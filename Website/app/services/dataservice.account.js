@@ -39,6 +39,7 @@
 					error: callbacks.error
 				});
 			},
+
 			accountLogin = function (loginModel, callbacks) {
 				var data = JSON.stringify(loginModel);
 				return amplify.request({
@@ -48,7 +49,26 @@
 					error: callbacks.error
 				});
 			},
-			accountLogout = function (authKey, callbacks) {
+
+            accountLogin2 = function (loginModel, callbacks) {
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + '/account/login',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(loginModel),
+                    statusCode: {
+                        200: callbacks.success,
+                        201: callbacks.success,
+                        204: callbacks.success,
+                        400: callbacks.error,
+                        500: callbacks.error,
+                        501: callbacks.error
+                    }
+                })
+            },
+
+            accountLogout = function (authKey, callbacks) {
 				amplify.request.define('logout', 'ajax', {
 					url: baseUrl + '/account/logout',
 					type: 'POST',
@@ -68,7 +88,7 @@
 
     	return {
     		accountEnroll: accountEnroll,
-    		accountLogin: accountLogin,
+    		accountLogin: accountLogin2,
     		accountLogout: accountLogout
     	}
 	});
