@@ -1,0 +1,40 @@
+﻿<!--<nav class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+		<a class="brand" href="/">
+      <span class="title">Evernym</span> 
+    </a>
+		<div class="nav-collapse collapse">
+			<ul class="nav nav-pills" data-bind="foreach: router.visibleRoutes">
+				<li data-bind="css: { active: isActive }"><a data-bind="attr: { href: hash }, text: name"></a></li>
+			</ul>
+		</div>
+    <div class="loader pull-right" data-bind="css: { active: router.isNavigating }">
+      <div class="progress progress-striped active page-progress-bar">
+        <div class="bar" style="width: 100px;"></div>
+      </div>
+    </div>
+  </div>
+</nav>-->
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="#">Evernym</a>          
+			<div class="nav-collapse collapse">
+        <ul class="nav" data-bind="foreach: router.visibleRoutes">
+          <li data-bind="css: { active: isActive }"><a data-bind="	attr: { href: hash }, text: name"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

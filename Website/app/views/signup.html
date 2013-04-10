@@ -1,0 +1,46 @@
+﻿<section>
+	<h2 class="page-title" data-bind="text: title"></h2>
+</section>
+<div id="view_signup" class="container-fluid">
+
+	<form class="form-inline">
+
+		<div class="control-group">
+			<div class="controls">
+				<input id="emailAddress" type="email" data-bind="value: emailaddress" placeholder="Email Address" class="span4" autocomplete="on" autofocus="autofocus" required data-validate="required|email" />
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<input id="userName" type="text" data-bind="value: accountName" placeholder="Evernym" class="span4" required data-validate="required" />
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<input id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" class="span4" autocomplete="on" required data-validate="required" />
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<input id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" class="span4" autocomplete="on" required data-validate="required" />
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<input id="password" type="password" data-bind="value: password" placeholder="Password" class="span4" required required data-validate="required" />
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<input id="signup_submit" type="button" data-bind="click: signUpCommand" value="Sign Up" class="btn btn-primary" />
+			</div>
+		</div>
+
+	</form>
+</div>
+
