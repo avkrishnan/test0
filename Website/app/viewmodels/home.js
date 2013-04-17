@@ -1,7 +1,7 @@
 ﻿define(['services/logger'], function (logger) {
 
     var
-        title = 'Welcome to Evernym',
+        title = 'Welcome to Evernym', // Test Commit
 
         activate = function activate() {
             return true;
