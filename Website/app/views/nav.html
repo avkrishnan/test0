@@ -31,9 +31,11 @@
       </button>
       <a class="brand" href="#">Evernym</a>          
 			<div class="nav-collapse collapse">
+        
         <ul class="nav" data-bind="foreach: router.visibleRoutes">
           <li data-bind="css: { active: isActive }"><a data-bind="	attr: { href: hash }, text: name"></a></li>
         </ul>
+
       </div>
     </div>
   </div>

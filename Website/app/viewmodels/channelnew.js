@@ -1,5 +1,5 @@
-﻿define(['services/logger', 'durandal/plugins/router', 'services/authentication'],
-	function (logger, router, authentication) {
+﻿define(['services/logger', 'durandal/plugins/router', 'services/authentication', 'services/dataservice'],
+	function (logger, router, authentication, dataService) {
 		var
 			// Properties
 			title = 'Create a New Channel',
@@ -17,11 +17,21 @@
 			},
 
 			routeToLogin = function () {
-				router.navigateTo('#/login?r=channelnew');
+				router.navigateTo('#/login');
 			},
 
+                        successfulCreate = function(data){
+                            logger.log('success creating channel', null, 'dataservice', true);
+                        },
+
+                        errorCreate = function(data){
+                            logger.log('error creating channel', null, 'dataservice', true);
+                        },
+
 			createChannelCommand = function () {
-				router.navigateTo('#/login?r=channelnew');
+                            //inputChannelName
+                            logger.log('start creating channel ' + this.name() , null, 'dataservice', true);
+                            dataService.channel.createChannel(this.name(), {success: successfulCreate, error: errorCreate}); 
 			};
 
 		return {

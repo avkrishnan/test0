@@ -1,24 +1,58 @@
-﻿define(['services/logger', 'services/config'],
-	function (logger, config) {
+﻿define(['services/logger', 'services/config', 'services/authentication'],
+	function (logger, config, authentication) {
 	    var
             baseUrl = config.baseUrl,
-
-            createChannel = function (authkey, channel, callbacks) {
-                var data = JSON.stringify(channel);
-
-                amplify.request.define('createChannel', 'ajax', {
-                    url: baseUrl + '/channel/',
-                    type: 'POST',
-                    contentType: 'application/json',
+            init = function () {
+		logger.log('initializing request ', null, 'dataservice', true);
+		amplify.request.define('addchannel', 'ajax', {
+		url: baseUrl + '/channel',
+		    dataType: 'json',
+		    type: 'POST',
                     beforeSend: function (xhr) {
-                        logger.logError('Setting the authorization headers', null, 'dataservice', true);
-                        xhr.setRequestHeader('Authorization', authKey);
-                        return true;
+                        var authKey = getCookie();
+			logger.log('Setting the authorization headers', null, 'dataservice', true);
+			xhr.setRequestHeader('Authorization', authKey);
+			return true;
+		    },
+		    contentType: 'application/json'
+		}),
+
+		amplify.request.define('getchannel', 'ajax', {
+		    url: baseUrl + '/channel',
+		    dataType: 'json',
+		    type: 'GET',
+                    beforeSend: function (xhr) {
+                        var authKey = getCookie();
+			logger.log('Setting the authorization headers', null, 'dataservice', true);
+			xhr.setRequestHeader('Authorization', authKey);
+			return true;
                     },
-                    data: data,
-                    success: callbacks.success,
-                    error: callbacks.error
-                });
+		    contentType: 'application/json'
+		})
+
+	    },
+
+            getCookie = function () {
+                var cookie = authentication.getCookie();
+                if (cookie) {
+                    return cookie;
+                }
+                    return undefined;
+            },
+
+            createChannel = function (channelname, callbacks) {
+                var channel = {name: channelname}; 
+                var data = JSON.stringify(channel);
+          
+		logger.log('starting to add channel ' + channelname , null, 'dataservice', true);
+
+		return amplify.request({
+		    resourceId: 'addchannel',
+		    data: data,
+		    success: callbacks.success,
+		    error: callbacks.error
+		});
+
             },
 	        updateChannel = function (authkey, channel, callbacks) {
 	            var data = JSON.stringify(channel);
@@ -28,7 +62,7 @@
 	                type: 'PUT',
 	                contentType: 'application/json',
 	                beforeSend: function (xhr) {
-	                    logger.logError('Setting the authorization headers', null, 'dataservice', true);
+	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
 	                    xhr.setRequestHeader('Authorization', authKey);
 	                    return true;
 	                },
@@ -43,7 +77,7 @@
                     type: 'GET',
                     contentType: 'application/json',
                     beforeSend: function (xhr) {
-                        logger.logError('Setting the authorization headers', null, 'dataservice', true);
+                        logger.log('Setting the authorization headers', null, 'dataservice', true);
                         xhr.setRequestHeader('Authorization', authKey);
                         return true;
                     },
@@ -57,7 +91,7 @@
 	                type: 'GET',
 	                contentType: 'application/json',
 	                beforeSend: function (xhr) {
-	                    logger.logError('Setting the authorization headers', null, 'dataservice', true);
+	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
 	                    xhr.setRequestHeader('Authorization', authKey);
 	                    return true;
 	                },
@@ -72,7 +106,7 @@
 	                type: 'DELETE',
 	                contentType: 'application/json',
 	                beforeSend: function (xhr) {
-	                    logger.logError('Setting the authorization headers', null, 'dataservice', true);
+	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
 	                    xhr.setRequestHeader('Authorization', authKey);
 	                    return true;
 	                },
@@ -87,7 +121,7 @@
 	                type: 'POST',
 	                contentType: 'application/json',
 	                beforeSend: function (xhr) {
-	                    logger.logError('Setting the authorization headers', null, 'dataservice', true);
+	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
 	                    xhr.setRequestHeader('Authorization', authKey);
 	                    return true;
 	                },
@@ -102,7 +136,7 @@
 	                type: 'DELETE',
 	                contentType: 'application/json',
 	                beforeSend: function (xhr) {
-	                    logger.logError('Setting the authorization headers', null, 'dataservice', true);
+	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
 	                    xhr.setRequestHeader('Authorization', authKey);
 	                    return true;
 	                },
@@ -111,11 +145,14 @@
 	                error: callbacks.error
 	            });
 	        };
+
+            init();
             
 	    return {
 	        createChannel: createChannel,
 	        updateChannel: updateChannel,
     	    getChannels: getChannels,
+    	    getCookie: getCookie,
     	    getChannel: getChannel,
     	    deleteChannel: deleteChannel,
     	    followChannel: followChannel,

@@ -4,7 +4,7 @@
             activate: activate,
             router: router
         };
-        
+
         return shell;
 
         //#region Internal Methods
@@ -13,10 +13,14 @@
         }
 
         function boot() {
+
+            router.mapAuto();
+
             router.mapNav('home');
             router.mapNav('login');
             router.mapNav('signup');
-            router.mapNav('channelnew');
+//            router.mapNav('channelnew');
+
             log('Welcome to Evernym!', null, true);
             return router.activate('home');
         }

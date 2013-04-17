@@ -86,19 +86,21 @@
     		createChannel(accessToken, channel, expectCreated, step4);
     	}
     	function step4(data) {
-    		listChannels(accessToken, undefined, expectSuccess );
+    		listChannels(accessToken, undefined, expectSuccess);
     	}
     });
-
 
     function createChannel(accessToken, channel, handler, postHandlerCallback) {
     	callAPI('POST', '/channel', accessToken, channel, handler, postHandlerCallback);
     }
 
-    function listChannels(accessToken, channel, handler, postHandlerCallback) {
+    function listChannels(accessToken, channel, handler) {
+        function postHandlerCallback(data){
+            ok(true, JSON.stringify(data));
+            start();
+        }
     	callAPI('GET', '/channel', accessToken, channel, handler, postHandlerCallback);
     }
-
 
     function enroll(account, handler, postHandlerCallback) {
     	callAPI('POST', '/account/enroll', null, account ? account : generateAccount(), handler, postHandlerCallback);
@@ -112,8 +114,7 @@
     	callAPI('POST', '/account/logout', accessToken, null, handler, postHandlerCallback);
     }
 
-
-	// generic helper method to handle ajax calls to API
+    // generic helper method to handle ajax calls to API
     function callAPI(method, resource, accessToken, object, handler, postHandlerCallback) {
     	var ajaxParams = {
     		url: baseUrl + resource,
@@ -156,9 +157,8 @@
     	equal(status, 200);
     }
 
-
     function expectCreated(textStatus, status, additionalDetails) {
-        equal(textStatus, 'created', additionalDetails);
+        equal(textStatus, 'success', additionalDetails);
         equal(status, 201);
     }
 

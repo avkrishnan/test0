@@ -1,5 +1,5 @@
-﻿define(['services/logger', 'services/authentication', 'services/dataservice', 'models/login'],
-	function (logger, authentication, dataService, loginModel) {
+﻿define(['services/logger', 'services/authentication', 'services/dataservice', 'models/login', 'durandal/plugins/router'],
+	function (logger, authentication, dataService, loginModel, router) {
 	    var
             // Properties
             title = 'Login',
@@ -31,6 +31,7 @@
                         error: logoutError
                     };
                     dataService.account.accountLogout(cookie, callbacks);
+                    logger.log('You successfully logged out!', null, 'login', true);
                 }
             },
 
@@ -38,11 +39,11 @@
                 authentication.deleteCookie();
                 if (args.accessToken) {
                     authentication.createCookie(args.accessToken);
-                    logoutCommand();
                 } else {
                     loginError();
                     return;
                 }
+                router.navigateTo('#/account');
                 logger.log('You successfully logged in!', null, 'login', true);
             },
 

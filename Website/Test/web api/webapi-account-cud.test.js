@@ -4,9 +4,9 @@
     var okAsync = QUnit.okAsync,
         stringformat = QUnit.stringformat;
 
-//    var baseUrl = 'http://192.168.79.101:8080/catalyst-api/rest/account', //local environment
-//	var baseUrl = 'http://qupler.no-ip.org:8080/catalyst-api/rest/account', //production environment
-    var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest/account', //local route to production environment
+        //var baseUrl = 'http://192.168.79.101:8080/catalyst-api/rest/account', //local environment
+        var baseUrl = 'http://qupler.no-ip.org:8080/catalyst-api/rest/account', //production environment
+        //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest/account', //local route to production environment
 	getMsgPrefix = function (id, rqstUrl) {
             return stringformat(
                 ' of account with id=\'{0}\' to \'{1}\'',
@@ -128,6 +128,8 @@
     	enroll(account, expectBadRequest);
     });
 
+
+
     function enroll(account, handler, postHandlerCallback) {
     	callAPI('POST', '/enroll', null, account ? account : generateAccount(), handler, postHandlerCallback);
     }
@@ -139,6 +141,8 @@
     function logout(accessToken, handler, postHandlerCallback) {
     	callAPI('POST', '/logout', accessToken, null, handler, postHandlerCallback);
     }
+
+
 
 	// generic helper method to handle ajax calls to API
     function callAPI(method, resource, accessToken, object, handler, postHandlerCallback) {
@@ -175,7 +179,7 @@
     		}
     	}
 
-	}
+    }
 
 	// handlers
     function expectSuccess(textStatus, status, additionalDetails) {
