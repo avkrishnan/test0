@@ -19,6 +19,9 @@
             router.mapNav('home');
             router.mapNav('login');
             router.mapNav('signup');
+            router.mapNav('channellist');
+            router.mapNav('channelnew');
+
 //            router.mapNav('channelnew');
 
             log('Welcome to Evernym!', null, true);

@@ -1,8 +1,11 @@
 ﻿<section>
-	<h2 class="page-title" data-bind="text: title"></h2>
+        <table><tr>
+        <td> <h2 class="page-title" data-bind="text: title"></h2></td>
+        <td style="padding-left:15px;"><a href="#/channelnew">new channel</a></td>
+        </tr>
+        </table>
 </section>
-
-
-<div id="view_channel_list" class="container-fluid">
-	Nancy's Tigers 
+ 
+<div id="view_channel_list" class="container-fluid" data-bind="foreach: channels">
+    <a data-bind="attr:{href:'#/channel/' + id},text: name"></a><br/>
 </div>

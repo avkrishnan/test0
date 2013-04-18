@@ -42,7 +42,7 @@
     	}
     	function step3(data) {
     		accessToken = data.accessToken;
-    		createChannel(accessToken, channel, expectCreated);
+    		createChannel(accessToken, channel, expectCreated, step4);
     	}
     });
 

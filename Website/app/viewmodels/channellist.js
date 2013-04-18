@@ -2,31 +2,45 @@
     var
         // Properties
         title = 'Channels',
-        channels = ko.observableArray(),
-
+        channels = ko.observableArray([]),
+	
+	
         // Methods
+	
         activate = function () {
-            logger.log("starting shiz", undefined, "channels", true);
-            return true;
+	    var that = this;
+	    return listChannelsCommand().then(function(data){
+		
+		that.channels.removeAll();
+                that.channels(data.channel);
+		
+		
+		});  
         },
+	
 
         successfulCreate = function(data){
-	    logger.log('success listing channels', null, 'dataservice', true);
+	    logger.log('success listing channels ' , null, 'dataservice', true);
+            
 	},
+        
 
 	errorCreate = function(data){
-	    logger.log('error listing channels', null, 'dataservice', true);
+	    logger.logError('error listing channels', null, 'dataservice', true);
 	},
 
 	listChannelsCommand = function () {
-	    logger.log('start creating channel ' + this.name() , null, 'dataservice', true);
-	    dataService.channel.createChannel(this.name(), {success: successfulCreate, error: errorCreate});
+	    
+            logger.log("starting listChannels", undefined, "channels", true);
+	    return dataService.channel.listChannels({success: successfulCreate, error: errorCreate});
+            
 	};
 
 
     return {
         title: title,
+        listChannelsCommand: listChannelsCommand,
         activate: activate,
-        channels: channels 
+        channels: channels
     };
 });

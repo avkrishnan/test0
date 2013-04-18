@@ -1,161 +1,47 @@
-﻿define(['services/logger', 'services/config', 'services/authentication'],
-	function (logger, config, authentication) {
+﻿define(['services/logger', 'services/config', 'services/authentication', 'services/dataservice.api'],
+	function (logger, config, authentication, api) {
 	    var
             baseUrl = config.baseUrl,
-            init = function () {
-		logger.log('initializing request ', null, 'dataservice', true);
-		amplify.request.define('addchannel', 'ajax', {
-		url: baseUrl + '/channel',
-		    dataType: 'json',
-		    type: 'POST',
-                    beforeSend: function (xhr) {
-                        var authKey = getCookie();
-			logger.log('Setting the authorization headers', null, 'dataservice', true);
-			xhr.setRequestHeader('Authorization', authKey);
-			return true;
-		    },
-		    contentType: 'application/json'
-		}),
-
-		amplify.request.define('getchannel', 'ajax', {
-		    url: baseUrl + '/channel',
-		    dataType: 'json',
-		    type: 'GET',
-                    beforeSend: function (xhr) {
-                        var authKey = getCookie();
-			logger.log('Setting the authorization headers', null, 'dataservice', true);
-			xhr.setRequestHeader('Authorization', authKey);
-			return true;
-                    },
-		    contentType: 'application/json'
-		})
-
-	    },
-
-            getCookie = function () {
-                var cookie = authentication.getCookie();
-                if (cookie) {
-                    return cookie;
-                }
-                    return undefined;
-            },
-
-            createChannel = function (channelname, callbacks) {
-                var channel = {name: channelname}; 
-                var data = JSON.stringify(channel);
+	    channels = new Array(),
+	    createChannel = function (channel, callbacks) {
+                
+                //var data = JSON.stringify(channel);
           
-		logger.log('starting to add channel ' + channelname , null, 'dataservice', true);
+		logger.log('starting to add channel ' + channel.name , null, 'dataservice.channel', true);
 
-		return amplify.request({
-		    resourceId: 'addchannel',
-		    data: data,
-		    success: callbacks.success,
-		    error: callbacks.error
-		});
+                return api.callAPI('POST', '/channel', channel, callbacks);
 
             },
-	        updateChannel = function (authkey, channel, callbacks) {
-	            var data = JSON.stringify(channel);
+	    listChannels = function (callbacks) {
+                
+		logger.log('starting to list channels ' , null, 'dataservice.channel', true);
+                return api.callAPI('GET', '/channel', undefined, callbacks);
 
-	            amplify.request.define('updateChannel', 'ajax', {
-	                url: baseUrl + '/channel/',
-	                type: 'PUT',
-	                contentType: 'application/json',
-	                beforeSend: function (xhr) {
-	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
-	                    xhr.setRequestHeader('Authorization', authKey);
-	                    return true;
-	                },
-	                data: data,
-	                success: callbacks.success,
-	                error: callbacks.error
-	            });
-	        },
-            getChannels = function (authkey, callbacks) {
-                amplify.request.define('getChannels', 'ajax', {
-                    url: baseUrl + '/channel/',
-                    type: 'GET',
-                    contentType: 'application/json',
-                    beforeSend: function (xhr) {
-                        logger.log('Setting the authorization headers', null, 'dataservice', true);
-                        xhr.setRequestHeader('Authorization', authKey);
-                        return true;
-                    },
-                    success: callbacks.success,
-                    error: callbacks.error
-                });
             },
-	        getChannel = function (authkey, id, callbacks) {
-	            amplify.request.define('getChannel', 'ajax', {
-	                url: baseUrl + '/channel/{id}',
-	                type: 'GET',
-	                contentType: 'application/json',
-	                beforeSend: function (xhr) {
-	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
-	                    xhr.setRequestHeader('Authorization', authKey);
-	                    return true;
-	                },
-	                data: { id: id },
-	                success: callbacks.success,
-	                error: callbacks.error
-	            });
-	        },
-	        deleteChannel = function (authkey, id, callbacks) {
-	            amplify.request.define('deleteChannel', 'ajax', {
-	                url: baseUrl + '/channel/{id}',
-	                type: 'DELETE',
-	                contentType: 'application/json',
-	                beforeSend: function (xhr) {
-	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
-	                    xhr.setRequestHeader('Authorization', authKey);
-	                    return true;
-	                },
-	                data: { id: id },
-	                success: callbacks.success,
-	                error: callbacks.error
-	            });
-	        },
-	        followChannel = function (authkey, id, callbacks) {
-	            amplify.request.define('followChannel', 'ajax', {
-	                url: baseUrl + '/channel/{id}/follow',
-	                type: 'POST',
-	                contentType: 'application/json',
-	                beforeSend: function (xhr) {
-	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
-	                    xhr.setRequestHeader('Authorization', authKey);
-	                    return true;
-	                },
-	                data: { id: id },
-	                success: callbacks.success,
-	                error: callbacks.error
-	            });
-	        },
-	        unFollowChannel = function (authkey, id, callbacks) {
-	            amplify.request.define('unFollowChannel', 'ajax', {
-	                url: baseUrl + '/channel/{id}/unfollow',
-	                type: 'DELETE',
-	                contentType: 'application/json',
-	                beforeSend: function (xhr) {
-	                    logger.log('Setting the authorization headers', null, 'dataservice', true);
-	                    xhr.setRequestHeader('Authorization', authKey);
-	                    return true;
-	                },
-	                data: { id: id },
-	                success: callbacks.success,
-	                error: callbacks.error
-	            });
-	        };
+	    getChannel = function (channelid, callbacks) {
+                
+		logger.log('starting to list channels ' , null, 'dataservice.channel', true);
+                return api.callAPI('GET', '/channel/' + channelid, undefined, callbacks);
 
-            init();
+            },
+	    deleteChannel = function (channelid, callbacks) {
+                
+		logger.log('starting to list channels ' , null, 'dataservice.channel', true);
+                return api.callAPI('DELETE', '/channel/' + channelid, undefined, callbacks);
+
+            }
+	    ;
+
+            
             
 	    return {
 	        createChannel: createChannel,
-	        updateChannel: updateChannel,
-    	    getChannels: getChannels,
-    	    getCookie: getCookie,
-    	    getChannel: getChannel,
-    	    deleteChannel: deleteChannel,
-    	    followChannel: followChannel,
-    	    unFollowChannel: unFollowChannel
-    	}
+		listChannels: listChannels,
+		getChannel: getChannel,
+		deleteChannel: deleteChannel
+    	    }
 	});
+
+
+
+

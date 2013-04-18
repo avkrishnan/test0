@@ -22,6 +22,7 @@
 
                         successfulCreate = function(data){
                             logger.log('success creating channel', null, 'dataservice', true);
+                            router.navigateTo('#/channellist');
                         },
 
                         errorCreate = function(data){
@@ -31,7 +32,7 @@
 			createChannelCommand = function () {
                             //inputChannelName
                             logger.log('start creating channel ' + this.name() , null, 'dataservice', true);
-                            dataService.channel.createChannel(this.name(), {success: successfulCreate, error: errorCreate}); 
+                            dataService.channel.createChannel({name: this.name()}, {success: successfulCreate, error: errorCreate}); 
 			};
 
 		return {

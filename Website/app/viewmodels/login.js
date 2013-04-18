@@ -43,7 +43,7 @@
                     loginError();
                     return;
                 }
-                router.navigateTo('#/account');
+                router.navigateTo('#/channellist');
                 logger.log('You successfully logged in!', null, 'login', true);
             },
 
