@@ -1,5 +1,5 @@
-define(['services/logger', 'services/config', 'services/authentication'],
-	function (logger, config, authentication) {
+define(['services/logger', 'services/config', 'services/authentication', 'durandal/plugins/router'],
+	function (logger, config, authentication, router) {
 	    var
             baseUrl = config.baseUrl,
             init = function () {
@@ -40,7 +40,11 @@ define(['services/logger', 'services/config', 'services/authentication'],
 		});
 	
 		ajaxCall.fail(function (jqXHR, textStatus, errorThrown) {
-			callbacks.success(errorThrown ? errorThrown : textStatus, jqXHR.status, jqXHR.responseText);
+		        logger.log('error: ' + jqXHR.status, undefined, 'dataservice.api', true);
+			if (jqXHR.status == '401'){
+			    router.navigateTo('#/login');
+			}
+			callbacks.error(errorThrown ? errorThrown : textStatus, jqXHR.status, jqXHR.responseText);
 		});
 		
 		return ajaxCall;

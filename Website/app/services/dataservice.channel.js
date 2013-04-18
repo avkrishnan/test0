@@ -29,6 +29,14 @@
 		logger.log('starting to list channels ' , null, 'dataservice.channel', true);
                 return api.callAPI('DELETE', '/channel/' + channelid, undefined, callbacks);
 
+            },
+	    modifyChannel = function (channel, callbacks) {
+                
+          
+		logger.log('starting to modify channel ' + channel.name , null, 'dataservice.channel', true);
+
+                return api.callAPI('PUT', '/channel/' + channel.id, channel, callbacks);
+
             }
 	    ;
 
@@ -38,7 +46,8 @@
 	        createChannel: createChannel,
 		listChannels: listChannels,
 		getChannel: getChannel,
-		deleteChannel: deleteChannel
+		deleteChannel: deleteChannel,
+		modifyChannel: modifyChannel
     	    }
 	});
 

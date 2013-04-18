@@ -7,5 +7,5 @@
 </section>
  
 <div id="view_channel_list" class="container-fluid" data-bind="foreach: channels">
-    <a data-bind="attr:{href:'#/channel/' + id},text: name"></a><br/>
+    <span data-bind="text: id"></span> <span data-bind="text: relationship"></span> <a data-bind="attr:{href:'#/channel/' + id},text: name"></a><br/>
 </div>
