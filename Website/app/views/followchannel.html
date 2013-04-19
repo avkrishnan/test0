@@ -1,0 +1,30 @@
+﻿<section>
+        <h2 class="page-title" data-bind="text: title"></h2>
+        <button data-bind="click: deleteChannelCommand">delete</button>
+        
+        
+        
+        
+</section>
+
+ <br/>
+
+ <div id="view_channel" class="container-fluid">
+   
+  <form class="form-inline">
+
+	  <div class="control-group"> 
+		  <div class="controls">
+			  <input id="channelName" type="text" data-bind="value: channel()[0].name" placeholder="channel name" autocomplete="on" required data-validate="required" />
+		  </div>
+	  </div>
+
+	  <div class="control-group">
+		  <div class="controls">
+			  <input id="login_submit" type="button" data-bind="click: modifyChannelCommand" value="Submit Change" class="btn btn-primary" />
+		  </div>
+	  </div>
+
+  </form>
+
+</div>
