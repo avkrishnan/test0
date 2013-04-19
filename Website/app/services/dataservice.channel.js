@@ -24,6 +24,18 @@
                 return api.callAPI('GET', '/channel/' + channelid, undefined, callbacks);
 
             },
+	    followChannel = function (channelid, callbacks) {
+                
+		logger.log('starting to follow channel' , null, 'dataservice.channel', true);
+                return api.callAPI('POST', '/channel/' + channelid + '/follow', undefined, callbacks);
+
+            },
+	    unFollowChannel = function (channelid, callbacks) {
+                
+		logger.log('starting to follow channel' , null, 'dataservice.channel', true);
+                return api.callAPI('DELETE', '/channel/' + channelid + '/follow', undefined, callbacks);
+
+            },
 	    deleteChannel = function (channelid, callbacks) {
                 
 		logger.log('starting to list channels ' , null, 'dataservice.channel', true);
@@ -47,7 +59,9 @@
 		listChannels: listChannels,
 		getChannel: getChannel,
 		deleteChannel: deleteChannel,
-		modifyChannel: modifyChannel
+		modifyChannel: modifyChannel,
+		followChannel: followChannel,
+		unFollowChannel: unFollowChannel
     	    }
 	});
 

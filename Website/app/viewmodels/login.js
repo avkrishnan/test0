@@ -8,6 +8,10 @@
 
             // Methods
             activate = function () {
+		
+		accountName("");
+                password("");
+		
                 return true;
             },
 

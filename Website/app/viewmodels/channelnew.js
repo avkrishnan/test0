@@ -8,10 +8,14 @@
 
 			// Methods
 			activate = function () {
+				name("");
 				var result = authentication.validateCookie();
+				
 				if (result === false) {
+					router.navigateTo('#/login');
 					return false;
 				} else {
+					
 					return true;
 				}
 			},

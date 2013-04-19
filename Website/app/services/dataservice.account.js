@@ -21,6 +21,7 @@
 			},
 
 			accountEnroll = function (accountModel, callbacks) {
+				logger.log('Trying dataservice.account.accountEnroll', null, 'dataservice.account', true);
 				var account = {
 					accountName: accountModel.accountName,
 					emailaddress: accountModel.emailaddress,

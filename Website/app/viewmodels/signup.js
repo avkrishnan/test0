@@ -1,70 +1,59 @@
-﻿define(['services/logger', 'services/authentication', 'services/dataservice', 'models/login'],
+﻿define(['services/logger', 'services/authentication', 'services/dataservice'],
 	function (logger, authentication, dataService, loginModel) {
 		var
 			// Properties
 			title = 'Get Your Evernym Now!',
 			accountName = ko.observable(),
 			password = ko.observable(),
+			emailaddress = ko.observable(),
+			firstname = ko.observable(),
+			lastname = ko.observable(),
 
 			// Methods
 			activate = function () {
 				return true;
 			},
+			
+			generateAccount = function() {
+			    return {
+				accountName: accountName(), // Create Random AccountName Generator
+				emailaddress: emailaddress(),
+				password: password(),
+				firstname: firstname(),
+				lastname: lastname()
+			    };
+		        }
 
-			loginCommand = function () {
+			signUpCommand = function () {
 				var callbacks = {
-					success: loginSuccess,
-					error: loginError
+					success: signUpSuccess,
+					error: signUpError
 				};
 
-				loginModel.accountName = accountName();
-				loginModel.password = password();
+                                
+				var account = generateAccount();
 
-				dataService.account.accountLogin(loginModel, callbacks);
+				dataService.account.accountEnroll(account, callbacks);
 			},
 
-			logoutCommand = function () {
-				var cookie = authentication.getCookie();
-				if (cookie) {
-					var callbacks = {
-						success: logoutSuccess,
-						error: logoutError
-					};
-					dataService.account.accountLogout(cookie, callbacks);
-				}
+			signUpSuccess = function (args) {
+				
+				logger.log('You successfully signed up!', null, 'signup', true);
 			},
 
-			loginSuccess = function (args) {
-				authentication.deleteCookie();
-				if (args.accessToken) {
-					authentication.createCookie(args.accessToken);
-					logoutCommand();
-				} else {
-					loginError();
-					return;
-				}
-				logger.log('You successfully logged in!', null, 'login', true);
-			},
-
-			loginError = function () {
-				logger.logError('Your login failed, please try again!', null, 'login', true);
-			},
-
-			logoutSuccess = function () {
-				authentication.deleteCookie();
-				logger.logError('You successfully logged out!', null, 'login', true);
-			},
-
-			logoutError = function () {
-				authentication.deleteCookie();
-				logger.logError('Your log out failed, please try again!', null, 'login', true);
+			signUpError = function () {
+				logger.logError('signup failed!', null, 'signup', true);
 			};
+;
 
 		return {
 			title: title,
-			activate: activate,
-			loginCommand: loginCommand,
+			emailaddress: emailaddress,
 			accountName: accountName,
-			password: password
+			password: password,
+			firstname: firstname,
+			lastname: lastname,
+			signUpCommand: signUpCommand
+			
 		};
 	});
