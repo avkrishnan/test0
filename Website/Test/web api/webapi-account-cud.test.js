@@ -4,9 +4,9 @@
     var okAsync = QUnit.okAsync,
         stringformat = QUnit.stringformat;
 
-        //var baseUrl = 'http://192.168.79.101:8080/catalyst-api/rest/account', //local environment
-        var baseUrl = 'http://qupler.no-ip.org:8080/catalyst-api/rest/account', //production environment
-        //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest/account', //local route to production environment
+    var baseUrl = 'http://qupler.no-ip.org:8080/api/rest/account', //production environment
+    //var baseUrl = 'http://localhost:8080/api/rest/account', //production environment
+    //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest/account', //local route to production environment
 	getMsgPrefix = function (id, rqstUrl) {
             return stringformat(
                 ' of account with id=\'{0}\' to \'{1}\'',
@@ -66,7 +66,7 @@
     	function step3(data) {
     		ok(data, 'no data returned');
     		ok(data.accessToken, 'no access token found');
-    		equal(data.accessToken.length, 24, 'access token should be 24 characters');
+    		equal(data.accessToken.length, 32, 'access token should be 32 characters');
     		start();
     	}
 
