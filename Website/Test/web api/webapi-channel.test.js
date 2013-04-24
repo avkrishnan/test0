@@ -72,7 +72,7 @@
     		createChannel(accessToken, channel, expectBadRequest );
     	}
     });
-
+    
     test('LIST CHANNELS', function () {
     	stop(timoutms); //tell qunit to wait 5 seconds before timing out
     	var account = generateAccount();
@@ -90,16 +90,41 @@
     		listChannels(accessToken, undefined, expectSuccess);
     	}
     });
+    
+    test('SEND MESSAGE ON CHANNEL', function () {
+    	stop(timoutms); //tell qunit to wait 5 seconds before timing out
+    	var account = generateAccount();
+    	var accessToken;
+    	enroll(account, expectSuccessNoContent, step2);
+	var channel = generateChannel();
+    	function step2() {
+    	    login(generateLogin(account), expectSuccess, step3);
+    	}
+    	function step3(data) {
+    	    accessToken = data.accessToken;
+    	    createChannel(accessToken, channel, expectCreated, step4);
+    	}
+    	function step4(data) {
+    	    listChannels(accessToken, undefined, expectSuccess, step5);
+		
+    	}
+	function step5(data){
+	    ok(true, JSON.stringify(data));
+	    sendMessage(accessToken, data.channel.id, {text: 'HERE IS A MESSAGE', type: 'FYI'}, expectSuccessNoContent); // 'FYI','RAC','ACK'
+	}
+    });
+    
 
     function createChannel(accessToken, channel, handler, postHandlerCallback) {
     	callAPI('POST', '/channel', accessToken, channel, handler, postHandlerCallback);
     }
+    
+    function sendMessage(accessToken, channelid, message, handler, postHandlerCallback) {
+    	callAPI('POST', '/channel/' + channelid + '/message', accessToken, message, handler, postHandlerCallback);
+    }
 
-    function listChannels(accessToken, channel, handler) {
-        function postHandlerCallback(data){
-            ok(true, JSON.stringify(data));
-            start();
-        }
+    function listChannels(accessToken, channel, handler, postHandlerCallback) {
+        
     	callAPI('GET', '/channel', accessToken, channel, handler, postHandlerCallback);
     }
 
