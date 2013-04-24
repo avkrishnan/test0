@@ -7,10 +7,14 @@
         
 </section>
 
+<input id="message_submit" type="button" data-bind="click: fooPooCommand" value="MAKE IT DOO" class="btn btn-primary" />
+<div style="border:5px solid lime;" data-bind="text:foopoo"></div>
+
+<!--
  <br/>
 
- <div id="view_channel" class="container-fluid">
-   
+ <div id="view_channel" class="container-fluid" style="border:1px solid gray;border-radius:15px;">
+   <h3>modify channel</h3>
   <form class="form-inline">
 
 	  <div class="control-group"> 
@@ -21,10 +25,38 @@
 
 	  <div class="control-group">
 		  <div class="controls">
-			  <input id="login_submit" type="button" data-bind="click: modifyChannelCommand" value="Submit Change" class="btn btn-primary" />
+			  <input id="channel_submit" type="button" data-bind="click: modifyChannelCommand" value="Submit Change" class="btn btn-primary" />
 		  </div>
 	  </div>
 
   </form>
+
+</div>
+-->
+
+<br/>
+
+ <div id="view_channel" class="container-fluid" style="border:1px solid gray;border-radius:15px;">
+   <h3>Send Message</h3>
+  <form class="form-inline">
+
+	  <div class="control-group"> 
+		  <div class="controls">
+			  <input id="message" type="text" data-bind="value: message" placeholder="message" autocomplete="on" required data-validate="required" />
+		  </div>
+	  </div>
+
+	  <div class="control-group">
+		  <div class="controls">
+			  <input id="message_submit" type="button" data-bind="click: postMessageCommand" value="Submit Message" class="btn btn-primary" />
+		  </div>
+	  </div>
+
+  </form>
+  
+  <hr/>
+  <div id="view_messages" class="container-fluid" data-bind="foreach: messages">
+    <div data-bind="text: text" style="background: gray; color:white; margin:5px 0;padding:0 10px;border-radius:5px;"></div>
+  </div>
 
 </div>
