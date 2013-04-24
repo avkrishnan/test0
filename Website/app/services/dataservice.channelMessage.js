@@ -1,59 +1,43 @@
-﻿define(['services/logger', 'services/config'],
-	function (logger, config) {
+﻿define(['services/logger', 'services/config', 'services/authentication', 'services/dataservice.api'],
+	function (logger, config, authentication, api) {
 	    var
             baseUrl = config.baseUrl,
+	   
+	    createChannelMessage = function (channelid, message, callbacks) {
+                
+		logger.log('createChannelMesage' , null, 'dataservice.channelMessage', true);
+                return api.callAPI('POST', '/channel/' + channelid + '/message', message, callbacks);
 
-            createChannelMessage = function (authkey, channelId, message, callbacks) {
-                var data = JSON.stringify(message);
-
-                amplify.request.define('createChannelMessage', 'ajax', {
-                    url: baseUrl + '/channel/{channelId}/message/',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    beforeSend: function (xhr) {
-                        logger.logError('Setting the authorization headers', null, 'dataservice', true);
-                        xhr.setRequestHeader('Authorization', authKey);
-                        return true;
-                    },
-                    data: { channelId: channelId },
-                    success: callbacks.success,
-                    error: callbacks.error
-                });
             },
-            getChannelMessages = function (authkey, channelId, callbacks) {
-                amplify.request.define('getChannelMessages', 'ajax', {
-                    url: baseUrl + '/channel/{channelId}/message/',
-                    type: 'GET',
-                    contentType: 'application/json',
-                    beforeSend: function (xhr) {
-                        logger.logError('Setting the authorization headers', null, 'dataservice', true);
-                        xhr.setRequestHeader('Authorization', authKey);
-                        return true;
-                    },
-                    data: { channelId: channelId },
-                    success: callbacks.success,
-                    error: callbacks.error
-                });
-            },
-            getChannelMessage = function (authkey, channelId, id, callbacks) {
-                amplify.request.define('getChannelMessages', 'ajax', {
-                    url: baseUrl + '/channel/{channelId}/message/{id}',
-                    type: 'GET',
-                    contentType: 'application/json',
-                    beforeSend: function (xhr) {
-                        logger.logError('Setting the authorization headers', null, 'dataservice', true);
-                        xhr.setRequestHeader('Authorization', authKey);
-                        return true;
-                    },
-                    data: { channelId: channelId, id: id },
-                    success: callbacks.success,
-                    error: callbacks.error
-                });
-            };
+	    getChannelMessages = function (channelid, callbacks) {
+                
+		logger.log('getChannelMessages' , null, 'dataservice.channelMessage', true);
+                return api.callAPI('GET', '/channel/' + channelid + '/message', undefined, callbacks);
 
+            },
+	    getChannelMessage = function (channelid, messageid, callbacks) {
+                
+		logger.log('getChannelMessage' , null, 'dataservice.channelMessage', true);
+                return api.callAPI('GET', '/channel/' + channelid + '/message/' + messageid, undefined, callbacks);
+
+            }
+	    
+	    
+	    ;
+
+            
+            
 	    return {
 	        createChannelMessage: createChannelMessage,
 	        getChannelMessages: getChannelMessages,
 	        getChannelMessage: getChannelMessage
 	    }
 	});
+
+
+
+
+
+
+
+
