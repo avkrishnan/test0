@@ -4,8 +4,8 @@
 	var okAsync = QUnit.okAsync,
 	stringformat = QUnit.stringformat;
 
-	//var baseUrl = 'http://qupler.no-ip.org:8080/api/rest', //production environment
-	var baseUrl = 'http://localhost:8080/api/rest', //local environment
+	var baseUrl = 'http://qupler.no-ip.org:8080/api/rest', //production environment
+	//var baseUrl = 'http://localhost:8080/api/rest', //local environment
 	//var baseUrl = 'http://192.168.1.202:8080/api/rest', //production environment through local network
 
 	getMsgPrefix = function (id, rqstUrl) {
@@ -99,6 +99,7 @@
 		var accessToken;
 		enroll(account, expectSuccessNoContent, step2);
 		var channel = generateChannel();
+        var channelid = '';
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3);
 		}
@@ -112,7 +113,41 @@
 		}
 		function step5(data){
 			ok(true, JSON.stringify(data));
-			sendMessage(accessToken, data.channel.id, {text: 'HERE IS A MESSAGE', type: 'FYI'}, expectCreated); // 'FYI','RAC','ACK'
+            channelid = data.channel.id;
+			sendMessage(accessToken, data.channel.id, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated ); // 'FYI','RAC','ACK'
+		}
+	});
+
+
+	test('GET MESSAGES ON CHANNEL', function () {
+		stop(timoutms); //tell qunit to wait 5 seconds before timing out
+		var account = generateAccount();
+		var accessToken;
+		enroll(account, expectSuccessNoContent, step2);
+		var channel = generateChannel();
+        var channelid = '';
+		function step2() {
+			login(generateLogin(account), expectSuccess, step3);
+		}
+		function step3(data) {
+			accessToken = data.accessToken;
+			createChannel(accessToken, channel, expectCreated, step4);
+		}
+		function step4(data) {
+			listChannels(accessToken, undefined, expectSuccess, step5);
+
+		}
+		function step5(data){
+			ok(true, JSON.stringify(data));
+            channelid = data.channel.id;
+			sendMessage(accessToken, data.channel.id, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated, step6 ); // 'FYI','RAC','ACK'
+		}
+		function step6(data){
+			ok(true, JSON.stringify(data));
+			getMessages(accessToken, channelid, expectSuccess, step7 ); // 'FYI','RAC','ACK'
+		}
+		function step7(data){
+			ok(true, JSON.stringify(data));
 		}
 	});
 
@@ -122,6 +157,10 @@
 
 	function sendMessage(accessToken, channelid, message, handler, postHandlerCallback) {
 		callAPI('POST', '/channel/' + channelid + '/message', accessToken, message, handler, postHandlerCallback);
+	}
+
+	function getMessages(accessToken, channelid, handler, postHandlerCallback) {
+		callAPI('GET', '/channel/' + channelid + '/message', accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function listChannels(accessToken, channel, handler, postHandlerCallback) {
