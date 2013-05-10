@@ -75,9 +75,9 @@ function SignupViewModel() {
     }
     
     function loginError(data, status, response) {
-        alert("LOGIN FAILED");
+        showMessage("LOGIN FAILED");
         localStorage.removeItem('accessToken');
-        alert("Error creating channel: " + response.message);
+        
         //logger.logError('Your login failed, please try again!', null, 'login', true);
     }
     
@@ -88,7 +88,7 @@ function SignupViewModel() {
     
     function signUpError(data, status, response) {
         //logger.logError('signup failed!', null, 'signup', true);
-        alert("Error Registering: " + response.message);
+        showMessage("Error Registering: " + response.message);
     };
     
 }

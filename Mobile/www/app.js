@@ -24,13 +24,33 @@ update: function (element, valueAccessor) {
 }
 };
 
+
+
+var messages = 0;
+
+function showMessage(message){
+    
+    
+    
+     $("<div class='xui-loader ui-overlay-shadow ui-body-e ui-corner-all'>" + message + "</div>").css({ "display": "block", "opacity": 0.96, "top": 50, "padding":"10px", "font-size":"14pt", "position":"relative", "z-index":100 })
+     .appendTo( $.mobile.pageContainer )
+     .delay( 2500 )
+     .fadeOut( 400, function(){
+     $(this).remove();
+     messages --;
+     });
+    
+}
+
+
 // create the various view models
-var 
+var
 loginViewModel = new LoginViewModel(),
 channelListViewModel = new ChannelListViewModel(),
 channelViewModel = new ChannelViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
-signupViewModel = new SignupViewModel()
+signupViewModel = new SignupViewModel(),
+sendMessageViewModel = new SendMessageViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -40,21 +60,36 @@ $.mobile.defaultPageTransition = ""; //"slide";
 $(document).ready(function () {
                   // bind each view model to a jQueryMobile page
                   
+                  $.mobile.activeBtnClass = '';
+                  
                   ko.applyBindings(loginViewModel, document.getElementById("loginView"));
                   ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
                   ko.applyBindings(channelViewModel, document.getElementById("channelView"));
                   ko.applyBindings(channelNewViewModel, document.getElementById("channelNewView"));
                   ko.applyBindings(signupViewModel, document.getElementById("signupView"));
+                  ko.applyBindings(sendMessageViewModel, document.getElementById("sendMessageView"));
                   
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   
                   console.log("currentUrl: " + currentUrl.hash);
                   
+                  
+                  $(document).bind("pagebeforechange", function( event, data ) {
+                                   $.mobile.pageData = (data && data.options && data.options.pageData)
+                                   ? data.options.pageData
+                                   : null;
+                                   });
+                  
+                  /*
                   $(document).on('pagebeforeshow', '#channelListView', function(){
                                  console.log('activating channel list view');
+                                 alert('activating something');
                                  channelListViewModel.activate();
                                  });
+                   */
+                  
+                  
                   
                   
                   if (currentUrl.hash  == '#channelListView' || currentUrl.hash  == ''){
@@ -65,10 +100,17 @@ $(document).ready(function () {
                       var channel = JSON.parse(currentChannel);
                       channelViewModel.activate(channel);
                   }
+                  else if (currentUrl.hash  == '#sendMessageView'){
+                      var currentChannel = localStorage.getItem("currentChannel");
+                      var channel = JSON.parse(currentChannel);
+                      sendMessageViewModel.activate(channel);
+                  }
                   else if (currentUrl.hash  == '#loginView'){
                       
                       loginViewModel.activate();
                   }
+                  
+                  
                   
     });
 

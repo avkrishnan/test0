@@ -16,6 +16,8 @@ function LoginViewModel() {
     
     var  dataService = new EvernymLoginService();
     
+    $("#" + this.template).live("pagebeforeshow", function(e, data){ that.activate(); });
+    
     this.activate = function(){
         that.password('');
         that.accountName('');
@@ -74,7 +76,8 @@ function LoginViewModel() {
     }
     
     function loginError(data, status, details) {
-        alert("LOGIN FAILED: " + details.message);
+        
+        showMessage("LOGIN FAILED: " + details.message);
         localStorage.removeItem('accessToken');
         //logger.logError('Your login failed, please try again!', null, 'login', true);
     }

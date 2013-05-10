@@ -14,6 +14,21 @@ function ChannelListViewModel() {
     this.chicken = ko.observable();
 	var that = this;
 	
+    
+    $("#" + this.template).live("pagebeforeshow", function(e, data){
+                         
+                          that.activate();
+                                
+                               
+                                 
+                                if ($.mobile.pageData && $.mobile.pageData.id){
+                                
+                                    
+                                }
+                                
+                          
+                          });
+    
     // Methods
     
     var  dataService = new EvernymChannelService();
@@ -22,6 +37,7 @@ function ChannelListViewModel() {
     this.activate = function() {
 	    
         console.log("trying to get channels");
+        $.mobile.showPageLoadingMsg("a", "Loading Channels");
         if ( that.channels() && that.channels().length){
             that.channels.removeAll();
         }
@@ -37,7 +53,7 @@ function ChannelListViewModel() {
 	};
     
 	function gotChannels(data){
-        
+        $.mobile.hidePageLoadingMsg();
 	    //that.channels.removeAll();
         
         if (data.channel && data.channel.constructor == Object){

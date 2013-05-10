@@ -8,12 +8,16 @@
             <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
             
             
+            
             <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
             <script type="text/javascript" src="lib/jquery.mobile-1.3.1.js"></script>
             <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
+            <script type="text/javascript" src="lib/jqm.page.params.js"></script>
             <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
             <script type="text/javascript" src="lib/iscroll.js"></script>
             <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
+            
+            
             
             <!-- the various view models -->
             
@@ -29,6 +33,8 @@
             <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>
             <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
+            
             
             <!-- the code that puts it all together -->
             <script type="text/javascript" src="app.js" ></script>
@@ -53,39 +59,39 @@
         
         
         
-        <div data-role="page" data-theme="b"
+        <div data-role="page" xdata-theme="b"
             id="channelListView">
-            <div data-role="header" data-theme="b">
+            <div data-role="header" xdata-theme="b">
                 <h1>Channel List</h1>
                 
-                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" data-theme="b" class="ui-btn-right">actions</a>
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
-                    <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                         
+                        
+                        <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>
                 </div>
             </div>
             
-            
-            <div>
-                <button data-bind="click: newChannelCommand"  data-inline="true">new channel</button>
-            </div>
-            
-            
-            <div data-role="content" data-theme="c" data-iscroll>
+            <div data-role="content" xdata-theme="c" data-iscroll>
                 
                 <ul data-role="listview">
                     
                     <!-- ko foreach: channels, updateListviewOnChange:channels -->
                     <li>
                         
-                        <a data-bind="click: $parent.showChannel">
-                            
-                            <h3 class="author" data-bind="text: name"></h3>
-                            
-                        </a>
+                        
+                        <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
+                            <span href="" data-bind="text: name"></span>
+                            </a>
+                        
+                        
+                        
+                        
+                        
                     </li>
                     <!-- /ko -->
                     
@@ -122,33 +128,31 @@
                     
                     <div >
                         <div >
-                            <input id="login_submit" type="button"
-                            data-bind="click: loginCommand" value="Login" data-inline="true" />
+                            <input id="login_submit" type="submit" data-bind="click: loginCommand" value="Login" data-inline="true" />
+                            <input id="register" type="button" data-bind="click: showRegistration" value="Register" data-inline="true" />
+                            
+                            
                         </div>
                     </div>
                     
                 </form>
                 
-                <a href="javascript:" data-bind="click: showRegistration">register</a>
+              
                 
             </div>
             
         </div>
         
         
-        
-        
-        
-        
-        <div data-role="page" data-theme="b"
-            id="channelView">
-            <div data-role="header" data-theme="b">
-                <a href="#channelListView" data-role="button" data-icon="arrow-l" >Channels</a>
-                <h1 data-bind="text:title"></h1>
+        <div data-role="page" xdata-theme="b"
+            id="sendMessageView">
+            <div data-role="header" xdata-theme="b">
+                <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
+                <h1>Send Message</h1>
                 
-                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" data-theme="b" class="ui-btn-right">actions</a>
-                <div data-role="popup" id="popupMenu" data-theme="a">
-                    <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" xdata-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                         
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
@@ -158,7 +162,10 @@
                 
             </div>
             
-            <div>
+            <div data-role="content" xdata-theme="b" >
+                
+                <div id="channel_id" data-bind="text:channelid"></div>
+                
                 <form class="form-inline">
                     
                     <div class="control-group">
@@ -169,56 +176,13 @@
                     
                     <div class="control-group">
                         <div class="controls">
-                            <input id="message_submit" type="button" data-bind="click: postMessageCommand" value="Submit Message"  data-inline="true" />
+                            <input id="message_submit" type="submit" data-bind="click: postMessageCommand" value="Submit Message"  data-inline="true" />
                         </div>
                     </div>
                     
+                    
+                    
                 </form>
-            </div>
-            
-            <hr/>
-            
-            <div data-role="content" data-theme="b">
-                
-                <input id="message_refresh" type="button" data-bind="click: refreshMessagesCommand" value="Refresh Messages"  data-inline="true" />
-                
-                <!--
-                 <br/>
-                 
-                 <div id="view_channel" class="container-fluid" style="border:1px solid gray;border-radius:15px;">
-                 <h3>modify channel</h3>
-                 <form class="form-inline">
-                 
-                 <div class="control-group">
-                 <div class="controls">
-                 <input id="channelName" type="text" data-bind="value: channel()[0].name" placeholder="channel name" autocomplete="on" required data-validate="required" />
-                 </div>
-                 </div>
-                 
-                 <div class="control-group">
-                 <div class="controls">
-                 <input id="channel_submit" type="button" data-bind="click: modifyChannelCommand" value="Submit Change" class="btn btn-primary" />
-                 </div>
-                 </div>
-                 
-                 </form>
-                 
-                 </div>
-                 -->
-                
-                
-                
-                
-                <div id="view_messages"
-                    data-bind="foreach: messages" >
-                    <div data-bind="text: text" style="border:1px solid #EEE; border-radius:5px; margin:5px;padding:0 5px 0;background:#EEE;"></div>
-                </div>
-                
-                
-                
-                
-                
-                
                 
                 
             </div>
@@ -226,25 +190,76 @@
         </div>
         
         
-        <div data-role="page" data-theme="b"
+        
+        <div data-role="page" xdata-theme="b"
+            id="channelView">
+            <div data-role="header" xdata-theme="b">
+                <a href="#channelListView" data-role="button" data-icon="arrow-l" >Channels</a>
+                <h1 data-bind="text:title"></h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" xdata-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                        
+                        
+                        <li><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
+                        <li><a href="#" data-bind="click: refreshMessagesCommand">Followers</a></li>
+                        <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+            </div>
+            
+            
+            
+            <div data-role="content" xdata-theme="b" data-iscroll>
+                
+                
+                <ul data-role="listview">
+                    
+                    <!-- ko foreach: messages, updateListviewOnChange:messages -->
+                    <li>
+                        
+                        
+                        <div data-bind="text: text"></div>
+                            
+                            
+                            
+                        
+                    </li>
+                    <!-- /ko -->
+                    
+                </ul>
+
+                
+            </div>
+            
+        </div>
+        
+        
+        <div data-role="page" xdata-theme="b"
             id="channelNewView" >
             
-            <div data-role="header" data-theme="b">
+            <div data-role="header" xdata-theme="b">
                 <a href="#channelListView" data-role="button" data-icon="arrow-l" >Channels</a>
                 <h1>Create Channel</h1>
                 
-                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" data-theme="b" class="ui-btn-right">actions</a>
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
-                    <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                         
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
                         
                     </ul>
                 </div>
                 
             </div>
             
-            <div data-role="content" Xdata-theme="c" data-iscroll style="border:1px solid gray;border-radius:15px;">
+            <div data-role="content" Xdata-theme="c" data-iscroll >
                 <form class="form-inline">
                     
                     <div class="control-group">
@@ -261,7 +276,7 @@
                     
                     <div class="control-group">
                         <div class="controls">
-                            <input id="button1" type="button" data-bind="click: createChannelCommand" value="Create Channel"    data-inline="true" />
+                            <input id="button1" type="submit" data-bind="click: createChannelCommand" value="Create Channel"    data-inline="true" />
                         </div>
                     </div>
                     

@@ -36,7 +36,7 @@ function ChannelNewViewModel() {
     function errorCreate(data, status, response){
         //that.notifications("error creating channel " + JSON.stringify(data));
         console.log("error creating channel: " + response.message);
-        alert("Error creating channel: " + response.message);
+        showMessage("Error creating channel: " + response.message);
         if (data == "Unauthorized"){
             $.mobile.changePage("#" + loginViewModel.template)
         }
