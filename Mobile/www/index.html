@@ -203,6 +203,7 @@
                         
                         
                         <li><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
+                        <li><a href="mailto:degraffenried@gmail.com" >Invite Followers</a></li>
                         <li><a href="#" data-bind="click: refreshMessagesCommand">Followers</a></li>
                         <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
@@ -261,6 +262,8 @@
             
             <div data-role="content" Xdata-theme="c" data-iscroll >
                 <form class="form-inline">
+                    
+                    <div id="no_channels_notification" style="display:none;"><h2>You don't have any channels yet. Start by creating a channel here.</h2></div>
                     
                     <div class="control-group">
                         <div class="controls" data-bind="text: notifications">

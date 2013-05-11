@@ -61,6 +61,14 @@ function ChannelListViewModel() {
             data.channel = [data.channel];
         }
         
+        if (!data.channel ){
+            
+            $.mobile.changePage("#" + channelNewViewModel.template);
+            $("#no_channels_notification").show();
+            return;
+        }
+        
+        $("#no_channels_notification").hide();
         
         that.channels(data.channel);
 	};

@@ -199,6 +199,7 @@ function ChannelViewModel() {
 	    return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
     
+    
     this.refreshMessagesCommand = function(){
         
         that.messages([]);

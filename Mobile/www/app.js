@@ -90,28 +90,6 @@ $(document).ready(function () {
                    */
                   
                   
-                  
-                  
-                  if (currentUrl.hash  == '#channelListView' || currentUrl.hash  == ''){
-                      channelListViewModel.activate();
-                  }
-                  else if (currentUrl.hash  == '#channelView'){
-                      var currentChannel = localStorage.getItem("currentChannel");
-                      var channel = JSON.parse(currentChannel);
-                      channelViewModel.activate(channel);
-                  }
-                  else if (currentUrl.hash  == '#sendMessageView'){
-                      var currentChannel = localStorage.getItem("currentChannel");
-                      var channel = JSON.parse(currentChannel);
-                      sendMessageViewModel.activate(channel);
-                  }
-                  else if (currentUrl.hash  == '#loginView'){
-                      
-                      loginViewModel.activate();
-                  }
-                  
-                  
-                  
     });
 
 

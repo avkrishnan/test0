@@ -10,8 +10,6 @@ function ChannelNewViewModel() {
     var that = this;
     var  dataService = new EvernymChannelService();
     
-     
-    
     
     // Methods
     this.activate = function () {
