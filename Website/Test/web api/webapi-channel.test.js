@@ -148,7 +148,6 @@
 		}
 		function step7(data){
 			ok(true, JSON.stringify(data));
-			start();
 		}
 	});
 
