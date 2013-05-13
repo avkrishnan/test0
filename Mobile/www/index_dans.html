@@ -1,0 +1,96 @@
+CTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+        
+        <title>Evernym</title>        
+    </head>
+    <body>
+        
+        <!-- Login -->
+        <div data-role="page" id="login">
+            
+            <!-- Header -->
+            <div data-role="header"  data-theme="a">
+                <h3>Evernym</h3>
+                <a data-role="button" data-theme="e" data-mini="true" href="#search" data-icon="search" data-iconpos="notext" class="ui-btn-right"></a>
+                <a data-role="button" data-theme="e" data-mini="true" href="#login" data-icon="home" data-iconpos="notext" class="ui-btn-left"></a>
+            </div>
+            
+            <!-- Content -->
+            <div data-role="content">
+                <form action="">
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="username" />
+                            <input name="username" id="username" placeholder="Username" value="" type="text" />
+                        </fieldset>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="password" />
+                            <input name="password" id="password" placeholder="Password" value="" type="password" />
+                        </fieldset>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup" data-type="vertical">
+                            <input id="rememberme" name="rememberme" checked type="checkbox" />
+                            <label for="rememberme">Remember Me</label>
+                        </fieldset>
+                    </div>
+                    <input type="submit" data-theme="e" value="Login" />
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div data-role="footer" data-position="fixed" data-theme="a">
+                <h3>Footer Text</h3>
+                <a data-role="button" href="#login" class="ui-btn-left">Button</a>
+                <a data-role="button" href="#login" class="ui-btn-right">Button</a>
+            </div>
+
+        </div>
+
+        <!-- Search -->
+        <div data-role="page" id="search">
+            
+            <!-- Header -->
+            <div data-role="header"  data-theme="a">
+                <a data-role="button" data-theme="e" data-mini="true" href="#" data-rel="back" data-icon="back" data-iconpos="notext" class="ui-btn-right"></a>
+                <a data-role="button" data-theme="e" data-mini="true" href="#login" data-icon="home" data-iconpos="notext" class="ui-btn-left"></a>
+                <h3>Evernym</h3>
+            </div>
+
+            <!-- Content -->
+            <div data-role="content">
+                <form action="">
+                    <div data-role="fieldcontain">
+                        <fieldset data-role="controlgroup">
+                            <label for="searchField" />
+                            <input name="searchField" id="searchField" placeholder="What are you looking for?" type="text" />
+                        </fieldset>
+                    </div>
+                    <input type="submit" data-theme="e" value="Search" />
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div data-role="footer" data-position="fixed" data-theme="a">
+                <h4>Footer Text</h4>
+                <a data-role="button" href="#login" class="ui-btn-left">Button</a>
+                <a data-role="button" href="#login" class="ui-btn-right">Button</a>
+            </div>
+
+        </div>
+
+    </body>
+</html>
+
