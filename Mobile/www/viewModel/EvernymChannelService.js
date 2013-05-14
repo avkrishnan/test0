@@ -32,10 +32,18 @@ function EvernymChannelService() {
     
     this.followChannel = function (channelid, callbacks) {
         
-		//logger.log('starting to follow channel' , null, 'dataservice.channel', true);
-        return api.callAPI('POST', '/channel/' + channelid + '/follow', undefined, callbacks, true);
+        return api.callAPI('POST', '/channel/' + channelid + '/follower', undefined, callbacks, true);
         
     };
+    
+    
+    this.getFollowers = function (channelid, callbacks) {
+        
+		
+        return api.callAPI('GET', '/channel/' + channelid + '/follower', undefined, callbacks, true);
+        
+    };
+    
     
     this.unFollowChannel = function (channelid, callbacks) {
         

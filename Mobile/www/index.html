@@ -34,6 +34,8 @@
             <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>
             <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
             <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/FollowersListViewModel.js"></script>
+            
             
             
             <!-- the code that puts it all together -->
@@ -85,7 +87,7 @@
                         
                         
                         <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
-                            <span href="" data-bind="text: name"></span>
+                            <span data-bind="text: relationship"></span> : <span data-bind="text: name"></span>
                             </a>
                         
                         
@@ -140,6 +142,57 @@
               
                 
             </div>
+            
+        </div>
+        
+        
+        
+        
+        <div data-role="page" xdata-theme="b"
+            id="followersListView">
+            <div data-role="header" xdata-theme="b">
+                
+                <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
+                
+                <h1>Followers</h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" data-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                        
+                        
+                        
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" xdata-theme="c" data-iscroll>
+                
+                <ul data-role="listview">
+                    
+                    
+                    
+                    
+                    <!-- ko foreach: followers, updateListviewOnChange:followers -->
+                    <li>
+                        
+                        
+                        <a data-bind="attr: {href: 'index.html#followerView?id=' + id}">
+                            <span href="" data-bind="text: firstname"></span> <span href="" data-bind="text: lastname"></span>
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                    </li>
+                    <!-- /ko -->
+                    
+                </ul>
+            </div>
+            
             
         </div>
         
@@ -204,7 +257,7 @@
                         
                         <li><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
                         <li><a href="mailto:degraffenried@gmail.com" >Invite Followers</a></li>
-                        <li><a href="#" data-bind="click: refreshMessagesCommand">Followers</a></li>
+                        <li><a href="index.html#followersListView">Followers</a></li>
                         <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
@@ -214,12 +267,16 @@
                 
             </div>
             
+            <div style="border-bottom:2px solid green;background:gray;color:white;font-weight:normal;">http://evernym.arachnicode.com/index.html#channelView?id=<span data-bind="text: channelid"></span>&follow=1</div>
             
             
             <div data-role="content" xdata-theme="b" data-iscroll>
                 
                 
+                
                 <ul data-role="listview">
+                    
+                    
                     
                     <!-- ko foreach: messages, updateListviewOnChange:messages -->
                     <li>

@@ -50,7 +50,8 @@ channelListViewModel = new ChannelListViewModel(),
 channelViewModel = new ChannelViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 signupViewModel = new SignupViewModel(),
-sendMessageViewModel = new SendMessageViewModel()
+sendMessageViewModel = new SendMessageViewModel(),
+followersListViewModel = new FollowersListViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -68,6 +69,7 @@ $(document).ready(function () {
                   ko.applyBindings(channelNewViewModel, document.getElementById("channelNewView"));
                   ko.applyBindings(signupViewModel, document.getElementById("signupView"));
                   ko.applyBindings(sendMessageViewModel, document.getElementById("sendMessageView"));
+                  ko.applyBindings(followersListViewModel, document.getElementById("followersListView"));
                   
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
