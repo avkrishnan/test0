@@ -51,7 +51,8 @@ channelViewModel = new ChannelViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 signupViewModel = new SignupViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
-followersListViewModel = new FollowersListViewModel()
+followersListViewModel = new FollowersListViewModel(),
+inviteFollowersViewModel = new InviteFollowersViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -70,7 +71,7 @@ $(document).ready(function () {
                   ko.applyBindings(signupViewModel, document.getElementById("signupView"));
                   ko.applyBindings(sendMessageViewModel, document.getElementById("sendMessageView"));
                   ko.applyBindings(followersListViewModel, document.getElementById("followersListView"));
-                  
+                  ko.applyBindings(inviteFollowersViewModel, document.getElementById("inviteFollowersView"));
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   

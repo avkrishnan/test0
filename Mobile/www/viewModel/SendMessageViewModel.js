@@ -73,7 +73,7 @@ function SendMessageViewModel() {
 
     
 	function successfulMessage(data){
-	    
+	    $.mobile.hidePageLoadingMsg();
 	    that.message('');
         $.mobile.changePage("#" + channelViewModel.template)
 	    
@@ -87,6 +87,7 @@ function SendMessageViewModel() {
     }
     
 	function errorAPI(data, status, details){
+        $.mobile.hidePageLoadingMsg();
         if (data == "Unauthorized"){
             $.mobile.changePage("#" + loginViewModel.template)
         }
@@ -97,6 +98,7 @@ function SendMessageViewModel() {
 	};
     
     function errorPostingMessage(data, status, details){
+        $.mobile.hidePageLoadingMsg();
         if (data == "Unauthorized"){
             $.mobile.changePage("#" + loginViewModel.template)
         }
@@ -116,6 +118,7 @@ function SendMessageViewModel() {
 	
 	this.postMessageCommand = function(){
 	    //logger.log("postMessageCommand", undefined, "channels", true);
+        $.mobile.showPageLoadingMsg("a", "Posting Message");
 	    var messageobj = {text: that.message(), type: 'FYI'};
 	    return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};

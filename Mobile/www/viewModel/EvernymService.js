@@ -32,10 +32,18 @@ function EvernymService() {
         
 		ajaxCall.fail(function (jqXHR, textStatus, errorThrown) {
                       //logger.log('error: ' + jqXHR.status, undefined, 'dataservice.api', true);
-                      if (jqXHR.status == '401'){
-                      //router.navigateTo('#/login');
+                      
+                      var details = (jqXHR.status!=500)?JSON.parse(jqXHR.responseText):jqXHR.responseText;
+                      
+                      if (details.code == 100202 || jqXHR.status == '401'){
+                      
+                      
+                          
+                      localStorage.setItem("login_nav", JSON.stringify({hash: $.mobile.urlHistory.getActive().hash, params: ajaxParams}));
+                      
                       }
-                      callbacks.error(errorThrown ? errorThrown : textStatus, jqXHR.status, (jqXHR.status!=500)?JSON.parse(jqXHR.responseText):jqXHR.responseText);
+                      
+                      callbacks.error(errorThrown ? errorThrown : textStatus, jqXHR.status, details);
                       });
 		
 		return ajaxCall;

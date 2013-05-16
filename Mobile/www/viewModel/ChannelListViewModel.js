@@ -13,20 +13,15 @@ function ChannelListViewModel() {
     this.channels = ko.observableArray([]);
     this.chicken = ko.observable();
 	var that = this;
+    this.shown = false;
 	
     
     $("#" + this.template).live("pagebeforeshow", function(e, data){
                          
-                          that.activate();
-                                
-                               
-                                 
-                                if ($.mobile.pageData && $.mobile.pageData.id){
-                                
-                                    
+                                if (!that.shown){
+                                    that.activate();
                                 }
                                 
-                          
                           });
     
     // Methods
@@ -37,10 +32,11 @@ function ChannelListViewModel() {
     this.activate = function() {
 	    
         console.log("trying to get channels");
-        $.mobile.showPageLoadingMsg("a", "Loading Channels");
+        
         if ( that.channels() && that.channels().length){
             that.channels.removeAll();
         }
+        $.mobile.showPageLoadingMsg("a", "Loading Channels");
 	    return this.listChannelsCommand().then(gotChannels);
     };
 	
@@ -54,6 +50,7 @@ function ChannelListViewModel() {
     
 	function gotChannels(data){
         $.mobile.hidePageLoadingMsg();
+        that.shown = true;
 	    //that.channels.removeAll();
         
         if (data.channel && data.channel.constructor == Object){
@@ -73,13 +70,17 @@ function ChannelListViewModel() {
         that.channels(data.channel);
 	};
     
-	function errorListChannels(data){
-        console.log("error listing channels");
-        $.mobile.changePage("#" + loginViewModel.template)
+	function errorListChannels(data, status, details){
+        $.mobile.hidePageLoadingMsg();
+        showMessage("Error listing channels: " + details.message);
+        if (details.code == 100202 || status == 401){
+            $.mobile.changePage("#" + loginViewModel.template)
+        }
 	    //logger.logError('error listing channels', null, 'dataservice', true);
 	};
     
 	this.listChannelsCommand = function () {
+        
         //logger.log("starting listChannels", undefined, "channels", true);
 	    return dataService.listChannels({success: successfulCreate, error: errorListChannels});
 	};

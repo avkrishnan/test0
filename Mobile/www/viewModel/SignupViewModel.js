@@ -32,6 +32,8 @@ function SignupViewModel() {
     };
     
     this.signUpCommand = function () {
+        
+        $.mobile.showPageLoadingMsg("a", "Enrolling");
         var callbacks = {
         success: signUpSuccess,
         error: signUpError
@@ -43,6 +45,7 @@ function SignupViewModel() {
     };
     
     this.loginCommand = function() {
+        $.mobile.showPageLoadingMsg("a", "Logging In With New Credentials");
         var callbacks = {
         success: loginSuccess,
         error: loginError
@@ -59,13 +62,26 @@ function SignupViewModel() {
     
     function loginSuccess(args) {
         
-        
+        $.mobile.hidePageLoadingMsg();
         localStorage.removeItem('accessToken');
         if (args.accessToken) {
             
             localStorage.setItem("accessToken", args.accessToken);
-            $.mobile.changePage("#" + channelListViewModel.template);
-            channelListViewModel.activate();
+            
+            var login_nav = JSON.parse(localStorage.getItem("login_nav"));
+            localStorage.removeItem("login_nav");
+            
+            if (login_nav){
+                var hash = login_nav.hash;
+                //var parameters = login_nav.parameters;
+                
+                $.mobile.changePage(hash);
+            }
+            else {
+                $.mobile.changePage("#" + channelListViewModel.template);
+            }
+            
+            
         } else {
             loginError();
             return;
@@ -75,6 +91,7 @@ function SignupViewModel() {
     }
     
     function loginError(data, status, response) {
+        $.mobile.hidePageLoadingMsg();
         showMessage("LOGIN FAILED");
         localStorage.removeItem('accessToken');
         
@@ -82,11 +99,13 @@ function SignupViewModel() {
     }
     
     function signUpSuccess(args) {
+        $.mobile.hidePageLoadingMsg();
         that.loginCommand();
         //logger.log('You successfully signed up!', null, 'signup', true);
     };
     
     function signUpError(data, status, response) {
+        $.mobile.hidePageLoadingMsg();
         //logger.logError('signup failed!', null, 'signup', true);
         showMessage("Error Registering: " + response.message);
     };

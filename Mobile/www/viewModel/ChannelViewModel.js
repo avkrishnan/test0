@@ -23,7 +23,7 @@ function ChannelViewModel() {
                                 
                                 
                                 if ($.mobile.pageData && $.mobile.pageData.follow){
-                                    showMessage("Following Channel " + $.mobile.pageData.id);
+                                    
                                 
                                     that.channelid($.mobile.pageData.id);
                                     that.followChannelCommand().then(getChannelFromPageData);
@@ -31,6 +31,7 @@ function ChannelViewModel() {
                                 }
                                 
                                 else if ($.mobile.pageData && $.mobile.pageData.id){
+                                
                                     that.activate({id:$.mobile.pageData.id});
                                 }
                                 
@@ -41,10 +42,7 @@ function ChannelViewModel() {
                                 
                                 }
                                 
-                                
-                                
-                                
-                                });
+           });
     
     
     // Methods
@@ -68,17 +66,20 @@ function ChannelViewModel() {
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
         
         that.getChannelCommand(that.channelid()).then(gotChannel);
-        that.getMessagesCommand(that.channelid()).then(gotMessages);
+        
         
         return true;
 	    
     };
 	
 	function gotChannel(data){
-        
+        $.mobile.hidePageLoadingMsg();
         localStorage.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.title(data.name );
+        that.getMessagesCommand(that.channelid()).then(gotMessages);
+        
+       
 		
     };
     
@@ -97,7 +98,7 @@ function ChannelViewModel() {
 	
     function successfulGetChannel(data){
 	    //logger.log('success Getting Channel ' , null, 'channel', true);
-	    
+	    $.mobile.hidePageLoadingMsg();
 	    
 	};
     
@@ -111,6 +112,7 @@ function ChannelViewModel() {
 	};
     
 	function successfulMessage(data){
+        $.mobile.hidePageLoadingMsg();
 	    //router.navigateTo('#/channellist');
 	    //logger.log("SUCCESS MESSAGE", undefined, "channel", true);
 	    that.getMessagesCommand(that.channelid()).then(gotMessages);
@@ -119,12 +121,13 @@ function ChannelViewModel() {
 	};
     
     function successfulFollowChannel(){
-	    showMessage("NOW FOLLOWING THIS CHANNEL");
+	    $.mobile.hidePageLoadingMsg();
+        showMessage("Now Following Channel " + $.mobile.pageData.id);
 	    
 	};
     
 	function successfulMessageGET(data){
-	    
+	    $.mobile.hidePageLoadingMsg();
 	    //logger.log("SUCCESS GET MESSAGES" + JSON.stringify(data), undefined, "channel", true);
 	    
 	    
@@ -137,7 +140,8 @@ function ChannelViewModel() {
     }
     
 	function errorAPI(data, status, details){
-        if (data == "Unauthorized"){
+        $.mobile.hidePageLoadingMsg();
+        if (details.code == 100202 || status == 401){
             $.mobile.changePage("#" + loginViewModel.template)
         }
         console.log("error something " + data);
@@ -147,7 +151,8 @@ function ChannelViewModel() {
 	};
     
     function errorPostingMessage(data, status, details){
-        if (data == "Unauthorized"){
+        $.mobile.hidePageLoadingMsg();
+        if (details.code == 100202 || status == 401){
             $.mobile.changePage("#" + loginViewModel.template)
         }
         console.log("error something " + data);
@@ -156,16 +161,18 @@ function ChannelViewModel() {
 	};
     
     function errorRetrievingMessages(data, status, details){
-        if (data == "Unauthorized"){
+        $.mobile.hidePageLoadingMsg();
+        if (details.code == 100202 || status == 401){
             $.mobile.changePage("#" + loginViewModel.template)
         }
-        console.log("error something " + data);
+        
         showMessage("Error Retrieving Messages: " + ((status==500)?"Internal Server Error":details.message));
 	    //logger.logError('error listing channels', null, 'channel', true);
 	};
 	
 	this.getChannelCommand = function (lchannelid) {
 	    
+        $.mobile.showPageLoadingMsg("a", "Loading Channel");
         //logger.log("starting getChannel", undefined, "channels", true);
 	    return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPI});
         
@@ -174,7 +181,7 @@ function ChannelViewModel() {
     this.followChannelCommand = function(){
         
         that.messages([]);
-        $.mobile.showPageLoadingMsg("a", "Requesting Follow Channel");
+        $.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
         return dataService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorAPI});
         
     };
@@ -208,7 +215,7 @@ function ChannelViewModel() {
     };
 	
 	this.getMessagesCommand = function(){
-        
+        $.mobile.showPageLoadingMsg("a", "Loading Messages");
 	    //logger.log("getMessagesCommand", undefined, "channels", true);
 	    return dataServiceM.getChannelMessages(that.channelid(), {success: successfulMessageGET, error: errorRetrievingMessages});
 	};

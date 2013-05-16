@@ -35,7 +35,7 @@
             <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
             <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
             <script type="text/javascript" src="viewModel/FollowersListViewModel.js"></script>
-            
+            <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
             
             
             <!-- the code that puts it all together -->
@@ -72,6 +72,8 @@
                         
                         
                         <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
+                        <li><a href="#" data-bind="click: activate">Refresh List</a></li>
+                        
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>
@@ -88,7 +90,7 @@
                         
                         <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
                             <span data-bind="text: relationship"></span> : <span data-bind="text: name"></span>
-                            </a>
+                        </a>
                         
                         
                         
@@ -113,7 +115,7 @@
             </div>
             
             <div data-role="content" Xdata-theme="b">
-            
+                
                 <form >
                     
                     <div >
@@ -139,7 +141,7 @@
                     
                 </form>
                 
-              
+                
                 
             </div>
             
@@ -161,7 +163,7 @@
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                         
                         
-                        
+                        <li><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>
@@ -216,14 +218,13 @@
             </div>
             
             <div data-role="content" xdata-theme="b" >
-                
-                <div id="channel_id" data-bind="text:channelid"></div>
+               
                 
                 <form class="form-inline">
                     
                     <div class="control-group">
                         <div class="controls">
-                            <input id="message" type="text" data-bind="value: message" placeholder="message" autocomplete="on" required data-validate="required"  data-inline="true" />
+                            <input id="message" type="text" data-bind="value: message" placeholder="message" autocomplete="on" required data-validate="required"  autofocus="autofocus" data-inline="true" />
                         </div>
                     </div>
                     
@@ -236,6 +237,34 @@
                     
                     
                 </form>
+                
+                
+            </div>
+            
+        </div>
+        
+        
+        <div data-role="page" xdata-theme="b"
+            id="inviteFollowersView">
+            <div data-role="header" xdata-theme="b">
+                <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
+                <h1>Invite Followers</h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" xdata-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                        
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+            </div>
+            
+            <div data-role="content" xdata-theme="b" >
+                
+            <div>http://evernym.arachnicode.com/index.html#channelView?id=<span data-bind="text: channelid"></span>&amp;follow=1</div>
                 
                 
             </div>
@@ -256,7 +285,7 @@
                         
                         
                         <li><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
-                        <li><a href="mailto:degraffenried@gmail.com" >Invite Followers</a></li>
+                        <li><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
                         <li><a href="index.html#followersListView">Followers</a></li>
                         <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
@@ -267,7 +296,7 @@
                 
             </div>
             
-            <div style="border-bottom:2px solid green;background:gray;color:white;font-weight:normal;">http://evernym.arachnicode.com/index.html#channelView?id=<span data-bind="text: channelid"></span>&follow=1</div>
+            
             
             
             <div data-role="content" xdata-theme="b" data-iscroll>
@@ -283,15 +312,15 @@
                         
                         
                         <div data-bind="text: text"></div>
-                            
-                            
-                            
+                        
+                        
+                        
                         
                     </li>
                     <!-- /ko -->
                     
                 </ul>
-
+                
                 
             </div>
             
@@ -330,7 +359,7 @@
                     
                     <div class="control-group">
                         <div class="controls">
-                            <input id="inputChannelName" type="text" data-bind="value: name" placeholder="Enter Channel Name" autocomplete="on" autofocus required data-validate="required" />
+                            <input id="inputChannelName" type="text" data-bind="value: name" placeholder="Enter Channel Name" autocomplete="on" autofocus="autofocus" required data-validate="required" />
                         </div>
                     </div>
                     

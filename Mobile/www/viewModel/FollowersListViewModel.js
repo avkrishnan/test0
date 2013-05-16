@@ -45,7 +45,7 @@ function FollowersListViewModel() {
         that.followers([]);
         that.channelid(channel.id);
         that.channelname(channel.name);
-        
+        $.mobile.showPageLoadingMsg("a", "Loading Followers");
         that.getFollowersCommand().then(gotFollowers);
 	    
         return true;
@@ -54,8 +54,15 @@ function FollowersListViewModel() {
 
 	
     function gotFollowers(data){
-	    
-        that.followers(data.all);
+	    $.mobile.hidePageLoadingMsg();
+        
+        if (data.followers && data.followers.constructor == Object){
+            
+            data.followers = [data.followers];
+        }
+
+        
+        that.followers(data.followers);
 	    
 	};
 
@@ -67,6 +74,7 @@ function FollowersListViewModel() {
     }
     
 	function errorAPI(data, status, details){
+        $.mobile.hidePageLoadingMsg();
         if (data == "Unauthorized"){
             $.mobile.changePage("#" + loginViewModel.template)
         }

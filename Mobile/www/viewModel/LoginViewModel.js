@@ -29,8 +29,9 @@ function LoginViewModel() {
         error: loginError
         };
         
+        channelListViewModel.shown = false;
         var loginModel = {};
-        
+        $.mobile.showPageLoadingMsg("a", "Logging In");
         loginModel.accountName = this.accountName();
         loginModel.password = this.password();
         loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
@@ -60,13 +61,28 @@ function LoginViewModel() {
     
     function loginSuccess(args) {
                 
-        
+        $.mobile.hidePageLoadingMsg();
         localStorage.removeItem('accessToken');
         if (args.accessToken) {
             
             localStorage.setItem("accessToken", args.accessToken);
-            $.mobile.changePage("#" + channelListViewModel.template);
-            channelListViewModel.activate();
+            
+            var login_nav = JSON.parse(localStorage.getItem("login_nav"));
+            localStorage.removeItem("login_nav");
+            
+            if (login_nav){
+                var hash = login_nav.hash;
+                //var parameters = login_nav.parameters;
+                
+                $.mobile.changePage(hash);
+            }
+            else {
+                $.mobile.changePage("#" + channelListViewModel.template);
+            }
+            
+            
+            
+            
         } else {
             loginError();
             return;
@@ -76,7 +92,7 @@ function LoginViewModel() {
     }
     
     function loginError(data, status, details) {
-        
+        $.mobile.hidePageLoadingMsg();
         showMessage("LOGIN FAILED: " + details.message);
         localStorage.removeItem('accessToken');
         //logger.logError('Your login failed, please try again!', null, 'login', true);
