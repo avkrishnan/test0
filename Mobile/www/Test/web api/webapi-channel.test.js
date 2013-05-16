@@ -4,8 +4,8 @@
 	var okAsync = QUnit.okAsync,
 	stringformat = QUnit.stringformat;
 
-	var baseUrl = 'http://qupler.no-ip.org:8080/api-rc/rest', //production environment
-	//var baseUrl = 'http://localhost:8080/api/rest', //local environment
+	//var baseUrl = 'http://qupler.no-ip.org:8080/api-rc/rest', //production environment
+	var baseUrl = 'http://localhost:8080/api/rest', //local environment
 	//var baseUrl = 'http://192.168.1.202:8080/api/rest', //production environment through local network
 
 
@@ -152,6 +152,32 @@
 		}
 	});
 
+	test('CREATE A CHANNEL, LIST FOLLOWERS (SELF)', function () {
+		stop(timoutms); //tell qunit to wait 5 seconds before timing out
+		var account = generateAccount();
+		var accessToken;
+		enroll(account, expectSuccessNoContent, step2);
+		var channel = generateChannel();
+
+		function step2() {
+			login(generateLogin(account), expectSuccess, step3);
+		}
+        function step3(data){
+			accessToken = data.accessToken;
+			createChannel(accessToken, channel, expectCreated, step4);
+        }
+		function step4(data) {
+			listChannels(accessToken, undefined, expectSuccess, step5);
+		}
+        function step5(data){
+            var channelid = data.channel.id;
+			listFollowers(accessToken, channelid, expectSuccess, step6);
+        }
+        function step6(data){
+			ok(true, JSON.stringify(data));
+            start();
+        }
+	});
 
 	test('FOLLOW A CHANNEL, LIST FOLLOWERS', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
@@ -191,7 +217,6 @@
  
         }
 	});
-
 
 
 	function createChannel(accessToken, channel, handler, postHandlerCallback) {
