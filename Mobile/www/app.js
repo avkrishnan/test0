@@ -16,7 +16,7 @@ update: function (element, valueAccessor) {
         try {
             $(listview).listview('refresh');
         } catch (e) {
-            // if the listview is not initialised, the above call with throw an exception
+            // if the list view is not initialized, the above call with throw an exception
             // there doe snot appear to be any way to easily test for this state, so
             // we just swallow the exception here.
         }
@@ -52,7 +52,8 @@ channelNewViewModel = new ChannelNewViewModel(),
 signupViewModel = new SignupViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
-inviteFollowersViewModel = new InviteFollowersViewModel()
+inviteFollowersViewModel = new InviteFollowersViewModel(),
+followerViewModel = new FollowerViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -72,6 +73,7 @@ $(document).ready(function () {
                   ko.applyBindings(sendMessageViewModel, document.getElementById("sendMessageView"));
                   ko.applyBindings(followersListViewModel, document.getElementById("followersListView"));
                   ko.applyBindings(inviteFollowersViewModel, document.getElementById("inviteFollowersView"));
+                  ko.applyBindings(followerViewModel, document.getElementById("followerView"));
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   

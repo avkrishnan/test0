@@ -44,6 +44,15 @@ function EvernymChannelService() {
         
     };
     
+
+    this.getFollower = function (followerid, callbacks) {
+
+        debugger;
+        // Todo call the api call to get a single follower.
+        //return api.callAPI('GET', '/channel/' + channelid + '/follower', undefined, callbacks, true);
+        return null;
+    };
+
     
     this.unFollowChannel = function (channelid, callbacks) {
         

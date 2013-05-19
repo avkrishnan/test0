@@ -189,13 +189,9 @@ function ChannelViewModel() {
 	
 	this.deleteChannelCommand = function () {
 
-        if (!confirm("Permanently delete channel. Are you sure?")) {
-            event.stopImmediatePropagation();            
-            return false;
-        }
-
+		debugger;
 		$.mobile.showPageLoadingMsg("a", "Removing Channel");
-		//logger.log("starting deleteChannel", undefined, "channels", true);
+
 		return dataService.deleteChannel(that.channelid() , {success: successfulDelete, error: errorAPI});
 		
 	};
