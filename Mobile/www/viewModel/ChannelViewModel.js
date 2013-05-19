@@ -104,6 +104,7 @@ function ChannelViewModel() {
     
 	function successfulDelete(data){
 	    //router.navigateTo('#/channellist');
+	    $.mobile.changePage("#" + channelListViewModel.template);
 	};
     
 	function successfulModify(data){
@@ -187,7 +188,8 @@ function ChannelViewModel() {
     };
 	
 	this.deleteChannelCommand = function () {
-	    
+
+	    $.mobile.showPageLoadingMsg("a", "Removing Channel");
         //logger.log("starting deleteChannel", undefined, "channels", true);
 	    return dataService.deleteChannel(that.channelid() , {success: successfulDelete, error: errorAPI});
         

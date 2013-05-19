@@ -2,7 +2,7 @@
 
 function TwitterSearchService() {
   /// <summary>
-  /// A service that provide a very simple twitter search function, returing a simplified
+  /// A service that provide a very simple twitter search function, returning a simplified
   /// version of the response provided by the Twitter APIs
   /// </summary>
 

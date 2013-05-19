@@ -52,11 +52,10 @@ function EvernymChannelService() {
         
     };
     
-    deleteChannel = function (channelid, callbacks) {
-        
-		//logger.log('starting to list channels ' , null, 'dataservice.channel', true);
+    this.deleteChannel = function (channelid, callbacks) {
+
         return api.callAPI('DELETE', '/channel/' + channelid, undefined, callbacks, true);
-        
+
     };
     
     this.modifyChannel = function (channel, callbacks) {
