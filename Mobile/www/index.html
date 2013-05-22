@@ -311,7 +311,7 @@
                         <li><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
                         <li><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
                         <li><a href="index.html#followersListView">Followers</a></li>
-                        <li><a href="#confirmRemoveChannel" data-rel="dialog" data-transition="pop">Remove Channel</a></li>
+                        <li><a href="#" data-bind="click: deleteChannelCommand">Delete Channel</a></li>
                         <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
@@ -352,15 +352,7 @@
         </div>
 
 
-        <div data-role="page" xdata-theme="a" id="confirmRemoveChannel">
-            <div data-role="header">
-                <h1>Delete Channel?</h1>
-            </div>
-            <div data-role="content">
-                <p>Permanently Delete Channel and Messages? Are you sure?</p>
-                <a href="#" data-rel="back" data-transition="pop" data-direction="reverse" data-bind="click: deleteChannelCommand" type="button" >Yes</a><a href="#" data-role="button" data-rel="back" data-transition="pop" data-direction="reverse">No</a>
-            </div>
-        </div>
+       
         
         <div data-role="page" xdata-theme="b"
             id="channelNewView" >
