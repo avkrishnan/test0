@@ -47,6 +47,7 @@ function showMessage(message){
 var
 loginViewModel = new LoginViewModel(),
 channelListViewModel = new ChannelListViewModel(),
+channelsFollowingListViewModel = new ChannelsFollowingListViewModel(),
 channelViewModel = new ChannelViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 signupViewModel = new SignupViewModel(),
@@ -67,6 +68,7 @@ $(document).ready(function () {
                   
                   ko.applyBindings(loginViewModel, document.getElementById("loginView"));
                   ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
+                  ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
                   ko.applyBindings(channelViewModel, document.getElementById("channelView"));
                   ko.applyBindings(channelNewViewModel, document.getElementById("channelNewView"));
                   ko.applyBindings(signupViewModel, document.getElementById("signupView"));

@@ -30,6 +30,7 @@
             
             <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/ChannelsFollowingListViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>
             <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
@@ -65,16 +66,52 @@
         <div data-role="page" xdata-theme="b"
             id="channelListView">
             <div data-role="header" xdata-theme="b">
-                <h1>Channel List</h1>
+                <h1>My Channel List</h1>
                 
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                        
-                        
+                       
                         <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
                         <li><a href="#" data-bind="click: activate">Refresh List</a></li>
+                        <li><a href="index.html#channelsFollowingListView">Channels I'm Following</a></li>
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" xdata-theme="c" data-iscroll>
+                
+                <ul data-role="listview">
+                    
+                    <!-- ko foreach: channels, updateListviewOnChange:channels -->
+                    <li>
+                        
+                        <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
+                            <span data-bind="text: relationship"></span> : <span data-bind="text: name"></span>
+                        </a>          
+                        
+                    </li>
+                    <!-- /ko -->
+                    
+                </ul>
+            </div>
+            
+            
+        </div>
+        
+        <div data-role="page" xdata-theme="b"
+            id="channelsFollowingListView">
+            <div data-role="header" xdata-theme="b">
+                <h1>Channels I'm Following</h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="Div2" data-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                       
+                        <li><a href="#" data-bind="click: activate">Refresh List</a></li>
+                        <li><a href="#" data-bind="click: newChannelCommand">My Channel List</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>
@@ -105,7 +142,6 @@
             
             
         </div>
-        
         
         
         <div data-role="page" xdata-theme="b"
@@ -306,7 +342,6 @@
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" xdata-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                        
                         
                         <li><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
                         <li><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
