@@ -55,13 +55,8 @@
                     alert('Menu button pressed.');
                 }
                 </script>
-            
-            
-            
             </head>
     <body>
-        
-        
         
         <div data-role="page" xdata-theme="b"
             id="channelListView">
@@ -107,11 +102,12 @@
                 <h1>Channels I'm Following</h1>
                 
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
-                <div data-role="popup" id="Div2" data-theme="a">
+                <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                        
+                        <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
                         <li><a href="#" data-bind="click: activate">Refresh List</a></li>
-                        <li><a href="#" data-bind="click: newChannelCommand">My Channel List</a></li>
+                        <li><a href="index.html#channelListView">My Channel List</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>
@@ -125,14 +121,9 @@
                     <!-- ko foreach: channels, updateListviewOnChange:channels -->
                     <li>
                         
-                        
                         <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
                             <span data-bind="text: relationship"></span> : <span data-bind="text: name"></span>
                         </a>
-                        
-                        
-                        
-                        
                         
                     </li>
                     <!-- /ko -->
@@ -198,11 +189,8 @@
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                        
-                        
                         <li><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
-                        
                     </ul>
                 </div>
             </div>
@@ -211,35 +199,25 @@
                 
                 <ul data-role="listview">
                     
-                    
-                    
-                    
                     <!-- ko foreach: followers, updateListviewOnChange:followers -->
                     <li>
-                        
                         
                         <a data-bind="attr: {href: 'index.html#followerView?id=' + id}">
                             <span href="" data-bind="text: firstname"></span> <span href="" data-bind="text: lastname"></span>
                         </a>
-                        
-                        
-                        
-                        
                         
                     </li>
                     <!-- /ko -->
                     
                 </ul>
             </div>
-            
-            
         </div>
 
           <div data-role="page" xdata-theme="b"
             id="followerView">
             <div data-role="header" xdata-theme="b">
                 
-                <a href="#followersListView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> - Follower List</a>
+                <a href="#followersListView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span>Follower List</a>
                 
                 <h1>Name</h1>
                 
