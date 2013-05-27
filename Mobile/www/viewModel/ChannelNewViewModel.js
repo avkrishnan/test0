@@ -11,9 +11,9 @@ function ChannelNewViewModel() {
     var  dataService = new EvernymChannelService();
     
     
-    $("#" + this.template).live("pagebeforeshow", function(e, data){
-                                    that.activate();
-                                });
+    $("#" + this.template).live("pagebeforeshow", function (e, data) {
+        that.activate();
+    });
     
     // Methods
     this.activate = function () {

@@ -189,11 +189,9 @@ function ChannelViewModel() {
 	
 	this.deleteChannelCommand = function () {
 
-		debugger;
 		$.mobile.showPageLoadingMsg("a", "Removing Channel");
+		return dataService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
 
-		return dataService.deleteChannel(that.channelid() , {success: successfulDelete, error: errorAPI});
-		
 	};
 	
 	this.modifyChannelCommand = function(){

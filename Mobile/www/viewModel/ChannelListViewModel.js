@@ -15,13 +15,14 @@ function ChannelListViewModel() {
 	this.shown = false;
 	
 	
-	$("#" + this.template).live("pagebeforeshow", function(e, data){
-						 
-								if (!that.shown){
-									that.activate();
-								}
-								
-						  });
+	$("#" + this.template).live("pagebeforeshow", function (e, data) {
+
+	    debugger;
+	    if (!that.shown) {
+	        that.activate();
+	    }
+
+	});
 	
 	// Methods
 	
@@ -71,7 +72,8 @@ function ChannelListViewModel() {
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Error listing channels: " + details.message);
+		showMessage("Error listing my channels: " + details.message);
+		debugger;
 		if (details.code == 100202 || status == 401){
 			$.mobile.changePage("#" + loginViewModel.template)
 		}
