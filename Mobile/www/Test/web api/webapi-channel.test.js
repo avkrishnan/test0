@@ -54,8 +54,10 @@
 	test('DELETE CHANNEL', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
 		var account = generateAccount();
-		var channel = generateChannel();
-		var channelid = '';
+		var channel1 = generateChannel();
+		var channel2 = generateChannel();
+		var channelid1 = '';
+		var channelid2 = '';
 		var accessToken;
 		enroll(account, expectSuccessNoContent, step2);	
 		function step2() {
@@ -63,14 +65,27 @@
 		}
 		function step3(data) {
 			accessToken = data.accessToken;
-			createChannel(accessToken, channel, expectCreated, step4);
+			createChannel(accessToken, channel1, expectCreated, step4a);
 		}
-		function step4(data) {
-			channelid = data.channel.id;
-			deleteChannel(accessToken, channelid, expectSuccess, step5);
+		function step4a(data) {
+			channelid1 = data.id;
+			createChannel(accessToken, channel2, expectCreated, step4b);
+		}
+		function step4b(data) {
+			channelid2 = data.id;
+			// delete the second one
+			deleteChannel(accessToken, channelid2, expectSuccessNoContent, step5);
 		}
 		function step5(data) {
-		    listOwnerChannels(accessToken, undefined, expectSuccessNoContent);
+		    listOwnerChannels(accessToken, expectSuccess, step6);
+		}
+		function step6(data) {
+			// make sure only one channel exists
+			ok(1, data.channel.length);
+			
+			// and make sure it's the first one (since we deleted the second one)
+			ok(channelid1, data.channel.id);
+			start();
 		}
 		
 	});
@@ -114,7 +129,7 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-			listOwnerChannels(accessToken, undefined, expectSuccess);
+			listOwnerChannels(accessToken, expectSuccess);
 		}
 	});
 
@@ -133,7 +148,7 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-			listOwnerChannels(accessToken, undefined, expectSuccess, step5);
+			listOwnerChannels(accessToken, expectSuccess, step5);
 		}
 		function step5(data){
 			ok(true, JSON.stringify(data));
@@ -158,7 +173,7 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-			listOwnerChannels(accessToken, undefined, expectSuccess, step5);
+			listOwnerChannels(accessToken, expectSuccess, step5);
 		}
 		function step5(data){
 			ok(true, JSON.stringify(data));
@@ -181,7 +196,7 @@
 		var accessToken;
 		enroll(account, expectSuccessNoContent, step2);
 		var channel = generateChannel();
-
+		var channelId;
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3);
 		}
@@ -190,11 +205,11 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-		    listFollowingChannels(accessToken, undefined, expectSuccess, step5);
+			channelId = data.id;
+		    listFollowingChannels(accessToken, expectSuccess, step5);
 		}
 		function step5(data){
-			var channelid = data.channel.id;
-			listFollowers(accessToken, channelid, expectSuccess, step6);
+			listFollowers(accessToken, channelId, expectSuccess, step6);
 		}
 		function step6(data){
 			ok(true, JSON.stringify(data));
@@ -247,7 +262,6 @@
 	}
 
 	function deleteChannel(accessToken, channelid, handler, postHandlerCallback) {
-		debugger;
 		callAPI('DELETE', '/channel/' + channelid, accessToken, undefined, handler, postHandlerCallback);
 	}
 
@@ -267,14 +281,14 @@
 		callAPI('GET', '/channel/' + channelid + '/message', accessToken, undefined, handler, postHandlerCallback);
 	}
 
-	function listOwnerChannels(accessToken, channel, handler, postHandlerCallback) {
+	function listOwnerChannels(accessToken, handler, postHandlerCallback) {
 
-	    callAPI('GET', '/channel?relationship=O', accessToken, channel, handler, postHandlerCallback);
+	    callAPI('GET', '/channel?relationship=O', accessToken, undefined, handler, postHandlerCallback);
 	}
 
-	function listFollowingChannels(accessToken, channel, handler, postHandlerCallback) {
+	function listFollowingChannels(accessToken, handler, postHandlerCallback) {
 
-	    callAPI('GET', '/channel?relationship=F', accessToken, channel, handler, postHandlerCallback);
+	    callAPI('GET', '/channel?relationship=F', accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function enroll(account, handler, postHandlerCallback) {
