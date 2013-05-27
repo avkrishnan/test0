@@ -61,23 +61,23 @@
 		var accessToken;
 		enroll(account, expectSuccessNoContent, step2);	
 		function step2() {
-			login(generateLogin(account), expectSuccess, step3);
+			login(generateLogin(account), expectSuccess, step3a);
 		}
-		function step3(data) {
+		function step3a(data) {
 			accessToken = data.accessToken;
-			createChannel(accessToken, channel1, expectCreated, step4a);
+			createChannel(accessToken, channel1, expectCreated, step3b);
 		}
-		function step4a(data) {
+		function step3b(data) {
 			channelid1 = data.id;
-			createChannel(accessToken, channel2, expectCreated, step4b);
+			createChannel(accessToken, channel2, expectCreated, step4);
 		}
-		function step4b(data) {
+		function step4(data) {
 			channelid2 = data.id;
-			// delete the second one
+			// delete the second channel
 			deleteChannel(accessToken, channelid2, expectSuccessNoContent, step5);
 		}
 		function step5(data) {
-		    listOwnerChannels(accessToken, expectSuccess, step6);
+			listOwnerChannels(accessToken, expectSuccess, step6);
 		}
 		function step6(data) {
 			// make sure only one channel exists
@@ -88,6 +88,50 @@
 			start();
 		}
 		
+	});
+
+	test('DELETE CHANNEL WITH MESSAGES', function () {
+		stop(timoutms); //tell qunit to wait 5 seconds before timing out
+		var account = generateAccount();
+		var channel1 = generateChannel();
+		var channel2 = generateChannel();
+		var channelid1 = '';
+		var channelid2 = '';
+		var accessToken;
+		enroll(account, expectSuccessNoContent, step2);
+		function step2() {
+			login(generateLogin(account), expectSuccess, step3a);
+		}
+		function step3a(data) {
+			accessToken = data.accessToken;
+			// create channel 1
+			createChannel(accessToken, channel1, expectCreated, step3b);
+		}
+		function step3b(data) {
+			channelid1 = data.id;
+			// create channel 2
+			createChannel(accessToken, channel2, expectCreated, step4);
+		}
+		function step4(data) {
+			channelid2 = data.id;
+			// send a message on channel 2
+			sendMessage(accessToken, channelid2, { text: 'HERE IS A TEST MESSAGE ON CHANNEL 2', type: 'FYI' }, expectCreated, step5);
+		}
+		function step5(data) {
+			// delete Channel 2 which contains a message
+			deleteChannel(accessToken, channelid2, expectSuccessNoContent, step6);
+		}
+		function step6(data) {
+			listOwnerChannels(accessToken, expectSuccess, step8);
+		}
+		function step8(data) {
+			// make sure only one channel exists
+			ok(1, data.channel.length);
+
+			// and make sure it's the first one (since we deleted the second one)
+			ok(channelid1, data.channel.id);
+			start();
+		}
 	});
 
 	test('CREATE CHANNEL NO AUTH', function () {
@@ -206,7 +250,7 @@
 		}
 		function step4(data) {
 			channelId = data.id;
-		    listFollowingChannels(accessToken, expectSuccess, step5);
+			listFollowingChannels(accessToken, expectSuccess, step5);
 		}
 		function step5(data){
 			listFollowers(accessToken, channelId, expectSuccess, step6);
@@ -283,12 +327,12 @@
 
 	function listOwnerChannels(accessToken, handler, postHandlerCallback) {
 
-	    callAPI('GET', '/channel?relationship=O', accessToken, undefined, handler, postHandlerCallback);
+		callAPI('GET', '/channel?relationship=O', accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function listFollowingChannels(accessToken, handler, postHandlerCallback) {
 
-	    callAPI('GET', '/channel?relationship=F', accessToken, undefined, handler, postHandlerCallback);
+		callAPI('GET', '/channel?relationship=F', accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function enroll(account, handler, postHandlerCallback) {
