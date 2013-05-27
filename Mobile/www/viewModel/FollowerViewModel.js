@@ -38,6 +38,7 @@ function FollowerViewModel() {
     // Methods
 
     function getChannelFromPageData() {
+        debugger;
         that.activate({ id: $.mobile.pageData.id });
     }
 
@@ -73,7 +74,7 @@ function FollowerViewModel() {
 
 
     this.getFollowerCommand = function () {
-
+        debugger;
         //logger.log("starting getChannel", undefined, "channels", true);
         return dataService.getFollower(that.channelid(), { success: function () { }, error: errorAPI });
 

@@ -14,13 +14,14 @@ function ChannelsFollowingListViewModel() {
 	this.shown = false;
 	
    
-	$("#" + this.template).live("pagebeforeshow", function(e, data){
-						 
-								if (!that.shown){
-									that.activate();
-								}
-								
-						  });
+	$("#" + this.template).live("pagebeforeshow", function (e, data) {
+
+	    debugger;
+	    if (!that.shown) {
+	        that.activate();
+	    }
+
+	});
 	
    
 	
@@ -55,9 +56,10 @@ function ChannelsFollowingListViewModel() {
 		}
 		
 		if (!data.channel) {
-			// TODO:  What do we do when there are no channels that we are following?
-			$.mobile.changePage("#" + channelNewViewModel.template);
-			$("#no_channels_notification").show();
+		    // TODO:  What do we do when there are no channels that we are following?
+
+			//$.mobile.changePage("#" + channelNewViewModel.template);
+			//$("#no_channels_notification").show();
 			return;
 		}
 		
@@ -68,7 +70,8 @@ function ChannelsFollowingListViewModel() {
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Error listing channels: " + details.message);
+		showMessage("Error listing channels I'm following: " + details.message);
+		debugger;
 		if (details.code == 100202 || status == 401){
 			$.mobile.changePage("#" + loginViewModel.template)
 		}

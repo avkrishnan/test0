@@ -54,7 +54,9 @@ signupViewModel = new SignupViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
 inviteFollowersViewModel = new InviteFollowersViewModel(),
-followerViewModel = new FollowerViewModel()
+followerViewModel = new FollowerViewModel(),
+userSettingsModel = new UserSettingsViewModel()
+
 ;
 
 // load the stored state (recent searches)
@@ -76,25 +78,29 @@ $(document).ready(function () {
                   ko.applyBindings(followersListViewModel, document.getElementById("followersListView"));
                   ko.applyBindings(inviteFollowersViewModel, document.getElementById("inviteFollowersView"));
                   ko.applyBindings(followerViewModel, document.getElementById("followerView"));
+                  ko.applyBindings(userSettingsModel, document.getElementById("userSettingView"));
+                  ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
+                  ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   
                   console.log("currentUrl: " + currentUrl.hash);
                   
                   
-                  $(document).bind("pagebeforechange", function( event, data ) {
+                  $(document).bind("pagebeforechange", function (event, data) {
+                      debugger;
                                    $.mobile.pageData = (data && data.options && data.options.pageData)
                                    ? data.options.pageData
                                    : null;
                                    });
                   
-                  /*
+              
                   $(document).on('pagebeforeshow', '#channelListView', function(){
                                  console.log('activating channel list view');
                                  alert('activating something');
                                  channelListViewModel.activate();
                                  });
-                   */
+                   
                   
                   
     });

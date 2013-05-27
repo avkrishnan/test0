@@ -23,7 +23,8 @@ function LoginViewModel() {
         that.accountName('');
     }
     
-    this.loginCommand = function() {
+    this.loginCommand = function () {
+        debugger;
         var callbacks = {
         success: loginSuccess,
         error: loginError
