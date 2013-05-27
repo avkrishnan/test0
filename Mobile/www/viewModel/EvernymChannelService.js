@@ -20,8 +20,6 @@ function EvernymChannelService() {
 	this.listMyChannels = function (callbacks) {
 		
 		///GET /channel?relationship=O for owner and GET /channel?relationship=F
-
-		//logger.log('starting to list channels ' , null, 'dataservice.channel', true);
 		return api.callAPI('GET', '/channel?relationship=O', undefined, callbacks, true);
 		
 	};
@@ -29,7 +27,7 @@ function EvernymChannelService() {
 	// call to get the channels that the user is following
 	this.listFollowingChannels = function (callbacks) {
 
-		//logger.log('starting to list channels ' , null, 'dataservice.channel', true);
+	    ///GET /channel?relationship=O for owner and GET /channel?relationship=F
 		return api.callAPI('GET', '/channel?relationship=F', undefined, callbacks, true);
 
 	};
@@ -56,12 +54,10 @@ function EvernymChannelService() {
 	};
 	
 
+    // Returns a single follower
 	this.getFollower = function (followerid, callbacks) {
-
 		debugger;
-		// Todo call the api call to get a single follower.
-		//return api.callAPI('GET', '/channel/' + channelid + '/follower', undefined, callbacks, true);
-		return null;
+		return api.callAPI('GET', '/follower/' + followerid, undefined, callbacks, true);
 	};
 
 	
@@ -69,13 +65,10 @@ function EvernymChannelService() {
 		
 		//logger.log('starting to follow channel' , null, 'dataservice.channel', true);
 		return api.callAPI('DELETE', '/channel/' + channelid + '/follow', undefined, callbacks, true);
-		
 	};
 	
 	this.deleteChannel = function (channelid, callbacks) {
-
 		return api.callAPI('DELETE', '/channel/' + channelid, undefined, callbacks, true);
-
 	};
 	
 	this.modifyChannel = function (channel, callbacks) {
