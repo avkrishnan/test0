@@ -12,6 +12,7 @@ function InviteFollowersViewModel() {
     
 	this.channelid = ko.observable();
     this.channelname = ko.observable();
+    this.normName = ko.observable();
     
     
     
@@ -49,7 +50,7 @@ function InviteFollowersViewModel() {
         
         that.channelid(channel.id);
         that.channelname(channel.name);
-        
+        that.normName(channel.normName);
         
         return true;
 	    

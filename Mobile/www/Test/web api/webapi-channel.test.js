@@ -80,11 +80,9 @@
 			listOwnerChannels(accessToken, expectSuccess, step6);
 		}
 		function step6(data) {
-			// make sure only one channel exists
-			ok(1, data.channel.length);
+			equal(1, data.channel.length, "only one channel remains");
 			
-			// and make sure it's the first one (since we deleted the second one)
-			ok(channelid1, data.channel.id);
+			equal(channelid1, data.channel[0].id, "the correct channel is remaining");
 			start();
 		}
 		
@@ -125,11 +123,9 @@
 			listOwnerChannels(accessToken, expectSuccess, step8);
 		}
 		function step8(data) {
-			// make sure only one channel exists
-			ok(1, data.channel.length);
+			equal(1, data.channel.length, "only one channel remains");
 
-			// and make sure it's the first one (since we deleted the second one)
-			ok(channelid1, data.channel.id);
+			equal(channelid1, data.channel[0].id, "the correct channel is remaining");
 			start();
 		}
 	});
@@ -196,8 +192,8 @@
 		}
 		function step5(data){
 			ok(true, JSON.stringify(data));
-			channelid = data.channel.id;
-			sendMessage(accessToken, data.channel.id, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated ); // 'FYI','RAC','ACK'
+			channelid = data.channel[0].id;
+			sendMessage(accessToken, channelid, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated ); // 'FYI','RAC','ACK'
 		}
 	});
 
@@ -221,8 +217,8 @@
 		}
 		function step5(data){
 			ok(true, JSON.stringify(data));
-			channelid = data.channel.id;
-			sendMessage(accessToken, data.channel.id, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated, step6 ); // 'FYI','RAC','ACK'
+			channelid = data.channel[0].id;
+			sendMessage(accessToken, channelid, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated, step6 ); // 'FYI','RAC','ACK'
 		}
 		function step6(data){
 			ok(true, JSON.stringify(data));
@@ -365,7 +361,7 @@
 		var ajaxCall = $.ajax(ajaxParams);
 
 		ajaxCall.done(function (data, textStatus, jqXHR) {
-			handler(textStatus, jqXHR.status);
+			handler(textStatus, jqXHR.status, method + ": " + resource);
 			callback(data);
 		});
 
