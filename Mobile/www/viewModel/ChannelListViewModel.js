@@ -42,7 +42,7 @@ function ChannelListViewModel() {
 	
 	
 	function successfulCreate(data){
-		
+		$.mobile.hidePageLoadingMsg();
 		//logger.log('success listing channels ' , null, 'dataservice', true);
 		
 		
@@ -98,7 +98,7 @@ function ChannelListViewModel() {
 		$.mobile.changePage("#" + channelViewModel.template)
 	};
 	
-	this.newChannelCommand = function (channel) {
+	this.newChannelCommand = function () {
 		channelNewViewModel.activate();
 		$.mobile.changePage("#" + channelNewViewModel.template)
 	};

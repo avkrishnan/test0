@@ -35,6 +35,14 @@ function UserSettingsViewModel() {
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;
 	};
+    
+    
+	this.logoutCommand = function(){
+		loginViewModel.logoutCommand();
+		$.mobile.changePage("#" + loginViewModel.template)
+		
+	}
+	
 	
 	
 	function successfulCreate(data){
