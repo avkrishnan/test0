@@ -1,20 +1,19 @@
 ﻿/*globals ko*/
 
-function ChannelListViewModel() {
+function ChannelsFollowingListViewModel() {
 	/// <summary>
-	/// A view model that displays the list of channels with the user owns
+	/// A view model that represents a single tweet
 	/// </summary>
 	
 	// --- properties
 	
 	this.template = "channelListView";
 	
-  
 	this.channels = ko.observableArray([]);
 	var that = this;
 	this.shown = false;
 	
-	
+   
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
 
 	    debugger;
@@ -24,11 +23,11 @@ function ChannelListViewModel() {
 
 	});
 	
-	// Methods
+   
 	
 	var  dataService = new EvernymChannelService();
 	
-	
+	// Methods
 	this.activate = function() {
 		
 		console.log("trying to get channels");
@@ -37,15 +36,13 @@ function ChannelListViewModel() {
 			that.channels.removeAll();
 		}
 		$.mobile.showPageLoadingMsg("a", "Loading Channels");
-		return this.listMyChannelsCommand().then(gotChannels);
+		return this.listFollowingChannelsCommand().then(gotChannels);
 	};
 	
 	
 	function successfulCreate(data){
 		
 		//logger.log('success listing channels ' , null, 'dataservice', true);
-		
-		
 	};
 	
 	function gotChannels(data){
@@ -58,10 +55,11 @@ function ChannelListViewModel() {
 			data.channel = [data.channel];
 		}
 		
-		if (!data.channel ){
-			
-			$.mobile.changePage("#" + channelNewViewModel.template);
-			$("#no_channels_notification").show();
+		if (!data.channel) {
+		    // TODO:  What do we do when there are no channels that we are following?
+
+			//$.mobile.changePage("#" + channelNewViewModel.template);
+			//$("#no_channels_notification").show();
 			return;
 		}
 		
@@ -72,28 +70,23 @@ function ChannelListViewModel() {
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Error listing my channels: " + details.message);
+		showMessage("Error listing channels I'm following: " + details.message);
 		debugger;
 		if (details.code == 100202 || status == 401){
 			$.mobile.changePage("#" + loginViewModel.template)
 		}
-		//logger.logError('error listing channels', null, 'dataservice', true);
 	};
 	
-	this.listMyChannelsCommand = function () {
-		
-		//logger.log("starting listChannels", undefined, "channels", true);
-		return dataService.listMyChannels({ success: successfulCreate, error: errorListChannels });
+	this.listFollowingChannelsCommand = function () {
+		return dataService.listFollowingChannels({ success: successfulCreate, error: errorListChannels });
 	};
 	
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
 		$.mobile.changePage("#" + loginViewModel.template)
-		
 	}
 	
 	this.showChannel = function (channel) {
-		
 		channelViewModel.activate(channel);
 		$.mobile.changePage("#" + channelViewModel.template)
 	};
@@ -102,9 +95,6 @@ function ChannelListViewModel() {
 		channelNewViewModel.activate();
 		$.mobile.changePage("#" + channelNewViewModel.template)
 	};
-	
-	
-	
 	
 	
 }

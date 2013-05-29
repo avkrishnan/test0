@@ -18,22 +18,22 @@ function SendMessageViewModel() {
     this.message = ko.observable();
     
     
-    $("#" + this.template).live("pagebeforeshow", function(e, data){
-                                
-                                
-                                if ($.mobile.pageData && $.mobile.pageData.id){
-                                    that.activate({id:$.mobile.pageData.id});
-                                }
-                                
-                                else {
-                                    var currentChannel = localStorage.getItem("currentChannel");
-                                    var lchannel = JSON.parse(currentChannel);
-                                    that.activate(lchannel);
-                                
-                                }
-                                
-                                
-                                });
+    $("#" + this.template).live("pagebeforeshow", function (e, data) {
+
+
+        if ($.mobile.pageData && $.mobile.pageData.id) {
+            that.activate({ id: $.mobile.pageData.id });
+        }
+
+        else {
+            var currentChannel = localStorage.getItem("currentChannel");
+            var lchannel = JSON.parse(currentChannel);
+            that.activate(lchannel);
+
+        }
+
+
+    });
     
     
     // Methods

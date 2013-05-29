@@ -6,8 +6,7 @@
             
             <!-- required libraries -->
             <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
-            
-            
+                       
             
             <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
             <script type="text/javascript" src="lib/jquery.mobile-1.3.1.js"></script>
@@ -30,12 +29,15 @@
             
             <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/ChannelsFollowingListViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>
             <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
             <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
             <script type="text/javascript" src="viewModel/FollowersListViewModel.js"></script>
             <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/FollowerViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/UserSettingViewModel.js"></script>
             
             
             <!-- the code that puts it all together -->
@@ -43,9 +45,9 @@
             
             
             <script type="text/javascript">
-                $(document).live("pagechange",function(){
-                                 var page = $.mobile.activePage.attr("id");
-                                 });
+                $(document).live("pagechange", function () {
+                    var page = $.mobile.activePage.attr("id");
+                });
                 document.addEventListener("deviceready", function () {
                                           document.addEventListener("menubutton", menuKeyDown, true);
                                           }, false);
@@ -53,27 +55,22 @@
                     alert('Menu button pressed.');
                 }
                 </script>
-            
-            
-            
             </head>
     <body>
-        
-        
         
         <div data-role="page" xdata-theme="b"
             id="channelListView">
             <div data-role="header" xdata-theme="b">
-                <h1>Channel List</h1>
+                <h1>My Channel List</h1>
                 
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                        
-                        
+                       
                         <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
                         <li><a href="#" data-bind="click: activate">Refresh List</a></li>
-                        
+                        <li><a href="index.html#channelsFollowingListView">Channels I'm Following</a></li>
+                        <li><a href="index.html#userSettingsView">My Communication Preferences</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>
@@ -87,14 +84,9 @@
                     <!-- ko foreach: channels, updateListviewOnChange:channels -->
                     <li>
                         
-                        
                         <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
                             <span data-bind="text: relationship"></span> : <span data-bind="text: name"></span>
-                        </a>
-                        
-                        
-                        
-                        
+                        </a>          
                         
                     </li>
                     <!-- /ko -->
@@ -105,6 +97,45 @@
             
         </div>
         
+
+        <div data-role="page" xdata-theme="b"
+            id="channelsFollowingListView">
+            <div data-role="header" xdata-theme="b">
+                <h1>Channels I'm Following</h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" data-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                       
+                        <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
+                        <li><a href="#" data-bind="click: activate">Refresh List</a></li>
+                        <li><a href="index.html#channelListView">My Channel List</a></li>
+                        <li><a href="index.html#userSettingsView">My Communication Preferences</a></li>
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" xdata-theme="c" data-iscroll>
+                
+                <ul data-role="listview">
+                    
+                    <!-- ko foreach: channels, updateListviewOnChange:channels -->
+                    <li>
+                        
+                        <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
+                            <span data-bind="text: relationship"></span> : <span data-bind="text: name"></span>
+                        </a>
+                        
+                    </li>
+                    <!-- /ko -->
+                    
+                </ul>
+            </div>
+            
+            
+        </div>
         
         
         <div data-role="page" xdata-theme="b"
@@ -146,9 +177,7 @@
             </div>
             
         </div>
-        
-        
-        
+                 
         
         <div data-role="page" xdata-theme="b"
             id="followersListView">
@@ -161,11 +190,8 @@
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                        
-                        
                         <li><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
-                        
                     </ul>
                 </div>
             </div>
@@ -174,28 +200,41 @@
                 
                 <ul data-role="listview">
                     
-                    
-                    
-                    
                     <!-- ko foreach: followers, updateListviewOnChange:followers -->
                     <li>
-                        
                         
                         <a data-bind="attr: {href: 'index.html#followerView?id=' + id}">
                             <span href="" data-bind="text: firstname"></span> <span href="" data-bind="text: lastname"></span>
                         </a>
-                        
-                        
-                        
-                        
                         
                     </li>
                     <!-- /ko -->
                     
                 </ul>
             </div>
+        </div>
+
+
+        <div data-role="page" xdata-theme="b"
+            id="followerView">
+            <div data-role="header" xdata-theme="b">
+                
+                <a href="#followersListView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span>Follower List</a>
+                
+                <h1>Name</h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" data-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                        
+                        <li><a href="#" data-bind="click: logoutCommand">Remove Follower From Channel</a></li>
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
             
-            
+             
         </div>
         
         
@@ -272,7 +311,6 @@
         </div>
         
         
-        
         <div data-role="page" xdata-theme="b"
             id="channelView">
             <div data-role="header" xdata-theme="b">
@@ -283,10 +321,10 @@
                 <div data-role="popup" id="popupMenu" xdata-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                         
-                        
                         <li><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
                         <li><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
                         <li><a href="index.html#followersListView">Followers</a></li>
+                        <li><a href="#" data-bind="click: deleteChannelCommand">Delete Channel</a></li>
                         <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
@@ -295,8 +333,8 @@
                 
                 
             </div>
-            
-            
+
+         
             
             
             <div data-role="content" xdata-theme="b" data-iscroll>
@@ -326,7 +364,7 @@
             
         </div>
         
-        
+
         <div data-role="page" xdata-theme="b"
             id="channelNewView" >
             
@@ -371,10 +409,9 @@
                     
                 </form>
             </div>
-            
-            
         </div>
         
+
         <div data-role="page" Xdata-theme="b"
             id="signupView" >
             
@@ -425,6 +462,55 @@
                     
                 </form>
             </div>
+            
+        </div>
+        
+
+        <div data-role="page" xdata-theme="b"
+            id="userSettingsView">
+            <div data-role="header" xdata-theme="b">
+                <h1>How I'll Receive Messages</h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" data-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+
+                        <li><a href="index.html#channelsFollowingListView">Channels I'm Following</a></li>
+                        <li><a href="index.html#channelListView">My Channel List</a></li>
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <div data-role="content" xdata-theme="c" data-iscroll>
+                
+                 <form >
+                    
+                     <!-- ko foreach: messages, updateListviewOnChange:messages -->
+                    <li>
+                        
+                        
+                        <div data-bind="text: text"></div>
+                        
+                        
+                        
+                        
+                    </li>
+                    <!-- /ko -->
+                    
+                    
+                    <p>
+                      Messages are sent to you above and according to the urgency selected by the sender.
+                    </p>
+                    <p>
+                       None of this information is shared with channels or other senders.
+                    </p>
+                    
+                   
+                </form>
+            </div>
+            
             
         </div>
         

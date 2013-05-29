@@ -16,7 +16,7 @@ update: function (element, valueAccessor) {
         try {
             $(listview).listview('refresh');
         } catch (e) {
-            // if the listview is not initialised, the above call with throw an exception
+            // if the list view is not initialized, the above call with throw an exception
             // there doe snot appear to be any way to easily test for this state, so
             // we just swallow the exception here.
         }
@@ -47,12 +47,16 @@ function showMessage(message){
 var
 loginViewModel = new LoginViewModel(),
 channelListViewModel = new ChannelListViewModel(),
+channelsFollowingListViewModel = new ChannelsFollowingListViewModel(),
 channelViewModel = new ChannelViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 signupViewModel = new SignupViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
-inviteFollowersViewModel = new InviteFollowersViewModel()
+inviteFollowersViewModel = new InviteFollowersViewModel(),
+followerViewModel = new FollowerViewModel(),
+userSettingsModel = new UserSettingsViewModel()
+
 ;
 
 // load the stored state (recent searches)
@@ -66,31 +70,37 @@ $(document).ready(function () {
                   
                   ko.applyBindings(loginViewModel, document.getElementById("loginView"));
                   ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
+                  ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
                   ko.applyBindings(channelViewModel, document.getElementById("channelView"));
                   ko.applyBindings(channelNewViewModel, document.getElementById("channelNewView"));
                   ko.applyBindings(signupViewModel, document.getElementById("signupView"));
                   ko.applyBindings(sendMessageViewModel, document.getElementById("sendMessageView"));
                   ko.applyBindings(followersListViewModel, document.getElementById("followersListView"));
                   ko.applyBindings(inviteFollowersViewModel, document.getElementById("inviteFollowersView"));
+                  ko.applyBindings(followerViewModel, document.getElementById("followerView"));
+                  ko.applyBindings(userSettingsModel, document.getElementById("userSettingView"));
+                  ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
+                  ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   
                   console.log("currentUrl: " + currentUrl.hash);
                   
                   
-                  $(document).bind("pagebeforechange", function( event, data ) {
+                  $(document).bind("pagebeforechange", function (event, data) {
+                      debugger;
                                    $.mobile.pageData = (data && data.options && data.options.pageData)
                                    ? data.options.pageData
                                    : null;
                                    });
                   
-                  /*
+              
                   $(document).on('pagebeforeshow', '#channelListView', function(){
                                  console.log('activating channel list view');
                                  alert('activating something');
                                  channelListViewModel.activate();
                                  });
-                   */
+                   
                   
                   
     });

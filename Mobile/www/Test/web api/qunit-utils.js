@@ -1,5 +1,5 @@
 ﻿/**
- * Code Camper utilities to make QUnit testing easier
+ * Channel utilities to make QUnit testing easier
  * A qunit extension
  * Include this script before your test script on your test html page
  *

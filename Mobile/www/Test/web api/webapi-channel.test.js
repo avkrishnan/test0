@@ -4,9 +4,9 @@
 	var okAsync = QUnit.okAsync,
 	stringformat = QUnit.stringformat;
 
-	//var baseUrl = 'http://qupler.no-ip.org:8080/api-rc/rest', //production environment
-	var baseUrl = 'http://localhost:8080/api/rest', //local environment
-	//var baseUrl = 'http://192.168.1.202:8080/api/rest', //production environment through local network
+	var baseUrl = 'http://qupler.no-ip.org:8080/api4/rest', //production environment
+	//var baseUrl = 'http://localhost:8080/api/rest', //local environment
+	//var baseUrl = 'http://192.168.1.202:8080/api3/rest', //production environment through local network
 
 
 	getMsgPrefix = function (id, rqstUrl) {
@@ -51,6 +51,85 @@
 	});
 
 
+	test('DELETE CHANNEL', function () {
+		stop(timoutms); //tell qunit to wait 5 seconds before timing out
+		var account = generateAccount();
+		var channel1 = generateChannel();
+		var channel2 = generateChannel();
+		var channelid1 = '';
+		var channelid2 = '';
+		var accessToken;
+		enroll(account, expectSuccessNoContent, step2);	
+		function step2() {
+			login(generateLogin(account), expectSuccess, step3a);
+		}
+		function step3a(data) {
+			accessToken = data.accessToken;
+			createChannel(accessToken, channel1, expectCreated, step3b);
+		}
+		function step3b(data) {
+			channelid1 = data.id;
+			createChannel(accessToken, channel2, expectCreated, step4);
+		}
+		function step4(data) {
+			channelid2 = data.id;
+			// delete the second channel
+			deleteChannel(accessToken, channelid2, expectSuccessNoContent, step5);
+		}
+		function step5(data) {
+			listOwnerChannels(accessToken, expectSuccess, step6);
+		}
+		function step6(data) {
+			equal(1, data.channel.length, "only one channel remains");
+			
+			equal(channelid1, data.channel[0].id, "the correct channel is remaining");
+			start();
+		}
+		
+	});
+
+	test('DELETE CHANNEL WITH MESSAGES', function () {
+		stop(timoutms); //tell qunit to wait 5 seconds before timing out
+		var account = generateAccount();
+		var channel1 = generateChannel();
+		var channel2 = generateChannel();
+		var channelid1 = '';
+		var channelid2 = '';
+		var accessToken;
+		enroll(account, expectSuccessNoContent, step2);
+		function step2() {
+			login(generateLogin(account), expectSuccess, step3a);
+		}
+		function step3a(data) {
+			accessToken = data.accessToken;
+			// create channel 1
+			createChannel(accessToken, channel1, expectCreated, step3b);
+		}
+		function step3b(data) {
+			channelid1 = data.id;
+			// create channel 2
+			createChannel(accessToken, channel2, expectCreated, step4);
+		}
+		function step4(data) {
+			channelid2 = data.id;
+			// send a message on channel 2
+			sendMessage(accessToken, channelid2, { text: 'HERE IS A TEST MESSAGE ON CHANNEL 2', type: 'FYI' }, expectCreated, step5);
+		}
+		function step5(data) {
+			// delete Channel 2 which contains a message
+			deleteChannel(accessToken, channelid2, expectSuccessNoContent, step6);
+		}
+		function step6(data) {
+			listOwnerChannels(accessToken, expectSuccess, step8);
+		}
+		function step8(data) {
+			equal(1, data.channel.length, "only one channel remains");
+
+			equal(channelid1, data.channel[0].id, "the correct channel is remaining");
+			start();
+		}
+	});
+
 	test('CREATE CHANNEL NO AUTH', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
 		var channel = generateChannel();
@@ -90,7 +169,7 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-			listChannels(accessToken, undefined, expectSuccess);
+			listOwnerChannels(accessToken, expectSuccess);
 		}
 	});
 
@@ -100,7 +179,7 @@
 		var accessToken;
 		enroll(account, expectSuccessNoContent, step2);
 		var channel = generateChannel();
-        var channelid = '';
+		var channelid = '';
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3);
 		}
@@ -109,13 +188,12 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-			listChannels(accessToken, undefined, expectSuccess, step5);
-
+			listOwnerChannels(accessToken, expectSuccess, step5);
 		}
 		function step5(data){
 			ok(true, JSON.stringify(data));
-            channelid = data.channel.id;
-			sendMessage(accessToken, data.channel.id, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated ); // 'FYI','RAC','ACK'
+			channelid = data.channel[0].id;
+			sendMessage(accessToken, channelid, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated ); // 'FYI','RAC','ACK'
 		}
 	});
 
@@ -126,7 +204,7 @@
 		var accessToken;
 		enroll(account, expectSuccessNoContent, step2);
 		var channel = generateChannel();
-        var channelid = '';
+		var channelid = '';
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3);
 		}
@@ -135,12 +213,12 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-			listChannels(accessToken, undefined, expectSuccess, step5);
+			listOwnerChannels(accessToken, expectSuccess, step5);
 		}
 		function step5(data){
 			ok(true, JSON.stringify(data));
-            channelid = data.channel.id;
-			sendMessage(accessToken, data.channel.id, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated, step6 ); // 'FYI','RAC','ACK'
+			channelid = data.channel[0].id;
+			sendMessage(accessToken, channelid, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated, step6 ); // 'FYI','RAC','ACK'
 		}
 		function step6(data){
 			ok(true, JSON.stringify(data));
@@ -148,7 +226,7 @@
 		}
 		function step7(data){
 			ok(true, JSON.stringify(data));
-            start();
+			start();
 		}
 	});
 
@@ -158,25 +236,25 @@
 		var accessToken;
 		enroll(account, expectSuccessNoContent, step2);
 		var channel = generateChannel();
-
+		var channelId;
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3);
 		}
-        function step3(data){
+		function step3(data){
 			accessToken = data.accessToken;
 			createChannel(accessToken, channel, expectCreated, step4);
-        }
-		function step4(data) {
-			listChannels(accessToken, undefined, expectSuccess, step5);
 		}
-        function step5(data){
-            var channelid = data.channel.id;
-			listFollowers(accessToken, channelid, expectSuccess, step6);
-        }
-        function step6(data){
+		function step4(data) {
+			channelId = data.id;
+			listFollowingChannels(accessToken, expectSuccess, step5);
+		}
+		function step5(data){
+			listFollowers(accessToken, channelId, expectSuccess, step6);
+		}
+		function step6(data){
 			ok(true, JSON.stringify(data));
-            start();
-        }
+			start();
+		}
 	});
 
 	test('FOLLOW A CHANNEL, LIST FOLLOWERS', function () {
@@ -185,42 +263,46 @@
 		var account2 = generateAccount();
 		var accessToken;
 		var accessToken2;
-        var channelid;
+		var channelid;
 		enroll(account, expectSuccessNoContent, step2);
 		var channel = generateChannel();
-        var channelid = '';
+		var channelid = '';
 
 		function step2() {
 			login(generateLogin(account), expectSuccess, step2a);
 		}
-        function step2a(data){
+		function step2a(data){
 			accessToken = data.accessToken;
 			createChannel(accessToken, channel, expectCreated, step2b);
-        }
+		}
 		function step2b(data) {
-            channelid = data.id;
-		    enroll(account2, expectSuccessNoContent, step2c);
+			channelid = data.id;
+			enroll(account2, expectSuccessNoContent, step2c);
 		}
 		function step2c() {
 			login(generateLogin(account2), expectSuccess, step2d);
 		}
-        function step2d(data){
+		function step2d(data){
 			accessToken2 = data.accessToken;
 			followChannel(accessToken2, channelid, expectSuccessNoContent, step4);
-        }
-        function step4(data){
+		}
+		function step4(data){
 			listFollowers(accessToken, channelid, expectSuccess, step5);
-        }
-        function step5(data){
+		}
+		function step5(data){
 			ok(true, JSON.stringify(data));
-            start();
+			start();
  
-        }
+		}
 	});
 
 
 	function createChannel(accessToken, channel, handler, postHandlerCallback) {
 		callAPI('POST', '/channel', accessToken, channel, handler, postHandlerCallback);
+	}
+
+	function deleteChannel(accessToken, channelid, handler, postHandlerCallback) {
+		callAPI('DELETE', '/channel/' + channelid, accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function sendMessage(accessToken, channelid, message, handler, postHandlerCallback) {
@@ -239,9 +321,14 @@
 		callAPI('GET', '/channel/' + channelid + '/message', accessToken, undefined, handler, postHandlerCallback);
 	}
 
-	function listChannels(accessToken, channel, handler, postHandlerCallback) {
+	function listOwnerChannels(accessToken, handler, postHandlerCallback) {
 
-		callAPI('GET', '/channel', accessToken, channel, handler, postHandlerCallback);
+		callAPI('GET', '/channel?relationship=O', accessToken, undefined, handler, postHandlerCallback);
+	}
+
+	function listFollowingChannels(accessToken, handler, postHandlerCallback) {
+
+		callAPI('GET', '/channel?relationship=F', accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function enroll(account, handler, postHandlerCallback) {
@@ -274,7 +361,7 @@
 		var ajaxCall = $.ajax(ajaxParams);
 
 		ajaxCall.done(function (data, textStatus, jqXHR) {
-			handler(textStatus, jqXHR.status);
+			handler(textStatus, jqXHR.status, method + ": " + resource);
 			callback(data);
 		});
 
