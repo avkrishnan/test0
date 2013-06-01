@@ -68,9 +68,10 @@ $(document).ready(function () {
                   
                   $.mobile.activeBtnClass = '';
                   
+                  
                   ko.applyBindings(loginViewModel, document.getElementById("loginView"));
-                  ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
-                  ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
+                  
+                  
                   ko.applyBindings(channelViewModel, document.getElementById("channelView"));
                   ko.applyBindings(channelNewViewModel, document.getElementById("channelNewView"));
                   ko.applyBindings(signupViewModel, document.getElementById("signupView"));
@@ -78,9 +79,11 @@ $(document).ready(function () {
                   ko.applyBindings(followersListViewModel, document.getElementById("followersListView"));
                   ko.applyBindings(inviteFollowersViewModel, document.getElementById("inviteFollowersView"));
                   ko.applyBindings(followerViewModel, document.getElementById("followerView"));
-                  ko.applyBindings(userSettingsModel, document.getElementById("userSettingView"));
+                  ko.applyBindings(userSettingsModel, document.getElementById("userSettingsView"));
                   ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
                   ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
+                  
+                   
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   
@@ -96,9 +99,9 @@ $(document).ready(function () {
                   
               
                   $(document).on('pagebeforeshow', '#channelListView', function(){
-                                 console.log('activating channel list view');
-                                 alert('activating something');
-                                 channelListViewModel.activate();
+                                 //console.log('activating channel list view');
+                                 //alert('activating something');
+                                 //channelListViewModel.activate();
                                  });
                    
                   

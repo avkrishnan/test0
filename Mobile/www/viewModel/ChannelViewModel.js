@@ -23,7 +23,6 @@ function ChannelViewModel() {
 								
 								
 								if ($.mobile.pageData && $.mobile.pageData.follow){
-									
 								
 									that.channelid($.mobile.pageData.id);
 									that.followChannelCommand().then(getChannelFromPageData);
@@ -55,15 +54,13 @@ function ChannelViewModel() {
 		
 		
 		
-		
-		
 		that.channelid(channel.id);
 		//if(that.channel()){
 		//    that.channel.removeAll();
 		//}
 		
 		that.messages([]);
-		$.mobile.showPageLoadingMsg("a", "Loading Messages");
+		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		
 		that.getChannelCommand(that.channelid()).then(gotChannel);
 		
@@ -77,6 +74,8 @@ function ChannelViewModel() {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.title(data.name );
+        that.channelid(data.id);
+        $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		that.getMessagesCommand(that.channelid()).then(gotMessages);
 		
 	   

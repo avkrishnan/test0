@@ -7,7 +7,7 @@ function ChannelsFollowingListViewModel() {
 	
 	// --- properties
 	
-	this.template = "channelListView";
+	this.template = "channelsFollowingListView";
 	
 	this.channels = ko.observableArray([]);
 	var that = this;
@@ -91,7 +91,7 @@ function ChannelsFollowingListViewModel() {
 		$.mobile.changePage("#" + channelViewModel.template)
 	};
 	
-	this.newChannelCommand = function (channel) {
+	this.newChannelCommand = function () {
 		channelNewViewModel.activate();
 		$.mobile.changePage("#" + channelNewViewModel.template)
 	};

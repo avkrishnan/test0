@@ -4,7 +4,7 @@
 	var okAsync = QUnit.okAsync,
 	stringformat = QUnit.stringformat;
 
-	var baseUrl = 'http://qupler.no-ip.org:8080/api4/rest', //production environment
+	var baseUrl = 'http://qupler.no-ip.org:8080/api5/rest', //production environment
 	//var baseUrl = 'http://localhost:8080/api/rest', //local environment
 	//var baseUrl = 'http://192.168.1.202:8080/api4/rest', //production environment through local network
 
@@ -172,6 +172,23 @@
 			listOwnerChannels(accessToken, expectSuccess);
 		}
 	});
+ 
+ 
+ test('LIST CHANNELS BUT ZERO CHANNELS', function () {
+      stop(timoutms); //tell qunit to wait 5 seconds before timing out
+      var account = generateAccount();
+      var accessToken;
+      enroll(account, expectSuccessNoContent, step2);
+      var channel = generateChannel();
+      function step2() {
+      login(generateLogin(account), expectSuccess, step3);
+      }
+      function step3(data) {
+      accessToken = data.accessToken;
+      
+      listOwnerChannels(accessToken, expectSuccess);
+      }
+      });
 
 	test('SEND MESSAGE ON CHANNEL', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
@@ -229,6 +246,36 @@
 			start();
 		}
 	});
+ 
+ 
+ test('GET MESSAGES ON CHANNEL, BUT NO MESSAGES', function () {
+      stop(timoutms); //tell qunit to wait 5 seconds before timing out
+      var account = generateAccount();
+      var accessToken;
+      enroll(account, expectSuccessNoContent, step2);
+      var channel = generateChannel();
+      var channelid = '';
+      function step2() {
+      login(generateLogin(account), expectSuccess, step3);
+      }
+      function step3(data) {
+      accessToken = data.accessToken;
+      createChannel(accessToken, channel, expectCreated, step4);
+      }
+      function step4(data) {
+      listOwnerChannels(accessToken, expectSuccess, step5);
+      }
+      function step5(data){
+      ok(true, JSON.stringify(data));
+      channelid = data.channel[0].id;
+      
+      getMessages(accessToken, channelid, expectSuccess, step7 ); // 'FYI','RAC','ACK'
+      }
+      function step7(data){
+      ok(true, JSON.stringify(data));
+      start();
+      }
+      });
 
 	test('CREATE A CHANNEL, LIST FOLLOWERS (SELF)', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
