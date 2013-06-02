@@ -343,10 +343,11 @@
 		}
 	});
 
-	test('CREATE PROVISIONAL ACCOUNT AND ADD TO CHANNEL', function () {
+	test('CREATE PROVISIONAL ACCOUNT FOLLOWING A CHANNEL', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
 		var account = generateAccount();
 		var accessToken;
+		// Step 1 Create a new account
 		enroll(account, expectSuccessNoContent, step2);
 		var channel = generateChannel();
 		var channelid = '';
@@ -360,18 +361,18 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-			channelid1 = data.id;
-			createProvisionalAccount(accessToken, expectSuccess, step5);
+			debugger;
+			channelid = data.id;
+			provisionalAccount = generateProvisionalAccount(channelid);
+			// Create a Provisional Account. The account contains the channelId that it was associated with.
+			createProvisionalAccount(accessToken, provisionalAccount, expectSuccess, step5);
 		}
 		function step5(data) {
 			provisionalToken = data.provisionalToken;
-			followChannel(provisionalToken, channelid, expectSuccessNoContent, step4);
+			listFollowers(accessToken, channelid, expectSuccess, step6);
 		}
-		function step4(data){
-			listFollowers(accessToken, channelid, expectSuccess, step5);
-		}
-		function step5(data) {
-            // TODO - Verify that the list followers returns the follower added with a 
+		function step6(data){
+			// TODO - Verify that the list followers returns the follower added with a 
 			ok(true, JSON.stringify(data));
 			start();
 		}
@@ -379,7 +380,7 @@
 
 
 	function createProvisionalAccount(accessToken, provisionalAccount, handler, postHandlerCallback){
-		callAPI('POST', '/account/provisional/enroll', accessToken, provisionalAccount ? provisionalAccount : generateProvisionalAccount(), handler, postHandlerCallback);
+		callAPI('POST', '/account/provisional/enroll', accessToken, provisionalAccount, handler, postHandlerCallback);
 	}
 
 	function createChannel(accessToken, channel, handler, postHandlerCallback) {
@@ -508,12 +509,13 @@
 		};
 	}
 
-	function generateProvisionalAccount() {
+	function generateProvisionalAccount(channelId) {
 		return {
 			emailaddress: 'test@test.com',
 			smsPhone: '123-123-1234',
 			firstname: 'testFirst',
 			lastname: 'testLast-' + randomString(5), // Create Random Last Name Generator
+			channelId: channelId
 		};
 	}
 
