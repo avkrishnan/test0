@@ -91,7 +91,7 @@ $(document).ready(function () {
                   
                   
                   $(document).bind("pagebeforechange", function (event, data) {
-                      debugger;
+                      
                                    $.mobile.pageData = (data && data.options && data.options.pageData)
                                    ? data.options.pageData
                                    : null;

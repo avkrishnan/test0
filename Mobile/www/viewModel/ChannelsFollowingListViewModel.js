@@ -16,7 +16,7 @@ function ChannelsFollowingListViewModel() {
    
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
 
-	    debugger;
+	   
 	    if (!that.shown) {
 	        that.activate();
 	    }
@@ -87,7 +87,8 @@ function ChannelsFollowingListViewModel() {
 	}
 	
 	this.showChannel = function (channel) {
-		channelViewModel.activate(channel);
+        localStorage.setItem("currentChannel", JSON.stringify(channel));
+		
 		$.mobile.changePage("#" + channelViewModel.template)
 	};
 	

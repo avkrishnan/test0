@@ -22,14 +22,7 @@ function ChannelViewModel() {
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
 								
-								if ($.mobile.pageData && $.mobile.pageData.follow){
-								
-									that.channelid($.mobile.pageData.id);
-									that.followChannelCommand().then(getChannelFromPageData);
-								
-								}
-								
-								else if ($.mobile.pageData && $.mobile.pageData.id){
+								if ($.mobile.pageData && $.mobile.pageData.id){
 								
 									that.activate({id:$.mobile.pageData.id});
 								}
@@ -37,22 +30,29 @@ function ChannelViewModel() {
 								else {
 									var currentChannel = localStorage.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
-									that.activate(lchannel);
+                                
+                                
+                                
+                                    if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
+                                
+                                        that.messages([]);
+                                    }
+                                
+                                    that.channel([lchannel]);
+                                    that.title(lchannel.name );
+                                    that.channelid(lchannel.id);
+                                    $.mobile.showPageLoadingMsg("a", "Loading Messages");
+									that.getMessagesCommand(that.channelid()).then(gotMessages);
+                                    
 								
 								}
 								
 		   });
 	
 	
-	// Methods
-	
-	function getChannelFromPageData(){
-		that.activate({id:$.mobile.pageData.id});
-	}
+
 	
 	this.activate = function (channel) {
-		
-		
 		
 		that.channelid(channel.id);
 		//if(that.channel()){
@@ -76,11 +76,21 @@ function ChannelViewModel() {
 		that.title(data.name );
         that.channelid(data.id);
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
-		that.getMessagesCommand(that.channelid()).then(gotMessages);
 		
-	   
 		
-	};
+        if ($.mobile.pageData && $.mobile.pageData.id){
+            that.followChannelCommand().then(postFollow);
+	    }
+        else {
+            that.getMessagesCommand(that.channelid()).then(gotMessages);
+        }
+        
+	}
+    
+    function postFollow(data){
+        that.getMessagesCommand(that.channelid()).then(gotMessages);
+        
+    }
 	
 	function gotMessages(data){
 		
@@ -93,23 +103,23 @@ function ChannelViewModel() {
 		
 		that.messages(data.message);
 		
-	};
+	}
 	
 	function successfulGetChannel(data){
 		//logger.log('success Getting Channel ' , null, 'channel', true);
 		$.mobile.hidePageLoadingMsg();
 		
-	};
+	}
 	
 	function successfulDelete(data){
 		//router.navigateTo('#/channellist');
 		$.mobile.changePage("#" + channelListViewModel.template);
-	};
+	}
 	
 	function successfulModify(data){
 		//router.navigateTo('#/channellist');
 		//logger.log("SUCCESS MODIFY", undefined, "channel", true);
-	};
+	}
 	
 	function successfulMessage(data){
 		$.mobile.hidePageLoadingMsg();
@@ -118,37 +128,50 @@ function ChannelViewModel() {
 		that.getMessagesCommand(that.channelid()).then(gotMessages);
 		that.message('');
 		
-	};
+	}
 	
 	function successfulFollowChannel(){
 		$.mobile.hidePageLoadingMsg();
 		showMessage("Now Following Channel " + $.mobile.pageData.id);
 		
-	};
+	}
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();
 		//logger.log("SUCCESS GET MESSAGES" + JSON.stringify(data), undefined, "channel", true);
 		
 		
-	};
+	}
 	
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
 		$.mobile.changePage("#" + loginViewModel.template)
 		
-	}
+	};
 	
-	function errorAPI(data, status, details){
+	function errorAPIChannel(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		if (details.code == 100202 || status == 401){
 			$.mobile.changePage("#" + loginViewModel.template)
 		}
 		console.log("error something " + data);
-		showMessage("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
+		showMessage("Error Getting Channel: " + ((status==500)?"Internal Server Error":details.message));
 		
 		//logger.logError('error listing channels', null, 'channel', true);
-	};
+	}
+    
+    function errorAPI(data, status, details){
+		$.mobile.hidePageLoadingMsg();
+		if (details.code == 100202 || status == 401){
+			$.mobile.changePage("#" + loginViewModel.template)
+		}
+		console.log("error something " + data);
+		showMessage("Error: " + ((status==500)?"Internal Server Error":details.message));
+		
+		//logger.logError('error listing channels', null, 'channel', true);
+	}
+    
+
 	
 	function errorPostingMessage(data, status, details){
 		$.mobile.hidePageLoadingMsg();
@@ -158,7 +181,7 @@ function ChannelViewModel() {
 		console.log("error something " + data);
 		showMessage("Error Posting Message: " + details.message);
 		//logger.logError('error listing channels', null, 'channel', true);
-	};
+	}
 	
 	function errorRetrievingMessages(data, status, details){
 		$.mobile.hidePageLoadingMsg();
@@ -168,13 +191,13 @@ function ChannelViewModel() {
 		
 		showMessage("Error Retrieving Messages: " + ((status==500)?"Internal Server Error":details.message));
 		//logger.logError('error listing channels', null, 'channel', true);
-	};
+	}
 	
 	this.getChannelCommand = function (lchannelid) {
 		
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
 		//logger.log("starting getChannel", undefined, "channels", true);
-		return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPI});
+		return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
 		
 	};
 	
@@ -192,6 +215,25 @@ function ChannelViewModel() {
 		return dataService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
 
 	};
+    
+    this.showChannelList = function(){
+        
+        
+        var relationship = 'O';
+        
+        if (that.channel()[0]){
+            relationship = that.channel()[0].relationship;
+        }
+        
+        if (relationship && relationship == "F"){
+            
+            $.mobile.changePage("#" + channelsFollowingListViewModel.template);
+        }
+        else {
+            $.mobile.changePage("#" + channelListViewModel.template);
+        }
+        
+    }
 	
 	this.modifyChannelCommand = function(){
 		//logger.log("starting modifyChannel", undefined, "channels", true);

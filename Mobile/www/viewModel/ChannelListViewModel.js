@@ -93,8 +93,8 @@ function ChannelListViewModel() {
 	}
 	
 	this.showChannel = function (channel) {
+        localStorage.setItem("currentChannel", JSON.stringify(channel));
 		
-		channelViewModel.activate(channel);
 		$.mobile.changePage("#" + channelViewModel.template)
 	};
 	

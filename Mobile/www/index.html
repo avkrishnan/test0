@@ -84,7 +84,7 @@
                     <!-- ko foreach: channels, updateListviewOnChange:channels -->
                     <li>
                         
-                        <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
+                        <a  href="#" data-bind="click: $parent.showChannel" xdata-bind="attr: {href: 'index.html#channelView?id=' + id}">
                             <span data-bind="text: name"></span>
                         </a>          
                         
@@ -124,7 +124,7 @@
                     <!-- ko foreach: channels, updateListviewOnChange:channels -->
                     <li>
                         
-                        <a data-bind="attr: {href: 'index.html#channelView?id=' + id}">
+                        <a  href="#" data-bind="click: $parent.showChannel" xdata-bind="attr: {href: 'index.html#channelView?id=' + id}">
                             <span data-bind="text: name"></span>
                         </a>
                         
@@ -314,7 +314,7 @@
         <div data-role="page" xdata-theme="b"
             id="channelView">
             <div data-role="header" xdata-theme="b">
-                <a href="#channelListView" data-role="button" data-icon="arrow-l" >Channels</a>
+                <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
                 <h1 data-bind="text:title"></h1>
                 
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
