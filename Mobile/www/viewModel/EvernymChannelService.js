@@ -79,6 +79,10 @@ function EvernymChannelService() {
 		return api.callAPI('PUT', '/channel/' + channel.id, channel, callbacks, true);
 		
 	};
-	
+
+	this.provisionalEnroll = function (provisional, callbacks) {
+	    debugger;
+	    return api.callAPI('POST', '/account/provisional/enroll', provisional, callbacks, true);
+	};
 	
 }
