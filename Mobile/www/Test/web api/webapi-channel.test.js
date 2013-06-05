@@ -427,7 +427,6 @@
 			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step4(data) {
-			debugger;
 			channelid = data.id;
 			provisionalAccount = generateProvisionalAccount(channelid);
 			// Create a Provisional Account. The account contains the channelId that it was associated with.

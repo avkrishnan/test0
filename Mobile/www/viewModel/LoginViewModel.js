@@ -41,7 +41,7 @@ function LoginViewModel() {
     }
     
     this.showRegistration = function(){
-        
+        debugger;
         $.mobile.changePage("#" + signupViewModel.template);
         
     }

@@ -56,7 +56,6 @@ function EvernymChannelService() {
 
     // Returns a single follower
 	this.getFollower = function (followerid, callbacks) {
-		debugger;
 		return api.callAPI('GET', '/follower/' + followerid, undefined, callbacks, true);
 	};
 
@@ -81,7 +80,6 @@ function EvernymChannelService() {
 	};
 
 	this.provisionalEnroll = function (provisional, callbacks) {
-	    debugger;
 	    return api.callAPI('POST', '/account/provisional/enroll', provisional, callbacks, true);
 	};
 	

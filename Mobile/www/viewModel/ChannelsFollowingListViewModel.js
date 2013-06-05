@@ -71,7 +71,6 @@ function ChannelsFollowingListViewModel() {
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		showMessage("Error listing channels I'm following: " + details.message);
-		debugger;
 		if (details.code == 100202 || status == 401){
 			$.mobile.changePage("#" + loginViewModel.template)
 		}

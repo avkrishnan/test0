@@ -61,9 +61,9 @@ function InviteFollowersViewModel() {
 		
 		return true;
 		
-	};
+	}
 
-	this.addFollowerCommand(provisionalAccount){
+	this.addFollowerCommand = function (provisionalAccount){
 		$.mobile.showPageLoadingMsg("a", "Adding Follower");
 		var callbacks = {
 			success: addFollowerSuccess,
