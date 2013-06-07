@@ -544,7 +544,6 @@
 			ok(true, JSON.stringify(data));
 			followerid = data.followers[0].id;
 			accountname = data.followers[0].accountname;
-			debugger;
 			getFollower(accessToken, followerid, expectSuccess, step9);
 		}
 		function step9(data) {

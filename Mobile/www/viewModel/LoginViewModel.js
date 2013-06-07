@@ -24,7 +24,6 @@ function LoginViewModel() {
     }
     
     this.loginCommand = function () {
-        debugger;
         var callbacks = {
         success: loginSuccess,
         error: loginError
@@ -41,7 +40,6 @@ function LoginViewModel() {
     }
     
     this.showRegistration = function(){
-        debugger;
         $.mobile.changePage("#" + signupViewModel.template);
         
     }

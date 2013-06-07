@@ -45,7 +45,6 @@ function SignupViewModel() {
     };
     
     this.loginCommand = function () {
-        debugger;
         $.mobile.showPageLoadingMsg("a", "Logging In With New Credentials");
         var callbacks = {
         success: loginSuccess,
@@ -62,7 +61,6 @@ function SignupViewModel() {
     }
     
     function loginSuccess(args) {
-        debugger;
         $.mobile.hidePageLoadingMsg();
         localStorage.removeItem('accessToken');
         if (args.accessToken) {
