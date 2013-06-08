@@ -4,7 +4,7 @@
 	var okAsync = QUnit.okAsync,
 	stringformat = QUnit.stringformat;
 
-	var baseUrl = 'http://qupler.no-ip.org:8080/api5/rest', //production environment
+	var baseUrl = 'http://qupler.no-ip.org:8080/api7/rest', //production environment
 	//var baseUrl = 'http://localhost:8080/api/rest', //local environment
 	//var baseUrl = 'http://192.168.1.202:8080/api4/rest', //production environment through local network
 
@@ -575,9 +575,15 @@
 		callAPI('POST', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
 	}
  
+<<<<<<< Updated upstream
 	function getChannel(accessToken, channelid, handler, postHandlerCallback) {
 		callAPI('POST', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
 	}
+=======
+    function getChannel(accessToken, channelid, handler, postHandlerCallback) {
+        callAPI('GET', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
+    }
+>>>>>>> Stashed changes
 
 	function listFollowers(accessToken, channelid, handler, postHandlerCallback) {
 		callAPI('GET', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
