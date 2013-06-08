@@ -484,8 +484,7 @@
 			listFollowers(accessToken, channelid, expectSuccess, step8);
 		}
 		function step8(data) {
-		    debugger;
-			// Todo - Verify that User of Account #2 is in the list of Followers
+a			// Todo - Verify that User of Account #2 is in the list of Followers
 			ok(true, JSON.stringify(data));
 			followerid = data.followers[0].id; 
 			removeFollowerFromChannel(accessToken, channelid, followerid, expectSuccessNoContent, step9);
@@ -642,15 +641,9 @@
 		callAPI('POST', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
 	}
  
-<<<<<<< Updated upstream
-	function getChannel(accessToken, channelid, handler, postHandlerCallback) {
-		callAPI('POST', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
-	}
-=======
     function getChannel(accessToken, channelid, handler, postHandlerCallback) {
         callAPI('GET', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
     }
->>>>>>> Stashed changes
 
 	function listFollowers(accessToken, channelid, handler, postHandlerCallback) {
 		callAPI('GET', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
