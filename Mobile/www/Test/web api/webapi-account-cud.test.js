@@ -4,7 +4,7 @@
     var okAsync = QUnit.okAsync,
         stringformat = QUnit.stringformat;
 
-    var baseUrl = 'http://qupler.no-ip.org:8080/api/rest/account', //production environment
+    var baseUrl = 'http://qupler.no-ip.org:8080/api5/rest', // Test environment
     //var baseUrl = 'http://localhost:8080/api/rest/account', //production environment
     //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest/account', //local route to production environment
 	getMsgPrefix = function (id, rqstUrl) {
