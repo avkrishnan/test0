@@ -5,8 +5,8 @@
         stringformat = QUnit.stringformat;
 
     var baseUrl = 'http://qupler.no-ip.org:8080/api5/rest', // Test environment
-    //var baseUrl = 'http://localhost:8080/api/rest/account', //production environment
-    //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest/account', //local route to production environment
+    //var baseUrl = 'http://localhost:8080/api/rest', //production environment
+    //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest', //local route to production environment
 	getMsgPrefix = function (id, rqstUrl) {
             return stringformat(
                 ' of account with id=\'{0}\' to \'{1}\'',
@@ -131,15 +131,15 @@
 
 
     function enroll(account, handler, postHandlerCallback) {
-    	callAPI('POST', '/enroll', null, account ? account : generateAccount(), handler, postHandlerCallback);
+        callAPI('POST', '/account/enroll', null, account ? account : generateAccount(), handler, postHandlerCallback);
     }
 
     function login(loginRequest, handler, postHandlerCallback) {
-    	callAPI('POST', '/login', null, loginRequest, handler, postHandlerCallback);
+        callAPI('POST', '/account/login', null, loginRequest, handler, postHandlerCallback);
     }
 
     function logout(accessToken, handler, postHandlerCallback) {
-    	callAPI('POST', '/logout', accessToken, null, handler, postHandlerCallback);
+        callAPI('POST', '/account/logout', accessToken, null, handler, postHandlerCallback);
     }
 
 
