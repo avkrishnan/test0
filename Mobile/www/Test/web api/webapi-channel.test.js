@@ -544,11 +544,11 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 			ok(true, JSON.stringify(data));
 			followerid = data.followers[0].id;
 			accountname = data.followers[0].accountname;
-			getFollower(accessToken, followerid, expectSuccess, step9);
+			getFollower(accessToken, channelid, followerid, expectSuccess, step9);
 		}
 		function step9(data) {
-			ok(true, JSON.stringify(data));
-			// Todo - Verify that accountname == data.accountname
+		    ok(true, JSON.stringify(data));
+		    equal(accountname, data.accountname, "Verify that the follower is the expected follower");
 			start();
 		}
 
@@ -653,8 +653,8 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 		callAPI('DELETE', '/channel/' + channelid + '/follower/' + followerid, accessToken, undefined, handler, postHandlerCallback);
 	}
 
-	function getFollower(accessToken, followerid, handler, postHandlerCallback) {
-		callAPI('GET', '/follower/' + followerid, accessToken, undefined, handler, postHandlerCallback);
+	function getFollower(accessToken, channelid, followerid, handler, postHandlerCallback) {
+	    callAPI('GET', '/channel/' + channelid + '/follower/' + followerid, accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function getMessages(accessToken, channelid, handler, postHandlerCallback) {
