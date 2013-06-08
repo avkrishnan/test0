@@ -575,15 +575,9 @@
 		callAPI('POST', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
 	}
  
-<<<<<<< Updated upstream
-	function getChannel(accessToken, channelid, handler, postHandlerCallback) {
-		callAPI('POST', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
-	}
-=======
     function getChannel(accessToken, channelid, handler, postHandlerCallback) {
         callAPI('GET', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
     }
->>>>>>> Stashed changes
 
 	function listFollowers(accessToken, channelid, handler, postHandlerCallback) {
 		callAPI('GET', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
