@@ -305,8 +305,38 @@
             <div data-role="content" xdata-theme="b" >
                 
             <div>http://<span data-bind="text: normName"></span>.evernym.com</div>
-                
-                
+                 <div >
+                        <div >
+                            <input id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" autocomplete="on" autofocus="autofocus" required data-validate="required" />
+                        </div>
+                    </div>
+                    
+                    <div >
+                        <div >
+                            <input id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
+                            
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div >
+                            <input id="emailAddress" type="email" data-bind="value: emailaddress" placeholder="Email Address" autocomplete="on"  required data-validate="required|email" />
+                        </div>
+                    </div>
+                    
+                    <div >
+                        <div >
+                            <input id="smsPhone" type="text" data-bind="value: smsPhone" placeholder="SMS Text Phone Number" required data-validate="required" required data-validate="required|phone"/>
+                        </div>
+                    </div>
+                    
+                    <div >
+                        <div>
+                            <input id="addFollowerButton" type="button" data-bind="click: addFollowerCommand" value="Add Follower" data-inline="true"  />
+                        </div>
+                    </div>
+
+
             </div>
             
         </div>
