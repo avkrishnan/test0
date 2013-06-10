@@ -1,4 +1,4 @@
-/*globules $, TweetViewModel */
+/*globals $, TweetViewModel */
 
 function EvernymChannelService() {
 	
@@ -27,7 +27,7 @@ function EvernymChannelService() {
 	// call to get the channels that the user is following
 	this.listFollowingChannels = function (callbacks) {
 
-		///GET /channel?relationship=O for owner and GET /channel?relationship=F
+	    ///GET /channel?relationship=O for owner and GET /channel?relationship=F
 		return api.callAPI('GET', '/channel?relationship=F', undefined, callbacks, true);
 
 	};
@@ -54,8 +54,9 @@ function EvernymChannelService() {
 	};
 	
 
-	// Returns a single follower
+    // Returns a single follower
 	this.getFollower = function (followerid, callbacks) {
+		debugger;
 		return api.callAPI('GET', '/follower/' + followerid, undefined, callbacks, true);
 	};
 
@@ -78,9 +79,6 @@ function EvernymChannelService() {
 		return api.callAPI('PUT', '/channel/' + channel.id, channel, callbacks, true);
 		
 	};
-
-	this.provisionalEnroll = function (provisional, callbacks) {
-		return api.callAPI('POST', '/account/provisional/enroll', provisional, callbacks, true);
-	};
+	
 	
 }

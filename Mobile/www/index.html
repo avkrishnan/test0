@@ -16,14 +16,15 @@
             <script type="text/javascript" src="lib/iscroll.js"></script>
             <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
             
+            
             <!-- the various view models -->
             
             <script type="text/javascript" src="viewModel/EvernymService.js"></script>
-            <script type="text/javascript" src="viewModel/EvernymLoginService.js"></script>
             
+            <script type="text/javascript" src="viewModel/EvernymLoginService.js"></script>
             <script type="text/javascript" src="viewModel/EvernymChannelService.js"></script>
             <script type="text/javascript" src="viewModel/EvernymMessageService.js"></script>
-            
+            <script type="text/javascript" src="viewModel/EvernymCommethodService.js"></script>
             
             <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
@@ -36,6 +37,8 @@
             <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
             <script type="text/javascript" src="viewModel/FollowerViewModel.js"></script>
             <script type="text/javascript" src="viewModel/UserSettingsViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/CommethodVerificationViewModel.js"></script>
+            
             
             
             <!-- the code that puts it all together -->
@@ -302,38 +305,8 @@
             <div data-role="content" xdata-theme="b" >
                 
             <div>http://<span data-bind="text: normName"></span>.evernym.com</div>
-                 <div >
-                        <div >
-                            <input id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" autocomplete="on" autofocus="autofocus" required data-validate="required" />
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div >
-                            <input id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
-                            
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div >
-                            <input id="emailAddress" type="email" data-bind="value: emailaddress" placeholder="Email Address" autocomplete="on"  required data-validate="required|email" />
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div >
-                            <input id="smsPhone" type="text" data-bind="value: smsPhone" placeholder="SMS Text Phone Number" required data-validate="required" required data-validate="required|phone"/>
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div>
-                            <input id="addFollowerButton" type="button" data-bind="click: addFollowerCommand" value="Add Follower" data-inline="true"  />
-                        </div>
-                    </div>
-
-
+                
+                
             </div>
             
         </div>
@@ -439,6 +412,8 @@
             </div>
         </div>
         
+        
+        
 
         <div data-role="page" Xdata-theme="b"
             id="signupView" >
@@ -492,6 +467,37 @@
             </div>
             
         </div>
+        
+        
+        
+        <div data-role="page" xdata-theme="b"
+            id="commethodVerificationView">
+            <div data-role="header" xdata-theme="b">
+                
+                <h1>Verification</h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" xdata-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                        
+                        <li><a href="#" >xxxxxxxx</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+            </div>
+            
+            <div data-role="content" xdata-theme="b" >
+                
+                Verification
+                <div data-bind="text: verification_key"></div>
+                
+            </div>
+            
+        </div>
+        
+        
         
 
         <div data-role="page" xdata-theme="b"

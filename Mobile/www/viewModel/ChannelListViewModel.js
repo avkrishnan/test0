@@ -17,6 +17,7 @@ function ChannelListViewModel() {
 	
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
 
+	    debugger;
 	    if (!that.shown) {
 	        that.activate();
 	    }
@@ -71,10 +72,19 @@ function ChannelListViewModel() {
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Error listing my channels: " + details.message);
-		if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template)
+				
+        
+        
+        if (details.code == 100202 || status == 401){
+			$.mobile.changePage("#" + loginViewModel.template);
+            showMessage("Please log in or register to view channels.");
 		}
+        else {
+            showMessage("Error listing my channels: " + details.message);
+            
+  
+        }
+        
 		//logger.logError('error listing channels', null, 'dataservice', true);
 	};
 	

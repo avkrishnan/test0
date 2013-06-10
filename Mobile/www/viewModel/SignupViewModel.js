@@ -45,6 +45,7 @@ function SignupViewModel() {
     };
     
     this.loginCommand = function () {
+        debugger;
         $.mobile.showPageLoadingMsg("a", "Logging In With New Credentials");
         var callbacks = {
         success: loginSuccess,
@@ -61,6 +62,7 @@ function SignupViewModel() {
     }
     
     function loginSuccess(args) {
+        debugger;
         $.mobile.hidePageLoadingMsg();
         localStorage.removeItem('accessToken');
         if (args.accessToken) {
@@ -72,8 +74,6 @@ function SignupViewModel() {
             
             if (login_nav){
                 var hash = login_nav.hash;
-                //var parameters = login_nav.parameters;
-                
                 $.mobile.changePage(hash);
             }
             else {
@@ -100,6 +100,9 @@ function SignupViewModel() {
     function signUpSuccess(args) {
         $.mobile.hidePageLoadingMsg();
         that.loginCommand();
+        localStorage.setItem('flags.signup_complete', 1);
+        
+        showMessage("You will now receive an email with information to verify your email.");
         //logger.log('You successfully signed up!', null, 'signup', true);
     };
     

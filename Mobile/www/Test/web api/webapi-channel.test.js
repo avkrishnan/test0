@@ -4,9 +4,9 @@
 	var okAsync = QUnit.okAsync,
 	stringformat = QUnit.stringformat;
 
-	var baseUrl = 'http://qupler.no-ip.org:8080/api7/rest', //production environment
+	var baseUrl = 'http://qupler.no-ip.org:8080/api6/rest', //production environment
 	//var baseUrl = 'http://localhost:8080/api/rest', //local environment
-	//var baseUrl = 'http://192.168.1.202:8080/api4/rest', //production environment through local network
+	//var baseUrl = 'http://192.168.1.202:8080/api3/rest', //production environment through local network
 
 
 	getMsgPrefix = function (id, rqstUrl) {
@@ -156,29 +156,29 @@
 	});
 
  
-	test('GET A CHANNEL I OWN', function () {
-	  stop(timoutms); //tell qunit to wait 5 seconds before timing out
-	  var account = generateAccount();
-	  var accessToken;
-	  enroll(account, expectSuccessNoContent, step2);
-	  var channel = generateChannel();
-	  function step2() {
-	  login(generateLogin(account), expectSuccess, step3);
-	  }
-	  function step3(data) {
-	  accessToken = data.accessToken;
-	  createChannel(accessToken, channel, expectCreated, step4);
-	  }
-	  function step4(data) {
-		 alert(data.id);
-		 getChannel(accessToken, data.id, expectSuccess, step5);
-	  }
-	  function step5(data){
-		 ok(true, JSON.stringify(data));
-		 start();
-		 
-	  }
-	});
+    test('GET A CHANNEL I OWN', function () {
+      stop(timoutms); //tell qunit to wait 5 seconds before timing out
+      var account = generateAccount();
+      var accessToken;
+      enroll(account, expectSuccessNoContent, step2);
+      var channel = generateChannel();
+      function step2() {
+      login(generateLogin(account), expectSuccess, step3);
+      }
+      function step3(data) {
+      accessToken = data.accessToken;
+      createChannel(accessToken, channel, expectCreated, step4);
+      }
+      function step4(data) {
+         
+         getChannel(accessToken, data.id, expectSuccess, step5);
+      }
+      function step5(data){
+         ok(true, JSON.stringify(data));
+         start();
+         
+      }
+    });
  
 	test('LIST CHANNELS', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
@@ -200,20 +200,20 @@
  
  
  test('LIST CHANNELS BUT ZERO CHANNELS', function () {
-	  stop(timoutms); //tell qunit to wait 5 seconds before timing out
-	  var account = generateAccount();
-	  var accessToken;
-	  enroll(account, expectSuccessNoContent, step2);
-	  var channel = generateChannel();
-	  function step2() {
-	  login(generateLogin(account), expectSuccess, step3);
-	  }
-	  function step3(data) {
-	  accessToken = data.accessToken;
-	  
-	  listOwnerChannels(accessToken, expectSuccess);
-	  }
-	  });
+      stop(timoutms); //tell qunit to wait 5 seconds before timing out
+      var account = generateAccount();
+      var accessToken;
+      enroll(account, expectSuccessNoContent, step2);
+      var channel = generateChannel();
+      function step2() {
+      login(generateLogin(account), expectSuccess, step3);
+      }
+      function step3(data) {
+      accessToken = data.accessToken;
+      
+      listOwnerChannels(accessToken, expectSuccess);
+      }
+      });
 
 	test('SEND MESSAGE ON CHANNEL', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
@@ -274,33 +274,33 @@
  
  
  test('GET MESSAGES ON CHANNEL, BUT NO MESSAGES', function () {
-	  stop(timoutms); //tell qunit to wait 5 seconds before timing out
-	  var account = generateAccount();
-	  var accessToken;
-	  enroll(account, expectSuccessNoContent, step2);
-	  var channel = generateChannel();
-	  var channelid = '';
-	  function step2() {
-	  login(generateLogin(account), expectSuccess, step3);
-	  }
-	  function step3(data) {
-	  accessToken = data.accessToken;
-	  createChannel(accessToken, channel, expectCreated, step4);
-	  }
-	  function step4(data) {
-	  listOwnerChannels(accessToken, expectSuccess, step5);
-	  }
-	  function step5(data){
-	  ok(true, JSON.stringify(data));
-	  channelid = data.channel[0].id;
-	  
-	  getMessages(accessToken, channelid, expectSuccess, step7 ); // 'FYI','RAC','ACK'
-	  }
-	  function step7(data){
-	  ok(true, JSON.stringify(data));
-	  start();
-	  }
-	  });
+      stop(timoutms); //tell qunit to wait 5 seconds before timing out
+      var account = generateAccount();
+      var accessToken;
+      enroll(account, expectSuccessNoContent, step2);
+      var channel = generateChannel();
+      var channelid = '';
+      function step2() {
+      login(generateLogin(account), expectSuccess, step3);
+      }
+      function step3(data) {
+      accessToken = data.accessToken;
+      createChannel(accessToken, channel, expectCreated, step4);
+      }
+      function step4(data) {
+      listOwnerChannels(accessToken, expectSuccess, step5);
+      }
+      function step5(data){
+      ok(true, JSON.stringify(data));
+      channelid = data.channel[0].id;
+      
+      getMessages(accessToken, channelid, expectSuccess, step7 ); // 'FYI','RAC','ACK'
+      }
+      function step7(data){
+      ok(true, JSON.stringify(data));
+      start();
+      }
+      });
 
 	test('CREATE A CHANNEL, LIST FOLLOWERS (SELF)', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
@@ -371,259 +371,44 @@
  
  
  test('GET A CHANNEL I\'M FOLLOWING', function () {
-	  stop(timoutms); //tell qunit to wait 5 seconds before timing out
-	  var account = generateAccount();
-	  var account2 = generateAccount();
-	  var accessToken;
-	  var accessToken2;
-	  var channelid;
-	  enroll(account, expectSuccessNoContent, step2);
-	  var channel = generateChannel();
-	  var channelid = '';
-	  
-	  function step2() {
-		  login(generateLogin(account), expectSuccess, step2a);
-	  }
-	  function step2a(data){
-		  accessToken = data.accessToken;
-		  createChannel(accessToken, channel, expectCreated, step2b);
-	  }
-	  function step2b(data) {
-		  channelid = data.id;
-		  enroll(account2, expectSuccessNoContent, step2c);
-	  }
-	  function step2c() {
-		  login(generateLogin(account2), expectSuccess, step2d);
-	  }
-	  function step2d(data){
-		  accessToken2 = data.accessToken;
-		  followChannel(accessToken2, channelid, expectSuccessNoContent, step4);
-	  }
-	  function step4(data){
-		  getChannel(accessToken, channelid, expectSuccess, step5);
-	  }
-	  function step5(data){
-		  ok(true, JSON.stringify(data));
-		  start();
-	  
-	  }
-	  });
+      stop(timoutms); //tell qunit to wait 5 seconds before timing out
+      var account = generateAccount();
+      var account2 = generateAccount();
+      var accessToken;
+      var accessToken2;
+      var channelid;
+      enroll(account, expectSuccessNoContent, step2);
+      var channel = generateChannel();
+      var channelid = '';
+      
+      function step2() {
+          login(generateLogin(account), expectSuccess, step2a);
+      }
+      function step2a(data){
+          accessToken = data.accessToken;
+          createChannel(accessToken, channel, expectCreated, step2b);
+      }
+      function step2b(data) {
+          channelid = data.id;
+          enroll(account2, expectSuccessNoContent, step2c);
+      }
+      function step2c() {
+          login(generateLogin(account2), expectSuccess, step2d);
+      }
+      function step2d(data){
+          accessToken2 = data.accessToken;
+          followChannel(accessToken2, channelid, expectSuccessNoContent, step4);
+      }
+      function step4(data){
+          getChannel(accessToken, channelid, expectSuccess, step5);
+      }
+      function step5(data){
+          ok(true, JSON.stringify(data));
+          start();
+      
+      }
+      });
 
-	test('CREATE PROVISIONAL ACCOUNT FOLLOWING A CHANNEL', function () {
-		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-		var account = generateAccount();
-		var accessToken;
-		// Step 1 Create a new account
-		enroll(account, expectSuccessNoContent, step2);
-		var channel = generateChannel();
-		var channelid = '';
-		var provisionalAccount = generateProvisionalAccount();
-		var provisionalToken;
-		function step2() {
-			login(generateLogin(account), expectSuccess, step3);
-		}
-		function step3(data) {
-			accessToken = data.accessToken;
-			createChannel(accessToken, channel, expectCreated, step4);
-		}
-		function step4(data) {
-			channelid = data.id;
-			provisionalAccount = generateProvisionalAccount(channelid);
-			// Create a Provisional Account. The account contains the channelId that it was associated with.
-			createProvisionalAccount(accessToken, provisionalAccount, expectSuccess, step5);
-		}
-		function step5(data) {
-			provisionalToken = data.provisionalToken;
-			listFollowers(accessToken, channelid, expectSuccess, step6);
-		}
-		function step6(data){
-			// TODO - Verify that the list followers returns the follower added with a 
-			ok(true, JSON.stringify(data));
-			start();
-		}
-	});
-
-
-	test('REMOVE A FOLLOWER FROM A CHANNEL', function () {
-		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-		var account = generateAccount();
-		var account2 = generateAccount();
-		var accessToken;
-		var accessToken2;
-		var channelid;
-		// Step 1 Create a New Account - ENROLL Account #1
-		enroll(account, expectSuccessNoContent, step2);
-		var channel = generateChannel();
-		var channelid = '';
-		var followerid = '';
-
-		function step2() {
-			// Log into Account #1
-			login(generateLogin(account), expectSuccess, step3);
-		}
-		function step3(data) {
-			accessToken = data.accessToken;
-			// Create a Channel for User of Account #1
-			createChannel(accessToken, channel, expectCreated, step4);
-		}
-		function step4(data) {
-			channelid = data.id;
-			// Create a New Account - ENROLL Account #2
-			enroll(account2, expectSuccessNoContent, step5);
-		}
-		function step5() {
-			// Log into Account #2
-			login(generateLogin(account2), expectSuccess, step6);
-		}
-		function step6(data) {
-			accessToken2 = data.accessToken;
-			// User Of Account #2 Is Following Account #1's Channel
-			followChannel(accessToken2, channelid, expectSuccessNoContent, step7);
-		}
-		function step7(data) {
-			listFollowers(accessToken, channelid, expectSuccess, step8);
-		}
-		function step8(data) {
-a			// Todo - Verify that User of Account #2 is in the list of Followers
-			ok(true, JSON.stringify(data));
-			followerid = data.followers[0].id; 
-			removeFollowerFromChannel(accessToken, channelid, followerid, expectSuccessNoContent, step9);
-		}
-		function step9(data) {
-			listFollowers(accessToken, channelid, expectSuccess, step10);
-		}
-		function step10(data) {
-			// Verify that No follower were returned. The Follower was Removed.
-			ok(false, JSON.stringify(data));
-			start();
-		}
-	});
-
-	test('GET FOLLOWER', function () {
-		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-		var account = generateAccount();
-		var account2 = generateAccount();
-		var accessToken;
-		var accessToken2;
-		var channelid;
-		// Step 1 Create a New Account - ENROLL Account #1
-		enroll(account, expectSuccessNoContent, step2);
-		var channel = generateChannel();
-		var channelid = '';
-		var followerid = '';
-		var accountname = '';
-
-		function step2() {
-			// Log into Account #1
-			login(generateLogin(account), expectSuccess, step3);
-		}
-		function step3(data) {
-			accessToken = data.accessToken;
-			// Create a Channel for User of Account #1
-			createChannel(accessToken, channel, expectCreated, step4);
-		}
-		function step4(data) {
-			channelid = data.id;
-			// Create a New Account - ENROLL Account #2
-			enroll(account2, expectSuccessNoContent, step5);
-		}
-		function step5() {
-			// Log into Account #2
-			login(generateLogin(account2), expectSuccess, step6);
-		}
-		function step6(data) {
-			accessToken2 = data.accessToken;
-			// User Of Account #2 Is Following Account #1's Channel
-			followChannel(accessToken2, channelid, expectSuccessNoContent, step7);
-		}
-		function step7(data) {
-			listFollowers(accessToken, channelid, expectSuccess, step8);
-		}
-		function step8(data) {
-			// Todo - Verify that User of Account #2 is in the list of Followers
-			ok(true, JSON.stringify(data));
-			followerid = data.followers[0].id;
-			accountname = data.followers[0].accountname;
-			getFollower(accessToken, channelid, followerid, expectSuccess, step9);
-		}
-		function step9(data) {
-		    ok(true, JSON.stringify(data));
-		    equal(accountname, data.accountname, "Verify that the follower is the expected follower");
-			start();
-		}
-
-	});
-
-	test('GET ACCOUNT COMMUNICATION MEANS FOR A CHANNEL', function () {
-		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-		var account = generateAccount();
-		var accessToken;
-		// Step 1 Create a New Evernym Account
-		enroll(account, expectSuccessNoContent, step2);
-
-		function step2() {
-		    // Log into Evernym Account
-		    login(generateLogin(account), expectSuccess, step3);
-		}
-		function step3(data) {
-		    accessToken = data.accessToken;
-		    // Create a Channel for User of Account #1
-		    createChannel(accessToken, channel, expectCreated, step4);
-		}
-		function step3(data) {
-		    channelid = data.id;
-			// retrieve the communication methods for the generated account
-		    getCommunicationMethodsForChannel(accessToken, channelid, expectSuccess, step4);
-		}
-		function step4(data) {
-			ok(true, JSON.stringify(data));
-			// Todo - Verify that the only communication method is emailaddress: 'test@test.com'
-			// Todo - Verify that there is exactly one method for communication
-			start();
-		}
-	});
-
-
-	test('ADD COMMUNICATION METHOD FOR A CHANNEL', function () {
-	    stop(timoutms); //tell qunit to wait 5 seconds before timing out
-	    var account = generateAccount();
-	    var accessToken;
-	    // Step 1 Create a New Evernym Account
-	    enroll(account, expectSuccessNoContent, step2);
-        // Create an Urgent SMS Communication Method 
-	    var communctionMeans = generateCommunicationMethodUrgentSMS();
-
-	    function step2() {
-	        // Log into Evernym Account
-	        login(generateLogin(account), expectSuccess, step3);
-	    }
-	    function step3(data) {
-	        accessToken = data.accessToken;
-	        // Create a Channel for User of Account #1
-	        createChannel(accessToken, channel, expectCreated, step4);
-	    }
-	    function step3(data) {
-	        channelid = data.id;
-	        // retrieve the communication methods for the generated account
-	        addCommunicationMethodToChannel(accessToken, channelid, communctionMeans, expectSuccess, step4);
-	    }
-	    function step4(data) {
-	        
-	        // retrieve the communication methods for the generated account
-	        getCommunicationMethodsForChannel(accessToken, channelid, expectSuccess, step4);
-	    }
-	    function step5(data) {
-	        ok(true, JSON.stringify(data));
-	        // Todo - Verify that the a communication method exists for emailaddress: 'test@test.com'
-	        // Todo - Verify that there is exactly two methods for communication
-	        // Todo - Verify that the new Urgent SMS Communication was added to the channel
-	        start();
-	    }
-	});
-
-	function createProvisionalAccount(accessToken, provisionalAccount, handler, postHandlerCallback){
-		callAPI('POST', '/account/provisional/enroll', accessToken, provisionalAccount, handler, postHandlerCallback);
-	}
 
 	function createChannel(accessToken, channel, handler, postHandlerCallback) {
 		callAPI('POST', '/channel', accessToken, channel, handler, postHandlerCallback);
@@ -647,14 +432,6 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 
 	function listFollowers(accessToken, channelid, handler, postHandlerCallback) {
 		callAPI('GET', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
-	}
-
-	function removeFollowerFromChannel(accessToken, channelid, followerid, handler, postHandlerCallback) {
-		callAPI('DELETE', '/channel/' + channelid + '/follower/' + followerid, accessToken, undefined, handler, postHandlerCallback);
-	}
-
-	function getFollower(accessToken, channelid, followerid, handler, postHandlerCallback) {
-	    callAPI('GET', '/channel/' + channelid + '/follower/' + followerid, accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function getMessages(accessToken, channelid, handler, postHandlerCallback) {
@@ -681,14 +458,6 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 
 	function logout(accessToken, handler, postHandlerCallback) {
 		callAPI('POST', '/account/logout', accessToken, null, handler, postHandlerCallback);
-	}
-
-	function getCommunicationMethodsForChannel(accessToken, channelid, handler, postHandlerCallback) {
-	    callAPI('GET', '/communication/' + channelid, accessToken, null, handler, postHandlerCallback);
-	}
-
-	function addCommunicationMethodToChannel(accessToken, channelid, communicationMethod, handler, postHandlerCallback) {
-	    callAPI('POST', '/communication/' + channelid, accessToken, communicationMethod, handler, postHandlerCallback);
 	}
 
 	// generic helper method to handle ajax calls to API
@@ -769,24 +538,6 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 			firstname: 'testFirst',
 			lastname: 'testLast'
 		};
-	}
-
-	function generateProvisionalAccount(channelId) {
-		return {
-			emailaddress: 'test@test.com',
-			smsPhone: '123-123-1234',
-			firstname: 'testFirst',
-			lastname: 'testLast-' + randomString(5), // Create Random Last Name Generator
-			channelId: channelId
-		};
-	}
-
-	function generateCommunicationMethodUrgentSMS(channelId) {
-	    return {
-	        smsPhone: '123-123-1234',
-	        urgency: true,
-	        channelId: channelId
-	    };
 	}
 
 	function generateLogin(account) {

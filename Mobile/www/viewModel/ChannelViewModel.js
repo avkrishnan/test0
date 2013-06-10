@@ -152,11 +152,13 @@ function ChannelViewModel() {
 	function errorAPIChannel(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template)
+			$.mobile.changePage("#" + loginViewModel.template);
+            showMessage("Please log in or register to view this channel.");
 		}
-		console.log("error something " + data);
-		showMessage("Error Getting Channel: " + ((status==500)?"Internal Server Error":details.message));
-		
+        else {
+		    showMessage("Error Getting Channel: " + ((status==500)?"Internal Server Error":details.message));
+		}
+            
 		//logger.logError('error listing channels', null, 'channel', true);
 	}
     
@@ -165,20 +167,30 @@ function ChannelViewModel() {
 		if (details.code == 100202 || status == 401){
 			$.mobile.changePage("#" + loginViewModel.template)
 		}
-		console.log("error something " + data);
+		
 		showMessage("Error: " + ((status==500)?"Internal Server Error":details.message));
 		
 		//logger.logError('error listing channels', null, 'channel', true);
 	}
     
 
+    function errorFollowing(data, status, details){
+		$.mobile.hidePageLoadingMsg();
+		if (details.code == 100601){ // we are already following this channel
+			that.getMessagesCommand(that.channelid()).then(gotMessages);
+		}
+        else {
+		
+		    showMessage("Error Following Channel: " + details.message);
+		}
+	}
 	
 	function errorPostingMessage(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		if (details.code == 100202 || status == 401){
 			$.mobile.changePage("#" + loginViewModel.template)
 		}
-		console.log("error something " + data);
+		
 		showMessage("Error Posting Message: " + details.message);
 		//logger.logError('error listing channels', null, 'channel', true);
 	}
@@ -205,7 +217,7 @@ function ChannelViewModel() {
 		
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
-		return dataService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorAPI});
+		return dataService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
 		
 	};
 	
