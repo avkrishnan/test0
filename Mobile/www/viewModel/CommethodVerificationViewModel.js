@@ -8,6 +8,7 @@ function CommethodVerificationViewModel() {
     var  dataService = new EvernymCommethodService();
     
     this.template = "commethodVerificationView";
+    this.message = ko.observable();
     
 
     this.verification_key = ko.observable();
@@ -35,19 +36,20 @@ function CommethodVerificationViewModel() {
     
     function gotVerification(data){
         $.mobile.hidePageLoadingMsg();
-        alert('got verification');
+        that.message("Successfully verified");
         
     }
     
     function verificationSuccess(data){
         $.mobile.hidePageLoadingMsg();
-        alert('got verification success');
+        
     }
     
     function verificationError(data, status, details){
         $.mobile.hidePageLoadingMsg();
         
-        showMessage("Error in Verification: " + ((status==500)?"Internal Server Error":details.message));
+        that.message("Error in Verification: " + ((status==500)?"Internal Server Error":getAPICode(details.code)));
+        //showMessage("Error in Verification: " + ((status==500)?"Internal Server Error":details.message));
     }
     
     this.verificationCommand = function () {

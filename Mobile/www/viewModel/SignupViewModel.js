@@ -61,24 +61,42 @@ function SignupViewModel() {
         dataService.accountLogin(loginModel, callbacks);
     }
     
+    
     function loginSuccess(args) {
-        debugger;
+        
         $.mobile.hidePageLoadingMsg();
         localStorage.removeItem('accessToken');
         if (args.accessToken) {
             
             localStorage.setItem("accessToken", args.accessToken);
+            var notifications = args.notifications;
+            
             
             var login_nav = JSON.parse(localStorage.getItem("login_nav"));
             localStorage.removeItem("login_nav");
             
+            
+            
             if (login_nav){
                 var hash = login_nav.hash;
+                //var parameters = login_nav.parameters;
+                
                 $.mobile.changePage(hash);
             }
+            else if (notifications.length){
+                for (var n in notifications){
+                    var code = notifications[n].code;
+                    notificationsViewModel.addNotification(getAPICode(code));
+                }
+                
+                $.mobile.changePage("#" + notificationsViewModel.template);
+            }
             else {
+                
                 $.mobile.changePage("#" + channelListViewModel.template);
             }
+            
+            
             
             
         } else {
@@ -86,7 +104,7 @@ function SignupViewModel() {
             return;
         }
         
-        //logger.log('You successfully logged in!', null, 'login', true);
+        
     }
     
     function loginError(data, status, response) {
@@ -102,8 +120,7 @@ function SignupViewModel() {
         that.loginCommand();
         localStorage.setItem('flags.signup_complete', 1);
         
-        showMessage("You will now receive an email with information to verify your email.");
-        //logger.log('You successfully signed up!', null, 'signup', true);
+        
     };
     
     function signUpError(data, status, response) {
