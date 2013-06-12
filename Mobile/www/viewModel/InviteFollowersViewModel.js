@@ -83,6 +83,10 @@ function InviteFollowersViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		showMessage("Error Creating Follower Account: " + response.message);
 	};
+	
+
+
+
    
 
 	

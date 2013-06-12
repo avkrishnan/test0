@@ -24,8 +24,9 @@ function LoginViewModel() {
     }
     
     this.loginCommand = function () {
+        
         var callbacks = {
-        success: loginSuccess,
+        success: loginSuccess2,
         error: loginError
         };
         
@@ -36,10 +37,11 @@ function LoginViewModel() {
         loginModel.password = this.password();
         loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
         
-        dataService.accountLogin(loginModel, callbacks);
+        return dataService.accountLogin(loginModel, callbacks).then(loginSuccess);
     }
     
     this.showRegistration = function(){
+        
         $.mobile.changePage("#" + signupViewModel.template);
         
     }
@@ -58,6 +60,8 @@ function LoginViewModel() {
         }
     }
     
+    function loginSuccess2(data){};
+    
     function loginSuccess(args) {
                 
         $.mobile.hidePageLoadingMsg();
@@ -65,17 +69,33 @@ function LoginViewModel() {
         if (args.accessToken) {
             
             localStorage.setItem("accessToken", args.accessToken);
+            var notifications = args.notifications;
+            
             
             var login_nav = JSON.parse(localStorage.getItem("login_nav"));
             localStorage.removeItem("login_nav");
             
+            
+            
             if (login_nav){
                 var hash = login_nav.hash;
-                //var parameters = login_nav.parameters;
+                
+                if (hash.indexOf("index.html") !== -1){
+                    hash = 'index.html';
+                }
                 
                 $.mobile.changePage(hash);
             }
+            else if (notifications.length){
+                for (var n in notifications){
+                    var code = notifications[n].code;
+                    notificationsViewModel.addNotification(getAPICode(code));
+                }
+                
+                $.mobile.changePage("#" + notificationsViewModel.template);
+            }
             else {
+                
                 $.mobile.changePage("#" + channelListViewModel.template);
             }
             

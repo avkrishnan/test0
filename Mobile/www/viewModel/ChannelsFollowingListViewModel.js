@@ -70,10 +70,16 @@ function ChannelsFollowingListViewModel() {
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Error listing channels I'm following: " + details.message);
-		if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template)
+        
+        if (details.code == 100202 || status == 401){
+			$.mobile.changePage("#" + loginViewModel.template);
+            showMessage("Please log in or register to view channels.");
 		}
+        else {
+            showMessage("Error listing my channels I'm Following: " + details.message);
+            
+            
+        }
 	};
 	
 	this.listFollowingChannelsCommand = function () {

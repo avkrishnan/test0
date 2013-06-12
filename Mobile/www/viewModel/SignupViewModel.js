@@ -45,6 +45,7 @@ function SignupViewModel() {
     };
     
     this.loginCommand = function () {
+        debugger;
         $.mobile.showPageLoadingMsg("a", "Logging In With New Credentials");
         var callbacks = {
         success: loginSuccess,
@@ -60,15 +61,21 @@ function SignupViewModel() {
         dataService.accountLogin(loginModel, callbacks);
     }
     
+    
     function loginSuccess(args) {
+        
         $.mobile.hidePageLoadingMsg();
         localStorage.removeItem('accessToken');
         if (args.accessToken) {
             
             localStorage.setItem("accessToken", args.accessToken);
+            var notifications = args.notifications;
+            
             
             var login_nav = JSON.parse(localStorage.getItem("login_nav"));
             localStorage.removeItem("login_nav");
+            
+            
             
             if (login_nav){
                 var hash = login_nav.hash;
@@ -76,9 +83,20 @@ function SignupViewModel() {
                 
                 $.mobile.changePage(hash);
             }
+            else if (notifications.length){
+                for (var n in notifications){
+                    var code = notifications[n].code;
+                    notificationsViewModel.addNotification(getAPICode(code));
+                }
+                
+                $.mobile.changePage("#" + notificationsViewModel.template);
+            }
             else {
+                
                 $.mobile.changePage("#" + channelListViewModel.template);
             }
+            
+            
             
             
         } else {
@@ -86,7 +104,7 @@ function SignupViewModel() {
             return;
         }
         
-        //logger.log('You successfully logged in!', null, 'login', true);
+        
     }
     
     function loginError(data, status, response) {
@@ -100,7 +118,9 @@ function SignupViewModel() {
     function signUpSuccess(args) {
         $.mobile.hidePageLoadingMsg();
         that.loginCommand();
-        //logger.log('You successfully signed up!', null, 'signup', true);
+        localStorage.setItem('flags.signup_complete', 1);
+        
+        
     };
     
     function signUpError(data, status, response) {

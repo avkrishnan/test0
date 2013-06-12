@@ -8,6 +8,8 @@
             <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
                        
             
+            <script type="text/javascript" src="api_codes.js"></script>
+            
             <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
             <script type="text/javascript" src="lib/jquery.mobile-1.3.1.js"></script>
             <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
@@ -16,14 +18,15 @@
             <script type="text/javascript" src="lib/iscroll.js"></script>
             <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
             
+            
             <!-- the various view models -->
             
             <script type="text/javascript" src="viewModel/EvernymService.js"></script>
-            <script type="text/javascript" src="viewModel/EvernymLoginService.js"></script>
             
+            <script type="text/javascript" src="viewModel/EvernymLoginService.js"></script>
             <script type="text/javascript" src="viewModel/EvernymChannelService.js"></script>
             <script type="text/javascript" src="viewModel/EvernymMessageService.js"></script>
-            
+            <script type="text/javascript" src="viewModel/EvernymCommethodService.js"></script>
             
             <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
@@ -36,6 +39,8 @@
             <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
             <script type="text/javascript" src="viewModel/FollowerViewModel.js"></script>
             <script type="text/javascript" src="viewModel/UserSettingsViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/CommethodVerificationViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/NotificationsViewModel.js"></script>
             
             
             <!-- the code that puts it all together -->
@@ -75,14 +80,18 @@
                 </div>
             </div>
             
+            
+        
+            
+            
             <div data-role="content" xdata-theme="c" data-iscroll>
-                
+                <div data-bind="text: notification"></div>
                 <ul data-role="listview">
                     
                     <!-- ko foreach: channels, updateListviewOnChange:channels -->
                     <li>
                         
-                        <a  href="#" data-bind="click: $parent.showChannel" xdata-bind="attr: {href: 'index.html#channelView?id=' + id}">
+                        <a  href="#" data-bind="click: $parent.showChannel" >
                             <span data-bind="text: name"></span>
                         </a>          
                         
@@ -92,7 +101,50 @@
                 </ul>
             </div>
             
-            
+        </div>
+        
+        
+        <div data-role="page" id="notificationsView">
+            <div data-role="header" >
+                <h1>Notifications</h1>
+                
+                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <div data-role="popup" id="popupMenu" data-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                        
+                        
+                        <li><a href="index.html#channelListView">My Channels</a></li>
+                        <li><a href="index.html#channelsListView">Channels I'm Following</a></li>
+                        <li><a href="index.html#userSettingsView">My Communication Preferences</a></li>
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                </div>
+
+                
+                
+            </div>
+            <div data-role="content" data-theme="d" >
+                
+                <ul data-role="listview">
+                    
+                    <!-- ko foreach: notifications, updateListviewOnChange:notifications -->
+                    <li>
+                        
+                        <span data-bind="text: message"></span>
+                        
+                        
+                    </li>
+                    <!-- /ko -->
+                    
+                </ul>
+                
+                <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                <li><a href="index.html#channelListView">My Channels</a></li>
+                <li><a href="index.html#channelsListView">Channels I'm Following</a></li>
+                </ul>
+                
+            </div>
         </div>
         
 
@@ -107,7 +159,7 @@
                        
                         <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
                         <li><a href="#" data-bind="click: activate">Refresh List</a></li>
-                        <li><a href="index.html#channelListView">My Channel List</a></li>
+                        <li><a href="index.html#channelListView">My Channels</a></li>
                         <li><a href="index.html#userSettingsView">My Communication Preferences</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
@@ -439,6 +491,7 @@
             </div>
         </div>
         
+       
 
         <div data-role="page" Xdata-theme="b"
             id="signupView" >
@@ -493,6 +546,36 @@
             
         </div>
         
+        
+        
+        <div data-role="page" xdata-theme="b"
+            id="commethodVerificationView">
+            <div data-role="header" xdata-theme="b">
+                
+                <h1>Verification</h1>
+                
+                
+            </div>
+            
+            <div data-role="content" xdata-theme="b" >
+                <h3>
+                <div data-bind="text: message"></div>
+                    </h3>
+                
+                <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                    
+                    
+                    <li><a href="index.html#channelListView">Continue</a></li>
+                    
+                    
+                </ul>
+                
+            </div>
+            
+        </div>
+        
+        
+        
 
         <div data-role="page" xdata-theme="b"
             id="userSettingsView">
@@ -504,7 +587,7 @@
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
 
                         <li><a href="index.html#channelsFollowingListView">Channels I'm Following</a></li>
-                        <li><a href="index.html#channelListView">My Channel List</a></li>
+                        <li><a href="index.html#channelListView">My Channels</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>

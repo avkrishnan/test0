@@ -2,7 +2,8 @@
 
 function EvernymService() {
   
-	var baseUrl = 'http://qupler.no-ip.org:8080/api6/rest';
+    
+	var baseUrl = 'http://qupler.no-ip.org:8080/api9/rest';
 	
 	this.callAPI = function(method, resource, object, callbacks, useAccessToken) {
 		var ajaxParams = {
@@ -14,8 +15,11 @@ function EvernymService() {
 		};
 		
 		
+      
 		
 		if (useAccessToken) {
+            
+            
 			ajaxParams.beforeSend = function (xhr) {
 				//logger.log('Setting the authorization headers', null, 'dataservice', true);
 				
@@ -23,6 +27,8 @@ function EvernymService() {
 				xhr.setRequestHeader("Authorization", accessToken);
 			}
 		}
+        
+      
 		
 		var ajaxCall = $.ajax(ajaxParams);
 		

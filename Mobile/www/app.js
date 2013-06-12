@@ -55,7 +55,9 @@ sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
 inviteFollowersViewModel = new InviteFollowersViewModel(),
 followerViewModel = new FollowerViewModel(),
-userSettingsModel = new UserSettingsViewModel()
+commethodVerificationViewModel = new CommethodVerificationViewModel(),
+userSettingsModel = new UserSettingsViewModel(),
+notificationsViewModel = new NotificationsViewModel()
 
 ;
 
@@ -82,7 +84,9 @@ $(document).ready(function () {
                   ko.applyBindings(userSettingsModel, document.getElementById("userSettingsView"));
                   ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
                   ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
+                  ko.applyBindings(commethodVerificationViewModel, document.getElementById("commethodVerificationView"));
                   
+                  ko.applyBindings(notificationsViewModel, document.getElementById("notificationsView"));
                    
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);

@@ -17,12 +17,14 @@ function FollowerViewModel() {
 
     $("#" + this.template).live("pagebeforeshow", function (e, data) {
 
+        debugger;
 
         if ($.mobile.pageData && $.mobile.pageData.id) {
             that.activate({ id: $.mobile.pageData.id });
         }
 
         else {
+            debugger;
             var currentChannel = localStorage.getItem("currentChannel");
             var lchannel = JSON.parse(currentChannel);
             that.activate(lchannel);
@@ -36,11 +38,12 @@ function FollowerViewModel() {
     // Methods
 
     function getChannelFromPageData() {
+        debugger;
         that.activate({ id: $.mobile.pageData.id });
     }
 
     this.activate = function (channel) {
-        
+        debugger;
 
         that.follower();
         that.channelid(channel.id);
@@ -71,6 +74,7 @@ function FollowerViewModel() {
 
 
     this.getFollowerCommand = function () {
+        debugger;
         //logger.log("starting getChannel", undefined, "channels", true);
         return dataService.getFollower(that.channelid(), { success: function () { }, error: errorAPI });
 
