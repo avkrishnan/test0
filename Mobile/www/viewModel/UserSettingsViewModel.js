@@ -54,9 +54,7 @@ function UserSettingsViewModel() {
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		showMessage("Error listing channels: " + details.message);
-		if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template)
-		}
+		loginPageIfBadLogin(details.code);
 		//logger.logError('error listing channels', null, 'dataservice', true);
 	};
 	

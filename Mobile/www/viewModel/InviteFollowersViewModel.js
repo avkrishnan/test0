@@ -19,7 +19,7 @@ function InviteFollowersViewModel() {
    
 	
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
-
+        that.clearForm();
 		if ($.mobile.pageData && $.mobile.pageData.id) {
 			that.activate({ id: $.mobile.pageData.id });
 		} else {
@@ -33,6 +33,16 @@ function InviteFollowersViewModel() {
 	
 	
 	// Methods
+    
+    this.clearForm = function(){
+        that.channelid('');
+        that.channelname('');
+        that.normName('');
+        that.emailaddress('');
+        that.firstname('');
+        that.lastname('');
+        that.smsPhone('');
+    };
 
 	function generateProvisionalAccount() {
 		return {
@@ -81,6 +91,9 @@ function InviteFollowersViewModel() {
 	
 	function addFollowerError(data, status, response) {
 		$.mobile.hidePageLoadingMsg();
+        
+        loginPageIfBadLogin(response.code);
+        
 		showMessage("Error Creating Follower Account: " + response.message);
 	};
 	

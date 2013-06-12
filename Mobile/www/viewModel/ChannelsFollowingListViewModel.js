@@ -71,8 +71,8 @@ function ChannelsFollowingListViewModel() {
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
         
-        if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template);
+        if (loginPageIfBadLogin(details.code)){
+			
             showMessage("Please log in or register to view channels.");
 		}
         else {

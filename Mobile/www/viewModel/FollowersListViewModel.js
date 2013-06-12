@@ -72,10 +72,8 @@ function FollowersListViewModel() {
     
 	function errorAPI(data, status, details){
         $.mobile.hidePageLoadingMsg();
-        if (data == "Unauthorized"){
-            $.mobile.changePage("#" + loginViewModel.template)
-        }
-        console.log("error something " + data);
+        loginPageIfBadLogin(details.code);
+        
         showMessage("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
         
 	    //logger.logError('error listing channels', null, 'channel', true);

@@ -21,6 +21,7 @@ function SendMessageViewModel() {
     $("#" + this.template).live("pagebeforeshow", function (e, data) {
 
 
+        that.clearForm();
         if ($.mobile.pageData && $.mobile.pageData.id) {
             that.activate({ id: $.mobile.pageData.id });
         }
@@ -78,6 +79,10 @@ function SendMessageViewModel() {
         $.mobile.changePage("#" + channelViewModel.template)
 	    
 	};
+    
+    this.clearForm = function(){
+        that.message('');
+    };
 
     
     this.logoutCommand = function(){
@@ -88,9 +93,9 @@ function SendMessageViewModel() {
     
 	function errorAPI(data, status, details){
         $.mobile.hidePageLoadingMsg();
-        if (data == "Unauthorized"){
-            $.mobile.changePage("#" + loginViewModel.template)
-        }
+        
+        loginPageIfBadLogin(details.code);
+        
         console.log("error something " + data);
         showMessage("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
         
@@ -99,11 +104,10 @@ function SendMessageViewModel() {
     
     function errorPostingMessage(data, status, details){
         $.mobile.hidePageLoadingMsg();
-        if (data == "Unauthorized"){
-            $.mobile.changePage("#" + loginViewModel.template)
-        }
-        console.log("error something " + data);
-        showMessage("Error Posting Message: " + details.message);
+		
+        loginPageIfBadLogin(details.code);
+        
+        showMessage("Error Posting Message: " + getAPICode(details.code));
 	    //logger.logError('error listing channels', null, 'channel', true);
 	};
 

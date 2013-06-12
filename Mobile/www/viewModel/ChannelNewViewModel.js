@@ -12,15 +12,18 @@ function ChannelNewViewModel() {
     
     
     $("#" + this.template).live("pagebeforeshow", function (e, data) {
-        that.activate();
+                                that.clearForm();
+                                that.activate();
     });
     
     // Methods
     this.activate = function () {
-        that.name("");
-        //var result = authentication.validateCookie();
         
         return true;
+    };
+    
+    this.clearForm = function(){
+        that.name('');
     };
     
     this.routeToLogin = function () {
@@ -41,9 +44,7 @@ function ChannelNewViewModel() {
         //that.notifications("error creating channel " + JSON.stringify(data));
         console.log("error creating channel: " + response.message);
         showMessage("Error creating channel: " + response.message);
-        if (details.code == 100202 || status == 401){
-            $.mobile.changePage("#" + loginViewModel.template)
-        }
+        loginPageIfBadLogin(details.code);
         //logger.log('error creating channel', null, 'dataservice', true);
     };
     

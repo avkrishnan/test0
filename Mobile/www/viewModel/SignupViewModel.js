@@ -16,9 +16,26 @@ function SignupViewModel() {
     this.firstname = ko.observable();
     this.lastname = ko.observable();
     
+    
+    $("#" + this.template).live("pagebeforeshow", function(e, data){
+								
+								that.clearForm();
+                                that.activate();
+																
+                                });
+    
+    
     // Methods
     this.activate = function () {
         return true;
+    };
+    
+    this.clearForm = function(){
+        that.accountName('');
+        that.password('');
+        that.emailaddress('');
+        that.firstname('');
+        that.lastname('');
     };
     
     function generateAccount() {

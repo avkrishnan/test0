@@ -24,6 +24,13 @@ function NotificationsViewModel() {
         
         
     }
+    
+    this.removeNotifications = function(){
+        that.messages = [];
+        that.notifications([]);
+        
+    
+    };
 	
     this.activate = function () {
         

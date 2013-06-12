@@ -16,12 +16,17 @@ function LoginViewModel() {
     
     var  dataService = new EvernymLoginService();
     
-    $("#" + this.template).live("pagebeforeshow", function(e, data){ that.activate(); });
+    $("#" + this.template).live("pagebeforeshow", function(e, data){ that.clearForm(); that.activate(); });
     
     this.activate = function(){
+        
+    };
+    
+    this.clearForm = function(){
         that.password('');
         that.accountName('');
-    }
+    };
+    
     
     this.loginCommand = function () {
         
@@ -38,33 +43,54 @@ function LoginViewModel() {
         loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
         
         return dataService.accountLogin(loginModel, callbacks).then(loginSuccess);
-    }
+    };
     
     this.showRegistration = function(){
         
         $.mobile.changePage("#" + signupViewModel.template);
         
-    }
+    };
     
     this.logoutCommand = function() {
-        that.password('');
-        that.accountName('');
-        var cookie = localStorage.getItem("accessToken");
-        if (cookie) {
+        
+        
+        var token = localStorage.getItem("accessToken");
+        
+        
+        if (token) {
             var callbacks = {
             success: logoutSuccess,
             error: logoutError
             };
-            dataService.accountLogout(cookie, callbacks);
-            //logger.log('You successfully logged out!', null, 'login', true);
+            dataService.accountLogout(token, callbacks);
+            
+            
+            that.clearForm();
+            that.cleanApplication();
+            
+            
         }
-    }
+    };
     
-    function loginSuccess2(data){};
+    this.cleanApplication = function(){
+        
+        signupViewModel.clearForm();
+        sendMessageViewModel.clearForm();
+        inviteFollowersViewModel.clearForm();
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('login_nav');
+        localStorage.removeItem('currentChannel');
+        
+        notificationsViewModel.removeNotifications();
+    };
+    
+    function loginSuccess2(data){}
     
     function loginSuccess(args) {
                 
         $.mobile.hidePageLoadingMsg();
+        
+        
         localStorage.removeItem('accessToken');
         if (args.accessToken) {
             
@@ -75,6 +101,7 @@ function LoginViewModel() {
             var login_nav = JSON.parse(localStorage.getItem("login_nav"));
             localStorage.removeItem("login_nav");
             
+            notificationsViewModel.removeNotifications();
             
             
             if (login_nav){

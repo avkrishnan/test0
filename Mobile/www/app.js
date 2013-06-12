@@ -43,6 +43,27 @@ function showMessage(message){
 }
 
 
+function isBadLogin(code){
+    
+    var loginBadCodes = [100110, 100201, 100202, 100203];
+    var rval = false;
+    if(loginBadCodes.indexOf(code) != -1){
+        rval = true;
+    }
+    
+    return rval;
+    
+}
+
+function loginPageIfBadLogin(code){
+    var isbad = isBadLogin(code);
+    if (isbad){
+        $.mobile.changePage("#" + loginViewModel.template);
+    }
+    return isbad;
+}
+
+
 // create the various view models
 var
 loginViewModel = new LoginViewModel(),

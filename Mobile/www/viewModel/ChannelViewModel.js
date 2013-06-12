@@ -151,8 +151,8 @@ function ChannelViewModel() {
 	
 	function errorAPIChannel(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template);
+		if (loginPageIfBadLogin(details.code)){
+			
             showMessage("Please log in or register to view this channel.");
 		}
         else {
@@ -164,9 +164,7 @@ function ChannelViewModel() {
     
     function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template)
-		}
+		loginPageIfBadLogin(details.code);
 		
 		showMessage("Error: " + ((status==500)?"Internal Server Error":details.message));
 		
@@ -187,9 +185,7 @@ function ChannelViewModel() {
 	
 	function errorPostingMessage(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template)
-		}
+		loginPageIfBadLogin(details.code);
 		
 		showMessage("Error Posting Message: " + details.message);
 		//logger.logError('error listing channels', null, 'channel', true);
@@ -197,9 +193,7 @@ function ChannelViewModel() {
 	
 	function errorRetrievingMessages(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		if (details.code == 100202 || status == 401){
-			$.mobile.changePage("#" + loginViewModel.template)
-		}
+		loginPageIfBadLogin(details.code);
 		
 		showMessage("Error Retrieving Messages: " + ((status==500)?"Internal Server Error":details.message));
 		//logger.logError('error listing channels', null, 'channel', true);
