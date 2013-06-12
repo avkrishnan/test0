@@ -547,8 +547,8 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 			getFollower(accessToken, channelid, followerid, expectSuccess, step9);
 		}
 		function step9(data) {
-		    ok(true, JSON.stringify(data));
-		    equal(accountname, data.accountname, "Verify that the follower is the expected follower");
+			ok(true, JSON.stringify(data));
+			equal(accountname, data.accountname, "Verify that the follower is the expected follower");
 			start();
 		}
 
@@ -562,18 +562,18 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 		enroll(account, expectSuccessNoContent, step2);
 
 		function step2() {
-		    // Log into Evernym Account
-		    login(generateLogin(account), expectSuccess, step3);
+			// Log into Evernym Account
+			login(generateLogin(account), expectSuccess, step3);
 		}
 		function step3(data) {
-		    accessToken = data.accessToken;
-		    // Create a Channel for User of Account #1
-		    createChannel(accessToken, channel, expectCreated, step4);
+			accessToken = data.accessToken;
+			// Create a Channel for User of Account #1
+			createChannel(accessToken, channel, expectCreated, step4);
 		}
 		function step3(data) {
-		    channelid = data.id;
+			channelid = data.id;
 			// retrieve the communication methods for the generated account
-		    getCommunicationMethodsForChannel(accessToken, channelid, expectSuccess, step4);
+			getCommunicationMethodsForChannel(accessToken, channelid, expectSuccess, step4);
 		}
 		function step4(data) {
 			ok(true, JSON.stringify(data));
@@ -585,40 +585,40 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 
 
 	test('ADD COMMUNICATION METHOD FOR A CHANNEL', function () {
-	    stop(timoutms); //tell qunit to wait 5 seconds before timing out
-	    var account = generateAccount();
-	    var accessToken;
-	    // Step 1 Create a New Evernym Account
-	    enroll(account, expectSuccessNoContent, step2);
-        // Create an Urgent SMS Communication Method 
-	    var communctionMeans = generateCommunicationMethodUrgentSMS();
+		stop(timoutms); //tell qunit to wait 5 seconds before timing out
+		var account = generateAccount();
+		var accessToken;
+		// Step 1 Create a New Evernym Account
+		enroll(account, expectSuccessNoContent, step2);
+		// Create an Urgent SMS Communication Method 
+		var communctionMeans = generateCommunicationMethodUrgentSMS();
 
-	    function step2() {
-	        // Log into Evernym Account
-	        login(generateLogin(account), expectSuccess, step3);
-	    }
-	    function step3(data) {
-	        accessToken = data.accessToken;
-	        // Create a Channel for User of Account #1
-	        createChannel(accessToken, channel, expectCreated, step4);
-	    }
-	    function step3(data) {
-	        channelid = data.id;
-	        // retrieve the communication methods for the generated account
-	        addCommunicationMethodToChannel(accessToken, channelid, communctionMeans, expectSuccess, step4);
-	    }
-	    function step4(data) {
-	        
-	        // retrieve the communication methods for the generated account
-	        getCommunicationMethodsForChannel(accessToken, channelid, expectSuccess, step4);
-	    }
-	    function step5(data) {
-	        ok(true, JSON.stringify(data));
-	        // Todo - Verify that the a communication method exists for emailaddress: 'test@test.com'
-	        // Todo - Verify that there is exactly two methods for communication
-	        // Todo - Verify that the new Urgent SMS Communication was added to the channel
-	        start();
-	    }
+		function step2() {
+			// Log into Evernym Account
+			login(generateLogin(account), expectSuccess, step3);
+		}
+		function step3(data) {
+			accessToken = data.accessToken;
+			// Create a Channel for User of Account #1
+			createChannel(accessToken, channel, expectCreated, step4);
+		}
+		function step3(data) {
+			channelid = data.id;
+			// retrieve the communication methods for the generated account
+			addCommunicationMethodToChannel(accessToken, channelid, communctionMeans, expectSuccess, step4);
+		}
+		function step4(data) {
+			
+			// retrieve the communication methods for the generated account
+			getCommunicationMethodsForChannel(accessToken, channelid, expectSuccess, step4);
+		}
+		function step5(data) {
+			ok(true, JSON.stringify(data));
+			// Todo - Verify that the a communication method exists for emailaddress: 'test@test.com'
+			// Todo - Verify that there is exactly two methods for communication
+			// Todo - Verify that the new Urgent SMS Communication was added to the channel
+			start();
+		}
 	});
 
 	function createProvisionalAccount(accessToken, provisionalAccount, handler, postHandlerCallback){
@@ -641,9 +641,9 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 		callAPI('POST', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
 	}
  
-    function getChannel(accessToken, channelid, handler, postHandlerCallback) {
-        callAPI('GET', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
-    }
+	function getChannel(accessToken, channelid, handler, postHandlerCallback) {
+		callAPI('GET', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
+	}
 
 	function listFollowers(accessToken, channelid, handler, postHandlerCallback) {
 		callAPI('GET', '/channel/' + channelid + '/follower', accessToken, undefined, handler, postHandlerCallback);
@@ -654,7 +654,7 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 	}
 
 	function getFollower(accessToken, channelid, followerid, handler, postHandlerCallback) {
-	    callAPI('GET', '/channel/' + channelid + '/follower/' + followerid, accessToken, undefined, handler, postHandlerCallback);
+		callAPI('GET', '/channel/' + channelid + '/follower/' + followerid, accessToken, undefined, handler, postHandlerCallback);
 	}
 
 	function getMessages(accessToken, channelid, handler, postHandlerCallback) {
@@ -684,11 +684,11 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 	}
 
 	function getCommunicationMethodsForChannel(accessToken, channelid, handler, postHandlerCallback) {
-	    callAPI('GET', '/communication/' + channelid, accessToken, null, handler, postHandlerCallback);
+		callAPI('GET', '/communication/' + channelid, accessToken, null, handler, postHandlerCallback);
 	}
 
 	function addCommunicationMethodToChannel(accessToken, channelid, communicationMethod, handler, postHandlerCallback) {
-	    callAPI('POST', '/communication/' + channelid, accessToken, communicationMethod, handler, postHandlerCallback);
+		callAPI('POST', '/communication/' + channelid, accessToken, communicationMethod, handler, postHandlerCallback);
 	}
 
 	// generic helper method to handle ajax calls to API
@@ -782,11 +782,11 @@ a			// Todo - Verify that User of Account #2 is in the list of Followers
 	}
 
 	function generateCommunicationMethodUrgentSMS(channelId) {
-	    return {
-	        smsPhone: '123-123-1234',
-	        urgency: true,
-	        channelId: channelId
-	    };
+		return {
+			smsPhone: '123-123-1234',
+			urgency: true,
+			channelId: channelId
+		};
 	}
 
 	function generateLogin(account) {
