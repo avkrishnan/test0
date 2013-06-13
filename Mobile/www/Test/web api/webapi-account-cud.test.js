@@ -4,7 +4,7 @@
     var okAsync = QUnit.okAsync,
         stringformat = QUnit.stringformat;
 
-    var baseUrl = 'http://qupler.no-ip.org:8080/api9/rest', // Test environment
+    var baseUrl = 'http://qupler.no-ip.org:8080/api10/rest', // Test environment
     //var baseUrl = 'http://localhost:8080/api/rest', //production environment
     //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest', //local route to production environment
 	getMsgPrefix = function (id, rqstUrl) {
@@ -97,6 +97,27 @@
     	}
 
     });
+ 
+ 
+ 
+     test('FORGOT PASSWORD', function () {
+      stop(timoutms); //tell qunit to wait 5 seconds before timing out
+      
+      var account = generateAccount();
+      var accessToken;
+      
+      enroll(account, expectSuccessNoContent, step2);
+      
+      function step2() {
+          login(generateLogin(account), expectSuccess, step3);
+      }
+      
+      function step3(data) {
+          
+          forgot({accountName: account.accountName, emailAddress: account.emailaddress}, expectSuccessNoContent);
+      }
+      
+      });
 
     test('TEST BAD ENROLLMENT - NAME TOO LONG', function () {
     	stop(timoutms); //tell qunit to wait 5 seconds before timing out
@@ -132,6 +153,10 @@
 
     function enroll(account, handler, postHandlerCallback) {
         callAPI('POST', '/account/enroll', null, account ? account : generateAccount(), handler, postHandlerCallback);
+    }
+ 
+    function forgot(account, handler, postHandlerCallback) {
+        callAPI('POST', '/account/forgot', null, account, handler, postHandlerCallback);
     }
 
     function login(loginRequest, handler, postHandlerCallback) {
@@ -206,7 +231,7 @@
     function generateAccount() {
     	return {
     		accountName: 'test-' + randomString(5), // Create Random AccountName Generator
-    		emailaddress: 'test@test.com',
+    		emailaddress: 'test-evernym-982346@mailinator.com',
     		password: 'secret',
     		firstname: 'testFirst',
     		lastname: 'testLast'

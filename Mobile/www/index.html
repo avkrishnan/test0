@@ -41,7 +41,7 @@
             <script type="text/javascript" src="viewModel/UserSettingsViewModel.js"></script>
             <script type="text/javascript" src="viewModel/CommethodVerificationViewModel.js"></script>
             <script type="text/javascript" src="viewModel/NotificationsViewModel.js"></script>
-            
+            <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>
             
             <!-- the code that puts it all together -->
             <script type="text/javascript" src="app.js" ></script>
@@ -213,9 +213,9 @@
                     
                     <div >
                         <div >
-                            <input id="login_submit" type="submit" data-bind="click: loginCommand" value="Login" data-inline="true" />
-                            <input id="register" type="button" data-bind="click: showRegistration" value="Register" data-inline="true" />
-                            
+                            <input id="login_submit" type="submit" data-bind="click: loginCommand" value="Login" data-inline="true" /><br/><br/>
+                            <input id="register"  type="button" data-bind="click: showRegistration" value="Register" data-inline="true" /><br/>
+                            <input id="forgotpassword"  type="button" data-bind="click: forgotPasswordCommand" value="Forgot My Damned Password" data-inline="true" /><br/>
                             
                         </div>
                     </div>
@@ -227,6 +227,49 @@
             </div>
             
         </div>
+        
+        
+        <div data-role="page" xdata-theme="b"
+            id="forgotPasswordView" >
+            <div data-role="header" xdata-theme="b">
+                <a href="#loginView" data-role="button" data-icon="arrow-l" >Login</a>
+                <h1>Forgot Password</h1>
+            </div>
+            
+            <div data-role="content" Xdata-theme="b">
+                
+                <form >
+                    
+                    <div >
+                        <div >
+                            <input id="userName" type="text" data-bind="value: accountName" placeholder="Evernym" autocomplete="on" autofocus="autofocus"   autocapitalize="off"/>
+                        </div>
+                    </div>
+                    
+                    <div >
+                        <div >
+                            <input id="email" type="email" data-bind="value: email" placeholder="Email"   />
+                        </div>
+                    </div>
+                    
+                    <div >
+                        <div >
+                            
+                            <input id="register" type="button" data-bind="click: forgotPasswordCommand" value="Submit" data-inline="true" />
+                            
+                        </div>
+                    </div>
+                    
+                </form>
+                
+                
+                
+            </div>
+            
+        </div>
+        
+        
+        
                  
         
         <div data-role="page" xdata-theme="b"
@@ -567,7 +610,7 @@
                 <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                     
                     
-                    <li><a href="index.html#channelListView">Continue</a></li>
+                    <li><a href="index.html#channelListView" data-inline="true">Continue</a></li>
                     
                     
                 </ul>

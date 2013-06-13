@@ -45,6 +45,13 @@ function LoginViewModel() {
         return dataService.accountLogin(loginModel, callbacks).then(loginSuccess);
     };
     
+    
+    this.forgotPasswordCommand = function () {
+        
+        
+         $.mobile.changePage("#" + forgotPasswordViewModel.template);
+    };
+    
     this.showRegistration = function(){
         
         $.mobile.changePage("#" + signupViewModel.template);
