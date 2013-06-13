@@ -4,7 +4,7 @@
     var okAsync = QUnit.okAsync,
         stringformat = QUnit.stringformat;
 
-    var baseUrl = 'http://qupler.no-ip.org:8080/api10/rest', // Test environment
+    var baseUrl = 'http://qupler.no-ip.org:8080/api12/rest', // Test environment
     //var baseUrl = 'http://localhost:8080/api/rest', //production environment
     //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest', //local route to production environment
 	getMsgPrefix = function (id, rqstUrl) {
@@ -232,7 +232,7 @@
     	return {
     		accountName: 'test-' + randomString(5), // Create Random AccountName Generator
     		emailaddress: 'test-evernym-982346@mailinator.com',
-    		password: 'secret',
+    		password: 'secretshizzle',
     		firstname: 'testFirst',
     		lastname: 'testLast'
     	};

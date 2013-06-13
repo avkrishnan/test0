@@ -110,12 +110,11 @@ function LoginViewModel() {
             
             notificationsViewModel.removeNotifications();
             
-            
             if (login_nav){
                 var hash = login_nav.hash;
                 
-                if (hash.indexOf("index.html") !== -1){
-                    hash = 'index.html';
+                if (hash.indexOf("index.html") !== -1 || hash.indexOf("loginView") !== -1 ){
+                    hash = '#channelListView';
                 }
                 
                 $.mobile.changePage(hash);
@@ -147,7 +146,7 @@ function LoginViewModel() {
     function loginError(data, status, details) {
         $.mobile.hidePageLoadingMsg();
         showMessage("LOGIN FAILED: " + details.message);
-        localStorage.removeItem('accessToken');
+        //localStorage.removeItem('accessToken');
         //logger.logError('Your login failed, please try again!', null, 'login', true);
     }
     

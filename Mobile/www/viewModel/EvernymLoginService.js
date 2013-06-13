@@ -32,6 +32,13 @@ function EvernymLoginService() {
         
     };
     
+    this.resetPassword = function (resetPasswordModel, callbacks) {
+        
+        return api.callAPI('PUT', '/account/forgot', resetPasswordModel, callbacks);
+        
+        
+    };
+    
     this.accountLogin = function (loginModel, callbacks) {
         return api.callAPI('POST', '/account/login', loginModel, callbacks);
     };

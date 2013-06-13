@@ -3,7 +3,7 @@
 function EvernymService() {
   
     
-	var baseUrl = 'http://qupler.no-ip.org:8080/api10/rest';
+	var baseUrl = 'http://qupler.no-ip.org:8080/api12/rest';
 	
 	this.callAPI = function(method, resource, object, callbacks, useAccessToken) {
 		var ajaxParams = {
@@ -40,12 +40,12 @@ function EvernymService() {
 					  //logger.log('error: ' + jqXHR.status, undefined, 'dataservice.api', true);
 					  
 					  var details = (jqXHR.status!=500)?JSON.parse(jqXHR.responseText):jqXHR.responseText;
+                      
+                      var hash = $.mobile.urlHistory.getActive().hash;
 					  
-					  if (details.code == 100202 || jqXHR.status == '401'){
+					  if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
 					  
-					  
-						  
-					  localStorage.setItem("login_nav", JSON.stringify({hash: $.mobile.urlHistory.getActive().hash, params: ajaxParams}));
+					      localStorage.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
 					  
 					  }
 					  

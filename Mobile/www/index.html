@@ -42,6 +42,7 @@
             <script type="text/javascript" src="viewModel/CommethodVerificationViewModel.js"></script>
             <script type="text/javascript" src="viewModel/NotificationsViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>
+            <script type="text/javascript" src="viewModel/ResetPasswordViewModel.js"></script>
             
             <!-- the code that puts it all together -->
             <script type="text/javascript" src="app.js" ></script>
@@ -213,9 +214,13 @@
                     
                     <div >
                         <div >
-                            <input id="login_submit" type="submit" data-bind="click: loginCommand" value="Login" data-inline="true" /><br/><br/>
-                            <input id="register"  type="button" data-bind="click: showRegistration" value="Register" data-inline="true" /><br/>
-                            <input id="forgotpassword"  type="button" data-bind="click: forgotPasswordCommand" value="Forgot My Damned Password" data-inline="true" /><br/>
+                            <input id="login_submit" type="submit" data-bind="click: loginCommand" value="Login" data-inline="true" />
+                           
+                            <h3>
+                            <a id="register" href="#" data-bind="click: showRegistration" data-icon="arrow-r" data-inline="true" >Register</a> <br/><br/>
+                            <a id="forgotpassword" href="#" data-bind="click: forgotPasswordCommand" data-icon="arrow-r" data-inline="true" >Forgot Password</a>
+                            </h3>
+                            
                             
                         </div>
                     </div>
@@ -236,8 +241,9 @@
                 <h1>Forgot Password</h1>
             </div>
             
-            <div data-role="content" Xdata-theme="b">
+            <div data-role="content" id="" Xdata-theme="b">
                 
+                <div id="forgotPasswordContent">
                 <form >
                     
                     <div >
@@ -255,13 +261,68 @@
                     <div >
                         <div >
                             
-                            <input id="register" type="button" data-bind="click: forgotPasswordCommand" value="Submit" data-inline="true" />
+                            <input id="forgotpassword" type="submit" data-bind="click: forgotPasswordCommand" value="Submit" data-inline="true" />
                             
                         </div>
                     </div>
                     
                 </form>
+                </div>
+                <center>
+                <h2 id="forgotPasswordNotification" data-bind="text:notification" >
+                </h2>
+                    </center>
                 
+                
+                
+            </div>
+            
+        </div>
+        
+        
+        <div data-role="page" xdata-theme="b"
+            id="resetPasswordView" >
+            <div data-role="header" xdata-theme="b">
+                <a href="#loginView" data-role="button" data-icon="arrow-l" >Login</a>
+                <h1>Reset Password</h1>
+            </div>
+            
+            <div data-role="content" Xdata-theme="b">
+                
+                <div id="resetPasswordContent">
+                <form >
+                    
+                    <div >
+                        <div >
+                            <input id="password" type="password" data-bind="value: password" placeholder="Password" autofocus="autofocus"   autocapitalize="off"/>
+                        </div>
+                    </div>
+                    
+                    <div >
+                        <div >
+                            <input id="confirmPassword" type="password" data-bind="value: confirmPassword" placeholder="Confirm Password"   />
+                        </div>
+                    </div>
+                    
+                    <div >
+                        <div >
+                            
+                            <input id="resetpassword" type="submit" data-bind="click: resetPasswordCommand" value="Submit" data-inline="true" />
+                            
+                        </div>
+                    </div>
+                    
+                </form>
+                </div>
+                
+                
+                <center>
+                    <h2 id="forgotPasswordNotification" data-bind="text:notification" >
+                    </h2>
+                    
+                    <a id="rp_login_button" href="index.html#channelListView" data-role="button" data-icon="arrow-r" data-inline="true" >Login</a>
+                    
+                </center>
                 
                 
             </div>
@@ -397,7 +458,8 @@
             <div data-role="content" xdata-theme="b" >
                 
             <div>http://<span data-bind="text: normName"></span>.evernym.com</div>
-                 <div >
+                <!--
+                 <div  >
                         <div >
                             <input id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" autocomplete="on" autofocus="autofocus" required data-validate="required" />
                         </div>
@@ -428,6 +490,7 @@
                         </div>
                     </div>
 
+                 -->
 
             </div>
             
@@ -607,13 +670,10 @@
                 <div data-bind="text: message"></div>
                     </h3>
                 
-                <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                    
-                    
-                    <li><a href="index.html#channelListView" data-inline="true">Continue</a></li>
-                    
-                    
-                </ul>
+                
+                
+                <a href="index.html#channelListView" data-role="button" data-icon="arrow-r" data-inline="true" >Continue</a>
+                
                 
             </div>
             

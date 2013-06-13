@@ -14,6 +14,8 @@ function ForgotPasswordViewModel() {
     
     this.email = ko.observable();
     
+    this.notification = ko.observable();
+    
     var  dataService = new EvernymLoginService();
     
     $("#" + this.template).live("pagebeforeshow", function(e, data){ that.clearForm(); that.activate(); });
@@ -25,11 +27,16 @@ function ForgotPasswordViewModel() {
     this.clearForm = function(){
         that.email('');
         that.accountName('');
+        that.notification('');
+        $('#forgotPasswordContent').show();
+        
     };
     
     function gotForgotPassword(data, status, details){
         
-        alert('asdf');
+        $('#forgotPasswordContent').hide(200);
+        that.notification('An email was sent to your inbox with further instructions to complete your password change.');
+        
     }
     
     
@@ -43,9 +50,9 @@ function ForgotPasswordViewModel() {
         
         var forgotPasswordModel = {};
         $.mobile.showPageLoadingMsg("a", "Sending Email for Fogotten Password");
-        forgotPasswordModel.accountName = this.accountName();
-        forgotPasswordModel.emailAddress = this.email();
-        //loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
+        forgotPasswordModel.accountName = that.accountName();
+        forgotPasswordModel.emailAddress = that.email();
+        
         
         return dataService.forgotPassword(forgotPasswordModel, callbacks).then(gotForgotPassword);
     };
@@ -62,7 +69,10 @@ function ForgotPasswordViewModel() {
     
     function forgotPasswordError(data, status, details) {
         $.mobile.hidePageLoadingMsg();
-        showMessage("FAILED: " + details.message);
+        //showMessage("FAILED: " + details.message);
+        
+        that.notification(details.message);
+        
         localStorage.removeItem('accessToken');
         //logger.logError('Your login failed, please try again!', null, 'login', true);
     }
