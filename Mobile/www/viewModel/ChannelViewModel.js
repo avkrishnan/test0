@@ -21,6 +21,8 @@ function ChannelViewModel() {
 	
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
+                                
+                                $('#more_messages_button').hide();
 								
 								if ($.mobile.pageData && $.mobile.pageData.id){
 								
@@ -100,11 +102,40 @@ function ChannelViewModel() {
 			
 			data.message = [data.message];
 		}
+        
+        if (data.more){
+            
+             $('#more_messages_button').show();
+        }
 		
 		that.messages(data.message);
 		
 	}
 	
+    function gotMoreMessages(data){
+		
+		
+		$.mobile.hidePageLoadingMsg();
+		
+        if (data.more){
+            
+            $('#more_messages_button').show();
+        }
+        else {
+            $('#more_messages_button').hide();
+        }
+		
+        
+        var tmp_messages = that.messages().concat(data.message);
+        
+        
+        that.messages(tmp_messages);
+        
+		
+		
+	}
+    
+    
 	function successfulGetChannel(data){
 		//logger.log('success Getting Channel ' , null, 'channel', true);
 		$.mobile.hidePageLoadingMsg();
@@ -206,6 +237,17 @@ function ChannelViewModel() {
 		return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
 		
 	};
+    
+    this.showMoreMessagesCommand = function(){
+        
+        var last_message_id = that.messages()[that.messages().length - 1].id;
+        
+        $.mobile.showPageLoadingMsg("a", "Loading Messages");
+		
+		return dataServiceM.getChannelMessages(that.channelid(), last_message_id, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
+        
+        
+    }
 	
 	this.followChannelCommand = function(){
 		
@@ -265,7 +307,7 @@ function ChannelViewModel() {
 	this.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
 		//logger.log("getMessagesCommand", undefined, "channels", true);
-		return dataServiceM.getChannelMessages(that.channelid(), {success: successfulMessageGET, error: errorRetrievingMessages});
+		return dataServiceM.getChannelMessages(that.channelid(), undefined, {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
    
 

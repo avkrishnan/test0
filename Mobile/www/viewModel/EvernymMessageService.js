@@ -9,14 +9,24 @@ function EvernymMessageService() {
         return api.callAPI('POST', '/channel/' + channelid + '/message', message, callbacks, true);
     };
     
-    this.getChannelMessages = function (channelid, callbacks) {
+    this.getChannelMessages = function (channelid, messageid, callbacks) {
 		//logger.log('getChannelMessages' , null, 'dataservice.channelMessage', true);
-        return api.callAPI('GET', '/channel/' + channelid + '/message', undefined, callbacks, true);
+        
+        if (messageid){
+            return api.callAPI('GET', '/channel/' + channelid + '/message?before=' + messageid , undefined, callbacks, true);
+        }
+        else {
+            return api.callAPI('GET', '/channel/' + channelid + '/message', undefined, callbacks, true);
+        }
     };
+    
+
     
     this.getChannelMessage = function (channelid, messageid, callbacks) {
 		//logger.log('getChannelMessage' , null, 'dataservice.channelMessage', true);
         return api.callAPI('GET', '/channel/' + channelid + '/message/' + messageid, undefined, callbacks, true);
     };
+    
+    
     
 }
