@@ -61,10 +61,9 @@ function EvernymChannelService() {
 	};
 
 	
-	this.unFollowChannel = function (channelid, callbacks) {
-		
-		//logger.log('starting to follow channel' , null, 'dataservice.channel', true);
-		return api.callAPI('DELETE', '/channel/' + channelid + '/follow', undefined, callbacks, true);
+	this.unFollowChannel = function (channelid, followerid, callbacks) {
+	    debugger;
+	    return api.callAPI('DELETE', '/channel/' + channelid + '/follower/' + followerid, undefined, callbacks, true);
 	};
 	
 	this.deleteChannel = function (channelid, callbacks) {
