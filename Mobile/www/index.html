@@ -373,15 +373,15 @@
             id="followerView">
             <div data-role="header" xdata-theme="b">
                 
-                <a href="#followersListView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span>Follower List</a>
+                <a href="#followersListView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> - Follower List</a>
                 
-                <h1>Name</h1>
+                <h1><span data-bind="text: followerName"></span></h1>
                 
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                         
-                        <li><a href="#" data-bind="click: logoutCommand">Remove Follower From Channel</a></li>
+                        <li><a href="#" data-bind="click: removeFollowerCommand">Remove Follower From Channel</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>

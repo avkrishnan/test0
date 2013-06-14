@@ -9,7 +9,8 @@ function FollowerViewModel() {
 
     this.template = "followerView";
     this.title = ko.observable();
-    this.follower = ko.observable();
+    this.followerid = ko.observable();
+    this.followerName = ko.observable();
 
     this.channelid = ko.observable();
     this.channelname = ko.observable();
@@ -20,32 +21,23 @@ function FollowerViewModel() {
         debugger;
 
         if ($.mobile.pageData && $.mobile.pageData.id) {
-            that.activate({ id: $.mobile.pageData.id });
-        }
-
-        else {
-            debugger;
             var currentChannel = localStorage.getItem("currentChannel");
             var lchannel = JSON.parse(currentChannel);
-            that.activate(lchannel);
-
+            that.activate({ id: $.mobile.pageData.id }, lchannel);
         }
 
+        // else { alert("error: page requires both a followerId and a channelId"); }
 
     });
 
 
     // Methods
 
-    function getChannelFromPageData() {
-        debugger;
-        that.activate({ id: $.mobile.pageData.id });
-    }
 
-    this.activate = function (channel) {
+    this.activate = function (follower, channel) {
         debugger;
 
-        that.follower();
+        that.followerid(follower.id);
         that.channelid(channel.id);
         that.channelname(channel.name);
         $.mobile.showPageLoadingMsg("a", "Loading Follower");
@@ -59,29 +51,39 @@ function FollowerViewModel() {
         $.mobile.changePage("#" + loginViewModel.template)
 
     }
-
-    //function errorAPI(data, status, details) {
-    //    $.mobile.hidePageLoadingMsg();
-    //    if (data == "Unauthorized") {
-    //        $.mobile.changePage("#" + loginViewModel.template)
-    //    }
-    //    console.log("error something " + data);
-    //    showMessage("Error Getting Messages: " + ((status == 500) ? "Internal Server Error" : details.message));
-
-    //    //logger.logError('error listing channels', null, 'channel', true);
-    //};
-
-
-
+        
     this.getFollowerCommand = function () {
         debugger;
         //logger.log("starting getChannel", undefined, "channels", true);
-        return dataService.getFollower(that.channelid(), { success: function () { }, error: errorAPI });
+        return dataService.getFollower(that.channelid(), { gotFollower, error: errorAPI });
 
     };
 
+    function gotFollower(data){
+        if(data.follower){
+            that.follower = data.follower;
+            that.followerName = data.follower.name;
+        }
+    }
 
+    this.removeFollowerCommand = function () {
+        debugger;
+        return dataService.unFollowChannel(that.channelid(), that.followerid(), { success: successfulRemove, error: errorAPI });
+    }
 
+    function successfulRemove(data) {
+        $.mobile.changePage("#" + FollowersListViewModel.template);
+    }
+
+    function errorAPI(data, status, details) {
+        debugger;
+        $.mobile.hidePageLoadingMsg();
+        if (data == "Unauthorized") {
+            $.mobile.changePage("#" + loginViewModel.template)
+        }
+        console.log("Error:  " + data);
+        showMessage("Error Getting Messages: " + ((status == 500) ? "Internal Server Error" : details.message));
+    };
 
 
 
