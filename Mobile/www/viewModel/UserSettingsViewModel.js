@@ -8,34 +8,37 @@ function UserSettingsViewModel() {
 	// --- properties
 	
     this.template = "userSettingsView";
+    
+    var  dataService = new EvernymCommethodService();
 	
   
 	this.channels = ko.observableArray([]);
+    this.commethods = ko.observableArray([]);
+    
 	var that = this;
-	this.shown = false;
 	
 	
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
 
-	    if (!that.shown) {
+	    
 	        that.activate();
-	    }
+                                
+	    
 	});
-	
-	
-	var  dataService = new EvernymChannelService();
-	
-    // 
-	this.activate = function() {
+    
+    
+		this.activate = function() {
 		
-		console.log("trying to settings");
-		
-	
+		that.getCommethods().then(gotCommethods);
 
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;
+            
 	};
     
+    function gotCommethods(data){
+        that.commethods(data);
+    }
     
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
@@ -44,11 +47,65 @@ function UserSettingsViewModel() {
 	}
 	
 	
-	
-	function successfulCreate(data){
+    function commethodError(data, status, details){
+		$.mobile.hidePageLoadingMsg();
+		loginPageIfBadLogin(details.code);
 		
-		//logger.log('success listing channels ' , null, 'dataservice', true);	
-	};
+		showMessage("Error Getting Communication Methods: " + details.message);
+		//logger.logError('error listing channels', null, 'channel', true);
+
+        
+    }
+    
+    function requestVerificationError(data, status, details){
+		$.mobile.hidePageLoadingMsg();
+		loginPageIfBadLogin(details.code);
+		
+		showMessage("Error Requesting Verification: " + details.message);
+		
+        
+        
+    }
+    
+    
+    function requestVerificationSucess(data){
+		
+		alert('hoopla. sent an email. ');
+        
+        
+    }
+
+    
+    this.verifyCommand = function(commethod){
+        
+        showMessage(JSON.stringify(commethod));
+        
+        $.mobile.showPageLoadingMsg("a", "Requesting Verification");
+        
+        var callbacks = {
+        success: requestVerificationSucess,
+        error: requestVerificationError
+        };
+        
+        return dataService.requestVerification( commethod.id, callbacks);
+        
+    }
+    
+    
+    this.getCommethods = function(){
+    
+        $.mobile.showPageLoadingMsg("a", "Getting Communication Methods");
+        
+        var callbacks = {
+        success: function(){;},
+        error: commethodError
+        };
+        
+        
+        return dataService.getCommethods( callbacks);
+
+        
+    };
 	
 	
 	function errorListChannels(data, status, details){

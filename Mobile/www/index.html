@@ -19,14 +19,15 @@
             <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
             
             
-            <!-- the various view models -->
+            <!-- services -->
             
-            <script type="text/javascript" src="viewModel/EvernymService.js"></script>
+            <script type="text/javascript" src="services/EvernymService.js"></script>
+            <script type="text/javascript" src="services/EvernymLoginService.js"></script>
+            <script type="text/javascript" src="services/EvernymChannelService.js"></script>
+            <script type="text/javascript" src="services/EvernymMessageService.js"></script>
+            <script type="text/javascript" src="services/EvernymCommethodService.js"></script>
             
-            <script type="text/javascript" src="viewModel/EvernymLoginService.js"></script>
-            <script type="text/javascript" src="viewModel/EvernymChannelService.js"></script>
-            <script type="text/javascript" src="viewModel/EvernymMessageService.js"></script>
-            <script type="text/javascript" src="viewModel/EvernymCommethodService.js"></script>
+            <!-- view models -->
             
             <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
@@ -58,7 +59,8 @@
                 function menuKeyDown() {
                     alert('Menu button pressed.');
                 }
-                </script>
+            </script>
+            
             </head>
     <body>
         
@@ -357,7 +359,7 @@
                     <!-- ko foreach: followers, updateListviewOnChange:followers -->
                     <li>
                         
-                        <a data-bind="attr: {href: 'index.html#followerView?id=' + id}">
+                        <a  href="#" data-bind="click: $parent.showFollower" >
                             <span href="" data-bind="text: firstname"></span> <span href="" data-bind="text: lastname"></span>
                         </a>
                         
@@ -387,6 +389,11 @@
                     </ul>
                 </div>
             </div>
+            
+            
+             <div data-role="content" xdata-theme="b" >
+                 <div data-bind="text: followerName">?</div>
+             </div>
             
              
         </div>
@@ -504,18 +511,25 @@
                 <h1 data-bind="text:title"></h1>
                 
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                
                 <div data-role="popup" id="popupMenu" xdata-theme="a">
+                    
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                         
-                        <li><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
-                        <li><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
-                        <li><a href="index.html#followersListView">Followers</a></li>
-                        <li><a href="#" data-bind="click: deleteChannelCommand">Delete Channel</a></li>
                         <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#followersListView">Followers</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="#" data-bind="click: deleteChannelCommand">Delete Channel</a></li>
+                        <li data-bind="style: {display:relationship()=='F'?'block':'none'}"><a href="#" data-bind="click: unfollowChannelCommand">Unfollow Channel</a></li>
+                        
+                        
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>
+                    
                 </div>
+                
                 
                 
             </div>
@@ -705,7 +719,7 @@
             
             <div data-role="content" xdata-theme="c" data-iscroll>
                 
-                 <form >
+                 
                     
                      <!-- ko foreach: messages, updateListviewOnChange:messages -->
                     <li>
@@ -727,8 +741,31 @@
                        None of this information is shared with channels or other senders.
                     </p>
                     
-                   
-                </form>
+                <hr/>
+                <br/><br/>
+                
+                <ul data-role="listview">
+                    <uh>Communication Methods</uh>
+                    <!-- ko foreach: commethods, updateListviewOnChange:commethods -->
+                    <li>
+                        
+                        
+                            <!-- <span data-bind="text: name"></span> -->
+                            <span data-bind="text: value" style="display:inline-block;width:300px;"></span>
+                            <span data-bind="style: { display: (verified == 'Y')?'none':'inline-block'}">
+                                <a href="#" data-bind="click: $parent.verifyCommand" data-role="button" class="ui-btn-right">verify</a>
+                            </span>
+                            <span data-bind="style: { display: (verified == 'N')?'none':'inline-block'}">verified</span>
+                        
+                        
+                        
+                    </li>
+                    <!-- /ko -->
+                    
+                </ul>
+                
+                
+                
             </div>
             
             

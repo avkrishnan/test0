@@ -47,7 +47,7 @@ function ChannelsFollowingListViewModel() {
 	
 	function gotChannels(data){
 		$.mobile.hidePageLoadingMsg();
-		that.shown = true;
+		//that.shown = true;
 		//that.channels.removeAll();
 		
 		if (data.channel && data.channel.constructor == Object){

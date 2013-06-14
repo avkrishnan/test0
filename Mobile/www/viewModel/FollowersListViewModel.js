@@ -63,10 +63,16 @@ function FollowersListViewModel() {
 		
 	};
 
+    
+    this.showFollower = function(follower){
+        followerViewModel.activate(follower);
+        $.mobile.changePage("#" + followerViewModel.template);
+        
+    };
 	
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
-		$.mobile.changePage("#" + loginViewModel.template)
+		$.mobile.changePage("#" + loginViewModel.template);
 		
 	}
 	
