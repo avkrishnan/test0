@@ -9,7 +9,7 @@ function NotificationsViewModel() {
     this.template = "notificationsView";
     
     this.messages = [];
-    
+       
     this.notifications = ko.observableArray([]);
     
     $("#" + this.template).live("pagebeforeshow", function (e, data) {
@@ -20,8 +20,9 @@ function NotificationsViewModel() {
     
     this.addNotification = function(message){
         
-        that.messages.push({'message':message});
         
+        that.messages.push({'message':message});
+        that.notifications(that.messages);
         
     }
     
@@ -35,8 +36,8 @@ function NotificationsViewModel() {
     this.activate = function () {
         
         that.notifications(that.messages);
-        return true;
-	    
+        
+        
     };
     
    	this.logoutCommand = function(){

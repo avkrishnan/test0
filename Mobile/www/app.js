@@ -107,7 +107,7 @@ $(document).ready(function () {
                   ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
                   ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
                   ko.applyBindings(commethodVerificationViewModel, document.getElementById("commethodVerificationView"));
-                  ko.applyBindings(commethodVerificationViewModel, document.getElementById("commethodVerificationView"));
+                  ko.applyBindings(notificationsViewModel, document.getElementById("notificationsView"));
                   ko.applyBindings(forgotPasswordViewModel, document.getElementById("forgotPasswordView"));
                   ko.applyBindings(resetPasswordViewModel, document.getElementById("resetPasswordView"));
                   

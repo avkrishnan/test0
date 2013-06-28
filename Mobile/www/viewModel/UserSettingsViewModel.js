@@ -68,9 +68,9 @@ function UserSettingsViewModel() {
     }
     
     
-    function requestVerificationSucess(data){
+    function requestVerificationSuccess(data){
 		
-		alert('hoopla. sent an email. ');
+        $("#chicken").html("Verification Email Sent");
         
         
     }
@@ -78,12 +78,16 @@ function UserSettingsViewModel() {
     
     this.verifyCommand = function(commethod){
         
-        showMessage(JSON.stringify(commethod));
+        //showMessage(JSON.stringify(commethod));
         
         $.mobile.showPageLoadingMsg("a", "Requesting Verification");
         
         var callbacks = {
-        success: requestVerificationSucess,
+        //success: requestVerificationSuccess,
+        
+        success: function (){
+            $("#commethod-" + commethod.id).html("Verification Email Sent");
+        },
         error: requestVerificationError
         };
         

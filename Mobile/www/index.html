@@ -6,7 +6,7 @@
             
             <!-- required libraries -->
             <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
-                       
+            <link rel="stylesheet" href="lib/evernym.css" />           
             
             <script type="text/javascript" src="api_codes.js"></script>
             
@@ -87,18 +87,65 @@
         
             
             
-            <div data-role="content" xdata-theme="c" data-iscroll>
+            <div class="channel-list" data-role="content" xdata-theme="c" data-iscroll>
                 <div data-bind="text: notification"></div>
                 <ul data-role="listview">
                     
-                    <!-- ko foreach: channels, updateListviewOnChange:channels -->
-                    <li>
+                    
+                    
+                    
+                    <li class="channel-list-item list-head">
                         
-                        <a  href="#" data-bind="click: $parent.showChannel" >
-                            <span data-bind="text: name"></span>
+                        <a  class="channel-list-anchor" href="#" >
+                            
+                            <div class="channel-list-stripe2"></div>
+                            
+                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                            
+                            <span class="channel-info">
+                                <span class="channel-name">My Channels</span>
+                               
+                            </span>
+                            <div class="channel-list-avatar-frame"></div>
+                            
+                            
+                        </a>
+                        
+                    </li>
+                     
+                    
+                    
+                    
+                    
+                    <!-- ko foreach: channels, updateListviewOnChange:channels -->
+                    <li class="channel-list-item">
+                        
+                        <a  class="channel-list-anchor" href="#" data-bind="click: $parent.showChannel" >
+                            
+                            <div class="channel-list-stripe1"></div>
+                            <!-- ko if: ($index() < ($parent.channels().length) - 1) -->
+                            <div class="channel-list-stripe2"></div>
+                            <!-- /ko -->
+                            
+                            
+                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                            
+                            <span class="channel-info">
+                                <span class="channel-name" data-bind="text: name"></span>
+                                <span class="channel-description">channel description</span>
+                            </span>
+                            <div class="channel-list-avatar-frame"></div>
+                            
+                            
+                            <div class="channel-list-message-count"></div>
+                            <div class="channel-list-alalytics"></div>
+                            
                         </a>          
                         
                     </li>
+                    
+                    
+                    
                     <!-- /ko -->
                     
                 </ul>
@@ -128,6 +175,7 @@
                 
             </div>
             <div data-role="content" data-theme="d" >
+                
                 
                 <ul data-role="listview">
                     
@@ -601,6 +649,10 @@
                         </div>
                     </div>
                     
+                    
+                    
+                    
+                    
                     <div class="control-group">
                         <div class="controls">
                             <input id="inputChannelName" type="text" data-bind="value: name" placeholder="Enter Channel Name" autocomplete="on" autofocus="autofocus" required data-validate="required" />
@@ -752,11 +804,13 @@
                         
                             <!-- <span data-bind="text: name"></span> -->
                             <span data-bind="text: value" style="display:inline-block;width:300px;"></span>
+                        
+                            <span data-bind="attr: {id: 'commethod-' + id}">
                             <span data-bind="style: { display: (verified == 'Y')?'none':'inline-block'}">
                                 <a href="#" data-bind="click: $parent.verifyCommand" data-role="button" class="ui-btn-right">verify</a>
                             </span>
                             <span data-bind="style: { display: (verified == 'N')?'none':'inline-block'}">verified</span>
-                        
+                            </span>
                         
                         
                     </li>
