@@ -22,7 +22,7 @@ function ChannelViewModel() {
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
                                 
-                                $('#more_messages_button').hide();
+                                $('.more_messages_button').hide();
 								
 								if ($.mobile.pageData && $.mobile.pageData.id){
 								
@@ -105,7 +105,7 @@ function ChannelViewModel() {
         
         if (data.more){
             
-             $('#more_messages_button').show();
+             $('.more_messages_button').show();
         }
 		
 		that.messages(data.message);
@@ -119,10 +119,10 @@ function ChannelViewModel() {
 		
         if (data.more){
             
-            $('#more_messages_button').show();
+            $('.more_messages_button').show();
         }
         else {
-            $('#more_messages_button').hide();
+            $('.more_messages_button').hide();
         }
 		
         

@@ -6,7 +6,7 @@
             
             <!-- required libraries -->
             <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
-            <link rel="stylesheet" href="lib/evernym.css" />           
+                      
             
             <script type="text/javascript" src="api_codes.js"></script>
             
@@ -44,6 +44,9 @@
             <script type="text/javascript" src="viewModel/NotificationsViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>
             <script type="text/javascript" src="viewModel/ResetPasswordViewModel.js"></script>
+            
+            
+            <link rel="stylesheet" href="lib/evernym.css" /> 
             
             <!-- the code that puts it all together -->
             <script type="text/javascript" src="app.js" ></script>
@@ -107,7 +110,6 @@
                                
                             </span>
                             <div class="channel-list-avatar-frame"></div>
-                            
                             
                         </a>
                         
@@ -218,18 +220,61 @@
                 </div>
             </div>
             
-            <div data-role="content" xdata-theme="c" data-iscroll>
+            <div class="channel-list" data-role="content" xdata-theme="c" data-iscroll>
                 
                 <ul data-role="listview">
                     
-                    <!-- ko foreach: channels, updateListviewOnChange:channels -->
-                    <li>
+                    <li class="channel-list-item list-head">
                         
-                        <a  href="#" data-bind="click: $parent.showChannel" xdata-bind="attr: {href: 'index.html#channelView?id=' + id}">
-                            <span data-bind="text: name"></span>
+                        <a  class="channel-list-anchor" href="#" >
+                            
+                            <div class="channel-list-stripe2"></div>
+                            
+                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                            
+                            <span class="channel-info">
+                                <span class="channel-name">Channels</span>
+                                
+                            </span>
+                            <div class="channel-list-avatar-frame"></div>
+                            
                         </a>
                         
                     </li>
+                    
+                    
+                    
+                    
+                    
+                    <!-- ko foreach: channels, updateListviewOnChange:channels -->
+                    <li class="channel-list-item">
+                        
+                        <a  class="channel-list-anchor" href="#" data-bind="click: $parent.showChannel" >
+                            
+                            <div class="channel-list-stripe1"></div>
+                            <!-- ko if: ($index() < ($parent.channels().length) - 1) -->
+                            <div class="channel-list-stripe2"></div>
+                            <!-- /ko -->
+                            
+                            
+                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                            
+                            <span class="channel-info">
+                                <span class="channel-name" data-bind="text: name"></span>
+                                <span class="channel-description">channel description</span>
+                            </span>
+                            <div class="channel-list-avatar-frame"></div>
+                            
+                            
+                            <div class="channel-list-message-count"></div>
+                            <div class="channel-list-alalytics"></div>
+                            
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
                     <!-- /ko -->
                     
                 </ul>
@@ -585,29 +630,136 @@
          
             
             
-            <div data-role="content" xdata-theme="b" data-iscroll>
+            <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll>
                 
                 
                 
-                <ul data-role="listview">
+                <ul data-role="listview" >
+                    
+                    
+                    
+                    <li class="channel-list-item">
+                        
+                        <a  class="channel-list-anchor" href="#"  >
+                            
+                            
+                            <div class="channel-list-stripe2"></div>
+                            
+                            
+                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                            
+                            <span class="channel-info">
+                                <span class="channel-name" data-bind="text: title"></span>
+                                <span class="channel-description">channel description</span>
+                            </span>
+                            <div class="channel-list-avatar-frame"></div>
+                            
+                           
+                            
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="channel-message-item">
+                        
+                        <div  class="channel-message-container">
+                            
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            
+                            <div class="channel-message-info">
+                                <div class="channel-message-text">Channel Messages</div>
+                                
+                            </div>
+                            
+                            <div class="channel-message-avatar" style="background:white;"></div>
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                        </div>
+                        
+                    </li>
+                    
+                    
                     
                     
                     
                     <!-- ko foreach: messages, updateListviewOnChange:messages -->
-                    <li>
+                   
+                    
+                    
+                    <li class="message-list-item">
                         
-                        
-                        <div data-bind="text: text"></div>
-                        
-                        
+                        <div  class="message-list-container">
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            
+                            
+                           
+                            
+                            <div class="message-info">
+                                <div class="message-text" data-bind="text: text"></div>
+                                
+                            </div>
+                            
+                             <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                            
+                            
+                            
+                            <!-- ko if: ($index() < ($parent.messages().length) - 1) -->
+                            <div class="message-list-stripe"></div>
+                            <!-- /ko -->
+                            
+                            
+                            <div class="message-list-avatar-frame"></div>
+                            
+                        </div>
                         
                         
                     </li>
+                    
+                    
+                    
                     <!-- /ko -->
                     
-                    <li id="more_messages_button">
-                        <a href="#" data-role="button" data-bind="click: showMoreMessagesCommand" data-inline="true" >Show More Messages</a>
+                    
+                    <li class="channel-message-item more_messages_button" data-icon="false">
+                        <div class="message-list-stripe"></div>
                     </li>
+                    
+                    
+                    <li class="channel-message-item more_messages_button" data-icon="false">
+                        
+                        
+                        <a data-role="none"  href="#" data-bind="click: showMoreMessagesCommand" >
+                        <div  class="channel-message-container">
+                            
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            
+                            
+                            <div class="channel-message-info">
+                                <div class="channel-message-text">Show More Messages</div>
+                                
+                            </div>
+                            
+                            <div class="channel-message-avatar" style="background:white;"></div>
+                            
+                            
+                            
+                        </div>
+                        </a>
+                            
+                    </li>
+                    
+                    
+                    
+                    
                     
                 </ul>
                 
