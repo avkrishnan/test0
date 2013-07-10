@@ -4,31 +4,17 @@
 	var okAsync = QUnit.okAsync,
 	stringformat = QUnit.stringformat;
 
-    var baseUrl = 'http://qupler.no-ip.org:8080/api12/rest', // Test environment
+    //var baseUrl = 'http://qupler.no-ip.org:8080/api12/rest', // Test environment
 	//var baseUrl = 'http://localhost:8080/api/rest', //local environment
 	//var baseUrl = 'http://192.168.1.202:8080/api12/rest', //production environment through local network
 
-
-	getMsgPrefix = function (id, rqstUrl) {
-		return stringformat(
-				' of account with id=\'{0}\' to \'{1}\'',
-				id, rqstUrl);
-	},
-	onCallSuccess = function (msgPrefix) {
-		ok(true, msgPrefix + " succeeded.");
-	},
-	onError = function (result, msgPrefix) {
-		okAsync(false, msgPrefix +
-				stringformat(' failed with status=\'{1}\': {2}.',
-						result.status, result.responseText));
-	};
-
+ 
 	var testAccount,
 	testAccessToken;
 
 	module('Web API Account Tests', {
 		setup: function () {
-			testUrl = stringformat('{0}/account/enroll', baseUrl);
+			//testUrl = stringformat('{0}/account/enroll', baseUrl);
 		}
 	});
 
@@ -40,7 +26,10 @@
 		var account = generateAccount();
 		var channel = generateChannel();
 		var accessToken;
-		enroll(account, expectSuccessNoContent, step2);
+		enroll(account, expectSuccessNoContent, step1);
+        function step1(){
+            checkEmailAndVerify(account.emailaddress, step2);
+        }
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3);
 		}
@@ -59,24 +48,36 @@
 		var channelid1 = '';
 		var channelid2 = '';
 		var accessToken;
-		enroll(account, expectSuccessNoContent, step2);	
+		enroll(account, expectSuccessNoContent, step1);
+         
+        function step1(){
+            console.log('check email and verify');
+            checkEmailAndVerify(account.emailaddress, step2);
+        }
+         
 		function step2() {
+            console.log('login');
 			login(generateLogin(account), expectSuccess, step3a);
 		}
+         
 		function step3a(data) {
 			accessToken = data.accessToken;
+            console.log('create channel');
 			createChannel(accessToken, channel1, expectCreated, step3b);
 		}
 		function step3b(data) {
 			channelid1 = data.id;
+            console.log('create second channel');
 			createChannel(accessToken, channel2, expectCreated, step4);
 		}
 		function step4(data) {
 			channelid2 = data.id;
 			// delete the second channel
+            console.log('delete second channel');
 			deleteChannel(accessToken, channelid2, expectSuccessNoContent, step5);
 		}
 		function step5(data) {
+            console.log('list owner channels');
 			listOwnerChannels(accessToken, expectSuccess, step6);
 		}
 		function step6(data) {
@@ -88,7 +89,7 @@
 		
 	});
 
-	test('DELETE CHANNEL WITH MESSAGES', function () {
+	test('DELETE WITH MESSAGES', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
 		var account = generateAccount();
 		var channel1 = generateChannel();
@@ -96,7 +97,11 @@
 		var channelid1 = '';
 		var channelid2 = '';
 		var accessToken;
-		enroll(account, expectSuccessNoContent, step2);
+		enroll(account, expectSuccessNoContent, step1);
+        function step1(){
+            console.log('check email and verify');
+            checkEmailAndVerify(account.emailaddress, step2);
+        }
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3a);
 		}
@@ -130,7 +135,7 @@
 		}
 	});
 
-	test('CREATE CHANNEL NO AUTH', function () {
+	test('NO AUTH WITH CREATE CHANNEL', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
 		var channel = generateChannel();
 		var accessToken = 'asdfasdf';
@@ -152,6 +157,7 @@
 		}
 		function step4(data) {
 			createChannel(accessToken, channel, expectBadRequest );
+            start();
 		}
 	});
 
@@ -160,8 +166,13 @@
 	  stop(timoutms); //tell qunit to wait 5 seconds before timing out
 	  var account = generateAccount();
 	  var accessToken;
-	  enroll(account, expectSuccessNoContent, step2);
-	  var channel = generateChannel();
+      var channel = generateChannel();
+      
+	  enroll(account, expectSuccessNoContent, step1);
+      function step1(){
+          checkEmailAndVerify(account.emailaddress, step2);
+      }
+	  
 	  function step2() {
 	  login(generateLogin(account), expectSuccess, step3);
 	  }
@@ -195,6 +206,7 @@
 		}
 		function step4(data) {
 			listOwnerChannels(accessToken, expectSuccess);
+            start();
 		}
 	});
  
@@ -209,9 +221,10 @@
 	  login(generateLogin(account), expectSuccess, step3);
 	  }
 	  function step3(data) {
-	  accessToken = data.accessToken;
+	      accessToken = data.accessToken;
 	  
-	  listOwnerChannels(accessToken, expectSuccess);
+	      listOwnerChannels(accessToken, expectSuccess);
+          start();
 	  }
 	  });
 
@@ -219,9 +232,15 @@
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
 		var account = generateAccount();
 		var accessToken;
-		enroll(account, expectSuccessNoContent, step2);
-		var channel = generateChannel();
-		var channelid = '';
+		enroll(account, expectSuccessNoContent, step1);
+        var channel = generateChannel();
+        var channelid = '';
+         
+        function step1(){
+            checkEmailAndVerify(account.emailaddress, step2);
+        }
+         
+        
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3);
 		}
@@ -236,6 +255,7 @@
 			ok(true, JSON.stringify(data));
 			channelid = data.channel[0].id;
 			sendMessage(accessToken, channelid, {text: 'HERE IS A MESSAGE 01', type: 'FYI'}, expectCreated ); // 'FYI','RAC','ACK'
+            start();
 		}
 	});
 
@@ -244,9 +264,16 @@
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
 		var account = generateAccount();
 		var accessToken;
-		enroll(account, expectSuccessNoContent, step2);
-		var channel = generateChannel();
-		var channelid = '';
+        var channel = generateChannel();
+        var channelid = '';
+         
+		enroll(account, expectSuccessNoContent, step1);
+        
+        function step1(){
+            checkEmailAndVerify(account.emailaddress, step2);
+        }
+         
+		
 		function step2() {
 			login(generateLogin(account), expectSuccess, step3);
 		}
@@ -273,7 +300,7 @@
 	});
  
  
-	test('GET MESSAGES ON CHANNEL, BUT NO MESSAGES', function () {
+	test('NO MESSAGES ON CHANNEL', function () {
 	    stop(timoutms); //tell qunit to wait 5 seconds before timing out
 	    var account = generateAccount();
 	    var accessToken;
@@ -302,144 +329,11 @@
 	    }
 	});
 
-	
-	function createChannel(accessToken, channel, handler, postHandlerCallback) {
-		callAPI('POST', '/channel', accessToken, channel, handler, postHandlerCallback);
-	}
-
-	function deleteChannel(accessToken, channelid, handler, postHandlerCallback) {
-		callAPI('DELETE', '/channel/' + channelid, accessToken, undefined, handler, postHandlerCallback);
-	}
-
-	function sendMessage(accessToken, channelid, message, handler, postHandlerCallback) {
-		callAPI('POST', '/channel/' + channelid + '/message', accessToken, message, handler, postHandlerCallback);
-	}
-
-	function getChannel(accessToken, channelid, handler, postHandlerCallback) {
-		callAPI('GET', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
-	}
-
-	function getMessages(accessToken, channelid, handler, postHandlerCallback) {
-		callAPI('GET', '/channel/' + channelid + '/message', accessToken, undefined, handler, postHandlerCallback);
-	}
-
-	function listOwnerChannels(accessToken, handler, postHandlerCallback) {
-
-		callAPI('GET', '/channel?relationship=O', accessToken, undefined, handler, postHandlerCallback);
-	}
-
-	function enroll(account, handler, postHandlerCallback) {
-	    callAPI('POST', '/account/enroll', null, account ? account : generateAccount(), handler, postHandlerCallback);
-	}
-
-	function login(loginRequest, handler, postHandlerCallback) {
-		callAPI('POST', '/account/login', null, loginRequest, handler, postHandlerCallback);
-	}
-
-	// generic helper method to handle ajax calls to API
-	function callAPI(method, resource, accessToken, object, handler, postHandlerCallback) {
-		var ajaxParams = {
-				url: baseUrl + resource,
-				type: method,
-				data: JSON.stringify(object),
-				dataType: "json",
-				contentType: "application/json"
-		}
-		if (accessToken) {
-			ajaxParams.beforeSend = function (xhr) {
-				xhr.setRequestHeader("Authorization", accessToken);
-			}
-		}
-
-		var ajaxCall = $.ajax(ajaxParams);
-
-		ajaxCall.done(function (data, textStatus, jqXHR) {
-			handler(textStatus, jqXHR.status, method + ": " + resource);
-			callback(data);
-		});
-
-		ajaxCall.fail(function (jqXHR, textStatus, errorThrown) {
-			handler(errorThrown ? errorThrown : textStatus, jqXHR.status, jqXHR.responseText);
-			callback();
-		});
-
-		function callback(data) {
-			if (postHandlerCallback) {
-				postHandlerCallback(data);
-			} else {
-				start();
-			}
-		}
-
-	}
-
-	// handlers
-	function expectSuccess(textStatus, status, additionalDetails) {
-		equal(textStatus, 'success', additionalDetails);
-		equal(status, 200);
-	}
-
-	function expectCreated(textStatus, status, additionalDetails) {
-		equal(textStatus, 'success', additionalDetails);
-		equal(status, 201);
-	}
-
-	function expectSuccessNoContent(textStatus, status, additionalDetails) {
-		equal(textStatus, 'nocontent', additionalDetails);
-		equal(status, 204);
-	}
-
-	function expectBadRequest(textStatus, status, additionalDetails) {
-		equal(textStatus, 'Bad Request', additionalDetails);
-		equal(status, 400);
-	}
-
-	function expectUnauthorized(textStatus, status, additionalDetails) {
-		equal(textStatus, 'Unauthorized', additionalDetails);
-		equal(status, 401);
-	}
-
-	function generateChannel() {
-		return {
-			name: 'testchannel-' + randomString(5)
-		};
-	}
 
 
-	function generateAccount() {
-		return {
-			accountName: 'test-' + randomString(5), // Create Random AccountName Generator
-			emailaddress: 'test@test.com',
-			password: 'secret',
-			firstname: 'testFirst',
-			lastname: 'testLast'
-		};
-	}
 
-	function generateCommunicationMethodUrgentSMS(channelId) {
-		return {
-			smsPhone: '123-123-1234',
-			urgency: true,
-			channelId: channelId
-		};
-	}
+ 
+ 
 
-	function generateLogin(account) {
-		return {
-			accountName: account.accountName,
-			password: account.password,
-			appToken: 'sNQO8tXmVkfQpyd3WoNA6_3y2Og='
-		};
-	}
-
-	function randomString(length) {
-		var text = "";
-		var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-		for (var i = 0; i < length; i++)
-			text += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
-
-		return text;
-	}
 
 })();
