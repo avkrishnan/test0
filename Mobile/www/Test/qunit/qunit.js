@@ -332,6 +332,7 @@ var QUnit = {
 	 */
 	equal: function(actual, expected, message) {
 		QUnit.push(expected == actual, actual, expected, message);
+ 
 	},
 
 	notEqual: function(actual, expected, message) {

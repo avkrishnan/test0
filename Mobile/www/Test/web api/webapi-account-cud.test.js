@@ -11,27 +11,29 @@
 
 	module('Web API Account Tests', {
 		setup: function () {
-			testUrl = stringformat('{0}/enroll', baseUrl);
+			//testUrl = stringformat('{0}/enroll', baseUrl);
 		}
 	});
 
 	var timoutms = 15000;
 
 	test('TEST ENROLLMENT', function () {
+        
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-		enroll(null, expectSuccessNoContent);
+        var api = new EvernymAPI();
+		api.enroll(null, api.HANDLER.expectSuccessNoContent);
 	});
 
 	test('TEST DUPLICATE ENROLLMENT', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
+        var api = new EvernymAPI();
+		var account = api.generateAccount();
 
-		var account = generateAccount();
-
-		enroll(
+		api.enroll(
 			account,
-			expectSuccessNoContent,
+			api.HANDLER.expectSuccessNoContent,
 			function () {
-				enroll(account, expectBadRequest)
+				api.enroll(account, api.HANDLER.expectBadRequest)
 			}
 		);
 
@@ -39,13 +41,13 @@
 
 	test('LOGIN', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
+        var api = new EvernymAPI();
+		var account = api.generateAccount();
 
-		var account = generateAccount();
-
-		enroll(account, expectSuccessNoContent, step2);
+		api.enroll(account, api.HANDLER.expectSuccessNoContent, step2);
 
 		function step2() {
-			login(generateLogin(account), expectSuccess, step3);
+			api.login(api.generateLogin(account), api.HANDLER.expectSuccess, step3);
 		}
 
 		function step3(data) {
@@ -59,66 +61,66 @@
 
 	test('INVALID LOGIN', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-
-		login(generateLogin(generateAccount()), expectUnauthorized);
+        var api = new EvernymAPI();
+		api.login(api.generateLogin(api.generateAccount()), api.HANDLER.expectUnauthorized);
 
 	});
 
 	test('LOGOUT', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-
-		var account = generateAccount();
+        var api = new EvernymAPI();
+		var account = api.generateAccount();
 		var accessToken;
 
-		enroll(account, expectSuccessNoContent, step2);
+		api.enroll(account, api.HANDLER.expectSuccessNoContent, step2);
 
 		function step2() {
-			login(generateLogin(account), expectSuccess, step3);
+			api.login(api.generateLogin(account), api.HANDLER.expectSuccess, step3);
 		}
 
 		function step3(data) {
 			accessToken = data.accessToken;
-			logout(accessToken, expectSuccessNoContent);
+			api.logout(accessToken, api.HANDLER.expectSuccessNoContent);
 		}
 
 	});
  
 	 test('FORGOT PASSWORD', function () {
 	  stop(timoutms); //tell qunit to wait 5 seconds before timing out
-	  
-	  var account = generateAccount();
+	  var api = new EvernymAPI();
+	  var account = api.generateAccount();
 	  var accessToken;
           
       var times = 0;
          
 	  
-	  enroll(account, expectSuccessNoContent, step2);
+	  api.enroll(account, api.HANDLER.expectSuccessNoContent, step2);
 	  
 	  function step2() {
           
-		  login(generateLogin(account), expectSuccess, step3);
+		  api.login(api.generateLogin(account), api.HANDLER.expectSuccess, step3);
 	  }
                     
       function step3(){
          
-          checkEmailAndVerify(account.emailaddress, step4);
+          api.checkEmailAndVerify(account.emailaddress, step4);
       }
 
           
         function step4(data){
         
                   
-          forgot({accountName: account.accountName, emailAddress: account.emailaddress}, expectSuccessNoContent, function(){console.log('done')});
+          api.forgot({accountName: account.accountName, emailAddress: account.emailaddress}, api.HANDLER.expectSuccessNoContent, function(){console.log('done')});
               start();
           }
      
 	  
 	  });
 
-	test('TEST BAD ENROLLMENT - NAME TOO LONG', function () {
+	test('NAME TOO LONG', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-
-		var account = generateAccount();
+        var api = new EvernymAPI();
+		var account = api.generateAccount();
          
 
 		account.accountName =
@@ -133,15 +135,15 @@
 			'01234567890123456789012345678901234567890123456789' +
 			'01234567890123456789012345678901234567890123456789';
 
-		enroll(account, expectBadRequest);
+		api.enroll(account, api.HANDLER.expectBadRequest);
 	});
 
 	test('TEST BAD ENROLLMENT - NAME TOO SHORT', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-
-		var account = generateAccount();
+        var api = new EvernymAPI();
+		var account = api.generateAccount();
 		account.accountName = 'hi';
-		enroll(account, expectBadRequest);
+		api.enroll(account, api.HANDLER.expectBadRequest);
 	});
  
  
