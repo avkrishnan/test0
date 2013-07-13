@@ -4,7 +4,7 @@ function EvernymService() {
   
     
 	//var baseUrl = 'http://qupler.no-ip.org:8079/api/rest';
-	var baseUrl = 'http://qupler.no-ip.org:8080/api15/rest';
+	var baseUrl = 'http://qupler.no-ip.org:8080/api16/rest';
     
 	this.callAPI = function(method, resource, object, callbacks, useAccessToken) {
 		var ajaxParams = {

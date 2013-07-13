@@ -12,6 +12,7 @@ function ChannelListViewModel() {
 	this.channels = ko.observableArray([]);
     
     this.notification = ko.observable();
+    this.name = ko.observable();
     
 	var that = this;
 	this.shown = false;
@@ -31,6 +32,7 @@ function ChannelListViewModel() {
 		
 	this.activate = function() {
 		console.log("trying to get channels");
+        that.clearForm();
 		
 		if ( that.channels() && that.channels().length){
 			that.channels.removeAll();
@@ -39,12 +41,16 @@ function ChannelListViewModel() {
 		return this.listMyChannelsCommand().then(gotChannels);
 	};
 	
-	function successfulCreate(data){
+	function successfulList(data){
 		$.mobile.hidePageLoadingMsg();
 		//logger.log('success listing channels ' , null, 'dataservice', true);
 		
 		
 	};
+    
+    this.clearForm = function(){
+        that.name('');
+    };
 	
 	function gotChannels(data){
 		$.mobile.hidePageLoadingMsg();
@@ -73,7 +79,7 @@ function ChannelListViewModel() {
 				
         if (loginPageIfBadLogin(details.code)){
 			
-            showMessage("Please log in or register to view channels.");
+            //showMessage("Please log in or register to view channels.");
 		}
         else {
             showMessage("Error listing my channels: " + details.message);
@@ -85,7 +91,7 @@ function ChannelListViewModel() {
 	this.listMyChannelsCommand = function () {
 		
 		//logger.log("starting listChannels", undefined, "channels", true);
-		return dataService.listMyChannels({ success: successfulCreate, error: errorListChannels });
+		return dataService.listMyChannels({ success: successfulList, error: errorListChannels });
 	};
 	
 	this.logoutCommand = function(){
@@ -106,6 +112,42 @@ function ChannelListViewModel() {
 		$.mobile.changePage("#" + channelNewViewModel.template)
 	};
 	
+    
+    
+    
+    function successfulCreate(data){
+        $.mobile.hidePageLoadingMsg();
+        //logger.log('success creating channel', null, 'dataservice', true);
+        //router.navigateTo('#/channellist');
+        
+        $.mobile.changePage("#" + channelListViewModel.template);
+        channelListViewModel.activate();
+        
+    };
+    
+    function errorCreate(data, status, response){
+        $.mobile.hidePageLoadingMsg();
+        //that.notifications("error creating channel " + JSON.stringify(data));
+        console.log("error creating channel: " + response.message);
+        showMessage("Error creating channel: " + response.message);
+        loginPageIfBadLogin(details.code);
+        //logger.log('error creating channel', null, 'dataservice', true);
+    };
+    
+    this.logoutCommand = function(){
+        loginViewModel.logoutCommand();
+        $.mobile.changePage("#" + loginViewModel.template)
+    }
+    
+    this.createChannelCommand = function () {
+        //inputChannelName
+        //logger.log('start creating channel ' + this.name() , null, 'dataservice', true);
+        $.mobile.showPageLoadingMsg("a", "Creating Channel " + that.name());
+        dataService.createChannel({name: that.name()}, {success: successfulCreate, error: errorCreate});
+    };
+    
+    
+    
 	
 	
 	

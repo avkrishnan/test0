@@ -1,14 +1,38 @@
 
 .channel-list, .message-list {
     
-    background:#444;
+    background:#393739;
 }
 
 
-.channel-list-item, .message-list-item, .channel-message-item {
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+
+
+*:focus {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none ;
+}
+
+.header {
+    background:#8DC63F;
+    height:40px;
+}
+
+.channel-list-footer {
+    
+    background:#8DC63F;
+    height:75px;
+}
+
+.channel-list-item, .message-list-item, .channel-message-item, .sub-message-list-item {
     
     border:none;
-    background: #444;
+    height:auto;
+    background: #393739;
 
     
 }
@@ -17,11 +41,30 @@
 .channel-message-item.ui-li-static.ui-li,
 .channel-message-item a.ui-link-inherit,
 .message-list-item  a.ui-link-inherit,
-.message-list-item.ui-li-static.ui-li
+.message-list-item.ui-li-static.ui-li,
+.sub-message-list-item  a.ui-link-inherit,
+.sub-message-list-item.ui-li-static.ui-li
 {
     
-    padding:0 !important;
+    padding:0px !important;
     
+}
+
+.login-info {
+    background:rgba(0,0,0,0.1);
+    border-radius:5px;
+    
+    
+}
+
+.login-info input {
+    
+    width: 80%;
+    margin-left:5px;
+    font-size:14pt;
+    border:1px solid gray;
+    padding:2px;
+    border-radius:5px;
 }
 
 
@@ -34,6 +77,11 @@
     border:none;
 }
 
+
+.channel-list-anchor.ui-link-inherit:focus {
+    outline:none !important;
+    
+}
 
 .channel-list-anchor .channel-list-stripe1{
     
@@ -56,16 +104,15 @@
 }
 
 
-
+.sub-message-list-container .message-list-stripe,
 .message-list-container .message-list-stripe,
 .channel-message-item .message-list-stripe
-
 {
     
     width:3px;
     background:white;
     position: relative;
-    height:10px;
+    height:18px;
     left:64px;
     top:50%;
 }
@@ -73,7 +120,7 @@
 
 .channel-list-anchor {
     border:none;
-    background: #444;
+    background: #393739;
     height: 60px;
     border:none;
     position:relative;
@@ -87,6 +134,39 @@
 .channel-message-container {
     border:none;
     min-height: 63px;
+    overflow:none;
+    
+    position:relative;
+    
+    display:inline-block;
+    
+    width:100%;
+    margin-right:10px;
+    
+    
+    
+}
+
+.sub-message-list-container {
+    border:none;
+    min-height: 0px;
+    overflow:none;
+    
+    position:relative;
+    
+    display:inline-block;
+    
+    width:100%;
+    margin-right:10px;
+    height:auto;
+    
+    
+}
+
+
+.new-channel-container {
+    border:none;
+    min-height: 0px;
     overflow:none;
     
     position:relative;
@@ -133,6 +213,8 @@ XXchannel-list-anchor:hover .channel-description
     
 }
 
+
+
 .message-list-container .message-info
 {
     
@@ -153,6 +235,55 @@ XXchannel-list-anchor:hover .channel-description
     
     
 }
+
+
+.sub-message-list-container .sub-message-info
+{
+    
+    position:relative;
+    
+    
+    font-style:none;
+    text-shadow:none;
+    color:black;
+    font-weight:none;
+    background:white;
+    border-radius:7px;
+    min-height:55px;
+    
+    margin-left:65px;
+    margin-right:45px;
+    
+    
+    
+}
+
+
+
+.new-channel-container .new-channel-info
+{
+    
+    position:relative;
+    
+    
+    font-style:none;
+    text-shadow:none;
+    color:black;
+    font-weight:none;
+    background:rgba(0,0,0,0.1);
+    
+    min-height:55px;
+    
+    margin-left:65px;
+    margin-top:10px;
+    margin-bottom:10px;
+    
+    
+    
+}
+
+
+
 
 .channel-message-container .channel-message-info
 {
@@ -212,6 +343,54 @@ XXchannel-list-anchor:hover .channel-description
 }
 
 
+
+.sub-message-list-container .sub-message-text
+{
+    position:relative;
+    margin-left:35px;
+    
+    padding:5px;
+    
+    
+    
+    
+    white-space: pre;           /* CSS 2.0 */
+    white-space: pre-wrap;      /* CSS 2.1 */
+    white-space: pre-line;      /* CSS 3.0 */
+    white-space: -pre-wrap;     /* Opera 4-6 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    white-space: -moz-pre-wrap; /* Mozilla */
+    white-space: -hp-pre-wrap;  /* HP Printers */
+    word-wrap: break-word;      /* IE 5+ */
+    
+    
+    
+    
+}
+
+
+
+.new-channel-container .new-channel-text
+{
+    position:relative;
+    margin-left:45px;
+    top:7px;
+    background:white;
+    border-radius:5px;
+    margin-right:10px;
+    
+    width:auto;
+    
+    height:41px;
+    
+    
+    
+    
+}
+
+
+
+
 .channel-message-container .channel-message-text
 {
     position:relative;
@@ -263,14 +442,134 @@ XXchannel-list-anchor:hover .channel-description
     width:55px;
     height:55px;
     border-radius:55px;
-    left:10px;
-    top:15px;
+    left:-26px;
+    top:5px;
     
     background-size:63px 63px;
     background-repeat:no-repeat;
     
 }
 
+.sub-message-list-container .sub-message-list-avatar
+{
+    position:absolute;
+    
+    width:49px;
+    height:49px;
+    border-radius:49px;
+    left:-26px;
+    top:0px;
+    
+    border:3px solid white;
+    background-size:49px 49px;
+    background-repeat:no-repeat;
+    
+}
+
+
+.sub-message-list-container .sub-message-list-avatar-frame
+{
+    position:absolute;
+    
+    width:30px;
+    height:55px;
+    border-top-right-radius:55px;
+    border-bottom-right-radius:55px;
+    border-bottom-left-radius:10px;
+    border-top-left-radius:10px;
+    left:0px;
+    top:0px;
+    
+    background-size:55px 55px;
+    border:none;
+    background:rgba(0,0,0,0.1);
+    background-repeat:no-repeat;
+    
+}
+
+
+
+.new-channel-container .new-channel-avatar
+{
+    position:absolute;
+    
+    width:49px;
+    height:49px;
+    border-radius:49px;
+    left:-26px;
+    top:0px;
+    
+    border:3px solid white;
+    background-size:49px 49px;
+    background-repeat:no-repeat;
+    
+}
+
+
+.new-channel-container .new-channel-avatar-frame
+{
+    position:absolute;
+    
+    width:30px;
+    height:55px;
+    border-top-right-radius:55px;
+    border-bottom-right-radius:55px;
+    border-bottom-left-radius:10px;
+    border-top-left-radius:10px;
+    left:0px;
+    top:0px;
+    
+    background-size:55px 55px;
+    border:none;
+    background:rgba(0,0,0,0.1);
+    background-repeat:no-repeat;
+    
+}
+
+.new-channel-container .new-channel-text .new-channel-input {
+    
+    
+    width:135px;
+    margin:7px;
+    font-size:11pt;
+    
+    
+}
+
+.menu-button {
+    
+    background: url('../resources/menu-button.png') ;
+    background-size:36px 30px;
+    width:36px;
+    height:30px;
+    border-radius:0px;
+    background-position:  0px 0px;
+    background-repeat: no-repeat;
+    right:7px !important;
+    
+    
+    border:none;
+    border-radius:5px;
+    
+}
+
+.new-channel-container .new-channel-text .new-channel-submit {
+    
+    width:20px;
+    height:20px;
+    position:relative;
+    
+    float:right;
+    margin-top:11px;
+    margin-right:5px;
+    background-size:20px 20px;
+    border-radius:20px;
+    
+    background-position:  0px 0px;
+    background-repeat: no-repeat;
+    border:none;
+    
+}
 
 
 .channel-message-container .channel-message-avatar
@@ -280,11 +579,11 @@ XXchannel-list-anchor:hover .channel-description
     width:50px;
     height:50px;
     border-radius:50px;
-    left:40px;
-    top:10px;
+    left:-25px;
+    top:0px;
     
     
-    background-size:63px 63px;
+    background-size:50px 50px;
     background-repeat:no-repeat;
     
 }

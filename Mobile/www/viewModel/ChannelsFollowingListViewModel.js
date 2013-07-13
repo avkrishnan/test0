@@ -73,7 +73,7 @@ function ChannelsFollowingListViewModel() {
         
         if (loginPageIfBadLogin(details.code)){
 			
-            showMessage("Please log in or register to view channels.");
+            //showMessage("Please log in or register to view channels.");
 		}
         else {
             showMessage("Error listing my channels I'm Following: " + details.message);

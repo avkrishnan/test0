@@ -116,6 +116,8 @@ $(document).ready(function () {
                   console.log("currentUrl: " + currentUrl.hash);
                   
                   
+                  
+                  
                   $(document).bind("pagebeforechange", function (event, data) {
                       
                                    $.mobile.pageData = (data && data.options && data.options.pageData)
