@@ -5,68 +5,68 @@
         <xmeta name="viewport" content="width=device-width, initial-scale=1">
             
             <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" >
-            
-            <!-- required libraries -->
-            <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
-                      
-            
-            <script type="text/javascript" src="api_codes.js"></script>
-            
-            <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
-            <script type="text/javascript" src="lib/jquery.mobile-1.3.1.js"></script>
-            <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
-            <script type="text/javascript" src="lib/jqm.page.params.js"></script>
-            <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
-            <script type="text/javascript" src="lib/iscroll.js"></script>
-            <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
-            
-            
-            <!-- services -->
-            
-            <script type="text/javascript" src="services/EvernymService.js"></script>
-            <script type="text/javascript" src="services/EvernymLoginService.js"></script>
-            <script type="text/javascript" src="services/EvernymChannelService.js"></script>
-            <script type="text/javascript" src="services/EvernymMessageService.js"></script>
-            <script type="text/javascript" src="services/EvernymCommethodService.js"></script>
-            
-            <!-- view models -->
-            
-            <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/ChannelsFollowingListViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/FollowersListViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/FollowerViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/UserSettingsViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/CommethodVerificationViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/NotificationsViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>
-            <script type="text/javascript" src="viewModel/ResetPasswordViewModel.js"></script>
-            
-            
-            <link rel="stylesheet" href="lib/evernym.css" /> 
-            
-            <!-- the code that puts it all together -->
-            <script type="text/javascript" src="app.js" ></script>
-            
-            
-            <script type="text/javascript">
-                $(document).live("pagechange", function () {
-                    var page = $.mobile.activePage.attr("id");
-                });
-                document.addEventListener("deviceready", function () {
-                                          document.addEventListener("menubutton", menuKeyDown, true);
-                                          }, false);
-                function menuKeyDown() {
-                    alert('Menu button pressed.');
-                }
-            </script>
-            
-            </head>
+                
+                <!-- required libraries -->
+                <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
+                
+                
+                <script type="text/javascript" src="api_codes.js"></script>
+                
+                <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+                <script type="text/javascript" src="lib/jquery.mobile-1.3.1.js"></script>
+                <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
+                <script type="text/javascript" src="lib/jqm.page.params.js"></script>
+                <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
+                <script type="text/javascript" src="lib/iscroll.js"></script>
+                <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
+                
+                
+                <!-- services -->
+                
+                <script type="text/javascript" src="services/EvernymService.js"></script>
+                <script type="text/javascript" src="services/EvernymLoginService.js"></script>
+                <script type="text/javascript" src="services/EvernymChannelService.js"></script>
+                <script type="text/javascript" src="services/EvernymMessageService.js"></script>
+                <script type="text/javascript" src="services/EvernymCommethodService.js"></script>
+                
+                <!-- view models -->
+                
+                <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/ChannelsFollowingListViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/FollowersListViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/FollowerViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/UserSettingsViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/CommethodVerificationViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/NotificationsViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/ResetPasswordViewModel.js"></script>
+                
+                
+                <link rel="stylesheet" href="lib/evernym.css" />
+                
+                <!-- the code that puts it all together -->
+                <script type="text/javascript" src="app.js" ></script>
+                
+                
+                <script type="text/javascript">
+                    $(document).live("pagechange", function () {
+                                     var page = $.mobile.activePage.attr("id");
+                                     });
+                    document.addEventListener("deviceready", function () {
+                                              document.addEventListener("menubutton", menuKeyDown, true);
+                                              }, false);
+                    function menuKeyDown() {
+                        alert('Menu button pressed.');
+                    }
+                    </script>
+                
+                </head>
     <body>
         
         <div data-role="page" xdata-theme="b"
@@ -83,7 +83,7 @@
                 
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                       
+                        
                         <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
                         <li><a href="#" data-bind="click: activate">Refresh List</a></li>
                         <li><a href="index.html#channelsFollowingListView">Channels I'm Following</a></li>
@@ -102,12 +102,12 @@
                         <div class="new-channel-avatar" style="background-image:url('resources/megaphone.png')"></div>
                         
                         <div class="new-channel-text">
-                        
-                        <form id="new-channel-form">
-                            <input data-role="none" type="text" name="new-channel" data-bind="value: name" class="new-channel-input" placeholder="New Channel Name" style="border:none;"/>
-                            <input data-role="none" class="new-channel-submit" data-bind="click: createChannelCommand" type="submit" value="" style="background-image: url('resources/add-button.png');" />
-                        </form>
-                        
+                            
+                            <form id="new-channel-form">
+                                <input data-role="none" type="text" name="new-channel" data-bind="value: name" class="new-channel-input" placeholder="New Channel Name" style="border:none;"/>
+                                <input data-role="none" class="new-channel-submit" data-bind="click: createChannelCommand" type="submit" value="" style="background-image: url('resources/add-button.png');" />
+                            </form>
+                            
                         </div>
                         
                         <div class="new-channel-avatar-frame"></div>
@@ -140,14 +140,14 @@
                             
                             <span class="channel-info">
                                 <span class="channel-name">My Channels</span>
-                               
+                                
                             </span>
                             <div class="channel-list-avatar-frame"></div>
                             
                         </a>
                         
                     </li>
-                     
+                    
                     
                     
                     
@@ -175,7 +175,7 @@
                             <div class="channel-list-message-count"></div>
                             <div class="channel-list-alalytics"></div>
                             
-                        </a>          
+                        </a>
                         
                     </li>
                     
@@ -205,7 +205,7 @@
                         
                     </ul>
                 </div>
-
+                
                 
                 
             </div>
@@ -233,16 +233,24 @@
             </div>
         </div>
         
-
+        
         <div data-role="page" xdata-theme="b"
             id="channelsFollowingListView">
-            <div data-role="header" xdata-theme="b">
+            <div data-role="header" class="header" xdata-theme="b">
                 <h1>Channels I'm Following</h1>
                 
-                <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
+                <a href="#popupMenu"
+                    data-rel="popup"
+                    data-role="button"
+                    class="ui-btn-right menu-button"
+                    data-inline="true"
+                    data-transition="slidedown"
+                    xdata-icon="gear"
+                    xdata-theme="b"
+                    class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                       
+                        
                         <li><a href="#" data-bind="click: newChannelCommand">New Channel</a></li>
                         <li><a href="#" data-bind="click: activate">Refresh List</a></li>
                         <li><a href="index.html#channelListView">My Channels</a></li>
@@ -340,17 +348,9 @@
                 
                 <ul data-role="listview">
                     
-                    
-                    
-                    
-                    <li class="message-list-item " style="height:75px;">
-                        
-                        
+                    <li class="message-list-item ">
                         
                         <div  class="message-list-container" >
-                            
-                            
-                            
                             
                             
                             <div class="message-info" >
@@ -368,7 +368,7 @@
                                         <br/>
                                         
                                         <input  data-role="none"  id="password" type="password" data-bind="value: password" placeholder="Password"   />
-                                    </td><td>
+                                        <br/>
                                         <input data-role="none" id="login_submit" type="submit" data-bind="click: loginCommand" value="Login" data-inline="true" />
                                     </td></tr></table>
                                     
@@ -376,19 +376,7 @@
                                 </form>
                                 
                                 
-                                                                
-                                
-                                
-                                
-                                </div>
-                                 
-                                
-                                
                             </div>
-                            
-                            
-                            
-                            
                             
                         </div>
                         
@@ -442,60 +430,91 @@
                     
                     
                     
-                    </ul>
-                
-               
-                
-                
-                
-                
-               
-                
-                
+                </ul>
                 
             </div>
             
         </div>
         
         
-        <div data-role="page" xdata-theme="b"
-            id="forgotPasswordView" >
-            <div data-role="header" xdata-theme="b">
+        <div class="channel-list" data-role="page" xdata-theme="b"
+            id="forgotPasswordView">
+            <div class="header" data-role="header" xdata-theme="b">
                 <a href="#loginView" data-role="button" data-icon="arrow-l" >Login</a>
                 <h1>Forgot Password</h1>
             </div>
             
             <div data-role="content" id="" Xdata-theme="b">
                 
-                <div id="forgotPasswordContent">
-                <form >
+                
+                <ul data-role="listview">
                     
-                    <div >
-                        <div >
-                            <input id="userName" type="text" data-bind="value: accountName" placeholder="Evernym" autocomplete="on" autofocus="autofocus"   autocapitalize="off"/>
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div >
-                            <input id="email" type="email" data-bind="value: email" placeholder="Email"   />
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div >
+                    <li class="message-list-item ">
+                        
+                        <div  class="message-list-container" >
                             
-                            <input id="forgotpassword" type="submit" data-bind="click: forgotPasswordCommand" value="Submit" data-inline="true" />
+                            
+                            <div class="message-info">
+                                <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                                <div class="message-list-avatar-frame"></div>
+                                <form data-role="none">
+                                    
+                                    <table style="margin-left:30px;margin-top:5px;">
+                                        <tr>
+                                            <td class="login-info">
+                                                
+                                                
+                                                <input data-role="none" id="userName" type="text" data-bind="value: accountName" placeholder="Evernym" autocomplete="on" autofocus="autofocus"   autocapitalize="off"/>
+                                                <br/>
+                                                <input data-role="none" id="email" type="email" data-bind="value: email" placeholder="Email"   />
+                                                <br/>
+                                                <input data-role="none" id="forgotpassword" type="submit" data-bind="click: forgotPasswordCommand" value="Submit" data-inline="true" />
+                                                
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    
+                                </form>
+                                
+                             
+                                
+                            </div>
+                             
+                           
+                        </div>
+                        
+                        
+                        
+                    </li>
+                    
+                    
+                    <li class="sub-message-list-item" id="forgotPasswordNotification">
+                        
+                        <div  class="sub-message-list-container">
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            <div class="sub-message-info">
+                                <div class="sub-message-list-avatar" style="background:#8D463F;"></div>
+                                <div class="sub-message-list-avatar-frame"></div>
+                                <div class="sub-message-text" data-bind="text:notification"></div>
+                                
+                            </div>
                             
                         </div>
-                    </div>
+                        
+                        
+                    </li>
                     
-                </form>
-                </div>
-                <center>
-                <h2 id="forgotPasswordNotification" data-bind="text:notification" >
-                </h2>
-                    </center>
+                    
+                </ul>
+                
+                
+                
+                
+                
                 
                 
                 
@@ -514,29 +533,29 @@
             <div data-role="content" Xdata-theme="b">
                 
                 <div id="resetPasswordContent">
-                <form >
-                    
-                    <div >
+                    <form >
+                        
                         <div >
-                            <input id="password" type="password" data-bind="value: password" placeholder="Password" autofocus="autofocus"   autocapitalize="off"/>
+                            <div >
+                                <input id="password" type="password" data-bind="value: password" placeholder="Password" autofocus="autofocus"   autocapitalize="off"/>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div >
+                        
                         <div >
-                            <input id="confirmPassword" type="password" data-bind="value: confirmPassword" placeholder="Confirm Password"   />
+                            <div >
+                                <input id="confirmPassword" type="password" data-bind="value: confirmPassword" placeholder="Confirm Password"   />
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div >
+                        
                         <div >
-                            
-                            <input id="resetpassword" type="submit" data-bind="click: resetPasswordCommand" value="Submit" data-inline="true" />
-                            
+                            <div >
+                                
+                                <input id="resetpassword" type="submit" data-bind="click: resetPasswordCommand" value="Submit" data-inline="true" />
+                                
+                            </div>
                         </div>
-                    </div>
-                    
-                </form>
+                        
+                    </form>
                 </div>
                 
                 
@@ -555,7 +574,7 @@
         
         
         
-                 
+        
         
         <div data-role="page" xdata-theme="b"
             id="followersListView">
@@ -591,8 +610,8 @@
                 </ul>
             </div>
         </div>
-
-
+        
+        
         <div data-role="page" xdata-theme="b"
             id="followerView">
             <div data-role="header" xdata-theme="b">
@@ -613,11 +632,11 @@
             </div>
             
             
-             <div data-role="content" xdata-theme="b" >
-                 <div data-bind="text: followerName">?</div>
-             </div>
+            <div data-role="content" xdata-theme="b" >
+                <div data-bind="text: followerName">?</div>
+            </div>
             
-             
+            
         </div>
         
         
@@ -640,7 +659,7 @@
             </div>
             
             <div data-role="content" xdata-theme="b" >
-               		
+                
                 
                 <form class="form-inline">
                     
@@ -686,47 +705,47 @@
             
             <div data-role="content" xdata-theme="b" >
                 
-            <div>http://<span data-bind="text: normName"></span>.evernym.com</div>
+                <div>http://<span data-bind="text: normName"></span>.evernym.com</div>
                 <!--
                  <div  >
-                        <div >
-                            <input id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" autocomplete="on" autofocus="autofocus" required data-validate="required" />
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div >
-                            <input id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
-                            
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div >
-                            <input id="emailAddress" type="email" data-bind="value: emailaddress" placeholder="Email Address" autocomplete="on"  required data-validate="required|email" />
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div >
-                            <input id="smsPhone" type="text" data-bind="value: smsPhone" placeholder="SMS Text Phone Number" required data-validate="required" required data-validate="required|phone"/>
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div>
-                            <input id="addFollowerButton" type="button" data-bind="click: addFollowerCommand" value="Add Follower" data-inline="true"  />
-                        </div>
-                    </div>
-
+                 <div >
+                 <input id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" autocomplete="on" autofocus="autofocus" required data-validate="required" />
+                 </div>
+                 </div>
+                 
+                 <div >
+                 <div >
+                 <input id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
+                 
+                 </div>
+                 </div>
+                 
+                 <div>
+                 <div >
+                 <input id="emailAddress" type="email" data-bind="value: emailaddress" placeholder="Email Address" autocomplete="on"  required data-validate="required|email" />
+                 </div>
+                 </div>
+                 
+                 <div >
+                 <div >
+                 <input id="smsPhone" type="text" data-bind="value: smsPhone" placeholder="SMS Text Phone Number" required data-validate="required" required data-validate="required|phone"/>
+                 </div>
+                 </div>
+                 
+                 <div >
+                 <div>
+                 <input id="addFollowerButton" type="button" data-bind="click: addFollowerCommand" value="Add Follower" data-inline="true"  />
+                 </div>
+                 </div>
+                 
                  -->
-
+                
             </div>
             
         </div>
         
         
-        <div data-role="page" xdata-theme="b"
+        <div  class="channel-list"  data-role="page" xdata-theme="b"
             id="channelView">
             <div data-role="header" xdata-theme="b" class="header">
                 <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
@@ -764,8 +783,8 @@
                 
                 
             </div>
-
-         
+            
+            
             
             
             <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll>
@@ -792,7 +811,7 @@
                             </span>
                             <div class="channel-list-avatar-frame"></div>
                             
-                           
+                            
                             
                         </a>
                         
@@ -827,7 +846,7 @@
                     
                     
                     <!-- ko foreach: messages, updateListviewOnChange:messages -->
-                   
+                    
                     
                     
                     <li class="message-list-item">
@@ -836,18 +855,18 @@
                             
                             <div class="message-list-stripe"></div>
                             
-                           
+                            
                             
                             <div class="message-info">
                                 
                                 <div class="message-list-avatar" style="background:#8DC63F;"></div>
                                 <div class="message-list-avatar-frame"></div>
                                 
-                                <div class="message-text" data-bind="text: text"></div>
+                                <div class="message-text" data-bind="text: responseToMsgId"></div>
                                 
                             </div>
                             
-                             
+                            
                             
                             
                             
@@ -862,10 +881,10 @@
                     
                     <!-- /ko -->
                     
-                
-                            
-                        
-                            
+                    
+                    
+                    
+                    
                     
                     <li class="sub-message-list-item">
                         
@@ -897,24 +916,24 @@
                         
                         
                         <a data-role="none"  href="#" data-bind="click: showMoreMessagesCommand" >
-                        <div  class="channel-message-container">
-                            
-                            
-                            <div class="message-list-stripe"></div>
-                            
-                            <div class="channel-message-info">
-                                <div class="channel-message-avatar" style="background:white;"></div>
-                                <div class="channel-message-text">Show More Messages</div>
+                            <div  class="channel-message-container">
+                                
+                                
+                                <div class="message-list-stripe"></div>
+                                
+                                <div class="channel-message-info">
+                                    <div class="channel-message-avatar" style="background:white;"></div>
+                                    <div class="channel-message-text">Show More Messages</div>
+                                    
+                                </div>
+                                
+                                
+                                
+                                
                                 
                             </div>
-                            
-                            
-                            
-                            
-                            
-                        </div>
                         </a>
-                            
+                        
                     </li>
                     
                     
@@ -928,7 +947,7 @@
             
         </div>
         
-
+        
         <div data-role="page" xdata-theme="b"
             id="channelNewView" >
             
@@ -981,57 +1000,83 @@
             </div>
         </div>
         
-       
-
-        <div data-role="page" Xdata-theme="b"
-            id="signupView" >
+        
+        
+        <div class="channel-list" data-role="page" Xdata-theme="b"
+            id="signupView">
             
-            <div data-role="header" Xdata-theme="b">
+            <div data-role="header" class="header" Xdata-theme="b">
                 <a href="#loginView" data-role="button" data-icon="arrow-l" >Login</a>
                 <h1>Register</h1>
             </div>
             
-            <div data-role="content" Xdata-theme="b">
+            <div class="message-list" data-role="content" Xdata-theme="b" >
                 
-                <form >
+                
+                
+                <ul data-role="listview">
                     
-                    <div >
-                        <div >
-                            <input id="emailAddress" type="email" data-bind="value: emailaddress" placeholder="Email Address" autocomplete="on" autofocus="autofocus" required data-validate="required|email" />
+                    <li class="message-list-item ">
+                        
+                        <div  class="message-list-container" >
+                            <div class="message-info" >
+                                <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                                <div class="message-list-avatar-frame"></div>
+                                <form data-role="none">
+                                    
+                                    <table style="margin-left:30px;margin-top:5px;">
+                                        <tr>
+                                            <td class="login-info">
+                                                
+                                                
+                                                
+                                                <input data-role="none" id="emailAddress" type="email" data-bind="value: emailaddress" placeholder="Email Address" autocomplete="on" autofocus="autofocus" required data-validate="required|email" />
+                                                <br/>
+                                                
+                                                
+                                                <input data-role="none" id="userName" type="text" data-bind="value: accountName" placeholder="Evernym" required data-validate="required" />
+                                                <br/>
+                                                
+                                                
+                                                
+                                                <input data-role="none" id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" autocomplete="on" required data-validate="required" />
+                                                <br/>
+                                                
+                                                
+                                                
+                                                <input data-role="none" id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
+                                                <br/>
+                                                
+                                                
+                                                
+                                                <input data-role="none" id="password" type="password" data-bind="value: password" placeholder="Password" required required data-validate="required" />
+                                                <br/>
+                                                
+                                                
+                                                
+                                                <input data-role="none" id="signup_submit" type="button" data-bind="click: signUpCommand" value="Register" data-inline="true"  />
+                                                
+                                                
+                                                
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    
+                                </form>
+                                
+                                
+                            </div>
+                            
                         </div>
-                    </div>
-                    
-                    <div >
-                        <div >
-                            <input id="userName" type="text" data-bind="value: accountName" placeholder="Evernym" required data-validate="required" />
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div >
-                            <input id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" autocomplete="on" required data-validate="required" />
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div >
-                            <input id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div >
-                            <input id="password" type="password" data-bind="value: password" placeholder="Password" required required data-validate="required" />
-                        </div>
-                    </div>
-                    
-                    <div >
-                        <div>
-                            <input id="signup_submit" type="button" data-bind="click: signUpCommand" value="Register" data-inline="true"  />
-                        </div>
-                    </div>
-                    
-                </form>
+                        
+                        
+                        
+                    </li>
+                </ul>
+                
+                
             </div>
             
         </div>
@@ -1041,29 +1086,21 @@
         <div data-role="page" xdata-theme="b"
             id="commethodVerificationView">
             <div data-role="header" xdata-theme="b">
-                
                 <h1>Verification</h1>
-                
                 
             </div>
             
             <div data-role="content" xdata-theme="b" >
                 <h3>
-                <div data-bind="text: message"></div>
-                    </h3>
-                
-                
+                    <div data-bind="text: message"></div>
+                </h3>
                 
                 <a href="index.html#channelListView" data-role="button" data-icon="arrow-r" data-inline="true" >Continue</a>
-                
                 
             </div>
             
         </div>
         
-        
-        
-
         <div data-role="page" xdata-theme="b"
             id="userSettingsView">
             <div data-role="header" xdata-theme="b">
@@ -1072,7 +1109,7 @@
                 <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown" data-icon="gear" xdata-theme="b" class="ui-btn-right">&nbsp;</a>
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-
+                        
                         <li><a href="index.html#channelsFollowingListView">Channels I'm Following</a></li>
                         <li><a href="index.html#channelListView">My Channels</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
@@ -1083,28 +1120,22 @@
             
             <div data-role="content" xdata-theme="c" data-iscroll>
                 
-                 
+                <!-- ko foreach: messages, updateListviewOnChange:messages -->
+                <li>
                     
-                     <!-- ko foreach: messages, updateListviewOnChange:messages -->
-                    <li>
-                        
-                        
-                        <div data-bind="text: text"></div>
-                        
-                        
-                        
-                        
-                    </li>
-                    <!-- /ko -->
+                    <div data-bind="text: text"></div>
                     
-                    
-                    <p>
-                      Messages are sent to you above and according to the urgency selected by the sender.
-                    </p>
-                    <p>
-                       None of this information is shared with channels or other senders.
-                    </p>
-                    
+                </li>
+                <!-- /ko -->
+                
+                
+                <p>
+                Messages are sent to you above and according to the urgency selected by the sender.
+                </p>
+                <p>
+                None of this information is shared with channels or other senders.
+                </p>
+                
                 <hr/>
                 <br/><br/>
                 
@@ -1114,15 +1145,15 @@
                     <li>
                         
                         
-                            <!-- <span data-bind="text: name"></span> -->
-                            <span data-bind="text: value" style="display:inline-block;width:300px;"></span>
+                        <!-- <span data-bind="text: name"></span> -->
+                        <span data-bind="text: value" style="display:inline-block;width:300px;"></span>
                         
-                            <span data-bind="attr: {id: 'commethod-' + id}">
+                        <span data-bind="attr: {id: 'commethod-' + id}">
                             <span data-bind="style: { display: (verified == 'Y')?'none':'inline-block'}">
                                 <a href="#" data-bind="click: $parent.verifyCommand" data-role="button" class="ui-btn-right">verify</a>
                             </span>
                             <span data-bind="style: { display: (verified == 'N')?'none':'inline-block'}">verified</span>
-                            </span>
+                        </span>
                         
                         
                     </li>

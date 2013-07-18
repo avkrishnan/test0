@@ -21,20 +21,21 @@ function ForgotPasswordViewModel() {
     $("#" + this.template).live("pagebeforeshow", function(e, data){ that.clearForm(); that.activate(); });
     
     this.activate = function(){
-        
+       $('#forgotPasswordNotification').hide();
     };
     
     this.clearForm = function(){
         that.email('');
         that.accountName('');
         that.notification('');
-        $('#forgotPasswordContent').show();
+        $('#forgotPasswordNotification').hide();
+        
         
     };
     
     function gotForgotPassword(data, status, details){
         
-        $('#forgotPasswordContent').hide(200);
+        $('#forgotPasswordNotification').show(200);
         that.notification('An email was sent to your inbox with further instructions to complete your password change.');
         
     }

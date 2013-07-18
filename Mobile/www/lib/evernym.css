@@ -55,6 +55,7 @@ textarea:focus, input:focus{
     border-radius:5px;
     
     
+    
 }
 
 .login-info input {
@@ -132,17 +133,25 @@ textarea:focus, input:focus{
 
 .message-list-container,
 .channel-message-container {
+   
     border:none;
     min-height: 63px;
+    
+    margin-right:10px;
     overflow:none;
+    
+    /*
+    border:none;
+    
+    
     
     position:relative;
     
-    display:inline-block;
     
-    width:100%;
-    margin-right:10px;
     
+    
+    
+    */
     
     
 }
@@ -154,7 +163,7 @@ textarea:focus, input:focus{
     
     position:relative;
     
-    display:inline-block;
+   
     
     width:100%;
     margin-right:10px;
@@ -171,7 +180,7 @@ textarea:focus, input:focus{
     
     position:relative;
     
-    display:inline-block;
+    
     
     width:100%;
     margin-right:10px;
