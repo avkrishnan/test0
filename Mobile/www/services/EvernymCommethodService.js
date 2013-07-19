@@ -11,7 +11,7 @@ function EvernymCommethodService() {
    
     
     this.getCommethods = function (callbacks) {
-        return api.callAPI('GET', '/commethod/', undefined, callbacks, true);
+        return api.callAPI('GET', '/commethod', undefined, callbacks, true);
         
     };
     

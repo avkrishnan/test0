@@ -20,13 +20,14 @@ function EvernymMessageService() {
         }
     };
     
-
-    
     this.getChannelMessage = function (channelid, messageid, callbacks) {
 		//logger.log('getChannelMessage' , null, 'dataservice.channelMessage', true);
         return api.callAPI('GET', '/channel/' + channelid + '/message/' + messageid, undefined, callbacks, true);
     };
     
+    this.getResponseMessages = function (channelid, messageid, callbacks) {
+		    return api.callAPI('GET', '/channel/' + channelid + '/message?replyto=' + messageid , undefined, callbacks, true);
+    };
     
     
 }

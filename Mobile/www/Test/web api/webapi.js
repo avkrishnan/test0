@@ -223,6 +223,11 @@ var EvernymAPI = function(){
         callAPI('GET', '/channel?relationship=O', accessToken, undefined, handler, postHandlerCallback);
     }
     
+    this.getCommunicationMethods = function(accessToken, handler, postHandlerCallback) {
+        
+        callAPI('GET', '/commethod', accessToken, undefined, handler, postHandlerCallback);
+    }
+    
     
     
     
@@ -275,5 +280,31 @@ var EvernymAPI = function(){
     
     
     
+    
+    
+    
+}
+
+
+
+// Speed up calls to hasOwnProperty
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function is_empty(obj) {
+    
+    // null and undefined are empty
+    if (obj == null) return true;
+    // Assume if it has a length property with a non-zero value
+    // that that property is correct.
+    if (obj.length && obj.length > 0)    return false;
+    if (obj.length === 0)  return true;
+    
+    for (var key in obj) {
+        if (hasOwnProperty.call(obj, key))    return false;
+    }
+    
+    // Doesn't handle toString and toValue enumeration bugs in IE < 9
+    
+    return true;
 }
 

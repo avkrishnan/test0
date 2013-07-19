@@ -80,7 +80,8 @@ commethodVerificationViewModel = new CommethodVerificationViewModel(),
 userSettingsModel = new UserSettingsViewModel(),
 notificationsViewModel = new NotificationsViewModel(),
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
-resetPasswordViewModel = new ResetPasswordViewModel()
+resetPasswordViewModel = new ResetPasswordViewModel(),
+messageViewModel = new MessageViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -110,13 +111,11 @@ $(document).ready(function () {
                   ko.applyBindings(notificationsViewModel, document.getElementById("notificationsView"));
                   ko.applyBindings(forgotPasswordViewModel, document.getElementById("forgotPasswordView"));
                   ko.applyBindings(resetPasswordViewModel, document.getElementById("resetPasswordView"));
+                  ko.applyBindings(messageViewModel, document.getElementById("messageView"));
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   
                   console.log("currentUrl: " + currentUrl.hash);
-                  
-                  
-                  
                   
                   $(document).bind("pagebeforechange", function (event, data) {
                       

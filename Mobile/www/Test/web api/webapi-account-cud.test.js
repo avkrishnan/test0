@@ -58,6 +58,47 @@
 		}
 
 	});
+ 
+ 
+    test('GET COMMUNICATION SETTINGS', function () {
+      stop(timoutms); //tell qunit to wait 5 seconds before timing out
+      var api = new EvernymAPI();
+      var account = api.generateAccount();
+      var accessToken;
+      
+      api.enroll(account, api.HANDLER.expectSuccessNoContent, step2);
+      
+      function step2() {
+          api.login(api.generateLogin(account), api.HANDLER.expectSuccess, step3);
+      }
+      function step3(data) {
+         
+         
+         ok(data, 'check for data from login');
+         ok(data.accessToken, 'check for access token: ' + data.accessToken);
+         equal(data.accessToken.length, 32, 'access token should be 32 characters: ' + data.accessToken.length);
+         
+         
+         accessToken = data.accessToken;
+         api.getCommunicationMethods(accessToken, api.HANDLER.expectSuccess, step4 );
+         
+         
+       }
+       function step4(data){
+         
+         ok(!is_empty(data), 'check for communication settings: ' + JSON.stringify(data));
+         
+         start();
+         
+       }
+         
+         
+         
+         
+      });
+ 
+ 
+ 
 
 	test('INVALID LOGIN', function () {
 		stop(timoutms); //tell qunit to wait 5 seconds before timing out
