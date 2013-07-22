@@ -10,6 +10,9 @@ textarea:focus, input:focus{
 }
 
 
+A {
+    text-decoration:none;
+}
 
 *:focus {
     -moz-box-shadow: none;
@@ -137,7 +140,7 @@ textarea:focus, input:focus{
     border:none;
     min-height: 63px;
     
-    margin-right:10px;
+    margin-right:0px;
     overflow:none;
     
     /*
@@ -260,7 +263,7 @@ XXchannel-list-anchor:hover .channel-description
     border-radius:7px;
     min-height:55px;
     
-    margin-left:65px;
+    margin-left:55px;
     margin-right:45px;
     
     
@@ -356,7 +359,7 @@ XXchannel-list-anchor:hover .channel-description
 .sub-message-list-container .sub-message-text
 {
     position:relative;
-    margin-left:35px;
+    margin-left:45px;
     
     padding:5px;
     
@@ -466,7 +469,7 @@ XXchannel-list-anchor:hover .channel-description
     width:49px;
     height:49px;
     border-radius:49px;
-    left:-26px;
+    left:-16px;
     top:0px;
     
     border:3px solid white;
@@ -486,7 +489,7 @@ XXchannel-list-anchor:hover .channel-description
     border-bottom-right-radius:55px;
     border-bottom-left-radius:10px;
     border-top-left-radius:10px;
-    left:0px;
+    left:10px;
     top:0px;
     
     background-size:55px 55px;

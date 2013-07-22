@@ -5,9 +5,9 @@ var EvernymAPI = function(){
     var okAsync = QUnit.okAsync,
     stringformat = QUnit.stringformat;
     
-    var baseUrl = 'http://qupler.no-ip.org:8080/api16/rest', // Test environment
-    //var baseUrl = 'http://localhost:8080/api/rest', //production environment
-    //var baseUrl = 'http://192.168.1.202:8080/catalyst-api/rest', //local route to production environment
+    var baseUrl = 'http://qupler.no-ip.org:8080/api17/rest', // Test environment
+    
+    //var baseUrl = 'http://qupler.no-ip.org:8079/api/rest', // Test environment
     
     
     

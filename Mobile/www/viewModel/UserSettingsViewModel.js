@@ -49,7 +49,8 @@ function UserSettingsViewModel() {
 	};
     
     function gotCommethods(data){
-        that.commethods(data);
+        //alert(JSON.stringify(data));
+        that.commethods(data.commethod);
     }
     
 	this.logoutCommand = function(){
@@ -117,6 +118,8 @@ function UserSettingsViewModel() {
     
     this.getCommethods = function(){
     
+        
+        
         $.mobile.showPageLoadingMsg("a", "Getting Communication Methods");
         
         var callbacks = {

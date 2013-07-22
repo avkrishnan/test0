@@ -8,7 +8,7 @@ function MessageViewModel() {
 	var that = this;
 	var  dataService = new EvernymChannelService();
 	var  dataServiceM = new EvernymMessageService();
-	
+	var replyToId = '';
 	
 	this.template = "messageView";
 	this.title = ko.observable();
@@ -19,12 +19,14 @@ function MessageViewModel() {
 	this.channelid = ko.observable();
     this.messageid = ko.observable();
     this.messagetext = ko.observable();
-    
+    this.replyMessage = ko.observable();
 	
     
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
+                                that.clear();
                                 
+                                $("#message-reply-form").hide();
                                 $('.more_messages_button').hide();
 								
 								if ($.mobile.pageData && $.mobile.pageData.id){
@@ -73,6 +75,7 @@ function MessageViewModel() {
 		
 		
 
+        
 		
 		that.messages([]);
         
@@ -83,6 +86,11 @@ function MessageViewModel() {
 		return true;
 		
 	};
+    
+    this.clear = function(){
+        
+        that.replyMessage('');
+    }
 	
 	function gotChannel(data){
 		$.mobile.hidePageLoadingMsg();
@@ -110,7 +118,8 @@ function MessageViewModel() {
 	
 	function gotMessages(data){
 		
-		
+        that.clear();
+		$("#message-reply-form").hide();
 		$.mobile.hidePageLoadingMsg();
 		if (data.message && data.message.constructor == Object){
 			
@@ -256,7 +265,7 @@ function MessageViewModel() {
         
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
-		return dataServiceM.getChannelMessages(that.channelid(), last_message_id, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
+		return dataServiceM.getChannelMessages(that.channelid(), {before: last_message_id, replyto: that.messageid()}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
         
         
     }
@@ -321,6 +330,33 @@ function MessageViewModel() {
         }
         
     }
+    
+    this.initiateReply = function(message){
+        //alert(JSON.stringify(message));
+        replyToId = message.id;
+        
+        if (!replyToId) {
+            replyToId = that.messageid();
+        }
+        
+        $("#message-reply-form").show(200, function(){
+                                                $("#reply-text-box").focus();
+                                                });
+        
+    }
+    
+    this.replyToMessage = function(){
+        
+        //alert(that.replyMessage());
+        //alert(replyToId);
+        
+        
+        this.postResponseMessageCommand(that.replyMessage(), replyToId);
+    }
+    
+    this.showMessageView = function(){
+            $.mobile.changePage("#" + channelViewModel.template);
+    }
 	
 	this.modifyChannelCommand = function(){
 		
@@ -332,7 +368,14 @@ function MessageViewModel() {
         var messageobj = {text: that.message(), type: 'FYI'};
 		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
+    
+    this.postResponseMessageCommand = function(message, messageid){
+        var messageobj = {text: message, type: 'FYI', responseToMsgId:messageid};
+		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
+	};
 	
+    
+
 	
 	this.refreshMessagesCommand = function(){
 		that.messages([]);
@@ -343,7 +386,7 @@ function MessageViewModel() {
 	
 	this.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		return dataServiceM.getResponseMessages(that.channelid(), that.messageid(), {success: successfulMessageGET, error: errorRetrievingMessages});
+		return dataServiceM.getChannelMessages(that.channelid(), {replyto: that.messageid()}, {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
    
 

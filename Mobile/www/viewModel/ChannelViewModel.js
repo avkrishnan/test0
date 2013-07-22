@@ -242,7 +242,7 @@ function ChannelViewModel() {
         
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
-		return dataServiceM.getChannelMessages(that.channelid(), last_message_id, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
+		return dataServiceM.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
         
         
     }

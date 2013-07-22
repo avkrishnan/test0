@@ -89,6 +89,7 @@
                         <li><a href="#" data-bind="click: activate">Refresh List</a></li>
                         <li><a href="index.html#channelsFollowingListView">Channels I'm Following</a></li>
                         <li><a href="index.html#userSettingsView">My Communication Preferences</a></li>
+                        <li><a href="index.html#notificationsView">Notifications</a></li>
                         <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
                         
                     </ul>
@@ -749,7 +750,7 @@
         <div  class="channel-list"  data-role="page" xdata-theme="b"
             id="messageView">
             <div data-role="header" xdata-theme="b" class="header">
-                <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
+                <a href="#" data-bind="click: showMessageView" data-role="button" data-icon="arrow-l" >Broadcasts</a>
                 
                 
                 <a href="#popupMenu" data-rel="popup"
@@ -836,6 +837,7 @@
                                     
                                     <div class="message-text" data-bind="text: messagetext"></div>
                                     
+                                    <button data-role="none" style="margin-left:60px;" data-bind="click: initiateReply">reply</button>
                                 </div>
                             </a>
                             
@@ -846,12 +848,32 @@
                    
                     
                     
-                    
+                    <li class="sub-message-list-item " id="message-reply-form">
+                        
+                        <div  class="sub-message-list-container">
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            
+                            <div class="sub-message-info">
+                                <form>
+                                <div class="sub-message-list-avatar" style="background:#8D863F;"></div>
+                                <div class="sub-message-list-avatar-frame"></div>
+                                <div class="sub-message-text"><input id="reply-text-box" type="text" data-bind="value: replyMessage"/></div>
+                                    <input type="submit" data-role="none" style="margin-left:60px;" value="send" data-bind="click: replyToMessage" />
+                                    
+                                <form>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        
+                        
+                    </li>
                     
                     
                     <!-- ko foreach: messages, updateListviewOnChange:messages -->
-                    
-                    
                     
                     
                     <li class="sub-message-list-item">
@@ -864,8 +886,9 @@
                             <div class="sub-message-info">
                                 <div class="sub-message-list-avatar" style="background:#8D463F;"></div>
                                 <div class="sub-message-list-avatar-frame"></div>
+                                <div data-bind="text: convDate(created)" style="margin-left:50px;font-weight:normal;font-size:10pt;"></div>
                                 <div class="sub-message-text" data-bind="text: text"></div>
-                                
+                                <button style="margin-left:60px;" data-bind="click: $parent.initiateReply">reply</button>
                             </div>
                             
                             
@@ -1038,34 +1061,6 @@
                     </li>
                     
                     <!-- /ko -->
-                    
-                    
-                    
-                    
-                    
-                    
-                    <li class="sub-message-list-item">
-                        
-                        <div  class="sub-message-list-container">
-                            
-                            <div class="message-list-stripe"></div>
-                            
-                            
-                            <div class="sub-message-info">
-                                <div class="sub-message-list-avatar" style="background:#8D463F;"></div>
-                                <div class="sub-message-list-avatar-frame"></div>
-                                <div class="sub-message-text">Test Sub Message</div>
-                                
-                            </div>
-                            
-                            
-                            
-                        </div>
-                        
-                        
-                    </li>
-                    
-                    
                     
                     
                     
@@ -1296,11 +1291,11 @@
                 
                 <hr/>
                 <br/><br/>
-                <form>
+                <form >
                 
                     API URL:
-                    <input type="text" data-bind="value: baseUrl" />
-                    <input type="submit" value="change" data-bind="click: changeBaseUrl" />
+                    <input style="font-size:14pt;width:320px;" data-role="none" type="text" data-bind="value: baseUrl" /> <br/>
+                    <input style="font-size:14pt;" data-role="none" type="submit" value="change" data-bind="click: changeBaseUrl" />
                     
                 </form>
                 
@@ -1315,8 +1310,10 @@
                     <li>
                         
                         
-                        <!-- <span data-bind="text: name"></span> -->
+                        
                         <span data-bind="text: value" style="display:inline-block;width:300px;"></span>
+                        
+                        
                         
                         <span data-bind="attr: {id: 'commethod-' + id}">
                             <span data-bind="style: { display: (verified == 'Y')?'none':'inline-block'}">
@@ -1324,6 +1321,8 @@
                             </span>
                             <span data-bind="style: { display: (verified == 'N')?'none':'inline-block'}">verified</span>
                         </span>
+                        
+                         
                         
                         
                     </li>

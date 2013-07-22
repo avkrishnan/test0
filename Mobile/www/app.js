@@ -42,6 +42,30 @@ function showMessage(message){
     
 }
 
+function convDate(d){
+    
+    var date = new Date();
+    var offset = date.getTimezoneOffset();
+    var d = new Date(d  + offset);
+    
+    var month = d.getMonth()+1;
+    var day = d.getDate();
+    var hour = d.getHours();
+    var minute = d.getMinutes();
+    var second = d.getSeconds();
+    
+    var output =  ((''+month).length<2 ? '0' : '') + month + '/' +
+    ((''+day).length<2 ? '0' : '') + day + '/' + 
+    d.getFullYear() + 
+    ' ' +
+    (hour == 0?12:hour%12) + ':' +
+    ((''+minute).length<2 ? '0' :'') + minute + ' ' +
+    (hour < 12? 'am' : 'pm');
+    
+    
+    return output;
+}
+
 
 function isBadLogin(code){
     
