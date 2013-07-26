@@ -122,6 +122,9 @@ function LoginViewModel() {
             else if (notifications.length){
                 for (var n in notifications){
                     var code = notifications[n].code;
+                    
+                    
+                    
                     notificationsViewModel.addNotification(getAPICode(code));
                 }
                 

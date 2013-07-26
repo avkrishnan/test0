@@ -16,7 +16,7 @@ function FollowersListViewModel() {
 	
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
 
-		debugger;
+		
 		if ($.mobile.pageData && $.mobile.pageData.id) {
 			that.activate({ id: $.mobile.pageData.id });
 		}

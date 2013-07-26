@@ -1,6 +1,6 @@
 ﻿/*globals ko*/
 
-function ChannelViewModel() {
+function ChannelDetailsViewModel() {
 
 	
 	// --- properties
@@ -10,7 +10,7 @@ function ChannelViewModel() {
 	var  dataServiceM = new EvernymMessageService();
 	
 	
-	this.template = "channelView";
+	this.template = "channelDetailsView";
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);
@@ -296,15 +296,6 @@ function ChannelViewModel() {
 		
 		$.mobile.changePage("#" + messageViewModel.template)
 	};
-    
-    
-    
-    this.showChannelMenu = function(){
-        
-         $.mobile.changePage("#" + channelMenuViewModel.template);
-        
-    }
-    
     
     
     this.showChannelList = function(){

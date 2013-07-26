@@ -5,7 +5,7 @@ var EvernymAPI = function(){
     var okAsync = QUnit.okAsync,
     stringformat = QUnit.stringformat;
     
-    var baseUrl = 'http://qupler.no-ip.org:8080/api17/rest', // Test environment
+    var baseUrl = 'http://qupler.no-ip.org:8080/api20/rest', // Test environment
     
     //var baseUrl = 'http://qupler.no-ip.org:8079/api/rest', // Test environment
     
@@ -96,7 +96,7 @@ var EvernymAPI = function(){
         
         var times = 0;
         function waitForIt(){
-            timeoutPromise(1000).done(getEmail);
+            return timeoutPromise(1000).done(getEmail);
         }
         
         function timeoutPromise(millis) {
@@ -111,6 +111,7 @@ var EvernymAPI = function(){
         function checkForContent(data){
             if (data.length == 0){
                 
+                
                 waitForIt();
                 times ++;
                 console.log('no email. times tried: ' + times);
@@ -123,7 +124,8 @@ var EvernymAPI = function(){
         
         
         function getEmail(){
-            return callAPI('GET', '/test/msg/' + emailAddress, null, null, that.HANDLER.expectSuccess, checkForContent, "html");
+            
+            return callAPI('GET', '/test/msg/' + emailAddress, undefined, undefined, that.HANDLER.expectSuccess, checkForContent, "html");
         }
         
         getEmail();
@@ -157,6 +159,8 @@ var EvernymAPI = function(){
         if (!datatype){
             datatype = "json";
         }
+        
+       
         
         var ajaxParams = {
         url: baseUrl + resource,

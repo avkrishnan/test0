@@ -20,6 +20,18 @@ A {
     box-shadow: none ;
 }
 
+
+@media only screen and (min-width: 600px){
+    .ui-page {
+        max-width: 600px !important;
+        margin: 0 auto !important;
+        position: relative !important;
+        border-right: 5px #666 outset !important;
+        border-left: 5px #666 outset !important;
+    }
+}
+
+
 .header {
     background:#8DC63F;
     height:40px;

@@ -1,6 +1,6 @@
 ﻿/*globals ko*/
 
-function ChannelViewModel() {
+function ChannelMenuViewModel() {
 
 	
 	// --- properties
@@ -8,21 +8,45 @@ function ChannelViewModel() {
 	var that = this;
 	var  dataService = new EvernymChannelService();
 	var  dataServiceM = new EvernymMessageService();
+	var initNB = false;
 	
-	
-	this.template = "channelView";
+	this.template = "channelMenuView";
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);
 	this.message = ko.observable();
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
+    
+    this.last_date = ko.observable();
+    this.last_message = ko.observable();
+    this.last_replies = ko.observable();
+    
+    this.urgency = ko.observable('N');
+    this.igi = ko.observable();
 	
+    this.newMessage = ko.observable('');
+    
+    this.clear = function(){
+        
+        if (! initNB){
+            that.newMessage('');
+            that.urgency('N');
+            
+            that.last_date('');
+            that.last_message('');
+            that.last_replies('');
+            
+            $("#new_broadcast_div").hide();
+        }
+    }
     
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
                                 
-                                $('.more_messages_button').hide();
+                                
+                                that.clear();
+                                
 								
 								if ($.mobile.pageData && $.mobile.pageData.id){
 								
@@ -45,7 +69,7 @@ function ChannelViewModel() {
                                     that.relationship(lchannel.relationship);
                                     that.channelid(lchannel.id);
                                     $.mobile.showPageLoadingMsg("a", "Loading Messages");
-									that.getMessagesCommand(that.channelid()).then(gotMessages);
+									that.getLastMessageCommand(that.channelid()).then(gotMessages);
                                     
 								
 								}
@@ -58,17 +82,45 @@ function ChannelViewModel() {
 	this.activate = function (channel) {
 		
 		that.channelid(channel.id);
-
-		
+    	
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		
 		that.getChannelCommand(that.channelid()).then(gotChannel);
 		
-		
 		return true;
 		
 	};
+    
+    
+    
+    this.sendNewBroadcast = function(){
+        //alert(that.newMessage());
+        //alert(that.urgency());
+        //alert(that.igi());
+        
+        initNB = false;
+        var messageobj = {text: that.newMessage(), urgencyId: that.urgency(),type: 'FYI'};
+        
+        
+        
+		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
+        
+    };
+    
+    this.initiateNewBroadcast = function(){
+        
+        initNB = true;
+        $("#new_broadcast_div").show(400, function(){$(window).resize(); $("#newMessage-cm").focus() } );
+        
+    };
+    
+    this.showMessageDetails = function(){
+        
+        
+        that.showMessage(that.message());
+        
+    };
 	
 	function gotChannel(data){
 		$.mobile.hidePageLoadingMsg();
@@ -84,7 +136,7 @@ function ChannelViewModel() {
             that.followChannelCommand().then(postFollow);
 	    }
         else {
-            that.getMessagesCommand(that.channelid()).then(gotMessages);
+            that.getLastMessageCommand(that.channelid()).then(gotMessages);
         }
         
 	}
@@ -96,19 +148,25 @@ function ChannelViewModel() {
 	
 	function gotMessages(data){
 		
+        
+        that.clear();
+        
 		
 		$.mobile.hidePageLoadingMsg();
 		if (data.message && data.message.constructor == Object){
 			
 			data.message = [data.message];
+            
 		}
         
-        if (data.more){
-            
-             $('.more_messages_button').show();
-        }
+        
+        that.message(data.message[0]);
+        
+        //alert(JSON.stringify(data.message));
 		
-		that.messages(data.message);
+        that.last_date(convDate(data.message[0].created));
+        
+		that.last_message(data.message[0].text);
 		
 	}
 	
@@ -151,13 +209,14 @@ function ChannelViewModel() {
         ;
 	}
 	
-	function successfulMessage(data){
+	
+    
+    function successfulMessage(data){
 		$.mobile.hidePageLoadingMsg();
-
 		that.getMessagesCommand(that.channelid()).then(gotMessages);
-		that.message('');
 		
 	}
+    
 	
 	function successfulFollowChannel(){
 		$.mobile.hidePageLoadingMsg();
@@ -292,24 +351,14 @@ function ChannelViewModel() {
     
     this.showMessage = function (message) {
         localStorage.setItem("currentMessage", JSON.stringify(message));
-        
-		
+    	
 		$.mobile.changePage("#" + messageViewModel.template)
 	};
     
     
-    
-    this.showChannelMenu = function(){
-        
-         $.mobile.changePage("#" + channelMenuViewModel.template);
-        
-    }
-    
-    
-    
     this.showChannelList = function(){
         
-        
+        initNB = false;
         var lrelationship = 'O';
         
         if (that.channel()[0]){
@@ -332,11 +381,13 @@ function ChannelViewModel() {
 		return dataService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
 	
-	this.postMessageCommand = function(){
+	
+    this.postMessageCommand = function(){
 
 		var messageobj = {text: that.message(), type: 'FYI'};
 		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
+     
 	
 	
 	this.refreshMessagesCommand = function(){
@@ -349,6 +400,12 @@ function ChannelViewModel() {
 	this.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
 		return dataServiceM.getChannelMessages(that.channelid(), undefined, {success: successfulMessageGET, error: errorRetrievingMessages});
+	};
+    
+    
+    this.getLastMessageCommand = function(){
+		$.mobile.showPageLoadingMsg("a", "Loading Message");
+		return dataServiceM.getChannelMessages(that.channelid(), {limit: 0}, {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
    
 

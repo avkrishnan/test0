@@ -103,13 +103,20 @@ function ChannelListViewModel() {
 	this.showChannel = function (channel) {
         localStorage.setItem("currentChannel", JSON.stringify(channel));
         
-		
-		$.mobile.changePage("#" + channelViewModel.template)
+        $.mobile.changePage("#" + channelMenuViewModel.template);
 	};
+
 	
+    this.showChannelStartMessage = function (channel) {
+        that.showChannel(channel);
+        channelMenuViewModel.initiateNewBroadcast();
+	};
+    
+    
+    
 	this.newChannelCommand = function () {
 		channelNewViewModel.activate();
-		$.mobile.changePage("#" + channelNewViewModel.template)
+		$.mobile.changePage("#" + channelNewViewModel.template);
 	};
 	
     

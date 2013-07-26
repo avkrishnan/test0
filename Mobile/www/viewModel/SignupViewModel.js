@@ -21,6 +21,17 @@ function SignupViewModel() {
 								
 								that.clearForm();
                                 that.activate();
+                                
+                                if ($.mobile.pageData && $.mobile.pageData.email){
+								
+                                    that.emailaddress($.mobile.pageData.email);
+								}
+                                
+                                if ($.mobile.pageData && $.mobile.pageData.follow){
+								
+                                    localStorage.setItem("follow", JSON.stringify($.mobile.pageData.follow));
+                                
+								}
 																
                                 });
     
@@ -62,7 +73,7 @@ function SignupViewModel() {
     };
     
     this.loginCommand = function () {
-        debugger;
+        
         $.mobile.showPageLoadingMsg("a", "Logging In With New Credentials");
         var callbacks = {
         success: loginSuccess,
@@ -93,8 +104,13 @@ function SignupViewModel() {
             localStorage.removeItem("login_nav");
             
             
+            var follow = localStorage.getItem("follow");
             
-            if (login_nav){
+            if (follow){
+                
+                alert('hello, we are going to now go to or follow the channel ' + follow);
+            }
+            else if (login_nav){
                 var hash = login_nav.hash;
                 //var parameters = login_nav.parameters;
                 

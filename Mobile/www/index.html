@@ -35,6 +35,8 @@
                 <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/ChannelsFollowingListViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/ChannelMenuViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/ChannelDetailsViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
@@ -70,6 +72,8 @@
                 </head>
     <body>
         
+        
+        <div id="allpages">
         <div data-role="page" xdata-theme="b"
             id="channelListView">
             <div class="header" data-role="header" xdata-theme="b">
@@ -95,7 +99,7 @@
                     </ul>
                 </div>
             </div>
-            
+            <!--
             <div class="channel-list-footer" data-role="footer" data-position="fixed">
                 
                 <div  class="new-channel-container">
@@ -120,9 +124,9 @@
                     
                     
                 </div>
-                
+             
             </div>
-            
+            -->
             
             
             <div class="channel-list" data-role="content" xdata-theme="c" data-iscroll>
@@ -170,6 +174,8 @@
                             <span class="channel-info">
                                 <span class="channel-name" data-bind="text: name"></span>
                                 <span class="channel-description">channel description</span>
+                                
+                                <input type="button"  data-bind="click: $parent.showChannelStartMessage" data-role="none" value="O" style="position:absolute;right:80px;"/>
                             </span>
                             <div class="channel-list-avatar-frame"></div>
                             
@@ -227,9 +233,11 @@
                     
                 </ul>
                 
-                <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
-                    <li><a href="index.html#channelListView">My Channels</a></li>
-                    <li><a href="index.html#channelsFollowingListView">Channels I'm Following</a></li>
+                <ul data-role="listview" data-inset="false" data-inline="true" xdata-theme="d">
+                    <li><a href="index.html#userSettingsView" data-inline="true">User Settings</a></li>
+                    <li><a href="index.html#channelListView" data-inline="true">My Channels</a></li>
+                    <li><a href="index.html#channelsFollowingListView" data-inline="true">Channels I'm Following</a></li>
+                    
                 </ul>
                 
             </div>
@@ -926,9 +934,380 @@
         
         
         <div  class="channel-list"  data-role="page" xdata-theme="b"
-            id="channelView">
+            id="channelDetailsView">
             <div data-role="header" xdata-theme="b" class="header">
                 <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
+                
+                
+                <a href="#popupMenu" data-rel="popup"
+                    data-role="button"
+                    data-inline="true"
+                    xdata-transition="slidedown"
+                    xdata-theme="b"
+                    xdata-icon="gear"
+                    class="ui-btn-right menu-button">&nbsp;</a>
+                
+                
+                
+                
+                <div data-role="popup" id="popupMenu" xdata-theme="a">
+                    
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                        
+                        <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#followersListView">Followers</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="#" data-bind="click: deleteChannelCommand">Delete Channel</a></li>
+                        <li data-bind="style: {display:relationship()=='F'?'block':'none'}"><a href="#" data-bind="click: unfollowChannelCommand">Unfollow Channel</a></li>
+                        
+                        
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                    
+                </div>
+                
+                
+                
+            </div>
+            
+            
+            
+            
+            <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll>
+                
+                
+                
+                <ul data-role="listview" >
+                    
+                    
+                    
+                    <li class="channel-list-item">
+                        
+                        <a  class="channel-list-anchor" href="#"  >
+                            
+                            
+                            <div class="channel-list-stripe2"></div>
+                            
+                            
+                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                            
+                            <span class="channel-info">
+                                <span class="channel-name" data-bind="text: title"></span>
+                                <span class="channel-description">channel description</span>
+                            </span>
+                            <div class="channel-list-avatar-frame"></div>
+                            
+                            
+                            
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="channel-message-item">
+                        
+                        <div  class="channel-message-container" >
+                            
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            
+                            <div class="channel-message-info">
+                                <div class="channel-message-avatar" style="background:white;"></div>
+                                <div class="channel-message-text">Channel Messages</div>
+                                
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                        
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    <!-- ko foreach: messages, updateListviewOnChange:messages -->
+                    
+                    
+                    
+                    <li class="message-list-item">
+                        
+                        <div  class="message-list-container" >
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            
+                            <a data-role="none" href="#" data-bind="click: $parent.showMessage">
+                                <div  class="message-info">
+                                    
+                                    <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                                    <div class="message-list-avatar-frame"></div>
+                                    
+                                    <div class="message-text" data-bind="text: text"></div>
+                                    
+                                </div>
+                            </a>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                        
+                        
+                    </li>
+                    
+                    <!-- /ko -->
+                    
+                    
+                    
+                    
+                    <li class="channel-message-item more_messages_button" data-icon="false">
+                        
+                        
+                        <a data-role="none"  href="#" data-bind="click: showMoreMessagesCommand" >
+                            <div  class="channel-message-container">
+                                
+                                
+                                <div class="message-list-stripe"></div>
+                                
+                                <div class="channel-message-info">
+                                    <div class="channel-message-avatar" style="background:white;"></div>
+                                    <div class="channel-message-text">Show More Messages</div>
+                                    
+                                </div>
+                                
+                                
+                                
+                                
+                                
+                            </div>
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                </ul>
+                
+                
+            </div>
+            
+        </div>
+        
+        
+        
+        
+        
+        <div  class="channel-list"  data-role="page" xdata-theme="b"
+            id="channelMenuView">
+            <div data-role="header" xdata-theme="b" class="header">
+                <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
+                
+                
+                <a href="#popupMenu" data-rel="popup"
+                    data-role="button"
+                    data-inline="true"
+                    xdata-transition="slidedown"
+                    xdata-theme="b"
+                    xdata-icon="gear"
+                    class="ui-btn-right menu-button">&nbsp;</a>
+                
+                
+                
+                
+                <div data-role="popup" id="popupMenu" xdata-theme="a">
+                    
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                        
+                        <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#followersListView">Followers</a></li>
+                        <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="#" data-bind="click: deleteChannelCommand">Delete Channel</a></li>
+                        <li data-bind="style: {display:relationship()=='F'?'block':'none'}"><a href="#" data-bind="click: unfollowChannelCommand">Unfollow Channel</a></li>
+                        
+                        
+                        <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                        
+                    </ul>
+                    
+                </div>
+                
+                
+                
+           </div>
+            
+            
+            <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll >
+                
+                
+                
+                <ul data-role="listview" >
+                    
+                    
+                    
+                    <li class="channel-list-item" data-icon="false">
+                        
+                        <a  class="channel-list-anchor" href="#"  >
+                            
+                            
+                            <div class="channel-list-stripe2"></div>
+                            
+                            
+                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                            
+                            <span class="channel-info">
+                                <span class="channel-name" data-bind="text: title"></span>
+                                <span class="channel-description">channel description</span>
+                                
+                            </span>
+                            <div class="channel-list-avatar-frame"></div>
+                            
+                            
+                            
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="message-list-item" >
+                        
+                        <div  class="message-list-container" >
+                            
+                            <div class="message-list-stripe" ></div>
+                            
+                            
+                            
+                            
+                            
+                                <div  class="message-info">
+                                    
+                                    <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                                    <div class="message-list-avatar-frame"></div>
+                                    
+                                    <a data-role="none" href="index.html#channelView" >
+                                    <div class="message-text" style="font-size:20pt;" >Broadcasts</div>
+                                        </a>
+                                    <div style="position:absolute;background:gray;top:2px;right:50px;border-radius:10px;width:50px;height:22px;color:white;text-align:center;font-size:15pt;">99</div>
+                                    
+                                    <div style="margin-left:45px;">most recent:</div>
+                                    
+                                    <a data-role="none" href="#"  data-bind="click: showMessageDetails" >
+                                    <div  style="margin-left:45px;border:1px solid gray; border-radius:10px;margin-right:10px;"  >
+                                        <div  style="top:0;margin:5px;" data-bind="text: last_date" ></div>
+                                        <div  style="top:0;margin:5px;" data-bind="text: last_message" ></div>
+                                    </div>
+                                    </a>
+                                    
+                                    <button   style="margin-left:45px;font-size:14pt;border-radius:10px;" data-bind="click: initiateNewBroadcast" data-role="none">compose new broadcast</button>
+                                    
+                                    <div style="margin-left:35px;margin-right:10px;overflow-x:scroll;" data-scroll="x"  id="new_broadcast_div">
+                                    
+                                    <textarea data-role="none" data-bind="value: newMessage, valueUpdate: 'afterkeydown'" style="height:50px;border-radius:10px;font-size:12pt;padding:10px;margin:10px;" id="newMessage-cm"></textarea>
+                                        <br/>
+                                        
+                                        <fieldset data-role="controlgroup" data-role="fieldcontain">
+                                            <legend> Select Urgency</legend>
+                                            
+                                            <input type="radio" name="urgency" id="r-urgency-n" data-bind="checked: urgency" value="N" checked />
+                                            <label for="r-urgency-n">Normal</label>
+                                            
+                                            <input type="radio" name="urgency" id="r-urgency-l" data-bind="checked: urgency" value="L" />
+                                            <label for="r-urgency-l">Low</label>
+                                            
+                                            <input type="radio" name="urgency" id="r-urgency-ts" data-bind="checked: urgency" value="TS" />
+                                            <label for="r-urgency-ts">Time-Sensitive</label>
+                                            
+                                            <input type="radio" name="urgency" id="r-urgency-u" data-bind="checked: urgency" value="U" />
+                                            <label for="r-urgency-u">Urgent</label>
+                                            
+                                            <input type="radio" name="urgency" id="r-urgency-e" data-bind="checked: urgency" value="E" />
+                                            <label for="r-urgency-e">Emergency</label>
+                                        
+                                        
+                                        </fieldset>
+                                        
+                                        <label><input type="checkbox" name="igi" data-bind="checked: igi" value="yes" />Request iGi (I Got It)</label>
+                                        
+                                        <button   style="margin-left:45px;font-size:14pt;border-radius:10px;" data-role="none" data-bind="click: sendNewBroadcast" >send</button>
+                                        
+                                    </div>
+                                    
+                                    <br/>
+                                    
+                                    
+                                    
+                                    
+                                </div>
+                            
+                            
+                        </div>
+                        
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="message-list-item">
+                        
+                        <div  class="message-list-container" >
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            
+                            <a data-role="none"  href="index.html#followersListView">
+                                <div  class="message-info">
+                                    
+                                    <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                                    <div class="message-list-avatar-frame"></div>
+                                    
+                                    <div class="message-text" style="font-size:20pt;" >Followers</div>
+                                    
+                                </div>
+                            </a>
+                            
+                        </div>
+                        
+                        
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+                
+                
+            </div>
+            
+        </div>
+        
+        
+        
+        <div  class="channel-list"  data-role="page" xdata-theme="b"
+            id="channelView">
+            <div data-role="header" xdata-theme="b" class="header">
+                <a href="#" data-bind="click: showChannelMenu" data-role="button" data-icon="arrow-l" >Channel Menu</a>
                 
                 
                 <a href="#popupMenu" data-rel="popup"
@@ -1046,14 +1425,6 @@
                                 
                             </div>
                             </a>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
                             
                         </div>
                         
@@ -1336,6 +1707,8 @@
             
             
         </div>
+            
+            </div>
         
         
     </body>

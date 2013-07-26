@@ -94,6 +94,8 @@ loginViewModel = new LoginViewModel(),
 channelListViewModel = new ChannelListViewModel(),
 channelsFollowingListViewModel = new ChannelsFollowingListViewModel(),
 channelViewModel = new ChannelViewModel(),
+channelMenuViewModel = new ChannelMenuViewModel(),
+channelDetailsViewModel = new ChannelDetailsViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 signupViewModel = new SignupViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
@@ -105,12 +107,14 @@ userSettingsModel = new UserSettingsViewModel(),
 notificationsViewModel = new NotificationsViewModel(),
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
-messageViewModel = new MessageViewModel()
-;
+messageViewModel = new MessageViewModel();
+
 
 // load the stored state (recent searches)
 
 $.mobile.defaultPageTransition = ""; //"slide";
+
+
 
 $(document).ready(function () {
                   // bind each view model to a jQueryMobile page
@@ -119,9 +123,9 @@ $(document).ready(function () {
                   
                   
                   ko.applyBindings(loginViewModel, document.getElementById("loginView"));
-                  
-                  
                   ko.applyBindings(channelViewModel, document.getElementById("channelView"));
+                  ko.applyBindings(channelDetailsViewModel, document.getElementById("channelDetailsView"));
+                  ko.applyBindings(channelMenuViewModel, document.getElementById("channelMenuView"));
                   ko.applyBindings(channelNewViewModel, document.getElementById("channelNewView"));
                   ko.applyBindings(signupViewModel, document.getElementById("signupView"));
                   ko.applyBindings(sendMessageViewModel, document.getElementById("sendMessageView"));
@@ -141,6 +145,8 @@ $(document).ready(function () {
                   
                   console.log("currentUrl: " + currentUrl.hash);
                   
+                  localStorage.removeItem('baseUrl');
+                  
                   $(document).bind("pagebeforechange", function (event, data) {
                       
                                    $.mobile.pageData = (data && data.options && data.options.pageData)
@@ -154,6 +160,8 @@ $(document).ready(function () {
                                  //alert('activating something');
                                  //channelListViewModel.activate();
                                  });
+                  
+                  
                    
                   
                   
