@@ -405,7 +405,7 @@ function ChannelMenuViewModel() {
     
     this.getLastMessageCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Message");
-		return dataServiceM.getChannelMessages(that.channelid(), {limit: 0}, {success: successfulMessageGET, error: errorRetrievingMessages});
+		return dataServiceM.getChannelMessages(that.channelid(), {limit: 1}, {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
    
 
