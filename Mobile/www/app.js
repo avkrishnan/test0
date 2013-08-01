@@ -28,21 +28,7 @@ update: function (element, valueAccessor) {
 
 var messages = 0;
 
-function XXshowMessage(message){
-    
-    
-    
-     $("<div class='xui-loader ui-overlay-shadow ui-body-e ui-corner-all'>" + message + "</div>").css({ "display": "block", "opacity": 0.96, "top": 50, "padding":"10px", "font-size":"14pt", "position":"absolute", "z-index":100 })
-     .appendTo( $.mobile.activePage )
-     .delay( 2500 )
-     .fadeOut( 400, function(){
-     $(this).remove();
-     messages --;
-     });
-    
-}
-
-
+var activePage = '';
 
 function showMessage(msg){
 	$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")
@@ -61,8 +47,24 @@ function showMessage(msg){
 }
 
 
+if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function (obj, fromIndex) {
+        if (fromIndex == null) {
+            fromIndex = 0;
+        } else if (fromIndex < 0) {
+            fromIndex = Math.max(0, this.length + fromIndex);
+        }
+        for (var i = fromIndex, j = this.length; i < j; i++) {
+            if (this[i] === obj)
+                return i;
+        }
+        return -1;
+    };
+}
+
 
 function convDate(d){
+    
     
     var date = new Date();
     var offset = date.getTimezoneOffset();
@@ -124,9 +126,11 @@ inviteFollowersViewModel = new InviteFollowersViewModel(),
 followerViewModel = new FollowerViewModel(),
 commethodVerificationViewModel = new CommethodVerificationViewModel(),
 userSettingsModel = new UserSettingsViewModel(),
+devSettingsModel = new DevSettingsViewModel(),
 notificationsViewModel = new NotificationsViewModel(),
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
+panelHelpViewModel = new PanelHelpViewModel(),
 messageViewModel = new MessageViewModel();
 
 
@@ -136,11 +140,11 @@ $.mobile.defaultPageTransition = ""; //"slide";
 
 
 
+
 $(document).ready(function () {
                   // bind each view model to a jQueryMobile page
                   
                   $.mobile.activeBtnClass = '';
-                  
                   
                   ko.applyBindings(loginViewModel, document.getElementById("loginView"));
                   ko.applyBindings(channelViewModel, document.getElementById("channelView"));
@@ -153,6 +157,7 @@ $(document).ready(function () {
                   ko.applyBindings(inviteFollowersViewModel, document.getElementById("inviteFollowersView"));
                   ko.applyBindings(followerViewModel, document.getElementById("followerView"));
                   ko.applyBindings(userSettingsModel, document.getElementById("userSettingsView"));
+                  ko.applyBindings(devSettingsModel, document.getElementById("devSettingsView"));
                   ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
                   ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
                   ko.applyBindings(commethodVerificationViewModel, document.getElementById("commethodVerificationView"));
@@ -160,6 +165,7 @@ $(document).ready(function () {
                   ko.applyBindings(forgotPasswordViewModel, document.getElementById("forgotPasswordView"));
                   ko.applyBindings(resetPasswordViewModel, document.getElementById("resetPasswordView"));
                   ko.applyBindings(messageViewModel, document.getElementById("messageView"));
+                  ko.applyBindings(panelHelpViewModel, document.getElementById("panelHelpView"));
                   
                   var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   
@@ -167,21 +173,65 @@ $(document).ready(function () {
                   
                   localStorage.removeItem('baseUrl');
                   
+                  
+                  channelListViewModel.activate().then(function(){});
+                  
+                  
+                  $(document).on('click', '#panelanchor', function(){
+                                 
+                                     alert('testing');
+                                     //$.mobile.activePage.find('#mypanel').panel("open");
+                                 });
+                  
+                  
+                  
+                  $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
+                                 
+                                 var panelhtml = $("#globalpanel").html();
+                                 $(this).find('#gpanel').html(panelhtml);
+                                 
+                                 });
+                   
+                  
+                  $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
+                                 
+                                 
+                                 if( panelHelpViewModel.isDirty($(this).attr('id'))){
+                                     var panelhtml = $("#globalpanel").find('#mypanel').html();
+                                     $(this).find('#mypanel').html(panelhtml);
+                                     $(this).find('#mypanel').panel();
+                                     $(this).find('#mypanel').trigger('create');
+                                     
+                                     panelHelpViewModel.setClean($(this).attr('id'));
+                                 }
+                                 
+                                 
+                                 
+                                 
+                                      /*
+                                 $('<div>').attr({'id':'xmypanel','data-role':'panel'}).prependTo($(this));
+                                 $('<a>').attr({'id':'openpanel','href':'#'}).html('testing').prependTo($(this));
+                                 
+                                 $(this).find('#xmypanel').html($("#globalpanel").html());
+                                 //$(this).find('#xmypanel').trigger('layout');
+                                 
+                                 
+                                 
+                                 $(document).on('click', '#open-panel', function(){
+                                                $.mobile.activePage.find('#xmypanel').panel("open");       
+                                                });   
+                                 */
+                                 
+                                 });
+                  
                   $(document).bind("pagebeforechange", function (event, data) {
-                      
+                                   
                                    $.mobile.pageData = (data && data.options && data.options.pageData)
                                    ? data.options.pageData
                                    : null;
                                    });
                   
               
-                  $(document).on('pagebeforeshow', '#channelListView', function(){
-                                 //console.log('activating channel list view');
-                                 //alert('activating something');
-                                 //channelListViewModel.activate();
-                                 });
-                  
-                  
                    
                   
                   

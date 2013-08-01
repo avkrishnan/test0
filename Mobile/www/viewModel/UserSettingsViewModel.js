@@ -15,10 +15,12 @@ function UserSettingsViewModel() {
 	this.channels = ko.observableArray([]);
     this.commethods = ko.observableArray([]);
     this.baseUrl = ko.observable();
+    this.accountName = ko.observable();
     
     
 	var that = this;
-	
+    
+  
 	
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
 
@@ -39,7 +41,12 @@ function UserSettingsViewModel() {
 	});
     
     
-		this.activate = function() {
+    this.activate = function() {
+        
+        
+        var _accountName = localStorage.getItem("accountName");
+        
+        that.accountName(_accountName);
 		
 		that.getCommethods().then(gotCommethods);
 
@@ -51,6 +58,7 @@ function UserSettingsViewModel() {
     function gotCommethods(data){
         //alert(JSON.stringify(data));
         that.commethods(data.commethod);
+        $(window).resize();
     }
     
 	this.logoutCommand = function(){

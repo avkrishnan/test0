@@ -5,10 +5,18 @@ function ChannelNewViewModel() {
     
     this.template = "channelNewView";
     this.name = ko.observable();
+    this.description = ko.observable();
     this.notifications = ko.observable();
     
     var that = this;
     var  dataService = new EvernymChannelService();
+    
+    /*
+    $("#" + that.template).live("pagebeforecreate", function (e, data) {
+                                var panelhtml = $("#globalpanel").html();
+                                $(this).find("#gpanel").html(panelhtml);
+                                });
+    */
     
     
     $("#" + this.template).live("pagebeforeshow", function (e, data) {
@@ -36,7 +44,11 @@ function ChannelNewViewModel() {
         //router.navigateTo('#/channellist');
         
         $.mobile.changePage("#" + channelListViewModel.template);
+        channelListViewModel.clearForm();
         channelListViewModel.activate();
+        
+        panelHelpViewModel.setAllDirty();
+        
     };
     
     function errorCreate(data, status, response){
@@ -57,7 +69,8 @@ function ChannelNewViewModel() {
         //inputChannelName
         //logger.log('start creating channel ' + this.name() , null, 'dataservice', true);
         $.mobile.showPageLoadingMsg("a", "Creating Channel " + that.name());
-        dataService.createChannel({name: that.name()}, {success: successfulCreate, error: errorCreate});
+        alert(that.description());
+        dataService.createChannel({name: that.name(), description: that.description()}, {success: successfulCreate, error: errorCreate});
     };
      
 

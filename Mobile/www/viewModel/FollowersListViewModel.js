@@ -9,11 +9,15 @@ function FollowersListViewModel() {
 	
 	this.template = "followersListView";
 	this.title = ko.observable();
+    this.description = ko.observable();
+    this.url = ko.observable();
+    this.relationship = ko.observable();
 	this.followers = ko.observableArray([]);
 	
 	this.channelid = ko.observable();
 	this.channelname = ko.observable();
-	
+    
+    
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
 
 		
@@ -26,6 +30,33 @@ function FollowersListViewModel() {
 			var lchannel = JSON.parse(currentChannel);
 			that.activate(lchannel);
 		}
+                                
+                                
+                                if ($.mobile.pageData && $.mobile.pageData.id){
+                                    that.activate({id:$.mobile.pageData.id});
+                                
+								}
+								
+								else {
+                                    var currentChannel = localStorage.getItem("currentChannel");
+                                    var lchannel = JSON.parse(currentChannel);
+                                    
+                                    
+                                
+                                    //that.channel([lchannel]);
+                                    that.title(lchannel.name );
+                                    that.description(lchannel.description);
+                                    that.url(lchannel.normName + ".evernym.com");
+                                    that.relationship(lchannel.relationship);
+                                    that.channelid(lchannel.id);
+                                    
+                                    that.activate(lchannel);
+                                
+                                
+								
+								}
+                                
+        
 
 
 	});

@@ -12,6 +12,8 @@ function NotificationsViewModel() {
        
     this.notifications = ko.observableArray([]);
     
+ 
+    
     $("#" + this.template).live("pagebeforeshow", function (e, data) {
 
             that.activate();

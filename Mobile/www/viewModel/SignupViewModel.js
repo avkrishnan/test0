@@ -29,7 +29,7 @@ function SignupViewModel() {
                                 
                                 if ($.mobile.pageData && $.mobile.pageData.follow){
 								
-                                    localStorage.setItem("follow", JSON.stringify($.mobile.pageData.follow));
+                                    //localStorage.setItem("follow", JSON.stringify($.mobile.pageData.follow));
                                 
 								}
 																
@@ -108,7 +108,8 @@ function SignupViewModel() {
             
             if (follow){
                 
-                alert('hello, we are going to now go to or follow the channel ' + follow);
+                //alert('hello, we are going to now go to or follow the channel ' + follow);
+                localStorage.removeItem("follow");
             }
             else if (login_nav){
                 var hash = login_nav.hash;

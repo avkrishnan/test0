@@ -1,6 +1,6 @@
 ﻿/*globals ko*/
 
-function ChannelViewModel() {
+function ChannelBroadcastsViewModel() {
 
 	
 	// --- properties
@@ -10,7 +10,7 @@ function ChannelViewModel() {
 	var  dataServiceM = new EvernymMessageService();
 	
 	
-	this.template = "channelView";
+	this.template = "channelBroadcastsView";
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);
@@ -18,13 +18,13 @@ function ChannelViewModel() {
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
 	
+    
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
                                 var panelhtml = $("#globalpanel").html();
                                 $(this).find("#gpanel").html(panelhtml);
                                 });
     */
-    
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
                                 
@@ -46,17 +46,13 @@ function ChannelViewModel() {
                                         that.messages([]);
                                     }
                                 
-                                    if (lchannel){
-                                        that.channel([lchannel]);
-                                        that.title(lchannel.name );
-                                        that.relationship(lchannel.relationship);
-                                        that.channelid(lchannel.id);
-                                        $.mobile.showPageLoadingMsg("a", "Loading Messages");
-									    that.getMessagesCommand(that.channelid()).then(gotMessages);
-                                    }
-                                    else {
-                                        $.mobile.changePage("#" + loginViewModel.template);
-                                    }
+                                    that.channel([lchannel]);
+                                    that.title(lchannel.name );
+                                    that.relationship(lchannel.relationship);
+                                    that.channelid(lchannel.id);
+                                    $.mobile.showPageLoadingMsg("a", "Loading Messages");
+									that.getMessagesCommand(that.channelid()).then(gotMessages);
+                                    
 								
 								}
 								
@@ -90,12 +86,14 @@ function ChannelViewModel() {
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
 		
-        if ($.mobile.pageData && $.mobile.pageData.id){
-            that.followChannelCommand().then(postFollow);
-	    }
-        else {
+        //if ($.mobile.pageData && $.mobile.pageData.id){
+            //that.followChannelCommand().then(postFollow);
+	    //}
+        //else {
+            
             that.getMessagesCommand(that.channelid()).then(gotMessages);
-        }
+            
+        //}
         
 	}
     

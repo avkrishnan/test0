@@ -17,8 +17,28 @@ function ChannelListViewModel() {
 	var that = this;
 	this.shown = false;
 	
+    
+    
+    
+    /*
+    $("#" + that.template).live("pagebeforecreate", function (e, data) {
+                                
+                                var panelhtml = $("#globalpanel").html();
+                                $(this).find( "#gpanel").html(panelhtml);
+                               
+                                
+                                });
+    
+     */
+    
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
-	    
+                                
+                                
+                                
+                                //$( '<li class="channel-list-item" data-bind="text: name"></li>').appendTo('#channellist' );
+                                //$('#' + that.template ).trigger("create");
+                                
+                                
 	    if (!that.shown) {
 	        that.activate();
 	    }
@@ -32,24 +52,29 @@ function ChannelListViewModel() {
 		
 	this.activate = function() {
 		console.log("trying to get channels");
-        that.clearForm();
+        
 		
 		if ( that.channels() && that.channels().length){
-			that.channels.removeAll();
+			// commented out to cache the channels
+            //that.channels.removeAll();
 		}
-		$.mobile.showPageLoadingMsg("a", "Loading Channels");
-		return this.listMyChannelsCommand().then(gotChannels);
+        else {
+            
+            $.mobile.showPageLoadingMsg("a", "Loading Channels");
+            return this.listMyChannelsCommand().then(gotChannels);
+        }
+        
+		
 	};
 	
 	function successfulList(data){
 		$.mobile.hidePageLoadingMsg();
 		//logger.log('success listing channels ' , null, 'dataservice', true);
-		
-		
 	};
     
     this.clearForm = function(){
         that.name('');
+        that.channels.removeAll();
     };
 	
 	function gotChannels(data){
@@ -68,8 +93,19 @@ function ChannelListViewModel() {
 			$("#no_channels_notification").show();
 			return;
 		}
-		
+        
+        populatePanel(data.channel);
+        
+        
+        var panelhtml = $("#globalpanel").find('#mypanel').html();
+        $.mobile.activePage.find('#mypanel').html(panelhtml);
+        $.mobile.activePage.find('#mypanel').panel();
+        $.mobile.activePage.find('#mypanel').trigger('create');
+        //$.mobile.activePage.find('#mypanel').trigger('updatelayout');
+        
+        
 		$("#no_channels_notification").hide();
+        
 		that.channels.removeAll();
 		that.channels(data.channel);
 	};
