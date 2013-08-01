@@ -49,9 +49,9 @@ A {
 }
 
 
-@media only screen and (min-width: 320px){
+@media only screen and (min-width: 620px){
     .ui-page {
-        max-width: 320px !important;
+        max-width: 620px !important;
         margin: 0 auto !important;
         position: relative !important;
         border:0;

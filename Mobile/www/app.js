@@ -177,11 +177,7 @@ $(document).ready(function () {
                   channelListViewModel.activate().then(function(){});
                   
                   
-                  $(document).on('click', '#panelanchor', function(){
-                                 
-                                     alert('testing');
-                                     //$.mobile.activePage.find('#mypanel').panel("open");
-                                 });
+                 
                   
                   
                   

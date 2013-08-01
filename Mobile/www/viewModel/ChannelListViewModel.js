@@ -20,16 +20,12 @@ function ChannelListViewModel() {
     
     
     
-    /*
-    $("#" + that.template).live("pagebeforecreate", function (e, data) {
-                                
-                                var panelhtml = $("#globalpanel").html();
-                                $(this).find( "#gpanel").html(panelhtml);
-                               
-                                
-                                });
     
-     */
+     $("#" + that.template).live("pagebeforecreate", function (e, data) {
+     var panelhtml = $("#globalpanel").html();
+     $(this).find("#gpanel").html(panelhtml);
+     });
+     
     
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
                                 
@@ -101,6 +97,7 @@ function ChannelListViewModel() {
         $.mobile.activePage.find('#mypanel').html(panelhtml);
         $.mobile.activePage.find('#mypanel').panel();
         $.mobile.activePage.find('#mypanel').trigger('create');
+        
         //$.mobile.activePage.find('#mypanel').trigger('updatelayout');
         
         
