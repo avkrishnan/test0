@@ -156,8 +156,8 @@
 		function step3(data) {
 	        accessToken = data.accessToken;
 	        newAccount = {
-	        	firstname: api.randomString(8),
-	        	lastname: api.randomString(8)
+	        	firstname: api.randomStr(8),
+	        	lastname: api.randomStr(8)
 	        };
 	        api.modifyAccount(accessToken, newAccount, api.HANDLER.expectSuccessNoContent, step4);
 		}

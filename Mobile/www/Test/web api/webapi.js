@@ -62,6 +62,7 @@ var EvernymAPI = function() {
     };
     
     
+
     
     
     
@@ -259,6 +260,7 @@ var EvernymAPI = function() {
         };
     };
     
+    
     this.randomAccountname = function() {
     	return 'test-' + randomString(8);
     };
@@ -285,7 +287,7 @@ var EvernymAPI = function() {
         channelId: channelId
         };
     };
-    
+
     function randomString(length) {
         var text = "";
         var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -296,7 +298,8 @@ var EvernymAPI = function() {
         return text;
     }
     
-    
+    this.randomStr = randomString;
+
 };
 
 
