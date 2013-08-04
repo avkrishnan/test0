@@ -16,6 +16,7 @@ function InviteFollowersViewModel() {
 	this.firstname = ko.observable();
 	this.lastname = ko.observable();
 	this.smsPhone = ko.observable();
+    
    
 	
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {

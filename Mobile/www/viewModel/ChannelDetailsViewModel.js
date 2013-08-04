@@ -18,6 +18,13 @@ function ChannelDetailsViewModel() {
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
 	
+    /*
+    $("#" + that.template).live("pagebeforecreate", function (e, data) {
+                                var panelhtml = $("#globalpanel").html();
+                                $(this).find("#gpanel").html(panelhtml);
+                                });
+    */
+    
     
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								

@@ -12,6 +12,10 @@ function ChannelsFollowingListViewModel() {
 	this.channels = ko.observableArray([]);
 	var that = this;
 	this.shown = false;
+    
+    
+    
+
 	
    
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {

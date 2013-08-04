@@ -16,6 +16,9 @@ function FollowerViewModel() {
     this.channelid = ko.observable();
     this.channelname = ko.observable();
 
+    
+    
+ 
 
     $("#" + this.template).live("pagebeforeshow", function (e, data) {
 

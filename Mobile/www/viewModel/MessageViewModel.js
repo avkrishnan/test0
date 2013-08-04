@@ -20,8 +20,15 @@ function MessageViewModel() {
     this.messageid = ko.observable();
     this.messagetext = ko.observable();
     this.replyMessage = ko.observable();
-	
+    this.messagecreated = ko.observable();
     
+    /*
+    $("#" + that.template).live("pagebeforecreate", function (e, data) {
+                                var panelhtml = $("#globalpanel").html();
+                                $(this).find("#gpanel").html(panelhtml);
+                                });
+	
+    */
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
                                 that.clear();
@@ -54,6 +61,11 @@ function MessageViewModel() {
                                     that.message([lmessage]);
                                 
                                     that.messagetext(lmessage.text);
+                                
+                                
+                                    
+                                    that.messagecreated(lmessage.created);
+                                
                                     that.messageid(lmessage.id);
                                 
                                     that.title(lchannel.name );

@@ -16,7 +16,24 @@ function LoginViewModel() {
     
     var  dataService = new EvernymLoginService();
     
-    $("#" + this.template).live("pagebeforeshow", function(e, data){ that.clearForm(); that.activate(); });
+    $("#" + this.template).live("pagebeforeshow", function(e, data){
+                                
+                                
+                                
+                                if ($.mobile.pageData && $.mobile.pageData.a){
+								
+                                    if ($.mobile.pageData.a == 'logout'){
+                                        that.logoutCommand();
+                                    }
+								}
+                                
+                                
+                                that.clearForm();
+                                
+                                that.activate();
+                                
+                                
+                                });
     
     this.activate = function(){
         
@@ -87,7 +104,9 @@ function LoginViewModel() {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('login_nav');
         localStorage.removeItem('currentChannel');
+        localStorage.removeItem('accountName');
         
+        channelListViewModel.clearForm();
         notificationsViewModel.removeNotifications();
     };
     
@@ -102,6 +121,8 @@ function LoginViewModel() {
         if (args.accessToken) {
             
             localStorage.setItem("accessToken", args.accessToken);
+            localStorage.setItem("accountName", that.accountName());
+            
             var notifications = args.notifications;
             
             

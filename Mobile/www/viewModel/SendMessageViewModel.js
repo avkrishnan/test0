@@ -17,6 +17,7 @@ function SendMessageViewModel() {
     this.channelname = ko.observable();
     this.message = ko.observable();
     
+   
     
     $("#" + this.template).live("pagebeforeshow", function (e, data) {
 

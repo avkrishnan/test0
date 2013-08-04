@@ -27,6 +27,9 @@ function ChannelMenuViewModel() {
 	
     this.newMessage = ko.observable('');
     
+    this.description = ko.observable('-');
+    this.url = ko.observable('-');
+    
     this.clear = function(){
         
         if (! initNB){
@@ -41,23 +44,26 @@ function ChannelMenuViewModel() {
         }
     }
     
+    /*
+    $("#" + that.template).live("pagebeforecreate", function (e, data) {
+                                var panelhtml = $("#globalpanel").html();
+                                $(this).find("#gpanel").html(panelhtml);
+                                });
+    */
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
-                                
+                                $('#broadcasts_mr').hide();
                                 
                                 that.clear();
                                 
-								
 								if ($.mobile.pageData && $.mobile.pageData.id){
-								
 									that.activate({id:$.mobile.pageData.id});
+                                    
 								}
 								
 								else {
 									var currentChannel = localStorage.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
-                                
-                                
                                 
                                     if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
                                 
@@ -66,6 +72,8 @@ function ChannelMenuViewModel() {
                                 
                                     that.channel([lchannel]);
                                     that.title(lchannel.name );
+                                    that.description(lchannel.description);
+                                    that.url(lchannel.normName + ".evernym.com");
                                     that.relationship(lchannel.relationship);
                                     that.channelid(lchannel.id);
                                     $.mobile.showPageLoadingMsg("a", "Loading Messages");
@@ -77,11 +85,20 @@ function ChannelMenuViewModel() {
 		   });
 	
 	
-
-	
-	this.activate = function (channel) {
+	this.activate = function (channel, action) {
 		
 		that.channelid(channel.id);
+        
+        
+        
+        if ($.mobile.pageData.action){
+            action = $.mobile.pageData.action;
+        }
+        
+        if (action == 'newbroadcast'){
+            that.initiateNewBroadcast();
+        }
+        
     	
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
@@ -111,15 +128,20 @@ function ChannelMenuViewModel() {
     this.initiateNewBroadcast = function(){
         
         initNB = true;
-        $("#new_broadcast_div").show(400, function(){$(window).resize(); $("#newMessage-cm").focus() } );
+        $("#new_broadcast_div").show(200, function(){$(window).resize(); $("#newMessage-cm").focus() } );
+        
+    };
+    
+    
+    this.cancelNewBroadcast = function(){
+        that.newMessage('');
+        initNB = false;
+        $("#new_broadcast_div").hide(200, function(){$(window).resize();  } );
         
     };
     
     this.showMessageDetails = function(){
-        
-        
         that.showMessage(that.message());
-        
     };
 	
 	function gotChannel(data){
@@ -132,12 +154,14 @@ function ChannelMenuViewModel() {
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
 		
-        if ($.mobile.pageData && $.mobile.pageData.id){
-            that.followChannelCommand().then(postFollow);
-	    }
-        else {
-            that.getLastMessageCommand(that.channelid()).then(gotMessages);
-        }
+        //if ($.mobile.pageData && $.mobile.pageData.id){
+        //    that.followChannelCommand().then(postFollow);
+	    //}
+        //else {
+        
+        that.getLastMessageCommand(that.channelid()).then(gotMessages);
+        
+        //}
         
 	}
     
@@ -159,14 +183,21 @@ function ChannelMenuViewModel() {
             
 		}
         
-        
-        that.message(data.message[0]);
-        
-        //alert(JSON.stringify(data.message));
-		
-        that.last_date(convDate(data.message[0].created));
-        
-		that.last_message(data.message[0].text);
+        if(data.message && data.message.length){
+            
+            $('#broadcasts_mr').show();
+            
+            var maxlength = 60;
+            var messagetext = data.message[0].text;
+            if (messagetext.length > maxlength){
+                messagetext = messagetext.substring(0,maxlength) + " ...";
+            }
+            
+            that.message(data.message[0]);
+            that.last_date(convDate(data.message[0].created));
+            that.last_message(messagetext);
+        }
+       
 		
 	}
 	
