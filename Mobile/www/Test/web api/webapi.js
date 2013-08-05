@@ -5,13 +5,10 @@ var EvernymAPI = function() {
     var okAsync = QUnit.okAsync,
     stringformat = QUnit.stringformat;
     
-    //var baseUrl = 'http://qupler.no-ip.org:8080/api20/rest', // Test environment
-    var baseUrl = 'http://localhost:8079/api/rest', // Test environment
-    //var baseUrl = 'https://api.evernym.com/api20/rest', // Test environment
-
-    //var baseUrl = 'http://qupler.no-ip.org:8079/api/rest', // Test environment
-    
-    
+    ///var baseUrl = 'http://localhost:8079/api/rest', 
+    //var baseUrl = 'http://qupler.no-ip.org:8079/api/rest', 
+    //var baseUrl = 'http://qupler.no-ip.org:8080/api20/rest', 
+    var baseUrl = 'https://api.evernym.com/api20/rest', 
     
     getMsgPrefix = function (id, rqstUrl) {
         return stringformat(
@@ -107,7 +104,7 @@ var EvernymAPI = function() {
     
     function checkEmail(emailAddress, postHandlerCallback){
         
-        var maxTimes = 15;
+        var maxTimes = 75;
         var times = 0;
         function waitForIt() {
             return timeoutPromise(1000).done(getEmail);
@@ -216,35 +213,35 @@ var EvernymAPI = function() {
     
     this.createChannel = function(accessToken, channel, handler, postHandlerCallback) {
         callAPI('POST', '/channel', accessToken, channel, handler, postHandlerCallback);
-    }
+    };
+    
+    this.modifyChannel = function(accessToken, channelid, channel, handler, postHandlerCallback) {
+        callAPI('PUT', '/channel/' + channelid , accessToken, channel, handler, postHandlerCallback);
+    };
     
     this.deleteChannel = function(accessToken, channelid, handler, postHandlerCallback) {
         callAPI('DELETE', '/channel/' + channelid, accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
     
     this.sendMessage = function(accessToken, channelid, message, handler, postHandlerCallback) {
         callAPI('POST', '/channel/' + channelid + '/message', accessToken, message, handler, postHandlerCallback);
-    }
+    };
     
     this.getChannel = function(accessToken, channelid, handler, postHandlerCallback) {
         callAPI('GET', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
     
     this.getMessages = function(accessToken, channelid, handler, postHandlerCallback) {
         callAPI('GET', '/channel/' + channelid + '/message', accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
     
     this.listOwnerChannels = function(accessToken, handler, postHandlerCallback) {
-        
         callAPI('GET', '/channel?relationship=O', accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
     
     this.getCommunicationMethods = function(accessToken, handler, postHandlerCallback) {
-        
         callAPI('GET', '/commethod', accessToken, undefined, handler, postHandlerCallback);
-    }
-    
-    
+    };
     
     
     this.generateAccount = function() {
@@ -271,20 +268,21 @@ var EvernymAPI = function() {
         password: account.password,
         appToken: 'sNQO8tXmVkfQpyd3WoNA6_3y2Og='
         };
-    }
-    
-    
+    };
+
     this.generateChannel = function() {
+    	var nm = 'testchannel-' + randomString(5);
         return {
-        name: 'testchannel-' + randomString(5)
+        	name: nm,
+        	description: 'Channel description for ' + nm
         };
     };
-    
+
     this.generateCommunicationMethodUrgentSMS = function(channelId) {
         return {
-        smsPhone: '123-123-1234',
-        urgency: true,
-        channelId: channelId
+        	smsPhone: '123-123-1234',
+        	urgency: true,
+        	channelId: channelId
         };
     };
 
