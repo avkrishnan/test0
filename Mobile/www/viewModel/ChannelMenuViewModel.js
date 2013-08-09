@@ -91,7 +91,7 @@ function ChannelMenuViewModel() {
         
         
         
-        if ($.mobile.pageData.action){
+        if ($.mobile.pageData && $.mobile.pageData.action){
             action = $.mobile.pageData.action;
         }
         

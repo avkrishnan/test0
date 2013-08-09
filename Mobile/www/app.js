@@ -30,6 +30,13 @@ var messages = 0;
 
 var activePage = '';
 
+
+function startBroadcast(channel){
+    $.mobile.activePage.find('#mypanel').panel("close");
+    $.mobile.changePage("#" + channelMenuViewModel.template );
+    channelMenuViewModel.activate({id:channel}, 'newbroadcast');
+}
+
 function showMessage(msg){
 	$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")
 	.css({ display: "block",
@@ -186,48 +193,171 @@ $(document).ready(function () {
                                  var panelhtml = $("#globalpanel").html();
                                  $(this).find('#gpanel').html(panelhtml);
                                  
+                                 //$(this).find('#mypanel').css('background','green');
+                                 
                                  });
                    
                   
                   $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
                                  
-                                 
                                  if( panelHelpViewModel.isDirty($(this).attr('id'))){
                                      var panelhtml = $("#globalpanel").find('#mypanel').html();
                                      $(this).find('#mypanel').html(panelhtml);
                                      $(this).find('#mypanel').panel();
-                                     $(this).find('#mypanel').trigger('create');
-                                     
+                                 
+                                 
+                                 
+                                 var panel = $(this).find('#mypanel').get(0);
+                                 myScroll = new iScroll(panel);
+                                 
+                                 
+                                 $(this).find('#mypanel').trigger('create');
+                                 
+                                 
+                                 
+                                 /*
+                                 if ($(this).find('#innerpanel').iscroll){
+                                 showMessage('asdf');
+                                     $(this).find('#innerpanel').iscroll('refresh');
+                                 
+                                 }
+                                  */
+                                 
+                                 
+                                 /*
+                                 $(this).find('#innerpanel #extra-broadcast-channels')
+                                 
+                                 $('#my-collaspible').bind('expand', function () {
+                                                           alert('Expanded');
+                                                           }).bind('collapse', function () {
+                                                                   alert('Collapsed');
+                                                                   });
+                                 
+                                 
+                                 
+                                 */
+                                 
+                                 
+                                 
+                                 
+                                 /*
+                                 
+                                 $(window).resize();
+                                 
+                                 
+                                 $(this).find('#mypanel').resize();
                                      panelHelpViewModel.setClean($(this).attr('id'));
+                                  
+                                  */
                                  }
                                  
                                  
                                  
                                  
-                                      /*
-                                 $('<div>').attr({'id':'xmypanel','data-role':'panel'}).prependTo($(this));
-                                 $('<a>').attr({'id':'openpanel','href':'#'}).html('testing').prependTo($(this));
+                                 });
+                  
+                  
+                  
+                  $(document).on('swiperight', '[data-role="page"]', function(e,a){
                                  
-                                 $(this).find('#xmypanel').html($("#globalpanel").html());
-                                 //$(this).find('#xmypanel').trigger('layout');
+                                   $(this).find('#mypanel').panel("open");
+                                   
+                                   });
+                  
+                  
+                  
+                  $(document).on('expand', '[data-role="collapsible"]', function(e,a){
                                  
+                                 $(this).find('span.ui-btn-inner').css({
+                                                                       'background':'#D1D3D4',
+                                                                       'border-top':'#F1F2F2',
+                                                                       'border-bottom':'#A7A9AC'
+                                                                       
+                                                                       })
+                                                
+                                 ;
                                  
+                                 $(window).resize();
                                  
-                                 $(document).on('click', '#open-panel', function(){
-                                                $.mobile.activePage.find('#xmypanel').panel("open");       
-                                                });   
-                                 */
                                  
                                  });
                   
+                  
+                  $(document).on('collapse', '[data-role="collapsible"]', function(e,a){
+                                 
+                                 $(this).find('span.ui-btn-inner').css({
+                                                                       'background':'',
+                                                                       'border-top':'',
+                                                                       'border-bottom':''
+                                                                       
+                                                                       })
+                                 
+                                 ;
+                                 $(window).resize();
+                                 
+                                 
+                                 
+                                 });
+                  
+                  
                   $(document).bind("pagebeforechange", function (event, data) {
+                  
+                  
+                                   //$.mobile.activePage.attr('id')
+                                 
+                                   //alert(data.toPage);
                                    
                                    $.mobile.pageData = (data && data.options && data.options.pageData)
                                    ? data.options.pageData
                                    : null;
                                    });
-                  
               
+                  
+                  $(document).bind('panelbeforeclose', function(e, data) {
+                                   $(".ui-panel").scrollTop(0);
+                                   });
+                  
+                  $(document).bind('panelbeforeopen', function(e, data) {
+                                   
+                                   top_pos = $(document).scrollTop();
+                                   $(".ui-panel").css("top", top_pos);
+                                   
+                                   
+                                   
+                                   });
+                  
+                  /*
+                  $(document).bind('panelopen', function(e, data) {
+                                   top_pos = $(document).scrollTop();
+                                   
+                                   var iOS = undefined;
+                                   
+                                   if (iOS && iOS <= 5.01) {
+                                   $(".ui-panel").css("overflow", "scroll");
+                                   $(".ui-panel").css("-webkit-overflow-scrolling", "auto");
+                                   } else {
+                                   $(".ui-panel").css("overflow", "scroll");
+                                   $(".ui-panel").css("-webkit-overflow-scrolling", "touch");
+                                   }
+                                   $(".ui-panel").height($(window).height() - $('.ui-page-active header').height());
+                                   $(".ui-panel").css("top", 0);
+                                   $(".ui-panel-content-wrap-open").css("overflow", "hidden");
+                                   $(".ui-panel-content-wrap-open").height($(window).height() - $('.ui-page-active header').height());
+                                   $(".ui-panel-content-wrap-open").scrollTop(top_pos);
+                                   $(document).scrollTop(0);
+                                   });
+                  
+                  $(document).bind('panelclose', function(e, data) {
+                                   top_pos = $(".ui-panel-content-wrap-closed").scrollTop();
+                                   $(".ui-panel").height('auto');
+                                   $(".ui-panel-content-wrap-closed").height("auto");
+                                   $(".ui-panel-content-wrap-closed").css("overflow", "auto");
+                                   $(document).scrollTop(top_pos);
+                                   });
+                  */
+                  
+                  
+                  
                    
                   
                   

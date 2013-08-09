@@ -7,6 +7,7 @@
             <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" >
                 
                 <!-- required libraries -->
+                <link href='resources/fonts/open_sans_woff.css' rel='stylesheet' type='text/css'>
                 <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
                 
                 
@@ -65,8 +66,8 @@
                     
                     
                     function goToChannel(select){
-                        //alert(select.value);
-                        window.location = 'index.html#panelHelpView?id=' + select.value;
+                        
+                        startBroadcast(select.value);
                         
                     }
                     
@@ -81,19 +82,24 @@
                             var channel = channels[n];
                             var name = channel.name;
                             if ( n < 2){
-                                innards += '<li><a href="index.html#panelHelpView?id=' + channel.normName + '&action=newbroadcast" >' + name + '</a></li>';
+                                innards += '<li class="white-gradient white_menu "><a href="#" onclick="startBroadcast(\''+ channel.normName +
+                                '\');" ><img class="ui-li-icon" src="resources/V-04-a2x.png" />' + name + '</a></li>';
                             }
                             else{
-                                outards += '<option value="' + channel.normName + '" >' + name + '</option>';
+                                outards += '<li class="white-gradient white_menu " ><a href="#"  onclick="startBroadcast(\''+ channel.normName +
+                                '\');" ><img class="ui-li-icon" src="resources/V-04-a2x.png" />' + name + '</a></li>';
                             }
                             
                         }
                         
                         if (outards.length > 0){
-                            innards += '<li><select onchange="goToChannel(this);"><option>SELECT</option>' + outards + '</select></li>'
+                            outards = '<h2  > -- Select a Channel -- </h2><ul data-icon="" data-role="listview"  data-corners="false"  >' + outards + '</ul>'
                         }
                         
                         $("#broadcast_channels").html(innards);
+                        
+                        $("#extra-broadcast-channels").html(outards);
+                        
                         
                         
                         //$("#broadcast_extras").html('<select><option>more channels</option>' + outards + '</select>');
@@ -111,33 +117,46 @@
         <div id="globalpanel" style="display:none;">
         
             
-            <div data-role="panel" id="mypanel" data-position="left" data-display="overlay">
+            <div data-role="panel" id="mypanel" data-position="left" data-display="reveal" >
             
-            
-            
-            <div style="color:gray;">
-                <span>Send Broadcast:</span><br/>
                 
-                <ul id="broadcast_channels" data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+            <div id="innerpanel" class="panel-inner" style="" data-iscroll>
+                
+            
+                <div data-role="none" class="green-gradient" style="">
+                    <div style="padding-left:15px;padding-top:5px;"> Timothy Ruff </div>
+                </div>
+            
+                <div class="menu_head">
+                    <div style="padding-left:15px;padding-top:5px;">SEND BROADCAST</div>
+                </div>
+                
+                <div data-role="collapsible-set"  data-corners="false">
+                    <ul data-icon="" id="broadcast_channels" data-corners="false" data-role="listview" xdata-inset="true" style="min-width:210px;" xdata-theme="evernym">
+                    </ul>
+                    <div id="extra-broadcast-channels"  data-role="collapsible" data-collapsed-icon="evernym-closed" data-expanded-icon="evernym-open"  data-corners="false">
+					</div>
+                </div>
+                
+            <div>
+                
+                <div class="menu_head">
+                    <div style="padding-left:15px;padding-top:5px;">MAIN MENU
+                    </div>
+                </div>
+                
+                <ul data-role="listview" data-icon="" data-corners="false" xdata-inset="true" style="min-width:210px;" xdata-theme="d">
                     
-                </ul>
-                
-            </div>
-            
-             
-             
-            <div style="color:gray;">
-                <div>Main Menu:</div>
-                
-                <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
                     
-                    <li><a href="index.html#channelNewView" >Create a Channel</a></li>
-                    <!-- <li><a href="index.html#followAnotherChannelView">Follow a Channel</a></li> -->
-                    <li><a href="index.html#channelListView">Channels I Own</a></li>
-                    <li><a href="index.html#channelsFollowingListView">Channels I Follow</a></li>
-                    <!-- <li><a href="index.html#allMessagesHistoryView">All Messages/ History</a></li> -->
-                    <li><a href="index.html#userSettingsView">Settings</a></li>
-                    <li><a href="index.html#loginView?a=logout">Logout</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-d2x.png" /><a href="index.html#channelListView">Channels I Own</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-e2x.png" /><a href="index.html#channelsFollowingListView">Channels I Follow</a></li>
+                    
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-f2x.png" /><a href="index.html#channelNewView" >Create a New Channel</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-g2x.png" /><a href="index.html#followAnotherChannelView">Find Channels</a></li>
+                    
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-h2x.png" /><a href="index.html#allMessagesHistoryView">All Messages</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-i2x.png" /><a href="index.html#userSettingsView">User Settings</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-i2x.png" /><a href="index.html#loginView?a=logout">Logout</a></li>
                     
                 </ul>
                 
@@ -146,9 +165,9 @@
              
             
             <h3 style="font-size:8pt;color:#BBB;">BETA V-04 Tray</h3>
-            
-            
             </div>
+            </div>
+            
              
                 
         
@@ -163,17 +182,18 @@
         <!--  CHANNEL LIST VIEW -->
             
         <div id="channelListView" data-role="page" class="channel-list">
+            <div id="gpanel"></div>
             <div class="header" data-role="header" xdata-theme="b">
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
             </div>
             
             
             
             
-            <div  class="channel-list" data-role="content" xdata-theme="c" data-iscroll>
+            <div  class="channel-list" data-role="content" data-iscroll>
                 <div data-bind="text: notification"></div>
                 <ul  data-role="listview">
                     
@@ -252,6 +272,8 @@
         <!--  NOTIFICATIONS VIEW -->
         
         <div id="notificationsView"  data-role="page" class="channel-list">
+            <div id="gpanel"></div>
+            
             <div data-role="header" >
                 <h1>Notifications</h1>
                 
@@ -265,7 +287,7 @@
                     xdata-icon="gear"
                     class="ui-btn-left menu-button">&nbsp;
                 </a>
-                <div id="gpanel"></div>
+                
                 
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
@@ -320,6 +342,7 @@
         <!--  CHANNELS FOLLOWING LIST VIEW -->
         
         <div id="channelsFollowingListView" data-role="page" class="channel-list">
+            <div id="gpanel"></div>
             <div data-role="header" class="header" >
                 
                 
@@ -328,7 +351,7 @@
                     data-inline="true"
                     class="ui-btn-left menu-button">&nbsp;
                 </a>
-                <div id="gpanel"></div>
+                
                 
                 
                 <!-- <li><a href="#" data-bind="click: activate">Refresh List</a></li> -->
@@ -675,6 +698,7 @@
         <!--  FOLLOWER LIST VIEW -->
         
         <div id="followersListView" data-role="page" class="channel-list">
+            <div id="gpanel"></div>
             <div data-role="header" class="header">
                 
                 <!--
@@ -682,7 +706,7 @@
                  -->
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
             </div>
             
@@ -810,6 +834,7 @@
         <!--  FOLLOWER VIEW -->
             
         <div id="followerView" data-role="page" class="channel-list">
+            <div id="gpanel"></div>
             <div data-role="header" class="header" xdata-theme="b">
                 
                 
@@ -818,7 +843,7 @@
                 
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
                 <div data-role="popup" id="popupMenu" data-theme="a">
                     <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
@@ -946,6 +971,7 @@
         <!--  SEND MESSAGE VIEW -->
             
         <div id="sendMessageView" data-role="page" class="channel-list">
+            <div id="gpanel"></div>
             <div data-role="header" xdata-theme="b">
                 <!--
                 <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
@@ -953,7 +979,7 @@
                  -->
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
             </div>
             
@@ -989,6 +1015,7 @@
         <!--  INVITE FOLLOWERS VIEW -->
         
         <div id="inviteFollowersView" data-role="page" class="channel-list" >
+            <div id="gpanel"></div>
             <div data-role="header" class="header" xdata-theme="b">
                 <!--
                 <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
@@ -996,7 +1023,7 @@
                  -->
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
                 
             </div>
@@ -1108,6 +1135,7 @@
         <!--  MESSAGE VIEW -->
         
         <div id="messageView" class="channel-list"  data-role="page" >
+            <div id="gpanel"></div>
             <div data-role="header" xdata-theme="b" class="header">
                 <!--
                 <a href="#" data-bind="click: showMessageView" data-role="button" data-icon="arrow-l" >Broadcasts</a>
@@ -1115,7 +1143,7 @@
                  -->
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
                 
                 <div data-role="popup" id="popupMenu" xdata-theme="a">
@@ -1298,6 +1326,7 @@
         
         
         <div id="channelDetailsView" class="channel-list"  data-role="page" >
+            <div id="gpanel"></div>
             <div data-role="header" xdata-theme="b" class="header">
                 <!--
                 <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
@@ -1305,7 +1334,7 @@
                  -->
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
                 
                 <div data-role="popup" id="popupMenu" xdata-theme="a">
@@ -1467,13 +1496,14 @@
         <!--  CHANNEL MENU VIEW -->
             
         <div id="channelMenuView" class="channel-list"  data-role="page" >
+            <div id="gpanel"></div>
             <div data-role="header" xdata-theme="b" class="header">
                 <!--
                 <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
                 -->
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
                 
                 <div data-role="popup" id="popupMenu" xdata-theme="a">
@@ -1507,7 +1537,7 @@
                     
                     
                     
-                    <li class="channel-list-item" data-icon="false">
+                    <li class="channel-list-item" data-icon="false" >
                         
                         <a  class="channel-list-anchor" href="#"  >
                             
@@ -1515,14 +1545,16 @@
                             <div class="channel-list-stripe2"></div>
                             
                             
-                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
                             
-                            <span class="channel-info">
+                            
+                            <span class="channel-info"  style="background:#414042;border-radius:0px;width:100%;">
                                 <span class="channel-name" data-bind="text: title"></span>
-                                <span class="channel-description" data-bind="text: description">asdf</span>
-                                <span class="channel-url" data-bind="text: url">asdf</span>
+                                <span class="channel-description" data-bind="text: description"></span>
+                                <span class="channel-url" data-bind="text: url"></span>
                                 
                             </span>
+                            
+                            <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
                             <div class="channel-list-avatar-frame"></div>
                             
                             
@@ -1533,6 +1565,77 @@
                     
                     
                     
+                    <!----- -->
+                     
+                     
+                     
+                     
+                     <li class="sub-message-list-item " id="message-reply-form">
+                     
+                     <div  class="sub-message-list-container" >
+                     
+                     <div class="message-list-stripe"></div>
+                     
+                     
+                     <div class="sub-message-info" style="background:#414042;border-radius:0px;width:100%;left:10px;">
+                     
+                     <div class="sub-message-list-avatar" style="background:#8D863F;left:-27px;"></div>
+                     
+                    <div class="sub-message-text"> Broadcasts </div>
+                    
+                    
+                    
+                    </div>
+            
+            
+            
+                     </div>
+                         
+                         <div style="background:white;height:100%;left:64px;width:3px;position:absolute;"></div>
+                         
+                         <div style="background:green;width:80%;height:200px;margin-top:10px;position:relative;left:100px;">something here</div>
+                         
+                         <div style="background:green;width:80%;height:200px;margin-top:10px;position:relative;left:100px;">something here</div>
+            
+            
+            </li>
+            
+                    
+                    
+                    
+                    
+                    <li class="sub-message-list-item " id="message-reply-form">
+                        
+                        <div  class="sub-message-list-container" >
+                            
+                            <div class="message-list-stripe"></div>
+                            
+                            
+                            <div class="sub-message-info" style="background:#414042;border-radius:0px;width:100%;left:10px;">
+                                
+                                <div class="sub-message-list-avatar" style="background:#8D863F;left:-27px;"></div>
+                                
+                                <div class="sub-message-text"> Followers </div>
+                                
+                                
+                                
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        
+                        
+                        
+                        
+                    </li>
+            
+            
+                     <!--- --->
+            
+            
+            
+            
                     <li class="message-list-item" >
                         
                         <div  class="message-list-container" >
@@ -1659,13 +1762,13 @@
         <!--  CHANNEL VIEW -->
         
         <div  id="channelView" class="channel-list"  data-role="page" >
-            
+            <div id="gpanel"></div>
             <div data-role="header" xdata-theme="b" class="header">
                
                 
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel"></div>
+                
                 
                 
                 <div data-role="popup" id="popupMenu" >
@@ -1806,13 +1909,14 @@
             
             
             
+            <div id="gpanel"></div>
             
             <div data-role="header" class="header">
                 
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <div id="gpanel">
-                </div>
+                
+                
                 
             </div>
             
@@ -2024,12 +2128,12 @@
             
             
             
-            
+            <div id="gpanel"></div>
             <div data-role="header" class="header">
                 
                 
                 <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-               <span id="gpanel"></span>
+               
                 
                  
                 
@@ -2230,10 +2334,11 @@
             <!--  FOLLOW ANOTHER CHANNEL VIEW -->
             
             <div id="followAnotherChannelView" class="channel-list" data-role="page" Xdata-theme="b" >
+                <div id="gpanel"></div>
                 <div data-role="header" class="header" Xdata-theme="b">
                     <h1>FollowAnotherChannel</h1>
                     <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button">&nbsp;</a>
-                    <div id="gpanel"></div>
+                    
                 </div>
                 <div data-role="content" Xdata-theme="b" >
                     <h2 style="color:white;">Follow Another Channel</h2>
@@ -2244,10 +2349,11 @@
             <!--  ALL MESSAGE HISTORY VIEW -->
             
             <div id="allMessagesHistoryView" class="channel-list" data-role="page" Xdata-theme="b" >
+                <div id="gpanel"></div>
                 <div data-role="header" class="header" Xdata-theme="b">
                     <h1>AllMessagesHistory</h1>
                     <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button">&nbsp;</a>
-                    <div id="gpanel"></div>
+                    
                 </div>
                 <div data-role="content" Xdata-theme="b" >
                     <h2 style="color:white;">AllMessagesHistory</h2>
@@ -2259,10 +2365,11 @@
             <!--  PANEL HELP VIEW -->
             
             <div id="panelHelpView" class="channel-list" data-role="page" Xdata-theme="b" >
+                <div id="gpanel"></div>
                 <div data-role="header" class="header" Xdata-theme="b">
                     <h1>PANEL HELP</h1>
                     <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button">&nbsp;</a>
-                    <div id="gpanel"></div>
+                    
                 </div>
                 <div data-role="content" Xdata-theme="b" >
                     <h2 style="color:white;">panel help</h2>

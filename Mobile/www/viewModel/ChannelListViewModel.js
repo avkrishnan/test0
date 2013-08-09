@@ -26,6 +26,7 @@ function ChannelListViewModel() {
      $(this).find("#gpanel").html(panelhtml);
      });
      
+     
     
 	$("#" + this.template).live("pagebeforeshow", function (e, data) {
                                 

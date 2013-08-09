@@ -10584,6 +10584,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					if ( self._modal ) {
 						self._modal.addClass( self._modalOpenClasses );
 					}
+         
+                    
 				},
 				complete = function() {
 					self.element.add( self._wrapper ).off( self._transitionEndEvents, complete );
