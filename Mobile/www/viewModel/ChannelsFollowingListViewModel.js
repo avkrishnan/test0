@@ -100,7 +100,7 @@ function ChannelsFollowingListViewModel() {
 	this.showChannel = function (channel) {
         localStorage.setItem("currentChannel", JSON.stringify(channel));
 		
-		$.mobile.changePage("#" + channelViewModel.template)
+		$.mobile.changePage("#" + channelBroadcastsViewModel.template)
 	};
 	
 	this.newChannelCommand = function () {
