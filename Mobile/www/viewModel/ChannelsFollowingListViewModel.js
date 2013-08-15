@@ -8,6 +8,8 @@ function ChannelsFollowingListViewModel() {
 	// --- properties
 	
 	this.template = "channelsFollowingListView";
+    this.viewid = "V-30";
+    this.viewname = "ChannelsIFollow";
 	
 	this.channels = ko.observableArray([]);
 	var that = this;

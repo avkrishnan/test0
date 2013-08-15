@@ -11,6 +11,10 @@ function MessageViewModel() {
 	var replyToId = '';
 	
 	this.template = "messageView";
+    this.viewid = "V-23";
+    this.viewname = "BroadcastDetails";
+    
+    
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);
@@ -21,6 +25,10 @@ function MessageViewModel() {
     this.messagetext = ko.observable();
     this.replyMessage = ko.observable();
     this.messagecreated = ko.observable();
+    
+    
+    this.url = ko.observable();
+    this.description = ko.observable();
     
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
@@ -62,6 +70,9 @@ function MessageViewModel() {
                                 
                                     that.messagetext(lmessage.text);
                                 
+                                
+                                that.description(lchannel.description);
+                                that.url(lchannel.normName + ".evernym.com");
                                 
                                     
                                     that.messagecreated(lmessage.created);

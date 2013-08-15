@@ -9,6 +9,9 @@ function ResetPasswordViewModel() {
     
     var that = this;
     this.template = "resetPasswordView";
+    this.viewid = "V-??";
+    this.viewname = "ResetPassword2";
+    
     this.key = '';
     this.notification = ko.observable();
     

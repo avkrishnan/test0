@@ -8,6 +8,11 @@ function PanelHelpViewModel() {
 	
 	
 	this.template = "panelHelpView";
+    
+    this.viewid = "V-00";
+    this.viewname = "panelhelp";
+    
+    
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);

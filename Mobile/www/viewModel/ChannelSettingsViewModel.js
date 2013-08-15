@@ -1,6 +1,6 @@
 ﻿/*globals ko*/
 
-function ChannelMenuViewModel() {
+function ChannelSettingsViewModel() {
 
 	
 	// --- properties
@@ -8,12 +8,11 @@ function ChannelMenuViewModel() {
 	var that = this;
 	var  dataService = new EvernymChannelService();
 	var  dataServiceM = new EvernymMessageService();
-	var initNB = false;
 	
-	this.template = "channelMenuView";
-    this.viewid = "V-21";
-    this.viewname = "ChannelMenu";
-    
+	
+	this.template = "channelSettingsView";
+    this.viewid = "V-16";
+    this.viewname = "ChannelSettings";
     
 	this.title = ko.observable();
     this.relationship = ko.observable();
@@ -22,137 +21,74 @@ function ChannelMenuViewModel() {
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
     
-    this.last_date = ko.observable();
-    this.last_message = ko.observable();
-    this.last_replies = ko.observable();
     
-    this.urgency = ko.observable('N');
-    this.igi = ko.observable();
+    this.url = ko.observable();
+    this.description = ko.observable();
+    
 	
-    this.newMessage = ko.observable('');
-    
-    this.description = ko.observable('-');
-    this.url = ko.observable('-');
-    
-    this.clear = function(){
-        
-        if (! initNB){
-            that.newMessage('');
-            that.urgency('N');
-            
-            that.last_date('');
-            that.last_message('');
-            that.last_replies('');
-            
-            $("#new_broadcast_div").hide();
-        }
-    }
-    
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
                                 var panelhtml = $("#globalpanel").html();
                                 $(this).find("#gpanel").html(panelhtml);
                                 });
     */
+    
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
-                                $('#broadcasts_mr').hide();
                                 
-                                that.clear();
-                                
+                                $('.more_messages_button').hide();
+								
 								if ($.mobile.pageData && $.mobile.pageData.id){
+								
 									that.activate({id:$.mobile.pageData.id});
-                                    
 								}
 								
 								else {
 									var currentChannel = localStorage.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
                                 
+                                
+                                
                                     if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
                                 
                                         that.messages([]);
                                     }
                                 
-                                    that.channel([lchannel]);
-                                    that.title(lchannel.name );
-                                    that.description(lchannel.description);
-                                    that.url(lchannel.normName + ".evernym.com");
-                                    that.relationship(lchannel.relationship);
-                                    that.channelid(lchannel.id);
-                                    
-                                    $.mobile.showPageLoadingMsg("a", "Loading Messages");
-									that.getLastMessageCommand(that.channelid()).then(gotMessages);
-                                    
+                                    if (lchannel){
+                                        that.channel([lchannel]);
+                                        that.title(lchannel.name );
+                                        that.description(lchannel.description);
+                                        that.url(lchannel.normName + '.evernym.com');
+                                        that.relationship(lchannel.relationship);
+                                        that.channelid(lchannel.id);
+                                        $.mobile.showPageLoadingMsg("a", "Loading Messages");
+									    
+                                    }
+                                    else {
+                                        $.mobile.changePage("#" + loginViewModel.template);
+                                    }
 								
 								}
 								
 		   });
 	
 	
-	this.activate = function (channel, action) {
+
+	
+	this.activate = function (channel) {
 		
 		that.channelid(channel.id);
-        
-        
-        
-        if ($.mobile.pageData && $.mobile.pageData.action){
-            action = $.mobile.pageData.action;
-        }
-        
-        if (action == 'newbroadcast'){
-            that.initiateNewBroadcast();
-        }
-        
-    	
+
+		
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		
 		that.getChannelCommand(that.channelid()).then(gotChannel);
 		
+		
 		return true;
 		
 	};
-    
-    
-    
-    this.sendNewBroadcast = function(){
-        //alert(that.newMessage());
-        //alert(that.urgency());
-        //alert(that.igi());
-        
-        initNB = false;
-        var messageobj = {text: that.newMessage(), urgencyId: that.urgency(),type: 'FYI'};
-        
-        
-        
-		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
-        
-    };
-    
-    this.initiateNewBroadcast = function(){
-        
-        initNB = true;
-        $("#new_broadcast_div").show(200, function(){$(window).resize(); $("#newMessage-cm").focus() } );
-        
-    };
-    
-    
-    this.cancelNewBroadcast = function(){
-        that.newMessage('');
-        initNB = false;
-        $("#new_broadcast_div").hide(200, function(){$(window).resize();  } );
-        
-    };
-    
-    this.showMessageDetails = function(){
-        that.showMessage(that.message());
-    };
-    
-    this.showChannelSettings = function(){
-        $.mobile.changePage("#" + channelSettingsViewModel.template);
-    
-    };
 	
 	function gotChannel(data){
 		$.mobile.hidePageLoadingMsg();
@@ -161,84 +97,20 @@ function ChannelMenuViewModel() {
 		that.title(data.name );
         that.relationship(data.relationship);
         that.channelid(data.id);
-        $.mobile.showPageLoadingMsg("a", "Loading Messages");
+        
 		
 		
-        //if ($.mobile.pageData && $.mobile.pageData.id){
-        //    that.followChannelCommand().then(postFollow);
-	    //}
-        //else {
-        
-        that.getLastMessageCommand(that.channelid()).then(gotMessages);
-        
-        //}
         
 	}
     
     function postFollow(data){
-        that.getMessagesCommand(that.channelid()).then(gotMessages);
+        
+        
         
     }
 	
-	function gotMessages(data){
-		
-        
-        that.clear();
-        
-		
-		$.mobile.hidePageLoadingMsg();
-		if (data.message && data.message.constructor == Object){
-			
-			data.message = [data.message];
-            
-		}
-        
-        if(data.message && data.message.length){
-            
-            $('#broadcasts_mr').show();
-            
-            var maxlength = 60;
-            var messagetext = data.message[0].text;
-            if (messagetext.length > maxlength){
-                messagetext = messagetext.substring(0,maxlength) + " ...";
-            }
-            
-            that.message(data.message[0]);
-            that.last_date(convDate(data.message[0].created));
-            that.last_message(messagetext);
-            if (data.message[0].replies){
-                var last_rs = data.message[0].replies
-                
-                last_rs = last_rs + ' ' + (last_rs > 1?'Replies':'Reply');
-                that.last_replies(last_rs);
-            }
-        }
-       
-		
-	}
+    
 	
-    function gotMoreMessages(data){
-		
-		
-		$.mobile.hidePageLoadingMsg();
-		
-        if (data.more){
-            
-            $('.more_messages_button').show();
-        }
-        else {
-            $('.more_messages_button').hide();
-        }
-		
-        
-        var tmp_messages = that.messages().concat(data.message);
-        
-        
-        that.messages(tmp_messages);
-        
-		
-		
-	}
     
     
 	function successfulGetChannel(data){
@@ -257,13 +129,6 @@ function ChannelMenuViewModel() {
 	}
 	
 	
-    
-    function successfulMessage(data){
-		$.mobile.hidePageLoadingMsg();
-		that.getMessagesCommand(that.channelid()).then(gotMessages);
-		
-	}
-    
 	
 	function successfulFollowChannel(){
 		$.mobile.hidePageLoadingMsg();
@@ -280,7 +145,7 @@ function ChannelMenuViewModel() {
 	
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
-		$.mobile.changePage("#" + loginViewModel.template);
+		$.mobile.changePage("#" + loginViewModel.template)
 		
 	};
 	
@@ -310,7 +175,9 @@ function ChannelMenuViewModel() {
     function errorFollowing(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		if (details.code == 100601){ // we are already following this channel
-			that.getMessagesCommand(that.channelid()).then(gotMessages);
+			
+            
+            
 		}
         else {
 		
@@ -398,14 +265,24 @@ function ChannelMenuViewModel() {
     
     this.showMessage = function (message) {
         localStorage.setItem("currentMessage", JSON.stringify(message));
-    	
+        
+		
 		$.mobile.changePage("#" + messageViewModel.template)
 	};
     
     
+    
+    this.showChannelMenu = function(){
+        
+         $.mobile.changePage("#" + channelMenuViewModel.template);
+        
+    }
+    
+    
+    
     this.showChannelList = function(){
         
-        initNB = false;
+        
         var lrelationship = 'O';
         
         if (that.channel()[0]){
@@ -429,31 +306,9 @@ function ChannelMenuViewModel() {
 	};
 	
 	
-    this.postMessageCommand = function(){
-
-		var messageobj = {text: that.message(), type: 'FYI'};
-		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
-	};
-     
 	
 	
-	this.refreshMessagesCommand = function(){
-		
-		that.messages([]);
-		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		that.getMessagesCommand(that.channelid()).then(gotMessages);
-	};
 	
-	this.getMessagesCommand = function(){
-		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		return dataServiceM.getChannelMessages(that.channelid(), undefined, {success: successfulMessageGET, error: errorRetrievingMessages});
-	};
-    
-    
-    this.getLastMessageCommand = function(){
-		$.mobile.showPageLoadingMsg("a", "Loading Message");
-		return dataServiceM.getChannelMessages(that.channelid(), {limit: 1}, {success: successfulMessageGET, error: errorRetrievingMessages});
-	};
    
 
 	

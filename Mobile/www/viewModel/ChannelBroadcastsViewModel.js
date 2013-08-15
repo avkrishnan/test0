@@ -11,20 +11,27 @@ function ChannelBroadcastsViewModel() {
 	
 	
 	this.template = "channelBroadcastsView";
+    this.viewid = "V-22";
+    this.viewname = "Broadcasts";
+    
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);
 	this.message = ko.observable();
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
-	
+   
+    this.url = ko.observable();
+    this.description = ko.observable();
     
+	
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
                                 var panelhtml = $("#globalpanel").html();
                                 $(this).find("#gpanel").html(panelhtml);
                                 });
     */
+    
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
                                 
@@ -46,13 +53,20 @@ function ChannelBroadcastsViewModel() {
                                         that.messages([]);
                                     }
                                 
-                                    that.channel([lchannel]);
-                                    that.title(lchannel.name );
-                                    that.relationship(lchannel.relationship);
-                                    that.channelid(lchannel.id);
-                                    $.mobile.showPageLoadingMsg("a", "Loading Messages");
-									that.getMessagesCommand(that.channelid()).then(gotMessages);
-                                    
+                                    if (lchannel){
+                                        that.channel([lchannel]);
+                                        that.title(lchannel.name );
+                                        that.relationship(lchannel.relationship);
+                                        that.channelid(lchannel.id);
+                                that.description(lchannel.description);
+                                that.url(lchannel.normName + '.evernym.com');
+                                
+                                        $.mobile.showPageLoadingMsg("a", "Loading Messages");
+									    that.getMessagesCommand(that.channelid()).then(gotMessages);
+                                    }
+                                    else {
+                                        $.mobile.changePage("#" + loginViewModel.template);
+                                    }
 								
 								}
 								
@@ -86,14 +100,12 @@ function ChannelBroadcastsViewModel() {
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
 		
-        //if ($.mobile.pageData && $.mobile.pageData.id){
-            //that.followChannelCommand().then(postFollow);
-	    //}
-        //else {
-            
+        if ($.mobile.pageData && $.mobile.pageData.id){
+            that.followChannelCommand().then(postFollow);
+	    }
+        else {
             that.getMessagesCommand(that.channelid()).then(gotMessages);
-            
-        //}
+        }
         
 	}
     

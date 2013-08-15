@@ -44,6 +44,13 @@ function EvernymLoginService() {
     };
     
     
+    
+    this.getAccount = function (loginModel, callbacks) {
+        return api.callAPI('GET', '/account', undefined, callbacks, true);
+    };
+    
+    
+    
     this.accountLogout = function (authKey, callbacks) {
         
         return api.callAPI('POST', '/account/logout', undefined, callbacks, true);

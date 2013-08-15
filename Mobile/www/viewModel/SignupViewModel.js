@@ -8,7 +8,8 @@ function SignupViewModel() {
     var  dataService = new EvernymLoginService();
     
     this.template = "signupView";
-    
+    this.viewid = "V-02";
+    this.viewname = "Register";
 
     this.accountName = ko.observable();
     this.password = ko.observable();

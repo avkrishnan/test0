@@ -8,7 +8,9 @@ function ChannelListViewModel() {
 	// --- properties
 	
 	this.template = "channelListView";
-	
+	this.viewid = "V-19";
+    this.viewname = "ChannelsIOwn";
+    
 	this.channels = ko.observableArray([]);
     
     this.notification = ko.observable();
@@ -21,9 +23,10 @@ function ChannelListViewModel() {
     
     
     
-     $("#" + that.template).live("pagebeforecreate", function (e, data) {
-     var panelhtml = $("#globalpanel").html();
-     $(this).find("#gpanel").html(panelhtml);
+     $("#" + that.template).live("Xpagebeforecreate", function (e, data) {
+                                 alert('hey 2');
+         var panelhtml = $("#globalpanel").html();
+         $(this).find("#gpanel").html(panelhtml);
      });
      
      

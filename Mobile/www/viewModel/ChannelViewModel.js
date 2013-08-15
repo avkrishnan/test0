@@ -11,6 +11,9 @@ function ChannelViewModel() {
 	
 	
 	this.template = "channelView";
+    this.viewid = "V-18";
+    this.viewname = "ChannelDetails";
+    
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);
@@ -52,7 +55,7 @@ function ChannelViewModel() {
                                         that.relationship(lchannel.relationship);
                                         that.channelid(lchannel.id);
                                         $.mobile.showPageLoadingMsg("a", "Loading Messages");
-									    that.getMessagesCommand(that.channelid()).then(gotMessages);
+									    
                                     }
                                     else {
                                         $.mobile.changePage("#" + loginViewModel.template);
@@ -87,63 +90,20 @@ function ChannelViewModel() {
 		that.title(data.name );
         that.relationship(data.relationship);
         that.channelid(data.id);
-        $.mobile.showPageLoadingMsg("a", "Loading Messages");
+        
 		
 		
-        if ($.mobile.pageData && $.mobile.pageData.id){
-            that.followChannelCommand().then(postFollow);
-	    }
-        else {
-            that.getMessagesCommand(that.channelid()).then(gotMessages);
-        }
         
 	}
     
     function postFollow(data){
-        that.getMessagesCommand(that.channelid()).then(gotMessages);
+        
+        
         
     }
 	
-	function gotMessages(data){
-		
-		
-		$.mobile.hidePageLoadingMsg();
-		if (data.message && data.message.constructor == Object){
-			
-			data.message = [data.message];
-		}
-        
-        if (data.more){
-            
-             $('.more_messages_button').show();
-        }
-		
-		that.messages(data.message);
-		
-	}
+    
 	
-    function gotMoreMessages(data){
-		
-		
-		$.mobile.hidePageLoadingMsg();
-		
-        if (data.more){
-            
-            $('.more_messages_button').show();
-        }
-        else {
-            $('.more_messages_button').hide();
-        }
-		
-        
-        var tmp_messages = that.messages().concat(data.message);
-        
-        
-        that.messages(tmp_messages);
-        
-		
-		
-	}
     
     
 	function successfulGetChannel(data){
@@ -161,13 +121,7 @@ function ChannelViewModel() {
         ;
 	}
 	
-	function successfulMessage(data){
-		$.mobile.hidePageLoadingMsg();
-
-		that.getMessagesCommand(that.channelid()).then(gotMessages);
-		that.message('');
-		
-	}
+	
 	
 	function successfulFollowChannel(){
 		$.mobile.hidePageLoadingMsg();
@@ -214,7 +168,9 @@ function ChannelViewModel() {
     function errorFollowing(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		if (details.code == 100601){ // we are already following this channel
-			that.getMessagesCommand(that.channelid()).then(gotMessages);
+			
+            
+            
 		}
         else {
 		
@@ -342,24 +298,10 @@ function ChannelViewModel() {
 		return dataService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
 	
-	this.postMessageCommand = function(){
-
-		var messageobj = {text: that.message(), type: 'FYI'};
-		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
-	};
 	
 	
-	this.refreshMessagesCommand = function(){
-		
-		that.messages([]);
-		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		that.getMessagesCommand(that.channelid()).then(gotMessages);
-	};
 	
-	this.getMessagesCommand = function(){
-		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		return dataServiceM.getChannelMessages(that.channelid(), undefined, {success: successfulMessageGET, error: errorRetrievingMessages});
-	};
+	
    
 
 	

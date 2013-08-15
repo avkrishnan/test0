@@ -4,6 +4,9 @@ function ChannelNewViewModel() {
     
     
     this.template = "channelNewView";
+    this.viewid = "V-15";
+    this.viewname = "CreateAnotherChannel";
+    
     this.name = ko.observable();
     this.description = ko.observable();
     this.notifications = ko.observable();

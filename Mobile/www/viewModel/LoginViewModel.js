@@ -9,6 +9,12 @@ function LoginViewModel() {
     
     var that = this;
     this.template = "loginView";
+    this.viewid = "V-01";
+    this.viewname = "Login";
+    
+    this.first_name = '';
+    
+    this.last_name = '';
     
     this.accountName = ko.observable();
     
@@ -63,6 +69,20 @@ function LoginViewModel() {
     };
     
     
+    
+    this.getAccount = function(){
+        
+        
+        var callbacks = {
+        success: getAccountSuccess,
+        error: loginError
+        };
+        
+        return dataService.getAccount(undefined, callbacks);
+        
+    };
+    
+    
     this.forgotPasswordCommand = function () {
         
         
@@ -105,6 +125,7 @@ function LoginViewModel() {
         localStorage.removeItem('login_nav');
         localStorage.removeItem('currentChannel');
         localStorage.removeItem('accountName');
+        localStorage.removeItem('name');
         
         channelListViewModel.clearForm();
         notificationsViewModel.removeNotifications();
@@ -112,9 +133,25 @@ function LoginViewModel() {
     
     function loginSuccess2(data){}
     
+    function getAccountSuccess(data){
+        
+        
+        that.first_name = data.firstname;
+        that.last_name = data.lastname;
+        
+        
+        populatePanelName(data.firstname + ' ' + data.lastname);
+        
+        
+        
+    }
+    
     function loginSuccess(args) {
                 
         $.mobile.hidePageLoadingMsg();
+        
+        
+        
         
         
         localStorage.removeItem('accessToken');
@@ -124,6 +161,8 @@ function LoginViewModel() {
             localStorage.setItem("accountName", that.accountName());
             
             var notifications = args.notifications;
+            
+            that.getAccount();
             
             
             var login_nav = JSON.parse(localStorage.getItem("login_nav"));
@@ -155,6 +194,7 @@ function LoginViewModel() {
                 
                 $.mobile.changePage("#" + channelListViewModel.template);
             }
+            
             
             
             

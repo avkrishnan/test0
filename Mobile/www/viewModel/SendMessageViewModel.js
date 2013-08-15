@@ -10,6 +10,9 @@ function SendMessageViewModel() {
     var  dataServiceM = new EvernymMessageService();
 	
     this.template = "sendMessageView";
+    this.viewid = "V-20";
+    this.viewname = "ComposeBroadcast";
+    
     this.title = ko.observable();
     this.channel = ko.observableArray([]);
     

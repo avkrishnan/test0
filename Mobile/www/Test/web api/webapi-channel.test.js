@@ -28,60 +28,8 @@
 		}
 		function step3(data) {
 			accessToken = data.accessToken;
-			api.createChannel(accessToken, channel, api.HANDLER.expectCreated, step4);
-		}
-		function step4(data) {
-			api.getChannel(accessToken, data.id, api.HANDLER.expectSuccess, step5);
-		}
-		function step5(data) {
-			equal(channel.name, data.name);
-			equal(channel.description, data.description);
-			start();
-		}
-	});
-
-	test('MODIFY CHANNEL NAME',  function () {
-		ok(false,"not yet implemented");
-	});
-
-	test('MODIFY CHANNEL DESCRIPTION',  function () {
-		stop(timoutms); //tell qunit to wait 5 seconds before timing out
-        
-        var api = new EvernymAPI();
-		var account = api.generateAccount();
-		var channel = api.generateChannel();
-		
-		var chnlId;
-		var newDesc;
-		
-		var accessToken;
-
-		api.enroll(account, api.HANDLER.expectSuccessNoContent, step1);
-        
-		function step1(){
-            api.checkEmailAndVerify(account.emailaddress, step2);
-        }
-		function step2() {
-			api.login(api.generateLogin(account), api.HANDLER.expectSuccess, step3);
-		}
-		function step3(data) {
-			accessToken = data.accessToken;
-			api.createChannel(accessToken, channel, api.HANDLER.expectCreated, step4);
-		}
-		function step4(data) {
-			newDesc = channel.description + "<modified>";
-			chnlId = data.id;
-			var newChannel = {
-				description: newDesc
-			};
-			api.modifyChannel(accessToken, chnlId, newChannel, api.HANDLER.expectSuccess, step5);
-		}
-		function step5(data) {
-			api.getChannel(accessToken, chnlId, api.HANDLER.expectSuccess, step6);
-		}
-		function step6(data) {
-			equal(data.description, newDesc);
-			start();
+			api.createChannel(accessToken, channel, api.HANDLER.expectCreated);
+            start();
 		}
 	});
 
@@ -188,7 +136,7 @@
         var api = new EvernymAPI();
 		var channel = api.generateChannel();
 		var accessToken = 'asdfasdf';
-		api.createChannel(accessToken, channel, api.HANDLER.expectUnauthorized);
+		api.createChannel(accessToken, channel, api.HANDLER.expectBadRequest);
 	});
 
 	test('CREATE DUPLICATE CHANNEL FAIL', function () {
@@ -269,7 +217,7 @@
 	  var account = api.generateAccount();
 	  var accessToken;
 	  api.enroll(account, api.HANDLER.expectSuccessNoContent, step2);
-	  // var channel = api.generateChannel();
+	  var channel = api.generateChannel();
 	  function step2() {
 	      api.login(api.generateLogin(account), api.HANDLER.expectSuccess, step3);
 	  }

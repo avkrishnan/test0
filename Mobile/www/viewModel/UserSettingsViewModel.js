@@ -8,6 +8,8 @@ function UserSettingsViewModel() {
 	// --- properties
 	
     this.template = "userSettingsView";
+    this.viewid = "V-08";
+    this.viewname = "UserSettings";
     
     var  dataService = new EvernymCommethodService();
 	

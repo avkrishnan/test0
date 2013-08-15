@@ -8,6 +8,9 @@ function CommethodVerificationViewModel() {
     var  dataService = new EvernymCommethodService();
     
     this.template = "commethodVerificationView";
+    this.viewid = "V-??";
+    this.viewname = "ComMethodVerification";
+    
     this.message = ko.observable();
     
 

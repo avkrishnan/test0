@@ -9,6 +9,8 @@ function ForgotPasswordViewModel() {
     
     var that = this;
     this.template = "forgotPasswordView";
+    this.viewid = "V-03";
+    this.viewname = "ForgotPassword";
     
     this.accountName = ko.observable();
     

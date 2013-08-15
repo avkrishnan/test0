@@ -5,7 +5,7 @@ ko.bindingHandlers.updateListviewOnChange = {
 update: function (element, valueAccessor) {
     
     
-    console.log('dood');
+    
     ko.utils.unwrapObservable(valueAccessor());  //grab dependency
     
     var listview = $(element).parents()
@@ -26,10 +26,17 @@ update: function (element, valueAccessor) {
 
 
 
+$(document).bind("mobileinit", function(){
+                 $.mobile.autoInitialize = false;
+                 });
+
+
 var messages = 0;
 
 var activePage = '';
 
+
+var openPanel = false;
 
 function startBroadcast(channel){
     $.mobile.activePage.find('#mypanel').panel("close");
@@ -53,6 +60,145 @@ function showMessage(msg){
              });
 }
 
+function closeError(){
+    $("#errordiv").fadeOut( 400, function(){
+                              $(this).remove();
+                              });
+    
+}
+
+
+function showError(msg){
+    
+    var existingdiv = $("#errordiv").get(0);
+    
+    
+    if (!existingdiv){
+        
+        $("<div id='errordiv' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg +
+          "<br/><button onclick='closeError();'>ok</button></h3></div>")
+        .css({ display: "block",
+             opacity: 0.90,
+             position: "fixed",
+             padding: "7px",
+             "text-align": "center",
+             width: "270px",
+             left: ($(window).width() - 284)/2,
+             top: $(window).height()/2 })
+        .appendTo( $.mobile.pageContainer ).delay( 1500 )
+        .fadeOut( 400, function(){
+                 $(this).remove();
+                 });
+        
+    }
+}
+
+
+
+function closeFeedback(){
+    
+    $("#feedbackdiv").fadeOut( 400, function(){
+                  $(this).remove();
+                  });
+}
+
+function submitFeedback(){
+    
+    var  systemService = new EvernymSystemService();
+    
+    
+    var vm = getCurrentViewModel();
+    
+    var viewid = vm.viewid;
+    var viewname = vm.viewname;
+    
+    
+    
+    function sentFeedback(data){
+        
+        $("#feedbackdiv").fadeOut( 400, function(){
+                                  $(this).remove();
+                                  showMessage("Thanks. Your feedback has been submitted for the page: " + viewid + " " + viewname);
+                                  });
+        
+    }
+    
+    function errorSendingFeedback(data, status, details){
+		$.mobile.hidePageLoadingMsg();
+		if (loginPageIfBadLogin(details.code)){
+			
+            showError("Please log in or register to view this channel.");
+		}
+        else {
+		    showError("Error Sending Feedback: " + ((status==500)?"Internal Server Error":details.message));
+		}
+        
+	}
+    
+    
+    var callbacks = {
+        success: sentFeedback,
+        error: errorSendingFeedback
+    };
+    
+    var feedback_comments = $("#feedbacktextarea").val();
+    
+    var feedbackObject = {
+        comments: feedback_comments,
+        context: viewid + " " + viewname
+    };
+    
+    
+    
+    systemService.sendFeedback(feedbackObject, callbacks);
+    
+    
+    
+}
+
+
+function getCurrentViewModel(){
+    
+    var vm = ko.dataFor($.mobile.activePage.get(0));
+    return vm;
+}
+
+function showFeedback(){
+    
+   
+  
+    
+    
+    
+    var existingdiv = $("#feedbackdiv").get(0);
+    
+    
+    if (!existingdiv){
+    
+	$("<div id='feedbackdiv' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'>" +
+      "<textarea id='feedbacktextarea' style='width:250px;height:100px;resize:none;'></textarea><br/>" +
+      "<button onclick='submitFeedback();'>submit</button><br/><br/><br/>" +
+      "<button onclick='closeFeedback();'>cancel</button><br/>" +
+      "</div>")
+	.css({ display: "block",
+         opacity: 0.90,
+         position: "fixed",
+         padding: "7px",
+         "text-align": "center",
+         width: "270px",
+         left: ($(window).width() - 284)/2,
+         top: $(window).height()/2 - 145 })
+	.appendTo( $.mobile.pageContainer ).delay( 1500 )
+	;
+    }
+    
+    
+}
+
+
+
+
+
 
 if (!Array.prototype.indexOf) {
     Array.prototype.indexOf = function (obj, fromIndex) {
@@ -72,22 +218,23 @@ if (!Array.prototype.indexOf) {
 
 function convDate(d){
     
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'];
     
     var date = new Date();
     var offset = date.getTimezoneOffset();
     var d = new Date(d  + offset);
     
-    var month = d.getMonth()+1;
+    var month = d.getMonth();
     var day = d.getDate();
     var hour = d.getHours();
     var minute = d.getMinutes();
     var second = d.getSeconds();
     
-    var output =  ((''+month).length<2 ? '0' : '') + month + '/' +
-    ((''+day).length<2 ? '0' : '') + day + '/' + 
+    var output =   months[month] + ' ' +
+     day + ', ' + 
     d.getFullYear() + 
-    ' ' +
-    (hour == 0?12:hour%12) + ':' +
+    ', ' +
+    ((hour == 0|| hour == 12 )?12:hour%12) + ':' +
     ((''+minute).length<2 ? '0' :'') + minute + ' ' +
     (hour < 12? 'am' : 'pm');
     
@@ -124,7 +271,8 @@ channelListViewModel = new ChannelListViewModel(),
 channelsFollowingListViewModel = new ChannelsFollowingListViewModel(),
 channelViewModel = new ChannelViewModel(),
 channelMenuViewModel = new ChannelMenuViewModel(),
-channelDetailsViewModel = new ChannelDetailsViewModel(),
+channelSettingsViewModel = new ChannelSettingsViewModel(),
+channelBroadcastsViewModel = new ChannelBroadcastsViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 signupViewModel = new SignupViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
@@ -151,12 +299,47 @@ $.mobile.defaultPageTransition = ""; //"slide";
 $(document).ready(function () {
                   // bind each view model to a jQueryMobile page
                   
+                  
+                  
+                 
+                  if (document.location.hash == ""){
+                  document.location.hash = "#channelListView"
+                  }
+                  
+                  
+                  
+                  
+                  $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
+                                 
+                                 
+                                 
+                                 var panelhtml = $("#globalpanel").html();
+                                 $(this).find('#gpanel').html(panelhtml);
+                                 
+                                 var panel = $(this).find('#mypanel').get(0);
+                                 if (panel){
+                                     var myScroll = new iScroll(panel);
+                                 }
+                                 
+                                 var panelhtmldots = $("#globalpaneldots").html();
+                                 $(this).find('#gpaneldots').html(panelhtmldots);
+                                 
+                                 
+                                 
+                                 //$(this).find('#mypanel').css('background','green');
+                                 
+                                 
+                                 
+                  });
+                  
+                  
                   $.mobile.activeBtnClass = '';
                   
                   ko.applyBindings(loginViewModel, document.getElementById("loginView"));
                   ko.applyBindings(channelViewModel, document.getElementById("channelView"));
-                  ko.applyBindings(channelDetailsViewModel, document.getElementById("channelDetailsView"));
+                  ko.applyBindings(channelBroadcastsViewModel, document.getElementById("channelBroadcastsView"));
                   ko.applyBindings(channelMenuViewModel, document.getElementById("channelMenuView"));
+                  ko.applyBindings(channelSettingsViewModel, document.getElementById("channelSettingsView"));
                   ko.applyBindings(channelNewViewModel, document.getElementById("channelNewView"));
                   ko.applyBindings(signupViewModel, document.getElementById("signupView"));
                   ko.applyBindings(sendMessageViewModel, document.getElementById("sendMessageView"));
@@ -181,21 +364,17 @@ $(document).ready(function () {
                   localStorage.removeItem('baseUrl');
                   
                   
-                  channelListViewModel.activate().then(function(){});
+                  
+                  
                   
                   
                  
+                                    
+                                   
+
+                  $.mobile.initializePage();
                   
                   
-                  
-                  $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
-                                 
-                                 var panelhtml = $("#globalpanel").html();
-                                 $(this).find('#gpanel').html(panelhtml);
-                                 
-                                 //$(this).find('#mypanel').css('background','green');
-                                 
-                                 });
                    
                   
                   $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
@@ -205,13 +384,29 @@ $(document).ready(function () {
                                      $(this).find('#mypanel').html(panelhtml);
                                      $(this).find('#mypanel').panel();
                                  
+                                                                  
+                                     $(this).find('#mypanel').trigger('create');
+                                 
+                                 
+                                 
+                                 
+                                     var panelhtml = $("#globalpaneldots").find('#mypaneldots').html();
+                                     $(this).find('#mypaneldots').html(panelhtml);
+                                     $(this).find('#mypaneldots').panel();
+                                 
+                                 
+                                     $(this).find('#mypaneldots').trigger('create');
                                  
                                  
                                  var panel = $(this).find('#mypanel').get(0);
+                                 if (panel){
                                  myScroll = new iScroll(panel);
+                                 }
                                  
                                  
-                                 $(this).find('#mypanel').trigger('create');
+                                 }
+                                 
+                                 
                                  
                                  
                                  
@@ -249,7 +444,7 @@ $(document).ready(function () {
                                      panelHelpViewModel.setClean($(this).attr('id'));
                                   
                                   */
-                                 }
+                                 
                                  
                                  
                                  
@@ -259,10 +454,17 @@ $(document).ready(function () {
                   
                   
                   $(document).on('swiperight', '[data-role="page"]', function(e,a){
-                                 
+                                   if (!openPanel)
                                    $(this).find('#mypanel').panel("open");
                                    
                                    });
+                  
+                  
+                  $(document).on('swipeleft', '[data-role="page"]', function(e,a){
+                                 if (!openPanel)
+                                 $(this).find('#mypaneldots').panel("open");
+                                 
+                                 });
                   
                   
                   
@@ -313,11 +515,25 @@ $(document).ready(function () {
                                    });
               
                   
+                  
+                  $(document).bind('panelclose', function(e, data) {
+                                   
+                                   openPanel = false;
+                                   });
+                  
+                  $(document).bind('panelopen', function(e, data) {
+                                   
+                                   openPanel = true;//e.target.id;
+                                   });
+                  
                   $(document).bind('panelbeforeclose', function(e, data) {
+                                   
+                                   
                                    $(".ui-panel").scrollTop(0);
                                    });
                   
                   $(document).bind('panelbeforeopen', function(e, data) {
+                                   
                                    
                                    top_pos = $(document).scrollTop();
                                    $(".ui-panel").css("top", top_pos);
@@ -358,7 +574,11 @@ $(document).ready(function () {
                   
                   
                   
-                   
+                 
+                  
+                  
+                  // This is the initial call to get the channels populated in the left menu.
+                  channelListViewModel.activate().then(function(){});
                   
                   
     });

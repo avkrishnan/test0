@@ -8,6 +8,9 @@ function FollowersListViewModel() {
 	var  dataService = new EvernymChannelService();
 	
 	this.template = "followersListView";
+    this.viewid = "V-26";
+    this.viewname = "Followers";
+    
 	this.title = ko.observable();
     this.description = ko.observable();
     this.url = ko.observable();

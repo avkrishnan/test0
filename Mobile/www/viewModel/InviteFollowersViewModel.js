@@ -8,6 +8,8 @@ function InviteFollowersViewModel() {
 	var  dataService = new EvernymChannelService();
 	
 	this.template = "inviteFollowersView";
+    this.viewid = "V-27";
+    this.viewname = "GetFollowers";
 	
 	this.channelid = ko.observable();
 	this.channelname = ko.observable();

@@ -11,6 +11,10 @@ function SearchResultsViewModel() {
   // --- properties
 
   this.template = "searchResultsView";
+  this.viewid = "v-???";
+  this.viewname = "searchResults";
+    
+    
   this.tweets = ko.observableArray();
   this.isSearching = ko.observable(false);
   this.pageNumber = ko.observable(1);
