@@ -144,7 +144,7 @@ function SignupViewModel() {
     
     function loginError(data, status, response) {
         $.mobile.hidePageLoadingMsg();
-        showMessage("LOGIN FAILED");
+        showError("LOGIN FAILED");
         localStorage.removeItem('accessToken');
         
         //logger.logError('Your login failed, please try again!', null, 'login', true);
@@ -161,7 +161,7 @@ function SignupViewModel() {
     function signUpError(data, status, response) {
         $.mobile.hidePageLoadingMsg();
         //logger.logError('signup failed!', null, 'signup', true);
-        showMessage("Error Registering: " + response.message);
+        showError("Error Registering: " + response.message);
     };
     
 }

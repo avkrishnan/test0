@@ -58,7 +58,7 @@ function ChannelNewViewModel() {
         $.mobile.hidePageLoadingMsg();
         //that.notifications("error creating channel " + JSON.stringify(data));
         console.log("error creating channel: " + response.message);
-        showMessage("Error creating channel: " + response.message);
+        showError("Error creating channel: " + response.message);
         loginPageIfBadLogin(details.code);
         //logger.log('error creating channel', null, 'dataservice', true);
     };

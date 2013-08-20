@@ -101,7 +101,7 @@ function SendMessageViewModel() {
         loginPageIfBadLogin(details.code);
         
         console.log("error something " + data);
-        showMessage("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
+        showError("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
         
 	    //logger.logError('error listing channels', null, 'channel', true);
 	};
@@ -111,7 +111,7 @@ function SendMessageViewModel() {
 		
         loginPageIfBadLogin(details.code);
         
-        showMessage("Error Posting Message: " + getAPICode(details.code));
+        showError("Error Posting Message: " + getAPICode(details.code));
 	    //logger.logError('error listing channels', null, 'channel', true);
 	};
 

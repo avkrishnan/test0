@@ -228,10 +228,10 @@ function MessageViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		if (loginPageIfBadLogin(details.code)){
 			
-            showMessage("Please log in or register to view this channel.");
+            showError("Please log in or register to view this channel.");
 		}
         else {
-		    showMessage("Error Getting Channel: " + ((status==500)?"Internal Server Error":details.message));
+		    showError("Error Getting Channel: " + ((status==500)?"Internal Server Error":details.message));
 		}
             
 
@@ -241,7 +241,7 @@ function MessageViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showMessage("Error: " + ((status==500)?"Internal Server Error":details.message));
+		showError("Error: " + ((status==500)?"Internal Server Error":details.message));
 		
 
 	}
@@ -254,7 +254,7 @@ function MessageViewModel() {
 		}
         else {
 		
-		    showMessage("Error Following Channel: " + details.message);
+		    showError("Error Following Channel: " + details.message);
 		}
 	}
 	
@@ -262,7 +262,7 @@ function MessageViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showMessage("Error Posting Message: " + details.message);
+		showError("Error Posting Message: " + details.message);
 
 	}
 	
@@ -270,7 +270,7 @@ function MessageViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showMessage("Error Retrieving Messages: " + ((status==500)?"Internal Server Error":details.message));
+		showError("Error Retrieving Messages: " + ((status==500)?"Internal Server Error":details.message));
 
 	}
 	
@@ -325,7 +325,7 @@ function MessageViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showMessage("Error Unfollowing Channel: " + ((status==500)?"Internal Server Error":details.message));
+		showError("Error Unfollowing Channel: " + ((status==500)?"Internal Server Error":details.message));
 	}
 	
 	this.deleteChannelCommand = function () {

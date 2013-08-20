@@ -88,7 +88,7 @@ function FollowerViewModel() {
             $.mobile.changePage("#" + loginViewModel.template)
         }
         console.log("Error:  " + data);
-        showMessage("Error Getting Messages: " + ((status == 500) ? "Internal Server Error" : details.message));
+        showError("Error Getting Messages: " + ((status == 500) ? "Internal Server Error" : details.message));
     };
 
 

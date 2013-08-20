@@ -94,7 +94,7 @@ function ChannelListViewModel() {
 			return;
 		}
         
-        populatePanel(data.channel);
+        //populatePanel(data.channel);
         
         
         var panelhtml = $("#globalpanel").find('#mypanel').html();
@@ -119,7 +119,7 @@ function ChannelListViewModel() {
             //showMessage("Please log in or register to view channels.");
 		}
         else {
-            showMessage("Error listing my channels: " + details.message);
+            showError("Error listing my channels: " + details.message);
         }
         
 		//logger.logError('error listing channels', null, 'dataservice', true);
@@ -173,7 +173,7 @@ function ChannelListViewModel() {
         $.mobile.hidePageLoadingMsg();
         //that.notifications("error creating channel " + JSON.stringify(data));
         console.log("error creating channel: " + response.message);
-        showMessage("Error creating channel: " + response.message);
+        showError("Error creating channel: " + response.message);
         loginPageIfBadLogin(details.code);
         //logger.log('error creating channel', null, 'dataservice', true);
     };

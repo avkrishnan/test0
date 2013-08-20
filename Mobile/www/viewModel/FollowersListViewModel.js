@@ -114,7 +114,7 @@ function FollowersListViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showMessage("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
+		showError("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
 		
 		//logger.logError('error listing channels', null, 'channel', true);
 	};

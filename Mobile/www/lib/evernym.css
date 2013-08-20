@@ -4,10 +4,16 @@
     background:#6D6E71;
 }
 
-body {
+body, input, div, a, span, li, button, textarea, h1, h2, h3, h4 {
     
     -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke: 1px rgba(0,0,0,0.1)
+    -webkit-text-stroke: 1px rgba(0,0,0,0.1);
+    
+    
+    font-family:'Open Sans', sans-serif;
+    
+    font-style:none;
+    text-shadow:none;
 }
 
 
@@ -55,6 +61,43 @@ body {
     
 }
 
+
+
+.green-gradient-2 {
+    
+    
+    text-shadow:none;
+    margin:none;
+    -webkit-background-origin: padding-box;
+    height:40px;
+    font-family: 'Open Sans', sans-serif !important;
+    font-size: 20px;
+    font-style:italic;
+    color:white;
+    
+    
+    /* IE10 Consumer Preview */
+    background-image: -ms-linear-gradient(left, #78A935 0%, #8DC63F 10%);
+    
+    /* Mozilla Firefox */
+    background-image: -moz-linear-gradient(left, #78A935 0%, #8DC63F 10%);
+    
+    /* Opera */
+    background-image: -o-linear-gradient(left, #78A935 0%, #8DC63F 10%);
+    
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #78A935), color-stop(.1, #8DC63F));
+    
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(left, #78A935 0%, #8DC63F 10%);
+    
+    /* W3C Markup, IE10 Release Preview */
+    background-image: linear-gradient(to right, #78A935 0%, #8DC63F 10%);
+    
+}
+
+
+
 .white-gradient,
 #extra-broadcast-channels h2 a span.ui-btn-inner
 {
@@ -81,6 +124,29 @@ body {
 }
 
 
+.white-gradient-2
+{
+    
+    text-shadow:none;
+    /* IE10 Consumer Preview */
+    background-image: -ms-linear-gradient(left, #EEE 0%, #FFF 10%);
+    
+    /* Mozilla Firefox */
+    background-image: -moz-linear-gradient(left, #EEE 0%, #FFF 10%);
+    
+    /* Opera */
+    background-image: -o-linear-gradient(left, #EEE 0%, #FFF 10%);
+    
+    /* Webkit (Safari/Chrome 10) */
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #EEE), color-stop(.1, #FFF));
+    
+    /* Webkit (Chrome 11+) */
+    background-image: -webkit-linear-gradient(left, #EEE 0%, #FFF 10%);
+    
+    /* W3C Markup, IE10 Release Preview */
+    background-image: linear-gradient(to right, #EEE 0%, #FFF 10%);
+    
+}
 
 
 
@@ -238,7 +304,7 @@ body {
 
 
 .ui-icon-evernym-closed {
-    background-image: url("../resources/V-04-b2x.png")   !important;
+    background-image: url("../resources/V-04-b.png")   !important;
     background-color:transparent;
     background-size: 27px 27px;
     
@@ -266,7 +332,7 @@ body {
 
 
 .ui-icon-evernym-open {
-    background-image: url("../resources/V-04-c2x.png")   !important;
+    background-image: url("../resources/V-04-c.png")   !important;
     background-color:transparent;
     background-size: 27px 27px;
     
@@ -347,10 +413,22 @@ A {
 }
 
 
+
+
 .header {
     background:#8DC63F;
     height:40px;
-    border:0;
+
+    font-family:'Open Sans', sans-serif;
+    font-weight:bold;
+
+    font-style:none;
+    text-shadow:none;
+    
+    
+    border-top-color:#8DC63F;
+    border-bottom-color:#8DC63F;
+
 }
 
 .channel-list-footer {
@@ -570,6 +648,8 @@ XXchannel-list-anchor:hover .channel-description
     
     margin-left:35px;
     margin-right:15px;
+    
+    
     
     
     
@@ -827,7 +907,7 @@ XXchannel-list-anchor:hover .channel-description
     
     
     
-    background:url('../resources/V-21-h2x.png') no-repeat;
+    background:url('../resources/V-21-h.png') no-repeat;
     left:-23px;
     border:0px;
     
@@ -908,35 +988,42 @@ XXchannel-list-anchor:hover .channel-description
 
 .menu-button {
     
-    background: url('../resources/V-21-b2x.png') ;
-    background-size:36px 30px;
-    width:36px;
-    height:30px;
+    background: url('../resources/V-21-b.png') ;
+    background-size:25px 20px;
+    width:25px;
+    height:20px;
     border-radius:0px;
     background-position:  0px 0px;
     background-repeat: no-repeat;
-    right:7px !important;
-    
-    
-    border:none;
-   
+    left:12px !important;
+    top:12px !important;
+    box-shadow: none !important;
+    border:none !important;
+    border-image: none !important;
+    border-image-width:0px !important;
+    -webkit-background-clip: none !important;
+    background-origin: none !important;
     
 }
 
 
 .menu-button-dots {
     
-    background: transparent url('../resources/V-21-d2x.png') ;
-    background-size:6px 30px;
-    width:36px;
-    height:30px;
+    background: transparent url('../resources/V-21-d.png') ;
+    background-size:5px 20px;
+    width:25px;
+    height:20px;
     border-radius:0px;
-    background-position:  15px 0px;
+    background-position:  12px 0px;
     background-repeat: no-repeat;
-    right:7px !important;
+
+    right:12px !important;
+    top:12px !important;
     
-    
-    border:none;
+    box-shadow: none !important;
+    border:none !important;
+    border-image: none !important;
+    border-image-width:0px !important;
     
     
 }

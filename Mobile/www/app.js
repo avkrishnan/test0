@@ -76,7 +76,7 @@ function showError(msg){
     if (!existingdiv){
         
         $("<div id='errordiv' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg +
-          "<br/><button onclick='closeError();'>ok</button></h3></div>")
+          "<br/><button onclick='closeError();' style='font-size:16pt;'>ok</button></h3></div>")
         .css({ display: "block",
              opacity: 0.90,
              position: "fixed",
@@ -86,9 +86,7 @@ function showError(msg){
              left: ($(window).width() - 284)/2,
              top: $(window).height()/2 })
         .appendTo( $.mobile.pageContainer ).delay( 1500 )
-        .fadeOut( 400, function(){
-                 $(this).remove();
-                 });
+        ;
         
     }
 }
@@ -176,9 +174,9 @@ function showFeedback(){
     if (!existingdiv){
     
 	$("<div id='feedbackdiv' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'>" +
-      "<textarea id='feedbacktextarea' style='width:250px;height:100px;resize:none;'></textarea><br/>" +
-      "<button onclick='submitFeedback();'>submit</button><br/><br/><br/>" +
-      "<button onclick='closeFeedback();'>cancel</button><br/>" +
+      "<textarea id='feedbacktextarea' style='width:250px;height:70px;resize:none;'></textarea><br/>" +
+      "<button onclick='submitFeedback();'>Submit</button>&nbsp;&nbsp;" +
+      "<button onclick='closeFeedback();'>Cancel</button><br/>" +
       "</div>")
 	.css({ display: "block",
          opacity: 0.90,
@@ -187,7 +185,7 @@ function showFeedback(){
          "text-align": "center",
          width: "270px",
          left: ($(window).width() - 284)/2,
-         top: $(window).height()/2 - 145 })
+         top: "20px" /* $(window).height()/2 - 145 */ })
 	.appendTo( $.mobile.pageContainer ).delay( 1500 )
 	;
     }
@@ -397,11 +395,12 @@ $(document).ready(function () {
                                  
                                      $(this).find('#mypaneldots').trigger('create');
                                  
-                                 
+                                 /*
                                  var panel = $(this).find('#mypanel').get(0);
                                  if (panel){
                                  myScroll = new iScroll(panel);
                                  }
+                                  */
                                  
                                  
                                  }
@@ -578,7 +577,7 @@ $(document).ready(function () {
                   
                   
                   // This is the initial call to get the channels populated in the left menu.
-                  channelListViewModel.activate().then(function(){});
+                  //channelListViewModel.activate().then(function(){});
                   
                   
     });

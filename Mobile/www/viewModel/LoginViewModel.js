@@ -209,7 +209,7 @@ function LoginViewModel() {
     
     function loginError(data, status, details) {
         $.mobile.hidePageLoadingMsg();
-        showMessage("LOGIN FAILED: " + details.message);
+        showError("LOGIN FAILED: " + details.message);
         //localStorage.removeItem('accessToken');
         //logger.logError('Your login failed, please try again!', null, 'login', true);
     }

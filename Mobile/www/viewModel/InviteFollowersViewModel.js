@@ -97,7 +97,7 @@ function InviteFollowersViewModel() {
         
         loginPageIfBadLogin(response.code);
         
-		showMessage("Error Creating Follower Account: " + response.message);
+		showError("Error Creating Follower Account: " + response.message);
 	};
 	
 

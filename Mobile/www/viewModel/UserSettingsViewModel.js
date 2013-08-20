@@ -81,7 +81,7 @@ function UserSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showMessage("Error Getting Communication Methods: " + details.message);
+		showError("Error Getting Communication Methods: " + details.message);
 		//logger.logError('error listing channels', null, 'channel', true);
 
         
@@ -91,7 +91,7 @@ function UserSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showMessage("Error Requesting Verification: " + details.message);
+		showError("Error Requesting Verification: " + details.message);
 		
         
         
@@ -146,7 +146,7 @@ function UserSettingsViewModel() {
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Error listing channels: " + details.message);
+		showError("Error listing channels: " + details.message);
 		loginPageIfBadLogin(details.code);
 		//logger.logError('error listing channels', null, 'dataservice', true);
 	};

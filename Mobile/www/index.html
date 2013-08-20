@@ -98,11 +98,11 @@
                             var name = channel.name;
                             if ( n < 2){
                                 innards += '<li class="white-gradient white_menu "><a href="#" onclick="startBroadcast(\''+ channel.normName +
-                                '\');" ><img class="ui-li-icon" src="resources/V-04-a2x.png" />' + name + '</a></li>';
+                                '\');" ><img class="ui-li-icon" src="resources/V-04-a.png" />' + name + '</a></li>';
                             }
                             else{
                                 outards += '<li class="white-gradient white_menu " ><a href="#"  onclick="startBroadcast(\''+ channel.normName +
-                                '\');" ><img class="ui-li-icon" src="resources/V-04-a2x.png" />' + name + '</a></li>';
+                                '\');" ><img class="ui-li-icon" src="resources/V-04-a.png" />' + name + '</a></li>';
                             }
                             
                         }
@@ -142,6 +142,7 @@
                     <div style="padding-left:15px;padding-top:5px;" id="panel_name"> name </div>
                 </div>
             
+                <!--
                 <div class="menu_head">
                     <div style="padding-left:15px;padding-top:5px;">SEND BROADCAST</div>
                 </div>
@@ -152,25 +153,29 @@
                     <div id="extra-broadcast-channels"  data-role="collapsible" data-collapsed-icon="evernym-closed" data-expanded-icon="evernym-open"  data-corners="false">
 					</div>
                 </div>
+                 -->
                 
             <div>
                 
+                <!--
                 <div class="menu_head">
                     <div style="padding-left:15px;padding-top:5px;">MAIN MENU
                     </div>
                 </div>
+                 -->
+                
                 
                 <ul data-role="listview" data-icon="" data-corners="false" xdata-inset="true" style="min-width:210px;" xdata-theme="d">
                     
                     
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-d2x.png" /><a href="index.html#channelListView">Channels I Own</a></li>
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-e2x.png" /><a href="index.html#channelsFollowingListView">Channels I Follow</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" /><a href="index.html#channelListView">Channels I Own</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" /><a href="index.html#channelsFollowingListView">Channels I Follow</a></li>
                     
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-f2x.png" /><a href="index.html#channelNewView" >Create a New Channel</a></li>
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-g2x.png" /><a href="index.html#followAnotherChannelView">Find Channels</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" /><a href="index.html#channelNewView" >Create a New Channel</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-g.png" /><a href="index.html#followAnotherChannelView">Find Channels</a></li>
                     
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-h2x.png" /><a href="index.html#allMessagesHistoryView">All Messages</a></li>
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-i2x.png" /><a href="index.html#userSettingsView">User Settings</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-h.png" /><a href="index.html#allMessagesHistoryView">All Messages</a></li>
+                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" /><a href="index.html#userSettingsView">User Settings</a></li>
                     
                     
                 </ul>
@@ -195,25 +200,22 @@
                 <div id="innerpanel" class="panel-inner" style="" data-iscroll>
                     
                     
-                    <div data-role="none" class="green-gradient" style="">
-                        <div style="padding-left:15px;padding-top:5px;" > DOT MENU </div>
+                    <div data-role="none" class="green-gradient-2" style="">
+                        
                     </div>
                     
                                         
                     <div>
                         
-                        <div class="menu_head">
-                            <div style="padding-left:15px;padding-top:5px;">MAIN MENU
-                            </div>
-                        </div>
+                        
                         
                         <ul data-role="listview" data-icon="" data-corners="false" xdata-inset="true" style="min-width:210px;" xdata-theme="d">
                             
-                            <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-d2x.png" /><a href="#" onclick="showMessage('help under construction');">Help</a></li>
-                            <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-e2x.png" /><a href="#" onclick="showMessage('about under construction');">About</a></li>
-                            <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-f2x.png" /><a href="#" onclick="showFeedback();" >Feedback</a></li>
-                            <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-i2x.png" /><a href="index.html#userSettingsView">User Settings</a></li>
-                            <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-i2x.png" /><a href="index.html#loginView?a=logout">Logout</a></li>
+                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" /><a href="#" onclick="showMessage('help under construction');">Help</a></li>
+                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" /><a href="#" onclick="showMessage('about under construction');">About</a></li>
+                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" /><a href="#" onclick="showFeedback();" >Feedback</a></li>
+                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" /><a href="index.html#userSettingsView">User Settings</a></li>
+                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" /><a href="index.html#loginView?a=logout">Logout</a></li>
                             
                         </ul>
                         
@@ -221,7 +223,7 @@
                     
                     
                     
-                    <h3 style="font-size:8pt;color:#BBB;">BETA V-?? DotTray</h3>
+                    <h3 style="font-size:8pt;color:#BBB;">BETA V-06 ThreeDots</h3>
                 </div>
             </div>
             
@@ -263,10 +265,8 @@
             
             <div class="header" data-role="header" xdata-theme="b">
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
-                
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
             </div>
@@ -361,15 +361,8 @@
                 
                 
                 
-                <a href="#mypanel" data-rel="popup"
-                    data-role="button"
-                    data-inline="true"
-                    xdata-transition="slidedown"
-                    xdata-theme="b"
-                    xdata-icon="gear"
-                    class="ui-btn-left menu-button">&nbsp;
-                </a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                 <div data-role="popup" id="popupMenu" data-theme="a">
@@ -431,14 +424,8 @@
             <div data-role="header" class="header" >
                 
                 
-                <a href="#mypanel" data-rel="popup"
-                    data-role="button"
-                    data-inline="true"
-                    class="ui-btn-left menu-button">&nbsp;
-                </a>
-                
-                
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
 
                 
@@ -519,15 +506,13 @@
         <!--  LOGIN VIEW -->
         
         <div id="loginView" class="channel-list" data-role="page">
-            <div data-role="header" class="header" xdata-theme="b">
+            <div data-role="header" class="header" xstyle="background:green;">
                 
-                <h1>Login</h1>
+                <h1>LOGIN</h1>
+                
             </div>
             
-            <div class="message-list" data-role="content" Xdata-theme="b">
-                
-                
-                
+            <div class="message-list" data-role="content">
                 
                 
                 <ul data-role="listview">
@@ -637,11 +622,14 @@
                     
                     
                 </ul>
+                 
+                
                 
             </div>
             
             <div class="footer" data-role="footer" >BETA V-01 Login</div>
-            
+                 
+                 
         </div>
         
         <!--  FORGOT PASSWORD VIEW -->
@@ -796,8 +784,8 @@
                 <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
                  -->
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
             </div>
@@ -935,8 +923,8 @@
                 
                 
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                 <div data-role="popup" id="popupMenu" data-theme="a">
@@ -1069,11 +1057,11 @@
             <div data-role="header" xdata-theme="b">
                 <!--
                 <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
-                <h1>Send Message</h1>
+                
                  -->
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
             </div>
@@ -1115,11 +1103,11 @@
             <div data-role="header" class="header" xdata-theme="b">
                 <!--
                 <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
-                <h1>Invite Followers</h1>
+                
                  -->
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                 
@@ -1240,9 +1228,8 @@
                 
                  -->
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
-                
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                 <div data-role="popup" id="popupMenu" xdata-theme="a">
@@ -1437,8 +1424,8 @@
                      
                      -->
                     
-                    <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                    <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                    <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                    <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                     
                     
                     
@@ -1533,8 +1520,8 @@
                 
                  -->
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                 
@@ -1677,8 +1664,8 @@
                 <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
                 -->
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                 
@@ -1752,7 +1739,7 @@
                                 
                                 width:32px;
                                 height:32px;
-                                background:url('resources/V-21-g2x.png') no-repeat;
+                                background:url('resources/V-21-g.png') no-repeat;
                                 background-size:32px;
                                 position:absolute;
                                 border:0px;
@@ -1789,7 +1776,7 @@
                          <a data-role="none"  href="index.html#channelBroadcastsView">
                      <div style="height:46px;">
                      <div class="sub-message-list-avatar" style="
-                         background:url(resources/V-21-h2x.png) no-repeat;
+                         background:url(resources/V-21-h.png) no-repeat;
                          background-size:46px;                         
                          
                          "></div>
@@ -1877,7 +1864,7 @@
                                          
                                          width:27px;
                                          height:27px;
-                                         background:url('resources/V-21-j2x.png') no-repeat;
+                                         background:url('resources/V-21-j.png') no-repeat;
                                          background-size:27px;
                                          position:absolute;
                                          
@@ -1983,7 +1970,7 @@
                                          
                                          width:27px;
                                          height:27px;
-                                         background:url('resources/V-21-k2x.png') no-repeat;
+                                         background:url('resources/V-21-k.png') no-repeat;
                                          background-size:27px;
                                          position:absolute;
                                          border:0px;
@@ -2181,7 +2168,7 @@
                             
                             width:27px;
                             height:27px;
-                            background:url('resources/V-21-k2x.png') no-repeat;
+                            background:url('resources/V-21-k.png') no-repeat;
                             background-size:27px;
                             position:absolute;
                             display:inline-block;
@@ -2213,8 +2200,8 @@
                
                 
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                 
@@ -2365,8 +2352,8 @@
             <div data-role="header" class="header">
                 
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                 
@@ -2417,7 +2404,7 @@
                                 <div style="margin-left:40px;">
                                 <form class="form-inline">
                                     
-                                    <div id="no_channels_notification" style="display:none;"><h2>Welcome to Evernym. Start by creating a channel here.</h2></div>
+                                    <div id="no_channels_notification" class="message-text" style="display:none;margin-left:0px;">Welcome to Evernym. Start by creating a channel here.</div>
                                     
                                     <div class="control-group">
                                         <div class="controls" data-bind="text: notifications">
@@ -2502,7 +2489,7 @@
                                                 <br/>
                                                 
                                                 
-                                                <input data-role="none" id="userName" type="text" data-bind="value: accountName" placeholder="Choose an Evernym" required data-validate="required" />
+                                                <input data-role="none" id="userName" type="text" data-bind="value: accountName" placeholder="Choose an Evernym" autocapitalize="off" required data-validate="required" />
                                                 <br/>
                                                 
                                                 
@@ -2512,7 +2499,7 @@
                                                 
                                                 
                                                 
-                                                <input data-role="none" id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
+                                                <input data-role="none" id="lastname" type="text" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
                                                 <br/>
                                                 
                                                 
@@ -2585,8 +2572,8 @@
             <div data-role="header" class="header">
                 
                 
-                <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                 
                 
                  
@@ -2790,10 +2777,12 @@
             <div id="followAnotherChannelView" class="channel-list" data-role="page" Xdata-theme="b" >
                 <div id="gpanel"></div>
                 <div id="gpaneldots"></div>
+                
                 <div data-role="header" class="header" Xdata-theme="b">
                     <h1>FollowAnotherChannel</h1>
-                    <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                    <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                    
+                    <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                    <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                     
                 </div>
                 <div data-role="content" Xdata-theme="b" >
@@ -2812,8 +2801,9 @@
                 <div id="gpaneldots"></div>
                 <div data-role="header" class="header" Xdata-theme="b">
                     <h1>PANEL HELP</h1>
-                    <a href="#mypanel" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-left menu-button">&nbsp;</a>
-                    <a href="#mypaneldots" data-rel="popup" data-role="button" data-inline="true"class="ui-btn-right menu-button-dots">&nbsp;</a>
+                    
+                    <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+                    <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
                     
                     
                 </div>
