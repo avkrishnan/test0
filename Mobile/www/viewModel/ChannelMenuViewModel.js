@@ -44,7 +44,7 @@ function ChannelMenuViewModel() {
             that.last_message('');
             that.last_replies('');
             
-            $("#new_broadcast_div").hide();
+            //$("#new_broadcast_div").hide();
         }
     }
     
@@ -54,26 +54,33 @@ function ChannelMenuViewModel() {
                                 $(this).find("#gpanel").html(panelhtml);
                                 });
     */
-	$("#" + this.template).live("pagebeforeshow", function(e, data){
-								
-                                $('#broadcasts_mr').hide();
-                                
-                                that.clear();
-                                
-								if ($.mobile.pageData && $.mobile.pageData.id){
+    
+    
+    this.applyBindings = function(){
+        
+        
+        $("#" + that.template).live("pagebeforeshow", function(e, data){
+                                    
+                                    
+                                    console.log('supposed to do stuff here.');
+                                    $('#broadcasts_mr').hide();
+                                    
+                                    that.clear();
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.id){
 									that.activate({id:$.mobile.pageData.id});
                                     
-								}
-								
-								else {
+                                    }
+                                    
+                                    else {
 									var currentChannel = localStorage.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
-                                
+                                    
                                     if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
-                                
-                                        that.messages([]);
+                                    
+                                    that.messages([]);
                                     }
-                                
+                                    
                                     that.channel([lchannel]);
                                     that.title(lchannel.name );
                                     that.description(lchannel.description);
@@ -84,10 +91,16 @@ function ChannelMenuViewModel() {
                                     $.mobile.showPageLoadingMsg("a", "Loading Messages");
 									that.getLastMessageCommand(that.channelid()).then(gotMessages);
                                     
-								
-								}
-								
-		   });
+                                    
+                                    }
+                                    
+                                    });
+        
+        
+    };
+    
+    
+	
 	
 	
 	this.activate = function (channel, action) {
@@ -132,16 +145,16 @@ function ChannelMenuViewModel() {
     
     this.initiateNewBroadcast = function(){
         
-        initNB = true;
-        $("#new_broadcast_div").show(200, function(){$(window).resize(); $("#newMessage-cm").focus() } );
+        //initNB = true;
+        //$("#new_broadcast_div").show(200, function(){$(window).resize(); $("#newMessage-cm").focus() } );
         
     };
     
     
     this.cancelNewBroadcast = function(){
         that.newMessage('');
-        initNB = false;
-        $("#new_broadcast_div").hide(200, function(){$(window).resize();  } );
+        //initNB = false;
+        //$("#new_broadcast_div").hide(200, function(){$(window).resize();  } );
         
     };
     

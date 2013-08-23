@@ -34,19 +34,7 @@ function PanelHelpViewModel() {
         return !(( that.dirty.indexOf(viewName) != -1));
     }
     
-	$("#" + this.template).live("pagebeforeshow", function(e, data){
-								
-								if ($.mobile.pageData && $.mobile.pageData.id){
-								
-                                    $.mobile.changePage("#" + channelMenuViewModel.template);
-                                    channelMenuViewModel.activate({id:$.mobile.pageData.id}, 'newbroadcast');
-                                
-								}
-								
-								
-		   });
-	
-	
+		
 
 	
 	

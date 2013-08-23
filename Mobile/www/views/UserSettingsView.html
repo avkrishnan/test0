@@ -1,0 +1,165 @@
+<!--  USER SETTINGS VIEW -->
+
+<div id="userSettingsView" class="channel-list" style="background:#444 !important;" data-role="page" >
+    
+    
+    
+    <div id="gpanel"></div>
+    <div id="gpaneldots"></div>
+    <div data-role="header" class="header">
+        
+        
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        
+        
+        
+        
+        
+    </div>
+    
+    
+    
+    <div class="message-list"  data-role="content" data-iscroll>
+        
+        
+        <ul data-role="listview" >
+            
+            
+            <li class="channel-list-item">
+                
+                <a  class="channel-list-anchor" href="#"  >
+                    
+                    <div class="channel-list-stripe2"></div>
+                    
+                    
+                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    
+                    <span class="channel-info">
+                        <span class="channel-name" >User Settings</span>
+                        
+                    </span>
+                    <div class="channel-list-avatar-frame"></div>
+                    
+                    
+                    
+                </a>
+                
+            </li>
+            
+            
+            
+            <li class="message-list-item ">
+                
+                <div  class="message-list-container" >
+                    <div class="message-list-stripe"></div>
+                    <div class="message-info" >
+                        <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                        <div class="message-list-avatar-frame"></div>
+                        
+                        <div style="margin-left:30px;top:10px;">
+                            <table>
+                                <tr><td>Evernym: </td><td data-bind="text: accountName"></td></tr>
+                                <tr><td>Name: </td><td>waiting for api</td></tr>
+                            </table>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                
+            </li>
+        </ul>
+        
+        
+        
+        
+        <br/><br/>
+        
+        
+        
+        <ul data-role="listview" >
+            
+            
+            <li class="message-list-item ">
+                
+                <div  class="message-list-container" >
+                    <div class="message-info" >
+                        <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                        <div class="message-list-avatar-frame"></div>
+                        
+                        <div style="margin-left:30px;margin-top:5px;">
+                            
+                            
+                            Communication Methods
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                
+                
+                
+            </li>
+            
+            
+            
+            
+            <!-- ko foreach: commethods, updateListviewOnChange:commethods -->
+            
+            
+            
+            <li class="sub-message-list-item " id="message-reply-form">
+                
+                <div  class="sub-message-list-container">
+                    
+                    <div class="message-list-stripe"></div>
+                    
+                    
+                    <div class="sub-message-info">
+                        
+                        <div class="sub-message-list-avatar" style="background:#8D863F;"></div>
+                        <!--<div class="sub-message-list-avatar-frame"></div>-->
+                        <div class="sub-message-text">
+                            
+                            
+                            
+                            <div class="email" data-bind="text: value" style="display:inline-block;width:300px;font-size: 80%;"></div>
+                            
+                            <div data-bind="attr: {id: 'commethod-' + id}" style="margin-top:10px;font-size:10pt;">
+                                <div data-bind="style: { display: (verified == 'Y')?'none':'inline-block'}">
+                                    <button data-bind="click: $parent.verifyCommand"  >verify</button>
+                                </div>
+                                <div data-bind="style: { display: (verified == 'N')?'none':'inline-block'}">verified</div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                    
+                    
+                </div>
+                
+                
+            </li>
+            
+            
+            
+            <!-- /ko -->
+            
+        </ul>
+        
+    </div>
+    
+    
+    
+    <div class="footer" data-role="footer" >BETA V-08 UserSettings</div>
+    
+</div>

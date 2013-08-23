@@ -21,17 +21,20 @@ function FollowerViewModel() {
 
     
     
- 
+    this.applyBindings = function(){
+        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.id) {
+                                    
+                                    that.activate({ id: $.mobile.pageData.id });
+                                    }
+                                    
+                                    
+                                    });
+    };
+    
 
-    $("#" + this.template).live("pagebeforeshow", function (e, data) {
-
-        if ($.mobile.pageData && $.mobile.pageData.id) {
-            
-            that.activate({ id: $.mobile.pageData.id });
-        }
-
-
-    });
+    
 
 
     this.activate = function (lfollower) {

@@ -21,31 +21,32 @@ function FollowersListViewModel() {
 	this.channelname = ko.observable();
     
     
-	$("#" + this.template).live("pagebeforeshow", function (e, data) {
-
-		
-		if ($.mobile.pageData && $.mobile.pageData.id) {
-			that.activate({ id: $.mobile.pageData.id });
-		}
-
-		else {
-			var currentChannel = localStorage.getItem("currentChannel");
-			var lchannel = JSON.parse(currentChannel);
-			that.activate(lchannel);
-		}
-                                
-                                
-                                if ($.mobile.pageData && $.mobile.pageData.id){
+    this.applyBindings = function(){
+        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+                                    
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.id) {
+                                    that.activate({ id: $.mobile.pageData.id });
+                                    }
+                                    
+                                    else {
+                                    var currentChannel = localStorage.getItem("currentChannel");
+                                    var lchannel = JSON.parse(currentChannel);
+                                    that.activate(lchannel);
+                                    }
+                                    
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.id){
                                     that.activate({id:$.mobile.pageData.id});
-                                
-								}
-								
-								else {
+                                    
+                                    }
+                                    
+                                    else {
                                     var currentChannel = localStorage.getItem("currentChannel");
                                     var lchannel = JSON.parse(currentChannel);
                                     
                                     
-                                
+                                    
                                     //that.channel([lchannel]);
                                     that.title(lchannel.name );
                                     that.description(lchannel.description);
@@ -54,15 +55,19 @@ function FollowersListViewModel() {
                                     that.channelid(lchannel.id);
                                     
                                     that.activate(lchannel);
-                                
-                                
-								
-								}
-                                
-        
-
-
-	});
+                                    
+                                    
+                                    
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    });
+    };
+    
+    
+	
 	
 	
 	// Methods

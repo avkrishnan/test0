@@ -21,11 +21,16 @@ function SearchResultsViewModel() {
   this.searchString = "";
 
   // --- public functions
+    
+    this.applyBindings = function(){
+        
+    };
+    
 
   this.init = function (searchText, tweetViewModels) {
-    this.tweets(tweetViewModels);
-    this.pageNumber = ko.observable(1);
-    this.searchString = searchText;
+    that.tweets(tweetViewModels);
+    that.pageNumber = ko.observable(1);
+    that.searchString = searchText;
   };
 
   this.loadMore = function () {

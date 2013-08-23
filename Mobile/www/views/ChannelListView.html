@@ -1,0 +1,89 @@
+<!--  CHANNEL LIST VIEW -->
+
+<div id="channelListView" data-role="page" data-dom-cache="true" class="channel-list">
+    <div id="gpanel"></div>
+    <div id="gpaneldots"></div>
+    
+    <div class="header" data-role="header" xdata-theme="b">
+        
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        
+        
+    </div>
+    
+    
+    <div  class="channel-list" data-role="content" data-iscroll>
+        <div data-bind="text: notification"></div>
+        <ul  data-role="listview">
+            
+            
+            
+            
+            <li class="channel-list-item list-head">
+                
+                <a  class="channel-list-anchor" href="#" >
+                    
+                    <div class="channel-list-stripe2"></div>
+                    
+                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    
+                    <span class="channel-info">
+                        <span class="channel-name">Channels I Own</span>
+                        
+                    </span>
+                    <div class="channel-list-avatar-frame"></div>
+                    
+                </a>
+                
+            </li>
+            
+            
+            <!-- ko foreach: channels, updateListviewOnChange:channels -->
+            <li class="channel-list-item">
+                
+                <a  class="channel-list-anchor" href="#" data-bind="click: $parent.showChannel" >
+                    
+                    <div class="channel-list-stripe1"></div>
+                    <!-- ko if: ($index() < ($parent.channels().length) - 1) -->
+                    <div class="channel-list-stripe2"></div>
+                    <!-- /ko -->
+                    
+                    
+                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    
+                    <div id="channellist" style="margin-left:80px;"></div>
+                    
+                    <span class="channel-info">
+                        <span class="channel-name" data-bind="text: name"></span>
+                        <span class="channel-description" data-bind="text: description"></span>
+                        
+                        <span class="channel-url" data-bind="text: normName + '.evernym.com'" ></span>
+                        
+                        <input type="button"  data-bind="click: $parent.showChannelStartMessage" data-role="none" value="O" style="position:absolute;right:80px;"/>
+                    </span>
+                    <div class="channel-list-avatar-frame"></div>
+                    
+                    
+                    <div class="channel-list-message-count"></div>
+                    <div class="channel-list-alalytics"></div>
+                    
+                </a>
+                
+            </li>
+            
+            
+            
+            <!-- /ko -->
+            
+        </ul>
+    </div>
+    
+    <div class="footer" data-role="footer" data-inset="true">
+        
+        <a href="index.html#channelNewView" data-role="button">Create a Channel</a>
+        [ BETA V-19 ChannelsIOwn ]
+    </div>
+    
+    
+</div>

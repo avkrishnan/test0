@@ -1,6 +1,7 @@
 /*globals $, ko, document */
 
 ko.virtualElements.allowedBindings.updateListviewOnChange = true;
+
 ko.bindingHandlers.updateListviewOnChange = {
 update: function (element, valueAccessor) {
     
@@ -26,9 +27,11 @@ update: function (element, valueAccessor) {
 
 
 
-$(document).bind("mobileinit", function(){
-                 $.mobile.autoInitialize = false;
-                 });
+
+
+
+
+
 
 
 var messages = 0;
@@ -37,6 +40,8 @@ var activePage = '';
 
 
 var openPanel = false;
+
+
 
 function startBroadcast(channel){
     $.mobile.activePage.find('#mypanel').panel("close");
@@ -71,6 +76,9 @@ function closeError(){
 function showError(msg){
     
     var existingdiv = $("#errordiv").get(0);
+    
+    // TODO: add some code to append the message to the box, instead of just ignoring and throwing it away if there is already
+    // an existing error message.
     
     
     if (!existingdiv){
@@ -146,30 +154,19 @@ function submitFeedback(){
         context: viewid + " " + viewname
     };
     
-    
-    
     systemService.sendFeedback(feedbackObject, callbacks);
-    
-    
     
 }
 
 
 function getCurrentViewModel(){
-    
     var vm = ko.dataFor($.mobile.activePage.get(0));
     return vm;
 }
 
 function showFeedback(){
     
-   
-  
-    
-    
-    
     var existingdiv = $("#feedbackdiv").get(0);
-    
     
     if (!existingdiv){
     
@@ -262,28 +259,39 @@ function loginPageIfBadLogin(code){
 }
 
 
+function getClassName(classobject) {
+    return classobject.constructor.name;
+}
+
+
+
 // create the various view models
 var
 loginViewModel = new LoginViewModel(),
 channelListViewModel = new ChannelListViewModel(),
 channelsFollowingListViewModel = new ChannelsFollowingListViewModel(),
 channelViewModel = new ChannelViewModel(),
+
 channelMenuViewModel = new ChannelMenuViewModel(),
 channelSettingsViewModel = new ChannelSettingsViewModel(),
 channelBroadcastsViewModel = new ChannelBroadcastsViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
+
 signupViewModel = new SignupViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
 inviteFollowersViewModel = new InviteFollowersViewModel(),
+
 followerViewModel = new FollowerViewModel(),
 commethodVerificationViewModel = new CommethodVerificationViewModel(),
 userSettingsModel = new UserSettingsViewModel(),
 devSettingsModel = new DevSettingsViewModel(),
+
 notificationsViewModel = new NotificationsViewModel(),
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
 panelHelpViewModel = new PanelHelpViewModel(),
+
 messageViewModel = new MessageViewModel();
 
 
@@ -291,298 +299,255 @@ messageViewModel = new MessageViewModel();
 
 $.mobile.defaultPageTransition = ""; //"slide";
 
+var models = [
+              loginViewModel,
+              channelListViewModel,
+              channelsFollowingListViewModel,
+              channelViewModel,
+              channelMenuViewModel,
+              channelSettingsViewModel,
+              channelBroadcastsViewModel,
+              channelNewViewModel,
+              signupViewModel,
+              sendMessageViewModel,
+              followersListViewModel,
+              inviteFollowersViewModel,
+              followerViewModel,
+              commethodVerificationViewModel,
+              userSettingsModel, 
+              devSettingsModel, 
+              notificationsViewModel, 
+              forgotPasswordViewModel, 
+              resetPasswordViewModel, 
+              panelHelpViewModel, 
+              messageViewModel
+              ];
+
+
+function getHTMLName(viewModel){
+    var name = getClassName(viewModel).replace("Model","");
+    return name.charAt(0).toUpperCase() + name.slice(1) + ".html";
+}
+
+
+function getViewName(viewModel){
+    var name = getClassName(viewModel);
+    return name.charAt(0).toLowerCase() + name.slice(1).replace("Model","");
+}
+
+
+
+function loadAllPages() {
+    
+    var getarray = [], i, len;
+    for (i = 0, len = models.length; i < len; i += 1) {
+        var page = getHTMLName(models[i]);
+        console.log("loading page: " + page);
+        var promise = $.mobile.loadPage( "views/" + page, {pageContainer: $('#allpages'), allowSamePageTransition: true} );
+        getarray.push( promise );
+    };
+    return $.when.apply($, getarray).done(function () {
+                                   
+                                   for (i = 0, len = models.length; i < len; i += 1) {
+                                   var name = getClassName(models[i]);
+                                   
+                                       var model = models[i];
+                                       var view = getViewName(model);
+                                       console.log("binding ko: " + view);
+                                       ko.applyBindings(model, document.getElementById(view));
+                                          if (model.applyBindings){
+                                              model.applyBindings();
+                                          }
+                                       
+                                   
+                                   }
+                                   
+                                   });
+};
 
 
 
 $(document).ready(function () {
+                  
+                  
+                  
+                  
                   // bind each view model to a jQueryMobile page
                   
+                  console.log("document ready");
                   
-                  
-                 
                   if (document.location.hash == ""){
-                  document.location.hash = "#channelListView"
+                 
+                      document.location.hash = "#channelListView";
                   }
                   
-                  
-                  
-                  
-                  $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
-                                 
-                                 
-                                 
-                                 var panelhtml = $("#globalpanel").html();
-                                 $(this).find('#gpanel').html(panelhtml);
-                                 
-                                 var panel = $(this).find('#mypanel').get(0);
-                                 if (panel){
-                                     var myScroll = new iScroll(panel);
-                                 }
-                                 
-                                 var panelhtmldots = $("#globalpaneldots").html();
-                                 $(this).find('#gpaneldots').html(panelhtmldots);
-                                 
-                                 
-                                 
-                                 //$(this).find('#mypanel').css('background','green');
-                                 
-                                 
-                                 
-                  });
-                  
+                   console.log('hash: ' + document.location.hash);
                   
                   $.mobile.activeBtnClass = '';
                   
-                  ko.applyBindings(loginViewModel, document.getElementById("loginView"));
-                  ko.applyBindings(channelViewModel, document.getElementById("channelView"));
-                  ko.applyBindings(channelBroadcastsViewModel, document.getElementById("channelBroadcastsView"));
-                  ko.applyBindings(channelMenuViewModel, document.getElementById("channelMenuView"));
-                  ko.applyBindings(channelSettingsViewModel, document.getElementById("channelSettingsView"));
-                  ko.applyBindings(channelNewViewModel, document.getElementById("channelNewView"));
-                  ko.applyBindings(signupViewModel, document.getElementById("signupView"));
-                  ko.applyBindings(sendMessageViewModel, document.getElementById("sendMessageView"));
-                  ko.applyBindings(followersListViewModel, document.getElementById("followersListView"));
-                  ko.applyBindings(inviteFollowersViewModel, document.getElementById("inviteFollowersView"));
-                  ko.applyBindings(followerViewModel, document.getElementById("followerView"));
-                  ko.applyBindings(userSettingsModel, document.getElementById("userSettingsView"));
-                  ko.applyBindings(devSettingsModel, document.getElementById("devSettingsView"));
-                  ko.applyBindings(channelListViewModel, document.getElementById("channelListView"));
-                  ko.applyBindings(channelsFollowingListViewModel, document.getElementById("channelsFollowingListView"));
-                  ko.applyBindings(commethodVerificationViewModel, document.getElementById("commethodVerificationView"));
-                  ko.applyBindings(notificationsViewModel, document.getElementById("notificationsView"));
-                  ko.applyBindings(forgotPasswordViewModel, document.getElementById("forgotPasswordView"));
-                  ko.applyBindings(resetPasswordViewModel, document.getElementById("resetPasswordView"));
-                  ko.applyBindings(messageViewModel, document.getElementById("messageView"));
-                  ko.applyBindings(panelHelpViewModel, document.getElementById("panelHelpView"));
+                  //$("#channelListView").page("destroy").page();
                   
-                  var currentUrl = $.mobile.path.parseUrl(window.location.href);
+                  //var currentUrl = $.mobile.path.parseUrl(window.location.href);
                   
-                  console.log("currentUrl: " + currentUrl.hash);
-                  
+                  //console.log("currentUrl: " + currentUrl.hash);
+                 
                   localStorage.removeItem('baseUrl');
-                  
-                  
-                  
-                  
-                  
-                  
-                 
-                                    
-                                   
-
-                  $.mobile.initializePage();
-                  
-                  
-                   
-                  
-                  $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
-                                 
-                                 if( panelHelpViewModel.isDirty($(this).attr('id'))){
-                                     var panelhtml = $("#globalpanel").find('#mypanel').html();
-                                     $(this).find('#mypanel').html(panelhtml);
-                                     $(this).find('#mypanel').panel();
-                                 
-                                                                  
-                                     $(this).find('#mypanel').trigger('create');
-                                 
-                                 
-                                 
-                                 
-                                     var panelhtml = $("#globalpaneldots").find('#mypaneldots').html();
-                                     $(this).find('#mypaneldots').html(panelhtml);
-                                     $(this).find('#mypaneldots').panel();
-                                 
-                                 
-                                     $(this).find('#mypaneldots').trigger('create');
-                                 
-                                 /*
-                                 var panel = $(this).find('#mypanel').get(0);
-                                 if (panel){
-                                 myScroll = new iScroll(panel);
-                                 }
-                                  */
-                                 
-                                 
-                                 }
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 /*
-                                 if ($(this).find('#innerpanel').iscroll){
-                                 showMessage('asdf');
-                                     $(this).find('#innerpanel').iscroll('refresh');
-                                 
-                                 }
-                                  */
-                                 
-                                 
-                                 /*
-                                 $(this).find('#innerpanel #extra-broadcast-channels')
-                                 
-                                 $('#my-collaspible').bind('expand', function () {
-                                                           alert('Expanded');
-                                                           }).bind('collapse', function () {
-                                                                   alert('Collapsed');
-                                                                   });
-                                 
-                                 
-                                 
-                                 */
-                                 
-                                 
-                                 
-                                 
-                                 /*
-                                 
-                                 $(window).resize();
-                                 
-                                 
-                                 $(this).find('#mypanel').resize();
-                                     panelHelpViewModel.setClean($(this).attr('id'));
-                                  
-                                  */
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 });
-                  
-                  
-                  
-                  $(document).on('swiperight', '[data-role="page"]', function(e,a){
-                                   if (!openPanel)
-                                   $(this).find('#mypanel').panel("open");
-                                   
-                                   });
-                  
-                  
-                  $(document).on('swipeleft', '[data-role="page"]', function(e,a){
-                                 if (!openPanel)
-                                 $(this).find('#mypaneldots').panel("open");
-                                 
-                                 });
-                  
-                  
-                  
-                  $(document).on('expand', '[data-role="collapsible"]', function(e,a){
-                                 
-                                 $(this).find('span.ui-btn-inner').css({
-                                                                       'background':'#D1D3D4',
-                                                                       'border-top':'#F1F2F2',
-                                                                       'border-bottom':'#A7A9AC'
-                                                                       
-                                                                       })
-                                                
-                                 ;
-                                 
-                                 $(window).resize();
-                                 
-                                 
-                                 });
-                  
-                  
-                  $(document).on('collapse', '[data-role="collapsible"]', function(e,a){
-                                 
-                                 $(this).find('span.ui-btn-inner').css({
-                                                                       'background':'',
-                                                                       'border-top':'',
-                                                                       'border-bottom':''
-                                                                       
-                                                                       })
-                                 
-                                 ;
-                                 $(window).resize();
-                                 
-                                 
-                                 
-                                 });
-                  
-                  
-                  $(document).bind("pagebeforechange", function (event, data) {
-                  
-                  
-                                   //$.mobile.activePage.attr('id')
-                                 
-                                   //alert(data.toPage);
-                                   
-                                   $.mobile.pageData = (data && data.options && data.options.pageData)
-                                   ? data.options.pageData
-                                   : null;
-                                   });
-              
-                  
-                  
-                  $(document).bind('panelclose', function(e, data) {
-                                   
-                                   openPanel = false;
-                                   });
-                  
-                  $(document).bind('panelopen', function(e, data) {
-                                   
-                                   openPanel = true;//e.target.id;
-                                   });
-                  
-                  $(document).bind('panelbeforeclose', function(e, data) {
-                                   
-                                   
-                                   $(".ui-panel").scrollTop(0);
-                                   });
-                  
-                  $(document).bind('panelbeforeopen', function(e, data) {
-                                   
-                                   
-                                   top_pos = $(document).scrollTop();
-                                   $(".ui-panel").css("top", top_pos);
-                                   
-                                   
-                                   
-                                   });
-                  
-                  /*
-                  $(document).bind('panelopen', function(e, data) {
-                                   top_pos = $(document).scrollTop();
-                                   
-                                   var iOS = undefined;
-                                   
-                                   if (iOS && iOS <= 5.01) {
-                                   $(".ui-panel").css("overflow", "scroll");
-                                   $(".ui-panel").css("-webkit-overflow-scrolling", "auto");
-                                   } else {
-                                   $(".ui-panel").css("overflow", "scroll");
-                                   $(".ui-panel").css("-webkit-overflow-scrolling", "touch");
-                                   }
-                                   $(".ui-panel").height($(window).height() - $('.ui-page-active header').height());
-                                   $(".ui-panel").css("top", 0);
-                                   $(".ui-panel-content-wrap-open").css("overflow", "hidden");
-                                   $(".ui-panel-content-wrap-open").height($(window).height() - $('.ui-page-active header').height());
-                                   $(".ui-panel-content-wrap-open").scrollTop(top_pos);
-                                   $(document).scrollTop(0);
-                                   });
-                  
-                  $(document).bind('panelclose', function(e, data) {
-                                   top_pos = $(".ui-panel-content-wrap-closed").scrollTop();
-                                   $(".ui-panel").height('auto');
-                                   $(".ui-panel-content-wrap-closed").height("auto");
-                                   $(".ui-panel-content-wrap-closed").css("overflow", "auto");
-                                   $(document).scrollTop(top_pos);
-                                   });
-                  */
-                  
-                  
-                  
-                 
-                  
-                  
-                  // This is the initial call to get the channels populated in the left menu.
-                  //channelListViewModel.activate().then(function(){});
+                  loadAllPages().done(function(){
+                                      
+                                           console.log('done loading all pages.');
+                                           console.log("INITIALIZE PAGE");
+                                           $.mobile.initializePage();
+                                      
+                                      
+                                      });
                   
                   
     });
 
 
+$(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
+               
+               console.log("creating " + $(this).attr('id'));
+               
+               $(this).find('#gpanel').append($("#globalpanel #mypanel").clone());
+               $(this).find('#gpaneldots').append($("#globalpaneldots #mypaneldots").clone());
+               
+               
+               
+               $(this).page({ domCache: true });
+               
+               });
+
+
+
+
+$(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
+               
+               console.log("showing page: " + $(this).attr('id'));
+               
+                             
+               //$(this).page();
+               
+               /*
+               
+               //if( panelHelpViewModel.isDirty($(this).attr('id'))){
+               var panelhtml = $("#globalpanel").find('#mypanel').html();
+               $(this).find('#mypanel').html(panelhtml);
+               $(this).find('#mypanel').panel();
+               
+               
+               $(this).find('#mypanel').trigger('create');
+               
+               
+               var panelhtml = $("#globalpaneldots").find('#mypaneldots').html();
+               $(this).find('#mypaneldots').html(panelhtml);
+               $(this).find('#mypaneldots').panel();
+               
+               
+               $(this).find('#mypaneldots').trigger('create');
+               */
+               
+               /*
+                var panel = $(this).find('#mypanel').get(0);
+                if (panel){
+                myScroll = new iScroll(panel);
+                }
+                */
+               
+               //}
+               
+               });
+
+
+
+$(document).on('swiperight', '[data-role="page"]', function(e,a){
+               if (!openPanel)
+               $(this).find('#mypanel').panel("open");
+               
+               });
+
+
+$(document).on('swipeleft', '[data-role="page"]', function(e,a){
+               if (!openPanel)
+               $(this).find('#mypaneldots').panel("open");
+               
+               });
+
+
+
+$(document).on('expand', '[data-role="collapsible"]', function(e,a){
+               
+               $(this).find('span.ui-btn-inner').css({
+                                                     'background':'#D1D3D4',
+                                                     'border-top':'#F1F2F2',
+                                                     'border-bottom':'#A7A9AC'
+                                                     
+                                                     })
+               
+               ;
+               
+               $(window).resize();
+               
+               
+               });
+
+
+$(document).on('collapse', '[data-role="collapsible"]', function(e,a){
+               
+               $(this).find('span.ui-btn-inner').css({
+                                                     'background':'',
+                                                     'border-top':'',
+                                                     'border-bottom':''
+                                                     
+                                                     })
+               
+               ;
+               $(window).resize();
+               
+               
+               
+               });
+
+
+$(document).bind('pagebeforechange', function (event, data) {
+                 
+                 
+                 //$.mobile.activePage.attr('id')
+                 
+                 //alert(data.toPage);
+                 
+                 $.mobile.pageData = (data && data.options && data.options.pageData)
+                 ? data.options.pageData
+                 : null;
+                 });
+
+
+
+$(document).bind('panelclose', function(e, data) {
+                 
+                 openPanel = false;
+                 });
+
+$(document).bind('panelopen', function(e, data) {
+                 
+                 openPanel = true;//e.target.id;
+                 });
+
+$(document).bind('panelbeforeclose', function(e, data) {
+                 
+                 
+                 $(".ui-panel").scrollTop(0);
+                 });
+
+$(document).bind('panelbeforeopen', function(e, data) {
+                 
+                 
+                 top_pos = $(document).scrollTop();
+                 $(".ui-panel").css("top", top_pos);
+                 
+                 
+                 
+                 });
 
 
 

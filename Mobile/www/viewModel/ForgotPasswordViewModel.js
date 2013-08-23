@@ -20,7 +20,12 @@ function ForgotPasswordViewModel() {
     
     var  dataService = new EvernymLoginService();
     
-    $("#" + this.template).live("pagebeforeshow", function(e, data){ that.clearForm(); that.activate(); });
+    this.applyBindings = function(){
+        $("#" + that.template).live("pagebeforeshow", function(e, data){ that.clearForm(); that.activate(); });
+        
+    };
+    
+    
     
     this.activate = function(){
        $('#forgotPasswordNotification').hide();

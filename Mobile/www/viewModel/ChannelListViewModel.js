@@ -6,6 +6,7 @@ function ChannelListViewModel() {
 	/// </summary>
 	
 	// --- properties
+ 
 	
 	this.template = "channelListView";
 	this.viewid = "V-19";
@@ -21,29 +22,29 @@ function ChannelListViewModel() {
 	
     
     
+    this.applyBindings = function(){
+        
+        $("#" + that.template).live("Xpagebeforecreate", function (e, data) {
+                                    
+                                    });
+        
+        
+        
+        $("#" + this.template).live("pagebeforeshow", function (e, data) {
+                                    
+                                    
+                                    
+                                    if (!that.shown) {
+                                    that.activate();
+                                    }
+                                    
+                                    });
+        
+        
+    };
     
     
-     $("#" + that.template).live("Xpagebeforecreate", function (e, data) {
-                                 alert('hey 2');
-         var panelhtml = $("#globalpanel").html();
-         $(this).find("#gpanel").html(panelhtml);
-     });
-     
-     
-    
-	$("#" + this.template).live("pagebeforeshow", function (e, data) {
-                                
-                                
-                                
-                                //$( '<li class="channel-list-item" data-bind="text: name"></li>').appendTo('#channellist' );
-                                //$('#' + that.template ).trigger("create");
-                                
-                                
-	    if (!that.shown) {
-	        that.activate();
-	    }
 
-	});
     
     //$('#channelNotifications').popup('close');
 	// Methods

@@ -22,10 +22,15 @@ function ChannelNewViewModel() {
     */
     
     
-    $("#" + this.template).live("pagebeforeshow", function (e, data) {
-                                that.clearForm();
-                                that.activate();
-    });
+    this.applyBindings = function(){
+        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+                                    that.clearForm();
+                                    that.activate();
+                                    });
+    };
+    
+    
+
     
     // Methods
     this.activate = function () {
@@ -72,7 +77,7 @@ function ChannelNewViewModel() {
         //inputChannelName
         //logger.log('start creating channel ' + this.name() , null, 'dataservice', true);
         $.mobile.showPageLoadingMsg("a", "Creating Channel " + that.name());
-        alert(that.description());
+        
         dataService.createChannel({name: that.name(), description: that.description()}, {success: successfulCreate, error: errorCreate});
     };
      

@@ -1,16 +1,14 @@
 ﻿
 
-var EvernymAPI = function(){
+var EvernymAPI = function() {
     
     var okAsync = QUnit.okAsync,
     stringformat = QUnit.stringformat;
     
-    //var baseUrl = 'http://qupler.no-ip.org:8080/api20/rest', // Test environment
-    var baseUrl = 'https://api.evernym.com/api20/rest', // Test environment
-
-    //var baseUrl = 'http://qupler.no-ip.org:8079/api/rest', // Test environment
-    
-    
+    ///var baseUrl = 'http://localhost:8079/api/rest',
+    //var baseUrl = 'http://qupler.no-ip.org:8079/api/rest',
+    //var baseUrl = 'http://qupler.no-ip.org:8080/api20/rest',
+    var baseUrl = 'https://api.evernym.com/api21/rest',
     
     getMsgPrefix = function (id, rqstUrl) {
         return stringformat(
@@ -51,10 +49,15 @@ var EvernymAPI = function(){
     expectUnauthorized: function(textStatus, status, additionalDetails) {
         equal(textStatus, 'Unauthorized', additionalDetails);
         equal(status, 401);
+    },
+    expectNotImplemented: function(textStatus, status, additionalDetails) {
+        equal(textStatus, 'Not Implemented', additionalDetails);
+        equal(status, 501);
     }
         
         
     };
+    
     
     
     
@@ -67,26 +70,33 @@ var EvernymAPI = function(){
         return results[1];
     }
     
-    
     function verifyEmail(verification_key, handler, postHandlerCallback){
         callAPI('PUT', '/commethod/verification/' + verification_key, undefined, handler, postHandlerCallback);
     }
     
     this.enroll = function(account, handler, postHandlerCallback) {
         callAPI('POST', '/account/enroll', undefined, account ? account : that.generateAccount(), handler, postHandlerCallback);
-    }
+    };
     
     this.forgot = function(account, handler, postHandlerCallback) {
         callAPI('POST', '/account/forgot', undefined, account, handler, postHandlerCallback);
-    }
+    };
     
     this.login = function(loginRequest, handler, postHandlerCallback) {
         callAPI('POST', '/account/login', undefined, loginRequest, handler, postHandlerCallback);
-    }
+    };
     
     this.logout = function(accessToken, handler, postHandlerCallback) {
         callAPI('POST', '/account/logout', accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
+    
+    this.getAccount = function(accessToken, handler, postHandlerCallback) {
+        callAPI('GET', '/account', accessToken, undefined, handler, postHandlerCallback);
+    };
+    
+    this.modifyAccount = function(accessToken, account, handler, postHandlerCallback) {
+        callAPI('PUT', '/account', accessToken, account, handler, postHandlerCallback);
+    };
     
     
     
@@ -94,9 +104,9 @@ var EvernymAPI = function(){
     
     function checkEmail(emailAddress, postHandlerCallback){
         
-        
+        var maxTimes = 75;
         var times = 0;
-        function waitForIt(){
+        function waitForIt() {
             return timeoutPromise(1000).done(getEmail);
         }
         
@@ -109,18 +119,19 @@ var EvernymAPI = function(){
         }
         
         
-        function checkForContent(data){
-            if (data.length == 0){
+        function checkForContent(data) {
+            if (data.length == 0) {
                 
-                
-                waitForIt();
                 times ++;
                 console.log('no email. times tried: ' + times);
+                if (times < maxTimes) {
+                	waitForIt();
+                } else {
+                    console.log('max times reached.');
+                }
                 return;
             }
-            
             postHandlerCallback(data);
-            
         }
         
         
@@ -133,12 +144,9 @@ var EvernymAPI = function(){
         
     }
     
-    
-    this.checkEmailAndVerify = function(emailAddress, postHandlerCallback){
+    this.checkEmailAndVerify = function(emailAddress, postHandlerCallback) {
         
         console.log('checking email');
-        
-        
         checkEmail(emailAddress, verify);
         
         function verify(data) {
@@ -151,7 +159,7 @@ var EvernymAPI = function(){
             verifyEmail(key, that.HANDLER.expectSuccessNoContent, postHandlerCallback);
         }
         
-    }
+    };
     
     
     // generic helper method to handle ajax calls to API
@@ -161,7 +169,7 @@ var EvernymAPI = function(){
             datatype = "json";
         }
         
-       
+        
         
         var ajaxParams = {
         url: baseUrl + resource,
@@ -205,40 +213,40 @@ var EvernymAPI = function(){
     
     this.createChannel = function(accessToken, channel, handler, postHandlerCallback) {
         callAPI('POST', '/channel', accessToken, channel, handler, postHandlerCallback);
-    }
+    };
+    
+    this.modifyChannel = function(accessToken, channelid, channel, handler, postHandlerCallback) {
+        callAPI('PUT', '/channel/' + channelid , accessToken, channel, handler, postHandlerCallback);
+    };
     
     this.deleteChannel = function(accessToken, channelid, handler, postHandlerCallback) {
         callAPI('DELETE', '/channel/' + channelid, accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
     
     this.sendMessage = function(accessToken, channelid, message, handler, postHandlerCallback) {
         callAPI('POST', '/channel/' + channelid + '/message', accessToken, message, handler, postHandlerCallback);
-    }
+    };
     
     this.getChannel = function(accessToken, channelid, handler, postHandlerCallback) {
         callAPI('GET', '/channel/' + channelid , accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
     
     this.getMessages = function(accessToken, channelid, handler, postHandlerCallback) {
         callAPI('GET', '/channel/' + channelid + '/message', accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
     
     this.listOwnerChannels = function(accessToken, handler, postHandlerCallback) {
-        
         callAPI('GET', '/channel?relationship=O', accessToken, undefined, handler, postHandlerCallback);
-    }
+    };
     
     this.getCommunicationMethods = function(accessToken, handler, postHandlerCallback) {
-        
         callAPI('GET', '/commethod', accessToken, undefined, handler, postHandlerCallback);
-    }
-    
-    
+    };
     
     
     this.generateAccount = function() {
         
-        var strAccountName = 'test-' + randomString(8);
+        var strAccountName = this.randomAccountname();
         
         return {
         accountName: strAccountName, // Create Random AccountName Generator
@@ -247,7 +255,12 @@ var EvernymAPI = function(){
         firstname: 'testFirst',
         lastname: 'testLast'
         };
-    }
+    };
+    
+    
+    this.randomAccountname = function() {
+    	return 'test-' + randomString(8);
+    };
     
     this.generateLogin = function(account) {
         return {
@@ -255,14 +268,15 @@ var EvernymAPI = function(){
         password: account.password,
         appToken: 'sNQO8tXmVkfQpyd3WoNA6_3y2Og='
         };
-    }
-    
+    };
     
     this.generateChannel = function() {
+    	var nm = 'testchannel-' + randomString(5);
         return {
-        name: 'testchannel-' + randomString(5)
+        name: nm,
+        description: 'Channel description for ' + nm
         };
-    }
+    };
     
     this.generateCommunicationMethodUrgentSMS = function(channelId) {
         return {
@@ -270,7 +284,7 @@ var EvernymAPI = function(){
         urgency: true,
         channelId: channelId
         };
-    }
+    };
     
     function randomString(length) {
         var text = "";
@@ -282,13 +296,9 @@ var EvernymAPI = function(){
         return text;
     }
     
+    this.randomStr = randomString;
     
-    
-    
-    
-    
-    
-}
+};
 
 
 

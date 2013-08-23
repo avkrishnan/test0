@@ -16,18 +16,21 @@ function ChannelsFollowingListViewModel() {
 	this.shown = false;
     
     
+    this.applyBindings = function(){
+        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+                                    
+                                    
+                                    if (!that.shown) {
+                                    that.activate();
+                                    }
+                                    
+                                    });
+    };
     
 
 	
    
-	$("#" + this.template).live("pagebeforeshow", function (e, data) {
 
-	   
-	    if (!that.shown) {
-	        that.activate();
-	    }
-
-	});
 	
    
 	

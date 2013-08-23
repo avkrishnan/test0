@@ -17,15 +17,20 @@ function CommethodVerificationViewModel() {
     this.verification_key = ko.observable();
     
     
-    $("#" + this.template).live("pagebeforeshow", function(e, data){
-								
-								
-								if ($.mobile.pageData && $.mobile.pageData.key){
-								
+    this.applyBindings = function(){
+        $("#" + that.template).live("pagebeforeshow", function(e, data){
+                                    
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.key){
+                                    
                                     that.activate($.mobile.pageData.key);
-								}
+                                    }
+                                    
+                                    });
+    };
     
-                                });
+    
+
 	
     
     // Methods

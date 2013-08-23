@@ -1,0 +1,533 @@
+<!--  CHANNEL MENU VIEW -->
+
+<div id="channelMenuView" class="channel-list"  data-role="page" >
+    <div id="gpanel"></div>
+    <div id="gpaneldots"></div>
+    <div data-role="header" xdata-theme="b" class="header">
+        <!--
+         <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
+         -->
+        
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        
+        
+        
+        <div data-role="popup" id="popupMenu" xdata-theme="a">
+            
+            <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                
+                <li><a href="#" data-bind="click: refreshMessagesCommand">Refresh Messages</a></li>
+                <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#sendMessageView" xdata-bind="click: refreshMessagesCommand">Send Message</a></li>
+                <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#inviteFollowersView" >Invite Followers</a></li>
+                <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="index.html#followersListView">Followers</a></li>
+                <li data-bind="style: {display:relationship()=='O'?'block':'none'}"><a href="#" data-bind="click: deleteChannelCommand">Delete Channel</a></li>
+                <li data-bind="style: {display:relationship()=='F'?'block':'none'}"><a href="#" data-bind="click: unfollowChannelCommand">Unfollow Channel</a></li>
+                
+                
+                <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                
+            </ul>
+            
+        </div>
+        
+        
+        
+    </div>
+    
+    
+    <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll >
+        
+        
+        
+        <ul data-role="listview" >
+            
+            
+            
+            <li class="channel-list-item" data-icon="false" >
+                
+                <a  class="channel-list-anchor" href="#"  >
+                    
+                    
+                    <div class="channel-list-stripe2"></div>
+                    
+                    
+                    
+                    
+                    <span class="channel-info"  style="background:#414042;border-radius:0px;">
+                        <span class="channel-name" data-bind="text: title" style="
+                            font-family:'Open Sans', sans-serif;
+                            font-size: 20px;
+                            color:white;
+                            font-weight:normal;
+                            "></span>
+                        <!--<span class="channel-description" data-bind="text: description"></span>-->
+                        <span class="channel-url" data-bind="text: url"style="
+                            font-family:'Open Sans', sans-serif;
+                            font-size: 14px;
+                            color:#8DC63F;
+                            font-weight:normal;
+                            font-style:italic;
+                            
+                            "></span>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+                    
+                    <button data-role="none"  data-bind="click: showChannelSettings" style="
+                        
+                        width:32px;
+                        height:32px;
+                        background:url('resources/V-21-g.png') no-repeat;
+                        background-size:32px;
+                        position:absolute;
+                        border:0px;
+                        top:30px;
+                        right:20px;
+                        ">
+                        
+                    </button>
+                    
+                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    <div class="channel-list-avatar-frame"></div>
+                    
+                    
+                    
+                </a>
+                
+            </li>
+            
+            
+            
+            <!----- -->
+            
+            
+            
+            
+            <li class="sub-message-list-item " id="message-reply-form">
+                
+                <div  class="sub-message-list-container" >
+                    
+                    <div class="message-list-stripe"></div>
+                    
+                    
+                    <div class="sub-message-info" >
+                        <a data-role="none"  href="index.html#channelBroadcastsView">
+                            <div style="height:46px;">
+                                <div class="sub-message-list-avatar" style="
+                                    background:url(resources/V-21-h.png) no-repeat;
+                                    background-size:46px;
+                                    
+                                    "></div>
+                                
+                                
+                                <div class="sub-message-text" style="
+                                    width:120px;
+                                    
+                                    "> Broadcasts </div>
+                                
+                                
+                                <div  style="
+                                    position:absolute;
+                                    width:66px;
+                                    height:27px;
+                                    border-radius:5px;
+                                    
+                                    font-family:'Open Sans', sans-serif;
+                                    font-weight:500;
+                                    font-size:15px;
+                                    color:white;
+                                    background: #8DC63F;
+                                    right:20px;
+                                    top:10px;
+                                    text-align:center;
+                                    
+                                    "> <div style="top:3px;position:relative;">See All </div></div>
+                                
+                                
+                            </div>
+                            
+                            </div>
+                    </a>
+                    
+                </div>
+                
+                <!-- veritical white line -->
+                <div style="background:white;height:100%;left:64px;width:2px;position:absolute;"></div>
+                
+                
+                <!-- broadcast div -->
+                <div style="margin-top:18px;position:relative;margin-left:86px;margin-right:18px;" id="broadcasts_mr">
+                    
+                    <div style="
+                        background:#D1D3D4;
+                        color:#58595B;
+                        text-shadow:none;
+                        
+                        font-family:'Open Sans', sans-serif;
+                        
+                        font-size:13px;
+                        
+                        -webkit-border-top-left-radius: 4px;
+                        -moz-border-radius-topleft: 4px;
+                        border-top-left-radius: 4px;
+                        
+                        -webkit-border-top-right-radius: 4px;
+                        -moz-border-radius-topright: 4px;
+                        border-top-right-radius: 4px;
+                        height: 24px;
+                        
+                        ">
+                        <span style="font-weight:600;
+                            position:relative;
+                            left:7px;top:2px;">Last Sent</span>
+                        <span style="font-weight:200;position:absolute;right:7px;top:2px;" data-bind="text: last_date" ></span>
+                    </div>
+                    <a data-role="none" href="#"  data-bind="click: showMessageDetails" >
+                        <div style="background:white;height:48px;position:relative;">
+                            
+                            <div  style="position:relative;"  >
+                                
+                                <div  style="
+                                    font-family:'Open Sans', sans-serif;
+                                    font-weight:normal;
+                                    font-size:14px;
+                                    color:black;padding:4px;
+                                    margin-right:48px;
+                                    
+                                    " data-bind="text: last_message" ></div>
+                            </div>
+                            
+                            <div style="
+                                
+                                width:27px;
+                                height:27px;
+                                background:url('resources/V-21-j.png') no-repeat;
+                                background-size:27px;
+                                position:absolute;
+                                
+                                top:10px;
+                                right:10px;
+                                ">
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </a>
+                    <div style="background:#8DC63F;
+                        color:white;
+                        font-family:'Open Sans', sans-serif;
+                        font-weight:600;
+                        font-size:13px;
+                        text-shadow:none;
+                        position:relative;
+                        
+                        -webkit-border-bottom-left-radius: 4px;
+                        -moz-border-radius-bottomleft: 4px;
+                        border-bottom-left-radius: 4px;
+                        
+                        -webkit-border-bottom-right-radius: 4px;
+                        -moz-border-radius-bottomright: 4px;
+                        border-bottom-right-radius: 4px;
+                        
+                        height: 24px;
+                        
+                        "
+                        
+                        >
+                        <!-- <span style="position:relative; left:7px;top:2px;"> <span>10</span> / <span>20</span> Got it </span> -->
+                        <span style="position:absolute; right:7px;top:2px;"><span data-bind="text: last_replies"></span></span>
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                
+                <!-- broadcast div -->
+                <div style="margin-top:18px;position:relative;margin-left:86px;margin-right:18px;" id="broadcasts_mr2">
+                    
+                    <div style="
+                        background:#D1D3D4;
+                        color:#58595B;
+                        text-shadow:none;
+                        
+                        font-family:'Open Sans', sans-serif;
+                        
+                        font-size:13px;
+                        
+                        
+                        -webkit-border-top-left-radius: 4px;
+                        -moz-border-radius-topleft: 4px;
+                        border-top-left-radius: 4px;
+                        
+                        -webkit-border-top-right-radius: 4px;
+                        -moz-border-radius-topright: 4px;
+                        border-top-right-radius: 4px;
+                        height: 24px;
+                        
+                        ">
+                        <span style="font-weight:600;
+                            position:relative;
+                            left:7px;top:2px;">New Broadcast</span>
+                        
+                    </div>
+                    
+                    <div style="background:white;height:48px;position:relative;">
+                        
+                        <div  style="position:relative;"  >
+                            
+                            <div  style="
+                                font-family:'Open Sans', sans-serif;
+                                font-weight:normal;
+                                font-size:14px;
+                                color:black;
+                                padding:4px;
+                                margin-right:48px;
+                                
+                                "  >
+                                <textarea data-role="none" data-bind="value: newMessage, valueUpdate: 'afterkeydown'" style="
+                                    width:100%;
+                                    height:100%;
+                                    font-family:'Open Sans', sans-serif;
+                                    font-weight:400;
+                                    resize:none;
+                                    
+                                    font-size:10pt;
+                                    border:0px;
+                                    " id="newMessage-cm"></textarea>
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        <button data-role="none"  data-bind="click: sendNewBroadcast" style="
+                            
+                            width:27px;
+                            height:27px;
+                            background:url('resources/V-21-k.png') no-repeat;
+                            background-size:27px;
+                            position:absolute;
+                            border:0px;
+                            top:10px;
+                            right:10px;
+                            ">
+                            
+                        </button>
+                        
+                        
+                        <!--
+                         <button   style="font-size:14pt;border-radius:10px;" data-role="none" data-bind="click: cancelNewBroadcast" >cancel</button>
+                         -->
+                        
+                        
+                    </div>
+                    
+                    <div style="background:#8DC63F;
+                        color:white;
+                        font-family:'Open Sans', sans-serif;
+                        font-weight:600;
+                        font-size:13px;
+                        text-shadow:none;
+                        position:relative;
+                        
+                        -webkit-border-bottom-left-radius: 4px;
+                        -moz-border-radius-bottomleft: 4px;
+                        border-bottom-left-radius: 4px;
+                        
+                        -webkit-border-bottom-right-radius: 4px;
+                        -moz-border-radius-bottomright: 4px;
+                        border-bottom-right-radius: 4px;
+                        
+                        height: 24px;
+                        
+                        "
+                        
+                        >
+                        <span style="position:relative; left:7px;top:2px;"> <!--Advanced Options --> </span>
+                        
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+                
+                
+                <!--   --->
+                
+                
+                
+                <!--
+                 <fieldset data-role="controlgroup" data-role="fieldcontain">
+                 <legend> Select Urgency</legend>
+                 
+                 <input type="radio" name="urgency" id="r-urgency-n" data-bind="checked: urgency" value="N" checked />
+                 <label for="r-urgency-n">Normal</label>
+                 
+                 <input type="radio" name="urgency" id="r-urgency-l" data-bind="checked: urgency" value="L" />
+                 <label for="r-urgency-l">Low</label>
+                 
+                 <input type="radio" name="urgency" id="r-urgency-ts" data-bind="checked: urgency" value="TS" />
+                 <label for="r-urgency-ts">Time-Sensitive</label>
+                 
+                 <input type="radio" name="urgency" id="r-urgency-u" data-bind="checked: urgency" value="U" />
+                 <label for="r-urgency-u">Urgent</label>
+                 
+                 <input type="radio" name="urgency" id="r-urgency-e" data-bind="checked: urgency" value="E" />
+                 <label for="r-urgency-e">Emergency</label>
+                 
+                 
+                 </fieldset>
+                 
+                 <label><input type="checkbox" name="igi" data-bind="checked: igi" value="yes" />Request iGi (I Got It)</label>
+                 -->
+                
+                
+                
+            </li>
+            
+            
+            
+            
+            
+            <li class="sub-message-list-item " id="message-reply-form">
+                
+                <div  class="sub-message-list-container" >
+                    
+                    <div class="message-list-stripe"></div>
+                    
+                    <a data-role="none"  href="index.html#followersListView">
+                        <div class="sub-message-info" style="">
+                            
+                            <div class="sub-message-list-avatar" style="background:url(resources/group.svg) no-repeat;background-size:46px;"></div>
+                            
+                            <div class="sub-message-text"> Followers </div>
+                            
+                            
+                            
+                            
+                            <!--
+                             <div  style="
+                             position:absolute;
+                             width:42px;
+                             height:27px;
+                             border-radius:5px;
+                             
+                             font-family:'Open Sans', sans-serif;
+                             font-weight:500;
+                             font-size:15px;
+                             color:white;
+                             background: #8DC63F;
+                             right:74px;
+                             top:10px;
+                             text-align:center;
+                             
+                             "> <div style="top:3px;position:relative;">+ 5</div></div>
+                             
+                             
+                             
+                             <div  style="
+                             position:absolute;
+                             width:42px;
+                             height:27px;
+                             border-radius:5px;
+                             
+                             font-family:'Open Sans', sans-serif;
+                             font-weight:500;
+                             font-size:15px;
+                             color:white;
+                             background: #8DC63F;
+                             right:20px;
+                             top:10px;
+                             text-align:center;
+                             
+                             "> <div style="top:3px;position:relative;">- 2</div></div>
+                             -->
+                            
+                            
+                        </div>
+                        
+                    </a>
+                    
+                </div>
+                
+                
+                
+                
+            </li>
+            
+            
+            <!--- --->
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+        
+        <br/><br/>
+        <span style="
+            text-shadow:none;
+            ">
+            [ BETA V-21 ChannelMenu ]
+        </span>
+        
+        
+        
+    </div>
+    
+    
+    
+    <div class="footer" data-role="footer" data-inset="true" style="border-top:#F1F2F2;background: #D1D3D4;">
+        
+        <a href="index.html#inviteFollowersView" data-role="none">
+            <div style="
+                height:40px;
+                color:#58595B;
+                font-family:'Open Sans', sans-serif;
+                font-weight:600;
+                font-size:16px;
+                text-shadow:none;
+                
+                ">
+                
+                
+                <div style="margin-left:60px;position:relative;top:8px;">
+                    
+                    <div data-role="none"  data-bind="click: sendNewBroadcast" style="
+                        
+                        width:27px;
+                        height:27px;
+                        background:url('resources/V-21-k.png') no-repeat;
+                        background-size:27px;
+                        position:absolute;
+                        display:inline-block;
+                        border:0px;
+                        top:0px;
+                        left:0px;
+                        ">
+                        
+                    </div>
+                    
+                    <span style="margin-left:36px;">Add / Invite Followers</span></div>
+                
+            </div>
+            
+        </a>
+        
+    </div>
+    
+</div>

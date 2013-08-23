@@ -5,16 +5,16 @@
 }
 
 body, input, div, a, span, li, button, textarea, h1, h2, h3, h4 {
-    
     -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke: 1px rgba(0,0,0,0.1);
-    
+    -webkit-text-stroke: 1px rgba(0,0,0,0.1); 
     
     font-family:'Open Sans', sans-serif;
     
     font-style:none;
     text-shadow:none;
 }
+
+
 
 
 .ui-collapsible-set {
@@ -935,6 +935,15 @@ XXchannel-list-anchor:hover .channel-description
     background:rgba(0,0,0,0.1);
     background-repeat:no-repeat;
     
+}
+
+
+
+.backbutton {
+    
+    background-image: url(back_button_left.png), url(back_button_middle.png), url(back_button_right.png);
+    background-repeat: no-repeat, no-repeat, repeat-x;
+    background-position: left top, right top, left top;
 }
 
 

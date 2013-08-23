@@ -18,24 +18,31 @@ function SignupViewModel() {
     this.lastname = ko.observable();
     
     
-    $("#" + this.template).live("pagebeforeshow", function(e, data){
-								
-								that.clearForm();
-                                that.activate();
-                                
-                                if ($.mobile.pageData && $.mobile.pageData.email){
-								
+    this.applyBindings = function(){
+        
+        $("#" + this.template).live("pagebeforeshow", function(e, data){
+                                    
+                                    that.clearForm();
+                                    that.activate();
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.email){
+                                    
                                     that.emailaddress($.mobile.pageData.email);
-								}
-                                
-                                if ($.mobile.pageData && $.mobile.pageData.follow){
-								
+                                    }
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.follow){
+                                    
                                     //localStorage.setItem("follow", JSON.stringify($.mobile.pageData.follow));
-                                
-								}
-																
-                                });
+                                    
+                                    }
+                                    
+                                    });
+
+        
+    };
     
+    
+        
     
     // Methods
     this.activate = function () {

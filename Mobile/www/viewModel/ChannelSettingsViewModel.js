@@ -33,44 +33,55 @@ function ChannelSettingsViewModel() {
                                 });
     */
     
-	$("#" + this.template).live("pagebeforeshow", function(e, data){
-								
-                                
-                                $('.more_messages_button').hide();
-								
-								if ($.mobile.pageData && $.mobile.pageData.id){
-								
+    
+    
+    this.applyBindings = function(){
+    
+        
+        $("#" + that.template).live("pagebeforeshow", function(e, data){
+                                    
+                                    
+                                    $('.more_messages_button').hide();
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.id){
+                                    
 									that.activate({id:$.mobile.pageData.id});
-								}
-								
-								else {
+                                    }
+                                    
+                                    else {
 									var currentChannel = localStorage.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
-                                
-                                
-                                
+                                    
+                                    
+                                    
                                     if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
-                                
-                                        that.messages([]);
+                                    
+                                    that.messages([]);
                                     }
-                                
+                                    
                                     if (lchannel){
-                                        that.channel([lchannel]);
-                                        that.title(lchannel.name );
-                                        that.description(lchannel.description);
-                                        that.url(lchannel.normName + '.evernym.com');
-                                        that.relationship(lchannel.relationship);
-                                        that.channelid(lchannel.id);
-                                        $.mobile.showPageLoadingMsg("a", "Loading Messages");
-									    
+                                    that.channel([lchannel]);
+                                    that.title(lchannel.name );
+                                    that.description(lchannel.description);
+                                    that.url(lchannel.normName + '.evernym.com');
+                                    that.relationship(lchannel.relationship);
+                                    that.channelid(lchannel.id);
+                                    $.mobile.showPageLoadingMsg("a", "Loading Messages");
+                                    
                                     }
                                     else {
-                                        $.mobile.changePage("#" + loginViewModel.template);
+                                    $.mobile.changePage("#" + loginViewModel.template);
                                     }
-								
-								}
-								
-		   });
+                                    
+                                    }
+                                    
+                                    });
+    
+    
+    
+    };
+    
+	
 	
 	
 

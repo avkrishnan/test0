@@ -21,24 +21,29 @@ function ResetPasswordViewModel() {
     
     var  dataService = new EvernymLoginService();
     
-    $("#" + this.template).live("pagebeforeshow", function(e, data){
-                                
-                                
-                                that.clearForm();
-                                if ($.mobile.pageData && $.mobile.pageData.key){
+    this.applyBindings = function(){
+        $("#" + that.template).live("pagebeforeshow", function(e, data){
+                                    
+                                    
+                                    that.clearForm();
+                                    if ($.mobile.pageData && $.mobile.pageData.key){
                                     that.key = $.mobile.pageData.key;
-                                
+                                    
                                     that.activate();
-								}
-								
-								else {
-                                
-                                }
-                                
-                                
-                                
-                                
-                                });
+                                    }
+                                    
+                                    else {
+                                    
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    });
+    };
+    
+    
+
     
     this.activate = function(){
         

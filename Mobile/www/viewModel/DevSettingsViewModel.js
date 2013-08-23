@@ -16,24 +16,32 @@ function DevSettingsViewModel() {
     
 	var that = this;
 	
-	
-	$("#" + this.template).live("pagebeforeshow", function (e, data) {
-
-	        var currentBaseUrl = localStorage.getItem("baseUrl");
-                                
-                                if (currentBaseUrl){
+    
+    this.applyBindings = function(){
+        
+        
+        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+                                    
+                                    var currentBaseUrl = localStorage.getItem("baseUrl");
+                                    
+                                    if (currentBaseUrl){
                                     that.baseUrl(currentBaseUrl);
-                                }
-                                else {
+                                    }
+                                    else {
                                     var es = new EvernymService();
                                     that.baseUrl(es.getBaseUrl());
-                                }
-                                
-                                
-	        that.activate();
-                                
-	    
-	});
+                                    }
+                                    
+                                    
+                                    that.activate();
+                                    
+                                    
+                                    });
+        
+    };
+    
+	
+	
     
     
     this.activate = function() {

@@ -37,48 +37,50 @@ function MessageViewModel() {
                                 });
 	
     */
-	$("#" + this.template).live("pagebeforeshow", function(e, data){
-								
-                                that.clear();
-                                
-                                $("#message-reply-form").hide();
-                                $('.more_messages_button').hide();
-								
-								if ($.mobile.pageData && $.mobile.pageData.id){
-								
+    
+    this.applyBindings = function(){
+       	$("#" + that.template).live("pagebeforeshow", function(e, data){
+                                    
+                                    that.clear();
+                                    
+                                    $("#message-reply-form2").hide();
+                                    $('.more_messages_button').hide();
+                                    
+                                    if ($.mobile.pageData && $.mobile.pageData.id){
+                                    
 									that.activate({id:$.mobile.pageData.id});
-								}
-								
-								else {
+                                    }
+                                    
+                                    else {
 									var currentChannel = localStorage.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
-                                
-                                
+                                    
+                                    
                                     var currentMessage = localStorage.getItem("currentMessage");
-                                
+                                    
                                     var lmessage = JSON.parse(currentMessage);
-                                
-                                
+                                    
+                                    
                                     if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
-                                
-                                        that.messages([]);
+                                    
+                                    that.messages([]);
                                     }
-                                
+                                    
                                     that.channel([lchannel]);
-                                
+                                    
                                     that.message([lmessage]);
-                                
+                                    
                                     that.messagetext(lmessage.text);
-                                
-                                
-                                that.description(lchannel.description);
-                                that.url(lchannel.normName + ".evernym.com");
-                                
+                                    
+                                    
+                                    that.description(lchannel.description);
+                                    that.url(lchannel.normName + ".evernym.com");
+                                    
                                     
                                     that.messagecreated(lmessage.created);
-                                
+                                    
                                     that.messageid(lmessage.id);
-                                
+                                    
                                     that.title(lchannel.name );
                                     that.relationship(lchannel.relationship);
                                     that.channelid(lchannel.id);
@@ -86,10 +88,15 @@ function MessageViewModel() {
 									
                                     that.getMessagesCommand().then(gotMessages);
                                     
-								
-								}
-								
-		   });
+                                    
+                                    }
+                                    
+                                    });
+    };
+    
+    
+    
+
 	
 	
 
@@ -142,7 +149,7 @@ function MessageViewModel() {
 	function gotMessages(data){
 		
         that.clear();
-		$("#message-reply-form").hide();
+		$("#message-reply-form2").hide();
 		$.mobile.hidePageLoadingMsg();
 		if (data.message && data.message.constructor == Object){
 			
@@ -362,7 +369,7 @@ function MessageViewModel() {
             replyToId = that.messageid();
         }
         
-        $("#message-reply-form").show(200, function(){
+        $("#message-reply-form2").show(200, function(){
                                                 $("#reply-text-box").focus();
                                                 });
         

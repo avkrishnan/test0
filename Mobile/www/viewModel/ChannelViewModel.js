@@ -28,6 +28,11 @@ function ChannelViewModel() {
                                 });
     */
     
+    
+    this.applyBindings = function(){
+    
+    };
+    
 	$("#" + this.template).live("pagebeforeshow", function(e, data){
 								
                                 

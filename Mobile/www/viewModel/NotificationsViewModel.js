@@ -15,12 +15,16 @@ function NotificationsViewModel() {
     this.notifications = ko.observableArray([]);
     
  
+    this.applyBindings = function(){
+        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+                                    
+                                    that.activate();
+                                    
+                                    });
+    };
     
-    $("#" + this.template).live("pagebeforeshow", function (e, data) {
-
-            that.activate();
-            
-    });
+    
+   
     
     this.addNotification = function(message){
         
