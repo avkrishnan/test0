@@ -18,6 +18,7 @@ function UserSettingsViewModel() {
     this.commethods = ko.observableArray([]);
     this.baseUrl = ko.observable();
     this.accountName = ko.observable();
+    this.name = ko.observable();
     
     
 	var that = this;
@@ -51,9 +52,12 @@ function UserSettingsViewModel() {
         
         
         var _accountName = localStorage.getItem("accountName");
+        var _name = localStorage.getItem("UserFullName");
         
         that.accountName(_accountName);
-		
+		that.name(_name);
+        
+        
 		that.getCommethods().then(gotCommethods);
 
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");

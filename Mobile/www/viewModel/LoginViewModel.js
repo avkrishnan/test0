@@ -144,9 +144,7 @@ function LoginViewModel() {
         that.first_name = data.firstname;
         that.last_name = data.lastname;
         
-        
-        populatePanelName(data.firstname + ' ' + data.lastname);
-        
+        localStorage.setItem('UserFullName', data.firstname + ' ' + data.lastname);
         
         
     }
@@ -164,6 +162,7 @@ function LoginViewModel() {
             
             localStorage.setItem("accessToken", args.accessToken);
             localStorage.setItem("accountName", that.accountName());
+            
             
             var notifications = args.notifications;
             

@@ -425,7 +425,10 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
                
                console.log("showing page: " + $(this).attr('id'));
                
-                             
+               var name = localStorage.getItem('UserFullName');
+               
+               $(this).find('#panel_name').html(name);
+               
                //$(this).page();
                
                /*

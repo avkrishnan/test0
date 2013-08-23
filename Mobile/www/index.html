@@ -62,7 +62,7 @@
                 <script type="text/javascript" src="viewModel/MessageViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/PanelHelpViewModel.js"></script>
                 
-                <link rel="stylesheet" href="lib/evernym.css" />
+                <link rel="stylesheet" href="evernym.css" />
                 
                 <!-- the code that puts it all together -->
                 <script type="text/javascript" src="app.js" ></script>
@@ -87,18 +87,9 @@
                         
                     }
                     
-                    function populatePanelName(name){
-                        
-                        localStorage.setItem("name", name);
-                        
-                    }
+                    
                     
                     function populatePanel(channels){
-                        
-                        
-                        var name = localStorage.getItem("name");
-                        
-                        $('#panel_name').html(name);
                         
                         
                         var innards = '';
