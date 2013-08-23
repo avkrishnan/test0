@@ -1,23 +1,18 @@
-/*globals $, TweetViewModel */
-
 function EvernymService() {
   
     
 	//var baseUrl = 'http://qupler.no-ip.org:8079/api/rest';
-	var baseUrl = 'https://api.evernym.com/api20/rest';
+	var baseUrl = 'https://api.evernym.com/api21/rest';
     
     this.getBaseUrl = function(){return baseUrl;};
     
 	this.callAPI = function(method, resource, object, callbacks, useAccessToken) {
 		
-        
-        
         var currentBaseUrl = localStorage.getItem("baseUrl");
         
         if (currentBaseUrl){
             baseUrl = currentBaseUrl;
         }
-        
         
         var ajaxParams = {
 		url: baseUrl + resource,
@@ -26,9 +21,6 @@ function EvernymService() {
 		dataType: "json",
 		contentType: "application/json"
 		};
-		
-		
-      
 		
 		if (useAccessToken) {
             
@@ -41,8 +33,6 @@ function EvernymService() {
 			}
 		}
         
-      
-		
 		var ajaxCall = $.ajax(ajaxParams);
 		
 		ajaxCall.done(function (data, textStatus, jqXHR) {
@@ -70,7 +60,6 @@ function EvernymService() {
 		return ajaxCall;
 		
 	};
-
 
   
 }
