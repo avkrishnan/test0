@@ -121,6 +121,8 @@ Test.prototype = {
 		}
 	},
 	finish: function() {
+	
+	
 		if ( this.expected && this.expected != this.assertions.length ) {
 			QUnit.ok( false, "Expected " + this.expected + " assertions, but " + this.assertions.length + " were run" );
 		}

@@ -1,5 +1,5 @@
 ﻿ (function () {
-  QUnit.config.testTimeout = 10000;
+  QUnit.config.testTimeout = 30000;
   
   
   
@@ -9,7 +9,7 @@
          }
          });
   
-  var timoutms = 15000;
+  var timoutms = 30000;
   
   
   test('CREATE CHANNEL',  function () {

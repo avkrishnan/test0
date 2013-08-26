@@ -71,7 +71,7 @@ var EvernymAPI = function() {
     }
     
     function verifyEmail(verification_key, handler, postHandlerCallback){
-        callAPI('PUT', '/commethod/verification/' + verification_key, undefined, handler, postHandlerCallback);
+        callAPI('PUT', '/commethod/verification/' + verification_key, undefined, undefined, handler, postHandlerCallback);
     }
     
     this.enroll = function(account, handler, postHandlerCallback) {
@@ -104,9 +104,10 @@ var EvernymAPI = function() {
     
     function checkEmail(emailAddress, postHandlerCallback){
         
-        var maxTimes = 75;
+        var maxTimes = 20;
         var times = 0;
         function waitForIt() {
+            //getEmail();
             return timeoutPromise(1000).done(getEmail);
         }
         
@@ -162,6 +163,7 @@ var EvernymAPI = function() {
     };
     
     
+    
     // generic helper method to handle ajax calls to API
     function callAPI(method, resource, accessToken, object, handler, postHandlerCallback, datatype) {
         
@@ -174,6 +176,7 @@ var EvernymAPI = function() {
         var ajaxParams = {
         url: baseUrl + resource,
         type: method,
+        async: false,
         data: JSON.stringify(object),
         dataType: datatype,
         contentType: "application/json"

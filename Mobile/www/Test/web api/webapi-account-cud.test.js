@@ -1,5 +1,5 @@
 ﻿ (function () {
-  QUnit.config.testTimeout = 10000;
+  QUnit.config.testTimeout = 20000;
   
   /*
    var okAsync = QUnit.okAsync,
@@ -16,6 +16,8 @@
          });
   
   var timoutms = 15000;
+  
+  module("group a");
   
   test('TEST ENROLLMENT', function () {
        
@@ -86,6 +88,8 @@
        }
        
        });
+  
+  module("group b");
   
   test('ENROLL AND CHANGE ACCOUNT NAME', function () {
        stop(timoutms); //tell qunit to wait 5 seconds before timing out
