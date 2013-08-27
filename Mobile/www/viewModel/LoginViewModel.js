@@ -19,6 +19,8 @@ function LoginViewModel() {
     this.accountName = ko.observable();
     
     this.password = ko.observable();
+    this.channelName = ko.observable();
+    this.donotfollow = ko.observable();
     
     var  dataService = new EvernymLoginService();
     
@@ -47,12 +49,32 @@ function LoginViewModel() {
     
        
     this.activate = function(){
-        
+    
+    
+       var action = localStorage.getItem("action");
+       
+       if (action == 'follow_channel'){
+       
+           var channel = JSON.parse(localStorage.getItem("currentChannel"));
+           //alert(JSON.stringify(channel));
+           if (channel){
+                that.channelName(channel.name);
+               //alert('request to follow ' + channel.name);
+               $("#login-follow-li").show();
+               
+           }
+           
+           
+           
+       }
+       
     };
     
     this.clearForm = function(){
         that.password('');
         that.accountName('');
+        
+        $("#login-follow-li").hide();
     };
     
     

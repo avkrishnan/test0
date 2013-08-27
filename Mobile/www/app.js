@@ -240,7 +240,7 @@ function convDate(d){
 
 function isBadLogin(code){
     
-    var loginBadCodes = [100110, 100201, 100202, 100203];
+    var loginBadCodes = [100110, 100201, 100202, 100203, 100400];
     var rval = false;
     if(loginBadCodes.indexOf(code) != -1){
         rval = true;

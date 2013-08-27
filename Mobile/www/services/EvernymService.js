@@ -22,13 +22,14 @@ function EvernymService() {
 		contentType: "application/json"
 		};
 		
-		if (useAccessToken) {
+		var accessToken = localStorage.getItem("accessToken");
+		if (useAccessToken && accessToken) {
             
             
 			ajaxParams.beforeSend = function (xhr) {
 				//logger.log('Setting the authorization headers', null, 'dataservice', true);
 				
-				var accessToken = localStorage.getItem("accessToken");
+				
 				xhr.setRequestHeader("Authorization", accessToken);
 			}
 		}

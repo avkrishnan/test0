@@ -29,14 +29,35 @@ function ChannelViewModel() {
     */
     
     
-    this.applyBindings = function(){
+   
     
+    this.clean = function(){
+    
+    
+        $("#" + that.template).find("#follow_channel_button").hide();
+        $("#" + that.template).find("#unfollow_channel_button").hide();
+        
     };
     
-	$("#" + this.template).live("pagebeforeshow", function(e, data){
+    
+    this.applyBindings = function(){
+    
+    
+        $("#" + that.template).live("pagebeforeshow", function(e, data){
 								
                                 
+                                
+                                that.clean();
+                                
                                 $('.more_messages_button').hide();
+                                
+                                
+                                
+                                var action = localStorage.getItem("action");
+       
+								
+                                
+                                
 								
 								if ($.mobile.pageData && $.mobile.pageData.id){
 								
@@ -46,6 +67,14 @@ function ChannelViewModel() {
 								else {
 									var currentChannel = localStorage.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
+                                
+                                    if (action == 'follow_channel'){
+
+								        that.followChannelCommand();
+                                        localStorage.removeItem('action');
+
+
+								    }
                                 
                                 
                                 
@@ -60,16 +89,32 @@ function ChannelViewModel() {
                                         that.relationship(lchannel.relationship);
                                         that.channelid(lchannel.id);
                                         $.mobile.showPageLoadingMsg("a", "Loading Messages");
+                                        
+                                        
+                                         //data-bind="style: {display:relationship()=='F'?'none':'block'}"
+                                        
+                                        if (lchannel.relationship == 'F'){
+                                            $("#" + that.template).find("#unfollow_channel_button").show();
+                                        }
+                                        else if (lchannel.relationship != 'F' && lchannel.relationship != 'O'){
+                                            $("#" + that.template).find("#follow_channel_button").show();
+                                        }
 									    
                                     }
                                     else {
-                                        $.mobile.changePage("#" + loginViewModel.template);
+                                        $.mobile.changePage("#" + channelListViewModel.template);
                                     }
 								
 								}
 								
 		   });
 	
+	
+    
+    };
+    
+    
+    
 	
 
 	
@@ -95,6 +140,14 @@ function ChannelViewModel() {
 		that.title(data.name );
         that.relationship(data.relationship);
         that.channelid(data.id);
+        
+        if (data.relationship == 'F'){
+			$("#" + that.template).find("#unfollow_channel_button").show();
+		}
+		else if (data.relationship != 'F' && data.relationship != 'O'){
+			$("#" + that.template).find("#follow_channel_button").show();
+		}
+									    
         
 		
 		
@@ -130,7 +183,8 @@ function ChannelViewModel() {
 	
 	function successfulFollowChannel(){
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Now Following Channel " + $.mobile.pageData.id);
+		showMessage("Now Following Channel " + that.title());
+		localStorage.removeItem("currentChannel");
         $.mobile.changePage("#" + channelsFollowingListViewModel.template);
 		
 	}
@@ -173,10 +227,17 @@ function ChannelViewModel() {
 
     function errorFollowing(data, status, details){
 		$.mobile.hidePageLoadingMsg();
+		
+		
 		if (details.code == 100601){ // we are already following this channel
 			
+            showError('You are already following this channel');
             
-            
+		}
+		else if (isBadLogin(details.code)){
+		    
+		    localStorage.setItem("action", 'follow_channel');
+		    $.mobile.changePage("#" + loginViewModel.template);
 		}
         else {
 		
@@ -243,7 +304,7 @@ function ChannelViewModel() {
     
     
     function successfulUnfollowChannel(data){
-        
+        localStorage.removeItem("currentChannel");
         that.showChannelList();
     }
     

@@ -34,7 +34,7 @@ function EvernymChannelService() {
 	
 	this.getChannel = function (channelid, callbacks) {
 		
-		//logger.log('starting to list channels ' , null, 'dataservice.channel', true);
+		
 		return api.callAPI('GET', '/channel/' + channelid, undefined, callbacks, true);
 		
 	};
