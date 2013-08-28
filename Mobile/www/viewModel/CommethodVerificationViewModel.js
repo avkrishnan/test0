@@ -22,16 +22,14 @@ function CommethodVerificationViewModel() {
                                     
                                     
                                     if ($.mobile.pageData && $.mobile.pageData.key){
-                                    
+                                        localStorage.removeItem('currentChannel');
+                                        channelListViewModel.clearForm();
                                     that.activate($.mobile.pageData.key);
                                     }
                                     
                                     });
     };
     
-    
-
-	
     
     // Methods
     this.activate = function (key) {
