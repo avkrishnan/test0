@@ -104,7 +104,7 @@ function ChannelViewModel() {
 									    
                                     }
                                     else {
-                                        $.mobile.changePage("#" + channelListViewModel.template);
+                                        //$.mobile.changePage("#" + channelListViewModel.template);
                                     }
 								
 								}

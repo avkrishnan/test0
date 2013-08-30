@@ -89,20 +89,19 @@ function ChannelListViewModel() {
 			
 			data.channel = [data.channel];
 		}
-				if (!data.channel.length ){
-			
-			$.mobile.changePage("#" + channelNewViewModel.template);
-			$("#no_channels_notification").show();
+			if (!data.channel.length ){
+			    $.mobile.changePage("#" + channelNewViewModel.template);
+			    $("#no_channels_notification").show();
 			return;
 		}
         
         //populatePanel(data.channel);
         
         
-        var panelhtml = $("#globalpanel").find('#mypanel').html();
-        $.mobile.activePage.find('#mypanel').html(panelhtml);
-        $.mobile.activePage.find('#mypanel').panel();
-        $.mobile.activePage.find('#mypanel').trigger('create');
+        //var panelhtml = $("#globalpanel").find('#mypanel').html();
+        //$.mobile.activePage.find('#mypanel').html(panelhtml);
+        //$.mobile.activePage.find('#mypanel').panel();
+        //$.mobile.activePage.find('#mypanel').trigger('create');
         
         //$.mobile.activePage.find('#mypanel').trigger('updatelayout');
         

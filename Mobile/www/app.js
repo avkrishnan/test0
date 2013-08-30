@@ -468,6 +468,9 @@ $(document).ready(function () {
                   localStorage.removeItem('baseUrl');
                   
                   
+                  
+                  
+                  
                   loadAllPages().done(function(){
                                       
                                            console.log('done loading all pages.');
@@ -475,7 +478,12 @@ $(document).ready(function () {
                                            $.mobile.initializePage();
                                            
                                            if (token){
-                                               channelListViewModel.activate();
+                                               function gotChannels(data){
+                                                  channelListViewModel.channels.removeAll();
+												  channelListViewModel.channels(data.channel);
+											  }
+                                               
+                                               channelListViewModel.listMyChannelsCommand().then(gotChannels);
                                            }
                                            
                                       
