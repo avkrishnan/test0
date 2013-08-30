@@ -11,7 +11,7 @@ function PanelHelpViewModel() {
     
     this.viewid = "V-00";
     this.viewname = "panelhelp";
-    
+    this.hasfooter = false;
     
 	this.title = ko.observable();
     this.relationship = ko.observable();

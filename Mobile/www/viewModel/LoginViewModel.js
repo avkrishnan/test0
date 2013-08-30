@@ -11,7 +11,7 @@ function LoginViewModel() {
     this.template = "loginView";
     this.viewid = "V-01";
     this.viewname = "Login";
-    
+    this.hasfooter = false;
     this.first_name = '';
     
     this.last_name = '';
@@ -88,7 +88,7 @@ function LoginViewModel() {
         channelListViewModel.shown = false;
         var loginModel = {};
         $.mobile.showPageLoadingMsg("a", "Logging In");
-        loginModel.accountName = this.accountName();
+        loginModel.accountname = this.accountName();
         loginModel.password = this.password();
         loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
         

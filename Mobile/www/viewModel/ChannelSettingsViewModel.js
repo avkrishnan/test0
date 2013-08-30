@@ -13,7 +13,8 @@ function ChannelSettingsViewModel() {
 	this.template = "channelSettingsView";
     this.viewid = "V-16";
     this.viewname = "ChannelSettings";
-    
+    this.hasfooter = true;
+    this.isChannelView = true;
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);

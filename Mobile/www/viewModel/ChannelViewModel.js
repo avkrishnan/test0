@@ -13,7 +13,8 @@ function ChannelViewModel() {
 	this.template = "channelView";
     this.viewid = "V-18";
     this.viewname = "ChannelDetails";
-    
+    this.hasfooter = true;
+    this.isChannelView = true;
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);
@@ -68,14 +69,7 @@ function ChannelViewModel() {
 									var currentChannel = localStorage.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
                                 
-                                    if (action == 'follow_channel'){
-
-								        that.followChannelCommand();
-                                        localStorage.removeItem('action');
-
-
-								    }
-                                
+                                    
                                 
                                 
                                     if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
@@ -90,6 +84,14 @@ function ChannelViewModel() {
                                         that.channelid(lchannel.id);
                                         $.mobile.showPageLoadingMsg("a", "Loading Messages");
                                         
+                                        
+                                        if (action == 'follow_channel'){
+
+								        that.followChannelCommand();
+                                        localStorage.removeItem('action');
+
+
+								         }
                                         
                                          //data-bind="style: {display:relationship()=='F'?'none':'block'}"
                                         
@@ -106,6 +108,10 @@ function ChannelViewModel() {
                                     }
 								
 								}
+								
+								
+								
+                                
 								
 		   });
 	
@@ -146,6 +152,17 @@ function ChannelViewModel() {
 		}
 		else if (data.relationship != 'F' && data.relationship != 'O'){
 			$("#" + that.template).find("#follow_channel_button").show();
+		}
+		
+		
+		 var action = localStorage.getItem("action");
+       
+		if (action == 'follow_channel'){
+
+			that.followChannelCommand();
+			localStorage.removeItem('action');
+
+
 		}
 									    
         

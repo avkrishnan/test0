@@ -29,9 +29,71 @@ update: function (element, valueAccessor) {
 
 
 
+function inviteFollowers(){
+    
+    var channelCount = channelListViewModel.channels().length;
+    var cvm  = getCurrentViewModel();
+    
+    
+    if (!channelCount){
+        showError('First create a channel, then you can invite followers to it.<br/> <button onclick="goToView(\'channelNewView\');closeError();">create channel</button><br/>');
+    }
+    else if (channelCount == 1){
+        localStorage.setItem("currentChannel", JSON.stringify(channelListViewModel.channels()[0]));
+        $.mobile.changePage( "#inviteFollowersView" , {allowSamePageTransition: true});
+        
+    }
+    else if (cvm.isChannelView){
+    
+        $.mobile.changePage( "#inviteFollowersView" , {allowSamePageTransition: true});
+        
+                             
+        
+    }
+    else {
+    
+        $.mobile.changePage( "#channelListView" , {allowSamePageTransition: true});
+    
+    }
+    
+    
+    
+    
+    
+    
+}
 
 
+function initiateBroadcast(){
 
+    var channelCount = channelListViewModel.channels().length;
+    var cvm  = getCurrentViewModel();
+    
+    
+    if (!channelCount){
+        showError('First create a channel, then you can send an alert to it.<br/> <button onclick="goToView(\'channelNewView\');closeError();">create channel</button><br/>');
+    }
+    else if (channelCount == 1){
+    
+        
+        startBroadcast( channelListViewModel.channels()[0].normName );
+        
+    }
+    else if (cvm.isChannelView){
+    
+        var currentChannel = localStorage.getItem("currentChannel");
+        var lchannel = JSON.parse(currentChannel);
+               
+        startBroadcast(lchannel.normName);                     
+        
+    }
+    else {
+        $.mobile.changePage( "#channelListView" , {allowSamePageTransition: true});
+    }
+    
+    
+
+}
 
 
 var messages = 0;
@@ -71,6 +133,8 @@ function closeError(){
                               });
     
 }
+
+
 
 
 function showError(msg){
@@ -378,7 +442,15 @@ $(document).ready(function () {
                   
                   if (document.location.hash == ""){
                  
-                      document.location.hash = "#channelListView";
+                      var token = localStorage.getItem("accessToken");
+        
+        
+                      if (token) {
+                          document.location.hash = "#channelListView";
+                      }
+                      else {
+                          document.location.hash = "#loginView";
+                      }
                   }
                   
                    console.log('hash: ' + document.location.hash);
@@ -392,14 +464,19 @@ $(document).ready(function () {
                   //console.log("currentUrl: " + currentUrl.hash);
                  
                   localStorage.removeItem('baseUrl');
+                  
+                  
                   loadAllPages().done(function(){
                                       
                                            console.log('done loading all pages.');
                                            console.log("INITIALIZE PAGE");
                                            $.mobile.initializePage();
-                                      
+                                           channelListViewModel.activate();
+                                           
+                                           
                                       
                                       });
+                  
                   
                   
     });
@@ -414,6 +491,10 @@ $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
                
                
                
+               
+                   
+               
+               
                $(this).page({ domCache: true });
                
                });
@@ -425,9 +506,30 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
                
                console.log("showing page: " + $(this).attr('id'));
                
-               var name = localStorage.getItem('UserFullName');
                
-               $(this).find('#panel_name').html(name);
+               
+               
+               
+               
+               var vm = ko.dataFor(this);
+    
+    
+               if (vm && vm.hasfooter){
+                   
+                   var viewid = vm.viewid;
+                   var viewname = vm.viewname;
+                   
+                   if (! $(this).find("#thefooter").length ){
+                       $(this).append($("#globalfooter #thefooter").clone());
+                   }
+                   
+                   var name = localStorage.getItem('UserFullName');
+               
+                   $(this).find('#thefooter #footer-gear').html(name);
+                   
+                   $(this).find('#thefooter #viewid').html(viewid + " " + viewname);
+               }
+               
                
                //$(this).page();
                

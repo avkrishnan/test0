@@ -12,9 +12,10 @@ function SendMessageViewModel() {
     this.template = "sendMessageView";
     this.viewid = "V-20";
     this.viewname = "ComposeBroadcast";
-    
+    this.hasfooter = true;
     this.title = ko.observable();
     this.channel = ko.observableArray([]);
+    this.isChannelView = true;
     
 	this.channelid = ko.observable();
     this.channelname = ko.observable();

@@ -9,7 +9,7 @@ function EvernymLoginService() {
         /*
         var appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
         var account = {
-        accountName: accountModel.accountName,
+        accountname: accountModel.accountName,
         emailaddress: accountModel.emailaddress,
         password: accountModel.password,
         firstname: accountModel.firstname,

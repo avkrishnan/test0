@@ -11,6 +11,7 @@ function ChannelListViewModel() {
 	this.template = "channelListView";
 	this.viewid = "V-19";
     this.viewname = "ChannelsIOwn";
+    this.hasfooter = true;
     
 	this.channels = ko.observableArray([]);
     
@@ -110,6 +111,7 @@ function ChannelListViewModel() {
         
 		that.channels.removeAll();
 		that.channels(data.channel);
+		
 	};
 	
 	function errorListChannels(data, status, details){

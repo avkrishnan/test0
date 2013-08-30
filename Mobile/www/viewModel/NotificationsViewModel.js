@@ -9,7 +9,7 @@ function NotificationsViewModel() {
     this.template = "notificationsView";
     this.viewid = "V-07";
     this.viewname = "NotificationOverlay";
-    
+    this.hasfooter = true;
     this.messages = [];
        
     this.notifications = ko.observableArray([]);

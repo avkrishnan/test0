@@ -10,7 +10,8 @@ function FollowersListViewModel() {
 	this.template = "followersListView";
     this.viewid = "V-26";
     this.viewname = "Followers";
-    
+    this.hasfooter = true;
+    this.isChannelView = true;
 	this.title = ko.observable();
     this.description = ko.observable();
     this.url = ko.observable();

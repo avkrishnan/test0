@@ -40,9 +40,10 @@
             
             
             <!-- ko foreach: channels, updateListviewOnChange:channels -->
-            <li class="channel-list-item">
+            <li class="channel-list-item" data-icon="false" >
                 
-                <a  class="channel-list-anchor" href="#" data-bind="click: $parent.showChannel" >
+                
+                <a  class="channel-list-anchor" data-role="none" href="#" data-bind="click: $parent.showChannel" >
                     
                     <div class="channel-list-stripe1"></div>
                     <!-- ko if: ($index() < ($parent.channels().length) - 1) -->
@@ -60,7 +61,10 @@
                         
                         <span class="channel-url" data-bind="text: normName + '.evernym.com'" ></span>
                         
-                        <input type="button"  data-bind="click: $parent.showChannelStartMessage" data-role="none" value="O" style="position:absolute;right:80px;"/>
+                        <!--
+                        <span data-role="none" data-bind="click: $parent.showChannelStartMessage" class="a-button broadcast-button" ></span>
+                        -->
+                        
                     </span>
                     <div class="channel-list-avatar-frame"></div>
                     
@@ -77,13 +81,13 @@
             <!-- /ko -->
             
         </ul>
+        <br/><br/>
+        <a href="index.html#channelNewView" data-role="button">Create a Channel</a>
     </div>
     
-    <div class="footer" data-role="footer" data-inset="true">
-        
-        <a href="index.html#channelNewView" data-role="button">Create a Channel</a>
-        [ BETA V-19 ChannelsIOwn ]
-    </div>
+    
+    
+    
     
     
 </div>

@@ -8,7 +8,7 @@ function UserSettingsViewModel() {
 	// --- properties
 	
     this.template = "userSettingsView";
-    
+    this.hasfooter = false;
     var  dataService = new EvernymCommethodService();
 	
   

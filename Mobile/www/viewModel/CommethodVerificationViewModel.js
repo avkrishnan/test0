@@ -10,7 +10,7 @@ function CommethodVerificationViewModel() {
     this.template = "commethodVerificationView";
     this.viewid = "V-??";
     this.viewname = "ComMethodVerification";
-    
+    this.hasfooter = false;
     this.message = ko.observable();
     
 

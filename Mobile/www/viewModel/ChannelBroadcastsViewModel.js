@@ -13,6 +13,8 @@ function ChannelBroadcastsViewModel() {
 	this.template = "channelBroadcastsView";
     this.viewid = "V-22";
     this.viewname = "Broadcasts";
+    this.hasfooter = true;
+    this.isChannelView = true;
     
 	this.title = ko.observable();
     this.relationship = ko.observable();

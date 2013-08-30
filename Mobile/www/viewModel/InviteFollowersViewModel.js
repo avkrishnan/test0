@@ -10,7 +10,8 @@ function InviteFollowersViewModel() {
 	this.template = "inviteFollowersView";
     this.viewid = "V-27";
     this.viewname = "GetFollowers";
-	
+	this.hasfooter = true;
+	this.isChannelView = true;
 	this.channelid = ko.observable();
 	this.channelname = ko.observable();
 	this.normName = ko.observable();

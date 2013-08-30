@@ -10,7 +10,7 @@ function SignupViewModel() {
     this.template = "signupView";
     this.viewid = "V-02";
     this.viewname = "Register";
-
+    this.hasfooter = false;
     this.accountName = ko.observable();
     this.password = ko.observable();
     this.emailaddress = ko.observable();
@@ -59,7 +59,7 @@ function SignupViewModel() {
     
     function generateAccount() {
         return {
-        accountName: that.accountName(), // Create Random AccountName Generator
+        accountname: that.accountName(), // Create Random AccountName Generator
         emailaddress: that.emailaddress(),
         password: that.password(),
         firstname: that.firstname(),
@@ -90,7 +90,7 @@ function SignupViewModel() {
         
         var loginModel = {};
         
-        loginModel.accountName = that.accountName();
+        loginModel.accountname = that.accountName();
         loginModel.password = that.password();
         loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
         

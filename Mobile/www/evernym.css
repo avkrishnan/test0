@@ -15,6 +15,117 @@ body, input, div, a, span, li, button, textarea, h1, h2, h3, h4 {
 }
 
 
+#thefooter {
+    height:52px;
+    
+    background:#E6E7E8;
+    
+
+}
+
+
+
+
+#thefooter #footer-gear {
+
+    position:absolute;
+    height:30px;
+    width:230px;
+    background: url(resources/graygear.png) no-repeat;
+    background-size: 30px 30px;
+    border:none;
+    left:12px;
+    top:12px;
+    font-size:14pt;
+    
+    color:#58595B;
+    -webkit-font-smoothing: antialiased;
+    text-align:left;
+    font-weight:normal;
+    
+    padding-left:46px; 
+    
+    font-family:'Open Sans', sans-serif;
+    
+    font-style:italic;
+    text-shadow:none;
+  
+
+}
+
+
+#thefooter #footer-followers {
+
+    position:absolute;
+    height:36px;
+    width:36px;
+    background: url(resources/V-21-i.png);
+    background-size: 36px 36px;
+    border-radius:50%;
+    right:78px;
+    top:8px;
+
+}
+
+
+#thefooter #viewid {
+
+    position:absolute;
+    bottom:2px;
+    right:150px;
+
+    color:#58595B;
+    -webkit-font-smoothing: antialiased;
+    text-align:left;
+    font-weight:100;
+    padding-left:40px; 
+    font-size:8pt;
+    font-family:'Open Sans', sans-serif;
+    
+    font-style:none;
+    text-shadow:none;
+    
+    
+}
+
+a.a-button {
+    box-shadow: none !important;
+    /*border:none !important;*/
+    border-image: none !important;
+    border-image-width:0px !important;
+    -webkit-background-clip: none !important;
+    background-origin: none !important;
+}
+
+#thefooter #footer-megaphone {
+
+    position:absolute;
+    height:52px;
+    width:52px;
+    background: url(resources/V-04-a2x.png);
+    background-size: 52px 52px;
+    border-radius:50%;
+    right:10px;
+    top:-10px;
+    
+    
+    
+
+}
+
+
+.broadcast-button {
+
+    position:absolute;
+    height:36px;
+    width:36px;
+    background: url(resources/V-04-a2x.png);
+    background-size: 36px 36px;
+    border-radius:50%;
+    right:104px;
+    top:24px;
+
+}
 
 
 .ui-collapsible-set {

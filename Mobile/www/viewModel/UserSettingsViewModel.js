@@ -10,7 +10,7 @@ function UserSettingsViewModel() {
     this.template = "userSettingsView";
     this.viewid = "V-08";
     this.viewname = "UserSettings";
-    
+    this.hasfooter = true;
     var  dataService = new EvernymCommethodService();
 	
   

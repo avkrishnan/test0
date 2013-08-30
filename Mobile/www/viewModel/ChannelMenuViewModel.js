@@ -13,7 +13,8 @@ function ChannelMenuViewModel() {
 	this.template = "channelMenuView";
     this.viewid = "V-21";
     this.viewname = "ChannelMenu";
-    
+    this.hasfooter = true;
+    this.isChannelView = true;
     
 	this.title = ko.observable();
     this.relationship = ko.observable();
@@ -67,32 +68,40 @@ function ChannelMenuViewModel() {
                                     
                                     that.clear();
                                     
+                                    
+                                    var currentChannel = localStorage.getItem("currentChannel");
+                                    
                                     if ($.mobile.pageData && $.mobile.pageData.id){
-									that.activate({id:$.mobile.pageData.id});
+                                        console.log('page id ' + $.mobile.pageData.id);
+										that.activate({id:$.mobile.pageData.id});
                                     
                                     }
                                     
-                                    else {
-									var currentChannel = localStorage.getItem("currentChannel");
-									var lchannel = JSON.parse(currentChannel);
+                                    else if (currentChannel){
+									
+										var lchannel = JSON.parse(currentChannel);
+									
+									    console.log('channel ' + currentChannel);
+									
+									
+										if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
+									
+										that.messages([]);
+										}
+									
+										that.channel([lchannel]);
+										that.title(lchannel.name );
+										that.description(lchannel.description);
+										that.url(lchannel.normName + ".evernym.com");
+										that.relationship(lchannel.relationship);
+										that.channelid(lchannel.id);
+									
+										$.mobile.showPageLoadingMsg("a", "Loading Messages");
+										that.getLastMessageCommand(that.channelid()).then(gotMessages);
                                     
-                                    if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
                                     
-                                    that.messages([]);
                                     }
                                     
-                                    that.channel([lchannel]);
-                                    that.title(lchannel.name );
-                                    that.description(lchannel.description);
-                                    that.url(lchannel.normName + ".evernym.com");
-                                    that.relationship(lchannel.relationship);
-                                    that.channelid(lchannel.id);
-                                    
-                                    $.mobile.showPageLoadingMsg("a", "Loading Messages");
-									that.getLastMessageCommand(that.channelid()).then(gotMessages);
-                                    
-                                    
-                                    }
                                     
                                     });
         

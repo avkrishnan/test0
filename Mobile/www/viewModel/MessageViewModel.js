@@ -13,8 +13,8 @@ function MessageViewModel() {
 	this.template = "messageView";
     this.viewid = "V-23";
     this.viewname = "BroadcastDetails";
-    
-    
+    this.hasfooter = true;
+    this.isChannelView = true;
 	this.title = ko.observable();
     this.relationship = ko.observable();
 	this.channel = ko.observableArray([]);
