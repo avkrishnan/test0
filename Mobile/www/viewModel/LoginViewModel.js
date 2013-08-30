@@ -191,6 +191,11 @@ function LoginViewModel() {
             that.getAccount();
             
             
+            var channelCount = channelListViewModel.channels().length;
+            if (! channelCount){
+                channelListViewModel.activate();
+            }
+            
             var login_nav = JSON.parse(localStorage.getItem("login_nav"));
             localStorage.removeItem("login_nav");
             

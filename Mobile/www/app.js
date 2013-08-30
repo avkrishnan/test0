@@ -440,9 +440,11 @@ $(document).ready(function () {
                   
                   console.log("document ready");
                   
+                  var token = localStorage.getItem("accessToken");
+                  
                   if (document.location.hash == ""){
                  
-                      var token = localStorage.getItem("accessToken");
+                      
         
         
                       if (token) {
@@ -471,8 +473,10 @@ $(document).ready(function () {
                                            console.log('done loading all pages.');
                                            console.log("INITIALIZE PAGE");
                                            $.mobile.initializePage();
-                                           channelListViewModel.activate();
                                            
+                                           if (token){
+                                               channelListViewModel.activate();
+                                           }
                                            
                                       
                                       });
@@ -507,14 +511,11 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
                console.log("showing page: " + $(this).attr('id'));
                
                
-               
-               
-               
-               
                var vm = ko.dataFor(this);
+               var token = localStorage.getItem("accessToken");
     
     
-               if (vm && vm.hasfooter){
+               if (vm && vm.hasfooter && token){
                    
                    var viewid = vm.viewid;
                    var viewname = vm.viewname;
