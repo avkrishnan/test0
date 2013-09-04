@@ -91,6 +91,8 @@ function ChannelsFollowingListViewModel() {
         }
 	};
 	
+
+	
 	this.listFollowingChannelsCommand = function () {
 		return dataService.listFollowingChannels({ success: successfulCreate, error: errorListChannels });
 	};

@@ -50,6 +50,10 @@ function EvernymLoginService() {
     };
     
     
+    this.changeName = function (account, callbacks) {
+        return api.callAPI('PUT', '/account', account, callbacks, true);
+    };
+    
     
     this.accountLogout = function (authKey, callbacks) {
         

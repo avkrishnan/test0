@@ -162,12 +162,10 @@ function LoginViewModel() {
     
     function getAccountSuccess(data){
         
-        
         that.first_name = data.firstname;
         that.last_name = data.lastname;
-        
         localStorage.setItem('UserFullName', data.firstname + ' ' + data.lastname);
-        
+        $.mobile.activePage.find('#thefooter #footer-gear').html(data.accountname);
         
     }
     
@@ -188,8 +186,12 @@ function LoginViewModel() {
             
             var notifications = args.notifications;
             
-            that.getAccount();
             
+            that.first_name = args.account.firstname;
+            that.last_name = args.account.lastname;
+            localStorage.setItem('UserFullName', args.account.firstname + ' ' + args.account.lastname);
+            $.mobile.activePage.find('#thefooter #footer-gear').html(args.account.accountname);
+           
             
             var channelCount = channelListViewModel.channels().length;
             if (! channelCount){

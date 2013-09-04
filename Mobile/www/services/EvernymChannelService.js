@@ -73,9 +73,6 @@ function EvernymChannelService() {
 	
 	this.modifyChannel = function (channel, callbacks) {
 		
-		
-		//logger.log('starting to modify channel ' + channel.name , null, 'dataservice.channel', true);
-		
 		return api.callAPI('PUT', '/channel/' + channel.id, channel, callbacks, true);
 		
 	};

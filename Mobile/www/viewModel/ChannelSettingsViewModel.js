@@ -21,7 +21,10 @@ function ChannelSettingsViewModel() {
 	this.message = ko.observable();
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
-    
+	
+	
+	this.editChannelName = ko.observable();
+	this.editChannelDescription = ko.observable();
     
     this.url = ko.observable();
     this.description = ko.observable();
@@ -63,6 +66,12 @@ function ChannelSettingsViewModel() {
                                     if (lchannel){
                                     that.channel([lchannel]);
                                     that.title(lchannel.name );
+                                    
+                                    that.editChannelName(lchannel.name);
+                                    that.editChannelDescription(lchannel.description);
+                                    
+                                  
+                                    
                                     that.description(lchannel.description);
                                     that.url(lchannel.normName + '.evernym.com');
                                     that.relationship(lchannel.relationship);
@@ -83,10 +92,6 @@ function ChannelSettingsViewModel() {
     };
     
 	
-	
-	
-
-	
 	this.activate = function (channel) {
 		
 		that.channelid(channel.id);
@@ -94,9 +99,7 @@ function ChannelSettingsViewModel() {
 		
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
-		
 		that.getChannelCommand(that.channelid()).then(gotChannel);
-		
 		
 		return true;
 		
@@ -110,6 +113,10 @@ function ChannelSettingsViewModel() {
         that.relationship(data.relationship);
         that.channelid(data.id);
         
+        that.description(data.description);
+        that.url(data.normName + '.evernym.com');
+        that.editChannelName(data.name);
+        that.editChannelDescription(data.description);
 		
 		
         
@@ -139,8 +146,17 @@ function ChannelSettingsViewModel() {
         
 	}
 	
-	function successfulModify(data){
-        ;
+	function successfulModify(){
+	
+	    var channelObject = {
+		    id: that.channelid(),
+		    name: that.editChannelName(),
+		    description: that.editChannelDescription()
+		};
+		
+        that.activate(channelObject);
+        //TODO - just change the one object inside of the list of channels instead of calling to get all the channels again.
+        channelListViewModel.refreshChannelList();
 	}
 	
 	
@@ -312,19 +328,24 @@ function ChannelSettingsViewModel() {
             $.mobile.changePage("#" + channelListViewModel.template);
         }
         
-    }
+    };
+ 
 	
 	this.modifyChannelCommand = function(){
 		
-		//that.title("Channel: " + channel()[0].name );
-		return dataService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
+		
+		
+		
+		var channelObject = {
+		    id: that.channelid(),
+		   // name: that.editChannelName(),
+		    description: that.editChannelDescription()
+		};
+		
+		return dataService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 	};
 	
 	
-	
-	
-	
-   
 
 	
 	

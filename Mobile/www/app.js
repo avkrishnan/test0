@@ -356,8 +356,10 @@ forgotPasswordViewModel = new ForgotPasswordViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
 panelHelpViewModel = new PanelHelpViewModel(),
 
-messageViewModel = new MessageViewModel();
+messageViewModel = new MessageViewModel(),
+unsubscribeModel = new UnsubscribeModel()
 
+;
 
 // load the stored state (recent searches)
 
@@ -384,7 +386,8 @@ var models = [
               forgotPasswordViewModel, 
               resetPasswordViewModel, 
               panelHelpViewModel, 
-              messageViewModel
+              messageViewModel,
+              unsubscribeModel
               ];
 
 
@@ -532,7 +535,7 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
                        $(this).append($("#globalfooter #thefooter").clone());
                    }
                    
-                   var name = localStorage.getItem('UserFullName');
+                   var name = localStorage.getItem('accountName');
                
                    $(this).find('#thefooter #footer-gear').html(name);
                    

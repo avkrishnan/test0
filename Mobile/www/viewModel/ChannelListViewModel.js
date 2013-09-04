@@ -69,6 +69,13 @@ function ChannelListViewModel() {
 		
 	};
 	
+	this.refreshChannelList = function(){
+        $.mobile.showPageLoadingMsg("a", "Loading Channels");
+		return this.listMyChannelsCommand().then(gotChannels);
+	
+	};
+	
+	
 	function successfulList(data){
 		$.mobile.hidePageLoadingMsg();
 		//logger.log('success listing channels ' , null, 'dataservice', true);
