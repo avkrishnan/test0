@@ -1,7 +1,7 @@
 <!--  CHANNEL SETTINGS VIEW -->
 
 
-<div id="channelSettingsView" class="channel-list"  data-role="page" >
+<div id="unsubscribe" class="channel-list"  data-role="page" >
     <div id="gpanel"></div>
     <div id="gpaneldots"></div>
     <div data-role="header" xdata-theme="b" class="header">
@@ -12,8 +12,6 @@
         
         <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
         <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
-        
-        
         
     </div>
     
@@ -54,7 +52,7 @@
             
             
             
-            <li class="message-list-item " data-bind="style: {display:relationship()=='O'?'block':'none'}">
+            <li class="message-list-item ">
                 
                 <div  class="message-list-container" >
                     <div class="message-info" >
@@ -63,14 +61,7 @@
                         
                         <div style="margin-left:30px;margin-top:5px;">
                             
-                            Edit Channel: <br/>
-                            
-                            <!-- Name: <input data-role="none" type="text" data-bind="value: editChannelName" /><br/> -->
-                            Description: <input data-role="none" type="text" data-bind="value: editChannelDescription" /><br/>
-                            
-                           
-                            <input data-role="none" type="submit" data-bind="click: modifyChannelCommand"  value="Modify Channel"/>
-                            
+                            some information that might be important here
                             
                         </div>
                         
@@ -84,45 +75,7 @@
             </li>
             
             
-            <li class="channel-message-item " data-bind="style: {display:relationship()=='F'?'block':'none'}" data-icon="false">
-                
-                <a data-role="none"  href="#" data-bind="click: unfollowChannelCommand" >
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Unfollow Channel</div>
-                            
-                        </div>
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-            
-            <li class="channel-message-item " data-bind="style: {display:relationship()=='O'?'block':'none'}" data-icon="false">
-                
-                <a data-role="none"  href="#" data-bind="click: deleteChannelCommand" >
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Delete Channel</div>
-                            
-                        </div>
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
+           
             
             
             

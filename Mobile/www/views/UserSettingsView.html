@@ -41,8 +41,6 @@
                     </span>
                     <div class="channel-list-avatar-frame"></div>
                     
-                    
-                    
                 </a>
                 
             </li>
@@ -70,9 +68,35 @@
                 </div>
                 
             </li>
+            
+            
+            <li class="message-list-item ">
+                
+                <div  class="message-list-container" >
+                    <div class="message-info" >
+                        <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                        <div class="message-list-avatar-frame"></div>
+                        
+                        <div style="margin-left:30px;margin-top:5px;">
+                            
+                            Edit Your Name: <br/>
+                            <input data-role="none" type="text" data-bind="value: firstname" /><br/>
+                            <input data-role="none" type="text" data-bind="value: lastname" /><br/>
+                            <input data-role="none" type="submit" data-bind="click: changeNameCommand"  value="Change Name"/>
+                            
+                            
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                
+                
+            </li>
+            
+            
         </ul>
-        
-        
         
         
         <br/><br/>
@@ -107,6 +131,39 @@
             
             
             
+            <li class="message-list-item ">
+                
+                <div  class="message-list-container" >
+                    <div class="message-info" >
+                        <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                        <div class="message-list-avatar-frame"></div>
+                        
+                        <div style="margin-left:30px;margin-top:5px;">
+                            
+                            Add Com Method: <br/>
+                            
+                            description: <input data-role="none" type="text" data-bind="value: newComMethodName" /><br/>
+                            type: <input data-role="none" type="radio" name="commethodtype" value="EMAIL" data-bind="checked: comMethodType" checked="true"/> Email 
+                            &nbsp;&nbsp;&nbsp;<input data-role="none" type="radio" name="commethodtype" value="TEXT" data-bind="checked: comMethodType"/> SMS<br/>
+                            
+                            Value: <input data-role="none" type="text" data-bind="value: newComMethod" /><br/>
+                            <input data-role="none" type="submit" data-bind="click: addNewComMethod"  value="new com method"/>
+                            
+                            
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                
+                
+                
+            </li>
+            
+            
+            
+            
             <!-- ko foreach: commethods, updateListviewOnChange:commethods -->
             
             
@@ -118,22 +175,27 @@
                     <div class="message-list-stripe"></div>
                     
                     
-                    <div class="sub-message-info">
+                    <div class="sub-message-info" >
                         
                         <div class="sub-message-list-avatar" style="background:#8D863F;"></div>
                         <!--<div class="sub-message-list-avatar-frame"></div>-->
-                        <div class="sub-message-text">
+                        <div class="sub-message-text" style="border:none;top:0px; ">
                             
                             
                             
-                            <div class="email" data-bind="text: value" style="display:inline-block;width:300px;font-size: 80%;"></div>
+                            <div class="email" data-bind="text: address" style="display:inline-block;width:300px;font-size: 80%;"></div>
                             
-                            <div data-bind="attr: {id: 'commethod-' + id}" style="margin-top:10px;font-size:10pt;">
-                                <div data-bind="style: { display: (verified == 'Y')?'none':'inline-block'}">
-                                    <button data-bind="click: $parent.verifyCommand"  >verify</button>
+                            <div  style="margin-top:2px;font-size:10pt;">
+                                <div data-bind="style: { display: (verified == 'Y')?'none':'inline-block'}, attr: {id: 'commethod-' + id}">
+                                    <button data-role="none" data-bind="click: $parent.verifyCommand"  >verify</button>
+                                    
                                 </div>
                                 <div data-bind="style: { display: (verified == 'N')?'none':'inline-block'}">verified</div>
+                                <button data-role="none" data-bind="click: $parent.verifyCodeCommand, style: { display: (verified == 'Y')?'none':'inline-block'}"  >verify code</button>
+                                <button data-role="none" data-bind="click: $parent.deleteMethod">delete</button>
                             </div>
+                            
+                            
                             
                             
                             
@@ -159,6 +221,7 @@
     </div>
     
     
+
     
     <div class="footer" data-role="footer" >BETA V-08 UserSettings</div>
     
