@@ -30,9 +30,6 @@ function ChannelsFollowingListViewModel() {
 
 	
    
-
-	
-   
 	
 	var  dataService = new EvernymChannelService();
 	

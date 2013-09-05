@@ -1,8 +1,21 @@
 <!--  CHANNEL LIST VIEW -->
 
 <div id="channelListView" data-role="page" data-dom-cache="true" class="channel-list">
+    
+    
     <div id="gpanel"></div>
     <div id="gpaneldots"></div>
+    <!--
+    <div data-role="footer" id="thefooter" >
+			
+			<a href="#" data-role="none" onclick="goToView('userSettingsView');" class="a-button" id="footer-gear">test</a>
+			<a href="#" data-role="none" onclick="inviteFollowers();" class="a-button" id="footer-followers"></a>
+			<a href="#" data-role="none" onclick="initiateBroadcast();" class="a-button" id="footer-megaphone"></a>
+			<span id="viewid">view id</span>
+			
+			
+	</div>
+	-->
     
     <div class="header" data-role="header" xdata-theme="b">
         
@@ -11,6 +24,13 @@
         
         
     </div>
+   
+    
+    
+
+		
+	
+    
     
     
     <div  class="channel-list" data-role="content" data-iscroll>
@@ -57,7 +77,11 @@
                     
                     <span class="channel-info">
                         <span class="channel-name" data-bind="text: name"></span>
-                        <span class="channel-description" data-bind="text: description"></span>
+                        
+                        <!-- ko if: $data.hasOwnProperty("description") -->
+						<span class="channel-description" data-bind="text: description"></span>
+						<!-- /ko -->
+                        
                         
                         <span class="channel-url" data-bind="text: normName + '.evernym.com'" ></span>
                         
@@ -83,11 +107,16 @@
         </ul>
         <br/><br/>
         <a href="index.html#channelNewView" data-role="button">Create a Channel</a>
+        
+            
     </div>
     
     
     
+    <div id="gfooter"></div>
     
+   
+    <div id="gfooter"></div>
     
     
 </div>

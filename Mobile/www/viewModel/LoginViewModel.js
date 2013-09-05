@@ -212,7 +212,7 @@ function LoginViewModel() {
                 
                 $.mobile.changePage(hash);
             }
-            else if (notifications.length){
+            else if (notifications && notifications.length){
                 for (var n in notifications){
                     var code = notifications[n].code;
                     

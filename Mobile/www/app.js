@@ -503,12 +503,7 @@ $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
                
                $(this).find('#gpanel').append($("#globalpanel #mypanel").clone());
                $(this).find('#gpaneldots').append($("#globalpaneldots #mypaneldots").clone());
-               
-               
-               
-               
-                   
-               
+               $(this).find('#gfooter').after($("#globalfooter #thefooter").clone());
                
                $(this).page({ domCache: true });
                
@@ -527,19 +522,25 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
     
     
                if (vm && vm.hasfooter && token){
+                   // The reason the footer is appended on the pagebeforeshow instead of pagebeforecreate is because it relies on the viewmodel for some information to build it.
                    
                    var viewid = vm.viewid;
                    var viewname = vm.viewname;
                    
+                   /*
                    if (! $(this).find("#thefooter").length ){
                        $(this).append($("#globalfooter #thefooter").clone());
                    }
+                   */
                    
                    var name = localStorage.getItem('accountName');
                
                    $(this).find('#thefooter #footer-gear').html(name);
                    
                    $(this).find('#thefooter #viewid').html(viewid + " " + viewname);
+               }
+               else {
+                   $(this).find("#thefooter").remove();
                }
                
                

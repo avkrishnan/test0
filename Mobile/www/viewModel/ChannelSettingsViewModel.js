@@ -25,9 +25,13 @@ function ChannelSettingsViewModel() {
 	
 	this.editChannelName = ko.observable();
 	this.editChannelDescription = ko.observable();
+    this.editLongDescription = ko.observable();
+    this.editIconId = ko.observable();
     
     this.url = ko.observable();
     this.description = ko.observable();
+    this.longdescription = ko.observable();
+    this.email = ko.observable('');
     
 	
     /*
@@ -73,7 +77,10 @@ function ChannelSettingsViewModel() {
                                   
                                     
                                     that.description(lchannel.description);
+                                    that.longdescription(lchannel.longDescription);
+                                    that.editLongDescription(lchannel.longDescription);
                                     that.url(lchannel.normName + '.evernym.com');
+                                    that.email(lchannel.normName + '@evernym.com');
                                     that.relationship(lchannel.relationship);
                                     that.channelid(lchannel.id);
                                     $.mobile.showPageLoadingMsg("a", "Loading Messages");
@@ -114,9 +121,11 @@ function ChannelSettingsViewModel() {
         that.channelid(data.id);
         
         that.description(data.description);
+        that.longdescription(data.longDescription);
         that.url(data.normName + '.evernym.com');
         that.editChannelName(data.name);
         that.editChannelDescription(data.description);
+        that.editLongDescription(data.longDescription);
 		
 		
         
@@ -339,7 +348,9 @@ function ChannelSettingsViewModel() {
 		var channelObject = {
 		    id: that.channelid(),
 		   // name: that.editChannelName(),
-		    description: that.editChannelDescription()
+		    description: that.editChannelDescription(),
+		    longDescription: that.editLongDescription(),
+		    picId: that.editIconId()
 		};
 		
 		return dataService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});

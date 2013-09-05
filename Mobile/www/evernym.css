@@ -979,11 +979,12 @@ XXchannel-list-anchor:hover .channel-description
 }
 
 
-.channel-list-anchor .channel-url {
+.channel-list-anchor .channel-email {
     position:absolute;
     left:50px;
-    
-    top:36px;
+    font-size: .8em;
+    top:62px;
+    font-style:italic;
     font-family: 'Open Sans', sans-serif !important;
     
 }
