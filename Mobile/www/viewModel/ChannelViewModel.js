@@ -21,6 +21,12 @@ function ChannelViewModel() {
 	this.message = ko.observable();
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
+
+	
+	this.url = ko.observable('');
+    this.description = ko.observable('DESCRIPTION');
+    this.longdescription = ko.observable('');
+    this.email = ko.observable('');
 	
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
@@ -80,10 +86,17 @@ function ChannelViewModel() {
                                     if (lchannel){
                                         that.channel([lchannel]);
                                         that.title(lchannel.name );
+                                        
                                         that.relationship(lchannel.relationship);
+                                        
                                         that.channelid(lchannel.id);
                                         $.mobile.showPageLoadingMsg("a", "Loading Messages");
                                         
+                                        that.description(lchannel.description);
+                                        that.longdescription(lchannel.longDescription);
+                                        that.url(lchannel.normName + '.evernym.com');
+                                        that.email(lchannel.normName + '@evernym.com');
+                                    
                                         
                                         if (action == 'follow_channel'){
 
@@ -120,7 +133,7 @@ function ChannelViewModel() {
     };
     
     
-    
+   
 	
 
 	
@@ -144,6 +157,13 @@ function ChannelViewModel() {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.title(data.name );
+		
+		that.description(data.description);
+        that.longdescription(data.longDescription);
+        that.url(data.normName + '.evernym.com');
+        that.email(data.normName + '@evernym.com');
+		
+		
         that.relationship(data.relationship);
         that.channelid(data.id);
         

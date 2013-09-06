@@ -78,9 +78,11 @@ function ChannelSettingsViewModel() {
                                     
                                     that.description(lchannel.description);
                                     that.longdescription(lchannel.longDescription);
-                                    that.editLongDescription(lchannel.longDescription);
                                     that.url(lchannel.normName + '.evernym.com');
                                     that.email(lchannel.normName + '@evernym.com');
+                                    
+                                    that.editLongDescription(lchannel.longDescription);
+                                    
                                     that.relationship(lchannel.relationship);
                                     that.channelid(lchannel.id);
                                     $.mobile.showPageLoadingMsg("a", "Loading Messages");
@@ -123,6 +125,8 @@ function ChannelSettingsViewModel() {
         that.description(data.description);
         that.longdescription(data.longDescription);
         that.url(data.normName + '.evernym.com');
+        that.email(data.normName + '@evernym.com');
+        
         that.editChannelName(data.name);
         that.editChannelDescription(data.description);
         that.editLongDescription(data.longDescription);

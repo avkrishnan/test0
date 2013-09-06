@@ -26,9 +26,9 @@
             
             
             
-            <li class="channel-list-item">
+            <li class="channel-list-item" >
                 
-                <a  class="channel-list-anchor" href="#"  >
+                <a  class="channel-list-anchor" href="#"  style="height:90px;">
                     
                     
                     <div class="channel-list-stripe2"></div>
@@ -36,18 +36,11 @@
                     
                     <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
                     
-                    <span class="channel-info">
+                    <span class="channel-info" style="height:90px;">
                         <span class="channel-name" data-bind="text: title"></span>
-                        <span class="channel-description">channel description</span>
-                        
-                        <span class="channel-url" xdata-bind="text: url"style="
-                            font-family:'Open Sans', sans-serif;
-                            font-size: 14px;
-                            color:#8DC63F;
-                            font-weight:normal;
-                            font-style:italic;
-                            
-                            "></span>
+                        <span class="channel-description" data-bind="text: description"></span>
+                        <span class="channel-url" data-bind="text: url" ></span>
+                        <span class="channel-email" data-bind="text: email" >email@evernym.com</span>
                         
                         
                     </span>
@@ -59,25 +52,31 @@
                 
             </li>
             
-            <!--
-             
-             <li class="channel-message-item">
-             
-             <div  class="channel-message-container" >
-             
-             <div class="message-list-stripe"></div>
-             
-             <div class="channel-message-info">
-             <div class="channel-message-avatar" style="background:white;"></div>
-             <div class="channel-message-text">Channel Messages</div>
-             
-             </div>
-             
-             </div>
-             
-             </li>
-             
-             -->
+            
+            
+            <li class="channel-message-item " data-icon="false">
+                
+                
+                    <div  class="channel-message-container">
+                        
+                        
+                        <div class="message-list-stripe"></div>
+                        
+                        <div class="channel-message-info">
+                            <div class="channel-message-avatar" style="background:white;"></div>
+                            
+                            
+                            
+                            <div class="channel-message-text" data-bind="text: longdescription">long description</div>
+                    
+                            
+                        </div>
+                        
+                        
+                    </div>
+                
+                
+            </li>
             
             
             
