@@ -8,6 +8,8 @@ function ChannelMenuViewModel() {
 	var that = this;
 	var  dataService = new EvernymChannelService();
 	var  dataServiceM = new EvernymMessageService();
+	var  systemService = new EvernymSystemService();
+	
 	var initNB = false;
 	
 	this.template = "channelMenuView";
@@ -27,7 +29,7 @@ function ChannelMenuViewModel() {
     this.last_message = ko.observable();
     this.last_replies = ko.observable();
     
-    this.urgency = ko.observable('N');
+    this.urgency = ko.observable('N ');
     this.igi = ko.observable();
 	
     this.newMessage = ko.observable('');
@@ -35,11 +37,14 @@ function ChannelMenuViewModel() {
     this.description = ko.observable('-');
     this.url = ko.observable('-');
     
+    this.urgencySettings = ko.observableArray([]);
+    
+    
     this.clear = function(){
         
         if (! initNB){
             that.newMessage('');
-            that.urgency('N');
+            that.urgency('N ');
             
             that.last_date('');
             that.last_message('');
@@ -453,7 +458,7 @@ function ChannelMenuViewModel() {
 	
     this.postMessageCommand = function(){
 
-		var messageobj = {text: that.message(), type: 'FYI'};
+		var messageobj = {text: that.message(), type: 'FYI', urgencyId: that.urgency()};
 		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
      
@@ -477,6 +482,36 @@ function ChannelMenuViewModel() {
 		return dataServiceM.getChannelMessages(that.channelid(), {limit: 1}, {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
    
+   
+   
+    this.getUrgencySettings = function(){
+        
+        function gotUrgencySettings(data){
+            that.urgencySettings(data);
+            that.urgency('N ');
+            
+		}
+		
+		function errorGettingUrgencySettings(data, status, details){
+			$.mobile.hidePageLoadingMsg();
+	
+			loginPageIfBadLogin(details.code);
+	
+			showError("Error Getting Urgency Settings: " + getAPICode(details.code));
+	
+		}
+        
+        
+        var callbacks = {
+               success: gotUrgencySettings,
+               error: errorGettingUrgencySettings
+        };
+        
+        if (! that.urgencySettings().length){
+           
+           systemService.getUrgencySettings(callbacks);
+        }
+    };
 
 	
 	

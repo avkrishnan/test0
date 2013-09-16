@@ -352,6 +352,12 @@
                         "
                         
                         >
+                        
+                        <!-- ko foreach: urgencySettings, updateListviewOnChange:urgencySettings -->
+                        <input data-role="none" type="radio" name="urgency" data-bind="checked: $parent.urgency, value: id" /> <span data-bind="text: name"></span> &nbsp;
+                        <!-- /ko -->
+                        
+                        
                         <span style="position:relative; left:7px;top:2px;"> <!--Advanced Options --> </span>
                         
                     </div>
@@ -362,35 +368,7 @@
                 </div>
                 
                 
-                <!--   --->
-                
-                
-                
-                <!--
-                 <fieldset data-role="controlgroup" data-role="fieldcontain">
-                 <legend> Select Urgency</legend>
-                 
-                 <input type="radio" name="urgency" id="r-urgency-n" data-bind="checked: urgency" value="N" checked />
-                 <label for="r-urgency-n">Normal</label>
-                 
-                 <input type="radio" name="urgency" id="r-urgency-l" data-bind="checked: urgency" value="L" />
-                 <label for="r-urgency-l">Low</label>
-                 
-                 <input type="radio" name="urgency" id="r-urgency-ts" data-bind="checked: urgency" value="TS" />
-                 <label for="r-urgency-ts">Time-Sensitive</label>
-                 
-                 <input type="radio" name="urgency" id="r-urgency-u" data-bind="checked: urgency" value="U" />
-                 <label for="r-urgency-u">Urgent</label>
-                 
-                 <input type="radio" name="urgency" id="r-urgency-e" data-bind="checked: urgency" value="E" />
-                 <label for="r-urgency-e">Emergency</label>
-                 
-                 
-                 </fieldset>
-                 
-                 <label><input type="checkbox" name="igi" data-bind="checked: igi" value="yes" />Request iGi (I Got It)</label>
-                 -->
-                
+               
                 
                 
             </li>

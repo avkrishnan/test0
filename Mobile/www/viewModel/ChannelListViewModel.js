@@ -45,8 +45,6 @@ function ChannelListViewModel() {
     };
     
     
-
-    
     //$('#channelNotifications').popup('close');
 	// Methods
 	
@@ -165,9 +163,23 @@ function ChannelListViewModel() {
 		$.mobile.changePage("#" + channelNewViewModel.template);
 	};
 	
-    
-    
-    
+	
+	this.mapImage = function(jsonText){
+	     var mappedIcon = undefined;
+	     if (jsonText ){
+			
+			var iconJSON = JSON.parse(jsonText);
+			if (iconJSON && iconJSON.id){
+				var set = iconJSON.set;
+				var id = iconJSON.id;
+				mappedIcon = selectIconViewModel.mapImage(set, id, 63);
+				
+			}
+		}
+		
+		return mappedIcon;
+	};
+	
     function successfulCreate(data){
         $.mobile.hidePageLoadingMsg();
         //logger.log('success creating channel', null, 'dataservice', true);

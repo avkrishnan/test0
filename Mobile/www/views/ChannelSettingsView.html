@@ -34,15 +34,27 @@
                     
                     <div class="channel-list-stripe2"></div>
                     
+                    <div class="channel-list-avatar" data-bind="with: channelIconObj">
                     
-                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                        
+                        <div data-bind=" style: {
+				 'background': 'url(resources/icons/' + image + ')', 'width': width ,
+				  'height': height , 
+				  'background-color': 'white',
+                  'border-radius': '50%',
+				   'background-position': left + ' ' + top ,
+				   'background-size': bgsize,
+				   'cursor': 'pointer'
+					}"></div>
+                    
+                    
+                    </div>
                     
                     <span class="channel-info" style="height:90px;">
                         <span class="channel-name" data-bind="text: title"></span>
                         <span class="channel-description" data-bind="text: description"></span>
                         <span class="channel-url" data-bind="text: url" ></span>
                         <span class="channel-email" data-bind="text: email" >email@evernym.com</span>
-                        
                         
                     </span>
                     <div class="channel-list-avatar-frame"></div>
@@ -100,21 +112,30 @@
                             Description: <input data-role="none" type="text" data-bind="value: editChannelDescription" /><br/>
                             Long Description:<br/> <textarea data-role="none" data-bind="value: editLongDescription" style="width:99%;height:100px;resize:none;" ></textarea><br/>
                             Icon: <input data-role="none" type="text" data-bind="value: editIconId" /><br/>
-                           
+                            
+                            <div data-bind="with: selectIconObj" style="height: 68px;height:68px;margin-left:50px;">
+                        
+                        <div data-bind=" style: {'margin':'5px','border-radius': '50%', 'border': '2px solid white',
+             'background': 'url(resources/icons/' + image + ')', 
+             'width': width ,
+             'background-color': 'white',
+             'border-radius': '50%',
+              'height': height , 
+               'background-position': left + ' ' + top ,
+               'background-size': bgsize,
+               'cursor': 'pointer'
+                }"></div></div>
+                        
+                            
+                            <a href="#" data-role="none" data-bind="click: selectIcon">select icon</a><br/>
+                            
+                            
                             <input data-role="none" type="submit" data-bind="click: modifyChannelCommand"  value="Modify Channel"/>
                             
-                            
                         </div>
-                        
-                        
                     </div>
-                    
                 </div>
-                
-                
-                
             </li>
-            
             
             <li class="channel-message-item " data-bind="style: {display:relationship()=='F'?'block':'none'}" data-icon="false">
                 

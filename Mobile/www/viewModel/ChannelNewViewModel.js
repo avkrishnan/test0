@@ -41,6 +41,8 @@ function ChannelNewViewModel() {
     
     this.clearForm = function(){
         that.name('');
+        that.description('');
+        that.longdescription('');
     };
     
     this.routeToLogin = function () {

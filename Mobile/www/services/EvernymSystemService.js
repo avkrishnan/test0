@@ -10,5 +10,9 @@ function EvernymSystemService() {
         
     };
     
+    this.getUrgencySettings = function(callbacks){
+        return api.callAPI('GET', '/system/urgency', undefined, callbacks, true);
+    };
+    
     
 }

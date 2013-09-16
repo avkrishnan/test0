@@ -1,4 +1,8 @@
-/*globals $, ko, document */
+
+
+
+
+
 
 ko.virtualElements.allowedBindings.updateListviewOnChange = true;
 
@@ -357,8 +361,8 @@ resetPasswordViewModel = new ResetPasswordViewModel(),
 panelHelpViewModel = new PanelHelpViewModel(),
 
 messageViewModel = new MessageViewModel(),
-unsubscribeModel = new UnsubscribeModel()
-
+unsubscribeModel = new UnsubscribeModel(),
+selectIconViewModel = new SelectIconViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -387,7 +391,8 @@ var models = [
               resetPasswordViewModel, 
               panelHelpViewModel, 
               messageViewModel,
-              unsubscribeModel
+              unsubscribeModel,
+              selectIconViewModel
               ];
 
 
@@ -487,6 +492,7 @@ $(document).ready(function () {
 											  }
                                                
                                                channelListViewModel.listMyChannelsCommand().then(gotChannels);
+                                               channelMenuViewModel.getUrgencySettings();
                                            }
                                            
                                       

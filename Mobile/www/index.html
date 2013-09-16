@@ -11,6 +11,7 @@
                 <!-- required libraries -->
                 <link href='resources/fonts/open_sans_woff.css' rel='stylesheet' type='text/css'>
                 <link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />
+
                 
                 
                 <script type="text/javascript" src="api_codes.js"></script>
@@ -22,7 +23,9 @@
                 <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
                 <script type="text/javascript" src="lib/iscroll.js"></script>
                 <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
-                
+                <script type="text/javascript" src="scripts/evernym_settings.js"></script>
+
+                <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
                     
                 <script type="text/javascript">
                     $.mobile.autoInitializePage = false;
@@ -62,6 +65,8 @@
                 <script type="text/javascript" src="viewModel/MessageViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/PanelHelpViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/UnsubscribeModel.js"></script>
+                <script type="text/javascript" src="viewModel/SelectIconViewModel.js"></script>
+                
                 
                 <link rel="stylesheet" href="evernym.css" />
                 
@@ -132,7 +137,16 @@
                 
                 </head>
     <body style="margin:0 !important;">
-        
+
+ <!--
+        <script type="text/javascript" src="cordova.js"></script>
+       
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+
+-->
         
         <div id="globalfooter" style="display:none;">
             <div data-role="footer" id="thefooter" >

@@ -70,8 +70,25 @@
                     <div class="channel-list-stripe2"></div>
                     <!-- /ko -->
                     
+                    <!-- ko if: $data.hasOwnProperty("picId") -->
+                    <div class="channel-list-avatar" data-bind="with: $parent.mapImage(picId)">
                     
-                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    <div data-bind=" style: {
+				 'background': 'url(resources/icons/' + image + ')', 'width': width ,
+				 'background-color': 'white',
+				 'border-radius' : '50%',
+				  'height': height ,
+				   'background-position': left + ' ' + top ,
+				   'background-size': bgsize,
+				   'cursor': 'pointer'
+					}"></div>
+					
+                    </div>
+                    <!-- /ko -->
+                    
+                    <!-- ko ifnot: $data.hasOwnProperty("picId") -->
+					<div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+					<!-- /ko -->
                     
                     <div id="channellist" style="margin-left:80px;"></div>
                     

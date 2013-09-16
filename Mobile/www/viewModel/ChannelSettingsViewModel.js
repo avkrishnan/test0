@@ -27,6 +27,8 @@ function ChannelSettingsViewModel() {
 	this.editChannelDescription = ko.observable();
     this.editLongDescription = ko.observable();
     this.editIconId = ko.observable();
+    this.selectIconObj = ko.observable();
+    that.channelIconObj = ko.observable();
     
     this.url = ko.observable();
     this.description = ko.observable();
@@ -48,6 +50,7 @@ function ChannelSettingsViewModel() {
         
         $("#" + that.template).live("pagebeforeshow", function(e, data){
                                     
+                                    that.clearForm();
                                     
                                     $('.more_messages_button').hide();
                                     
@@ -83,6 +86,23 @@ function ChannelSettingsViewModel() {
                                     
                                     that.editLongDescription(lchannel.longDescription);
                                     
+                                    if (lchannel.picId ){
+                                     	that.editIconId(lchannel.picId);
+										var iconJSON = JSON.parse(lchannel.picId);
+										if (iconJSON && iconJSON.id){
+											var set = iconJSON.set;
+											var id = iconJSON.id;
+											var mappedIcon = selectIconViewModel.mapImage(set, id, 68);
+											that.selectIconObj(mappedIcon);
+											var mappedIcon2 = selectIconViewModel.mapImage(set, id, 63);
+											that.channelIconObj(mappedIcon2);
+										}
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
                                     that.relationship(lchannel.relationship);
                                     that.channelid(lchannel.id);
                                     $.mobile.showPageLoadingMsg("a", "Loading Messages");
@@ -114,7 +134,28 @@ function ChannelSettingsViewModel() {
 		
 	};
 	
+	this.clearForm = function(){
+	
+	
+	
+	    
+		that.editIconId('');
+		that.selectIconObj(undefined);
+		that.channelIconObj(undefined);
+
+        that.editChannelName('');
+        that.editChannelDescription('');
+        that.editLongDescription('');
+	
+	
+	};
+	
+	
+	//TODO make one function for getting the data onto the page.
 	function gotChannel(data){
+	
+	    var lchannel = data;
+	
 		$.mobile.hidePageLoadingMsg();
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
@@ -127,12 +168,27 @@ function ChannelSettingsViewModel() {
         that.url(data.normName + '.evernym.com');
         that.email(data.normName + '@evernym.com');
         
+        
+        if (lchannel.picId){
+			that.editIconId(lchannel.picId);
+			var iconJSON = JSON.parse(lchannel.picId);
+			if (iconJSON && iconJSON.id){
+				var set = iconJSON.set;
+				var id = iconJSON.id;
+			
+				var mappedIcon = selectIconViewModel.mapImage(set, id, 68);
+				that.selectIconObj(mappedIcon);
+			
+				var mappedIcon2 = selectIconViewModel.mapImage(set, id, 63);
+				that.channelIconObj(mappedIcon2);
+			
+			}
+		}
+        
         that.editChannelName(data.name);
         that.editChannelDescription(data.description);
         that.editLongDescription(data.longDescription);
 		
-		
-        
 	}
     
     function postFollow(data){
@@ -343,10 +399,26 @@ function ChannelSettingsViewModel() {
         
     };
  
+ 
+    this.selectIcon = function(){
+        selectIconViewModel.setCallBack(gotIcon);
+        $.mobile.changePage("#" + selectIconViewModel.template);
+        
+        function gotIcon(iconObj){
+            //alert(JSON.stringify(iconObj));
+            var imageObj = {set: iconObj.set, id: iconObj.id};
+            
+            $.mobile.changePage("#" + that.template);
+            that.editIconId(JSON.stringify(imageObj));
+            
+            var mappedIcon = selectIconViewModel.mapImage(iconObj.set, iconObj.id, 68);
+            that.selectIconObj(mappedIcon);
+            
+        }
+        
+    };
 	
 	this.modifyChannelCommand = function(){
-		
-		
 		
 		
 		var channelObject = {

@@ -62,6 +62,7 @@ function ForgotPasswordViewModel() {
         forgotPasswordModel.emailAddress = that.email();
         
         
+        
         return dataService.forgotPassword(forgotPasswordModel, callbacks).then(gotForgotPassword);
     };
    
@@ -77,19 +78,21 @@ function ForgotPasswordViewModel() {
     
     function forgotPasswordError(data, status, details) {
         $.mobile.hidePageLoadingMsg();
-        //showMessage("FAILED: " + details.message);
         
-        that.notification(details.message);
+        //that.notification(details.message);
         
-        localStorage.removeItem('accessToken');
-        //logger.logError('Your login failed, please try again!', null, 'login', true);
+        loginPageIfBadLogin(details.code);
+        
+        if (details.code){
+		    showError("Error Sending Forgot Password Request: " + getAPICode(details.code));
+        }
+        else {
+            showError("Error Sending Forgot Password Request: " + details);
+        }
+        
     }
     
- 
     
-
-    
-
     
     
 }

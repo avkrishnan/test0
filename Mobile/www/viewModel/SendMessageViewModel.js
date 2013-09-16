@@ -8,6 +8,7 @@ function SendMessageViewModel() {
     var that = this;
     var  dataService = new EvernymChannelService();
     var  dataServiceM = new EvernymMessageService();
+
 	
     this.template = "sendMessageView";
     this.viewid = "V-20";
@@ -20,6 +21,10 @@ function SendMessageViewModel() {
 	this.channelid = ko.observable();
     this.channelname = ko.observable();
     this.message = ko.observable();
+    
+    
+    
+    
     
    
     this.applyBindings = function(){
@@ -72,7 +77,7 @@ function SendMessageViewModel() {
 		that.channel([data]);
 		that.title("Channel: " + data.name );
 		
-    };
+    }
     
 
 	
@@ -80,7 +85,7 @@ function SendMessageViewModel() {
 	    //logger.log('success Getting Channel ' , null, 'channel', true);
 	    
 	    
-	};
+	}
 
     
 	function successfulMessage(data){
@@ -88,7 +93,7 @@ function SendMessageViewModel() {
 	    that.message('');
         $.mobile.changePage("#" + channelViewModel.template)
 	    
-	};
+	}
     
     this.clearForm = function(){
         that.message('');
@@ -99,7 +104,7 @@ function SendMessageViewModel() {
         loginViewModel.logoutCommand();
         $.mobile.changePage("#" + loginViewModel.template)
         
-    }
+    };
     
 	function errorAPI(data, status, details){
         $.mobile.hidePageLoadingMsg();
@@ -110,7 +115,7 @@ function SendMessageViewModel() {
         showError("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
         
 	    //logger.logError('error listing channels', null, 'channel', true);
-	};
+	}
     
     function errorPostingMessage(data, status, details){
         $.mobile.hidePageLoadingMsg();
@@ -119,8 +124,11 @@ function SendMessageViewModel() {
         
         showError("Error Posting Message: " + getAPICode(details.code));
 	    //logger.logError('error listing channels', null, 'channel', true);
-	};
+	}
 
+    
+
+   
 	
 	this.getChannelCommand = function (lchannelid) {
 	    

@@ -107,6 +107,13 @@ function SignupViewModel() {
             localStorage.setItem("accessToken", args.accessToken);
             var notifications = args.notifications;
             
+            localStorage.setItem("accessToken", args.accessToken);
+            localStorage.setItem("accountName", args.account.accountname);
+            
+            that.first_name = args.account.firstname;
+            that.last_name = args.account.lastname;
+            localStorage.setItem('UserFullName', args.account.firstname + ' ' + args.account.lastname);
+            $.mobile.activePage.find('#thefooter #footer-gear').html(args.account.accountname);
             
             var login_nav = JSON.parse(localStorage.getItem("login_nav"));
             localStorage.removeItem("login_nav");
