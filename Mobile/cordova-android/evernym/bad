@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+
+ant clean debug;
+#scp bin/Evernym-debug.apk jared@arachnicode.com:/var/www/html/arachnicode.com/evernym/apk;
+adb install -r bin/evernym-debug.apk
