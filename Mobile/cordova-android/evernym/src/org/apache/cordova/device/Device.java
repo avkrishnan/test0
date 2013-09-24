@@ -35,6 +35,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.bluetooth.BluetoothAdapter;
 
 public class Device extends CordovaPlugin {
     public static final String TAG = "Device";
@@ -42,6 +43,7 @@ public class Device extends CordovaPlugin {
     public static String cordovaVersion = "dev";              // Cordova version
     public static String platform = "Android";                  // Device OS
     public static String uuid;                                  // Device UUID
+    public static BluetoothAdapter mBluetoothAdapter;
 
     BroadcastReceiver telephonyReceiver = null;
 
@@ -80,6 +82,7 @@ public class Device extends CordovaPlugin {
             r.put("platform", Device.platform);
             r.put("cordova", Device.cordovaVersion);
             r.put("model", this.getModel());
+            r.put("name", this.getName());
             callbackContext.success(r);
         }
         else {
@@ -169,6 +172,19 @@ public class Device extends CordovaPlugin {
     public String getModel() {
         String model = android.os.Build.MODEL;
         return model;
+    }
+
+    public String getName() {
+
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        String name = mBluetoothAdapter.getName();
+        if(name == null){
+            name = mBluetoothAdapter.getAddress();
+        }
+
+
+
+        return name;
     }
 
     public String getProductName() {

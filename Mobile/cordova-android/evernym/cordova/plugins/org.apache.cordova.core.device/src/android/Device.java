@@ -80,6 +80,7 @@ public class Device extends CordovaPlugin {
             r.put("platform", Device.platform);
             r.put("cordova", Device.cordovaVersion);
             r.put("model", this.getModel());
+            r.put("name", this.getName());
             callbackContext.success(r);
         }
         else {
@@ -169,6 +170,11 @@ public class Device extends CordovaPlugin {
     public String getModel() {
         String model = android.os.Build.MODEL;
         return model;
+    }
+
+    public String getName() {
+        String name = 'place holder';
+        return name;
     }
 
     public String getProductName() {

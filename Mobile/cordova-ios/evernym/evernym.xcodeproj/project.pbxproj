@@ -45,17 +45,13 @@
 		5AA0E66F1729F460000DC89A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA0E66E1729F460000DC89A /* ImageIO.framework */; };
 		5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AEE5B34173C68D80009041E /* CoreLocation.framework */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
-		7FFB8DD017E936DB00E8B125 /* api_codes.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8CE917E936DB00E8B125 /* api_codes.js */; };
 		7FFB8DD117E936DB00E8B125 /* apns_pem_certificate.pem in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CEA17E936DB00E8B125 /* apns_pem_certificate.pem */; };
 		7FFB8DD217E936DB00E8B125 /* app.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8CEB17E936DB00E8B125 /* app.js */; };
 		7FFB8DD317E936DB00E8B125 /* aps_production.cer in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CEC17E936DB00E8B125 /* aps_production.cer */; };
 		7FFB8DD417E936DB00E8B125 /* cordova.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8CED17E936DB00E8B125 /* cordova.js */; };
 		7FFB8DD517E936DB00E8B125 /* cordova_plugins.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8CEE17E936DB00E8B125 /* cordova_plugins.js */; };
-		7FFB8DD617E936DB00E8B125 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CF017E936DB00E8B125 /* index.css */; };
 		7FFB8DD717E936DB00E8B125 /* evernym.css in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CF117E936DB00E8B125 /* evernym.css */; };
-		7FFB8DD817E936DB00E8B125 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CF317E936DB00E8B125 /* logo.png */; };
 		7FFB8DD917E936DB00E8B125 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CF417E936DB00E8B125 /* index.html */; };
-		7FFB8DDA17E936DB00E8B125 /* index.x.html in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CF517E936DB00E8B125 /* index.x.html */; };
 		7FFB8DDB17E936DB00E8B125 /* index.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8CF717E936DB00E8B125 /* index.js */; };
 		7FFB8DDC17E936DB00E8B125 /* ajax-loader.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CFA17E936DB00E8B125 /* ajax-loader.gif */; };
 		7FFB8DDD17E936DC00E8B125 /* icons-18-black.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8CFB17E936DB00E8B125 /* icons-18-black.png */; };
@@ -176,13 +172,6 @@
 		7FFB8E5017E936DC00E8B125 /* EvernymMessageService.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8D7B17E936DB00E8B125 /* EvernymMessageService.js */; };
 		7FFB8E5117E936DC00E8B125 /* EvernymService.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8D7C17E936DB00E8B125 /* EvernymService.js */; };
 		7FFB8E5217E936DC00E8B125 /* EvernymSystemService.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8D7D17E936DB00E8B125 /* EvernymSystemService.js */; };
-		7FFB8E5317E936DC00E8B125 /* helper.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8D7F17E936DB00E8B125 /* helper.js */; };
-		7FFB8E5417E936DC00E8B125 /* index.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8017E936DB00E8B125 /* index.js */; };
-		7FFB8E5517E936DC00E8B125 /* jasmine-html.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8317E936DB00E8B125 /* jasmine-html.js */; };
-		7FFB8E5617E936DC00E8B125 /* jasmine.css in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8417E936DB00E8B125 /* jasmine.css */; };
-		7FFB8E5717E936DC00E8B125 /* jasmine.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8517E936DB00E8B125 /* jasmine.js */; };
-		7FFB8E5817E936DC00E8B125 /* MIT.LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8617E936DB00E8B125 /* MIT.LICENSE */; };
-		7FFB8E5917E936DC00E8B125 /* spec.html in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8717E936DB00E8B125 /* spec.html */; };
 		7FFB8E5A17E936DC00E8B125 /* startPythonServer.sh in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8817E936DB00E8B125 /* startPythonServer.sh */; };
 		7FFB8E5B17E936DC00E8B125 /* qunit-1.12.0.css in Resources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8B17E936DB00E8B125 /* qunit-1.12.0.css */; };
 		7FFB8E5C17E936DC00E8B125 /* qunit-1.12.0.js in Sources */ = {isa = PBXBuildFile; fileRef = 7FFB8D8C17E936DB00E8B125 /* qunit-1.12.0.js */; };
@@ -320,17 +309,13 @@
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		6AB4FFE7E4BD4B9C9C0F2875 /* CDVDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = org.apache.cordova.core.device/CDVDevice.m; sourceTree = "<group>"; };
 		6F48266EDDCE41CBA24BAAF0 /* PushPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushPlugin.h; path = com.phonegap.plugins.PushPlugin/PushPlugin.h; sourceTree = "<group>"; };
-		7FFB8CE917E936DB00E8B125 /* api_codes.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = api_codes.js; sourceTree = "<group>"; };
 		7FFB8CEA17E936DB00E8B125 /* apns_pem_certificate.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apns_pem_certificate.pem; sourceTree = "<group>"; };
 		7FFB8CEB17E936DB00E8B125 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		7FFB8CEC17E936DB00E8B125 /* aps_production.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = aps_production.cer; sourceTree = "<group>"; };
 		7FFB8CED17E936DB00E8B125 /* cordova.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = cordova.js; sourceTree = "<group>"; };
 		7FFB8CEE17E936DB00E8B125 /* cordova_plugins.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = cordova_plugins.js; sourceTree = "<group>"; };
-		7FFB8CF017E936DB00E8B125 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
 		7FFB8CF117E936DB00E8B125 /* evernym.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = evernym.css; sourceTree = "<group>"; };
-		7FFB8CF317E936DB00E8B125 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		7FFB8CF417E936DB00E8B125 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		7FFB8CF517E936DB00E8B125 /* index.x.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.x.html; sourceTree = "<group>"; };
 		7FFB8CF717E936DB00E8B125 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		7FFB8CFA17E936DB00E8B125 /* ajax-loader.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "ajax-loader.gif"; sourceTree = "<group>"; };
 		7FFB8CFB17E936DB00E8B125 /* icons-18-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-18-black.png"; sourceTree = "<group>"; };
@@ -451,13 +436,6 @@
 		7FFB8D7B17E936DB00E8B125 /* EvernymMessageService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = EvernymMessageService.js; sourceTree = "<group>"; };
 		7FFB8D7C17E936DB00E8B125 /* EvernymService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = EvernymService.js; sourceTree = "<group>"; };
 		7FFB8D7D17E936DB00E8B125 /* EvernymSystemService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = EvernymSystemService.js; sourceTree = "<group>"; };
-		7FFB8D7F17E936DB00E8B125 /* helper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = helper.js; sourceTree = "<group>"; };
-		7FFB8D8017E936DB00E8B125 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
-		7FFB8D8317E936DB00E8B125 /* jasmine-html.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jasmine-html.js"; sourceTree = "<group>"; };
-		7FFB8D8417E936DB00E8B125 /* jasmine.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = jasmine.css; sourceTree = "<group>"; };
-		7FFB8D8517E936DB00E8B125 /* jasmine.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jasmine.js; sourceTree = "<group>"; };
-		7FFB8D8617E936DB00E8B125 /* MIT.LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MIT.LICENSE; sourceTree = "<group>"; };
-		7FFB8D8717E936DB00E8B125 /* spec.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = spec.html; sourceTree = "<group>"; };
 		7FFB8D8817E936DB00E8B125 /* startPythonServer.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = startPythonServer.sh; sourceTree = "<group>"; };
 		7FFB8D8B17E936DB00E8B125 /* qunit-1.12.0.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "qunit-1.12.0.css"; sourceTree = "<group>"; };
 		7FFB8D8C17E936DB00E8B125 /* qunit-1.12.0.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "qunit-1.12.0.js"; sourceTree = "<group>"; };
@@ -730,17 +708,13 @@
 		7FFB8CE817E936DB00E8B125 /* www */ = {
 			isa = PBXGroup;
 			children = (
-				7FFB8CE917E936DB00E8B125 /* api_codes.js */,
 				7FFB8CEA17E936DB00E8B125 /* apns_pem_certificate.pem */,
 				7FFB8CEB17E936DB00E8B125 /* app.js */,
 				7FFB8CEC17E936DB00E8B125 /* aps_production.cer */,
 				7FFB8CED17E936DB00E8B125 /* cordova.js */,
 				7FFB8CEE17E936DB00E8B125 /* cordova_plugins.js */,
-				7FFB8CEF17E936DB00E8B125 /* css */,
 				7FFB8CF117E936DB00E8B125 /* evernym.css */,
-				7FFB8CF217E936DB00E8B125 /* img */,
 				7FFB8CF417E936DB00E8B125 /* index.html */,
-				7FFB8CF517E936DB00E8B125 /* index.x.html */,
 				7FFB8CF617E936DB00E8B125 /* js */,
 				7FFB8CF817E936DB00E8B125 /* lib */,
 				7FFB8D0F17E936DB00E8B125 /* plugins */,
@@ -750,30 +724,12 @@
 				7FFB8D7417E936DB00E8B125 /* scripts */,
 				7FFB8D7617E936DB00E8B125 /* sendApplePushNotification.php */,
 				7FFB8D7717E936DB00E8B125 /* services */,
-				7FFB8D7E17E936DB00E8B125 /* spec */,
-				7FFB8D8717E936DB00E8B125 /* spec.html */,
 				7FFB8D8817E936DB00E8B125 /* startPythonServer.sh */,
 				7FFB8D8917E936DB00E8B125 /* Test */,
 				7FFB8D9F17E936DB00E8B125 /* viewModel */,
 				7FFB8DB817E936DB00E8B125 /* views */,
 			);
 			path = www;
-			sourceTree = "<group>";
-		};
-		7FFB8CEF17E936DB00E8B125 /* css */ = {
-			isa = PBXGroup;
-			children = (
-				7FFB8CF017E936DB00E8B125 /* index.css */,
-			);
-			path = css;
-			sourceTree = "<group>";
-		};
-		7FFB8CF217E936DB00E8B125 /* img */ = {
-			isa = PBXGroup;
-			children = (
-				7FFB8CF317E936DB00E8B125 /* logo.png */,
-			);
-			path = img;
 			sourceTree = "<group>";
 		};
 		7FFB8CF617E936DB00E8B125 /* js */ = {
@@ -1015,35 +971,6 @@
 			path = services;
 			sourceTree = "<group>";
 		};
-		7FFB8D7E17E936DB00E8B125 /* spec */ = {
-			isa = PBXGroup;
-			children = (
-				7FFB8D7F17E936DB00E8B125 /* helper.js */,
-				7FFB8D8017E936DB00E8B125 /* index.js */,
-				7FFB8D8117E936DB00E8B125 /* lib */,
-			);
-			path = spec;
-			sourceTree = "<group>";
-		};
-		7FFB8D8117E936DB00E8B125 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				7FFB8D8217E936DB00E8B125 /* jasmine-1.2.0 */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		7FFB8D8217E936DB00E8B125 /* jasmine-1.2.0 */ = {
-			isa = PBXGroup;
-			children = (
-				7FFB8D8317E936DB00E8B125 /* jasmine-html.js */,
-				7FFB8D8417E936DB00E8B125 /* jasmine.css */,
-				7FFB8D8517E936DB00E8B125 /* jasmine.js */,
-				7FFB8D8617E936DB00E8B125 /* MIT.LICENSE */,
-			);
-			path = "jasmine-1.2.0";
-			sourceTree = "<group>";
-		};
 		7FFB8D8917E936DB00E8B125 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -1240,11 +1167,8 @@
 				30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */,
 				7FFB8DD117E936DB00E8B125 /* apns_pem_certificate.pem in Resources */,
 				7FFB8DD317E936DB00E8B125 /* aps_production.cer in Resources */,
-				7FFB8DD617E936DB00E8B125 /* index.css in Resources */,
 				7FFB8DD717E936DB00E8B125 /* evernym.css in Resources */,
-				7FFB8DD817E936DB00E8B125 /* logo.png in Resources */,
 				7FFB8DD917E936DB00E8B125 /* index.html in Resources */,
-				7FFB8DDA17E936DB00E8B125 /* index.x.html in Resources */,
 				7FFB8DDC17E936DB00E8B125 /* ajax-loader.gif in Resources */,
 				7FFB8DDD17E936DC00E8B125 /* icons-18-black.png in Resources */,
 				7FFB8DDE17E936DC00E8B125 /* icons-18-white.png in Resources */,
@@ -1345,9 +1269,6 @@
 				7FFB8E4917E936DC00E8B125 /* V-21-l.png in Resources */,
 				7FFB8E4A17E936DC00E8B125 /* V-21-l2x.png in Resources */,
 				7FFB8E4C17E936DC00E8B125 /* sendApplePushNotification.php in Resources */,
-				7FFB8E5617E936DC00E8B125 /* jasmine.css in Resources */,
-				7FFB8E5817E936DC00E8B125 /* MIT.LICENSE in Resources */,
-				7FFB8E5917E936DC00E8B125 /* spec.html in Resources */,
 				7FFB8E5A17E936DC00E8B125 /* startPythonServer.sh in Resources */,
 				7FFB8E5B17E936DC00E8B125 /* qunit-1.12.0.css in Resources */,
 				7FFB8E5D17E936DC00E8B125 /* qunit-composite.css in Resources */,
@@ -1414,7 +1335,6 @@
 				837CED705307482E943D2CA7 /* CDVDevice.m in Sources */,
 				555C915DD3AC4973A0126AED /* AppDelegate+notification.m in Sources */,
 				9168B8FAB7D7475E8F0F8B46 /* PushPlugin.m in Sources */,
-				7FFB8DD017E936DB00E8B125 /* api_codes.js in Sources */,
 				7FFB8DD217E936DB00E8B125 /* app.js in Sources */,
 				7FFB8DD417E936DB00E8B125 /* cordova.js in Sources */,
 				7FFB8DD517E936DB00E8B125 /* cordova_plugins.js in Sources */,
@@ -1438,10 +1358,6 @@
 				7FFB8E5017E936DC00E8B125 /* EvernymMessageService.js in Sources */,
 				7FFB8E5117E936DC00E8B125 /* EvernymService.js in Sources */,
 				7FFB8E5217E936DC00E8B125 /* EvernymSystemService.js in Sources */,
-				7FFB8E5317E936DC00E8B125 /* helper.js in Sources */,
-				7FFB8E5417E936DC00E8B125 /* index.js in Sources */,
-				7FFB8E5517E936DC00E8B125 /* jasmine-html.js in Sources */,
-				7FFB8E5717E936DC00E8B125 /* jasmine.js in Sources */,
 				7FFB8E5C17E936DC00E8B125 /* qunit-1.12.0.js in Sources */,
 				7FFB8E5E17E936DC00E8B125 /* qunit-composite.js in Sources */,
 				7FFB8E6017E936DC00E8B125 /* qunit.js in Sources */,

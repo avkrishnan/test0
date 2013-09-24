@@ -1,13 +1,18 @@
 <?php
 
 $deviceRegistrationId = 'APA91bGa3G4ydIAfT3st1ebEn7qwtLcH2ic_Hk2pbbV2_MGXB-44fHJKzqTh_VasKQ9QSKneftFBKhYzqV6dquh5ER5CB-JSUpZVxpaFk7H_77elJCiAs8Mk4ag8aAaDOmqkEwK-g2T26SiA3KMuioh_uf0Ha3ZnQQ';
-$messageText = "You have 5 new messages";
+$messageText = "You have a new message from Barry Mannilo";
 
 $headers = array("Content-Type:" . "application/json", "Authorization:" . "key=" . "AIzaSyDD_SZAT0dHtrrBAHUnlzQgdO9ZM_p4nT8");
 
     $data = array(
         'collapse_key' => "messages",
-        'data' => array( "message" =>  $messageText, "type" => "broadcast" ),
+        'data' => array(
+                        "message" =>  $messageText,
+                        "type" => "broadcast",
+                        "channelid" => "628f4a1c-8d48-4877-ab6d-1611a888c929",
+                        "messageid" => "47fc4840-ff38-4084-b1dd-17511342a6be"
+                        ),
         'registration_ids' => array($deviceRegistrationId)
     );
 

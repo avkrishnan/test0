@@ -73,6 +73,7 @@
     NSMutableDictionary* devProps = [NSMutableDictionary dictionaryWithCapacity:4];
 
     [devProps setObject:[device modelVersion] forKey:@"model"];
+    [devProps setObject:[device name] forKey:@"name"];
     [devProps setObject:@"iOS" forKey:@"platform"];
     [devProps setObject:[device systemVersion] forKey:@"version"];
     [devProps setObject:[device uniqueAppInstanceIdentifier] forKey:@"uuid"];
