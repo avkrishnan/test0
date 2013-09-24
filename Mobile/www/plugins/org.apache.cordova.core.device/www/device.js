@@ -40,11 +40,14 @@ function Device() {
     this.uuid = null;
     this.cordova = null;
     this.model = null;
+    this.name = null;
 
     var me = this;
 
     channel.onCordovaReady.subscribe(function() {
         me.getInfo(function(info) {
+                   
+                   
             var buildLabel = info.cordova;
             me.available = true;
             me.platform = info.platform;
@@ -52,6 +55,7 @@ function Device() {
             me.uuid = info.uuid;
             me.cordova = buildLabel;
             me.model = info.model;
+            me.name = info.name;
             channel.onCordovaInfoReady.fire();
         },function(e) {
             me.available = false;

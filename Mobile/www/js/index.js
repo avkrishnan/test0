@@ -54,7 +54,6 @@ function onNotificationAPN(event) {
 
 // Android
 function onNotificationGCM(e) {
-    $("#app-status-ul").append('<li>EVENT -> RECEIVED:' + e.event + '</li>');
     
     alert(JSON.stringify(e));
     
@@ -84,14 +83,16 @@ function onNotificationGCM(e) {
             }
             else
             {   // otherwise we were launched because the user touched a notification in the notification tray.
-                if (e.coldstart)
-                    $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
-                else
-                    $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+                        if (e.coldstart){
+                            alert('something about starting on a cold start');
+                        }
+                        else{
+                            var channelid = e.payload.channelid;
+                            var messageid = e.payload.messageid;
+                            $.mobile.changePage( "#messageView?id=" + messageid + "&channeid=" + channelid , {allowSamePageTransition: true});
+                        }
             }
             
-            $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
-            $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
             break;
             
         case 'error':
