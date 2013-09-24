@@ -49,12 +49,12 @@ function EvernymService() {
 					  
 					  var pattern = /<b>description<\/b>/;
 					  
-					  var details = '';
+					  var details = {};
 	    
 	                  var results = pattern.exec(jqXHR.responseText);
 	                  
 	                  if (results && results.length){
-	                      details = parseDescription(jqXHR.responseText);
+	                      details.message = parseDescription(jqXHR.responseText);
 	                  }
 	                  else {
 	                      details = JSON.parse(jqXHR.responseText);

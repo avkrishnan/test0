@@ -497,7 +497,7 @@ function ChannelMenuViewModel() {
 	
 			loginPageIfBadLogin(details.code);
 	
-			showError("Error Getting Urgency Settings: " + getAPICode(details.code));
+			showError("Error Getting Urgency Settings: " + details.message);
 	
 		}
         

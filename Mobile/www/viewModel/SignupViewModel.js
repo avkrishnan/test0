@@ -135,7 +135,7 @@ function SignupViewModel() {
             else if (notifications.length){
                 for (var n in notifications){
                     var code = notifications[n].code;
-                    notificationsViewModel.addNotification(getAPICode(code));
+                    notificationsViewModel.addNotification(notifications[n].code);
                 }
                 
                 $.mobile.changePage("#" + notificationsViewModel.template);

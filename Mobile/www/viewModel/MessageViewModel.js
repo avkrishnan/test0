@@ -46,25 +46,20 @@ function MessageViewModel() {
                                     $("#message-reply-form2").hide();
                                     $('.more_messages_button').hide();
                                     
-                                    if ($.mobile.pageData && $.mobile.pageData.id){
+                                    if ($.mobile.pageData && $.mobile.pageData.channelid && $.mobile.pageData.id){
                                     
-									that.activate({id:$.mobile.pageData.id});
+					that.activate($.mobile.pageData.channelid, $.mobile.pageData.id);
                                     }
                                     
                                     else {
-									var currentChannel = localStorage.getItem("currentChannel");
-									var lchannel = JSON.parse(currentChannel);
+					var currentChannel = localStorage.getItem("currentChannel");
+					var lchannel = JSON.parse(currentChannel);
+                                        var currentMessage = localStorage.getItem("currentMessage");
+                                        var lmessage = JSON.parse(currentMessage);
                                     
-                                    
-                                    var currentMessage = localStorage.getItem("currentMessage");
-                                    
-                                    var lmessage = JSON.parse(currentMessage);
-                                    
-                                    
-                                    if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
-                                    
-                                    that.messages([]);
-                                    }
+                                        if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
+                                            that.messages([]);
+                                        }
                                     
                                     that.channel([lchannel]);
                                     
@@ -101,18 +96,14 @@ function MessageViewModel() {
 	
 
 	
-	this.activate = function (message) {
-		
-		
-
-        
+	this.activate = function (channelid, messageid) {
 		
 		that.messages([]);
-        
+	        that.channelid(channelid);
+	        that.messageid(messageid);
+                that.getSingleMessageCommand().then();
 		$.mobile.showPageLoadingMsg("a", "Loading The Message");
-		
-		//that.getChannelCommand(that.channelid()).then(gotChannel);
-		
+		that.getChannelCommand(channelid).then(gotChannel);
 		return true;
 		
 	};
@@ -127,27 +118,35 @@ function MessageViewModel() {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.title(data.name );
-        that.relationship(data.relationship);
-        that.channelid(data.id);
-        $.mobile.showPageLoadingMsg("a", "Loading Messages");
-		
-		
-        if ($.mobile.pageData && $.mobile.pageData.id){
-            that.followChannelCommand().then(postFollow);
-	    }
-        else {
-            that.getMessagesCommand(that.channelid()).then(gotMessages);
-        }
+		that.relationship(data.relationship);
+		that.channelid(data.id);
+		$.mobile.showPageLoadingMsg("a", "Loading Messages");
+                that.getMessagesCommand().then(gotMessages);
         
 	}
     
-    function postFollow(data){
-        that.getMessagesCommand(that.channelid()).then(gotMessages);
+        function postFollow(data){
+            that.getMessagesCommand().then(gotMessages);
+        }
+
+	function gotSingleMessage(data){
+        that.clear();
+		$.mobile.hidePageLoadingMsg();
+                alert(JSON.stringify(data));
+
+		if (data.message && data.message.constructor == Object){
+			data.message = [data.message];
+		}
         
-    }
-	
+                if (data.more){
+                    $('.more_messages_button').show();
+                }
+
+		that.messages(data.message);
+	}
+
+
 	function gotMessages(data){
-		
         that.clear();
 		$("#message-reply-form2").hide();
 		$.mobile.hidePageLoadingMsg();
@@ -156,14 +155,12 @@ function MessageViewModel() {
 			data.message = [data.message];
 		}
         
-        if (data.more){
-            
-             $('.more_messages_button').show();
-        }
-		
+                if (data.more){
+                    $('.more_messages_button').show();
+                }
 		that.messages(data.message);
-		
 	}
+
 	
     function gotMoreMessages(data){
 		
@@ -207,7 +204,7 @@ function MessageViewModel() {
 	function successfulMessage(data){
 		$.mobile.hidePageLoadingMsg();
 
-		that.getMessagesCommand(that.channelid()).then(gotMessages);
+		that.getMessagesCommand().then(gotMessages);
 		that.message('');
 		
 	}
@@ -257,7 +254,7 @@ function MessageViewModel() {
     function errorFollowing(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		if (details.code == 100601){ // we are already following this channel
-			that.getMessagesCommand(that.channelid()).then(gotMessages);
+			that.getMessagesCommand().then(gotMessages);
 		}
         else {
 		
@@ -410,7 +407,12 @@ function MessageViewModel() {
 	this.refreshMessagesCommand = function(){
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		that.getMessagesCommand(that.channelid()).then(gotMessages);
+		that.getMessagesCommand().then(gotMessages);
+	};
+
+        this.getSingleMessageCommand = function(){
+		$.mobile.showPageLoadingMsg("a", "Loading Message");
+		return dataServiceM.getChannelMessage(that.channelid(), that.messageid(), {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
     
 	

@@ -58,7 +58,7 @@ function ForgotPasswordViewModel() {
         
         var forgotPasswordModel = {};
         $.mobile.showPageLoadingMsg("a", "Sending Email for Fogotten Password");
-        forgotPasswordModel.accountName = that.accountName();
+        forgotPasswordModel.accountname = that.accountName();
         forgotPasswordModel.emailAddress = that.email();
         
         
@@ -83,11 +83,11 @@ function ForgotPasswordViewModel() {
         
         loginPageIfBadLogin(details.code);
         
-        if (details.code){
-		    showError("Error Sending Forgot Password Request: " + getAPICode(details.code));
+        if (details){
+		    showError("Error Sending Forgot Password Request: " + details.message);
         }
         else {
-            showError("Error Sending Forgot Password Request: " + details);
+            showError("Error Sending Forgot Password Request: " + details.message);
         }
         
     }

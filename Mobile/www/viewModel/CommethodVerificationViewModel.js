@@ -54,7 +54,7 @@ function CommethodVerificationViewModel() {
     function verificationError(data, status, details){
         $.mobile.hidePageLoadingMsg();
         
-        that.message("Error in Verification: " + ((status==500)?"Internal Server Error":getAPICode(details.code)));
+        that.message("Error in Verification: " + ((status==500)?"Internal Server Error":details.message));
         //showMessage("Error in Verification: " + ((status==500)?"Internal Server Error":details.message));
     }
     

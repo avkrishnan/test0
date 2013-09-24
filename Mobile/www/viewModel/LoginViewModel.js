@@ -155,7 +155,8 @@ function LoginViewModel() {
         localStorage.removeItem('name');
         
         channelListViewModel.clearForm();
-        notificationsViewModel.removeNotifications();
+        //notificationsViewModel.removeNotifications();
+        OVERLAY.removeNotifications();
     };
     
     function loginSuccess2(data){}
@@ -195,13 +196,14 @@ function LoginViewModel() {
             
             var channelCount = channelListViewModel.channels().length;
             if (! channelCount){
-                channelListViewModel.activate();
+                channelListViewModel.populateChannelList();
             }
             
             var login_nav = JSON.parse(localStorage.getItem("login_nav"));
             localStorage.removeItem("login_nav");
             
-            notificationsViewModel.removeNotifications();
+            //notificationsViewModel.removeNotifications();
+           OVERLAY.removeNotifications();
             
             if (login_nav){
                 var hash = login_nav.hash;
@@ -214,14 +216,12 @@ function LoginViewModel() {
             }
             else if (notifications && notifications.length){
                 for (var n in notifications){
-                    var code = notifications[n].code;
                     
-                    
-                    
-                    notificationsViewModel.addNotification(getAPICode(code));
+                    OVERLAY.addNotification(notifications[n]);
                 }
                 
-                $.mobile.changePage("#" + notificationsViewModel.template);
+                //$.mobile.changePage("#" + notificationsViewModel.template);
+                OVERLAY.show();
             }
             else {
                 

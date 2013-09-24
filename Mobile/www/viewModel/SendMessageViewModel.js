@@ -122,7 +122,7 @@ function SendMessageViewModel() {
 		
         loginPageIfBadLogin(details.code);
         
-        showError("Error Posting Message: " + getAPICode(details.code));
+        showError("Error Posting Message: " + details.message);
 	    //logger.logError('error listing channels', null, 'channel', true);
 	}
 

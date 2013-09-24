@@ -67,6 +67,13 @@ function ChannelListViewModel() {
 		
 	};
 	
+    
+    this.populateChannelList = function(){
+        $.mobile.showPageLoadingMsg("a", "Loading Channels");
+        return this.listMyChannelsCommand().then(gotChannelList);
+        
+    };
+	
 	this.refreshChannelList = function(){
         $.mobile.showPageLoadingMsg("a", "Loading Channels");
 		return this.listMyChannelsCommand().then(gotChannels);
@@ -118,6 +125,26 @@ function ChannelListViewModel() {
 		
 	};
 	
+    
+    function gotChannelList(data){
+		$.mobile.hidePageLoadingMsg();
+		
+        //that.shown = true;
+		//that.channels.removeAll();
+		
+		if (data.channel && data.channel.constructor == Object){
+			
+			data.channel = [data.channel];
+		}
+      
+		$("#no_channels_notification").hide();
+        
+		that.channels.removeAll();
+		that.channels(data.channel);
+		
+	};
+    
+    
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 				
