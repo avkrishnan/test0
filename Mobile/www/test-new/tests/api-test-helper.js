@@ -157,6 +157,21 @@ function ApiTestHelper(api) {
 			.then(start);
 		};
 	};
+
+	t.createPushComMethod = function(scenario, address, localNameSuffix) {
+		return function() {
+			var cmName = "push" + localNameSuffix;
+			var comMethod = {
+				name : cmName,
+				type : "PUSH",
+				address : address
+			};
+			$.when(api.sCreateComMethod(scenario.accessToken, comMethod))
+			.then(api.CHECK.created)
+			.then(function(data) {scenario[cmName] = data;})
+			.then(start);
+		};
+	};
 	
 	t.deleteComMethod = function(scenario, localNameSuffix) {
 		return function() {

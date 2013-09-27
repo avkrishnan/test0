@@ -26,6 +26,7 @@
 			password: "testtest"
 		};
 		
+	
 	//debugger;
 	//acctA.phonenumber = '801376334   8 ';
 	//asyncTest('A enrolls', hlpr.enroll(SCEN_A, acctA));
@@ -34,7 +35,9 @@
 
 	//asyncTest('B enrolls', hlpr.enroll(SCEN_B));
 	asyncTest('B logs in', hlpr.login(SCEN_B));
-	
+
+	asyncTest('CREATE PUSH COM METHOD', hlpr.createPushComMethod(SCEN_B, "GCM:APA91bEfh9fWKaslF2ajSNDRt_zV7NwaPBxaEr5p4oo_1p50AR82W8HoAy9-jQ4aK9kjrt1gQv9SoJByPPmgNTmxf49x1TKY6yh1_kXRgTAyBkCbLhAxLTDK4bgmJygYrw78-HzonMw_ssk2J0fKuPdVcryAqakaeQ", "-1"));
+
 	asyncTest('A creates channel', hlpr.createChannelF(SCEN_A, 'chnl1'));
 	asyncTest("B follows A's channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl1'));
 			
@@ -43,7 +46,7 @@
 
 	var msgText = 'Hello everybody, this is a test broadcast!';
 	
-	asyncTest('A broadcasts a message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));
+	asyncTest('A broadcasts a message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'TS'));
 	asyncTest('B checks message', hlpr.fetchMsgs(SCEN_B, SCEN_A, 'chnl1'));
 
 	//asyncTest('B receives email with message', hlpr.findEmail(SCEN_B, msgText));

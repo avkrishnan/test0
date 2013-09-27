@@ -285,7 +285,7 @@
 	asyncTest('VERIFY EMAIL ADDRESS', hlpr.verify(SCEN1));
 		
 	asyncTest('FORGOT PASSWORD', hlpr.forgotPassword(SCEN1));
-	/*
+	
 	asyncTest('FORGOT PASSWORD UNKNOWN EMAIL', hlpr.forgotPassword(SCEN1, "invalidemail@invalid.edu", api.CHECK.notFound));
 
 	//TODO: RESET PASSWORD
@@ -333,7 +333,7 @@
 	asyncTest('DELETE THE THIRD COM METHOD', hlpr.deleteComMethod(SCEN1, "-3"));
 	
 	asyncTest('VERIFY EMAIL ADDRESS', hlpr.verify(SCEN1,"-2"));
-*/
+
 	
 	//TODO
 	/*
