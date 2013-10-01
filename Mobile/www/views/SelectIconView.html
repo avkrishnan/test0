@@ -8,13 +8,26 @@
     <div id="gpaneldots"></div>
     <div data-role="header" class="header">
         
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
-        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
+        <button id="hnav" class="hnav" data-role="none"  data-bind="click: backNav, text: navText" ></button>
         
     </div>
     
     
     <div class="message-list"  data-role="content" data-iscroll>
+        
+        
+        <ul class="icon-list" style="list-style-type: none;" >
+        <!-- ko foreach: iconSets, updateListviewOnChange:iconSets -->
+            <li  
+            
+            
+            ><a href="#" data-bind="text: $data, click:$parent.pickImageSet"></a> </li>
+            
+            
+            <!-- /ko -->
+        </ul>
         
         
         <ul class="icon-list" style="list-style-type: none;" >

@@ -1,0 +1,20 @@
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes.dex : \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/BuildConfig.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/evernym.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/Manifest$permission.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/Manifest.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/R$attr.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/R$drawable.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/R$layout.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/R$string.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/R$xml.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/evernym/alpha/R.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/plugin/gcm/CordovaGCMBroadcastReceiver.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/plugin/gcm/GCMIntentService.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/plugin/gcm/PushHandlerActivity.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/com/plugin/gcm/PushPlugin.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/org/apache/cordova/device/Device$1.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/classes/org/apache/cordova/device/Device.class \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/dexedLibs/cordova-3.0.0-b24a8e1d42c7b222cf8da93c4b46f81a.jar \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/dexedLibs/gcm-f26e2bb175e5914ed7a90723ca0d0bf8.jar \
+/Users/jared/Downloads/cordova-3.0.0/cordova-android/evernym/bin/dexedLibs/android-support-v13-a7cff9c206097c412a5e459346bde3e2.jar \

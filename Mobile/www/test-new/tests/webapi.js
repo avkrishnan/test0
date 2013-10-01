@@ -16,7 +16,7 @@
 	var q = getJsonFromUrl();
 	
 	var env = q.env == undefined ? "" : q.env;
-	var apiver = (q.api == undefined || q.api == "") ? (env.indexOf("dev") > 0 ? "" : "23") : q.api;
+	var apiver = (q.api == undefined || q.api == "") ? (env.indexOf("dev") > 0 ? "" : "24") : q.api;
 	var baseUrl = 
 		(env === "ldev") ? 'http://localhost:8079/api' + apiver + '/rest' : 
 		(env === "qdev") ? 'http://qupler.no-ip.org:8079/api' + apiver + '/rest' : 

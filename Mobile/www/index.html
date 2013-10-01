@@ -22,6 +22,8 @@
                 <script type="text/javascript" src="lib/iscroll.js"></script>
                 <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
                 <script type="text/javascript" src="scripts/evernym_settings.js"></script>
+                <script type="text/javascript" src="scripts/notification_registration.js"></script>
+                
                 <script type="text/javascript" src="scripts/NotificationOverlay.js"></script>
 
                 <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
@@ -62,9 +64,11 @@
                 <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/ResetPasswordViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/MessageViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/SingleMessageViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/PanelHelpViewModel.js"></script>
                 <script type="text/javascript" src="viewModel/UnsubscribeModel.js"></script>
                 <script type="text/javascript" src="viewModel/SelectIconViewModel.js"></script>
+                <script type="text/javascript" src="viewModel/FollowChannelViewModel.js"></script>
                 
                 
                 <link rel="stylesheet" href="evernym.css" />
@@ -74,12 +78,7 @@
                 
                 
                 <script type="text/javascript">
-                   /*
-                    $(document).live("pagechange", function () {
-                                     var page = $.mobile.activePage.attr("id");
-                                     });
-                    */
-                    
+                   
                     
                     
                     function goToView(view){
@@ -94,132 +93,79 @@
                     
                     
                     
-                    function populatePanel(channels){
-                        
-                        
-                        var innards = '';
-                        
-                        var outards = '';
-                        
-                        for (var n = 0; n < channels.length; n++){
-                            
-                            var channel = channels[n];
-                            var name = channel.name;
-                            if ( n < 2){
-                                innards += '<li class="white-gradient white_menu "><a href="#" onclick="startBroadcast(\''+ channel.normName +
-                                '\');" ><img class="ui-li-icon" src="resources/V-04-a.png" />' + name + '</a></li>';
-                            }
-                            else{
-                                outards += '<li class="white-gradient white_menu " ><a href="#"  onclick="startBroadcast(\''+ channel.normName +
-                                '\');" ><img class="ui-li-icon" src="resources/V-04-a.png" />' + name + '</a></li>';
-                            }
-                            
-                        }
-                        
-                        if (outards.length > 0){
-                            outards = '<h2  style="font-style:italic;"> -- Select a Channel -- </h2><ul data-icon="" data-role="listview"  data-corners="false"  >' + outards + '</ul>'
-                        }
-                        
-                        $("#broadcast_channels").html(innards);
-                        
-                        $("#extra-broadcast-channels").html(outards);
-                        
-                        
-                        
-                        //$("#broadcast_extras").html('<select><option>more channels</option>' + outards + '</select>');
-                        
-                        
-                        
-                    }
-                    
                     </script>
                 
                 </head>
     <body style="margin:0 !important;">
 
-
-
-
         <script type="text/javascript" src="cordova.js"></script>
        
+       <!--
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
         </script>
-
+        -->
         
         <div id="globalfooter" style="display:none;">
             <div data-role="footer" id="thefooter" >
-                
-                
                 <a href="#" data-role="none" onclick="goToView('userSettingsView');" class="a-button" id="footer-gear">test</a>
                 <a href="#" data-role="none" onclick="inviteFollowers();" class="a-button" id="footer-followers"></a>
                 <a href="#" data-role="none" onclick="initiateBroadcast();" class="a-button" id="footer-megaphone"></a>
                 <span id="viewid">view id</span>
-                
-                
             </div>
         </div>
         
         <div id="globalpanel" style="display:none;">
-        
-            
-            <div data-role="panel" id="mypanel" data-position="left" data-display="reveal" >
-            
-                
+            <div data-role="panel" id="mypanel" data-position="right" data-display="reveal" >
             <div id="innerpanel" class="panel-inner" style="" >
-                
-                
-                <div data-role="none" class="green-gradient" style="">
+                <div data-role="none" class="green-gradient-2" style="">
                    <!--  <div style="padding-left:15px;padding-top:5px;" id="panel_name"> name </div> -->
                 </div>
-            
-                <!--
-                <div class="menu_head">
-                    <div style="padding-left:15px;padding-top:5px;">SEND BROADCAST</div>
-                </div>
-                
-                <div data-role="collapsible-set"  data-corners="false">
-                    <ul data-icon="" id="broadcast_channels" data-corners="false" data-role="listview" xdata-inset="true" style="min-width:210px;" xdata-theme="evernym">
-                    </ul>
-                    <div id="extra-broadcast-channels"  data-role="collapsible" data-collapsed-icon="evernym-closed" data-expanded-icon="evernym-open"  data-corners="false">
-					</div>
-                </div>
-                 -->
-                
             <div>
-                
-                <!--
-                <div class="menu_head">
-                    <div style="padding-left:15px;padding-top:5px;">MAIN MENU
-                    </div>
-                </div>
-                 -->
-                
                 
                 <ul data-role="listview" data-icon="" data-corners="false" xdata-inset="true" style="min-width:210px;" xdata-theme="d">
                     
                     
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" />
+                    <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" />
                         <a href="" onclick="goToView('channelListView');">Channels I Own</a>
                     </li>
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" />
+                    <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" />
                         <a href="#" onclick="goToView('channelsFollowingListView');">Channels I Follow</a>
                     </li>
                     
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" />
+                    <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" />
                         <a href="#" onclick="goToView('channelNewView');">Create a New Channel</a>
                     </li>
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-g.png" />
-                        <a href="#" onclick="goToView('followAnotherChannelView');">Find Channels</a>
+                    
+                    
+                    <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-g.png" />
+                        <a href="#" onclick="goToView('followChannelView');">Follow Channel</a>
                     </li>
                     
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-h.png" />
+                    <!--
+                    <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-h.png" />
                         <a href="#" onclick="goToView('allMessagesHistoryView');">All Messages</a>
                     </li>
-                    <li class="white-gradient white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" />
+                    -->
+                    
+                    <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" />
                         <a href="#" onclick="goToView('userSettingsView');">User Settings</a>
                     </li>
+                    
+                    <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" />
+                        <a href="#" onclick="showMessage('help under construction');">Help</a>
+                    </li>
+					<li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" />
+					    <a href="#" onclick="showMessage('about under construction');">About</a>
+					</li>
+					<li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" />
+					    <a href="#" onclick="showFeedback();" >Feedback</a>
+					</li>
+					<li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" />
+						<a href="index.html#loginView?a=logout">Logout</a>
+					</li>
+					
                     
                     
                 </ul>
@@ -234,49 +180,6 @@
         
         </div>
         
-        
-        <div id="globalpaneldots" style="display:none;">
-            
-            
-            <div data-role="panel" id="mypaneldots" data-position="right" data-display="reveal" >
-                
-                
-                <div id="innerpanel" class="panel-inner" style="" >
-                    
-                    
-                    <div data-role="none" class="green-gradient-2" style="">
-                        
-                    </div>
-                    
-                                        
-                    <div>
-                        
-                        
-                        
-                        <ul data-role="listview" data-icon="" data-corners="false" xdata-inset="true" style="min-width:210px;" xdata-theme="d">
-                            
-                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" /><a href="#" onclick="showMessage('help under construction');">Help</a></li>
-                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" /><a href="#" onclick="showMessage('about under construction');">About</a></li>
-                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" /><a href="#" onclick="showFeedback();" >Feedback</a></li>
-                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" /><a href="#" onclick="OVERLAY.show();" >Notifications</a></li>
-                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" />
-                                <a href="#" onclick="goToView('userSettingsView');">User Settings</a>
-                            </li>
-                            
-                            <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" /><a href="index.html#loginView?a=logout">Logout</a></li>
-                            
-                            
-                        </ul>
-                        
-                    </div>
-                    
-                    
-                    
-                    <h3 style="font-size:8pt;color:#BBB;">BETA V-06 ThreeDots</h3>
-                </div>
-            </div>
-            
-        </div>
         
         
         

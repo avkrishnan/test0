@@ -10,17 +10,22 @@ function SelectIconViewModel() {
     this.template = "selectIconView";
     this.viewid = "V-??";
     this.viewname = "SelectIcon";
+    this.displayname = "Set Icon";
+    
     this.hasfooter = true;
     
     this.callback = function(){};
+    this.iconSets = ko.observableArray();
 	this.iconsToSelect = ko.observableArray([]);
-    
+    this.navText = ko.observable('Channel Settings');
 	var that = this;
     
-  
 	this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function (e, data) {
                             
+                            
+                     var setkeys = Object.keys(EVERNYM_ICONS);
+                     that.iconSets(setkeys);
                      that.activate();               
                                     
         });
@@ -30,12 +35,22 @@ function SelectIconViewModel() {
         that.callback = _callback;
     };
     
+    this.backNav = function(){
+        $.mobile.changePage("#" + channelSettingsViewModel.template);
+    };
+    
     this.activate = function() {
         
         //alert(JSON.stringify(EVERNYM_ICONS));
+        that.showIcons('sports');
         
-        var _icons = [];
-        var icon_set = 'sports';
+            
+	};
+	
+	
+	this.showIcons = function(icon_set){
+	    var _icons = [];
+        
         //var icon_set = 'animals';
         
         var set = EVERNYM_ICONS[icon_set];
@@ -65,7 +80,7 @@ function SelectIconViewModel() {
         }
         
         that.iconsToSelect(_icons);
-            
+	
 	};
 	
 	
@@ -95,6 +110,10 @@ function SelectIconViewModel() {
         
         return iconObj;
    
+    };
+    this.pickImageSet = function(set){
+        
+        that.showIcons(set);
     };
    
     this.pickImage = function(imageObj){

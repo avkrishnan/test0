@@ -10,8 +10,9 @@
          
          -->
         
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
-        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+        
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
         
         
         
@@ -34,7 +35,18 @@
                     <div class="channel-list-stripe2"></div>
                     
                     
-                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    <div class="channel-list-avatar" data-bind="with: channelIconObj">
+                    <div data-bind=" style: {
+				       'background': 'url(resources/icons/' + image + ')', 'width': width ,
+				       'height': height , 
+				       'background-color': 'white',
+                       'border-radius': '50%',
+				       'background-position': left + ' ' + top ,
+				       'background-size': bgsize,
+				       'cursor': 'pointer'
+					   }">
+					</div>
+                    </div>
                     
                     <span class="channel-info" style="height:90px;">
                         <span class="channel-name" data-bind="text: title"></span>

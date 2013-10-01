@@ -13,6 +13,8 @@ function SearchResultsViewModel() {
   this.template = "searchResultsView";
   this.viewid = "v-???";
   this.viewname = "searchResults";
+  this.displayname = "Search Results";
+  
     this.hasfooter = true;
     
   this.tweets = ko.observableArray();

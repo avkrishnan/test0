@@ -13,6 +13,8 @@ function ChannelSettingsViewModel() {
 	this.template = "channelSettingsView";
     this.viewid = "V-16";
     this.viewname = "ChannelSettings";
+    this.displayname = "Channel Settings";
+    
     this.hasfooter = true;
     this.isChannelView = true;
 	this.title = ko.observable();
@@ -35,6 +37,7 @@ function ChannelSettingsViewModel() {
     this.longdescription = ko.observable();
     this.email = ko.observable('');
     
+	this.navText = ko.observable('Channel');
 	
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
@@ -380,8 +383,7 @@ function ChannelSettingsViewModel() {
     
     
     
-    this.showChannelList = function(){
-        
+    this.backNav = function(){
         
         var lrelationship = 'O';
         
@@ -391,10 +393,10 @@ function ChannelSettingsViewModel() {
         
         if (lrelationship && lrelationship == "F"){
             
-            $.mobile.changePage("#" + channelsFollowingListViewModel.template);
+            $.mobile.changePage("#" + channelBroadcastsViewModel.template);
         }
         else {
-            $.mobile.changePage("#" + channelListViewModel.template);
+            $.mobile.changePage("#" + channelMenuViewModel.template);
         }
         
     };

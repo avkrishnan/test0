@@ -8,7 +8,7 @@ var EvernymAPI = function() {
     ///var baseUrl = 'http://localhost:8079/api/rest',
     //var baseUrl = 'http://qupler.no-ip.org:8079/api/rest',
     //var baseUrl = 'http://qupler.no-ip.org:8080/api20/rest',
-    var baseUrl = 'https://api.evernym.com/api21/rest',
+    var baseUrl = 'https://api.evernym.com/api23/rest',
     
     getMsgPrefix = function (id, rqstUrl) {
         return stringformat(

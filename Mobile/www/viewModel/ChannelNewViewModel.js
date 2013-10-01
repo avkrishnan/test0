@@ -6,11 +6,16 @@ function ChannelNewViewModel() {
     this.template = "channelNewView";
     this.viewid = "V-15";
     this.viewname = "CreateAnotherChannel";
+    this.displayname = "Create Channel";
+    
     this.hasfooter = true;
     this.name = ko.observable();
     this.description = ko.observable();
     this.longdescription = ko.observable();
     this.notifications = ko.observable();
+    
+    this.navText = ko.observable();
+    this.pView = '';
     
     var that = this;
     var  dataService = new EvernymChannelService();
@@ -26,6 +31,15 @@ function ChannelNewViewModel() {
     this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function (e, data) {
                                     that.clearForm();
+                                    
+                                    var previousView = localStorage.getItem('previousView');
+                                    console.log("previousView: " + previousView);
+                                    var vm = ko.dataFor($("#" + previousView).get(0));
+                                    console.log("previousView Model viewid: " + vm.displayname);
+                                    that.navText(vm.displayname);
+                                    that.pView = previousView;
+                                    
+                                    
                                     that.activate();
                                     });
     };
@@ -37,6 +51,10 @@ function ChannelNewViewModel() {
     this.activate = function () {
         
         return true;
+    };
+    
+    this.backNav = function(){
+        $.mobile.changePage("#" + that.pView);
     };
     
     this.clearForm = function(){

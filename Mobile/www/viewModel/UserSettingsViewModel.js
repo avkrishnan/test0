@@ -10,6 +10,7 @@ function UserSettingsViewModel() {
     this.template = "userSettingsView";
     this.viewid = "V-08";
     this.viewname = "UserSettings";
+    this.displayname = "User Settings";
     this.hasfooter = true;
     var  dataService = new EvernymCommethodService();
     var  accountDataService = new EvernymLoginService();
@@ -29,16 +30,24 @@ function UserSettingsViewModel() {
     this.newComMethod = ko.observable();
     this.newComMethodName = ko.observable();
     this.comMethodType = ko.observable("EMAIL");
-
     
+    this.navText = ko.observable();
+    this.pView = '';
     
 	var that = this;
-    
   
 	this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function (e, data) {
                                     
                                     var currentBaseUrl = localStorage.getItem("baseUrl");
+                                    
+                                    
+                                    var previousView = localStorage.getItem('previousView');
+                                    console.log("previousView: " + previousView);
+                                    var vm = ko.dataFor($("#" + previousView).get(0));
+                                    console.log("previousView Model viewid: " + vm.displayname);
+                                    that.navText(vm.displayname);
+                                    that.pView = previousView;
                                     
                                     if (currentBaseUrl){
                                     that.baseUrl(currentBaseUrl);
@@ -76,6 +85,10 @@ function UserSettingsViewModel() {
             
 	};
 	
+	this.backNav = function(){
+        $.mobile.changePage("#" + that.pView);
+    };
+	
 	
     
     function gotCommethods(data){
@@ -86,13 +99,16 @@ function UserSettingsViewModel() {
     
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
-		$.mobile.changePage("#" + loginViewModel.template);
-	};
+		$.mobile.changePage("#" + loginViewModel.template)
+		
+	}
 	
     
     this.changeBaseUrl = function(){
+        
         showMessage('stored base url: ' + that.baseUrl());
-        localStorage.setItem("baseUrl", that.baseUrl());
+        localStorage.setItem("baseUrl", that.baseUrl())
+        
     };
 	
     function commethodError(data, status, details){
@@ -247,14 +263,15 @@ function UserSettingsViewModel() {
 	    
 	    
 	    var callbacks = {
-	    success: function(){ that.activate(); },
+	    success: function(){ that.activate()},
 	    error: errorAddComMethod
 	    };
 	    
 	    var comobject = {
 	        name : _newComMethodName,
-            type : _comMethodType,
-            address : commethod
+            type : _comMethodType,
+            address : commethod
+	        
 	    };
 	    
 	    dataService.addCommethod(comobject, callbacks );
@@ -265,7 +282,7 @@ function UserSettingsViewModel() {
 	this.deleteMethod = function(commethod){
 	    
 	    var callbacks = {
-	    success: function(){ that.activate(); },
+	    success: function(){ that.activate()},
 	    error: errorDeleteComMethod
 	    };
 	    

@@ -10,6 +10,8 @@ function DevSettingsViewModel() {
     this.template = "devSettingsView";
     this.viewid = "V-00";
     this.viewname = "DevSettings";
+    this.displayname = "Dev Settings";
+    
     this.hasfooter = false;
     this.baseUrl = ko.observable();
     

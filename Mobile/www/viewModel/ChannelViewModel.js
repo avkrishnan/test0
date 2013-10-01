@@ -13,6 +13,8 @@ function ChannelViewModel() {
 	this.template = "channelView";
     this.viewid = "V-18";
     this.viewname = "ChannelDetails";
+    this.displayname = "Channel";
+    
     this.hasfooter = true;
     this.isChannelView = true;
 	this.title = ko.observable();
@@ -21,7 +23,7 @@ function ChannelViewModel() {
 	this.message = ko.observable();
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
-
+    this.channelIconObj = ko.observable();
 	
 	this.url = ko.observable('');
     this.description = ko.observable('DESCRIPTION');
@@ -96,7 +98,7 @@ function ChannelViewModel() {
                                         that.longdescription(lchannel.longDescription);
                                         that.url(lchannel.normName + '.evernym.com');
                                         that.email(lchannel.normName + '@evernym.com');
-                                    
+                                        that.showMainIcon(lchannel);
                                         
                                         if (action == 'follow_channel'){
 
@@ -132,10 +134,19 @@ function ChannelViewModel() {
     
     };
     
+    this.showMainIcon = function(lchannel){
+		if (lchannel.picId ){
+			var iconJSON = JSON.parse(lchannel.picId);
+			if (iconJSON && iconJSON.id){
+				var set = iconJSON.set;
+				var id = iconJSON.id;
+			
+				var mappedIcon2 = selectIconViewModel.mapImage(set, id, 63);
+				that.channelIconObj(mappedIcon2);
+			}
+		}
+    };
     
-   
-	
-
 	
 	this.activate = function (channel) {
 		
@@ -163,7 +174,7 @@ function ChannelViewModel() {
         that.url(data.normName + '.evernym.com');
         that.email(data.normName + '@evernym.com');
 		
-		
+		that.showMainIcon(data);
         that.relationship(data.relationship);
         that.channelid(data.id);
         
