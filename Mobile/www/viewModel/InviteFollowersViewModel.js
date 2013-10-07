@@ -10,6 +10,8 @@ function InviteFollowersViewModel() {
 	this.template = "inviteFollowersView";
     this.viewid = "V-27";
     this.viewname = "GetFollowers";
+    this.displayname = "Get Followers";
+    
 	this.hasfooter = true;
 	this.isChannelView = true;
 	this.channelid = ko.observable();
@@ -19,7 +21,7 @@ function InviteFollowersViewModel() {
 	this.firstname = ko.observable();
 	this.lastname = ko.observable();
 	this.smsPhone = ko.observable();
-    
+    this.navText = ko.observable('Channel Menu');
    
     this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function (e, data) {
@@ -69,7 +71,12 @@ function InviteFollowersViewModel() {
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
 		$.mobile.changePage("#" + loginViewModel.template)
-	}
+	};
+	
+	this.backNav = function(){
+        $.mobile.changePage("#" + channelMenuViewModel.template);
+    };
+
 	
 	this.activate = function (channel) {
 		
@@ -79,7 +86,7 @@ function InviteFollowersViewModel() {
 		
 		return true;
 		
-	}
+	};
 
 	this.addFollowerCommand = function (provisionalAccount){
 		$.mobile.showPageLoadingMsg("a", "Adding Follower");
@@ -90,12 +97,12 @@ function InviteFollowersViewModel() {
 		
 		var provisional = generateProvisionalAccount();
 		dataService.provisionalEnroll(provisional, callbacks);
-	}
+	};
 
 
 	function addFollowerSuccess(args) {
 		$.mobile.hidePageLoadingMsg();
-	};
+	}
 	
 	function addFollowerError(data, status, response) {
 		$.mobile.hidePageLoadingMsg();
@@ -103,7 +110,7 @@ function InviteFollowersViewModel() {
         loginPageIfBadLogin(response.code);
         
 		showError("Error Creating Follower Account: " + response.message);
-	};
+	}
 	
 
 

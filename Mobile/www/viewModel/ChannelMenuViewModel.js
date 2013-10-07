@@ -15,6 +15,8 @@ function ChannelMenuViewModel() {
 	this.template = "channelMenuView";
     this.viewid = "V-21";
     this.viewname = "ChannelMenu";
+    this.displayname = "Channel Menu";
+    
     this.hasfooter = true;
     this.isChannelView = true;
     
@@ -24,6 +26,7 @@ function ChannelMenuViewModel() {
 	this.message = ko.observable();
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
+	this.channelIconObj = ko.observable();
     
     this.last_date = ko.observable();
     this.last_message = ko.observable();
@@ -39,6 +42,7 @@ function ChannelMenuViewModel() {
     
     this.urgencySettings = ko.observableArray([]);
     
+    this.navText = ko.observable('My Channels');
     
     this.clear = function(){
         
@@ -61,6 +65,19 @@ function ChannelMenuViewModel() {
                                 });
     */
     
+    
+    this.showMainIcon = function(lchannel){
+		if (lchannel.picId ){
+			var iconJSON = JSON.parse(lchannel.picId);
+			if (iconJSON && iconJSON.id){
+				var set = iconJSON.set;
+				var id = iconJSON.id;
+			
+				var mappedIcon2 = selectIconViewModel.mapImage(set, id, 63);
+				that.channelIconObj(mappedIcon2);
+			}
+		}
+    };
     
     this.applyBindings = function(){
         
@@ -93,9 +110,15 @@ function ChannelMenuViewModel() {
 									
 										that.messages([]);
 										}
+										
+										that.showMainIcon(lchannel);
+										
+										
+										
 									
 										that.channel([lchannel]);
 										that.title(lchannel.name );
+										document.title = that.displayname + ": " + lchannel.name;
 										that.description(lchannel.description);
 										that.url(lchannel.normName + ".evernym.com");
 										that.relationship(lchannel.relationship);
@@ -113,9 +136,6 @@ function ChannelMenuViewModel() {
         
     };
     
-    
-	
-	
 	
 	this.activate = function (channel, action) {
 		
@@ -142,6 +162,9 @@ function ChannelMenuViewModel() {
 	};
     
     
+    this.backNav = function(){
+        $.mobile.changePage("#" + channelListViewModel.template);
+    };
     
     this.sendNewBroadcast = function(){
         //alert(that.newMessage());
@@ -189,8 +212,8 @@ function ChannelMenuViewModel() {
         that.relationship(data.relationship);
         that.channelid(data.id);
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
-		
-		
+		document.title = that.displayname + ": " + data.name;
+		that.showMainIcon(data);
         //if ($.mobile.pageData && $.mobile.pageData.id){
         //    that.followChannelCommand().then(postFollow);
 	    //}

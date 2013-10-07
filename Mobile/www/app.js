@@ -61,10 +61,6 @@ function inviteFollowers(){
     }
     
     
-    
-    
-    
-    
 }
 
 
@@ -177,53 +173,35 @@ function closeFeedback(){
 }
 
 function submitFeedback(){
-    
     var  systemService = new EvernymSystemService();
-    
-    
     var vm = getCurrentViewModel();
-    
     var viewid = vm.viewid;
     var viewname = vm.viewname;
-    
-    
-    
     function sentFeedback(data){
-        
         $("#feedbackdiv").fadeOut( 400, function(){
                                   $(this).remove();
                                   showMessage("Thanks. Your feedback has been submitted for the page: " + viewid + " " + viewname);
                                   });
-        
     }
-    
     function errorSendingFeedback(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		if (loginPageIfBadLogin(details.code)){
-			
             showError("Please log in or register to view this channel.");
 		}
         else {
 		    showError("Error Sending Feedback: " + ((status==500)?"Internal Server Error":details.message));
 		}
-        
 	}
-    
-    
     var callbacks = {
         success: sentFeedback,
         error: errorSendingFeedback
     };
-    
     var feedback_comments = $("#feedbacktextarea").val();
-    
     var feedbackObject = {
         comments: feedback_comments,
         context: viewid + " " + viewname
     };
-    
     systemService.sendFeedback(feedbackObject, callbacks);
-    
 }
 
 
@@ -361,8 +339,10 @@ resetPasswordViewModel = new ResetPasswordViewModel(),
 panelHelpViewModel = new PanelHelpViewModel(),
 
 messageViewModel = new MessageViewModel(),
+singleMessageViewModel = new SingleMessageViewModel(),
 unsubscribeModel = new UnsubscribeModel(),
-selectIconViewModel = new SelectIconViewModel()
+selectIconViewModel = new SelectIconViewModel(),
+followChannelViewModel = new FollowChannelViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -391,8 +371,10 @@ var models = [
               resetPasswordViewModel, 
               panelHelpViewModel, 
               messageViewModel,
+              singleMessageViewModel,
               unsubscribeModel,
-              selectIconViewModel
+              selectIconViewModel,
+              followChannelViewModel
               ];
 
 
@@ -406,6 +388,18 @@ function getViewName(viewModel){
     var name = getClassName(viewModel);
     return name.charAt(0).toLowerCase() + name.slice(1).replace("Model","");
 }
+
+
+                  /**
+ * Determine whether the file loaded from PhoneGap or not
+ */
+function isPhoneGap() {
+    return (cordova || PhoneGap || phonegap) 
+    && /^file:\/{3}[^\/]/i.test(window.location.href) 
+    && /ios|iphone|ipod|ipad|android/i.test(navigator.userAgent);
+}
+
+
 
 
 
@@ -430,9 +424,7 @@ function loadAllPages() {
                                           if (model.applyBindings){
                                               model.applyBindings();
                                           }
-                                       
-                                   
-                                   }
+                                    }
                                    
                                    });
 };
@@ -441,6 +433,10 @@ function loadAllPages() {
 
 $(document).ready(function () {
                   
+                  
+                  
+                  
+
                   
                   
                   
@@ -517,6 +513,13 @@ $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
 
 
 
+$(document).on('pagebeforehide', '[data-role="page"]', function(e,a){
+               
+               console.log("hiding page: " + $(this).attr('id'));
+               localStorage.setItem('previousView', $(this).attr('id') );
+               
+               });
+
 
 $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
                
@@ -526,8 +529,9 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
                var vm = ko.dataFor(this);
                var token = localStorage.getItem("accessToken");
     
+               document.title = vm.displayname;
     
-               if (vm && vm.hasfooter && token){
+               if ( vm && vm.hasfooter && token){
                    // The reason the footer is appended on the pagebeforeshow instead of pagebeforecreate is because it relies on the viewmodel for some information to build it.
                    
                    var viewid = vm.viewid;
@@ -584,16 +588,19 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
 
 
 
+/*
 $(document).on('swiperight', '[data-role="page"]', function(e,a){
                if (!openPanel)
                $(this).find('#mypanel').panel("open");
                
                });
 
+*/
 
 $(document).on('swipeleft', '[data-role="page"]', function(e,a){
                if (!openPanel)
-               $(this).find('#mypaneldots').panel("open");
+               $(this).find('#mypanel').panel("open");
+               
                
                });
 

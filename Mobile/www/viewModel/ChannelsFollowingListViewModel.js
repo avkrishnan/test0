@@ -10,11 +10,12 @@ function ChannelsFollowingListViewModel() {
 	this.template = "channelsFollowingListView";
     this.viewid = "V-30";
     this.viewname = "ChannelsIFollow";
+    this.displayname = "Channels I Follow";
+    
 	this.hasfooter = true;
 	this.channels = ko.observableArray([]);
 	var that = this;
 	this.shown = false;
-    
     
     this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function (e, data) {
@@ -26,10 +27,6 @@ function ChannelsFollowingListViewModel() {
                                     
                                     });
     };
-    
-
-	
-   
 	
 	var  dataService = new EvernymChannelService();
 	
@@ -86,6 +83,22 @@ function ChannelsFollowingListViewModel() {
             
             
         }
+	};
+	
+	this.mapImage = function(jsonText){
+	     var mappedIcon = undefined;
+	     if (jsonText ){
+			
+			var iconJSON = JSON.parse(jsonText);
+			if (iconJSON && iconJSON.id){
+				var set = iconJSON.set;
+				var id = iconJSON.id;
+				mappedIcon = selectIconViewModel.mapImage(set, id, 63);
+				
+			}
+		}
+		
+		return mappedIcon;
 	};
 	
 

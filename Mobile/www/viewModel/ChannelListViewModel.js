@@ -11,6 +11,8 @@ function ChannelListViewModel() {
 	this.template = "channelListView";
 	this.viewid = "V-19";
     this.viewname = "ChannelsIOwn";
+    this.displayname = "My Channels";
+    
     this.hasfooter = true;
     
 	this.channels = ko.observableArray([]);

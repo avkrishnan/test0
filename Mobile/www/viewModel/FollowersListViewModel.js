@@ -10,6 +10,8 @@ function FollowersListViewModel() {
 	this.template = "followersListView";
     this.viewid = "V-26";
     this.viewname = "Followers";
+    this.displayname = "Followers";
+    
     this.hasfooter = true;
     this.isChannelView = true;
 	this.title = ko.observable();
@@ -21,6 +23,7 @@ function FollowersListViewModel() {
 	this.channelid = ko.observable();
 	this.channelname = ko.observable();
     
+    this.navText = ko.observable('Channel Menu');
     
     this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function (e, data) {
@@ -134,6 +137,13 @@ function FollowersListViewModel() {
 		
 	};
 
+    this.backNav = function(){
+        
+        
+        $.mobile.changePage("#" + channelMenuViewModel.template);
+        
+        
+    };
 
    
 

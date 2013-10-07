@@ -11,6 +11,8 @@ function LoginViewModel() {
     this.template = "loginView";
     this.viewid = "V-01";
     this.viewname = "Login";
+    this.displayname = "Login";
+    
     this.hasfooter = false;
     this.first_name = '';
     
@@ -71,11 +73,14 @@ function LoginViewModel() {
     };
     
     this.clearForm = function(){
-        that.password('');
-        that.accountName('');
+        that.password('password');
+        that.accountName('chicken02');
         
         $("#login-follow-li").hide();
     };
+    
+    
+    
     
     
     this.loginCommand = function () {
@@ -170,11 +175,22 @@ function LoginViewModel() {
         
     }
     
+    
+    
+   
+    
     function loginSuccess(args) {
                 
         $.mobile.hidePageLoadingMsg();
         
         
+        
+        if ( isPhoneGap() ) {
+            //alert("Running on PhoneGap!");
+            registerPushNotifications();
+        } else {
+            //alert("Not running on PhoneGap!");
+        }
         
         
         
@@ -214,7 +230,13 @@ function LoginViewModel() {
                 
                 $.mobile.changePage(hash);
             }
-            else if (notifications && notifications.length){
+            else {
+                
+                $.mobile.changePage("#" + channelListViewModel.template);
+            }
+
+            
+            if (notifications && notifications.length){
                 for (var n in notifications){
                     
                     OVERLAY.addNotification(notifications[n]);
@@ -223,11 +245,7 @@ function LoginViewModel() {
                 //$.mobile.changePage("#" + notificationsViewModel.template);
                 OVERLAY.show();
             }
-            else {
-                
-                $.mobile.changePage("#" + channelListViewModel.template);
-            }
-            
+                        
             
             
             

@@ -10,6 +10,8 @@ import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.app.NotificationManager;
+import android.app.Notification;
+import android.os.Vibrator;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -73,12 +75,23 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 			extras.putBoolean("foreground", foreground);
 
-			if (foreground)
+			if (foreground){
 				PushPlugin.sendExtras(extras);
-			else
-				createNotification(context, extras);
+			}
+			
+			//else
+			// edit, JD, send to device no matter what.
+			createNotification(context, extras);
+			
 		}
 	}
+
+    public boolean hasVibrator(){
+        String vs = Context.VIBRATOR_SERVICE;
+        Vibrator mVibrator = (Vibrator)getSystemService(vs);
+        boolean isVibrator = mVibrator.hasVibrator();
+        return isVibrator;
+    }
 
 	public void createNotification(Context context, Bundle extras)
 	{
@@ -91,12 +104,21 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);		
 
+
+        int defaults =  Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS;
+        if (hasVibrator()){
+            defaults |= Notification.DEFAULT_VIBRATE;
+        }
+        
+        
+
 		NotificationCompat.Builder mBuilder = 
 			new NotificationCompat.Builder(context)
 				.setSmallIcon(context.getApplicationInfo().icon)
 				.setWhen(System.currentTimeMillis())
 				.setContentTitle(appName)
 				.setTicker(appName)
+				.setDefaults(defaults)
 				.setContentIntent(contentIntent);
 
 		String message = extras.getString("message");
@@ -118,6 +140,17 @@ public class GCMIntentService extends GCMBaseIntentService {
 	private void tryPlayRingtone() 
 	{
 		try {
+		
+		/*
+		    Notification notification = new Notification(icon, title, when);
+notification.flags |= Notification.FLAG_AUTO_CANCEL;
+notification.defaults |= Notification.DEFAULT_SOUND; // To play default notification sound
+notification.sound = Uri.parse("PATH_TO_YOUR_SOUND_FILE"); // to play custom notification sound
+NotificationManager nm = (NotificationManager)   getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+nm.notify(System.currentTimeMillis(), notification);
+		
+		*/
+		
 			Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 			Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
 			r.play();

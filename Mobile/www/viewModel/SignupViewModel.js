@@ -10,6 +10,8 @@ function SignupViewModel() {
     this.template = "signupView";
     this.viewid = "V-02";
     this.viewname = "Register";
+    this.displayname = "Register";
+    
     this.hasfooter = false;
     this.accountName = ko.observable();
     this.password = ko.observable();

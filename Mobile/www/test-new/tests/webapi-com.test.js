@@ -36,7 +36,11 @@
 	//asyncTest('B enrolls', hlpr.enroll(SCEN_B));
 	asyncTest('B logs in', hlpr.login(SCEN_B));
 
+<<<<<<< HEAD
 	//asyncTest('CREATE PUSH COM METHOD', hlpr.createPushComMethod(SCEN_B, "GCM:APA91bEfh9fWKaslF2ajSNDRt_zV7NwaPBxaEr5p4oo_1p50AR82W8HoAy9-jQ4aK9kjrt1gQv9SoJByPPmgNTmxf49x1TKY6yh1_kXRgTAyBkCbLhAxLTDK4bgmJygYrw78-HzonMw_ssk2J0fKuPdVcryAqakaeQ", "-1"));
+=======
+	asyncTest('CREATE PUSH COM METHOD', hlpr.createPushComMethod(SCEN_B, "GCM:XPA91bH-aHSjBDpinkLbb0L9c9Q8JYXpxOT_2a53UVoHE6t4NQpnB9X79WaXgWhdaee4cSv4GOkpigQrpb5mO3WkBtVY4qSPoBzIpRGs2XefZ-ftwqk30TLRfXAhmlyxHo1VPhCAflJgqY9eB_8TCaT9zfkCsn5rkg", "-1"));
+>>>>>>> 9ab07fb2cc65e297ee98f96485b627025c735ceb
 
 	asyncTest('A creates channel', hlpr.createChannelF(SCEN_A, 'chnl1'));
 	asyncTest("B follows A's channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl1'));

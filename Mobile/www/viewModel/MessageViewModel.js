@@ -13,6 +13,8 @@ function MessageViewModel() {
 	this.template = "messageView";
     this.viewid = "V-23";
     this.viewname = "BroadcastDetails";
+    this.displayname = "Broadcast";
+    
     this.hasfooter = true;
     this.isChannelView = true;
 	this.title = ko.observable();
@@ -26,9 +28,12 @@ function MessageViewModel() {
     this.replyMessage = ko.observable();
     this.messagecreated = ko.observable();
     
+    that.channelIconObj = ko.observable();
     
     this.url = ko.observable();
     this.description = ko.observable();
+    
+    this.navText = ko.observable('Broadcasts');
     
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
@@ -68,6 +73,8 @@ function MessageViewModel() {
                                     that.messagetext(lmessage.text);
                                     
                                     
+                                    
+                                    that.showMainIcon(lchannel);
                                     that.description(lchannel.description);
                                     that.url(lchannel.normName + ".evernym.com");
                                     
@@ -107,6 +114,19 @@ function MessageViewModel() {
 		return true;
 		
 	};
+	
+	this.showMainIcon = function(lchannel){
+		if (lchannel.picId ){
+			var iconJSON = JSON.parse(lchannel.picId);
+			if (iconJSON && iconJSON.id){
+				var set = iconJSON.set;
+				var id = iconJSON.id;
+			
+				var mappedIcon2 = selectIconViewModel.mapImage(set, id, 63);
+				that.channelIconObj(mappedIcon2);
+			}
+		}
+    };
     
     this.clear = function(){
         
@@ -120,6 +140,7 @@ function MessageViewModel() {
 		that.title(data.name );
 		that.relationship(data.relationship);
 		that.channelid(data.id);
+		that.showMainIcon(data);
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
                 that.getMessagesCommand().then(gotMessages);
         
@@ -400,6 +421,24 @@ function MessageViewModel() {
         var messageobj = {text: message, type: 'FYI', responseToMsgId:messageid};
 		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
+	
+	this.backNav = function(){
+        
+        var lrelationship = 'O';
+        
+        if (that.channel()[0]){
+            lrelationship = that.channel()[0].relationship;
+        }
+        
+        if (lrelationship && lrelationship == "F"){
+            
+            $.mobile.changePage("#" + channelBroadcastsViewModel.template);
+        }
+        else {
+            $.mobile.changePage("#" + channelBroadcastsViewModel.template);
+        }
+        
+    };
 	
     
 

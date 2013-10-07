@@ -13,6 +13,8 @@ function UnsubscribeModel() {
 	this.template = "unsubscribe";
     this.viewid = "V-??";
     this.viewname = "unsubscribe";
+    this.displayname = "Unsubscribe";
+    
     this.hasfooter = true;
     this.isChannelView = true;
 	this.title = ko.observable();

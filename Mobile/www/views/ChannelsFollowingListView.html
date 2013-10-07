@@ -7,8 +7,9 @@
     <div data-role="header" class="header" >
         
         
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
-        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+        
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
         
         <!-- <li><a href="#" data-bind="click: activate">Refresh List</a></li> -->
         
@@ -55,7 +56,23 @@
                     <!-- /ko -->
                     
                     
-                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    <!-- ko if: $data.hasOwnProperty("picId") -->
+                    <div class="channel-list-avatar" data-bind="with: $parent.mapImage(picId)">
+                    <div data-bind=" style: {
+				         'background': 'url(resources/icons/' + image + ')', 'width': width ,
+				         'background-color': 'white',
+				         'border-radius' : '50%',
+				         'height': height ,
+				         'background-position': left + ' ' + top ,
+				         'background-size': bgsize,
+				         'cursor': 'pointer'
+					}"></div>
+					</div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $data.hasOwnProperty("picId") -->
+					<div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+					<!-- /ko -->
+
                     
                     <span class="channel-info">
                         <span class="channel-name" data-bind="text: name"></span>

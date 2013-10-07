@@ -13,6 +13,8 @@ function ChannelBroadcastsViewModel() {
 	this.template = "channelBroadcastsView";
     this.viewid = "V-22";
     this.viewname = "Broadcasts";
+    this.displayname = "Broadcasts";
+    
     this.hasfooter = true;
     this.isChannelView = true;
     
@@ -25,7 +27,9 @@ function ChannelBroadcastsViewModel() {
    
     this.url = ko.observable();
     this.description = ko.observable();
+    that.channelIconObj = ko.observable();
     
+	this.navText = ko.observable('Channel Menu');
 	
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
@@ -65,9 +69,9 @@ function ChannelBroadcastsViewModel() {
                                         that.title(lchannel.name );
                                         that.relationship(lchannel.relationship);
                                         that.channelid(lchannel.id);
-                                that.description(lchannel.description);
-                                that.url(lchannel.normName + '.evernym.com');
-                                
+                                        that.description(lchannel.description);
+                                        that.url(lchannel.normName + '.evernym.com');
+                                        that.showMainIcon(lchannel);
                                         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 									    that.getMessagesCommand(that.channelid()).then(gotMessages);
                                     }
@@ -97,6 +101,19 @@ function ChannelBroadcastsViewModel() {
 		
 	};
 	
+	this.showMainIcon = function(lchannel){
+		if (lchannel.picId ){
+			var iconJSON = JSON.parse(lchannel.picId);
+			if (iconJSON && iconJSON.id){
+				var set = iconJSON.set;
+				var id = iconJSON.id;
+			
+				var mappedIcon2 = selectIconViewModel.mapImage(set, id, 63);
+				that.channelIconObj(mappedIcon2);
+			}
+		}
+    };
+	
 	function gotChannel(data){
 		$.mobile.hidePageLoadingMsg();
 		localStorage.setItem("currentChannel", JSON.stringify(data));
@@ -106,7 +123,7 @@ function ChannelBroadcastsViewModel() {
         that.channelid(data.id);
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
-		
+		that.showMainIcon(data);
         if ($.mobile.pageData && $.mobile.pageData.id){
             that.followChannelCommand().then(postFollow);
 	    }
@@ -340,7 +357,7 @@ function ChannelBroadcastsViewModel() {
     };
     
     
-    this.showChannelList = function(){
+    this.backNav = function(){
         
         
         var lrelationship = 'O';
@@ -354,7 +371,7 @@ function ChannelBroadcastsViewModel() {
             $.mobile.changePage("#" + channelsFollowingListViewModel.template);
         }
         else {
-            $.mobile.changePage("#" + channelListViewModel.template);
+            $.mobile.changePage("#" + channelMenuViewModel.template);
         }
         
     }

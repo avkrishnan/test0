@@ -5,23 +5,12 @@
     
     <div id="gpanel"></div>
     <div id="gpaneldots"></div>
-    <!--
-    <div data-role="footer" id="thefooter" >
-			
-			<a href="#" data-role="none" onclick="goToView('userSettingsView');" class="a-button" id="footer-gear">test</a>
-			<a href="#" data-role="none" onclick="inviteFollowers();" class="a-button" id="footer-followers"></a>
-			<a href="#" data-role="none" onclick="initiateBroadcast();" class="a-button" id="footer-megaphone"></a>
-			<span id="viewid">view id</span>
-			
-			
-	</div>
-	-->
     
     <div class="header" data-role="header" xdata-theme="b">
         
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
-        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
         
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
         
     </div>
    
@@ -72,18 +61,16 @@
                     
                     <!-- ko if: $data.hasOwnProperty("picId") -->
                     <div class="channel-list-avatar" data-bind="with: $parent.mapImage(picId)">
-                    
                     <div data-bind=" style: {
-				 'background': 'url(resources/icons/' + image + ')', 'width': width ,
-				 'background-color': 'white',
-				 'border-radius' : '50%',
-				  'height': height ,
-				   'background-position': left + ' ' + top ,
-				   'background-size': bgsize,
-				   'cursor': 'pointer'
+				         'background': 'url(resources/icons/' + image + ')', 'width': width ,
+				         'background-color': 'white',
+				         'border-radius' : '50%',
+				         'height': height ,
+				         'background-position': left + ' ' + top ,
+				         'background-size': bgsize,
+				         'cursor': 'pointer'
 					}"></div>
-					
-                    </div>
+					</div>
                     <!-- /ko -->
                     
                     <!-- ko ifnot: $data.hasOwnProperty("picId") -->

@@ -9,6 +9,8 @@ function NotificationsViewModel() {
     this.template = "notificationsView";
     this.viewid = "V-07";
     this.viewname = "NotificationOverlay";
+    this.displayname = "Notifications";
+    
     this.hasfooter = true;
     this.messages = [];
        

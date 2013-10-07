@@ -10,6 +10,8 @@ function FollowerViewModel() {
     this.template = "followerView";
     this.viewid = "V-??";
     this.viewname = "FOLLOWER";
+    this.displayname = "Follower";
+    
     this.hasfooter = true;
     this.isChannelView = true;
     this.title = ko.observable();
@@ -19,7 +21,7 @@ function FollowerViewModel() {
 
     this.channelid = ko.observable();
     this.channelname = ko.observable();
-
+    this.navText = ko.observable('Followers');
     
     
     this.applyBindings = function(){
@@ -34,9 +36,6 @@ function FollowerViewModel() {
                                     });
     };
     
-
-    
-
 
     this.activate = function (lfollower) {
 
@@ -59,7 +58,11 @@ function FollowerViewModel() {
         loginViewModel.logoutCommand();
         $.mobile.changePage("#" + loginViewModel.template)
 
-    }
+    };
+    
+    this.backNav = function(){
+        $.mobile.changePage("#" + followersListViewModel.template);
+    };
         
     this.getFollowerCommand = function () {
 
@@ -78,7 +81,7 @@ function FollowerViewModel() {
         
         
         return dataService.removeFollower(that.channelid(), that.followerid(), { success: function(){;}, error: errorAPI }).then(successfulRemove);
-    }
+    };
 
     function successfulRemove(data) {
         showMessage('Removed Follower ' + that.followerName());

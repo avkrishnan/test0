@@ -11,6 +11,8 @@ function ResetPasswordViewModel() {
     this.template = "resetPasswordView";
     this.viewid = "V-??";
     this.viewname = "ResetPassword2";
+    this.displayname = "Reset Password";
+    
     this.hasfooter = false;
     this.key = '';
     this.notification = ko.observable();

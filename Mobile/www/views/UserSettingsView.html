@@ -9,11 +9,12 @@
     <div data-role="header" class="header">
         
         
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
-        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+        
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
         
         
-        
+        <button id="hnav" class="hnav" data-role="none"  data-bind="click: backNav, text: navText" ></button>
         
         
     </div>
@@ -186,12 +187,17 @@
                             <div class="email" data-bind="text: address" style="display:inline-block;width:300px;font-size: 80%;"></div>
                             
                             <div  style="margin-top:2px;font-size:10pt;">
-                                <div data-bind="style: { display: (verified == 'Y')?'none':'inline-block'}, attr: {id: 'commethod-' + id}">
+                                
+                                
+                                <div data-bind="style: { display: (verified == 'Y' || verified == '-')?'none':'inline-block'}, attr: {id: 'commethod-' + id}">
                                     <button data-role="none" data-bind="click: $parent.verifyCommand"  >verify</button>
                                     
                                 </div>
-                                <div data-bind="style: { display: (verified == 'N')?'none':'inline-block'}">verified</div>
-                                <button data-role="none" data-bind="click: $parent.verifyCodeCommand, style: { display: (verified == 'Y')?'none':'inline-block'}"  >verify code</button>
+                                
+                                <div data-bind="style: { display: (verified == 'N' || verified == '-')?'none':'inline-block'}">verified</div>
+                                <button data-role="none" data-bind="click: $parent.verifyCodeCommand, style: { display: (verified == 'Y' || verified == '-')?'none':'inline-block'}"  >verify code</button>
+                                
+                                
                                 <button data-role="none" data-bind="click: $parent.deleteMethod">delete</button>
                             </div>
                             

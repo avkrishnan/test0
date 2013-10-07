@@ -1,12 +1,16 @@
 <?php
 
-$deviceRegistrationId = 'APA91bGa3G4ydIAfT3st1ebEn7qwtLcH2ic_Hk2pbbV2_MGXB-44fHJKzqTh_VasKQ9QSKneftFBKhYzqV6dquh5ER5CB-JSUpZVxpaFk7H_77elJCiAs8Mk4ag8aAaDOmqkEwK-g2T26SiA3KMuioh_uf0Ha3ZnQQ';
+//$deviceRegistrationId = 'APA91bGa3G4ydIAfT3st1ebEn7qwtLcH2ic_Hk2pbbV2_MGXB-44fHJKzqTh_VasKQ9QSKneftFBKhYzqV6dquh5ER5CB-JSUpZVxpaFk7H_77elJCiAs8Mk4ag8aAaDOmqkEwK-g2T26SiA3KMuioh_uf0Ha3ZnQQ';
+$deviceRegistrationId = 'APA91bH-aHSjBDpinkLbb0L9c9Q8JYXpxOT_2a53UVoHE6t4NQpnB9X79WaXgWhdaee4cSv4GOkpigQrpb5mO3WkBtVY4qSPoBzIpRGs2XefZ-ftwqk30TLRfXAhmlyxHo1VPhCAflJgqY9eB_8TCaT9zfkCsn5rkg';
 $messageText = "You have a new message from Barry Mannilo";
 
-$headers = array("Content-Type:" . "application/json", "Authorization:" . "key=" . "AIzaSyDD_SZAT0dHtrrBAHUnlzQgdO9ZM_p4nT8");
+//$headers = array("Content-Type:" . "application/json", "Authorization:" . "key=" . "AIzaSyDD_SZAT0dHtrrBAHUnlzQgdO9ZM_p4nT8");
+
+$headers = array("Content-Type:" . "application/json", "Authorization:" . "key=" . "AIzaSyCNodVFzDwVzMNPkFohnseAYPv8DPXUTiY");
 
     $data = array(
-        'collapse_key' => "messages",
+        'collapse_key' => "messages3",
+        'badge' => 5,
         'data' => array(
                         "message" =>  $messageText,
                         "type" => "broadcast",

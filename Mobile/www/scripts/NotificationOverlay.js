@@ -1,13 +1,18 @@
 
+
+var CODEMAP = {
+    100000: "userSettingsView"
+};
+
+
+
 var NotificationOverlay  = function(){
     var notifications = [];
     var that = this;
 
 
     this.close = function(){
-        $("#notification-overlay").fadeOut( 400, function(){
-                              $(this).remove();
-                              });
+        $("#notification-overlay").remove();
     }
 
     this.addNotification = function(notification){
@@ -20,10 +25,12 @@ var NotificationOverlay  = function(){
     };
 
     this.displayNotifications = function(){
-        console.log("trying to get shit" + JSON.stringify(that.notifications));
-        for (var n = 0; n < that.notifications.length; n++){
+        console.log("trying to get notifications" + JSON.stringify(that.notifications));
+        if (that.notifications){
+            for (var n = 0; n < that.notifications.length; n++){
             
-            $("#notification-overlay").prepend("<div>" + that.notifications[n].message +"</div>"); 
+                $("#notification-overlay").prepend("<div style=\"border:1px solid gray; border-radius:5px;margin:0px 0px 5px;background:white;cursor:pointer;\" onclick=\"goToView('"  +  CODEMAP[that.notifications[n].code] + "');OVERLAY.close();\">" + that.notifications[n].message +"</div>"); 
+            }
         }
 
     };
@@ -38,6 +45,9 @@ var NotificationOverlay  = function(){
     };
 
     this.show = function(){
+    
+    // test data
+    //that.notifications = [{"code":100000,"message":"pending communication method verification","details":"ec7fe031-c940-445b-9da5-20ce7cb86f2b"},{"code":100000,"message":"pending communication method verification","details":"a9c143b5-d545-4ddb-9a0e-1f1c84343fcb"},{"code":100000,"message":"pending communication method verification","details":"02820f52-5795-4640-a66a-3f6be09b9a9e"}];
    
 	var existingdiv = $("#notification-overlay").get(0);
 
@@ -45,7 +55,7 @@ var NotificationOverlay  = function(){
 	    $("<div id='notification-overlay' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+
 	      "<br/><button onclick='OVERLAY.close();' style='font-size:16pt;'>ok</button></h3></div>")
 	    .css({ display: "block",
-		 opacity: 0.90,
+		 opacity: 0.95,
 		 position: "fixed",
 		 padding: "7px",
 		 "text-align": "center",
@@ -64,6 +74,9 @@ var NotificationOverlay  = function(){
 };
 
 var OVERLAY = new NotificationOverlay();
+
+
+
 
 
 $( window ).resize(function() {

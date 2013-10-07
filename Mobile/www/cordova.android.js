@@ -1336,7 +1336,7 @@ module.exports = {
         prompt(value, 'gap_bridge_mode:');
     },
     retrieveJsMessages: function() {
-        return prompt('', 'gap_poll:');
+        //return prompt('', 'gap_poll:');
     }
 };
 

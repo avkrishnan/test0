@@ -8,10 +8,12 @@
          <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
          -->
         
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
-        <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+        
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
         
         
+        <button id="hnav" class="hnav" data-role="none"  data-bind="click: backNav, text: navText" ></button>
         
         <div data-role="popup" id="popupMenu" xdata-theme="a">
             
@@ -93,7 +95,21 @@
                         
                     </button>
                     
-                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    
+                    
+                    <div class="channel-list-avatar" data-bind="with: channelIconObj">
+                    <div data-bind=" style: {
+				       'background': 'url(resources/icons/' + image + ')', 'width': width ,
+				       'height': height , 
+				       'background-color': 'white',
+                       'border-radius': '50%',
+				       'background-position': left + ' ' + top ,
+				       'background-size': bgsize,
+				       'cursor': 'pointer'
+					   }">
+					</div>
+                    </div>
+                    
                     <div class="channel-list-avatar-frame"></div>
                     
                     
