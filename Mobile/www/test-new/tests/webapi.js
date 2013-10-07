@@ -184,6 +184,46 @@
 		return sCallAPI('GET', '/escplan', accessToken);
 	};
 
+	this.cloneEscPlan = function(accessToken, epId) {
+		return sCallAPI('PUT', '/escplan/' + epId, accessToken);
+	};
+
+	this.createEscStep = function(accessToken, epId, escStep) {
+		return sCallAPI('POST', '/escplan/' + epId + '/step', accessToken, escStep);
+	};
+
+	this.updateEscStep = function(accessToken, epId, stepId, escStep) {
+		return sCallAPI('PUT', '/escplan/' + epId + '/step/' + stepId, accessToken, escStep);
+	};
+
+	this.deleteEscStep = function(accessToken, epId, stepId) {
+		return sCallAPI('DELETE', '/escplan/' + epId + '/step/' + stepId, accessToken);
+	};
+
+	this.createEscRetry = function(accessToken, epId, stepId, escRetry) {
+		return sCallAPI('POST', '/escplan/' + epId + '/step/' + stepId + '/retry', accessToken, escRetry);
+	};
+
+	this.updateEscRetry = function(accessToken, epId, stepId, retrySeq, escRetry) {
+		return sCallAPI('PUT', '/escplan/' + epId + '/step/' + stepId + '/retry/' + retrySeq, accessToken, escRetry);
+	};
+
+	this.deleteEscRetry = function(accessToken, epId, stepId, retrySeq) {
+		return sCallAPI('DELETE', '/escplan/' + epId + '/step/' + stepId + '/retry/' + retrySeq, accessToken);
+	};
+
+	this.readMsg = function(accessToken, msgId) {
+		return sCallAPI('POST', '/message/' + msgId + '/read', accessToken);
+	};
+	
+	this.dismissMsg = function(accessToken, msgId) {
+		return sCallAPI('POST', '/message/' + msgId + '/dismiss', accessToken);
+	};
+	
+	this.acknowledgeMsg = function(accessToken, msgId) {
+		return sCallAPI('POST', '/message/' + msgId + '/igi', accessToken);
+	};
+	
 	/*	
 
 		
@@ -391,7 +431,7 @@
 
 			function callback(data) {
 				if (postHandlerCallback) {
-					postHandlerCallback(data);
+					postHandlerCallback(data);clones 
 				} else {
 					start();
 				}

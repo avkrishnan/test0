@@ -97,16 +97,17 @@ function ApiTestHelper(api) {
 		return function() {
 			$.when(api.sFetchMessages(scenario.accessToken, ownerScenario[chnlKey].id))
 			.then(api.CHECK.success)
-			.then(checkOneMsgFunc(ownerScenario.msg))
+			.then(checkOneMsgFunc(scenario, ownerScenario.msg))
 			.then(start);
 		};
 	};
 	
-	function checkOneMsgFunc(msg) {
+	function checkOneMsgFunc(scenario, msg) {
 		return function checkOneMsg(data) {
 			equal(data.message.length, 1, "we get one message back");
 			equal(data.message[0].text, msg.text, "and the text matches");
 			equal(data.more, false, "there should be no more messages");
+			scenario.msg = data.message[0]
 			ok(true, JSON.stringify(data));
 		};
 	}
