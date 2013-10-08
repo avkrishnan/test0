@@ -99,16 +99,13 @@ function UserSettingsViewModel() {
     
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
-		$.mobile.changePage("#" + loginViewModel.template)
-		
-	}
+		$.mobile.changePage("#" + loginViewModel.template);
+	};
 	
     
     this.changeBaseUrl = function(){
-        
         showMessage('stored base url: ' + that.baseUrl());
-        localStorage.setItem("baseUrl", that.baseUrl())
-        
+        localStorage.setItem("baseUrl", that.baseUrl());
     };
 	
     function commethodError(data, status, details){
@@ -263,15 +260,14 @@ function UserSettingsViewModel() {
 	    
 	    
 	    var callbacks = {
-	    success: function(){ that.activate()},
+	    success: function(){ that.activate();},
 	    error: errorAddComMethod
 	    };
 	    
 	    var comobject = {
 	        name : _newComMethodName,
-            type : _comMethodType,
-            address : commethod
-	        
+            type : _comMethodType,
+            address : commethod
 	    };
 	    
 	    dataService.addCommethod(comobject, callbacks );
@@ -282,7 +278,7 @@ function UserSettingsViewModel() {
 	this.deleteMethod = function(commethod){
 	    
 	    var callbacks = {
-	    success: function(){ that.activate()},
+	    success: function(){ that.activate();},
 	    error: errorDeleteComMethod
 	    };
 	    
