@@ -224,6 +224,10 @@
 		return sCallAPI('POST', '/message/' + msgId + '/igi', accessToken);
 	};
 	
+	this.fetchMsgNotifs = function(accessToken) {
+		return sCallAPI('GET', '/notification?type=msg', accessToken);
+	};
+	
 	/*	
 
 		
