@@ -1,0 +1,21 @@
+<div id="escalationPlanSingleView" class="channel-list" data-role="page">
+  <div class="header" data-role="header">     
+		<a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
+		<a class="menu" href="#"></a>       
+  </div>
+  <div class="page-content" data-role="content">
+		<div class="portal-name"></div>     
+    <div id="escPlanData"></div>   
+    <a class="low-messages addMore"> Add another action event </a>
+  </div>  
+  <div data-role="footer" class="footer" data-position="fixed">
+    <a href="#" data-role="none" onclick="goToView('escalationPlansView');" class="logo" id="footer-gear">test</a>
+    <div class="contact-announcement"> 
+      <a class="add-contacts" href="#"></a> 
+      <a class="announcement" href="#"></a> 
+    </div>
+  </div>
+	<script>
+		$("#escalationPlanSingleView").on("pageshow", EscPlansettings);
+  </script>  
+</div>

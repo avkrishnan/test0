@@ -1,9 +1,3 @@
-
-
-
-
-
-
 ko.virtualElements.allowedBindings.updateListviewOnChange = true;
 
 ko.bindingHandlers.updateListviewOnChange = {
@@ -338,6 +332,14 @@ forgotPasswordViewModel = new ForgotPasswordViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
 panelHelpViewModel = new PanelHelpViewModel(),
 
+/*By Devedner*/
+escalationPlansViewModel = new EscalationPlansViewModel(),
+escalationPlanSingleViewModel = new EscalationPlanSingleViewModel(),
+addContactViewModel = new AddContactViewModel(),
+additionalContactViewModel = new AdditionalContactViewModel(),
+verifyContactViewModel = new VerifyContactViewModel(),
+/* end*/
+
 messageViewModel = new MessageViewModel(),
 singleMessageViewModel = new SingleMessageViewModel(),
 unsubscribeModel = new UnsubscribeModel(),
@@ -374,7 +376,12 @@ var models = [
               singleMessageViewModel,
               unsubscribeModel,
               selectIconViewModel,
-              followChannelViewModel
+              followChannelViewModel,
+							escalationPlansViewModel,
+							escalationPlanSingleViewModel,
+							addContactViewModel,
+							additionalContactViewModel,
+							verifyContactViewModel
               ];
 
 
