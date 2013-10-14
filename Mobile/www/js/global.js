@@ -17,7 +17,8 @@ function showContents ( page, method, callback, element ) {
  *Contact information
  */
 function contactinfo() {
-	//$.mobile.loading('show');	
+	//$.mobile.loading('show');
+	showhideerror();	
 	$('input#add-number,input#add_phone_or_email').on('keyup', function() {
 		showhideerror();
 	});		
