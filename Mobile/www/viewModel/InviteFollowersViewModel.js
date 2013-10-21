@@ -5,7 +5,6 @@ function InviteFollowersViewModel() {
 	// --- properties
 	
 	var that = this;
-	var  dataService = new EvernymChannelService();
 	
 	this.template = "inviteFollowersView";
     this.viewid = "V-27";
@@ -96,7 +95,7 @@ function InviteFollowersViewModel() {
 		};
 		
 		var provisional = generateProvisionalAccount();
-		dataService.provisionalEnroll(provisional, callbacks);
+		ES.channelService.provisionalEnroll(provisional, callbacks);
 	};
 
 

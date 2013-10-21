@@ -6,9 +6,6 @@ function ChannelViewModel() {
 	// --- properties
 	
 	var that = this;
-	var  dataService = new EvernymChannelService();
-	var  dataServiceM = new EvernymMessageService();
-	
 	
 	this.template = "channelView";
     this.viewid = "V-18";
@@ -313,7 +310,7 @@ function ChannelViewModel() {
 		
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
 
-		return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
+		return ES.channelService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
 		
 	};
     
@@ -323,7 +320,7 @@ function ChannelViewModel() {
         
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
-		return dataServiceM.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
+		return ES.messageService.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
         
         
     }
@@ -332,7 +329,7 @@ function ChannelViewModel() {
 		
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
-		return dataService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
+		return ES.channelService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
 		
 	};
     
@@ -346,7 +343,7 @@ function ChannelViewModel() {
             error: errorUnfollow
         };
 		
-        return dataService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
+        return ES.channelService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
 		
 	};
     
@@ -366,7 +363,7 @@ function ChannelViewModel() {
 	this.deleteChannelCommand = function () {
 
 		$.mobile.showPageLoadingMsg("a", "Removing Channel");
-		return dataService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
+		return ES.channelService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
 
 	};
     
@@ -409,7 +406,7 @@ function ChannelViewModel() {
 	this.modifyChannelCommand = function(){
 		
 		//that.title("Channel: " + channel()[0].name );
-		return dataService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
+		return ES.channelService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
 	
 	

@@ -28,7 +28,6 @@ function ChannelsFollowingListViewModel() {
                                     });
     };
 	
-	var  dataService = new EvernymChannelService();
 	
 	// Methods
 	this.activate = function() {
@@ -45,7 +44,7 @@ function ChannelsFollowingListViewModel() {
 	
 	function successfulCreate(data){
 		
-		//logger.log('success listing channels ' , null, 'dataservice', true);
+		//logger.log('success listing channels ' , null, 'channelService', true);
 	};
 	
 	function gotChannels(data){
@@ -104,7 +103,7 @@ function ChannelsFollowingListViewModel() {
 
 	
 	this.listFollowingChannelsCommand = function () {
-		return dataService.listFollowingChannels({ success: successfulCreate, error: errorListChannels });
+		return ES.channelService.listFollowingChannels({ success: successfulCreate, error: errorListChannels });
 	};
 	
 	this.logoutCommand = function(){

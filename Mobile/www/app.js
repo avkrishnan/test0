@@ -1,9 +1,36 @@
+var ES = {
+    evernymService: new EvernymService()
+
+};
+
+ES.evernymService = new EvernymService();
+ES.channelService = new EvernymChannelService(ES.evernymService);
+ES.commethodService = new EvernymCommethodService(ES.evernymService);
+ES.loginService = new EvernymLoginService(ES.evernymService);
+ES.systemService = new EvernymSystemService(ES.evernymService);
+ES.messageService = new EvernymMessageService(ES.evernymService);
+
+
+ES.evernymService.doAfterDone = function(){
+    $.mobile.hidePageLoadingMsg();
+};    
+
+ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
+    $.mobile.hidePageLoadingMsg();
+    var hash = $.mobile.urlHistory.getActive().hash;
+	if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
+
+	  localStorage.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
+
+	}
+					  
+};
+
+
 ko.virtualElements.allowedBindings.updateListviewOnChange = true;
 
 ko.bindingHandlers.updateListviewOnChange = {
 update: function (element, valueAccessor) {
-    
-    
     
     ko.utils.unwrapObservable(valueAccessor());  //grab dependency
     
@@ -128,9 +155,6 @@ function closeError(){
     
 }
 
-
-
-
 function showError(msg){
     
     var existingdiv = $("#errordiv").get(0);
@@ -167,7 +191,7 @@ function closeFeedback(){
 }
 
 function submitFeedback(){
-    var  systemService = new EvernymSystemService();
+    
     var vm = getCurrentViewModel();
     var viewid = vm.viewid;
     var viewname = vm.viewname;
@@ -195,7 +219,7 @@ function submitFeedback(){
         comments: feedback_comments,
         context: viewid + " " + viewname
     };
-    systemService.sendFeedback(feedbackObject, callbacks);
+    ES.systemService.sendFeedback(feedbackObject, callbacks);
 }
 
 
@@ -229,10 +253,6 @@ function showFeedback(){
     
     
 }
-
-
-
-
 
 
 if (!Array.prototype.indexOf) {
@@ -377,11 +397,11 @@ var models = [
               unsubscribeModel,
               selectIconViewModel,
               followChannelViewModel,
-							escalationPlansViewModel,
-							escalationPlanSingleViewModel,
-							addContactViewModel,
-							additionalContactViewModel,
-							verifyContactViewModel
+              escalationPlansViewModel,
+              escalationPlanSingleViewModel,
+              addContactViewModel,
+              additionalContactViewModel,
+              verifyContactViewModel
               ];
 
 
@@ -439,12 +459,6 @@ function loadAllPages() {
 
 
 $(document).ready(function () {
-                  
-                  
-                  
-                  
-
-                  
                   
                   
                   // bind each view model to a jQueryMobile page

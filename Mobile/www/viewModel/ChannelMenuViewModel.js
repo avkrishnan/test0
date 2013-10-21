@@ -6,9 +6,6 @@ function ChannelMenuViewModel() {
 	// --- properties
 	
 	var that = this;
-	var  dataService = new EvernymChannelService();
-	var  dataServiceM = new EvernymMessageService();
-	var  systemService = new EvernymSystemService();
 	
 	var initNB = false;
 	
@@ -176,7 +173,7 @@ function ChannelMenuViewModel() {
         
         
         
-		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
+		return ES.messageService.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
         
     };
     
@@ -388,7 +385,7 @@ function ChannelMenuViewModel() {
 		
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
 
-		return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
+		return ES.channelService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
 		
 	};
     
@@ -398,7 +395,7 @@ function ChannelMenuViewModel() {
         
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
-		return dataServiceM.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
+		return ES.messageService.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
         
         
     }
@@ -407,7 +404,7 @@ function ChannelMenuViewModel() {
 		
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
-		return dataService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
+		return ES.channelService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
 		
 	};
     
@@ -421,7 +418,7 @@ function ChannelMenuViewModel() {
             error: errorUnfollow
         };
 		
-        return dataService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
+        return ES.channelService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
 		
 	};
     
@@ -441,7 +438,7 @@ function ChannelMenuViewModel() {
 	this.deleteChannelCommand = function () {
 
 		$.mobile.showPageLoadingMsg("a", "Removing Channel");
-		return dataService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
+		return ES.channelService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
 
 	};
     
@@ -475,14 +472,14 @@ function ChannelMenuViewModel() {
 	this.modifyChannelCommand = function(){
 		
 		//that.title("Channel: " + channel()[0].name );
-		return dataService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
+		return ES.channelService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
 	
 	
     this.postMessageCommand = function(){
 
 		var messageobj = {text: that.message(), type: 'FYI', urgencyId: that.urgency()};
-		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
+		return ES.messageService.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
      
 	
@@ -496,13 +493,13 @@ function ChannelMenuViewModel() {
 	
 	this.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		return dataServiceM.getChannelMessages(that.channelid(), undefined, {success: successfulMessageGET, error: errorRetrievingMessages});
+		return ES.messageService.getChannelMessages(that.channelid(), undefined, {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
     
     
     this.getLastMessageCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Message");
-		return dataServiceM.getChannelMessages(that.channelid(), {limit: 1}, {success: successfulMessageGET, error: errorRetrievingMessages});
+		return ES.messageService.getChannelMessages(that.channelid(), {limit: 1}, {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
    
    
@@ -532,7 +529,7 @@ function ChannelMenuViewModel() {
         
         if (! that.urgencySettings().length){
            
-           systemService.getUrgencySettings(callbacks);
+           ES.systemService.getUrgencySettings(callbacks);
         }
     };
 

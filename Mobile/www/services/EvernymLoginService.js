@@ -1,8 +1,8 @@
 
 
-function EvernymLoginService() {
+function EvernymLoginService(api) {
     
-    var api = new EvernymService();
+    console.log('loading EvernymLoginService');
     
     this.accountEnroll = function (accountModel, callbacks) {
         

@@ -6,8 +6,7 @@ function SendMessageViewModel() {
     // --- properties
     
     var that = this;
-    var  dataService = new EvernymChannelService();
-    var  dataServiceM = new EvernymMessageService();
+
 
 	
     this.template = "sendMessageView";
@@ -135,7 +134,7 @@ function SendMessageViewModel() {
 	this.getChannelCommand = function (lchannelid) {
 	    
         //logger.log("starting getChannel", undefined, "channels", true);
-	    return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPI});
+	    return ES.channelService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPI});
         
 	};
 
@@ -144,7 +143,7 @@ function SendMessageViewModel() {
 	    //logger.log("postMessageCommand", undefined, "channels", true);
         $.mobile.showPageLoadingMsg("a", "Posting Message");
 	    var messageobj = {text: that.message(), type: 'FYI'};
-	    return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
+	    return ES.messageService.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
    
 

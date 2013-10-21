@@ -18,7 +18,7 @@ function ChannelNewViewModel() {
     this.pView = '';
     
     var that = this;
-    var  dataService = new EvernymChannelService();
+
     
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
@@ -69,7 +69,7 @@ function ChannelNewViewModel() {
     
     function successfulCreate(data){
         $.mobile.hidePageLoadingMsg();
-        //logger.log('success creating channel', null, 'dataservice', true);
+        //logger.log('success creating channel', null, 'channelService', true);
         //router.navigateTo('#/channellist');
         
         $.mobile.changePage("#" + channelListViewModel.template);
@@ -86,7 +86,7 @@ function ChannelNewViewModel() {
         console.log("error creating channel: " + response.message);
         showError("Error creating channel: " + response.message);
         loginPageIfBadLogin(details.code);
-        //logger.log('error creating channel', null, 'dataservice', true);
+        //logger.log('error creating channel', null, 'channelService', true);
     };
     
     this.logoutCommand = function(){
@@ -96,10 +96,10 @@ function ChannelNewViewModel() {
     
     this.createChannelCommand = function () {
         //inputChannelName
-        //logger.log('start creating channel ' + this.name() , null, 'dataservice', true);
+        //logger.log('start creating channel ' + this.name() , null, 'channelService', true);
         $.mobile.showPageLoadingMsg("a", "Creating Channel " + that.name());
         
-        dataService.createChannel({name: that.name(), description: that.description(), longDescription:that.longdescription()}, {success: successfulCreate, error: errorCreate});
+        ES.channelService.createChannel({name: that.name(), description: that.description(), longDescription:that.longdescription()}, {success: successfulCreate, error: errorCreate});
     };
      
 

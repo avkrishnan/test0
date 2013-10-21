@@ -6,8 +6,6 @@ function UnsubscribeModel() {
 	// --- properties
 	
 	var that = this;
-	var  dataService = new EvernymChannelService();
-	var  dataServiceM = new EvernymMessageService();
 	
 	
 	this.template = "unsubscribe";
@@ -248,7 +246,7 @@ function UnsubscribeModel() {
 		
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
 
-		return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
+		return ES.channelService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
 		
 	};
     
@@ -258,7 +256,7 @@ function UnsubscribeModel() {
         
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
-		return dataServiceM.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
+		return ES.messageService.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
         
         
     }
@@ -267,7 +265,7 @@ function UnsubscribeModel() {
 		
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
-		return dataService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
+		return ES.channelService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
 		
 	};
     
@@ -281,7 +279,7 @@ function UnsubscribeModel() {
             error: errorUnfollow
         };
 		
-        return dataService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
+        return ES.channelService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
 		
 	};
     
@@ -301,7 +299,7 @@ function UnsubscribeModel() {
 	this.deleteChannelCommand = function () {
 
 		$.mobile.showPageLoadingMsg("a", "Removing Channel");
-		return dataService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
+		return ES.channelService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
 
 	};
     
@@ -354,7 +352,7 @@ function UnsubscribeModel() {
 		    description: that.editChannelDescription()
 		};
 		
-		return dataService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
+		return ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 	};
 	
 	

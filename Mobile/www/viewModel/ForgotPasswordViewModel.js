@@ -20,7 +20,6 @@ function ForgotPasswordViewModel() {
     
     this.notification = ko.observable();
     
-    var  dataService = new EvernymLoginService();
     
     this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function(e, data){ that.clearForm(); that.activate(); });
@@ -65,7 +64,7 @@ function ForgotPasswordViewModel() {
         
         
         
-        return dataService.forgotPassword(forgotPasswordModel, callbacks).then(gotForgotPassword);
+        return ES.loginService.forgotPassword(forgotPasswordModel, callbacks).then(gotForgotPassword);
     };
    
     

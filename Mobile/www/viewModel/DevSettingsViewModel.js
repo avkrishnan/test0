@@ -27,11 +27,11 @@ function DevSettingsViewModel() {
                                     var currentBaseUrl = localStorage.getItem("baseUrl");
                                     
                                     if (currentBaseUrl){
-                                    that.baseUrl(currentBaseUrl);
+                                        that.baseUrl(currentBaseUrl);
                                     }
                                     else {
-                                    var es = new EvernymService();
-                                    that.baseUrl(es.getBaseUrl());
+                                    
+                                        that.baseUrl(ES.evernymService.getBaseUrl());
                                     }
                                     
                                     

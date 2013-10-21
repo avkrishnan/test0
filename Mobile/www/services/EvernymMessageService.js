@@ -1,8 +1,9 @@
 
 
-function EvernymMessageService() {
+function EvernymMessageService(api) {
     
-    var api = new EvernymService();
+    
+    console.log('loading EvernymMessageService');
     
     this.createChannelMessage = function (channelid, message, callbacks) {
 		//logger.log('createChannelMesage' , null, 'dataservice.channelMessage', true);

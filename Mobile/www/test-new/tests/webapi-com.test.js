@@ -50,7 +50,6 @@
 	asyncTest('B checks message', hlpr.fetchMsgs(SCEN_B, SCEN_A, 'chnl1'));
 
 	//asyncTest('B receives email with message', hlpr.findEmail(SCEN_B, msgText));
-
 	
 	//Here's were we do the tests for message read, dismiss, ack, and snooze
 

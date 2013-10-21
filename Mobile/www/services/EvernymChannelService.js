@@ -1,8 +1,10 @@
 
 
-function EvernymChannelService() {
+function EvernymChannelService(api) {
 	
-	var api = new EvernymService();
+	
+	
+	console.log('loading EvernymChannelService');
 	
 	var channels = new Array();
 	

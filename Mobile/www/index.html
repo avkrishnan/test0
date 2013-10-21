@@ -6,10 +6,13 @@
     <xmeta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" >
 
+	<!--JAL: Devender, do we not need this css anymore? -->
     <!--<link href='resources/fonts/open_sans_woff.css' rel='stylesheet' type='text/css'>-->
+
     <!--<link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />-->
     <link href="css/jquery.mobile-1.3.2.min.css" rel="stylesheet" type="text/css" />
 
+                <!-- required libraries -->
     <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="lib/jquery.mobile-1.3.1.js"></script>               
     <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
@@ -24,7 +27,7 @@
     <script type="text/javascript">
 			$.mobile.autoInitializePage = false;
     </script>
-        
+
     <!-- services -->
     <script type="text/javascript" src="services/EvernymService.js"></script>
     <script type="text/javascript" src="services/EvernymLoginService.js"></script>
@@ -57,7 +60,7 @@
     <script type="text/javascript" src="viewModel/SingleMessageViewModel.js"></script>
     <script type="text/javascript" src="viewModel/PanelHelpViewModel.js"></script>
     <script type="text/javascript" src="viewModel/UnsubscribeModel.js"></script>
-		<script type="text/javascript" src="viewModel/SelectIconViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/SelectIconViewModel.js"></script>
     <script type="text/javascript" src="viewModel/FollowChannelViewModel.js"></script>
     <script type="text/javascript" src="viewModel/EscalationPlansViewModel.js"></script>
     <script type="text/javascript" src="viewModel/EscalationPlanSingleViewModel.js"></script>
@@ -65,6 +68,7 @@
     <script type="text/javascript" src="viewModel/AdditionalContactViewModel.js"></script>
     <script type="text/javascript" src="viewModel/VerifyContactViewModel.js"></script>
     
+	<!--JAL: Devender, are we replacing evernym.css with style.css? -->
     <!--<link rel="stylesheet" href="evernym.css" />-->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     
@@ -79,8 +83,10 @@
 				startBroadcast(select.value);
 			}
     </script>
+		<!--JAL: Devender, this is new... is it replacing app.js? -->
 		<script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/global.js"></script>    
+		<!--JAL: Devender, this is new as well. Why do we have both a global.js and a main.js? Does it replace app.js? -->
+		<script type="text/javascript" src="js/global.js"></script>    
 	</head>
   <body style="margin:0 !important;">
 		<script type="text/javascript" src="cordova.js"></script>
@@ -92,8 +98,11 @@
     -->
     <div id="globalfooter" style="display:none;">
       <div data-role="footer" id="thefooter" >
+
+		<!--JAL: Devender, is this a temporary replacement? -->
         <!--<a href="#" data-role="none" onclick="goToView('userSettingsView');" class="a-button" id="footer-gear">test</a>-->
         <a href="#" data-role="none" onclick="goToView('escalationPlansView');" class="a-button" id="footer-gear">test</a>
+
         <a href="#" data-role="none" onclick="inviteFollowers();" class="a-button" id="footer-followers"></a>
         <a href="#" data-role="none" onclick="initiateBroadcast();" class="a-button" id="footer-megaphone"></a>
         <span id="viewid">view id</span>
@@ -146,6 +155,8 @@
     	</div>
     </div>
     <div id="allpages" >
+            
+      <!--  ALL MESSAGE HISTORY VIEW -->
       <div id="allMessagesHistoryView" class="channel-list" data-role="page" Xdata-theme="b" >
         <div id="gpanel"></div>
         <div id="gpaneldots"></div>

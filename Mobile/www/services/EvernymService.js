@@ -1,9 +1,16 @@
 function EvernymService() {
 
+
+    console.log('loading EvernymService');
+    var that = this;
 	//var baseUrl = 'http://qupler.no-ip.org:8080/api/rest';
 	var baseUrl = 'https://api.evernym.com/api24/rest';
     
     this.getBaseUrl = function(){return baseUrl;};
+    
+    this.doAfterDone = function(){};
+    
+    this.doAfterFail = function(){};
     
 	this.callAPI = function(method, resource, object, callbacks, useAccessToken) {
 		
@@ -24,28 +31,28 @@ function EvernymService() {
 		var accessToken = localStorage.getItem("accessToken");
 		if (useAccessToken && accessToken) {
             
-            
 			ajaxParams.beforeSend = function (xhr) {
-				//logger.log('Setting the authorization headers', null, 'dataservice', true);
-				
-				
 				xhr.setRequestHeader("Authorization", accessToken);
 			}
 		}
         
+        var deferred = $.Deferred();
+           
 		var ajaxCall = $.ajax(ajaxParams);
 		
 		ajaxCall.done(function (data, textStatus, jqXHR) {
-                      $.mobile.hidePageLoadingMsg();
-					  callbacks.success(data, textStatus, jqXHR.status, jqXHR.responseText);
+		
+		              that.doAfterDone();
+                      
+                      if (callbacks && callbacks.success){
+					      callbacks.success(data, textStatus, jqXHR.status, jqXHR.responseText);
+					  }
+					  deferred.resolve(data, textStatus, jqXHR.status, jqXHR.responseText);
+					  
 					  });
 		
 		ajaxCall.fail(function (jqXHR, textStatus, errorThrown) {
-                      $.mobile.hidePageLoadingMsg();
-					  //logger.log('error: ' + jqXHR.status, undefined, 'dataservice.api', true);
-					  
-					  //alert( jqXHR.responseText);
-					  
+		
 					  var pattern = /<b>description<\/b>/;
 					  
 					  var details = {};
@@ -60,18 +67,17 @@ function EvernymService() {
 	                  }
 					  
                       
-                      var hash = $.mobile.urlHistory.getActive().hash;
+                      that.doAfterFail(ajaxParams, jqXHR, textStatus, errorThrown, details);
 					  
-					  if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
-					  
-					      localStorage.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
-					  
+					  if (callbacks && callbacks.error){
+					      callbacks.error(errorThrown ? errorThrown : textStatus, jqXHR.status, details);
 					  }
 					  
-					  callbacks.error(errorThrown ? errorThrown : textStatus, jqXHR.status, details);
+					  deferred.reject(errorThrown ? errorThrown : textStatus, jqXHR.status, details);
+					  
 					  });
 		
-		return ajaxCall;
+		return deferred.promise();
 		
 	};
 	

@@ -47,10 +47,7 @@ function ChannelListViewModel() {
     };
     
     
-    //$('#channelNotifications').popup('close');
-	// Methods
-	
-	var  dataService = new EvernymChannelService();
+
 		
 	this.activate = function() {
 		console.log("trying to get channels");
@@ -85,7 +82,7 @@ function ChannelListViewModel() {
 	
 	function successfulList(data){
 		$.mobile.hidePageLoadingMsg();
-		//logger.log('success listing channels ' , null, 'dataservice', true);
+		//logger.log('success listing channels ' , null, 'channelService', true);
 	};
     
     this.clearForm = function(){
@@ -151,31 +148,24 @@ function ChannelListViewModel() {
 		$.mobile.hidePageLoadingMsg();
 				
         if (loginPageIfBadLogin(details.code)){
-			
             //showMessage("Please log in or register to view channels.");
 		}
         else {
             showError("Error listing my channels: " + details.message);
         }
-        
-		//logger.logError('error listing channels', null, 'dataservice', true);
 	};
 	
 	this.listMyChannelsCommand = function () {
-		
-		//logger.log("starting listChannels", undefined, "channels", true);
-		return dataService.listMyChannels({ success: successfulList, error: errorListChannels });
+		return ES.channelService.listMyChannels({ success: successfulList, error: errorListChannels });
 	};
 	
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
 		$.mobile.changePage("#" + loginViewModel.template)
-		
 	}
 	
 	this.showChannel = function (channel) {
         localStorage.setItem("currentChannel", JSON.stringify(channel));
-        
         $.mobile.changePage("#" + channelMenuViewModel.template);
 	};
 
@@ -196,48 +186,40 @@ function ChannelListViewModel() {
 	this.mapImage = function(jsonText){
 	     var mappedIcon = undefined;
 	     if (jsonText ){
-			
 			var iconJSON = JSON.parse(jsonText);
 			if (iconJSON && iconJSON.id){
 				var set = iconJSON.set;
 				var id = iconJSON.id;
 				mappedIcon = selectIconViewModel.mapImage(set, id, 63);
-				
 			}
 		}
-		
 		return mappedIcon;
 	};
 	
     function successfulCreate(data){
         $.mobile.hidePageLoadingMsg();
-        //logger.log('success creating channel', null, 'dataservice', true);
-        //router.navigateTo('#/channellist');
-        
         $.mobile.changePage("#" + channelListViewModel.template);
         channelListViewModel.activate();
-        
     };
     
     function errorCreate(data, status, response){
         $.mobile.hidePageLoadingMsg();
-        //that.notifications("error creating channel " + JSON.stringify(data));
+        
         console.log("error creating channel: " + response.message);
         showError("Error creating channel: " + response.message);
         loginPageIfBadLogin(details.code);
-        //logger.log('error creating channel', null, 'dataservice', true);
+        
     };
     
     this.logoutCommand = function(){
-        loginViewModel.logoutCommand();
+        return loginViewModel.logoutCommand();
         $.mobile.changePage("#" + loginViewModel.template)
     }
     
     this.createChannelCommand = function () {
-        //inputChannelName
-        //logger.log('start creating channel ' + this.name() , null, 'dataservice', true);
+        
         $.mobile.showPageLoadingMsg("a", "Creating Channel " + that.name());
-        dataService.createChannel({name: that.name()}, {success: successfulCreate, error: errorCreate});
+        return ES.channelService.createChannel({name: that.name()}, {success: successfulCreate, error: errorCreate});
     };
     
     

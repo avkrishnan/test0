@@ -5,7 +5,6 @@ function CommethodVerificationViewModel() {
     
     var that = this;
     
-    var  dataService = new EvernymCommethodService();
     
     this.template = "commethodVerificationView";
     this.viewid = "V-??";
@@ -69,7 +68,7 @@ function CommethodVerificationViewModel() {
         };
         
         
-        return dataService.verification(that.verification_key(), callbacks);
+        return ES.commethodService.verification(that.verification_key(), callbacks);
     }
     
 

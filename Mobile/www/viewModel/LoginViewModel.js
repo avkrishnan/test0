@@ -24,7 +24,6 @@ function LoginViewModel() {
     this.channelName = ko.observable();
     this.donotfollow = ko.observable();
     
-    var  dataService = new EvernymLoginService();
     
     this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function(e, data){
@@ -73,8 +72,8 @@ function LoginViewModel() {
     };
     
     this.clearForm = function(){
-        that.password('password');
-        that.accountName('chicken02');
+        that.password('');
+        that.accountName('');
         
         $("#login-follow-li").hide();
     };
@@ -97,7 +96,7 @@ function LoginViewModel() {
         loginModel.password = this.password();
         loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
         
-        return dataService.accountLogin(loginModel, callbacks).then(loginSuccess);
+        return ES.loginService.accountLogin(loginModel, callbacks).then(loginSuccess);
     };
     
     
@@ -110,7 +109,7 @@ function LoginViewModel() {
         error: loginError
         };
         
-        return dataService.getAccount(undefined, callbacks);
+        return ES.loginService.getAccount(undefined, callbacks);
         
     };
     
@@ -138,7 +137,7 @@ function LoginViewModel() {
             success: logoutSuccess,
             error: logoutError
             };
-            dataService.accountLogout(token, callbacks);
+            ES.loginService.accountLogout(token, callbacks);
             
             
             that.clearForm();

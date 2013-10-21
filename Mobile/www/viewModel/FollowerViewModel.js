@@ -5,7 +5,6 @@ function FollowerViewModel() {
     // --- properties
 
     var that = this;
-    var dataService = new EvernymChannelService();
 
     this.template = "followerView";
     this.viewid = "V-??";
@@ -66,7 +65,7 @@ function FollowerViewModel() {
         
     this.getFollowerCommand = function () {
 
-        return dataService.getFollower(that.channelid(), { success: gotFollower, error: errorAPI });
+        return ES.channelService.getFollower(that.channelid(), { success: gotFollower, error: errorAPI });
 
     };
 
@@ -80,7 +79,7 @@ function FollowerViewModel() {
     this.removeFollowerCommand = function () {
         
         
-        return dataService.removeFollower(that.channelid(), that.followerid(), { success: function(){;}, error: errorAPI }).then(successfulRemove);
+        return ES.channelService.removeFollower(that.channelid(), that.followerid(), { success: function(){;}, error: errorAPI }).then(successfulRemove);
     };
 
     function successfulRemove(data) {

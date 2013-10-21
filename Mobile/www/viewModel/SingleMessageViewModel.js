@@ -6,8 +6,7 @@ function SingleMessageViewModel() {
 	// --- properties
 	
 	var that = this;
-	var  dataService = new EvernymChannelService();
-	var  dataServiceM = new EvernymMessageService();
+
 	var replyToId = '';
 	
 	this.template = "singleMessageView";
@@ -303,7 +302,7 @@ function SingleMessageViewModel() {
 		
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
 
-		return dataService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
+		return ES.channelService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
 		
 	};
     
@@ -313,7 +312,7 @@ function SingleMessageViewModel() {
         
         $.mobile.showPageLoadingMsg("a", "Loading Messages");
 		
-		return dataServiceM.getChannelMessages(that.channelid(), {before: last_message_id, replyto: that.messageid()}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
+		return ES.messageService.getChannelMessages(that.channelid(), {before: last_message_id, replyto: that.messageid()}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
         
         
     }
@@ -322,7 +321,7 @@ function SingleMessageViewModel() {
 		
 		that.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
-		return dataService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
+		return ES.channelService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
 		
 	};
     
@@ -336,7 +335,7 @@ function SingleMessageViewModel() {
             error: errorUnfollow
         };
 		
-        return dataService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
+        return ES.channelService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
 		
 	};
     
@@ -356,7 +355,7 @@ function SingleMessageViewModel() {
 	this.deleteChannelCommand = function () {
 
 		$.mobile.showPageLoadingMsg("a", "Removing Channel");
-		return dataService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
+		return ES.channelService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
 
 	};
     
@@ -409,17 +408,17 @@ function SingleMessageViewModel() {
 	this.modifyChannelCommand = function(){
 		
 		//that.title("Channel: " + channel()[0].name );
-		return dataService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
+		return ES.channelService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
 	
 	this.postMessageCommand = function(){
         var messageobj = {text: that.message(), type: 'FYI'};
-		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
+		return ES.messageService.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
     
     this.postResponseMessageCommand = function(message, messageid){
         var messageobj = {text: message, type: 'FYI', responseToMsgId:messageid};
-		return dataServiceM.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
+		return ES.messageService.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
 	};
 	
 	this.backNav = function(){
@@ -451,13 +450,13 @@ function SingleMessageViewModel() {
 
         this.getSingleMessageCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Message");
-		return dataServiceM.getChannelMessage(that.channelid(), that.messageid(), {success: successfulMessageGET, error: errorRetrievingMessages});
+		return ES.messageService.getChannelMessage(that.channelid(), that.messageid(), {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
     
 	
 	this.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		return dataServiceM.getChannelMessages(that.channelid(), {replyto: that.messageid()}, {success: successfulMessageGET, error: errorRetrievingMessages});
+		return ES.messageService.getChannelMessages(that.channelid(), {replyto: that.messageid()}, {success: successfulMessageGET, error: errorRetrievingMessages});
 	};
    
 

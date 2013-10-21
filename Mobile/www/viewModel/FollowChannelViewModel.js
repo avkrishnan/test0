@@ -2,8 +2,6 @@
 
 	
 	var that = this;
-	var  dataService = new EvernymChannelService();
-	var  dataServiceM = new EvernymMessageService();
 	
 	
 	this.template = "followChannelView";
@@ -102,7 +100,7 @@
 		
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
         var lchannelid = that.channelid();
-		return dataService.getChannel(lchannelid, {success: gotChannel, error: errorAPIChannel});
+		return ES.channelService.getChannel(lchannelid, {success: gotChannel, error: errorAPIChannel});
 		
 	};
     

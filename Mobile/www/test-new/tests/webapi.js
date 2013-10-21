@@ -435,7 +435,7 @@
 
 			function callback(data) {
 				if (postHandlerCallback) {
-					postHandlerCallback(data);clones 
+					postHandlerCallback(data);
 				} else {
 					start();
 				}

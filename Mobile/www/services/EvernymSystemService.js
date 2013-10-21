@@ -1,13 +1,11 @@
 
 
-function EvernymSystemService() {
+function EvernymSystemService(api) {
     
-    var api = new EvernymService();
+    console.log('loading EvernySystemService');
     
     this.sendFeedback = function (feedbackObject, callbacks) {
-        
         return api.callAPI('POST', '/system/feedback', feedbackObject, callbacks, true);
-        
     };
     
     this.getUrgencySettings = function(callbacks){

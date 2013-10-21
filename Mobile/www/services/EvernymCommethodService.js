@@ -1,8 +1,9 @@
 
 
-function EvernymCommethodService() {
+function EvernymCommethodService(api) {
     
-    var api = new EvernymService();
+    
+    console.log('loading EvernymCommethodService');
     
     this.verification = function (verification_key, callbacks, authentication) {
         return api.callAPI('PUT', '/commethod/verification/' + verification_key, undefined, callbacks, authentication);

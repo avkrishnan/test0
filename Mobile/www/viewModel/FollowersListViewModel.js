@@ -5,7 +5,6 @@ function FollowersListViewModel() {
 	// --- properties
 	
 	var that = this;
-	var  dataService = new EvernymChannelService();
 	
 	this.template = "followersListView";
     this.viewid = "V-26";
@@ -133,7 +132,7 @@ function FollowersListViewModel() {
 	this.getFollowersCommand = function () {
 		
 		//logger.log("starting getChannel", undefined, "channels", true);
-		return dataService.getFollowers(that.channelid(), {success: function(){}, error: errorAPI});
+		return ES.channelService.getFollowers(that.channelid(), {success: function(){}, error: errorAPI});
 		
 	};
 

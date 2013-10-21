@@ -21,7 +21,6 @@ function ResetPasswordViewModel() {
     
     this.confirmPassword = ko.observable();
     
-    var  dataService = new EvernymLoginService();
     
     this.applyBindings = function(){
         $("#" + that.template).live("pagebeforeshow", function(e, data){
@@ -83,7 +82,7 @@ function ResetPasswordViewModel() {
         resetPasswordModel.forgotPasswordRequestKey = that.key;
         
         
-        return dataService.resetPassword(resetPasswordModel, callbacks).then(gotResetPassword);
+        return ES.loginService.resetPassword(resetPasswordModel, callbacks).then(gotResetPassword);
     };
    
     

@@ -29,6 +29,13 @@ $result = mysql_query("SELECT id,token FROM `device_tokens` ORDER BY id");
 //Setup notification message
 $body = array();
 $body['aps'] = array('alert' => 'This is push message');
+
+
+$body['aps']['myshiz'] =  array(
+                        "channelid" => "628f4a1c-8d48-4877-ab6d-1611a888c929",
+                        "messageid" => "47fc4840-ff38-4084-b1dd-17511342a6be"
+ );
+
 $body['aps']['notifurl'] = 'http://www.arachnicode.com';
 $body['aps']['badge'] = 2;
 

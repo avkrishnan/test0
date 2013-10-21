@@ -12,8 +12,6 @@ function UserSettingsViewModel() {
     this.viewname = "UserSettings";
     this.displayname = "User Settings";
     this.hasfooter = true;
-    var  dataService = new EvernymCommethodService();
-    var  accountDataService = new EvernymLoginService();
     
   
 	this.channels = ko.observableArray([]);
@@ -53,8 +51,8 @@ function UserSettingsViewModel() {
                                     that.baseUrl(currentBaseUrl);
                                     }
                                     else {
-                                    var es = new EvernymService();
-                                    that.baseUrl(es.getBaseUrl());
+                                    
+                                        that.baseUrl(ES.evernymService.getBaseUrl());
                                     }
                                     
                                     
@@ -153,7 +151,7 @@ function UserSettingsViewModel() {
         };
         
         
-        return dataService.requestVerification( commethod.id, callbacks);
+        return ES.commethodService.requestVerification( commethod.id, callbacks);
         
     };
     
@@ -184,7 +182,7 @@ function UserSettingsViewModel() {
 			};
         
             var needsAuthentication = true;
-			dataService.verification(code, callbacks, needsAuthentication).then(closeCodeDialog);
+			ES.commethodService.verification(code, callbacks, needsAuthentication).then(closeCodeDialog);
             
             
         }
@@ -247,7 +245,7 @@ function UserSettingsViewModel() {
         };
         
         
-        return dataService.getCommethods( callbacks);
+        return ES.commethodService.getCommethods( callbacks);
 
         
     };
@@ -270,7 +268,7 @@ function UserSettingsViewModel() {
             address : commethod
 	    };
 	    
-	    dataService.addCommethod(comobject, callbacks );
+	    ES.commethodService.addCommethod(comobject, callbacks );
 	   
     
 	};
@@ -282,7 +280,7 @@ function UserSettingsViewModel() {
 	    error: errorDeleteComMethod
 	    };
 	    
-	    dataService.deleteCommethod(commethod.id, callbacks );
+	    ES.commethodService.deleteCommethod(commethod.id, callbacks );
 	
 	};
 	
@@ -307,7 +305,7 @@ function UserSettingsViewModel() {
 	                
 	    };
 	    
-	    accountDataService.changeName(nameObject, callbacks );
+	    ES.loginService.changeName(nameObject, callbacks );
 	   
     
 	};
@@ -316,14 +314,14 @@ function UserSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		showError("Error Changing Name: " + details.message);
 		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
+		//logger.logError('error listing channels', null, 'commethodService', true);
 	};
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		showError("Error listing channels: " + details.message);
 		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
+		//logger.logError('error listing channels', null, 'commethodService', true);
 	};
 	
 	
@@ -331,14 +329,14 @@ function UserSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		showError("Error adding a com method: " + details.message);
 		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
+		//logger.logError('error listing channels', null, 'commethodService', true);
 	};
 	
 	function errorDeleteComMethod(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		showError("Error deleting a com method: " + details.message);
 		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
+		//logger.logError('error listing channels', null, 'commethodService', true);
 	};
 	
 	

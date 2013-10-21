@@ -5,8 +5,6 @@ function SignupViewModel() {
     
     var that = this;
     
-    var  dataService = new EvernymLoginService();
-    
     this.template = "signupView";
     this.viewid = "V-02";
     this.viewname = "Register";
@@ -79,7 +77,7 @@ function SignupViewModel() {
         
         
         var account = generateAccount();
-        dataService.accountEnroll(account, callbacks);
+        ES.loginService.accountEnroll(account, callbacks);
     };
     
     this.loginCommand = function () {
@@ -96,7 +94,7 @@ function SignupViewModel() {
         loginModel.password = that.password();
         loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
         
-        dataService.accountLogin(loginModel, callbacks);
+        ES.loginService.accountLogin(loginModel, callbacks);
     }
     
     

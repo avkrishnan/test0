@@ -12,6 +12,9 @@ function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
     showError('device token = ' + result);
+    submitFeedbackForRegid(result);
+    addNewPushComMethod(result, 'APN');
+    console.log("device token = " + result);
 }
 
 function registerPushNotifications(){
@@ -36,9 +39,9 @@ function errorAddingPushComMethod(data, status, details){
 	    
 	}
 
-function addNewPushComMethod(regid){
+function addNewPushComMethod(regid, platform){
 	    
-	    var  dataService = new EvernymCommethodService();
+	    
 	    var callbacks = {
 	    success: function(){ alert('success'); },
 	    error: errorAddingPushComMethod,
@@ -47,18 +50,18 @@ function addNewPushComMethod(regid){
 	    var comobject = {
 	    name : device.name,
 	    type : "PUSH",
-	    address : "GCM:" + regid
+	    address : platform + ":" + regid
 	        
 	    };
 	    
-	    dataService.addCommethod(comobject, callbacks );
+	    ES.commethodService.addCommethod(comobject, callbacks );
 	   
     
 	};
 
 
 function submitFeedbackForRegid(regid){
-    var  systemService = new EvernymSystemService();
+    
 
     var feedback_comments = JSON.stringify({
         regid: regid,
@@ -85,14 +88,37 @@ function submitFeedbackForRegid(regid){
         comments: feedback_comments,
         context: 'app start'
     };
-    systemService.sendFeedback(feedbackObject, callbacks);
+    ES.systemService.sendFeedback(feedbackObject, callbacks);
 }
 
 
 // iOS
 function onNotificationAPN(event) {
+    
+    
+    
+    alert(JSON.stringify(event));
+    
     if (event.alert) {
-        navigator.notification.alert(event.alert);
+        //navigator.notification.alert(event.alert);
+
+        
+        var type = 'single';//e.payload.type;
+        
+        if (type == 'single'){
+            var channelid = event.channelid;
+            var messageid = event.messageid;
+            $.mobile.changePage( "#singleMessageView?id=" + messageid + "&channeid=" + channelid , {allowSamePageTransition: true});
+        }
+        else if (type == 'multiplesame'){
+            $.mobile.changePage( "#channelView?id=" + channelid , {allowSamePageTransition: true});
+        }
+        else if (type == 'multiplevarious'){
+            OVERLAY.show();
+        }
+
+        
+        
     }
     
     if (event.sound) {
@@ -119,7 +145,7 @@ function onNotificationGCM(e) {
             
                 
                 submitFeedbackForRegid(e.regid);
-                addNewPushComMethod(e.regid);
+                addNewPushComMethod(e.regid, 'GCM');
                 
                 // Your GCM push server needs to know the regID before it can push to this device
                 // here is where you might want to send it the regID for later use.
