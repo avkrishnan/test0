@@ -1,0 +1,48 @@
+<div id="addContactView" class="channel-list" data-role="page">
+  <div class="header" data-role="header">     
+		<a href="#" class="back"></a>
+		<a class="menu" href="#"></a>       
+  </div>
+  <div class="page-content" data-role="content">    	
+		<div class="portal-name"></div>     
+      <div id="default_page">
+      <div class="success">
+        <p>Add a new phone number (TXT) or email</p>
+      </div>
+      <div class="add-action">
+        <div class="addaction">
+          <input type="text" name="verify" placeholder="phone or email" id="phone_or_email" data-inline="true" style="float:left;" >
+          <a class="addbtn" id="add_phone_or_email" href="#">ADD</a>
+        </div>
+        <p class="error-message"></p>
+      </div>
+      </div>
+      <div id="pageHavingContent">          
+        <div class="details-delete">
+          <h1>My contact information</h1> 
+          <span class="gray-delete" id="top-del-btn"></span>
+        </div>
+        <div id="added_details"></div>                 
+        <div class="add-action" id="addTXT">
+          <div class="addaction">
+            <input type="text" name="verify" id="add-number" placeholder="please add a phone number (TXT)"  data-inline="true" style="float:left;" >
+            <a class="addbtn" href="#" id="addNumber">ADD</a>
+          </div>
+          <p class="error-message"></p>
+        </div>
+        <a href="#" class="low-messages addMore" id="additional-link" onclick="goToView('additionalContactView');">
+          Add an additional number or email
+        </a>
+      </div>
+	</div>
+  <div data-role="footer" class="footer" data-position="fixed">
+    <a href="#" data-role="none" onclick="goToView('escalationPlansView');" class="logo" id="footer-gear">test</a>
+    <div class="contact-announcement"> 
+      <a class="add-contacts" href="#"></a> 
+      <a class="announcement" href="#"></a> 
+    </div>
+  </div>
+	<script>
+		$("#addContactView").on("pageshow", contactinfo);
+  </script>  
+</div>

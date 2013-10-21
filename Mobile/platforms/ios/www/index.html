@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Evernym</title>
+    <base href="" >
+    <xmeta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" >
+
+    <!--<link href='resources/fonts/open_sans_woff.css' rel='stylesheet' type='text/css'>-->
+    <!--<link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />-->
+    <link href="css/jquery.mobile-1.3.2.min.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.mobile-1.3.1.js"></script>               
+    <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
+    <script type="text/javascript" src="lib/jqm.page.params.js"></script>
+    <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
+    <script type="text/javascript" src="lib/iscroll.js"></script>
+    <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
+    <script type="text/javascript" src="scripts/evernym_settings.js"></script>
+    <script type="text/javascript" src="scripts/notification_registration.js"></script>
+    <script type="text/javascript" src="scripts/NotificationOverlay.js"></script>
+    <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
+    <script type="text/javascript">
+			$.mobile.autoInitializePage = false;
+    </script>
+        
+    <!-- services -->
+    <script type="text/javascript" src="services/EvernymService.js"></script>
+    <script type="text/javascript" src="services/EvernymLoginService.js"></script>
+    <script type="text/javascript" src="services/EvernymChannelService.js"></script>
+    <script type="text/javascript" src="services/EvernymMessageService.js"></script>
+    <script type="text/javascript" src="services/EvernymCommethodService.js"></script>
+    <script type="text/javascript" src="services/EvernymSystemService.js"></script>
+
+    <!-- view models -->
+    <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ChannelListViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ChannelSettingsViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ChannelsFollowingListViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ChannelMenuViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ChannelBroadcastsViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/SignupViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/FollowersListViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/FollowerViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/UserSettingsViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/DevSettingsViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/CommethodVerificationViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/NotificationsViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/ResetPasswordViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/MessageViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/SingleMessageViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/PanelHelpViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/UnsubscribeModel.js"></script>
+		<script type="text/javascript" src="viewModel/SelectIconViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/FollowChannelViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/EscalationPlansViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/EscalationPlanSingleViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/AddContactViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/AdditionalContactViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/VerifyContactViewModel.js"></script>
+    
+    <!--<link rel="stylesheet" href="evernym.css" />-->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    
+    <!-- the code that puts it all together -->
+    <script type="text/javascript" src="app.js" ></script>
+		<script type="text/javascript">
+			function goToView(view) {
+				$.mobile.changePage( "#" + view, {allowSamePageTransition: true});
+			}
+			
+			function goToChannel(select) {
+				startBroadcast(select.value);
+			}
+    </script>
+		<script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>    
+	</head>
+  <body style="margin:0 !important;">
+		<script type="text/javascript" src="cordova.js"></script>
+    <!--
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+      app.initialize();
+    </script>
+    -->
+    <div id="globalfooter" style="display:none;">
+      <div data-role="footer" id="thefooter" >
+        <!--<a href="#" data-role="none" onclick="goToView('userSettingsView');" class="a-button" id="footer-gear">test</a>-->
+        <a href="#" data-role="none" onclick="goToView('escalationPlansView');" class="a-button" id="footer-gear">test</a>
+        <a href="#" data-role="none" onclick="inviteFollowers();" class="a-button" id="footer-followers"></a>
+        <a href="#" data-role="none" onclick="initiateBroadcast();" class="a-button" id="footer-megaphone"></a>
+        <span id="viewid">view id</span>
+      </div>
+    </div>
+    <div id="globalpanel" style="display:none;">
+    	<div data-role="panel" id="mypanel" data-position="right" data-display="reveal" >
+      	<div id="innerpanel" class="panel-inner" style="">
+        	<div data-role="none" class="green-gradient-2" style="">
+          	<!--  <div style="padding-left:15px;padding-top:5px;" id="panel_name"> name </div> -->
+          </div>
+          <div>
+            <ul data-role="listview" data-icon="" data-corners="false" xdata-inset="true" style="min-width:210px;" xdata-theme="d">
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" />
+              	<a href="" onclick="goToView('channelListView');">Channels I Own</a>
+              </li>
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" />
+								<a href="#" onclick="goToView('channelsFollowingListView');">Channels I Follow</a>
+              </li>
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" />
+								<a href="#" onclick="goToView('channelNewView');">Create a New Channel</a>
+              </li>
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-g.png" />
+								<a href="#" onclick="goToView('followChannelView');">Follow Channel</a>
+              </li>
+              <!--
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-h.png" />
+                <a href="#" onclick="goToView('allMessagesHistoryView');">All Messages</a>
+              </li>
+              -->
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" />
+								<a href="#" onclick="goToView('userSettingsView');">User Settings</a>
+              </li>
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" />
+								<a href="#" onclick="showMessage('help under construction');">Help</a>
+              </li>
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" />
+								<a href="#" onclick="showMessage('about under construction');">About</a>
+              </li>
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" />
+								<a href="#" onclick="showFeedback();" >Feedback</a>
+              </li>
+              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" />
+								<a href="index.html#loginView?a=logout">Logout</a>
+              </li>
+            </ul>
+          </div>
+      		<h3 style="font-size:8pt;color:#BBB;">BETA V-04 Tray</h3>
+				</div>
+    	</div>
+    </div>
+    <div id="allpages" >
+      <div id="allMessagesHistoryView" class="channel-list" data-role="page" Xdata-theme="b" >
+        <div id="gpanel"></div>
+        <div id="gpaneldots"></div>
+        <div data-role="header" class="header" Xdata-theme="b">
+          <h1>AllMessagesHistory</h1>
+          <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+          <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        </div>
+        <div data-role="content" Xdata-theme="b" >
+        	<h2 style="color:white;">AllMessagesHistory</h2>
+        </div>
+        <div class="footer" data-role="footer" >BETA V-31 AllMessagesHistory</div>
+      </div>
+      
+      <!--  FOLLOW ANOTHER CHANNEL VIEW -->
+      <div id="followAnotherChannelView" class="channel-list" data-role="page" Xdata-theme="b" >
+      	<div id="gpanel"></div>
+      	<div id="gpaneldots"></div>
+        <div data-role="header" class="header" Xdata-theme="b">
+          <h1>FollowAnotherChannel</h1>
+          <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
+          <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
+        </div>
+        <div data-role="content" Xdata-theme="b" >
+          <h2 style="color:white;">Follow Another Channel</h2>
+        </div>
+      	<div class="footer" data-role="footer" >BETA V-17 FollowAnotherChannel</div>
+      </div>
+    </div>
+  </body>
+</html>

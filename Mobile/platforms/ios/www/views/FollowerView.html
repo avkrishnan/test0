@@ -1,0 +1,139 @@
+<!--  FOLLOWER VIEW -->
+
+<div id="followerView" data-role="page" class="channel-list">
+    <div id="gpanel"></div>
+    <div id="gpaneldots"></div>
+    <div data-role="header" class="header" xdata-theme="b">
+        
+        
+        <!--<a href="#followersListView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> - Follower List</a> -->
+        
+        
+        
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+        
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
+        
+        <button id="hnav" class="hnav" data-role="none"  data-bind="click: backNav, text: navText" ></button>
+        
+        <div data-role="popup" id="popupMenu" data-theme="a">
+            <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                
+                <li><a href="#" data-bind="click: removeFollowerCommand">Remove Follower From Channel</a></li>
+                <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                
+            </ul>
+        </div>
+    </div>
+    
+    
+    
+    <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll>
+        
+        
+        
+        <ul data-role="listview" >
+            
+            
+            
+            <li class="channel-list-item">
+                
+                <a  class="channel-list-anchor" href="#"  >
+                    
+                    
+                    <div class="channel-list-stripe2"></div>
+                    
+                    
+                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                    
+                    <span class="channel-info">
+                        <span class="channel-name" data-bind="text: title"></span>
+                        <span class="channel-description" xdata-bind="text: description"></span>
+                        <span class="channel-url" xdata-bind="text: url"></span>
+                    </span>
+                    <div class="channel-list-avatar-frame"></div>
+                    
+                    
+                </a>
+                
+            </li>
+            
+            
+            
+            
+            <li class="message-list-item">
+                
+                <div  class="message-list-container" >
+                    
+                    <div class="message-list-stripe"></div>
+                    
+                    
+                    <a data-role="none" href="#">
+                        <div  class="message-info">
+                            
+                            <div class="message-list-avatar" style="background:#8DC63F;"></div>
+                            <div class="message-list-avatar-frame"></div>
+                            
+                            <div class="message-text"> Follower Detail </div>
+                            
+                            <div data-bind="text: followerName" style="margin-left:40px;"></div>
+                            
+                            
+                        </div>
+                    </a>
+                    
+                </div>
+                
+                
+            </li>
+            
+            
+            
+            <li class="sub-message-list-item">
+                
+                <div  class="sub-message-list-container">
+                    
+                    <div class="message-list-stripe"></div>
+                    
+                    <a href="#" data-bind="click: removeFollowerCommand">
+                        <div class="sub-message-info">
+                            <div class="sub-message-list-avatar" style="background:#8D463F;"></div>
+                            <div class="sub-message-list-avatar-frame"></div>
+                            
+                            <div class="sub-message-text" >
+                                
+                                
+                                Remove Follower From Channel
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </a>
+                    
+                    
+                </div>
+                
+                
+            </li>
+            
+            
+            
+            
+            
+            
+            
+        </ul>
+    </div>
+    
+    
+    
+    
+    
+    
+    <div data-role="content" xdata-theme="b" >
+        <div data-bind="text: followerName"></div>
+    </div>
+    <div id="gfooter"></div>
+    
+</div>

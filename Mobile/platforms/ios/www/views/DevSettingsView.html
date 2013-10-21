@@ -1,0 +1,20 @@
+<!--  DEV SETTINGS VIEW -->
+
+<div id="devSettingsView" class="channel-list" data-role="page" Xdata-theme="b" >
+    <div data-role="header" class="header" Xdata-theme="b">
+        <a href="#loginView" data-role="button" data-icon="arrow-l" >Login</a>
+        <h1>DEV SETTINGS</h1>
+    </div>
+    <div data-role="content" Xdata-theme="b" >
+        
+        <form >
+            
+            API URL:
+            <input style="font-size:14pt;width:320px;" data-role="none" type="text" data-bind="value: baseUrl" /> <br/>
+            <input style="font-size:14pt;" data-role="none" type="submit" value="change" data-bind="click: changeBaseUrl" />
+            
+        </form>
+        
+    </div>
+    <div class="footer" data-role="footer" >BETA V-00 DevSettings</div>
+</div>

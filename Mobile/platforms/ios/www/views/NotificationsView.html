@@ -1,0 +1,64 @@
+<!--  NOTIFICATIONS VIEW -->
+
+
+<div id="notificationsView"  data-role="page" class="channel-list">
+    <div id="gpanel"></div>
+    <div id="gpaneldots"></div>
+    
+    <div data-role="header" >
+        <h1>Notifications</h1>
+        
+        
+        
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+        
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
+        
+        
+        <div data-role="popup" id="popupMenu" data-theme="a">
+            <ul data-role="listview" data-inset="true" style="min-width:210px;" xdata-theme="d">
+                
+                
+                <li><a href="index.html#channelListView">My Channels</a></li>
+                <li><a href="index.html#channelsFollowingListView">Channels I Follow</a></li>
+                <li><a href="index.html#userSettingsView">User Settings</a></li>
+                <li><a href="#" data-bind="click: logoutCommand">Logout</a></li>
+                
+            </ul>
+        </div>
+        
+        
+        
+        
+        
+        
+    </div>
+    
+    
+    <div data-role="content" data-theme="d" >
+        
+        
+        <ul data-role="listview">
+            
+            <!-- ko foreach: notifications, updateListviewOnChange:notifications -->
+            <li>
+                
+                <span data-bind="text: message"></span>
+                
+                
+            </li>
+            <!-- /ko -->
+            
+        </ul>
+        
+        <ul data-role="listview" data-inset="false" data-inline="true" xdata-theme="d">
+            <li><a href="index.html#userSettingsView" data-inline="true">User Settings</a></li>
+            <li><a href="index.html#channelListView" data-inline="true">My Channels</a></li>
+            <li><a href="index.html#channelsFollowingListView" data-inline="true">Channels I Follow</a></li>
+            
+        </ul>
+        
+    </div>
+    <div id="gfooter"></div>
+    
+</div>
