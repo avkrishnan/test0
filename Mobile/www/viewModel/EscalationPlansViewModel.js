@@ -6,10 +6,6 @@ function EscalationPlansViewModel() {
 	this.viewname = "EscalationPlans";
 	this.displayname = "Escalation Plans";
 	this.hasfooter = true;
-	
-	//var dataService = new EvernymCommethodService();
-	//var escPlanDataService = new EvernymEscPlanService();
-	//var accountDataService = new EvernymLoginService();
     
 	this.channels = ko.observableArray([]);
 	this.commethods = ko.observableArray([]);

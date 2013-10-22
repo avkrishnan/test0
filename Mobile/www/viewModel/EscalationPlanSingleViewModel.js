@@ -7,10 +7,6 @@ function EscalationPlanSingleViewModel() {
 	this.displayname = "Escalation Plan Single";
 	this.hasfooter = true;
 	
-	//var  dataService = new EvernymCommethodService();
-	//var escPlanDataService = new EvernymEscPlanService();
-	//var  accountDataService = new EvernymLoginService();
-	
 	this.commethods = ko.observableArray([]);
 	this.activeEscalationPlan = ko.observableArray([]);
 	

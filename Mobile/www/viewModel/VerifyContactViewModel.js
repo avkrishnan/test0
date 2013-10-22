@@ -12,8 +12,8 @@ function VerifyContactViewModel() {
     this.viewname = "VerifyContact";
     this.displayname = "Verify Contact";
     this.hasfooter = true;
-    var  dataService = new EvernymCommethodService();
-    var  accountDataService = new EvernymLoginService();
+    //var  dataService = new EvernymCommethodService();
+    //var  accountDataService = new EvernymLoginService();
     
 		this.channels = ko.observableArray([]);
     this.commethods = ko.observableArray([]);
@@ -144,7 +144,7 @@ function VerifyContactViewModel() {
         };
         
         
-        return dataService.requestVerification( commethod.id, callbacks);
+        return ES.commethodService.requestVerification( commethod.id, callbacks);
         
     };
     
@@ -175,7 +175,7 @@ function VerifyContactViewModel() {
 			};
         
             var needsAuthentication = true;
-			dataService.verification(code, callbacks, needsAuthentication).then(closeCodeDialog);
+			ES.commethodService.verification(code, callbacks, needsAuthentication).then(closeCodeDialog);
             
             
         }
@@ -238,7 +238,7 @@ function VerifyContactViewModel() {
         };
         
         
-        return dataService.getCommethods( callbacks);
+        return ES.commethodService.getCommethods( callbacks);
 
         
     };
@@ -261,7 +261,7 @@ function VerifyContactViewModel() {
             address : commethod
 	    };
 	    
-	    dataService.addCommethod(comobject, callbacks );
+	    ES.commethodService.addCommethod(comobject, callbacks );
 	   
     
 	};
@@ -273,7 +273,7 @@ function VerifyContactViewModel() {
 	    error: errorDeleteComMethod
 	    };
 	    
-	    dataService.deleteCommethod(commethod.id, callbacks );
+	    ES.commethodService.deleteCommethod(commethod.id, callbacks );
 	
 	};
 	
