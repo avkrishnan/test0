@@ -6,7 +6,7 @@ function AdditionalContactViewModel() {
 	this.viewname = "AdditionalContact";
 	this.displayname = "Additional Contact";
 	this.hasfooter = true;
-	var  dataService = new EvernymCommethodService();
+	//var  dataService = new EvernymCommethodService();
 	//var  accountDataService = new EvernymLoginService();
 	
 	this.baseUrl = ko.observable();
@@ -75,7 +75,7 @@ function AdditionalContactViewModel() {
 			type : _comMethodType,
 			address : commethod
 		};
-		dataService.addCommethod(comobject, callbacks );
+		ES.escplanService.addCommethod(comobject, callbacks );
 	};
 	
 	function errorChangingName(data, status, details){

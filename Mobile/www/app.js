@@ -2,13 +2,13 @@ var ES = {
     evernymService: new EvernymService()
 
 };
-
 ES.evernymService = new EvernymService();
 ES.channelService = new EvernymChannelService(ES.evernymService);
 ES.commethodService = new EvernymCommethodService(ES.evernymService);
 ES.loginService = new EvernymLoginService(ES.evernymService);
 ES.systemService = new EvernymSystemService(ES.evernymService);
 ES.messageService = new EvernymMessageService(ES.evernymService);
+ES.escplanService = new EvernymEscPlanService(ES.evernymService);
 
 
 ES.evernymService.doAfterDone = function(){

@@ -6,8 +6,6 @@ function AddContactViewModel() {
 	this.viewname = "AddEditContact";
 	this.displayname = "Add/Edit Contact";
 	this.hasfooter = true;
-	var  dataService = new EvernymCommethodService();
-	//var  accountDataService = new EvernymLoginService();
 	
 	this.channels = ko.observableArray([]);
 	this.commethods = ko.observableArray([]);
@@ -50,7 +48,7 @@ function AddContactViewModel() {
 				alert('error');
 			}
 		};		
-		return dataService.getCommethods(callbacks);
+		return ES.commethodService.getCommethods(callbacks);
 	}
 	
 	this.gotoView = function(pageView) {

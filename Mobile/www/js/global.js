@@ -1,5 +1,5 @@
 $(document).on('pageinit', function (event) {	 
-	$('.portal-name').html(evernym_name);
+	//$('.portal-name').html(evernym_name);
 	$('.logo').html(evernym_name);					 		
 });
 /*
