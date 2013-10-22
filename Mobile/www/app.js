@@ -337,7 +337,6 @@ channelSettingsViewModel = new ChannelSettingsViewModel(),
 channelBroadcastsViewModel = new ChannelBroadcastsViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 
-signupViewModel = new SignupViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
 inviteFollowersViewModel = new InviteFollowersViewModel(),
@@ -360,6 +359,12 @@ additionalContactViewModel = new AdditionalContactViewModel(),
 verifyContactViewModel = new VerifyContactViewModel(),
 /* end*/
 
+/* By chaman*/
+tutorialViewModel = new TutorialViewModel(),
+signupStepFirstViewModel = new SignupStepFirstViewModel(),
+signupStepSecondViewModel = new SignupStepSecondViewModel(),
+/* end*/
+
 messageViewModel = new MessageViewModel(),
 singleMessageViewModel = new SingleMessageViewModel(),
 unsubscribeModel = new UnsubscribeModel(),
@@ -379,8 +384,7 @@ var models = [
               channelMenuViewModel,
               channelSettingsViewModel,
               channelBroadcastsViewModel,
-              channelNewViewModel,
-              signupViewModel,
+              channelNewViewModel,            
               sendMessageViewModel,
               followersListViewModel,
               inviteFollowersViewModel,
@@ -401,7 +405,10 @@ var models = [
               escalationPlanSingleViewModel,
               addContactViewModel,
               additionalContactViewModel,
-              verifyContactViewModel
+              verifyContactViewModel,
+							signupStepFirstViewModel,
+							signupStepSecondViewModel,
+							tutorialViewModel
               ];
 
 

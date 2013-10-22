@@ -1,0 +1,41 @@
+<div id="signupStepSecondView" data-role="page" >    
+    <header>
+      <a href="#signupStepFirstView" class="back register"></a>
+      <a class="menu" href="#"></a>
+    </header><!--Header-->
+    
+    <div class="page-content">
+    
+      <div class="portal-name">
+      	Welcome to Channels!
+      </div>
+      
+       <form class="loginform" method="get" action="#">
+      
+        <label class="msginfo">Sign up - Step 2 of 2:</label>
+        
+        <div class="formtype registration" data-bind="css: firstnameClass">
+          <input type="text" data-bind="value: firstname" placeholder="first name" />
+          <em data-bind="css: { enable: firstNamehighlight}, click: firstNameActiveInfo"></em>
+        </div>
+        
+        <div class="formtype registration" data-bind="css: lastnameClass">
+          <input type="text" data-bind="value: lastname" placeholder="last name" />
+          <em data-bind="css: { enable: lastNamehighlight}, click: lastNameActiveInfo"></em>
+          <div class="msgerror" data-bind="html: errorFirstLastName"></div>
+        </div>
+                        
+        <div class="login"><p class="loginbtn"><a href="#" data-bind="click: signUpCommand">REGISTER</a></p></div>
+        
+      </form>
+      
+      <hr noshade>
+      
+      <div class="signedup userunique" data-bind="visible: firstNameInfo">
+      	Information about first name
+      </div>
+      <div class="signedup userunique" data-bind="visible: lastNameInfo">
+				Information about last name
+      </div>      
+    </div><!--page-content--> 
+</div>

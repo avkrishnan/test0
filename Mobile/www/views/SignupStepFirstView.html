@@ -1,0 +1,58 @@
+<div id="signupStepFirstView" data-role="page" >    
+    <header>
+      <a href="#loginView" class="back logintop"></a>
+      <a class="menu" href="#"></a>
+    </header><!--Header-->
+    
+    <div class="page-content">
+    
+      <div class="portal-name">
+      	Welcome to Channels!
+      </div>
+      
+      <form class="loginform">
+            
+        <label class="msginfo">Sign up - Step 1 of 2:</label>
+        
+        <div class="formtype registration" data-bind="css: emailClass">
+          <input type="text" data-bind="value: emailaddress" placeholder="email address"/>
+          <em data-bind="css: { enable: emailhighlight, errorimg:errorIconEmail, righttick: tickIconEmail}, click: emailActiveInfo" ></em>
+          <div class="msgerror" data-bind="html: errorEmail"></div>
+        </div>
+        
+        <div class="formtype registration" data-bind="css: accountNameClass">
+          <input type="text" data-bind="value: accountName" placeholder="choose an Evernym"/>
+          <em data-bind="css: { enable: namehighlight, errorimg:errorIconAccoountName, righttick: tickIconAccoountName }, click: nameActiveInfo"></em>
+          <div class="msgerror" data-bind="html: errorAccountName"></div>
+        </div>
+        
+        <div class="formtype registration" data-bind="css: passwordClass">
+          <input type="password" data-bind="value: password" placeholder="choose a password"/>
+          <em data-bind="css: { enable: passwordhighlight, errorimg: errorIconPassword, righttick: tickIconPassword }, click: passwordActiveInfo"></em>
+        	<div class="msgerror" data-bind="html: errorPassword"></div>
+        </div>
+                
+        <div class="login"><p class="loginbtn"><a href="#" data-bind="click: signUpCommand">NEXT</a></p></div>
+        
+      </form>
+      
+      <hr noshade>
+      
+      <div class="signedup userunique" data-bind="visible: emailInfo">
+      	Your Evernym is like a email. Choose something unique and memorable. Characters, numbers, and dashes only. Evernyms are public. which means everyone can see your Evernym
+      </div>
+      <div class="signedup userunique" data-bind="visible: nameInfo">
+      	Your Evernym is like a username. Choose something unique and memorable. Characters, numbers, and dashes only. Evernyms are public. which means everyone can see your Evernym
+      </div>
+      <div class="signedup userunique" data-bind="visible: passwordInfo">
+      	Your Evernym is like a password. Choose something unique and memorable. Characters, numbers, and dashes only. Evernyms are public. which means everyone can see your Evernym
+      </div>
+      
+      <div class="signedup" data-bind="visible: aboutEvernym"><span>Evernym is all about privacy.</span> We never share your information with anyone, and we never read or scan your communications</div>
+      
+      <hr noshade data-bind="visible: aboutEvernym">
+      
+      <div class="terms" data-bind="visible: aboutEvernym">By signing up you are agreeing to our<a href="#">Terms of Use and Privacy Policy</a></div>
+      
+    </div><!--page-content--> 
+</div>

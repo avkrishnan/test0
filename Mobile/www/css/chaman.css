@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+/*Tutorial Page */
+.page-content .tutorialslides {
+	display:none; 
+}
+.page-content .tutorialslides:first-child {
+	display:block; 
+}

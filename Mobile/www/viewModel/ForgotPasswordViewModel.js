@@ -39,26 +39,16 @@ function ForgotPasswordViewModel() {
 			that.usernameClass('');
 			that.emailClass('');
 		});
-		$('#forgotPasswordNotification').hide();
 	};
 
 	this.clearForm = function() {
 		that.email('');
 		that.accountName('');
 		that.notification('');
-		$('#forgotPasswordNotification').hide();
-
 	};
 
 	function gotForgotPassword(data, status, details) {
-
-		$('#forgotPasswordNotification').show(200);
-		that
-				.notification('We have sent you an email with a link to change your password');
-		$.mobile.changePage("#resetPasswordView", {
-			allowSamePageTransition : true
-		});
-
+		that.notification('We have sent you an email with a link to change your password');	
 	}
 
 	this.forgotPasswordCommand = function() {
