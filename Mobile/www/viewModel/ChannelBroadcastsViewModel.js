@@ -41,7 +41,7 @@ function ChannelBroadcastsViewModel() {
     };
     
     
-	$("#" + this.template).live("pagebeforeshow", function(e, data){
+	$("#" + this.template).on("pagebeforeshow", null , function(e, data){
 								
                                 
                                 $('.more_messages_button').hide();

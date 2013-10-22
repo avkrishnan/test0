@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Evernym</title>
     <base href="" >
     <xmeta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="user-scalable=no,width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" >
 
-	<!--JAL: Devender, do we not need this css anymore? -->
     <!--<link href='resources/fonts/open_sans_woff.css' rel='stylesheet' type='text/css'>-->
 
     <!--<link rel="stylesheet" href="lib/jquery.mobile-1.3.1.css" />-->
     <link href="css/jquery.mobile-1.3.2.min.css" rel="stylesheet" type="text/css" />
 
-                <!-- required libraries -->
-    <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" src="lib/jquery.mobile-1.3.1.js"></script>               
+    <script type="text/javascript" src="lib/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.mobile-1.3.2.js"></script>               
     <script type="text/javascript" src="lib/jquery.jsonp-2.1.4.min.js"></script>
     <script type="text/javascript" src="lib/jqm.page.params.js"></script>
     <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
@@ -26,6 +25,7 @@
     <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
     <script type="text/javascript">
 			$.mobile.autoInitializePage = false;
+			$.support.cors = true;
     </script>
 
     <!-- services -->
@@ -35,6 +35,7 @@
     <script type="text/javascript" src="services/EvernymMessageService.js"></script>
     <script type="text/javascript" src="services/EvernymCommethodService.js"></script>
     <script type="text/javascript" src="services/EvernymSystemService.js"></script>
+    <script type="text/javascript" src="services/EvernymEscPlanService.js"></script>
 
     <!-- view models -->
     <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
@@ -68,7 +69,6 @@
     <script type="text/javascript" src="viewModel/AdditionalContactViewModel.js"></script>
     <script type="text/javascript" src="viewModel/VerifyContactViewModel.js"></script>
     
-	<!--JAL: Devender, are we replacing evernym.css with style.css? -->
     <!--<link rel="stylesheet" href="evernym.css" />-->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     
@@ -83,9 +83,7 @@
 				startBroadcast(select.value);
 			}
     </script>
-		<!--JAL: Devender, this is new... is it replacing app.js? -->
 		<script type="text/javascript" src="js/main.js"></script>
-		<!--JAL: Devender, this is new as well. Why do we have both a global.js and a main.js? Does it replace app.js? -->
 		<script type="text/javascript" src="js/global.js"></script>    
 	</head>
   <body style="margin:0 !important;">

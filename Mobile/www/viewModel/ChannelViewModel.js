@@ -49,7 +49,7 @@ function ChannelViewModel() {
     this.applyBindings = function(){
     
     
-        $("#" + that.template).live("pagebeforeshow", function(e, data){
+        $("#" + that.template).on("pagebeforeshow", null, function(e, data){
 								
                                 
                                 

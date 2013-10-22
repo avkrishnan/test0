@@ -1,7 +1,7 @@
 ﻿/*globals ko*/
 
 function ChannelListViewModel() {
-	/// <summary>
+	// <summary>
 	/// A view model that displays the list of channels with the user owns
 	/// </summary>
 	
@@ -27,13 +27,8 @@ function ChannelListViewModel() {
     
     this.applyBindings = function(){
         
-        $("#" + that.template).live("Xpagebeforecreate", function (e, data) {
-                                    
-                                    });
-        
-        
-        
-        $("#" + this.template).live("pagebeforeshow", function (e, data) {
+  	$("#" + that.template).on("Xpagebeforecreate", null, function (e, data) {});
+		$("#" + this.template).on("pagebeforeshow", null, function (e, data) {
                                     
                                     
                                     
@@ -214,7 +209,7 @@ function ChannelListViewModel() {
     this.logoutCommand = function(){
         return loginViewModel.logoutCommand();
         $.mobile.changePage("#" + loginViewModel.template)
-    }
+	};
     
     this.createChannelCommand = function () {
         

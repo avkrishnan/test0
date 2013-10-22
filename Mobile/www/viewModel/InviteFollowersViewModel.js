@@ -23,7 +23,7 @@ function InviteFollowersViewModel() {
     this.navText = ko.observable('Channel Menu');
    
     this.applyBindings = function(){
-        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+        $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
                                     that.clearForm();
                                     if ($.mobile.pageData && $.mobile.pageData.id) {
                                     that.activate({ id: $.mobile.pageData.id });

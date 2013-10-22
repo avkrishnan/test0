@@ -1,333 +1,143 @@
 ﻿/*globals ko*/
-
 function EscalationPlansViewModel() {
-	/// <summary>
-	/// A view model that displays the communication means and urgency that user wants to recieve communications
-	/// </summary>
 	
-	// --- properties
+	this.template = "escalationPlansView";
+	this.viewid = "V-081";
+	this.viewname = "EscalationPlans";
+	this.displayname = "Escalation Plans";
+	this.hasfooter = true;
 	
-    this.template = "escalationPlansView";
-    this.viewid = "V-081";
-    this.viewname = "EscalationPlans";
-    this.displayname = "Escalation Plans";
-    this.hasfooter = true;
-    var  dataService = new EvernymCommethodService();
-    var  accountDataService = new EvernymLoginService();
+	var dataService = new EvernymCommethodService();
+	var escPlanDataService = new EvernymEscPlanService();
+	//var accountDataService = new EvernymLoginService();
     
-		this.channels = ko.observableArray([]);
-    this.commethods = ko.observableArray([]);
-    this.baseUrl = ko.observable();
-    this.accountName = ko.observable();
-    this.name = ko.observable();
-    
-    
-    this.firstname = ko.observable();
-    this.lastname = ko.observable();
-    
-    
-    this.newComMethod = ko.observable();
-    this.newComMethodName = ko.observable();
-    this.comMethodType = ko.observable("EMAIL");
-    
-    this.navText = ko.observable();
-    this.pView = '';
-    
-		var that = this;
+	this.channels = ko.observableArray([]);
+	this.commethods = ko.observableArray([]);
+	this.escalationplans = ko.observableArray([]);
+	
+	this.baseUrl = ko.observable();
+	this.accountName = ko.observable();
+	this.name = ko.observable();
+	
+	this.firstname = ko.observable();
+	this.lastname = ko.observable();
+	
+	this.newComMethod = ko.observable();
+	this.newComMethodName = ko.observable();
+	this.comMethodType = ko.observable("EMAIL");
+	
+	this.navText = ko.observable();
+	this.pView = '';
+	
+	this.defaultCommethods = '';
+	
+	this.gotoView = function(pageView) {
+		//alert(JSON.parse(JSON.stringify(pageView)).urgencyName);
+		localStorage.setItem("activeEscPlan",JSON.parse(JSON.stringify(pageView)).urgencyName);
+		goToView('escalationPlanSingleView');
+	}	
+	
+	this.getEscPlans = function() {
+		return escPlanDataService.getEscPlans({success: successEscPlans, error: errorEscPlans});
+	}
+	
+	var that = this;
+	
+	//console.log(this.escalationplans);
   
-		this.applyBindings = function(){
-        $("#" + that.template).live("pagebeforeshow", function (e, data) {
-                                    
-                                    var currentBaseUrl = localStorage.getItem("baseUrl");
-                                    
-                                    
-                                    var previousView = localStorage.getItem('previousView');
-                                    console.log("previousView: " + previousView);
-                                    var vm = ko.dataFor($("#" + previousView).get(0));
-                                    console.log("previousView Model viewid: " + vm.displayname);
-                                    that.navText(vm.displayname);
-                                    that.pView = previousView;
-                                    
-                                    if (currentBaseUrl){
-                                    that.baseUrl(currentBaseUrl);
-                                    }
-                                    else {
-                                    var es = new EvernymService();
-                                    that.baseUrl(es.getBaseUrl());
-                                    }
-                                    
-                                    
-                                    that.activate();
-                                    
-                                    
-                                    });
-    };
-    
-    this.activate = function() {
-			var _accountName = localStorage.getItem("accountName");
-			var _name = localStorage.getItem("UserFullName");
+	this.applyBindings = function(){
+		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
 			
-			that.accountName(_accountName);
-			that.name(_name);
-			that.getCommethods().then(gotCommethods);
-
-			$.mobile.showPageLoadingMsg("a", "Loading Settings");
-			return true;     
+			var currentBaseUrl = localStorage.getItem("baseUrl");
+			var previousView = localStorage.getItem('previousView');
+			
+			console.log("previousView: " + previousView);
+			var vm = ko.dataFor($("#" + previousView).get(0));
+			console.log("previousView Model viewid: " + vm.displayname);
+			that.navText(vm.displayname);
+			that.pView = previousView;	
+			
+			if (currentBaseUrl){
+				that.baseUrl(currentBaseUrl);
+			}
+			else {
+				var es = new EvernymService();
+				that.baseUrl(es.getBaseUrl());
+			}
+			that.activate();
+		});
+	};
+			
+	this.activate = function() {
+		var _accountName = localStorage.getItem("accountName");
+		var _name = localStorage.getItem("UserFullName");
+		
+		that.accountName(_accountName);
+		that.name(_name);
+		that.escalationplans.removeAll();
+		that.getCommethods().then(gotCommethods);
+		$.mobile.showPageLoadingMsg("a", "Loading Escalation Plans");
+		return that.getEscPlans().then(gotEscPlans);
+		//return true;     
 	};
 	
-	this.backNav = function(){
-        $.mobile.changePage("#" + that.pView);
-    };
-	
-	
-    
-    function gotCommethods(data){
-        //alert(JSON.stringify(data));
-        that.commethods(data.commethod);
-        $(window).resize();
-    }
-    
-	this.logoutCommand = function(){
-		loginViewModel.logoutCommand();
-		$.mobile.changePage("#" + loginViewModel.template);
-	};
-	
-    
-    this.changeBaseUrl = function() {
-        showMessage('stored base url: ' + that.baseUrl());
-        localStorage.setItem("baseUrl", that.baseUrl());
-    };
-	
-    function commethodError(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		loginPageIfBadLogin(details.code);
-		
-		showError("Error Getting Communication Methods: " + details.message);
-		//logger.logError('error listing channels', null, 'channel', true);
-
-        
-    }
-    
-    function requestVerificationError(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		loginPageIfBadLogin(details.code);
-		
-		showError("Error Requesting Verification: " + details.message);
-		
-        
-        
-    }
-    
-    
-    function requestVerificationSuccess(data){
-		
-        $("#chicken").html("Verification Email Sent");
-        
-        
-    }
-
-    
-    this.verifyCommand = function(commethod){
-        
-        //showMessage(JSON.stringify(commethod));
-        
-        $.mobile.showPageLoadingMsg("a", "Requesting Verification");
-        
-        var callbacks = {
-        //success: requestVerificationSuccess,
-        
-        success: function (){
-            $("#commethod-" + commethod.id).html("Verification Email Sent");
-        },
-        error: requestVerificationError
-        };
-        
-        
-        return dataService.requestVerification( commethod.id, callbacks);
-        
-    };
-    
-    
-    this.verifyCodeCommand = function(commethod){
-        
-        showCodeDialog();
-        
-        function verificationSuccess(){
-            showMessage("Successfully Verified Communication Method");
-            that.getCommethods().then(gotCommethods);
-        }
-        
-        function verificationError(data, status, details){
-			$.mobile.hidePageLoadingMsg();
-			showError("Error in Verification: " + details.message);
-			loginPageIfBadLogin(details.code);
-		};
-        
-        function submitVerificationCode(){
-        
-            var code = $("#verifyCode").find("#verifyCodeCode").val();
-            
-            $.mobile.showPageLoadingMsg("a", "Verifying");
-			var callbacks = {
-			success: verificationSuccess,
-			error: verificationError
-			};
-        
-            var needsAuthentication = true;
-			dataService.verification(code, callbacks, needsAuthentication).then(closeCodeDialog);
-            
-            
-        }
-        
-        function closeCodeDialog(){
-        
-            $("#verifyCode").fadeOut( 400, function(){
-                              $(this).remove();
-                              });
-        
-        }
-        
-        function showCodeDialog(){
-            
-			var existingdiv = $("#verifyCode").get(0);
-	
-			if (!existingdiv){
-	
-			$("<div id='verifyCode' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'>" +
-			  "<h3>Verification Code</h3>" +
-			  "<input type='text' id='verifyCodeCode' style='width:250px;' /><br/>" +
-			  "<button id='submitcodebutton'>Submit</button>&nbsp;&nbsp;" +
-			  "<button id='closecodebutton' >Cancel</button><br/>" +
-			  "</div>")
-			.css({ display: "block",
-				 opacity: 0.90,
-				 position: "fixed",
-				 padding: "7px",
-				 "text-align": "center",
-				 width: "270px",
-				 left: ($(window).width() - 284)/2,
-				 top: "20px" /* $(window).height()/2 - 145 */ })
-			.appendTo( $.mobile.pageContainer ).delay( 1500 )
-			.find('#closecodebutton').click(closeCodeDialog)
-			.end()
-			.find('#submitcodebutton').click(submitVerificationCode)
-			
-			;
+	function gotEscPlans (data) {
+		//localStorage.setItem('allEscPlans',JSON.stringify(data));
+		if(data.escPaths.length) {
+			$.each(data.escPaths, function(indexEscPlans, valueEscPlans) {
+				var tempEscCommethods = [], varDefaultCommethod;
+				$.each(valueEscPlans.steps, function(indexSteps, valueSteps) {
+					var tempRetries = 0, varDefaultCommethod = valueSteps.comMethodType;
+					$.each(valueSteps.retries, function(indexRetries, valueRetries) {
+						tempRetries += valueRetries.totalDuration/valueRetries.interval;
+					});
+					$.each(that.defaultCommethods, function(indexCommethods, valueCommethods) {
+						if((valueCommethods.type == valueSteps.comMethodType) && (valueCommethods.dflt == 'Y')) {
+							varDefaultCommethod = valueCommethods.address;
+							if(valueCommethods.verified == 'Y') {
+								//tempEscCommethods.push({ comMethodName: valueCommethods.address, comMethodRetries: tempRetries + ' Retries' });
+							}
+							else {
+								//tempEscCommethods.push({ comMethodName: valueCommethods.address, comMethodRetries: ' UNVERIFIED' });
+							}
+						}	
+					});
+					tempEscCommethods.push({ comMethodName: varDefaultCommethod, comMethodRetries: tempRetries + ' Retries' });
+				});
+				that.escalationplans.push( // without push not working
+					{ urgencyName: valueEscPlans.urgencyName.toLowerCase(), commethods: tempEscCommethods }
+				);
+			});
 		}
-		
-		
-	
-    
-}
+	}
 
-        
-    };
-    
-    
-    
-    this.getCommethods = function(){
-    
-        
-        
-        $.mobile.showPageLoadingMsg("a", "Getting Communication Methods");
-        
-        var callbacks = {
-        success: function(){;},
-        error: commethodError
-        };
-        
-        
-        return dataService.getCommethods( callbacks);
-
-        
-    };
+	function successEscPlans() {
+		//alert('success');	
+	}
 	
-	this.addNewComMethod = function(){
-	
-	    var commethod = that.newComMethod();
-	    var _newComMethodName = that.newComMethodName();
-	    var _comMethodType = that.comMethodType();
-	    
-	    
-	    var callbacks = {
-	    success: function(){ that.activate(); },
-	    error: errorAddComMethod
-	    };
-	    
-	    var comobject = {
-	        name : _newComMethodName,
-            type : _comMethodType,
-            address : commethod        
-	    };
-	    
-	    dataService.addCommethod(comobject, callbacks );
-	   
-    
+	function errorEscPlans(data, status, details){
+		alert(details.message);
 	};
 	
-	this.deleteMethod = function(commethod){
-	    
-	    var callbacks = {
-	    success: function(){ that.activate(); },
-	    error: errorDeleteComMethod
-	    };
-	    
-	    dataService.deleteCommethod(commethod.id, callbacks );
-	
+	this.getCommethods = function(){
+		$.mobile.showPageLoadingMsg("a", "Getting Communication Methods");
+		var callbacks = {
+			success: function(){
+				//alert('succ');
+			},
+			error: function() {
+				alert('error');
+			}
+		};
+		return dataService.getCommethods(callbacks);
 	};
-	
-	
-	this.changeNameCommand = function(){
-	
-	    var firstName = that.firstname();
-	    var lastName = that.lastname();
-	    
-	    var callbacks = {
-	    success: function(){ 
-	        that.name(firstName + " " + lastName);
-	        loginViewModel.getAccount();
-	    
-	     },
-	    error: errorChangingName
-	    };
-	    
-	    var nameObject = {
-	        firstname: firstName,
-	        lastname: lastName
-	                
-	    };
-	    
-	    accountDataService.changeName(nameObject, callbacks );
-	   
-    
-	};
-	
-	function errorChangingName(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		showError("Error Changing Name: " + details.message);
-		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
-	};
-	
-	function errorListChannels(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		showError("Error listing channels: " + details.message);
-		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
-	};
-	
-	
-	function errorAddComMethod(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		showError("Error adding a com method: " + details.message);
-		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
-	};
-	
-	function errorDeleteComMethod(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		showError("Error deleting a com method: " + details.message);
-		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
-	};
+		
+	function gotCommethods(data){
+		//alert(JSON.stringify(data));
+		//console.log(JSON.stringify(data));
+		//localStorage.setItem('currentCommethods',JSON.stringify(data));
+		that.defaultCommethods = data.commethod;
+		//console.log(that.defaultCommethods);
+		//$(window).resize();
+	}
 }

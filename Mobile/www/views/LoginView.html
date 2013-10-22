@@ -1,154 +1,33 @@
-<!--  LOGIN VIEW -->
-
-<div id="loginView" class="channel-list" data-role="page">
-    <div data-role="header" class="header" xstyle="background:green;">
-        
-        <h1>LOGIN</h1>
-        
-    </div>
+<div id="loginView" data-role="page">
+  <header>
+    <a class="menu" href="#"></a>
+  </header>
+  <div class="page-content">
+  
+    <div class="portal-name">Welcome to Channels</div>  
+    <h1 class="logininfo tm">Know they know</h1>    
+    <form class="loginform">
+      <label class="msginfo">Please login:</label>
+      <div class="formtype" data-bind="css: usernameClass">
+      	<input type="text" data-bind="{ value: accountName, css: errorUsername }" placeholder="your Evernym" />
+			</div>
+      <div class="formtype" data-bind="css: passwordClass">
+        <input type="password" data-bind="{ value: password, css: errorPassword }" placeholder="password" />
+        <div class="msgerror" data-bind="html:errorMessage"></div>            
+      </div>
+      <label>
+      	<input type="checkbox" name="checkbox-0" id="rememberPassword" />Remember My password
+      </label>
+      <div class="login">
+        <a href="#forgotPasswordView">Forgot password?</a>
+        <p class="loginbtn">
+        	<a href="#" data-bind="click: loginCommand">LOGIN</a>
+        </p>
+      </div>
+    </form>
+    <hr noshade>
+    <div class="signedup">Not signed up yet?</div>
+    <div class="login"><p class="loginbtn"><a href="#signupStepFirstView">DO IT! IT'S FAST AND FREE!</a></p></div>  
     
-    <div class="message-list" data-role="content">
-        
-        
-        <ul data-role="listview">
-        
-        
-            <li class="channel-message-item" data-icon="false" id="login-follow-li">
-                
-                
-                <a data-role="none"  href="index.html#devSettingsView">
-                    <div  class="channel-message-container">
-                        
-                        
-                        
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text"><span>Please log in or register to follow the channel </span><span style="color:orange;" data-bind="text: channelName"></span></div>
-                            
-                        </div>
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-        
-        
-            
-            <li class="message-list-item ">
-                
-                <div  class="message-list-container" >
-                    
-                    
-                    <div class="message-info" >
-                        
-                        
-                        <div class="message-list-avatar" style="background:#8DC63F;"></div>
-                        <div class="message-list-avatar-frame"></div>
-                        
-                        <form data-role="none">
-                            
-                            <table style="margin-left:30px;margin-top:5px;"><tr><td class="login-info">
-                                
-                                
-                                <input data-role="none"  id="userName" type="text" data-bind="value: accountName" placeholder="Evernym" autocomplete="on" autofocus="autofocus"   autocapitalize="off"/>
-                                <br/>
-                                
-                                <input  data-role="none"  id="password" type="password" data-bind="value: password" placeholder="Password"   />
-                                <br/>
-                                <input data-role="none" id="login_submit" type="submit" data-bind="click: loginCommand" value="Login" data-inline="true" />
-                            </td></tr></table>
-                            
-                            
-                        </form>
-                        
-                        
-                    </div>
-                    
-                </div>
-                
-                
-                
-            </li>
-            
-            
-            <li class="channel-message-item" data-icon="false">
-                
-                
-                <a data-role="none"  href="#" data-bind="click: showRegistration" >
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Register</div>
-                            
-                        </div>
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-            
-            
-            <li class="channel-message-item" data-icon="false">
-                
-                
-                <a data-role="none"  href="#" data-bind="click: forgotPasswordCommand" >
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Forgot Password</div>
-                            
-                        </div>
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-            
-            
-            <li class="channel-message-item" data-icon="false">
-                
-                
-                <a data-role="none"  href="index.html#devSettingsView">
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Dev Settings</div>
-                            
-                        </div>
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-            
-            
-            
-        </ul>
-        
-        
-        
-    </div>
-    
-    <div class="footer" data-role="footer" >BETA V-01 Login</div>
-    
-    
+  </div>  
 </div>

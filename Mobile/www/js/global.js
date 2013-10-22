@@ -17,8 +17,7 @@ function showContents ( page, method, callback, element ) {
  *Contact information
  */
 function contactinfo() {
-	//$.mobile.loading('show');
-	showhideerror();	
+	//$.mobile.loading('show');	
 	$('input#add-number,input#add_phone_or_email').on('keyup', function() {
 		showhideerror();
 	});		
@@ -26,7 +25,7 @@ function contactinfo() {
 		if($(this).hasClass('del-mode')) {
 			$('#top-del-btn').removeClass('red-delete');
 			$(this).removeClass('del-mode');
-			$('a#additional-link').removeClass('ui-disabled');			
+			$('a#additional-link').removeClass('ui-disabled');
 			app.ajaxcallemailid( 'commethod','AddedEmail', '#added_details', accesstokenvalue );
 		}
 		else {

@@ -18,7 +18,6 @@ function ChannelNewViewModel() {
     this.pView = '';
     
     var that = this;
-
     
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
@@ -29,7 +28,7 @@ function ChannelNewViewModel() {
     
     
     this.applyBindings = function(){
-        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+        $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
                                     that.clearForm();
                                     
                                     var previousView = localStorage.getItem('previousView');

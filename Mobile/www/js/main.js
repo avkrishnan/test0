@@ -17,11 +17,12 @@
  * under the License.
  */
 var baseUrl = 'https://api.evernym.com/api24/rest/';
-var count = 0,countEmail=0;
+var count = 0, countEmail=0;
 var evernym_name = localStorage.getItem("accountName"), accesstokenvalue  = localStorage.getItem("accessToken"), urgencynameTxt = '';
 var urgencyname = '', esc_plans, verification_com_method_id, verification_com_method, contact_details;
 var registeredEmail = 'demo@demo.com';
 $.support.cors = true;
+var defaultCommethods = '';
 
 /*
  * show/hide footer on keyboard show/hide'
@@ -49,10 +50,15 @@ document.addEventListener("backbutton", function(e){
  * This is to perform back button functionality'
 */
 function backBtn(prevPage) {
-	$('.back').off('click').on('click', function(event) {						
+	$('.back').off('click').on('click', function(event) {
 		$.mobile.changePage(prevPage);
 	});
 }
+
+//if (localStorage.getItem("defaultCommethods") === null) {
+	//var escPlanDataService = new EvernymEscPlanService();
+	//escPlanDataService.getCommethods({ success: function(data) {alert(data.commethod.length + ' success'); }, error: function(data) {alert('bad6');} });
+//}
 /*
  * This function returns escalation plan for specific action like 'Emergency'
  */
@@ -218,14 +224,45 @@ function changePageOnSuccess(url, method, accesstokenvalue) {
     }
 	});
 }
+
+function successfulList(data){
+	//$.mobile.hidePageLoadingMsg();
+	//logger.log('success listing channels ' , null, 'dataservice', true);
+	alert(JSON.stringify(data));
+};
+
+function errorListChannels(data, status, details){
+/*	$.mobile.hidePageLoadingMsg();
+	if (loginPageIfBadLogin(details.code)){
+		//showMessage("Please log in or register to view channels.");
+	}
+	else {
+		showError("Error listing my channels: " + details.message);
+	}*/
+	//logger.logError('error listing channels', null, 'dataservice', true);
+	alert('Bad :(');
+};
+	
 /*
  * This function returns all Escalation Plans
  */
 function escPlan(msg,tagtobeFilled,accesstokenvalue) {
+	var callbacks = {
+		success: function(data) {
+			console.log(JSON.stringify(data));
+			defaultCommethods = data;
+			//alert(JSON.stringify(data));
+		},
+		error: function() { 
+			alert("Bad, bad!"); 
+		}
+	};	
 	$(tagtobeFilled).html(''); 
-	var plan = [],retries;
+	var plan = [], retries;
 	if ( msg.escPaths.length > 0 ) {
-		for(var pathcounter = 0; pathcounter < msg.escPaths.length; pathcounter++) {	
+		var escPlanDataService = new EvernymEscPlanService();
+		escPlanDataService.getCommethods(callbacks);
+		for(var pathcounter = 0; pathcounter < msg.escPaths.length; pathcounter++) {
 			var ultext = '', emaillitext = '', phonelitext = '';
 			for( var pathcounter_steps = 0; pathcounter_steps < msg.escPaths[pathcounter].steps.length; pathcounter_steps++ ) {
 				retries = 0;
@@ -234,11 +271,32 @@ function escPlan(msg,tagtobeFilled,accesstokenvalue) {
 				}
 				if( msg.escPaths[pathcounter].steps[pathcounter_steps].comMethodType == 'EMAIL') {
 					retries = isNaN(retries)?'Needed':retries+' retries ';
-					emaillitext = '<li class="mail"><strong>'+registeredEmail+'</strong><span>'+retries+'</span></li>';
+					for ( var i = 0; i < defaultCommethods.commethod.length; i++) {
+						//if((defaultCommethods.commethod[i].type == "EMAIL") && (defaultCommethods.commethod[i].dflt == "Y")) {
+						if(defaultCommethods.commethod[i].type == "EMAIL") {
+							if (defaultCommethods.commethod[i].dflt == "N") {
+								emaillitext += '<li class="mail"><strong>'+defaultCommethods.commethod[i].address+'</strong><span>Needed</span></li>';
+							}
+							else {
+								emaillitext += '<li class="mail"><strong>'+defaultCommethods.commethod[i].address+'</strong><span>'+retries+'</span></li>';
+							}
+						}
+					}
 				}
 				else {
 					retries = isNaN(retries)?'Needed':retries+' retries ';
-					phonelitext = '<li><strong>phone number (TXT)</strong><span>Needed</span></li>';
+					for ( var i = 0; i < defaultCommethods.commethod.length; i++) {
+						//if((defaultCommethods.commethod[i].type == "TXT") && (defaultCommethods.commethod[i].dflt == "Y")) {
+						if(defaultCommethods.commethod[i].type == "TXT") {
+							if (defaultCommethods.commethod[i].dflt == "N") {
+								phonelitext += '<li class="mail"><strong>'+defaultCommethods.commethod[i].address+'</strong><span>Needed</span></li>';
+							}
+							else {
+								phonelitext += '<li class="mail"><strong>'+defaultCommethods.commethod[i].address+'</strong><span>'+retries+'</span></li>';
+							}
+						}
+					}					
+					//phonelitext = '<li><strong>phone number (TXT)</strong><span>Needed</span></li>';
 				}
 			}
 			ultext =  phonelitext + emaillitext;
@@ -252,12 +310,11 @@ function escPlan(msg,tagtobeFilled,accesstokenvalue) {
 		goToView('escalationPlanSingleView');
 		urgencynameTxt = urgencyname.toLowerCase();
 		urgencynameTxt =  urgencyname.replace(/([^ -])([^ -]*)/gi,function(v,v1,v2){ return v1.toUpperCase()+v2; });
-		//$.mobile.changePage('specific-escalation-plan.html',{transition: "none"});
 	});
-	/*setTimeout(function(){
-	$.mobile.loading('hide');
-	}, 1000);*/	  
 }
+/*
+ * 
+ */
 function deletion(msg,tagtobeFilled,accesstokenvalue) {	
 	var details;
 	$(tagtobeFilled).html('');

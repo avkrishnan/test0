@@ -20,7 +20,7 @@ function SignupViewModel() {
     
     this.applyBindings = function(){
         
-        $("#" + this.template).live("pagebeforeshow", function(e, data){
+        $("#" + this.template).on("pagebeforeshow", null, function(e, data){
                                     
                                     that.clearForm();
                                     that.activate();

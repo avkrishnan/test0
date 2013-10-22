@@ -1,21 +1,51 @@
-<div id="escalationPlanSingleView" class="channel-list" data-role="page">
-  <div class="header" data-role="header">     
-		<a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
-		<a class="menu" href="#"></a>       
-  </div>
-  <div class="page-content" data-role="content">
-		<div class="portal-name"></div>     
-    <div id="escPlanData"></div>   
-    <a class="low-messages addMore"> Add another action event </a>
+<div id="escalationPlanSingleView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
+    <a class="menu" href="#"></a>
+  </header>
+  
+  <div class="page-content">
+		<div class="portal-name" data-bind="value: accountName"></div>
+    <div class="Emergencymsg" data-bind="css: activeEscPlan">When an <strong data-bind="value: activeEscPlan"></strong> message arrives</div>
+    
+    <div data-bind="foreach: activeEscalationPlan">
+      <a href="v-12b(entire view).html" class="alldetails message-arrives">
+        <strong class="details" data-bind="text: $data.delayText"></strong> 
+        <ul data-bind="foreach: $data.comMethods">
+          <li>
+            <strong>Alert me via this <b data-bind="text: $data.comMethodName"></b></strong>
+            <span>RETRY :</span>
+            <ul class="uplode" data-bind="foreach: $data.comMethodRetries">
+              <li>every <b data-bind="text: $data.comInterval"></b> for <b data-bind="text: $data.comDuration"></b></li>
+            </ul>
+          </li>
+          <!--<li>
+            <strong>Deliver via TXT to 801-555-1234</strong>
+            <span>RETRY :</span>
+            <ul class="uplode">
+            	 <li class="unuplode">none</li>
+              <li>every 5 min. for 1 hour;</li>
+              <li>then every 10 min. for 2 hours;</li>
+              <li>then every 10 min. for 12 hours;</li>
+            </ul>
+          </li>
+          <li>
+            <strong>FWD via email to billybob@gmail.com</strong>
+            <span>RETRY :</span>
+            <ul class="uplode">
+              <li class="unuplode">NA — FWDs need to be sent only once</li>
+            </ul>
+          </li>-->
+        </ul>
+      </a>
+    </div>
+    <a href="V-36.html" class="low-messages addMore"> Add an Emergency action </a>
   </div>  
-  <div data-role="footer" class="footer" data-position="fixed">
-    <a href="#" data-role="none" onclick="goToView('escalationPlansView');" class="logo" id="footer-gear">test</a>
-    <div class="contact-announcement"> 
-      <a class="add-contacts" href="#"></a> 
-      <a class="announcement" href="#"></a> 
+  
+  <div class="footer">
+    <a class="logo" href="#" data-bind="value: accountName" onclick="goToView('escalationPlansView');"></a>
+    <div class="contact-announcement">
+      <a class="announcement" href="#"></a>
     </div>
   </div>
-	<script>
-		$("#escalationPlanSingleView").on("pageshow", EscPlansettings);
-  </script>  
 </div>

@@ -18,7 +18,7 @@ function ChannelsFollowingListViewModel() {
 	this.shown = false;
     
     this.applyBindings = function(){
-        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+        $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
                                     
                                     
                                     if (!that.shown) {

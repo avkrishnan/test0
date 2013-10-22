@@ -1,28 +1,147 @@
-<div id="escalationPlansView" class="channel-list" data-role="page">
-  <div class="header" data-role="header">     
-     <a class="menu" href="#"></a>
-  </div>
-  <div class="page-content" data-role="content">
-    <div class="portal-name"></div>
+<div id="escalationPlansView" data-role="page">
+  <header>
+    <a href="#" class="back"></a>
+    <a class="menu" href="#"></a>
+  </header>
+  
+  <div class="page-content">
+    <div class="portal-name" data-bind="value: accountName"></div>
+    <!-- <div class="slides">
+      <h1>IMPORTANT</h1>
+      <div class="actions first">
+        <span></span>
+        <div class="message">
+          Add a phone number to receive
+        </div>
+        <em>Emergency or Urgent messages via SMS/TXT</em>
+        <div class="actions-info">
+          <form class="actionform" method="get" action="#">
+            <input type="text" name="Add" placeholder="enter a phone number (TXT)" >
+            <a href="#" class="addbtn">ADD</a>
+          </form>
+          <p class="error-message"><span>ERROR : </span>Not a valid email</p>
+        </div>
+        <a class="larrow" href="#"></a>
+        <div class="dots">
+          <a class="active" href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+        </div>
+        <a class="rarrow" href="#"></a>
+      </div>
+   
+      <div class="actions">
+        <span></span>
+        <div class="message">
+          Verify<strong> email-2@test.com</strong>
+        </div>
+        <em>We've sent you a confirmation message. Verify by clicking on the link (or enter the code below)</em>
+        <div class="actions-info">
+          <form class="actionform" method="get" action="#">
+            <input type="text" name="Add" placeholder="enter a phone number (TXT)" >
+            <a href="#" class="addbtn verify">VERIFY</a>
+          </form>
+        </div>
+        <div class="resend slideresend">
+          Con't Find the code
+          <a href="#" class="addbtn">RESEND</a>
+        </div>
+        <a class="larrow" href="#"></a>
+        <div class="dots">
+          <a href="#"></a>
+          <a class="active" href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+        </div>
+        <a class="rarrow" href="#"></a>
+      </div>
+      
+      <div class="actions">
+        <span></span>
+        <div class="message">
+          Please add an Emergency Buddy
+        </div>
+        <em>Emergency or Urgent messages via SMS/TXT</em>
+        <div class="actions-info">
+          <form class="actionform" method="get" action="#">
+            <input type="text" name="Add" placeholder="enter a phone number (TXT)" >
+            <a href="#" class="addbtn buddy">ADD</a>
+          </form>
+        </div>
+        <a class="larrow" href="#"></a>
+        <div class="dots">
+          <a href="#"></a>
+          <a href="#"></a>
+          <a class="active" href="#"></a>
+          <a href="#"></a>
+        </div>
+        <a class="rarrow" href="#"></a>
+      </div>
+      
+      <div class="actions">
+        <span></span>
+        <div class="message">
+          App not downloaded
+        </div>
+        <em>Emergency messages and other messages are best received via the app</em>        
+        <div class="actions-info download-app">
+          <h3>Download the app now</h3>
+          <a href="#" class="addbtn verify go">GO</a>
+        </div>
+        <a class="larrow" href="#"></a>
+        <div class="dots">
+          <a class="current" href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+          <a class="active" href="#"></a>
+        </div>
+        <a class="rarrow" href="#"></a>
+      </div>
+      
+    </div> -->
     <h1>How I get messages :</h1>
-    <div id="escPlans"></div>			
-    <h1 class="additionalsetting" id="additionalsetting" >Additional settings :</h1>
-    <a href="#" data-role="none" class="low-messages editcontact" id="editcontact" onclick="goToView('addContactView');">Add or edit contact information</a>
-    <a href="#" class="low-messages changepassword">Change password</a>
-    <a href="#" class="low-messages help">Help</a>
-    <a href="#" class="low-messages channels">About Evernym Channels</a>
-    <a href="#" class="low-messages feedback">Give us feedback</a>
-    <a href="#" class="low-messages policy">Privacy Policy and Terms of Service</a>
-    <a href="#" class="low-messages signout">Sign out</a>           
-  </div>    
-  <div data-role="footer" class="footer" data-position="fixed">
-    <a href="#" data-role="none" onclick="goToView('escalationPlansView');" class="logo" id="footer-gear">test</a>
-    <div class="contact-announcement"> 
-      <a class="add-contacts" href="#"></a> 
-      <a class="announcement" href="#"></a> 
-    </div>
+    
+    <div data-bind="foreach: escalationplans">
+      <a href="#" class="alldetails" data-bind="click: $parent.gotoView.bind($data.urgencyName)">
+        <span class="emergency" data-bind="css: urgencyName"></span>
+        <strong class="details" data-bind="text: urgencyName"></strong>
+        <ul data-bind="foreach: commethods">
+          <!--<li><strong>phone number (TXT)</strong><span>NEEDED</span></li>
+          <li class="mail"><strong>jason.law@gmail.com</strong><span>5 retries</span></li>
+          <li class="eme-buddy"><strong>Emergency Buddy</strong><span>NEEDED</span></li>
+          <li><strong>email-2@test.com</strong><span>UNVERIFIED</span></li>-->
+          <li><strong data-bind="text: $data.comMethodName"></strong><span data-bind="text: $data.comMethodRetries"></span></li>
+        </ul>
+      </a>
+		</div>
+   
+    <h1 class="additionalsettings">Additional settings :</h1>
+    <a href="#" class="low-messages editcontact" onclick="goToView('addContactView');">
+      Add or edit contact information
+    </a>
+    <a href="#" class="low-messages changepassword">
+      Change password
+    </a>
+    <a href="#" class="low-messages help">
+      Help
+    </a>
+    <a href="#" class="low-messages channels">
+      About Evernym Channels
+    </a>
+    <a href="#" class="low-messages feedback">
+      Give us feedback
+    </a>
+    <a href="#" class="low-messages policy">
+      Privacy Policy and Terms of Service
+    </a>
+    <a href="login.html" class="low-messages signout">
+      Sign out
+    </a>
   </div>
-  <script>
-		showContents( '#escalationPlansView', 'escplan', 'escPlan', '#escPlans' );
-  </script>
+  
+  <div class="footer">
+    <a class="logo" href="#">Jason.law</a>
+    <a class="announcement" href="#"></a>
+  </div>
 </div>

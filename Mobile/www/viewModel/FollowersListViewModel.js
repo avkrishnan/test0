@@ -25,7 +25,7 @@ function FollowersListViewModel() {
     this.navText = ko.observable('Channel Menu');
     
     this.applyBindings = function(){
-        $("#" + that.template).live("pagebeforeshow", function (e, data) {
+        $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
                                     
                                     
                                     if ($.mobile.pageData && $.mobile.pageData.id) {
