@@ -27,8 +27,6 @@ function LoginViewModel() {
 	this.errorMessage = ko.observable();
 	this.usernameClass = ko.observable();
 	this.passwordClass = ko.observable();
-	this.errorUsername = ko.observable();
-	this.errorPassword = ko.observable();
 
 	var username, password, rememberPassword;
 	this.applyBindings = function() {
@@ -68,8 +66,6 @@ function LoginViewModel() {
 			that.errorMessage('');
 			that.usernameClass('');
 			that.passwordClass('');
-			that.errorUsername('');
-			that.errorPassword('');
 		});
 		var action = localStorage.getItem("action");
 
@@ -100,17 +96,12 @@ function LoginViewModel() {
 		if (that.accountName() == '' && that.password() == '') {
 			that.usernameClass('validationerror');
 			that.passwordClass('validationerror');
-			that.errorUsername('typeerrormsg');
-			that.errorPassword('typeerrormsg');
-			that
-					.errorMessage('<span>SORRY:</span>Please enter username and password');
+			that.errorMessage('<span>SORRY:</span>Please enter username and password');
 		} else if (that.accountName() == '') {
 			that.usernameClass('validationerror');
-			that.errorUsername('typeerrormsg');
 			that.errorMessage('<span>SORRY:</span>Please enter username');
 		} else if (that.password() == '') {
 			that.passwordClass('validationerror');
-			that.errorPassword('typeerrormsg');
 			that.errorMessage('<span>SORRY:</span>Please enter password');
 		} else {
 			rememberPassword = document.getElementById('rememberPassword').checked;
@@ -218,12 +209,12 @@ function LoginViewModel() {
 
 		$.mobile.hidePageLoadingMsg();
 
-		if (isPhoneGap()) {
+		//if (isPhoneGap()) {
 			//alert("Running on PhoneGap!");
-			registerPushNotifications();
-		} else {
+			//registerPushNotifications();
+		//} else {
 			//alert("Not running on PhoneGap!");
-		}
+		//}
 
 		localStorage.removeItem('accessToken');
 		if (args.accessToken) {
@@ -286,8 +277,6 @@ function LoginViewModel() {
 	function loginError(data, status, details) {
 		that.usernameClass('validationerror');
 		that.passwordClass('validationerror');
-		that.errorUsername('typeerrormsg');
-		that.errorPassword('typeerrormsg');
 		that.errorMessage('<span>SORRY:</span>' + details.message);
 		that.password('');
 		that.accountName('');

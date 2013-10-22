@@ -22,9 +22,6 @@ function ForgotPasswordViewModel() {
 	this.usernameClass = ko.observable();
 	this.emailClass = ko.observable();
 
-	this.errorUsername = ko.observable();
-	this.errorEmail = ko.observable();
-
 	this.notification = ko.observable();
 
 	this.applyBindings = function() {
@@ -41,8 +38,6 @@ function ForgotPasswordViewModel() {
 			that.errorForgotPassword('');
 			that.usernameClass('');
 			that.emailClass('');
-			that.errorUsername('');
-			that.errorEmail('');
 		});
 		$('#forgotPasswordNotification').hide();
 	};
@@ -71,8 +66,6 @@ function ForgotPasswordViewModel() {
 		if (this.accountName() == '' && this.email() == '') {
 			that.usernameClass('validationerror');
 			that.emailClass('validationerror');
-			that.errorUsername('typeerrormsg');
-			that.errorEmail('typeerrormsg');
 			that.errorForgotPassword('Please enter username or email');
 		} else {
 			var callbacks = {
@@ -106,8 +99,6 @@ function ForgotPasswordViewModel() {
 		if (details) {
 			that.usernameClass('validationerror');
 			that.emailClass('validationerror');
-			that.errorUsername('typeerrormsg');
-			that.errorEmail('typeerrormsg');
 			that.errorForgotPassword(details.message);
 			// showError("Error Sending Forgot Password Request: " + details.message);
 		} else {
