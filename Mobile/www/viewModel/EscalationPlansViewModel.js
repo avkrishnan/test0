@@ -7,8 +7,8 @@ function EscalationPlansViewModel() {
 	this.displayname = "Escalation Plans";
 	this.hasfooter = true;
 	
-	var dataService = new EvernymCommethodService();
-	var escPlanDataService = new EvernymEscPlanService();
+	//var dataService = new EvernymCommethodService();
+	//var escPlanDataService = new EvernymEscPlanService();
 	//var accountDataService = new EvernymLoginService();
     
 	this.channels = ko.observableArray([]);
@@ -38,7 +38,7 @@ function EscalationPlansViewModel() {
 	}	
 	
 	this.getEscPlans = function() {
-		return escPlanDataService.getEscPlans({success: successEscPlans, error: errorEscPlans});
+		return ES.escplanService.getEscPlans({success: successEscPlans, error: errorEscPlans});
 	}
 	
 	var that = this;
@@ -129,7 +129,8 @@ function EscalationPlansViewModel() {
 				alert('error');
 			}
 		};
-		return dataService.getCommethods(callbacks);
+		//return dataService.getCommethods(callbacks);
+		return ES.commethodService.getCommethods(callbacks);
 	};
 		
 	function gotCommethods(data){
