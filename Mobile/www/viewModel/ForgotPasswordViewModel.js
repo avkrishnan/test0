@@ -52,11 +52,15 @@ function ForgotPasswordViewModel() {
 	}
 
 	this.forgotPasswordCommand = function() {
-
+		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
 		if (this.accountName() == '' && this.email() == '') {
 			that.usernameClass('validationerror');
 			that.emailClass('validationerror');
 			that.errorForgotPassword('Please enter username or email');
+		}
+		else if(!emailReg.test(this.email())) {
+			that.emailClass('validationerror');			 
+			that.errorForgotPassword('Please enter valid email');
 		} else {
 			var callbacks = {
 				success : forgotPasswordSuccess,

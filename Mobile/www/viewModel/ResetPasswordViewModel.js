@@ -8,10 +8,10 @@ function ResetPasswordViewModel() {
     // --- properties	
 		 
     var that = this;
-    this.template = "resetPasswordView";
-    this.viewid = "V-03b";
-    this.viewname = "ResetPassword";
-    this.displayname = "ResetPassword";
+    this.template = 'resetPasswordView';
+    this.viewid = 'V-03b';
+    this.viewname = 'ResetPassword';
+    this.displayname = 'ResetPassword';
     
     this.hasfooter = true;
 		
@@ -30,8 +30,8 @@ function ResetPasswordViewModel() {
 		this.changePasswordNotification = ko.observable();
 				    
     this.applyBindings = function(){
-			$("#" + that.template).on("pagebeforeshow", function(e, data){					
-				that.clearForm();										
+			$('#' + that.template).on('pagebeforeshow', function(e, data){					
+				that.clearForm();												
 			});
     };   
 		if ($.mobile.pageData && $.mobile.pageData.key){			
@@ -40,6 +40,8 @@ function ResetPasswordViewModel() {
 		}
        
     this.activate = function(){
+			var _accountName = localStorage.getItem("accountName");			
+			that.accountName(_accountName);
 			$('input').keyup(function ( ){ 
 				that.passwordClass('');
 				that.confirmPasswordClass('');				

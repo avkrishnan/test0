@@ -6,59 +6,40 @@ function ChannelListViewModel() {
 	/// </summary>
 	
 	// --- properties
- 
-	
-	this.template = "channelListView";
-	this.viewid = "V-19";
-    this.viewname = "ChannelsIOwn";
-    this.displayname = "My Channels";
-    
-    this.hasfooter = true;
-    
-	this.channels = ko.observableArray([]);
-    
-    this.notification = ko.observable();
-    this.name = ko.observable();
-    
 	var that = this;
-	this.shown = false;
-	
-    
-    
-    this.applyBindings = function(){
-        
-  	$("#" + that.template).on("Xpagebeforecreate", null, function (e, data) {});
-		$("#" + this.template).on("pagebeforeshow", null, function (e, data) {
-                                    
-                                    
-                                    
-                                    if (!that.shown) {
-                                    that.activate();
-                                    }
-                                    
-                                    });
-        
-        
-    };
-    
-    
 
-		
+	this.template = "channelListView";
+	this.viewid = "V-40";
+	this.viewname = "ChannelsIOwn";
+	this.displayname = "My Channels";
+	
+	this.hasfooter = true;    
+	this.channels = ko.observableArray([]);
+	this.accountName = ko.observable();	
+	this.notification = ko.observable();
+	this.name = ko.observable();
+	this.shown = false;	
+	this.applyBindings = function(){
+	
+	$("#" + that.template).on("Xpagebeforecreate", null, function (e, data) {});
+		$("#" + this.template).on("pagebeforeshow", null, function (e, data) {	
+			if (!that.shown) {
+				that.activate();
+			}		
+		});		
+	};  
 	this.activate = function() {
-		console.log("trying to get channels");
-        
-		
+		var _accountName = localStorage.getItem("accountName");
+		that.accountName(_accountName);
+		console.log("trying to get channels");   
 		if ( that.channels() && that.channels().length){
 			// commented out to cache the channels
-            //that.channels.removeAll();
+			//that.channels.removeAll();
 		}
-        else {
-            
-            $.mobile.showPageLoadingMsg("a", "Loading Channels");
-            return this.listMyChannelsCommand().then(gotChannels);
-        }
-        
-		
+		else {		
+			$.mobile.showPageLoadingMsg("a", "Loading Channels");
+			return this.listMyChannelsCommand().then(gotChannels);
+		}        		
 	};
 	
     

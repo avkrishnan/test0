@@ -1,0 +1,8 @@
+
+/*Todo - this file will be merged to style.css once all development done*/
+.page-content .tutorialslides {
+	display:none; 
+}
+.page-content .tutorialslides:first-child {
+	display:block; 
+}
