@@ -1,31 +1,32 @@
-<div id="verifyContactView" class="channel-list" data-role="page">
-  <div class="header" data-role="header">     
-		<a href="#" class="back" onclick="goToView('addContactView');"></a>
-		<a class="menu" href="#"></a>       
-  </div>
-	<div class="page-content" data-role="content">
-    <div class="portal-name"></div>
+<div id="verifyContactView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('additionalContactView');"></a>
+    <a class="menu" href="#"></a>
+  </header>
+  
+  <div class="page-content">
+    <div class="portal-name" data-bind="text: accountName"></div>
+   
     <div class="success">
-      <span id="recently-added-email"></span>
-      <p>We've sent you a confirmation message.Verify by clicking on the link (or enter the code below).</p>
+      <p>Success!<span data-bind="text:verificationCommethod"></span> has been added to your contact list.</p>
+      <p>We've sent you a confirmation message. Verify by clicking on the link (or enter the code below)</p>
     </div>
+    
     <div class="add-action">
       <div class="addaction">
-        <input type="text" name="verify" id="verification-code_email" placeholder="enter 6-digit code from TXT" data-inline="true" style="float:left;" />
-        <a class="addbtn verify" id="verify-code_email" href="#">VERIFY</a>
+        <input type="text" placeholder="phone or email" />
+        <a href="V-09-alternate-version-A.html" class="addbtn verify">VERIFY</a>
       </div>
-      <p class="error-message"></p>
     </div>
+    
     <div class="resend">
-      Can't Find the code
-      <a href="#" class="addbtn" id="resendEmail">RESEND</a>
+      Con't Find the code
+      <a class="addbtn" href="#">RESEND</a>
     </div>
-  </div>
-  <div data-role="footer" class="footer" data-position="fixed">
-    <a href="#" data-role="none" onclick="goToView('escalationPlansView');" class="logo" id="footer-gear">test</a>
-    <div class="contact-announcement"> 
-      <a class="add-contacts" href="#"></a> 
-      <a class="announcement" href="#"></a> 
-    </div>
+  </div>  
+  
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
   </div>
 </div>

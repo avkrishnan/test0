@@ -6,17 +6,12 @@ function AdditionalContactViewModel() {
 	this.viewname = "AdditionalContact";
 	this.displayname = "Additional Contact";
 	this.hasfooter = true;
-	//var  dataService = new EvernymCommethodService();
-	//var  accountDataService = new EvernymLoginService();
 	
 	this.baseUrl = ko.observable();
 	this.accountName = ko.observable();
 	this.name = ko.observable();
-	
-	this.newComMethod = ko.observable();
-	this.newComMethodName = ko.observable();
+
 	this.comMethodName = ko.observable();
-	this.comMethodType = ko.observable("EMAIL");
 	
 	this.navText = ko.observable();
 	this.pView = '';
@@ -26,10 +21,54 @@ function AdditionalContactViewModel() {
 	var that = this;
 		
 	that.addCommethod = function() {
-		//if() {
-			that.errorMessage("<span>ERROR: </span>Please input commethod.");
-			this.errorMessageInput('validationerror');
-		//}
+		var emailPattern = /^([\w-\.\+]+@([\w-]+\.)+[\w-]{2,4})?$/;
+		var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+		var phonepatternforhyphen = /^\d+(-\d+)*$/;
+		if(that.comMethodName() == '') {
+			that.errorMessage("<span>ERROR: </span>Please input email or phone!");
+			that.errorMessageInput('validationerror');
+		}
+		else if(!phonepatternforhyphen.test(that.comMethodName())) { /* for email*/
+			if(!emailPattern.test(that.comMethodName())) {
+				that.errorMessage("<span>ERROR: </span>Not a valid email address!");
+				return false;
+			}
+			else if(emailPattern.test(that.comMethodName())) {
+				var newCommethodObject = {
+					name : 'Default name', // TO DO with Timothy
+					type : 'EMAIL',
+					address : that.comMethodName()
+				};
+				that.addNewCommethod(newCommethodObject);
+			}
+		}
+		else { // for phone
+			if(!phoneNumberPattern.test(that.comMethodName()) || (10 > that.comMethodName().length > 12 )){
+				that.errorMessage("<span>ERROR: </span>Not a valid phone number!");
+			}
+			else if(phoneNumberPattern.test(that.comMethodName())){  
+				if(that.comMethodName().match(/^[0-9]{3}\-[0-9]{3}\-[0-9]{4}$/)) {
+					tempCommethodName = that.comMethodName();
+				}
+				else if(that.comMethodName().indexOf('-') == 3 || that.comMethodName().indexOf('-') == 6) {
+					tempCommethodName = (that.comMethodName().indexOf('-') == 3) ? that.comMethodName().substring(0, 7) + "-" + that.comMethodName().substring(7, that.comMethodName().length) : that.comMethodName().substring(0, 3) + "-" + that.comMethodName().substring(3, that.comMethodName().length);
+				}
+				else {
+					tempCommethodName = that.comMethodName().replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+				}
+				that.comMethodName(tempCommethodName);
+				var newCommethodObject = {
+					name : 'Default name', // TO DO with Timothy
+					type : 'TEXT',
+					address : that.comMethodName()
+				};
+				that.addNewCommethod(newCommethodObject);				    
+			}    
+		} 	
+	}
+	
+	this.inputKeyUp = function () {
+		that.errorMessage('');
 	}	
 		
 	this.applyBindings = function(){
@@ -50,45 +89,33 @@ function AdditionalContactViewModel() {
 			}
 			that.activate();
 		});
+		$('input').on("keyup", that.inputKeyUp );
 	};
     
 	this.activate = function() {
-		var _accountName = localStorage.getItem("accountName");
-		var _name = localStorage.getItem("UserFullName");
-		that.accountName(_accountName);
-		that.name(_name);
-		//that.getCommethods().then(gotCommethods);
+		that.accountName(localStorage.getItem("accountName"));
+		that.name(localStorage.getItem("UserFullName"));
+		that.comMethodName('');;
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;     
 	};
 	
-	this.addNewComMethod = function(){
-		var commethod = that.newComMethod();
-		var _newComMethodName = that.newComMethodName();
-		var _comMethodType = that.comMethodType();
+	this.addNewCommethod = function(newCommethodObject) {
+		//alert(JSON.stringify(newCommethodObject));
 		var callbacks = {
-			success: function(){ that.activate()},
-			error: errorAddComMethod
+			success: function(responseData) {
+				if (responseData.address == 'TEXT') {
+					localStorage.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
+				}
+				else {
+					localStorage.setItem("currentVerificationCommethod",responseData.address);	
+				}
+				goToView('verifyContactView');
+			},
+			error: function (responseData, status, details) {
+				that.errorMessage("<span>ERROR: </span>" + details.message);
+			}
 		};
-		var comobject = {
-			name : _newComMethodName,
-			type : _comMethodType,
-			address : commethod
-		};
-		ES.escplanService.addCommethod(comobject, callbacks );
-	};
-	
-	function errorChangingName(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		showError("Error Changing Name: " + details.message);
-		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
-	};
-	
-	function errorAddComMethod(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		showError("Error adding a com method: " + details.message);
-		loginPageIfBadLogin(details.code);
-		//logger.logError('error listing channels', null, 'dataservice', true);
+		ES.commethodService.addCommethod(newCommethodObject, callbacks );
 	};
 }

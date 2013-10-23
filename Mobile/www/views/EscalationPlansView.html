@@ -5,7 +5,8 @@
   </header>
   
   <div class="page-content">
-    <div class="portal-name" data-bind="value: accountName"></div>
+    <div class="portal-name" data-bind="text: accountName"></div>
+    <!-- To Do Later -->
     <!-- <div class="slides">
       <h1>IMPORTANT</h1>
       <div class="actions first">
@@ -138,9 +139,10 @@
     <a href="login.html" class="low-messages signout">
       Sign out
     </a>
-  </div>  
+  </div>
+  
   <div class="footer">
-    <a class="logo" href="#" data-bind="value: accountName"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
     <a class="announcement" href="#"></a>
   </div>
 </div>

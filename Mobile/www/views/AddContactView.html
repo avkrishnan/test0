@@ -5,7 +5,7 @@
   </header>
 
   <div class="page-content">
-    <div class="portal-name" data-bind="value: accountName"></div>
+    <div class="portal-name" data-bind="text: accountName"></div>
     
     <div class="details-delete">
       <h1>My contact information</h1> 
@@ -29,11 +29,8 @@
   </div> 
   
   <div class="footer">
-    <a class="logo" href="#" data-bind="value: accountName" onclick="goToView('escalationPlansView');"></a>
-    <div class="contact-announcement">
-      <a class="add-contacts" href="#"></a>
-      <a class="announcement" href="#"></a>
-    </div>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
   </div>
   
 </div>

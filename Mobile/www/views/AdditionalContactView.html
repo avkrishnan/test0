@@ -5,7 +5,7 @@
   </header>
   
   <div class="page-content">
-    <div class="portal-name" data-bind="value: accountName"></div>
+    <div class="portal-name" data-bind="text: accountName"></div>
     
     <div class="success">
     	<p>Add a new phone number (TXT) or email</p>
@@ -20,4 +20,10 @@
     </div> 
     
   </div>
+  
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
+  </div>
+    
 </div>
