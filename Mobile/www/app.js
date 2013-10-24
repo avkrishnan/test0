@@ -363,6 +363,7 @@ verifyContactViewModel = new VerifyContactViewModel(),
 tutorialViewModel = new TutorialViewModel(),
 signupStepFirstViewModel = new SignupStepFirstViewModel(),
 signupStepSecondViewModel = new SignupStepSecondViewModel(),
+channelsIOwnViewModel = new ChannelsIOwnViewModel(),
 /* end*/
 
 messageViewModel = new MessageViewModel(),
@@ -408,7 +409,8 @@ var models = [
               verifyContactViewModel,
 							signupStepFirstViewModel,
 							signupStepSecondViewModel,
-							tutorialViewModel
+							tutorialViewModel,
+							channelsIOwnViewModel
               ];
 
 
