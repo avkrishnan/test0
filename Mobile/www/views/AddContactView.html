@@ -4,21 +4,14 @@
     <a class="menu" href="#"></a>
   </header>
 
+	<!--
   <div class="page-content">
     <div class="portal-name" data-bind="text: accountName"></div>
-    
     <div class="details-delete">
       <h1>My contact information</h1> 
       <a class="gray-delete" href="V-09-Delete-A.html"></a>
     </div>
-    
     <div data-bind="foreach: commethods">
-      <!--<div class="addnewno">
-        <em></em><span>jason.law@gmail.com</span>
-      </div>
-      <div class="addnewno notverify">
-        <em></em><span>jason.law@gmail.com</span><a class="addbtn verify" href="#">VERIFY</a>
-      </div>-->
       <div class="addnewno" data-bind="css: $data.comMethodClass">
         <em></em><span data-bind="text: $data.comMethodAddress"></span><div data-bind="if: $data.comMethodVerify">
         <a class="addbtn verify" href="#" data-bind="click: $parent.gotoView.bind('verifyContactView')">VERIFY</a>
@@ -27,6 +20,57 @@
     </div>
     <a class="low-messages addMore" href="#" onclick="goToView('additionalContactView');">Add an additional number or email</a>
   </div> 
+	-->
+  
+  <div class="page-content">
+    <div class="portal-name" data-bind="text: accountName"></div>
+    
+    <div class="details-delete">
+      <h1>My contact information</h1> 
+      <a class="gray-delete" href="#" data-bind="click: changeIcon.bind($data, 'red'), css: deleteClass"></a>
+    </div>
+    
+    <div class="details-delete">
+      <h1>My contact information</h1> 
+      <a class="deleteicanred" href="#" data-bind="click: changeIcon.bind($data, 'grey'), css: deleteClass"></a>
+    </div> 
+      
+    <div class="mycontact">
+    <em class="emailican"></em><span>jason.law@gmail.com</span>
+    </div> 
+    <div class="mycontact notverify">
+    <em class="emailican"></em><span>jason.law@gmail.com</span>
+    <a class="addbtn verify" href="#">VERIFY</a>
+    </div> 
+    <div class="mycontact textican">
+    <em class="textican"></em><span>866-432-9999</span>
+    </div> 
+    <div class="mycontact textican notverify">
+    <em class="textican"></em><span>866-432-9999</span>
+    <a class="addbtn verify" href="#">VERIFY</a>
+    </div> 
+    <div class="mycontact">
+    <em class="removeemailnumber"></em><span>jason.law@gmail.com</span>
+    </div>
+    <div class="mycontact">
+    <em class="deleteicanchange"></em>
+    <span>jason.law@gmail.com</span>
+    <a class="deleteemailbtn" href="#">Delete</a>
+    </div>
+    <div class="mycontact notverify">
+      <em class="removeemailnumber"></em>
+      <span>jason.law@gmail.com</span>
+      <a class="deleteemailbtn" href="#">Delete</a>
+    </div>    
+    <div class="mycontact notverify">
+      <em class="deleteicanchange"></em>
+      <span>jason.law@gmail.com</span>
+      <a class="deleteemailbtn" href="#">Delete</a>
+    </div>
+    
+    <a class="low-messages addMore" href="#" onclick="goToView('additionalContactView');">Add an additional number or email</a>
+    <a class="low-messages addMore disabled" href="#">Add an additional number or email</a>
+  </div>  
   
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>

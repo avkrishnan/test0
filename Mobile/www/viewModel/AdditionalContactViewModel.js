@@ -89,7 +89,7 @@ function AdditionalContactViewModel() {
 			}
 			that.activate();
 		});
-		$('input').on("keyup", that.inputKeyUp );
+		$('input').on("keyup", that.inputKeyUp);
 	};
     
 	this.activate = function() {
@@ -110,6 +110,7 @@ function AdditionalContactViewModel() {
 				else {
 					localStorage.setItem("currentVerificationCommethod",responseData.address);	
 				}
+				localStorage.setItem("verificationStatus",true);
 				goToView('verifyContactView');
 			},
 			error: function (responseData, status, details) {
