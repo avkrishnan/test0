@@ -6,12 +6,15 @@ function AddContactViewModel() {
 	this.viewname = "AddEditContact";
 	this.displayname = "Add/Edit Contact";
 	this.hasfooter = true;
+	this.deleteClass = "uima2";
 	
 	this.channels = ko.observableArray([]);
 	this.commethods = ko.observableArray([]);
 	this.baseUrl = ko.observable();
 	this.accountName = ko.observable();
-	this.name = ko.observable();	
+	this.name = ko.observable();
+	
+	//this.deleteClass = ko.observable();
 	
 	this.navText = ko.observable();
 	this.pView = '';
@@ -51,21 +54,24 @@ function AddContactViewModel() {
 		return ES.commethodService.getCommethods(callbacks);
 	}
 	
-	this.gotoView = function(pageView) {
-		alert(JSON.stringify(pageView));
-		goToView(pageView);
+	this.gotoView = function(data) {
+		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
+		localStorage.setItem("currentVerificationCommethodType",data.comMethodType);
+		localStorage.setItem("currentVerificationCommethodID",data.comMethodID);
+		localStorage.setItem("verificationStatus",false);
+		goToView('verifyContactView');
 	}	
 
 	this.showCommethods = function(data) {
 		if(data.commethod.length > 0) {
 			var tempCommethodClass = '', tempshowVerify = false;
 			$.each(data.commethod, function(indexCommethods, valueCommethods) {
-				//alert(valueCommethods.address);
+				//alert(JSON.stringify(valueCommethods));
 				if (valueCommethods.verified == "N") {
 					tempCommethodClass = "notverify";
 					tempshowVerify = true;
 				}
-				that.commethods.push({ comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify });
+				that.commethods.push({ comMethodID: valueCommethods.id, comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify, comMethodType: valueCommethods.type});
 			});
 		}
 	}	
@@ -83,4 +89,10 @@ function AddContactViewModel() {
 		return that.getCommethods().then(that.showCommethods);
 		//return true;     
 	};
+	
+	this.changeIcon = function(data, data2) {
+		alert(JSON.stringify(data2));
+		that.deleteClass('uima');
+		this.deleteClass = 'see';
+	}
 }

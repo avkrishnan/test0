@@ -11,11 +11,50 @@ function VerifyContactViewModel() {
 	this.name = ko.observable();
 	
 	this.verificationCommethod = ko.observable();
+	this.verificationCommethodType = ko.observable();
+	this.verificationCommethodID = ko.observable();
+	this.verificationCode = ko.observable();
+	this.verificationStatus = ko.observable();
 	
 	this.navText = ko.observable();
 	this.pView = '';
+	this.errorMessage = ko.observable();
 	
 	var that = this;
+	
+	this.verifyRequestCommethod = function() {
+		//alert(that.verificationCode().length);
+		if(that.verificationCode() == '') {
+			that.errorMessage("<span>ERROR: </span> Please input verification code!");
+		}
+		else if(that.verificationCode().length != 6) {
+			that.errorMessage("<span>ERROR: </span> Verification code should be 6 digits!");
+		}
+		else {
+			var verifyCommethodObject = {
+				code : that.verificationCode(),
+				type : that.verificationCommethodType,
+				address : that.verificationCommethod()
+			};
+			that.verifyRequest(verifyCommethodObject);	
+		}
+	}		
+	
+	this.requestVerificationCode = function() {
+		var callbacks = {
+			success: function(responseData) {
+				alert('Verification code sent!');
+			},
+			error: function (responseData, status, details) {
+				alert('error');
+			}
+		};		
+		return ES.commethodService.requestVerification(that.verificationCommethodID(), callbacks);
+	}
+	
+	this.inputKeyUp = function () {
+		that.errorMessage('');
+	}	
   
 	this.applyBindings = function(){
 		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
@@ -26,9 +65,9 @@ function VerifyContactViewModel() {
 			console.log("previousView Model viewid: " + vm.displayname);
 			that.navText(vm.displayname);
 			that.pView = previousView;
-			
 			that.activate();
 		});
+		$('input').on("keyup", that.inputKeyUp);
 	};
     
 	this.activate = function() {
@@ -37,59 +76,40 @@ function VerifyContactViewModel() {
 		
 		that.accountName(_accountName);
 		that.name(_name);
-		that.getCommethods().then(gotCommethods);
-	
+		that.verificationCode('');
+		that.verificationCommethod(localStorage.getItem("currentVerificationCommethod"));
+		that.verificationCommethodID(localStorage.getItem("currentVerificationCommethodID"));
+		that.verificationStatus(localStorage.getItem("verificationStatus"));
+		
+		if (that.verificationStatus() == 'false') {
+			that.verificationStatus(false);
+		}
+		else {
+			that.verificationStatus(true);
+		}
+		if(localStorage.getItem("currentVerificationCommethodType") == 'EMAIL') {
+			that.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below)');
+		}
+		else {
+			that.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below');
+		}
+		//alert(localStorage.getItem("currentVerificationCommethod"));
+		//that.getCommethods().then(gotCommethods);
+		
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;     
 	};
 
-	function requestVerificationError(data, status, details) {
-		$.mobile.hidePageLoadingMsg();
-		loginPageIfBadLogin(details.code);
-		showError("Error Requesting Verification: " + details.message);
-	}
-    
-	function requestVerificationSuccess(data){
-		$("#chicken").html("Verification Email Sent"); 
-	}
-
-	this.verifyCommand = function(commethod){
-		//showMessage(JSON.stringify(commethod));
-		$.mobile.showPageLoadingMsg("a", "Requesting Verification");
+	this.verifyRequest = function(verifyCommethodObject){
 		var callbacks = {
-		//success: requestVerificationSuccess,
-		success: function (){
-				$("#commethod-" + commethod.id).html("Verification Email Sent");
-		},
-		error: requestVerificationError
+			success: function(responseData) {
+				alert('success');
+			},
+			error: function (responseData, status, details) {
+				alert('error');
+				that.errorMessage("<span>ERROR: </span>" + details.message);
+			}
 		};
-		return ES.commethodService.requestVerification( commethod.id, callbacks);
-	};
-	
-	this.verifyCodeCommand = function(commethod) {
-	function verificationSuccess(){
-			showMessage("Successfully Verified Communication Method");
-			that.getCommethods().then(gotCommethods);
-	}
-	
-	function verificationError(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		showError("Error in Verification: " + details.message);
-		loginPageIfBadLogin(details.code);
-	};
-					
-	function submitVerificationCode(){
-		
-		var code = $("#verifyCode").find("#verifyCodeCode").val();
-		$.mobile.showPageLoadingMsg("a", "Verifying");
-		
-		var callbacks = {
-			success: verificationSuccess,
-			error: verificationError
-		};
-		
-		var needsAuthentication = true;
-			ES.commethodService.verification(code, callbacks, needsAuthentication).then(closeCodeDialog);
-		}
-	}
+		return ES.commethodService.verification(verifyCommethodObject.code, callbacks);
+	};	
 }

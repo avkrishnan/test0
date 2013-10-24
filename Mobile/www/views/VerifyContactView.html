@@ -8,20 +8,24 @@
     <div class="portal-name" data-bind="text: accountName"></div>
    
     <div class="success">
-      <p>Success!<span data-bind="text:verificationCommethod"></span> has been added to your contact list.</p>
-      <p>We've sent you a confirmation message. Verify by clicking on the link (or enter the code below)</p>
+      <p data-bind="ifnot: verificationStatus"><span data-bind="text: verificationCommethod"></span></p>
+      <p data-bind="if: verificationStatus">Success! <span data-bind="text: verificationCommethod"></span> has been added to your contact list.</p>
+      <p data-bind="text: verificationCommethodType"></p>
     </div>
     
     <div class="add-action">
       <div class="addaction">
-        <input type="text" placeholder="phone or email" />
-        <a href="V-09-alternate-version-A.html" class="addbtn verify">VERIFY</a>
+      
+        <input type="text" placeholder="enter 5 digit code from email" data-bind="{value: verificationCode}" />
+        
+        <a href="#" class="addbtn verify" data-bind="click: verifyRequestCommethod">VERIFY</a>
       </div>
+      <div class="error-message" data-bind="html: errorMessage"></div>
     </div>
     
     <div class="resend">
       Con't Find the code
-      <a class="addbtn" href="#">RESEND</a>
+      <a class="addbtn" href="#" data-bind="click: requestVerificationCode">RESEND</a>
     </div>
   </div>  
   
