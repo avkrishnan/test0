@@ -364,6 +364,11 @@ tutorialViewModel = new TutorialViewModel(),
 signupStepFirstViewModel = new SignupStepFirstViewModel(),
 signupStepSecondViewModel = new SignupStepSecondViewModel(),
 channelsIOwnViewModel = new ChannelsIOwnViewModel(),
+helpViewModel = new HelpViewModel(),
+aboutEvernymViewModel = new AboutEvernymViewModel(),
+feedbackViewModel = new FeedbackViewModel(),
+inviteFollowersIIViewModel = new InviteFollowersIIViewModel(),
+privacyPolicyViewModel = new PrivacyPolicyViewModel(),
 /* end*/
 
 messageViewModel = new MessageViewModel(),
@@ -410,7 +415,12 @@ var models = [
 							signupStepFirstViewModel,
 							signupStepSecondViewModel,
 							tutorialViewModel,
-							channelsIOwnViewModel
+							channelsIOwnViewModel,
+							helpViewModel,
+							aboutEvernymViewModel,
+							feedbackViewModel,
+							inviteFollowersIIViewModel,
+							privacyPolicyViewModel
               ];
 
 

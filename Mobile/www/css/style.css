@@ -323,7 +323,7 @@ h1.additionalsettings {
 	float:right;
 	width:78px;
 }
-.low-messages {
+.low-messages, .togglearrow {
 	background:#2D2D2D url("images/sprites.png") no-repeat -5px 3px;
 	border-radius:21px 0 0 21px;
 	color:#FFFFFF;
@@ -1070,11 +1070,11 @@ span.down-arrow {
 .Channel {
 	background:#2D2D2D;
 	border-radius:4px;
-	margin:0 30px 0 20px;
+	margin:0 25px 0 15px;
 	overflow:hidden;
 	color:#fff;
 	font-size:15px;
-	padding: 10px 10px 10px 10px;
+	padding:10px 10px 10px 10px;
 	line-height:28px;
 }
 .Channel a {
@@ -1357,6 +1357,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channel5 {
 	background:url("images/channelimg4.png") no-repeat 0 0;
+}
+.channel6 {
+	background:url("images/channelimg5.png") no-repeat 0 0;
+}
+.borderblue {
+	border:2px solid #2e3192;
 }
 .borderyellow {
 	border:2px solid #f7941e;
@@ -1642,7 +1648,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:4px;
 	margin-bottom:10px;
 }
-.channelmessages .channelicans {
+.channelicans {
 	float:left;
 	height:50px;
 	width:50px;
@@ -1657,13 +1663,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin-left:50px;
 	border-left:1px solid #eaeaea;
 }
-.channelmessages .messagebtn {
+.messagebtn {
 	float:right;
 	padding:0 8px;
 	border-radius:4px;
 	font-size:14px;
 	background:#8dc63f;
-	margin:5px 10px 0 0;
+	margin:3px 10px 0 0;
 }
 .channelmessages .timemsg {
 	font-size:14px;
@@ -2143,9 +2149,214 @@ h1.requests {
 .loginform .sendbtnican span {
 	margin:0;
 }
+/*-25-10-2013-*/
+.help-FAQs {
+	font-size:20px;
+	margin:15px 10px;
+}
+.helpfull-link, .aboutuschannel {
+	margin-right:10px;
+	padding:20px;
+	border-top:1px solid #828181;
+	border-bottom:1px solid #828181;
+}
+/*.helpfull-link li {
+	margin-bottom:6px;
+	padding:0 0 3px 0;
+}*/
+.helpfull-link li {
+	font-size:16px;
+	color:#fff;
+	padding:0 0 0 35px;
+	background:url("images/helpicon.png") no-repeat 0px 2px;
+	margin-bottom:6px;
+}
+.channeledit {
+	padding:20px;
+	border-bottom:1px solid #828181;
+	margin-right:10px;
+}
+.channeledit.last {
+	border-bottom:none;
+}
+.channeledit h2 {
+	font-size:16px;
+	color:#fff;
+	font-weight:normal;
+	margin-bottom:10px;
+}
+.channeledit p {
+	font-style:italic;
+	font-size:14px;
+	color:#fff;
+}
+.aboutuschannel {
+	color:#fff;
+	font-size:14px;
+}
+.feedbacktitle {
+	padding:0 0 0 6px;
+}
+.aboutuschannel.last {
+	border-bottom:none;
+}
+.messages-content {
+	padding:3px;
+	border-radius:4px;
+	background:#fff;
+	margin:15px 10px 0px 0px;
+}
+.messagescontent {
+	background:#e6e7e8;
+	padding:0 0 8px 0;
+}
+.msg-hideshow {
+	overflow:hidden;
+	padding:8px 8px 8px 8px;
+	border-bottom:1px solid #ccc;
+}
+.msg-hideshow h4 {
+	float:left;
+	font-size:22px;
+	color:#2d2d2d;
+	font-weight:normal;
+}
+.msg-hideshow a {
+	float:right;
+	padding:13px;
+	margin-top:5px;
+	background:url("images/msg-hide.png") no-repeat 0px 0px;
+}
+.messagesreceived, .igi-responses {
+	background:#fff;
+	display:block;
+	border-radius:4px;
+	margin:10px 8px 0 8px;
+}
+.messagesreceived .received, .igi-responses .received {
+	color:#8DC63F;
+	font-size:15px;
+}
+.messagesreceived .messageschannel p.receive-time, .igi-responses p.receive-time {
+	font-size:15px;
+	color:#414141;
+	line-height:20px;
+}
+.messagesreceived p.receive-time em {
+	font-style:normal;
+	color:#a0a0a0;
+	font-size:15px;
+	padding:0 2px 0 0;
+}
+.normalicon {
+	background:url("images/sprites.png") no-repeat -3px -1547px;
+}
+.received-responses-msg {
+	background:#27AAE1;
+	border-radius:4px;
+	font-size:14px;
+	padding:0 5px;
+	position:absolute;
+	top:3px;
+}
+ul.igiresponses, .notification {
+	border-top:1px solid #EAEAEA;
+	padding:2px 0px 5px 0;
+}
+ul.igiresponses li {
+	font-size:14px;
+	color:#8DC63F;
+	padding:5px 0px;
+}
+ul.igiresponses li span {
+	font-size:12px;
+	color:#8d8b8c;
+	padding:0 10px;
+}
+.followersname {
+	font-size:15px;
+	color:#8DC63F;
+	padding:8px 10px;
+}
+.notification li {
+	color:#2d2d2d;
+	font-size:14px;
+	padding:5px 10px;
+}
+.notification li em {
+	color:#8DC63F;
+	font-size:13px;
+}
+.search-query {
+	border-bottom:1px solid #828181;
+	padding: 0 0 5px 10px;
+}
+.searchtype .ui-icon-searchfield:after {
+	background:url("images/searchicon.png") no-repeat 0 0;
+	border:none;
+	border-radius:0 4px 4px 0;
+	height:36px;
+	left:inherit;
+	right:0;
+	top:9px;
+	width:35px;
+}
+.searchtype .ui-icon, .searchtype .ui-btn-inner {
+	background:none;
+	border:none;
+	margin:0px;
+}
+.channelsrecommended h1 {
+	margin-bottom:15px;
+	margin-top:20px;
+}
+.channelsrecommended {
+	padding:0 0 0 10px;
+}
+.browseall {
+	font-size:14px;
+	padding:6px;
+	line-height:22px;
+}
+.browseall a {
+	font-size:13px;
+	padding:2px 3px;
+}
+.togglearrow {
+	background:#2D2D2D url("images/togglearrow.png") no-repeat 3px 3px;
+}
+.togglearrowdown {
+	background:#2D2D2D url("images/togglearrowdown.png") no-repeat 3px 3px;
+}
+.dropdownchanel {
+	background:#fff;
+	margin:-10px 5px 0 18px;
+}
+.dropdownchanellist li {
+	padding:5px 0px;
+}
+.dropdownchanellist li.even {
+	background:#f1f2f2
+}
+.dropdownchanellist li a.ui-link, .dropdownchanellist li a.ui-link:hover {
+	font-size:12px;
+	color:#414141;
+	font-style:italic;
+}
+.dropdownchanellist li a span {
+	font-size:12px;
+	color:#8DC63F;
+	padding:0px 8px;
+	font-weight:bold;
+	font-style:normal;
+}
+.addmorelist.ui-link, .addmorelist.ui-link:hover {
+	padding:5px 0 5px 30px;
+	display:block;
+	color:#a7a9ac;
+	background:#f1f2f2 url("images/sprites-channel.png") no-repeat -9px -1419px;
+}
 /* CHANNELS PAGES CSS	END	 */
-
-
 /*
 	*@media query css
 */
@@ -2196,6 +2407,19 @@ h1.requests {
 	}
 	.sendbtnican {
 		padding:10px 20px 10px 50px;
+	}
+	.browseall {
+		font-size:15px;
+		padding:6px;
+		line-height:28px;
+		margin:0 30px 0 20px
+	}
+	.browseall a {
+		font-size:14px;
+		padding:4px 14px;
+	}
+	.dropdownchanellist li a.ui-link, .dropdownchanellist li a span {
+		font-size:13px;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -2261,6 +2485,12 @@ h1.requests {
 	}
 	.channelinfo.channelfollow {
 		width:95%;
+	}
+	.browseall {
+		padding:10px;
+	}
+	.dropdownchanellist li a.ui-link, .dropdownchanellist li a span {
+		font-size:15px;
 	}
 }
 @media only screen and (max-width:1280px) and (min-width:768px) {
