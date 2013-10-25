@@ -1,0 +1,49 @@
+<div id="channelsIOwnView" data-role="page">
+  <header>
+    <a href="#" class="back"></a>
+    <a class="menu" href="#"></a>
+    <div class="linkican">
+      <a class="smsican" href="#"></a>
+      <a class="processingican"href="#"></a>
+      <a class="groupican" href="#"></a>
+    </div>
+  </header>  
+  <div class="page-content">
+    <div class="dropdown">
+      Channels I Own
+      <form class="chaneldropdown" action="#" method="get" >
+        <select>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+        </select>
+      </form>
+    </div>
+    <div data-bind="foreach: channels"> 
+      <div class="channelcontent">
+        <span class="channelimg channel1 borderred"></span>
+        <div class="detailschannel">
+          <div class="channelinfo">
+            <strong data-bind="text: name"></strong>
+            <em data-bind="text: description"></em>
+          </div>
+          <a href="#" class="setting"></a>
+          </div>    
+          <a class="requestcontent" href="#">
+            <span class="request">4 new requests</span>
+            <span class="igi">2 new iGi's</span>
+          </a>    
+          <a class="requestcontent last" href="#">
+            <span class="followers">16 followers</span>
+            <span class="request">+ 1 requests</span>
+            <span class="lost">-1 lost</span>
+          </a>
+        </div>
+      </div>   
+    </div>  
+ <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
+  </div>  
+</div>    
