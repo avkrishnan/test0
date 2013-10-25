@@ -649,6 +649,7 @@ em.removeemailnumber {
 }
 .disabled {
 	opacity: 0.5;
+	cursor:auto;
 }
 .mycontact .deleteemailbtn {
 	margin:7px 10px 6px 0;
@@ -771,11 +772,14 @@ em.removeemailnumber {
 .loginform {
 	overflow:hidden;
 }
-.loginform .msginfo em{
+.loginform .msginfo em, .loginform .msginfo, .invited-followChannel{
 	font-size:16px;
 	color:#fff;
 	margin:15px 0 15px 10px;
 	display:block;
+}
+.loginform .msginfo {
+		color:#fff;
 }
 .loginform form {
 	border-bottom:1px solid #A0A0A0;
@@ -1292,6 +1296,15 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	float:left;
 	width:90%;
 }
+.channelinfo.channelfollow {
+	width:86%;
+}
+.channelinfo.channelfollow strong {
+	color:#8DC63F;
+	float:left;
+	font-size:18px;
+	font-weight:normal;
+}
 .detailschannel.last {
 	border:none;
 }
@@ -1322,10 +1335,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:50%;
 }
 .channel1 {
-	background:url("images/channelimg1.png") no-repeat -1px 0px;
+	background:url("images/channelimg1.png") no-repeat -1px 0;
 }
 .borderred {
 	border:2px solid #be1e2d;
+}
+.bordergreen {
+	border:2px solid #006838;
 }
 .sky-blue {
 	border:2px solid #1c75bc;
@@ -1335,6 +1351,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channel3 {
 	background:url("images/channelimg3.png") no-repeat 0 0;
+}
+.channel4 {
+	background:url("images/channelimg3.png") no-repeat 0 0;
+}
+.channel5 {
+	background:url("images/channelimg4.png") no-repeat 0 0;
 }
 .borderyellow {
 	border:2px solid #f7941e;
@@ -1372,7 +1394,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding-top:65px;
 }
 .channelsettings .channelcontent {
-	/*margin:0px;*/
+	/*margin:0;*/
 }
 .editchannel {
 	/*background: url("images/sprites.png") no-repeat scroll -5px 3px #2D2D2D;*/
@@ -1394,8 +1416,8 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background-position:-2px -396px;
 }
 .changename {
-	margin:0px 20px 0px 10px;
-	padding:15px 0px 15px 0;
+	margin:0 20px 0 10px;
+	padding:15px 0 15px 0;
 	color:#8DC63F;
 	font-size:20px;
 	border-bottom:1.5px solid #828181;
@@ -1531,7 +1553,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	float:right;
 }
 .dropdown .ui-select .ui-btn {
-	margin:0px;
+	margin:0;
 	width:120px;
 	height:26px;
 	background:#414141;
@@ -1552,14 +1574,14 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:0 0 4px 10px;
 }
 .dropdown .ui-select .ui-btn-icon-right .ui-btn-inner, .dropdown .ui-select .ui-li-has-count .ui-btn-inner {
-	padding:0px;
+	padding:0;
 	border:1px solid #828181;
 }
 .radiobtn {
 	border-top:1px solid #828181;
 	border-bottom:1px solid #828181;
 	margin:25px 0 0 -10px;
-	padding:15px 20px 0px 25px;
+	padding:15px 15px 0 15px;
 	overflow:hidden;
 }
 .yes-no {
@@ -1577,7 +1599,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	float:right;
 }
 .yes-no div.ui-slider-switch {
-	margin:0px;
+	margin:0;
 	border:none;
 	background:none;
 }
@@ -1611,7 +1633,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 
 .channelmessages {
-	padding:0px 10px 0px 0;
+	padding:0 10px 0 0;
 }
 .channelmessages a {
 	display:inline-block;
@@ -1637,11 +1659,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelmessages .messagebtn {
 	float:right;
-	padding:0px 8px;
+	padding:0 8px;
 	border-radius:4px;
 	font-size:14px;
 	background:#8dc63f;
-	margin:5px 10px 0px 0px;
+	margin:5px 10px 0 0;
 }
 .channelmessages .timemsg {
 	font-size:14px;
@@ -1670,7 +1692,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-style:normal;
 }
 .msgbroadcast {
-	margin:0px 0px 0px 9px;
+	margin:0 0 0 9px;
 	padding:4px 0;
 }
 .msgbroadcast p em {
@@ -1693,7 +1715,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#fff;
 	border-radius:4px;
 	overflow:hidden;
-	margin:8px 0px 0px 0px;
+	margin:8px 0 0 0;
 }
 .messagesundeliver li {
 	padding:5px 10px;
@@ -1749,11 +1771,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin-left:15px;
 	padding:2px 10px;
 }
-
-
-
-
-
 .channelinformation {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
@@ -1766,7 +1783,8 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelinfocontent {
 	border-bottom:1px solid #828181;
 	margin:0 15px 0 57px;
-	padding:8px 0px 8px 0px;
+	padding:8px 0 8px 0;
+	overflow:hidden;
 }
 .channelinformation .setting {
 	margin:2px 10px 0 0;
@@ -1781,7 +1799,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .broadcast-sensitive {
 	border-radius: 21px 0 0 21px;
-	margin:0px 0 0 4px;
+	margin:0 0 0 4px;
 	overflow:hidden;
 }
 .broadcast-sensitive span {
@@ -1809,7 +1827,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-top:2px solid #a7a9ac;
 	border-bottom:2px solid #fff;
 	overflow:hidden;
-	margin:8px 0px;
+	margin:8px 0;
 	background:#67676a;
 	height:30px;
 	line-height:30px;
@@ -1865,7 +1883,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .broadcastmsgsend em.broadcastmsgunsend {
 	float:right;
 	font-size:16px;
-	padding:0px;
+	padding:0;
 	width:32%;
 	font-style:normal;
 	color:#fff;
@@ -1892,14 +1910,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	display:inline-block;
 	font-size:16px;
 	margin-left:15px;
-	padding:0px 10px;
+	padding:0 10px;
 	float:right;
 	color:#fff;
 	font-style:normal;
 	margin:2px 5px;
 	line-height:25px;
 }
-
 .broadcast-sensitive.singlemessage {
 	margin: 0 4px;
 	border-radius:21px 4px 4px 21px;
@@ -1910,7 +1927,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .broadcast-sensitive.singlemessage em {
 	padding:16px 20px;
-	background:url("images/singalmsgread.png") no-repeat 0px 8px;
+	background:url("images/singalmsgread.png") no-repeat 0 8px;
 	
 }
 h1.messagesdate {
@@ -1948,7 +1965,7 @@ h1.messagesdate {
 .broadcastmsgred {
 	border-bottom: 1px solid #7f7c7c;
 	box-shadow: 0 -8px 9px #CCCCCC inset;
-	margin:0px;
+	margin:0;
 }
 .msgfullread {
 	background:#F1F2F2 url("images/sprites.png") no-repeat scroll -9px -748px;
@@ -1988,7 +2005,7 @@ h1.messagesdate {
 	padding:10px 0 5px 10px;
 }
 .followerchannel .channelcontent {
-	margin:0px;
+	margin:0;
 }
 .newfollowers {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -969px;
@@ -2012,7 +2029,7 @@ h1.requests {
 	line-height:20px;
 }
 .accept-decline span {
-	font-size:14px;
+	font-size:13px;
 }
 .accept-decline em {
 	font-size:12px;
@@ -2032,7 +2049,7 @@ h1.requests {
 	padding:0 8px;
 }
 .allfollowercs {
-	margin:0px 0px 10px 10px;
+	margin:0 0 10px 10px;
 	overflow:hidden;
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1084px;
 }
@@ -2071,9 +2088,9 @@ h1.requests {
 	background:#fff;
 	border-radius:4px;
 	resize:none;
-	font-size:14px;
+	font-size:13px;
 }
-.msginfo em, .followerdetails em, .response span, .createchannel em {
+.msginfo em, .followerdetails em, .response span, .createchannel em, .invited-followChannel em {
 	color:#8DC63F;
 }
 .followerdetails {
@@ -2085,15 +2102,15 @@ h1.requests {
 .followerincrease .broadcastmsgsend {
 	border:2px solid #ffffff;
 	border-radius:4px;
-	margin:8px 0px 0px 0px;
+	margin:8px 0 5px 0;
 }
 .followerincrease .broadcastmsgsend .msgincreasefull {
 	width:75%;
 }
 .response {
 	font-size:14px;
-	padding:0px 0px 0px 10px;
-	margin:0px;
+	padding:0 0 0 10px;
+	margin:0;
 }
 .createchannel {
 	color:#FFFFFF;
@@ -2103,6 +2120,28 @@ h1.requests {
 }
 .createchannel em {
 	font-style:normal;
+}
+.channelinfocontent em {
+	color:#969696;
+	font-size:14px;
+	font-weight:bold;
+	display:block;
+	clear:both;
+}
+.channel-follow {
+	margin:0;
+}
+.channelinfocontent.last {
+	border: medium none;
+}
+.sendbtnican {
+	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -741px;
+	border-radius:24px 0 0 24px;
+	float:right;
+	padding:10px 8px 10px 50px;
+}
+.loginform .sendbtnican span {
+	margin:0;
 }
 /* CHANNELS PAGES CSS	END	 */
 
@@ -2154,6 +2193,9 @@ h1.requests {
 	}
 	.addfollowers a {
 		font-size:16px;
+	}
+	.sendbtnican {
+		padding:10px 20px 10px 50px;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -2217,7 +2259,9 @@ h1.requests {
 	.broadcast-sensitive span {
 		width:86.5%;
 	}
-	
+	.channelinfo.channelfollow {
+		width:95%;
+	}
 }
 @media only screen and (max-width:1280px) and (min-width:768px) {
 	.msg-content p {

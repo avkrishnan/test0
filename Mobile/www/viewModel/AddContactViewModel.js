@@ -6,7 +6,6 @@ function AddContactViewModel() {
 	this.viewname = "AddEditContact";
 	this.displayname = "Add/Edit Contact";
 	this.hasfooter = true;
-	this.deleteClass = "uima2";
 	
 	this.channels = ko.observableArray([]);
 	this.commethods = ko.observableArray([]);
@@ -14,7 +13,7 @@ function AddContactViewModel() {
 	this.accountName = ko.observable();
 	this.name = ko.observable();
 	
-	//this.deleteClass = ko.observable();
+	this.deleteClass = ko.observable();
 	
 	this.navText = ko.observable();
 	this.pView = '';
@@ -82,6 +81,7 @@ function AddContactViewModel() {
 		
 		that.accountName(_accountName);
 		that.name(_name);
+		this.deleteClass('gray-delete');
 		that.commethods.removeAll();
 		//alert(localStorage.getItem('currentEscPlan'));
 		//alert(JSON.stringify(localStorage.getItem('allEscPlans')));
@@ -90,9 +90,15 @@ function AddContactViewModel() {
 		//return true;     
 	};
 	
-	this.changeIcon = function(data, data2) {
-		alert(JSON.stringify(data2));
-		that.deleteClass('uima');
-		this.deleteClass = 'see';
+	this.changeIcon = function(data) {
+		//alert(JSON.stringify(data));
+		//alert(that.deleteClass());
+		if(that.deleteClass() == 'gray-delete') {
+			tempClass = 'deleteicanred';
+		}
+		else {
+			tempClass = 'gray-delete';
+		}
+		that.deleteClass(tempClass);
 	}
 }
