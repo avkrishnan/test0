@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function PrivacyPolicyViewModel() {
   var that = this;
   this.template = "privacyPolicyView";

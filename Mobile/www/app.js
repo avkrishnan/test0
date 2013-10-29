@@ -305,7 +305,7 @@ channelMenuViewModel = new ChannelMenuViewModel(), channelSettingsViewModel = ne
 
 sendMessageViewModel = new SendMessageViewModel(), followersListViewModel = new FollowersListViewModel(), inviteFollowersViewModel = new InviteFollowersViewModel(),
 
-followerViewModel = new FollowerViewModel(), commethodVerificationViewModel = new CommethodVerificationViewModel(), userSettingsModel = new UserSettingsViewModel(), devSettingsModel = new DevSettingsViewModel(),
+followerViewModel = new FollowerViewModel(), commethodVerificationViewModel = new CommethodVerificationViewModel(), userSettingsModel = new UserSettingsViewModel(), devSettingsModel = new DevSettingsViewModel(), firstChannelViewModel = new FirstChannelViewModel(),
 
 notificationsViewModel = new NotificationsViewModel(), forgotPasswordViewModel = new ForgotPasswordViewModel(), resetPasswordViewModel = new ResetPasswordViewModel(), panelHelpViewModel = new PanelHelpViewModel(),
 
@@ -336,7 +336,8 @@ var models = [ loginViewModel, channelListViewModel,
     additionalContactViewModel, verifyContactViewModel,
     signupStepFirstViewModel, signupStepSecondViewModel, tutorialViewModel,
     channelsIOwnViewModel, helpViewModel, aboutEvernymViewModel,
-    feedbackViewModel, inviteFollowersIIViewModel, privacyPolicyViewModel ];
+    feedbackViewModel, inviteFollowersIIViewModel, privacyPolicyViewModel,
+		firstChannelViewModel ];
 
 function getHTMLName(viewModel) {
   var name = getClassName(viewModel).replace("Model", "");

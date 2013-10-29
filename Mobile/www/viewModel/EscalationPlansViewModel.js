@@ -137,4 +137,40 @@ function EscalationPlansViewModel() {
 		//console.log(that.defaultCommethods);
 		//$(window).resize();
 	}
+	
+	/* logout */
+  this.logoutCommand = function() {
+    var token = ES.evernymService.getAccessToken();
+		if(token) {
+			var callbacks = {
+				success : logoutSuccess,
+				error : logoutError
+			};
+			ES.loginService.accountLogout(callbacks);
+			that.cleanApplication();
+		}
+  };
+	
+  function logoutSuccess() {
+		//alert('success');
+    ES.evernymService.clearAccessToken();
+		goToView('loginView');
+  }
+
+  function logoutError() {
+		alert('error');
+  }	
+	
+  this.cleanApplication = function() {
+		sendMessageViewModel.clearForm();
+		inviteFollowersViewModel.clearForm();
+		ES.evernymService.clearAccessToken();
+		localStorage.removeItem('login_nav');
+		localStorage.removeItem('currentChannel');
+		localStorage.removeItem('accountName');
+		localStorage.removeItem('name');
+		channelListViewModel.clearForm();
+		notificationsViewModel.removeNotifications();
+		OVERLAY.removeNotifications();
+	};
 }

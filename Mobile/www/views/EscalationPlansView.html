@@ -124,19 +124,19 @@
     <a href="#" class="low-messages changepassword">
       Change password
     </a>
-    <a href="#" class="low-messages help">
+    <a href="#" class="low-messages help" onclick="goToView('helpView');">
       Help
     </a>
-    <a href="#" class="low-messages channels">
+    <a href="#" class="low-messages channels" onclick="goToView('aboutEvernymView');">
       About Evernym Channels
     </a>
-    <a href="#" class="low-messages feedback">
+    <a href="#" class="low-messages feedback" onclick="goToView('feedbackView');">
       Give us feedback
     </a>
-    <a href="#" class="low-messages policy">
+    <a href="#" class="low-messages policy" onclick="goToView('privacyPolicyView');">
       Privacy Policy and Terms of Service
     </a>
-    <a href="login.html" class="low-messages signout">
+    <a href="login.html" class="low-messages signout" data-bind="click: logoutCommand">
       Sign out
     </a>
   </div>
