@@ -1,0 +1,25 @@
+<div id="channelNewStepSecondView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('channelNewStepFirstView');"></a>
+    <a class="menu" href="#"></a>
+    <div class="linkican">
+      <a class="smsican" href="#"></a>
+      <a class="processingican"href="#"></a>
+      <a class="groupican" href="#"></a>
+    </div>
+  </header>  
+  <div class="page-content">
+    <div class="changename">Create a Channel</div>
+    <em class="webaddress">Your channel's web address will be:</em>
+    <div class="createchannel"><em data-bind="text: channelWebAddress"><!--lawfamilyvacation.evernym.com--></em></div>
+    <div class="login">
+      <p class="loginbtn">
+        <a href="#" data-bind="click: createChannelCommand">CREATE</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
+  </div>
+</div>   

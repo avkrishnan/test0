@@ -1,195 +1,65 @@
-<!--  CHANNEL SETTINGS VIEW -->
-
-
-<div id="channelSettingsView" class="channel-list"  data-role="page" >
-    <div id="gpanel"></div>
-    <div id="gpaneldots"></div>
-    
-    <div data-role="header" xdata-theme="b" class="header">
-        <!--
-         <a href="#" data-bind="click: showChannelList" data-role="button" data-icon="arrow-l" >Channels</a>
-         
-         -->
-        
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
-        
-        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
-        
-        <button id="hnav" class="hnav" data-role="none"  data-bind="click: backNav, text: navText" ></button>
-        
+<div id="channelSettingsView" data-role="page" >
+  <header>
+    <a href="#" class="back" onclick="goToView('channelMainView');"></a>
+    <a class="menu" href="#"></a>
+    <div class="linkican">
+      <a class="smsican" href="#"></a>
+      <a class="processingican"href="#"></a>
+      <a class="groupican" href="#"></a>
     </div>
-    
-    
-    <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll>
-        
-        
-        
-        <ul data-role="listview" >
-            
-            
-            
-            <li class="channel-list-item" >
-                
-                <a  class="channel-list-anchor" href="#"  style="height:90px;">
-                    
-                    
-                    <div class="channel-list-stripe2"></div>
-                    
-                    <div class="channel-list-avatar" data-bind="with: channelIconObj">
-                    <div data-bind=" style: {
-				       'background': 'url(resources/icons/' + image + ')', 'width': width ,
-				       'height': height , 
-				       'background-color': 'white',
-                       'border-radius': '50%',
-				       'background-position': left + ' ' + top ,
-				       'background-size': bgsize,
-				       'cursor': 'pointer'
-					   }">
-					</div>
-                    </div>
-                    
-                    <span class="channel-info" style="height:90px;">
-                        <span class="channel-name" data-bind="text: title"></span>
-                        <span class="channel-description" data-bind="text: description"></span>
-                        <span class="channel-url" data-bind="text: url" ></span>
-                        <span class="channel-email" data-bind="text: email" >email@evernym.com</span>
-                        
-                    </span>
-                    <div class="channel-list-avatar-frame"></div>
-                    
-                    
-                    
-                </a>
-                
-            </li>
-            
-            
-            
-            <li class="channel-message-item " data-icon="false">
-                
-                
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            
-                            
-                            
-                            <div class="channel-message-text" data-bind="text: longdescription">long description</div>
-                    
-                            
-                        </div>
-                        
-                        
-                    </div>
-                
-                
-            </li>
-            
-            
-            <li class="message-list-item " data-bind="style: {display:relationship()=='O'?'block':'none'}">
-                
-                <div  class="message-list-container" >
-                
-                    <div class="message-list-stripe"></div>
-                    
-                    <div class="message-info" >
-                        <div class="message-list-avatar" style="background:#8DC63F;"></div>
-                        <div class="message-list-avatar-frame"></div>
-                        
-                        
-                        
-                        <div style="margin-left:30px; margin-right:20px;">
-                            
-                            Edit Channel: <br/>
-                            
-                            <!-- Name: <input data-role="none" type="text" data-bind="value: editChannelName" /><br/> -->
-                            Description: <input data-role="none" type="text" data-bind="value: editChannelDescription" /><br/>
-                            Long Description:<br/> <textarea data-role="none" data-bind="value: editLongDescription" style="width:99%;height:100px;resize:none;" ></textarea><br/>
-                            Icon: <input data-role="none" type="text" data-bind="value: editIconId" /><br/>
-                            
-                            <div data-bind="with: selectIconObj" style="height: 68px;height:68px;margin-left:50px;">
-                        
-                        <div data-bind=" style: {'margin':'5px','border-radius': '50%', 'border': '2px solid white',
-             'background': 'url(resources/icons/' + image + ')', 
-             'width': width ,
-             'background-color': 'white',
-             'border-radius': '50%',
-              'height': height , 
-               'background-position': left + ' ' + top ,
-               'background-size': bgsize,
-               'cursor': 'pointer'
-                }"></div></div>
-                        
-                            
-                            <a href="#" data-role="none" data-bind="click: selectIcon">select icon</a><br/>
-                            
-                            
-                            <input data-role="none" type="submit" data-bind="click: modifyChannelCommand"  value="Modify Channel"/>
-                            
-                        </div>
-                    </div>
-                </div>
-            </li>
-            
-            <li class="channel-message-item " data-bind="style: {display:relationship()=='F'?'block':'none'}" data-icon="false">
-                
-                <a data-role="none"  href="#" data-bind="click: unfollowChannelCommand" >
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Unfollow Channel</div>
-                            
-                        </div>
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-            
-            <li class="channel-message-item " data-bind="style: {display:relationship()=='O'?'block':'none'}" data-icon="false">
-                
-                <a data-role="none"  href="#" data-bind="click: deleteChannelCommand" >
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Delete Channel</div>
-                            
-                        </div>
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        </ul>
-        
-        
+  </header>  
+  <div class="page-content channelsettings">
+      <div class="channelcontent">
+        <span class="channelimg channel1 borderred"></span>
+        <div class="detailschannel last">
+          <div class="channelinfo">
+            <!--<strong>The Hawks</strong>
+            <em>Jimmy's soccer team</em>-->
+             <strong data-bind="text: channelName">The Hawks</strong>
+            <em data-bind="text: channelDisplayName">Jimmy's soccer team</em>
+          </div>
+        </div>
+      </div>
+      <h1>Channel Settings</h1>
+      <a class="editchannel" href="#" data-bind="click: editChannelName">
+        Edit Channel Name
+      </a>
+      <a class="editchannel" href="#" data-bind="click: editChannelDisplayName">
+        Edit Display Name
+      </a>
+      <a class="editchannel deletechannel" href="#" data-bind="click: deleteChannel">
+        Delete This channel
+      </a>
+      <a class="editchannel changechannel" href="#" data-bind="click: changeChannelIcon">
+        Change Channel Icon Image
+      </a>
+      <div class="radiobtn">
+        <div class="yes-no">
+          <label for="flip-1">Make this channel public?</label>
+          <select name="public" data-role="slider">
+            <option value="yes">YES</option>
+            <option value="no">NO</option>
+          </select> 
+        </div>
+        <div class="yes-no">
+          <label for="flip-1">Hide broadcasts history?</label>
+          <select name="history?" data-role="slider">
+            <option value="yes">YES</option>
+            <option value="no">NO</option>
+          </select> 
+        </div>
+        <div class="yes-no">
+          <label for="flip-1">Require follower approval?</label>
+          <select name="approval" id="public" data-role="slider">
+            <option value="yes">YES</option>
+            <option value="no">NO</option>
+          </select> 
+        </div>
+      </div>
     </div>
-    
-    <div id="gfooter"></div>
-    
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
+  </div> 
 </div>
 

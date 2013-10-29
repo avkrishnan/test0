@@ -7,11 +7,14 @@ function ChannelsIOwnViewModel() {
 	this.viewname = "ChannelsIOwn";
 	this.displayname = "My Channels";	
 	this.hasfooter = true;    
-	this.channels = ko.observableArray([]);
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
-	this.name = ko.observable();
-	this.description = ko.observable();		
+	
+  /* Channels observable */		
+	this.channels = ko.observableArray([]);
+	this.channelId = ko.observable();
+	this.channelname = ko.observable();
+	this.channeldescription = ko.observable();		
 	this.shown = false;	
 	this.applyBindings = function(){	
 		$("#" + that.template).on("Xpagebeforecreate", null, function (e, data) {});
@@ -20,7 +23,7 @@ function ChannelsIOwnViewModel() {
 				that.activate();
 			}		
 		});		
-	};  
+	};
   this.activate = function() {
 		var _accountName = localStorage.getItem("accountName");
 		that.accountName(_accountName);
@@ -31,7 +34,10 @@ function ChannelsIOwnViewModel() {
 		}
 		else {		
 			$.mobile.showPageLoadingMsg("a", "Loading Channels");
-			return this.listMyChannelsCommand().then(gotChannels);
+			return this.listMyChannelsCommand()/*.then(gotChannels)*/;
+			$.mobile.changePage('#channelsIOwnView', {
+				transition: 'none'
+			});
 		}        		
 	};	    
 	this.populateChannelList = function(){
@@ -44,10 +50,11 @@ function ChannelsIOwnViewModel() {
 	};	
 	function successfulList(data){	
     $.mobile.hidePageLoadingMsg();
-		for(var channelslenght = 0; channelslenght<data.channel.length; channelslenght++) {
-			that.channels.push({ 
-				name: data.channel[channelslenght].name, 
-					description: data.channel[channelslenght].description
+		for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
+			that.channels.push({
+				channelId: data.channel[channelslength].id, 
+				channelname: data.channel[channelslength].name, 
+				channeldescription: data.channel[channelslength].description 
 			});
 		}	
 	};    
@@ -131,5 +138,17 @@ function ChannelsIOwnViewModel() {
 	this.createChannelCommand = function () {	
 		$.mobile.showPageLoadingMsg("a", "Creating Channel " + that.name());
 		return ES.channelService.createChannel({name: that.name()}, {success: successfulCreate, error: errorCreate});
+	};
+	this.channelSettings = function(data, event){
+		localStorage.setItem("currentChannelId", event.target.id);
+		goToView('channelSettingsView');
+	};
+	this.channelMain = function(data, event){
+		localStorage.setItem("currentChannelId", event.target.id);
+		goToView('channelMainView');
+	};
+	this.channelFollowers = function(data, event){
+		localStorage.setItem("currentChannelId", event.target.id);
+		goToView('followersListView');
 	};
 }

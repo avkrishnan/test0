@@ -1,10 +1,10 @@
 <div id="channelsIOwnView" data-role="page">
   <header>
-    <a href="#" class="back"></a>
+    <a href="#" class="back" onclick="goToView('channelListView');"></a>
     <a class="menu" href="#"></a>
     <div class="linkican">
       <a class="smsican" href="#"></a>
-      <a class="processingican" href="#"></a>
+      <a class="processingican"href="#"></a>
       <a class="groupican" href="#"></a>
     </div>
   </header>  
@@ -25,24 +25,24 @@
         <span class="channelimg channel1 borderred"></span>
         <div class="detailschannel">
           <div class="channelinfo">
-            <strong data-bind="text: name"></strong>
-            <em data-bind="text: description"></em>
+            <strong data-bind="text: channelname"></strong>
+            <em data-bind="text: channeldescription"></em>
           </div>
-          <a href="#" class="setting"></a>
+          <a href="#" class="setting" data-bind="attr: { id: channelId }, click: $parent.channelSettings"></a>
           </div>    
-          <a class="requestcontent" href="#">
-            <span class="request">4 new requests</span>
-            <span class="igi">2 new iGi's</span>
+          <a class="requestcontent" href="#" data-bind="attr: { id: channelId }, click: $parent.channelMain">
+            <span class="request">4 new requests??</span>
+            <span class="igi">2 new iGi's??</span>
           </a>    
-          <a class="requestcontent last" href="#">
-            <span class="followers">16 followers</span>
-            <span class="request">+ 1 requests</span>
-            <span class="lost">-1 lost</span>
+          <a class="requestcontent last" href="#" data-bind="attr: { id: channelId }, click: $parent.channelFollowers">
+            <span class="followers">16 followers??</span>
+            <span class="request">+ 1 requests??</span>
+            <span class="lost">-1 lost??</span>
           </a>
         </div>
       </div>   
     </div>  
- <div class="footer">
+  <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
     <a class="announcement" href="#"></a>
   </div>  

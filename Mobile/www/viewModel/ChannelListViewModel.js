@@ -142,3 +142,5 @@ function ChannelListViewModel() {
     });
   };
 }
+
+$("#panel").panel("toggle");

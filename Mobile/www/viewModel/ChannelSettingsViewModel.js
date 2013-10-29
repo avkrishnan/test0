@@ -1,6 +1,77 @@
 ﻿/*globals ko*/
 
-function ChannelSettingsViewModel() {
+function ChannelSettingsViewModel() {	
+  var that = this;
+	this.template = 'channelSettingsView';
+	this.viewid = 'V-16';
+	this.viewname = 'ChannelSettings';
+	this.displayname = 'Channel Settings';	
+	this.hasfooter = true;    
+	this.accountName = ko.observable();	
+	this.notification = ko.observable();
+
+  /* Channel Settings observable */
+	this.channelName = ko.observable();
+	this.channelDisplayName = ko.observable();
+		
+	this.applyBindings = function() {
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+      if ($.mobile.pageData && $.mobile.pageData.a) {
+        if ($.mobile.pageData.a == 'logout') {
+          that.logoutCommand();
+        }
+      }
+      that.activate();
+    });	
+	};  
+	this.activate = function() {
+		var _accountName = localStorage.getItem('accountName');
+		that.accountName(_accountName);
+		return this.channelSettingsCommand()/*.then(gotChannels)*/;
+		goToView('channelSettingsView');
+	}
+	this.editChannelName = function () {
+		$.mobile.changePage('#channelChangeNameStepFirstView', {
+			transition: 'none'
+		});
+  };
+	this.editChannelDisplayName = function () {
+		$.mobile.changePage('#channelEditDisplayNameView', {
+			transition: 'none'
+		});
+  };
+	this.deleteChannel = function () {
+		$.mobile.changePage('#channelDeleteView', {
+			transition: 'none'
+		});
+  };
+	this.changeChannelIcon = function () {
+		$.mobile.changePage('#channelNewStepSecondView', {
+			transition: 'none'
+		});
+  };
+	function successfulGetChannel(data) {
+		$.mobile.hidePageLoadingMsg();
+    that.channelName(data.name);
+		that.channelDisplayName(data.description);
+  };
+
+  function errorAPI(data, status, response) {
+    $.mobile.hidePageLoadingMsg();
+    localStorage.setItem('signUpError', response.message);
+    $.mobile.changePage('#channelSettingsView', {
+      transition: 'none'
+    });
+  };
+  this.channelSettingsCommand = function () {
+		var channelId = localStorage.getItem("currentChannelId");
+		$.mobile.showPageLoadingMsg("a", "Loading Channel");
+		return ES.channelService.getChannel(channelId, {success: successfulGetChannel, error: errorAPI});
+		//localStorage.removeItem("currentChannelId");
+  };
+}
+
+/*function ChannelSettingsViewModel() {
 
 	
 	// --- properties
@@ -37,6 +108,7 @@ function ChannelSettingsViewModel() {
     this.email = ko.observable('');
     
 	this.navText = ko.observable('Channel');
+	*/
 	
     /*
     $("#" + that.template).live("pagebeforecreate", function (e, data) {
@@ -47,7 +119,7 @@ function ChannelSettingsViewModel() {
     
     
     
-    this.applyBindings = function(){
+    /*this.applyBindings = function(){
     
         
         $("#" + that.template).on("pagebeforeshow", null, function(e, data){
@@ -438,3 +510,4 @@ function ChannelSettingsViewModel() {
 	
 	
 }
+*/

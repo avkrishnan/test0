@@ -1,0 +1,84 @@
+<div id="channelMainView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('channelsIOwnView');"></a>
+    <a class="menu" href="#"></a>
+    <div class="linkican">
+      <a class="smsican" href="#"></a>
+      <a class="processingican"href="#"></a>
+      <a class="groupican" href="#"></a>
+    </div>
+  </header>  
+  <div class="page-content">   
+    <div class="channelinformation">
+      <a href="#" class="channelimg channel1 borderred"></a>
+      <div class="channelinfocontent">
+        <a class="title" href="#">The Hawks</a>
+        <a href="#" class="setting" data-bind="attr: { id: channelId }, click: channelSettings"></a>
+        <div class="addfollowers">16 followers<a class="add-followers" href="#">Add Followers</a></div>
+      </div>
+      <a class="requestcontent last" href="#">
+        <span class="request">+ 1 requests</span>
+        <span class="lost">-1 lost</span>
+      </a>
+    </div>
+    <div class="dropdown">
+      My Broadcasts:
+      <form class="chaneldropdown" action="#" method="get" >
+        <select>
+          <option value="min">newest first</option>
+          <option value="min">newest first</option>
+          <option value="min">newest first</option>
+          <option value="min">newest first</option>
+        </select>
+      </form>
+    </div>
+    <a href="#" class="channelbroadcast">
+      <div class="broadcast-sensitive">
+        <span>No practice tonight ...</span><em>20 min ago</em>
+      </div>
+      <div class="broadcastmsgsend">
+        <span>12 Got it<em class="percentage">75%</em></span><em class="broadcastmsgunsend">4 Haven't</em>
+      </div>
+      <div class="broadcastmsgreplie">
+        <span>6 replies</span><em>3 new</em>
+      </div>
+    </a>
+    <a href="#" class="channelbroadcast">
+      <div class="broadcast-sensitive broadcastnormal">
+        <span>RSL tickets for Oct ...</span><em>6 hrs ago</em>
+      </div>
+      <div class="broadcastmsgsend">
+        <span class="norequested">No iGi requested</span><em class="norequestedican"></em>
+      </div>
+      <div class="broadcastmsgreplie">
+        <span>12 replies</span>
+      </div>
+    </a>
+    <a href="#" class="channelbroadcast">
+      <div class="broadcast-sensitive">
+        <span>No practice tonight ...</span><em>20 min ago</em>
+      </div>
+      <div class="broadcastmsgsend">
+        <span class="msgincrease"></span><em class="broadcastmsgunsend msgnoincrease">0% . . . no responses yet</em>
+      </div>
+      <div class="broadcastmsgreplie">
+        <span>6 replies</span><em>3 new</em>
+      </div>
+    </a>
+    <a href="#" class="channelbroadcast">
+      <div class="broadcast-sensitive">
+        <span>No practice tonight ...</span><em>20 min ago</em>
+      </div>
+      <div class="broadcastmsgsend">
+        <span class="msgincreasefull">12 Got it<em class="percentage">100%</em></span>
+      </div>
+      <div class="broadcastmsgreplie">
+        <span>6 replies</span><em>3 new</em>
+      </div>
+    </a>
+  </div>
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
+  </div>
+</div>   

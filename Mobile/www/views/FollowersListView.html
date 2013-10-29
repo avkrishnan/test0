@@ -1,135 +1,73 @@
-<!--  FOLLOWER LIST VIEW -->
-
-<div id="followersListView" data-role="page" class="channel-list">
-    <div id="gpanel"></div>
-    <div id="gpaneldots"></div>
-    <div data-role="header" class="header">
-        
-        <!--
-         <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
-         -->
-        
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
-        
-        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
-        
-        <button id="hnav" class="hnav" data-role="none"  data-bind="click: backNav, text: navText" ></button>
-        
+<div id="followersListView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('channelsIOwnView');"></a>
+    <a class="menu" href="#"></a>
+    <div class="linkican">
+      <a class="smsican" href="#"></a>
+      <a class="processingican"href="#"></a>
+      <a class="groupican" href="#"></a>
     </div>
-    
-    
-    
-    
-    <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll>
-        
-        
-        
-        <ul data-role="listview" >
-            
-            
-            
-            <li class="channel-list-item">
-                
-                <a  class="channel-list-anchor" href="#"  >
-                    
-                    
-                    <div class="channel-list-stripe2"></div>
-                    
-                    
-                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
-                    
-                    <span class="channel-info">
-                        <span class="channel-name" data-bind="text: title"></span>
-                        <span class="channel-description" data-bind="text: description">asdf</span>
-                        <span class="channel-url" data-bind="text: url">asdf</span>
-                    </span>
-                    <div class="channel-list-avatar-frame"></div>
-                    
-                    
-                    
-                </a>
-                
-            </li>
-            
-            
-            
-            
-            <li class="message-list-item">
-                
-                <div  class="message-list-container" >
-                    
-                    <div class="message-list-stripe"></div>
-                    
-                    
-                    <a data-role="none" href="#">
-                        <div  class="message-info">
-                            
-                            <div class="message-list-avatar" style="background:#8DC63F;"></div>
-                            <div class="message-list-avatar-frame"></div>
-                            
-                            <div class="message-text"> Followers </div>
-                            
-                            
-                            
-                            
-                        </div>
-                    </a>
-                    
-                </div>
-                
-                
-            </li>
-            
-            
-            
-            
-            
-            
-            <!-- ko foreach: followers, updateListviewOnChange:followers -->
-            
-            
-            <li class="sub-message-list-item">
-                
-                <div  class="sub-message-list-container">
-                    
-                    <div class="message-list-stripe"></div>
-                    
-                    
-                    <div class="sub-message-info">
-                        <div class="sub-message-list-avatar" style="background:#8D463F;"></div>
-                        <div class="sub-message-list-avatar-frame"></div>
-                        
-                        
-                        
-                        
-                        <a  href="#" data-bind="click: $parent.showFollower" >
-                            <div class="sub-message-text" >
-                                
-                                
-                                <span href="" data-bind="text: firstname"></span> <span href="" data-bind="text: lastname"></span>
-                                
-                            </div>
-                        </a>
-                        
-                    </div>
-                    
-                    
-                    
-                </div>
-                
-                
-            </li>
-            
-            <!-- /ko -->
-            
-            
-            <br/><br/>
-             <a href="index.html#inviteFollowersView" data-role="button">Invite Followers</a>
-            
-            
-        </ul>
+  </header>  
+  <div class="page-content followerpage">
+    <div class="followerchannel">
+      <div class="channelcontent broadecast">
+        <span class="channelimg channel1 borderred"></span>
+        <div class="channelinfoname" data-bind="text: channelname">The Hawks</div>
+        <a href="#" class="setting settinginner"></a>
+      </div>
     </div>
-    <div id="gfooter"></div>
-   
-    
-</div>
+    <div class="followerchannel">
+      <a class="low-messages newfollowers" href="#">
+        Add or invite new followers
+      </a>
+    </div>
+    <div class="followerchannel">
+      <h1 class="requests">Follower Requests:</h1>
+      <div class="low-messages acceptdecline requestsican">
+        <div class="accept-decline">
+          <span>Lebron James</span>
+          <em>lj-ballin</em>
+        </div>
+        <div class="acceptdeclinebtn">
+          <a href="#">ACCEPT</a>
+          <a href="#">DECLINE</a>
+        </div>
+      </div>
+    </div>
+    <div class="followerchannel">
+      <h1 class="requests">No Longer following:</h1>
+      <div class="low-messages acceptdecline norequestsican">
+        <div class="accept-decline">
+          <span>Will Bown</span>
+          <em>willbowen17</em>
+        </div>
+        <div class="acceptdeclinebtn">
+          <a href="#">CLEAR</a>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown">
+      <span class="followerssearch" data-bind="text: followerCount"><!--16 Followers:--></span>
+      <form class="chaneldropdown" action="#" method="get" >
+        <select>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+        </select>
+      </form>
+    </div>
+    <div data-bind="foreach: followers">
+      <div class="low-messages allfollowercs">
+        <div class="accept-decline">
+          <span data-bind="text: followerName"><!--Biff Jones--></span>
+          <em data-bind="text: accountname"><!--theycallmebiff--></em>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
+  </div>
+</div>   
