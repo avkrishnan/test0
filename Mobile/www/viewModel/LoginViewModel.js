@@ -19,8 +19,8 @@ function LoginViewModel() {
   var username;
   var password;
   var rememberPassword;
-  this.applyBindings = function () {
-    $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
+  this.applyBindings = function() {
+    $("#" + that.template).on("pagebeforeshow", null, function(e, data) {
       if ($.mobile.pageData && $.mobile.pageData.a) {
         if ($.mobile.pageData.a == 'logout') {
           that.logoutCommand();
@@ -30,24 +30,26 @@ function LoginViewModel() {
       that.activate();
     });
   };
-  this.activate = function () {
+  this.activate = function() {
     that.errorMessage('');
-    if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
+    if (localStorage.getItem("username") == null
+        && localStorage.getItem("password") == null) {
       username = '';
       password = '';
     } else {
       username = localStorage.getItem("username");
       password = localStorage.getItem("password");
-      $("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
+      $("input[type='checkbox']").attr("checked", true)
+          .checkboxradio("refresh");
     }
     that.password(password);
     that.accountName(username);
-    $(document).keypress(function (e) {
+    $(document).keypress(function(e) {
       if (e.keyCode == 13) {
         that.loginCommand();
       }
     });
-    $('input').keyup(function () {
+    $('input').keyup(function() {
       that.errorMessage('');
       that.usernameClass('');
       that.passwordClass('');
@@ -60,15 +62,16 @@ function LoginViewModel() {
       }
     }
   };
-  this.clearForm = function () {
+  this.clearForm = function() {
     that.password('');
     that.accountName('');
   };
-  this.loginCommand = function () {
+  this.loginCommand = function() {
     if (that.accountName() == '' && that.password() == '') {
       that.usernameClass('validationerror');
       that.passwordClass('validationerror');
-      that.errorMessage('<span>SORRY:</span>Please enter username and password');
+      that
+          .errorMessage('<span>SORRY:</span>Please enter username and password');
     } else if (that.accountName() == '') {
       that.usernameClass('validationerror');
       that.errorMessage('<span>SORRY:</span>Please enter username');
@@ -82,8 +85,8 @@ function LoginViewModel() {
         localStorage.setItem("password", that.password());
       }
       var callbacks = {
-        success: loginSuccess2,
-        error: loginError
+        success : loginSuccess2,
+        error : loginError
       };
       channelListViewModel.shown = false;
       var loginModel = {};
@@ -92,25 +95,27 @@ function LoginViewModel() {
       loginModel.password = this.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
       return ES.loginService.accountLogin(loginModel, callbacks).then(
-      loginSuccess);
+          loginSuccess);
     }
   };
-  this.logoutCommand = function () {
-    var token = localStorage.getItem("accessToken");
+  this.logoutCommand = function() {
+
+    var token = ES.evernymService.getAccessToken();
+
     if (token) {
       var callbacks = {
-        success: logoutSuccess,
-        error: logoutError
+        success : logoutSuccess,
+        error : logoutError
       };
-      ES.loginService.accountLogout(token, callbacks);
+      ES.loginService.accountLogout(callbacks);
       that.clearForm();
       that.cleanApplication();
     }
   };
-  this.cleanApplication = function () {
+  this.cleanApplication = function() {
     sendMessageViewModel.clearForm();
     inviteFollowersViewModel.clearForm();
-    localStorage.removeItem('accessToken');
+    ES.evernymService.clearAccessToken();
     localStorage.removeItem('login_nav');
     localStorage.removeItem('currentChannel');
     localStorage.removeItem('accountName');
@@ -120,7 +125,8 @@ function LoginViewModel() {
     OVERLAY.removeNotifications();
   };
 
-  function loginSuccess2(data) {}
+  function loginSuccess2(data) {
+  }
 
   function getAccountSuccess(data) {
     that.first_name = data.firstname;
@@ -130,22 +136,23 @@ function LoginViewModel() {
 
   function loginSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-    //if (isPhoneGap()) {
-    //alert("Running on PhoneGap!");
-    //registerPushNotifications();
-    //} else {
-    //alert("Not running on PhoneGap!");
-    //}
-    localStorage.removeItem('accessToken');
+    // if (isPhoneGap()) {
+    // alert("Running on PhoneGap!");
+    // registerPushNotifications();
+    // } else {
+    // alert("Not running on PhoneGap!");
+    // }
+    ES.evernymService.clearAccessToken();
     if (args.accessToken) {
-      localStorage.setItem("accessToken", args.accessToken);
+      ES.evernymService.setAccessToken(args.accessToken);
       localStorage.setItem("accountName", that.accountName());
       var notifications = args.notifications;
       that.first_name = args.account.firstname;
       that.last_name = args.account.lastname;
-      localStorage.setItem('UserFullName', args.account.firstname + ' ' + args.account.lastname);
+      localStorage.setItem('UserFullName', args.account.firstname + ' '
+          + args.account.lastname);
       $.mobile.activePage.find('#thefooter #footer-gear').html(
-      args.account.accountname);
+          args.account.accountname);
       var channelCount = channelListViewModel.channels().length;
       if (!channelCount) {
         channelListViewModel.populateChannelList();
@@ -156,22 +163,22 @@ function LoginViewModel() {
       OVERLAY.removeNotifications();
       if (login_nav) {
         var hash = login_nav.hash;
-        if (hash.indexOf("index.html") !== -1 || hash.indexOf("loginView") !== -1) {
+        if (hash.indexOf("index.html") !== -1
+            || hash.indexOf("loginView") !== -1) {
           hash = '#channelListView';
         }
         $.mobile.changePage(hash);
       } else {
         $.mobile.changePage("#" + channelListViewModel.template);
-      } 
-			/* Notification redirect is commmented for temporarily*/
-     /*if (notifications && notifications.length) {
-		 for ( var n in notifications) {
-		
-		 OVERLAY.addNotification(notifications[n]);
-		 }
-		 //$.mobile.changePage("#" + notificationsViewModel.template);
-		 OVERLAY.show();
-		 }*/
+      }
+      /* Notification redirect is commmented for temporarily */
+      /*
+       * if (notifications && notifications.length) { for ( var n in
+       * notifications) {
+       * 
+       * OVERLAY.addNotification(notifications[n]); } //$.mobile.changePage("#" +
+       * notificationsViewModel.template); OVERLAY.show(); }
+       */
 
     } else {
       loginError();
@@ -188,12 +195,12 @@ function LoginViewModel() {
   }
 
   function logoutSuccess() {
-    localStorage.removeItem('accessToken');
+    ES.evernymService.clearAccessToken();
   }
 
-  function logoutError() {}
+  function logoutError() {
+  }
   // --- private functions
-
 
   function parseDate(date) {
     var diff = (new Date() - new Date(date)) / 1000;

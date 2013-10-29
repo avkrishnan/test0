@@ -8,21 +8,21 @@ function TutorialViewModel() {
   this.displayname = 'Tutorials';
   this.hasfooter = false;
 
-  this.applyBindings = function () {
-    $('#' + that.template).on('pagebeforeshow', function (e, data) {
+  this.applyBindings = function() {
+    $('#' + that.template).on('pagebeforeshow', function(e, data) {
       that.activate();
     });
   };
 
   /* Methods */
-  this.activate = function () {
+  this.activate = function() {
     SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
     SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
 
     /* This function will swipe tutorial slides */
 
     function SwipeSlide(Element, Event, functionName) {
-      $(Element).on(Event, function () {
+      $(Element).on(Event, function() {
         $('header ul li').removeClass('active');
         var slideDiv = $(this)[functionName]('div.tutorialslides').attr('id');
         $(this).hide();
@@ -34,11 +34,11 @@ function TutorialViewModel() {
       });
     }
   };
-  this.loginCommand = function () {
+  this.loginCommand = function() {
     $.mobile.showPageLoadingMsg('a', 'Logging In With New Credentials');
     var callbacks = {
-      success: loginSuccess,
-      error: loginError
+      success : loginSuccess,
+      error : loginError
     };
     var loginModel = {};
     loginModel.accountname = localStorage.getItem('newusername');
@@ -49,28 +49,30 @@ function TutorialViewModel() {
 
   function loginSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.removeItem('accessToken');
+    ES.evernymService.clearAccessToken();
     if (args.accessToken) {
-      localStorage.setItem('accessToken', args.accessToken);
       var notifications = args.notifications;
-      localStorage.setItem('accessToken', args.accessToken);
+      ES.evernymService.setAccessToken(args.accessToken);
       localStorage.setItem('accountName', args.account.accountname);
       that.first_name = args.account.firstname;
       that.last_name = args.account.lastname;
-      localStorage.setItem('UserFullName', args.account.firstname + ' ' + args.account.lastname);
-      $.mobile.activePage.find('#thefooter #footer-gear').html(args.account.accountname);
+      localStorage.setItem('UserFullName', args.account.firstname + ' '
+          + args.account.lastname);
+      $.mobile.activePage.find('#thefooter #footer-gear').html(
+          args.account.accountname);
       var login_nav = JSON.parse(localStorage.getItem('login_nav'));
       localStorage.removeItem('login_nav');
       var follow = localStorage.getItem('follow');
       if (follow) {
-        //alert('hello, we are going to now go to or follow the channel ' + follow);
+        // alert('hello, we are going to now go to or follow the channel ' +
+        // follow);
         localStorage.removeItem('follow');
       } else if (login_nav) {
         var hash = login_nav.hash;
-        //var parameters = login_nav.parameters;				
+        // var parameters = login_nav.parameters;
         $.mobile.changePage(hash);
       } else if (notifications.length) {
-        for (var n in notifications) {
+        for ( var n in notifications) {
           var code = notifications[n].code;
           notificationsViewModel.addNotification(notifications[n].code);
         }
@@ -87,9 +89,9 @@ function TutorialViewModel() {
   function loginError(data, status, response) {
     $.mobile.hidePageLoadingMsg();
     showError('LOGIN FAILED');
-    localStorage.removeItem('accessToken');
+    ES.evernymService.clearAccessToken();
   }
-  that.getStartedCommand = function () {
+  that.getStartedCommand = function() {
     that.loginCommand();
   }
 }
