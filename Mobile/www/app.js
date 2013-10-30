@@ -373,7 +373,6 @@ privacyPolicyViewModel = new PrivacyPolicyViewModel(),
 
 /* By Pradeep */
 channelMainViewModel = new ChannelMainViewModel(),
-channelNewViewModel = new ChannelNewViewModel(),
 channelChangeNameViewModel = new ChannelChangeNameViewModel(),
 channelEditDisplayNameViewModel = new ChannelEditDisplayNameViewModel(),
 channelDeleteViewModel = new ChannelDeleteViewModel,
@@ -431,7 +430,6 @@ var models = [
 							inviteFollowersIIViewModel,
 							privacyPolicyViewModel,
 							channelMainViewModel,
-							channelNewViewModel,
 							channelChangeNameViewModel,
 							channelEditDisplayNameViewModel,
 							channelDeleteViewModel,
