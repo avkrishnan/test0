@@ -1,107 +1,69 @@
 ﻿/*globals ko*/
 
-function ChannelNewViewModel() {
-    
-    
-    this.template = "channelNewView";
-    this.viewid = "V-15";
-    this.viewname = "CreateAnotherChannel";
-    this.displayname = "Create Channel";
-    
-    this.hasfooter = true;
-    this.name = ko.observable();
-    this.description = ko.observable();
-    this.longdescription = ko.observable();
-    this.notifications = ko.observable();
-    
-    this.navText = ko.observable();
-    this.pView = '';
-    
-    var that = this;
-    
-    /*
-    $("#" + that.template).live("pagebeforecreate", function (e, data) {
-                                var panelhtml = $("#globalpanel").html();
-                                $(this).find("#gpanel").html(panelhtml);
-                                });
-    */
-    
-    
-    this.applyBindings = function(){
-        $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
-                                    that.clearForm();
-                                    
-                                    var previousView = localStorage.getItem('previousView');
-                                    console.log("previousView: " + previousView);
-                                    var vm = ko.dataFor($("#" + previousView).get(0));
-                                    console.log("previousView Model viewid: " + vm.displayname);
-                                    that.navText(vm.displayname);
-                                    that.pView = previousView;
-                                    
-                                    
-                                    that.activate();
-                                    });
-    };
-    
-    
+function ChannelNewViewModel() {	
+  var that = this;
+	this.template = 'channelNewView';
+	this.viewid = 'V-13';
+	this.viewname = 'CreateNewChannel';
+	this.displayname = 'Create a channel';	
+	this.hasfooter = true;    
+	this.accountName = ko.observable();	
+	this.notification = ko.observable();
+	
+  /* New Channel Step First observable */
+	this.sectionOne = ko.observable(true);
+	this.sectionTwo = ko.observable(false);		
+	this.newChannel = ko.observable('');	
+	this.message = ko.observable();	
+	this.errorNewChannel = ko.observable();
+	this.channelWebAddress = ko.observable();					
+	
+	this.applyBindings = function() {
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+      if ($.mobile.pageData && $.mobile.pageData.a) {
+        if ($.mobile.pageData.a == 'logout') {
+          that.logoutCommand();
+        }
+      }
+      that.activate();
+    });	
+	};  
+	this.activate = function() {
+		var _accountName = localStorage.getItem('accountName');
+		that.accountName(_accountName);
+		that.newChannel('');
+		$('input').keyup(function () {
+      that.message('');
+			that.errorNewChannel('');
+    });
+	}
 
-    
-    // Methods
-    this.activate = function () {
-        
-        return true;
-    };
-    
-    this.backNav = function(){
-        $.mobile.changePage("#" + that.pView);
-    };
-    
-    this.clearForm = function(){
-        that.name('');
-        that.description('');
-        that.longdescription('');
-    };
-    
-    this.routeToLogin = function () {
-        //router.navigateTo('#/login');
-    };
-    
-    function successfulCreate(data){
-        $.mobile.hidePageLoadingMsg();
-        //logger.log('success creating channel', null, 'channelService', true);
-        //router.navigateTo('#/channellist');
-        
-        $.mobile.changePage("#" + channelListViewModel.template);
-        channelListViewModel.clearForm();
-        channelListViewModel.activate();
-        
-        panelHelpViewModel.setAllDirty();
-        
-    };
-    
-    function errorCreate(data, status, response){
-        $.mobile.hidePageLoadingMsg();
-        //that.notifications("error creating channel " + JSON.stringify(data));
-        console.log("error creating channel: " + response.message);
-        showError("Error creating channel: " + response.message);
-        loginPageIfBadLogin(details.code);
-        //logger.log('error creating channel', null, 'channelService', true);
-    };
-    
-    this.logoutCommand = function(){
-        loginViewModel.logoutCommand();
-        $.mobile.changePage("#" + loginViewModel.template)
+	this.nextViewCommand = function () {
+    if (that.newChannel() == '') {
+      that.errorNewChannel('<span>SORRY:</span> Please enter channel name');
+    } else {
+			that.message('<span>GREAT!</span> This name is available');
+			that.sectionOne(false);
+			that.sectionTwo(true);
+			that.channelWebAddress(that.newChannel()+'.evernym.com');	
     }
-    
-    this.createChannelCommand = function () {
-        //inputChannelName
-        //logger.log('start creating channel ' + this.name() , null, 'channelService', true);
-        $.mobile.showPageLoadingMsg("a", "Creating Channel " + that.name());
-        
-        ES.channelService.createChannel({name: that.name(), description: that.description(), longDescription:that.longdescription()}, {success: successfulCreate, error: errorCreate});
-    };
-     
+  };
+	function successfulCreate(args) {
+    $.mobile.hidePageLoadingMsg();
+    goToView('channelsIOwnView');
+  };
 
-    
-    
+  function errorAPI(data, status, response) {
+    $.mobile.hidePageLoadingMsg();
+    goToView('channelNameView');
+		that.sectionOne(true);
+		that.sectionTwo(false);
+		that.message('');
+    that.errorNewChannel('<span>SORRY:</span> '+response.message);		
+  };
+	
+  this.createChannelCommand = function () {
+		$.mobile.showPageLoadingMsg("a", "Creating Channel ");
+		ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});
+  };
 }

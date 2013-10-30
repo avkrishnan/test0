@@ -373,12 +373,11 @@ privacyPolicyViewModel = new PrivacyPolicyViewModel(),
 
 /* By Pradeep */
 channelMainViewModel = new ChannelMainViewModel(),
-channelNewStepFirstViewModel = new ChannelNewStepFirstViewModel(),
-channelNewStepSecondViewModel = new ChannelNewStepSecondViewModel(),
-channelChangeNameStepFirstViewModel = new ChannelChangeNameStepFirstViewModel(),
-channelChangeNameStepSecondViewModel = new ChannelChangeNameStepSecondViewModel(),
+channelNewViewModel = new ChannelNewViewModel(),
+channelChangeNameViewModel = new ChannelChangeNameViewModel(),
 channelEditDisplayNameViewModel = new ChannelEditDisplayNameViewModel(),
 channelDeleteViewModel = new ChannelDeleteViewModel,
+channelChangeIconViewModel = new ChannelChangeIconViewModel,
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -432,12 +431,11 @@ var models = [
 							inviteFollowersIIViewModel,
 							privacyPolicyViewModel,
 							channelMainViewModel,
-							channelNewStepFirstViewModel,
-							channelNewStepSecondViewModel,
-							channelChangeNameStepFirstViewModel,
-							channelChangeNameStepSecondViewModel,
+							channelNewViewModel,
+							channelChangeNameViewModel,
 							channelEditDisplayNameViewModel,
-							channelDeleteViewModel							
+							channelDeleteViewModel,
+							channelChangeIconViewModel							
               ];
 
 

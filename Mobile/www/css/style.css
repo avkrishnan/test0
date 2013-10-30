@@ -38,12 +38,13 @@ header {
 	top:0;
 	z-index:9999;
 }
+
 /*
 	*Back Button 
 */
 .back {
 	background:url(images/sprites.png) no-repeat 0 -1035px ;
-	padding:12px 80px;
+	padding:12px 70px;
 	margin-left:10px;
 	float:left;
 }
@@ -89,8 +90,11 @@ h1.additionalsettings {
 .page-content.loginpage {
 	padding:40px 0 15px 10px;
 }
+.page-content.composepage {
+	display:inline-block;
+}
 .portal-name {
-	font-size:20px;
+	font-size:18px;
 	color:#8dc63f;
 	font-style:italic;
 	display:block;
@@ -177,11 +181,11 @@ h1.additionalsettings {
 	font-family:'OpenSansRegular';
 }
 .error-message {
-	font-size:14px;
+	font-size:12px;
 	color:#fff;
 	font-style:italic;
 	line-height:normal;
-	margin:4px 15px 4px 10px;
+	margin:8px 15px 8px 10px;
 }
 .error-message span {
 	background:none;
@@ -216,13 +220,13 @@ h1.additionalsettings {
 .addbtn{
 	background:#8dc63f url(images/add-verify.png) no-repeat 6px center;
 	border:none;
-	padding:3px 5px 3px 16px;
+	padding:2px 5px 2px 16px;
 	font-size:13px;
 	border-radius:4px;
 	font-family: 'OpenSansRegular';
 	color:#fff;
 	float:right;
-	margin:6px 6px 6px 0;
+	margin:7px 6px 7px 0;
 }
 .larrow, .rarrow {
 	float:left;
@@ -250,6 +254,28 @@ h1.additionalsettings {
 .dots a.active {
 	background:url(images/slider-green.png) no-repeat center center;
 }
+/*	
+	*	NEW HOME PAGE 
+*/
+.emergencyicon {
+	background:#2D2D2D url("images/sprites.png") no-repeat -6px -629px;
+	border-radius:21px 0 0 21px;
+	color:#FFFFFF;
+	display:block;
+	font-family:'OpenSansRegular';
+	font-size:15px;
+	line-height:35px;
+	margin:0 0 10px;
+	padding:4px 0 4px 56px;
+	text-shadow:none;
+}
+.urgenticon {
+	background-position:-6px -687px;
+}
+.normal-icon {
+	background-position:-6px -1552px;
+}
+/*	NEW HOME PAGE End 	*/
 .alldetails {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
@@ -329,7 +355,7 @@ h1.additionalsettings {
 	color:#FFFFFF;
 	display:block;
 	font-family:'OpenSansRegular';
-	font-size:15px;
+	font-size:14px;
 	line-height:35px;
 	margin:0 0 10px;
 	padding:4px 0 4px 56px;
@@ -588,17 +614,18 @@ select, .ui-icon-arrow-d {
 	*	V- 09 My contact information
 */
 .details-delete {
-	overflow: hidden;
+	overflow:hidden;
 	padding:0 15px 0 0;
+	margin-top:10px;
 }
 .details-delete h1 {
-	float: left;
+	float:left;
 }
-.gray-delete, .deleteicanred  {
+/*.gray-delete, .deleteicanred  {
 	background:url("images/sprites.png") no-repeat -10px -460px;
 	float:right;
 	padding:19px;
-}
+}*/
 .mycontact {
 	background:#2D2D2D;
 	border-radius:21px 0 0 21px;
@@ -609,6 +636,7 @@ select, .ui-icon-arrow-d {
 	overflow:hidden;
 	padding:3px 0;
 	width:100%;
+	display:inline-block;
 }
 .mycontact em {
 	background:url("images/sprites.png") no-repeat;
@@ -628,13 +656,14 @@ select, .ui-icon-arrow-d {
 	font-size:13px;
 	float:left;
 	padding:10px 0;
+	font-weight:bold;
 }
 .verify {
 	background:#8DC63F;
-	padding:3px 8px;
+	padding:2px 6px;
 }
 .notverify em, .notverify span {
-	opacity:0.5;
+	opacity:0.4;
 }
 /*	V- 09 My contact information End	*/
 /*
@@ -690,10 +719,10 @@ em.removeemailnumber {
 .success {
 	font-size:14px;
 	color:#fff;
-	padding:0 0 0 6px;
+	padding:0 0 0 12px;
 }
 .success p {
-	padding-bottom:10px;
+	padding-bottom:15px;
 }
 .success span {
 	color:#8DC63F;
@@ -758,9 +787,9 @@ em.removeemailnumber {
 */
 .logininfo {
 	color:#fff;
-	font-size:16px;
+	font-size:14px;
 	font-style:italic;
-	margin:0 0 0 10px;
+	margin:0 0 0 4px;
 }
 .tm:after {
 	content:"TM";
@@ -773,9 +802,9 @@ em.removeemailnumber {
 	overflow:hidden;
 }
 .loginform .msginfo em, .loginform .msginfo, .invited-followChannel{
-	font-size:16px;
+	font-size:14px;
 	color:#fff;
-	margin:15px 0 15px 10px;
+	margin:15px 0 15px 5px;
 	display:block;
 }
 .loginform .msginfo {
@@ -839,8 +868,8 @@ input[type="checkbox"]:checked + label span {
 	padding:0 0 0 10px;
 	clear:both;
 }
-.login a.ui-link {
-	color:#A0A0A0;
+.login a.ui-link, .login a.ui-link:hover, .login a.forget-password.ui-link, .login a.forget-password.ui-link:hover {
+	color:#7F7F7F;
 	font-size:18px;
 	text-decoration:underline;
 }
@@ -850,7 +879,7 @@ input[type="checkbox"]:checked + label span {
 	border-radius:24px 0 0 24px;
 	float:right;
 }
-.loginbtn a.ui-link {
+.loginbtn a.ui-link, .loginbtn a.ui-link:hover {
 	background:#8dc63f;
 	color:#fff;
 	float:left;
@@ -861,13 +890,13 @@ input[type="checkbox"]:checked + label span {
 }
 .signedup {
 	color:#fff;
-	font-size:16px;
+	font-size:14px;
 	display:block;
 	font-weight:normal;
 	font-style:italic;
 	margin:10px 20px 10px 10px;
 }
-hr {
+hr, .baseline {
 	height:1px;
 	background:#545454;
 	border:0;
@@ -908,11 +937,11 @@ hr {
 	color:#8DC63F;
 }
 .terms {
-	font-size:16px;
+	font-size:14px;
 	color:#fff;
 	padding:0 10px;
 }
-.terms a.ui-link, .terms a.ui-link:hover{
+.terms a.ui-link, .terms a.ui-link:hover, .terms a.term-condition.ui-link, .terms a.term-condition.ui-link:hover{
 	text-decoration:underline;
 	display:block;
 	color:#a0a0a0;
@@ -926,13 +955,13 @@ hr {
 .msgerror {
 	color:#fff;
 	font-style:italic;
-	font-size:14px;
+	font-size:12px;
 	display:inline-block;
 	margin:4px 0 4px 8px;
 }
-.msgerror span {
+.loginform .msgerror span {
 	color:#ED1C24;
-	font-size:14px;
+	font-size:12px;
 	margin:0;
 	font-style:normal;
 	font-weight:bold;
@@ -1175,12 +1204,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .ui-checkbox label span.ui-btn-inner span.ui-btn-text {
 	color:#7F7F7F;
 	font-family: 'OpenSansRegular';
-	font-size:20px;
+	font-size:18px;
 	font-weight:normal;
 	padding:0 0 0 26px;
 }
 .ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon {
-	margin-top:-12px;
+	margin-top:-9px;
 	left:-6px;
 }
 .ui-btn-up-c {
@@ -1309,7 +1338,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border:none;
 }
 .detailschannel strong {
-	font-size:18px;
+	font-size:16px;
 	font-weight:normal;
 	color:#8DC63F;
 	float:left;
@@ -1319,13 +1348,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-weight:bold;
 	float:left;
 	clear:both;
-	font-size:14px;
+	font-size:12px;
 }
 .setting {
 	background:url("images/sprites-channel.png") no-repeat -14px -1320px;
 	color:#FFFFFF;
 	float:right;
-/*	margin-top:-22px;*/
 	padding:12px 22px 12px 0;
 }
 .channelimg {
@@ -1379,8 +1407,8 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin-right:4px;
 }
 .requestcontent .request, .requestcontent .igi, .requestcontent .lost {
-	padding:2px 3px;
-	font-size:14px;
+	padding:2px 8px;
+	font-size:12px;
 	background:#27aae1;
 	display:inline-block;
 	border-radius:4px;
@@ -1396,14 +1424,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-bottom:none;
 }
 .page-content.channelsettings {
-/*	margin-top:55px;*/
 	padding-top:65px;
 }
-.channelsettings .channelcontent {
-	/*margin:0;*/
-}
 .editchannel {
-	/*background: url("images/sprites.png") no-repeat scroll -5px 3px #2D2D2D;*/
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -283px;
 	border-radius:21px 0 0 21px;
 	color:#FFFFFF;
@@ -1431,23 +1454,23 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelavailable {
 	color:#FFFFFF;
 	display:inline-block;
-	font-size:14px;
+	font-size:12px;
 	font-style:italic;
 	margin:8px 0 8px 8px;
 }
 .loginform .channelavailable span {
 	color:#8DC63F;
-	font-size:14px;
+	font-size:12px;
 	font-style:normal;
 	font-weight:bold;
 	margin:0;
-	padding:0 0 0 25px;
+	padding:1px 0 1px 25px;
 	background:url("images/sprites-channel.png") no-repeat -16px -1152px;
 }
 .webaddress, .availablechannel {
 	color:#fff;
 	display:block;
-	font-size:16px;
+	font-size:14px;
 	margin:15px 0 15px 10px;
 }
 .availablechannel {
@@ -1502,7 +1525,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:50%;
 	background:#be1e2d;
 }
-.disableican img {
+.disableicon img {
 	opacity:0.5;
 }
 .icancolourcode {
@@ -1552,7 +1575,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	overflow:hidden;
 	padding:20px 15px 10px 10px;
 	color:#FFFFFF;
-	font-size:18px;
+	font-size:15px;
 	line-height:26px;
 }
 .chaneldropdown {
@@ -1560,24 +1583,28 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .dropdown .ui-select .ui-btn {
 	margin:0;
-	width:120px;
+	width:125px;
 	height:26px;
 	background:#414141;
 	border-radius:4px;
 }
 .dropdown .ui-select select, .dropdown .ui-select .ui-icon-arrow-d {
-	background:url("images/sprites-channel.png") no-repeat -13px -1422px;
-	border-right:1px solid #828181;
+	background:url("images/sprites-channel.png") no-repeat -18px -1433px;
 	border-radius:0;
 	height:26px;
-	margin:-11px 92px 0 0;
+	margin:0 92px 0 0;
 	padding:0 6px;
+	color:#969696;
+}
+.dropdown .ui-select select option {
+	border-bottom:1px solid #828181;
 }
 .dropdown .ui-select .ui-btn-inner .ui-btn-text {
 	color:#969696;
 	font-size:17px;
-	margin:0 0 0 22px;
-	padding:0 0 4px 10px;
+	margin:0 0 0 27px;
+	padding:0 0 4px 6px;
+	border-left:1px solid #828181;
 }
 .dropdown .ui-select .ui-btn-icon-right .ui-btn-inner, .dropdown .ui-select .ui-li-has-count .ui-btn-inner {
 	padding:0;
@@ -1587,13 +1614,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-top:1px solid #828181;
 	border-bottom:1px solid #828181;
 	margin:25px 0 0 -10px;
-	padding:15px 15px 0 15px;
+	padding:15px 10px 0 22px;
 	overflow:hidden;
 }
 .yes-no {
 	line-height:36px;
 	margin-bottom:20px;
-	font-size:16px;
+	font-size:14px;
 	color:#fff;
 }
 .yes-no label.ui-slider {
@@ -1614,7 +1641,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#e6e7e8;
 	text-shadow:none;
 	color:#898a8a;
-	font-size:14px;
+	font-size:13px;
 	line-height:36px;
 }
 .yes-no .ui-slider-switch .ui-btn.ui-slider-handle {
@@ -1631,13 +1658,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:2px 10px;
 	background:#8dc63f;
 	color:#fff;
-	font-size:15px;
+	font-size:14px;
 	display:block;
 	width:85px;
-	margin:5px 0 0 15px;
+	margin:5px 0 0 12px;
 	border-radius:4px;
 }
-
 .channelmessages {
 	padding:0 10px 0 0;
 }
@@ -1667,16 +1693,17 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	float:right;
 	padding:0 8px;
 	border-radius:4px;
-	font-size:14px;
+	font-size:13px;
 	background:#8dc63f;
 	margin:3px 10px 0 0;
+	color:#fff;
 }
 .channelmessages .timemsg {
 	font-size:14px;
 	color:#a0a0a0;
 }
 .channelmessages p {
-	font-size:14px;
+	font-size:12px;
 	color:#000;
 }
 .broadecast {
@@ -1687,15 +1714,16 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:8px 0 8px 57px;
 	margin:10px 0 12px 0;
 	font-size:16px;
-	background:url("images/sprites-channel.png") no-repeat -3px -1201px;
+	background:url("images/Replies-ican.png") no-repeat 0 0;
 }
 .newreplies{
 	padding:0 8px 1px 8px;
 	background:#27aae1;
 	float:left;
 	border-radius:4px;
-	margin:16px 10px 14px 10px;
+	margin:16px 10px 14px 8px;
 	font-style:normal;
+	font-size:13px;
 }
 .msgbroadcast {
 	margin:0 0 0 9px;
@@ -1703,7 +1731,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .msgbroadcast p em {
 	color:#8DC63F;
-	font-size:14px;
+	font-size:12px;
 	font-style:normal;
 }
 .broadcastbuddy {
@@ -1724,11 +1752,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin:8px 0 0 0;
 }
 .messagesundeliver li {
-	padding:5px 10px;
+	padding:5px 8px;
 }
-.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover {
+.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover, .messagesundeliver li a.ui-link:visited, .messagesundeliver li a.ui-link:active {
 	color:#1c75bc;
-	font-size:14px;
+	font-size:12px;
 	text-transform:uppercase;
 }
 .messagesundeliver li a span {
@@ -1742,7 +1770,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-size:13px;
 	text-transform:lowercase;
 }
-.messagesdeliver li a.ui-link, .messagesdeliver li a.ui-link:hover {
+.messagesdeliver li a.ui-link, .messagesdeliver li a.ui-link:hover, .messagesdeliver li a.ui-link:visited,  .messagesdeliver li a.ui-link:active {
 	color:#8DC63F;
 }
 .messagesdeliver li a span.timeundeliver {
@@ -1773,7 +1801,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#8DC63F;
 	border-radius:4px 4px 4px 4px;
 	display:inline-block;
-	font-size:14px;
+	font-size:12px;
 	margin-left:15px;
 	padding:2px 10px;
 }
@@ -1792,8 +1820,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:8px 0 8px 0;
 	overflow:hidden;
 }
+.channelinfocontent .title.ui-link {
+	color:#8DC63F;
+}
 .channelinformation .setting {
-	margin:2px 10px 0 0;
+	margin:2px 5px 0 0;
 }
 .channelbroadcast {
 	background:#e6e7e8;
@@ -1801,7 +1832,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	display:block;
 	margin:0 10px 10px 0;
 	overflow:hidden;
-	padding:4px 0 8px 0;
+	padding:4px 0 0 0;
 }
 .broadcast-sensitive {
 	border-radius: 21px 0 0 21px;
@@ -1814,9 +1845,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:21px 4px 4px 21px;
 	line-height:33px;
 	float:left;
-	font-size:16px;
+	font-size:14px;
 	padding:0 0 0 50px;
-	width:58%;
+	width:55%;
 	color:#414141;
 }
 .broadcastnormal span {
@@ -1855,7 +1886,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	line-height:30px;
 	padding:0 2% 0 2%;
 	width:64%;
-	font-size:16px;
+	font-size:14px;
 	color:#fff;
 	background: rgb(141,198,63); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(141,198,63,1) 0%, rgba(163,205,55,1) 50%, rgba(141,198,63,1) 51%, rgba(210,221,37,1) 100%); /* FF3.6+ */
@@ -1888,7 +1919,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .broadcastmsgsend em.broadcastmsgunsend {
 	float:right;
-	font-size:16px;
+	font-size:14px;
 	padding:0;
 	width:32%;
 	font-style:normal;
@@ -1903,7 +1934,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:21px 4px 4px 21px;
 	color:#414141;
 	float:left;
-	font-size:16px;
+	font-size:14px;
 	height:29px;
 	line-height:29px;
 	margin:0 0 0 5px;
@@ -1914,27 +1945,26 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#27aae1;
 	border-radius:4px;
 	display:inline-block;
-	font-size:16px;
+	font-size:13px;
 	margin-left:15px;
-	padding:0 10px;
+	padding:0 6px;
 	float:right;
 	color:#fff;
 	font-style:normal;
-	margin:2px 5px;
-	line-height:25px;
+	margin:3px 5px;
+	line-height:23px;
 }
 .broadcast-sensitive.singlemessage {
 	margin: 0 4px;
 	border-radius:21px 4px 4px 21px;
 }
-
 .broadcast-sensitive.singlemessage span {
-	width:96.8%;
+	width:80%;
 }
 .broadcast-sensitive.singlemessage em {
-	padding:16px 20px;
-	background:url("images/singalmsgread.png") no-repeat 0 8px;
-	
+	padding:16px 15px;
+	float:right;
+	background:url("images/singalmsgread.png") no-repeat 8px 8px;
 }
 h1.messagesdate {
 	font-size:14px;
@@ -1960,17 +1990,17 @@ h1.messagesdate {
 }
 .broadcastmsgredfull {
 	background:#ffffff;
-	padding:0 0 10px 0;
+	padding:0 0 5px 0;
 	border-radius:21px 10px 10px 10px;
 	margin:0 10px 0 0;
 }
 .broadcastmsgredfull p {
-	font-size:16px;
-	margin:15px 30px 5px 30px;
+	font-size:13px;
+	margin:10px 20px 5px 18px;
 }
 .broadcastmsgred {
 	border-bottom: 1px solid #7f7c7c;
-	box-shadow: 0 -8px 9px #CCCCCC inset;
+	box-shadow:0 -8px 9px #CCCCCC inset;
 	margin:0;
 }
 .msgfullread {
@@ -1984,11 +2014,11 @@ h1.messagesdate {
 }
 .msgfullread span {
 	text-transform:uppercase;
-	font-size:12px;
+	font-size:11px;
 	color:#999999;
 }
 .msgfullread em {
-	font-size:14px;
+	font-size:12px;
 	color:#414141;
 	font-style:normal;
 	display:block;
@@ -2051,8 +2081,8 @@ h1.requests {
 	background:#8DC63F;
 	border-radius:4px;
 	margin:0 0 0 3px;
-	font-size:14px;
-	padding:0 8px;
+	font-size:12px;
+	padding:0 6px;
 }
 .allfollowercs {
 	margin:0 0 10px 10px;
@@ -2109,6 +2139,7 @@ h1.requests {
 	border:2px solid #ffffff;
 	border-radius:4px;
 	margin:8px 0 5px 0;
+	width:98.5%;
 }
 .followerincrease .broadcastmsgsend .msgincreasefull {
 	width:75%;
@@ -2121,7 +2152,7 @@ h1.requests {
 .createchannel {
 	color:#FFFFFF;
 	display:block;
-	font-size:16px;
+	font-size:14px;
 	margin:0 0 30px 15px;
 }
 .createchannel em {
@@ -2152,23 +2183,19 @@ h1.requests {
 /*-25-10-2013-*/
 .help-FAQs {
 	font-size:20px;
-	margin:15px 10px;
+	margin:15px 0;
 }
 .helpfull-link, .aboutuschannel {
 	margin-right:10px;
-	padding:20px;
+	padding:20px 5px;
 	border-top:1px solid #828181;
 	border-bottom:1px solid #828181;
 }
-/*.helpfull-link li {
-	margin-bottom:6px;
-	padding:0 0 3px 0;
-}*/
 .helpfull-link li {
 	font-size:16px;
 	color:#fff;
 	padding:0 0 0 35px;
-	background:url("images/helpicon.png") no-repeat 0px 2px;
+	background:url("images/helpicon.png") no-repeat 0 2px;
 	margin-bottom:6px;
 }
 .channeledit {
@@ -2204,7 +2231,7 @@ h1.requests {
 	padding:3px;
 	border-radius:4px;
 	background:#fff;
-	margin:15px 10px 0px 0px;
+	margin:15px 10px 0 0;
 }
 .messagescontent {
 	background:#e6e7e8;
@@ -2212,20 +2239,21 @@ h1.requests {
 }
 .msg-hideshow {
 	overflow:hidden;
-	padding:8px 8px 8px 8px;
+	padding:4px 8px 4px 8px;
 	border-bottom:1px solid #ccc;
 }
 .msg-hideshow h4 {
 	float:left;
-	font-size:22px;
+	font-size:15px;
 	color:#2d2d2d;
+	padding:5px 0px;
 	font-weight:normal;
 }
 .msg-hideshow a {
 	float:right;
 	padding:13px;
-	margin-top:5px;
-	background:url("images/msg-hide.png") no-repeat 0px 0px;
+	margin-top:3px;
+	background:url("images/msg-hide.png") no-repeat 0 0;
 }
 .messagesreceived, .igi-responses {
 	background:#fff;
@@ -2235,17 +2263,17 @@ h1.requests {
 }
 .messagesreceived .received, .igi-responses .received {
 	color:#8DC63F;
-	font-size:15px;
+	font-size:13px;
 }
 .messagesreceived .messageschannel p.receive-time, .igi-responses p.receive-time {
-	font-size:15px;
+	font-size:12px;
 	color:#414141;
 	line-height:20px;
 }
 .messagesreceived p.receive-time em {
 	font-style:normal;
 	color:#a0a0a0;
-	font-size:15px;
+	font-size:12px;
 	padding:0 2px 0 0;
 }
 .normalicon {
@@ -2254,38 +2282,38 @@ h1.requests {
 .received-responses-msg {
 	background:#27AAE1;
 	border-radius:4px;
-	font-size:14px;
+	font-size:12px;
 	padding:0 5px;
 	position:absolute;
 	top:3px;
 }
 ul.igiresponses, .notification {
 	border-top:1px solid #EAEAEA;
-	padding:2px 0px 5px 0;
+	padding:2px 0 5px 0;
 }
 ul.igiresponses li {
-	font-size:14px;
+	font-size:12px;
 	color:#8DC63F;
-	padding:5px 0px;
+	padding:5px 0;
 }
 ul.igiresponses li span {
-	font-size:12px;
+	font-size:10px;
 	color:#8d8b8c;
-	padding:0 10px;
+	padding:0 6px;
 }
 .followersname {
-	font-size:15px;
+	font-size:13px;
 	color:#8DC63F;
 	padding:8px 10px;
 }
 .notification li {
 	color:#2d2d2d;
-	font-size:14px;
+	font-size:12px;
 	padding:5px 10px;
 }
 .notification li em {
 	color:#8DC63F;
-	font-size:13px;
+	font-size:11px;
 }
 .search-query {
 	border-bottom:1px solid #828181;
@@ -2304,7 +2332,7 @@ ul.igiresponses li span {
 .searchtype .ui-icon, .searchtype .ui-btn-inner {
 	background:none;
 	border:none;
-	margin:0px;
+	margin:0;
 }
 .channelsrecommended h1 {
 	margin-bottom:15px;
@@ -2333,7 +2361,7 @@ ul.igiresponses li span {
 	margin:-10px 5px 0 18px;
 }
 .dropdownchanellist li {
-	padding:5px 0px;
+	padding:5px 0;
 }
 .dropdownchanellist li.even {
 	background:#f1f2f2
@@ -2346,15 +2374,362 @@ ul.igiresponses li span {
 .dropdownchanellist li a span {
 	font-size:12px;
 	color:#8DC63F;
-	padding:0px 8px;
+	padding:0 8px;
 	font-weight:bold;
 	font-style:normal;
 }
 .addmorelist.ui-link, .addmorelist.ui-link:hover {
 	padding:5px 0 5px 30px;
 	display:block;
+	font-size:13px;
 	color:#a7a9ac;
-	background:#f1f2f2 url("images/sprites-channel.png") no-repeat -9px -1419px;
+	background:#f1f2f2 url("images/sprites-channel.png") no-repeat -9px -1421px;
+}
+
+/*26-10-2013*/
+.messageshistory {
+	padding:0 10px;
+}
+.messageshistory a{
+	display:inline-block;
+	width:100%;
+	background:#fff;
+	border-radius:4px;
+	margin-bottom:10px;
+}
+.msghistory{
+	border-left:1px solid #EAEAEA;
+	margin-left:50px;
+	padding:5px 0;
+}
+.msghistory span {
+	color:#8DC63F;
+	font-size:14px;
+}
+.msghistory p {
+	font-size:13px;
+	color:#414141;
+}
+.msghistory p em {
+	color:#ccc;
+	padding:0 3px 0 0;
+	font-style:normal;
+}
+.messageshistory .announcementicon {
+   background: url("images/announcementicon.png") no-repeat 6px 7px;
+}
+.msghistory .messagebtn {
+	color:#fff;
+}
+
+.snoozetitle {
+display:block;
+margin:30px 0 25px 20px;
+}
+.snoozesettings {
+	border-radius:20px 0 0 20px;
+	float:right;
+	overflow:hidden;
+	padding:8px 15px;
+	width:222px;
+	background:#2D2D2D;
+}
+.snoozesettings .action-time .ui-input-search, .action-time div.ui-input-text {
+	width:40px;
+	margin-right:8px;
+}
+.snoozesettings .action-time div.ui-input-text input.ui-input-text {
+	width:32px;
+}
+.snoozesettings .action-time .ui-select {
+	width:55%;
+}
+.snoozesettings .action-time label {
+	width:45px;
+	color:#fff;
+}
+.snoozesettings .action-time span.ui-btn-text span {
+	color: #000000;
+	font-size: 17px;
+	padding: 0 0 0 6px;
+}
+.landingpage {
+	border:1px solid red;
+}
+.landingpage .detailschannel {
+	border:1px solid red;
+	display:block;
+}
+.channelprivate {
+	margin:20px 10px 10px 0;
+	background:#fff;
+	border-radius:4px;
+	padding:10px;
+	color:#414141;
+}
+.channelprivate h4 {
+	float: left;
+	font-size: 20px;
+	font-weight: normal;
+}
+.channelprivate a.lock-channel {
+	float:right;
+	 background: url("images/lock.png") no-repeat 0 8px;
+	padding:14px 10px;
+}
+.channelprivate p {
+	font-size:14px;
+	font-style:italic;
+	clear:both;
+	padding:5px 0;
+}
+.morebtn.ui-link, .morebtn.ui-link:hover {
+	background:#E6E7E8 url("images/sprites-channel.png") no-repeat -12px -1423px;
+	border-radius:4px;
+	color:#A7A9AC;
+	font-size:13px;
+	padding:3px 9px 3px 22px;
+}
+.contactchannel {
+	border-top:1px solid #828181;
+	border-bottom:1px solid #828181;
+	margin:0 0 10px -10px;
+	padding: 15px 0 15px 10px;
+}
+.contactchannel .login a.ui-link {
+	margin-left:8px;
+}
+.login .loginbtn a.ui-link {
+	margin-left:0;
+}
+.dropdownchanellist li a span.broadcastsdate {
+	float:left;
+	font-size:12px;
+	font-weight:normal;
+	width:40px;
+	color:999999;
+	line-height:25px;
+}
+.message-detail {
+	padding:5px 5px 5px 6px;
+	margin:10px 10px 0 0;
+	background:#f1f2f2;
+	border-radius:25px 4px 4px 4px;
+}
+.messagedetail {
+	background:#fff;
+	overflow:hidden;
+	border-radius:21px 4px 4px 4px;
+}
+.messagedetail em {
+	float:left;
+	padding:20px;
+	background:url("images/sprites.png") no-repeat -7px -689px;
+}
+.messagedetail-info {
+	float:left;
+	margin:0 0 0 10px;
+	padding:0 0 10px 0;
+	width:82%;
+}
+.messagedetail-info span {
+	font-size:14px;
+	color:#a0a0a0;
+}
+.messagedetail-info p {
+	font-size:14px;
+	padding:5px 0 10px 0;
+}
+.snoozedismissbtn {
+	padding:10px 0;
+	text-align:center;
+}
+.snoozedismissbtn a {
+	background:#8DC63F;
+	border-radius:4px 4px 4px 4px;
+	display:inline-block;
+	font-size:14px;
+	margin-right:4px;
+	padding:2px 10px;
+}
+.snoozedismissbtn a.snoozebtn.ui-link:hover {
+	background:#8DC63F;
+	border-radius:4px 4px 4px 4px;
+	display:inline-block;
+	font-size:14px;
+	margin-right:4px;
+	padding:2px 10px;
+	color:#fff;
+}
+.snoozedismissbtn a.snoozebtn.ui-link {
+	background:#2d2d2d;
+	color:#767676;
+}
+/*slide menu*/
+.slidemenu {
+	background:#e6e7e8;
+	float: right;
+	margin-top: -41px;
+	position: relative;
+	width:90%;
+	z-index: 9999;
+	min-height:480px;
+}
+.slidemenu h4 {
+	font-size:22px;
+	font-weight:normal;
+	font-style:italic;
+	color:#8DC63F;
+	padding:3px 0 7px 24px;
+	border-bottom:1px solid #fff;
+}
+.slidemenu a.ui-link, .slidemenu a.ui-link:hover, .slidemenu a.ui-link:visited, .slidemenu .ui-link:active {
+	display:block;
+	font-size:20px;
+	font-weight:normal;
+	color:#414141;
+	padding:10px 0 8px 52px;
+	background:url("images/sprites-channel.png") no-repeat 0 -510px;
+	border-bottom:1px solid #fff;
+}
+.slidemenu a.ui-link.channels-followicon {
+	background-position:0 -567px;
+}
+.slidemenu a.ui-link.new-channelicon {
+	background-position:0 -624px;
+}
+.slidemenu a.ui-link.find-channelsicon {
+	background-position:0 -681px;
+}
+.slidemenu a.ui-link.channelsall-messagesicon {
+	background-position:0 -737px;
+}
+/*slide menu End*/
+/*-28-10-2013-*/
+.compose {
+	margin:0 10px 0 0;
+}
+.compose h1 {
+	margin:15px 0;
+	padding:0 0 0 25px;
+	background:url("images/sprites-login.png") no-repeat -26px -479px;
+}
+.compose-text {
+	border-top:1px solid #828181;
+	padding:15px 0 0 0;
+}
+.compose .compose-text h1.logininfo {
+	background:none;
+	padding:0;
+	margin:0 0 15px 0;
+}
+.compose-text p {
+	font-size:14px;
+	color:#fff;
+	font-style:italic;
+	margin-bottom:10px;
+}
+.compose-text p strong {
+	font-weight:normal;
+	font-size:16px;
+}
+.composepage .login {
+	padding:0;
+}
+.composepage .loginform span {
+	margin:10px 0 20px 3px
+}
+.composepage .ui-checkbox label span.ui-btn-inner span.ui-btn-text {
+	font-size:16px;
+}
+
+.broadcast-textarea {
+	border:1px solid red;
+	background:#e6e7e8;
+	border-radius:4px;
+	padding:5px 20px 5px 5px;
+}
+.broadcast-textarea .textarea {
+	resize:none;
+	background:#fff;
+	border-radius:4px;
+	font-size:14px;
+	margin:0;
+}
+.broadcast-textarea span {
+	float:right;
+	padding:0 4px;
+	position:absolute;
+	right:24px;
+	font-size:14px;
+	top:128px;
+	color:#8DC63F;
+}
+.compose-newbroadcast {
+	border:2px solid red;
+}
+.compose-newbroadcast .ui-select .ui-btn.ui-btn-hover-c {
+	border:3px solid green;
+}
+.composebroadcast {
+	border:1px solid red;
+	margin:10px 0 0 0;
+}
+.composedropdown {
+	border:1px solid green;
+}
+.replydetail {
+	font-size:14px;
+	font-weight:normal;
+	color:#8DC63F;
+	margin:0 25px 0 15px;
+}
+.reply-detail {
+	margin:4px 25px 10px 15px;
+	padding:5px 10px 10px 10px;
+}
+.reply-detail p {
+	font-style:normal;
+	padding:0 0 5px 0;
+}
+.channelprivate span {
+	color:#a0a0a0;
+	font-size:14px;
+}
+/*-V-09-*//*-30-10-2013-*/
+.information-delete {
+	font-size:14px;
+	color:#8DC63F;
+	font-weight:normal;
+	margin:25px 0 15px 12px;
+}
+.mycontact em.gray-delete, .gray-delete  {
+	background:url("images/sprites.png") no-repeat -10px -460px;
+	padding:19px;
+}
+.editbtn.ui-link, .editbtn.ui-link:hover {
+	padding:2px 10px;
+	font-size:13px;
+	color:#898a8a;
+	background:#e6e7e8;
+	float:right;
+	border-radius:4px;
+	margin:2px 0 0 0;
+}
+.mycontact .delete-address {
+	color:#fff;
+	font-size:14px;
+	font-weight:normal;
+}
+.confirmbtn {
+	background:#ED1C24;
+	border-radius:4px 4px 4px 4px;
+	color:#FFFFFF;
+	float:right;
+	font-size:13px;
+	line-height:22px;
+	margin:9px 10px 9px 0;
+	padding:0 5px;
 }
 /* CHANNELS PAGES CSS	END	 */
 /*
@@ -2393,7 +2768,7 @@ ul.igiresponses li span {
 	.channelicons ul {
 		width:84%;
 	}
-	hr {
+	hr, .baseline {
 		margin:15px 20px 20px 10px;
 	}
 	.loginform span {
@@ -2420,6 +2795,21 @@ ul.igiresponses li span {
 	}
 	.dropdownchanellist li a.ui-link, .dropdownchanellist li a span {
 		font-size:13px;
+	}
+	.slidemenu {
+		min-height:600px;
+	}
+	.broadcast-sensitive.singlemessage span {
+		width:81.5%;
+	}
+	.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover {
+		font-size:14px;
+	}
+	.channelmessages p {
+		font-size:14px;
+	}
+	.msgbroadcast p em {
+		font-size:14px;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -2489,8 +2879,21 @@ ul.igiresponses li span {
 	.browseall {
 		padding:10px;
 	}
-	.dropdownchanellist li a.ui-link, .dropdownchanellist li a span {
+	.dropdownchanellist li a.ui-link, .dropdownchanellist li a.ui-link:hover, .dropdownchanellist li a span {
 		font-size:15px;
+	}
+	.slidemenu {
+		width:95%;
+		min-height:980px;
+	}
+	.broadcast-sensitive.singlemessage span {
+		width:91%;
+	}
+	.followerincrease .broadcastmsgsend {
+		width:99.5%;
+	}
+	.messagedetail-info {
+		width:93%;
 	}
 }
 @media only screen and (max-width:1280px) and (min-width:768px) {
@@ -2523,6 +2926,9 @@ ul.igiresponses li span {
 	.GetStart {
 		top:61.5%;
 	}
+	.slidemenu {
+		min-height:1240px;
+	}
 }
 @media only screen and (min-width:980px) {
 	.details {
@@ -2552,6 +2958,10 @@ ul.igiresponses li span {
 	.channelicons ul {
 		width:94.5%;
 	}
+	.broadcast-sensitive.singlemessage span {
+		width:92.5%;
+	}
+	
 }
 @media only screen and (min-width:1280px) {
 	.details {
@@ -2583,6 +2993,15 @@ ul.igiresponses li span {
 	}
 	.channelicons ul {
 		width:95.8%;
+	}
+	.slidemenu {
+		min-height:600px;
+	}
+	.broadcast-sensitive.singlemessage span {
+		width:95%;
+	}
+	.messagedetail-info {
+		width:95.5%;
 	}
 }
 @media only screen and (max-width: 600px) and (min-width: 599px) {

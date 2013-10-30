@@ -11,7 +11,6 @@ function AboutEvernymViewModel() {
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
-	this.shown = false;	
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       if ($.mobile.pageData && $.mobile.pageData.a) {

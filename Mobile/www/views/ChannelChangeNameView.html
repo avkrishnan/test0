@@ -1,6 +1,6 @@
-<div id="channelNewView" data-role="page">
+<div id="channelChangeNameView" data-role="page">
   <header>
-    <a href="#" class="back" onclick="goToView('channelListView');"></a>
+    <a href="#" class="back" onclick="goToView('channelSettingsView');"></a>
     <a class="menu" href="#"></a>
     <div class="linkican">
       <a class="smsican" href="#"></a>
@@ -9,15 +9,13 @@
     </div>
   </header>  
   <div class="page-content" data-bind="visible: sectionOne">
-    <div class="changename">Create a Channel</div>
-    <em class="webaddress">Name your channel:</em>
-    <em class="webaddress">(choose a short name with no spaces)</em>
+    <div class="changename">Change Channel Name</div>
     <form class="loginform">
-      <label class="createchannel">Example:<em> karateclass</em></label>
+      <label class="msginfo"><em>New channel name (no spaces):</em></label>
       <div class="formtype">
-        <input type="text" data-bind="value: newChannel" placeholder="lawfamilyvacation" />
+        <input type="text" data-bind="value: channelChangeName" placeholder="2013hawks" />
         <div class="channelavailable" data-bind="html: message"></div>
-        <div class="msgerror" data-bind="html: errorNewChannel"></div>
+        <div class="msgerror" data-bind="html: errorChannel"></div>
       </div>
       <div class="login">
         <p class="loginbtn">
@@ -27,12 +25,12 @@
     </form>
   </div>
   <div class="page-content" data-bind="visible: sectionTwo">
-    <div class="changename">Create a Channel</div>
+    <div class="changename">Change Channel Name</div>
     <em class="webaddress">Your channel's web address will be:</em>
     <div class="createchannel"><em data-bind="text: channelWebAddress"><!--lawfamilyvacation.evernym.com--></em></div>
     <div class="login">
       <p class="loginbtn">
-        <a href="#" data-bind="click: createChannelCommand">CREATE</a>
+        <a href="#" data-bind="click: confirmChannelChangeNameCommand">CONFIRM</a>
       </p>
     </div>
   </div>

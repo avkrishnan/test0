@@ -12,7 +12,7 @@ function ChannelMainViewModel() {
 	this.notification = ko.observable();
 	
   /* Channel Main observable */			
-	this.channelId = ko.observable();	
+	this.channelName = ko.observable();		
 	
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
@@ -27,12 +27,28 @@ function ChannelMainViewModel() {
 	this.activate = function() {
 		var _accountName = localStorage.getItem('accountName');
 		that.accountName(_accountName);
-		that.channelId(localStorage.getItem('currentChannel'));
+		return this.getChannelCommand()/*.then(gotChannels)*/;
+		goToView('channelMainView');
 	}
 	this.channelSettings = function(){
-		//alert(localStorage.getItem('currentChannel'));
-		$.mobile.changePage('#channelSettingsView', {
-			transition: 'none'
-		});
+		goToView('channelSettingsView');
 	};
+	
+	function successfulGetChannel(data) {
+		$.mobile.hidePageLoadingMsg();
+		localStorage.setItem('currentChannelName', data.name);
+		that.channelName(localStorage.getItem('currentChannelName'));
+  };
+
+  function errorAPI(data, status, response) {
+    $.mobile.hidePageLoadingMsg();
+    localStorage.setItem('signUpError', response.message);
+    goToView('channelMainView');
+  };
+	
+  this.getChannelCommand = function () {
+		var channelId = localStorage.getItem('currentChannelId');
+		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
+		return ES.channelService.getChannel(channelId, {success: successfulGetChannel, error: errorAPI});
+  };
 }

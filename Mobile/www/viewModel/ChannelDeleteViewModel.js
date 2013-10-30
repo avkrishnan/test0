@@ -10,8 +10,10 @@ function ChannelDeleteViewModel() {
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
-  /* New Channel Step First observable */
-	this.channelId = ko.observable();				
+  /* Channel delete observable */
+	this.channelId = ko.observable();
+	this.channelName = ko.observable();
+	this.channelDisplayName = ko.observable();					
 	
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
@@ -27,6 +29,8 @@ function ChannelDeleteViewModel() {
 		var _accountName = localStorage.getItem('accountName');
 		that.accountName(_accountName);
 		that.channelId(localStorage.getItem('currentChannelId'));
+		that.channelName(localStorage.getItem('currentChannelName'));
+		that.channelDisplayName(localStorage.getItem('currentChannelDescription'));
 	}
 
 	function successfulDelete(args) {

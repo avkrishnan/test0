@@ -27,33 +27,28 @@ function ChannelSettingsViewModel() {
 	this.activate = function() {
 		var _accountName = localStorage.getItem('accountName');
 		that.accountName(_accountName);
-		return this.channelSettingsCommand()/*.then(gotChannels)*/;
+		return this.getChannelCommand();
 		goToView('channelSettingsView');
 	}
 	this.editChannelName = function () {
-		$.mobile.changePage('#channelChangeNameStepFirstView', {
-			transition: 'none'
-		});
+		goToView('channelChangeNameStepFirstView');
   };
 	this.editChannelDisplayName = function () {
-		$.mobile.changePage('#channelEditDisplayNameView', {
-			transition: 'none'
-		});
+		goToView('channelEditDisplayNameView');
   };
 	this.deleteChannel = function () {
-		$.mobile.changePage('#channelDeleteView', {
-			transition: 'none'
-		});
+		goToView('channelDeleteView');
   };
 	this.changeChannelIcon = function () {
-		$.mobile.changePage('#channelNewStepSecondView', {
-			transition: 'none'
-		});
+		goToView('channelChangeIconView');
   };
+	
 	function successfulGetChannel(data) {
 		$.mobile.hidePageLoadingMsg();
-    that.channelName(data.name);
-		that.channelDisplayName(data.description);
+		localStorage.setItem('currentChannelName', data.name);
+		localStorage.setItem('currentChannelDescription', data.description);
+		that.channelName(localStorage.getItem('currentChannelName'));
+		that.channelDisplayName(localStorage.getItem('currentChannelDescription'));
   };
 
   function errorAPI(data, status, response) {
@@ -63,11 +58,11 @@ function ChannelSettingsViewModel() {
       transition: 'none'
     });
   };
-  this.channelSettingsCommand = function () {
-		var channelId = localStorage.getItem("currentChannelId");
-		$.mobile.showPageLoadingMsg("a", "Loading Channel");
+	
+  this.getChannelCommand = function () {
+		var channelId = localStorage.getItem('currentChannelId');
+		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
 		return ES.channelService.getChannel(channelId, {success: successfulGetChannel, error: errorAPI});
-		//localStorage.removeItem("currentChannelId");
   };
 }
 
@@ -80,10 +75,10 @@ function ChannelSettingsViewModel() {
 
 	
 	
-	this.template = "channelSettingsView";
-    this.viewid = "V-16";
-    this.viewname = "ChannelSettings";
-    this.displayname = "Channel Settings";
+	this.template = 'channelSettingsView';
+    this.viewid = 'V-16';
+    this.viewname = 'ChannelSettings';
+    this.displayname = 'Channel Settings';
     
     this.hasfooter = true;
     this.isChannelView = true;
@@ -111,9 +106,9 @@ function ChannelSettingsViewModel() {
 	*/
 	
     /*
-    $("#" + that.template).live("pagebeforecreate", function (e, data) {
-                                var panelhtml = $("#globalpanel").html();
-                                $(this).find("#gpanel").html(panelhtml);
+    $('#' + that.template).live('pagebeforecreate', function (e, data) {
+                                var panelhtml = $('#globalpanel').html();
+                                $(this).find('#gpanel').html(panelhtml);
                                 });
     */
     
@@ -122,7 +117,7 @@ function ChannelSettingsViewModel() {
     /*this.applyBindings = function(){
     
         
-        $("#" + that.template).on("pagebeforeshow", null, function(e, data){
+        $('#' + that.template).on('pagebeforeshow', null, function(e, data){
                                     
                                     that.clearForm();
                                     
@@ -134,7 +129,7 @@ function ChannelSettingsViewModel() {
                                     }
                                     
                                     else {
-									var currentChannel = localStorage.getItem("currentChannel");
+									var currentChannel = localStorage.getItem('currentChannel');
 									var lchannel = JSON.parse(currentChannel);
                                     
                                     
@@ -179,11 +174,11 @@ function ChannelSettingsViewModel() {
                                     
                                     that.relationship(lchannel.relationship);
                                     that.channelid(lchannel.id);
-                                    $.mobile.showPageLoadingMsg("a", "Loading Messages");
+                                    $.mobile.showPageLoadingMsg('a', 'Loading Messages');
                                     
                                     }
                                     else {
-                                    $.mobile.changePage("#" + loginViewModel.template);
+                                    $.mobile.changePage('#' + loginViewModel.template);
                                     }
                                     
                                     }
@@ -201,7 +196,7 @@ function ChannelSettingsViewModel() {
 
 		
 		that.messages([]);
-		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
+		$.mobile.showPageLoadingMsg('a', 'Loading The Channel');
 		that.getChannelCommand(that.channelid()).then(gotChannel);
 		
 		return true;
@@ -231,7 +226,7 @@ function ChannelSettingsViewModel() {
 	    var lchannel = data;
 	
 		$.mobile.hidePageLoadingMsg();
-		localStorage.setItem("currentChannel", JSON.stringify(data));
+		localStorage.setItem('currentChannel', JSON.stringify(data));
 		that.channel([data]);
 		that.title(data.name );
         that.relationship(data.relationship);
@@ -283,7 +278,7 @@ function ChannelSettingsViewModel() {
 	
 	function successfulDelete(data){
 
-		$.mobile.changePage("#" + channelListViewModel.template);
+		$.mobile.changePage('#' + channelListViewModel.template);
         channelListViewModel.clearForm();
         channelListViewModel.activate();
         
@@ -306,7 +301,7 @@ function ChannelSettingsViewModel() {
 	
 	function successfulFollowChannel(){
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Now Following Channel " + $.mobile.pageData.id);
+		showMessage('Now Following Channel ' + $.mobile.pageData.id);
 		
 	}
 	
@@ -319,7 +314,7 @@ function ChannelSettingsViewModel() {
 	
 	this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
-		$.mobile.changePage("#" + loginViewModel.template)
+		$.mobile.changePage('#' + loginViewModel.template)
 		
 	};
 	
@@ -327,10 +322,10 @@ function ChannelSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		if (loginPageIfBadLogin(details.code)){
 			
-            showError("Please log in or register to view this channel.");
+            showError('Please log in or register to view this channel.');
 		}
         else {
-		    showError("Error Getting Channel: " + ((status==500)?"Internal Server Error":details.message));
+		    showError('Error Getting Channel: ' + ((status==500)?'Internal Server Error':details.message));
 		}
             
 
@@ -340,7 +335,7 @@ function ChannelSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showError("Error: " + ((status==500)?"Internal Server Error":details.message));
+		showError('Error: ' + ((status==500)?'Internal Server Error':details.message));
 		
 
 	}
@@ -355,7 +350,7 @@ function ChannelSettingsViewModel() {
 		}
         else {
 		
-		    showError("Error Following Channel: " + details.message);
+		    showError('Error Following Channel: ' + details.message);
 		}
 	}
 	
@@ -363,7 +358,7 @@ function ChannelSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showError("Error Posting Message: " + details.message);
+		showError('Error Posting Message: ' + details.message);
 
 	}
 	
@@ -371,13 +366,13 @@ function ChannelSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showError("Error Retrieving Messages: " + ((status==500)?"Internal Server Error":details.message));
+		showError('Error Retrieving Messages: ' + ((status==500)?'Internal Server Error':details.message));
 
 	}
 	
 	this.getChannelCommand = function (lchannelid) {
 		
-		$.mobile.showPageLoadingMsg("a", "Loading Channel");
+		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
 
 		return ES.channelService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
 		
@@ -387,7 +382,7 @@ function ChannelSettingsViewModel() {
         
         var last_message_id = that.messages()[that.messages().length - 1].id;
         
-        $.mobile.showPageLoadingMsg("a", "Loading Messages");
+        $.mobile.showPageLoadingMsg('a', 'Loading Messages');
 		
 		return ES.messageService.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
         
@@ -397,7 +392,7 @@ function ChannelSettingsViewModel() {
 	this.followChannelCommand = function(){
 		
 		that.messages([]);
-		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
+		$.mobile.showPageLoadingMsg('a', 'Requesting to Follow Channel');
 		return ES.channelService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
 		
 	};
@@ -406,7 +401,7 @@ function ChannelSettingsViewModel() {
     this.unfollowChannelCommand = function(){
 	   
         
-		$.mobile.showPageLoadingMsg("a", "Requesting to Unfollow Channel");
+		$.mobile.showPageLoadingMsg('a', 'Requesting to Unfollow Channel');
         var callbacks = {
         success: function(){;},
             error: errorUnfollow
@@ -426,29 +421,29 @@ function ChannelSettingsViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
 		
-		showError("Error Unfollowing Channel: " + ((status==500)?"Internal Server Error":details.message));
+		showError('Error Unfollowing Channel: ' + ((status==500)?'Internal Server Error':details.message));
 	}
 	
 	this.deleteChannelCommand = function () {
 
-		$.mobile.showPageLoadingMsg("a", "Removing Channel");
+		$.mobile.showPageLoadingMsg('a', 'Removing Channel');
 		return ES.channelService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
 
 	};
     
     
     this.showMessage = function (message) {
-        localStorage.setItem("currentMessage", JSON.stringify(message));
+        localStorage.setItem('currentMessage', JSON.stringify(message));
         
 		
-		$.mobile.changePage("#" + messageViewModel.template)
+		$.mobile.changePage('#' + messageViewModel.template)
 	};
     
     
     
     this.showChannelMenu = function(){
         
-         $.mobile.changePage("#" + channelMenuViewModel.template);
+         $.mobile.changePage('#' + channelMenuViewModel.template);
         
     }
     
@@ -462,12 +457,12 @@ function ChannelSettingsViewModel() {
             lrelationship = that.channel()[0].relationship;
         }
         
-        if (lrelationship && lrelationship == "F"){
+        if (lrelationship && lrelationship == 'F'){
             
-            $.mobile.changePage("#" + channelBroadcastsViewModel.template);
+            $.mobile.changePage('#' + channelBroadcastsViewModel.template);
         }
         else {
-            $.mobile.changePage("#" + channelMenuViewModel.template);
+            $.mobile.changePage('#' + channelMenuViewModel.template);
         }
         
     };
@@ -475,13 +470,13 @@ function ChannelSettingsViewModel() {
  
     this.selectIcon = function(){
         selectIconViewModel.setCallBack(gotIcon);
-        $.mobile.changePage("#" + selectIconViewModel.template);
+        $.mobile.changePage('#' + selectIconViewModel.template);
         
         function gotIcon(iconObj){
             //alert(JSON.stringify(iconObj));
             var imageObj = {set: iconObj.set, id: iconObj.id};
             
-            $.mobile.changePage("#" + that.template);
+            $.mobile.changePage('#' + that.template);
             that.editIconId(JSON.stringify(imageObj));
             
             var mappedIcon = selectIconViewModel.mapImage(iconObj.set, iconObj.id, 68);

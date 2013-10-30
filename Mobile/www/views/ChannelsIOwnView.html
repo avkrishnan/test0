@@ -28,20 +28,20 @@
             <strong data-bind="text: channelname"></strong>
             <em data-bind="text: channeldescription"></em>
           </div>
-          <a href="#" class="setting" data-bind="attr: { id: channelId }, click: $parent.channelSettings"></a>
-          </div>    
-          <a class="requestcontent" href="#" data-bind="attr: { id: channelId }, click: $parent.channelMain">
-            <span class="request">4 new requests??</span>
-            <span class="igi">2 new iGi's??</span>
-          </a>    
-          <a class="requestcontent last" href="#" data-bind="attr: { id: channelId }, click: $parent.channelFollowers">
-            <span class="followers">16 followers??</span>
-            <span class="request">+ 1 requests??</span>
-            <span class="lost">-1 lost??</span>
-          </a>
-        </div>
-      </div>   
-    </div>  
+          <a href="#" class="setting" data-bind="click: $parent.channelSettings.bind($index())"></a>
+        </div>    
+        <a class="requestcontent" href="#" data-bind="click: $parent.channelMain.bind($index())">
+          <span class="request">4 new requests??</span>
+          <span class="igi">2 new iGi's??</span>
+        </a>    
+        <a class="requestcontent last" href="#" data-bind="click: $parent.channelFollowers.bind($index())">
+          <span class="followers">16 followers??</span>
+          <span class="request">+ 1 requests??</span>
+          <span class="lost">-1 lost??</span>
+        </a>
+      </div>
+    </div>   
+  </div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
     <a class="announcement" href="#"></a>

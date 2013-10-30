@@ -13,7 +13,7 @@ function FollowersListViewModel() {
 	this.notification = ko.observable();
 	
   /* Followers observable */
-	this.channelname = ko.observable();			
+	this.channelName = ko.observable();			
   this.followers = ko.observableArray([]);
 	this.followerCount = ko.observable();
 	this.followerName = ko.observable();
@@ -44,9 +44,15 @@ function FollowersListViewModel() {
 	this.activate = function() {
 		var _accountName = localStorage.getItem('accountName');
 		that.accountName(_accountName);
-		$.mobile.showPageLoadingMsg("a", "Loading Followers");
-		return this.getFollowersCommand()/*.then(gotFollowers)*/;
+		that.followers.removeAll();			
+		$.mobile.showPageLoadingMsg("a", "Loading Followers");		
+		return this.getChannelCommand().then(this.getFollowersCommand());
+		goToView('followersListView');
 	}
+	
+	this.channelSettings = function(){
+		goToView('channelSettingsView');
+	};
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
@@ -57,19 +63,31 @@ function FollowersListViewModel() {
 				accountname: data.followers[len].accountname
 			});
 		}
-		that.followerCount((len++)+' Followers:');
+		that.followerCount(data.followers.length+' Followers:');
 	}; 
 	
-	function errorAPI(data, status, details) {
+	function successfulGetChannel(data) {
+		$.mobile.hidePageLoadingMsg();
+		localStorage.setItem('currentChannelName', data.name);
+		that.channelName(localStorage.getItem('currentChannelName'));
+  };
+
+  function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
-    loginPageIfBadLogin(details.code);
-    showError("Error Getting Messages: " + ((status == 500) ? "Internal Server Error" : details.message));
-    //logger.logError('error listing channels', null, 'channel', true);
+    localStorage.setItem('signUpError', response.message);
+    goToView('followersListView');
+  };
+	
+  this.getChannelCommand = function () {
+		var channelId = localStorage.getItem('currentChannelId');
+		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
+		return ES.channelService.getChannel(channelId, {success: successfulGetChannel, error: errorAPI});
   };
 	
 	this.getFollowersCommand = function () {
-    //logger.log("starting getChannel", undefined, "channels", true);
-    return ES.channelService.getFollowers('94442626-1f93-416f-ab4f-ca1ca4614c80', { success: successfulList, error: errorAPI });
+		var channelId = localStorage.getItem('currentChannelId');
+		$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
+    return ES.channelService.getFollowers(channelId, { success: successfulList, error: errorAPI });
   };
 }
 
