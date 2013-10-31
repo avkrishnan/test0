@@ -18,22 +18,40 @@ function TutorialViewModel() {
   this.activate = function() {
     SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
     SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
+		navigation('.msg-content span', 'next', 'div.tutorialslides');
 
     /* This function will swipe tutorial slides */
-
     function SwipeSlide(Element, Event, functionName) {
       $(Element).on(Event, function() {
         $('header ul li').removeClass('active');
-        var slideDiv = $(this)[functionName]('div.tutorialslides').attr('id');
+        var swipeView = $(this)[functionName](Element).attr('id');
         $(this).hide();
-        if (typeof slideDiv == 'undefined') {
-          slideDiv = $(this).attr('id');
+        if (typeof swipeView == 'undefined') {
+          swipeView = $(this).attr('id');
         }
-        $('header ul li#' + slideDiv + 'Active').addClass('active');
-        $('#' + slideDiv).show();
+        $('header ul li#' + swipeView + 'Active').addClass('active');
+        $('#' + swipeView).show();
       });
     }
+		
+		/* This function will slide tutorial slides on arrow click */
+		function navigation(clickElement, functionName, Element) {
+			$(clickElement).on('click',function() {
+				$('header ul li').removeClass('active');
+				$(Element).hide();
+				var slideview = $(this).parent().parent()[functionName]("div "+Element).attr('id');
+				if(typeof slideview == 'undefined') {
+					slideview = $(this).parent().parent().attr('id');
+				}
+				$('#'+slideview).show();
+				$('header ul li#' + slideview + 'Active').addClass('active');
+			});
+		}
+		$('img').on('dragstart', function(event) {
+			event.preventDefault();
+		});
   };
+	
   this.loginCommand = function() {
     $.mobile.showPageLoadingMsg('a', 'Logging In With New Credentials');
     var callbacks = {
