@@ -19,6 +19,7 @@ function ForgotPasswordViewModel() {
       that.activate();
     });
   };
+	
   this.activate = function () {
     that.errorForgotPassword('');
     $(document).keypress(function (e) {
@@ -32,6 +33,7 @@ function ForgotPasswordViewModel() {
       that.emailClass('');
     });
   };
+	
   this.clearForm = function () {
     that.email('');
     that.accountName('');
@@ -41,6 +43,7 @@ function ForgotPasswordViewModel() {
   function gotForgotPassword(data, status, details) {
     that.notification('We have sent you an email with a link to change your password');
   }
+	
   this.forgotPasswordCommand = function () {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     if (this.accountName() == '' && this.email() == '') {

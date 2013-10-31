@@ -48,6 +48,7 @@ function ChannelNewViewModel() {
 			that.channelWebAddress(that.newChannel()+'.evernym.com');	
     }
   };
+	
 	function successfulCreate(args) {
     $.mobile.hidePageLoadingMsg();
     goToView('channelsIOwnView');
