@@ -1,7 +1,5 @@
 ﻿/*globals ko*/
 
-/*globals ko*/
-
 function FollowersListViewModel() {	
   var that = this;
 	this.template = 'followersListView';
@@ -18,8 +16,8 @@ function FollowersListViewModel() {
 	this.followerCount = ko.observable();
 	this.followerName = ko.observable();
 	this.followerDescription = ko.observable();		
-		
-	this.shown = false;	
+	
+	/* Methods */	
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       if ($.mobile.pageData && $.mobile.pageData.a) {
@@ -28,26 +26,33 @@ function FollowersListViewModel() {
         }
       }
       that.activate();
-			var currentChannel = localStorage.getItem("currentChannel");
-			//alert(currentChannel);
-			//var lchannel = JSON.parse(currentChannel);
-			//that.channelname(lchannel.name);
-			/*//that.channel([lchannel]);
+			var currentChannel = localStorage.getItem('currentChannel');
+			/*To do - removed when followersList page is complete
+			alert(currentChannel);
+			var lchannel = JSON.parse(currentChannel);
+			that.channelname(lchannel.name);
+			that.channel([lchannel]);
 			that.title(lchannel.name);
 			that.description(lchannel.description);
-			that.url(lchannel.normName + ".evernym.com");
+			that.url(lchannel.normName + '.evernym.com');
 			that.relationship(lchannel.relationship);
 			that.channelid(lchannel.id);
-			that.activate(lchannel)*/;
+			that.activate(lchannel)*/
     });	
-	};  
+	};
+	  
 	this.activate = function() {
-		var _accountName = localStorage.getItem('accountName');
-		that.accountName(_accountName);
-		that.followers.removeAll();			
-		$.mobile.showPageLoadingMsg("a", "Loading Followers");		
-		return this.getChannelCommand().then(this.getFollowersCommand());
-		goToView('followersListView');
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');
+			that.accountName(_accountName);
+			that.followers.removeAll();			
+			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
+			return this.getChannelCommand().then(this.getFollowersCommand());
+			goToView('followersListView');
+		}
 	}
 	
 	this.channelSettings = function(){
@@ -91,13 +96,13 @@ function FollowersListViewModel() {
   };
 }
 
-/* Temporarly commented for future purpose*/
-/*function FollowersListViewModel() {
+/* To do - removed when followersList page is complete
+function FollowersListViewModel() {
   var that = this;
-  this.template = "followersListView";
-  this.viewid = "V-26";
-  this.viewname = "Followers";
-  this.displayname = "Followers";
+  this.template = 'followersListView';
+  this.viewid = 'V-26';
+  this.viewname = 'Followers';
+  this.displayname = 'Followers';
   this.hasfooter = true;
   this.accountName = ko.observable();
   this.isChannelView = true;
@@ -112,13 +117,13 @@ function FollowersListViewModel() {
   //this.channelname = ko.observable();
   this.navText = ko.observable('Channel Menu');
   this.applyBindings = function () {
-    $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
+    $('#' + that.template).on('pagebeforeshow', null, function (e, data) {
       if ($.mobile.pageData && $.mobile.pageData.id) {
         that.activate({
           id: $.mobile.pageData.id
         });
       } else {
-        var currentChannel = localStorage.getItem("currentChannel");
+        var currentChannel = localStorage.getItem('currentChannel');
         var lchannel = JSON.parse(currentChannel);
         that.activate(lchannel);
       }
@@ -127,12 +132,12 @@ function FollowersListViewModel() {
           id: $.mobile.pageData.id
         });
       } else {
-        var currentChannel = localStorage.getItem("currentChannel");
+        var currentChannel = localStorage.getItem('currentChannel');
         var lchannel = JSON.parse(currentChannel);
         //that.channel([lchannel]);
         that.title(lchannel.name);
         that.description(lchannel.description);
-        that.url(lchannel.normName + ".evernym.com");
+        that.url(lchannel.normName + '.evernym.com');
         that.relationship(lchannel.relationship);
         that.channelid(lchannel.id);
         that.activate(lchannel);
@@ -151,7 +156,7 @@ function FollowersListViewModel() {
     that.followers([]);
     that.channelid(channel.id);
     that.channelname(channel.name);
-    $.mobile.showPageLoadingMsg("a", "Loading Followers");
+    $.mobile.showPageLoadingMsg('a', 'Loading Followers');
     that.getFollowersCommand().then(gotFollowers);
     return true;
   };
@@ -166,23 +171,23 @@ function FollowersListViewModel() {
 
   this.showFollower = function (follower) {
     followerViewModel.activate(follower);
-    $.mobile.changePage("#" + followerViewModel.template);
+    $.mobile.changePage('#' + followerViewModel.template);
   };
 
   this.logoutCommand = function () {
     loginViewModel.logoutCommand();
-    $.mobile.changePage("#" + loginViewModel.template);
+    $.mobile.changePage('#' + loginViewModel.template);
   }
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     loginPageIfBadLogin(details.code);
-    showError("Error Getting Messages: " + ((status == 500) ? "Internal Server Error" : details.message));
+    showError('Error Getting Messages: ' + ((status == 500) ? 'Internal Server Error' : details.message));
     //logger.logError('error listing channels', null, 'channel', true);
   };
 
   this.getFollowersCommand = function () {
-    //logger.log("starting getChannel", undefined, "channels", true);
+    //logger.log('starting getChannel', undefined, 'channels', true);
     return ES.channelService.getFollowers(that.channelid(), {
       success: function () {},
       error: errorAPI
@@ -190,6 +195,6 @@ function FollowersListViewModel() {
   };
 	
   this.backNav = function () {
-    $.mobile.changePage("#" + channelMenuViewModel.template);
+    $.mobile.changePage('#' + channelMenuViewModel.template);
   };
 }*/	

@@ -1,10 +1,10 @@
 ﻿/*globals ko*/
 function PrivacyPolicyViewModel() {
   var that = this;
-  this.template = "privacyPolicyView";
-  this.viewid = "V-49";
-  this.viewname = "PrivacyPolicy";
-  this.displayname = "Privacy Policy";
+  this.template = 'privacyPolicyView';
+  this.viewid = 'V-49';
+  this.viewname = 'PrivacyPolicy';
+  this.displayname = 'Privacy Policy';
   this.hasfooter = true;
 	this.accountName = ko.observable();	
 	
@@ -21,7 +21,12 @@ function PrivacyPolicyViewModel() {
 	};  
 
 	this.activate = function() {
-		var _accountName = localStorage.getItem('accountName');
-		that.accountName(_accountName);
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');
+			that.accountName(_accountName);
+		}
 	}
 }

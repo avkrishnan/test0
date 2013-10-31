@@ -2,19 +2,23 @@
 
 function ForgotPasswordViewModel() {
   var that = this;
-  this.template = "forgotPasswordView";
-  this.viewid = "V-03";
-  this.viewname = "ForgotPassword";
-  this.displayname = "Forgot Password";
+  this.template = 'forgotPasswordView';
+  this.viewid = 'V-03';
+  this.viewname = 'ForgotPassword';
+  this.displayname = 'Forgot Password';
   this.hasfooter = false;
   this.accountName = ko.observable();
+	
+	/* Forgot password observable */
   this.email = ko.observable();
   this.errorForgotPassword = ko.observable();
   this.usernameClass = ko.observable();
   this.emailClass = ko.observable();
   this.notification = ko.observable();
+	
+	/* Methods */
   this.applyBindings = function () {
-    $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
+    $('#' + that.template).on('pagebeforeshow', null, function (e, data) {
       that.clearForm();
       that.activate();
     });
@@ -77,7 +81,7 @@ function ForgotPasswordViewModel() {
       that.emailClass('validationerror');
       that.errorForgotPassword(details.message);
     } else {
-      showError("Error Sending Forgot Password Request: " + details.message);
+      showError('Error Sending Forgot Password Request: ' + details.message);
     }
   }
 }

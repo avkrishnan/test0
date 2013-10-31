@@ -7,9 +7,11 @@ function LoginViewModel() {
   this.viewname = "Login";
   this.displayname = "Login";
   this.hasfooter = false;
+  this.accountName = ko.observable();	
+	
+	/* Login view observable */
   this.first_name = '';
   this.last_name = '';
-  this.accountName = ko.observable();
   this.password = ko.observable();
   this.channelName = ko.observable();
   this.donotfollow = ko.observable();
@@ -19,6 +21,8 @@ function LoginViewModel() {
   var username;
   var password;
   var rememberPassword;
+	
+	/* Methods */
   this.applyBindings = function() {
     $("#" + that.template).on("pagebeforeshow", null, function(e, data) {
       if ($.mobile.pageData && $.mobile.pageData.a) {
@@ -30,48 +34,54 @@ function LoginViewModel() {
       that.activate();
     });
   };
+	
   this.activate = function() {
-    that.errorMessage('');
-    if (localStorage.getItem("username") == null
-        && localStorage.getItem("password") == null) {
-      username = '';
-      password = '';
-    } else {
-      username = localStorage.getItem("username");
-      password = localStorage.getItem("password");
-      $("input[type='checkbox']").attr("checked", true)
-          .checkboxradio("refresh");
-    }
-    that.password(password);
-    that.accountName(username);
-    $(document).keypress(function(e) {
-      if (e.keyCode == 13) {
-        that.loginCommand();
-      }
-    });
-    $('input').keyup(function() {
-      that.errorMessage('');
-      that.usernameClass('');
-      that.passwordClass('');
-    });
-    var action = localStorage.getItem("action");
-    if (action == 'follow_channel') {
-      var channel = JSON.parse(localStorage.getItem("currentChannel"));
-      if (channel) {
-        that.channelName(channel.name);
-      }
-    }
+		var token = ES.evernymService.getAccessToken();		
+		if(token == '' || token == null) {
+			that.errorMessage('');
+			if (localStorage.getItem("username") == null
+					&& localStorage.getItem("password") == null) {
+				username = '';
+				password = '';
+			} else {
+				username = localStorage.getItem("username");
+				password = localStorage.getItem("password");
+				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
+			}
+			that.password(password);
+			that.accountName(username);
+			$(document).keypress(function(e) {
+				if (e.keyCode == 13) {
+					that.loginCommand();
+				}
+			});
+			$('input').keyup(function() {
+				that.errorMessage('');
+				that.usernameClass('');
+				that.passwordClass('');
+			});
+			var action = localStorage.getItem("action");
+			if (action == 'follow_channel') {
+				var channel = JSON.parse(localStorage.getItem("currentChannel"));
+				if (channel) {
+					that.channelName(channel.name);
+				}
+			}
+		} else {
+			goToView('escalationPlansView');
+		}
   };
+	
   this.clearForm = function() {
     that.password('');
     that.accountName('');
   };
+	
   this.loginCommand = function() {
     if (that.accountName() == '' && that.password() == '') {
       that.usernameClass('validationerror');
       that.passwordClass('validationerror');
-      that
-          .errorMessage('<span>SORRY:</span>Please enter username and password');
+      that.errorMessage('<span>SORRY:</span>Please enter username and password');
     } else if (that.accountName() == '') {
       that.usernameClass('validationerror');
       that.errorMessage('<span>SORRY:</span>Please enter username');
@@ -94,14 +104,12 @@ function LoginViewModel() {
       loginModel.accountname = this.accountName();
       loginModel.password = this.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
-      return ES.loginService.accountLogin(loginModel, callbacks).then(
-          loginSuccess);
+      return ES.loginService.accountLogin(loginModel, callbacks).then(loginSuccess);
     }
   };
+	
   this.logoutCommand = function() {
-
     var token = ES.evernymService.getAccessToken();
-
     if (token) {
       var callbacks = {
         success : logoutSuccess,
@@ -112,6 +120,7 @@ function LoginViewModel() {
       that.cleanApplication();
     }
   };
+	
   this.cleanApplication = function() {
     sendMessageViewModel.clearForm();
     inviteFollowersViewModel.clearForm();
@@ -149,10 +158,8 @@ function LoginViewModel() {
       var notifications = args.notifications;
       that.first_name = args.account.firstname;
       that.last_name = args.account.lastname;
-      localStorage.setItem('UserFullName', args.account.firstname + ' '
-          + args.account.lastname);
-      $.mobile.activePage.find('#thefooter #footer-gear').html(
-          args.account.accountname);
+      localStorage.setItem('UserFullName', args.account.firstname + ' '+ args.account.lastname);
+      $.mobile.activePage.find('#thefooter #footer-gear').html(args.account.accountname);
       var channelCount = channelListViewModel.channels().length;
       if (!channelCount) {
         channelListViewModel.populateChannelList();
@@ -169,7 +176,7 @@ function LoginViewModel() {
         }
         $.mobile.changePage(hash);
       } else {
-        $.mobile.changePage("#" + channelListViewModel.template);
+        goToView('channelListView');
       }
       /* Notification redirect is commmented for temporarily */
       /*

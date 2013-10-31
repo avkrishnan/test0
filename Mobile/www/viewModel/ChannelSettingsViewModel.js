@@ -13,7 +13,8 @@ function ChannelSettingsViewModel() {
   /* Channel Settings observable */
 	this.channelName = ko.observable();
 	this.channelDisplayName = ko.observable();
-		
+	
+	/* Methods */	
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       if ($.mobile.pageData && $.mobile.pageData.a) {
@@ -23,22 +24,32 @@ function ChannelSettingsViewModel() {
       }
       that.activate();
     });	
-	};  
+	};
+	  
 	this.activate = function() {
-		var _accountName = localStorage.getItem('accountName');
-		that.accountName(_accountName);
-		return this.getChannelCommand();
-		goToView('channelSettingsView');
+		var token = ES.evernymService.getAccessToken();		
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');
+			that.accountName(_accountName);
+			return this.getChannelCommand();
+			goToView('channelSettingsView');
+		}
 	}
+	
 	this.editChannelName = function () {
-		goToView('channelChangeNameStepFirstView');
+		goToView('channelChangeNameView');
   };
+	
 	this.editChannelDisplayName = function () {
 		goToView('channelEditDisplayNameView');
   };
+	
 	this.deleteChannel = function () {
 		goToView('channelDeleteView');
   };
+	
 	this.changeChannelIcon = function () {
 		goToView('channelChangeIconView');
   };
@@ -54,9 +65,7 @@ function ChannelSettingsViewModel() {
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
     localStorage.setItem('signUpError', response.message);
-    $.mobile.changePage('#channelSettingsView', {
-      transition: 'none'
-    });
+    goToView('channelSettingsView')
   };
 	
   this.getChannelCommand = function () {
@@ -66,7 +75,8 @@ function ChannelSettingsViewModel() {
   };
 }
 
-/*function ChannelSettingsViewModel() {
+/* To do - removed when channelSetting page is complete
+function ChannelSettingsViewModel() {
 
 	
 	// --- properties

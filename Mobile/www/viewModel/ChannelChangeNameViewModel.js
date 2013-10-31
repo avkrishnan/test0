@@ -18,6 +18,7 @@ function ChannelChangeNameViewModel() {
 	this.errorChannel = ko.observable();	
 	this.channelWebAddress = ko.observable();				
 	
+	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       if ($.mobile.pageData && $.mobile.pageData.a) {
@@ -27,16 +28,23 @@ function ChannelChangeNameViewModel() {
       }
       that.activate();
     });	
-	};  
+	};
+	  
 	this.activate = function() {
-		var _accountName = localStorage.getItem('accountName');
-		that.accountName(_accountName);
-		that.channelChangeName('');		
-		$('input').keyup(function () {
-      that.message('');
-			that.errorChannel('');
-    });
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');
+			that.accountName(_accountName);
+			that.channelChangeName('');		
+			$('input').keyup(function () {
+				that.message('');
+				that.errorChannel('');
+			});
+		}
 	}
+	
 	this.clearForm = function () {
     that.channelChangeName('');
 		that.message('');
@@ -52,6 +60,7 @@ function ChannelChangeNameViewModel() {
 			that.channelWebAddress(that.channelChangeName()+'.evernym.com');	
     }
   };
+	
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
 		that.activate(channelObject);
@@ -72,7 +81,7 @@ function ChannelChangeNameViewModel() {
 			id: localStorage.getItem('currentChannelId'),
 			name: that.channelChangeName()
 		};
-		$.mobile.showPageLoadingMsg("a", "Modifying Channel ");
+		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
   };
 }

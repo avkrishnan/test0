@@ -2,13 +2,13 @@
 
 function SignupStepFirstViewModel() {
   var that = this;
-
   this.template = 'signupStepFirstView';
   this.viewid = 'V-02';
   this.viewname = 'Register';
   this.displayname = 'Register';
-
   this.hasfooter = false;
+	
+  /* Signup observable */	
   this.accountName = ko.observable();
   this.password = ko.observable();
   this.emailaddress = ko.observable();
@@ -45,6 +45,7 @@ function SignupStepFirstViewModel() {
   this.tickIconAccountName = ko.observable();
   this.tickIconPassword = ko.observable();
 
+	/* Methods */
   this.applyBindings = function () {
     $('#' + this.template).on('pagebeforeshow', function (e, data) {
       that.clearForm();
@@ -52,7 +53,6 @@ function SignupStepFirstViewModel() {
     });
   };
 
-  /* Methods */
   this.activate = function () {
     if (localStorage.getItem('signUpError') != null) {
       that.tickIconEmail('righttick');
@@ -83,21 +83,24 @@ function SignupStepFirstViewModel() {
     });
     return true;
   };
+	
   that.emailinput = function () {
     that.tickIconEmail('righttick');
   }
+	
   that.emailActiveInfo = function () {
     toggleInfo('nameInfo', 'namehighlight', 'passwordInfo', 'passwordhighlight', 'emailInfo', 'emailhighlight');
   }
+	
   that.nameActiveInfo = function () {
     toggleInfo('emailInfo', 'emailhighlight', 'passwordInfo', 'passwordhighlight', 'nameInfo', 'namehighlight');
   }
+	
   that.passwordActiveInfo = function () {
     toggleInfo('emailInfo', 'emailhighlight', 'nameInfo', 'namehighlight', 'passwordInfo', 'passwordhighlight');
   }
 
   /* This function will toggle info on 'i' tap */
-
   function toggleInfo(hideElementOne, hideClassOne, hideElementTwo, hideClassTwo, showElement, showClass) {
     if (that[showElement]() == false) {
       that.aboutEvernym(false);
@@ -122,6 +125,7 @@ function SignupStepFirstViewModel() {
       that.passwordhighlight('');
     }
   }
+	
   this.clearForm = function () {
     that.accountName('');
     that.password('');
@@ -136,6 +140,7 @@ function SignupStepFirstViewModel() {
     that.errorIconAccountName('');
     that.errorIconPassword('');
   };
+	
   this.nextViewCommand = function () {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
@@ -154,9 +159,7 @@ function SignupStepFirstViewModel() {
       localStorage.setItem('newuseremail', that.emailaddress());
       localStorage.setItem('newusername', that.accountName());
       localStorage.setItem('newuserpassword', that.password());
-      $.mobile.changePage('#signupStepSecondView', {
-        transition: 'none'
-      });
+      goToView('signupStepSecondView');
     }
   };
 }

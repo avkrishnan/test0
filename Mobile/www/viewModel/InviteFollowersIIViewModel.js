@@ -2,10 +2,10 @@
 
 function InviteFollowersIIViewModel() {
   var that = this;
-  this.template = "inviteFollowersIIView";
-  this.viewid = "V-41";
-  this.viewname = "GetFollowersII";
-  this.displayname = "Praise for Evernym Channels";
+  this.template = 'inviteFollowersIIView';
+  this.viewid = 'V-41';
+  this.viewname = 'GetFollowersII';
+  this.displayname = 'Praise for Evernym Channels';
   this.hasfooter = true;
 	this.accountName = ko.observable();	
 
@@ -29,22 +29,25 @@ function InviteFollowersIIViewModel() {
 	};  
 
 	this.activate = function() {
-		var _accountName = localStorage.getItem('accountName');
-		that.accountName(_accountName);
-		
-		$(document).keypress(function (e) {
-      if (e.keyCode == 13) {
-        that.sendFeedbackCommand();
-      }
-    });
-		
-		$('input').keyup(function () {
-      that.emailClass('');
-      that.errorEmail('');
-      that.feedbackClass('');
-      that.errorFeedback('');
-    });
-		return true;
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');
+			that.accountName(_accountName);
+			$(document).keypress(function (e) {
+				if (e.keyCode == 13) {
+					that.sendFeedbackCommand();
+				}
+			});
+			$('input').keyup(function () {
+				that.emailClass('');
+				that.errorEmail('');
+				that.feedbackClass('');
+				that.errorFeedback('');
+			});
+			return true;
+		}
 	}
 	
   this.clearForm = function () {
@@ -63,12 +66,12 @@ function InviteFollowersIIViewModel() {
 			that.feedbackClass('validationerror');
 			that.errorFeedback('<span>SORRY:</span>Please give feedback');
     } else {
-      $.mobile.changePage('#inviteFollowersIIView', {
-        transition: 'none'
-      });
+      goToView('inviteFollowersIIView')
     }
   };	
- /*function generateProvisionalAccount() {
+}
+/* To do - removed once Invitefollowers page complete
+ function generateProvisionalAccount() {
     return {
       emailaddress: that.emailaddress,
       smsPhone: that.smsPhone,
@@ -85,10 +88,10 @@ function InviteFollowersIIViewModel() {
   }
   this.logoutCommand = function () {
     loginViewModel.logoutCommand();
-    $.mobile.changePage("#" + loginViewModel.template)
+    $.mobile.changePage('#' + loginViewModel.template)
   };
   this.backNav = function () {
-    $.mobile.changePage("#" + channelMenuViewModel.template);
+    $.mobile.changePage('#' + channelMenuViewModel.template);
   };
   this.activate = function (channel) {
     that.channelid(channel.id);
@@ -97,7 +100,7 @@ function InviteFollowersIIViewModel() {
     return true;
   };
   this.addFollowerCommand = function (provisionalAccount) {
-    $.mobile.showPageLoadingMsg("a", "Adding Follower");
+    $.mobile.showPageLoadingMsg('a', 'Adding Follower');
     var callbacks = {
       success: addFollowerSuccess,
       error: addFollowerError
@@ -113,6 +116,5 @@ function InviteFollowersIIViewModel() {
   function addFollowerError(data, status, response) {
     $.mobile.hidePageLoadingMsg();
     loginPageIfBadLogin(response.code);
-    showError("Error Creating Follower Account: " + response.message);
+    showError('Error Creating Follower Account: ' + response.message);
   }*/
-}

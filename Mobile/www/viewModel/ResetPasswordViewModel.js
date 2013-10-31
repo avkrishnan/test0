@@ -9,27 +9,24 @@ function ResetPasswordViewModel() {
 	this.hasfooter = true;
 	this.accountName = ko.observable();		
   
-	/* New Channel Step First observable */
+	/* Reset Password observable */
 	this.newPassword = ko.observable();		
 	this.confirmPassword = ko.observable();
 	this.errorResetPassword = ko.observable();
 	this.passwordClass = ko.observable();
 	this.confirmPasswordClass = ko.observable();		
 	this.changePasswordNotification = ko.observable();
-					
+	
+	/* Methods */				
 	this.applyBindings = function(){
 		$('#' + that.template).on('pagebeforeshow', function(e, data){					
 			that.clearForm();												
 			that.activate();
 		});
-	};   
-	//if ($.mobile.pageData && $.mobile.pageData.key){			
-		//that.key = $.mobile.pageData.key;
-		//that.activate();
-	//}
+	};
 		 
 	this.activate = function(){
-		var _accountName = localStorage.getItem("accountName");			
+		var _accountName = localStorage.getItem('accountName');			
 		that.accountName(_accountName);
 		$('input').keyup(function ( ){ 
 			that.passwordClass('');
@@ -56,7 +53,7 @@ function ResetPasswordViewModel() {
 			var resetPasswordModel = {};       
 			resetPasswordModel.password = this.newPassword();             
 			resetPasswordModel.confirmPassword = this.confirmPassword();
-			resetPasswordModel.forgotPasswordRequestKey = (jQuery.mobile.path.get().split("?")[1]).replace("key=","");
+			resetPasswordModel.forgotPasswordRequestKey = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
 			return ES.loginService.resetPassword(resetPasswordModel, callbacks).then(resetPasswordSuccess);
 		} else {
 			that.passwordClass('validationerror');

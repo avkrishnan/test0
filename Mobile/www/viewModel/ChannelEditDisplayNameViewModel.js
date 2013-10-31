@@ -15,6 +15,7 @@ function ChannelEditDisplayNameViewModel() {
 	this.message = ko.observable();	
 	this.errorChannel = ko.observable();
 	
+	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       if ($.mobile.pageData && $.mobile.pageData.a) {
@@ -25,17 +26,25 @@ function ChannelEditDisplayNameViewModel() {
       that.activate();
     });	
 	};  
+	
 	this.activate = function() {
-		var _accountName = localStorage.getItem('accountName');
-		that.accountName(_accountName);
-		$('input').keyup(function () {
-      that.message('');
-			that.errorChannel('');
-    });
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');
+			that.accountName(_accountName);
+			$('input').keyup(function () {
+				that.message('');
+				that.errorChannel('');
+			});
+		}
 	}
+	
 	this.clearForm = function () {
     that.channelEditDisplayName('');
   };
+	
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
     goToView('channelsIOwnView');
@@ -56,7 +65,7 @@ function ChannelEditDisplayNameViewModel() {
 				id: localStorage.getItem('currentChannelId'),
 				description: that.channelEditDisplayName()
 			};
-			$.mobile.showPageLoadingMsg("a", "Modifying Channel ");
+			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 		}
   };

@@ -18,6 +18,7 @@ function ChannelNewViewModel() {
 	this.errorNewChannel = ko.observable();
 	this.channelWebAddress = ko.observable();					
 	
+	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       if ($.mobile.pageData && $.mobile.pageData.a) {
@@ -29,13 +30,18 @@ function ChannelNewViewModel() {
     });	
 	};  
 	this.activate = function() {
-		var _accountName = localStorage.getItem('accountName');
-		that.accountName(_accountName);
-		that.newChannel('');
-		$('input').keyup(function () {
-      that.message('');
-			that.errorNewChannel('');
-    });
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');		
+			that.accountName(_accountName);
+			that.newChannel('');
+			$('input').keyup(function () {
+				that.message('');
+				that.errorNewChannel('');
+			});
+		}
 	}
 
 	this.nextViewCommand = function () {
@@ -64,7 +70,7 @@ function ChannelNewViewModel() {
   };
 	
   this.createChannelCommand = function () {
-		$.mobile.showPageLoadingMsg("a", "Creating Channel ");
+		$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
 		ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});
   };
 }

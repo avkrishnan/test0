@@ -2,30 +2,32 @@
 
 function SignupStepSecondViewModel() {
   var that = this;
-
   this.template = 'signupStepSecondView';
   this.viewid = 'V-02b';
   this.viewname = 'Register';
   this.displayname = 'Register';
-
   this.hasfooter = false;
+	
+	/* Signup observable */
   this.firstname = ko.observable();
   this.lastname = ko.observable();
-
-  /* Information icon activate observable*/
+	
+  /* Information icon activate observable */
   this.firstNamehighlight = ko.observable();
   this.lastNamehighlight = ko.observable();
 
-  /* Information toggle observable*/
+  /* Information toggle observable */
   this.firstNameInfo = ko.observable(false);
   this.lastNameInfo = ko.observable(false);
   this.errorFirstLastName = ko.observable();
   this.firstnameClass = ko.observable();
   this.lastnameClass = ko.observable();
 
+	/* Error Icon observable */
   this.errorIconFirstName = ko.observable();
   this.errorIconLastName = ko.observable();
 
+	/* Methods */
   this.applyBindings = function () {
     $('#' + this.template).on('pagebeforeshow', function (e, data) {
       that.clearForm();
@@ -33,7 +35,6 @@ function SignupStepSecondViewModel() {
     });
   };
 
-  /* Methods */
   this.activate = function () {
     $(document).keypress(function (e) {
       if (e.keyCode == 13) {
@@ -49,15 +50,16 @@ function SignupStepSecondViewModel() {
     });
     return true;
   };
+	
   that.firstNameActiveInfo = function () {
     showHideInfo('lastNameInfo', 'lastNamehighlight', 'firstNameInfo', 'firstNamehighlight');
   }
+	
   that.lastNameActiveInfo = function () {
     showHideInfo('firstNameInfo', 'firstNamehighlight', 'lastNameInfo', 'lastNamehighlight');
   }
 
   /* This function will toggle info on 'i' tap */
-
   function showHideInfo(hideElement, hideClass, showElement, showClass) {
     if (that[showElement]() == false) {
       that[hideElement](false);
@@ -71,6 +73,7 @@ function SignupStepSecondViewModel() {
       that.lastNamehighlight('');
     }
   }
+	
   this.clearForm = function () {
     that.firstname('');
     that.lastname('');
@@ -89,6 +92,7 @@ function SignupStepSecondViewModel() {
       lastname: that.lastname()
     };
   };
+	
   this.signUpCommand = function () {
     if (that.firstname() == '') {
       that.firstnameClass('validationerror');
@@ -117,8 +121,6 @@ function SignupStepSecondViewModel() {
   function signUpError(data, status, response) {
     $.mobile.hidePageLoadingMsg();
     localStorage.setItem('signUpError', response.message);
-    $.mobile.changePage('#signupStepFirstView', {
-      transition: 'none'
-    });
+    goToView('signupStepFirstView');
   };
 }
