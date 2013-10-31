@@ -645,10 +645,10 @@ select, .ui-icon-arrow-d {
 	margin:0 15px 0 4px;
 	padding:19px;
 }
-.mycontact em.emailican {
+.mycontact em.emailican, .mycontact em.emailicon {
 	background-position:-9px -517px;
 }
-.mycontact em.textican {
+.mycontact em.textican, .mycontact em.texticon {
 	background-position:-9px -574px;
 }
 .mycontact span {

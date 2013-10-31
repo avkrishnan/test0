@@ -13,7 +13,10 @@ function AddContactViewModel() {
 	this.accountName = ko.observable();
 	this.name = ko.observable();
 	
-	this.deleteClass = ko.observable();
+	this.currentDeleteCommethodID = ko.observable();
+	this.showDelete = ko.observable(false);
+	this.showConfirm = ko.observable(false);
+	this.currentDeleteCommethod = ko.observable();
 	
 	this.navText = ko.observable();
 	this.pView = '';
@@ -53,15 +56,46 @@ function AddContactViewModel() {
 		return ES.commethodService.getCommethods(callbacks);
 	}
 	
-	this.gotoView = function(data) {
+	this.gotoVerify = function(data) {
 		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
 		localStorage.setItem("currentVerificationCommethodType",data.comMethodType);
 		localStorage.setItem("currentVerificationCommethodID",data.comMethodID);
 		localStorage.setItem("verificationStatus",false);
+		//alert(that.commethods.removeAll());
 		goToView('verifyContactView');
-	}	
+	}
+	
+	this.gotoDelete = function(data) {
+		//alert(that.showDelete());
+		//alert(JSON.stringify(data));
+		//alert(that.currentDeleteCommethodID());
+		that.currentDeleteCommethod(data.comMethodAddress);
+		that.currentDeleteCommethodID(data.comMethodID);
+		//alert(that.currentDeleteCommethodID());
+		that.showDelete(true);
+	}
+	
+	this.showConfirmButton = function(data) {
+		that.showConfirm(true);
+	}
+	
+	this.confirmDelete = function() {
+		//alert(that.currentDeleteCommethodID());
+		var callbacks = {
+			success: function(){
+				//alert('success');
+			},
+			error: function() {
+				alert('error');
+			}
+		};
+		//that.commethods.remove(that.currentDeleteCommethodID());		
+		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
+		goToView('addContactView');
+	}
 
 	this.showCommethods = function(data) {
+		//alert(that.currentDeleteCommethodID());
 		if(data.commethod.length > 0) {
 			var tempCommethodClass = '', tempshowVerify = false;
 			$.each(data.commethod, function(indexCommethods, valueCommethods) {
@@ -70,7 +104,19 @@ function AddContactViewModel() {
 					tempCommethodClass = "notverify";
 					tempshowVerify = true;
 				}
-				that.commethods.push({ comMethodID: valueCommethods.id, comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify, comMethodType: valueCommethods.type});
+				else {
+					tempCommethodClass = "notverify";
+					tempshowVerify = false;
+				}
+				if(valueCommethods.type == "EMAIL") {
+					tempCommethodTypeClass = "emailicon";
+				}
+				else {
+					tempCommethodTypeClass = "texticon";	
+				}
+				if(that.currentDeleteCommethodID() != valueCommethods.id) {
+					that.commethods.push({ comMethodID: valueCommethods.id, comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify, comMethodType: valueCommethods.type, comMethodTypeClass: tempCommethodTypeClass});
+				}
 			});
 		}
 	}	
@@ -81,24 +127,13 @@ function AddContactViewModel() {
 		
 		that.accountName(_accountName);
 		that.name(_name);
-		this.deleteClass('gray-delete');
 		that.commethods.removeAll();
+		that.showDelete(false);
+		that.showConfirm(false);
 		//alert(localStorage.getItem('currentEscPlan'));
 		//alert(JSON.stringify(localStorage.getItem('allEscPlans')));
 		//$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return that.getCommethods().then(that.showCommethods);
 		//return true;     
 	};
-	
-	this.changeIcon = function(data) {
-		//alert(JSON.stringify(data));
-		//alert(that.deleteClass());
-		if(that.deleteClass() == 'gray-delete') {
-			tempClass = 'deleteicanred';
-		}
-		else {
-			tempClass = 'gray-delete';
-		}
-		that.deleteClass(tempClass);
-	}
 }

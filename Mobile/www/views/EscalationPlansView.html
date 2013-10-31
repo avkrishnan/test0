@@ -7,7 +7,8 @@
   <div class="page-content">
     <div class="portal-name" data-bind="text: accountName"></div>
     <!-- To Do Later -->
-    <!-- <div class="slides">
+    <!--
+    <div class="slides">
       <h1>IMPORTANT</h1>
       <div class="actions first">
         <span></span>
@@ -100,7 +101,7 @@
         <a class="rarrow" href="#"></a>
       </div>
       
-    </div> -->
+    </div>
     <h1>How I get messages :</h1>
     
     <div data-bind="foreach: escalationplans">
@@ -108,15 +109,15 @@
         <span class="emergency" data-bind="css: urgencyName"></span>
         <strong class="details" data-bind="text: urgencyName"></strong>
         <ul data-bind="foreach: commethods">
-          <!--<li><strong>phone number (TXT)</strong><span>NEEDED</span></li>
+          <li><strong>phone number (TXT)</strong><span>NEEDED</span></li>
           <li class="mail"><strong>jason.law@gmail.com</strong><span>5 retries</span></li>
           <li class="eme-buddy"><strong>Emergency Buddy</strong><span>NEEDED</span></li>
-          <li><strong>email-2@test.com</strong><span>UNVERIFIED</span></li>-->
+          <li><strong>email-2@test.com</strong><span>UNVERIFIED</span></li>
           <li><strong data-bind="text: $data.comMethodName"></strong><span data-bind="text: $data.comMethodRetries"></span></li>
         </ul>
       </a>
 		</div>
-   
+   	-->
     <h1 class="additionalsettings">Additional settings :</h1>
     <a href="#" class="low-messages editcontact" onclick="goToView('addContactView');">
       Add or edit contact information

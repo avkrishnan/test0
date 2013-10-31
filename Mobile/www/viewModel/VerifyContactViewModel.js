@@ -38,7 +38,7 @@ function VerifyContactViewModel() {
 			};
 			that.verifyRequest(verifyCommethodObject);	
 		}
-	}		
+	}
 	
 	this.requestVerificationCode = function() {
 		var callbacks = {
@@ -100,16 +100,17 @@ function VerifyContactViewModel() {
 		return true;     
 	};
 
-	this.verifyRequest = function(verifyCommethodObject){
+	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				alert('success');
+				//alert('success');
+				goToView('addContactView');
 			},
 			error: function (responseData, status, details) {
 				alert('error');
 				that.errorMessage("<span>ERROR: </span>" + details.message);
 			}
 		};
-		return ES.commethodService.verification(verifyCommethodObject.code, callbacks);
+		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
 	};	
 }
