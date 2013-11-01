@@ -16,23 +16,27 @@ function TutorialViewModel() {
 
   /* Methods */
   this.activate = function() {
-    SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
-    SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
+		var newUser = localStorage.getItem('newusername');
+		if(newUser == '' || newUser == null) {
+			goToView('channelListView');
+		}
+		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
+		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
 		navigation('.msg-content span', 'next', 'div.tutorialslides');
 
-    /* This function will swipe tutorial slides */
-    function SwipeSlide(Element, Event, functionName) {
-      $(Element).on(Event, function() {
-        $('header ul li').removeClass('active');
-        var swipeView = $(this)[functionName](Element).attr('id');
-        $(this).hide();
-        if (typeof swipeView == 'undefined') {
-          swipeView = $(this).attr('id');
-        }
-        $('header ul li#' + swipeView + 'Active').addClass('active');
-        $('#' + swipeView).show();
-      });
-    }
+		/* This function will swipe tutorial slides */
+		function SwipeSlide(Element, Event, functionName) {
+			$(Element).on(Event, function() {
+				$('header ul li').removeClass('active');
+				var swipeView = $(this)[functionName](Element).attr('id');
+				$(this).hide();
+				if (typeof swipeView == 'undefined') {
+					swipeView = $(this).attr('id');
+				}
+				$('header ul li#' + swipeView + 'Active').addClass('active');
+				$('#' + swipeView).show();
+			});
+		}
 		
 		/* This function will slide tutorial slides on arrow click */
 		function navigation(clickElement, functionName, Element) {
@@ -74,10 +78,8 @@ function TutorialViewModel() {
       localStorage.setItem('accountName', args.account.accountname);
       that.first_name = args.account.firstname;
       that.last_name = args.account.lastname;
-      localStorage.setItem('UserFullName', args.account.firstname + ' '
-          + args.account.lastname);
-      $.mobile.activePage.find('#thefooter #footer-gear').html(
-          args.account.accountname);
+      localStorage.setItem('UserFullName', args.account.firstname + ' '+ args.account.lastname);
+      $.mobile.activePage.find('#thefooter #footer-gear').html(args.account.accountname);
       var login_nav = JSON.parse(localStorage.getItem('login_nav'));
       localStorage.removeItem('login_nav');
       var follow = localStorage.getItem('follow');
@@ -102,6 +104,8 @@ function TutorialViewModel() {
       loginError();
       return;
     }
+		localStorage.removeItem('newusername');
+		localStorage.removeItem('newuserpassword');
   }
 
   function loginError(data, status, response) {

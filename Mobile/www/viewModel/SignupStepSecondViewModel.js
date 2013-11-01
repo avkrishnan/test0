@@ -36,19 +36,24 @@ function SignupStepSecondViewModel() {
   };
 
   this.activate = function () {
-    $(document).keypress(function (e) {
-      if (e.keyCode == 13) {
-        that.signUpCommand();
-      }
-    });
-    $('input').keyup(function () {
-      that.firstnameClass('');
-      that.lastnameClass('');
-      that.errorFirstLastName('');
-      that.errorIconFirstName('');
-      that.errorIconLastName('');
-    });
-    return true;
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			$('input').keyup(function () {
+				that.firstnameClass('');
+				that.lastnameClass('');
+				that.errorFirstLastName('');
+				that.errorIconFirstName('');
+				that.errorIconLastName('');
+			});
+			$(document).keyup(function (e) {
+				if (e.keyCode == 13) {
+					that.signUpCommand();
+				}
+			});
+			return true;
+		} else {
+			goToView('escalationPlansView');
+		}
   };
 	
   that.firstNameActiveInfo = function () {
@@ -86,7 +91,7 @@ function SignupStepSecondViewModel() {
     return {
       emailaddress: localStorage.getItem('newuseremail'),
       accountname: localStorage.getItem('newusername'),
-      // Create Random AccountName Generator			
+      /* Create Random AccountName Generator */			
       password: localStorage.getItem('newuserpassword'),
       firstname: that.firstname(),
       lastname: that.lastname()
@@ -115,7 +120,7 @@ function SignupStepSecondViewModel() {
 
   function signUpSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-    $.mobile.changePage('#tutorialView');
+    goToView('tutorialView');
   };
 
   function signUpError(data, status, response) {

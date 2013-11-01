@@ -40,9 +40,7 @@ function FeedbackViewModel() {
 	}
 	
 	this.praiseCommand = function () {
-		$.mobile.changePage('#inviteFollowersIIView', {
-			transition: 'none'
-		});
+		goToView('inviteFollowersIIView');
 	}
 }
 

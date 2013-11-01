@@ -40,6 +40,14 @@ function ChannelNewViewModel() {
 			$('input').keyup(function () {
 				that.message('');
 				that.errorNewChannel('');
+				if(that.newChannel().length > 2) {
+					//alert(that.newChannel().length);
+				}
+			});
+			$(document).keyup(function (e) {
+				if (e.keyCode == 13) {
+					that.nextViewCommand();
+				}
 			});
 		}
 	}

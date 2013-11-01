@@ -28,10 +28,15 @@ function ResetPasswordViewModel() {
 	this.activate = function(){
 		var _accountName = localStorage.getItem('accountName');			
 		that.accountName(_accountName);
-		$('input').keyup(function ( ){ 
+		$('input').keyup(function (){ 
 			that.passwordClass('');
 			that.confirmPasswordClass('');				
 			that.errorResetPassword('');
+		});
+		$(document).keyup(function (e) {
+			if (e.keyCode == 13) {
+				that.resetPasswordCommand();
+			}
 		});     	 
 	};
 		

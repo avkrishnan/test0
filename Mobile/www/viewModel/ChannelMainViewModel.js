@@ -11,7 +11,8 @@ function ChannelMainViewModel() {
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
-  /* Channel Main observable */			
+  /* Channel Main observable */	
+	this.channelId = ko.observable();		
 	this.channelName = ko.observable();		
 	
 	/* Methods */
@@ -26,16 +27,20 @@ function ChannelMainViewModel() {
     });	
 	};  
 	
+	var token = ES.evernymService.getAccessToken();
+	var channelId = localStorage.getItem('currentChannelId');
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
+		/*if(token == '' || token == null) {
 			goToView('loginView');
-		} else {
+		} else if(channelId == '' || channelId == null) {
+			goToView('channelsIOwnView');
+		} else {}*/
 			var _accountName = localStorage.getItem('accountName');
 			that.accountName(_accountName);
+			that.channelId(localStorage.getItem('currentChannelId'));
 			return this.getChannelCommand();
 			goToView('channelMainView');
-		}
+		
 	}
 	
 	this.channelSettings = function(){
@@ -55,8 +60,7 @@ function ChannelMainViewModel() {
   };
 	
   this.getChannelCommand = function () {
-		var channelId = localStorage.getItem('currentChannelId');
 		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
-		return ES.channelService.getChannel(channelId, {success: successfulGetChannel, error: errorAPI});
+		return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});
   };
 }

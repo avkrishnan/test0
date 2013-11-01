@@ -26,15 +26,15 @@ function ForgotPasswordViewModel() {
 	
   this.activate = function () {
     that.errorForgotPassword('');
-    $(document).keypress(function (e) {
-      if (e.keyCode == 13) {
-        that.forgotPasswordCommand();
-      }
-    });
     $('input').keyup(function () {
       that.errorForgotPassword('');
       that.usernameClass('');
       that.emailClass('');
+    });
+		$(document).keyup(function (e) {
+      if (e.keyCode == 13) {
+        that.forgotPasswordCommand();
+      }
     });
   };
 	

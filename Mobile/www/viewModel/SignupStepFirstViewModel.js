@@ -54,34 +54,45 @@ function SignupStepFirstViewModel() {
   };
 
   this.activate = function () {
-    if (localStorage.getItem('signUpError') != null) {
-      that.tickIconEmail('righttick');
-      that.emailaddress(localStorage.getItem('newuseremail'));
-      that.accountNameClass('validationerror');
-      that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY:</span>This Evernym has already been taken');
-      that.accountName(localStorage.getItem('newusername'));
-      that.tickIconPassword('righttick');
-      that.password(localStorage.getItem('newuserpassword'));
-      localStorage.removeItem('signUpError');
-    }
-    $(document).keypress(function (e) {
-      if (e.keyCode == 13) {
-        that.nextViewCommand();
-      }
-    });
-    $('input').keyup(function () {
-      that.errorEmail('');
-      that.errorAccountName('');
-      that.errorPassword('');
-      that.emailClass('');
-      that.accountNameClass('');
-      that.passwordClass('');
-      that.errorIconEmail('');
-      that.errorIconAccountName('');
-      that.errorIconPassword('');
-    });
-    return true;
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			if (localStorage.getItem('signUpError') != null) {
+				that.tickIconEmail('righttick');
+				that.emailaddress(localStorage.getItem('newuseremail'));
+				that.accountName(localStorage.getItem('newusername'));
+				that.tickIconPassword('righttick');
+				that.password(localStorage.getItem('newuserpassword'));
+				if(localStorage.getItem('signUpError') == 'name not available') {
+					that.errorIconAccountName('errorimg');
+					that.errorAccountName('<span>SORRY:</span> This Evernym has already been taken');
+					that.accountNameClass('validationerror');				
+				} else {
+					that.errorIconEmail('errorimg');
+					that.errorEmail('<span>SORRY:</span>'+ localStorage.getItem('signUpError'));
+					that.emailClass('validationerror');				
+				}
+				localStorage.removeItem('signUpError');			
+			}		
+			$('input').keyup(function () {
+				that.errorEmail('');
+				that.errorAccountName('');
+				that.errorPassword('');
+				that.emailClass('');
+				that.accountNameClass('');
+				that.passwordClass('');
+				that.errorIconEmail('');
+				that.errorIconAccountName('');
+				that.errorIconPassword('');
+			});
+			$(document).keyup(function (e) {
+				if (e.keyCode == 13) {
+					that.nextViewCommand();
+				}
+			});
+			return true;			
+		} else {
+			goToView('escalationPlansView');
+		}
   };
 	
   that.emailinput = function () {
@@ -161,5 +172,5 @@ function SignupStepFirstViewModel() {
       localStorage.setItem('newuserpassword', that.password());
       goToView('signupStepSecondView');
     }
-  };
+  };				
 }

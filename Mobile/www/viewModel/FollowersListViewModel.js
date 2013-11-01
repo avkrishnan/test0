@@ -11,6 +11,7 @@ function FollowersListViewModel() {
 	this.notification = ko.observable();
 	
   /* Followers observable */
+	this.channelId = ko.observable();	
 	this.channelName = ko.observable();			
   this.followers = ko.observableArray([]);
 	this.followerCount = ko.observable();
@@ -48,6 +49,7 @@ function FollowersListViewModel() {
 		} else {
 			var _accountName = localStorage.getItem('accountName');
 			that.accountName(_accountName);
+			that.channelId(localStorage.getItem('currentChannelId'));			
 			that.followers.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
 			return this.getChannelCommand().then(this.getFollowersCommand());
@@ -90,9 +92,8 @@ function FollowersListViewModel() {
   };
 	
 	this.getFollowersCommand = function () {
-		var channelId = localStorage.getItem('currentChannelId');
 		$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
-    return ES.channelService.getFollowers(channelId, { success: successfulList, error: errorAPI });
+    return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
   };
 }
 
