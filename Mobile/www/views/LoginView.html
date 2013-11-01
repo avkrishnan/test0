@@ -2,20 +2,21 @@
   <header>
     <a class="menu" href="#"></a>
   </header>
+  
   <div class="page-content">  
     <div class="portal-name">Welcome to Channels</div>  
     <h1 class="logininfo tm">Know they know</h1>    
     <form class="loginform">
-      <label class="msginfo">Please login:</label>
+      <label class="msginfo">Please login : </label>
       <div class="formtype" data-bind="css: usernameClass">
         <input type="text" data-bind="value: accountName" placeholder="your Evernym" />
       </div>
       <div class="formtype" data-bind="css: passwordClass">
         <input type="password" data-bind="value: password" placeholder="password" />
-        <div class="msgerror" data-bind="html:errorMessage"></div>            
+        <div class="msgerror" data-bind="html: errorMessage"></div>            
       </div>
       <label>
-        <input type="checkbox" name="checkbox-0" id="rememberPassword" />Remember me
+        <input type="checkbox" name="rememberPassword" />Remember me
       </label>
       <div class="login">
         <a href="#forgotPasswordView">Forgot password?</a>

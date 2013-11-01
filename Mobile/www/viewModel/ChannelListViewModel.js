@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function ChannelListViewModel() {
   var that = this;
   this.template = 'channelListView';
