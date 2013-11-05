@@ -1,6 +1,5 @@
 var ES = {
     evernymService: new EvernymService()
-
 };
 ES.evernymService = new EvernymService();
 ES.channelService = new EvernymChannelService(ES.evernymService);
