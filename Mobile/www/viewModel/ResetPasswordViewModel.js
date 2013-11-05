@@ -63,7 +63,7 @@ function ResetPasswordViewModel() {
 		} else {
 			that.passwordClass('validationerror');
 			that.confirmPasswordClass('validationerror');				 
-			that.errorResetPassword('Passwords donot match');				
+			that.errorResetPassword("Passwords don't match");				
 		}
 	};
 	
