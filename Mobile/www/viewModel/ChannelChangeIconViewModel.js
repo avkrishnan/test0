@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function ChannelChangeIconViewModel() {	
   var that = this;
 	this.template = 'channelChangeIconView';
@@ -8,7 +7,6 @@ function ChannelChangeIconViewModel() {
 	this.displayname = 'Channel Chage Icon Image';	
 	this.hasfooter = true;    
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 	
   /* Channel Icon Image observable */
 	this.picId = ko.observable();
@@ -16,11 +14,6 @@ function ChannelChangeIconViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      if ($.mobile.pageData && $.mobile.pageData.a) {
-        if ($.mobile.pageData.a == 'logout') {
-          that.logoutCommand();
-        }
-      }
       that.activate();
     });	
 	};  

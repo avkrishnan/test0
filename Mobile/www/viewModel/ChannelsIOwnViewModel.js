@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function ChannelsIOwnViewModel() {	
   var that = this;
 	this.template = 'channelsIOwnView';

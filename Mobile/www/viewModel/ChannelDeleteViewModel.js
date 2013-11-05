@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function ChannelDeleteViewModel() {	
   var that = this;
 	this.template = 'channelDeleteView';
@@ -18,11 +17,6 @@ function ChannelDeleteViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      if ($.mobile.pageData && $.mobile.pageData.a) {
-        if ($.mobile.pageData.a == 'logout') {
-          that.logoutCommand();
-        }
-      }
       that.activate();
     });	
 	};  

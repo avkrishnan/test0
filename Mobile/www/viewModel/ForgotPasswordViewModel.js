@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function ForgotPasswordViewModel() {
   var that = this;
   this.template = 'forgotPasswordView';

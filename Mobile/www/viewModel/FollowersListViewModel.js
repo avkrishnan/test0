@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function FollowersListViewModel() {	
   var that = this;
 	this.template = 'followersListView';
@@ -21,11 +20,6 @@ function FollowersListViewModel() {
 	/* Methods */	
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      if ($.mobile.pageData && $.mobile.pageData.a) {
-        if ($.mobile.pageData.a == 'logout') {
-          that.logoutCommand();
-        }
-      }
       that.activate();
 			var currentChannel = localStorage.getItem('currentChannel');
 			/*To do - removed when followersList page is complete

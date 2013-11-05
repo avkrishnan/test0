@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function SignupStepSecondViewModel() {
   var that = this;
   this.template = 'signupStepSecondView';

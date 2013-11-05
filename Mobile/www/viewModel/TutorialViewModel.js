@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function TutorialViewModel() {
   var that = this;
   this.template = 'tutorialView';

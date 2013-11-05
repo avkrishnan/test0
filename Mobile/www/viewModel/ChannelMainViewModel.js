@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function ChannelMainViewModel() {	
   var that = this;
 	this.template = 'channelMainView';
@@ -18,11 +17,6 @@ function ChannelMainViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      if ($.mobile.pageData && $.mobile.pageData.a) {
-        if ($.mobile.pageData.a == 'logout') {
-          that.logoutCommand();
-        }
-      }
       that.activate();
     });	
 	};  
@@ -40,7 +34,6 @@ function ChannelMainViewModel() {
 			that.channelId(localStorage.getItem('currentChannelId'));
 			return this.getChannelCommand();
 			goToView('channelMainView');
-		
 	}
 	
 	this.channelSettings = function(){

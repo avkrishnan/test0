@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function ResetPasswordViewModel() {
 	var that = this;
 	this.template = 'resetPasswordView';

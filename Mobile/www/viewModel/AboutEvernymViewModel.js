@@ -1,5 +1,4 @@
 ﻿/*globals ko*/
-
 function AboutEvernymViewModel() {	
   var that = this;
 	this.template = 'aboutEvernymView';
@@ -12,11 +11,6 @@ function AboutEvernymViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      if ($.mobile.pageData && $.mobile.pageData.a) {
-        if ($.mobile.pageData.a == 'logout') {
-          that.logoutCommand();
-        }
-      }
       that.activate();
     });	
 	};  
