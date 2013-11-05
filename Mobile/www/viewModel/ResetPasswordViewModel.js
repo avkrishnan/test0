@@ -52,7 +52,7 @@ function ResetPasswordViewModel() {
 			that.errorResetPassword('Please enter password and confirm password');
 		} else if(this.newPassword() == this.confirmPassword()) {				
 			var callbacks = {
-				success: resetPasswordSuccess2,
+				success: resetPasswordSuccess,
 				error: resetPasswordError
 			}; 
 			var resetPasswordModel = {};       
@@ -74,8 +74,6 @@ function ResetPasswordViewModel() {
 	function resetPasswordError(data, status, details){
 		that.passwordClass('validationerror');
 		that.confirmPasswordClass('validationerror');				
-		that.errorPassword('typeerrormsg');
-		that.errorConfirmPassword('typeerrormsg'); 
 		that.errorResetPassword(details.message);			
 	};		       
 }
