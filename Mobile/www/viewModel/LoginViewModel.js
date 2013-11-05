@@ -38,7 +38,7 @@ function LoginViewModel() {
 				that.password(localStorage.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
-			$('input').keyup(function(e) {
+			$('#loginView input').keyup(function(e) {
 				if(e.keyCode != 13) {
 					that.errorMessage('');
 					that.usernameClass('');

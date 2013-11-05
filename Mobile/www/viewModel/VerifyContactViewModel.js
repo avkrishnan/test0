@@ -88,10 +88,10 @@ function VerifyContactViewModel() {
 			that.verificationStatus(true);
 		}
 		if(localStorage.getItem("currentVerificationCommethodType") == 'EMAIL') {
-			that.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below)');
+			that.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below).');
 		}
 		else {
-			that.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below');
+			that.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below.');
 		}
 		//alert(localStorage.getItem("currentVerificationCommethod"));
 		//that.getCommethods().then(gotCommethods);
