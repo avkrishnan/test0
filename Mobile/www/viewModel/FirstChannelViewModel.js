@@ -1,13 +1,39 @@
 ﻿/*globals ko*/
 function FirstChannelViewModel() {
-
-	this.template = "firstChannelView";
-	this.viewid = "V-014";
-	this.viewname = "FollowFirstChannel";
-	this.displayname = "Follow First Channel";
-	this.hasfooter = true;
+	var that = this;
+	this.template = 'firstChannelView';
+	this.viewid = 'V-14';
+	this.viewname = 'FollowFirstChannel';
+	this.displayname = 'Follow First Channel';
+	this.hasfooter = true;    
+	this.accountName = ko.observable();	
 	
-	this.channels = ko.observableArray([]);
+	/* Methods */
+	this.applyBindings = function() {
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+      if ($.mobile.pageData && $.mobile.pageData.a) {
+        if ($.mobile.pageData.a == 'logout') {
+          that.logoutCommand();
+        }
+      }
+      that.activate();
+    });	
+	};  
+	
+	this.activate = function() {
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');
+			that.accountName(_accountName);
+		}
+	};
+}
+
+/* To do - to be removed when first channel view is complete
+
+this.channels = ko.observableArray([]);
 	this.commethods = ko.observableArray([]);
 	this.baseUrl = ko.observable();
 	this.accountName = ko.observable();
@@ -48,4 +74,4 @@ function FirstChannelViewModel() {
 		//return that.getCommethods().then(that.showCommethods);
 		return true;   
 	};
-}
+*/

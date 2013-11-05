@@ -1,6 +1,6 @@
 <div id="channelsIOwnView" data-role="page">
   <header>
-    <a href="#" class="back" onclick="goToView('channelListView');"></a>
+    <a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
     <a class="menu" href="#"></a>
     <div class="linkican">
       <a class="smsican" href="#"></a>
@@ -13,10 +13,10 @@
       Channels I Own
       <form class="chaneldropdown" action="#" method="get" >
         <select>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
+          <option value="min">A - Z</option>
+          <option value="min">Z - A</option>
+          <option value="min">Active s</option>
+          <option value="min">Messages</option>
         </select>
       </form>
     </div>
@@ -31,7 +31,7 @@
           <a href="#" class="setting" data-bind="click: $parent.channelSettings.bind($index())"></a>
         </div>    
         <a class="requestcontent" href="#" data-bind="click: $parent.channelMain.bind($index())">
-          <span class="request">4 new requests??</span>
+          <span class="request">4 new replies??</span>
           <span class="igi">2 new iGi's??</span>
         </a>    
         <a class="requestcontent last" href="#" data-bind="click: $parent.channelFollowers.bind($index())">

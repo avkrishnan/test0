@@ -7,9 +7,7 @@ function AboutEvernymViewModel() {
 	this.viewname = 'AboutEvernym';
 	this.displayname = 'About Evernym Channels';	
 	this.hasfooter = true;    
-	this.channels = ko.observableArray([]);
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 	
 	/* Methods */
 	this.applyBindings = function() {

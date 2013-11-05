@@ -377,6 +377,7 @@ channelChangeNameViewModel = new ChannelChangeNameViewModel(),
 channelEditDisplayNameViewModel = new ChannelEditDisplayNameViewModel(),
 channelDeleteViewModel = new ChannelDeleteViewModel,
 channelChangeIconViewModel = new ChannelChangeIconViewModel,
+firstChannelViewModel = new FirstChannelViewModel,
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -433,7 +434,8 @@ var models = [
 							channelChangeNameViewModel,
 							channelEditDisplayNameViewModel,
 							channelDeleteViewModel,
-							channelChangeIconViewModel							
+							channelChangeIconViewModel,
+							firstChannelViewModel							
               ];
 
 

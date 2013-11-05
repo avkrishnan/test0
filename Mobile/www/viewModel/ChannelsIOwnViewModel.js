@@ -30,7 +30,7 @@ function ChannelsIOwnViewModel() {
 		} else {
 			var _accountName = localStorage.getItem('accountName');
 			that.accountName(_accountName);
-			that.channels.removeAll();	
+			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return this.listMyChannelsCommand();
 			goToView('channelsIOwnView');
@@ -42,6 +42,7 @@ function ChannelsIOwnViewModel() {
 			goToView('channelListView');			
 		}	
     $.mobile.hidePageLoadingMsg();
+		that.channels.removeAll();	
 		for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 			that.channels.push({
 				channelId: data.channel[channelslength].id, 
@@ -82,8 +83,9 @@ function ChannelsIOwnViewModel() {
 		localStorage.setItem('currentChannelId', data.channelId);
 		goToView('followersListView');
 	};
-	
-	/*Todo - remvoed when channesIOwn page is donde
+}
+
+/*Todo - remvoed when channesIOwn page is done
 	this.showChannel = function (channel) {
 		localStorage.setItem('currentChannel', JSON.stringify(channel));
 		$.mobile.changePage('#' + channelMenuViewModel.template);
@@ -159,4 +161,3 @@ function ChannelsIOwnViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Creating Channel ' + that.name());
 		return ES.channelService.createChannel({name: that.name()}, {success: successfulCreate, error: errorCreate});
 	};*/
-}
