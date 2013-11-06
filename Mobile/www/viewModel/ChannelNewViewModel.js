@@ -68,7 +68,7 @@ function ChannelNewViewModel() {
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorNewChannel('<span>SORRY:</span> '+response.message);		
+    that.errorNewChannel('<span>SORRY:</span> ' + response.message);		
   };
 	
   this.createChannelCommand = function () {

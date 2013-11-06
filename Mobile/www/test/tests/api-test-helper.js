@@ -3,10 +3,33 @@
 function ApiTestHelper() {
 
   var t = this;
+  
+  function getJsonFromUrl() {
+    var query = location.search.substr(1);
+    var data = query.split("&");
+    var result = {};
+    for ( var i = 0; i < data.length; i++) {
+      var item = data[i].split("=");
+      result[item[0]] = item[1];
+    }
+    return result;
+  }
+  
+  var q = getJsonFromUrl();
+  
+  var env = q.env == undefined ? "" : q.env;
+  var apiver = (q.api == undefined || q.api == "") ? (env.indexOf("dev") > 0 ? "api" : "api24") : q.api;
+  var baseUrl = 
+    (env === "ldev") ? 'http://localhost:8079/' + apiver + '/rest' :
+    (env === "nldev") ? 'http://localhost:8079/' + apiver + '/rest' :
+    (env === "qdev") ? 'http://qupler.no-ip.org:8079/' + apiver + '/rest' :
+    (env === "qprod") ? 'http://qupler.no-ip.org:8080/' + apiver + '/rest' : 
+    (env === "lprod") ? 'http://app01:8080/' + apiver + '/rest' :
+    'https://api.evernym.com/' + apiver + '/rest';
 
   t.TestScenario = function() {
     return {
-      ES : ServiceContext(t.genMockLocalStorage())
+      ES : ServiceContext(t.genMockLocalStorage(), baseUrl)
     };
   };
 
@@ -36,8 +59,12 @@ function ApiTestHelper() {
     unauthorized : checkFunc("401: Unauthorized"),
     notFound : checkFunc("404: Not Found"),
     notImplemented : checkFunc("501: Not Implemented"),
-    shouldNotSucceed : function() { ok(false, 'this call should not have succeeded'); },
-    shouldNotFail : function() { ok(false, 'this call should not have failed'); }
+    shouldNotSucceed : function(a,b,c,d) { 
+      ok(false, 'this call should not have succeeded: ' + a + b + c + d); 
+    },
+    shouldNotFail : function(a,b,c,d) { 
+      ok(false, 'this call should not have failed: ' + a + b + c + d); 
+    }
   };
 
   t.randomAccountname = function() {
@@ -120,8 +147,10 @@ function ApiTestHelper() {
   t.login = function(scenario) {
     return function() {
       scenario.login = t.generateLogin(scenario.account);
-      $.when(scenario.ES.loginService.accountLogin(scenario.login)).then(t.CHECK.success).then(
-          t.checkLogin(scenario)).then(start);
+      $.when(scenario.ES.loginService.accountLogin(scenario.login))
+      .then(t.CHECK.success,t.CHECK.shouldNotFail)
+      .then(t.checkLogin(scenario),t.CHECK.shouldNotFail)
+      .then(start,start);
     };
   };
 
