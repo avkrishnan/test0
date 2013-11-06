@@ -1,152 +1,114 @@
 ﻿/*globals ko*/
-
 function SendMessageViewModel() {
-
-    
-    // --- properties
-    
-    var that = this;
-
-
+	var that = this;
+	this.template = "sendMessageView";
+	this.viewid = "V-20";
+	this.viewname = "ComposeBroadcast";
+	this.displayname = "Compose Broadcast";	
+	this.hasfooter = true;    
+	this.accountName = ko.observable();
 	
-    this.template = "sendMessageView";
-    this.viewid = "V-20";
-    this.viewname = "ComposeBroadcast";
-    this.displayname = "Compose Broadcast";
-    
-    this.hasfooter = true;
-    this.title = ko.observable();
-    this.channel = ko.observableArray([]);
-    this.isChannelView = true;
-    
-	this.channelid = ko.observable();
-    this.channelname = ko.observable();
-    this.message = ko.observable();
-    
-    
-    
-    
-    
-   
-    this.applyBindings = function(){
-        
-        $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
-                                    
-                                    
-                                    that.clearForm();
-                                    if ($.mobile.pageData && $.mobile.pageData.id) {
-                                    that.activate({ id: $.mobile.pageData.id });
-                                    }
-                                    
-                                    else {
-                                    var currentChannel = localStorage.getItem("currentChannel");
-                                    var lchannel = JSON.parse(currentChannel);
-                                    that.activate(lchannel);
-                                    
-                                    }
-                                    
-                                    
-                                    });
-    };
-    
-    
-    
-    
-    
-    // Methods
-    
-    function getChannelFromPageData(){
-        that.activate({id:$.mobile.pageData.id});
-    }
+  /* Send Message observable */
+	this.messageText = ko.observable();
+	this.characterCount = ko.observable();		
+	this.channels = ko.observableArray([]);			
+	this.channelId = ko.observable();	
+	this.channelname = ko.observable();
 	
-    this.activate = function (channel) {
-        
-        
-	    
-        localStorage.setItem("currentChannel", JSON.stringify(channel));
-        
-        that.channelid(channel.id);
-        that.channelname(channel.name);
-	    
-       
-        
-        return true;
-	    
-    };
+	/* channels options variable */
+	var channelsOptions = function(name, id) {
+		this.channelname = name;
+		this.channelId = id;
+	};
+	this.selectedChannels = ko.observable()				
 	
-	function gotChannel(data){
-		that.channel([data]);
-		that.title("Channel: " + data.name );
-		
-    }
-    
-
+	/* Methods */
+	this.applyBindings = function() {
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+      that.activate();
+    });	
+	};  
 	
-    function successfulGetChannel(data){
-	    //logger.log('success Getting Channel ' , null, 'channel', true);
-	    
-	    
+	this.activate = function() {
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			var _accountName = localStorage.getItem('accountName');
+			that.accountName(_accountName);
+			that.messageText('Add additional text here . . . ');
+			that.characterCount('31');			
+			$('textarea').keyup(function () {
+				if(that.messageText().length > 0) {
+					that.characterCount(that.messageText().length);
+				}
+			});	
+			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
+			return this.listMyChannelsCommand();		
+		}
 	}
-
-    
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA') {
+			that.sendMessageCommand();
+		}
+	});
+	
+	function successfulVerify(data){
+		var len = 0;
+		for(len; len<data.commethod.length; len++) {
+			if(data.commethod[len].name == 'Email' && data.commethod[len].verified == 'Y') {
+				that.messageText();
+				return that.createChannelMessage();
+			} else {
+				alert('Please verify your email !');				
+			}
+		}
+	};    
+	
+	function errorValidation(data, status, details){
+		$.mobile.hidePageLoadingMsg();	
+		showError('Not authorized ' + details.message);
+	};
+	
+	this.sendMessageCommand = function(){
+		return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
+	};
+	
+	function successfulList(data){
+		if(data.channel.length < 1) {
+			alert('Please create some channels !');				
+		} else {	
+			$.mobile.hidePageLoadingMsg();
+			that.channels.removeAll();	
+			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
+				that.channels.push(
+					new channelsOptions(data.channel[channelslength].name, data.channel[channelslength].id)
+				);
+			}
+		}
+	};    
+		
+	this.listMyChannelsCommand = function () {
+		$.mobile.showPageLoadingMsg('a', 'Loading Channels');
+		return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
+	};
+	
 	function successfulMessage(data){
-	    $.mobile.hidePageLoadingMsg();
-	    that.message('');
-        $.mobile.changePage("#" + channelViewModel.template)
-	    
-	}
-    
-    this.clearForm = function(){
-        that.message('');
-    };
-
-    
-    this.logoutCommand = function(){
-        loginViewModel.logoutCommand();
-        $.mobile.changePage("#" + loginViewModel.template)
-        
-    };
-    
+		alert('Your message is posted successfully');
+		localStorage.setItem('currentChannelId', that.selectedChannels())
+		goToView('channelMainView');			
+	};
+	
 	function errorAPI(data, status, details){
-        $.mobile.hidePageLoadingMsg();
-        
-        loginPageIfBadLogin(details.code);
-        
-        console.log("error something " + data);
-        showError("Error Getting Messages: " + ((status==500)?"Internal Server Error":details.message));
-        
-	    //logger.logError('error listing channels', null, 'channel', true);
-	}
-    
-    function errorPostingMessage(data, status, details){
-        $.mobile.hidePageLoadingMsg();
-		
-        loginPageIfBadLogin(details.code);
-        
-        showError("Error Posting Message: " + details.message);
-	    //logger.logError('error listing channels', null, 'channel', true);
-	}
-
-    
-
-   
+		$.mobile.hidePageLoadingMsg();	
+		showError('Error listing my channels: ' + details.message);
+	};
 	
-	this.getChannelCommand = function (lchannelid) {
-	    
-        //logger.log("starting getChannel", undefined, "channels", true);
-	    return ES.channelService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPI});
-        
+	this.createChannelMessage = function () {
+    $.mobile.showPageLoadingMsg("a", "Posting Message");
+		var messageobj = {text: that.messageText(), type: 'FYI'};
+		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
 	};
 
-	
-	this.postMessageCommand = function(){
-	    //logger.log("postMessageCommand", undefined, "channels", true);
-        $.mobile.showPageLoadingMsg("a", "Posting Message");
-	    var messageobj = {text: that.message(), type: 'FYI'};
-	    return ES.messageService.createChannelMessage(that.channelid(), messageobj, {success: successfulMessage, error: errorPostingMessage});
-	};
-   
-
-    
-    
 }

@@ -58,7 +58,7 @@ function ChannelChangeNameViewModel() {
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
 		that.activate(channelObject);
-    goToView('channelsIOwnView');
+    goToView('channelSettingsView');
   };
 
   function errorAPI(data, status, response) {
@@ -67,7 +67,7 @@ function ChannelChangeNameViewModel() {
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorChannel('<span>SORRY:</span> ' + response.message);		
+    that.errorChannel('<span>SORRY:</span> '+response.message);		
   };
 	
   this.confirmChannelChangeNameCommand = function () {

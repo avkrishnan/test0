@@ -28,7 +28,7 @@ function ChannelChangeIconViewModel() {
 	}
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
-    goToView('channelsIOwnView');
+    goToView('channelSettingsView');
   };
 
   function errorAPI(data, status, response) {
