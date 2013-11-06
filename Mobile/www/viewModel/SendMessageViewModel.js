@@ -15,6 +15,7 @@ function SendMessageViewModel() {
 	this.channelId = ko.observable();	
 	this.channelname = ko.observable();
 	
+	/* channels options variable */
 	var channelsOptions = function(name, id) {
 		this.channelname = name;
 		this.channelId = id;
@@ -46,6 +47,12 @@ function SendMessageViewModel() {
 			return this.listMyChannelsCommand();		
 		}
 	}
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA') {
+			that.sendMessageCommand();
+		}
+	});
 	
 	function successfulVerify(data){
 		var len = 0;
