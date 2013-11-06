@@ -90,8 +90,10 @@ function ChannelMainViewModel() {
 					return hours+' hrs ago';
 				} else if(minutes > 0) {
 					return minutes+' mins ago';
-				} else {
+				} else if(seconds > 0) {
 					return  seconds+' secs ago';
+				} else {
+					return  '0 secs ago';
 				}
 			}
 			var timeago = msToTime(timeAgo);
