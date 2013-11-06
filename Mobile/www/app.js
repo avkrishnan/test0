@@ -1,5 +1,5 @@
 var ES = {
-    evernymService: new EvernymService()
+	evernymService: new EvernymService()
 };
 ES.evernymService = new EvernymService();
 ES.channelService = new EvernymChannelService(ES.evernymService);
@@ -8,7 +8,6 @@ ES.loginService = new EvernymLoginService(ES.evernymService);
 ES.systemService = new EvernymSystemService(ES.evernymService);
 ES.messageService = new EvernymMessageService(ES.evernymService);
 ES.escplanService = new EvernymEscPlanService(ES.evernymService);
-
 
 ES.evernymService.doAfterDone = function(){
     $.mobile.hidePageLoadingMsg();
@@ -575,70 +574,49 @@ $(document).on('pagebeforehide', '[data-role="page"]', function(e,a){
                });
 
 
-$(document).on('pagebeforeshow', '[data-role="page"]', function(e,a){
-               
-               console.log("showing page: " + $(this).attr('id'));
-               
-               
-               var vm = ko.dataFor(this);
-               var token = localStorage.getItem("accessToken");
-    
-               document.title = vm.displayname;
-    
-               if ( vm && vm.hasfooter && token){
-                   // The reason the footer is appended on the pagebeforeshow instead of pagebeforecreate is because it relies on the viewmodel for some information to build it.
-                   
-                   var viewid = vm.viewid;
-                   var viewname = vm.viewname;
-                   
-                   /*
-                   if (! $(this).find("#thefooter").length ){
-                       $(this).append($("#globalfooter #thefooter").clone());
-                   }
-                   */
-                   
-                   var name = localStorage.getItem('accountName');
-               
-                   $(this).find('#thefooter #footer-gear').html(name);
-                   
-                   $(this).find('#thefooter #viewid').html(viewid + " " + viewname);
-               }
-               else {
-                   $(this).find("#thefooter").remove();
-               }
-               
-               
-               //$(this).page();
-               
-               /*
-               
-               //if( panelHelpViewModel.isDirty($(this).attr('id'))){
-               var panelhtml = $("#globalpanel").find('#mypanel').html();
-               $(this).find('#mypanel').html(panelhtml);
-               $(this).find('#mypanel').panel();
-               
-               
-               $(this).find('#mypanel').trigger('create');
-               
-               
-               var panelhtml = $("#globalpaneldots").find('#mypaneldots').html();
-               $(this).find('#mypaneldots').html(panelhtml);
-               $(this).find('#mypaneldots').panel();
-               
-               
-               $(this).find('#mypaneldots').trigger('create');
-               */
-               
-               /*
-                var panel = $(this).find('#mypanel').get(0);
-                if (panel){
-                myScroll = new iScroll(panel);
-                }
-                */
-               
-               //}
-               
-               });
+$(document).on('pagebeforeshow', '[data-role="page"]', function(e,a) {
+	console.log("showing page: " + $(this).attr('id'));
+	var vm = ko.dataFor(this);
+	var token = localStorage.getItem("accessToken");
+	document.title = vm.displayname;
+	
+	if ( vm && vm.hasfooter && token){
+		// The reason the footer is appended on the pagebeforeshow instead of pagebeforecreate is because it relies on the viewmodel for some information to build it.
+		var viewid = vm.viewid;
+		var viewname = vm.viewname;
+		
+		/*
+		if (! $(this).find("#thefooter").length ){
+		$(this).append($("#globalfooter #thefooter").clone());
+		}
+		*/
+		var name = localStorage.getItem('accountName');
+		$(this).find('#thefooter #footer-gear').html(name);
+		$(this).find('#thefooter #viewid').html(viewid + " " + viewname);
+	}
+	else {
+		$(this).find("#thefooter").remove();
+	}
+	//$(this).page();
+	/*
+	//if( panelHelpViewModel.isDirty($(this).attr('id'))){
+	var panelhtml = $("#globalpanel").find('#mypanel').html();
+	$(this).find('#mypanel').html(panelhtml);
+	$(this).find('#mypanel').panel();
+	$(this).find('#mypanel').trigger('create');
+	var panelhtml = $("#globalpaneldots").find('#mypaneldots').html();
+	$(this).find('#mypaneldots').html(panelhtml);
+	$(this).find('#mypaneldots').panel();
+	$(this).find('#mypaneldots').trigger('create');
+	*/
+	/*
+	var panel = $(this).find('#mypanel').get(0);
+	if (panel){
+	myScroll = new iScroll(panel);
+	}
+	*/
+	//}
+});
 
 
 

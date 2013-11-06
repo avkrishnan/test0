@@ -10,16 +10,16 @@
     <div class="success">
     	<p>Add a new phone number (TXT) or email</p>
     </div>
-      
+    
     <div class="add-action">
       <div class="addaction" data-bind="css: errorMessageInput">
         <input type="text" placeholder="phone or email" data-bind="{value: comMethodName}" />
         <a href="#" class="addbtn" data-bind="click: addCommethod">ADD</a>
       </div>
-			<div class="error-message" data-bind="html: errorMessage"></div>
+      <div class="error-message" data-bind="html: errorMessage"></div>
     </div> 
     
-  </div>
+	</div>
   
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
