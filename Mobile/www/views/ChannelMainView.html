@@ -3,23 +3,24 @@
     <a href="#" class="back" onclick="goToView('channelsIOwnView');"></a>
     <a class="menu" href="#"></a>
     <div class="linkican">
-      <a class="smsican" href="#"></a>
-      <a class="processingican"href="#"></a>
-      <a class="groupican" href="#"></a>
+      <a class="smsican" href="V-07-messages-notification-overlay.html"><span class="received-responses-msg">2</span></a>
+      <a class="processingican" href="V-58-iGi-stats-notification-overlay.html"><span class="received-responses-msg">4</span></a>
+      <a class="groupican" href="V-59-followers-notification-overlay.html"><span class="received-responses-msg">3</span></a>
     </div>
   </header>  
   <div class="page-content">   
     <div class="channelinformation">
-      <a href="#" class="channelimg channel1 borderred"></a>
+      <a href="#" class="channelimg channel1 borderred" data-bind="click: channelFollowers"></a>
       <div class="channelinfocontent">
-        <a class="title" href="#" data-bind="text: channelName">The Hawks</a>
+        <a class="title" href="#" data-bind="text: channelName, click: channelFollowers">The Hawks</a>
         <a href="#" class="setting" data-bind="click: channelSettings"></a>
-        <div class="addfollowers">16 followers<a class="add-followers" href="#">Add Followers</a></div>
+        <div class="addfollowers" data-bind="html: followerCount"><!--16 followers<a class="add-followers" href="#">Add Followers</a>--></div>
       </div>
-      <a class="requestcontent last" href="#">
+      <!--To do - to be activated when data received-->
+      <!--<a class="requestcontent last" href="#">
         <span class="request">+ 1 requests</span>
         <span class="lost">-1 lost</span>
-      </a>
+      </a>-->
     </div>
     <div class="dropdown">
       My Broadcasts:
@@ -32,50 +33,19 @@
         </select>
       </form>
     </div>
-    <a href="#" class="channelbroadcast">
-      <div class="broadcast-sensitive">
-        <span>No practice tonight ...</span><em>20 min ago</em>
-      </div>
-      <div class="broadcastmsgsend">
-        <span>12 Got it<em class="percentage">75%</em></span><em class="broadcastmsgunsend">4 Haven't</em>
-      </div>
-      <div class="broadcastmsgreplie">
-        <span>6 replies</span><em>3 new</em>
-      </div>
-    </a>
-    <a href="#" class="channelbroadcast">
-      <div class="broadcast-sensitive broadcastnormal">
-        <span>RSL tickets for Oct ...</span><em>6 hrs ago</em>
-      </div>
-      <div class="broadcastmsgsend">
-        <span class="norequested">No iGi requested</span><em class="norequestedican"></em>
-      </div>
-      <div class="broadcastmsgreplie">
-        <span>12 replies</span>
-      </div>
-    </a>
-    <a href="#" class="channelbroadcast">
-      <div class="broadcast-sensitive">
-        <span>No practice tonight ...</span><em>20 min ago</em>
-      </div>
-      <div class="broadcastmsgsend">
-        <span class="msgincrease"></span><em class="broadcastmsgunsend msgnoincrease">0% . . . no responses yet</em>
-      </div>
-      <div class="broadcastmsgreplie">
-        <span>6 replies</span><em>3 new</em>
-      </div>
-    </a>
-    <a href="#" class="channelbroadcast">
-      <div class="broadcast-sensitive">
-        <span>No practice tonight ...</span><em>20 min ago</em>
-      </div>
-      <div class="broadcastmsgsend">
-        <span class="msgincreasefull">12 Got it<em class="percentage">100%</em></span>
-      </div>
-      <div class="broadcastmsgreplie">
-        <span>6 replies</span><em>3 new</em>
-      </div>
-    </a>
+    <div data-bind="foreach: broadcasts">
+      <a href="#" class="channelbroadcast" data-bind="click: $parent.singleMessage.bind($index())">
+        <div class="broadcast-sensitive" data-bind="css: sensitivity">
+          <span data-bind="text: broadcast"></span><em data-bind="text: time">20 min ago</em>
+        </div>
+        <div class="broadcastmsgsend">
+          <span>12 Got it<em class="percentage">75%</em></span><em class="broadcastmsgunsend">4 Haven't</em>
+        </div>
+        <div class="broadcastmsgreplie">
+          <span data-bind="text: replies"></span><!--<em>3 new</em>-->
+        </div>
+      </a>
+    </div>
   </div>
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>

@@ -58,7 +58,7 @@ function ChannelChangeNameViewModel() {
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
 		that.activate(channelObject);
-    goToView('channelsIOwnView');
+    goToView('channelSettingsView');
   };
 
   function errorAPI(data, status, response) {
