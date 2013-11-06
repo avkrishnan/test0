@@ -23,12 +23,11 @@ function VerifyContactViewModel() {
 	var that = this;
 	
 	this.verifyRequestCommethod = function() {
-		//alert(that.verificationCode().length);
 		if(that.verificationCode() == '') {
-			that.errorMessage("<span>ERROR: </span> Please input verification code!");
+			that.errorMessage("<span>ERROR : </span> Please input verification code!");
 		}
 		else if(that.verificationCode().length != 6) {
-			that.errorMessage("<span>ERROR: </span> Verification code should be 6 digits!");
+			that.errorMessage("<span>ERROR : </span> Verification code should be 6 digits!");
 		}
 		else {
 			var verifyCommethodObject = {
@@ -36,7 +35,7 @@ function VerifyContactViewModel() {
 				type : that.verificationCommethodType,
 				address : that.verificationCommethod()
 			};
-			that.verifyRequest(verifyCommethodObject);	
+			that.verifyRequest(verifyCommethodObject);
 		}
 	}
 	
@@ -52,8 +51,12 @@ function VerifyContactViewModel() {
 		return ES.commethodService.requestVerification(that.verificationCommethodID(), callbacks);
 	}
 	
-	this.inputKeyUp = function () {
-		that.errorMessage('');
+	this.inputKeyUp = function(e) {
+		if( e.keyCode != 13 ) {
+			//e.preventDefault();
+			that.errorMessage('');
+		}
+		return true;
 	}	
   
 	this.applyBindings = function(){
@@ -62,12 +65,13 @@ function VerifyContactViewModel() {
 			var previousView = localStorage.getItem('previousView');
 			console.log("previousView: " + previousView);
 			var vm = ko.dataFor($("#" + previousView).get(0));
+			//alert(JSON.stringify(vm));
 			console.log("previousView Model viewid: " + vm.displayname);
 			that.navText(vm.displayname);
 			that.pView = previousView;
 			that.activate();
 		});
-		$('input').on("keyup", that.inputKeyUp);
+		$('#verifyContactView input').on("keyup", that.inputKeyUp);
 	};
     
 	this.activate = function() {
@@ -77,6 +81,7 @@ function VerifyContactViewModel() {
 		that.accountName(_accountName);
 		that.name(_name);
 		that.verificationCode('');
+		that.errorMessage('');
 		that.verificationCommethod(localStorage.getItem("currentVerificationCommethod"));
 		that.verificationCommethodID(localStorage.getItem("currentVerificationCommethodID"));
 		that.verificationStatus(localStorage.getItem("verificationStatus"));
@@ -93,6 +98,13 @@ function VerifyContactViewModel() {
 		else {
 			that.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below.');
 		}
+		
+		$(document).keyup(function(e) {
+			if (e.keyCode == 13) {
+				that.errorMessage('');
+				that.verifyRequestCommethod();
+			}
+		});		
 		//alert(localStorage.getItem("currentVerificationCommethod"));
 		//that.getCommethods().then(gotCommethods);
 		
@@ -107,8 +119,8 @@ function VerifyContactViewModel() {
 				goToView('addContactView');
 			},
 			error: function (responseData, status, details) {
-				alert('error');
-				that.errorMessage("<span>ERROR: </span>" + details.message);
+				//alert('error');
+				that.errorMessage("<span>ERROR : </span>" + details.message);
 			}
 		};
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());

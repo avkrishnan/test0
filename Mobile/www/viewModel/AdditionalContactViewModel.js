@@ -89,13 +89,20 @@ function AdditionalContactViewModel() {
 			}
 			that.activate();
 		});
-		$('input').on("keyup", that.inputKeyUp);
+		$('#additionalContactView input').on("keyup", that.inputKeyUp);
 	};
     
 	this.activate = function() {
 		that.accountName(localStorage.getItem("accountName"));
 		that.name(localStorage.getItem("UserFullName"));
-		that.comMethodName('');;
+		that.comMethodName('');
+		that.errorMessage('');
+		$(document).keyup(function(e) {
+			if (e.keyCode == 13) {
+				that.errorMessage('');
+				that.addCommethod();
+			}
+		});		
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;     
 	};
