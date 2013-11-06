@@ -355,6 +355,7 @@ escalationPlanSingleViewModel = new EscalationPlanSingleViewModel(),
 addContactViewModel = new AddContactViewModel(),
 additionalContactViewModel = new AdditionalContactViewModel(),
 verifyContactViewModel = new VerifyContactViewModel(),
+channelMessagesViewModel = new ChannelMessagesViewModel(),
 /* end*/
 
 /* By chaman*/
@@ -433,7 +434,8 @@ var models = [
 							channelEditDisplayNameViewModel,
 							channelDeleteViewModel,
 							channelChangeIconViewModel,
-							firstChannelViewModel							
+							firstChannelViewModel,
+							channelMessagesViewModel							
               ];
 
 

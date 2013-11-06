@@ -52,21 +52,22 @@ header {
 	margin:0 10px 0 0;
 	padding:12px 13px;
 	background:url(images/sprites.png) no-repeat -10px -1094px;
+	outline:none;
 }
-.linkican {
+.linkicon {
 	float:right;
 }
-.linkican a {
+.linkicon a {
 	margin:0 14px 0 0;
 	padding:0 12px;
 }
-.linkican a {
+.linkicon a {
 	background:url("images/sprites-channel.png") no-repeat -13px -464px;
 }
-a.processingican {
+a.processingicon {
 	background-position:-13px -921px;
 }
-a.groupican {
+a.groupicon {
 	background-position:-13px -1367px;
 }
 /*	Header end	*/
@@ -894,7 +895,7 @@ hr, .baseline {
 	height:1px;
 	background:#545454;
 	border:0;
-	margin:5px 20px 5px 10px;
+	margin:10px 20px 5px 10px;
 }
 .loginform span {
 	margin:0 0 8px 10px;
@@ -1155,7 +1156,7 @@ span.down-arrow {
 	background:#FEFBD6;
 }
 div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text, .ui-input-search input.ui-input-text {
-	padding:0 0 0 6px;
+	padding:0 0 0 5px;
 	height:36px;
 }
 .ui-btn-corner-all,
@@ -1880,7 +1881,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#252625', endColorstr='#535254',GradientType=1 ); /* IE6-9 */
 }
 .broadcastmsgsend span {
-	background:green;
 	float:left;
 	height:30px;
 	line-height:30px;
@@ -2303,10 +2303,11 @@ ul.igiresponses li span {
 	color:#8d8b8c;
 	padding:0 6px;
 }
-.followersname {
+.followersname, .followersname.ui-link, .followersname.ui-link:hover, .followersname.ui-link:visited, .followersname.ui-link:active {
 	font-size:13px;
 	color:#8DC63F;
 	padding:8px 10px;
+	display: block;
 }
 .notification li {
 	color:#2d2d2d;
@@ -2491,8 +2492,8 @@ ul.igiresponses li span {
 .contactchannel {
 	border-top:1px solid #828181;
 	border-bottom:1px solid #828181;
-	margin:0 0 10px -10px;
-	padding: 15px 0 15px 10px;
+	margin:0 0 0 -10px;
+	padding:15px 0 15px 10px;
 }
 .contactchannel .login a.ui-link {
 	margin-left:8px;
@@ -2527,7 +2528,7 @@ ul.igiresponses li span {
 .messagedetail-info {
 	float:left;
 	margin:0 0 0 10px;
-	padding:0 0 10px 0;
+	padding:0;
 	width:82%;
 }
 .messagedetail-info span {
@@ -2536,7 +2537,7 @@ ul.igiresponses li span {
 }
 .messagedetail-info p {
 	font-size:14px;
-	padding:5px 0 10px 0;
+	padding:5px 0 0px 0;
 }
 .snoozedismissbtn {
 	padding:10px 0;
@@ -2755,6 +2756,10 @@ ul.igiresponses li span {
 	font-size:14px;
 	font-weight:bold;
 	color:#a0a0a0;
+	outline:none;
+}
+.ui-link:visited, .ui-link:hover, .ui-link:active{
+	outline:none;
 }
 .reply-detail {
 	margin:4px 25px 10px 15px;
