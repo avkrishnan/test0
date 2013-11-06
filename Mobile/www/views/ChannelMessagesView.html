@@ -1,0 +1,43 @@
+<div id="channelMessagesView" data-role="page">
+
+  <header>
+    <!--<a href="V-30-channels-I-follow.html" class="back"></a>-->
+    <a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
+    <a class="menu" href="V-04-slide-in-menu.html"></a>
+    <div class="linkicon">
+      <a class="smsicon" href="#"></a>
+      <a class="processingicon" href="#"></a>
+      <a class="groupicon" href="#"></a>
+    </div>
+  </header>
+  
+  <div class="page-content channelsettings">
+  
+    <div class="channelcontent">
+      <span class="channelimg channel3 sky-blue"></span>
+      <div class="detailschannel last">
+        <div class="channelinfo">
+          <strong data-bind="text:title"></strong>
+          <em data-bind="text:description"></em>
+        </div>
+      </div>
+    </div>
+    
+    <div class="channelmessages" data-bind="foreach: channelMessages">
+      <a href="#">
+        <span class="channelicans" data-bind="css:$data.urgencyId"></span>
+        <div class="messageschannel">
+          <span class="timemsg" data-bind="text:$data.created"></span>
+          <p data-bind="text:$data.text"></p>
+        </div>
+      </a>
+    </div>
+    
+  </div>
+  
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
+  </div>
+  
+</div>
