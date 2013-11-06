@@ -48,7 +48,7 @@ function ChannelEditDisplayNameViewModel() {
     $.mobile.hidePageLoadingMsg();
     goToView('channelEditDisplayNameView');
 		that.message('');
-		that.errorChannel('<span>SORRY:</span> '+response.message);
+		that.errorChannel('<span>SORRY:</span> ' + response.message);
   };
 	
   this.changeChannelDisplayNameCommand = function () {

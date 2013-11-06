@@ -58,9 +58,9 @@ function InviteFollowersIIViewModel() {
 		var feedbackData = $('#'+that.feedbackId()).val();
     if (feedbackData == '') {
 			that.feedbackClass('validationerror');
-			that.errorFeedback('<span>SORRY:</span>Please give feedback');
+			that.errorFeedback('<span>SORRY:</span> Please give feedback');
     } else {
-      goToView('inviteFollowersIIView')
+      goToView('inviteFollowersIIView');
     }
   };	
 }

@@ -17,39 +17,6 @@
    * }())));
    */
 
-  asyncTest('DUPLICATE ENROLLMENT', function() {
-    $.when(SCEN1.ES.loginService.accountEnroll(SCEN1.account))
-    .then(hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest)
-    .then(start,start);
-  });
-
-  asyncTest('TEST BAD ENROLLMENT - NAME TOO LONG', function() {
-    var account = hlpr.generateAccount();
-
-    account.accountname = '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789'
-        + '01234567890123456789012345678901234567890123456789';
-
-    $.when(SCEN1.ES.loginService.accountEnroll(account))
-    .then(hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest)
-    .then(start,start);
-  });
-
-  asyncTest('TEST BAD ENROLLMENT - NAME TOO SHORT', function() {
-    var account = hlpr.generateAccount();
-    account.accountname = 'hi';
-    $.when(SCEN1.ES.loginService.accountEnroll(account))
-    .then(hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest)
-    .then(start,start);
-  });
-
   asyncTest('LOGIN', hlpr.login(SCEN1));
 
   asyncTest('LOGOUT', function() {
@@ -255,6 +222,7 @@
   asyncTest('DELETE THE THIRD COM METHOD', hlpr.deleteComMethod(SCEN1, "-3"));
 
   asyncTest('VERIFY EMAIL ADDRESS', hlpr.verify(SCEN1, "-2"));
+
 
   // TODO
   /*

@@ -1,6 +1,12 @@
-function ServiceContext(altStorage) {
+/**
+ * Returns a new ServiceContext.
+ *
+ * @param {Storage} altStorage An alternative Storage object. If omitted, LocalStorage is used. 
+ * @param {string} altBaseUrl An alternative base URL to use for API calls. Not required.
+ */
+function ServiceContext(altStorage, altBaseUrl) {
   var sc = {};
-  sc.evernymService = new EvernymService(altStorage);
+  sc.evernymService = new EvernymService(altStorage, altBaseUrl);
   sc.channelService = new EvernymChannelService(sc.evernymService);
   sc.commethodService = new EvernymCommethodService(sc.evernymService);
   sc.loginService = new EvernymLoginService(sc.evernymService);
@@ -10,13 +16,12 @@ function ServiceContext(altStorage) {
   return sc;
 }
 
-function EvernymService(altStorage) {
+function EvernymService(altStorage, altBaseUrl) {
 
   console.log('loading EvernymService');
   var that = this;
 
-  // var baseUrl = 'http://qupler.no-ip.org:8080/api/rest';
-  var baseUrl = 'https://api.evernym.com/api24/rest';
+  var baseUrl = altBaseUrl ? altBaseUrl : 'https://api.evernym.com/api24/rest';
 
   that.getBaseUrl = function() {
     return baseUrl;
@@ -91,7 +96,11 @@ function EvernymService(altStorage) {
       if (results && results.length) {
         details.message = parseDescription(jqXHR.responseText);
       } else {
-        details = JSON.parse(jqXHR.responseText);
+        try {
+          details = JSON.parse(jqXHR.responseText);
+        } catch (e) {
+          details.message = jqXHR.responseText;
+        }
       }
 
       that.doAfterFail(ajaxParams, jqXHR, textStatus, errorThrown, details);

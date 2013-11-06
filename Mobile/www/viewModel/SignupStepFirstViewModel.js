@@ -37,7 +37,7 @@ function SignupStepFirstViewModel() {
   /* Change error textbox color observable */
   this.emailClass = ko.observable();
   this.accountNameClass = ko.observable();
-  this.passwordClass = ko.observable()
+  this.passwordClass = ko.observable();
 
   /* Tick icon observable */
   this.tickIconEmail = ko.observable();
@@ -67,7 +67,7 @@ function SignupStepFirstViewModel() {
 					that.accountNameClass('validationerror');				
 				} else {
 					that.errorIconEmail('errorimg');
-					that.errorEmail('<span>SORRY:</span>'+ localStorage.getItem('signUpError'));
+					that.errorEmail('<span>SORRY:</span> ' + localStorage.getItem('signUpError'));
 					that.emailClass('validationerror');				
 				}
 				localStorage.removeItem('signUpError');			
@@ -96,19 +96,19 @@ function SignupStepFirstViewModel() {
 	
   that.emailinput = function () {
     that.tickIconEmail('righttick');
-  }
+  };
 	
   that.emailActiveInfo = function () {
     toggleInfo('nameInfo', 'namehighlight', 'passwordInfo', 'passwordhighlight', 'emailInfo', 'emailhighlight');
-  }
+  };
 	
   that.nameActiveInfo = function () {
     toggleInfo('emailInfo', 'emailhighlight', 'passwordInfo', 'passwordhighlight', 'nameInfo', 'namehighlight');
-  }
+  };
 	
   that.passwordActiveInfo = function () {
     toggleInfo('emailInfo', 'emailhighlight', 'nameInfo', 'namehighlight', 'passwordInfo', 'passwordhighlight');
-  }
+  };
 
   /* This function will toggle info on 'i' tap */
   function toggleInfo(hideElementOne, hideClassOne, hideElementTwo, hideClassTwo, showElement, showClass) {
@@ -156,15 +156,15 @@ function SignupStepFirstViewModel() {
     if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
       that.emailClass('validationerror');
       that.errorIconEmail('errorimg');
-      that.errorEmail('<span>SORRY:</span>Please enter valid email');
+      that.errorEmail('<span>SORRY:</span> Please enter valid email');
     } else if (that.accountName() == '') {
       that.accountNameClass('validationerror');
       that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY:</span>Please enter Evernym name');
+      that.errorAccountName('<span>SORRY:</span> Please enter Evernym name');
     } else if (that.password() == '') {
       that.passwordClass('validationerror');
       that.errorIconPassword('errorimg');
-      that.errorPassword('<span>SORRY:</span>Please enter password');
+      that.errorPassword('<span>SORRY:</span> Please enter password');
     } else {
       localStorage.setItem('newuseremail', that.emailaddress());
       localStorage.setItem('newusername', that.accountName());

@@ -34,7 +34,7 @@ function ChannelChangeNameStepFirstViewModel() {
     });
 		if (localStorage.getItem('signUpError') != null) {
 			that.message('');
-      that.errorNewChannel('<span>SORRY:</span>'+localStorage.getItem('signUpError'));
+      that.errorNewChannel('<span>SORRY:</span> ' + localStorage.getItem('signUpError'));
       localStorage.removeItem('signUpError');
     }
 	}

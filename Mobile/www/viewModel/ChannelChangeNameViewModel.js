@@ -67,7 +67,7 @@ function ChannelChangeNameViewModel() {
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorChannel('<span>SORRY:</span> '+response.message);		
+    that.errorChannel('<span>SORRY:</span> ' + response.message);		
   };
 	
   this.confirmChannelChangeNameCommand = function () {
