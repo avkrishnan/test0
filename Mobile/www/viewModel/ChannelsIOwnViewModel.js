@@ -27,12 +27,10 @@ function ChannelsIOwnViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			var _accountName = localStorage.getItem('accountName');
-			that.accountName(_accountName);
+			that.accountName(localStorage.getItem('accountName'));
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
-			return this.listMyChannelsCommand();
-			/*goToView('channelsIOwnView');*/
+			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
 		}
 	};	    	
 	
@@ -56,10 +54,10 @@ function ChannelsIOwnViewModel() {
 		showError('Error listing my channels: ' + details.message);
 	};
 		
-	this.listMyChannelsCommand = function () {
+	/*this.listMyChannelsCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 		return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
-	};
+	};*/
 	
 	this.channelSettings = function(data){
 		localStorage.removeItem('currentChannelId');

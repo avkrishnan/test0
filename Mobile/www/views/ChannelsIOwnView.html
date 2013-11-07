@@ -25,12 +25,13 @@
         <span class="channelimg channel1 borderred"></span>
         <div class="detailschannel">
           <div class="channelinfo">
-            <strong data-bind="text: channelname"></strong>
+            <strong data-bind="text: channelname, click: $parent.channelMain.bind($index())"></strong>
             <em data-bind="text: channeldescription"></em>
           </div>
           <a href="#" class="setting" data-bind="click: $parent.channelSettings.bind($index())"></a>
-        </div>    
-        <a class="requestcontent" href="#" data-bind="click: $parent.channelMain.bind($index())">
+        </div>
+        <!--To do - to be activated when data received-->            
+        <!--<a class="requestcontent" href="#" data-bind="click: $parent.channelMain.bind($index())">
           <span class="request">4 new replies??</span>
           <span class="igi">2 new iGi's??</span>
         </a>    
@@ -38,7 +39,7 @@
           <span class="followers">16 followers??</span>
           <span class="request">+ 1 requests??</span>
           <span class="lost">-1 lost??</span>
-        </a>
+        </a>-->
       </div>
     </div>   
   </div>  

@@ -34,17 +34,20 @@ function SendMessageViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			var _accountName = localStorage.getItem('accountName');
-			that.accountName(_accountName);
-			//that.messageText('Add additional text here . . . ');
-			that.characterCount('31');			
-			$('textarea').keyup(function () {
-				if(that.messageText().length > 0) {
-					that.characterCount(that.messageText().length);
+			that.accountName(localStorage.getItem('accountName'));
+			that.messageText('Add additional text here . . . ');
+			that.characterCount('31');
+			$('textarea').click(function () {
+				if(that.messageText() == 'Add additional text here . . . ') {
+					that.messageText('');				
+					that.characterCount('0');				
 				}
+			});			
+			$('textarea').keyup(function () {				
+				that.characterCount(that.messageText().length);
 			});	
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
-			return this.listMyChannelsCommand();		
+			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });		
 		}
 	}
 	
@@ -61,7 +64,7 @@ function SendMessageViewModel() {
 				that.messageText();
 				return that.createChannelMessage();
 			} else {
-				alert('Please verify your email !');				
+				showMessage('Please verify your email !');				
 			}
 		}
 	};    
@@ -72,12 +75,16 @@ function SendMessageViewModel() {
 	};
 	
 	this.sendMessageCommand = function(){
-		return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
+		if(that.messageText() == '') {
+			showMessage('Please type some message !');
+		} else {
+			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
+		}
 	};
 	
 	function successfulList(data){
 		if(data.channel.length < 1) {
-			alert('Please create some channels !');				
+			showMessage('Please create some channels !');
 		} else {	
 			$.mobile.hidePageLoadingMsg();
 			that.channels.removeAll();	
@@ -88,14 +95,9 @@ function SendMessageViewModel() {
 			}
 		}
 	};    
-		
-	this.listMyChannelsCommand = function () {
-		$.mobile.showPageLoadingMsg('a', 'Loading Channels');
-		return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
-	};
 	
 	function successfulMessage(data){
-		alert('Your message is posted successfully');
+		showMessage('Your message is posted successfully');
 		localStorage.setItem('currentChannelId', that.selectedChannels())
 		goToView('channelMainView');			
 	};
