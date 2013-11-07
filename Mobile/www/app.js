@@ -490,68 +490,39 @@ function loadAllPages() {
                                    });
 };
 
-
-
-$(document).ready(function () {
-                  
-                  
-                  // bind each view model to a jQueryMobile page
-                  
-                  console.log("document ready");
-                  
-                  var token = localStorage.getItem("accessToken");
-                  
-                  if (document.location.hash == ""){
-                 
-                      
-        
-        
-                      if (token) {
-                          document.location.hash = "#channelListView";
-                      }
-                      else {
-                          document.location.hash = "#loginView";
-                      }
-                  }
-                  
-                   console.log('hash: ' + document.location.hash);
-                  
-                  $.mobile.activeBtnClass = '';
-                  
-                  //$("#channelListView").page("destroy").page();
-                  
-                  //var currentUrl = $.mobile.path.parseUrl(window.location.href);
-                  
-                  //console.log("currentUrl: " + currentUrl.hash);
-                 
-                  localStorage.removeItem('baseUrl');
-                  
-                  
-                  
-                  
-                  
-                  loadAllPages().done(function(){
-                                      
-                                           console.log('done loading all pages.');
-                                           console.log("INITIALIZE PAGE");
-                                           $.mobile.initializePage();
-                                           
-                                           if (token){
-                                               function gotChannels(data){
-                                                  channelListViewModel.channels.removeAll();
-												  channelListViewModel.channels(data.channel);
-											  }
-                                               
-                                               channelListViewModel.listMyChannelsCommand().then(gotChannels);
-                                               channelMenuViewModel.getUrgencySettings();
-                                           }
-                                           
-                                      
-                                      });
-                  
-                  
-                  
-    });
+	$(document).ready(function () {
+		// bind each view model to a jQueryMobile page
+		console.log("document ready");
+		var token = localStorage.getItem("accessToken");
+		if (document.location.hash == ""){
+			if (token) {
+				//document.location.hash = "#channelListView";
+				document.location.hash = "#channelsIOwnView";
+			}
+			else {
+				document.location.hash = "#loginView";
+			}
+		}
+		console.log('hash: ' + document.location.hash);
+		$.mobile.activeBtnClass = '';
+		//$("#channelListView").page("destroy").page();
+		//var currentUrl = $.mobile.path.parseUrl(window.location.href);
+		//console.log("currentUrl: " + currentUrl.hash);
+		localStorage.removeItem('baseUrl');
+		loadAllPages().done(function() {
+			console.log('done loading all pages.');
+			console.log("INITIALIZE PAGE");
+			$.mobile.initializePage();
+			if (token){
+				function gotChannels(data){
+					channelListViewModel.channels.removeAll();
+					channelListViewModel.channels(data.channel);
+				}
+				channelListViewModel.listMyChannelsCommand().then(gotChannels);
+				channelMenuViewModel.getUrgencySettings();
+			}
+		});
+	});
 
 
 $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
