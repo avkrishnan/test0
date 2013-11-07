@@ -2,10 +2,10 @@
   <header>
     <a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
     <a class="menu" href="#"></a>
-    <div class="linkican">
-      <a class="smsican" href="#"></a>
-      <a class="processingican"href="#"></a>
-      <a class="groupican" href="#"></a>
+    <div class="linkicon">
+      <a class="smsicon" href="#"></a>
+      <a class="processingicon"href="#"></a>
+      <a class="groupicon" href="#"></a>
     </div>
   </header>  
   <div class="page-content">
@@ -20,17 +20,21 @@
         </select>
       </form>
     </div>
-    <div data-bind="foreach: channels"> 
-      <div class="channelcontent">
-        <span class="channelimg channel1 borderred"></span>
-        <div class="detailschannel">
-          <div class="channelinfo">
-            <strong data-bind="text: channelname"></strong>
-            <em data-bind="text: channeldescription"></em>
+    <div data-bind="foreach: channels">
+    
+      <a href="#" class="channelcontent">
+          <span class="channelimg channel1 borderred" data-bind="click: $parent.channelMain.bind($index())"></span>
+          <div class="detailschannel">
+            <div class="channelinfo" data-bind="click: $parent.channelMain.bind($index())">
+              <strong data-bind="text: channelname, click: $parent.channelMain.bind($index())"></strong>
+              <em data-bind="text: channeldescription, click: $parent.channelMain.bind($index())"></em>
+            </div>
+            <div class="setting" data-bind="click: $parent.channelSettings.bind($index())"></div>
           </div>
-          <a href="#" class="setting" data-bind="click: $parent.channelSettings.bind($index())"></a>
-        </div>    
-        <a class="requestcontent" href="#" data-bind="click: $parent.channelMain.bind($index())">
+          <br />
+        </a>
+        <!--To do - to be activated when data received-->            
+        <!--<a class="requestcontent" href="#" data-bind="click: $parent.channelMain.bind($index())">
           <span class="request">4 new replies??</span>
           <span class="igi">2 new iGi's??</span>
         </a>    
@@ -38,8 +42,8 @@
           <span class="followers">16 followers??</span>
           <span class="request">+ 1 requests??</span>
           <span class="lost">-1 lost??</span>
-        </a>
-      </div>
+        </a>-->
+      </a>
     </div>   
   </div>  
   <div class="footer">

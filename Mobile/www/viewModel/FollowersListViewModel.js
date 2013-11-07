@@ -41,8 +41,7 @@ function FollowersListViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			var _accountName = localStorage.getItem('accountName');
-			that.accountName(_accountName);
+			that.accountName(localStorage.getItem('accountName'));
 			that.channelId(localStorage.getItem('currentChannelId'));			
 			that.followers.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
@@ -64,7 +63,11 @@ function FollowersListViewModel() {
 				accountname: data.followers[len].accountname
 			});
 		}
-		that.followerCount(data.followers.length+' Followers:');
+		if(data.followers.length <= 1) {
+			that.followerCount(data.followers.length+' follower');
+		} else {
+			that.followerCount(data.followers.length+' followers');
+		}
 	}; 
 	
 	function successfulGetChannel(data) {

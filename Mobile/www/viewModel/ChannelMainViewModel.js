@@ -31,17 +31,14 @@ function ChannelMainViewModel() {
 	var token = ES.evernymService.getAccessToken();
 	var channelId = localStorage.getItem('currentChannelId');
 	this.activate = function() {
-		/*if(token == '' || token == null) {
+		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(channelId == '' || channelId == null) {
-			goToView('channelsIOwnView');
-		} else {}*/
-			var _accountName = localStorage.getItem('accountName');
-			that.accountName(_accountName);
+		} else {
+			that.accountName(localStorage.getItem('accountName'));
 			that.broadcasts.removeAll();				
 			that.channelId(localStorage.getItem('currentChannelId'));
 			return this.getChannelCommand().then(this.getFollowersCommand()).then(this.getMessagesCommand());
-			goToView('channelMainView');
+		}
 	}
 	
 	this.channelSettings = function(){
@@ -56,7 +53,11 @@ function ChannelMainViewModel() {
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
-		that.followerCount(data.followers.length+' followers');
+		if(data.followers.length <= 1) {
+			that.followerCount(data.followers.length+' follower');
+		} else {
+			that.followerCount(data.followers.length+' followers');
+		}
 	}; 
 	
 	function successfulMessageGET(data){
@@ -81,19 +82,23 @@ function ChannelMainViewModel() {
 			function msToTime(ms){
 				var secs = Math.floor(ms / 1000);
 				var msleft = ms % 1000;
-				var hours = Math.floor(secs / (60 * 60));
+				var totalHours = Math.floor(secs / (60 * 60));
+				var days = Math.floor(totalHours / 24);
+				var hours = totalHours % 24;
 				var divisor_for_minutes = secs % (60 * 60);
 				var minutes = Math.floor(divisor_for_minutes / 60);
 				var divisor_for_seconds = divisor_for_minutes % 60;
 				var seconds = Math.ceil(divisor_for_seconds);
-				if(hours > 0) {
+				if(days > 0) {
+					return days+' days ago';
+				} else if(hours > 0) {
 					return hours+' hrs ago';
 				} else if(minutes > 0) {
 					return minutes+' mins ago';
 				} else if(seconds > 0) {
 					return  seconds+' secs ago';
 				} else {
-					return  '0 secs ago';
+					return  '1 secs ago';
 				}
 			}
 			var timeago = msToTime(timeAgo);
@@ -110,7 +115,7 @@ function ChannelMainViewModel() {
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
     localStorage.setItem('signUpError', response.message);
-    goToView('channelMainView');
+    goToView('channelsIOwnView');
   };
 	
   this.getChannelCommand = function () {

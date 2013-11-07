@@ -1,6 +1,6 @@
 <div id="sendMessageView" data-role="page" class="channel-list">
    <header>
-    <a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
+    <a href="#" class="back" data-rel="back"></a>
     <a class="menu" href="#"></a>
     <div class="linkican">
       <a class="smsican" href="#"></a>
@@ -12,8 +12,8 @@
   <form>
     <label class="invited-followChannel">Compose a New Broadcast</label>
     <div class="broadcast-textarea">
-      <textarea class="textarea" data-bind="value: messageText, valueUpdate: 'afterkeydown'" onclick="if (this.value == 'Add additional text here . . . ') this.value = '';"></textarea>
-      <span data-bind="text: characterCount">32</span>
+      <textarea class="textarea" data-bind="value: messageText, valueUpdate: 'afterkeydown'"></textarea>
+      <span data-bind="text: characterCount"></span>
     </div>
     <div class="compose-newbroadcast">
       <div class="composedropdown"> 

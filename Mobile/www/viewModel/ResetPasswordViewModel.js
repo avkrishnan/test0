@@ -24,9 +24,8 @@ function ResetPasswordViewModel() {
 		});
 	};
 		 
-	this.activate = function(){
-		var _accountName = localStorage.getItem('accountName');			
-		that.accountName(_accountName);
+	this.activate = function(){			
+		that.accountName(localStorage.getItem('accountName'));
 		$('input').keyup(function (){ 
 			that.passwordClass('');
 			that.confirmPasswordClass('');				
