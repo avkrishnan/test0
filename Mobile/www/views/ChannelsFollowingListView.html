@@ -1,103 +1,145 @@
 <!--  CHANNELS FOLLOWING LIST VIEW -->
-
 <div id="channelsFollowingListView" data-role="page" data-dom-cache="true" class="channel-list">
-    <div id="gpanel"></div>
-    <div id="gpaneldots"></div>
-    
-    <div data-role="header" class="header" >
-        
-        
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
-        
-        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
-        
-        <!-- <li><a href="#" data-bind="click: activate">Refresh List</a></li> -->
-        
-        
-    </div>
-    
-    
-    
-    
-    <div class="channel-list" data-role="content" xdata-theme="c" data-iscroll>
-        
-        <ul data-role="listview">
-            
-            <li class="channel-list-item list-head">
-                
-                <a  class="channel-list-anchor" href="#" >
-                    
-                    <div class="channel-list-stripe2"></div>
-                    
-                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
-                    
-                    <span class="channel-info">
-                        <span class="channel-name">Channels I Follow</span>
-                        
-                    </span>
-                    <div class="channel-list-avatar-frame"></div>
-                    
-                </a>
-                
-            </li>
-            
-            
-            
-            
-            
-            <!-- ko foreach: channels, updateListviewOnChange:channels -->
-            <li class="channel-list-item">
-                
-                <a  class="channel-list-anchor" href="#" data-bind="click: $parent.showChannel" >
-                    
-                    <div class="channel-list-stripe1"></div>
-                    <!-- ko if: ($index() < ($parent.channels().length) - 1) -->
-                    <div class="channel-list-stripe2"></div>
-                    <!-- /ko -->
-                    
-                    
-                    <!-- ko if: $data.hasOwnProperty("picId") -->
-                    <div class="channel-list-avatar" data-bind="with: $parent.mapImage(picId)">
-                    <div data-bind=" style: {
-				         'background': 'url(resources/icons/' + image + ')', 'width': width ,
-				         'background-color': 'white',
-				         'border-radius' : '50%',
-				         'height': height ,
-				         'background-position': left + ' ' + top ,
-				         'background-size': bgsize,
-				         'cursor': 'pointer'
-					}"></div>
-					</div>
-                    <!-- /ko -->
-                    <!-- ko ifnot: $data.hasOwnProperty("picId") -->
-					<div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
-					<!-- /ko -->
+	<!--
+  <div id="gpanel"></div>
+  <div id="gpaneldots"></div>
+  <div data-role="header" class="header" >
+      <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+      <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
+  </div>
+  <div class="channel-list" data-role="content" xdata-theme="c" data-iscroll>
+      
+      <ul data-role="listview">
+          
+          <li class="channel-list-item list-head">
+              
+              <a  class="channel-list-anchor" href="#" >
+                  
+                  <div class="channel-list-stripe2"></div>
+                  
+                  <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+                  
+                  <span class="channel-info">
+                      <span class="channel-name">Channels I Follow</span>
+                      
+                  </span>
+                  <div class="channel-list-avatar-frame"></div>
+                  
+              </a>
+              
+          </li>
 
-                    
-                    <span class="channel-info">
-                        <span class="channel-name" data-bind="text: name"></span>
-                         <!-- ko if: $data.hasOwnProperty("description") -->
-						<span class="channel-description" data-bind="text: description"></span>
-						<!-- /ko -->
-                        <span class="channel-url" data-bind="text: normName + '.evernym.com'" ></span>
-                        
-                    </span>
-                    <div class="channel-list-avatar-frame"></div>
-                    
-                    
-                    <div class="channel-list-message-count"></div>
-                    <div class="channel-list-alalytics"></div>
-                    
-                </a>
-                
-            </li>
-            
-            
-            
-            <!-- /ko -->
-            
-        </ul>
+          <li class="channel-list-item">
+              
+              <a  class="channel-list-anchor" href="#" data-bind="click: $parent.showChannel" >
+                  
+                  <div class="channel-list-stripe1"></div>
+                  <div class="channel-list-stripe2"></div>
+                  <div class="channel-list-avatar" data-bind="with: $parent.mapImage(picId)">
+                  <div data-bind=" style: {
+               'background': 'url(resources/icons/' + image + ')', 'width': width ,
+               'background-color': 'white',
+               'border-radius' : '50%',
+               'height': height ,
+               'background-position': left + ' ' + top ,
+               'background-size': bgsize,
+               'cursor': 'pointer'
+        }"></div>
+        </div>
+        <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
+  
+                  
+                  <span class="channel-info">
+                      <span class="channel-name" data-bind="text: name"></span>
+          <span class="channel-description" data-bind="text: description"></span>
+                      <span class="channel-url" data-bind="text: normName + '.evernym.com'" ></span>
+                      
+                  </span>
+                  <div class="channel-list-avatar-frame"></div>
+                  
+                  
+                  <div class="channel-list-message-count"></div>
+                  <div class="channel-list-alalytics"></div>
+                  
+              </a>
+              
+          </li>
+      </ul>
+  </div>
+  <div id="gfooter"></div>
+  -->
+  <header>
+    <a href="#" class="back"></a>
+    <a class="menu" href="V-04-slide-in-menu.html"></a>
+    <div class="linkicon">
+      <a class="smsicon" href="V-07-messages-notification-overlay.html"><span class="received-responses-msg">2</span></a>
+      <a class="processingicon" href="V-58-iGi-stats-notification-overlay.html"><span class="received-responses-msg">4</span></a>
+      <a class="groupicon" href="V-59-followers-notification-overlay.html"><span class="received-responses-msg">3</span></a>
     </div>
-    <div id="gfooter"></div>
+  </header>
+  
+  <div class="page-content channel_follow">
     
+    <div class="dropdown">
+      Channels I Follow:
+      <form class="chaneldropdown" action="#" method="get" >
+        <select>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+        </select>
+      </form>
+    </div>
+    <!--
+    <div class="channelinformation channel-follow">
+      <a href="V-55-followed-channel.html" class="channelimg channel4 sky-blue"></a>
+      <div class="channelinfocontent">
+        <a href="V-55-followed-channel.html" class="channelinfo channelfollow">
+          <strong>BYU Football</strong>
+          <em>The official channel of BYU football</em>
+        </a>
+        <a href="V-16.html" class="setting"></a>
+      </div>
+      <a href="V-55-followed-channel.html" class="requestcontent last">
+        <span class="request">4 new requests</span>
+        <span class="igi">2 new iGi's</span>
+      </a>
+    </div>
+    <div class="channelinformation channel-follow">
+      <a href="V-55-followed-channel.html" class="channelimg channel2 borderyellow"></a>
+      <div class="channelinfocontent">
+        <a href="V-55-followed-channel.html" class="channelinfo channelfollow">
+          <strong>Wasatch Warriors</strong>
+          <em>Wasatch Junior High School</em>
+        </a>
+        <a href="V-16.html" class="setting"></a>
+      </div>
+      
+      <a href="V-55-followed-channel.html" class="requestcontent last">
+        <span class="request">1 new message</span>
+        <span class="igi">1 new iGi's</span>
+      </a>
+    </div>
+    -->
+    <section data-bind="foreach: channels">
+      <div class="channelinformation channel-follow">
+        <a href="V-55-followed-channel.html" class="channelimg channel5 bordergreen"></a>
+        <div class="channelinfocontent last">
+          <a href="V-55-followed-channel.html" class="channelinfo channelfollow">
+            <strong data-bind="text:name"></strong>
+            <em data-bind="text:normName"></em>
+          </a>
+          <a href="V-16.html" class="setting"></a>
+        </div>
+      </div>
+    </section>  
+    
+  </div>
+
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#"></a>
+  </div>  
+
 </div>

@@ -1,7 +1,6 @@
 <div id="channelMessagesView" data-role="page">
 
   <header>
-    <!--<a href="V-30-channels-I-follow.html" class="back"></a>-->
     <a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
     <a class="menu" href="V-04-slide-in-menu.html"></a>
     <div class="linkicon">
@@ -25,10 +24,11 @@
     
     <div class="channelmessages" data-bind="foreach: channelMessages">
       <a href="#">
-        <span class="channelicans" data-bind="css:$data.urgencyId"></span>
+        <span class="channelicans" data-bind="css:$data.messageClass"></span>
         <div class="messageschannel">
-          <span class="timemsg" data-bind="text:$data.created"></span>
-          <p data-bind="text:$data.text"></p>
+          <span class="timemsg" data-bind="text:$data.messageCreated"></span>
+          <span class="messagebtn">iGi</span>
+          <p data-bind="text:$data.messageText"></p>
         </div>
       </a>
     </div>

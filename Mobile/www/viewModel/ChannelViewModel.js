@@ -25,17 +25,21 @@ function ChannelViewModel() {
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
-			$('.more_messages_button').hide();
-			var action = localStorage.getItem("action");
+			//$('.more_messages_button').hide();
+			//var action = localStorage.getItem("action");
 			if ($.mobile.pageData && $.mobile.pageData.id) {
 				that.activate({id:$.mobile.pageData.id});
 			}
 			else {
 				var currentChannel = localStorage.getItem("currentChannel");
+				//alert(currentChannel);
+				//alert(localStorage.getItem("currentChannelMessages"));
+				
 				var lchannel = JSON.parse(currentChannel);
 				if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)) {
 					that.messages([]);
 				}
+
 				if(lchannel) {
 					that.channel([lchannel]);
 					that.title(lchannel.name );

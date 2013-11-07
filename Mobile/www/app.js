@@ -513,13 +513,13 @@ function loadAllPages() {
 			console.log('done loading all pages.');
 			console.log("INITIALIZE PAGE");
 			$.mobile.initializePage();
-			if (token){
+			if (token) {
 				function gotChannels(data){
 					channelListViewModel.channels.removeAll();
 					channelListViewModel.channels(data.channel);
 				}
-				channelListViewModel.listMyChannelsCommand().then(gotChannels);
-				channelMenuViewModel.getUrgencySettings();
+				//channelListViewModel.listMyChannelsCommand().then(gotChannels);
+				//channelMenuViewModel.getUrgencySettings();
 			}
 		});
 	});
