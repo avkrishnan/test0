@@ -20,8 +20,7 @@ function AboutEvernymViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			var _accountName = localStorage.getItem('accountName');
-			that.accountName(_accountName);
+			that.accountName(localStorage.getItem('accountName'));
 		}
 	}
 }

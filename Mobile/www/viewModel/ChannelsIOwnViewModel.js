@@ -34,7 +34,7 @@ function ChannelsIOwnViewModel() {
 		}
 	};	    	
 	
-	function successfulList(data){
+	function successfulList(data){	
 		if(data.channel.length < 1) {
 			goToView('channelListView');			
 		}	
@@ -53,11 +53,6 @@ function ChannelsIOwnViewModel() {
 		$.mobile.hidePageLoadingMsg();	
 		showError('Error listing my channels: ' + details.message);
 	};
-		
-	/*this.listMyChannelsCommand = function () {
-		$.mobile.showPageLoadingMsg('a', 'Loading Channels');
-		return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
-	};*/
 	
 	this.channelSettings = function(data){
 		localStorage.removeItem('currentChannelId');

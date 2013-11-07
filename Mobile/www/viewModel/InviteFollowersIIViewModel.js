@@ -27,8 +27,7 @@ function InviteFollowersIIViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			var _accountName = localStorage.getItem('accountName');
-			that.accountName(_accountName);
+			that.accountName(localStorage.getItem('accountName'));
 			$(document).keypress(function (e) {
 				if (e.keyCode == 13) {
 					that.sendFeedbackCommand();

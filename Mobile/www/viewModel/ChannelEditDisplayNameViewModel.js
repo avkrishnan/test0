@@ -26,8 +26,7 @@ function ChannelEditDisplayNameViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			var _accountName = localStorage.getItem('accountName');
-			that.accountName(_accountName);
+			that.accountName(localStorage.getItem('accountName'));
 			$('input').keyup(function () {
 				that.message('');
 				that.errorChannel('');

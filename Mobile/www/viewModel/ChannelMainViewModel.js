@@ -36,8 +36,7 @@ function ChannelMainViewModel() {
 		} else if(channelId == '' || channelId == null) {
 			goToView('channelsIOwnView');
 		} else {}*/
-			var _accountName = localStorage.getItem('accountName');
-			that.accountName(_accountName);
+			that.accountName(localStorage.getItem('accountName'));
 			that.broadcasts.removeAll();				
 			that.channelId(localStorage.getItem('currentChannelId'));
 			return this.getChannelCommand().then(this.getFollowersCommand()).then(this.getMessagesCommand());
@@ -56,7 +55,11 @@ function ChannelMainViewModel() {
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
-		that.followerCount(data.followers.length+' followers');
+		if(data.followers.length <= 1) {
+			that.followerCount(data.followers.length+' follower');
+		} else {
+			that.followerCount(data.followers.length+' followers');
+		}
 	}; 
 	
 	function successfulMessageGET(data){
