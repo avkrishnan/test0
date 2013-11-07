@@ -32,7 +32,7 @@ function ChannelsIOwnViewModel() {
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return this.listMyChannelsCommand();
-			goToView('channelsIOwnView');
+			/*goToView('channelsIOwnView');*/
 		}
 	};	    	
 	

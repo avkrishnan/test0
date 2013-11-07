@@ -36,7 +36,7 @@ function SendMessageViewModel() {
 		} else {
 			var _accountName = localStorage.getItem('accountName');
 			that.accountName(_accountName);
-			that.messageText('Add additional text here . . . ');
+			//that.messageText('Add additional text here . . . ');
 			that.characterCount('31');			
 			$('textarea').keyup(function () {
 				if(that.messageText().length > 0) {
