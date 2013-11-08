@@ -33,14 +33,14 @@ function RegistrationVerifyViewModel() {
 			that.verificationCommethodType(localStorage.getItem('newuseremail'));		
 			$('input').keyup(function () {
 				that.errorMessage('');
-			});
+			});		
 			$(document).keyup(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'registrationVerifyView') {
+				if (e.keyCode == 13) {
 					that.verifyRequestCommethod();
 				}
-			});					
+			});				
 		}
-	}
+	}	
 	
 	this.getCommethods = function() {
 		var callbacks = {
