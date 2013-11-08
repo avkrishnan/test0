@@ -22,20 +22,6 @@ function ChannelListViewModel() {
 		} 
 		else {
 			that.accountName(localStorage.getItem('accountName'));
-			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
-			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
 		}
 	}
-	
-	function successfulList(data){
-		if(data.channel.length > 0) {
-			goToView('channelsIOwnView');			
-		}	
-	};    
-	
-	function errorAPI(data, status, response){
-		$.mobile.hidePageLoadingMsg();	
-		showError('Error listing my channels: ' + response.message);
-	};
-		
 }

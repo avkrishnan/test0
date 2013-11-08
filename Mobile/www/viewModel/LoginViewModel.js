@@ -132,7 +132,8 @@ function LoginViewModel() {
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
       localStorage.setItem("accountName", that.accountName());
-			ES.channelService.listMyChannels({success: successfulList, error: errorAPI });
+			goToView('channelListView');
+			//ES.channelService.listMyChannels({success: successfulList, error: errorAPI });
     } 
 		else {
       //loginError();
