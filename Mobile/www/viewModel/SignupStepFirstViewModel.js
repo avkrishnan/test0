@@ -90,7 +90,7 @@ function SignupStepFirstViewModel() {
 			});
 			return true;			
 		} else {
-			goToView('escalationPlansView');
+			goToView('channelListView');
 		}
   };
 	

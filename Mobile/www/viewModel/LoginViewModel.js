@@ -4,11 +4,10 @@ function LoginViewModel() {
   this.template = "loginView";
   this.viewid = "V-01";
   this.viewname = "Login";
-  this.displayname = "Login";
-  this.hasfooter = false;
-  this.accountName = ko.observable();	
+  this.displayname = "Login";	
 	
 	/* Login view observable */
+  this.accountName = ko.observable();	
   this.password = ko.observable();
   this.errorMessage = ko.observable();
   this.usernameClass = ko.observable();
@@ -23,6 +22,7 @@ function LoginViewModel() {
         }
       }
       that.activate();
+      that.clearForm();			
     });
   };
 	
@@ -58,6 +58,14 @@ function LoginViewModel() {
 		else {
 			goToView('escalationPlansView');
 		}
+  };
+	
+	this.clearForm = function () {
+		that.accountName('');	
+		that.password('');
+		that.errorMessage('');
+		that.usernameClass('');
+		that.passwordClass('');		
   };
 	
   this.loginCommand = function() {
@@ -107,13 +115,17 @@ function LoginViewModel() {
   };
 	
   this.cleanApplication = function() {
-    sendMessageViewModel.clearForm();
-    inviteFollowersViewModel.clearForm();
+    //sendMessageViewModel.clearForm();
+    //inviteFollowersViewModel.clearForm();
     ES.evernymService.clearAccessToken();
     localStorage.removeItem('login_nav');
     localStorage.removeItem('currentChannel');
     localStorage.removeItem('accountName');
     localStorage.removeItem('name');
+    localStorage.removeItem('signUpError');
+		localStorage.removeItem('newuseremail');
+		localStorage.removeItem('newusername');
+		localStorage.removeItem('newuserpassword');
     channelListViewModel.clearForm();
     notificationsViewModel.removeNotifications();
     OVERLAY.removeNotifications();

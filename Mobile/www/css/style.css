@@ -730,6 +730,7 @@ em.removeemailnumber {
 	overflow:hidden;
 	margin-top:10px;
 	padding:0 10px;
+	margin-bottom:10px;
 }
 .slideresend {
 	margin:0;
@@ -1041,10 +1042,10 @@ span.down-arrow {
 	margin:0 10px 0 0;
 	line-height:55px;
 }
-.tutorial h1 {
+/*.tutorial h1 {
 	font-size:16px;
 	font-style:italic;
-}
+}*/
 .tutorial ul li {
 	display:inline;
 	padding:0 12px;
@@ -1314,6 +1315,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin-bottom:10px;
 	overflow:hidden;
 	padding:0;
+	cursor:pointer;
 }
 .detailschannel {
 	border-bottom:1px solid #828181;
@@ -1407,7 +1409,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-size:14px;
 	margin-right:4px;
 }
-.requestcontent .request, .requestcontent .igi, .requestcontent .lost {
+.requestcontent .request, .requestcontent .replies, .requestcontent .igi, .requestcontent .lost {
 	padding:2px 8px;
 	font-size:12px;
 	background:#27aae1;
@@ -1599,6 +1601,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .dropdown .ui-select select option {
 	border-bottom:1px solid #828181;
+	text-align:center;
 }
 .dropdown .ui-select .ui-btn-inner .ui-btn-text {
 	color:#969696;
@@ -2930,7 +2933,7 @@ ul.igiresponses li span {
 	.tutorial h1 {
 		font-size:22px;
 	}
-	.requestcontent .request, .requestcontent .igi, .requestcontent .lost {
+	.requestcontent .request, .requestcontent .replies, .requestcontent .igi, .requestcontent .lost {
 		font-size:15px;
 		margin-right:15px;
 		padding:1px 10px;

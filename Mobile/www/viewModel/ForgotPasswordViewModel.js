@@ -5,47 +5,45 @@ function ForgotPasswordViewModel() {
   this.viewid = 'V-03';
   this.viewname = 'ForgotPassword';
   this.displayname = 'Forgot Password';
-  this.hasfooter = false;
-  this.accountName = ko.observable();
 	
 	/* Forgot password observable */
+  this.accountName = ko.observable();	
   this.email = ko.observable();
   this.errorForgotPassword = ko.observable();
   this.usernameClass = ko.observable();
   this.emailClass = ko.observable();
-  this.notification = ko.observable();
 	
 	/* Methods */
   this.applyBindings = function () {
     $('#' + that.template).on('pagebeforeshow', null, function (e, data) {
-      that.clearForm();
       that.activate();
+      that.clearForm();			
     });
   };
 	
   this.activate = function () {
-    that.errorForgotPassword('');
-    $('input').keyup(function () {
-      that.errorForgotPassword('');
-      that.usernameClass('');
-      that.emailClass('');
-    });
-		$(document).keyup(function (e) {
-      if (e.keyCode == 13) {
-        that.forgotPasswordCommand();
-      }
-    });
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {		
+			$('input').keyup(function () {
+				that.errorForgotPassword('');
+				that.usernameClass('');
+				that.emailClass('');
+			});
+			$(document).keyup(function (e) {
+				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotPasswordView') {
+					that.forgotPasswordCommand();
+				}
+			});
+		} else {
+			goToView('channelListView');
+		}
   };
 	
   this.clearForm = function () {
     that.email('');
     that.accountName('');
-    that.notification('');
+    that.errorForgotPassword('');		
   };
-
-  function gotForgotPassword(data, status, details) {
-    that.notification('We have sent you an email with a link to change your password');
-  }
 	
   this.forgotPasswordCommand = function () {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -64,12 +62,18 @@ function ForgotPasswordViewModel() {
       var forgotPasswordModel = {};
       forgotPasswordModel.accountname = that.accountName();
       forgotPasswordModel.emailAddress = that.email();
-      return ES.loginService.forgotPassword(forgotPasswordModel, callbacks).then(gotForgotPassword);
+      return ES.loginService.forgotPassword(forgotPasswordModel, callbacks);
     }
   };
 
   function forgotPasswordSuccess(args) {
     $.mobile.hidePageLoadingMsg();
+		if(that.accountName() == '') {
+			localStorage.setItem('resetAccount', that.email());	
+		} else {
+			localStorage.setItem('resetAccount', that.accountName());				
+		}
+		goToView('forgotPasswordSuccessView');		
   }
 
   function forgotPasswordError(data, status, details) {

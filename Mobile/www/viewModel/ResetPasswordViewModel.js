@@ -2,10 +2,9 @@
 function ResetPasswordViewModel() {
 	var that = this;
 	this.template = 'resetPasswordView';
-	this.viewid = 'V-03b';
+	this.viewid = 'V-03d';
 	this.viewname = 'ResetPassword';
 	this.displayname = 'ResetPassword';
-	this.hasfooter = true;
 	this.accountName = ko.observable();		
   
 	/* Reset Password observable */
@@ -18,29 +17,37 @@ function ResetPasswordViewModel() {
 	
 	/* Methods */				
 	this.applyBindings = function(){
-		$('#' + that.template).on('pagebeforeshow', function(e, data){					
-			that.clearForm();												
+		$('#' + that.template).on('pagebeforeshow', function(e, data){																	
 			that.activate();
+			that.clearForm();			
 		});
 	};
 		 
-	this.activate = function(){			
-		that.accountName(localStorage.getItem('accountName'));
-		$('input').keyup(function (){ 
-			that.passwordClass('');
-			that.confirmPasswordClass('');				
-			that.errorResetPassword('');
-		});
-		$(document).keyup(function (e) {
-			if (e.keyCode == 13) {
-				that.resetPasswordCommand();
-			}
-		});     	 
+	this.activate = function(){
+		var resetAccount = localStorage.getItem('resetAccount');
+		if(resetAccount == '' || resetAccount == null) {
+			goToView('forgotPasswordView');
+		} else {			
+			that.accountName(localStorage.getItem('accountName'));
+			$('input').keyup(function (){ 
+				that.passwordClass('');
+				that.confirmPasswordClass('');				
+				that.errorResetPassword('');
+			});
+			$(document).keyup(function (e) {
+				if (e.keyCode == 13) {
+					that.resetPasswordCommand();
+				}
+			});
+		}
 	};
 		
 	this.clearForm = function(){
 		that.newPassword('');
-		that.confirmPassword('');							
+		that.confirmPassword('');
+		that.passwordClass('');
+		that.confirmPasswordClass('');				
+		that.errorResetPassword('');									
 	};
 	 
 	this.resetPasswordCommand = function () {
@@ -66,7 +73,7 @@ function ResetPasswordViewModel() {
 	};
 	
 	function resetPasswordSuccess (data) {							
-		that.changePasswordNotification('Your password has been updated');			
+		goToView('resetPasswordSuccessView');			
 	}
 		
 	function resetPasswordError(data, status, details){

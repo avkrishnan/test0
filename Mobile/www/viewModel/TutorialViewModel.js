@@ -15,10 +15,13 @@ function TutorialViewModel() {
 
   /* Methods */
   this.activate = function() {
+		var token = ES.evernymService.getAccessToken();		
 		var newUser = localStorage.getItem('newusername');
-		/*if(newUser == '' || newUser == null) {
+		if(token == '' || token == null){
+			goToView('loginView');
+		} else if(newUser == '' || newUser == null) {
 			goToView('channelListView');
-		}*/
+		}
 		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
 		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
 		navigation('.msg-content span', 'next', 'div.tutorialslides');

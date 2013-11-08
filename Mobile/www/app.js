@@ -346,7 +346,9 @@ devSettingsModel = new DevSettingsViewModel(),
 
 notificationsViewModel = new NotificationsViewModel(),
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
+forgotPasswordSuccessViewModel = new ForgotPasswordSuccessViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
+resetPasswordSuccessViewModel = new ResetPasswordSuccessViewModel(),
 panelHelpViewModel = new PanelHelpViewModel(),
 
 /*By Devedner*/
@@ -408,8 +410,10 @@ var models = [
               userSettingsModel, 
               devSettingsModel, 
               notificationsViewModel, 
-              forgotPasswordViewModel, 
-              resetPasswordViewModel, 
+              forgotPasswordViewModel,
+							forgotPasswordSuccessViewModel, 
+              resetPasswordViewModel,
+							resetPasswordSuccessViewModel, 
               panelHelpViewModel, 
               messageViewModel,
               singleMessageViewModel,

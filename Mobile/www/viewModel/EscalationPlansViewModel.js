@@ -65,16 +65,21 @@ function EscalationPlansViewModel() {
 	};
 			
 	this.activate = function() {
-		var _accountName = localStorage.getItem("accountName");
-		var _name = localStorage.getItem("UserFullName");
-		
-		that.accountName(_accountName);
-		that.name(_name);
-		that.escalationplans.removeAll();
-		that.getCommethods().then(gotCommethods);
-		$.mobile.showPageLoadingMsg("a", "Loading Escalation Plans");
-		return that.getEscPlans().then(gotEscPlans);
-		//return true;     
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {		
+			var _accountName = localStorage.getItem("accountName");
+			var _name = localStorage.getItem("UserFullName");
+			
+			that.accountName(_accountName);
+			that.name(_name);
+			that.escalationplans.removeAll();
+			that.getCommethods().then(gotCommethods);
+			$.mobile.showPageLoadingMsg("a", "Loading Escalation Plans");
+			return that.getEscPlans().then(gotEscPlans);
+			//return true;
+		}
 	};
 	
 	function gotEscPlans (data) {
@@ -154,6 +159,10 @@ function EscalationPlansViewModel() {
   function logoutSuccess() {
 		//alert('success');
     ES.evernymService.clearAccessToken();
+		localStorage.removeItem('newuseremail');
+		localStorage.removeItem('newusername');
+		localStorage.removeItem('newuserpassword');		
+    localStorage.removeItem('signUpError');		
 		goToView('loginView');
   }
 
@@ -163,7 +172,7 @@ function EscalationPlansViewModel() {
 	
   this.cleanApplication = function() {
 		//sendMessageViewModel.clearForm();
-		inviteFollowersViewModel.clearForm();
+		//inviteFollowersViewModel.clearForm();
 		ES.evernymService.clearAccessToken();
 		localStorage.removeItem('login_nav');
 		localStorage.removeItem('currentChannel');

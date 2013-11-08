@@ -51,7 +51,7 @@ function SignupStepSecondViewModel() {
 			});
 			return true;
 		} else {
-			goToView('escalationPlansView');
+			goToView('channelListView');
 		}
   };
 	
@@ -124,7 +124,7 @@ function SignupStepSecondViewModel() {
 
   function signUpError(data, status, response) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', response.message);
+    localStorage.setItem('signUpError', response.message);		
     goToView('signupStepFirstView');
   };
 	
