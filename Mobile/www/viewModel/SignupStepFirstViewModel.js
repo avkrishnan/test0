@@ -47,8 +47,8 @@ function SignupStepFirstViewModel() {
 	/* Methods */
   this.applyBindings = function () {
     $('#' + this.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();
       that.activate();
+      that.clearForm();			
     });
   };
 
