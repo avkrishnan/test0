@@ -27,19 +27,27 @@ function RegistrationVerifyViewModel() {
 		var newUser = localStorage.getItem('newusername');		
 		if(newUser == '' || newUser == null) {
 			goToView('channelListView');
+		} else{
+			that.getCommethods();
+			that.accountName(localStorage.getItem('newusername'));
+			that.verificationCommethodType(localStorage.getItem('newuseremail'));		
+			$('input').keyup(function () {
+				that.errorMessage('');
+			});		
 		}
-		that.accountName(localStorage.getItem('newusername'));
-		that.verificationCommethodType(localStorage.getItem('newuseremail'));
-		that.verificationCommethod(localStorage.getItem("currentVerificationCommethod"));
-		that.verificationCommethodID(localStorage.getItem("currentVerificationCommethodID"));
-		$('input').keyup(function () {
-			that.errorMessage('');
-		});
-		$(document).keyup(function (e) {
-			if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'registrationVerifyView') {
-				that.verifyRequestCommethod();
+	}
+	
+	this.getCommethods = function() {
+		var callbacks = {
+			success: function(data){
+				that.verificationCommethod(data.commethod[0].type);
+				that.verificationCommethodID(data.commethod[0].id);
+			},
+			error: function (data, status, details) {
+				showMessage(details.message);
 			}
-		});
+		};		
+		return ES.commethodService.getCommethods(callbacks);
 	}
 	
 	this.clearForm = function () {
@@ -70,10 +78,9 @@ function RegistrationVerifyViewModel() {
 				showMessage('Verification code sent!');
 			},
 			error: function (responseData, status, details) {
-				showMessage(details.message);
+				showError(details.message);
 			}
 		};	
-		alert(that.verificationCommethodID())	
 		return ES.commethodService.requestVerification(that.verificationCommethodID(), callbacks);
 	}
 	
@@ -88,5 +95,4 @@ function RegistrationVerifyViewModel() {
 		};
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
 	};	
-	
 }

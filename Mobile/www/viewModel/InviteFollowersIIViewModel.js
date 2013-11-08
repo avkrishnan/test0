@@ -45,12 +45,9 @@ function InviteFollowersIIViewModel() {
 	}
 	
   this.clearForm = function () {
-		that.emailClass('');
-		that.emailaddress('');
-		that.errorEmail('');
-		that.feedbackClass('');
 		that.feedback('');
-		that.errorFeedback('');
+		that.feedbackClass('');
+		that.errorFeedback('');				
   };
 	
 	this.sendFeedbackCommand = function () {

@@ -138,7 +138,7 @@ function SignupStepSecondViewModel() {
     loginModel.accountname = localStorage.getItem('newusername');
     loginModel.password = localStorage.getItem('newuserpassword');
     loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
-    ES.loginService.accountLogin(loginModel, callbacks).then(that.getCommethods());
+    ES.loginService.accountLogin(loginModel, callbacks);
 	}
 	
 	function loginSuccess(args) {
@@ -184,17 +184,4 @@ function SignupStepSecondViewModel() {
     showError('LOGIN FAILED');
     ES.evernymService.clearAccessToken();
   }
-	
-	this.getCommethods = function() {
-		var callbacks = {
-			success: function(data){
-				alert(data);
-			},
-			error: function (data, status, details) {
-				showMessage(details.message);
-			}
-		};		
-		return ES.commethodService.getCommethods(callbacks);
-	}
-	
 }
