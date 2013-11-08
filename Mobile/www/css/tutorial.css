@@ -1,7 +1,8 @@
 @charset "utf-8";
 /* Todo - this file will be merged to style.css once all development done */
 .page-content .tutorialslides {
-	display:none; 
+	display:none;
+	cursor:pointer; 
 }
 .page-content .tutorialslides:first-child {
 	display:block; 

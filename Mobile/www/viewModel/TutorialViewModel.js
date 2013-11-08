@@ -54,65 +54,7 @@ function TutorialViewModel() {
 			event.preventDefault();
 		});
   };
-	
-  /*this.loginCommand = function() {
-    $.mobile.showPageLoadingMsg('a', 'Logging In With New Credentials');
-    var callbacks = {
-      success : loginSuccess,
-      error : loginError
-    };
-    var loginModel = {};
-    loginModel.accountname = localStorage.getItem('newusername');
-    loginModel.password = localStorage.getItem('newuserpassword');
-    loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
-    ES.loginService.accountLogin(loginModel, callbacks);
-  }
 
-  function loginSuccess(args) {
-    $.mobile.hidePageLoadingMsg();
-    ES.evernymService.clearAccessToken();
-    if (args.accessToken) {
-      var notifications = args.notifications;
-      ES.evernymService.setAccessToken(args.accessToken);
-      localStorage.setItem('accountName', args.account.accountname);
-      that.first_name = args.account.firstname;
-      that.last_name = args.account.lastname;
-      localStorage.setItem('UserFullName', args.account.firstname + ' '+ args.account.lastname);
-      $.mobile.activePage.find('#thefooter #footer-gear').html(args.account.accountname);
-      var login_nav = JSON.parse(localStorage.getItem('login_nav'));
-      localStorage.removeItem('login_nav');
-      var follow = localStorage.getItem('follow');
-      if (follow) {
-        // alert('hello, we are going to now go to or follow the channel ' +
-        // follow);
-        localStorage.removeItem('follow');
-      } else if (login_nav) {
-        var hash = login_nav.hash;
-        // var parameters = login_nav.parameters;
-        $.mobile.changePage(hash);
-      } else if (notifications.length) {
-        for ( var n in notifications) {
-          var code = notifications[n].code;
-          notificationsViewModel.addNotification(notifications[n].code);
-        }
-        $.mobile.changePage('#' + notificationsViewModel.template);
-      } else {
-        $.mobile.changePage('#' + channelListViewModel.template);
-      }
-    } else {
-      loginError();
-      return;
-    }
-		localStorage.removeItem('newuseremail');
-		localStorage.removeItem('newusername');
-		localStorage.removeItem('newuserpassword');
-  }
-
-  function loginError(data, status, response) {
-    $.mobile.hidePageLoadingMsg();
-    showError('LOGIN FAILED');
-    ES.evernymService.clearAccessToken();
-  }*/
   that.getStartedCommand = function() {
 		localStorage.removeItem('newuseremail');
 		localStorage.removeItem('newusername');
