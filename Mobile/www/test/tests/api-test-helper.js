@@ -21,7 +21,7 @@ function ApiTestHelper() {
   var apiver = (q.api == undefined || q.api == "") ? (env.indexOf("dev") > 0 ? "api" : "api24") : q.api;
   var baseUrl = 
     (env === "ldev") ? 'http://localhost:8079/' + apiver + '/rest' :
-    (env === "nldev") ? 'http://localhost:8079/' + apiver + '/rest' :
+    (env === "nldev") ? 'https://opty-dev:8079/' + apiver + '/rest' :
     (env === "qdev") ? 'http://qupler.no-ip.org:8079/' + apiver + '/rest' :
     (env === "qprod") ? 'http://qupler.no-ip.org:8080/' + apiver + '/rest' : 
     (env === "lprod") ? 'http://app01:8080/' + apiver + '/rest' :
