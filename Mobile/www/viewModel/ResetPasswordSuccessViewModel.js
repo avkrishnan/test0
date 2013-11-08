@@ -20,11 +20,11 @@ function ResetPasswordSuccessViewModel() {
 			goToView('forgotPasswordView');
 		} else {					
 			that.accountName(localStorage.getItem('resetAccount'));
-			localStorage.removeItem('resetAccount');
 		}
 	};
 	
-	this.okayResetCommand = function () {				
+	this.okayResetCommand = function () {
+		localStorage.removeItem('resetAccount');						
 		goToView('loginView');
   };		       
 }

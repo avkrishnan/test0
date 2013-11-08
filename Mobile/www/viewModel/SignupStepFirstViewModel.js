@@ -61,6 +61,7 @@ function SignupStepFirstViewModel() {
 				that.accountName(localStorage.getItem('newusername'));
 				that.tickIconPassword('righttick');
 				that.password(localStorage.getItem('newuserpassword'));
+				alert(localStorage.getItem('signUpError'));
 				if(localStorage.getItem('signUpError') == 'name not available') {
 					that.errorIconAccountName('errorimg');
 					that.errorAccountName('<span>SORRY:</span> This Evernym has already been taken');
@@ -156,20 +157,41 @@ function SignupStepFirstViewModel() {
     if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
       that.emailClass('validationerror');
       that.errorIconEmail('errorimg');
-      that.errorEmail('<span>SORRY:</span> Please enter valid email');
+      that.errorEmail('<span>SORRY :</span> Please enter valid email');
     } else if (that.accountName() == '') {
       that.accountNameClass('validationerror');
       that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY:</span> Please enter Evernym name');
+      that.errorAccountName('<span>SORRY :</span> Please enter Evernym name');
     } else if (that.password() == '') {
       that.passwordClass('validationerror');
       that.errorIconPassword('errorimg');
-      that.errorPassword('<span>SORRY:</span> Please enter password');
+      that.errorPassword('<span>SORRY :</span> Please enter password');
     } else {
       localStorage.setItem('newuseremail', that.emailaddress());
       localStorage.setItem('newusername', that.accountName());
       localStorage.setItem('newuserpassword', that.password());
+			//return ES.loginService.checkName(that.accountName(), { success: successAvailable, error: errorAPI });
       goToView('signupStepSecondView');
     }
-  };				
+  };
+	
+	function successAvailable(data){
+		alert(data);
+		if(data.refType == 'A'){
+			that.accountNameClass('validationerror');
+      that.errorIconAccountName('errorimg');
+      that.errorAccountName('<span>SORRY :</span> This Evernym has already been taken');
+		} else if(typeof data === 'undefined') {
+			alert('here');
+			goToView('signupStepSecondView');
+		}	else {
+			alert('here1');
+			goToView('signupStepSecondView')
+		}			
+	};    
+	
+	function errorAPI(data, status, details){
+		$.mobile.hidePageLoadingMsg();	
+		showError('Error in checking Evernym: ' + details.message);
+	};				
 }
