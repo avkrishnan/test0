@@ -19,6 +19,7 @@ function InviteFollowersIIViewModel() {
   this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       that.activate();
+      that.clearForm();			
     });	
 	};  
 
@@ -28,16 +29,16 @@ function InviteFollowersIIViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			$(document).keypress(function (e) {
-				if (e.keyCode == 13) {
-					that.sendFeedbackCommand();
-				}
-			});
 			$('input').keyup(function () {
 				that.emailClass('');
 				that.errorEmail('');
 				that.feedbackClass('');
 				that.errorFeedback('');
+			});
+			$(document).keypress(function (e) {
+				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'inviteFollowersIIView') {
+					that.sendFeedbackCommand();
+				}
 			});
 			return true;
 		}

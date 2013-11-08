@@ -21,6 +21,7 @@ function ChannelChangeNameViewModel() {
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       that.activate();
+      that.clearForm();			
     });	
 	};
 	  
@@ -35,6 +36,11 @@ function ChannelChangeNameViewModel() {
 				that.message('');
 				that.errorChannel('');
 			});
+			$(document).keyup(function (e) {
+				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelChangeNameView') {
+					that.nextViewCommand();
+				}
+			});
 		}
 	}
 	
@@ -43,6 +49,7 @@ function ChannelChangeNameViewModel() {
 		that.message('');
 		that.errorChannel('');
   };
+	
   this.nextViewCommand = function () {
     if (that.channelChangeName() == '') {
       that.errorChannel('<span>SORRY:</span> Please enter channel name');

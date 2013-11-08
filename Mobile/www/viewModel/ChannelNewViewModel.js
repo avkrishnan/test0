@@ -21,6 +21,7 @@ function ChannelNewViewModel() {
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       that.activate();
+      that.clearForm();					
     });	
 	};  
 	this.activate = function() {
@@ -29,7 +30,6 @@ function ChannelNewViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.newChannel('');
 			$('input').keyup(function () {
 				that.message('');
 				that.errorNewChannel('');
@@ -38,18 +38,24 @@ function ChannelNewViewModel() {
 				}
 			});
 			$(document).keyup(function (e) {
-				if (e.keyCode == 13) {
+				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelNewView') {
 					that.nextViewCommand();
 				}
 			});
 		}
 	}
 
-	this.nextViewCommand = function () {
+	this.clearForm = function () {
+		that.newChannel('');
+		that.message('');
+		that.errorNewChannel('');		
+  };
+
+	this.nextViewCommand = function (e) {
     if (that.newChannel() == '') {
-      that.errorNewChannel('<span>SORRY:</span> Please enter channel name');
+      that.errorNewChannel('<span>SORRY: </span> Please enter channel name');
     } else {
-			that.message('<span>GREAT!</span> This name is available');
+			that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
 			that.sectionTwo(true);
 			that.channelWebAddress(that.newChannel()+'.evernym.com');	
@@ -67,7 +73,7 @@ function ChannelNewViewModel() {
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorNewChannel('<span>SORRY:</span> ' + response.message);		
+    that.errorNewChannel('<span>SORRY: </span> ' + response.message);		
   };
 	
   this.createChannelCommand = function () {

@@ -16,9 +16,9 @@ function TutorialViewModel() {
   /* Methods */
   this.activate = function() {
 		var newUser = localStorage.getItem('newusername');
-		if(newUser == '' || newUser == null) {
+		/*if(newUser == '' || newUser == null) {
 			goToView('channelListView');
-		}
+		}*/
 		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
 		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
 		navigation('.msg-content span', 'next', 'div.tutorialslides');
@@ -55,7 +55,7 @@ function TutorialViewModel() {
 		});
   };
 	
-  this.loginCommand = function() {
+  /*this.loginCommand = function() {
     $.mobile.showPageLoadingMsg('a', 'Logging In With New Credentials');
     var callbacks = {
       success : loginSuccess,
@@ -103,6 +103,7 @@ function TutorialViewModel() {
       loginError();
       return;
     }
+		localStorage.removeItem('newuseremail');
 		localStorage.removeItem('newusername');
 		localStorage.removeItem('newuserpassword');
   }
@@ -111,8 +112,11 @@ function TutorialViewModel() {
     $.mobile.hidePageLoadingMsg();
     showError('LOGIN FAILED');
     ES.evernymService.clearAccessToken();
-  }
+  }*/
   that.getStartedCommand = function() {
-    that.loginCommand();
+		localStorage.removeItem('newuseremail');
+		localStorage.removeItem('newusername');
+		localStorage.removeItem('newuserpassword');		
+    goToView('channelListView');
   }
 }

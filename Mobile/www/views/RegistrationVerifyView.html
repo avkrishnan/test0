@@ -1,0 +1,36 @@
+<div id="registrationVerifyView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
+    <a class="menu" href="#"></a>
+    <div class="linkican">
+      <a class="smsican" href="#"></a>
+      <a class="processingican" href="#"></a>
+      <a class="groupican" href="#"></a>
+    </div>
+  </header>  
+  <div class="page-content">
+    <div class="portal-name" data-bind="text: accountName"></div>
+    <h4 class="information-delete"  data-bind="text: verificationCommethodType"></h4>
+    <div class="success">
+      <p>We've sent you a confirmation message. Verify by clicking on the link from the email (or enter the code from the email below)</p>
+    </div>
+    <div class="add-action">
+      <div class="addaction">
+        <form>
+          <input type="text" data-bind="value: verificationCode" placeholder="enter 6-digit code from email" />
+          <a href="#" class="addbtn verify"  data-bind="click: verifyRequestCommethod">VERIFY</a>
+        </form>        
+      </div>
+      <div class="error-message" data-bind="html: errorMessage"></div>      
+    </div>
+    <div class="resend">
+      Can't Find the code?
+      <a class="addbtn" href="#" data-bind="click: requestVerificationCode">RESEND</a>
+    </div>
+    <div class="loginbtn"><a href="#" class="ui-link" onclick="goToView('tutorialView');">SKIP FOR NOW</a></div>
+  </div>
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="goToView('sendMessageView');"></a>
+  </div>
+</div>   

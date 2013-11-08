@@ -18,6 +18,7 @@ function ChannelEditDisplayNameViewModel() {
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       that.activate();
+      that.clearForm();			
     });	
 	};  
 	
@@ -31,11 +32,18 @@ function ChannelEditDisplayNameViewModel() {
 				that.message('');
 				that.errorChannel('');
 			});
+			$(document).keyup(function (e) {
+				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelEditDisplayNameView') {
+					that.changeChannelDisplayNameCommand();
+				}
+			});
 		}
 	}
 	
 	this.clearForm = function () {
     that.channelEditDisplayName('');
+		that.message('');
+		that.errorChannel('');		
   };
 	
 	function successfulModify(args) {

@@ -84,7 +84,7 @@ function SignupStepFirstViewModel() {
 				that.errorIconPassword('');
 			});
 			$(document).keyup(function (e) {
-				if (e.keyCode == 13) {
+				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepFirstView') {
 					that.nextViewCommand();
 				}
 			});
