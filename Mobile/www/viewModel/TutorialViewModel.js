@@ -117,6 +117,12 @@ function TutorialViewModel() {
 		localStorage.removeItem('newuseremail');
 		localStorage.removeItem('newusername');
 		localStorage.removeItem('newuserpassword');		
-    goToView('channelListView');
+    if(localStorage.getItem("action") == 'follow_channel') {
+			localStorage.removeItem('action');
+			goToView('channelMessagesView');
+		}
+		else {
+			goToView('channelListView');
+		}
   }
 }

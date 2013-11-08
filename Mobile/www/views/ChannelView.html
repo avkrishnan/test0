@@ -172,9 +172,11 @@
     <div class="contactchannel">
       <div class="login">
         <a href="#">Contact Channel</a>
-        <div class="loginbtn">
-          <a href="#" data-bind="click:actionFollowChannelCommand, text:channelAction"></a>
-        </div>
+        <span data-bind="if: channelAction">
+          <div class="loginbtn">
+            <a href="#" data-bind="click:actionFollowChannelCommand"> Follow </a>
+          </div>
+        </span>
       </div>
     </div>
     <!--
@@ -195,7 +197,7 @@
     -->
   </div>
    
-  <div class="footer">
+  <div class="footer" data-bind="visible:hasfooter">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
     <a class="announcement" href="#"></a>
   </div>

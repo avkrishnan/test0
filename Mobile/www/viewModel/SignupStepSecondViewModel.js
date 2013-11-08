@@ -159,20 +159,24 @@ function SignupStepSecondViewModel() {
         // alert('hello, we are going to now go to or follow the channel ' +
         // follow);
         localStorage.removeItem('follow');
-      } else if (login_nav) {
+      }
+			else if (login_nav) {
         var hash = login_nav.hash;
         // var parameters = login_nav.parameters;
         $.mobile.changePage(hash);
-      } else if (notifications.length) {
+      } 
+			else if (notifications.length) {
         for ( var n in notifications) {
           var code = notifications[n].code;
           notificationsViewModel.addNotification(notifications[n].code);
         }
         $.mobile.changePage('#' + notificationsViewModel.template);
-      } else {
+      } 
+			else {
         $.mobile.changePage('#' + channelListViewModel.template);
       }
-    } else {
+    } 
+		else {
       loginError();
       return;
     }

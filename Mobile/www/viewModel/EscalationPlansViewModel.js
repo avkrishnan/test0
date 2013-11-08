@@ -162,7 +162,7 @@ function EscalationPlansViewModel() {
   }	
 	
   this.cleanApplication = function() {
-		sendMessageViewModel.clearForm();
+		//sendMessageViewModel.clearForm();
 		inviteFollowersViewModel.clearForm();
 		ES.evernymService.clearAccessToken();
 		localStorage.removeItem('login_nav');

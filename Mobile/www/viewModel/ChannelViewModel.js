@@ -8,7 +8,7 @@ function ChannelViewModel() {
 	
 	this.accountName = ko.observable();
 	
-	this.hasfooter = true;
+	this.hasfooter = ko.observable(true);
 	this.isChannelView = true;
 	this.title = ko.observable();
 	this.channelAction = ko.observable();
@@ -75,12 +75,16 @@ function ChannelViewModel() {
 	};
     
 	this.activate = function (channel) {
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			that.hasfooter(false);
+		}
 		that.channelid(channel.id);
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
 		that.accountName(_accountName);		
 		that.messages([]);
-		that.channelAction('');
+		that.channelAction(true);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		//alert(that.channelid());
 		return that.getChannelCommand(that.channelid()).then(gotChannel);
@@ -100,10 +104,10 @@ function ChannelViewModel() {
 		that.showMainIcon(data);
 		that.channelid(data.id);
 		if(data.relationship == 'F' ) {
-			that.channelAction('UNFollow');
+			that.channelAction(false);
 		}
 		else {
-			that.channelAction('Follow');	
+			that.channelAction(true);
 		}
 	}
     
@@ -195,12 +199,7 @@ function ChannelViewModel() {
 	// follow/unfollow will be called on the basis of channelAction value
 	this.actionFollowChannelCommand = function() {
 		localStorage.setItem("currentChannelMessages", that.channelid());
-		if(that.channelAction() == 'UNFollow') {
-			that.unfollowChannelCommand();
-		}
-		else {
-			that.followChannelCommand();
-		}
+		that.followChannelCommand();
 	}
 	
 	this.followChannelCommand = function() {

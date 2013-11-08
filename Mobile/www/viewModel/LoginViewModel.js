@@ -132,7 +132,13 @@ function LoginViewModel() {
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
       localStorage.setItem("accountName", that.accountName());
-			goToView('channelListView');
+			if(localStorage.getItem("action") == 'follow_channel') {
+				localStorage.removeItem('action');
+				goToView('channelMessagesView');
+			}
+			else {
+				goToView('channelListView');
+			}
 			//ES.channelService.listMyChannels({success: successfulList, error: errorAPI });
     } 
 		else {
