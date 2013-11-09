@@ -4,6 +4,28 @@ function ApiTestHelper() {
 
   var t = this;
   
+  t.is_empty = function(obj) {
+
+    // null and undefined are empty
+    if (obj == null)
+      return true;
+    // Assume if it has a length property with a non-zero value
+    // that that property is correct.
+    if (obj.length && obj.length > 0)
+      return false;
+    if (obj.length === 0)
+      return true;
+
+    for ( var key in obj) {
+      if (hasOwnProperty.call(obj, key))
+        return false;
+    }
+
+    // Doesn't handle toString and toValue enumeration bugs in IE < 9
+
+    return true;
+  };
+  
   function getJsonFromUrl() {
     var query = location.search.substr(1);
     var data = query.split("&");
@@ -25,6 +47,7 @@ function ApiTestHelper() {
     (env === "qdev") ? 'http://qupler.no-ip.org:8079/' + apiver + '/rest' :
     (env === "qprod") ? 'http://qupler.no-ip.org:8080/' + apiver + '/rest' : 
     (env === "lprod") ? 'http://app01:8080/' + apiver + '/rest' :
+    (env === "prod") ? 'https://api.evernym.com/' + apiver + '/rest' :
     'https://api.evernym.com/' + apiver + '/rest';
 
   t.TestScenario = function() {
@@ -41,6 +64,9 @@ function ApiTestHelper() {
     ls.getItem = function(key) {
       return this[key];
     };
+    ls.removeItem = function(key) {
+      delete this[key];
+    };
     return ls;
   };
 
@@ -55,10 +81,10 @@ function ApiTestHelper() {
     success : checkFunc("success"),// "200: OK"),
     created : checkFunc("success"),// "201: Created"),
     successNoContent : checkFunc("nocontent"),// "204: No Content"),
-    badRequest : checkFunc("400"),// "400: Bad Request"),
-    unauthorized : checkFunc("401: Unauthorized"),
+    badRequest : checkFunc("400"),// : Bad Request"),
+    unauthorized : checkFunc("401"),// : Unauthorized"),
     notFound : checkFunc("404: Not Found"),
-    notImplemented : checkFunc("501: Not Implemented"),
+    notImplemented : checkFunc("501"),//: Not Implemented"),
     shouldNotSucceed : function(a,b,c,d) { 
       ok(false, 'this call should not have succeeded: ' + a + b + c + d); 
     },
@@ -121,6 +147,17 @@ function ApiTestHelper() {
     return text;
   }
 
+  t.clone = function(obj) {
+    if (null == obj || "object" != typeof obj)
+      return obj;
+    var copy = obj.constructor();
+    for ( var attr in obj) {
+      if (obj.hasOwnProperty(attr))
+        copy[attr] = obj[attr];
+    }
+    return copy;
+  };
+  
   t.randomStr = randomString;
 
   t.enroll = function(scenario, account) {
@@ -154,6 +191,14 @@ function ApiTestHelper() {
     };
   };
 
+  t.logout = function(scenario) {
+    return function() {
+      $.when(scenario.ES.loginService.accountLogout())
+      .then(t.CHECK.successNoContent,t.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  };
+  
   t.checkEqualC = function(exp, attribs) { // C = Constrained by the attributes
     // supplied, or by the attributes of
     // exp

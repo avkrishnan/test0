@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Evernym API Tests</title>
+  <script src="../lib/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      window.goz = function(base) {
+        var env = $("#env").val();
+        window.open(base + ".html?env=" + $("#env").val() + "&api=" + $("#apiver").val(), '_newtab');
+      }
+    });
+  </script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <STYLE>
+    <!--
+    A{text-decoration:none}
+    -->
+  </STYLE>
+</head>
+<body>
+  
+  <h2>Evernym API Tests</h2>
+
+  <br>
+
+  <div class="block">
+    <label>Environment</label>
+    <select id="env">
+      <option value="prod">Production</option>
+      <option value="lprod">Dev non-SSL</option>
+      <option value="ldev">Localhost non-SSL</option>
+    </select>
+  </div>
+
+  <div class="block">
+    <label>API Version</label>
+    <select id="apiver">
+      <option value="api24">24</option>
+    </select>
+  </div>
+
+  <br>
+  
+  <a href="#" onclick="goz('enroll')">Enrollment</a><br>
+  <a href="#" onclick="goz('login')">Login</a><br>
+  <a href="#" onclick="goz('account')">Account</a><br>
+  <a href="#" onclick="goz('channel')">Channel</a><br>
+  <a href="#" onclick="goz('com')">Communication</a><br>
+  <a href="#" onclick="goz('esc')">Escalation</a><br>
+</body>
+</html>

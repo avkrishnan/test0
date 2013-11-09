@@ -305,7 +305,7 @@ function UserSettingsViewModel() {
 	                
 	    };
 	    
-	    ES.loginService.changeName(nameObject, callbacks );
+	    ES.loginService.accountModify(nameObject, callbacks );
 	   
     
 	};
