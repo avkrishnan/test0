@@ -24,11 +24,11 @@ function EvernymLoginService(api) {
     return api.callAPI('POST', '/account/login', loginModel, callbacks);
   };
 
-  t.getAccount = function(loginModel, callbacks) {
+  t.getAccount = function(callbacks) {
     return api.callAPI('GET', '/account', undefined, callbacks, true);
   };
 
-  t.changeName = function(account, callbacks) {
+  t.accountModify = function(account, callbacks) {
     return api.callAPI('PUT', '/account', account, callbacks, true);
   };
 

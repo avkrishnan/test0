@@ -2,22 +2,21 @@
 	QUnit.config.testTimeout = 90000;
 	QUnit.config.reorder = false;
 
-	var api = new EvernymAPI();
-	var hlpr = new ApiTestHelper(api);
+	var hlpr = new ApiTestHelper();
 
-	var SCEN_A = {};
+	var SCEN_A = hlpr.TestScenario();
 
 	asyncTest('A enrolls', hlpr.enroll(SCEN_A));
 	asyncTest('A logs in', hlpr.login(SCEN_A));
 
-	asyncTest('A retrieves escalation plan', function() {
-		$.when(api.fetchEscPlan(SCEN_A.accessToken))
-		.then(api.CHECK.success)
+	asyncTest('A retrieves escalation plan', function() {    
+		$.when(SCEN_A.ES.escplanService.getEscPlans(SCEN_A.accessToken))
+		.then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
 		.then(function(data) {
-			SCEN_A.ep = data; 
-			console.log(data);
-		})
-		.then(start);
+			  SCEN_A.ep = data; 
+			  console.log(data);
+		  }, hlpr.CHECK.shouldNotFail)
+		.then(start,start);
 	});
 
 	function findEP(scenario, urgId) {
@@ -34,15 +33,15 @@
 	
 	asyncTest('A clones escalation plan', function() {
 		var ts = findEP(SCEN_A, "TS");
-		$.when(api.cloneEscPlan(SCEN_A.accessToken, ts.id))
-		.then(api.CHECK.created)
+		$.when(hlpr.cloneEscPlan(SCEN_A.accessToken, ts.id))
+		.then(hlpr.CHECK.created)
 		.then(function(data) {SCEN_A.newTS = data; console.log(data);})
 		.then(start);
 	});
 
 	function createStep(scenario, step, checkFunc) {
 		return function() {
-			$.when(api.createEscStep(scenario.accessToken, scenario.newTS, step))
+			$.when(hlpr.createEscStep(scenario.accessToken, scenario.newTS, step))
 			.then(checkFunc)
 			.then(function(data) {console.log(data);})
 			.then(start);
@@ -51,7 +50,7 @@
 	
 	function createRetry(scenario, stepId, retry, checkFunc) {
 		return function() {
-			$.when(api.createEscRetry(scenario.accessToken, scenario.newTS, stepId, retry))
+			$.when(hlpr.createEscRetry(scenario.accessToken, scenario.newTS, stepId, retry))
 			.then(checkFunc)
 			.then(function(data) {console.log(data);})
 			.then(start);
@@ -60,7 +59,7 @@
 
 	function updateStep(scenario, stepId, step, checkFunc) {
 		return function() {
-			$.when(api.updateEscStep(scenario.accessToken, scenario.newTS, stepId, step))
+			$.when(hlpr.updateEscStep(scenario.accessToken, scenario.newTS, stepId, step))
 			.then(checkFunc)
 			.then(function(data) {console.log(data);})
 			.then(start);
@@ -69,7 +68,7 @@
 	
 	function deleteStep(scenario, stepId, checkFunc) {
 		return function() {
-			$.when(api.deleteEscStep(scenario.accessToken, scenario.newTS, stepId))
+			$.when(hlpr.deleteEscStep(scenario.accessToken, scenario.newTS, stepId))
 			.then(checkFunc)
 			.then(function(data) {console.log(data);})
 			.then(start);
@@ -78,7 +77,7 @@
 	
 	function modifyRetry(scenario, stepId, seq, retry, checkFunc) {
 		return function() {
-			$.when(api.updateEscRetry(scenario.accessToken, scenario.newTS, stepId, seq, retry))
+			$.when(hlpr.updateEscRetry(scenario.accessToken, scenario.newTS, stepId, seq, retry))
 			.then(checkFunc)
 			.then(function(data) {console.log(data);})
 			.then(start);
@@ -87,7 +86,7 @@
 
 	function deleteRetry(scenario, stepId, seq, checkFunc) {
 		return function() {
-			$.when(api.deleteEscRetry(scenario.accessToken, scenario.newTS, stepId, seq))
+			$.when(hlpr.deleteEscRetry(scenario.accessToken, scenario.newTS, stepId, seq))
 			.then(checkFunc)
 			.then(function(data) {console.log(data);})
 			.then(start);
@@ -99,14 +98,14 @@
 			createStep(
 					SCEN_A, 
 					{stepId: 1, comMethodType: 'EMAIL', delay: 60}, 
-					api.CHECK.badRequest));
+					hlpr.CHECK.badRequest));
 	
 	asyncTest(
 			'A adds an escalation plan step', 
 			createStep(
 					SCEN_A, 
 					{stepId: 4, comMethodType: 'EMAIL', delay: 60}, 
-					api.CHECK.created));
+					hlpr.CHECK.created));
 	
 	asyncTest(
 			'A modifies escalation plan step', 
@@ -114,31 +113,31 @@
 					SCEN_A,
 					4,
 					{delay: 40}, 
-					api.CHECK.successNoContent));
+					hlpr.CHECK.successNoContent));
 
 	asyncTest(
 			'A deletes escalation plan step', 
 			deleteStep(
 					SCEN_A,
 					4, 
-					api.CHECK.successNoContent));
+					hlpr.CHECK.successNoContent));
 
 	asyncTest(
 			'A adds an escalation plan step again', 
 			createStep(
 					SCEN_A, 
 					{stepId: 4, comMethodType: 'EMAIL', delay: 60}, 
-					api.CHECK.created));
+					hlpr.CHECK.created));
 
 	var seq = 1;
 	var retry = {interval: 5400, seq: seq, totalDuration: 21600};
 
-	asyncTest('A adds a retry rule', createRetry(SCEN_A, 4, retry, api.CHECK.created));
+	asyncTest('A adds a retry rule', createRetry(SCEN_A, 4, retry, hlpr.CHECK.created));
 	
-	asyncTest('A adds the same retry rule', createRetry(SCEN_A, 4, retry, api.CHECK.badRequest));
+	asyncTest('A adds the same retry rule', createRetry(SCEN_A, 4, retry, hlpr.CHECK.badRequest));
 
-	asyncTest('A modifies the retry rule', modifyRetry( SCEN_A, 4, seq, {interval: 5399}, api.CHECK.successNoContent));
+	asyncTest('A modifies the retry rule', modifyRetry( SCEN_A, 4, seq, {interval: 5399}, hlpr.CHECK.successNoContent));
 
-	asyncTest('A deletes the retry rule', deleteRetry( SCEN_A, 4, seq, api.CHECK.successNoContent));
+	asyncTest('A deletes the retry rule', deleteRetry( SCEN_A, 4, seq, hlpr.CHECK.successNoContent));
 
 })();
