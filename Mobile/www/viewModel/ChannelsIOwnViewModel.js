@@ -4,8 +4,7 @@ function ChannelsIOwnViewModel() {
 	this.template = 'channelsIOwnView';
 	this.viewid = 'V-19';
 	this.viewname = 'ChannelsIOwn';
-	this.displayname = 'My Channels';	
-	this.hasfooter = true;    
+	this.displayname = 'My Channels';	   
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
@@ -71,4 +70,5 @@ function ChannelsIOwnViewModel() {
 		localStorage.setItem('currentChannelId', data.channelId);
 		goToView('followersListView');
 	};
+	
 }

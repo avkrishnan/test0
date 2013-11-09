@@ -5,7 +5,6 @@ function AboutEvernymViewModel() {
 	this.viewid = 'V-46';
 	this.viewname = 'AboutEvernym';
 	this.displayname = 'About Evernym Channels';	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();	
 	
 	/* Methods */
