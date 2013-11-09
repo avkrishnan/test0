@@ -44,11 +44,6 @@ function SignupStepSecondViewModel() {
 				that.errorIconFirstName('');
 				that.errorIconLastName('');
 			});
-			$(document).keyup(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepSecondView') {
-					that.signUpCommand();
-				}
-			});
 			return true;
 		} else {
 			goToView('channelListView');
@@ -85,6 +80,12 @@ function SignupStepSecondViewModel() {
     that.errorIconFirstName('');
     that.errorIconLastName('');
   };
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepSecondView') {
+			that.signUpCommand();
+		}
+	});
 
   function generateAccount() {
     return {

@@ -16,9 +16,17 @@ function ForgotPasswordViewModel() {
 	/* Methods */
   this.applyBindings = function () {
     $('#' + that.template).on('pagebeforeshow', null, function (e, data) {
-      that.activate();
-      that.clearForm();			
+      that.clearForm();	      
+			that.activate();		
     });
+  };
+	
+	this.clearForm = function () {
+    that.email('');
+    that.accountName('');
+		that.usernameClass('');		
+		that.emailClass('');		
+    that.errorForgotPassword('');		
   };
 	
   this.activate = function () {
@@ -29,21 +37,16 @@ function ForgotPasswordViewModel() {
 				that.usernameClass('');
 				that.emailClass('');
 			});
-			$(document).keyup(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotPasswordView') {
-					that.forgotPasswordCommand();
-				}
-			});
 		} else {
 			goToView('channelListView');
 		}
   };
 	
-  this.clearForm = function () {
-    that.email('');
-    that.accountName('');
-    that.errorForgotPassword('');		
-  };
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotPasswordView') {
+			that.forgotPasswordCommand();
+		}
+	});
 	
   this.forgotPasswordCommand = function () {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -62,6 +65,7 @@ function ForgotPasswordViewModel() {
       var forgotPasswordModel = {};
       forgotPasswordModel.accountname = that.accountName();
       forgotPasswordModel.emailAddress = that.email();
+			$.mobile.showPageLoadingMsg('a', 'Sending Forgot Password Request');
       return ES.loginService.forgotPassword(forgotPasswordModel, callbacks);
     }
   };

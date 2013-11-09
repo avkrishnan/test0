@@ -7,6 +7,7 @@ function ChannelListViewModel() {
   this.displayname = 'My Channels';
   this.hasfooter = true;
   this.accountName = ko.observable();
+	this.responseData = ko.observable();
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -22,6 +23,24 @@ function ChannelListViewModel() {
 		} 
 		else {
 			that.accountName(localStorage.getItem('accountName'));
+			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
+		}
+	}
+	
+	function successfulList(data){
+		that.responseData(data.channel.length);
+	};    
+	
+	function errorAPI(data, status, details){
+		$.mobile.hidePageLoadingMsg();	
+		showError('Error listing my channels: ' + details.message);
+	};
+	
+	this.goChannelsIOwn = function() {
+		if(that.responseData() < 1) {
+			return false;
+		} else {
+			goToView('channelsIOwnView')
 		}
 	}
 }

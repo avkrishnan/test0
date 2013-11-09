@@ -18,9 +18,15 @@ function InviteFollowersIIViewModel() {
 	/* Methods */
   this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+      that.clearForm();						
       that.activate();
-      that.clearForm();			
     });	
+	};
+	
+	this.clearForm = function () {
+		that.feedback('');
+		that.feedbackClass('');
+		that.errorFeedback('');				
 	};  
 
 	this.activate = function() {
@@ -43,12 +49,6 @@ function InviteFollowersIIViewModel() {
 			return true;
 		}
 	}
-	
-  this.clearForm = function () {
-		that.feedback('');
-		that.feedbackClass('');
-		that.errorFeedback('');				
-  };
 	
 	this.sendFeedbackCommand = function () {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;

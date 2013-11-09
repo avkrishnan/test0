@@ -17,10 +17,16 @@ function ChannelEditDisplayNameViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
       that.clearForm();			
+      that.activate();			
     });	
 	};  
+	
+	this.clearForm = function () {
+    that.channelEditDisplayName('');
+		that.message('');
+		that.errorChannel('');		
+  };
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
@@ -39,12 +45,6 @@ function ChannelEditDisplayNameViewModel() {
 			});
 		}
 	}
-	
-	this.clearForm = function () {
-    that.channelEditDisplayName('');
-		that.message('');
-		that.errorChannel('');		
-  };
 	
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();

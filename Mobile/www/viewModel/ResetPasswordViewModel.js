@@ -18,9 +18,17 @@ function ResetPasswordViewModel() {
 	/* Methods */				
 	this.applyBindings = function(){
 		$('#' + that.template).on('pagebeforeshow', function(e, data){																	
-			that.activate();
 			that.clearForm();			
+			that.activate();		
 		});
+	};
+	
+	this.clearForm = function(){
+		that.newPassword('');
+		that.confirmPassword('');
+		that.passwordClass('');
+		that.confirmPasswordClass('');				
+		that.errorResetPassword('');									
 	};
 		 
 	this.activate = function(){
@@ -41,14 +49,6 @@ function ResetPasswordViewModel() {
 			});
 		}
 	};
-		
-	this.clearForm = function(){
-		that.newPassword('');
-		that.confirmPassword('');
-		that.passwordClass('');
-		that.confirmPasswordClass('');				
-		that.errorResetPassword('');									
-	};
 	 
 	this.resetPasswordCommand = function () {
 		if(this.newPassword() == '' &&  this.confirmPassword() == '') {
@@ -64,6 +64,7 @@ function ResetPasswordViewModel() {
 			resetPasswordModel.password = this.newPassword();             
 			resetPasswordModel.confirmPassword = this.confirmPassword();
 			resetPasswordModel.forgotPasswordRequestKey = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
+			$.mobile.showPageLoadingMsg('a', 'Sending Update Password Request');			
 			return ES.loginService.resetPassword(resetPasswordModel, callbacks).then(resetPasswordSuccess);
 		} else {
 			that.passwordClass('validationerror');

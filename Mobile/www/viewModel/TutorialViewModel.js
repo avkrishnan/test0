@@ -22,6 +22,10 @@ function TutorialViewModel() {
 		} else if(newUser == '' || newUser == null) {
 			goToView('channelListView');
 		}
+		$('.tutorial ul li').removeClass('active');
+		$('.tutorial ul li:first-child').addClass('active');		
+		$('.tutorials .tutorialslides').hide();
+		$('.tutorials .tutorialslides:first-child').show();
 		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
 		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
 		navigation('.msg-content span', 'next', 'div.tutorialslides');

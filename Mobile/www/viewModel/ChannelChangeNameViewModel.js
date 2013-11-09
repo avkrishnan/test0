@@ -20,10 +20,16 @@ function ChannelChangeNameViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-      that.clearForm();			
+      that.clearForm();      
+			that.activate();			
     });	
 	};
+	
+	this.clearForm = function () {
+    that.channelChangeName('');
+		that.message('');
+		that.errorChannel('');
+  };
 	  
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
@@ -43,12 +49,6 @@ function ChannelChangeNameViewModel() {
 			});
 		}
 	}
-	
-	this.clearForm = function () {
-    that.channelChangeName('');
-		that.message('');
-		that.errorChannel('');
-  };
 	
   this.nextViewCommand = function () {
     if (that.channelChangeName() == '') {

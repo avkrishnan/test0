@@ -16,14 +16,17 @@ function LoginViewModel() {
 	/* Methods */
   this.applyBindings = function() {
     $("#" + that.template).on("pagebeforeshow", null, function(e, data) {
-      if ($.mobile.pageData && $.mobile.pageData.a) {
-        if ($.mobile.pageData.a == 'logout') {
-          that.logoutCommand();
-        }
-      }
-      that.activate();
-      that.clearForm();			
+      that.clearForm();				
+      that.activate();		
     });
+  };
+	
+	this.clearForm = function () {
+		that.accountName('');	
+		that.password('');
+		that.errorMessage('');
+		that.usernameClass('');
+		that.passwordClass('');		
   };
 	
   this.activate = function() {
@@ -44,29 +47,22 @@ function LoginViewModel() {
 					that.usernameClass('');
 					that.passwordClass('');
 				}
-				else {
+				/*else {
 					that.loginCommand();
-				}
+				}*/
 			});			
-			$(document).keyup(function(e) {
-				if (e.keyCode == 13) {
-					that.errorMessage('');
-					that.loginCommand();
-				}
-			});
 		} 
 		else {
 			goToView('escalationPlansView');
 		}
   };
 	
-	this.clearForm = function () {
-		that.accountName('');	
-		that.password('');
-		that.errorMessage('');
-		that.usernameClass('');
-		that.passwordClass('');		
-  };
+	$(document).keyup(function(e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'loginView') {
+			that.errorMessage('');
+			that.loginCommand();
+		}
+	});
 	
   this.loginCommand = function() {
     if (that.accountName() == '' && that.password() == '') {

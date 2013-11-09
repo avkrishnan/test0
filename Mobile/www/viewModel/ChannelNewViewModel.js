@@ -30,17 +30,11 @@ function ChannelNewViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.sectionOne(true);
+			that.sectionTwo(false);			
 			$('input').keyup(function () {
 				that.message('');
 				that.errorNewChannel('');
-				if(that.newChannel().length > 2) {
-					//alert(that.newChannel().length);
-				}
-			});
-			$(document).keyup(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelNewView') {
-					that.nextViewCommand();
-				}
 			});
 		}
 	}
@@ -50,6 +44,12 @@ function ChannelNewViewModel() {
 		that.message('');
 		that.errorNewChannel('');		
   };
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13) {
+			that.nextViewCommand();
+		}
+	});
 
 	this.nextViewCommand = function (e) {
     if (that.newChannel() == '') {

@@ -18,10 +18,15 @@ function RegistrationVerifyViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+			that.clearForm();			
       that.activate();
-			that.clearForm();
     });	
 	};  
+	
+	this.clearForm = function () {
+		that.verificationCode('');
+    that.errorMessage('');
+  };
 	
 	this.activate = function() {
 		var newUser = localStorage.getItem('newusername');		
@@ -55,11 +60,6 @@ function RegistrationVerifyViewModel() {
 		return ES.commethodService.getCommethods(callbacks);
 	}
 	
-	this.clearForm = function () {
-		that.verificationCode('');
-    that.errorMessage('');
-  };
-	
 	this.verifyRequestCommethod = function() {
 		if(that.verificationCode() == '') {
 			that.errorMessage("<span>ERROR : </span> Please input verification code!");
@@ -85,19 +85,22 @@ function RegistrationVerifyViewModel() {
 			error: function (responseData, status, details) {
 				showError(details.message);
 			}
-		};	
+		};
+		$.mobile.showPageLoadingMsg('a', 'Resending Verification code');				
 		return ES.commethodService.requestVerification(that.verificationCommethodID(), callbacks);
 	}
 	
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
-			success: function(responseData) {			
+			success: function(responseData) {
+				showMessage('Email verified successfully!');							
 				goToView('tutorialView');
 			},
 			error: function (responseData, status, details) {
 				that.errorMessage("<span>ERROR : </span>" + details.message);
 			}
 		};
+		$.mobile.showPageLoadingMsg('a', 'Sending Verification Request');		
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
 	};
 	

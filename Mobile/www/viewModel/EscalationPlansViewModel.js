@@ -178,7 +178,7 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('currentChannel');
 		localStorage.removeItem('accountName');
 		localStorage.removeItem('name');
-		channelListViewModel.clearForm();
+		//channelListViewModel.clearForm();
 		notificationsViewModel.removeNotifications();
 		OVERLAY.removeNotifications();
 	};

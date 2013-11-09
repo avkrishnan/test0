@@ -37,6 +37,7 @@ header {
 	position:fixed;
 	top:0;
 	z-index:9999;
+	height:24px;
 }
 /*
 	*Back Button 
@@ -53,6 +54,16 @@ header {
 	padding:12px 13px;
 	background:url(images/sprites.png) no-repeat -10px -1094px;
 	outline:none;
+}
+.menu.hamburgermenu {
+	float:left;
+	margin:1px 7px;	
+}
+.hamburgermenuhide {
+	margin-left:-10px;
+	min-height:384px;
+	padding:0px 19px;
+	display:inline-block;
 }
 .linkicon {
 	float:right;
@@ -907,6 +918,7 @@ hr, .baseline {
 .changepswd {
 	background:url("images/sprites-login.png") no-repeat -23px -266px;
 	padding:2px 0 2px 32px;
+	margin:10px 20px 20px 10px
 }
 .errormsg {
 	background:url("images/sprites-login.png") no-repeat -28px -196px;
@@ -921,12 +933,12 @@ hr, .baseline {
 .loginform .registration {
 	padding:4px 0px 0 4px;
 }
-.loginform .registration em{
+.loginform .registration em, .loginform .registration a.informatiniconmsg{
 	float:right;
 	background:#2d2d2d url("images/sprites-login.png") no-repeat -22px -338px;
 	padding:19px 24px 19px 15px;
 }
-.loginform .registration em.enable {
+.loginform .registration em.enable, .loginform .registration a.informatiniconmsg.enable, .loginform .registration a.informatiniconmsg:hover {
 	background:#2d2d2d url("images/sprites-login.png") no-repeat -22px -474px;
 }
 .signedup span {
@@ -1097,7 +1109,7 @@ span.down-arrow {
 .Channel {
 	background:#2D2D2D;
 	border-radius:4px;
-	margin:0 25px 0 15px;
+	margin:0 20px 0 10px;
 	overflow:hidden;
 	color:#fff;
 	font-size:15px;
@@ -1315,7 +1327,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin-bottom:10px;
 	overflow:hidden;
 	padding:0;
-	cursor:pointer;
+	outline:none;
 }
 .detailschannel {
 	border-bottom:1px solid #828181;
@@ -1607,7 +1619,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#969696;
 	font-size:17px;
 	margin:0 0 0 27px;
-	padding:0 0 4px 6px;
+	padding:1px 0 3px 6px;
 	border-left:1px solid #828181;
 }
 .dropdown .ui-select .ui-btn-icon-right .ui-btn-inner, .dropdown .ui-select .ui-li-has-count .ui-btn-inner {
@@ -1807,7 +1819,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	display:inline-block;
 	font-size:12px;
 	margin-left:15px;
-	padding:2px 10px;
+	padding:1px 10px;
 }
 .channelinformation {
 	background:#2D2D2D;
@@ -1844,15 +1856,22 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	overflow:hidden;
 }
 .broadcast-sensitive span {
-	background:#f1f2f2 url("images/sprites.png") no-repeat -9px -748px;
-	height:36px;
-	border-radius:21px 4px 4px 21px;
-	line-height:33px;
-	float:left;
-	font-size:14px;
-	padding:0 0 0 50px;
-	width:55%;
-	color:#414141;
+    background:#f1f2f2;
+    border-radius:4px;
+    color:#414141;
+    float:left;
+    font-size:14px;
+    height:36px;
+    line-height:33px;
+    margin-left:12px;
+    padding:0 0 0 12px;
+    width:63%;
+}
+.broadcast-sensitive span strong{
+	background:url("images/sprites.png") no-repeat -9px -745px;
+	padding:10px 25px;
+	margin-left: -22px;
+	border-radius:21px 0 0 21px;
 }
 .broadcastnormal span {
 	background-position:-9px -1555px;
@@ -1942,7 +1961,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	height:29px;
 	line-height:29px;
 	margin:0 0 10px 5px;
-	padding:0 0 0 55px;
+	padding:0 0 0 40px;
 	width:56%;
 }
 .broadcastmsgreplie em {
@@ -2365,6 +2384,7 @@ ul.igiresponses li span {
 .dropdownchanel {
 	background:#fff;
 	margin:-10px 5px 0 18px;
+	/*display:none;*/
 }
 .dropdownchanellist li {
 	padding:5px 0;
@@ -2495,7 +2515,7 @@ ul.igiresponses li span {
 .contactchannel {
 	border-top:1px solid #828181;
 	border-bottom:1px solid #828181;
-	margin:0 0 0 -10px;
+	margin:0 0 10px -10px;
 	padding:15px 0 15px 10px;
 }
 .contactchannel .login a.ui-link {
@@ -2532,7 +2552,7 @@ ul.igiresponses li span {
 	float:left;
 	margin:0 0 0 10px;
 	padding:0;
-	width:82%;
+	width:81%;
 }
 .messagedetail-info span {
 	font-size:14px;
@@ -2710,10 +2730,13 @@ ul.igiresponses li span {
 	font-size:13px;
 	font-weight:bold;
 }
+.composedropdown .ui-select select option {
+	padding:0px 0px 0px 6px;
+}
 .yes-no span.informationicon {
 	display:inline-block;
 	text-align:center;
-	width:40%;
+	width:39%;
 	padding:10px 0px;
 	margin-bottom:-7px;
 	background:url(images/informationicon.png) no-repeat center center;
@@ -2862,10 +2885,7 @@ ul.igiresponses li span {
 		margin:10px 0 20px 10px;
 	}
 	.addfollowers {
-		font-size:16px;
-	}
-	.addfollowers a {
-		font-size:16px;
+		/*font-size:16px;*/
 	}
 	.sendbtnican {
 		padding:10px 20px 10px 50px;
@@ -2903,6 +2923,10 @@ ul.igiresponses li span {
 	}
 	.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 		width:87%;
+	}
+	.hamburgermenuhide {
+		min-height:543px;
+		padding:0px 21px;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -2961,7 +2985,7 @@ ul.igiresponses li span {
     width:86%;
 	}
 	.broadcastmsgreplie {
-		width:86%;
+		width:85%;
 	}
 	.broadcast-sensitive span {
 		width:86.5%;
@@ -2993,6 +3017,13 @@ ul.igiresponses li span {
 	}
 	.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 		width: 94%;
+	}
+	.addfollowers a {
+		font-size:15px;
+	}
+	.hamburgermenuhide {
+		min-height:927px;
+		padding:0px 22px;
 	}
 }
 @media only screen and (max-width:1280px) and (min-width:768px) {
@@ -3027,6 +3058,10 @@ ul.igiresponses li span {
 	}
 	.slidemenu {
 		min-height:1240px;
+	}
+	.hamburgermenuhide {
+		min-height:1182px;
+		padding:0px 23px;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -3065,6 +3100,10 @@ ul.igiresponses li span {
 	}
 	.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 		width: 95.5%;
+	}
+	.hamburgermenuhide {
+		min-height:1182px;
+		padding:0px 28px;
 	}
 }
 @media only screen and (min-width:1280px) {
@@ -3112,6 +3151,10 @@ ul.igiresponses li span {
 	}
 	.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 		width:96.5%;
+	}
+	.hamburgermenuhide {
+		min-height:543px;
+		padding:0px 35px;
 	}
 }
 @media only screen and (max-width: 600px) and (min-width: 599px) {

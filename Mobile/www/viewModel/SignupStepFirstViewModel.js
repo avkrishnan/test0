@@ -47,32 +47,40 @@ function SignupStepFirstViewModel() {
 	/* Methods */
   this.applyBindings = function () {
     $('#' + this.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
       that.clearForm();			
+      that.activate();			
     });
+  };
+	
+	this.clearForm = function () {
+    that.accountName('');
+    that.password('');
+    that.emailaddress('');
+    that.errorEmail('');
+    that.errorAccountName('');
+    that.errorPassword('');
+    that.emailClass('');
+    that.accountNameClass('');
+    that.passwordClass('');
+    that.errorIconEmail('');
+    that.errorIconAccountName('');
+    that.errorIconPassword('');
   };
 
   this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
-			if (localStorage.getItem('signUpError') != null) {
-				that.tickIconEmail('righttick');
+			if(localStorage.getItem('signUpError') == 'communication method already used') {
 				that.emailaddress(localStorage.getItem('newuseremail'));
 				that.accountName(localStorage.getItem('newusername'));
-				that.tickIconPassword('righttick');
 				that.password(localStorage.getItem('newuserpassword'));
-				alert(localStorage.getItem('signUpError'));
-				if(localStorage.getItem('signUpError') == 'name not available') {
-					that.errorIconAccountName('errorimg');
-					that.errorAccountName('<span>SORRY:</span> This Evernym has already been taken');
-					that.accountNameClass('validationerror');				
-				} else {
-					that.errorIconEmail('errorimg');
-					that.errorEmail('<span>SORRY:</span> ' + localStorage.getItem('signUpError'));
-					that.emailClass('validationerror');				
-				}
-				localStorage.removeItem('signUpError');			
-			}		
+				that.emailClass('validationerror');										
+				that.errorIconEmail('errorimg');
+				that.errorEmail('<span>SORRY : </span> ' + localStorage.getItem('signUpError'));
+				that.tickIconAccountName('righttick');															
+				that.tickIconPassword('righttick');					
+			}
+			localStorage.removeItem('signUpError');				
 			$('input').keyup(function () {
 				that.errorEmail('');
 				that.errorAccountName('');
@@ -82,12 +90,7 @@ function SignupStepFirstViewModel() {
 				that.passwordClass('');
 				that.errorIconEmail('');
 				that.errorIconAccountName('');
-				that.errorIconPassword('');
-			});
-			$(document).keyup(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepFirstView') {
-					that.nextViewCommand();
-				}
+				that.errorIconPassword('');				
 			});
 			return true;			
 		} else {
@@ -137,57 +140,43 @@ function SignupStepFirstViewModel() {
     }
   }
 	
-  this.clearForm = function () {
-    that.accountName('');
-    that.password('');
-    that.emailaddress('');
-    that.errorEmail('');
-    that.errorAccountName('');
-    that.errorPassword('');
-    that.emailClass('');
-    that.accountNameClass('');
-    that.passwordClass('');
-    that.errorIconEmail('');
-    that.errorIconAccountName('');
-    that.errorIconPassword('');
-  };
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepFirstView') {
+			that.nextViewCommand();
+		}
+	});
 	
   this.nextViewCommand = function () {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
       that.emailClass('validationerror');
       that.errorIconEmail('errorimg');
-      that.errorEmail('<span>SORRY :</span> Please enter valid email');
+      that.errorEmail('<span>SORRY : </span>Please enter valid email');
     } else if (that.accountName() == '') {
       that.accountNameClass('validationerror');
       that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY :</span> Please enter Evernym name');
+      that.errorAccountName('<span>SORRY : </span>Please enter Evernym name');
     } else if (that.password() == '') {
       that.passwordClass('validationerror');
       that.errorIconPassword('errorimg');
-      that.errorPassword('<span>SORRY :</span> Please enter password');
+      that.errorPassword('<span>SORRY : </span>Please enter password');
     } else {
       localStorage.setItem('newuseremail', that.emailaddress());
       localStorage.setItem('newusername', that.accountName());
       localStorage.setItem('newuserpassword', that.password());
-			//return ES.loginService.checkName(that.accountName(), { success: successAvailable, error: errorAPI });
-      goToView('signupStepSecondView');
+			$.mobile.showPageLoadingMsg('a', 'Checking Evernym availability');
+			return ES.loginService.checkName(that.accountName(), { success: successAvailable, error: errorAPI });
     }
   };
 	
 	function successAvailable(data){
-		alert(data);
-		if(data.refType == 'A'){
+		if(data){
 			that.accountNameClass('validationerror');
       that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY :</span> This Evernym has already been taken');
-		} else if(typeof data === 'undefined') {
-			alert('here');
+      that.errorAccountName('<span>SORRY : </span>This Evernym has already been taken');
+		} else {
 			goToView('signupStepSecondView');
-		}	else {
-			alert('here1');
-			goToView('signupStepSecondView')
-		}			
+		}
 	};    
 	
 	function errorAPI(data, status, details){
