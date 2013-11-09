@@ -27,11 +27,11 @@ function EscalationPlansViewModel() {
 	
 	this.defaultCommethods = '';
 	
-	this.gotoView = function(pageView) {
+	/*this.gotoView = function(pageView) {
 		//alert(JSON.parse(JSON.stringify(pageView)).urgencyName);
 		localStorage.setItem("activeEscPlan",JSON.parse(JSON.stringify(pageView)).urgencyName);
 		goToView('escalationPlanSingleView');
-	}	
+	}*/
 	
 	this.getEscPlans = function() {
 		return ES.escplanService.getEscPlans({success: successEscPlans, error: errorEscPlans});

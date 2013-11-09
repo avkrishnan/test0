@@ -56,13 +56,13 @@ function ChannelsIOwnViewModel() {
 	this.channelSettings = function(data){
 		localStorage.removeItem('currentChannelId');
 		localStorage.setItem('currentChannelId', data.channelId);
-		goToView('channelSettingsView');
+		goToView('channelSettingsView');		
 	};
 	
 	this.channelMain = function(data){
 		localStorage.removeItem('currentChannelId');
 		localStorage.setItem('currentChannelId', data.channelId);
-		goToView('channelMainView');
+		goToView('channelMainView');			
 	};
 	
 	/*this.channelFollowers = function(data){
