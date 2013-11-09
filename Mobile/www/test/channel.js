@@ -33,7 +33,7 @@
     .then(start, start);
   });
 
-  asyncTest('MODIFY CHANNEL DESCRIPTION', function() {
+  asyncTest('MODIFY CHANNEL SHORT DESCRIPTION', function() {
     var newChnl = {
       id: SCEN1.channel.id,
       description: SCEN1.channel.description + "<modified>"
@@ -43,6 +43,20 @@
     .then(hlpr.fetchChannelAndCheckF(SCEN1, 'channel', newChnl), hlpr.CHECK.shouldNotFail)
     .then(function() {
           SCEN1.channel.description = newChnl.description;
+        }, hlpr.CHECK.shouldNotFail)
+    .then(start,start);
+  });
+
+  asyncTest('MODIFY CHANNEL LONG DESCRIPTION', function() {
+    var newChnl = {
+      id: SCEN1.channel.id,
+      longDescription: SCEN1.channel.longDescription + "<modified>"
+    };
+    $.when(SCEN1.ES.channelService.modifyChannel(newChnl))
+    .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
+    .then(hlpr.fetchChannelAndCheckF(SCEN1, 'channel', newChnl), hlpr.CHECK.shouldNotFail)
+    .then(function() {
+          SCEN1.channel.longDescription = newChnl.longDescription;
         }, hlpr.CHECK.shouldNotFail)
     .then(start,start);
   });

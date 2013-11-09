@@ -222,24 +222,28 @@ function ApiTestHelper() {
 
   t.fetchChannelAndCheckF = function(scenario, chnlKey, comp) {
     return function(data) {
-      return $.when(scenario.ES.channelService.getChannel(scenario[chnlKey].id)).then(
-          t.CHECK.success).then(t.checkEqualC(comp ? comp : scenario[chnlKey]));
+      return $.when(scenario.ES.channelService.getChannel(scenario[chnlKey].id))
+        .then(t.CHECK.success)
+        .then(t.checkEqualC(comp ? comp : scenario[chnlKey]));
     };
   };
 
   t.createChannelF = function(scenario, chnlKey) {
     return function() {
       channel = t.generateChannel();
-      $.when(scenario.ES.channelService.createChannel(channel)).then(t.CHECK.created).then(
-          t.recordChannelF(scenario, chnlKey)).then(t.fetchChannelAndCheckF(scenario, chnlKey))
-          .then(start);
+      $.when(scenario.ES.channelService.createChannel(channel))
+      .then(t.CHECK.created)
+      .then(t.recordChannelF(scenario, chnlKey))
+      .then(t.fetchChannelAndCheckF(scenario, chnlKey))
+      .then(start);
     };
   };
 
   t.followChannel = function(scenario, ownerScenario, chnlKey) {
     return function() {
-      $.when(scenario.ES.channelService.followChannel(ownerScenario[chnlKey].id)).then(
-          t.CHECK.success).then(start);
+      $.when(scenario.ES.channelService.followChannel(ownerScenario[chnlKey].id))
+      .then(t.CHECK.success)
+      .then(start);
     };
   };
 
