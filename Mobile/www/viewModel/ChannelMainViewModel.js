@@ -36,7 +36,7 @@ function ChannelMainViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			that.broadcasts.removeAll();				
-			that.channelId(localStorage.getItem('currentChannelId'));		
+			that.channelId(localStorage.getItem('currentChannelId'));					
 			that.getChannelCommand().then(that.getFollowersCommand()).then(that.getMessagesCommand());
 		}
 	}

@@ -13,7 +13,7 @@ function ChannelsIOwnViewModel() {
 	this.channels = ko.observableArray([]);
 	this.channelId = ko.observable();
 	this.channelname = ko.observable();
-	this.channeldescription = ko.observable();
+	this.channeldescription = ko.observable();	
 
 	/* Methods */
 	this.applyBindings = function(){	
@@ -28,11 +28,11 @@ function ChannelsIOwnViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.channels.removeAll();
-			$.mobile.showPageLoadingMsg('a', 'Loading Channels');						
-			that.listMyChannelsCommand();
+			that.channels.removeAll();					
+			$.mobile.showPageLoadingMsg('a', 'Loading Channels');					
+			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
 		}
-	};	    	
+	};
 	
 	function successfulList(data){	
 		if(data.channel.length < 1) {
@@ -47,16 +47,12 @@ function ChannelsIOwnViewModel() {
 				channeldescription: data.channel[channelslength].description
 			});
 		}	
-	};    
+	};
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
 		showError('Error listing my channels: ' + details.message);
 	};
-	
-	this.listMyChannelsCommand = function() {		
-		return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });		
-	}
 	
 	this.channelSettings = function(data){
 		localStorage.removeItem('currentChannelId');

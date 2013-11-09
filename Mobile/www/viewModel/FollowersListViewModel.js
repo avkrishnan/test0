@@ -43,10 +43,8 @@ function FollowersListViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			that.channelId(localStorage.getItem('currentChannelId'));			
-			that.followers.removeAll();			
-			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
-			return this.getChannelCommand().then(this.getFollowersCommand());
-			goToView('followersListView');
+			that.followers.removeAll();					
+			that.getChannelCommand().then(that.getFollowersCommand());
 		}
 	}
 	
