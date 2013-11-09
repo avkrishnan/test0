@@ -42,19 +42,20 @@ function ChannelChangeNameViewModel() {
 				that.message('');
 				that.errorChannel('');
 			});
-			$(document).keyup(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelChangeNameView') {
-					that.nextViewCommand();
-				}
-			});
 		}
 	}
 	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelChangeNameView') {
+			that.nextViewCommand();
+		}
+	});
+	
   this.nextViewCommand = function () {
     if (that.channelChangeName() == '') {
-      that.errorChannel('<span>SORRY:</span> Please enter channel name');
+      that.errorChannel('<span>SORRY :</span> Please enter channel name');
     } else {
-			that.message('<span>GREAT!</span> This name is available');
+			that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
 			that.sectionTwo(true);
 			that.channelWebAddress(that.channelChangeName()+'.evernym.com');	
@@ -73,7 +74,7 @@ function ChannelChangeNameViewModel() {
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorChannel('<span>SORRY:</span> '+response.message);		
+    that.errorChannel('<span>SORRY :</span> '+response.message);		
   };
 	
   this.confirmChannelChangeNameCommand = function () {
@@ -84,4 +85,5 @@ function ChannelChangeNameViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
   };
+	
 }

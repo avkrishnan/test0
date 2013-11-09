@@ -20,10 +20,17 @@ function ChannelNewViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-      that.clearForm();					
+      that.clearForm();			
+      that.activate();					
     });	
-	};  
+	};
+	
+	this.clearForm = function () {
+		that.newChannel('');
+		that.message('');
+		that.errorNewChannel('');		
+  };
+	  
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
@@ -38,22 +45,16 @@ function ChannelNewViewModel() {
 			});
 		}
 	}
-
-	this.clearForm = function () {
-		that.newChannel('');
-		that.message('');
-		that.errorNewChannel('');		
-  };
 	
 	$(document).keyup(function (e) {
-		if (e.keyCode == 13) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelNewView') {
 			that.nextViewCommand();
 		}
 	});
 
 	this.nextViewCommand = function (e) {
     if (that.newChannel() == '') {
-      that.errorNewChannel('<span>SORRY: </span> Please enter channel name');
+      that.errorNewChannel('<span>SORRY :</span> Please enter channel name');
     } else {
 			that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
@@ -73,11 +74,12 @@ function ChannelNewViewModel() {
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorNewChannel('<span>SORRY: </span> ' + response.message);		
+    that.errorNewChannel('<span>SORRY :</span> ' + response.message);		
   };
 	
   this.createChannelCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
 		ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});
   };
+	
 }

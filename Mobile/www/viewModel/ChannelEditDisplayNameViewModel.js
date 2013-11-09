@@ -38,13 +38,14 @@ function ChannelEditDisplayNameViewModel() {
 				that.message('');
 				that.errorChannel('');
 			});
-			$(document).keyup(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelEditDisplayNameView') {
-					that.changeChannelDisplayNameCommand();
-				}
-			});
 		}
 	}
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelEditDisplayNameView') {
+			that.changeChannelDisplayNameCommand();
+		}
+	});
 	
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
@@ -55,12 +56,12 @@ function ChannelEditDisplayNameViewModel() {
     $.mobile.hidePageLoadingMsg();
     goToView('channelEditDisplayNameView');
 		that.message('');
-		that.errorChannel('<span>SORRY:</span> '+response.message);
+		that.errorChannel('<span>SORRY :</span> '+response.message);
   };
 	
   this.changeChannelDisplayNameCommand = function () {
 		if (that.channelEditDisplayName() == '') {
-      that.errorChannel('<span>SORRY:</span> Please enter channel display name');
+      that.errorChannel('<span>SORRY :</span> Please enter channel display name');
     } else {
 			var channelObject = {
 				id: localStorage.getItem('currentChannelId'),
@@ -70,4 +71,5 @@ function ChannelEditDisplayNameViewModel() {
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 		}
   };
+	
 }

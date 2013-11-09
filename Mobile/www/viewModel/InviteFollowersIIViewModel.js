@@ -24,6 +24,7 @@ function InviteFollowersIIViewModel() {
 	};
 	
 	this.clearForm = function () {
+		that.emailaddress('');
 		that.feedback('');
 		that.feedbackClass('');
 		that.errorFeedback('');				
@@ -41,25 +42,26 @@ function InviteFollowersIIViewModel() {
 				that.feedbackClass('');
 				that.errorFeedback('');
 			});
-			$(document).keypress(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'inviteFollowersIIView') {
-					that.sendFeedbackCommand();
-				}
-			});
-			return true;
 		}
 	}
+	
+	$(document).keypress(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'inviteFollowersIIView') {
+			that.sendFeedbackCommand();
+		}
+	});
 	
 	this.sendFeedbackCommand = function () {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 		var feedbackData = $('#'+that.feedbackId()).val();
     if (feedbackData == '') {
 			that.feedbackClass('validationerror');
-			that.errorFeedback('<span>SORRY:</span> Please give feedback');
+			that.errorFeedback('<span>SORRY :</span> Please give feedback');
     } else {
       goToView('inviteFollowersIIView');
     }
-  };	
+  };
+		
 }
 /* To do - removed once Invitefollowers page complete
  function generateProvisionalAccount() {

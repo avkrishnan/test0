@@ -90,13 +90,19 @@ function SignupStepFirstViewModel() {
 				that.passwordClass('');
 				that.errorIconEmail('');
 				that.errorIconAccountName('');
-				that.errorIconPassword('');				
-			});
-			return true;			
+				that.errorIconPassword('');
+				localStorage.removeItem('signUpError');								
+			});			
 		} else {
 			goToView('channelListView');
 		}
   };
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepFirstView') {
+			that.nextViewCommand();
+		}
+	});
 	
   that.emailinput = function () {
     that.tickIconEmail('righttick');
@@ -140,12 +146,6 @@ function SignupStepFirstViewModel() {
     }
   }
 	
-	$(document).keyup(function (e) {
-		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepFirstView') {
-			that.nextViewCommand();
-		}
-	});
-	
   this.nextViewCommand = function () {
 
     /*JAL: this is the old regex. The next regex is the same we use in the back-end. 
@@ -159,15 +159,15 @@ function SignupStepFirstViewModel() {
     if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
       that.emailClass('validationerror');
       that.errorIconEmail('errorimg');
-      that.errorEmail('<span>SORRY : </span>Please enter valid email');
+      that.errorEmail('<span>SORRY :</span> Please enter valid email');
     } else if (that.accountName() == '') {
       that.accountNameClass('validationerror');
       that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY : </span>Please enter Evernym name');
+      that.errorAccountName('<span>SORRY :</span> Please enter Evernym name');
     } else if (that.password() == '') {
       that.passwordClass('validationerror');
       that.errorIconPassword('errorimg');
-      that.errorPassword('<span>SORRY : </span>Please enter password');
+      that.errorPassword('<span>SORRY :</span> Please enter password');
     } else {
       localStorage.setItem('newuseremail', that.emailaddress());
       localStorage.setItem('newusername', that.accountName());
@@ -181,7 +181,7 @@ function SignupStepFirstViewModel() {
 		if(data){
 			that.accountNameClass('validationerror');
       that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY : </span>This Evernym has already been taken');
+      that.errorAccountName('<span>SORRY :</span> This Evernym has already been taken');
 		} else {
 			goToView('signupStepSecondView');
 		}
@@ -190,5 +190,6 @@ function SignupStepFirstViewModel() {
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
 		showError('Error in checking Evernym: ' + details.message);
-	};				
+	};	
+				
 }

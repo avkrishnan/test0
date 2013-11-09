@@ -91,4 +91,5 @@ function ForgotPasswordViewModel() {
       showError('Error Sending Forgot Password Request: ' + details.message);
     }
   }
+	
 }

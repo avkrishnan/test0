@@ -20,17 +20,19 @@ function ForgotPasswordSuccessViewModel() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {		
 			that.resetAccount(localStorage.getItem('resetAccount'));		
-			$(document).keyup(function (e) {
-				if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotPasswordSuccessView') {
-					that.okayCommand();
-				}
-			});
 		} else {
 			goToView('channelListView');
 		}		
   };
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotPasswordSuccessView') {
+			that.okayCommand();
+		}
+	});
 
   this.okayCommand = function () {		
 		goToView('loginView');
   };
+	
 }

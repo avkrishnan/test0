@@ -32,7 +32,7 @@ function ChannelChangeIconViewModel() {
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
-    goToView('channelChangeIconView');
+    showError(response.message);
   };
 	
   this.changeChannelIconCommand = function () {

@@ -29,9 +29,17 @@ function SignupStepSecondViewModel() {
 	/* Methods */
   this.applyBindings = function () {
     $('#' + this.template).on('pagebeforeshow', function (e, data) {
+			that.clearForm();			
       that.activate();
-			that.clearForm();
     });
+  };
+	
+	this.clearForm = function () {
+    that.firstname('');
+    that.lastname('');
+    that.errorFirstLastName('');
+    that.errorIconFirstName('');
+    that.errorIconLastName('');
   };
 
   this.activate = function () {
@@ -44,11 +52,16 @@ function SignupStepSecondViewModel() {
 				that.errorIconFirstName('');
 				that.errorIconLastName('');
 			});
-			return true;
 		} else {
 			goToView('channelListView');
 		}
   };
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepSecondView') {
+			that.signUpCommand();
+		}
+	});
 	
   that.firstNameActiveInfo = function () {
     showHideInfo('lastNameInfo', 'lastNamehighlight', 'firstNameInfo', 'firstNamehighlight');
@@ -72,20 +85,6 @@ function SignupStepSecondViewModel() {
       that.lastNamehighlight('');
     }
   }
-	
-  this.clearForm = function () {
-    that.firstname('');
-    that.lastname('');
-    that.errorFirstLastName('');
-    that.errorIconFirstName('');
-    that.errorIconLastName('');
-  };
-	
-	$(document).keyup(function (e) {
-		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepSecondView') {
-			that.signUpCommand();
-		}
-	});
 
   function generateAccount() {
     return {
@@ -102,11 +101,11 @@ function SignupStepSecondViewModel() {
     if (that.firstname() == '') {
       that.firstnameClass('validationerror');
       that.errorIconFirstName('errorimg');
-      that.errorFirstLastName('<span>SORRY:</span> Please enter first name');
+      that.errorFirstLastName('<span>SORRY :</span> Please enter first name');
     } else if (that.lastname() == '') {
       that.lastnameClass('validationerror');
       that.errorIconLastName('errorimg');
-      that.errorFirstLastName('<span>SORRY:</span> Please enter last name');
+      that.errorFirstLastName('<span>SORRY :</span> Please enter last name');
     } else {
       $.mobile.showPageLoadingMsg('a', 'Enrolling');
       var callbacks = {
@@ -189,4 +188,5 @@ function SignupStepSecondViewModel() {
     showError('LOGIN FAILED');
     ES.evernymService.clearAccessToken();
   }
+	
 }

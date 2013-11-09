@@ -42,13 +42,14 @@ function ResetPasswordViewModel() {
 				that.confirmPasswordClass('');				
 				that.errorResetPassword('');
 			});
-			$(document).keyup(function (e) {
-				if (e.keyCode == 13) {
-					that.resetPasswordCommand();
-				}
-			});
 		}
 	};
+	
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'resetPasswordView') {
+			that.resetPasswordCommand();
+		}
+	});
 	 
 	this.resetPasswordCommand = function () {
 		if(this.newPassword() == '' &&  this.confirmPassword() == '') {
@@ -81,5 +82,6 @@ function ResetPasswordViewModel() {
 		that.passwordClass('validationerror');
 		that.confirmPasswordClass('validationerror');				
 		that.errorResetPassword(details.message);			
-	};		       
+	};		
+	       
 }

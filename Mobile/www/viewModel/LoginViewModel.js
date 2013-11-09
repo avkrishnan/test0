@@ -68,15 +68,15 @@ function LoginViewModel() {
     if (that.accountName() == '' && that.password() == '') {
       that.usernameClass('validationerror');
       that.passwordClass('validationerror');
-      that.errorMessage('<span>SORRY : </span>Please enter username and password');
+      that.errorMessage('<span>SORRY :</span> Please enter username and password');
     } 
 		else if(that.accountName() == '') {
       that.usernameClass('validationerror');
-      that.errorMessage('<span>SORRY : </span>Please enter username');
+      that.errorMessage('<span>SORRY :</span> Please enter username');
     } 
 		else if(that.password() == '') {
       that.passwordClass('validationerror');
-      that.errorMessage('<span>SORRY : </span>Please enter password');
+      that.errorMessage('<span>SORRY :</span> Please enter password');
     } 
 		else {
 			that.errorMessage('');
@@ -168,5 +168,6 @@ function LoginViewModel() {
 	
 	function errorAPI(data, status, details){
 		alert('error');
-	};	
+	};
+		
 }
