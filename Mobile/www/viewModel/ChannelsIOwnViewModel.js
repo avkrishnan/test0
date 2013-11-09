@@ -65,10 +65,10 @@ function ChannelsIOwnViewModel() {
 		goToView('channelMainView');
 	};
 	
-	this.channelFollowers = function(data){
+	/*this.channelFollowers = function(data){
 		localStorage.removeItem('currentChannelId');
 		localStorage.setItem('currentChannelId', data.channelId);
 		goToView('followersListView');
-	};
+	};*/
 	
 }

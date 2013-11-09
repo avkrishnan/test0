@@ -21,12 +21,12 @@
       </form>
     </div>
     <div data-bind="foreach: channels">
-      <a href="#" class="channelcontent">
+      <div href="#" class="channelcontent">
         <span class="channelimg channel1 borderred" data-bind="click: $parent.channelMain.bind($index())"></span>
         <div class="detailschannel">
           <div class="channelinfo" data-bind="click: $parent.channelMain.bind($index())">
-            <strong data-bind="text: channelname, click: $parent.channelMain.bind($index())"></strong>
-            <em data-bind="text: channeldescription, click: $parent.channelMain.bind($index())"></em>
+            <strong data-bind="text: channelname"></strong>
+            <em data-bind="text: channeldescription"></em>
           </div>
           <div class="setting" data-bind="click: $parent.channelSettings.bind($index())"></div>
         </div>
@@ -41,7 +41,7 @@
           <span class="request">+ 1 requests</span>
           <span class="lost">-1 lost</span>
         </div>-->
-      </a>
+      </div>
     </div>   
   </div>  
   <div class="footer">

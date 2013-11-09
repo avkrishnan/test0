@@ -4,6 +4,9 @@
 	/*display:none;*/
 	cursor:pointer; 
 }
+.channelcontent {
+	cursor:pointer;	
+}
 /*.page-content .tutorialslides:first-child {
 	display:block; 
 }*/
