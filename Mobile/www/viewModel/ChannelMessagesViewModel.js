@@ -9,7 +9,7 @@ function ChannelMessagesViewModel() {
 	
 	this.accountName = ko.observable();
 	this.title = ko.observable();
-	this.description = ko.observable('DESCRIPTION');
+	this.description = ko.observable('');
 	this.channelid = ko.observable();
 	this.channelMessages = ko.observableArray([]);
 
@@ -21,7 +21,10 @@ function ChannelMessagesViewModel() {
     
 	this.activate = function() {
 		that.accountName(localStorage.getItem("accountName"));
-		that.channelid(localStorage.getItem("currentChannelMessages"));		
+		var channel = JSON.parse(localStorage.getItem("currentChannel"));
+		//alert(localStorage.getItem("currentChannel"));
+		that.channelid(channel.id);
+		//alert(that.channelid());	
 		$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 		that.channelMessages.removeAll();
 		return that.getChannelCommand(that.channelid()).then(that.gotChannel);
