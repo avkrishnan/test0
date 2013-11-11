@@ -5,7 +5,6 @@ function SendMessageViewModel() {
 	this.viewid = "V-20";
 	this.viewname = "ComposeBroadcast";
 	this.displayname = "Compose Broadcast";	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();
 	
   /* Send Message observable */

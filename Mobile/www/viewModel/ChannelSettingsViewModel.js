@@ -5,9 +5,7 @@ function ChannelSettingsViewModel() {
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelSettings';
 	this.displayname = 'Channel Settings';	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 
   /* Channel Settings observable */
 	this.channelName = ko.observable();

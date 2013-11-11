@@ -5,10 +5,7 @@ function ChannelMainViewModel() {
 	this.viewid = 'V-46';
 	this.viewname = 'ChannelMain';
 	this.displayname = 'Channel Main';	
-	this.hasfooter = true;    
-	this.channels = ko.observableArray([]);
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 	
   /* Channel Main observable */	
 	this.channelId = ko.observable();		

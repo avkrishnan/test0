@@ -5,9 +5,7 @@ function ChannelDeleteViewModel() {
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelDeleteView';
 	this.displayname = 'Channel Delete';	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 	
   /* Channel delete observable */
 	this.channelId = ko.observable();

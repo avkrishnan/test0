@@ -4,7 +4,8 @@ function ChannelsIOwnViewModel() {
 	this.template = 'channelsIOwnView';
 	this.viewid = 'V-19';
 	this.viewname = 'ChannelsIOwn';
-	this.displayname = 'My Channels';	   
+	this.displayname = 'My Channels';	
+	this.hasfooter = true;    
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
@@ -12,7 +13,7 @@ function ChannelsIOwnViewModel() {
 	this.channels = ko.observableArray([]);
 	this.channelId = ko.observable();
 	this.channelname = ko.observable();
-	this.channeldescription = ko.observable();	
+	this.channeldescription = ko.observable();
 
 	/* Methods */
 	this.applyBindings = function(){	
@@ -27,16 +28,13 @@ function ChannelsIOwnViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.channels.removeAll();					
-			$.mobile.showPageLoadingMsg('a', 'Loading Channels');					
+			that.channels.removeAll();			
+			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
 		}
-	};
+	};	    	
 	
 	function successfulList(data){	
-		if(data.channel.length < 1) {
-			goToView('channelListView');			
-		}	
     $.mobile.hidePageLoadingMsg();
 		that.channels.removeAll();	
 		for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
@@ -46,7 +44,7 @@ function ChannelsIOwnViewModel() {
 				channeldescription: data.channel[channelslength].description
 			});
 		}	
-	};
+	};    
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
@@ -56,19 +54,19 @@ function ChannelsIOwnViewModel() {
 	this.channelSettings = function(data){
 		localStorage.removeItem('currentChannelId');
 		localStorage.setItem('currentChannelId', data.channelId);
-		goToView('channelSettingsView');		
+		goToView('channelSettingsView');
 	};
 	
 	this.channelMain = function(data){
 		localStorage.removeItem('currentChannelId');
 		localStorage.setItem('currentChannelId', data.channelId);
-		goToView('channelMainView');			
+		goToView('channelMainView');
 	};
 	
-	/*this.channelFollowers = function(data){
+	this.channelFollowers = function(data){
 		localStorage.removeItem('currentChannelId');
 		localStorage.setItem('currentChannelId', data.channelId);
 		goToView('followersListView');
-	};*/
+	};
 	
 }

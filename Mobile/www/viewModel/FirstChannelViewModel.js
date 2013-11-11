@@ -5,7 +5,6 @@ function FirstChannelViewModel() {
 	this.viewid = 'V-14';
 	this.viewname = 'FollowFirstChannel';
 	this.displayname = 'Follow First Channel';
-	this.hasfooter = true;    
 	this.accountName = ko.observable();	
 	
 	/* Methods */

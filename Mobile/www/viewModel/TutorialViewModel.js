@@ -5,7 +5,6 @@ function TutorialViewModel() {
   this.viewid = 'V-51';
   this.viewname = 'Tutorial';
   this.displayname = 'Tutorials';
-  this.hasfooter = false;
 
   this.applyBindings = function() {
     $('#' + that.template).on('pagebeforeshow', function(e, data) {

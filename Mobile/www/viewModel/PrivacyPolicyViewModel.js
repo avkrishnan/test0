@@ -5,7 +5,6 @@ function PrivacyPolicyViewModel() {
   this.viewid = 'V-49';
   this.viewname = 'PrivacyPolicy';
   this.displayname = 'Privacy Policy';
-  this.hasfooter = true;
 	this.accountName = ko.observable();	
 	
 	/* Methods */

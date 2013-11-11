@@ -5,7 +5,6 @@ function SignupStepFirstViewModel() {
   this.viewid = 'V-02';
   this.viewname = 'Register';
   this.displayname = 'Register';
-  this.hasfooter = false;
 	
   /* Signup observable */	
   this.accountName = ko.observable();
