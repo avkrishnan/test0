@@ -376,10 +376,11 @@ privacyPolicyViewModel = new PrivacyPolicyViewModel(),
 channelMainViewModel = new ChannelMainViewModel(),
 channelChangeNameViewModel = new ChannelChangeNameViewModel(),
 channelEditDisplayNameViewModel = new ChannelEditDisplayNameViewModel(),
-channelDeleteViewModel = new ChannelDeleteViewModel,
-channelChangeIconViewModel = new ChannelChangeIconViewModel,
-firstChannelViewModel = new FirstChannelViewModel,
-registrationVerifyViewModel = new RegistrationVerifyViewModel,
+channelDeleteViewModel = new ChannelDeleteViewModel(),
+channelChangeIconViewModel = new ChannelChangeIconViewModel(),
+firstChannelViewModel = new FirstChannelViewModel(),
+registrationVerifyViewModel = new RegistrationVerifyViewModel(),
+singleMessageFullTextViewModel = new SingleMessageFullTextViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -441,7 +442,8 @@ var models = [
 							channelChangeIconViewModel,
 							firstChannelViewModel,
 							channelMessagesViewModel,
-							registrationVerifyViewModel							
+							registrationVerifyViewModel,
+							singleMessageFullTextViewModel							
               ];
 
 
@@ -519,14 +521,14 @@ function loadAllPages() {
 			console.log('done loading all pages.');
 			console.log("INITIALIZE PAGE");
 			$.mobile.initializePage();
-			if (token){
+			/*if (token){
 				function gotChannels(data){
 					channelListViewModel.channels.removeAll();
 					channelListViewModel.channels(data.channel);
 				}
-				/*channelListViewModel.listMyChannelsCommand().then(gotChannels);
-				channelMenuViewModel.getUrgencySettings();*/
-			}
+				channelListViewModel.listMyChannelsCommand().then(gotChannels);
+				channelMenuViewModel.getUrgencySettings();
+			}*/
 		});
 	});
 

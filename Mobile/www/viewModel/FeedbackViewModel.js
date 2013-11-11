@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function FeedbackViewModel() {	
   var that = this;
 	this.template = 'feedbackView';
@@ -34,5 +35,6 @@ function FeedbackViewModel() {
 	this.reportABugCommand = function () {
 		goToView('inviteFollowersIIView');
 	}
+	
 }
 

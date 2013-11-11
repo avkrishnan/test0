@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelMenuViewModel() {
 	var that = this;
 	this.template = 'channelMenuView';

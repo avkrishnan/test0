@@ -1,11 +1,11 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function InviteFollowersIIViewModel() {
   var that = this;
   this.template = 'inviteFollowersIIView';
   this.viewid = 'V-41';
   this.viewname = 'GetFollowersII';
   this.displayname = 'Praise for Evernym Channels';
-  this.hasfooter = true;
 	this.accountName = ko.observable();	
 
   /* Feedback value and error observable */

@@ -1,3 +1,4 @@
+<!--To do - Pradeep Kumar-->
 <div id="channelMainView" data-role="page">
   <header>
     <a href="#" class="back" onclick="goToView('channelsIOwnView');"></a>
@@ -12,7 +13,7 @@
     <div class="channelinformation">
       <a href="#" class="channelimg channel1 borderred" data-bind="click: channelFollowers"></a>
       <div class="channelinfocontent">
-        <a class="title" href="#" data-bind="text: channelName, click: channelFollowers">The Hawks</a>
+        <a class="title" href="#" data-bind="text: channelName, click: channelFollowers"></a>
         <a href="#" class="setting" data-bind="click: channelSettings"></a>
         <div class="addfollowers" data-bind="html: followerCount"><!--16 followers<a class="add-followers" href="#">Add Followers</a>--></div>
       </div>
@@ -37,7 +38,7 @@
     <div data-bind="foreach: broadcasts">
       <a href="#" class="channelbroadcast" data-bind="click: $parent.singleMessage.bind($index())">
         <div class="broadcast-sensitive" data-bind="css: sensitivity">
-          <span data-bind="text: broadcast"></span><em data-bind="text: time">20 min ago</em>
+          <span data-bind="html: broadcast"></span><em data-bind="text: time"></em>
         </div>
         <br />
         <!--To do - to be activated when data received-->        

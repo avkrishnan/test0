@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function SendMessageViewModel() {
 	var that = this;
 	this.template = "sendMessageView";
@@ -103,7 +104,7 @@ function SendMessageViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		showError('Error listing my channels: ' + details.message);
+		showError(details.message);
 	};
 	
 	this.createChannelMessage = function () {

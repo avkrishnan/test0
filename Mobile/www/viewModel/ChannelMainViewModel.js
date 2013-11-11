@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelMainViewModel() {	
   var that = this;
 	this.template = 'channelMainView';
@@ -20,7 +21,7 @@ function ChannelMainViewModel() {
 	
 	/* Methods */
 	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {		
       that.activate();
     });	
 	};  
@@ -32,21 +33,18 @@ function ChannelMainViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.broadcasts.removeAll();				
-			that.channelId(localStorage.getItem('currentChannelId'));					
-			that.getChannelCommand().then(that.getFollowersCommand()).then(that.getMessagesCommand());
+			localStorage.removeItem('currentMessageData');			
+			that.broadcasts.removeAll();
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+			that.channelId(channelObject.channelId);
+			that.channelName(channelObject.channelname);								
+			that.getFollowersCommand().then(that.getMessagesCommand());
 		}
 	}
 	
 	this.channelSettings = function(){
 		goToView('channelSettingsView');
 	};
-	
-	function successfulGetChannel(data) {
-		$.mobile.hidePageLoadingMsg();
-		localStorage.setItem('currentChannelName', data.name);
-		that.channelName(localStorage.getItem('currentChannelName'));
-  };
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
@@ -64,16 +62,22 @@ function ChannelMainViewModel() {
 		for(len; len<data.message.length; len++) {
 			if(data.message[len].urgencyId == 'N ') {
 				var message_sensitivity = 'broadcastnormal';
+				var sensitivityText = 'NORMAL';
 			} else if(data.message[len].urgencyId == 'L ') {
 				var message_sensitivity = 'broadcastlow';
+				var sensitivityText = 'LOW';
 			} else if(data.message[len].urgencyId == 'TS') {
 				var message_sensitivity = 'broadcasttimesensitive';
+				var sensitivityText = 'TIME-SENSITIVE';
 			} else if(data.message[len].urgencyId == 'E ') {
 				var message_sensitivity = 'broadcastemergency';
+				var sensitivityText = 'EMERGENCY';
 			} else if(data.message[len].urgencyId == 'U ') {
 				var message_sensitivity = 'broadcasturgent';
+				var sensitivityText = 'URGENT';
 			} else {
-				var message_sensitivity = '';				
+				var message_sensitivity = '';
+				var sensitivityText = '';				
 			}
 			var timeAgo = new Date().getTime() - data.message[len].created;
 			function msToTime(ms){
@@ -101,9 +105,11 @@ function ChannelMainViewModel() {
 			var timeago = msToTime(timeAgo);
 			that.broadcasts.push({
 				messageId: data.message[len].id,
-				sensitivity: message_sensitivity,			
-				broadcast: data.message[len].text,
-				time: timeago,				
+				sensitivity: message_sensitivity,
+				sensitivityText: sensitivityText,			
+				broadcast: '<strong></strong>'+data.message[len].text+'<em></em>',
+				time: timeago,
+				created: data.message[len].created,				
 				replies: data.message[len].replies+' replies'
 			});
 		}
@@ -135,9 +141,8 @@ function ChannelMainViewModel() {
 	};
 	
 	this.singleMessage = function(data){
-		localStorage.removeItem('currentMessageId');
-		localStorage.setItem('currentMessageId', data.messageId);	
-		//goToView('singleMessageView');
+		localStorage.setItem('currentMessageData', JSON.stringify(data));							
+		goToView('singleMessageView');
 	};
 	
 }

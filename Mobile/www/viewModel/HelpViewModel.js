@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function HelpViewModel() {	
   var that = this;
 	this.template = 'helpView';
@@ -22,4 +23,5 @@ function HelpViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 		}
 	}
+	
 }

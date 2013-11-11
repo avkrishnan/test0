@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function PrivacyPolicyViewModel() {
   var that = this;
   this.template = 'privacyPolicyView';
@@ -22,4 +23,5 @@ function PrivacyPolicyViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 		}
 	}
+	
 }

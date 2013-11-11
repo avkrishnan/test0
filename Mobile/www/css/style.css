@@ -918,7 +918,6 @@ hr, .baseline {
 .changepswd {
 	background:url("images/sprites-login.png") no-repeat -23px -266px;
 	padding:2px 0 2px 32px;
-	margin:10px 20px 20px 10px
 }
 .errormsg {
 	background:url("images/sprites-login.png") no-repeat -28px -196px;

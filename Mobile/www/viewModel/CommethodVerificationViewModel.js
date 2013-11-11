@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function CommethodVerificationViewModel() {
 	var that = this;
 	this.template = 'commethodVerificationView';

@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelDeleteViewModel() {	
   var that = this;
 	this.template = 'channelDeleteView';
@@ -47,4 +48,5 @@ function ChannelDeleteViewModel() {
 		return ES.channelService.deleteChannel(that.channelId(), { success: successfulDelete, error: errorAPI });
 		localStorage.removeItem('currentChannel');
   };
+	
 }

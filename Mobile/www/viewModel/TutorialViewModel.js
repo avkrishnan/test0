@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function TutorialViewModel() {
   var that = this;
   this.template = 'tutorialView';
@@ -73,4 +74,5 @@ function TutorialViewModel() {
 			goToView('channelListView');
 		}
   }
+	
 }

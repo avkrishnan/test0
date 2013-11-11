@@ -1,13 +1,12 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelsIOwnViewModel() {	
   var that = this;
 	this.template = 'channelsIOwnView';
 	this.viewid = 'V-19';
 	this.viewname = 'ChannelsIOwn';
 	this.displayname = 'My Channels';	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 	
   /* Channels observable */
 	this.channels = ko.observableArray([]);
@@ -28,6 +27,7 @@ function ChannelsIOwnViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			localStorage.removeItem('currentChannelData');			
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
@@ -52,20 +52,17 @@ function ChannelsIOwnViewModel() {
 	};
 	
 	this.channelSettings = function(data){
-		localStorage.removeItem('currentChannelId');
-		localStorage.setItem('currentChannelId', data.channelId);
+		localStorage.setItem('currentChannelData', JSON.stringify(data));	
 		goToView('channelSettingsView');
 	};
 	
 	this.channelMain = function(data){
-		localStorage.removeItem('currentChannelId');
-		localStorage.setItem('currentChannelId', data.channelId);
+		localStorage.setItem('currentChannelData', JSON.stringify(data));				
 		goToView('channelMainView');
 	};
 	
 	this.channelFollowers = function(data){
-		localStorage.removeItem('currentChannelId');
-		localStorage.setItem('currentChannelId', data.channelId);
+		localStorage.setItem('currentChannelData', JSON.stringify(data));	
 		goToView('followersListView');
 	};
 	

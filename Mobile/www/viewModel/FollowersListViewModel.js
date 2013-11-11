@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function FollowersListViewModel() {	
   var that = this;
 	this.template = 'followersListView';
@@ -88,6 +89,7 @@ function FollowersListViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
     return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
   };
+	
 }
 
 /* To do - removed when followersList page is complete

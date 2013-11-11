@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelChangeIconViewModel() {	
   var that = this;
 	this.template = 'channelChangeIconView';
@@ -42,4 +43,5 @@ function ChannelChangeIconViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
   };
+	
 }

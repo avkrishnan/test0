@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelListViewModel() {
   var that = this;
   this.template = 'channelListView';

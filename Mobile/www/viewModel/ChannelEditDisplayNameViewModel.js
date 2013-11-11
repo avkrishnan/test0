@@ -1,11 +1,11 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelEditDisplayNameViewModel() {	
   var that = this;
 	this.template = 'channelEditDisplayNameView';
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelEditDisplayName';
-	this.displayname = 'Channel Edit Display Name';	
-	this.hasfooter = true;    
+	this.displayname = 'Channel Edit Display Name';	  
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
