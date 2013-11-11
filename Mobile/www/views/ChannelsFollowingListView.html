@@ -124,13 +124,13 @@
     -->
     <section data-bind="foreach: channels">
       <div class="channelinformation channel-follow">
-        <a href="V-55-followed-channel.html" class="channelimg channel5 bordergreen"></a>
+        <a href="#" class="channelimg channel5 bordergreen"></a>
         <div class="channelinfocontent last">
           <a href="V-55-followed-channel.html" class="channelinfo channelfollow">
             <strong data-bind="text:name"></strong>
             <em data-bind="text:normName"></em>
           </a>
-          <a href="V-16.html" class="setting"></a>
+          <a href="#" class="setting" data-bind="click: $parent.channelViewUnfollow"></a>
         </div>
       </div>
     </section>  

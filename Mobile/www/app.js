@@ -358,9 +358,9 @@ addContactViewModel = new AddContactViewModel(),
 additionalContactViewModel = new AdditionalContactViewModel(),
 verifyContactViewModel = new VerifyContactViewModel(),
 channelMessagesViewModel = new ChannelMessagesViewModel(),
+channelViewUnfollowModel = new ChannelViewUnfollowModel(),
 /* end*/
 
-/* By chaman*/
 tutorialViewModel = new TutorialViewModel(),
 signupStepFirstViewModel = new SignupStepFirstViewModel(),
 signupStepSecondViewModel = new SignupStepSecondViewModel(),
@@ -370,7 +370,6 @@ aboutEvernymViewModel = new AboutEvernymViewModel(),
 feedbackViewModel = new FeedbackViewModel(),
 inviteFollowersIIViewModel = new InviteFollowersIIViewModel(),
 privacyPolicyViewModel = new PrivacyPolicyViewModel(),
-/* end*/
 
 /* By Pradeep */
 channelMainViewModel = new ChannelMainViewModel(),
@@ -441,7 +440,8 @@ var models = [
 							channelChangeIconViewModel,
 							firstChannelViewModel,
 							channelMessagesViewModel,
-							registrationVerifyViewModel							
+							registrationVerifyViewModel,
+							channelViewUnfollowModel				
               ];
 
 
