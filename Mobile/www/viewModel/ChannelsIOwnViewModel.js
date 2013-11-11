@@ -9,7 +9,7 @@ function ChannelsIOwnViewModel() {
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
-  /* Channels observable */		
+  /* Channels observable */
 	this.channels = ko.observableArray([]);
 	this.channelId = ko.observable();
 	this.channelname = ko.observable();

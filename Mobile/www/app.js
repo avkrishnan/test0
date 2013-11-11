@@ -524,8 +524,8 @@ function loadAllPages() {
 					channelListViewModel.channels.removeAll();
 					channelListViewModel.channels(data.channel);
 				}
-				channelListViewModel.listMyChannelsCommand().then(gotChannels);
-				channelMenuViewModel.getUrgencySettings();
+				/*channelListViewModel.listMyChannelsCommand().then(gotChannels);
+				channelMenuViewModel.getUrgencySettings();*/
 			}
 		});
 	});
