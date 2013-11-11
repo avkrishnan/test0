@@ -442,11 +442,8 @@ var models = [
 							firstChannelViewModel,
 							channelMessagesViewModel,
 							registrationVerifyViewModel,
-<<<<<<< HEAD
-							singleMessageFullTextViewModel							
-=======
+							singleMessageFullTextViewModel,							
 							channelViewUnfollowModel				
->>>>>>> 73ff8f161692bb8503e9d4b7ccd08adfa150faed
               ];
 
 
