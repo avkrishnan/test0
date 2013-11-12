@@ -31,7 +31,7 @@ function SingleMessageRepliesViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
-			localStorage.removeItem('currentReplyData');													
+			//localStorage.removeItem('currentReplyData');													
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelname);												
 			that.messageId(messageObject.messageId);
@@ -118,8 +118,7 @@ function SingleMessageRepliesViewModel() {
   };
 	
 	this.replyDetail = function(data){	
-		localStorage.setItem('currentReplyData', JSON.stringify(data));
-		//alert(localStorage.getItem('currentReplyData'));						
+		localStorage.setItem('currentReplyData', JSON.stringify(data));									
 		goToView('replyDetailView');
 	};
 				

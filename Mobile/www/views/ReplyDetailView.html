@@ -20,12 +20,10 @@
     </div>  
     <!--<h5 class="replydetail">Will Bowen:</h5>-->
     <div class="channelprivate reply-detail">
-      <span data-bind="text: replyDate">October 15, 5:20 PM</span>
-      <p data-bind="text: reply">Coach does that mean we will be moving Friday's practice to Saturday again like we did last week. I hope we can keep it on ...</p>
-        <p class="more" data-bind="text: reply">
-          Coach does that mean we will be moving Friday's practice to Saturday again like we did last week. I hope we can keep it on ...
-        </p>
-        <a class="morebtn" href="#" data-bind="click: showMore">MORE</a>
+      <span data-bind="text: replyDate"></span>
+      <p data-bind="text: reply"></p>
+        <p class="more" data-bind="text: moreText, visible: more">The more</p>
+        <a class="morebtn" href="#" data-bind="visible:moreButton, click: showMore">MORE</a>
       </p>
     </div>   
     <div class="contactchannel">

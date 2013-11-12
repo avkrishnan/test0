@@ -60,10 +60,9 @@ function SendMessageViewModel() {
 	function successfulVerify(data){
 		var len = 0;
 		for(len; len<data.commethod.length; len++) {
-			if(data.commethod[len].name == 'Email' && data.commethod[len].verified == 'Y') {
-				that.messageText();
+			if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'Y' && data.commethod[len].dflt == 'Y') {
 				return that.createChannelMessage();
-			} else {
+			} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'Y') {
 				showMessage('Please verify your email !');				
 			}
 		}
