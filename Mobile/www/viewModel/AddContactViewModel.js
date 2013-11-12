@@ -57,11 +57,20 @@ function AddContactViewModel() {
 	}
 	
 	this.gotoVerify = function(data) {
+		var callbacks = {
+			success: function(responseData) {
+				//alert('Verification code sent!');
+			},
+			error: function (responseData, status, details) {
+				alert('error');
+			}
+		};		
 		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
 		localStorage.setItem("currentVerificationCommethodType",data.comMethodType);
 		localStorage.setItem("currentVerificationCommethodID",data.comMethodID);
 		localStorage.setItem("verificationStatus",false);
 		//alert(that.commethods.removeAll());
+		ES.commethodService.requestVerification(data.comMethodID, callbacks);
 		goToView('verifyContactView');
 	}
 	
@@ -130,6 +139,8 @@ function AddContactViewModel() {
 		that.commethods.removeAll();
 		that.showDelete(false);
 		that.showConfirm(false);
+		localStorage.removeItem("currentVerificationCommethodID");
+		that.currentDeleteCommethodID('');
 		//alert(localStorage.getItem('currentEscPlan'));
 		//alert(JSON.stringify(localStorage.getItem('allEscPlans')));
 		//$.mobile.showPageLoadingMsg("a", "Loading Settings");
