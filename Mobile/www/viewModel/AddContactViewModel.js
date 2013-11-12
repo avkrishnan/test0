@@ -111,7 +111,6 @@ function AddContactViewModel() {
 		};
 		//that.commethods.remove(that.currentDeleteCommethodID());		
 		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
-		that.currentDeleteCommethodID('');
 		goToView('addContactView');
 	}
 
