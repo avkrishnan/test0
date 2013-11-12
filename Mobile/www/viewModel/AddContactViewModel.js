@@ -140,7 +140,6 @@ function AddContactViewModel() {
 		that.showDelete(false);
 		that.showConfirm(false);
 		localStorage.removeItem("currentVerificationCommethodID");
-		that.currentDeleteCommethodID('');
 		//alert(localStorage.getItem('currentEscPlan'));
 		//alert(JSON.stringify(localStorage.getItem('allEscPlans')));
 		//$.mobile.showPageLoadingMsg("a", "Loading Settings");
