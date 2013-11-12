@@ -9,6 +9,7 @@ function ChannelSettingsViewModel() {
 	this.accountName = ko.observable();	
 
   /* Channel Settings observable */
+	this.channelId = ko.observable();	
 	this.channelName = ko.observable();
 	this.channelDisplayName = ko.observable();
 	
@@ -25,8 +26,10 @@ function ChannelSettingsViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			return this.getChannelCommand();
-			goToView('channelSettingsView');
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.channelId(channelObject.channelId);
+			that.channelName(channelObject.channelname);
+			that.channelDisplayName(channelObject.channeldescription);									
 		}
 	}
 	
@@ -44,26 +47,6 @@ function ChannelSettingsViewModel() {
 	
 	this.changeChannelIcon = function () {
 		goToView('channelChangeIconView');
-  };
-	
-	function successfulGetChannel(data) {
-		$.mobile.hidePageLoadingMsg();
-		localStorage.setItem('currentChannelName', data.name);
-		localStorage.setItem('currentChannelDescription', data.description);
-		that.channelName(localStorage.getItem('currentChannelName'));
-		that.channelDisplayName(localStorage.getItem('currentChannelDescription'));
-  };
-
-  function errorAPI(data, status, response) {
-    $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', response.message);
-    goToView('channelSettingsView')
-  };
-	
-  this.getChannelCommand = function () {
-		var channelId = localStorage.getItem('currentChannelId');
-		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
-		return ES.channelService.getChannel(channelId, {success: successfulGetChannel, error: errorAPI});
   };
 	
 }

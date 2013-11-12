@@ -63,8 +63,8 @@ function ResetPasswordViewModel() {
 				error: resetPasswordError
 			}; 
 			var resetPasswordModel = {};       
-			resetPasswordModel.password = this.newPassword();             
-			resetPasswordModel.confirmPassword = this.confirmPassword();
+			resetPasswordModel.password = that.newPassword();             
+			resetPasswordModel.confirmPassword = that.confirmPassword();
 			resetPasswordModel.forgotPasswordRequestKey = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
 			$.mobile.showPageLoadingMsg('a', 'Sending Update Password Request');			
 			return ES.loginService.resetPassword(resetPasswordModel, callbacks).then(resetPasswordSuccess);

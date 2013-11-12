@@ -117,7 +117,7 @@ function ChannelMainViewModel() {
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', response.message);
+    showError(response.message);
     goToView('channelsIOwnView');
   };
 	
