@@ -381,6 +381,7 @@ firstChannelViewModel = new FirstChannelViewModel(),
 registrationVerifyViewModel = new RegistrationVerifyViewModel(),
 singleMessageFullTextViewModel = new SingleMessageFullTextViewModel(),
 singleMessageRepliesViewModel = new SingleMessageRepliesViewModel(),
+replyDetailViewModel = new ReplyDetailViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -445,7 +446,8 @@ var models = [
 							registrationVerifyViewModel,
 							singleMessageFullTextViewModel,							
 							channelViewUnfollowModel,
-							singleMessageRepliesViewModel											
+							singleMessageRepliesViewModel,
+							replyDetailViewModel											
               ];
 
 

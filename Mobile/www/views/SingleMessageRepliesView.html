@@ -20,10 +20,11 @@
     </div>  
     <div class="broadcastreplies">Replies</div>
     <div class="channelmessages" data-bind="foreach: replies">
-      <a href="#" class="repliesbroadcast">
-        <!--<span class="newreplies">new</span>-->
+      <a href="#" class="repliesbroadcast" data-bind="click: $parent.replyDetail.bind($index())">
+        <!--<span class="newreplies">new</span>-->       
         <div class="msgbroadcast">
-          <span class="timemsg" data-bind="text: replyTime">20 mins ago:</span>
+          <span class="timemsg" data-bind="text: replyTime"></span>
+          <!--<span class="messagebtn">iGi</span> -->          
           <p data-bind="html: reply"></p>
         </div>
       </a>
