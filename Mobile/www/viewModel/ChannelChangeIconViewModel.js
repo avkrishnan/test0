@@ -9,6 +9,7 @@ function ChannelChangeIconViewModel() {
 	this.accountName = ko.observable();	
 	
   /* Channel Icon Image observable */
+	this.channelId = ko.observable();	
 	this.picId = ko.observable();
 	
 	/* Methods */
@@ -23,6 +24,8 @@ function ChannelChangeIconViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.channelId(channelObject.channelId);			
 		}
 	}
 	function successfulModify(args) {
@@ -37,7 +40,7 @@ function ChannelChangeIconViewModel() {
 	
   this.changeChannelIconCommand = function () {
 		var channelObject = {
-			id: localStorage.getItem('currentChannelId'),
+			id: that.channelId(),
 			picId: that.picId()
 		};
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');

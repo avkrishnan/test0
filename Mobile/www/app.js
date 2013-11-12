@@ -380,6 +380,7 @@ channelChangeIconViewModel = new ChannelChangeIconViewModel(),
 firstChannelViewModel = new FirstChannelViewModel(),
 registrationVerifyViewModel = new RegistrationVerifyViewModel(),
 singleMessageFullTextViewModel = new SingleMessageFullTextViewModel(),
+singleMessageRepliesViewModel = new SingleMessageRepliesViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -443,7 +444,8 @@ var models = [
 							channelMessagesViewModel,
 							registrationVerifyViewModel,
 							singleMessageFullTextViewModel,							
-							channelViewUnfollowModel				
+							channelViewUnfollowModel,
+							singleMessageRepliesViewModel											
               ];
 
 

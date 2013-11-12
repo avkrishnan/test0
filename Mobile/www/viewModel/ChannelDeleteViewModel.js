@@ -26,9 +26,10 @@ function ChannelDeleteViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.channelId(localStorage.getItem('currentChannelId'));
-			that.channelName(localStorage.getItem('currentChannelName'));
-			that.channelDisplayName(localStorage.getItem('currentChannelDescription'));
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.channelId(channelObject.channelId);
+			that.channelName(channelObject.channelname);
+			that.channelDisplayName(channelObject.channeldescription);			
 		}
 	}
 

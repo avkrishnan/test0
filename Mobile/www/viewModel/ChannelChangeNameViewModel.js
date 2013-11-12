@@ -11,7 +11,8 @@ function ChannelChangeNameViewModel() {
 	
   /* New Channel Step First observable */
 	this.sectionOne = ko.observable(true);
-	this.sectionTwo = ko.observable(false);	
+	this.sectionTwo = ko.observable(false);
+	this.channelId = ko.observable();		
 	this.channelChangeName = ko.observable('');	
 	this.message = ko.observable();	
 	this.errorChannel = ko.observable();	
@@ -37,6 +38,8 @@ function ChannelChangeNameViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.channelId(channelObject.channelId);			
 			that.channelChangeName('');		
 			$('input').keyup(function () {
 				that.message('');
@@ -78,12 +81,16 @@ function ChannelChangeNameViewModel() {
   };
 	
   this.confirmChannelChangeNameCommand = function () {
-		var channelObject = {
-			id: localStorage.getItem('currentChannelId'),
-			name: that.channelChangeName()
-		};
-		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
-		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
-  };
+		if (that.channelChangeName() == '') {
+      that.errorChannel('<span>SORRY :</span> Please enter channel name');
+    } else {		
+			var channelObject = {
+				id: that.channelId(),
+				name: that.channelChangeName()
+			};
+			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
+			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
+		}
+	}
 	
 }

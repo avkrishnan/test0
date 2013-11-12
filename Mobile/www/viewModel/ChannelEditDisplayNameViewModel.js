@@ -10,7 +10,8 @@ function ChannelEditDisplayNameViewModel() {
 	this.notification = ko.observable();
 	
   /* Edit Channel Display observable */
-	this.channelEditDisplayName = ko.observable('');	
+	this.channelId = ko.observable();
+	this.channelEditDisplayName = ko.observable();	
 	this.message = ko.observable();	
 	this.errorChannel = ko.observable();
 	
@@ -34,6 +35,8 @@ function ChannelEditDisplayNameViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.channelId(channelObject.channelId);			
 			$('input').keyup(function () {
 				that.message('');
 				that.errorChannel('');
@@ -64,7 +67,7 @@ function ChannelEditDisplayNameViewModel() {
       that.errorChannel('<span>SORRY :</span> Please enter channel display name');
     } else {
 			var channelObject = {
-				id: localStorage.getItem('currentChannelId'),
+				id: that.channelId(),
 				description: that.channelEditDisplayName()
 			};
 			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');

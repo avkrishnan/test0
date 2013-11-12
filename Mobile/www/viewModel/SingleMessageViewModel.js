@@ -44,8 +44,12 @@ function SingleMessageViewModel() {
 		(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
 	}
 	
-	this.messageFullText = function(data){						
+	this.messageFullText = function(){						
 		goToView('singleMessageFullTextView');
+	};
+	
+	this.messageReplies = function(){						
+		goToView('singleMessageRepliesView');
 	};
 				
 }

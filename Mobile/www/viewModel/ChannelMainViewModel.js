@@ -46,6 +46,30 @@ function ChannelMainViewModel() {
 		goToView('channelSettingsView');
 	};
 	
+	function msToTime(ms){
+		var ms = new Date().getTime() - ms;	
+		var secs = Math.floor(ms / 1000);
+		var msleft = ms % 1000;
+		var totalHours = Math.floor(secs / (60 * 60));
+		var days = Math.floor(totalHours / 24);
+		var hours = totalHours % 24;
+		var divisor_for_minutes = secs % (60 * 60);
+		var minutes = Math.floor(divisor_for_minutes / 60);
+		var divisor_for_seconds = divisor_for_minutes % 60;
+		var seconds = Math.ceil(divisor_for_seconds);
+		if(days > 0) {
+			return days+' days ago';
+		} else if(hours > 0) {
+			return hours+' hrs ago';
+		} else if(minutes > 0) {
+			return minutes+' mins ago';
+		} else if(seconds > 0) {
+			return  seconds+' secs ago';
+		} else {
+			return  '1 secs ago';
+		}
+	}
+	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		if(data.followers.length <= 1) {
@@ -79,36 +103,12 @@ function ChannelMainViewModel() {
 				var message_sensitivity = '';
 				var sensitivityText = '';				
 			}
-			var timeAgo = new Date().getTime() - data.message[len].created;
-			function msToTime(ms){
-				var secs = Math.floor(ms / 1000);
-				var msleft = ms % 1000;
-				var totalHours = Math.floor(secs / (60 * 60));
-				var days = Math.floor(totalHours / 24);
-				var hours = totalHours % 24;
-				var divisor_for_minutes = secs % (60 * 60);
-				var minutes = Math.floor(divisor_for_minutes / 60);
-				var divisor_for_seconds = divisor_for_minutes % 60;
-				var seconds = Math.ceil(divisor_for_seconds);
-				if(days > 0) {
-					return days+' days ago';
-				} else if(hours > 0) {
-					return hours+' hrs ago';
-				} else if(minutes > 0) {
-					return minutes+' mins ago';
-				} else if(seconds > 0) {
-					return  seconds+' secs ago';
-				} else {
-					return  '1 secs ago';
-				}
-			}
-			var timeago = msToTime(timeAgo);
 			that.broadcasts.push({
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
 				sensitivityText: sensitivityText,			
 				broadcast: '<strong></strong>'+data.message[len].text+'<em></em>',
-				time: timeago,
+				time: msToTime(data.message[len].created),
 				created: data.message[len].created,				
 				replies: data.message[len].replies+' replies'
 			});
