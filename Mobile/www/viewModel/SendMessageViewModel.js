@@ -15,6 +15,9 @@ function SendMessageViewModel() {
 	this.channelId = ko.observable();	
 	this.channelname = ko.observable();
 	
+	/* In case of reply observable*/
+	this.messageId = ko.observable();	
+	
 	/* channels options variable */
 	var channelsOptions = function(name, id) {
 		this.channelname = name;
@@ -107,9 +110,17 @@ function SendMessageViewModel() {
 	};
 	
 	this.createChannelMessage = function () {
-    $.mobile.showPageLoadingMsg("a", "Posting Message");
-		var messageobj = {text: that.messageText(), type: 'FYI'};
-		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
+		if(localStorage.getItem('currentMessageData')) {
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
+			that.messageId(messageObject.messageId);
+			$.mobile.showPageLoadingMsg("a", "Posting Message");						
+			var messageobj = {responseToMsgId: that.messageId(), text: that.messageText(), type: 'FYI'};
+			return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});						
+		} else {
+			$.mobile.showPageLoadingMsg("a", "Posting Message");
+			var messageobj = {text: that.messageText(), type: 'FYI'};
+			return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
+		}
 	};
 
 }

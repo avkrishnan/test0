@@ -31,7 +31,7 @@ function SingleMessageRepliesViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
-			//localStorage.removeItem('currentReplyData');													
+			localStorage.removeItem('currentReplyData');													
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelname);												
 			that.messageId(messageObject.messageId);
@@ -77,37 +77,17 @@ function SingleMessageRepliesViewModel() {
 		that.replies.removeAll();			
 		var len = 0;
 		for(len; len<data.message.length; len++) {
-			if(data.message[len].urgencyId == 'N ') {
-				var message_sensitivity = 'broadcastnormal';
-				var sensitivityText = 'NORMAL';
-			} else if(data.message[len].urgencyId == 'L ') {
-				var message_sensitivity = 'broadcastlow';
-				var sensitivityText = 'LOW';
-			} else if(data.message[len].urgencyId == 'TS') {
-				var message_sensitivity = 'broadcasttimesensitive';
-				var sensitivityText = 'TIME-SENSITIVE';
-			} else if(data.message[len].urgencyId == 'E ') {
-				var message_sensitivity = 'broadcastemergency';
-				var sensitivityText = 'EMERGENCY';
-			} else if(data.message[len].urgencyId == 'U ') {
-				var message_sensitivity = 'broadcasturgent';
-				var sensitivityText = 'URGENT';
-			} else {
-				var message_sensitivity = '';
-				var sensitivityText = '';				
-			}		
-			that.replies.push({
-				replyId: data.message[len].id,
-				senderSubscriberId: data.message[len].senderSubscriberId,
-				responseToMsgId: data.message[len].responseToMsgId,		
-				created: data.message[len].created,				
-				replyTime: msToTime(data.message[len].created),
-				reply: data.message[len].text,
-				urgencyId: data.message[len].urgencyId,
-				sensitivity: message_sensitivity,
-				sensitivityText: sensitivityText,							
-				replyToReply: data.message[len].replies
-			});
+			if(data.message[len].replies < 1) {
+				that.replies.push({
+					replyId: data.message[len].id,
+					senderSubscriberId: data.message[len].senderSubscriberId,
+					responseToMsgId: data.message[len].responseToMsgId,		
+					created: data.message[len].created,				
+					replyTime: msToTime(data.message[len].created),
+					reply: data.message[len].text,							
+					replyToReply: data.message[len].replies
+				});
+			}
 		}
 	}; 
 	
