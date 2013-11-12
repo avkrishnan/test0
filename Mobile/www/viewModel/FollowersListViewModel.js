@@ -40,10 +40,13 @@ function FollowersListViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.channelId(localStorage.getItem('currentChannelId'));			
-			that.followers.removeAll();					
-			that.getChannelCommand().then(that.getFollowersCommand());
+			that.accountName(localStorage.getItem('accountName'));			
+			that.followers.removeAll();	
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+			that.channelId(channelObject.channelId);
+			that.channelName(channelObject.channelname);												
+			$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
+			return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
 		}
 	}
 	
@@ -83,11 +86,6 @@ function FollowersListViewModel() {
 		var channelId = localStorage.getItem('currentChannelId');
 		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
 		return ES.channelService.getChannel(channelId, {success: successfulGetChannel, error: errorAPI});
-  };
-	
-	this.getFollowersCommand = function () {
-		$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
-    return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
   };
 	
 }

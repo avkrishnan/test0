@@ -2,7 +2,7 @@
 /* To do - Pradeep Kumar */
 function ReplyDetailViewModel() {
   var that = this;
-	this.template = 'replyDetailViewModel';
+	this.template = 'replyDetailView';
 	this.viewid = 'V-56';
 	this.viewname = 'ReplyDetail';
 	this.displayname = 'Reply Detail';	
@@ -14,8 +14,11 @@ function ReplyDetailViewModel() {
 	this.messageId = ko.observable();
 	//this.replyAuthor = ko.observable();			
 	this.replyDate = ko.observable();	
-	this.reply = ko.observable();							
-	
+	this.reply = ko.observable();	
+	this.moreText = ko.observable();	
+	this.more = ko.observable(false);
+	this.moreButton = ko.observable(true);										
+
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
@@ -31,28 +34,33 @@ function ReplyDetailViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
-			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));																
+			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));
+			that.more(false);		
+			that.moreButton(true);																								
 			that.channelId(channelObject.channelId);	
 			that.channelName(channelObject.channelname);													
 			that.messageId(messageObject.messageId);						
 			that.replyDate(_date(replyObject.created));
-			that.reply(replyObject.reply);						
+			that.reply(replyObject.reply);
+			that.moreText(replyObject.reply);												
 		}
 	}
 	
 	function _date(created) {	
 		var date  = new Date(created);
-    return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
-		date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
+		var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
+    return ( ((date.getMonth()+1)<10?'0':'') + (monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
+		", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
 		(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
 	}
 	
-	this.showMore = function(data){							
-		goToView('replyDetailViewModel');
+	this.showMore = function(){
+		that.more(true);
+		that.moreButton(false);														
 	};
 	
-	this.replyButton = function(data){							
-		goToView('replyDetailViewModel');
+	this.replyButton = function(){							
+		goToView('sendMessageView');
 	};
 				
 }

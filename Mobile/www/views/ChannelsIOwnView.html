@@ -21,7 +21,7 @@
         </select>
       </form>
     </div>
-    <div data-bind="foreach: channels">
+    <a href="#" data-bind="foreach: channels">
       <div class="channelcontent">
         <span class="channelimg channel1 borderred"></span>
         <div class="detailschannel">
@@ -35,14 +35,15 @@
         <!--<a class="requestcontent" href="#" data-bind="click: $parent.channelMain.bind($index())">
           <span class="request">4 new replies</span>
           <span class="igi">2 new iGi's</span>
-        </a>
+        </a>-->
         <div class="requestcontent last">    
-          <span class="followers" data-bind="text: followerCount, click: $parent.channelFollowers.bind($index())"></span>
-          <span class="request">+ 1 requests</span>
-          <span class="lost">-1 lost</span>
-        </div>-->
+          <span class="followers" data-bind="click: $parent.channelFollowers.bind($index())">16 followers</span>
+          <!--To do - to be activated when data received-->          
+          <!--<span class="request">+ 1 requests</span>
+          <span class="lost">-1 lost</span>-->
+        </div>
       </div>
-    </div>   
+    </a>   
   </div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
