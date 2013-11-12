@@ -84,6 +84,17 @@ function AddContactViewModel() {
 		that.showDelete(true);
 	}
 	
+	this.gotoView = function() {
+		if(that.currentDeleteCommethodID()) {
+			that.currentDeleteCommethodID('');
+			goToView('addContactView');
+		}
+		else {
+			that.currentDeleteCommethodID('');
+			goToView('escalationPlansView');
+		}
+	}
+	
 	this.showConfirmButton = function(data) {
 		that.showConfirm(true);
 	}
@@ -100,6 +111,7 @@ function AddContactViewModel() {
 		};
 		//that.commethods.remove(that.currentDeleteCommethodID());		
 		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
+		that.currentDeleteCommethodID('');
 		goToView('addContactView');
 	}
 
