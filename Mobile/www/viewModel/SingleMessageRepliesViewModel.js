@@ -3,7 +3,7 @@
 function SingleMessageRepliesViewModel() {
   var that = this;
 	this.template = 'singleMessageRepliesView';
-	this.viewid = 'V-23';
+	this.viewid = 'V-56';
 	this.viewname = 'MessageReplies';
 	this.displayname = 'Message Replies';	
 	this.accountName = ko.observable();	
@@ -30,7 +30,8 @@ function SingleMessageRepliesViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
+			localStorage.removeItem('currentReplyData');													
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelname);												
 			that.messageId(messageObject.messageId);
@@ -63,6 +64,14 @@ function SingleMessageRepliesViewModel() {
 		}
 	}
 	
+	/*function replyAuthor() {
+		return ES.loginService.getAccount('bb5156c5-1e95-414b-b76a-299edabd15f7', {success: successfulGetAccountInfo, error: errorAPI});
+	}
+	
+	function successfulGetAccountInfo(data){
+		alert(data);
+	}*/
+	
 	function successfulReliesGET(data){
     $.mobile.hidePageLoadingMsg();
 		that.replies.removeAll();			
@@ -93,7 +102,7 @@ function SingleMessageRepliesViewModel() {
 				responseToMsgId: data.message[len].responseToMsgId,		
 				created: data.message[len].created,				
 				replyTime: msToTime(data.message[len].created),
-				reply: '<em>Will Bowen:</em> '+data.message[len].text,
+				reply: data.message[len].text,
 				urgencyId: data.message[len].urgencyId,
 				sensitivity: message_sensitivity,
 				sensitivityText: sensitivityText,							
@@ -108,8 +117,10 @@ function SingleMessageRepliesViewModel() {
     goToView('singleMessageView');
   };
 	
-	this.replyDeatail = function(data){						
-		goToView('singleMessageRepliesView');
+	this.replyDetail = function(data){	
+		localStorage.setItem('currentReplyData', JSON.stringify(data));
+		//alert(localStorage.getItem('currentReplyData'));						
+		goToView('replyDetailView');
 	};
 				
 }
