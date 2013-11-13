@@ -40,6 +40,7 @@ function VerifyContactViewModel() {
 	}
 	
 	this.requestVerificationCode = function() {
+		//alert(that.verificationCommethodID());
 		var callbacks = {
 			success: function(responseData) {
 				alert('Verification code sent!');
@@ -85,7 +86,6 @@ function VerifyContactViewModel() {
 		that.verificationCommethod(localStorage.getItem("currentVerificationCommethod"));
 		that.verificationCommethodID(localStorage.getItem("currentVerificationCommethodID"));
 		that.verificationStatus(localStorage.getItem("verificationStatus"));
-		
 		if (that.verificationStatus() == 'false') {
 			that.verificationStatus(false);
 		}

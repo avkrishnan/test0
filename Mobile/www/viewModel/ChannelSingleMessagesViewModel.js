@@ -1,10 +1,10 @@
 ﻿/*globals ko*/
-function ChannelMessagesViewModel() {
+function ChannelSingleMessagesViewModel() {
 	var that = this;
-	this.template = "channelMessagesView";
+	this.template = "channelSingleMessagesView";
 	this.viewid = "V-55";
-	this.viewname = "ChannelMessagesDetails";
-	this.displayname = "Channel Messages";
+	this.viewname = "ChannelSingleMessagesDetails";
+	this.displayname = "Channel Single Message";
 	this.hasfooter = true;	
 	
 	this.accountName = ko.observable();
