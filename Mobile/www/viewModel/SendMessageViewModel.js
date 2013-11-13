@@ -13,10 +13,7 @@ function SendMessageViewModel() {
 	this.characterCount = ko.observable();		
 	this.channels = ko.observableArray([]);			
 	this.channelId = ko.observable();	
-	this.channelname = ko.observable();
-	
-	/* In case of reply observable*/
-	this.messageId = ko.observable();	
+	this.channelname = ko.observable();	
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id) {
@@ -61,13 +58,20 @@ function SendMessageViewModel() {
 	});
 	
 	function successfulVerify(data){
-		var len = 0;
-		for(len; len<data.commethod.length; len++) {
-			if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'Y' && data.commethod[len].dflt == 'Y') {
-				return that.createChannelMessage();
-			} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'Y') {
-				showMessage('Please verify your email !');				
+		if(data.commethod.length >= 1) {
+			var len = 0;			
+			for(len; len<data.commethod.length; len++) {
+				if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'Y' && data.commethod[len].dflt == 'Y') {
+					return that.createChannelMessage();
+				} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'Y') {
+					showMessage('Please verify your email !');				
+				} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'N') {
+					showMessage('Please add a default email !');				
+				}
 			}
+		}
+		else {
+			showMessage('Please add a default email !');
 		}
 	};    
 	
@@ -100,8 +104,7 @@ function SendMessageViewModel() {
 	
 	function successfulMessage(data){
 		showMessage('Your message is posted successfully');
-		localStorage.setItem('currentChannelId', that.selectedChannels())
-		goToView('channelMainView');			
+		localStorage.setItem('currentChannelId', that.selectedChannels())		
 	};
 	
 	function errorAPI(data, status, details){
@@ -110,17 +113,9 @@ function SendMessageViewModel() {
 	};
 	
 	this.createChannelMessage = function () {
-		if(localStorage.getItem('currentMessageData')) {
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
-			that.messageId(messageObject.messageId);
-			$.mobile.showPageLoadingMsg("a", "Posting Message");						
-			var messageobj = {responseToMsgId: that.messageId(), text: that.messageText(), type: 'FYI'};
-			return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});						
-		} else {
-			$.mobile.showPageLoadingMsg("a", "Posting Message");
-			var messageobj = {text: that.messageText(), type: 'FYI'};
-			return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
-		}
+		$.mobile.showPageLoadingMsg("a", "Posting Message");
+		var messageobj = {text: that.messageText(), type: 'FYI'};
+		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
 	};
 
 }
