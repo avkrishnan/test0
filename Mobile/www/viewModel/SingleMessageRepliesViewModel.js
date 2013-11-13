@@ -60,7 +60,7 @@ function SingleMessageRepliesViewModel() {
 		} else if(seconds > 0) {
 			return  seconds+' secs ago';
 		} else {
-			return  '1 secs ago';
+			return  'just now';
 		}
 	}
 	

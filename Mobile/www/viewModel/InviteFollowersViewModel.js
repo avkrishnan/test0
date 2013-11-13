@@ -14,10 +14,10 @@ function InviteFollowersViewModel() {
 	this.emailClass = ko.observable();
 	this.errorEmail = ko.observable();		
 	this.emailaddress = ko.observable();		
-	this.messageClass = ko.observable();
-	this.message = ko.observable();
-	this.messageId = ko.observable('message');								
-	this.errorMessage = ko.observable();		
+	this.textClass = ko.observable();
+	this.text = ko.observable();
+	this.textId = ko.observable('message');								
+	this.errorText = ko.observable();		
 		
 	/* Methods */
 	this.applyBindings = function() {
@@ -31,9 +31,9 @@ function InviteFollowersViewModel() {
 		that.emailaddress('');
 		that.emailClass('');
 		that.errorEmail('');				
-		that.message('');
-		that.messageClass('');
-		that.errorMessage('');				
+		that.text('');
+		that.textClass('');
+		that.errorText('');				
 	};	
 	
 	this.activate = function() {
@@ -45,18 +45,18 @@ function InviteFollowersViewModel() {
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
 			that.channelName(channelObject.channelname);
 			that.channelWebAddress(channelObject.channelname+'.evernym.dom');
-			that.message('Add additional text here . . . ');			
+			that.text('Add additional text here . . . ');			
 			$('textarea').click(function () {
-				if(that.message() == 'Add additional text here . . . ') {
-					that.message('');											
+				if(that.text() == 'Add additional text here . . . ') {
+					that.text('');											
 				}
 			});
 			$('textarea').keyup(function () {
-				if(that.message() == 'Add additional text here . . . ') {
-					that.message('');											
+				if(that.text() == 'Add additional text here . . . ') {
+					that.text('');											
 				}
-				that.messageClass('');
-				that.errorMessage('');												
+				that.textClass('');
+				that.errorText('');												
 			});							
 			$('input, textarea').keyup(function () {
 				that.emailClass('');
@@ -73,13 +73,13 @@ function InviteFollowersViewModel() {
 	
 	this.sendInviteCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-		var messageData = $('#'+that.messageId()).val();
+		var textData = $('#'+that.textId()).val();
 		if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
 			that.emailClass('validationerror');
 			that.errorEmail('<span>SORRY :</span> Please enter valid email');
-    } else if (messageData == '') {
-			that.messageClass('validationerror');
-			that.errorMessage('<span>SORRY :</span> Please give message');
+    } else if (textData == '') {
+			that.textClass('validationerror');
+			that.errorText('<span>SORRY :</span> Please give message');
     } else {
 			showMessage('Testing');			
     }

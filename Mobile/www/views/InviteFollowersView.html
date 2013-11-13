@@ -23,9 +23,9 @@
         <div class="msgerror" data-bind="html: errorEmail"></div>        
       </div>        
       <label class="invited-followChannel">Jason Law has invited you to follow an Evernym Channel: <em data-bind="text: channelWebAddress"></em></label>
-      <div class="formtype textareatype" data-bind="css: messageClass">
-        <textarea class="textarea" data-bind="attr: { id: messageId }, value: message"></textarea>
-        <div class="msgerror" data-bind="html: errorMessage"></div>
+      <div class="formtype textareatype" data-bind="css: textClass">
+        <textarea class="textarea" data-bind="attr: { id: textId }, value: text"></textarea>
+        <div class="msgerror" data-bind="html: errorText"></div>
       </div>             
       <a href="#" class="sendbtnican"><span data-bind="click: sendInviteCommand">send</span></a>
     </section>           

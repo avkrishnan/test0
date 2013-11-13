@@ -97,7 +97,6 @@ function LoginViewModel() {
 					that.password('');
 				}
       };
-      //channelListViewModel.shown = false;
       var loginModel = {};
       $.mobile.showPageLoadingMsg("a", "Logging In");
       loginModel.accountname = this.accountName();
@@ -119,9 +118,9 @@ function LoginViewModel() {
 		localStorage.removeItem('newuseremail');
 		localStorage.removeItem('newusername');
 		localStorage.removeItem('newuserpassword');
-    channelListViewModel.clearForm();
-    notificationsViewModel.removeNotifications();
-    OVERLAY.removeNotifications();
+    //channelListViewModel.clearForm();
+    //notificationsViewModel.removeNotifications();
+    //OVERLAY.removeNotifications();
   };
 
   function loginSuccess(args) {
@@ -144,7 +143,6 @@ function LoginViewModel() {
 			else {
 				goToView('channelListView');
 			}
-			//ES.channelService.listMyChannels({success: successfulList, error: errorAPI });
     } 
 		else {
       //loginError();
@@ -152,19 +150,5 @@ function LoginViewModel() {
       return;
     }
   }
-	
-	function successfulList(data) {
-		if(data.channel.length < 1) {
-			goToView('channelListView');
-		}
-		else {
-			goToView('channelsIOwnView');
-		}
-    //$.mobile.hidePageLoadingMsg();
-	};    
-	
-	function errorAPI(data, status, details){
-		alert('error');
-	};
 		
 }
