@@ -57,6 +57,7 @@ function AddContactViewModel() {
 	}
 	
 	this.gotoVerify = function(data) {
+		//alert(JSON.stringify(data));
 		var callbacks = {
 			success: function(responseData) {
 				//alert('Verification code sent!');
@@ -68,6 +69,7 @@ function AddContactViewModel() {
 		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
 		localStorage.setItem("currentVerificationCommethodType",data.comMethodType);
 		localStorage.setItem("currentVerificationCommethodID",data.comMethodID);
+		//alert(localStorage.getItem("currentVerificationCommethodID"));
 		localStorage.setItem("verificationStatus",false);
 		//alert(that.commethods.removeAll());
 		ES.commethodService.requestVerification(data.comMethodID, callbacks);
@@ -75,6 +77,7 @@ function AddContactViewModel() {
 	}
 	
 	this.gotoDelete = function(data) {
+		//alert('Delete');
 		//alert(that.showDelete());
 		//alert(JSON.stringify(data));
 		//alert(that.currentDeleteCommethodID());
@@ -115,7 +118,6 @@ function AddContactViewModel() {
 	}
 
 	this.showCommethods = function(data) {
-		//alert(that.currentDeleteCommethodID());
 		if(data.commethod.length > 0) {
 			var tempCommethodClass = '', tempshowVerify = false;
 			$.each(data.commethod, function(indexCommethods, valueCommethods) {
@@ -142,6 +144,7 @@ function AddContactViewModel() {
 	}	
     
 	this.activate = function() {
+		//alert(that.currentDeleteCommethodID());
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
 		

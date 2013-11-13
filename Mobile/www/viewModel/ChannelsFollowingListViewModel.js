@@ -97,6 +97,11 @@ function ChannelsFollowingListViewModel() {
 	this.channelViewUnfollow = function(data) {
 		var channel = JSON.stringify(data);
 		localStorage.setItem("currentChannel", channel);
-		goToView('channelViewUnfollow');	
+		goToView('channelViewUnfollow');
 	}
+	
+	this.actionFollowChannelCommand = function(data) {
+		localStorage.setItem("currentChannel", JSON.stringify(data));
+		goToView('channelMessagesView');
+	}	
 }

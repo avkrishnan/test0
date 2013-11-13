@@ -34,6 +34,11 @@ function ChannelMessagesViewModel() {
 		goToView('channelView');
 	}
 	
+	this.showSingleMessage = function(data) {
+		alert(JSON.stringify(data));
+		//goToView('channelView');
+	}
+	
 	this.getChannelCommand = function(channelid) {
 		//alert(channelid);
 		var callbacks = {
@@ -55,6 +60,7 @@ function ChannelMessagesViewModel() {
 		var callbacks = {
 			success: function(data){
 				$.each(data.message, function(indexMessage, valueMessage) {
+					//alert(JSON.stringify(valueMessage));
 					var tempCreated = time2TimeAgo(valueMessage.created/1000);
 					var tempClass = valueMessage.urgencyId.toLowerCase().trim();
 					if(tempClass == 'n') {
@@ -64,7 +70,7 @@ function ChannelMessagesViewModel() {
 						tempClass = 'unknown';
 					}
 					that.channelMessages.push( // without push not working
-						{ messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass}
+						{messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.id, messageSender:valueMessage.senderSubscriberId}
 					);
 				});
 			},
