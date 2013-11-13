@@ -43,7 +43,11 @@ function SendMessageViewModel() {
 					that.characterCount('0');				
 				}
 			});			
-			$('textarea').keyup(function () {				
+			$('textarea').keyup(function () {
+				if(that.messageText() == 'Add additional text here . . . ') {
+					that.messageText('');				
+					that.characterCount('0');				
+				}								
 				that.characterCount(that.messageText().length);
 			});	
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');

@@ -1,5 +1,5 @@
 <!--To do - Pradeep Kumar-->
-<div id="inviteFollowersView" data-role="page">
+<div id="addFollowersView" data-role="page">
   <header>
     <a href="#" class="back" onclick="goToView('followersListView');"></a>
     <a class="menu" href="#" onclick="goToView('channelMenuView');"></a>
@@ -15,20 +15,19 @@
       <div class="detailschannel last">
         <div class="channelinfo"><strong data-bind="text: channelName"></strong></div>
       </div>
-    </div>            
-    <section class="loginform">
-      <label class="invited-followChannel">Recipient's email address:</label>
+    </div> 
+    <section class="loginform" method="get" action="#">
+      <label class="msginfo">Add a Follower Manually</label>
+      <div class="formtype" data-bind="css: nameClass">
+        <input type="text" data-bind="value: firstLastName" placeholder="first and last name" />
+        <div class="msgerror" data-bind="html: errorName"></div>         
+      </div>
       <div class="formtype" data-bind="css: emailClass">
-        <input type="text" data-bind="value: emailaddress" placeholder="email here" />
-        <div class="msgerror" data-bind="html: errorEmail"></div>        
-      </div>        
-      <label class="invited-followChannel">Jason Law has invited you to follow an Evernym Channel: <em data-bind="text: channelWebAddress"></em></label>
-      <div class="formtype textareatype" data-bind="css: messageClass">
-        <textarea class="textarea" data-bind="attr: { id: messageId }, value: message"></textarea>
-        <div class="msgerror" data-bind="html: errorMessage"></div>
-      </div>             
-      <a href="#" class="sendbtnican"><span data-bind="click: sendInviteCommand">send</span></a>
-    </section>           
+        <input type="text" data-bind="value: emailaddress" placeholder="phone number or email address" />
+        <div class="msgerror" data-bind="html: errorEmail"></div>         
+      </div>
+      <div class="login"><div class="loginbtn"><a href="#" data-bind="click: addFollowersCommand">ADD</a></div></div>
+    </section>
   </div>
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>

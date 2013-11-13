@@ -383,6 +383,8 @@ registrationVerifyViewModel = new RegistrationVerifyViewModel(),
 singleMessageFullTextViewModel = new SingleMessageFullTextViewModel(),
 singleMessageRepliesViewModel = new SingleMessageRepliesViewModel(),
 replyDetailViewModel = new ReplyDetailViewModel(),
+addInviteFollowersViewModel = new AddInviteFollowersViewModel(),
+addFollowersViewModel = new AddFollowersViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -449,7 +451,9 @@ var models = [
 							channelViewUnfollowModel,
 							singleMessageRepliesViewModel,
 							replyDetailViewModel,
-							channelSingleMessagesViewModel											
+							channelSingleMessagesViewModel,
+							addInviteFollowersViewModel,
+							addFollowersViewModel											
               ];
 
 
