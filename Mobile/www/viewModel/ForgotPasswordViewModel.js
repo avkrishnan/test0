@@ -50,7 +50,7 @@ function ForgotPasswordViewModel() {
 	});
 	
   this.forgotPasswordCommand = function () {
-    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
     if (this.accountName() == '' && this.email() == '') {
       that.usernameClass('validationerror');
       that.emailClass('validationerror');

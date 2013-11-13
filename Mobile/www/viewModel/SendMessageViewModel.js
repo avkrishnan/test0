@@ -84,6 +84,7 @@ function SendMessageViewModel() {
 		if(that.messageText() == '') {
 			showMessage('Please type some message !');
 		} else {
+			$.mobile.showPageLoadingMsg("a", "Checking email verification !");			
 			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
 		}
 	};
