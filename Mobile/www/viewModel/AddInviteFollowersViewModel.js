@@ -26,8 +26,8 @@ function AddInviteFollowersViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
-			that.channelName(channelObject.channelname);
-			that.channelWebAddress(channelObject.channelname+'.evernym.dom');			
+			that.channelName(channelObject.channelName);
+			that.channelWebAddress(channelObject.channelName+'.evernym.dom');			
 		}
 	}
 	

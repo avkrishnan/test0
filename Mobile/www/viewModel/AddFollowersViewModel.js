@@ -43,7 +43,7 @@ function AddFollowersViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
 			that.channelId(channelObject.channelId);										
-			that.channelName(channelObject.channelname);
+			that.channelName(channelObject.channelName);
 			$('input').keyup(function () {
 				that.nameClass('');
 				that.errorName('');			

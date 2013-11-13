@@ -36,7 +36,7 @@ function ChannelMainViewModel() {
 			that.broadcasts.removeAll();
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
 			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelname);
+			that.channelName(channelObject.channelName);
 			that.followerCount(channelObject.followerCount);											
 			that.getMessagesCommand();
 		}

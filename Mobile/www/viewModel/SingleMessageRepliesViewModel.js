@@ -33,7 +33,7 @@ function SingleMessageRepliesViewModel() {
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
 			localStorage.removeItem('currentReplyData');													
 			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelname);												
+			that.channelName(channelObject.channelName);												
 			that.messageId(messageObject.messageId);
 			$.mobile.showPageLoadingMsg("a", "Loading Message replies");			
 			return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI})			

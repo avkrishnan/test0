@@ -29,7 +29,7 @@ function SingleMessageViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
-			that.channelName(channelObject.channelname);					
+			that.channelName(channelObject.channelName);					
 			that.time('Sent '+ _date(messageObject.created) +' ('+messageObject.time+'):');	
 			that.singleMessage(messageObject.broadcast);	
 			that.replies(messageObject.replies);							

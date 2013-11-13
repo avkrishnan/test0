@@ -30,7 +30,7 @@ function SingleMessageFullTextViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
-			that.channelName(channelObject.channelname);
+			that.channelName(channelObject.channelName);
 			var fullDate = _date(messageObject.created);					
 			that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
 			that.sensitivityText(messageObject.sensitivityText);				

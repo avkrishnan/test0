@@ -31,7 +31,7 @@ function FollowersListViewModel() {
 			that.followers.removeAll();	
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
 			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelname);
+			that.channelName(channelObject.channelName);
 			that.followerCount(channelObject.followerCount);															
 			$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
 			return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });

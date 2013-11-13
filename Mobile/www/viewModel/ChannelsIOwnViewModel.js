@@ -11,8 +11,8 @@ function ChannelsIOwnViewModel() {
   /* Channels observable */
 	this.channels = ko.observableArray([]);
 	this.channelId = ko.observable();
-	this.channelname = ko.observable();
-	this.channeldescription = ko.observable();
+	this.channelName = ko.observable();
+	this.channelDescription = ko.observable();
 	this.followerCount = ko.observable();	
 
 	/* Methods */
@@ -46,8 +46,8 @@ function ChannelsIOwnViewModel() {
 			}			
 			that.channels.push({
 				channelId: data.channel[channelslength].id, 
-				channelname: data.channel[channelslength].name, 
-				channeldescription: data.channel[channelslength].description,
+				channelName: data.channel[channelslength].name, 
+				channelDescription: data.channel[channelslength].description,
 				followerCount: followers
 			});
 		}	

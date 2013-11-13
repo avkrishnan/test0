@@ -38,7 +38,7 @@ function ReplyDetailViewModel() {
 			that.more(false);		
 			that.moreButton(true);																								
 			that.channelId(channelObject.channelId);	
-			that.channelName(channelObject.channelname);													
+			that.channelName(channelObject.channelName);													
 			that.messageId(messageObject.messageId);						
 			that.replyDate(_date(replyObject.created));
 			that.reply(replyObject.reply);

@@ -13,11 +13,11 @@ function SendMessageViewModel() {
 	this.characterCount = ko.observable();		
 	this.channels = ko.observableArray([]);			
 	this.channelId = ko.observable();	
-	this.channelname = ko.observable();	
+	this.channelName = ko.observable();	
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id) {
-		this.channelname = name;
+		this.channelName = name;
 		this.channelId = id;
 	};
 	this.selectedChannels = ko.observable()				

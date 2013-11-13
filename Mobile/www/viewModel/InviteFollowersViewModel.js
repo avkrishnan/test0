@@ -43,8 +43,8 @@ function InviteFollowersViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
-			that.channelName(channelObject.channelname);
-			that.channelWebAddress(channelObject.channelname+'.evernym.dom');
+			that.channelName(channelObject.channelName);
+			that.channelWebAddress(channelObject.channelName+'.evernym.dom');
 			that.text('Add additional text here . . . ');			
 			$('textarea').click(function () {
 				if(that.text() == 'Add additional text here . . . ') {

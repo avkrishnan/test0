@@ -24,4 +24,8 @@ function AboutEvernymViewModel() {
 		}
 	}
 	
+	this.notificationsCommand = function() {
+		goToView('notificationsView');		
+	} 
+	
 }
