@@ -1,5 +1,6 @@
 ﻿/*globals ko*/
 /* To do - Pradeep Kumar */
+/* This ViewModel is for edit short description */
 function ChannelEditDisplayNameViewModel() {	
   var that = this;
 	this.template = 'channelEditDisplayNameView';

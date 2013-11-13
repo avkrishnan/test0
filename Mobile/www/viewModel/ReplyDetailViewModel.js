@@ -58,9 +58,5 @@ function ReplyDetailViewModel() {
 		that.more(true);
 		that.moreButton(false);														
 	};
-	
-	this.replyButton = function(){							
-		goToView('sendMessageView');
-	};
 				
 }

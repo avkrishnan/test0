@@ -13,6 +13,7 @@ function ChannelsIOwnViewModel() {
 	this.channelId = ko.observable();
 	this.channelname = ko.observable();
 	this.channeldescription = ko.observable();
+	this.followerCount = ko.observable();	
 
 	/* Methods */
 	this.applyBindings = function(){	
@@ -26,7 +27,7 @@ function ChannelsIOwnViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
+			that.accountName(localStorage.getItem('accountName'));			
 			localStorage.removeItem('currentChannelData');			
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
@@ -38,10 +39,16 @@ function ChannelsIOwnViewModel() {
     $.mobile.hidePageLoadingMsg();
 		that.channels.removeAll();	
 		for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
+			if(data.channel[channelslength].followers <= 1) {
+				var followers = data.channel[channelslength].followers +' follower';
+			} else {
+				var followers = data.channel[channelslength].followers +' followers';
+			}			
 			that.channels.push({
 				channelId: data.channel[channelslength].id, 
 				channelname: data.channel[channelslength].name, 
-				channeldescription: data.channel[channelslength].description
+				channeldescription: data.channel[channelslength].description,
+				followerCount: followers
 			});
 		}	
 	};    
@@ -51,7 +58,7 @@ function ChannelsIOwnViewModel() {
 		showError('Error listing my channels: ' + details.message);
 	};
 	
-	this.channelSettings = function(data){
+	this.channelSettings = function(data){		
 		localStorage.setItem('currentChannelData', JSON.stringify(data));	
 		goToView('channelSettingsView');
 	};
@@ -61,7 +68,7 @@ function ChannelsIOwnViewModel() {
 		goToView('channelMainView');
 	};
 	
-	this.channelFollowers = function(data){
+	this.channelFollowers = function(data){	
 		localStorage.setItem('currentChannelData', JSON.stringify(data));	
 		goToView('followersListView');
 	};

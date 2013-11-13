@@ -17,18 +17,17 @@ function ChannelMainViewModel() {
 	this.sensitivity = ko.observable();	
 	this.broadcast = ko.observable();
 	this.time = ko.observable();	
-	this.replies = ko.observable();				
+	this.replies = ko.observable();			
 	
 	/* Methods */
 	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {		
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {	
       that.activate();
     });	
 	};  
 	
-	var token = ES.evernymService.getAccessToken();
-	var channelId = localStorage.getItem('currentChannelId');
 	this.activate = function() {
+		var token = ES.evernymService.getAccessToken();		
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
@@ -37,14 +36,11 @@ function ChannelMainViewModel() {
 			that.broadcasts.removeAll();
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
 			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelname);								
-			that.getFollowersCommand().then(that.getMessagesCommand());
+			that.channelName(channelObject.channelname);
+			that.followerCount(channelObject.followerCount);											
+			that.getMessagesCommand();
 		}
 	}
-	
-	this.channelSettings = function(){
-		goToView('channelSettingsView');
-	};
 	
 	function msToTime(ms){
 		var ms = new Date().getTime() - ms;	
@@ -69,15 +65,6 @@ function ChannelMainViewModel() {
 			return  '1 secs ago';
 		}
 	}
-	
-	function successfulList(data){
-    $.mobile.hidePageLoadingMsg();
-		if(data.followers.length <= 1) {
-			that.followerCount(data.followers.length+' follower');
-		} else {
-			that.followerCount(data.followers.length+' followers');
-		}
-	}; 
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();
@@ -121,24 +108,18 @@ function ChannelMainViewModel() {
     goToView('channelsIOwnView');
   };
 	
-  this.getChannelCommand = function () {
-		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
-		return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});
-  };
-	
-	this.getFollowersCommand = function () {
-		$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
-    return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
-  };
-	
-	this.channelFollowers = function(data){	
-		goToView('followersListView');
-	};
-	
 	this.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
 		return ES.messageService.getChannelMessages(that.channelId(), undefined, {success: successfulMessageGET, error: errorAPI});
 	};
+	
+	this.channelSettings = function(){
+		goToView('channelSettingsView');
+	};	
+	
+	this.channelFollowers = function(data){	
+		goToView('followersListView');
+	};	
 	
 	this.singleMessage = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));							

@@ -23,7 +23,7 @@
     </div>
     <a href="#" data-bind="foreach: channels">
       <div class="channelcontent">
-        <span class="channelimg channel1 borderred"></span>
+        <span class="channelimg channel1 borderred" data-bind="click: $parent.channelMain.bind($index())"></span>
         <div class="detailschannel">
           <div class="channelinfo" data-bind="click: $parent.channelMain.bind($index())">
             <strong data-bind="text: channelname"></strong>
@@ -36,14 +36,14 @@
           <span class="request">4 new replies</span>
           <span class="igi">2 new iGi's</span>
         </a>-->
-        <div class="requestcontent last">    
-          <span class="followers" data-bind="click: $parent.channelFollowers.bind($index())">16 followers</span>
+        <div class="requestcontent last" data-bind="click: $parent.channelFollowers.bind($index())">    
+          <span class="followers" data-bind="text: followerCount"></span>
           <!--To do - to be activated when data received-->          
           <!--<span class="request">+ 1 requests</span>
           <span class="lost">-1 lost</span>-->
         </div>
       </div>
-    </a>   
+    </a>  
   </div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>

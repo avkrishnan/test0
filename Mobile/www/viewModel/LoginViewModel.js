@@ -47,13 +47,10 @@ function LoginViewModel() {
 					that.usernameClass('');
 					that.passwordClass('');
 				}
-				/*else {
-					that.loginCommand();
-				}*/
 			});			
 		} 
 		else {
-			goToView('escalationPlansView');
+			goToView('channelListView');
 		}
   };
 	
