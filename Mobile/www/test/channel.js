@@ -5,12 +5,13 @@
   var hlpr = new ApiTestHelper();
 
   var SCEN1 = hlpr.TestScenario();
+  var SCEN2 = hlpr.TestScenario();
 
-  asyncTest('ENROLL', hlpr.enroll(SCEN1));
+  asyncTest('A ENROLLS', hlpr.enroll(SCEN1));
 
-  asyncTest('LOGIN', hlpr.login(SCEN1));
+  asyncTest('A LOGS IN', hlpr.login(SCEN1));
 
-  asyncTest('GET COMMUNICATION METHODS', function() {
+  asyncTest('A GETS COMMUNICATION METHODS', function() {
     $.when(SCEN1.ES.commethodService.getCommethods())
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then( function(data) {
@@ -30,6 +31,9 @@
   asyncTest('FETCH A CHANNEL I OWN', function() {
     $.when(SCEN1.ES.channelService.getChannel(SCEN1.channel.id))
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
+    .then(function(data) {
+        equal(data.followers,0);
+      }, hlpr.CHECK.shouldNotFail)
     .then(start, start);
   });
 
@@ -137,4 +141,21 @@
     testCreateChannelWithFail(SCEN1.ES.evernymService.getAccessToken(), hlpr.CHECK.badRequest, SCEN1.channel);
   });
 
+  asyncTest('B ENROLLS', hlpr.enroll(SCEN2));
+
+  asyncTest('B LOGS IN', hlpr.login(SCEN2));
+
+  asyncTest("B FOLLOWS A'S CHANNEL", hlpr.followChannel(SCEN2, SCEN1, 'channel'));
+
+  asyncTest("A'S CHANNEL FOLLOWER COUNT INCREASES", function() {
+    $.when(SCEN1.ES.channelService.getChannel(SCEN1.channel.id))
+    .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
+    .then(function(data) {
+        equal(data.followers,1);
+      }, hlpr.CHECK.shouldNotFail)
+    .then(start, start);
+  });
+
+
+  
 })();
