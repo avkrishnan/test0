@@ -17,6 +17,7 @@ function ChannelViewModel() {
 	this.messages = ko.observableArray([]);
 	this.channelid = ko.observable();
 	this.channelIconObj = ko.observable();
+	this.channelMessage = ko.observable();
 	
 	this.url = ko.observable('');
 	this.description = ko.observable('DESCRIPTION');
@@ -95,6 +96,7 @@ function ChannelViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
+		that.channelMessage(data);
 		that.title(data.name );
 		
 		that.description(data.description);
@@ -128,7 +130,7 @@ function ChannelViewModel() {
 	function successfulFollowChannel() {
 		$.mobile.hidePageLoadingMsg();
 		showMessage("Now Following Channel " + that.title());
-		localStorage.removeItem("currentChannel");
+		//localStorage.removeItem("currentChannel");
 		//$.mobile.changePage("#" + channelsFollowingListViewModel.template);
 		$.mobile.changePage("#" + channelMessagesViewModel.template);
 	}
@@ -198,7 +200,8 @@ function ChannelViewModel() {
 	
 	// follow/unfollow will be called on the basis of channelAction value
 	this.actionFollowChannelCommand = function() {
-		localStorage.setItem("currentChannelMessages", that.channelid());
+		//alert(JSON.stringify(that.channelMessage()));
+		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
 		that.followChannelCommand();
 	}
 	

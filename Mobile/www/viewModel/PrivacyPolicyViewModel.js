@@ -1,11 +1,11 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function PrivacyPolicyViewModel() {
   var that = this;
   this.template = 'privacyPolicyView';
   this.viewid = 'V-49';
   this.viewname = 'PrivacyPolicy';
   this.displayname = 'Privacy Policy';
-  this.hasfooter = true;
 	this.accountName = ko.observable();	
 	
 	/* Methods */
@@ -23,4 +23,5 @@ function PrivacyPolicyViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 		}
 	}
+	
 }

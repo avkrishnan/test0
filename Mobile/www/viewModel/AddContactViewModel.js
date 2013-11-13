@@ -57,15 +57,27 @@ function AddContactViewModel() {
 	}
 	
 	this.gotoVerify = function(data) {
+		//alert(JSON.stringify(data));
+		var callbacks = {
+			success: function(responseData) {
+				//alert('Verification code sent!');
+			},
+			error: function (responseData, status, details) {
+				alert('error');
+			}
+		};		
 		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
 		localStorage.setItem("currentVerificationCommethodType",data.comMethodType);
 		localStorage.setItem("currentVerificationCommethodID",data.comMethodID);
+		//alert(localStorage.getItem("currentVerificationCommethodID"));
 		localStorage.setItem("verificationStatus",false);
 		//alert(that.commethods.removeAll());
+		ES.commethodService.requestVerification(data.comMethodID, callbacks);
 		goToView('verifyContactView');
 	}
 	
 	this.gotoDelete = function(data) {
+		//alert('Delete');
 		//alert(that.showDelete());
 		//alert(JSON.stringify(data));
 		//alert(that.currentDeleteCommethodID());
@@ -73,6 +85,17 @@ function AddContactViewModel() {
 		that.currentDeleteCommethodID(data.comMethodID);
 		//alert(that.currentDeleteCommethodID());
 		that.showDelete(true);
+	}
+	
+	this.gotoView = function() {
+		if(that.currentDeleteCommethodID()) {
+			that.currentDeleteCommethodID('');
+			goToView('addContactView');
+		}
+		else {
+			that.currentDeleteCommethodID('');
+			goToView('escalationPlansView');
+		}
 	}
 	
 	this.showConfirmButton = function(data) {
@@ -95,7 +118,6 @@ function AddContactViewModel() {
 	}
 
 	this.showCommethods = function(data) {
-		//alert(that.currentDeleteCommethodID());
 		if(data.commethod.length > 0) {
 			var tempCommethodClass = '', tempshowVerify = false;
 			$.each(data.commethod, function(indexCommethods, valueCommethods) {
@@ -122,6 +144,7 @@ function AddContactViewModel() {
 	}	
     
 	this.activate = function() {
+		//alert(that.currentDeleteCommethodID());
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
 		
@@ -130,6 +153,7 @@ function AddContactViewModel() {
 		that.commethods.removeAll();
 		that.showDelete(false);
 		that.showConfirm(false);
+		localStorage.removeItem("currentVerificationCommethodID");
 		//alert(localStorage.getItem('currentEscPlan'));
 		//alert(JSON.stringify(localStorage.getItem('allEscPlans')));
 		//$.mobile.showPageLoadingMsg("a", "Loading Settings");

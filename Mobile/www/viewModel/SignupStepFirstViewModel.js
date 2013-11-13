@@ -1,11 +1,11 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function SignupStepFirstViewModel() {
   var that = this;
   this.template = 'signupStepFirstView';
   this.viewid = 'V-02';
   this.viewname = 'Register';
   this.displayname = 'Register';
-  this.hasfooter = false;
 	
   /* Signup observable */	
   this.accountName = ko.observable();
@@ -147,15 +147,7 @@ function SignupStepFirstViewModel() {
   }
 	
   this.nextViewCommand = function () {
-
-    /*JAL: this is the old regex. The next regex is the same we use in the back-end. 
-     * If we're going to change the front-end regex, we need to do the same in the 
-     * back end.
-     */
-
-    //var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-
     if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
       that.emailClass('validationerror');
       that.errorIconEmail('errorimg');

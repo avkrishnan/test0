@@ -1,3 +1,4 @@
+<!--To do - Pradeep Kumar-->
 <div id="sendMessageView" data-role="page" class="channel-list">
    <header>
     <a href="#" class="back" data-rel="back"></a>
@@ -18,7 +19,7 @@
     <div class="compose-newbroadcast">
       <div class="composedropdown"> 
         <label>Channel</label>
-        <select data-bind="options: channels, optionsText: 'channelname', value: selectedChannels, optionsValue: 'channelId'">
+        <select data-bind="options: channels, optionsText: 'channelName', value: selectedChannels, optionsValue: 'channelId'">
         </select>
         <div data-bind="visible: selectedChannels">
           <span data-bind="text: selectedChannels() ? selectedChannels().channelId : 'unknown'"></span>.

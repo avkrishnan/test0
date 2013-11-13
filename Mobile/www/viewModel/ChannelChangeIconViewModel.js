@@ -1,14 +1,15 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelChangeIconViewModel() {	
   var that = this;
 	this.template = 'channelChangeIconView';
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelChangeIcon';
-	this.displayname = 'Channel Chage Icon Image';	
-	this.hasfooter = true;    
+	this.displayname = 'Channel Chage Icon Image';	   
 	this.accountName = ko.observable();	
 	
   /* Channel Icon Image observable */
+	this.channelId = ko.observable();	
 	this.picId = ko.observable();
 	
 	/* Methods */
@@ -23,6 +24,8 @@ function ChannelChangeIconViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.channelId(channelObject.channelId);			
 		}
 	}
 	function successfulModify(args) {
@@ -37,10 +40,11 @@ function ChannelChangeIconViewModel() {
 	
   this.changeChannelIconCommand = function () {
 		var channelObject = {
-			id: localStorage.getItem('currentChannelId'),
+			id: that.channelId(),
 			picId: that.picId()
 		};
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
   };
+	
 }

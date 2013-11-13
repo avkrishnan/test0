@@ -1,121 +1,37 @@
-<!--  INVITE FOLLOWERS VIEW -->
-
-<div id="inviteFollowersView" data-role="page" class="channel-list" >
-    <div id="gpanel"></div>
-    <div id="gpaneldots"></div>
-    <div data-role="header" class="header" xdata-theme="b">
-        <!--
-         <a href="#channelView" data-role="button" data-icon="arrow-l" ><span data-bind="text: channelname"></span> </a>
-         
-         -->
-        
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
-        
-        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
-        
-        <button id="hnav" class="hnav" data-role="none"  data-bind="click: backNav, text: navText" ></button>
-        
+<!--To do - Pradeep Kumar-->
+<div id="inviteFollowersView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('followersListView');"></a>
+    <a class="menu" href="#" onclick="goToView('channelMenuView');"></a>
+    <div class="linkicon">
+      <a class="smsicon" href="#"></a>
+      <a class="processingicon"href="#"></a>
+      <a class="groupicon" href="#"></a>
     </div>
-    
-    
-    
-    <div class="message-list"  data-role="content" data-iscroll>
-        
-        
-        <ul data-role="listview" >
-            
-            
-            <li class="channel-list-item">
-                
-                <a  class="channel-list-anchor" href="#"  >
-                    
-                    <div class="channel-list-stripe2"></div>
-                    
-                    
-                    <div class="channel-list-avatar" style="background-image:url('resources/megaphone.png')"></div>
-                    
-                    <span class="channel-info">
-                        <span class="channel-name" >Invite FOllowers</span>
-                        
-                    </span>
-                    <div class="channel-list-avatar-frame"></div>
-                    
-                    
-                    
-                </a>
-                
-            </li>
-            
-            
-            <li class="message-list-item ">
-                
-                <div  class="message-list-container" >
-                    
-                    <div class="message-list-stripe"></div>
-                    <div class="message-info" >
-                        <div class="message-list-avatar" style="background:#8DC63F;"></div>
-                        <div class="message-list-avatar-frame"></div>
-                        
-                        
-                        
-                        
-                        <div style="margin-left:35px;">
-                            <div style="">http://<span data-bind="text: normName"></span>.evernym.com</div>
-                        </div>
-                        
-                        
-                    </div>
-                    
-                </div>
-                
-                
-                
-            </li>
-        </ul>
-        
-        
-    </div>
-    
-    
-    
-    
-    <div data-role="content" xdata-theme="b" >
-        
-        
-        <!--
-         <div  >
-         <div >
-         <input id="firstname" type="text" data-bind="value: firstname" placeholder="First Name" autocomplete="on" autofocus="autofocus" required data-validate="required" />
-         </div>
-         </div>
-         
-         <div >
-         <div >
-         <input id="lastname" type="email" data-bind="value: lastname" placeholder="Last Name" autocomplete="on" required data-validate="required" />
-         
-         </div>
-         </div>
-         
-         <div>
-         <div >
-         <input id="emailAddress" type="email" data-bind="value: emailaddress" placeholder="Email Address" autocomplete="on"  required data-validate="required|email" />
-         </div>
-         </div>
-         
-         <div >
-         <div >
-         <input id="smsPhone" type="text" data-bind="value: smsPhone" placeholder="SMS Text Phone Number" required data-validate="required" required data-validate="required|phone"/>
-         </div>
-         </div>
-         
-         <div >
-         <div>
-         <input id="addFollowerButton" type="button" data-bind="click: addFollowerCommand" value="Add Follower" data-inline="true"  />
-         </div>
-         </div>
-         
-         -->
-        
-    </div>
-   <div id="gfooter"></div>
-</div>
+  </header>  
+  <div class="page-content channelsettings">
+    <div class="channelcontent broadecast">
+      <span class="channelimg channel1 borderred"></span>
+      <div class="detailschannel last">
+        <div class="channelinfo"><strong data-bind="text: channelName"></strong></div>
+      </div>
+    </div>            
+    <section class="loginform">
+      <label class="invited-followChannel">Recipient's email address:</label>
+      <div class="formtype" data-bind="css: emailClass">
+        <input type="text" data-bind="value: emailaddress" placeholder="email here" />
+        <div class="msgerror" data-bind="html: errorEmail"></div>        
+      </div>        
+      <label class="invited-followChannel">Jason Law has invited you to follow an Evernym Channel: <em data-bind="text: channelWebAddress"></em></label>
+      <div class="formtype textareatype" data-bind="css: textClass">
+        <textarea class="textarea" data-bind="attr: { id: textId }, value: text"></textarea>
+        <div class="msgerror" data-bind="html: errorText"></div>
+      </div>             
+      <a href="#" class="sendbtnican"><span data-bind="click: sendInviteCommand">send</span></a>
+    </section>           
+  </div>
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="goToView('sendMessageView');"></a>
+  </div>
+</div>   

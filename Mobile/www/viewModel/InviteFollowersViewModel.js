@@ -1,121 +1,88 @@
 ﻿/*globals ko*/
-
-function InviteFollowersViewModel() {
+/* To do - Pradeep Kumar */
+function InviteFollowersViewModel() {	
+  var that = this;
+	this.template = 'inviteFollowersView';
+	this.viewid = 'V-27';
+	this.viewname = 'InviteFollowers';
+	this.displayname = 'Invite Followers';	
+	this.accountName = ko.observable();	
 	
-	// --- properties
+  /* Invite Followers observable */
+	this.channelName = ko.observable();	
+	this.channelWebAddress = ko.observable();
+	this.emailClass = ko.observable();
+	this.errorEmail = ko.observable();		
+	this.emailaddress = ko.observable();		
+	this.textClass = ko.observable();
+	this.text = ko.observable();
+	this.textId = ko.observable('message');								
+	this.errorText = ko.observable();		
+		
+	/* Methods */
+	this.applyBindings = function() {
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+      that.clearForm();				
+      that.activate();
+    });	
+	};  
 	
-	var that = this;
+	this.clearForm = function () {
+		that.emailaddress('');
+		that.emailClass('');
+		that.errorEmail('');				
+		that.text('');
+		that.textClass('');
+		that.errorText('');				
+	};	
 	
-	this.template = "inviteFollowersView";
-    this.viewid = "V-27";
-    this.viewname = "GetFollowers";
-    this.displayname = "Get Followers";
-    
-	this.hasfooter = true;
-	this.isChannelView = true;
-	this.channelid = ko.observable();
-	this.channelname = ko.observable();
-	this.normName = ko.observable();
-	this.emailaddress = ko.observable();
-	this.firstname = ko.observable();
-	this.lastname = ko.observable();
-	this.smsPhone = ko.observable();
-    this.navText = ko.observable('Channel Menu');
-   
-    this.applyBindings = function(){
-        $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
-                                    that.clearForm();
-                                    if ($.mobile.pageData && $.mobile.pageData.id) {
-                                    that.activate({ id: $.mobile.pageData.id });
-                                    } else {
-                                    var currentChannel = localStorage.getItem("currentChannel");
-                                    var lchannel = JSON.parse(currentChannel);
-                                    that.activate(lchannel);
-                                    }
-                                    
-                                    
-                                    });
-    };
-    
-	
-
-	
-	
-	// Methods
-    
-    this.clearForm = function(){
-        that.channelid('');
-        that.channelname('');
-        that.normName('');
-        that.emailaddress('');
-        that.firstname('');
-        that.lastname('');
-        that.smsPhone('');
-    };
-
-	function generateProvisionalAccount() {
-		return {
-			emailaddress: that.emailaddress,
-			smsPhone: that.smsPhone,
-			firstname: that.firstname,
-			lastname: that.lastname,
-			channelid: that.channelid
-		};
+	this.activate = function() {
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			that.accountName(localStorage.getItem('accountName'));
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+			that.channelName(channelObject.channelName);
+			that.channelWebAddress(channelObject.channelName+'.evernym.dom');
+			that.text('Add additional text here . . . ');			
+			$('textarea').click(function () {
+				if(that.text() == 'Add additional text here . . . ') {
+					that.text('');											
+				}
+			});
+			$('textarea').keyup(function () {
+				if(that.text() == 'Add additional text here . . . ') {
+					that.text('');											
+				}
+				that.textClass('');
+				that.errorText('');												
+			});							
+			$('input, textarea').keyup(function () {
+				that.emailClass('');
+				that.errorEmail('');									
+			});			
+		}
 	}
 	
-	function getChannelFromPageData(){
-		that.activate({id:$.mobile.pageData.id});
-	}
+	$(document).keyup(function (e) {
+		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'inviteFollowersView') {
+			that.sendInviteCommand();
+		}
+	});
 	
-	this.logoutCommand = function(){
-		loginViewModel.logoutCommand();
-		$.mobile.changePage("#" + loginViewModel.template)
-	};
-	
-	this.backNav = function(){
-        $.mobile.changePage("#" + channelMenuViewModel.template);
-    };
-
-	
-	this.activate = function (channel) {
-		
-		that.channelid(channel.id);
-		that.channelname(channel.name);
-		that.normName(channel.normName);
-		
-		return true;
-		
-	};
-
-	this.addFollowerCommand = function (provisionalAccount){
-		$.mobile.showPageLoadingMsg("a", "Adding Follower");
-		var callbacks = {
-			success: addFollowerSuccess,
-			error: addFollowerError
-		};
-		
-		var provisional = generateProvisionalAccount();
-		ES.channelService.provisionalEnroll(provisional, callbacks);
-	};
-
-
-	function addFollowerSuccess(args) {
-		$.mobile.hidePageLoadingMsg();
-	}
-	
-	function addFollowerError(data, status, response) {
-		$.mobile.hidePageLoadingMsg();
-        
-        loginPageIfBadLogin(response.code);
-        
-		showError("Error Creating Follower Account: " + response.message);
-	}
-	
-
-
-
-   
-
-	
+	this.sendInviteCommand = function () {
+    var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
+		var textData = $('#'+that.textId()).val();
+		if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
+			that.emailClass('validationerror');
+			that.errorEmail('<span>SORRY :</span> Please enter valid email');
+    } else if (textData == '') {
+			that.textClass('validationerror');
+			that.errorText('<span>SORRY :</span> Please give message');
+    } else {
+			showMessage('Testing');			
+    }
+  };
 	
 }

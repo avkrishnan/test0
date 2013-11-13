@@ -1,3 +1,4 @@
+<!--To do - Pradeep Kumar-->
 <div id="channelsIOwnView" data-role="page">
   <header>
     <a href="#" class="back" onclick="goToView('channelListView');"></a>
@@ -20,13 +21,13 @@
         </select>
       </form>
     </div>
-    <div data-bind="foreach: channels">
-      <div href="#" class="channelcontent">
+    <a href="#" data-bind="foreach: channels">
+      <div class="channelcontent">
         <span class="channelimg channel1 borderred" data-bind="click: $parent.channelMain.bind($index())"></span>
         <div class="detailschannel">
           <div class="channelinfo" data-bind="click: $parent.channelMain.bind($index())">
-            <strong data-bind="text: channelname"></strong>
-            <em data-bind="text: channeldescription"></em>
+            <strong data-bind="text: channelName"></strong>
+            <em data-bind="text: channelDescription"></em>
           </div>
           <div class="setting" data-bind="click: $parent.channelSettings.bind($index())"></div>
         </div>
@@ -34,14 +35,15 @@
         <!--<a class="requestcontent" href="#" data-bind="click: $parent.channelMain.bind($index())">
           <span class="request">4 new replies</span>
           <span class="igi">2 new iGi's</span>
-        </a>
-        <div class="requestcontent last">    
-          <span class="followers" data-bind="text: followerCount, click: $parent.channelFollowers.bind($index())"></span>
-          <span class="request">+ 1 requests</span>
-          <span class="lost">-1 lost</span>
-        </div>-->
+        </a>-->
+        <div class="requestcontent last" data-bind="click: $parent.channelFollowers.bind($index())">    
+          <span class="followers" data-bind="text: followerCount"></span>
+          <!--To do - to be activated when data received-->          
+          <!--<span class="request">+ 1 requests</span>
+          <span class="lost">-1 lost</span>-->
+        </div>
       </div>
-    </div>   
+    </a>  
   </div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>

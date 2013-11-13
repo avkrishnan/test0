@@ -1,11 +1,11 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function RegistrationVerifyViewModel() {	
   var that = this;
 	this.template = 'registrationVerifyView';
 	this.viewid = 'V-02f';
 	this.viewname = 'RegistrationVerify';
 	this.displayname = 'Registration Verify';	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();	
 	
 	/* Registration verify observable */

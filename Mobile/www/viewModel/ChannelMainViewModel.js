@@ -1,14 +1,12 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelMainViewModel() {	
   var that = this;
 	this.template = 'channelMainView';
 	this.viewid = 'V-46';
 	this.viewname = 'ChannelMain';
 	this.displayname = 'Channel Main';	
-	this.hasfooter = true;    
-	this.channels = ko.observableArray([]);
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 	
   /* Channel Main observable */	
 	this.channelId = ko.observable();		
@@ -19,46 +17,54 @@ function ChannelMainViewModel() {
 	this.sensitivity = ko.observable();	
 	this.broadcast = ko.observable();
 	this.time = ko.observable();	
-	this.replies = ko.observable();				
+	this.replies = ko.observable();			
 	
 	/* Methods */
 	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {	
       that.activate();
     });	
 	};  
 	
-	var token = ES.evernymService.getAccessToken();
-	var channelId = localStorage.getItem('currentChannelId');
 	this.activate = function() {
+		var token = ES.evernymService.getAccessToken();		
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.broadcasts.removeAll();				
-			that.channelId(localStorage.getItem('currentChannelId'));					
-			that.getChannelCommand().then(that.getFollowersCommand()).then(that.getMessagesCommand());
+			localStorage.removeItem('currentMessageData');			
+			that.broadcasts.removeAll();
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+			that.channelId(channelObject.channelId);
+			that.channelName(channelObject.channelName);
+			that.followerCount(channelObject.followerCount);											
+			that.getMessagesCommand();
 		}
 	}
 	
-	this.channelSettings = function(){
-		goToView('channelSettingsView');
-	};
-	
-	function successfulGetChannel(data) {
-		$.mobile.hidePageLoadingMsg();
-		localStorage.setItem('currentChannelName', data.name);
-		that.channelName(localStorage.getItem('currentChannelName'));
-  };
-	
-	function successfulList(data){
-    $.mobile.hidePageLoadingMsg();
-		if(data.followers.length <= 1) {
-			that.followerCount(data.followers.length+' follower');
+	function msToTime(ms){
+		var ms = new Date().getTime() - ms;	
+		var secs = Math.floor(ms / 1000);
+		var msleft = ms % 1000;
+		var totalHours = Math.floor(secs / (60 * 60));
+		var days = Math.floor(totalHours / 24);
+		var hours = totalHours % 24;
+		var divisor_for_minutes = secs % (60 * 60);
+		var minutes = Math.floor(divisor_for_minutes / 60);
+		var divisor_for_seconds = divisor_for_minutes % 60;
+		var seconds = Math.ceil(divisor_for_seconds);
+		if(days > 0) {
+			return days+' days ago';
+		} else if(hours > 0) {
+			return hours+' hrs ago';
+		} else if(minutes > 0) {
+			return minutes+' mins ago';
+		} else if(seconds > 0) {
+			return  seconds+' secs ago';
 		} else {
-			that.followerCount(data.followers.length+' followers');
+			return  'just now';
 		}
-	}; 
+	}
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();
@@ -67,46 +73,30 @@ function ChannelMainViewModel() {
 		for(len; len<data.message.length; len++) {
 			if(data.message[len].urgencyId == 'N ') {
 				var message_sensitivity = 'broadcastnormal';
+				var sensitivityText = 'NORMAL';
 			} else if(data.message[len].urgencyId == 'L ') {
 				var message_sensitivity = 'broadcastlow';
+				var sensitivityText = 'LOW';
 			} else if(data.message[len].urgencyId == 'TS') {
 				var message_sensitivity = 'broadcasttimesensitive';
+				var sensitivityText = 'TIME-SENSITIVE';
 			} else if(data.message[len].urgencyId == 'E ') {
 				var message_sensitivity = 'broadcastemergency';
+				var sensitivityText = 'EMERGENCY';
 			} else if(data.message[len].urgencyId == 'U ') {
 				var message_sensitivity = 'broadcasturgent';
+				var sensitivityText = 'URGENT';
 			} else {
-				var message_sensitivity = '';				
+				var message_sensitivity = '';
+				var sensitivityText = '';				
 			}
-			var timeAgo = new Date().getTime() - data.message[len].created;
-			function msToTime(ms){
-				var secs = Math.floor(ms / 1000);
-				var msleft = ms % 1000;
-				var totalHours = Math.floor(secs / (60 * 60));
-				var days = Math.floor(totalHours / 24);
-				var hours = totalHours % 24;
-				var divisor_for_minutes = secs % (60 * 60);
-				var minutes = Math.floor(divisor_for_minutes / 60);
-				var divisor_for_seconds = divisor_for_minutes % 60;
-				var seconds = Math.ceil(divisor_for_seconds);
-				if(days > 0) {
-					return days+' days ago';
-				} else if(hours > 0) {
-					return hours+' hrs ago';
-				} else if(minutes > 0) {
-					return minutes+' mins ago';
-				} else if(seconds > 0) {
-					return  seconds+' secs ago';
-				} else {
-					return  '1 secs ago';
-				}
-			}
-			var timeago = msToTime(timeAgo);
 			that.broadcasts.push({
 				messageId: data.message[len].id,
-				sensitivity: message_sensitivity,			
-				broadcast: data.message[len].text,
-				time: timeago,				
+				sensitivity: message_sensitivity,
+				sensitivityText: sensitivityText,			
+				broadcast: '<strong></strong>'+data.message[len].text+'<em></em>',
+				time: msToTime(data.message[len].created),
+				created: data.message[len].created,				
 				replies: data.message[len].replies+' replies'
 			});
 		}
@@ -114,33 +104,26 @@ function ChannelMainViewModel() {
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', response.message);
+    showError(response.message);
     goToView('channelsIOwnView');
   };
-	
-  this.getChannelCommand = function () {
-		$.mobile.showPageLoadingMsg('a', 'Loading Channel');
-		return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});
-  };
-	
-	this.getFollowersCommand = function () {
-		$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
-    return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
-  };
-	
-	this.channelFollowers = function(data){	
-		goToView('followersListView');
-	};
 	
 	this.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
 		return ES.messageService.getChannelMessages(that.channelId(), undefined, {success: successfulMessageGET, error: errorAPI});
 	};
 	
+	this.channelSettings = function(){
+		goToView('channelSettingsView');
+	};	
+	
+	this.channelFollowers = function(data){	
+		goToView('followersListView');
+	};	
+	
 	this.singleMessage = function(data){
-		localStorage.removeItem('currentMessageId');
-		localStorage.setItem('currentMessageId', data.messageId);	
-		//goToView('singleMessageView');
+		localStorage.setItem('currentMessageData', JSON.stringify(data));							
+		goToView('singleMessageView');
 	};
 	
 }

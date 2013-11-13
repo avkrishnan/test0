@@ -1,11 +1,11 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function SignupStepSecondViewModel() {
   var that = this;
   this.template = 'signupStepSecondView';
   this.viewid = 'V-02b';
   this.viewname = 'Register';
   this.displayname = 'Register';
-  this.hasfooter = false;
 	
 	/* Signup observable */
   this.firstname = ko.observable();

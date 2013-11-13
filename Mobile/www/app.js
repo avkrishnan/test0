@@ -358,9 +358,10 @@ addContactViewModel = new AddContactViewModel(),
 additionalContactViewModel = new AdditionalContactViewModel(),
 verifyContactViewModel = new VerifyContactViewModel(),
 channelMessagesViewModel = new ChannelMessagesViewModel(),
+channelSingleMessagesViewModel = new ChannelSingleMessagesViewModel(),
+channelViewUnfollowModel = new ChannelViewUnfollowModel(),
 /* end*/
 
-/* By chaman*/
 tutorialViewModel = new TutorialViewModel(),
 signupStepFirstViewModel = new SignupStepFirstViewModel(),
 signupStepSecondViewModel = new SignupStepSecondViewModel(),
@@ -370,16 +371,20 @@ aboutEvernymViewModel = new AboutEvernymViewModel(),
 feedbackViewModel = new FeedbackViewModel(),
 inviteFollowersIIViewModel = new InviteFollowersIIViewModel(),
 privacyPolicyViewModel = new PrivacyPolicyViewModel(),
-/* end*/
 
 /* By Pradeep */
 channelMainViewModel = new ChannelMainViewModel(),
 channelChangeNameViewModel = new ChannelChangeNameViewModel(),
 channelEditDisplayNameViewModel = new ChannelEditDisplayNameViewModel(),
-channelDeleteViewModel = new ChannelDeleteViewModel,
-channelChangeIconViewModel = new ChannelChangeIconViewModel,
-firstChannelViewModel = new FirstChannelViewModel,
-registrationVerifyViewModel = new RegistrationVerifyViewModel,
+channelDeleteViewModel = new ChannelDeleteViewModel(),
+channelChangeIconViewModel = new ChannelChangeIconViewModel(),
+firstChannelViewModel = new FirstChannelViewModel(),
+registrationVerifyViewModel = new RegistrationVerifyViewModel(),
+singleMessageFullTextViewModel = new SingleMessageFullTextViewModel(),
+singleMessageRepliesViewModel = new SingleMessageRepliesViewModel(),
+replyDetailViewModel = new ReplyDetailViewModel(),
+addInviteFollowersViewModel = new AddInviteFollowersViewModel(),
+addFollowersViewModel = new AddFollowersViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -441,7 +446,14 @@ var models = [
 							channelChangeIconViewModel,
 							firstChannelViewModel,
 							channelMessagesViewModel,
-							registrationVerifyViewModel							
+							registrationVerifyViewModel,
+							singleMessageFullTextViewModel,							
+							channelViewUnfollowModel,
+							singleMessageRepliesViewModel,
+							replyDetailViewModel,
+							channelSingleMessagesViewModel,
+							addInviteFollowersViewModel,
+							addFollowersViewModel											
               ];
 
 
@@ -519,14 +531,14 @@ function loadAllPages() {
 			console.log('done loading all pages.');
 			console.log("INITIALIZE PAGE");
 			$.mobile.initializePage();
-			if (token){
+			/*if (token){
 				function gotChannels(data){
 					channelListViewModel.channels.removeAll();
 					channelListViewModel.channels(data.channel);
 				}
 				channelListViewModel.listMyChannelsCommand().then(gotChannels);
 				channelMenuViewModel.getUrgencySettings();
-			}
+			}*/
 		});
 	});
 

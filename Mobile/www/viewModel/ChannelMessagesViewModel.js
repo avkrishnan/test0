@@ -9,7 +9,7 @@ function ChannelMessagesViewModel() {
 	
 	this.accountName = ko.observable();
 	this.title = ko.observable();
-	this.description = ko.observable('DESCRIPTION');
+	this.description = ko.observable('');
 	this.channelid = ko.observable();
 	this.channelMessages = ko.observableArray([]);
 
@@ -21,7 +21,10 @@ function ChannelMessagesViewModel() {
     
 	this.activate = function() {
 		that.accountName(localStorage.getItem("accountName"));
-		that.channelid(localStorage.getItem("currentChannelMessages"));		
+		var channel = JSON.parse(localStorage.getItem("currentChannel"));
+		//alert(localStorage.getItem("currentChannel"));
+		that.channelid(channel.id);
+		//alert(that.channelid());	
 		$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 		that.channelMessages.removeAll();
 		return that.getChannelCommand(that.channelid()).then(that.gotChannel);
@@ -29,6 +32,11 @@ function ChannelMessagesViewModel() {
 	
 	this.gotoChannel = function() {
 		goToView('channelView');
+	}
+	
+	this.showSingleMessage = function(data) {
+		alert(JSON.stringify(data));
+		//goToView('channelView');
 	}
 	
 	this.getChannelCommand = function(channelid) {
@@ -52,6 +60,7 @@ function ChannelMessagesViewModel() {
 		var callbacks = {
 			success: function(data){
 				$.each(data.message, function(indexMessage, valueMessage) {
+					//alert(JSON.stringify(valueMessage));
 					var tempCreated = time2TimeAgo(valueMessage.created/1000);
 					var tempClass = valueMessage.urgencyId.toLowerCase().trim();
 					if(tempClass == 'n') {
@@ -61,7 +70,7 @@ function ChannelMessagesViewModel() {
 						tempClass = 'unknown';
 					}
 					that.channelMessages.push( // without push not working
-						{ messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass}
+						{messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.id, messageSender:valueMessage.senderSubscriberId}
 					);
 				});
 			},

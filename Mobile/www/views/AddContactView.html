@@ -1,6 +1,6 @@
 <div id="addContactView" data-role="page">
   <header>
-    <a href="#" class="back" onclick="goToView('escalationPlansView');"></a>
+    <a href="#" class="back" data-bind="click: gotoView"></a>
     <a class="menu" href="#" onclick="goToView('channelMenuView');"></a>
   </header>
   
@@ -30,17 +30,17 @@
       <div data-bind="foreach: commethods">
         <section data-bind="ifnot: $data.comMethodVerify">
           <a href="#" class="mycontact" data-bind="click: $parent.gotoDelete.bind('verifyContactView')">
-            <em class="emailican" data-bind="css: $data.comMethodTypeClass"></em><span data-bind="text: $data.comMethodAddress"></span>
-          </a>
+            <em data-bind="css: $data.comMethodTypeClass"></em><span data-bind="text: $data.comMethodAddress"></span>
+          </a>          
         </section>
         <section data-bind="if: $data.comMethodVerify">
-          <div class="mycontact" data-bind="css: $data.comMethodClass">
-            <em class="emailican" data-bind="css: $data.comMethodTypeClass"></em><span data-bind="text: $data.comMethodAddress"></span>
-            <a class="addbtn verify" href="#" data-bind="click: $parent.gotoVerify.bind('verifyContactView')">VERIFY</a>
-          </div>
-        </section>         
-      </div>   
-      <a class="low-messages addMore" href="#" onclick="goToView('additionalContactView');"> Add an additional number or email </a>     
+          <a href="#" class="mycontact" data-bind="css: $data.comMethodClass, click: $parent.gotoDelete.bind('verifyContactView')">
+            <em data-bind="css: $data.comMethodTypeClass"></em><span data-bind="text: $data.comMethodAddress"></span>
+            <span class="addbtn verify" data-bind="click: $parent.gotoVerify.bind('verifyContactView')">VERIFY</span>
+          </a>          
+        </section>
+      </div>
+      <a class="low-messages addMore" href="#" onclick="goToView('additionalContactView');"> Add an additional number or email </a>
     </div>
   </section>
   

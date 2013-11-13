@@ -1,13 +1,12 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelDeleteViewModel() {	
   var that = this;
 	this.template = 'channelDeleteView';
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelDeleteView';
 	this.displayname = 'Channel Delete';	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 	
   /* Channel delete observable */
 	this.channelId = ko.observable();
@@ -27,9 +26,10 @@ function ChannelDeleteViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.channelId(localStorage.getItem('currentChannelId'));
-			that.channelName(localStorage.getItem('currentChannelName'));
-			that.channelDisplayName(localStorage.getItem('currentChannelDescription'));
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.channelId(channelObject.channelId);
+			that.channelName(channelObject.channelName);
+			that.channelDisplayName(channelObject.channeldescription);			
 		}
 	}
 
@@ -49,4 +49,5 @@ function ChannelDeleteViewModel() {
 		return ES.channelService.deleteChannel(that.channelId(), { success: successfulDelete, error: errorAPI });
 		localStorage.removeItem('currentChannel');
   };
+	
 }

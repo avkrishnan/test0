@@ -19,11 +19,12 @@
           <strong data-bind="text:title"></strong>
           <em data-bind="text:description"></em>
         </div>
+        <a href="#" class="setting" onclick="goToView('channelViewUnfollow');"></a>
       </div>
     </div>
     
     <div class="channelmessages" data-bind="foreach: channelMessages">
-      <a href="#">
+      <a href="#" data-bind="click: $parent.showSingleMessage">
         <span class="channelicans" data-bind="css:$data.messageClass"></span>
         <div class="messageschannel">
           <span class="timemsg" data-bind="text:$data.messageCreated"></span>
@@ -37,7 +38,7 @@
   
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
-    <a class="announcement" href="#"></a>
+    <a class="announcement" href="#" onclick="goToView('sendMessageView');"></a>
   </div>
   
 </div>

@@ -1,18 +1,18 @@
-<!--  COM METHOD VERIFICATION VIEW -->
-
-<div id="commethodVerificationView" data-role="page" class="channel-list">
-    <div data-role="header" class="header">
-        <h1>Verification</h1>
-        
-    </div>
-    
-    <div data-role="content" xdata-theme="b" >
-        <h3>
-            <div data-bind="text: message"></div>
-        </h3>
-        
-        <a href="index.html#channelListView" data-role="button" data-icon="arrow-r" data-inline="true" >Continue</a>
-        
-    </div>
-    <div class="footer" data-role="footer" data-inset="true">BETA V-?? ComMethodVerification</div>
+<!--To do - Pradeep Kumar-->
+<div id="commethodVerificationView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('signupStepFirstView');"></a>
+  </header>
+  <div class="page-content">
+    <div class="portal-name" data-bind="text: accountName"></div>
+    <h1>Verification</h1>
+    <div class="success">
+      <p data-bind="text: message"></p>
+    </div>   
+    <div class="loginbtn"><a href="#" onclick="goToView('tutorialView');">Continue</a></div>        
+  </div> 
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="goToView('sendMessageView');"></a>
+  </div> 
 </div>

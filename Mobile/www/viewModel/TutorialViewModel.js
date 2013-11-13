@@ -1,11 +1,11 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function TutorialViewModel() {
   var that = this;
   this.template = 'tutorialView';
   this.viewid = 'V-51';
   this.viewname = 'Tutorial';
   this.displayname = 'Tutorials';
-  this.hasfooter = false;
 
   this.applyBindings = function() {
     $('#' + that.template).on('pagebeforeshow', function(e, data) {
@@ -74,4 +74,5 @@ function TutorialViewModel() {
 			goToView('channelListView');
 		}
   }
+	
 }

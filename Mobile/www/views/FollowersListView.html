@@ -1,3 +1,4 @@
+<!--To do - Pradeep Kumar-->
 <div id="followersListView" data-role="page">
   <header>
     <a href="#" class="back" onclick="goToView('channelsIOwnView');"></a>
@@ -15,13 +16,11 @@
         <div class="channelinfoname" data-bind="text: channelName">The Hawks</div>
         <a href="#" class="setting settinginner" data-bind="click: channelSettings"></a>
       </div>
-    </div>
+    </div>      
     <div class="followerchannel">
-      <a class="low-messages newfollowers" href="#">
-        Add or invite new followers
-      </a>
-    </div>
-    <div class="followerchannel">
+      <a class="low-messages newfollowers" href="#" onclick="goToView('addInviteFollowersView');">Add or invite new followers</a>
+    </div>    
+    <!--<div class="followerchannel">
       <h1 class="requests">Follower Requests:</h1>
       <div class="low-messages acceptdecline requestsican">
         <div class="accept-decline">
@@ -45,7 +44,7 @@
           <a href="#">CLEAR</a>
         </div>
       </div>
-    </div>
+    </div>-->
     <div class="dropdown">
       <span class="followerssearch" data-bind="text: followerCount"><!--16 Followers:--></span>
       <form class="chaneldropdown" action="#" method="get" >

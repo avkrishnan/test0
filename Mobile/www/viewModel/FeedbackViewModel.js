@@ -1,20 +1,12 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function FeedbackViewModel() {	
   var that = this;
 	this.template = 'feedbackView';
 	this.viewid = 'V-47';
 	this.viewname = 'Feedback';
-	this.displayname = 'Feedback';	
-	this.hasfooter = true;    
-	this.channels = ko.observableArray([]);
+	this.displayname = 'Feedback';	 
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
-	this.shown = false;
-		
-  /* Feedback observable */
-	this.praisewCommand = ko.observable();
-	this.suggestionsCommand = ko.observable();
-	this.reportABugCommand = ko.observable();
 	
 	/* Methods */			
 	this.applyBindings = function() {
@@ -35,5 +27,14 @@ function FeedbackViewModel() {
 	this.praiseCommand = function () {
 		goToView('inviteFollowersIIView');
 	}
+	
+	this.suggestionsCommand = function () {
+		goToView('inviteFollowersIIView');
+	}
+	
+	this.reportABugCommand = function () {
+		goToView('inviteFollowersIIView');
+	}
+	
 }
 

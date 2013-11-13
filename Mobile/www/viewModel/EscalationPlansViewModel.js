@@ -1,11 +1,10 @@
 ﻿/*globals ko*/
 function EscalationPlansViewModel() {
-	
+	var that = this;	
 	this.template = "escalationPlansView";
 	this.viewid = "V-081";
 	this.viewname = "EscalationPlans";
 	this.displayname = "Escalation Plans";
-	this.hasfooter = true;
     
 	this.channels = ko.observableArray([]);
 	this.commethods = ko.observableArray([]);
@@ -36,8 +35,6 @@ function EscalationPlansViewModel() {
 	this.getEscPlans = function() {
 		return ES.escplanService.getEscPlans({success: successEscPlans, error: errorEscPlans});
 	}
-	
-	var that = this;
 	
 	//console.log(this.escalationplans);
   
@@ -179,7 +176,7 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('accountName');
 		localStorage.removeItem('name');
 		//channelListViewModel.clearForm();
-		notificationsViewModel.removeNotifications();
-		OVERLAY.removeNotifications();
+		//notificationsViewModel.removeNotifications();
+		//OVERLAY.removeNotifications();
 	};
 }

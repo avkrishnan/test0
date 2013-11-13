@@ -69,7 +69,7 @@
   <div id="gfooter"></div>
   -->
   <header>
-    <a href="#" class="back"></a>
+    <a href="#" class="back" onclick="goToView('channelListView');"></a>
     <a class="menu" href="#" onclick="goToView('channelMenuView');"></a>
     <div class="linkicon">
       <a class="smsicon" href="V-07-messages-notification-overlay.html"><span class="received-responses-msg">2</span></a>
@@ -79,7 +79,6 @@
   </header>
   
   <div class="page-content channel_follow">
-    
     <div class="dropdown">
       Channels I Follow:
       <form class="chaneldropdown" action="#" method="get" >
@@ -91,55 +90,23 @@
         </select>
       </form>
     </div>
-    <!--
-    <div class="channelinformation channel-follow">
-      <a href="V-55-followed-channel.html" class="channelimg channel4 sky-blue"></a>
-      <div class="channelinfocontent">
-        <a href="V-55-followed-channel.html" class="channelinfo channelfollow">
-          <strong>BYU Football</strong>
-          <em>The official channel of BYU football</em>
-        </a>
-        <a href="V-16.html" class="setting"></a>
-      </div>
-      <a href="V-55-followed-channel.html" class="requestcontent last">
-        <span class="request">4 new requests</span>
-        <span class="igi">2 new iGi's</span>
-      </a>
-    </div>
-    <div class="channelinformation channel-follow">
-      <a href="V-55-followed-channel.html" class="channelimg channel2 borderyellow"></a>
-      <div class="channelinfocontent">
-        <a href="V-55-followed-channel.html" class="channelinfo channelfollow">
-          <strong>Wasatch Warriors</strong>
-          <em>Wasatch Junior High School</em>
-        </a>
-        <a href="V-16.html" class="setting"></a>
-      </div>
-      
-      <a href="V-55-followed-channel.html" class="requestcontent last">
-        <span class="request">1 new message</span>
-        <span class="igi">1 new iGi's</span>
-      </a>
-    </div>
-    -->
     <section data-bind="foreach: channels">
       <div class="channelinformation channel-follow">
-        <a href="V-55-followed-channel.html" class="channelimg channel5 bordergreen"></a>
+        <a href="#" class="channelimg channel5 bordergreen"></a>
         <div class="channelinfocontent last">
-          <a href="V-55-followed-channel.html" class="channelinfo channelfollow">
+          <a href="#" class="channelinfo channelfollow" data-bind="click: $parent.actionFollowChannelCommand">
             <strong data-bind="text:name"></strong>
-            <em data-bind="text:normName"></em>
+            <em data-bind="text:description"></em>
           </a>
-          <a href="V-16.html" class="setting"></a>
+          <a href="#" class="setting" data-bind="click: $parent.channelViewUnfollow"></a>
         </div>
       </div>
     </section>  
-    
   </div>
 
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
-    <a class="announcement" href="#"></a>
+    <a class="announcement" href="#" onclick="goToView('sendMessageView');"></a>
   </div>  
 
 </div>

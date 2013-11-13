@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function AboutEvernymViewModel() {	
   var that = this;
 	this.template = 'aboutEvernymView';
@@ -22,4 +23,9 @@ function AboutEvernymViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 		}
 	}
+	
+	this.notificationsCommand = function() {
+		goToView('notificationsView');		
+	} 
+	
 }

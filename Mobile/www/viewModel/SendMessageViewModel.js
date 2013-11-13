@@ -1,11 +1,11 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function SendMessageViewModel() {
 	var that = this;
 	this.template = "sendMessageView";
 	this.viewid = "V-20";
 	this.viewname = "ComposeBroadcast";
 	this.displayname = "Compose Broadcast";	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();
 	
   /* Send Message observable */
@@ -13,11 +13,11 @@ function SendMessageViewModel() {
 	this.characterCount = ko.observable();		
 	this.channels = ko.observableArray([]);			
 	this.channelId = ko.observable();	
-	this.channelname = ko.observable();
+	this.channelName = ko.observable();	
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id) {
-		this.channelname = name;
+		this.channelName = name;
 		this.channelId = id;
 	};
 	this.selectedChannels = ko.observable()				
@@ -43,7 +43,11 @@ function SendMessageViewModel() {
 					that.characterCount('0');				
 				}
 			});			
-			$('textarea').keyup(function () {				
+			$('textarea').keyup(function () {
+				if(that.messageText() == 'Add additional text here . . . ') {
+					that.messageText('');				
+					that.characterCount('0');				
+				}								
 				that.characterCount(that.messageText().length);
 			});	
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
@@ -58,14 +62,20 @@ function SendMessageViewModel() {
 	});
 	
 	function successfulVerify(data){
-		var len = 0;
-		for(len; len<data.commethod.length; len++) {
-			if(data.commethod[len].name == 'Email' && data.commethod[len].verified == 'Y') {
-				that.messageText();
-				return that.createChannelMessage();
-			} else {
-				showMessage('Please verify your email !');				
+		if(data.commethod.length >= 1) {
+			var len = 0;			
+			for(len; len<data.commethod.length; len++) {
+				if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'Y' && data.commethod[len].dflt == 'Y') {
+					return that.createChannelMessage();
+				} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'Y') {
+					showMessage('Please verify your email !');				
+				} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'N') {
+					showMessage('Please add a default email !');				
+				}
 			}
+		}
+		else {
+			showMessage('Please add a default email !');
 		}
 	};    
 	
@@ -78,6 +88,7 @@ function SendMessageViewModel() {
 		if(that.messageText() == '') {
 			showMessage('Please type some message !');
 		} else {
+			$.mobile.showPageLoadingMsg("a", "Checking email verification !");			
 			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
 		}
 	};
@@ -98,17 +109,16 @@ function SendMessageViewModel() {
 	
 	function successfulMessage(data){
 		showMessage('Your message is posted successfully');
-		localStorage.setItem('currentChannelId', that.selectedChannels())
-		goToView('channelMainView');			
+		localStorage.setItem('currentChannelId', that.selectedChannels())		
 	};
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		showError('Error listing my channels: ' + details.message);
+		showError(details.message);
 	};
 	
 	this.createChannelMessage = function () {
-    $.mobile.showPageLoadingMsg("a", "Posting Message");
+		$.mobile.showPageLoadingMsg("a", "Posting Message");
 		var messageobj = {text: that.messageText(), type: 'FYI'};
 		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
 	};

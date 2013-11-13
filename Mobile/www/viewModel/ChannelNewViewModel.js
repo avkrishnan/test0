@@ -1,13 +1,12 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ChannelNewViewModel() {	
   var that = this;
 	this.template = 'channelNewView';
 	this.viewid = 'V-13';
 	this.viewname = 'CreateNewChannel';
 	this.displayname = 'Create a channel';	
-	this.hasfooter = true;    
 	this.accountName = ko.observable();	
-	this.notification = ko.observable();
 	
   /* New Channel Step First observable */
 	this.sectionOne = ko.observable(true);
