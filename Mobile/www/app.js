@@ -358,6 +358,7 @@ addContactViewModel = new AddContactViewModel(),
 additionalContactViewModel = new AdditionalContactViewModel(),
 verifyContactViewModel = new VerifyContactViewModel(),
 channelMessagesViewModel = new ChannelMessagesViewModel(),
+channelSingleMessagesViewModel = new ChannelSingleMessagesViewModel(),
 channelViewUnfollowModel = new ChannelViewUnfollowModel(),
 /* end*/
 
@@ -447,7 +448,8 @@ var models = [
 							singleMessageFullTextViewModel,							
 							channelViewUnfollowModel,
 							singleMessageRepliesViewModel,
-							replyDetailViewModel											
+							replyDetailViewModel,
+							channelSingleMessagesViewModel											
               ];
 
 
