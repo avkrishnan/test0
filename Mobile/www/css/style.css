@@ -37,16 +37,23 @@ header {
 	position:fixed;
 	top:0;
 	z-index:9999;
-	height:24px;
+	height:26px;
 }
 /*
 	*Back Button 
 */
-.back {
-	background:url(images/sprites.png) no-repeat 0 -1035px ;
-	padding:12px 70px;
+
+a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:active {
+	background:#fff url(images/back-right-arrow.png) no-repeat top right;
 	margin-left:10px;
 	float:left;
+	padding:3px 8px 3px 0px;
+	color:#8DC63F;
+	font-size:14px;
+}
+.back em {
+	background:url(images/back-left-arrow.png) no-repeat 0 0 ;
+	padding:3px 8px;
 }
 .menu {
 	float:right;
@@ -62,7 +69,7 @@ header {
 .hamburgermenuhide {
 	margin-left:-10px;
 	min-height:384px;
-	padding:0px 19px;
+	padding:0px 17px;
 	display:inline-block;
 }
 .linkicon {
@@ -71,15 +78,25 @@ header {
 .linkicon a {
 	margin:0 14px 0 0;
 	padding:0 12px;
+	background:url("images/notification-img.png") no-repeat;
 }
-.linkicon a {
-	background:url("images/sprites-channel.png") no-repeat -13px -464px;
+a.smsicon {
+	background-position:1px 5px;
+}
+a.smsicon.smsiconwhite {
+	background-position:1px -55px;
 }
 a.processingicon {
-	background-position:-13px -921px;
+	background-position:1px -115px;
+}
+a.processingicon.processingiconwhite {
+	background-position:1px -185px;
 }
 a.groupicon {
-	background-position:-13px -1367px;
+	background-position:1px -255px;
+}
+a.groupicon.groupiconwhite {
+	background-position:1px -324px;
 }
 /*	Header end	*/
 /*	
@@ -1133,10 +1150,10 @@ span.down-arrow {
 	font-size:14px;
 	padding:4px 14px;
 }
-.logintop {
+/*.logintop {
 	background:url(images/login.png) no-repeat left center;
-}
-.forgotpassward {
+}*/
+/*.forgotpassward {
 	background:url(images/forgotpassward.png) no-repeat left center;
 }
 .register {
@@ -1144,7 +1161,7 @@ span.down-arrow {
 }
 .broadcasttop {
 	background:url(images/broadcast.png) no-repeat left center;
-}
+}*/
 /*	Login page css	*/
 /*
 	*	Overwrite css jquery Mobile
@@ -1804,9 +1821,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#918f8f;
 	font-size:12px;
 }
-.whogotit {
+/*.whogotit {
 	background:url("images/whogotit.png") no-repeat left center;
-}
+}*/
 .msg-nameuserid {
 	background:url("images/sprites-channel.png") no-repeat 4px -1087px;
 	border-bottom:1px solid #828181;
@@ -1845,7 +1862,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:8px 0 8px 0;
 	overflow:hidden;
 }
-.channelinfocontent .title.ui-link {
+.channelinfocontent .title.ui-link, .channelinfocontent span {
 	color:#8DC63F;
 }
 .channelinformation .setting {
@@ -1992,7 +2009,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	display:block;
 }
 .broadcast-sensitive.singlemessage span {
-	width:80%;
+	width:91%;
 }
 .broadcast-sensitive.singlemessage em {
 	padding:16px 15px;
@@ -2193,7 +2210,7 @@ h1.requests {
 }
 .channelinfocontent em {
 	color:#969696;
-	font-size:14px;
+	font-size:12px;
 	font-weight:bold;
 	display:block;
 	clear:both;
@@ -2763,6 +2780,7 @@ ul.igiresponses li span {
 .composebroadcast .yes-no label {
 	width:90px;
 	display:inline-block;
+	cursor:pointer;
 }
 .broadcastsettingbtn {
 	background:#8DC63F;
@@ -2880,7 +2898,7 @@ ul.igiresponses li span {
 .all-setting h4 {
 	font-weight:normal;
 	font-size:13px;
-	color:#a1a1a1;
+	color:#B6B6B6;
 	display:inline-block;
 	width:100%;
 	text-align:center;
@@ -3115,7 +3133,7 @@ ul.igiresponses li span {
 		min-height:600px;
 	}
 	.broadcast-sensitive.singlemessage span {
-		width:81.5%;
+		width:92.5%;
 	}
 	.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover {
 		font-size:14px;
@@ -3131,7 +3149,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:543px;
-		padding:0px 21px;
+		padding:0px 19px;
 	}
 	.slider-value span.chase {
 		margin:0 27%;
@@ -3200,10 +3218,10 @@ ul.igiresponses li span {
 		font-size:14px;
 	}
 	.broadcastmsgsend span {
-		width:88%;
+		width:81%;
 	}
 	.broadcastmsgsend em.broadcastmsgunsend {
-		width:8%;
+		width:15%;
 	}
 	.broadcastmsgsend em.msgnoincrease {
 		padding:0 0 0 5%;
@@ -3211,10 +3229,10 @@ ul.igiresponses li span {
     width:86%;
 	}
 	.broadcastmsgreplie {
-		width:85%;
+		width:78%;
 	}
 	.broadcast-sensitive span {
-		width:86.5%;
+		width:80.5%;
 	}
 	.channelinfo.channelfollow {
 		width:95%;
@@ -3230,7 +3248,7 @@ ul.igiresponses li span {
 		min-height:980px;
 	}
 	.broadcast-sensitive.singlemessage span {
-		width:91%;
+		width:96.5%;
 	}
 	.followerincrease .broadcastmsgsend {
 		width:99.5%;
@@ -3249,7 +3267,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:927px;
-		padding:0px 22px;
+		padding:0px 20px;
 	}
 	.slider-value span.chase {
 		margin:0 40%;
@@ -3305,7 +3323,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:1182px;
-		padding:0px 23px;
+		padding:0px 21px;
 	}
 	.slider-value span.chase {
 		margin:0 40.2%;
@@ -3355,7 +3373,7 @@ ul.igiresponses li span {
 		width:94.5%;
 	}
 	.broadcast-sensitive.singlemessage span {
-		width:92.5%;
+		width:97.2%;
 	}
 	.yes-no span.informationicon {
 		width:78%;
@@ -3365,7 +3383,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:1182px;
-		padding:0px 28px;
+		padding:0px 26px;
 	}
 	.slider-value span.chase {
 		margin:0 42%;
@@ -3421,7 +3439,7 @@ ul.igiresponses li span {
 		min-height:600px;
 	}
 	.broadcast-sensitive.singlemessage span {
-		width:95%;
+		width:97.8%;
 	}
 	.messagedetail-info {
 		width:95.5%;
@@ -3434,7 +3452,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:543px;
-		padding:0px 35px;
+		padding:0px 33px;
 	}
 	.slider-value span.chase {
 		margin:0 43.6%;
