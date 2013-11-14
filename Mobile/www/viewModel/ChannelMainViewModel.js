@@ -42,8 +42,8 @@ function ChannelMainViewModel() {
 		}
 	}
 	
-	function msToTime(ms){
-		var ms = new Date().getTime() - ms;	
+	function msToTime(created){
+		var ms = new Date().getTime() - created;	
 		var secs = Math.floor(ms / 1000);
 		var msleft = ms % 1000;
 		var totalHours = Math.floor(secs / (60 * 60));
@@ -104,7 +104,7 @@ function ChannelMainViewModel() {
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
-    showError(response.message);
+    showError('Error in loading channel: ' + response.message);
     goToView('channelsIOwnView');
   };
 	
