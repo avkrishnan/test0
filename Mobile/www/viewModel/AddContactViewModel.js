@@ -17,6 +17,7 @@ function AddContactViewModel() {
 	this.showDelete = ko.observable(false);
 	this.showConfirm = ko.observable(false);
 	this.currentDeleteCommethod = ko.observable();
+	this.currentDeleteCommethod = ko.observable();	
 	
 	this.navText = ko.observable();
 	this.pView = '';

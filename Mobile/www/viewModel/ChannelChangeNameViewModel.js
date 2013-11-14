@@ -16,7 +16,9 @@ function ChannelChangeNameViewModel() {
 	this.channelChangeName = ko.observable('');	
 	this.message = ko.observable();	
 	this.errorChannel = ko.observable();	
-	this.channelWebAddress = ko.observable();				
+	this.channelWebAddress = ko.observable();
+	this.backText = ko.observable();
+	this.backNav = ko.observable();							
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -30,6 +32,7 @@ function ChannelChangeNameViewModel() {
     that.channelChangeName('');
 		that.message('');
 		that.errorChannel('');
+    that.backNav('');		
   };
 	  
 	this.activate = function() {
@@ -39,12 +42,12 @@ function ChannelChangeNameViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
-			that.channelId(channelObject.channelId);			
-			that.channelChangeName('');		
+			that.channelId(channelObject.channelId);				
 			$('input').keyup(function () {
 				that.message('');
 				that.errorChannel('');
 			});
+			that.backText('<em></em>Settings');			
 		}
 	}
 	
@@ -54,13 +57,27 @@ function ChannelChangeNameViewModel() {
 		}
 	});
 	
+	this.goToBack = function() {
+		if(that.backNav() == 'channelChangeNameView') {			
+			that.sectionOne(true)
+			that.sectionTwo(false);
+			that.backText('<em></em>Settings');
+			that.backNav('');																	
+		}
+		else {
+			goToView('channelSettingsView');
+		}
+	}
+	
   this.nextViewCommand = function () {
     if (that.channelChangeName() == '') {
       that.errorChannel('<span>SORRY :</span> Please enter channel name');
     } else {
-			that.message('<span>GREAT! </span> This name is available');
+			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
 			that.sectionTwo(true);
+			that.backText('<em></em>Step 1');
+			that.backNav('channelChangeNameView');				
 			that.channelWebAddress(that.channelChangeName()+'.evernym.com');	
     }
   };

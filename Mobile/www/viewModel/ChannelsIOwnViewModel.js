@@ -53,9 +53,9 @@ function ChannelsIOwnViewModel() {
 		}	
 	};    
 	
-	function errorAPI(data, status, details){
+	function errorAPI(data, status, response){
 		$.mobile.hidePageLoadingMsg();	
-		showError('Error listing my channels: ' + details.message);
+		showError('Error listing my channels: ' + response.message);
 	};
 	
 	this.channelSettings = function(data){		

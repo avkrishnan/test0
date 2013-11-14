@@ -14,7 +14,9 @@ function ChannelNewViewModel() {
 	this.newChannel = ko.observable('');	
 	this.message = ko.observable();	
 	this.errorNewChannel = ko.observable();
-	this.channelWebAddress = ko.observable();					
+	this.channelWebAddress = ko.observable();
+	this.backText = ko.observable();
+	this.backNav = ko.observable();							
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -27,7 +29,8 @@ function ChannelNewViewModel() {
 	this.clearForm = function () {
 		that.newChannel('');
 		that.message('');
-		that.errorNewChannel('');		
+		that.errorNewChannel('');
+    that.backNav('');				
   };
 	  
 	this.activate = function() {
@@ -42,6 +45,7 @@ function ChannelNewViewModel() {
 				that.message('');
 				that.errorNewChannel('');
 			});
+			that.backText('<em></em>Back');				
 		}
 	}
 	
@@ -50,14 +54,28 @@ function ChannelNewViewModel() {
 			that.nextViewCommand();
 		}
 	});
+	
+	this.goToBack = function() {
+		if(that.backNav() == 'channelNewView') {			
+			that.sectionOne(true)
+			that.sectionTwo(false);
+			that.backText('<em></em>Back');
+			that.backNav('');																	
+		}
+		else {
+			goToView('channelListView');
+		}
+	}
 
 	this.nextViewCommand = function (e) {
     if (that.newChannel() == '') {
       that.errorNewChannel('<span>SORRY :</span> Please enter channel name');
     } else {
-			that.message('<span>GREAT! </span> This name is available');
+			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
 			that.sectionTwo(true);
+			that.backText('<em></em>New Chan');
+			that.backNav('channelNewView');
 			that.channelWebAddress(that.newChannel()+'.evernym.com');	
     }
   };
