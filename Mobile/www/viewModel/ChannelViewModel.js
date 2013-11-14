@@ -98,7 +98,7 @@ function ChannelViewModel() {
 	};
 	
 	function gotChannel(data) {
-		alert(JSON.stringify(data));
+		//alert(JSON.stringify(data));
 		$.mobile.hidePageLoadingMsg();
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
