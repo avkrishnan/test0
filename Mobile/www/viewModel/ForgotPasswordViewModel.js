@@ -51,11 +51,11 @@ function ForgotPasswordViewModel() {
 	
   this.forgotPasswordCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-    if (this.accountName() == '' && this.email() == '') {
+    if (that.accountName() == '' && that.email() == '') {
       that.usernameClass('validationerror');
       that.emailClass('validationerror');
       that.errorForgotPassword('Please enter username or email');
-    } else if (!emailReg.test(this.email())) {
+    } else if (that.email() != '' && !emailReg.test(that.email())) {
       that.emailClass('validationerror');
       that.errorForgotPassword('Please enter valid email');
     } else {
@@ -89,7 +89,7 @@ function ForgotPasswordViewModel() {
       that.emailClass('validationerror');
       that.errorForgotPassword(details.message);
     } else {
-      showError('Error Sending Forgot Password Request: ' + details.message);
+      showError(details.message);
     }
   }
 	

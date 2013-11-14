@@ -114,7 +114,7 @@ function EscalationPlansViewModel() {
 	}
 	
 	function errorEscPlans(data, status, details){
-		alert(details.message);
+		//alert(details.message);
 	};
 	
 	this.getCommethods = function(){
@@ -124,7 +124,7 @@ function EscalationPlansViewModel() {
 				//alert('succ');
 			},
 			error: function() {
-				alert('error');
+				//alert('error');
 			}
 		};
 		//return dataService.getCommethods(callbacks);
@@ -164,7 +164,7 @@ function EscalationPlansViewModel() {
   }
 
   function logoutError() {
-		alert('error');
+		//alert('error');
   }	
 	
   this.cleanApplication = function() {
