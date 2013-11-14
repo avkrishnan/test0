@@ -1,0 +1,33 @@
+<!--To do - Pradeep Kumar-->
+<div id="editLongDescriptionView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('channelSettingsView');"><em></em>Settings</a>
+    <a class="menu" href="#" onclick="goToView('channelMenuView');"></a>
+    <div class="linkicon">    
+      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
+      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
+      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
+    </div>
+  </header>  
+  <div class="page-content">  
+    <div class="changename">Longer Channel Description</div>        
+    <section class="loginform textareatype">       
+      <label class="short-description">Website landing page info for :<span>2013hawks</span></label>         
+      <div class="formtype textareatype">
+        <textarea data-bind="value: longDescription" placeholder="Welcome to the Evernym Channel for the Salt Lake City youth soccer team The Hawks coached by Bob Smith.">
+        </textarea>
+        <div class="channelavailable" data-bind="html: message"></div>
+        <div class="msgerror" data-bind="html: errorChannel"></div>        
+      </div>
+      <div class="login">
+        <div class="loginbtn">
+          <a href="#" data-bind="click: longDescriptionCommand">SAVE</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="goToView('sendMessageView');"></a>
+  </div>
+</div>   

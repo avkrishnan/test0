@@ -37,9 +37,13 @@ function ChannelSettingsViewModel() {
 		goToView('channelChangeNameView');
   };
 	
-	this.editChannelDisplayName = function () {
-		goToView('channelEditDisplayNameView');
+	this.editShortDescription = function () {
+		goToView('editShortDescriptionView');
   };
+	
+	this.editLongDescription = function () {
+		goToView('editLongDescriptionView');
+	};	
 	
 	this.deleteChannel = function () {
 		goToView('channelDeleteView');

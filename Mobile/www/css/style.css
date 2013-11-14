@@ -395,6 +395,9 @@ h1.additionalsettings {
 	padding:4px 0 4px 56px;
 	text-shadow:none;
 }
+.personalinformation {
+	background:#2D2D2D url("images/personalinformationicon.png") no-repeat 3px 3px;
+}
 .changepassword {
 	background-position:-5px -55px;
 }
@@ -1099,7 +1102,7 @@ span.down-arrow {
 .GetStart {
 	position:fixed;
 	text-align:center;
-	top:71.5%;
+	top:73%;
 	width:100%;
 	z-index:9999;
 }
@@ -1108,9 +1111,9 @@ span.down-arrow {
 	border-radius:4px;
 	color:#FFFFFF;
 	display:inline-block;
-	font-size:25px;
+	font-size:20px;
 	font-weight:normal;
-	padding:8px 20px;
+	padding:4px 15px;
 }
 .tutorialbottombar {
 	background:#8DC63F;
@@ -2910,7 +2913,6 @@ ul.igiresponses li span {
 	text-align:center;
 	margin-top:8px;
 }
-
 .escalate-settings {
 	overflow:hidden;
 	background:#2D2D2D;
@@ -3070,6 +3072,40 @@ ul.igiresponses li span {
 .set-date-time.last {
 	border:none;
 }
+/*
+	*	A short description
+*/
+.loginform .short-description {
+	font-size:14px;
+	color:#fff;
+	margin:15px 0 15px 5px;
+	display:block;
+	font-style:italic;
+}
+.loginform .short-description span{
+	font-size:14px;
+	color:#8DC63F;
+	font-style:normal;
+}
+.longdescription textarea.ui-input-text {
+	height:190px;
+}
+
+.longdescription textarea::-moz-placeholder {
+	color:#000;
+}
+/*-Edit personal information-*/
+
+.savebtn.ui-link, .savebtn.ui-link:visited, .savebtn.ui-link:hover, .savebtn.ui-link:active {
+    background:#e6e7e8;
+    border-radius:4px;
+    font-size:14px;
+		color:#a7a9ac;
+    padding:1px 14px;
+		float:right;
+		margin-right:12px;
+    /*text-decoration:none;*/
+}
 /* CHANNELS PAGES CSS	END	 */
 /*
 	*@media query css
@@ -3102,7 +3138,7 @@ ul.igiresponses li span {
 		padding:12px 0;
 	}
 	.GetStart {
-		top:67.8%;
+		top:68.8%;
 	}
 	.channelicons ul {
 		width:84%;
@@ -3199,7 +3235,7 @@ ul.igiresponses li span {
 		width:95.5%;
 	}
 	.GetStart {
-		top:62.8%;
+		top:63.5%;
 	}
 	.msg-content p, .msg-content h1 {
 		width:90%;
@@ -3322,7 +3358,7 @@ ul.igiresponses li span {
 		width:95.7%;
 	}
 	.GetStart {
-		top:61.5%;
+		top:62%;
 	}
 	.slidemenu {
 		min-height:1240px;
@@ -3433,7 +3469,7 @@ ul.igiresponses li span {
 		width:94%;
 	}
 	.GetStart {
-		top:68%;
+		top:69.5%;
 	}
 	.msg-content p {
 		font-size:18px;
@@ -3492,7 +3528,7 @@ ul.igiresponses li span {
 		width:94.5%;
 	}
 	.GetStart {
-		top:67.5%;
+		top:69%;
 	}
 }
 @media only screen and (max-width: 900px) and (min-width: 899px) {
