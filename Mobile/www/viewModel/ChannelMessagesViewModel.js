@@ -1,4 +1,4 @@
-﻿/*globals ko*/
+﻿/* Devender - To Do Remove it later before go live*/
 function ChannelMessagesViewModel() {
 	var that = this;
 	this.template = "channelMessagesView";
@@ -24,6 +24,7 @@ function ChannelMessagesViewModel() {
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		//alert(localStorage.getItem("currentChannel"));
 		that.channelid(channel.id);
+		localStorage.removeItem("currentChannelMessage");
 		//alert(that.channelid());	
 		$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 		that.channelMessages.removeAll();
@@ -35,8 +36,9 @@ function ChannelMessagesViewModel() {
 	}
 	
 	this.showSingleMessage = function(data) {
-		alert(JSON.stringify(data));
-		//goToView('channelView');
+		//alert(JSON.stringify(data));
+		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
+		goToView('channelSingleMessagesView');
 	}
 	
 	this.getChannelCommand = function(channelid) {
@@ -70,7 +72,7 @@ function ChannelMessagesViewModel() {
 						tempClass = 'unknown';
 					}
 					that.channelMessages.push( // without push not working
-						{messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.id, messageSender:valueMessage.senderSubscriberId}
+						{messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.id, messageSender:valueMessage.senderSubscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
 			},

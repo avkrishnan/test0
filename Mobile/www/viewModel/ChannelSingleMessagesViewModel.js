@@ -1,4 +1,4 @@
-﻿/*globals ko*/
+﻿/* Devender - To Do Remove it later before go live*/
 function ChannelSingleMessagesViewModel() {
 	var that = this;
 	this.template = "channelSingleMessagesView";
@@ -11,7 +11,9 @@ function ChannelSingleMessagesViewModel() {
 	this.title = ko.observable();
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
-	this.channelMessages = ko.observableArray([]);
+	this.messageCreated = ko.observable();
+	this.messageClass = ko.observable();
+	this.messageText = ko.observable();
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -22,64 +24,17 @@ function ChannelSingleMessagesViewModel() {
 	this.activate = function() {
 		that.accountName(localStorage.getItem("accountName"));
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
+		var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
 		//alert(localStorage.getItem("currentChannel"));
+		//alert(localStorage.getItem("currentChannelMessage"));
+		that.title(channel.name);
 		that.channelid(channel.id);
-		//alert(that.channelid());	
-		$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
-		that.channelMessages.removeAll();
-		return that.getChannelCommand(that.channelid()).then(that.gotChannel);
+		that.description(channel.description);
+		that.messageCreated(channelMessage.messageCreatedOriginal);
+		that.messageClass(channelMessage.messageClass);
+		that.messageText(channelMessage.messageText);
+		//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
 	};
-	
-	this.gotoChannel = function() {
-		goToView('channelView');
-	}
-	
-	this.showSingleMessage = function(data) {
-		alert(JSON.stringify(data));
-		//goToView('channelView');
-	}
-	
-	this.getChannelCommand = function(channelid) {
-		//alert(channelid);
-		var callbacks = {
-			success: function(){
-				//alert('success');	
-			},
-			error: function() {
-				alert('error');
-			}
-		};
-		$.mobile.showPageLoadingMsg("a", "Loading Channel");
-		return ES.channelService.getChannel(channelid, callbacks);
-	};
-		
-	this.gotChannel = function(data) {
-		$.mobile.hidePageLoadingMsg();
-		that.title(data.name );
-		that.description(data.description);
-		var callbacks = {
-			success: function(data){
-				$.each(data.message, function(indexMessage, valueMessage) {
-					//alert(JSON.stringify(valueMessage));
-					var tempCreated = time2TimeAgo(valueMessage.created/1000);
-					var tempClass = valueMessage.urgencyId.toLowerCase().trim();
-					if(tempClass == 'n') {
-						tempClass = 'announcementicon';
-					}
-					else {
-						tempClass = 'unknown';
-					}
-					that.channelMessages.push( // without push not working
-						{messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.id, messageSender:valueMessage.senderSubscriberId}
-					);
-				});
-			},
-			error: function() {
-				alert('error');	
-			}
-		};		
-		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
-	}
 	
 	function time2TimeAgo(ts) {
 		// This function computes the delta between the
