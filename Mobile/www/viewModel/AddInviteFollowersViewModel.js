@@ -35,4 +35,12 @@ function AddInviteFollowersViewModel() {
 		goToView('channelSettingsView');
 	};
 	
+	this.inviteFollowers = function(){
+		showMessage('Feature coming soon!');
+	};
+	
+	this.addFollowers = function(){
+		showMessage('Feature coming soon!');
+	};
+	
 }

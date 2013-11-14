@@ -39,7 +39,7 @@ function ChannelsIOwnViewModel() {
     $.mobile.hidePageLoadingMsg();
 		that.channels.removeAll();	
 		for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
-			if(data.channel[channelslength].followers <= 1) {
+			if(data.channel[channelslength].followers == 1) {
 				var followers = data.channel[channelslength].followers +' follower';
 			} else {
 				var followers = data.channel[channelslength].followers +' followers';

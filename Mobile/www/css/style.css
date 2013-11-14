@@ -115,8 +115,11 @@ h1.additionalsettings {
 .page-content {
   padding:40px 0 50px 10px;
 }
-.page-content.loginpage {
+/*.page-content.loginpage {
 	padding:40px 0 15px 10px;
+}*/
+.page-content.nofooterbar {
+	padding:40px 0 0 10px;
 }
 .page-content.composepage {
 	display:inline-block;
@@ -1006,7 +1009,8 @@ hr, .baseline {
 	margin:55px auto 20px;
 	padding:0;
 	width:auto;
-	scalable:no;
+	/*scalable:no;*/
+	overflow:hidden;
 }
 .new-user {
 	height:100%;
@@ -1361,6 +1365,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:8px 0;
 	overflow:hidden;
 	margin:0 15px 0 0;
+	min-height:25px;
 }
 .channelinfo {
 	float:left;
@@ -1875,6 +1880,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin:0 10px 10px 0;
 	overflow:hidden;
 	padding:4px 0 0 0;
+	min-height:50px;
 }
 .broadcast-sensitive {
 	border-radius: 21px 0 0 21px;
@@ -3035,7 +3041,7 @@ ul.igiresponses li span {
 	margin:0 17px;
 }
 .datetime-setting span {
-	padding:15px 10px;
+	padding:12px 10px;
 	font-size:16px;
 	display:block;
 	background:#fff;
@@ -3045,7 +3051,7 @@ ul.igiresponses li span {
 .top-clickable, .bottom-clickable {
 	background:#e6e7e8 url(images/top-clickable.png) no-repeat center center;
 	display:block;
-	padding:15px 10px;
+	padding:12px 10px;
 	border-radius:4px 4px 0 0;
 }
 .bottom-clickable {
