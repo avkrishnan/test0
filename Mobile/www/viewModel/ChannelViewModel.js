@@ -9,6 +9,8 @@ function ChannelViewModel() {
 	this.accountName = ko.observable();
 	
 	this.hasfooter = ko.observable(true);
+	this.hasheader = ko.observable(false);
+	
 	this.isChannelView = true;
 	this.title = ko.observable();
 	this.channelAction = ko.observable();
@@ -20,9 +22,10 @@ function ChannelViewModel() {
 	this.channelMessage = ko.observable();
 	
 	this.url = ko.observable('');
-	this.description = ko.observable('DESCRIPTION');
+	this.description = ko.observable('');
 	this.longdescription = ko.observable('');
 	this.email = ko.observable('');
+	this.followers = ko.observable('');
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -80,6 +83,9 @@ function ChannelViewModel() {
 		if(token == '' || token == null) {
 			that.hasfooter(false);
 		}
+		else {
+			this.hasheader(true);
+		}
 		that.channelid(channel.id);
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
@@ -92,12 +98,13 @@ function ChannelViewModel() {
 	};
 	
 	function gotChannel(data) {
-		//alert(JSON.stringify(data));
+		alert(JSON.stringify(data));
 		$.mobile.hidePageLoadingMsg();
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.channelMessage(data);
-		that.title(data.name );
+		that.title(data.name);
+		that.followers(data.followers);
 		
 		that.description(data.description);
 		that.longdescription(data.longDescription);
@@ -200,7 +207,6 @@ function ChannelViewModel() {
 	
 	// follow/unfollow will be called on the basis of channelAction value
 	this.actionFollowChannelCommand = function() {
-		//alert(JSON.stringify(that.channelMessage()));
 		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
 		that.followChannelCommand();
 	}

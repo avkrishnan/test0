@@ -52,7 +52,8 @@ function SignupStepSecondViewModel() {
 				that.errorIconFirstName('');
 				that.errorIconLastName('');
 			});
-		} else {
+		} 
+		else {
 			goToView('channelListView');
 		}
   };
@@ -142,6 +143,10 @@ function SignupStepSecondViewModel() {
 	}
 	
 	function loginSuccess(args) {
+		var callbacks = {
+			success: function() {;},
+			error: function(data, status, details) {alert(details.message);}
+		};		
     $.mobile.hidePageLoadingMsg();
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
@@ -155,6 +160,13 @@ function SignupStepSecondViewModel() {
       var login_nav = JSON.parse(localStorage.getItem('login_nav'));
       localStorage.removeItem('login_nav');
       var follow = localStorage.getItem('follow');
+			if(localStorage.getItem("action") == "follow_channel") {
+				alert(localStorage.getItem('currentChannel'));
+				var channel = JSON.parse(localStorage.getItem('currentChannel'));
+				ES.channelService.followChannel(channel.id, callbacks);
+				localStorage.removeItem('action');
+				goToView('channelMessagesView');				
+			}
       if (follow) {
         // alert('hello, we are going to now go to or follow the channel ' +
         // follow);

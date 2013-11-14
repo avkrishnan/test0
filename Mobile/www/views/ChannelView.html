@@ -1,147 +1,9 @@
 <!-- To Do - Devender - Remove this later -->
-<!--
-<div id="channelView" class="channel-list"  data-role="page" >
-    <div id="gpanel"></div>
-    <div id="gpaneldots"></div>
-    <div data-role="header" xdata-theme="b" class="header">
-        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
-        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
-    </div>
-    
-    
-    <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll>
-        
-        
-        
-        <ul data-role="listview" >
-            
-            
-            
-            <li class="channel-list-item" >
-                
-                <a  class="channel-list-anchor" href="#"  style="height:90px;">
-                    
-                    
-                    <div class="channel-list-stripe2"></div>
-                    
-                    
-                    <div class="channel-list-avatar" data-bind="with: channelIconObj">
-                    <div data-bind=" style: {
-				       'background': 'url(resources/icons/' + image + ')', 'width': width ,
-				       'height': height , 
-				       'background-color': 'white',
-                       'border-radius': '50%',
-				       'background-position': left + ' ' + top ,
-				       'background-size': bgsize,
-				       'cursor': 'pointer'
-					   }">
-					</div>
-                    </div>
-                    
-                    <span class="channel-info" style="height:90px;">
-                        <span class="channel-name" data-bind="text: title"></span>
-                        <span class="channel-description" data-bind="text: description"></span>
-                        <span class="channel-url" data-bind="text: url" ></span>
-                        <span class="channel-email" data-bind="text: email" >email@evernym.com</span>
-                        
-                        
-                    </span>
-                    <div class="channel-list-avatar-frame"></div>
-                    
-                    
-                    
-                </a>
-                
-            </li>
-            
-            
-            
-            <li class="channel-message-item " data-icon="false">
-                
-                
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            
-                            
-                            
-                            <div class="channel-message-text" data-bind="text: longdescription">long description</div>
-                    
-                            
-                        </div>
-                        
-                        
-                    </div>
-                
-                
-            </li>
-            
-            
-            
-            
-            <li class="channel-message-item " id="follow_channel_button"  data-icon="false">
-                
-                <a data-role="none"  href="#" data-bind="click: followChannelCommand" >
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Follow Channel</div>
-                            
-                        </div>
-                        
-                        
-                        
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-            
-            
-            
-            
-            
-            <li class="channel-message-item " id="unfollow_channel_button"  data-icon="false">
-                
-                <a data-role="none"  href="#" data-bind="click: unfollowChannelCommand" >
-                    <div  class="channel-message-container">
-                        
-                        
-                        <div class="message-list-stripe"></div>
-                        
-                        <div class="channel-message-info">
-                            <div class="channel-message-avatar" style="background:white;"></div>
-                            <div class="channel-message-text">Unfollow Channel</div>
-                            
-                        </div>
-                        
-                        
-                        
-                        
-                        
-                    </div>
-                </a>
-                
-            </li>
-        </ul>
-    </div>
-    <div id="gfooter"></div>
-</div>
--->    
 <div id="channelView" data-role="page">
   <header>
-    <a href="#" class="back" onclick="goToView('additionalContactView');"><em></em>BACK</a>
-    <a class="menu" href="#" onclick="goToView('channelMenuView');"></a>
-    <div class="linkicon">    
+    <a href="#" class="back" onclick="goToView('additionalContactView');" data-bind="visible:hasheader"><em></em>BACK</a>
+    <a class="menu" href="#" onclick="goToView('channelMenuView');" data-bind="visible:hasheader"></a>
+    <div class="linkicon" data-bind="visible:hasheader">    
       <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
       <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
       <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
@@ -154,18 +16,18 @@
       <a href="#" class="channelimg channel4 sky-blue"></a>
       <div class="channelinfocontent last">
         <a class="title" href="#" data-bind="text:title"></a>
-        <a href="#" class="setting" onclick="goToView('channelViewUnfollow');"></a>
+        <a href="#" class="setting" onclick="goToView('channelViewUnfollow');" data-bind="visible:hasheader"></a>
         <em data-bind="text:description"></em>
       </div>
     </div>
     <div class="channelprivate">
-      <h4>123,435 followers</h4>
+      <h4><b data-bind="text:followers"></b> followers</h4>
       <a class="lock-channel" href="#"></a>
-      <p>The BYU Cougars football team is the college football program representing Brigham Young University, a The BYU Cougars football team is the college football program representing Brigham ...</p>
-      <p class="more">
+      <p data-bind="text:description"></p>
+      <!--<p class="more">
       	The BYU Cougars football team is the college football program representing Brigham Young University, a ...           
       </p>
-      <a class="morebtn" href="#">MORE</a>
+      <a class="morebtn" href="#">MORE</a>-->
     </div>
     
     <div class="contactchannel">

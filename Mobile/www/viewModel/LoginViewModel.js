@@ -124,6 +124,10 @@ function LoginViewModel() {
   };
 
   function loginSuccess(args) {
+		var callbacks = {
+			success: function() {;},
+			error: function(data, status, details) {alert(details.message);}
+		};
 		//alert(JSON.stringify(args));
     $.mobile.hidePageLoadingMsg();
     // if (isPhoneGap()) {
@@ -137,6 +141,8 @@ function LoginViewModel() {
       ES.evernymService.setAccessToken(args.accessToken);
       localStorage.setItem("accountName", that.accountName());
 			if(localStorage.getItem("action") == 'follow_channel') {
+				var channel = JSON.parse(localStorage.getItem('currentChannel'));
+				ES.channelService.followChannel(channel.id, callbacks);
 				localStorage.removeItem('action');
 				goToView('channelMessagesView');
 			}

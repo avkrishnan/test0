@@ -91,9 +91,10 @@ function SignupStepFirstViewModel() {
 				that.errorIconEmail('');
 				that.errorIconAccountName('');
 				that.errorIconPassword('');
-				localStorage.removeItem('signUpError');								
-			});			
-		} else {
+				localStorage.removeItem('signUpError');
+			});
+		} 
+		else {
 			goToView('channelListView');
 		}
   };
