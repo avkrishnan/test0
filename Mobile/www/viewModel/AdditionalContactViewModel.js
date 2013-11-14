@@ -97,6 +97,7 @@ function AdditionalContactViewModel() {
 		that.name(localStorage.getItem("UserFullName"));
 		that.comMethodName('');
 		that.errorMessage('');
+		localStorage.removeItem("currentVerificationCommethodID");
 		$(document).keyup(function(e) {
 			if (e.keyCode == 13) {
 				that.errorMessage('');
@@ -111,11 +112,14 @@ function AdditionalContactViewModel() {
 		//alert(JSON.stringify(newCommethodObject));
 		var callbacks = {
 			success: function(responseData) {
+				//alert(JSON.stringify(responseData));
 				if (responseData.address == 'TEXT') {
 					localStorage.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
+					localStorage.setItem("currentVerificationCommethodID",responseData.id);
 				}
 				else {
-					localStorage.setItem("currentVerificationCommethod",responseData.address);	
+					localStorage.setItem("currentVerificationCommethod",responseData.address);
+					localStorage.setItem("currentVerificationCommethodID",responseData.id);
 				}
 				localStorage.setItem("verificationStatus",true);
 				goToView('verifyContactView');

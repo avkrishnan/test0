@@ -22,6 +22,11 @@ function VerifyContactViewModel() {
 	
 	var that = this;
 	
+	this.gotoView = function() {
+		localStorage.removeItem("currentVerificationCommethodID");
+		goToView("addContactView");
+	}
+	
 	this.verifyRequestCommethod = function() {
 		if(that.verificationCode() == '') {
 			that.errorMessage("<span>ERROR : </span> Please input verification code!");

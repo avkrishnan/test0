@@ -17,7 +17,7 @@ function AddContactViewModel() {
 	this.showDelete = ko.observable(false);
 	this.showConfirm = ko.observable(false);
 	this.currentDeleteCommethod = ko.observable();
-	this.currentDeleteCommethod = ko.observable();	
+	this.verify = ko.observable();
 	
 	this.navText = ko.observable();
 	this.pView = '';
@@ -58,7 +58,7 @@ function AddContactViewModel() {
 	}
 	
 	this.gotoVerify = function(data) {
-		//alert(JSON.stringify(data));
+		that.verify(true);
 		var callbacks = {
 			success: function(responseData) {
 				//alert('Verification code sent!');
@@ -70,21 +70,16 @@ function AddContactViewModel() {
 		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
 		localStorage.setItem("currentVerificationCommethodType",data.comMethodType);
 		localStorage.setItem("currentVerificationCommethodID",data.comMethodID);
-		//alert(localStorage.getItem("currentVerificationCommethodID"));
 		localStorage.setItem("verificationStatus",false);
-		//alert(that.commethods.removeAll());
 		ES.commethodService.requestVerification(data.comMethodID, callbacks);
 		goToView('verifyContactView');
 	}
 	
 	this.gotoDelete = function(data) {
-		//alert('Delete');
-		//alert(that.showDelete());
-		//alert(JSON.stringify(data));
-		//alert(that.currentDeleteCommethodID());
-		that.currentDeleteCommethod(data.comMethodAddress);
-		that.currentDeleteCommethodID(data.comMethodID);
-		//alert(that.currentDeleteCommethodID());
+		if(that.verify() == false) {
+			that.currentDeleteCommethod(data.comMethodAddress);
+			that.currentDeleteCommethodID(data.comMethodID);
+		}
 		that.showDelete(true);
 	}
 	
@@ -104,7 +99,6 @@ function AddContactViewModel() {
 	}
 	
 	this.confirmDelete = function() {
-		//alert(that.currentDeleteCommethodID());
 		var callbacks = {
 			success: function(){
 				//alert('success');
@@ -112,8 +106,7 @@ function AddContactViewModel() {
 			error: function() {
 				alert('error');
 			}
-		};
-		//that.commethods.remove(that.currentDeleteCommethodID());		
+		};	
 		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
 		goToView('addContactView');
 	}
@@ -122,7 +115,6 @@ function AddContactViewModel() {
 		if(data.commethod.length > 0) {
 			var tempCommethodClass = '', tempshowVerify = false;
 			$.each(data.commethod, function(indexCommethods, valueCommethods) {
-				//alert(JSON.stringify(valueCommethods));
 				if (valueCommethods.verified == "N") {
 					tempCommethodClass = "notverify";
 					tempshowVerify = true;
@@ -145,7 +137,6 @@ function AddContactViewModel() {
 	}	
     
 	this.activate = function() {
-		//alert(that.currentDeleteCommethodID());
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
 		
@@ -154,11 +145,9 @@ function AddContactViewModel() {
 		that.commethods.removeAll();
 		that.showDelete(false);
 		that.showConfirm(false);
+		that.verify(false);
 		localStorage.removeItem("currentVerificationCommethodID");
-		//alert(localStorage.getItem('currentEscPlan'));
-		//alert(JSON.stringify(localStorage.getItem('allEscPlans')));
-		//$.mobile.showPageLoadingMsg("a", "Loading Settings");
+		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return that.getCommethods().then(that.showCommethods);
-		//return true;     
 	};
 }
