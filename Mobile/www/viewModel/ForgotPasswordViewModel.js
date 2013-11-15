@@ -10,7 +10,8 @@ function ForgotPasswordViewModel() {
 	/* Forgot password observable */
   this.accountName = ko.observable();	
   this.email = ko.observable();
-  this.errorForgotPassword = ko.observable();
+  this.errorEvernym = ko.observable();	
+  this.errorEmail = ko.observable();
   this.usernameClass = ko.observable();
   this.emailClass = ko.observable();
 	
@@ -27,14 +28,16 @@ function ForgotPasswordViewModel() {
     that.accountName('');
 		that.usernameClass('');		
 		that.emailClass('');		
-    that.errorForgotPassword('');		
+    that.errorEvernym('');			
+    that.errorEmail('');		
   };
 	
   this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {		
 			$('input').keyup(function () {
-				that.errorForgotPassword('');
+				that.errorEvernym('');					
+				that.errorEmail('');
 				that.usernameClass('');
 				that.emailClass('');
 			});
@@ -54,10 +57,10 @@ function ForgotPasswordViewModel() {
     if (that.accountName() == '' && that.email() == '') {
       that.usernameClass('validationerror');
       that.emailClass('validationerror');
-      that.errorForgotPassword('Please enter username or email');
+      that.errorEmail('Please enter Evernym or email');
     } else if (that.email() != '' && !emailReg.test(that.email())) {
       that.emailClass('validationerror');
-      that.errorForgotPassword('Please enter valid email');
+      that.errorEmail('Please enter valid email');
     } else {
       var callbacks = {
         success: forgotPasswordSuccess,
@@ -85,9 +88,13 @@ function ForgotPasswordViewModel() {
     $.mobile.hidePageLoadingMsg();
     loginPageIfBadLogin(details.code);
     if (details) {
-      that.usernameClass('validationerror');
-      that.emailClass('validationerror');
-      that.errorForgotPassword(details.message);
+			if(that.accountName() != '') {
+				that.usernameClass('validationerror');
+				that.errorEvernym(details.message);								
+			} else{
+				that.emailClass('validationerror');
+				that.errorEmail(details.message);
+			}
     } else {
       showError(details.message);
     }
