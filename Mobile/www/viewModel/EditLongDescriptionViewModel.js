@@ -12,7 +12,7 @@ function EditLongDescriptionViewModel() {
   /* Edit Channel Display observable */
 	this.channelId = ko.observable();
 	this.longDescription = ko.observable();	
-	this.message = ko.observable();	
+	this.errorMessage = ko.observable(false);	
 	this.errorChannel = ko.observable();
 	
 	/* Methods */
@@ -25,7 +25,7 @@ function EditLongDescriptionViewModel() {
 	
 	this.clearForm = function () {
     that.longDescription('');
-		that.message('');
+		that.errorMessage(false);		
 		that.errorChannel('');		
   };
 	
@@ -36,9 +36,10 @@ function EditLongDescriptionViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
-			that.channelId(channelObject.channelId);			
-			$('input').keyup(function () {
-				that.message('');
+			that.channelId(channelObject.channelId);
+			that.longDescription(channelObject.longDescription);						
+			$('textarea').keyup(function () {
+				that.errorMessage(false);				
 				that.errorChannel('');
 			});
 		}
@@ -52,18 +53,40 @@ function EditLongDescriptionViewModel() {
 	
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
-    goToView('channelSettingsView');
+		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
+		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});		
   };
+	
+	function successfulGetChannel(data) {
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		var channel = [];			
+		channel.push({
+			channelId: data.id, 
+			channelName: data.name, 
+			channelDescription: data.description,
+			longDescription: data.longDescription,			
+			followerCount: followers
+		});
+		channel = channel[0];		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));	
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+    goToView('channelSettingsView');					
+	}
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
     goToView('longDescriptionView');
-		that.message('');
+		that.errorMessage(true);	
 		that.errorChannel('<span>SORRY :</span> '+response.message);
   };
 	
   this.longDescriptionCommand = function () {
 		if (that.longDescription() == '') {
+			that.errorMessage(true);						
       that.errorChannel('<span>SORRY :</span> Please enter long description');
     } else {
 			var channelObject = {
