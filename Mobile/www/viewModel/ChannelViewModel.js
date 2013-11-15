@@ -82,6 +82,7 @@ function ChannelViewModel() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 			that.hasfooter(false);
+			this.hasheader(false);
 		}
 		else {
 			this.hasheader(true);

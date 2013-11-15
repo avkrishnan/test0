@@ -16,11 +16,11 @@ function ChannelViewUnfollowModel() {
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
-			//alert(localStorage.getItem("currentChannel"));
 			var channelObject = JSON.parse(localStorage.getItem("currentChannel"));
 			that.channelid(channelObject.id);
 			that.title(channelObject.name);
 			that.description(channelObject.description);
+			that.activate(channelObject);
 		});
 	};
     
@@ -31,10 +31,7 @@ function ChannelViewUnfollowModel() {
 		}
 		that.channelid(channel.id);
 		that.accountName(localStorage.getItem("accountName"));	
-		that.channelAction(true);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
-		alert(that.channelid());
-		return that.getChannelCommand(that.channelid()).then(gotChannel);
 	};
 	
 	this.unfollowChannelCommand = function() {

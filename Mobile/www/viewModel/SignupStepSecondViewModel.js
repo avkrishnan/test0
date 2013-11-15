@@ -161,7 +161,7 @@ function SignupStepSecondViewModel() {
       localStorage.removeItem('login_nav');
       var follow = localStorage.getItem('follow');
 			if(localStorage.getItem("action") == "follow_channel") {
-				alert(localStorage.getItem('currentChannel'));
+				//alert(localStorage.getItem('currentChannel'));
 				var channel = JSON.parse(localStorage.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);
 				localStorage.removeItem('action');
