@@ -70,7 +70,9 @@ function ChannelNewViewModel() {
 	this.nextViewCommand = function (e) {
     if (that.newChannel() == '') {
       that.errorNewChannel('<span>SORRY :</span> Please enter channel name');
-    } else {
+    } else if (that.newChannel().match(/\s/)) {
+			that.errorNewChannel('<span>SORRY :</span> Please choose a short name with no spaces');
+		} else {
 			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
 			that.sectionTwo(true);

@@ -42,7 +42,8 @@ function ChannelChangeNameViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
-			that.channelId(channelObject.channelId);				
+			that.channelId(channelObject.channelId);	
+			that.channelChangeName(channelObject.channelName);						
 			$('input').keyup(function () {
 				that.message('');
 				that.errorChannel('');
@@ -72,6 +73,8 @@ function ChannelChangeNameViewModel() {
   this.nextViewCommand = function () {
     if (that.channelChangeName() == '') {
       that.errorChannel('<span>SORRY :</span> Please enter channel name');
+		} else if (that.channelChangeName().match(/\s/)) {
+			 that.errorChannel('<span>SORRY :</span> Please choose a short name with no spaces');
     } else {
 			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
