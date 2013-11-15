@@ -82,7 +82,7 @@ function EditShortDescriptionViewModel() {
   };
 	
   this.shortDescriptionCommand = function () {
-		if (that.shortDescription() == '') {
+		if (that.shortDescription() == '' || typeof that.shortDescription() == 'undefined') {
 			that.errorMessage(true);			
       that.errorChannel('<span>SORRY:</span> Please enter short description');
     } else {

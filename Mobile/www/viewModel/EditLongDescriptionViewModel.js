@@ -81,13 +81,13 @@ function EditLongDescriptionViewModel() {
     $.mobile.hidePageLoadingMsg();
     goToView('longDescriptionView');
 		that.errorMessage(true);	
-		that.errorChannel('<span>SORRY :</span> '+response.message);
+		that.errorChannel('<span>SORRY:</span> '+response.message);
   };
 	
   this.longDescriptionCommand = function () {
-		if (that.longDescription() == '') {
+		if (that.longDescription() == '' || typeof that.longDescription() == 'undefined') {
 			that.errorMessage(true);						
-      that.errorChannel('<span>SORRY :</span> Please enter long description');
+      that.errorChannel('<span>SORRY:</span> Please enter long description');
     } else {
 			var channelObject = {
 				id: that.channelId(),
