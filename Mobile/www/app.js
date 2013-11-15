@@ -385,6 +385,7 @@ singleMessageRepliesViewModel = new SingleMessageRepliesViewModel(),
 replyDetailViewModel = new ReplyDetailViewModel(),
 addInviteFollowersViewModel = new AddInviteFollowersViewModel(),
 addFollowersViewModel = new AddFollowersViewModel(),
+editNameViewModel = new EditNameViewModel(),
 editLongDescriptionViewModel = new EditLongDescriptionViewModel(),
 /* end */
 
@@ -455,6 +456,7 @@ var models = [
 							channelSingleMessagesViewModel,
 							addInviteFollowersViewModel,
 							addFollowersViewModel,
+							editNameViewModel,							
 							editLongDescriptionViewModel											
               ];
 

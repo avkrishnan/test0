@@ -68,7 +68,7 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 }
 .hamburgermenuhide {
 	margin-left:-10px;
-	min-height:384px;
+	min-height:484px;
 	padding:0px 17px;
 	display:inline-block;
 }
@@ -297,10 +297,10 @@ h1.additionalsettings {
 	color:#FFFFFF;
 	display:block;
 	font-family:'OpenSansRegular';
-	font-size:15px;
+	font-size:14px;
 	line-height:35px;
 	margin:0 0 10px;
-	padding:4px 0 4px 56px;
+	padding:4px 0 4px 50px;
 	text-shadow:none;
 }
 .urgenticon {
@@ -392,7 +392,7 @@ h1.additionalsettings {
 	font-size:14px;
 	line-height:35px;
 	margin:0 0 10px;
-	padding:4px 0 4px 56px;
+	padding:4px 0 4px 50px;
 	text-shadow:none;
 }
 .personalinformation {
@@ -909,7 +909,7 @@ input[type="checkbox"]:checked + label span {
 }
 .login a.ui-link, .login a.ui-link:hover, .login a.forget-password.ui-link, .login a.forget-password.ui-link:hover {
 	color:#7F7F7F;
-	font-size:18px;
+	font-size:16px;
 	text-decoration:underline;
 }
 .loginbtn {
@@ -1009,7 +1009,7 @@ hr, .baseline {
 }
 /*	New User	*/
 .page-content.tutorials {
-	margin:55px auto 20px;
+	/*margin:55px auto 20px;*/
 	padding:0;
 	width:auto;
 	/*scalable:no;*/
@@ -1252,7 +1252,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .ui-checkbox label span.ui-btn-inner span.ui-btn-text {
 	color:#7F7F7F;
 	font-family: 'OpenSansRegular';
-	font-size:18px;
+	font-size:16px;
 	font-weight:normal;
 	padding:0 0 0 26px;
 }
@@ -1481,10 +1481,10 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#FFFFFF;
 	display:block;
 	font-family: 'OpenSansRegular';
-	font-size:15px;
+	font-size:14px;
 	line-height:35px;
 	margin:0 0 10px;
-	padding:4px 0 4px 56px;
+	padding:4px 0 4px 50px;
 	text-shadow:none;
 }
 .deletechannel {
@@ -2625,12 +2625,12 @@ ul.igiresponses li span {
 /*slide menu*/
 .slidemenu {
 	background:#e6e7e8;
-	float: right;
+	float:right;
 	margin-top: -41px;
 	position: relative;
 	width:90%;
 	z-index: 9999;
-	min-height:480px;
+	min-height:550px;
 }
 .slidemenu h4 {
 	font-size:22px;
@@ -2959,7 +2959,7 @@ ul.igiresponses li span {
 }
 .slider-value span.chase {
 	float:left;
-	margin:0px 24%;
+	margin:0px 22%;
 }
 .slider-value span.hound {
 	float:right;
@@ -2972,20 +2972,26 @@ ul.igiresponses li span {
 }
 .slidervalue-img .remind-sensitive, .slidervalue-img .chase-broadcast, .slidervalue-img .hound-critical  {
 	float:left;
-	padding:19px 19px 19px 20px;
+	padding:20px;
 	background:url("images/emergency-setting-dot.png") no-repeat -5px 0px;
 }
 .slidervalue-img .chase-broadcast {
 	background:url("images/emergency-setting-dot.png") no-repeat -4px 0px;
 	float:left;
-	margin:0 28.8%;
+	margin:0 27%;
 }
 .slidervalue-img .hound-critical {
 	float:right;
-	background:url("images/emergency-setting-dot.png") no-repeat -2px 0px;
+	background:url("images/emergency-setting-dot.png") no-repeat 6px 0px;
 }
-.slidervalue-img .timesensitive-criticalicon {
-	background:url("images/sprites-channel.png") no-repeat -4px -800px;
+.slidervalue-img .criticalicon {
+	background:url("images/sprites-channel.png") no-repeat -3px -800px;
+}
+.slidervalue-img .broadcasticon {
+	background:url("images/brodecasticon.png") no-repeat 0 0;
+}
+.slidervalue-img .timesensitiveicon {
+	background:url("images/sprites.png") no-repeat -5px -746px;
 }
 .escalatesettingstext {
 	overflow:hidden;
@@ -3001,7 +3007,7 @@ ul.igiresponses li span {
 }
 .escalatesettingstext .broadcastquite {
 	float:left;
-	width:124px;
+	width:107px;
 	margin:0 5px;
 }
 .escalatesettingstext .critical {
@@ -3096,7 +3102,7 @@ ul.igiresponses li span {
 }
 /*-Edit personal information-*/
 
-.savebtn.ui-link, .savebtn.ui-link:visited, .savebtn.ui-link:hover, .savebtn.ui-link:active {
+/*.savebtn.ui-link, .savebtn.ui-link:visited, .savebtn.ui-link:hover, .savebtn.ui-link:active {
     background:#e6e7e8;
     border-radius:4px;
     font-size:14px;
@@ -3104,7 +3110,33 @@ ul.igiresponses li span {
     padding:1px 14px;
 		float:right;
 		margin-right:12px;
-    /*text-decoration:none;*/
+}*/
+
+/* Yes No*/
+
+.yesnoclick {
+	float:right;
+	border-radius:20px;
+	padding:2px 5px;
+	background:#e6e7e8;
+	color:#666;
+}
+.yesnoclick span {
+	border-radius:50%;
+	float: left;
+	height:30px;
+	line-height: 30px;
+	margin: 2px;
+	text-align: center;
+	width:30px;
+	color:#666;
+}
+.yesnoclick span.nobutton {
+	background:#8dc63f;
+	color:#fff;
+}
+.yes-noactive {
+	background:#8dc63f;
 }
 /* CHANNELS PAGES CSS	END	 */
 /*

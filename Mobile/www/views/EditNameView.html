@@ -1,0 +1,21 @@
+<!--To do - Pradeep Kumar-->
+<div id="editNameView" data-role="page">
+  <header>
+    <a href="#" class="back register" onclick="goToView('escalationPlansView');"><em></em>Settings</a>
+    <a class="menu" href="#" onclick="goToView('channelMenuView');"></a> 
+  </header>
+  <div class="page-content nofooterbar">
+      <div class="portal-name welcome" data-bind="text: accountName"></div>
+      <section class="loginform" data-bind="css: firstnameClass">
+        <label class="msginfo">Edit Name:</label>
+        <div class="formtype" data-bind="css: firstnameClass">
+          <input type="text" data-bind="value: firstname" placeholder="Jason" />      
+        </div>
+        <div class="formtype" data-bind="css: lastnameClass">
+          <input type="text" data-bind="value: lastname" placeholder="Law" />
+          <div class="msgerror" data-bind="html: errorFirstLastName"></div>
+        </div>
+        <div class="loginbtn"><a href="#" data-bind="click: editNameCommand">SAVE</a></div>
+      </section>  
+    </div>
+</div>
