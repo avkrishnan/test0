@@ -15,8 +15,7 @@
       <label class="short-description">A short description for :<span>2013hawks</span></label>         
       <div class="formtype textareatype">
         <textarea data-bind="value: shortDescription" placeholder="Salt Lake City youth soccer team coached by Bob Smith, 2013 Season."></textarea>
-        <div class="channelavailable" data-bind="html: message"></div>
-        <div class="msgerror" data-bind="html: errorChannel"></div>        
+        <div class="msgerror" data-bind="visible:errorMessage, html: errorChannel"></div>        
       </div>
       <div class="login">
         <div class="loginbtn">

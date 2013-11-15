@@ -9,11 +9,11 @@ function EditShortDescriptionViewModel() {
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
-  /* Edit Channel Display observable */
+  /* Edit Channel Display observable */	
 	this.channelId = ko.observable();
 	this.shortDescription = ko.observable();	
-	this.message = ko.observable();	
-	this.errorChannel = ko.observable();
+	this.errorMessage = ko.observable(false);	
+	this.errorChannel = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -25,7 +25,7 @@ function EditShortDescriptionViewModel() {
 	
 	this.clearForm = function () {
     that.shortDescription('');
-		that.message('');
+		that.errorMessage(false);		
 		that.errorChannel('');		
   };
 	
@@ -36,9 +36,10 @@ function EditShortDescriptionViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
-			that.channelId(channelObject.channelId);			
-			$('input').keyup(function () {
-				that.message('');
+			that.channelId(channelObject.channelId);
+			that.shortDescription(channelObject.channelDescription);						
+			$('textarea').keyup(function () {
+				that.errorMessage(false);				
 				that.errorChannel('');
 			});
 		}
@@ -51,20 +52,39 @@ function EditShortDescriptionViewModel() {
 	});
 	
 	function successfulModify(args) {
-    $.mobile.hidePageLoadingMsg();
-    goToView('channelSettingsView');
+		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
+		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});
   };
+	
+	function successfulGetChannel(data) {
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		var channel = [];			
+		channel.push({
+			channelId: data.id, 
+			channelName: data.name, 
+			channelDescription: data.description,
+			followerCount: followers
+		});
+		channel = channel[0];		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));	
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+    goToView('channelSettingsView');					
+	}
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
-    goToView('shortDescriptionView');
-		that.message('');
-		that.errorChannel('<span>SORRY :</span> '+response.message);
+		that.errorMessage(true);			
+		that.errorChannel('<span>SORRY:</span> '+response.message);
   };
 	
   this.shortDescriptionCommand = function () {
 		if (that.shortDescription() == '') {
-      that.errorChannel('<span>SORRY :</span> Please enter short description');
+			that.errorMessage(true);			
+      that.errorChannel('<span>SORRY:</span> Please enter short description');
     } else {
 			var channelObject = {
 				id: that.channelId(),

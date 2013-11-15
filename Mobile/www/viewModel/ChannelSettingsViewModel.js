@@ -11,7 +11,7 @@ function ChannelSettingsViewModel() {
   /* Channel Settings observable */
 	this.channelId = ko.observable();	
 	this.channelName = ko.observable();
-	this.channelDisplayName = ko.observable();
+	this.shortDescription = ko.observable();
 	
 	/* Methods */	
 	this.applyBindings = function() {
@@ -29,7 +29,7 @@ function ChannelSettingsViewModel() {
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
-			that.channelDisplayName(channelObject.channelDescription);									
+			that.shortDescription(channelObject.channelDescription);									
 		}
 	}
 	
