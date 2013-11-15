@@ -360,6 +360,7 @@ verifyContactViewModel = new VerifyContactViewModel(),
 channelMessagesViewModel = new ChannelMessagesViewModel(),
 channelSingleMessagesViewModel = new ChannelSingleMessagesViewModel(),
 channelViewUnfollowModel = new ChannelViewUnfollowModel(),
+changePasswordViewModel = new ChangePasswordViewModel(),
 /* end*/
 
 tutorialViewModel = new TutorialViewModel(),
@@ -457,7 +458,8 @@ var models = [
 							addInviteFollowersViewModel,
 							addFollowersViewModel,
 							editNameViewModel,							
-							editLongDescriptionViewModel											
+							editLongDescriptionViewModel,
+							changePasswordViewModel									
               ];
 
 
