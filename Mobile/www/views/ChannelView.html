@@ -21,9 +21,9 @@
       </div>
     </div>
     <div class="channelprivate">
-      <h4><b data-bind="text:followers"></b> followers</h4>
-      <a class="lock-channel" href="#"></a>
-      <p data-bind="text:description"></p>
+      <h4 data-bind="visible:hasheader"><b data-bind="text:followers"></b> followers</h4>
+      <!--<a class="lock-channel" href="#"></a>-->
+      <p data-bind="text:longdescription"></p>
       <!--<p class="more">
       	The BYU Cougars football team is the college football program representing Brigham Young University, a ...           
       </p>
@@ -32,7 +32,7 @@
     
     <div class="contactchannel">
       <div class="login">
-        <a href="#">Contact Channel</a>
+        <!--<a href="#">Contact Channel</a>-->
         <span data-bind="if: channelAction">
           <div class="loginbtn">
             <a href="#" data-bind="click:actionFollowChannelCommand"> Follow </a>
