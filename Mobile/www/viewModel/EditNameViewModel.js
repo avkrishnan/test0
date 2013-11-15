@@ -9,6 +9,7 @@ function EditNameViewModel() {
 	this.accountName = ko.observable();	
 	
 	/* Edit Name observable */
+	this.accountName = ko.observable();	
   this.firstname = ko.observable();
   this.lastname = ko.observable();
   this.errorFirstLastName = ko.observable();
@@ -40,8 +41,9 @@ function EditNameViewModel() {
 			$('input').keyup(function () {
 				that.firstnameClass('');
 				that.lastnameClass('');
-				that.errorFirstLastName('');
+				that.errorFirstLastName('');				
 			});
+			that.accountName(localStorage.getItem('accountName'));			
 			$.mobile.showPageLoadingMsg('a', 'Loading information');
 			ES.loginService.getAccount({ success: successfulGetAccount, error: errorAPI });						
 		}
