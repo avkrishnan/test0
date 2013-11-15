@@ -29,7 +29,7 @@ function SendMessageViewModel() {
     });	
 	};  
 	
-	this.activate = function() {
+	this.activate = function() {			
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 			goToView('loginView');
