@@ -97,7 +97,7 @@ function ChannelMainViewModel() {
 				broadcast: '<strong></strong>'+data.message[len].text+'<em></em>',
 				time: msToTime(data.message[len].created),
 				created: data.message[len].created,				
-				replies: data.message[len].replies+' replies'
+				replies: 'Replies'
 			});
 		}
 	}
