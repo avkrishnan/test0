@@ -48,6 +48,7 @@ function ChannelsIOwnViewModel() {
 				channelId: data.channel[channelslength].id, 
 				channelName: data.channel[channelslength].name, 
 				channelDescription: data.channel[channelslength].description,
+				longDescription: data.channel[channelslength].longDescription,
 				followerCount: followers
 			});
 		}	
