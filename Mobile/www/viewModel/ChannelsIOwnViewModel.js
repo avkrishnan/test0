@@ -60,7 +60,9 @@ function ChannelsIOwnViewModel() {
 	};
 	
 	this.channelSettings = function(data){		
-		localStorage.setItem('currentChannelData', JSON.stringify(data));	
+		localStorage.setItem('currentChannelData', JSON.stringify(data));
+		backNavView = 'channelsIOwnView';
+		backNavText = 'channelsIOwn';		
 		goToView('channelSettingsView');
 	};
 	

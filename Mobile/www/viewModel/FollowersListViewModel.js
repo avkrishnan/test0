@@ -24,12 +24,14 @@ function FollowersListViewModel() {
 	  
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));				
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));			
-			that.followers.removeAll();	
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+			that.followers.removeAll();									
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
 			that.followerCount(channelObject.followerCount);															
@@ -39,6 +41,8 @@ function FollowersListViewModel() {
 	}
 	
 	this.channelSettings = function(){
+		backNavView = 'followersListView';
+		backNavText = 'Followers';			
 		goToView('channelSettingsView');
 	};
 	

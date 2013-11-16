@@ -27,14 +27,16 @@ function ChannelMainViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();		
+		var token = ES.evernymService.getAccessToken();	
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));					
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');		
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			localStorage.removeItem('currentMessageData');			
-			that.broadcasts.removeAll();
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+			that.broadcasts.removeAll();							
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
 			that.followerCount(channelObject.followerCount);											
@@ -114,6 +116,8 @@ function ChannelMainViewModel() {
 	};
 	
 	this.channelSettings = function(){
+		backNavView = 'channelMainView';
+		backNavText = 'Main';			
 		goToView('channelSettingsView');
 	};	
 	

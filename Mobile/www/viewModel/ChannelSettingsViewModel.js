@@ -7,6 +7,7 @@ function ChannelSettingsViewModel() {
 	this.viewname = 'ChannelSettings';
 	this.displayname = 'Channel Settings';	
 	this.accountName = ko.observable();	
+	this.backText = ko.observable();
 
   /* Channel Settings observable */
 	this.channelId = ko.observable();	
@@ -19,19 +20,27 @@ function ChannelSettingsViewModel() {
       that.activate();
     });	
 	};
+	
 	  
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();		
+		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));				
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.backText('<em></em>'+backNavText);
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
 			that.shortDescription(channelObject.channelDescription);									
 		}
 	}
+	
+	this.backCommand = function () {
+		goToView(backNavView);
+  };
 	
 	this.editChannelName = function () {
 		goToView('channelChangeNameView');
