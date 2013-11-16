@@ -69,9 +69,9 @@ function ChannelNewViewModel() {
 
 	this.nextViewCommand = function (e) {
     if (that.newChannel() == '') {
-      that.errorNewChannel('<span>SORRY :</span> Please enter channel name');
+      that.errorNewChannel('<span>SORRY:</span> Please enter channel name');
     } else if (that.newChannel().match(/\s/)) {
-			that.errorNewChannel('<span>SORRY :</span> Please choose a short name with no spaces');
+			that.errorNewChannel('<span>SORRY:</span> Please choose a short name with no spaces');
 		} else {
 			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
@@ -93,7 +93,7 @@ function ChannelNewViewModel() {
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorNewChannel('<span>SORRY :</span> ' + response.message);		
+    that.errorNewChannel('<span>SORRY:</span> ' + response.message);		
   };
 	
   this.createChannelCommand = function () {

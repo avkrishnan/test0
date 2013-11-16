@@ -72,9 +72,9 @@ function ChannelChangeNameViewModel() {
 	
   this.nextViewCommand = function () {
     if (that.channelChangeName() == '') {
-      that.errorChannel('<span>SORRY :</span> Please enter channel name');
+      that.errorChannel('<span>SORRY:</span> Please enter channel name');
 		} else if (that.channelChangeName().match(/\s/)) {
-			 that.errorChannel('<span>SORRY :</span> Please choose a short name with no spaces');
+			 that.errorChannel('<span>SORRY:</span> Please choose a short name with no spaces');
     } else {
 			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
@@ -87,7 +87,6 @@ function ChannelChangeNameViewModel() {
 	
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
-		that.activate(channelObject);
     goToView('channelSettingsView');
   };
 
@@ -97,20 +96,16 @@ function ChannelChangeNameViewModel() {
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorChannel('<span>SORRY :</span> '+response.message);		
+    that.errorChannel('<span>SORRY:</span> '+response.message);		
   };
 	
-  this.confirmChannelChangeNameCommand = function () {
-		if (that.channelChangeName() == '') {
-      that.errorChannel('<span>SORRY :</span> Please enter channel name');
-    } else {		
-			var channelObject = {
-				id: that.channelId(),
-				name: that.channelChangeName()
-			};
-			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
-			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
-		}
+  this.confirmChannelChangeNameCommand = function () {		
+		var channelObject = {
+			id: that.channelId(),
+			name: that.channelChangeName()
+		};
+		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
+		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 	}
 	
 }
