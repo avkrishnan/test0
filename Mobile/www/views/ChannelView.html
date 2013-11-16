@@ -23,11 +23,10 @@
     <div class="channelprivate">
       <h4 data-bind="visible:hasheader"><b data-bind="text:followers"></b> followers</h4>
       <!--<a class="lock-channel" href="#"></a>-->
-      <p data-bind="text:longdescription"></p>
-      <!--<p class="more">
-      	The BYU Cougars football team is the college football program representing Brigham Young University, a ...           
-      </p>
-      <a class="morebtn" href="#">MORE</a>-->
+      <div class="formtype textareatype channellanding">
+        <textarea class="textarea" data-bind="text:longdescription" readonly></textarea>
+        <!--<a class="morebtn" href="#">MORE</a> -->       
+      </div>
     </div>
     
     <div class="contactchannel">
