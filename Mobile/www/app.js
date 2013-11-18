@@ -709,6 +709,9 @@ $(document).bind('panelbeforeopen', function(e, data) {
                  
                  });
 								 
+/* by pradeep kumar */
+var backNavView = '';
+var backNavText = '';
 
 								 
 
