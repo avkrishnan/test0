@@ -710,25 +710,18 @@ $(document).bind('panelbeforeopen', function(e, data) {
                  });
 								 
 /* by pradeep kumar */
-var backNavText = JSON.parse(localStorage.getItem('backNavText'));
-var backNavView = JSON.parse(localStorage.getItem('backNavView'));
+var backNavText = [];
+var backNavView = [];
 
 function pushBackNav(backText, backView, targetView) {
-	backNavText.push(backText);
-	localStorage['backNavText']=JSON.stringify(backNavText);	
-	backNavView.push(backView);
-	localStorage['backNavView']=JSON.stringify(backNavView);	
-	goToView(targetView);	
-}			
+ backNavText.push(backText); 
+ backNavView.push(backView); 
+ goToView(targetView); 
+}   
 
 function popBackNav() {
-	var backNavText = JSON.parse(localStorage.getItem('backNavText'));
-	var backNavView = JSON.parse(localStorage.getItem('backNavView'));
-	backNavText.pop();
-	localStorage['backNavText']=JSON.stringify(backNavText);		
-	var goView = backNavView.pop();
-	localStorage['backNavView']=JSON.stringify(backNavView);	
-	goToView(goView);
+ backNavText.pop();  
+ goToView(backNavView.pop());
 }
 								 
 
