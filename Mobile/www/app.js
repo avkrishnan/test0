@@ -710,26 +710,48 @@ $(document).bind('panelbeforeopen', function(e, data) {
                  });
 								 
 /* by pradeep kumar */
-var backNavText = JSON.parse(localStorage.getItem('backNavText'));
-var backNavView = JSON.parse(localStorage.getItem('backNavView'));
+if(!localStorage.getItem('backNavText')) {
+	var backNavText = [];
+	var backNavView = [];
+} else {
+	var backNavText = JSON.parse(localStorage.getItem('backNavText'));
+	var backNavView = JSON.parse(localStorage.getItem('backNavView'));
+}
 
 function pushBackNav(backText, backView, targetView) {
 	backNavText.push(backText);
-	localStorage['backNavText']=JSON.stringify(backNavText);	
+	localStorage.setItem('backNavText', JSON.stringify(backNavText));	
 	backNavView.push(backView);
-	localStorage['backNavView']=JSON.stringify(backNavView);	
+	localStorage.setItem('backNavView', JSON.stringify(backNavView));	
 	goToView(targetView);	
 }			
 
 function popBackNav() {
-	var backNavText = JSON.parse(localStorage.getItem('backNavText'));
-	var backNavView = JSON.parse(localStorage.getItem('backNavView'));
 	backNavText.pop();
-	localStorage['backNavText']=JSON.stringify(backNavText);		
-	var goView = backNavView.pop();
-	localStorage['backNavView']=JSON.stringify(backNavView);	
-	goToView(goView);
+	localStorage.removeItem('backNavText');	
+	localStorage.setItem('backNavText', JSON.stringify(backNavText));
+	//alert(localStorage.getItem('backNavText'));					
+	var goView = goToView(backNavView.pop());
+	localStorage.removeItem('backNavView');		
+	localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	//alert(localStorage.getItem('backNavView'));	
+	goToView(goView);		
 }
+
+/* by pradeep kumar 
+var backNavText = [];
+var backNavView = [];
+
+function pushBackNav(backText, backView, targetView) {
+	backNavText.push(backText);	
+	backNavView.push(backView);	
+	goToView(targetView);	
+}			
+
+function popBackNav() {
+	backNavText.pop();		
+	goToView(backNavView.pop());
+}*/
 								 
 
 

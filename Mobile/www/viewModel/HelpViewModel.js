@@ -7,7 +7,6 @@ function HelpViewModel() {
 	this.viewname = 'Help';
 	this.displayname = 'Help and FAQs';	
 	this.accountName = ko.observable();	
-	this.backText = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -21,15 +20,9 @@ function HelpViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));			
 		}
 	}
-	
-
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Help', 'helpView', 'channelMenuView');

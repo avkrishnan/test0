@@ -1,7 +1,7 @@
 <!--To do - Pradeep Kumar-->
 <div id="signupStepFirstView" data-role="page">
   <header>
-    <a href="#loginView" class="back logintop"><em></em>Login</a>
+    <a class="back logintop" onclick="goToView('loginView');"><em></em>Login</a>
   </header>
   <div class="page-content">
     <div class="portal-name">
@@ -46,7 +46,7 @@
       <span>Evernym is all about privacy.</span> We never share your information with anyone, and we never read or scan your communications</div>
     <hr noshade data-bind="visible: aboutEvernym">
     <div class="terms" data-bind="visible: aboutEvernym">By signing up you are agreeing to our
-      <a href="#">Terms of Use and Privacy Policy</a>
+      <a href="#" onclick="goToView('privacyPolicyView');">Terms of Use and Privacy Policy</a>
     </div>
   </div>
 </div>

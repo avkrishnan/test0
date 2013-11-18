@@ -8,7 +8,6 @@ function EditShortDescriptionViewModel() {
 	this.displayname = 'Edit Short Description';	  
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
-	this.backText = ko.observable();	
 	
   /* Edit Channel Display observable */	
 	this.channelId = ko.observable();
@@ -38,8 +37,7 @@ function EditShortDescriptionViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
 			that.shortDescription(channelObject.channelDescription);						
@@ -55,10 +53,6 @@ function EditShortDescriptionViewModel() {
 			that.shortDescriptionCommand();
 		}
 	});
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Edit Short Description', 'editShortDescriptionView', 'channelMenuView');		

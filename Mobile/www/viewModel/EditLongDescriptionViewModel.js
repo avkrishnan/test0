@@ -8,7 +8,6 @@ function EditLongDescriptionViewModel() {
 	this.displayname = 'Edit Long Description';	  
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
-	this.backText = ko.observable();	
 	
   /* Edit Channel Display observable */
 	this.channelId = ko.observable();
@@ -35,8 +34,7 @@ function EditLongDescriptionViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
 			that.longDescription(channelObject.longDescription);						
@@ -52,10 +50,6 @@ function EditLongDescriptionViewModel() {
 			that.longDescriptionCommand();
 		}
 	});
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Edit Long Descriptiono', 'editLongDescriptionView', 'channelMenuView');

@@ -6,14 +6,14 @@ function ChannelChangeNameViewModel() {
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelChangeName';
 	this.displayname = 'Change Channel Name';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();	
 	
   /* New Channel Step First observable */
 	this.sectionOne = ko.observable(true);
 	this.sectionTwo = ko.observable(false);
 	this.channelId = ko.observable();		
-	this.channelChangeName = ko.observable('');	
+	this.channelChangeName = ko.observable('');
+	this.channelClass = ko.observable();		
 	this.message = ko.observable();	
 	this.errorChannel = ko.observable();	
 	this.channelWebAddress = ko.observable();
@@ -30,6 +30,7 @@ function ChannelChangeNameViewModel() {
 	
 	this.clearForm = function () {
     that.channelChangeName('');
+		that.channelClass('');			
 		that.message('');
 		that.errorChannel('');
     that.backNav('');		
@@ -43,8 +44,7 @@ function ChannelChangeNameViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);	
 			that.channelChangeName(channelObject.channelName);						
@@ -62,15 +62,15 @@ function ChannelChangeNameViewModel() {
 		}
 	});
 	
-	this.backCommand = function() {
+	this.goToBack = function() {
 		if(that.backNav() == 'channelChangeNameView') {			
 			that.sectionOne(true)
 			that.sectionTwo(false);
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);
+			that.backText('<em></em>Settings');
 			that.backNav('');																	
 		}
 		else {
-			popBackNav();
+			goToView('channelSettingsView');
 		}
 	}
 	
@@ -84,12 +84,8 @@ function ChannelChangeNameViewModel() {
 		} else if (that.channelChangeName().match(/\s/)) {
 			 that.errorChannel('<span>SORRY:</span> Please choose a short name with no spaces');
     } else {
-			//that.message('<span>GREAT! </span> This name is available');
-			that.sectionOne(false);
-			that.sectionTwo(true);
-			that.backText('<em></em>Step 1');
-			that.backNav('channelChangeNameView');				
-			that.channelWebAddress(that.channelChangeName()+'.evernym.com');	
+			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
+			ES.loginService.checkName(that.channelChangeName(), { success: successAvailable, error: errorAPI });					
     }
   };
 	
@@ -97,6 +93,20 @@ function ChannelChangeNameViewModel() {
     $.mobile.hidePageLoadingMsg();
     goToView('channelSettingsView');
   };
+	
+	function successAvailable(data){
+		if(data){
+			that.channelClass('validationerror');
+      that.errorChannel('<span>SORRY:</span> This channel name has already been taken');
+		} else {
+			//that.message('<span>GREAT! </span> This name is available');
+			that.sectionOne(false);
+			that.sectionTwo(true);
+			that.backText('<em></em>Step 1');
+			that.backNav('channelChangeNameView');				
+			that.channelWebAddress(that.channelChangeName()+'.evernym.com');				
+		}
+	};	
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();

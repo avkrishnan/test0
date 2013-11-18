@@ -12,6 +12,7 @@ function ChannelNewViewModel() {
 	this.sectionOne = ko.observable(true);
 	this.sectionTwo = ko.observable(false);		
 	this.newChannel = ko.observable('');	
+	this.channelClass = ko.observable();	
 	this.message = ko.observable();	
 	this.errorNewChannel = ko.observable();
 	this.channelWebAddress = ko.observable();
@@ -28,6 +29,7 @@ function ChannelNewViewModel() {
 	
 	this.clearForm = function () {
 		that.newChannel('');
+		that.channelClass('');		
 		that.message('');
 		that.errorNewChannel('');
     that.backNav('');				
@@ -76,12 +78,8 @@ function ChannelNewViewModel() {
     } else if (that.newChannel().match(/\s/)) {
 			that.errorNewChannel('<span>SORRY:</span> Please choose a short name with no spaces');
 		} else {
-			//that.message('<span>GREAT! </span> This name is available');
-			that.sectionOne(false);
-			that.sectionTwo(true);
-			that.backText('<em></em>New Chan');
-			that.backNav('channelNewView');
-			that.channelWebAddress(that.newChannel()+'.evernym.com');	
+			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
+			ES.loginService.checkName(that.newChannel(), { success: successAvailable, error: errorAPI });			
     }
   };
 	
@@ -89,6 +87,20 @@ function ChannelNewViewModel() {
     $.mobile.hidePageLoadingMsg();
     goToView('channelsIOwnView');
   };
+	
+	function successAvailable(data){
+		if(data){
+			that.channelClass('validationerror');
+      that.errorNewChannel('<span>SORRY:</span> This channel name has already been taken');
+		} else {
+			//that.message('<span>GREAT! </span> This name is available');
+			that.sectionOne(false);
+			that.sectionTwo(true);
+			that.backText('<em></em>New Chan');
+			that.backNav('channelNewView');
+			that.channelWebAddress(that.newChannel()+'.evernym.com');				
+		}
+	};	
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();
@@ -102,7 +114,7 @@ function ChannelNewViewModel() {
   this.createChannelCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
 		ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});
-  };
+  };	
 	
 	this.userSettings = function () {
 		pushBackNav('New Chan', 'channelNewView', 'escalationPlansView');		

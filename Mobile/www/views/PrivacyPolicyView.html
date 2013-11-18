@@ -1,9 +1,10 @@
 <!--To do - Pradeep Kumar-->
 <div id="privacyPolicyView" data-role="page" class="channel-list" >
    <header>
-    <a href="#" class="back" data-bind="html: backText, click: backCommand"></a>
-    <a class="menu" href="#" data-bind="click: menuCommand"></a>
-    <div class="linkicon">    
+    <a href="#" class="back" data-bind="visible:hasheader" onclick="goToView('escalationPlansView');"><em></em>Settings</a>
+    <a href="#" class="back" data-bind="visible:noheader" onclick="goToView('signupStepFirstView');"><em></em>Step 1</a>    
+    <a class="menu" href="#" data-bind="click: menuCommand, visible:hasheader"></a>
+    <div class="linkicon" data-bind="visible:hasheader">    
       <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
       <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
       <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
@@ -25,7 +26,7 @@
       occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum . . . .
     </div>
   </div> 
-  <div class="footer">
+  <div class="footer" data-bind="visible:hasfooter">
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>
   </div>

@@ -7,7 +7,11 @@ function PrivacyPolicyViewModel() {
   this.viewname = 'PrivacyPolicy';
   this.displayname = 'Privacy Policy';
 	this.accountName = ko.observable();	
-	this.backText = ko.observable();	
+	
+	/* Privacy policy observable */
+	this.hasfooter = ko.observable(false);
+	this.hasheader = ko.observable(false);
+	this.noheader = ko.observable(false);		
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -19,16 +23,16 @@ function PrivacyPolicyViewModel() {
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
-			goToView('loginView');
+			that.hasfooter(false);
+			that.hasheader(false);
+			that.noheader(true);			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.hasfooter(true);
+			that.hasheader(true);
+			that.noheader(false);									
 		}
 	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Settings', 'privacyPolicyView', 'channelMenuView');		

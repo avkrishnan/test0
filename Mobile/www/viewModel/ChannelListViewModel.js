@@ -34,6 +34,10 @@ function ChannelListViewModel() {
 		pushBackNav('Home', 'channelListView', 'channelsIOwnView');		
 	}
 	
+	this.goChannelsIFollow = function() {
+		pushBackNav('Home', 'channelListView', 'channelsFollowingListView');		
+	}	
+	
 	this.userSettings = function () {
 		pushBackNav('Home', 'channelListView', 'escalationPlansView');
   };	

@@ -6,8 +6,7 @@ function ReplyDetailViewModel() {
 	this.viewid = 'V-56';
 	this.viewname = 'ReplyDetail';
 	this.displayname = 'Reply Detail';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();		
 
   /* Single message observable */		
 	this.channelId = ko.observable();
@@ -30,13 +29,13 @@ function ReplyDetailViewModel() {
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channelObject) {
+		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
 			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));
@@ -50,10 +49,6 @@ function ReplyDetailViewModel() {
 			that.moreText(replyObject.reply);												
 		}
 	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Reply detail', 'replyDetailView', 'channelMenuView');		

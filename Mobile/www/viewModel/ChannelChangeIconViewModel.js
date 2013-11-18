@@ -6,8 +6,7 @@ function ChannelChangeIconViewModel() {
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelChangeIcon';
 	this.displayname = 'Channel Chage Icon Image';	   
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();	
 	
   /* Channel Icon Image observable */
 	this.channelId = ko.observable();	
@@ -27,16 +26,11 @@ function ChannelChangeIconViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);			
 		}
 	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Change Icon', 'channelChangeIconView', 'channelMenuView');		

@@ -51,10 +51,12 @@ function FollowersListViewModel() {
   };		
 	
 	this.channelSettings = function(){
-		backNavView.push('followersListView');
-		backNavText.push('Followers');				
-		goToView('channelSettingsView');
+		pushBackNav('Followers', 'followersListView', 'channelSettingsView');				
 	};
+	
+	this.addInviteFollowers = function(){
+		pushBackNav('Followers', 'followersListView', 'addInviteFollowersView');				
+	};	
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();

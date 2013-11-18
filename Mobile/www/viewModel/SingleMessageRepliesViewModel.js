@@ -6,8 +6,7 @@ function SingleMessageRepliesViewModel() {
 	this.viewid = 'V-56';
 	this.viewname = 'MessageReplies';
 	this.displayname = 'Message Replies';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();	
 
   /* Single message observable */		
 	this.channelId = ko.observable();
@@ -27,13 +26,13 @@ function SingleMessageRepliesViewModel() {
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channelObject) {
+		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
 			localStorage.removeItem('currentReplyData');													
@@ -44,10 +43,6 @@ function SingleMessageRepliesViewModel() {
 			return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI})			
 		}
 	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Broadcast', 'singleMessageRepliesView', 'channelMenuView');		

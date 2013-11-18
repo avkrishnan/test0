@@ -6,8 +6,7 @@ function SingleMessageFullTextViewModel() {
 	this.viewid = 'V-23';
 	this.viewname = 'SingleMessageFullText';
 	this.displayname = 'Message Full Text';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();		
 
   /* Single message observable */		
 	this.channelName = ko.observable();		
@@ -26,13 +25,13 @@ function SingleMessageFullTextViewModel() {
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channelObject) {
+		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
 			that.channelName(channelObject.channelName);
@@ -43,10 +42,6 @@ function SingleMessageFullTextViewModel() {
 			that.fullText(messageObject.broadcast);										
 		}
 	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Broadcast details', 'singleMessageFullTextView', 'channelMenuView');		

@@ -6,8 +6,7 @@ function SingleMessageViewModel() {
 	this.viewid = 'V-23';
 	this.viewname = 'Message';
 	this.displayname = 'Message';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();		
 
   /* Single message observable */		
 	this.channelName = ko.observable();		
@@ -24,14 +23,14 @@ function SingleMessageViewModel() {
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
+		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channelObject) {
+		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));	
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
 			that.channelName(channelObject.channelName);					
@@ -40,10 +39,6 @@ function SingleMessageViewModel() {
 			that.replies(messageObject.replies);							
 		}
 	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Broadcast Details', 'singleMessageView', 'channelMenuView');		
@@ -57,11 +52,11 @@ function SingleMessageViewModel() {
 	}
 	
 	this.messageFullText = function(){
-		pushBackNav('Broadcast Details', 'singleMessageView', 'singleMessageFullTextView');										
+		goToView('singleMessageFullTextView');										
 	};
 	
 	this.messageReplies = function(){
-		pushBackNav('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');										
+		goToView('singleMessageRepliesView');									
 	};
 	
 	this.userSettings = function () {

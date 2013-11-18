@@ -6,8 +6,7 @@ function ChannelDeleteViewModel() {
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelDeleteView';
 	this.displayname = 'Channel Delete';	
-	this.accountName = ko.observable();	
-	this.backText = ko.observable();	
+	this.accountName = ko.observable();		
 	
   /* Channel delete observable */
 	this.channelId = ko.observable();
@@ -29,18 +28,13 @@ function ChannelDeleteViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));	
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
 			that.channelDisplayName(channelObject.channeldescription);			
 		}
 	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Channel Delete', 'ChannelDeleteView', 'channelMenuView');		

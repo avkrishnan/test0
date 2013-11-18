@@ -1,7 +1,7 @@
 <!--To do - Pradeep Kumar-->
 <div id="inviteFollowersIIView" data-role="page" class="channel-list" >
    <header>
-    <a href="#" class="back" data-bind="html: backText, click: backCommand"></a>
+    <a href="#" class="back" onclick="goToView('feedbackView');"><em></em>Feedback</a>
     <a class="menu" href="#" data-bind="click: menuCommand"></a>
     <div class="linkicon">    
       <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
@@ -18,7 +18,7 @@
       </div>
       <label class="invited-followChannel">Your feedback:</label>
       <div class="formtype textareatype" data-bind="css: feedbackClass">
-        <textarea class="textarea" data-bind="attr: { id: feedbackId }, value: feedback"></textarea>
+        <textarea class="textarea" data-bind="attr: { id: feedbackId }, value: feedback" placeholder="Add additional text here . . . "></textarea>
         <div class="msgerror" data-bind="html: errorFeedback"></div>
       </div>
       <a href="#" class="sendbtnican" data-bind="click: sendFeedbackCommand">

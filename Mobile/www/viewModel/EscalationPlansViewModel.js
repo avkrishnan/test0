@@ -182,6 +182,8 @@ function EscalationPlansViewModel() {
 		//inviteFollowersViewModel.clearForm();
 		ES.evernymService.clearAccessToken();
 		localStorage.removeItem('login_nav');
+		localStorage.removeItem('backNavText');	
+		localStorage.removeItem('backNavView');				
 		localStorage.removeItem('currentChannel');
 		localStorage.removeItem('accountName');
 		localStorage.removeItem('name');

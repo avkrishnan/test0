@@ -7,8 +7,7 @@ function ChannelMessagesViewModel() {
 	this.displayname = "Channel Messages";
 	this.hasfooter = true;	
 	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();	
+	this.accountName = ko.observable();	
 	this.title = ko.observable();
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
@@ -21,8 +20,7 @@ function ChannelMessagesViewModel() {
 	};
     
 	this.activate = function() {
-		that.accountName(localStorage.getItem("accountName"));
-		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
+		that.accountName(localStorage.getItem("accountName"));	
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		//alert(localStorage.getItem("currentChannel"));
 		that.channelid(channel.id);
@@ -32,10 +30,6 @@ function ChannelMessagesViewModel() {
 		that.channelMessages.removeAll();
 		return that.getChannelCommand(that.channelid()).then(that.gotChannel);
 	};
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('AllMessagesHistory', 'channelMessagesView', 'channelMenuView');		
@@ -48,7 +42,7 @@ function ChannelMessagesViewModel() {
 	this.showSingleMessage = function(data) {
 		//alert(JSON.stringify(data));
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
-		goToView('channelSingleMessagesView');
+		goToView('channelSingleMessagesView');		
 	}
 	
 	this.getChannelCommand = function(channelid) {
