@@ -710,9 +710,19 @@ $(document).bind('panelbeforeopen', function(e, data) {
                  });
 								 
 /* by pradeep kumar */
-var backNavView = '';
-var backNavText = '';
+var backNavText = [];
+var backNavView = [];
 
+function pushBackNav(backText, backView, targetView) {
+ backNavText.push(backText); 
+ backNavView.push(backView); 
+ goToView(targetView); 
+}   
+
+function popBackNav() {
+ backNavText.pop();  
+ goToView(backNavView.pop());
+}
 								 
 
 
