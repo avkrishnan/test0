@@ -6,7 +6,8 @@ function ChannelChangeIconViewModel() {
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelChangeIcon';
 	this.displayname = 'Channel Chage Icon Image';	   
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
   /* Channel Icon Image observable */
 	this.channelId = ko.observable();	
@@ -20,14 +21,27 @@ function ChannelChangeIconViewModel() {
 	};  
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);			
 		}
 	}
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Change Icon', 'channelChangeIconView', 'channelMenuView');		
+  };	
+	
 	function successfulModify(args) {
     $.mobile.hidePageLoadingMsg();
     goToView('channelSettingsView');
@@ -46,5 +60,13 @@ function ChannelChangeIconViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
   };
+	
+	this.userSettings = function () {
+		pushBackNav('Change Icon', 'channelChangeIconView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Change Icon', 'channelChangeIconView', 'sendMessageView');		
+  };	
 	
 }

@@ -7,6 +7,7 @@ function SendMessageViewModel() {
 	this.viewname = "ComposeBroadcast";
 	this.displayname = "Compose Broadcast";	
 	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
   /* Send Message observable */
 	this.messageText = ko.observable();
@@ -35,19 +36,20 @@ function SendMessageViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
-			that.messageText('Add additional text here . . . ');
-			that.characterCount('31');
-			$('textarea').click(function () {
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			//that.messageText('Add additional text here . . . ');
+			that.characterCount('0');
+			/*$('textarea').click(function () {
 				if(that.messageText() == 'Add additional text here . . . ') {
 					that.messageText('');				
 					that.characterCount('0');				
 				}
-			});			
+			});	*/		
 			$('textarea').keyup(function () {
-				if(that.messageText() == 'Add additional text here . . . ') {
+				/*if(that.messageText() == 'Add additional text here . . . ') {
 					that.messageText('');				
 					that.characterCount('0');				
-				}								
+				}*/								
 				that.characterCount(that.messageText().length);
 			});	
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
@@ -60,6 +62,14 @@ function SendMessageViewModel() {
 			that.sendMessageCommand();
 		}
 	});
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Compose', 'sendMessageView', 'channelMenuView');		
+  };	
 	
 	function successfulVerify(data){
 		if(data.commethod.length >= 1) {
@@ -122,5 +132,9 @@ function SendMessageViewModel() {
 		var messageobj = {text: that.messageText(), type: 'FYI'};
 		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
 	};
+	
+	this.userSettings = function () {
+		pushBackNav('Compose', 'sendMessageView', 'escalationPlansView');
+  };	
 
 }

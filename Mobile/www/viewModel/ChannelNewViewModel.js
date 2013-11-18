@@ -38,14 +38,14 @@ function ChannelNewViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
+			that.accountName(localStorage.getItem('accountName'));	
 			that.sectionOne(true);
 			that.sectionTwo(false);			
 			$('input').keyup(function () {
 				that.message('');
 				that.errorNewChannel('');
 			});
-			that.backText('<em></em>Back');				
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);				
 		}
 	}
 	
@@ -55,17 +55,20 @@ function ChannelNewViewModel() {
 		}
 	});
 	
-	this.goToBack = function() {
+	this.backCommand = function() {
 		if(that.backNav() == 'channelNewView') {			
 			that.sectionOne(true)
 			that.sectionTwo(false);
-			that.backText('<em></em>Back');
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 			that.backNav('');																	
-		}
-		else {
-			goToView('channelListView');
+		} else {
+			popBackNav();
 		}
 	}
+	
+	this.menuCommand = function () {
+		pushBackNav('New Chan', 'channelNewView', 'channelMenuView');		
+  };	
 
 	this.nextViewCommand = function (e) {
     if (that.newChannel() == '') {
@@ -100,5 +103,13 @@ function ChannelNewViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
 		ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});
   };
+	
+	this.userSettings = function () {
+		pushBackNav('New Chan', 'channelNewView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('New Chan', 'channelNewView', 'sendMessageView');		
+  };	
 	
 }

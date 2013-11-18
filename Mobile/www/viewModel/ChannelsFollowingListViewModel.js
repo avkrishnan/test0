@@ -6,6 +6,7 @@ function ChannelsFollowingListViewModel() {
 	this.displayname = "Channels I Follow";
 	this.hasfooter = true;
 	this.accountName = ko.observable();
+	this.backText = ko.observable();			
 	this.channels = ko.observableArray([]);
 	
 	var that = this;
@@ -19,9 +20,10 @@ function ChannelsFollowingListViewModel() {
 		});
 	};
 	
-	// Methods
+	/* Methods */
 	this.activate = function() {
 		that.accountName(localStorage.getItem("accountName"));
+		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		console.log("trying to get channels");
 		if ( that.channels() && that.channels().length){
 			that.channels.removeAll();
@@ -29,6 +31,14 @@ function ChannelsFollowingListViewModel() {
 		$.mobile.showPageLoadingMsg("a", "Loading Channels");
 		return this.listFollowingChannelsCommand().then(gotChannels);
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Channels', 'channelsFollowingListView', 'channelMenuView');		
+  };	
 	
 	function successfulCreate(data){
 		//logger.log('success listing channels ' , null, 'channelService', true);
@@ -102,6 +112,16 @@ function ChannelsFollowingListViewModel() {
 	
 	this.actionFollowChannelCommand = function(data) {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
+		pushBackNav('Channels', 'channelsFollowingListView', 'escalationPlansView');		
 		goToView('channelMessagesView');
 	}	
+	
+	this.userSettings = function () {
+		pushBackNav('Channels', 'channelsFollowingListView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Channels', 'channelsFollowingListView', 'sendMessageView');		
+  };
+	
 }

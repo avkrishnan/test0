@@ -1,8 +1,8 @@
 <!-- To Do - Devender - Remove this later -->
 <div id="channelView" data-role="page">
   <header>
-    <a href="#" class="back" onclick="goToView('additionalContactView');" data-bind="visible:hasheader"><em></em>BACK</a>
-    <a class="menu" href="#" onclick="goToView('channelMenuView');" data-bind="visible:hasheader"></a>
+    <a href="#" class="back" data-bind="html: backText, click: backCommand, visible:hasheader"></a>
+    <a class="menu" href="#" data-bind="click: menuCommand, visible:hasheader"></a>    
     <div class="linkicon" data-bind="visible:hasheader">    
       <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
       <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
@@ -58,7 +58,7 @@
   </div>
    
   <div class="footer" data-bind="visible:hasfooter">
-    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
-    <a class="announcement" href="#"></a>
+    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
+    <a class="announcement" href="#" data-bind="click: composeCommand"></a>
   </div>
 </div>

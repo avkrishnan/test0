@@ -6,7 +6,8 @@ function InviteFollowersViewModel() {
 	this.viewid = 'V-27a';
 	this.viewname = 'InviteFollowers';
 	this.displayname = 'Invite Followers';	
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
   /* Invite Followers observable */
 	this.channelName = ko.observable();	
@@ -38,10 +39,14 @@ function InviteFollowersViewModel() {
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
 			that.channelName(channelObject.channelName);
 			that.channelWebAddress(channelObject.channelName+'.evernym.dom');
@@ -71,6 +76,14 @@ function InviteFollowersViewModel() {
 		}
 	});
 	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Add/Invite', 'inviteFollowersView', 'channelMenuView');		
+  };	
+	
 	this.sendInviteCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
 		var textData = $('#'+that.textId()).val();
@@ -84,5 +97,13 @@ function InviteFollowersViewModel() {
 			showMessage('Testing');			
     }
   };
+	
+	this.userSettings = function () {
+		pushBackNav('Add/Invite', 'inviteFollowersView', 'escalationPlansView');
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Add/Invite', 'inviteFollowersView', 'sendMessageView');
+  };	
 	
 }

@@ -7,6 +7,7 @@ function ChannelDeleteViewModel() {
 	this.viewname = 'ChannelDeleteView';
 	this.displayname = 'Channel Delete';	
 	this.accountName = ko.observable();	
+	this.backText = ko.observable();	
 	
   /* Channel delete observable */
 	this.channelId = ko.observable();
@@ -22,16 +23,28 @@ function ChannelDeleteViewModel() {
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
 			that.channelDisplayName(channelObject.channeldescription);			
 		}
 	}
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Channel Delete', 'ChannelDeleteView', 'channelMenuView');		
+  };	
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
@@ -49,5 +62,13 @@ function ChannelDeleteViewModel() {
 		return ES.channelService.deleteChannel(that.channelId(), { success: successfulDelete, error: errorAPI });
 		localStorage.removeItem('currentChannel');
   };
+	
+	this.userSettings = function () {
+		pushBackNav('Channel Delete', 'ChannelDeleteView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Channel Delete', 'ChannelDeleteView', 'sendMessageView');		
+  };	
 	
 }

@@ -14,7 +14,11 @@ function ChannelListViewModel() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
       that.activate();
     });	
-	};  
+	};
+	
+	this.menuCommand = function () {
+		pushBackNav('Home', 'channelListView', 'channelMenuView');		
+  };	  
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
@@ -27,7 +31,15 @@ function ChannelListViewModel() {
 	}
 	
 	this.goChannelsIOwn = function() {
-		goToView('channelsIOwnView')
+		pushBackNav('Home', 'channelListView', 'channelsIOwnView');		
 	}
+	
+	this.userSettings = function () {
+		pushBackNav('Home', 'channelListView', 'escalationPlansView');
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Home', 'channelListView', 'sendMessageView');
+  };	
 	
 }

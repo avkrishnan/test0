@@ -6,7 +6,8 @@ function InviteFollowersIIViewModel() {
   this.viewid = 'V-41';
   this.viewname = 'GetFollowersII';
   this.displayname = 'Praise for Evernym Channels';
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 
   /* Feedback value and error observable */
 	this.emailaddress = ko.observable();		
@@ -36,6 +37,7 @@ function InviteFollowersIIViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			that.feedback('Add additional text here . . . ');			
 			$('textarea').click(function () {
 				if(that.feedback() == 'Add additional text here . . . ') {
@@ -62,6 +64,14 @@ function InviteFollowersIIViewModel() {
 		}
 	});
 	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('InviteII', 'inviteFollowersIIView', 'channelMenuView');		
+  };	
+	
 	this.sendFeedbackCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
 		var feedbackData = $('#'+that.feedbackId()).val();
@@ -72,5 +82,13 @@ function InviteFollowersIIViewModel() {
 			showMessage('Testing');		
     }
   };
+	
+	this.userSettings = function () {
+		pushBackNav('InviteII', 'inviteFollowersIIView', 'escalationPlansView');
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('InviteII', 'inviteFollowersIIView', 'sendMessageView');
+  };	
 		
 }

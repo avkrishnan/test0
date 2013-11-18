@@ -7,6 +7,7 @@ function AddFollowersViewModel() {
 	this.viewname = 'AddFollowers';
 	this.displayname = 'Add Followers';	
 	this.accountName = ko.observable();
+	this.backText = ko.observable();	
 	
   /* Add Followers observable */
 	this.channelId = ko.observable();		
@@ -37,10 +38,14 @@ function AddFollowersViewModel() {
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
 			that.channelId(channelObject.channelId);										
 			that.channelName(channelObject.channelName);
@@ -58,6 +63,14 @@ function AddFollowersViewModel() {
 			that.addFollowersCommand();
 		}
 	});
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Add Followers', 'addFollowersView', 'channelMenuView');		
+  };	
 	
 	this.addFollowersCommand = function () {		
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
@@ -96,5 +109,13 @@ function AddFollowersViewModel() {
 		$.mobile.hidePageLoadingMsg();	
 		showError(details.message);
 	};
+	
+	this.userSettings = function () {
+		pushBackNav('Add Followers', 'addFollowersView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Add Followers', 'addFollowersView', 'sendMessageView');
+  };	
 	
 }

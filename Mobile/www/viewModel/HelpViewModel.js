@@ -7,6 +7,7 @@ function HelpViewModel() {
 	this.viewname = 'Help';
 	this.displayname = 'Help and FAQs';	
 	this.accountName = ko.observable();	
+	this.backText = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -21,7 +22,25 @@ function HelpViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
 	}
+	
+
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Help', 'helpView', 'channelMenuView');
+  };
+	
+	this.userSettings = function () {
+		pushBackNav('Help', 'helpView', 'escalationPlansView');
+  };	
+
+	this.composeCommand = function () {
+		pushBackNav('Help', 'helpView', 'sendMessageView');
+  };	
 	
 }

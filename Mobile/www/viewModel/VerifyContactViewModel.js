@@ -8,6 +8,7 @@ function VerifyContactViewModel() {
 	
 	this.baseUrl = ko.observable();
 	this.accountName = ko.observable();
+	this.backText = ko.observable();	
 	this.name = ko.observable();
 	
 	this.verificationCommethod = ko.observable();
@@ -29,10 +30,10 @@ function VerifyContactViewModel() {
 	
 	this.verifyRequestCommethod = function() {
 		if(that.verificationCode() == '') {
-			that.errorMessage("<span>ERROR : </span> Please input verification code!");
+			that.errorMessage("<span>ERROR: </span> Please input verification code!");
 		}
 		else if(that.verificationCode().length != 6) {
-			that.errorMessage("<span>ERROR : </span> Verification code should be 6 digits!");
+			that.errorMessage("<span>ERROR: </span> Verification code should be 6 digits!");
 		}
 		else {
 			var verifyCommethodObject = {
@@ -85,6 +86,7 @@ function VerifyContactViewModel() {
 		var _name = localStorage.getItem("UserFullName");
 		
 		that.accountName(_accountName);
+		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		that.name(_name);
 		that.verificationCode('');
 		that.errorMessage('');
@@ -116,6 +118,14 @@ function VerifyContactViewModel() {
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;     
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Cont. Info', 'verifyContactView', 'channelMenuView');		
+  };	
 
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
@@ -125,9 +135,18 @@ function VerifyContactViewModel() {
 			},
 			error: function (responseData, status, details) {
 				//alert('error');
-				that.errorMessage("<span>ERROR : </span>" + details.message);
+				that.errorMessage("<span>ERROR: </span>" + details.message);
 			}
 		};
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
-	};	
+	};
+	
+	this.userSettings = function () {
+		pushBackNav('Cont. Info', 'verifyContactView', 'escalationPlansView');
+  };		
+	
+	this.composeCommand = function () {
+		pushBackNav('Cont. Info', 'verifyContactView', 'sendMessageView');
+  };
+		
 }

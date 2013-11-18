@@ -6,7 +6,8 @@ function FirstChannelViewModel() {
 	this.viewid = 'V-14';
 	this.viewname = 'FollowFirstChannel';
 	this.displayname = 'Follow First Channel';
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -21,7 +22,24 @@ function FirstChannelViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('FollowFirstChannel', 'firstChannelView', 'channelMenuView');
+  };
+	
+	this.userSettings = function () {
+		pushBackNav('FollowFirstChannel', 'firstChannelView', 'escalationPlansView');
+  };	
+
+	this.composeCommand = function () {
+		pushBackNav('FollowFirstChannel', 'firstChannelView', 'sendMessageView');
+  };	
 	
 }

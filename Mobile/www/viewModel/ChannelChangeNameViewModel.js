@@ -6,8 +6,8 @@ function ChannelChangeNameViewModel() {
 	this.viewid = 'V-16';
 	this.viewname = 'ChannelChangeName';
 	this.displayname = 'Change Channel Name';	
-	this.accountName = ko.observable();	
-	this.notification = ko.observable();
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
   /* New Channel Step First observable */
 	this.sectionOne = ko.observable(true);
@@ -37,10 +37,14 @@ function ChannelChangeNameViewModel() {
 	  
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);	
 			that.channelChangeName(channelObject.channelName);						
@@ -58,17 +62,21 @@ function ChannelChangeNameViewModel() {
 		}
 	});
 	
-	this.goToBack = function() {
+	this.backCommand = function() {
 		if(that.backNav() == 'channelChangeNameView') {			
 			that.sectionOne(true)
 			that.sectionTwo(false);
-			that.backText('<em></em>Settings');
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 			that.backNav('');																	
 		}
 		else {
-			goToView('channelSettingsView');
+			popBackNav();
 		}
 	}
+	
+	this.menuCommand = function () {
+		pushBackNav('Step 1', 'channelChangeNameView', 'channelMenuView');		
+  };		
 	
   this.nextViewCommand = function () {
     if (that.channelChangeName() == '') {
@@ -107,5 +115,13 @@ function ChannelChangeNameViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 	}
+	
+	this.userSettings = function () {
+		pushBackNav('Step 1', 'channelChangeNameView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Step 1', 'channelChangeNameView', 'sendMessageView');
+  };	
 	
 }

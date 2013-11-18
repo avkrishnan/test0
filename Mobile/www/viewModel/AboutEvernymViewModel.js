@@ -6,7 +6,8 @@ function AboutEvernymViewModel() {
 	this.viewid = 'V-46';
 	this.viewname = 'AboutEvernym';
 	this.displayname = 'About Evernym Channels';	
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -21,7 +22,24 @@ function AboutEvernymViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
 	}
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('About Evernym', 'aboutEvernymView', 'channelMenuView');		
+  };
+	
+	this.userSettings = function () {
+		pushBackNav('About Evernym', 'aboutEvernymView', 'escalationPlansView');		
+  };	
+
+	this.composeCommand = function () {
+		pushBackNav('About Evernym', 'aboutEvernymView', 'sendMessageView');		
+  };	
 	
 }

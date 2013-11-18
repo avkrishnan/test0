@@ -6,7 +6,8 @@ function FollowersListViewModel() {
 	this.viewid = 'V-26';
 	this.viewname = 'Followers';
 	this.displayname = 'Followers';	 
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
   /* Followers observable */
 	this.channelId = ko.observable();	
@@ -30,19 +31,28 @@ function FollowersListViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));			
+			that.accountName(localStorage.getItem('accountName'));		
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);						
 			that.followers.removeAll();									
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
-			that.followerCount(channelObject.followerCount);															
-			$.mobile.showPageLoadingMsg('a', 'Loading Followers');				
+			that.followerCount(channelObject.followerCount);																			
+			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
 			return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
 		}
 	}
 	
+	this.backCommand = function () {
+		popBackNav();
+  };
+
+	this.menuCommand = function () {
+		pushBackNav('Followers', 'followersListView', 'channelMenuView');
+  };		
+	
 	this.channelSettings = function(){
-		backNavView = 'followersListView';
-		backNavText = 'Followers';			
+		backNavView.push('followersListView');
+		backNavText.push('Followers');				
 		goToView('channelSettingsView');
 	};
 	
@@ -64,5 +74,13 @@ function FollowersListViewModel() {
     localStorage.setItem('signUpError', response.message);
     goToView('followersListView');
   };
+	
+	this.userSettings = function () {
+		pushBackNav('Followers', 'followersListView', 'escalationPlansView');
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Followers', 'followersListView', 'sendMessageView');
+  };	
 	
 }

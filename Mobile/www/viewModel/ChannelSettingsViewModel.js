@@ -29,18 +29,22 @@ function ChannelSettingsViewModel() {
 			goToView('loginView');
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');
-		} else {
+		} else {		
 			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText);
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);	
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
-			that.shortDescription(channelObject.channelDescription);									
+			that.shortDescription(channelObject.channelDescription);							
 		}
 	}
 	
 	this.backCommand = function () {
-		goToView(backNavView);
+		popBackNav();
   };
+	
+	this.menuCommand = function () {
+		pushBackNav('Settings', 'channelSettingsView', 'channelMenuView');		
+  };	
 	
 	this.editChannelName = function () {
 		goToView('channelChangeNameView');
@@ -61,5 +65,13 @@ function ChannelSettingsViewModel() {
 	this.changeChannelIcon = function () {
 		goToView('channelChangeIconView');
   };
+	
+	this.userSettings = function () {
+		pushBackNav('Settings', 'channelSettingsView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Settings', 'channelSettingsView', 'sendMessageView');		
+  };	
 	
 }

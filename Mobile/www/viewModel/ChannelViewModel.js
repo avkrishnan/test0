@@ -7,6 +7,7 @@ function ChannelViewModel() {
 	this.displayname = "Channel";
 	
 	this.accountName = ko.observable();
+	this.backText = ko.observable();	
 	
 	this.hasfooter = ko.observable(true);
 	this.hasheader = ko.observable(false);
@@ -90,13 +91,22 @@ function ChannelViewModel() {
 		that.channelid(channel.id);
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
-		that.accountName(_accountName);		
+		that.accountName(_accountName);	
+		that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		that.messages([]);
 		that.channelAction(true);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		//alert(that.channelid());
 		return that.getChannelCommand(that.channelid()).then(gotChannel);
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('ChannelLandingPage', 'channelView', 'channelMenuView');
+  };	
 	
 	function gotChannel(data) {
 		//alert(JSON.stringify(data));
@@ -269,4 +279,13 @@ function ChannelViewModel() {
 		//that.title("Channel: " + channel()[0].name );
 		return ES.channelService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
+	
+	this.userSettings = function () {
+		pushBackNav('ChannelLandingPage', 'channelView', 'escalationPlansView');
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('ChannelLandingPage', 'channelView', 'sendMessageView');
+  };
+		
 }

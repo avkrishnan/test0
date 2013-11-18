@@ -7,6 +7,7 @@ function PrivacyPolicyViewModel() {
   this.viewname = 'PrivacyPolicy';
   this.displayname = 'Privacy Policy';
 	this.accountName = ko.observable();	
+	this.backText = ko.observable();	
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -21,7 +22,24 @@ function PrivacyPolicyViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
 	}
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Settings', 'privacyPolicyView', 'channelMenuView');		
+  };
+	
+	this.userSettings = function () {
+		pushBackNav('Settings', 'privacyPolicyView', 'escalationPlansView');
+  };	
+
+	this.composeCommand = function () {
+		pushBackNav('Settings', 'privacyPolicyView', 'sendMessageView');
+  };	
 	
 }

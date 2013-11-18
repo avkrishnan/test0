@@ -6,7 +6,8 @@ function ReplyDetailViewModel() {
 	this.viewid = 'V-56';
 	this.viewname = 'ReplyDetail';
 	this.displayname = 'Reply Detail';	
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 
   /* Single message observable */		
 	this.channelId = ko.observable();
@@ -28,10 +29,14 @@ function ReplyDetailViewModel() {
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
 			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));
@@ -46,6 +51,14 @@ function ReplyDetailViewModel() {
 		}
 	}
 	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Reply detail', 'replyDetailView', 'channelMenuView');		
+  };	
+	
 	function _date(created) {	
 		var date  = new Date(created);
 		var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
@@ -58,5 +71,13 @@ function ReplyDetailViewModel() {
 		that.more(true);
 		that.moreButton(false);														
 	};
+	
+	this.userSettings = function () {
+		pushBackNav('Reply detail', 'replyDetailView', 'escalationPlansView');
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Reply detail', 'replyDetailView', 'sendMessageView');
+  };	
 				
 }

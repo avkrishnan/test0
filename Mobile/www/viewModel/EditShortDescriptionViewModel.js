@@ -8,6 +8,7 @@ function EditShortDescriptionViewModel() {
 	this.displayname = 'Edit Short Description';	  
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
+	this.backText = ko.observable();	
 	
   /* Edit Channel Display observable */	
 	this.channelId = ko.observable();
@@ -31,10 +32,14 @@ function EditShortDescriptionViewModel() {
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
 			that.shortDescription(channelObject.channelDescription);						
@@ -50,6 +55,14 @@ function EditShortDescriptionViewModel() {
 			that.shortDescriptionCommand();
 		}
 	});
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Edit Short Description', 'editShortDescriptionView', 'channelMenuView');		
+  };	
 	
 	function successfulModify(args) {
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
@@ -94,5 +107,13 @@ function EditShortDescriptionViewModel() {
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 		}
   };
+	
+	this.userSettings = function () {
+		pushBackNav('Edit Short Description', 'editShortDescriptionView', 'escalationPlansView');		
+  };
+
+	this.composeCommand = function () {
+		pushBackNav('Edit Short Description', 'editShortDescriptionView', 'sendMessageView');		
+  };	
 	
 }

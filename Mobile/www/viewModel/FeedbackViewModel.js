@@ -7,6 +7,7 @@ function FeedbackViewModel() {
 	this.viewname = 'Feedback';
 	this.displayname = 'Feedback';	 
 	this.accountName = ko.observable();	
+	this.backText = ko.observable();	
 	
 	/* Methods */			
 	this.applyBindings = function() {
@@ -21,8 +22,17 @@ function FeedbackViewModel() {
 			goToView('loginView');
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
 	}
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Feedback', 'feedbackView', 'channelMenuView');		
+  };	
 	
 	this.praiseCommand = function () {
 		goToView('inviteFollowersIIView');
@@ -35,6 +45,14 @@ function FeedbackViewModel() {
 	this.reportABugCommand = function () {
 		goToView('inviteFollowersIIView');
 	}
+	
+	this.userSettings = function () {
+		pushBackNav('Feedback', 'feedbackView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Feedback', 'feedbackView', 'sendMessageView');		
+  };	
 	
 }
 

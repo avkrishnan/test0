@@ -12,6 +12,7 @@ function EscalationPlanSingleViewModel() {
 	
 	this.baseUrl = ko.observable();
 	this.accountName = ko.observable();
+	this.backText = ko.observable();	
 	this.name = ko.observable();
 	
 	this.activeEscPlan = ko.observable();
@@ -164,9 +165,26 @@ function EscalationPlanSingleViewModel() {
 		var _name = localStorage.getItem("UserFullName");
 		that.activeEscalationPlan.removeAll()
 		that.accountName(_accountName);
+		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		that.name(_name);
 		that.activeEscPlan = localStorage.getItem("activeEscPlan");
 		return that.getEscPlans().then(gotEscPlans);   
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('SettingsSingle', 'escalationPlanSingleView', 'channelMenuView');		
+  };
+	
+	this.userSettings = function () {
+		pushBackNav('SettingsSingle', 'escalationPlanSingleView', 'escalationPlansView');				
+  };	
+
+	this.composeCommand = function () {
+		pushBackNav('SettingsSingle', 'escalationPlanSingleView', 'sendMessageView');				
+  };	
 	
 }

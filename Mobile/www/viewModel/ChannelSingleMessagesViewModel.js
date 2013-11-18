@@ -8,6 +8,7 @@ function ChannelSingleMessagesViewModel() {
 	this.hasfooter = true;	
 	
 	this.accountName = ko.observable();
+	this.backText = ko.observable();	
 	this.title = ko.observable();
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
@@ -23,6 +24,7 @@ function ChannelSingleMessagesViewModel() {
     
 	this.activate = function() {
 		that.accountName(localStorage.getItem("accountName"));
+		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
 		//alert(localStorage.getItem("currentChannel"));
@@ -35,6 +37,14 @@ function ChannelSingleMessagesViewModel() {
 		that.messageText(channelMessage.messageText);
 		//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('MessageDetails', 'channelSingleMessagesView', 'channelMenuView');
+  };	
 	
 	function time2TimeAgo(ts) {
 		// This function computes the delta between the
@@ -66,4 +76,13 @@ function ChannelSingleMessagesViewModel() {
 			return  'a few seconds ago';
 		}		
 	}
+	
+	this.userSettings = function () {
+		pushBackNav('MessageDetails', 'channelSingleMessagesView', 'escalationPlansView');;
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('MessageDetails', 'channelSingleMessagesView', 'sendMessageView');
+  };	
+	
 }

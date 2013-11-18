@@ -6,7 +6,8 @@ function SingleMessageRepliesViewModel() {
 	this.viewid = 'V-56';
 	this.viewname = 'MessageReplies';
 	this.displayname = 'Message Replies';	
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 
   /* Single message observable */		
 	this.channelId = ko.observable();
@@ -25,10 +26,14 @@ function SingleMessageRepliesViewModel() {
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
 			localStorage.removeItem('currentReplyData');													
@@ -39,6 +44,14 @@ function SingleMessageRepliesViewModel() {
 			return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI})			
 		}
 	}
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Broadcast', 'singleMessageRepliesView', 'channelMenuView');		
+  };	
 	
 	function msToTime(ms){
 		var ms = new Date().getTime() - ms;	
@@ -101,5 +114,13 @@ function SingleMessageRepliesViewModel() {
 		localStorage.setItem('currentReplyData', JSON.stringify(data));									
 		goToView('replyDetailView');
 	};
+	
+	this.userSettings = function () {
+		pushBackNav('Broadcast', 'singleMessageRepliesView', 'escalationPlansView');
+  };
+			
+	this.composeCommand = function () {
+		pushBackNav('Broadcast', 'singleMessageRepliesView', 'sendMessageView');
+  };	
 				
 }

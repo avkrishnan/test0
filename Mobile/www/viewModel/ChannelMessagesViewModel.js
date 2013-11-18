@@ -8,6 +8,7 @@ function ChannelMessagesViewModel() {
 	this.hasfooter = true;	
 	
 	this.accountName = ko.observable();
+	this.backText = ko.observable();	
 	this.title = ko.observable();
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
@@ -21,6 +22,7 @@ function ChannelMessagesViewModel() {
     
 	this.activate = function() {
 		that.accountName(localStorage.getItem("accountName"));
+		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		//alert(localStorage.getItem("currentChannel"));
 		that.channelid(channel.id);
@@ -30,6 +32,14 @@ function ChannelMessagesViewModel() {
 		that.channelMessages.removeAll();
 		return that.getChannelCommand(that.channelid()).then(that.gotChannel);
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('AllMessagesHistory', 'channelMessagesView', 'channelMenuView');		
+  };	
 	
 	this.gotoChannel = function() {
 		goToView('channelView');
@@ -113,4 +123,13 @@ function ChannelMessagesViewModel() {
 			return  'a few seconds ago';
 		}		
 	}
+	
+	this.userSettings = function () {
+		pushBackNav('AllMessagesHistory', 'channelMessagesView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('AllMessagesHistory', 'channelMessagesView', 'sendMessageView');		
+  };	
+	
 }

@@ -11,6 +11,7 @@ function AddContactViewModel() {
 	this.commethods = ko.observableArray([]);
 	this.baseUrl = ko.observable();
 	this.accountName = ko.observable();
+	this.backText = ko.observable();	
 	this.name = ko.observable();
 	
 	this.currentDeleteCommethodID = ko.observable();
@@ -141,6 +142,7 @@ function AddContactViewModel() {
 		var _name = localStorage.getItem("UserFullName");
 		
 		that.accountName(_accountName);
+		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		that.name(_name);
 		that.commethods.removeAll();
 		that.showDelete(false);
@@ -150,4 +152,21 @@ function AddContactViewModel() {
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return that.getCommethods().then(that.showCommethods);
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Add new', 'addContactView', 'channelMenuView');		
+  };
+	
+	this.userSettings = function () {
+		pushBackNav('Add new', 'addContactView', 'escalationPlansView');		
+  };	
+
+	this.composeCommand = function () {
+		pushBackNav('Add new', 'addContactView', 'sendMessageView');		
+  };	
+	
 }

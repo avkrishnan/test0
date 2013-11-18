@@ -6,7 +6,8 @@ function ChannelMainViewModel() {
 	this.viewid = 'V-46';
 	this.viewname = 'ChannelMain';
 	this.displayname = 'Channel Main';	
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
   /* Channel Main observable */	
 	this.channelId = ko.observable();		
@@ -35,6 +36,7 @@ function ChannelMainViewModel() {
 			goToView('channelsIOwnView');		
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			localStorage.removeItem('currentMessageData');			
 			that.broadcasts.removeAll();							
 			that.channelId(channelObject.channelId);
@@ -43,6 +45,14 @@ function ChannelMainViewModel() {
 			that.getMessagesCommand();
 		}
 	}
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Main', 'channelMainView', 'channelMenuView');		
+  };	
 	
 	function msToTime(created){
 		var ms = new Date().getTime() - created;	
@@ -116,18 +126,24 @@ function ChannelMainViewModel() {
 	};
 	
 	this.channelSettings = function(){
-		backNavView = 'channelMainView';
-		backNavText = 'Main';			
-		goToView('channelSettingsView');
+		pushBackNav('Main', 'channelMainView', 'channelSettingsView');					
 	};	
 	
-	this.channelFollowers = function(data){	
-		goToView('followersListView');
+	this.channelFollowers = function(data){
+		pushBackNav('Main', 'channelMainView', 'followersListView');					
 	};	
 	
 	this.singleMessage = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));							
 		goToView('singleMessageView');
 	};
+	
+	this.userSettings = function () {
+		pushBackNav('Main', 'channelMainView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Main', 'channelMainView', 'sendMessageView');		
+  };	
 	
 }

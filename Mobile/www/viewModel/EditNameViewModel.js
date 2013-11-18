@@ -6,7 +6,8 @@ function EditNameViewModel() {
 	this.viewid = 'V-11';
 	this.viewname = 'EditName';
 	this.displayname = 'Edit Name';	
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	
 	/* Edit Name observable */
 	this.accountName = ko.observable();	
@@ -43,7 +44,8 @@ function EditNameViewModel() {
 				that.lastnameClass('');
 				that.errorFirstLastName('');				
 			});
-			that.accountName(localStorage.getItem('accountName'));			
+			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);						
 			$.mobile.showPageLoadingMsg('a', 'Loading information');
 			ES.loginService.getAccount({ success: successfulGetAccount, error: errorAPI });						
 		}
@@ -54,6 +56,14 @@ function EditNameViewModel() {
 			that.editNameCommand();
 		}
 	});
+	
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.menuCommand = function () {
+		pushBackNav('Edit Name', 'editNameView', 'channelMenuView');		
+  };	
 	
 	this.editNameCommand = function () {
     if (that.firstname() == '') {
@@ -93,5 +103,13 @@ function EditNameViewModel() {
 		that.lastnameClass('validationerror');
 		that.errorFirstLastName('<span>SORRY:</span> '+response.message);		
   };
+	
+	this.userSettings = function () {
+		pushBackNav('Edit Name', 'editNameView', 'escalationPlansView');		
+  };	
+	
+	this.composeCommand = function () {
+		pushBackNav('Edit Name', 'editNameView', 'sendMessageView');		
+  };	
 	
 }
