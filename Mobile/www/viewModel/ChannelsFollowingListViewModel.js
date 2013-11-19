@@ -25,6 +25,7 @@ function ChannelsFollowingListViewModel() {
 		that.accountName(localStorage.getItem("accountName"));
 		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		console.log("trying to get channels");
+		that.channels.removeAll();
 		if ( that.channels() && that.channels().length){
 			that.channels.removeAll();
 		}
@@ -37,7 +38,7 @@ function ChannelsFollowingListViewModel() {
   };
 	
 	this.menuCommand = function () {
-		pushBackNav('Channels', 'channelsFollowingListView', 'channelMenuView');		
+		pushBackNav('Channels', 'channelsFollowingListView', 'channelMenuView');
   };	
 	
 	function successfulCreate(data){
@@ -58,7 +59,14 @@ function ChannelsFollowingListViewModel() {
 			return;
 		}
 		$("#no_channels_notification").hide();
-		that.channels(data.channel);
+		if(data.channel.length) {
+			$.each(data.channel, function(indexChannel, valueChannel) {
+				if(typeof valueChannel.description == 'undefined') {
+					valueChannel.description = '';			
+				}
+			});
+			that.channels(data.channel);
+		}
 	};
 	
 	function errorListChannels(data, status, details){
