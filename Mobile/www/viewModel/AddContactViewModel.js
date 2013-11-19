@@ -10,7 +10,8 @@ function AddContactViewModel() {
 	this.channels = ko.observableArray([]);
 	this.commethods = ko.observableArray([]);
 	this.baseUrl = ko.observable();
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.backText = ko.observable();		
 	this.name = ko.observable();
 	
 	this.currentDeleteCommethodID = ko.observable();
@@ -75,21 +76,22 @@ function AddContactViewModel() {
 		goToView('verifyContactView');
 	}
 	
-	this.gotoDelete = function(data) {
+	this.gotoDelete = function(data) {	
 		if(that.verify() == false) {
 			that.currentDeleteCommethod(data.comMethodAddress);
 			that.currentDeleteCommethodID(data.comMethodID);
 		}
 		that.showDelete(true);
+		that.backText('<em></em>Cont. Info');			
 	}
 	
 	this.gotoView = function() {
 		if(that.currentDeleteCommethodID()) {
-			that.currentDeleteCommethodID('');
+			that.currentDeleteCommethodID('');				
 			goToView('addContactView');
 		}
 		else {
-			that.currentDeleteCommethodID('');
+			that.currentDeleteCommethodID('');			
 			goToView('escalationPlansView');
 		}
 	}
@@ -139,8 +141,8 @@ function AddContactViewModel() {
 	this.activate = function() {
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
-		
-		that.accountName(_accountName);	
+		that.accountName(_accountName);
+		that.backText('<em></em>Settings');						
 		that.name(_name);
 		that.commethods.removeAll();
 		that.showDelete(false);
@@ -152,15 +154,15 @@ function AddContactViewModel() {
 	};
 	
 	this.menuCommand = function () {
-		pushBackNav('Add new', 'addContactView', 'channelMenuView');		
+		pushBackNav('Cont. Info', 'addContactView', 'channelMenuView');		
   };
 	
 	this.userSettings = function () {
-		pushBackNav('Add new', 'addContactView', 'escalationPlansView');		
+		pushBackNav('Cont. Info', 'addContactView', 'escalationPlansView');		
   };	
 
 	this.composeCommand = function () {
-		pushBackNav('Add new', 'addContactView', 'sendMessageView');		
+		pushBackNav('Cont. Info', 'addContactView', 'sendMessageView');		
   };	
 	
 }

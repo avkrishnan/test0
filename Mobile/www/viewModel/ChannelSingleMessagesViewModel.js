@@ -37,7 +37,7 @@ function ChannelSingleMessagesViewModel() {
 	};
 
 	this.menuCommand = function () {
-		pushBackNav('MessageDetails', 'channelSingleMessagesView', 'channelMenuView');
+		pushBackNav('Message details', 'channelSingleMessagesView', 'channelMenuView');
   };	
 	
 	function time2TimeAgo(ts) {
@@ -71,12 +71,16 @@ function ChannelSingleMessagesViewModel() {
 		}		
 	}
 	
+	this.actionFollowChannelCommand = function(data) {
+		pushBackNav('Message details', 'channelSingleMessagesView', 'channelViewUnfollow');		
+	}	
+	
 	this.userSettings = function () {
-		pushBackNav('MessageDetails', 'channelSingleMessagesView', 'escalationPlansView');;
+		pushBackNav('Message details', 'channelSingleMessagesView', 'escalationPlansView');;
   };	
 	
 	this.composeCommand = function () {
-		pushBackNav('MessageDetails', 'channelSingleMessagesView', 'sendMessageView');
+		pushBackNav('Message details', 'channelSingleMessagesView', 'sendMessageView');
   };	
 	
 }

@@ -7,7 +7,6 @@ function AddFollowersViewModel() {
 	this.viewname = 'AddFollowers';
 	this.displayname = 'Add Followers';	
 	this.accountName = ko.observable();
-	this.backText = ko.observable();	
 	
   /* Add Followers observable */
 	this.channelId = ko.observable();		
@@ -44,8 +43,7 @@ function AddFollowersViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
 			that.channelId(channelObject.channelId);										
 			that.channelName(channelObject.channelName);
@@ -63,10 +61,6 @@ function AddFollowersViewModel() {
 			that.addFollowersCommand();
 		}
 	});
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Add Followers', 'addFollowersView', 'channelMenuView');		

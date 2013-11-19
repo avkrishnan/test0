@@ -9,7 +9,6 @@ function AdditionalContactViewModel() {
 	
 	this.baseUrl = ko.observable();
 	this.accountName = ko.observable();
-	this.backText = ko.observable();	
 	this.name = ko.observable();
 
 	this.comMethodName = ko.observable();
@@ -94,8 +93,7 @@ function AdditionalContactViewModel() {
 	};
     
 	this.activate = function() {
-		that.accountName(localStorage.getItem("accountName"));
-		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
+		that.accountName(localStorage.getItem("accountName"));		
 		that.name(localStorage.getItem("UserFullName"));
 		that.comMethodName('');
 		that.errorMessage('');
@@ -109,10 +107,6 @@ function AdditionalContactViewModel() {
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;     
 	};
-	
-	this.backCommand = function () {
-		popBackNav();	
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Add New', 'additionalContactView', 'channelMenuView');		

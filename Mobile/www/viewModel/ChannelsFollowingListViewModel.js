@@ -107,7 +107,8 @@ function ChannelsFollowingListViewModel() {
 	this.channelViewUnfollow = function(data) {
 		var channel = JSON.stringify(data);
 		localStorage.setItem("currentChannel", channel);
-		goToView('channelViewUnfollow');
+		//goToView('channelViewUnfollow');
+		pushBackNav('Channels', 'channelsFollowingListView', 'channelViewUnfollow');		
 	}
 	
 	this.actionFollowChannelCommand = function(data) {

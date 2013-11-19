@@ -45,7 +45,7 @@ function SingleMessageRepliesViewModel() {
 	}
 	
 	this.menuCommand = function () {
-		pushBackNav('Broadcast', 'singleMessageRepliesView', 'channelMenuView');		
+		pushBackNav('Broadcast Replies', 'singleMessageRepliesView', 'channelMenuView');		
   };	
 	
 	function msToTime(ms){
@@ -111,11 +111,11 @@ function SingleMessageRepliesViewModel() {
 	};
 	
 	this.userSettings = function () {
-		pushBackNav('Broadcast', 'singleMessageRepliesView', 'escalationPlansView');
+		pushBackNav('Broadcast Replies', 'singleMessageRepliesView', 'escalationPlansView');
   };
 			
 	this.composeCommand = function () {
-		pushBackNav('Broadcast', 'singleMessageRepliesView', 'sendMessageView');
+		pushBackNav('Broadcast Replies', 'singleMessageRepliesView', 'sendMessageView');
   };	
 				
 }

@@ -12,7 +12,8 @@ function InviteFollowersIIViewModel() {
 	this.emailaddress = ko.observable();		
 	this.feedbackClass = ko.observable();
 	this.feedback = ko.observable();
-	this.feedbackId = ko.observable('feedback');								
+	this.feedbackId = ko.observable('feedback');
+	this.error = ko.observable(false);									
 	this.errorFeedback = ko.observable();	
 	
 	/* Methods */
@@ -27,6 +28,7 @@ function InviteFollowersIIViewModel() {
 		that.emailaddress('');
 		that.feedback('');
 		that.feedbackClass('');
+		that.error(false);		
 		that.errorFeedback('');				
 	};  
 
@@ -38,12 +40,9 @@ function InviteFollowersIIViewModel() {
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {
 				that.feedbackClass('');
+				that.error(false);				
 				that.errorFeedback('');													
 			});					
-			$('input').keyup(function () {
-				that.emailClass('');
-				that.errorEmail('');				
-			});
 		}
 	}
 	
@@ -58,11 +57,11 @@ function InviteFollowersIIViewModel() {
   };	
 	
 	this.sendFeedbackCommand = function () {
-    var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
 		var feedbackData = $('#'+that.feedbackId()).val();
     if (feedbackData == '') {
 			that.feedbackClass('validationerror');
-			that.errorFeedback('<span>SORRY :</span> Please give feedback');
+			that.error(true);				
+			that.errorFeedback('<span>SORRY:</span> Please give feedback');
     } else {
 			showMessage('Testing');		
     }

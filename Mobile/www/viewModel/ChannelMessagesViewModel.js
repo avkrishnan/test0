@@ -32,12 +32,16 @@ function ChannelMessagesViewModel() {
 	};
 	
 	this.menuCommand = function () {
-		pushBackNav('AllMessagesHistory', 'channelMessagesView', 'channelMenuView');		
+		pushBackNav('Broadcast Msg', 'channelMessagesView', 'channelMenuView');		
   };	
 	
 	this.gotoChannel = function() {
 		goToView('channelView');
 	}
+	
+	this.actionFollowChannelCommand = function(data) {
+		pushBackNav('Broadcast Msg', 'channelMessagesView', 'channelViewUnfollow');		
+	}	
 	
 	this.showSingleMessage = function(data) {
 		//alert(JSON.stringify(data));
@@ -119,11 +123,11 @@ function ChannelMessagesViewModel() {
 	}
 	
 	this.userSettings = function () {
-		pushBackNav('AllMessagesHistory', 'channelMessagesView', 'escalationPlansView');		
+		pushBackNav('Broadcast Msg', 'channelMessagesView', 'escalationPlansView');		
   };	
 	
 	this.composeCommand = function () {
-		pushBackNav('AllMessagesHistory', 'channelMessagesView', 'sendMessageView');		
+		pushBackNav('Broadcast Msg', 'channelMessagesView', 'sendMessageView');		
   };	
 	
 }

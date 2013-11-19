@@ -1,7 +1,7 @@
 <!--To do - Pradeep Kumar-->
 <div id="inviteFollowersView" data-role="page">
   <header>
-    <a href="#" class="back" data-bind="html: backText, click: backCommand"></a>
+    <a href="#" class="back" onclick="goToView('followersListView');"><em></em>Add/Invite</a>
     <a class="menu" href="#" data-bind="click: menuCommand"></a>
     <div class="linkicon">    
       <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
@@ -24,8 +24,8 @@
       </div>        
       <label class="invited-followChannel">Jill Jones has invited you to follow an Evernym Channel: <em data-bind="text: channelWebAddress"></em></label>
       <div class="formtype textareatype" data-bind="css: textClass">
-        <textarea class="textarea" data-bind="attr: { id: textId }, value: text"></textarea>
-        <div class="msgerror" data-bind="html: errorText"></div>
+        <textarea class="textarea" data-bind="attr: { id: textId }, value: text" placeholder="Add additional text here . . . "></textarea>
+        <div class="msgerror" data-bind="visible: error, html: errorText"></div>
       </div>             
       <a href="#" class="sendbtnican"><span data-bind="click: sendInviteCommand">send</span></a>
     </section>           
