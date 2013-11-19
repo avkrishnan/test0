@@ -112,7 +112,7 @@ function ChannelsFollowingListViewModel() {
 	
 	this.actionFollowChannelCommand = function(data) {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
-		pushBackNav('Channels', 'channelsFollowingListView', 'channelMessagesView');		
+		goToView('channelMessagesView');		
 	}	
 	
 	this.userSettings = function () {
