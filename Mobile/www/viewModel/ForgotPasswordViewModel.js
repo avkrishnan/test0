@@ -8,11 +8,8 @@ function ForgotPasswordViewModel() {
   this.displayname = 'Forgot Password';
 	
 	/* Forgot password observable */
-  this.accountName = ko.observable();	
-  this.email = ko.observable();
-  this.errorEvernym = ko.observable();	
+  this.email = ko.observable();	
   this.errorEmail = ko.observable();
-  this.usernameClass = ko.observable();
   this.emailClass = ko.observable();
 	
 	/* Methods */
@@ -24,21 +21,16 @@ function ForgotPasswordViewModel() {
   };
 	
 	this.clearForm = function () {
-    that.email('');
-    that.accountName('');
-		that.usernameClass('');		
-		that.emailClass('');		
-    that.errorEvernym('');			
+    that.email('');		
+		that.emailClass('');				
     that.errorEmail('');		
   };
 	
   this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {		
-			$('input').keyup(function () {
-				that.errorEvernym('');					
+			$('input').keyup(function () {					
 				that.errorEmail('');
-				that.usernameClass('');
 				that.emailClass('');
 			});
 		} else {
@@ -54,10 +46,9 @@ function ForgotPasswordViewModel() {
 	
   this.forgotPasswordCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-    if (that.accountName() == '' && that.email() == '') {
-      that.usernameClass('validationerror');
+    if (that.email() == '') {
       that.emailClass('validationerror');
-      that.errorEmail('Please enter Evernym or email');
+      that.errorEmail('Please enter your email');
     } else if (that.email() != '' && !emailReg.test(that.email())) {
       that.emailClass('validationerror');
       that.errorEmail('Please enter valid email');
@@ -67,7 +58,6 @@ function ForgotPasswordViewModel() {
         error: forgotPasswordError
       };
       var forgotPasswordModel = {};
-      forgotPasswordModel.accountname = that.accountName();
       forgotPasswordModel.emailAddress = that.email();
 			$.mobile.showPageLoadingMsg('a', 'Sending Forgot Password Request');
       return ES.loginService.forgotPassword(forgotPasswordModel, callbacks);
@@ -76,28 +66,15 @@ function ForgotPasswordViewModel() {
 
   function forgotPasswordSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-		if(that.accountName() == '') {
-			localStorage.setItem('resetAccount', that.email());	
-		} else {
-			localStorage.setItem('resetAccount', that.accountName());				
-		}
+		localStorage.setItem('resetAccount', that.email());	
 		goToView('forgotPasswordSuccessView');		
   }
 
   function forgotPasswordError(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     loginPageIfBadLogin(details.code);
-    if (details) {
-			if(that.accountName() != '') {
-				that.usernameClass('validationerror');
-				that.errorEvernym(details.message);								
-			} else{
-				that.emailClass('validationerror');
-				that.errorEmail(details.message);
-			}
-    } else {
-      showError(details.message);
-    }
+		that.emailClass('validationerror');
+		that.errorEmail(details.message);
   }
 	
 }

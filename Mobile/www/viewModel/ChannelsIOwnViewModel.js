@@ -76,7 +76,7 @@ function ChannelsIOwnViewModel() {
 	
 	this.channelMain = function(data){
 		localStorage.setItem('currentChannelData', JSON.stringify(data));
-		pushBackNav('Channels', 'channelsIOwnView', 'channelMainView');			
+		goToView('channelMainView');					
 	};
 	
 	this.channelFollowers = function(data){	

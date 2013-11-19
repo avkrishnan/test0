@@ -49,7 +49,7 @@ function AddInviteFollowersViewModel() {
 	};
 	
 	this.inviteFollowers = function(){
-		showMessage('Feature coming soon!');
+		showMessage('Feature coming soon!');		
 	};
 	
 	this.addFollowers = function(){

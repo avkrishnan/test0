@@ -6,8 +6,7 @@ function InviteFollowersViewModel() {
 	this.viewid = 'V-27a';
 	this.viewname = 'InviteFollowers';
 	this.displayname = 'Invite Followers';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();	
 	
   /* Invite Followers observable */
 	this.channelName = ko.observable();	
@@ -18,6 +17,7 @@ function InviteFollowersViewModel() {
 	this.textClass = ko.observable();
 	this.text = ko.observable();
 	this.textId = ko.observable('message');								
+	this.error = ko.observable(false);	
 	this.errorText = ko.observable();		
 		
 	/* Methods */
@@ -34,6 +34,7 @@ function InviteFollowersViewModel() {
 		that.errorEmail('');				
 		that.text('');
 		that.textClass('');
+		that.error(false);		
 		that.errorText('');				
 	};	
 	
@@ -45,22 +46,13 @@ function InviteFollowersViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));	
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
 			that.channelName(channelObject.channelName);
-			that.channelWebAddress(channelObject.channelName+'.evernym.dom');
-			that.text('Add additional text here . . . ');			
-			$('textarea').click(function () {
-				if(that.text() == 'Add additional text here . . . ') {
-					that.text('');											
-				}
-			});
+			that.channelWebAddress(channelObject.channelName+'.evernym.dom');		
 			$('textarea').keyup(function () {
-				if(that.text() == 'Add additional text here . . . ') {
-					that.text('');											
-				}
 				that.textClass('');
+				that.error(false);				
 				that.errorText('');												
 			});							
 			$('input, textarea').keyup(function () {
@@ -76,10 +68,6 @@ function InviteFollowersViewModel() {
 		}
 	});
 	
-	this.backCommand = function () {
-		popBackNav();
-  };
-	
 	this.menuCommand = function () {
 		pushBackNav('Add/Invite', 'inviteFollowersView', 'channelMenuView');		
   };	
@@ -89,10 +77,11 @@ function InviteFollowersViewModel() {
 		var textData = $('#'+that.textId()).val();
 		if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
 			that.emailClass('validationerror');
-			that.errorEmail('<span>SORRY :</span> Please enter valid email');
+			that.errorEmail('<span>SORRY:</span> Please enter valid email');
     } else if (textData == '') {
 			that.textClass('validationerror');
-			that.errorText('<span>SORRY :</span> Please give message');
+			that.error(true);			
+			that.errorText('<span>SORRY:</span> Please give message');
     } else {
 			showMessage('Testing');			
     }
