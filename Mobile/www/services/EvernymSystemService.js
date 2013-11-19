@@ -12,8 +12,7 @@ function EvernymSystemService(api) {
   };
 
   this.getMsgNotifs = function(callbacks) {
-    return api.callAPI('GET', '/notification?type=msg', undefined, callbacks,
-        true);
+    return api.callAPI('GET', '/notification?type=msg', undefined, callbacks, true);
   };
 
 }

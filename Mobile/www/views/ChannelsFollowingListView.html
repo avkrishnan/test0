@@ -3,7 +3,7 @@
     <a href="#" class="back" data-bind="html: backText, click: backCommand"></a>
     <a class="menu" href="#" data-bind="click: menuCommand"></a>
     <div class="linkicon">    
-      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
+      <a class="smsicon smsiconwhite" data-bind="click:newMessages"><span class="received-responses-msg" data-bind="text:newMessagesCount"></span></a>
       <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
       <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
     </div>
@@ -38,6 +38,36 @@
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>
+  </div> 
+  
+  <div class="messages-content" data-role="popup" id="newMessages" data-history="false">
+    <div class="messagescontent">
+        <div class="msg-hideshow">
+          <h4>NEW MESSAGES</h4>
+          <a data-rel="back" data-bind="click:closePopup"></a>
+        </div>
+        
+        <section>
+        <a class="messagesreceived" href="V-53-message-detail.html">
+          <span class="channelicans"></span>
+          <div class="messageschannel">
+            <span class="received">byufootball</span>
+            <span class="messagebtn">iGi</span>
+            <p class="receive-time"><em>20 mins ago:</em>News conference this ...</p>
+          </div>
+        </a>
+        </section>
+        <!--
+        <a class="messagesreceived" href="V-53-message-detail.html">
+          <span class="channelicans normalicon"></span>
+          <div class="messageschannel">
+            <span class="received">wasatchwarriors</span>
+            <span class="messagebtn">iGi</span>
+            <p class="receive-time"><em>1 hour ago:</em>Friday's field trip list ...</p>
+          </div>
+        </a>
+        -->
+    </div>
   </div>  
 
 </div>

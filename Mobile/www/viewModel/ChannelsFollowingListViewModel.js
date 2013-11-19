@@ -6,8 +6,9 @@ function ChannelsFollowingListViewModel() {
 	this.displayname = "Channels I Follow";
 	this.hasfooter = true;
 	this.accountName = ko.observable();
-	this.backText = ko.observable();			
+	this.backText = ko.observable();
 	this.channels = ko.observableArray([]);
+	this.newMessagesCount = ko.observable();
 	
 	var that = this;
 	this.shown = false;
@@ -44,6 +45,30 @@ function ChannelsFollowingListViewModel() {
 	function successfulCreate(data){
 		//logger.log('success listing channels ' , null, 'channelService', true);
 	};
+	
+	this.newMessages = function() {
+		var callbacks = {
+			success: function(responseData) {
+				var tempCount = 0;
+				$.each(responseData, function(indexNotification, valueNotification) {
+					//alert(JSON.stringify(valueNotification.read));
+					if(valueNotification.read == 'N') {
+						tempCount = tempCount+1;
+					}
+				});	
+				that.newMessagesCount(tempCount);
+			},
+			error: function (responseData, status, details) {
+				alert(details.message);
+			}
+		};
+		//$("#newMessages").popup('open');
+		ES.systemService.getMsgNotifs(callbacks);
+	}
+	
+	this.closePopup = function() {
+		$("#newMessages").popup('close');
+	}
 	
 	function gotChannels(data){
 		$.mobile.hidePageLoadingMsg();
