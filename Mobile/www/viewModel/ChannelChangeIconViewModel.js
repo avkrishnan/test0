@@ -11,6 +11,7 @@ function ChannelChangeIconViewModel() {
   /* Channel Icon Image observable */
 	this.channelId = ko.observable();	
 	this.picId = ko.observable();
+	this.toastText = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -37,7 +38,8 @@ function ChannelChangeIconViewModel() {
   };	
 	
 	function successfulModify(args) {
-    $.mobile.hidePageLoadingMsg();
+		that.toastText('Description changed');		
+		localStorage.setItem('toastData', that.toastText());
     goToView('channelSettingsView');
   };
 

@@ -14,7 +14,8 @@ function SendMessageViewModel() {
 	this.characterCount = ko.observable();		
 	this.channels = ko.observableArray([]);			
 	this.channelId = ko.observable();	
-	this.channelName = ko.observable();	
+	this.channelName = ko.observable();		
+	this.toastText = ko.observable();
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id) {
@@ -26,9 +27,14 @@ function SendMessageViewModel() {
 	/* Methods */
 	this.applyBindings = function() {
 		$('#' + that.template).on('pagebeforeshow', function (e, data) {
+      that.clearForm();				
       that.activate();
     });	
-	};  
+	};
+	
+	this.clearForm = function () {
+		that.messageText('');
+  };	  
 	
 	this.activate = function() {			
 		var token = ES.evernymService.getAccessToken();
@@ -37,21 +43,10 @@ function SendMessageViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-			//that.messageText('Add additional text here . . . ');
-			that.characterCount('0');
-			/*$('textarea').click(function () {
-				if(that.messageText() == 'Add additional text here . . . ') {
-					that.messageText('');				
-					that.characterCount('0');				
-				}
-			});	*/		
-			$('textarea').keyup(function () {
-				/*if(that.messageText() == 'Add additional text here . . . ') {
-					that.messageText('');				
-					that.characterCount('0');				
-				}*/								
+			that.characterCount('0');		
+			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
-			});	
+			});				
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });		
 		}
@@ -61,7 +56,7 @@ function SendMessageViewModel() {
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'sendMessageView') {
 			that.sendMessageCommand();
 		}
-	});
+	});		
 	
 	this.backCommand = function () {
 		popBackNav();
@@ -93,9 +88,8 @@ function SendMessageViewModel() {
 		$.mobile.hidePageLoadingMsg();	
 		showError('Not authorized ' + details.message);
 	};
-	
 	this.sendMessageCommand = function(){
-		if(that.messageText() == '') {
+		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
 			showMessage('Please type some message !');
 		} else {
 			$.mobile.showPageLoadingMsg("a", "Checking email verification !");			
@@ -118,8 +112,10 @@ function SendMessageViewModel() {
 	};    
 	
 	function successfulMessage(data){
-		showMessage('Your message is posted successfully');
-		localStorage.setItem('currentChannelId', that.selectedChannels())		
+		that.messageText('');	
+		that.characterCount('0');				
+		that.toastText('Broadcast sent');
+		showToast();			
 	};
 	
 	function errorAPI(data, status, details){

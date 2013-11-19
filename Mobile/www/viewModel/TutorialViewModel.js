@@ -6,6 +6,7 @@ function TutorialViewModel() {
   this.viewid = 'V-51';
   this.viewname = 'Tutorial';
   this.displayname = 'Tutorials';
+	this.toastText = ko.observable();			
 
   this.applyBindings = function() {
     $('#' + that.template).on('pagebeforeshow', function(e, data) {
@@ -22,6 +23,11 @@ function TutorialViewModel() {
 		} else if(newUser == '' || newUser == null) {
 			goToView('channelListView');
 		}
+		if(localStorage.getItem('toastData')) {
+			that.toastText(localStorage.getItem('toastData'));
+			showToast();
+			localStorage.removeItem('toastData');												
+		}				
 		$('.tutorial ul li').removeClass('active');
 		$('.tutorial ul li:first-child').addClass('active');		
 		$('.tutorials .tutorialslides').hide();

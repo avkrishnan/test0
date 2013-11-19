@@ -709,7 +709,8 @@ $(document).bind('panelbeforeopen', function(e, data) {
                  
                  });
 								 
-/* by pradeep kumar */
+/* By pradeep kumar */
+/* Back navigation functions */
 if(!localStorage.getItem('backNavText')) {
 	var backNavText = [];
 	var backNavView = [];
@@ -729,29 +730,20 @@ function pushBackNav(backText, backView, targetView) {
 function popBackNav() {
 	backNavText.pop();
 	localStorage.removeItem('backNavText');	
-	localStorage.setItem('backNavText', JSON.stringify(backNavText));
-	//alert(localStorage.getItem('backNavText'));					
+	localStorage.setItem('backNavText', JSON.stringify(backNavText));				
 	var goView = goToView(backNavView.pop());
 	localStorage.removeItem('backNavView');		
-	localStorage.setItem('backNavView', JSON.stringify(backNavView));
-	//alert(localStorage.getItem('backNavView'));	
+	localStorage.setItem('backNavView', JSON.stringify(backNavView));	
 	goToView(goView);		
 }
 
-/* by pradeep kumar 
-var backNavText = [];
-var backNavView = [];
+/* Toast messages function */
+function showToast() {
+	$('.toast-notification').delay(500).slideDown(1000, function() {
+		$('.toast-notification').show();
+	}).delay(4000).slideUp(1000);
+}
 
-function pushBackNav(backText, backView, targetView) {
-	backNavText.push(backText);	
-	backNavView.push(backView);	
-	goToView(targetView);	
-}			
-
-function popBackNav() {
-	backNavText.pop();		
-	goToView(backNavView.pop());
-}*/
 								 
 
 

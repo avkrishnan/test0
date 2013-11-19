@@ -13,7 +13,8 @@ function RegistrationVerifyViewModel() {
 	this.verificationCommethod = ko.observable();
 	this.verificationCommethodID = ko.observable();		
 	this.verificationCode = ko.observable();
-	this.errorMessage = ko.observable();					
+	this.errorMessage = ko.observable();
+	this.toastText = ko.observable();						
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -94,7 +95,8 @@ function RegistrationVerifyViewModel() {
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				showMessage('Email verified successfully!');							
+				that.toastText('Email verified');		
+				localStorage.setItem('toastData', that.toastText());											
 				goToView('tutorialView');
 			},
 			error: function (responseData, status, details) {

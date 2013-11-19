@@ -10,55 +10,56 @@
     </div>
   </header>  
   <div class="page-content channelsettings">
-      <div class="channelcontent">
-        <span class="channelimg channel1 borderred"></span>
-        <div class="detailschannel last">
-          <div class="channelinfo">
-             <strong data-bind="text: channelName"></strong>
-            <em data-bind="text: shortDescription"></em>
-          </div>
-        </div>
-      </div>
-      <h1>Channel Settings</h1>
-      <a class="editchannel" href="#" data-bind="click: editChannelName">
-        Edit channel name
-      </a>
-      <a class="editchannel" href="#" data-bind="click: editShortDescription">
-        Edit short description
-      </a>
-      <a class="editchannel" href="#" data-bind="click: editLongDescription">
-        Edit web page description
-      </a>      
-      <a class="editchannel deletechannel" href="#" data-bind="click: deleteChannel">
-        Delete this channel
-      </a>
-      <a class="editchannel changechannel" href="#" data-bind="click: changeChannelIcon">
-        Change channel icon image
-      </a>
-      <div class="radiobtn">
-        <div class="yes-no">
-          <label for="flip-1">Make this channel public</label>
-          <select name="public" data-role="slider">
-            <option value="yes">YES</option>
-            <option value="no">NO</option>
-          </select> 
-        </div>
-        <div class="yes-no">
-          <label for="flip-1">Hide broadcast history</label>
-          <select name="history?" data-role="slider">
-            <option value="yes">YES</option>
-            <option value="no">NO</option>
-          </select> 
-        </div>
-        <div class="yes-no">
-          <label for="flip-1">Followers must be approved</label>
-          <select name="approval" id="public" data-role="slider">
-            <option value="yes">YES</option>
-            <option value="no">NO</option>
-          </select> 
+    <div class="channelcontent">
+      <span class="channelimg channel1 borderred"></span>
+      <div class="detailschannel last">
+        <div class="channelinfo">
+           <strong data-bind="text: channelName"></strong>
+          <em data-bind="text: shortDescription"></em>
         </div>
       </div>
     </div>
+    <h1>Channel Settings</h1>
+    <a class="editchannel" href="#" data-bind="click: editChannelName">
+      Edit channel name
+    </a>
+    <a class="editchannel" href="#" data-bind="click: editShortDescription">
+      Edit short description
+    </a>
+    <a class="editchannel" href="#" data-bind="click: editLongDescription">
+      Edit web page description
+    </a>      
+    <a class="editchannel deletechannel" href="#" data-bind="click: deleteChannel">
+      Delete this channel
+    </a>
+    <a class="editchannel changechannel" href="#" data-bind="click: changeChannelIcon">
+      Change channel icon image
+    </a>
+    <div class="radiobtn">
+      <div class="yes-no">
+        <label for="flip-1">Make this channel public</label>
+        <select name="public" data-role="slider">
+          <option value="yes">YES</option>
+          <option value="no">NO</option>
+        </select> 
+      </div>
+      <div class="yes-no">
+        <label for="flip-1">Hide broadcast history</label>
+        <select name="history?" data-role="slider">
+          <option value="yes">YES</option>
+          <option value="no">NO</option>
+        </select> 
+      </div>
+      <div class="yes-no">
+        <label for="flip-1">Followers must be approved</label>
+        <select name="approval" id="public" data-role="slider">
+          <option value="yes">YES</option>
+          <option value="no">NO</option>
+        </select> 
+      </div>
+    </div>
+  </div>
+  <div class="toast-notification" data-bind="text: toastText"></div>    
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>
