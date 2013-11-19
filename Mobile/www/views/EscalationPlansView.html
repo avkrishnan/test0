@@ -26,7 +26,7 @@
             <input type="text" name="Add" placeholder="enter a phone number (TXT)" >
             <a href="#" class="addbtn">ADD</a>
           </form>
-          <p class="error-message"><span>ERROR : </span>Not a valid email</p>
+          <p class="error-message"><span>ERROR: </span>Not a valid email</p>
         </div>
         <a class="larrow" href="#"></a>
         <div class="dots">
@@ -51,8 +51,8 @@
           </form>
         </div>
         <div class="resend slideresend">
-          Con't Find the code
-          <a href="#" class="addbtn">RESEND</a>
+          Can't find the code
+          <a href="#" class="addbtn">RE-SEND</a>
         </div>
         <a class="larrow" href="#"></a>
         <div class="dots">
@@ -107,7 +107,7 @@
       </div>
       
     </div>
-    <h1>How I get messages :</h1>
+    <h1>How I get messages:</h1>
     
     <div data-bind="foreach: escalationplans">
       <a href="#" class="alldetails" data-bind="click: $parent.gotoView.bind($data.urgencyName)">
@@ -115,14 +115,14 @@
         <strong class="details" data-bind="text: urgencyName"></strong>
         <ul data-bind="foreach: commethods">
           <li><strong>phone number (TXT)</strong><span>NEEDED</span></li>
-          <li class="mail"><strong>jason.law@gmail.com</strong><span>5 retries</span></li>
+          <li class="mail"><strong>jill.jones@xyz.com</strong><span>5 retries</span></li>
           <li class="eme-buddy"><strong>Emergency Buddy</strong><span>NEEDED</span></li>
           <li><strong>email-2@test.com</strong><span>UNVERIFIED</span></li>
           <li><strong data-bind="text: $data.comMethodName"></strong><span data-bind="text: $data.comMethodRetries"></span></li>
         </ul>
       </a>
 		</div>
-    <h1 class="additionalsettings">Additional settings :</h1> 
+    <h1 class="additionalsettings">Additional settings:</h1> 
     -->
     <a href="#" class="low-messages editcontact" onclick="goToView('addContactView');">
       Add or edit contact information
