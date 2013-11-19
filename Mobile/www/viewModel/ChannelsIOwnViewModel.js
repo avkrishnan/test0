@@ -14,7 +14,8 @@ function ChannelsIOwnViewModel() {
 	this.channelId = ko.observable();
 	this.channelName = ko.observable();
 	this.channelDescription = ko.observable();
-	this.followerCount = ko.observable();	
+	this.followerCount = ko.observable();
+	this.toastText = ko.observable();		
 
 	/* Methods */
 	this.applyBindings = function(){	
@@ -28,6 +29,11 @@ function ChannelsIOwnViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}
 			that.accountName(localStorage.getItem('accountName'));			
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);						
 			localStorage.removeItem('currentChannelData');			

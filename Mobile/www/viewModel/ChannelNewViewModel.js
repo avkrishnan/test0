@@ -17,7 +17,8 @@ function ChannelNewViewModel() {
 	this.errorNewChannel = ko.observable();
 	this.channelWebAddress = ko.observable();
 	this.backText = ko.observable();
-	this.backNav = ko.observable();							
+	this.backNav = ko.observable();
+	this.toastText = ko.observable();								
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -85,6 +86,8 @@ function ChannelNewViewModel() {
 	
 	function successfulCreate(args) {
     $.mobile.hidePageLoadingMsg();
+		that.toastText('Channel created');		
+		localStorage.setItem('toastData', that.toastText());		
     goToView('channelsIOwnView');
   };
 	

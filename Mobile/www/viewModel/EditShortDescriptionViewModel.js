@@ -13,7 +13,8 @@ function EditShortDescriptionViewModel() {
 	this.channelId = ko.observable();
 	this.shortDescription = ko.observable();	
 	this.errorMessage = ko.observable(false);	
-	this.errorChannel = ko.observable();	
+	this.errorChannel = ko.observable();
+	this.toastText = ko.observable();		
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -59,6 +60,8 @@ function EditShortDescriptionViewModel() {
   };	
 	
 	function successfulModify(args) {
+		that.toastText('Description changed');		
+		localStorage.setItem('toastData', that.toastText());		
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});
   };

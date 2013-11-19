@@ -7,6 +7,9 @@
 .addfollowers {
 	cursor:pointer;	
 }
+.toast-notification {
+	display:none;
+}
 /*.page-content .tutorialslides:first-child {
 	display:block; 
 }*/

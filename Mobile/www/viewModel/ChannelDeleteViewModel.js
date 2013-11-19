@@ -11,7 +11,8 @@ function ChannelDeleteViewModel() {
   /* Channel delete observable */
 	this.channelId = ko.observable();
 	this.channelName = ko.observable();
-	this.channelDisplayName = ko.observable();					
+	this.channelDisplayName = ko.observable();
+	this.toastText = ko.observable();						
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -42,7 +43,9 @@ function ChannelDeleteViewModel() {
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-    goToView('channelsIOwnView');
+		that.toastText('Channel deleted');		
+		localStorage.setItem('toastData', that.toastText());
+		goToView('channelsIOwnView');		
   };
 
   function errorAPI(data, status, response) {

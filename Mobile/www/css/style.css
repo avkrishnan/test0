@@ -47,7 +47,7 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 	background:#fff url(images/back-right-arrow.png) no-repeat top right;
 	margin-left:10px;
 	float:left;
-	padding:3px 8px 3px 0px;
+	padding:3px 8px 3px 0;
 	color:#8DC63F;
 	font-size:14px;
 }
@@ -69,7 +69,7 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 .hamburgermenuhide {
 	margin-left:-10px;
 	min-height:464px;
-	padding:0px 17px;
+	padding:0 17px;
 	display:inline-block;
 }
 .linkicon {
@@ -80,6 +80,8 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 	padding:0 12px;
 	background:url("images/notification-img.png") no-repeat;
 	cursor:auto;
+	float:left;
+	height:24px;
 }
 a.smsicon {
 	background-position:1px 5px;
@@ -102,8 +104,6 @@ a.smsicon.smsiconwhite {
 	background-position:1px -55px;
 	cursor:pointer;
 }
-
-
 /*	Header end	*/
 /*	
 	*	Page Content	
@@ -121,9 +121,6 @@ h1.additionalsettings {
 .page-content {
   padding:40px 0 50px 10px;
 }
-/*.page-content.loginpage {
-	padding:40px 0 15px 10px;
-}*/
 .page-content.nofooterbar {
 	padding:40px 0 0 10px;
 }
@@ -294,101 +291,6 @@ h1.additionalsettings {
 .dots a.active {
 	background:url(images/slider-green.png) no-repeat center center;
 }
-/*	
-	*	NEW HOME PAGE 
-*/
-.emergencyicon {
-	background:#2D2D2D url("images/sprites.png") no-repeat -6px -629px;
-	border-radius:21px 0 0 21px;
-	color:#FFFFFF;
-	display:block;
-	font-family:'OpenSansRegular';
-	font-size:14px;
-	line-height:35px;
-	margin:0 0 10px;
-	padding:4px 0 4px 50px;
-	text-shadow:none;
-}
-.urgenticon {
-	background-position:-6px -687px;
-}
-.normal-icon {
-	background-position:-6px -1552px;
-}
-/*	NEW HOME PAGE End 	*/
-.alldetails {
-	background:#2D2D2D;
-	border-radius:21px 0 0 10px;
-	display: block;
-	margin-bottom: 10px;
-	overflow: hidden;
-	padding:4px 0 8px 0;
-}
-.emergency {
-	float:left;
-	margin:0 15px 0 4px;
-	background:url(images/sprites.png) no-repeat -9px -633px;
-	padding:19px;
-}
-.urgent {
-	background-position:-9px -690px;
-}
-.sensitive {
-	background-position:-9px -748px;
-}
-.low {
-	background-position:-9px -805px;
-}
-.normal {
-	background-position:-9px -1555px;
-}
-.details {
-	border-bottom:1px solid #828181;
-	color:#FFFFFF;
-	float:left;
-	font-size:15px;
-	font-weight:normal;
-	margin:0;
-	overflow:hidden;
-	padding:8px 0;
-	width:76.7%;
-	text-transform:capitalize;
-}
-.details strong {
-	font-size:17px;
-	color:#FFF;
-	font-weight:normal;
-}
-.alldetails ul {
-	clear:both;
-	overflow:hidden;
-	padding:0 15px;
-}
-.alldetails ul li {
-	padding:8px 0 9px 42px;
-	color:#8dc63f;
-	font-size:13px;
-	display:block;
-	font-weight:normal;
-	border-bottom:1px solid #828181;
-}
-.alldetails ul li.last {
-	border-bottom:none;
-}
-.alldetails ul li.mail strong {
-	opacity:1;
-}
-.alldetails ul li.eme-buddy {
-	background:url(images/buddy.png) no-repeat 42px 8px;
-	padding:6px 0 6px 60px;
-}
-.alldetails ul li strong {
-	opacity:0.5;
-}
-.alldetails ul li span {
-	float:right;
-	width:78px;
-}
 .low-messages, .togglearrow {
 	background:#2D2D2D url("images/sprites.png") no-repeat -5px 3px;
 	border-radius:21px 0 0 21px;
@@ -517,70 +419,12 @@ a.addMore {
 	background:url(images/sprites.png) no-repeat -10px -458px;
 }
 /*
-	*Page 36.
-*/
-.actionreplay {
-	font-size:15px;
-	color:#fff;
-	padding:0 0 10px 56px;
-	display:block;
-}
-.fwd-action {
-	background-position:-5px -1683px;
-}
-.deliver-txt {
-	background-position:-5px -572px;
-}
-.deliver-email {
-	background-position:-5px -514px;
-}
-.alert-app {
-	background-position:-5px -1618px;
-}
-/*36-end*/
-/*
 	*Page V-36b
 */
 .low-messages.deliver-txt.addno.ui-link, .addno {
 	color:#8DC63F;
 }
 /*V-36b-end*/
-/*Emergency action details*/
-.actiondetails ul li {
-	text-align:right;
-	min-height:40px;
-	line-height:40px;
-	font-size:15px;
-	color:#FFFFFF;
-	padding:6px 0;
-	overflow:hidden;
-}
-.alldetails .actiondetails ul li span {
-	float:none;
-	color:#8DC63F;
-}
-.action-time input {
-	border:none;
-	border-radius:4px;
-	font-family:'OpenSansRegular';
-	height:35px;
-	margin:0 5px;
-	padding:0 8px;
-	width:22px;
-	font-size:16px;
-	text-align:right;
-}
-.add-retry a{
-	background:url("images/gray-plus.png") no-repeat scroll 0 10px;
-	padding:17px 0 16px 50px;
-	color:#fff;
-	line-height:35px;
-}
-.save {
-	background:#8DC63F;
-	padding:4px 15px;
-	margin-right:0;
-}
 select, .ui-icon-arrow-d {
 	background:#fff url(images/drop-down.png) no-repeat right 0;
 	border:none;
@@ -596,25 +440,8 @@ select, .ui-icon-arrow-d {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
+
 /*Emergency action details end*/
-/*
-	*V-37b (entire view)
-*/
-.alldetails .collapse a, .ui-body-c .alldetails .collapse a.ui-link:hover {
-	background:#414141 url("images/collapse-none.png") no-repeat 86px 7px;
-	font-size:15px;
-	color:#8DC63F;
-	padding:8px 44px 8px 10px;
-	border-radius:4px;
-	display:inline-block;
-}
-.alldetails .collapse span {
-	background:url("images/collapse.png") no-repeat left center;
-	padding:0 14px;
-	height:10px;
-	width:20px;
-}
-/*	V-37b (entire view) End	*/
 /*
 	*	V-12b - Delete - A
 */
@@ -628,29 +455,10 @@ select, .ui-icon-arrow-d {
 /*
 	*	V-12b - Delete -B
 */
-.removedelete {
-	border-bottom:1px solid #828181;
-	display:inline-block;
-	padding:8px 0 4px 0;
-	width:76.8%;
-	color:#8DC63F;
-	font-size:14px;
-	min-height:25px;
-	font-weight:normal;
-}
-.deleteemailbtn {
-	background:#ED1C24;
-	border-radius:4px;
-	color:#FFFFFF;
-	float:right;
-	font-size:14px;
-	line-height:25px;
-	padding:0 10px;
-	margin-top:-3px;
-}
 .deleteicanchange, .mycontact .deleteicanchange {
 	background:url("images/sprites.png") no-repeat -8px -920px;
 	opacity:1;
+	border:2px solid red;
 }
 /* V-12b - Delete - B End */
 /*
@@ -713,20 +521,6 @@ select, .ui-icon-arrow-d {
 /*
 	*	V-09 - Delete - A B C
 */
-em.removeemailnumber {
-	background:url("images/sprites.png") no-repeat -8px -403px;
-	opacity:1;
-}
-.deleteicanred {
-	background-position:-8px -978px;
-}
-.disabled {
-	opacity: 0.5;
-	cursor:auto;
-}
-.mycontact .deleteemailbtn {
-	margin:7px 10px 6px 0;
-}
 /* V-09 - Delete - A b c End */
 /*
 	*	V-10
@@ -763,7 +557,7 @@ em.removeemailnumber {
 .success {
 	font-size:14px;
 	color:#fff;
-	padding:0 10px 0 12px;
+	padding:0 10px 0px 12px;
 }
 .success p {
 	padding-bottom:15px;
@@ -881,7 +675,6 @@ em.removeemailnumber {
 .loginform .validationright input[type="text"], .loginform .validationright input[type="password"] {
 	color:#000;
 }
-
 .loginform input.typeerrormsg {
 	background:#fefbd6;
 	color:#000;
@@ -969,7 +762,7 @@ hr, .baseline {
 	padding:0 0 0 20px;
 }
 .loginform .registration {
-	padding:4px 0px 0 4px;
+	padding:4px 0 0 4px;
 }
 .loginform .registration em, .loginform .registration a.informatiniconmsg{
 	float:right;
@@ -1015,10 +808,8 @@ hr, .baseline {
 }
 /*	New User	*/
 .page-content.tutorials {
-	/*margin:55px auto 20px;*/
 	padding:0;
 	width:auto;
-	/*scalable:no;*/
 	overflow:hidden;
 }
 .new-user {
@@ -1032,7 +823,6 @@ hr, .baseline {
 	top:0;
 	position:fixed;
 	width:100%;
-	/*margin-top:42px;*/
 }
 .msg-content {
 	padding:15px 0;
@@ -1092,10 +882,6 @@ span.down-arrow {
 	margin:0 10px 0 0;
 	line-height:42px;
 }
-/*.tutorial h1 {
-	font-size:16px;
-	font-style:italic;
-}*/
 .tutorial ul li {
 	display:inline;
 	padding:0 12px;
@@ -1162,18 +948,6 @@ span.down-arrow {
 	font-size:14px;
 	padding:4px 14px;
 }
-/*.logintop {
-	background:url(images/login.png) no-repeat left center;
-}*/
-/*.forgotpassward {
-	background:url(images/forgotpassward.png) no-repeat left center;
-}
-.register {
-	background:url(images/register.png) no-repeat left center;
-}
-.broadcasttop {
-	background:url(images/broadcast.png) no-repeat left center;
-}*/
 /*	Login page css	*/
 /*
 	*	Overwrite css jquery Mobile
@@ -1353,7 +1127,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	position:relative;
 }
 /* Overwrite css jquery Mobile End	*/
-
 /*
 	* CHANNELS PAGES CSS
 */
@@ -1834,9 +1607,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#918f8f;
 	font-size:12px;
 }
-/*.whogotit {
-	background:url("images/whogotit.png") no-repeat left center;
-}*/
 .msg-nameuserid {
 	background:url("images/sprites-channel.png") no-repeat 4px -1087px;
 	border-bottom:1px solid #828181;
@@ -2298,7 +2068,6 @@ h1.requests {
 .bugicon {
 	background:#2D2D2D url("images/reportbugican.png") no-repeat 3px 3px;
 }
-
 .aboutuschannel.last {
 	border-bottom:none;
 }
@@ -2322,7 +2091,7 @@ h1.requests {
 	float:left;
 	font-size:15px;
 	color:#2d2d2d;
-	padding:5px 0px;
+	padding:5px 0;
 	font-weight:normal;
 }
 .msg-hideshow a {
@@ -2437,7 +2206,6 @@ ul.igiresponses li span {
 .dropdownchanel {
 	background:#fff;
 	margin:-10px 5px 10px 18px;
-	/*display:none;*/
 }
 .dropdownchanellist li {
 	padding:5px 0;
@@ -2613,7 +2381,7 @@ ul.igiresponses li span {
 }
 .messagedetail-info p {
 	font-size:14px;
-	padding:5px 0 0px 0;
+	padding:5px 0 0 0;
 }
 .snoozedismissbtn {
 	padding:10px 0;
@@ -2735,18 +2503,18 @@ ul.igiresponses li span {
 	float:right;
 	padding:0 4px;
 	font-size:14px;
-	margin:-24px 10px 0px 0px;
+	margin:-24px 10px 0 0;
 	color:#8DC63F;
 }
 .broadcast-textarea span.length-warning a.ui-link {
 	color:#fbb040;
 	background:url("images/length-warning.png") no-repeat right center;
-	padding:0px 25px 0px 0px;
+	padding:0 25px 0 0;
 }
 .compose-newbroadcast {
 	padding:8px 10px;
-	margin:10px 0px 10px 0px;
-	border-radius:4px 0px 0px 4px;
+	margin:10px 0 10px 0;
+	border-radius:4px 0 0 4px;
 	background:#2d2d2d;
 }
 .compose-newbroadcast .ui-select .ui-btn.ui-btn-hover-c {
@@ -2759,7 +2527,7 @@ ul.igiresponses li span {
 	border-bottom:1px solid #828181;
 	overflow:hidden;
 	line-height:35px;
-	padding:0px 0px 10px 0px;
+	padding:0 0 10px 0;
 }
 .composedropdown label {
 	color:#fff;
@@ -2772,7 +2540,7 @@ ul.igiresponses li span {
 	width:200px;
 }
 .composedropdown .ui-select .ui-btn {
-	margin:0px;
+	margin:0;
 	border-radius:4px;
 }
 .composedropdown .ui-select .ui-btn-text {
@@ -2784,14 +2552,14 @@ ul.igiresponses li span {
 	font-weight:bold;
 }
 .composedropdown .ui-select select option {
-	padding:0px 0px 0px 6px;
+	padding:0 0 0 6px;
 }
 .yes-no span.informationicon {
 	display:inline-block;
 	text-align:center;
 	/*width:39%;*/
 	width:28%;
-	padding:10px 0px;
+	padding:10px 0;
 	margin-bottom:-7px;
 	background:url(images/informationicon.png) no-repeat center center;
 	text-align:center;
@@ -2802,7 +2570,7 @@ ul.igiresponses li span {
 	border-bottom:1px solid #828181;
 }
 .composebroadcast .yes-no.last {
-	margin:0px;
+	margin:0;
 }
 .composebroadcast .yes-no label {
 	width:90px;
@@ -2829,7 +2597,7 @@ ul.igiresponses li span {
 }
 .broadcast-icon {
 	padding:7px 20px 7px 46px;
-	background:#2D2D2D url(images/broadcast-icon.png) no-repeat 0px 1px;
+	background:#2D2D2D url(images/broadcast-icon.png) no-repeat 0 1px;
 }
 .schedulecalendar.ui-link, .schedulecalendar.ui-link:hover {
 	padding:7px 8px 7px 38px;
@@ -2872,7 +2640,7 @@ ul.igiresponses li span {
 	background:#e6e7e8;
 	float:right;
 	border-radius:4px;
-	margin:2px 0 0 0;
+	margin:10px 0 0 0;
 }
 .mycontact .delete-address {
 	color:#fff;
@@ -2903,14 +2671,14 @@ ul.igiresponses li span {
 	overflow:hidden;
 	padding:10px;
 	background:#2D2D2D;
-	border-radius:10px 0px 0px 10px;
-	margin:20px 0px 10px 0px;
+	border-radius:10px 0 0 10px;
+	margin:20px 0 10px 0;
 }
 .emergency-setting em, .escalatedate-time em  {
 	float:left;
 	color:#fff;
 	font-size:14px;
-	padding:3px 0px 0px 0px;
+	padding:3px 0 0 0;
 }
 .emergency-setting span, .emergencybtn {
 	float:right;
@@ -2919,7 +2687,6 @@ ul.igiresponses li span {
 	padding:4px 10px 4px 34px;
 	border-radius:20px 4px 4px 20px;
 	margin-right:5px;
-	/*opacity:0.5;*/
 	background:#be1e2d url("images/emergency.png") no-repeat 10px 4px;
 }
 .all-setting h4 {
@@ -2935,7 +2702,7 @@ ul.igiresponses li span {
 	overflow:hidden;
 	background:#2D2D2D;
 	border-radius:10px 0 0 10px;
-	padding:5px 0px 15px 0;
+	padding:5px 0 15px 0;
 	margin-bottom:15px;
 }
 .escalate-settings.escalatesettings-deseable {
@@ -2944,7 +2711,7 @@ ul.igiresponses li span {
 .escalatedate-time {
 	overflow:hidden;
 	margin:5px 10px 5px 10px;
-	padding:0px 0px 10px 0px;
+	padding:0 0 10px 0;
 	border-bottom:1px solid #828181;
 }
 .escalatedate-time em {
@@ -2960,7 +2727,7 @@ ul.igiresponses li span {
 	color:#fff;
 }
 .agressively-slider {
-	padding:0px 10px;
+	padding:0 10px;
 }
 .agressively-slider span {
 	font-size:14px;
@@ -2980,30 +2747,30 @@ ul.igiresponses li span {
 }
 .slider-value span.chase {
 	float:left;
-	margin:0px 22%;
+	margin:0 22%;
 }
 .slider-value span.hound {
 	float:right;
 }
 .slidervalue-img {
-	padding:12px 0px;
-	margin:0px 7px;
+	padding:12px 0;
+	margin:0 7px;
 	overflow:hidden;
 	background:url("images/emergency-setting-line.png") no-repeat 4px 30px;
 }
 .slidervalue-img .remind-sensitive, .slidervalue-img .chase-broadcast, .slidervalue-img .hound-critical  {
 	float:left;
 	padding:20px;
-	background:url("images/emergency-setting-dot.png") no-repeat -5px 0px;
+	background:url("images/emergency-setting-dot.png") no-repeat -5px 0;
 }
 .slidervalue-img .chase-broadcast {
-	background:url("images/emergency-setting-dot.png") no-repeat -4px 0px;
+	background:url("images/emergency-setting-dot.png") no-repeat -4px 0;
 	float:left;
 	margin:0 27%;
 }
 .slidervalue-img .hound-critical {
 	float:right;
-	background:url("images/emergency-setting-dot.png") no-repeat 6px 0px;
+	background:url("images/emergency-setting-dot.png") no-repeat 6px 0;
 }
 .slidervalue-img .criticalicon {
 	background:url("images/sprites-channel.png") no-repeat -3px -800px;
@@ -3036,21 +2803,20 @@ ul.igiresponses li span {
 }
 .composebroadcast .yes-no.escalate-activesetting {
 	border:none;
-	margin:0px;
+	margin:0;
 }
 .yes-no.setting-datetime label {
 	width:210px;
 }
 .emergencybtn {
 	margin:6px 0 0 0;
-	/*opacity:1;*/
 }
 .datetime-escalation {
 	background:#2D2D2D;
 	overflow:hidden;
 	padding:15px 10px 10px 10px;
 	border-radius:10px 0 0 10px;
-	margin:20px 0px 15px 0px;
+	margin:20px 0 15px 0;
 }
 .datetime-escalation h4 {
 	font-size:14px;
@@ -3122,19 +2888,7 @@ ul.igiresponses li span {
 	color:#000;
 }
 /*-Edit personal information-*/
-
-/*.savebtn.ui-link, .savebtn.ui-link:visited, .savebtn.ui-link:hover, .savebtn.ui-link:active {
-    background:#e6e7e8;
-    border-radius:4px;
-    font-size:14px;
-		color:#a7a9ac;
-    padding:1px 14px;
-		float:right;
-		margin-right:12px;
-}*/
-
 /* Yes No*/
-
 .yesnoclick {
 	float:right;
 	border-radius:20px;
@@ -3159,17 +2913,26 @@ ul.igiresponses li span {
 .yes-noactive {
 	background:#8dc63f;
 }
-
 /* Channel Landing Page */
 .channellanding textarea.ui-input-text {
-	padding:0px;
+	padding:0;
 	clear:both;
 	font-size:14px;
 	font-style:italic;
 	min-height:120px;
 }
 .formtype.channellanding.textareatype {
-	padding:0px;
+	padding:0;
+}
+/* TOAST-NOTIFICATION */
+.toast-notification {
+	background:#FDFACC url("images/sprites-channel.png") no-repeat 5px -1142px;
+	bottom:46px;
+	font-size:14px;
+	padding:10px 0px 10px 48px;
+	position:fixed;
+	width:100%;
+	border-bottom:1px solid #e4e2b9;
 }
 /* CHANNELS PAGES CSS	END	 */
 /*
@@ -3214,9 +2977,6 @@ ul.igiresponses li span {
 	.loginform span {
 		margin:10px 0 20px 10px;
 	}
-	.addfollowers {
-		/*font-size:16px;*/
-	}
 	.sendbtnican {
 		padding:10px 20px 10px 50px;
 	}
@@ -3256,7 +3016,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:543px;
-		padding:0px 19px;
+		padding:0 19px;
 	}
 	.slider-value span.chase {
 		margin:0 27%;
@@ -3374,7 +3134,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:927px;
-		padding:0px 20px;
+		padding:0 20px;
 	}
 	.slider-value span.chase {
 		margin:0 40%;
@@ -3430,7 +3190,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:1182px;
-		padding:0px 21px;
+		padding:0 21px;
 	}
 	.slider-value span.chase {
 		margin:0 40.2%;
@@ -3490,7 +3250,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:1182px;
-		padding:0px 26px;
+		padding:0 26px;
 	}
 	.slider-value span.chase {
 		margin:0 42%;
@@ -3559,7 +3319,7 @@ ul.igiresponses li span {
 	}
 	.hamburgermenuhide {
 		min-height:543px;
-		padding:0px 33px;
+		padding:0 33px;
 	}
 	.slider-value span.chase {
 		margin:0 43.6%;

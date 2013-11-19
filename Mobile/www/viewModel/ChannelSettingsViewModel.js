@@ -13,6 +13,7 @@ function ChannelSettingsViewModel() {
 	this.channelId = ko.observable();	
 	this.channelName = ko.observable();
 	this.shortDescription = ko.observable();
+	this.toastText = ko.observable();		
 	
 	/* Methods */	
 	this.applyBindings = function() {
@@ -29,7 +30,12 @@ function ChannelSettingsViewModel() {
 			goToView('loginView');
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');
-		} else {		
+		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}					
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);	
 			that.channelId(channelObject.channelId);

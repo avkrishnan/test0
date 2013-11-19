@@ -13,7 +13,7 @@
   <section>
     <label class="invited-followChannel">Compose a New Broadcast</label>
     <div class="broadcast-textarea">
-      <textarea class="textarea" data-bind="value: messageText, valueUpdate: 'afterkeydown'" placeholder="Add text here..."></textarea>
+      <textarea class="textarea" data-bind="value: messageText, valueUpdate: 'afterkeydown'" placeholder="Add additional text here . . . "></textarea>
       <span data-bind="text: characterCount"></span>
     </div>
     <div class="compose-newbroadcast">
@@ -49,6 +49,7 @@
     <a href="#" class="sendbtnican broadcast-icon" data-bind="click: sendMessageCommand"><span>send</span></a></div>        
   </section>
   </div>
+  <div class="toast-notification" data-bind="text: toastText"></div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
   </div>

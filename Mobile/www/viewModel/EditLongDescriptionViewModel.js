@@ -14,6 +14,7 @@ function EditLongDescriptionViewModel() {
 	this.longDescription = ko.observable();	
 	this.errorMessage = ko.observable(false);	
 	this.errorChannel = ko.observable();
+	this.toastText = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -56,7 +57,8 @@ function EditLongDescriptionViewModel() {
   };	
 	
 	function successfulModify(args) {
-    $.mobile.hidePageLoadingMsg();
+		that.toastText('Description changed');		
+		localStorage.setItem('toastData', that.toastText());		
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});		
   };

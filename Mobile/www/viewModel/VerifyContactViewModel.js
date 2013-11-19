@@ -19,6 +19,7 @@ function VerifyContactViewModel() {
 	this.navText = ko.observable();
 	this.pView = '';
 	this.errorMessage = ko.observable();
+	this.toastText = ko.observable();	
 	
 	var that = this;
 	
@@ -102,20 +103,20 @@ function VerifyContactViewModel() {
 		}
 		else {
 			that.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below.');
-		}
-		
-		$(document).keyup(function(e) {
-			if (e.keyCode == 13) {
-				that.errorMessage('');
-				that.verifyRequestCommethod();
-			}
-		});		
+		}	
 		//alert(localStorage.getItem("currentVerificationCommethod"));
 		//that.getCommethods().then(gotCommethods);
 		
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;     
 	};
+	
+	$(document).keyup(function(e) {
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'verifyContactView') {
+			that.errorMessage('');
+			that.verifyRequestCommethod();
+		}
+	});			
 	
 	this.menuCommand = function () {
 		pushBackNav('Cont. Info', 'verifyContactView', 'channelMenuView');		
@@ -124,7 +125,14 @@ function VerifyContactViewModel() {
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				//alert('success');
+				if(localStorage.getItem("currentVerificationCommethodType") == 'EMAIL') {
+					that.toastText('Email verified');		
+					localStorage.setItem('toastData', that.toastText());
+				}
+				else {
+					that.toastText('Phone number verified');		
+					localStorage.setItem('toastData', that.toastText());
+				}				
 				goToView('addContactView');
 			},
 			error: function (responseData, status, details) {

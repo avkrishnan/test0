@@ -19,6 +19,7 @@ function AddContactViewModel() {
 	this.showConfirm = ko.observable(false);
 	this.currentDeleteCommethod = ko.observable();
 	this.verify = ko.observable();
+	this.toastText = ko.observable();	
 	
 	this.navText = ko.observable();
 	this.pView = '';
@@ -80,6 +81,7 @@ function AddContactViewModel() {
 		if(that.verify() == false) {
 			that.currentDeleteCommethod(data.comMethodAddress);
 			that.currentDeleteCommethodID(data.comMethodID);
+			localStorage.setItem("CommethodType",data.comMethodType);			
 		}
 		that.showDelete(true);
 		that.backText('<em></em>Cont. Info');			
@@ -103,13 +105,22 @@ function AddContactViewModel() {
 	this.confirmDelete = function() {
 		var callbacks = {
 			success: function(){
-				//alert('success');
 			},
 			error: function() {
 				alert('error');
 			}
 		};	
 		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
+		if(localStorage.getItem("CommethodType") == 'EMAIL') {
+			that.toastText('Email address deleted');		
+			localStorage.setItem('toastData', that.toastText());
+			localStorage.removeItem("CommethodType");			
+		}
+		else {
+			that.toastText('Phone number deleted');		
+			localStorage.setItem('toastData', that.toastText());
+			localStorage.removeItem("CommethodType");			
+		}		
 		goToView('addContactView');
 	}
 
@@ -139,18 +150,28 @@ function AddContactViewModel() {
 	}	
     
 	this.activate = function() {
-		var _accountName = localStorage.getItem("accountName");
-		var _name = localStorage.getItem("UserFullName");
-		that.accountName(_accountName);
-		that.backText('<em></em>Settings');						
-		that.name(_name);
-		that.commethods.removeAll();
-		that.showDelete(false);
-		that.showConfirm(false);
-		that.verify(false);
-		localStorage.removeItem("currentVerificationCommethodID");
-		$.mobile.showPageLoadingMsg("a", "Loading Settings");
-		return that.getCommethods().then(that.showCommethods);
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}				
+			var _accountName = localStorage.getItem("accountName");
+			var _name = localStorage.getItem("UserFullName");
+			that.accountName(_accountName);
+			that.backText('<em></em>Settings');						
+			that.name(_name);
+			that.commethods.removeAll();
+			that.showDelete(false);
+			that.showConfirm(false);
+			that.verify(false);
+			localStorage.removeItem("currentVerificationCommethodID");
+			$.mobile.showPageLoadingMsg("a", "Loading Settings");
+			return that.getCommethods().then(that.showCommethods);
+		}
 	};
 	
 	this.menuCommand = function () {
