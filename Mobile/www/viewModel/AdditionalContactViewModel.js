@@ -17,6 +17,7 @@ function AdditionalContactViewModel() {
 	this.pView = '';
 	this.errorMessage = ko.observable();
 	this.errorMessageInput = ko.observable();
+	this.toastText = ko.observable();		
 	
 	var that = this;
 		
@@ -126,6 +127,14 @@ function AdditionalContactViewModel() {
 					localStorage.setItem("currentVerificationCommethodID",responseData.id);
 				}
 				localStorage.setItem("verificationStatus",true);
+				if(responseData.address == 'EMAIL') {
+					that.toastText('Email added');		
+					localStorage.setItem('toastData', that.toastText());
+				}
+				else {
+					that.toastText('Phone number added');		
+					localStorage.setItem('toastData', that.toastText());
+				}					
 				goToView('verifyContactView');
 			},
 			error: function (responseData, status, details) {

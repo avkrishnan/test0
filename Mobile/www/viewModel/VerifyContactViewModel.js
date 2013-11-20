@@ -82,33 +82,43 @@ function VerifyContactViewModel() {
 	};
     
 	this.activate = function() {
-		var _accountName = localStorage.getItem("accountName");
-		var _name = localStorage.getItem("UserFullName");
-		
-		that.accountName(_accountName);	
-		that.name(_name);
-		that.verificationCode('');
-		that.errorMessage('');
-		that.verificationCommethod(localStorage.getItem("currentVerificationCommethod"));
-		that.verificationCommethodID(localStorage.getItem("currentVerificationCommethodID"));
-		that.verificationStatus(localStorage.getItem("verificationStatus"));
-		if (that.verificationStatus() == 'false') {
-			that.verificationStatus(false);
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}			
+			var _accountName = localStorage.getItem("accountName");
+			var _name = localStorage.getItem("UserFullName");
+			
+			that.accountName(_accountName);	
+			that.name(_name);
+			that.verificationCode('');
+			that.errorMessage('');
+			that.verificationCommethod(localStorage.getItem("currentVerificationCommethod"));
+			that.verificationCommethodID(localStorage.getItem("currentVerificationCommethodID"));
+			that.verificationStatus(localStorage.getItem("verificationStatus"));
+			if (that.verificationStatus() == 'false') {
+				that.verificationStatus(false);
+			}
+			else {
+				that.verificationStatus(true);
+			}
+			if(localStorage.getItem("currentVerificationCommethodType") == 'EMAIL') {
+				that.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below).');
+			}
+			else {
+				that.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below.');
+			}	
+			//alert(localStorage.getItem("currentVerificationCommethod"));
+			//that.getCommethods().then(gotCommethods);
+			
+			$.mobile.showPageLoadingMsg("a", "Loading Settings");
+			return true;     
 		}
-		else {
-			that.verificationStatus(true);
-		}
-		if(localStorage.getItem("currentVerificationCommethodType") == 'EMAIL') {
-			that.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below).');
-		}
-		else {
-			that.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below.');
-		}	
-		//alert(localStorage.getItem("currentVerificationCommethod"));
-		//that.getCommethods().then(gotCommethods);
-		
-		$.mobile.showPageLoadingMsg("a", "Loading Settings");
-		return true;     
 	};
 	
 	$(document).keyup(function(e) {
