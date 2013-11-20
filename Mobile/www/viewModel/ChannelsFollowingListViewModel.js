@@ -48,25 +48,7 @@ function ChannelsFollowingListViewModel() {
 	};
 	
 	this.newMessages = function() {
-		/*
-		var callbacks = {
-			success: function(responseData) {
-				var tempCount = 0;
-				alert(responseData);
-				$.each(responseData, function(indexNotification, valueNotification) {
-					//alert(JSON.stringify(valueNotification.read));
-					if(valueNotification.read == 'N') {
-						tempCount = tempCount+1;
-					}
-				});	
-				that.newMessagesCount(tempCount);
-			},
-			error: function (responseData, status, details) {
-				alert(details.message);
-			}
-		};*/
 		$("#newMessages").popup('open');
-		//ES.systemService.getMsgNotifs(callbacks);
 	}
 	
 	this.closePopup = function() {

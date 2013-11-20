@@ -1,7 +1,6 @@
 var ES = {
 	evernymService: new EvernymService()
 };
-var newMessagesCount = '';
 ES.evernymService = new EvernymService();
 ES.channelService = new EvernymChannelService(ES.evernymService);
 ES.commethodService = new EvernymCommethodService(ES.evernymService);
