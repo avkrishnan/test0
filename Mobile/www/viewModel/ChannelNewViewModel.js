@@ -18,7 +18,8 @@ function ChannelNewViewModel() {
 	this.channelWebAddress = ko.observable();
 	this.backText = ko.observable();
 	this.backNav = ko.observable();
-	this.toastText = ko.observable();								
+	this.toastText = ko.observable();
+	this.counter = ko.observable();									
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -46,9 +47,11 @@ function ChannelNewViewModel() {
 			that.sectionTwo(false);			
 			$('input').keyup(function () {
 				that.message('');
+				that.channelClass('');				
 				that.errorNewChannel('');
 			});
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);				
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);
+			that.counter(localStorage.getItem('counter'));							
 		}
 	}
 	
@@ -86,6 +89,9 @@ function ChannelNewViewModel() {
 	
 	function successfulCreate(args) {
     $.mobile.hidePageLoadingMsg();
+		for(var ctr = 0; ctr <= that.counter(); ctr++) {
+			that.backCommand();		
+		}		
 		that.toastText('Channel created');		
 		localStorage.setItem('toastData', that.toastText());		
     goToView('channelsIOwnView');

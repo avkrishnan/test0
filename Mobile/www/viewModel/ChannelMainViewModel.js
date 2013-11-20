@@ -6,7 +6,8 @@ function ChannelMainViewModel() {
 	this.viewid = 'V-46';
 	this.viewname = 'ChannelMain';
 	this.displayname = 'Channel Main';	
-	this.accountName = ko.observable();		
+	this.accountName = ko.observable();
+	this.backText = ko.observable();			
 	
   /* Channel Main observable */	
 	this.channelId = ko.observable();		
@@ -34,7 +35,13 @@ function ChannelMainViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');		
 		} else {
-			that.accountName(localStorage.getItem('accountName'));		
+			that.accountName(localStorage.getItem('accountName'));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);
+			if(localStorage.getItem('counter') == 1) {
+				localStorage.setItem('counter', 2);
+			} else {		
+				localStorage.setItem('counter', 1)
+			}								
 			localStorage.removeItem('currentMessageData');			
 			that.broadcasts.removeAll();							
 			that.channelId(channelObject.channelId);
@@ -43,6 +50,10 @@ function ChannelMainViewModel() {
 			that.getMessagesCommand();
 		}
 	}
+	
+	this.backCommand = function () {
+		popBackNav();		
+  };	
 	
 	this.menuCommand = function () {
 		pushBackNav('Main', 'channelMainView', 'channelMenuView');		

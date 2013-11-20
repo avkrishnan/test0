@@ -30,9 +30,18 @@ function AddInviteFollowersViewModel() {
 		} else {
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			if(localStorage.getItem('counter') == 1) {
+				localStorage.setItem('counter', 2);
+			} else if(localStorage.getItem('counter') == 2){		
+				localStorage.setItem('counter', 3);
+			}	else if(localStorage.getItem('counter') == 3){
+				localStorage.setItem('counter', 4);
+			}	else {
+				localStorage.setItem('counter', 1);
+			}										
 			that.channelName(channelObject.channelName);
-			that.channelWebAddress(channelObject.channelName+'.evernym.dom');			
+			that.channelWebAddress(channelObject.channelName+'.evernym.com');			
 		}
 	}
 	

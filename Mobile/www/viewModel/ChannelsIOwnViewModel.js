@@ -35,7 +35,8 @@ function ChannelsIOwnViewModel() {
 				localStorage.removeItem('toastData');												
 			}
 			that.accountName(localStorage.getItem('accountName'));			
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);						
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			localStorage.setItem('counter', 1);									
 			localStorage.removeItem('currentChannelData');			
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
@@ -82,7 +83,7 @@ function ChannelsIOwnViewModel() {
 	
 	this.channelMain = function(data){
 		localStorage.setItem('currentChannelData', JSON.stringify(data));
-		goToView('channelMainView');					
+		pushBackNav('Channels', 'channelsIOwnView', 'channelMainView');					
 	};
 	
 	this.channelFollowers = function(data){	
