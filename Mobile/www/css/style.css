@@ -123,14 +123,6 @@ h1.additionalsettings {
 .page-content.nofooterbar, .page-content.hamburgermenupage {
 	padding:40px 0 0 10px;
 }
-
-/*.page-content.composepage {
-	display:inline-block;
-		border:2px solid red;
-}*/
-/*.page-content.escalatesettingspage {
-	overflow:hidden;
-}*/
 .portal-name {
 	font-size:18px;
 	color:#8dc63f;
@@ -1514,7 +1506,22 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	height:50px;
 	width:50px;
 	margin-right:10px;
-	background:url("images/sprites.png") no-repeat -3px -682px;
+	background:url("images/sprites.png") no-repeat;
+}
+.icon-n {
+	background-position:-3px -1547px;
+}
+.icon-ts {
+	background-position:-3px -740px;
+}
+.icon-u {
+	background-position: -3px -682px;
+}
+.icon-e {
+	background-position: -3px -625px;
+}
+.icon-l {
+	background-position: -3px -798px;
 }
 .channelmessages .announcementicon {
 	background:url(images/announcementicon.png) no-repeat 6px 7px;
@@ -1522,6 +1529,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .messageschannel {
 	padding:5px 0;
 	margin-left:50px;
+	height:42px;
 	border-left:1px solid #eaeaea;
 }
 .messagebtn {
