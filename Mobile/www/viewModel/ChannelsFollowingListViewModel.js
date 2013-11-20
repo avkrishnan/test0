@@ -27,6 +27,7 @@ function ChannelsFollowingListViewModel() {
 		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		console.log("trying to get channels");
 		that.channels.removeAll();
+		that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 		if ( that.channels() && that.channels().length){
 			that.channels.removeAll();
 		}
@@ -47,9 +48,11 @@ function ChannelsFollowingListViewModel() {
 	};
 	
 	this.newMessages = function() {
+		/*
 		var callbacks = {
 			success: function(responseData) {
 				var tempCount = 0;
+				alert(responseData);
 				$.each(responseData, function(indexNotification, valueNotification) {
 					//alert(JSON.stringify(valueNotification.read));
 					if(valueNotification.read == 'N') {
@@ -61,9 +64,9 @@ function ChannelsFollowingListViewModel() {
 			error: function (responseData, status, details) {
 				alert(details.message);
 			}
-		};
-		//$("#newMessages").popup('open');
-		ES.systemService.getMsgNotifs(callbacks);
+		};*/
+		$("#newMessages").popup('open');
+		//ES.systemService.getMsgNotifs(callbacks);
 	}
 	
 	this.closePopup = function() {

@@ -8,6 +8,7 @@ function ChannelListViewModel() {
   this.displayname = 'My Channels';
   this.accountName = ko.observable();
 	this.responseData = ko.observable();
+	this.newMessagesCount = ko.observable();
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -26,6 +27,7 @@ function ChannelListViewModel() {
 			goToView('loginView');
 		} 
 		else {
+			that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 			that.accountName(localStorage.getItem('accountName'));
 		}
 	}

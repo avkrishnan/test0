@@ -1,6 +1,7 @@
 var ES = {
 	evernymService: new EvernymService()
 };
+var newMessagesCount = '';
 ES.evernymService = new EvernymService();
 ES.channelService = new EvernymChannelService(ES.evernymService);
 ES.commethodService = new EvernymCommethodService(ES.evernymService);
@@ -744,33 +745,14 @@ function showToast() {
 	}).delay(4000).slideUp(1000);
 }
 
-								 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* New messages*/
+function showNewMessages(data) {
+	var tempCount = 0;
+	var tempNotifications = JSON.parse(data);
+	$.each(tempNotifications, function(indexNotification, valueNotification) {
+		if(valueNotification.read == 'N') {
+			tempCount = tempCount+1;
+		}
+	});
+	return tempCount;	
+}
