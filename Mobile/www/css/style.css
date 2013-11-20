@@ -68,7 +68,8 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 }
 .hamburgermenuhide {
 	margin-left:-10px;
-	min-height:464px;
+	/*min-height:464px;*/
+	min-height:394px;
 	padding:0 17px;
 	display:inline-block;
 }
@@ -79,7 +80,7 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 	margin:0 14px 0 0;
 	padding:0 12px;
 	background:url("images/notification-img.png") no-repeat;
-	cursor:auto;
+	cursor:pointer;
 	float:left;
 	height:24px;
 }
@@ -94,15 +95,12 @@ a.groupicon {
 }
 a.groupicon.groupiconwhite {
 	background-position:1px -324px;
-	cursor:pointer;
 }
 a.processingicon.processingiconwhite {
 	background-position:1px -185px;
-	cursor:pointer;
 }
 a.smsicon.smsiconwhite {
 	background-position:1px -55px;
-	cursor:pointer;
 }
 /*	Header end	*/
 /*	
@@ -120,24 +118,25 @@ h1.additionalsettings {
 }
 .page-content {
   padding:40px 0 50px 10px;
-}
-.page-content.nofooterbar {
-	padding:40px 0 0 10px;
-}
-.page-content.composepage {
-	display:inline-block;
-}
-.page-content.escalatesettingspage {
 	overflow:hidden;
 }
+.page-content.nofooterbar, .page-content.hamburgermenupage {
+	padding:40px 0 0 10px;
+}
+
+/*.page-content.composepage {
+	display:inline-block;
+		border:2px solid red;
+}*/
+/*.page-content.escalatesettingspage {
+	overflow:hidden;
+}*/
 .portal-name {
 	font-size:18px;
 	color:#8dc63f;
 	font-style:italic;
 	display:block;
 	margin:20px 20px 12px 12px;
-	display:inline-block;
-	width:100%;
 }
 .welcome {
 	font-style:normal;
@@ -429,7 +428,7 @@ select, .ui-icon-arrow-d {
 	background:#fff url(images/drop-down.png) no-repeat right 0;
 	border:none;
 	border-radius:4px;
-	padding:5px 10px;
+	padding:0px 10px;
 	width:48%;
 	height:35px;
 	font-size:16px;
@@ -458,7 +457,6 @@ select, .ui-icon-arrow-d {
 .deleteicanchange, .mycontact .deleteicanchange {
 	background:url("images/sprites.png") no-repeat -8px -920px;
 	opacity:1;
-	border:2px solid red;
 }
 /* V-12b - Delete - B End */
 /*
@@ -1109,8 +1107,8 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:0 0 0 6px;
 }
 .ui-select .ui-btn-icon-right .ui-icon {
-	right:0;
-	margin-top: -16px;
+	right:1px;
+	margin-top:-16px;
 	width:15px;
 }
 .ui-shadow {
@@ -1404,6 +1402,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#FFFFFF;
 	font-size:15px;
 	line-height:26px;
+	border:1px solid green;
+}
+.dropdown span.mybroadcast {
+	border:1px solid red;
+	float:left;
 }
 .chaneldropdown {
 	float:right;
@@ -1641,9 +1644,10 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelinfocontent {
 	border-bottom:1px solid #828181;
-	margin:0 15px 0 57px;
+	margin:0 15px 0 0px;
 	padding:8px 0 8px 0;
 	overflow:hidden;
+	display:block;
 }
 .channelinfocontent .title.ui-link, .channelinfocontent span {
 	color:#8DC63F;
@@ -1730,7 +1734,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8dc63f', endColorstr='#d2dd25',GradientType=0 ); /* IE6-9 */
 }
 .broadcastmsgsend span.msgincreasefull {
-	width:96%;
+	width:96.5%;
 }
 .broadcastmsgsend span.msgincrease {
 	width:5%;
@@ -2000,7 +2004,7 @@ h1.requests {
 	clear:both;
 }
 .channel-follow {
-	margin:0;
+	margin:0 0 8px 0;
 }
 .channelinfocontent.last {
 	border: medium none;
@@ -2076,7 +2080,6 @@ h1.requests {
 	border-radius:4px;
 	background:#fff;
 	margin:15px 10px 0 0;
-	width:99%;
 }
 .messagescontent {
 	background:#e6e7e8;
@@ -2416,7 +2419,7 @@ ul.igiresponses li span {
 	position: relative;
 	width:90%;
 	z-index: 9999;
-	min-height:550px;
+	min-height:480px;
 }
 .slidemenu h4 {
 	font-size:22px;
@@ -2476,8 +2479,9 @@ ul.igiresponses li span {
 	font-weight:normal;
 	font-size:16px;
 }
-.composepage .login {
+.composecheckbok {
 	padding:0;
+	border:1px solid red;
 }
 .composepage .loginform span {
 	margin:10px 0 20px 3px
@@ -2487,7 +2491,7 @@ ul.igiresponses li span {
 }
 .broadcast-textarea {
 	background:#e6e7e8;
-	border-radius:4px;
+	border-radius:4px 0px 0px 4px;
 	padding:5px 20px 5px 5px;
 }
 .broadcast-textarea .textarea {
@@ -2503,7 +2507,7 @@ ul.igiresponses li span {
 	float:right;
 	padding:0 4px;
 	font-size:14px;
-	margin:-24px 10px 0 0;
+	margin:-24px 12px 0 0;
 	color:#8DC63F;
 }
 .broadcast-textarea span.length-warning a.ui-link {
@@ -2543,13 +2547,14 @@ ul.igiresponses li span {
 	margin:0;
 	border-radius:4px;
 }
-.composedropdown .ui-select .ui-btn-text {
+/*.composedropdown .ui-select .ui-btn-text {
 	padding:0 0 0 5px;
-}
+}*/
 .composedropdown .ui-select .ui-btn-text span, .composedropdown .ui-select select{
 	color:#8DC63F;
 	font-size:13px;
 	font-weight:bold;
+	padding:0 0 0 5px;
 }
 .composedropdown .ui-select select option {
 	padding:0 0 0 6px;
@@ -2889,24 +2894,24 @@ ul.igiresponses li span {
 }
 /*-Edit personal information-*/
 /* Yes No*/
-.yesnoclick {
+.yesnoclick, .yes-noclick, .yesno-click {
 	float:right;
 	border-radius:20px;
 	padding:2px 5px;
 	background:#e6e7e8;
 	color:#666;
 }
-.yesnoclick span {
+.yesnoclick span, .yes-noclick span, .yesno-click span {
 	border-radius:50%;
-	float: left;
+	float:left;
 	height:30px;
-	line-height: 30px;
-	margin: 2px;
-	text-align: center;
+	line-height:30px;
+	margin:2px;
+	text-align:center;
 	width:30px;
 	color:#666;
 }
-.yesnoclick span.nobutton {
+.yesnoclick span.nobutton, .yes-noclick span.nobutton, .yesno-click span.nobutton {
 	background:#8dc63f;
 	color:#fff;
 }
@@ -2929,12 +2934,65 @@ ul.igiresponses li span {
 	background:#FDFACC url("images/sprites-channel.png") no-repeat 5px -1142px;
 	bottom:46px;
 	font-size:14px;
-	padding:10px 0px 10px 48px;
+	padding:10px 0px 12px 48px;
 	position:fixed;
 	width:100%;
 	border-bottom:1px solid #e4e2b9;
+	z-index:9999;
 }
 /* CHANNELS PAGES CSS	END	 */
+/* ui-popup-container */
+/*.ui-popup-container {
+	width:100%;
+	border:1px solid red;
+}*/
+/*-Terms Service-*/
+.terms-service {
+	font-size:14px;
+	color:#fff;
+	padding:0 10px 0 5px;
+	border-top:1px solid #828181;
+}
+.terms-service h2 {
+	font-size:18px;
+	font-weight:normal;
+	text-decoration:underline;
+	margin:20px 0 10px 0px;
+}
+.terms-service p {
+	margin-bottom:15px;
+}
+.terms-service p strong {
+	font-size:16px;
+	font-weight:normal;
+}
+.terms-service h6 {
+	font-size:14px;
+	font-weight:normal;
+}
+.terms-service ul li {
+	list-style:disc;
+	padding:2px 0px;
+	margin-left:15px;
+}
+.terms-service ul li.inside {
+	list-style:none;
+}
+.terms-service ul li.inside ul li {
+	list-style:circle;
+	margin:0 0 0 15px;
+}
+.terms-service ul li strong {
+	font-weight:normal;
+	font-size:15px;
+}
+.terms-service span {
+	margin:0 0 15px 0;
+	display:block;
+}
+.ourservices {
+	margin:10px 0 0 0;
+}
 /*
 	*@media query css
 */
@@ -2997,7 +3055,7 @@ ul.igiresponses li span {
 		font-size:13px;
 	}
 	.slidemenu {
-		min-height:600px;
+		min-height:640px;
 	}
 	.broadcast-sensitive.singlemessage span {
 		width:92.5%;
@@ -3015,7 +3073,7 @@ ul.igiresponses li span {
 		width:87%;
 	}
 	.hamburgermenuhide {
-		min-height:543px;
+		min-height:554px;
 		padding:0 19px;
 	}
 	.slider-value span.chase {
@@ -3112,7 +3170,7 @@ ul.igiresponses li span {
 	}
 	.slidemenu {
 		width:95%;
-		min-height:980px;
+		min-height:1025px;
 	}
 	.broadcast-sensitive.singlemessage span {
 		width:96.5%;
@@ -3133,7 +3191,7 @@ ul.igiresponses li span {
 		font-size:15px;
 	}
 	.hamburgermenuhide {
-		min-height:927px;
+		min-height:938px;
 		padding:0 20px;
 	}
 	.slider-value span.chase {
@@ -3186,10 +3244,10 @@ ul.igiresponses li span {
 		top:62%;
 	}
 	.slidemenu {
-		min-height:1240px;
+		min-height:1280px;
 	}
 	.hamburgermenuhide {
-		min-height:1182px;
+		min-height:1195px;
 		padding:0 21px;
 	}
 	.slider-value span.chase {
@@ -3249,7 +3307,7 @@ ul.igiresponses li span {
 		width: 95.5%;
 	}
 	.hamburgermenuhide {
-		min-height:1182px;
+		min-height:1195px;
 		padding:0 26px;
 	}
 	.slider-value span.chase {
@@ -3303,7 +3361,7 @@ ul.igiresponses li span {
 		width:95.8%;
 	}
 	.slidemenu {
-		min-height:600px;
+		min-height:601px;
 	}
 	.broadcast-sensitive.singlemessage span {
 		width:97.8%;
@@ -3318,7 +3376,7 @@ ul.igiresponses li span {
 		width:96.5%;
 	}
 	.hamburgermenuhide {
-		min-height:543px;
+		min-height:515px;
 		padding:0 33px;
 	}
 	.slider-value span.chase {
@@ -3339,6 +3397,9 @@ ul.igiresponses li span {
 	.datetime-setting.date-minutesetting {
 		margin-right:79px;
 	}
+	.broadcastmsgreplie {
+    width:79%;
+}
 }
 @media only screen and (max-width: 600px) and (min-width: 599px) {
 	.new-user img {
