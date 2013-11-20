@@ -40,34 +40,30 @@
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>
   </div> 
   
-  <div class="messages-content" data-role="popup" id="newMessages" data-history="false">
+  <div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0px;">
     <div class="messagescontent">
         <div class="msg-hideshow">
           <h4>NEW MESSAGES</h4>
           <a data-rel="back" data-bind="click:closePopup"></a>
         </div>
-        
-        <section>
-        <a class="messagesreceived" href="V-53-message-detail.html">
-          <span class="channelicans"></span>
+        <section data-bind="foreach: newMessagesDisplay">
+        <a class="messagesreceived" href="#" data-bind="click: $parent.newpop">
+          <span class="channelicans" data-bind="css:$data.urgencyId"></span>
           <div class="messageschannel">
-            <span class="received">byufootball</span>
+            <span class="received" data-bind="text: $data.chnlName"></span>
             <span class="messagebtn">iGi</span>
-            <p class="receive-time"><em>20 mins ago:</em>News conference this ...</p>
+            <p class="receive-time"><em data-bind="text: created"></em>: News conference this ...</p>
           </div>
         </a>
         </section>
-        <!--
-        <a class="messagesreceived" href="V-53-message-detail.html">
-          <span class="channelicans normalicon"></span>
-          <div class="messageschannel">
-            <span class="received">wasatchwarriors</span>
-            <span class="messagebtn">iGi</span>
-            <p class="receive-time"><em>1 hour ago:</em>Friday's field trip list ...</p>
-          </div>
-        </a>
-        -->
     </div>
   </div>  
+
+  <div id="newPOP" data-role="popup" data-history="false">
+    <div class="msg-hideshow">
+      <h4>NEW MESSAGES</h4>
+      <a data-rel="back" data-bind="click:closePopup"></a>
+    </div>
+  </div>
 
 </div>

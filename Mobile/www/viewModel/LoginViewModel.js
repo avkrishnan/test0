@@ -12,7 +12,7 @@ function LoginViewModel() {
   this.errorMessage = ko.observable();
   this.usernameClass = ko.observable();
   this.passwordClass = ko.observable();
-	this.newMessagesCount = ko.observable();
+	//this.newMessagesCount = ko.observable();
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -31,6 +31,7 @@ function LoginViewModel() {
   };
 	
   this.activate = function() {
+		//that.newMessagesCount('');
 		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
 			that.errorMessage('');
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
@@ -48,8 +49,8 @@ function LoginViewModel() {
 					that.usernameClass('');
 					that.passwordClass('');
 				}
-			});	
-			that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
+			});
+			//that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 		} 
 		else {
 			goToView('channelListView');
@@ -145,6 +146,7 @@ function LoginViewModel() {
 				success: function(responseData) {
 					//alert(JSON.stringify(responseData));
 					//enymNotifications = responseData;
+					localStorage.removeItem('enymNotifications');
 					localStorage.setItem('enymNotifications', JSON.stringify(responseData));
 				},
 				error: function(data, status, details) {

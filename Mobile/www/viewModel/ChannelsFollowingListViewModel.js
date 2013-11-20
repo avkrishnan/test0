@@ -8,6 +8,7 @@ function ChannelsFollowingListViewModel() {
 	this.accountName = ko.observable();
 	this.backText = ko.observable();
 	this.channels = ko.observableArray([]);
+	this.newMessagesDisplay = ko.observableArray([]);
 	this.newMessagesCount = ko.observable();
 	
 	var that = this;
@@ -27,6 +28,16 @@ function ChannelsFollowingListViewModel() {
 		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		console.log("trying to get channels");
 		that.channels.removeAll();
+		var dd = localStorage.getItem('enymNotifications');
+		//that.newMessages(JSON.stringify(dd));
+		that.newMessagesDisplay.removeAll();
+		$.each(JSON.parse(dd), function(indexNotification, valueNotification) {
+			if(valueNotification.read == 'N') {
+				valueNotification.created = time2TimeAgo(valueNotification.created+999);
+				valueNotification.urgencyId = "icon-" + valueNotification.urgencyId.toLowerCase();
+				that.newMessagesDisplay.push(valueNotification);
+			}
+		});
 		that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 		if ( that.channels() && that.channels().length){
 			that.channels.removeAll();
@@ -48,6 +59,12 @@ function ChannelsFollowingListViewModel() {
 	};
 	
 	this.newMessages = function() {
+		$("#newMessages").popup('open');
+	}
+	
+	this.newpop = function() {
+		$("#newMessages").popup('close');
+		$("#newPOP").popup('open');
 		$("#newMessages").popup('open');
 	}
 	
