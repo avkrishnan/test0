@@ -8,7 +8,7 @@ function ChannelChangeNameViewModel() {
 	this.displayname = 'Change Channel Name';	
 	this.accountName = ko.observable();	
 	
-  /* New Channel Step First observable */
+  /* Channel changet name observable */
 	this.sectionOne = ko.observable(true);
 	this.sectionTwo = ko.observable(false);
 	this.channelId = ko.observable();		

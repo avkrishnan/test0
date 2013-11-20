@@ -32,7 +32,14 @@ function FollowersListViewModel() {
 			goToView('channelsIOwnView');			
 		} else {
 			that.accountName(localStorage.getItem('accountName'));		
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);						
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);
+			if(localStorage.getItem('counter') == 1) {
+				localStorage.setItem('counter', 2);
+			} else if(localStorage.getItem('counter') == 2){		
+				localStorage.setItem('counter', 3);
+			}	else {
+				localStorage.setItem('counter', 1);
+			}								
 			that.followers.removeAll();									
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);

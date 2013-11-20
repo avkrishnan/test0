@@ -70,10 +70,10 @@ function AddFollowersViewModel() {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
 		if (that.firstLastName() == '') {
 			that.nameClass('validationerror');
-			that.errorName('<span>SORRY :</span> Please enter first and last name');
+			that.errorName('<span>SORRY:</span> Please enter first and last name');
     } else if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
 			that.emailClass('validationerror');
-			that.errorEmail('<span>SORRY :</span> Please enter valid email');
+			that.errorEmail('<span>SORRY:</span> Please enter valid email');
     } else {
 			$.mobile.showPageLoadingMsg("a", "Adding Follower");
 			var provisional = generateProvisionalAccount();

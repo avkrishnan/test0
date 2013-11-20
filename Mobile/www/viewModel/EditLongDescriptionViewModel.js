@@ -78,8 +78,7 @@ function EditLongDescriptionViewModel() {
 			followerCount: followers
 		});
 		channel = channel[0];		
-		localStorage.setItem('currentChannelData', JSON.stringify(channel));	
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));		
     goToView('channelSettingsView');					
 	}
 

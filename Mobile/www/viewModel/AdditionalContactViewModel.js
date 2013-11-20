@@ -129,7 +129,7 @@ function AdditionalContactViewModel() {
 				goToView('verifyContactView');
 			},
 			error: function (responseData, status, details) {
-				that.errorMessage("<span>ERROR : </span>" + details.message);
+				that.errorMessage("<span>ERROR: </span>" + details.message);
 			}
 		};
 		ES.commethodService.addCommethod(newCommethodObject, callbacks );
