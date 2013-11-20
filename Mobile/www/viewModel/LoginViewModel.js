@@ -12,6 +12,7 @@ function LoginViewModel() {
   this.errorMessage = ko.observable();
   this.usernameClass = ko.observable();
   this.passwordClass = ko.observable();
+	//this.newMessagesCount = ko.observable();
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -30,6 +31,7 @@ function LoginViewModel() {
   };
 	
   this.activate = function() {
+		//that.newMessagesCount('');
 		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
 			that.errorMessage('');
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
@@ -47,7 +49,8 @@ function LoginViewModel() {
 					that.usernameClass('');
 					that.passwordClass('');
 				}
-			});			
+			});
+			//that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 		} 
 		else {
 			goToView('channelListView');
@@ -86,8 +89,8 @@ function LoginViewModel() {
 				localStorage.removeItem('password');
 			}
       var callbacks = {
-        success : function() {
-					//loginSuccess2	
+        success : function(responseData) {
+					//loginSuccess2
 				},
         error : function(data, status, details) {
 					//loginError
@@ -125,7 +128,7 @@ function LoginViewModel() {
 
   function loginSuccess(args) {
 		var callbacks = {
-			success: function() {;},
+			success: function() {alert(JSON.stringify(args))},
 			error: function(data, status, details) {alert(details.message);}
 		};
 		//alert(JSON.stringify(args));
@@ -139,6 +142,18 @@ function LoginViewModel() {
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
+			ES.systemService.getMsgNotifs({
+				success: function(responseData) {
+					//alert(JSON.stringify(responseData));
+					//enymNotifications = responseData;
+					localStorage.removeItem('enymNotifications');
+					localStorage.setItem('enymNotifications', JSON.stringify(responseData));
+				},
+				error: function(data, status, details) {
+					alert(details.message);
+				}
+			});
+			//ES.systemService.getMsgNotifs(callbacks);
       localStorage.setItem("accountName", that.accountName());
 			if(localStorage.getItem("action") == 'follow_channel') {
 				var channel = JSON.parse(localStorage.getItem('currentChannel'));
