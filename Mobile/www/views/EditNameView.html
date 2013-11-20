@@ -10,19 +10,20 @@
     </div>    
   </header>
   <div class="page-content nofooterbar">
-      <div class="portal-name welcome" data-bind="text: accountName"></div>
-      <section class="loginform" data-bind="css: firstnameClass">
-        <label class="msginfo">Edit Name:</label>
-        <div class="formtype" data-bind="css: firstnameClass">
-          <input type="text" data-bind="value: firstname" placeholder="Jill" />      
-        </div>
-        <div class="formtype" data-bind="css: lastnameClass">
-          <input type="text" data-bind="value: lastname" placeholder="Jones" />
-          <div class="msgerror" data-bind="html: errorFirstLastName"></div>
-        </div>
-        <div class="loginbtn"><a href="#" data-bind="click: editNameCommand">SAVE</a></div>
-      </section>  
-    </div>
+    <div class="portal-name welcome" data-bind="text: accountName"></div>
+    <section class="loginform" data-bind="css: firstnameClass">
+      <label class="msginfo">Edit Name:</label>
+      <div class="formtype" data-bind="css: firstnameClass">
+        <input type="text" data-bind="value: firstname" placeholder="Jill" />      
+      </div>
+      <div class="formtype" data-bind="css: lastnameClass">
+        <input type="text" data-bind="value: lastname" placeholder="Jones" />
+        <div class="msgerror" data-bind="html: errorFirstLastName"></div>
+      </div>
+      <div class="loginbtn"><a href="#" data-bind="click: editNameCommand">SAVE</a></div>
+    </section>  
+  </div>
+  <div class="toast-notification" data-bind="text: toastText"></div>
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>

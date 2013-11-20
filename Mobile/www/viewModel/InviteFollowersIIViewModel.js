@@ -14,7 +14,8 @@ function InviteFollowersIIViewModel() {
 	this.feedback = ko.observable();
 	this.feedbackId = ko.observable('feedback');
 	this.error = ko.observable(false);									
-	this.errorFeedback = ko.observable();	
+	this.errorFeedback = ko.observable();
+	this.toastText = ko.observable();		
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -37,6 +38,11 @@ function InviteFollowersIIViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {
 				that.feedbackClass('');

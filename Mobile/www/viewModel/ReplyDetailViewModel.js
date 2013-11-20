@@ -17,7 +17,8 @@ function ReplyDetailViewModel() {
 	this.reply = ko.observable();	
 	this.moreText = ko.observable();	
 	this.more = ko.observable(false);
-	this.moreButton = ko.observable(true);										
+	this.moreButton = ko.observable(true);
+	this.toastText = ko.observable();											
 
 	/* Methods */
 	this.applyBindings = function() {
@@ -35,6 +36,11 @@ function ReplyDetailViewModel() {
 		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));

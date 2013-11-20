@@ -15,7 +15,8 @@ function EditNameViewModel() {
   this.lastname = ko.observable();
   this.errorFirstLastName = ko.observable();
   this.firstnameClass = ko.observable();
-  this.lastnameClass = ko.observable();	
+  this.lastnameClass = ko.observable();
+	this.toastText = ko.observable();		
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -39,6 +40,11 @@ function EditNameViewModel() {
 			goToView('channelListView');			
 		} 
 		else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			$('input').keyup(function () {
 				that.firstnameClass('');
 				that.lastnameClass('');

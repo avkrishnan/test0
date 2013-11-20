@@ -111,11 +111,10 @@ function SendMessageViewModel() {
 		}
 	};    
 	
-	function successfulMessage(data){
-		that.messageText('');	
-		that.characterCount('0');				
-		that.toastText('Broadcast sent');
-		showToast();			
+	function successfulMessage(data){				
+		that.toastText('Broadcast sent');		
+		localStorage.setItem('toastData', that.toastText());
+		that.backCommand();							
 	};
 	
 	function errorAPI(data, status, details){

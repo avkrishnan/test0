@@ -14,6 +14,7 @@ function ChannelSingleMessagesViewModel() {
 	this.messageCreated = ko.observable();
 	this.messageClass = ko.observable();
 	this.messageText = ko.observable();
+	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -22,18 +23,28 @@ function ChannelSingleMessagesViewModel() {
 	};
     
 	this.activate = function() {
-		that.accountName(localStorage.getItem("accountName"));		
-		var channel = JSON.parse(localStorage.getItem("currentChannel"));
-		var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
-		//alert(localStorage.getItem("currentChannel"));
-		//alert(localStorage.getItem("currentChannelMessage"));
-		that.title(channel.name);
-		that.channelid(channel.id);
-		that.description(channel.description);
-		that.messageCreated(channelMessage.messageCreatedOriginal);
-		that.messageClass(channelMessage.messageClass);
-		that.messageText(channelMessage.messageText);
-		//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}		
+			that.accountName(localStorage.getItem("accountName"));		
+			var channel = JSON.parse(localStorage.getItem("currentChannel"));
+			var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
+			//alert(localStorage.getItem("currentChannel"));
+			//alert(localStorage.getItem("currentChannelMessage"));
+			that.title(channel.name);
+			that.channelid(channel.id);
+			that.description(channel.description);
+			that.messageCreated(channelMessage.messageCreatedOriginal);
+			that.messageClass(channelMessage.messageClass);
+			that.messageText(channelMessage.messageText);
+			//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
+		}
 	};
 
 	this.menuCommand = function () {

@@ -35,6 +35,11 @@ function EditLongDescriptionViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}			
 			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);

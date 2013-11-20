@@ -18,7 +18,8 @@ function ChannelMainViewModel() {
 	this.sensitivity = ko.observable();	
 	this.broadcast = ko.observable();
 	this.time = ko.observable();	
-	this.replies = ko.observable();			
+	this.replies = ko.observable();	
+	this.toastText = ko.observable();			
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -35,6 +36,11 @@ function ChannelMainViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');		
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}			
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 			if(localStorage.getItem('counter') == 1) {

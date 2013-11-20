@@ -26,6 +26,7 @@ function EscalationPlansViewModel() {
 	this.pView = '';
 	
 	this.defaultCommethods = '';
+	this.toastText = ko.observable();	
 	
 	/*this.gotoView = function(pageView) {
 		//alert(JSON.parse(JSON.stringify(pageView)).urgencyName);
@@ -66,7 +67,12 @@ function EscalationPlansViewModel() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else {		
+		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}					
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
 			

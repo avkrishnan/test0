@@ -12,7 +12,8 @@ function SingleMessageViewModel() {
 	this.channelName = ko.observable();		
 	this.time = ko.observable();	
 	this.singleMessage = ko.observable();	
-	this.replies = ko.observable();		
+	this.replies = ko.observable();
+	this.toastText = ko.observable();			
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -30,6 +31,11 @@ function SingleMessageViewModel() {
 		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.accountName(localStorage.getItem('accountName'));	
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										

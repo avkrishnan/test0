@@ -33,7 +33,7 @@ function RegistrationVerifyViewModel() {
 		var newUser = localStorage.getItem('newusername');		
 		if(newUser == '' || newUser == null) {
 			goToView('channelListView');
-		} else{
+		} else {
 			that.getCommethods();
 			that.accountName(localStorage.getItem('newusername'));
 			that.verificationCommethodType(localStorage.getItem('newuseremail'));		

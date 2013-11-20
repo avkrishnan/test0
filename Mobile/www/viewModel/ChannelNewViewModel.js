@@ -42,6 +42,11 @@ function ChannelNewViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}			
 			that.accountName(localStorage.getItem('accountName'));	
 			that.sectionOne(true);
 			that.sectionTwo(false);			

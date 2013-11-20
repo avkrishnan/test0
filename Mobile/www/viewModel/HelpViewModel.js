@@ -6,7 +6,8 @@ function HelpViewModel() {
 	this.viewid = 'V-45';
 	this.viewname = 'Help';
 	this.displayname = 'Help and FAQs';	
-	this.accountName = ko.observable();	
+	this.accountName = ko.observable();
+	this.toastText = ko.observable();		
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -20,6 +21,11 @@ function HelpViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.accountName(localStorage.getItem('accountName'));			
 		}
 	}

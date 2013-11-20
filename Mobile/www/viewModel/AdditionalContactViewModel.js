@@ -94,20 +94,31 @@ function AdditionalContactViewModel() {
 	};
     
 	this.activate = function() {
-		that.accountName(localStorage.getItem("accountName"));		
-		that.name(localStorage.getItem("UserFullName"));
-		that.comMethodName('');
-		that.errorMessage('');
-		localStorage.removeItem("currentVerificationCommethodID");
-		$(document).keyup(function(e) {
-			if (e.keyCode == 13) {
-				that.errorMessage('');
-				that.addCommethod();
-			}
-		});		
-		$.mobile.showPageLoadingMsg("a", "Loading Settings");
-		return true;     
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}		
+			that.accountName(localStorage.getItem("accountName"));		
+			that.name(localStorage.getItem("UserFullName"));
+			that.comMethodName('');
+			that.errorMessage('');
+			localStorage.removeItem("currentVerificationCommethodID");	
+			$.mobile.showPageLoadingMsg("a", "Loading Settings");
+			return true;
+		}
 	};
+	
+	$(document).keyup(function(e) {
+		if (e.keyCode == 13  && $.mobile.activePage.attr('id') == 'additionalContactView') {
+			that.errorMessage('');
+			that.addCommethod();
+		}
+	});			
 	
 	this.menuCommand = function () {
 		pushBackNav('Add New', 'additionalContactView', 'channelMenuView');		
@@ -127,7 +138,7 @@ function AdditionalContactViewModel() {
 					localStorage.setItem("currentVerificationCommethodID",responseData.id);
 				}
 				localStorage.setItem("verificationStatus",true);
-				if(responseData.address == 'EMAIL') {
+				if(responseData.type == 'EMAIL') {
 					that.toastText('Email added');		
 					localStorage.setItem('toastData', that.toastText());
 				}

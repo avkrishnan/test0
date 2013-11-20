@@ -27,6 +27,7 @@ function ChannelViewModel() {
 	this.longdescription = ko.observable('');
 	this.email = ko.observable('');
 	this.followers = ko.observable('');
+	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -88,6 +89,11 @@ function ChannelViewModel() {
 		else {
 			this.hasheader(true);
 		}
+		if(localStorage.getItem('toastData')) {
+			that.toastText(localStorage.getItem('toastData'));
+			showToast();
+			localStorage.removeItem('toastData');				
+		}		
 		that.channelid(channel.id);
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");

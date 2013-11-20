@@ -14,6 +14,7 @@ function ChannelViewUnfollowModel() {
 	
 	this.title = ko.observable('');
 	this.description = ko.observable('');
+	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -30,6 +31,11 @@ function ChannelViewUnfollowModel() {
 		if(token == '' || token == null) {
 			that.hasfooter(false);
 		}
+		if(localStorage.getItem('toastData')) {
+			that.toastText(localStorage.getItem('toastData'));
+			showToast();
+			localStorage.removeItem('toastData');				
+		}		
 		that.channelid(channel.id);
 		that.accountName(localStorage.getItem("accountName"));
 		that.backText('<em></em>'+backNavText[backNavText.length-1]);			

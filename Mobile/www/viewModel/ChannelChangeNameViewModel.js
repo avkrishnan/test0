@@ -18,7 +18,8 @@ function ChannelChangeNameViewModel() {
 	this.errorChannel = ko.observable();	
 	this.channelWebAddress = ko.observable();
 	this.backText = ko.observable();
-	this.backNav = ko.observable();							
+	this.backNav = ko.observable();
+	this.toastText = ko.observable();								
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -44,6 +45,11 @@ function ChannelChangeNameViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);	

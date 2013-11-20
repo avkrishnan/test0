@@ -12,6 +12,7 @@ function ChannelMessagesViewModel() {
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
 	this.channelMessages = ko.observableArray([]);
+	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -20,15 +21,25 @@ function ChannelMessagesViewModel() {
 	};
     
 	this.activate = function() {
-		that.accountName(localStorage.getItem("accountName"));	
-		var channel = JSON.parse(localStorage.getItem("currentChannel"));
-		//alert(localStorage.getItem("currentChannel"));
-		that.channelid(channel.id);
-		localStorage.removeItem("currentChannelMessage");
-		//alert(that.channelid());	
-		$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
-		that.channelMessages.removeAll();
-		return that.getChannelCommand(that.channelid()).then(that.gotChannel);
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');
+		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}		
+			that.accountName(localStorage.getItem("accountName"));	
+			var channel = JSON.parse(localStorage.getItem("currentChannel"));
+			//alert(localStorage.getItem("currentChannel"));
+			that.channelid(channel.id);
+			localStorage.removeItem("currentChannelMessage");
+			//alert(that.channelid());	
+			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
+			that.channelMessages.removeAll();
+			return that.getChannelCommand(that.channelid()).then(that.gotChannel);
+		}
 	};
 	
 	this.menuCommand = function () {

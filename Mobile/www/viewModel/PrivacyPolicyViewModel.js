@@ -11,7 +11,8 @@ function PrivacyPolicyViewModel() {
 	/* Privacy policy observable */
 	this.hasfooter = ko.observable(false);
 	this.hasheader = ko.observable(false);
-	this.noheader = ko.observable(false);		
+	this.noheader = ko.observable(false);
+	this.toastText = ko.observable();			
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -27,6 +28,11 @@ function PrivacyPolicyViewModel() {
 			that.hasheader(false);
 			that.noheader(true);			
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.accountName(localStorage.getItem('accountName'));
 			that.hasfooter(true);
 			that.hasheader(true);

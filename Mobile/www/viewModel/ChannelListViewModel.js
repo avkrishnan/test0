@@ -26,7 +26,8 @@ function ChannelListViewModel() {
   /* Home view observable */	
   this.firstChannelId = ko.observable(false);
   this.channelWebAddress = ko.observable();	
-  this.followWebAddress = ko.observable();												
+  this.followWebAddress = ko.observable();
+	this.toastText = ko.observable();													
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -41,6 +42,11 @@ function ChannelListViewModel() {
 			goToView('loginView');
 		} 
 		else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 			that.accountName(localStorage.getItem('accountName'));
 			$.mobile.showPageLoadingMsg('a', 'Getting user details');

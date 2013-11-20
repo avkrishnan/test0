@@ -12,6 +12,7 @@ function ChangePasswordViewModel() {
 	this.newConfirmPassword = ko.observable();
 	this.errorMessageNew = ko.observable();
 	this.errorMessageConfirm = ko.observable();
+	this.toastText = ko.observable();	
 	
 	/* Methods */
   this.applyBindings = function () {
@@ -34,6 +35,11 @@ function ChangePasswordViewModel() {
 			that.accountName(localStorage.getItem("accountName"));  
 		} 
 		else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			//goToView('loginView');
 			that.accountName(localStorage.getItem("accountName"));
 		}

@@ -11,7 +11,8 @@ function AddInviteFollowersViewModel() {
 	
   /* Add/Invite Followers observable */
 	this.channelName = ko.observable();	
-	this.channelWebAddress = ko.observable();			
+	this.channelWebAddress = ko.observable();
+	this.toastText = ko.observable();				
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -28,6 +29,11 @@ function AddInviteFollowersViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));

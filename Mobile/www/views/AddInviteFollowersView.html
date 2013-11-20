@@ -10,24 +10,25 @@
     </div>
   </header>  
   <div class="page-content followerpage">
-      <div class="followerchannel last">
-        <div class="channelcontent broadecast">
-          <span class="channelimg channel1 borderred"></span>
-          <div class="channelinfoname" data-bind="text: channelName"></div>
-          <a href="#" class="setting settinginner" data-bind="click: channelSettings"></a>
-        </div>
-      </div>			
-      <h1 class="invitefollowers">Add or invite new followers</h1>      
-      <h1 class="followersby">You can add followers by:</h1>     
-      <div class="low-messages allfollowercs visitaddress">
-        <div class="accept-decline">
-          <span>Asking them to visit your channel address:</span>
-          <em data-bind="text: channelWebAddress"></em>
-        </div>
+    <div class="followerchannel last">
+      <div class="channelcontent broadecast">
+        <span class="channelimg channel1 borderred"></span>
+        <div class="channelinfoname" data-bind="text: channelName"></div>
+        <a href="#" class="setting settinginner" data-bind="click: channelSettings"></a>
       </div>
-        <a href="#" class="low-messages invitation" data-bind="click: inviteFollowers">Sending them an invitation (email)</a>
-        <a href="#" class="low-messages addMore addinformation" data-bind="click: addFollowers">Adding their information manually</a>
+    </div>			
+    <h1 class="invitefollowers">Add or invite new followers</h1>      
+    <h1 class="followersby">You can add followers by:</h1>     
+    <div class="low-messages allfollowercs visitaddress">
+      <div class="accept-decline">
+        <span>Asking them to visit your channel address:</span>
+        <em data-bind="text: channelWebAddress"></em>
+      </div>
     </div>
+      <a href="#" class="low-messages invitation" data-bind="click: inviteFollowers">Sending them an invitation (email)</a>
+      <a href="#" class="low-messages addMore addinformation" data-bind="click: addFollowers">Adding their information manually</a>
+  </div>
+  <div class="toast-notification" data-bind="text: toastText"></div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>

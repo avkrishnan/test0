@@ -7,7 +7,8 @@ function FirstChannelViewModel() {
 	this.viewname = 'FollowFirstChannel';
 	this.displayname = 'Follow First Channel';
 	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.backText = ko.observable();
+	this.toastText = ko.observable();			
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -21,6 +22,11 @@ function FirstChannelViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}			
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
