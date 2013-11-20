@@ -44,6 +44,7 @@ function SignupStepSecondViewModel() {
 
   this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
+		var newUser = localStorage.getItem('newusername');		
 		if(token == '' || token == null) {
 			$('input').keyup(function () {
 				that.firstnameClass('');
@@ -52,9 +53,10 @@ function SignupStepSecondViewModel() {
 				that.errorIconFirstName('');
 				that.errorIconLastName('');
 			});
-		} 
-		else {
+		}	else if(newUser == '' || newUser == null) {
 			goToView('channelListView');
+		} else {
+			goToView('tutorialView');
 		}
   };
 	
@@ -150,7 +152,6 @@ function SignupStepSecondViewModel() {
     $.mobile.hidePageLoadingMsg();
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
-      var notifications = args.notifications;
       ES.evernymService.setAccessToken(args.accessToken);
       localStorage.setItem('accountName', args.account.accountname);
       that.first_name = args.account.firstname;
@@ -167,28 +168,7 @@ function SignupStepSecondViewModel() {
 				localStorage.removeItem('action');
 				goToView('channelMessagesView');				
 			}
-      if (follow) {
-        // alert('hello, we are going to now go to or follow the channel ' +
-        // follow);
-        localStorage.removeItem('follow');
-      }
-			else if (login_nav) {
-        var hash = login_nav.hash;
-        // var parameters = login_nav.parameters;
-        $.mobile.changePage(hash);
-      } 
-			else if (notifications.length) {
-        for ( var n in notifications) {
-          var code = notifications[n].code;
-          notificationsViewModel.addNotification(notifications[n].code);
-        }
-        $.mobile.changePage('#' + notificationsViewModel.template);
-      } 
-			else {
-        $.mobile.changePage('#' + channelListViewModel.template);
-      }
-    } 
-		else {
+    } else {
       loginError();
       return;
     }
