@@ -12,7 +12,6 @@ function LoginViewModel() {
   this.errorMessage = ko.observable();
   this.usernameClass = ko.observable();
   this.passwordClass = ko.observable();
-	this.newMessagesCount = ko.observable();
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -48,8 +47,7 @@ function LoginViewModel() {
 					that.usernameClass('');
 					that.passwordClass('');
 				}
-			});	
-			that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
+			});			
 		} 
 		else {
 			goToView('channelListView');
@@ -88,8 +86,8 @@ function LoginViewModel() {
 				localStorage.removeItem('password');
 			}
       var callbacks = {
-        success : function(responseData) {
-					//loginSuccess2
+        success : function() {
+					//loginSuccess2	
 				},
         error : function(data, status, details) {
 					//loginError
@@ -127,7 +125,7 @@ function LoginViewModel() {
 
   function loginSuccess(args) {
 		var callbacks = {
-			success: function() {alert(JSON.stringify(args))},
+			success: function() {;},
 			error: function(data, status, details) {alert(details.message);}
 		};
 		//alert(JSON.stringify(args));
@@ -141,17 +139,6 @@ function LoginViewModel() {
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
-			ES.systemService.getMsgNotifs({
-				success: function(responseData) {
-					//alert(JSON.stringify(responseData));
-					//enymNotifications = responseData;
-					localStorage.setItem('enymNotifications', JSON.stringify(responseData));
-				},
-				error: function(data, status, details) {
-					alert(details.message);
-				}
-			});
-			//ES.systemService.getMsgNotifs(callbacks);
       localStorage.setItem("accountName", that.accountName());
 			if(localStorage.getItem("action") == 'follow_channel') {
 				var channel = JSON.parse(localStorage.getItem('currentChannel'));

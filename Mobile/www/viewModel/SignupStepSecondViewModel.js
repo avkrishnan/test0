@@ -10,21 +10,9 @@ function SignupStepSecondViewModel() {
 	/* Signup observable */
   this.firstname = ko.observable();
   this.lastname = ko.observable();
-	
-  /* Information icon activate observable */
-  this.firstNamehighlight = ko.observable();
-  this.lastNamehighlight = ko.observable();
-
-  /* Information toggle observable */
-  this.firstNameInfo = ko.observable(false);
-  this.lastNameInfo = ko.observable(false);
   this.errorFirstLastName = ko.observable();
   this.firstnameClass = ko.observable();
   this.lastnameClass = ko.observable();
-
-	/* Error Icon observable */
-  this.errorIconFirstName = ko.observable();
-  this.errorIconLastName = ko.observable();
 
 	/* Methods */
   this.applyBindings = function () {
@@ -38,8 +26,6 @@ function SignupStepSecondViewModel() {
     that.firstname('');
     that.lastname('');
     that.errorFirstLastName('');
-    that.errorIconFirstName('');
-    that.errorIconLastName('');
   };
 
   this.activate = function () {
@@ -50,8 +36,6 @@ function SignupStepSecondViewModel() {
 				that.firstnameClass('');
 				that.lastnameClass('');
 				that.errorFirstLastName('');
-				that.errorIconFirstName('');
-				that.errorIconLastName('');
 			});
 		}	else if(newUser == '' || newUser == null) {
 			goToView('channelListView');
@@ -65,29 +49,6 @@ function SignupStepSecondViewModel() {
 			that.signUpCommand();
 		}
 	});
-	
-  that.firstNameActiveInfo = function () {
-    showHideInfo('lastNameInfo', 'lastNamehighlight', 'firstNameInfo', 'firstNamehighlight');
-  }
-	
-  that.lastNameActiveInfo = function () {
-    showHideInfo('firstNameInfo', 'firstNamehighlight', 'lastNameInfo', 'lastNamehighlight');
-  }
-
-  /* This function will toggle info on 'i' tap */
-  function showHideInfo(hideElement, hideClass, showElement, showClass) {
-    if (that[showElement]() == false) {
-      that[hideElement](false);
-      that[showElement](true);
-      that[hideClass]('');
-      that[showClass]('enable');
-    } else {
-      that.firstNameInfo(false);
-      that.lastNameInfo(false);
-      that.firstNamehighlight('');
-      that.lastNamehighlight('');
-    }
-  }
 
   function generateAccount() {
     return {
@@ -103,11 +64,9 @@ function SignupStepSecondViewModel() {
   this.signUpCommand = function () {
     if (that.firstname() == '') {
       that.firstnameClass('validationerror');
-      that.errorIconFirstName('errorimg');
       that.errorFirstLastName('<span>SORRY:</span> Please enter first name');
     } else if (that.lastname() == '') {
       that.lastnameClass('validationerror');
-      that.errorIconLastName('errorimg');
       that.errorFirstLastName('<span>SORRY:</span> Please enter last name');
     } else {
       $.mobile.showPageLoadingMsg('a', 'Enrolling');
@@ -160,14 +119,6 @@ function SignupStepSecondViewModel() {
       $.mobile.activePage.find('#thefooter #footer-gear').html(args.account.accountname);
       var login_nav = JSON.parse(localStorage.getItem('login_nav'));
       localStorage.removeItem('login_nav');
-      var follow = localStorage.getItem('follow');
-			if(localStorage.getItem("action") == "follow_channel") {
-				//alert(localStorage.getItem('currentChannel'));
-				var channel = JSON.parse(localStorage.getItem('currentChannel'));
-				ES.channelService.followChannel(channel.id, callbacks);
-				localStorage.removeItem('action');
-				goToView('channelMessagesView');				
-			}
     } else {
       loginError();
       return;

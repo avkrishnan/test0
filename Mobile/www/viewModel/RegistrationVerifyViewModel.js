@@ -82,7 +82,8 @@ function RegistrationVerifyViewModel() {
 	this.requestVerificationCode = function() {
 		var callbacks = {
 			success: function(responseData) {
-				showMessage('Verification code sent!');
+				that.toastText('Verification code sent');
+				showToast();						
 			},
 			error: function (responseData, status, details) {
 				showError(details.message);

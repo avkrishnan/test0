@@ -9,13 +9,11 @@
     </div>
     <section class="loginform">
       <label class="msginfo">Sign up - Step 2 of 2:</label>
-      <div class="formtype registration" data-bind="css: firstnameClass">
+      <div class="formtype" data-bind="css: firstnameClass">
         <input type="text" data-bind="value: firstname" placeholder="first name" />
-        <em data-bind="css: { enable: firstNamehighlight, errorimg:errorIconFirstName}, click: firstNameActiveInfo"></em>
       </div>
-      <div class="formtype registration" data-bind="css: lastnameClass">
+      <div class="formtype" data-bind="css: lastnameClass">
         <input type="text" data-bind="value: lastname" placeholder="last name" />
-        <em data-bind="css: { enable: lastNamehighlight, errorimg:errorIconLastName}, click: lastNameActiveInfo"></em>
         <div class="msgerror" data-bind="html: errorFirstLastName"></div>
       </div>
       <div class="login">
@@ -24,14 +22,6 @@
         </p>
       </div>
     </section>
-    <hr noshade>
-    <div class="signedup userunique" data-bind="visible: firstNameInfo">
-      <!-- Todo: required text form client -->
-      Information about first name
-    </div>
-    <div class="signedup userunique" data-bind="visible: lastNameInfo">
-      <!-- Todo: required text form client -->
-      Information about last name
-    </div>
+    <div class="baseline"></div>
   </div>
 </div>
