@@ -932,13 +932,14 @@ span.down-arrow {
 	background:#2D2D2D;
 	border-radius:4px;
 	margin:0 20px 0 10px;
-	overflow:hidden;
+	/*overflow:hidden;*/
+	display:block;
 	color:#fff;
 	font-size:15px;
 	padding:10px 10px 10px 10px;
 	line-height:28px;
 }
-.Channel a {
+.Channel a, .Channel span {
 	background:#8DC63F;
 	border-radius:4px;
 	color:#FFFFFF;
@@ -2959,10 +2960,9 @@ ul.igiresponses li span {
 }
 /* CHANNELS PAGES CSS	END	 */
 /* ui-popup-container */
-/*.ui-popup-container {
+.ui-popup-container {
 	width:100%;
-	border:1px solid red;
-}*/
+}
 /*-Terms Service-*/
 .terms-service {
 	font-size:14px;

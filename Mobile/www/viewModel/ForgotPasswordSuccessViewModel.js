@@ -7,9 +7,6 @@ function ForgotPasswordSuccessViewModel() {
   this.viewname = 'ForgotPasswordSuccess';
   this.displayname = 'Forgot Password Success';
 	
-	/* Forgot password success observable */
-  this.resetAccount = ko.observable();	
-	
 	/* Methods */
   this.applyBindings = function () {
     $('#' + that.template).on('pagebeforeshow', null, function (e, data) {
@@ -19,18 +16,11 @@ function ForgotPasswordSuccessViewModel() {
 	
   this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {		
-			that.resetAccount(localStorage.getItem('resetAccount'));		
+		if(token == '' || token == null) {				
 		} else {
 			goToView('channelListView');
 		}		
   };
-	
-	$(document).keyup(function (e) {
-		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotPasswordSuccessView') {
-			that.okayCommand();
-		}
-	});
 
   this.okayCommand = function () {		
 		goToView('loginView');
