@@ -76,7 +76,7 @@ function SignupStepFirstViewModel() {
 				that.password(localStorage.getItem('newuserpassword'));
 				that.emailClass('validationerror');										
 				that.errorIconEmail('errorimg');
-				that.errorEmail('<span>SORRY : </span> ' + localStorage.getItem('signUpError'));
+				that.errorEmail('<span>SORRY: </span> ' + localStorage.getItem('signUpError'));
 				that.tickIconAccountName('righttick');															
 				that.tickIconPassword('righttick');					
 			}
@@ -152,15 +152,15 @@ function SignupStepFirstViewModel() {
     if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
       that.emailClass('validationerror');
       that.errorIconEmail('errorimg');
-      that.errorEmail('<span>SORRY :</span> Please enter valid email');
+      that.errorEmail('<span>SORRY:</span> Please enter valid email');
     } else if (that.accountName() == '') {
       that.accountNameClass('validationerror');
       that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY :</span> Please enter Evernym name');
+      that.errorAccountName('<span>SORRY:</span> Please enter Evernym name');
     } else if (that.password() == '') {
       that.passwordClass('validationerror');
       that.errorIconPassword('errorimg');
-      that.errorPassword('<span>SORRY :</span> Please enter password');
+      that.errorPassword('<span>SORRY:</span> Please enter password');
     } else {
       localStorage.setItem('newuseremail', that.emailaddress());
       localStorage.setItem('newusername', that.accountName());
@@ -174,7 +174,7 @@ function SignupStepFirstViewModel() {
 		if(data){
 			that.accountNameClass('validationerror');
       that.errorIconAccountName('errorimg');
-      that.errorAccountName('<span>SORRY :</span> This Evernym has already been taken');
+      that.errorAccountName('<span>SORRY:</span> This Evernym has already been taken');
 		} else {
 			goToView('signupStepSecondView');
 		}

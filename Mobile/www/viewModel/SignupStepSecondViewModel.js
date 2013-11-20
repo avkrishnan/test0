@@ -102,11 +102,11 @@ function SignupStepSecondViewModel() {
     if (that.firstname() == '') {
       that.firstnameClass('validationerror');
       that.errorIconFirstName('errorimg');
-      that.errorFirstLastName('<span>SORRY :</span> Please enter first name');
+      that.errorFirstLastName('<span>SORRY:</span> Please enter first name');
     } else if (that.lastname() == '') {
       that.lastnameClass('validationerror');
       that.errorIconLastName('errorimg');
-      that.errorFirstLastName('<span>SORRY :</span> Please enter last name');
+      that.errorFirstLastName('<span>SORRY:</span> Please enter last name');
     } else {
       $.mobile.showPageLoadingMsg('a', 'Enrolling');
       var callbacks = {

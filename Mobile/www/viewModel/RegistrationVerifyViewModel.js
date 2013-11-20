@@ -64,10 +64,10 @@ function RegistrationVerifyViewModel() {
 	
 	this.verifyRequestCommethod = function() {
 		if(that.verificationCode() == '') {
-			that.errorMessage("<span>ERROR :</span> Please input verification code!");
+			that.errorMessage("<span>ERROR:</span> Please input verification code!");
 		}
 		else if(that.verificationCode().length != 6) {
-			that.errorMessage("<span>ERROR :</span> Verification code should be 6 digits!");
+			that.errorMessage("<span>ERROR:</span> Verification code should be 6 digits!");
 		}
 		else {
 			var verifyCommethodObject = {
@@ -100,7 +100,7 @@ function RegistrationVerifyViewModel() {
 				goToView('tutorialView');
 			},
 			error: function (responseData, status, details) {
-				that.errorMessage("<span>ERROR :</span> " + details.message);
+				that.errorMessage("<span>ERROR:</span> " + details.message);
 			}
 		};
 		$.mobile.showPageLoadingMsg('a', 'Sending Verification Request');		
