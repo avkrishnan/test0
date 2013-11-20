@@ -739,7 +739,7 @@ hr, .baseline {
 	margin:10px 20px 5px 10px;
 }
 .loginform span {
-	margin:0 0 8px 10px;
+	margin:0 0 8px 8px;
 	font-size:16px;
 	color:#fff;
 	display:inline-block;
@@ -977,6 +977,7 @@ span.down-arrow {
 }
 .errorstate .ui-input-search, .errorstate div.ui-input-text {
 	background:#FEFBD6;
+	border-radius:4px;
 }
 div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text, .ui-input-search input.ui-input-text {
 	padding:0 0 0 5px;
@@ -1079,6 +1080,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .action-time .ui-select .ui-btn {
 	margin:0;
 	border-radius:4px;
+}
+.action-time .ui-select .ui-btn select option {
+	padding:0 0 0 5px;
 }
 .action-time .ui-select .ui-btn-hover-c {
 	background:#fff;
@@ -1249,7 +1253,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-bottom:none;
 }
 .page-content.channelsettings {
-	padding-top:65px;
+	padding-top:50px;
 }
 .editchannel {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -283px;
@@ -1404,8 +1408,8 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	line-height:26px;
 }
 .dropdown span.mybroadcast {
-	border:1px solid red;
 	float:left;
+	margin-top:2px;
 }
 .chaneldropdown {
 	float:right;
@@ -1836,7 +1840,7 @@ h1.messagesdate {
 	margin:10px 20px 5px 18px;
 }
 .broadcastmsgred {
-	border-bottom: 1px solid #7f7c7c;
+	border-bottom:1px solid #7f7c7c;
 	box-shadow:0 -8px 9px #CCCCCC inset;
 	margin:0;
 }
@@ -1962,6 +1966,7 @@ h1.requests {
 	border-radius:4px;
 	resize:none;
 	font-size:13px;
+	overflow:auto;
 }
 .msginfo em, .followerdetails em, .response span, .createchannel em, .invited-followChannel em {
 	color:#8DC63F;
@@ -2341,12 +2346,17 @@ ul.igiresponses li span {
 	margin:0 0 10px -10px;
 	padding:15px 0 15px 10px;
 }
-.contactchannel .login a.ui-link {
+/*.contactchannel .login a.ui-link {
+	
+}*/
+.contact-channel {
+	float:left;
+	line-height:48px;
 	margin-left:8px;
 }
-.login .loginbtn a.ui-link {
+/*.login .loginbtn a.ui-link {
 	margin-left:0;
-}
+}*/
 .dropdownchanellist li a span.broadcastsdate {
 	float:left;
 	font-size:12px;
@@ -2480,14 +2490,17 @@ ul.igiresponses li span {
 }
 .composecheckbok {
 	padding:0;
-	border:1px solid red;
+	overflow:hidden;
 }
-.composepage .loginform span {
+.loginform .composecheckbok span {
+	margin:10px 0 20px 4px;
+}
+/*.composepage .loginform span {
 	margin:10px 0 20px 3px
 }
 .composepage .ui-checkbox label span.ui-btn-inner span.ui-btn-text {
 	font-size:16px;
-}
+}*/
 .broadcast-textarea {
 	background:#e6e7e8;
 	border-radius:4px 0px 0px 4px;
@@ -2886,8 +2899,8 @@ ul.igiresponses li span {
 }
 .longdescription textarea.ui-input-text {
 	height:156px;
+	overflow:auto;
 }
-
 .longdescription textarea::-moz-placeholder {
 	color:#000;
 }
@@ -2899,6 +2912,7 @@ ul.igiresponses li span {
 	padding:2px 5px;
 	background:#e6e7e8;
 	color:#666;
+	cursor:pointer;
 }
 .yesnoclick span, .yes-noclick span, .yesno-click span {
 	border-radius:50%;
@@ -2924,6 +2938,7 @@ ul.igiresponses li span {
 	font-size:14px;
 	font-style:italic;
 	min-height:120px;
+	overflow:auto;
 }
 .formtype.channellanding.textareatype {
 	padding:0;
@@ -2939,6 +2954,9 @@ ul.igiresponses li span {
 	border-bottom:1px solid #e4e2b9;
 	z-index:9999;
 }
+.toast-tutorial {
+	bottom:12px;
+}
 /* CHANNELS PAGES CSS	END	 */
 /* ui-popup-container */
 /*.ui-popup-container {
@@ -2949,14 +2967,15 @@ ul.igiresponses li span {
 .terms-service {
 	font-size:14px;
 	color:#fff;
-	padding:0 10px 0 5px;
+	padding:0 5px;
+	margin-right:10px;
 	border-top:1px solid #828181;
 }
 .terms-service h2 {
 	font-size:18px;
 	font-weight:normal;
 	text-decoration:underline;
-	margin:20px 0 10px 0px;
+	margin:20px 0 10px 0;
 }
 .terms-service p {
 	margin-bottom:15px;
@@ -2990,7 +3009,7 @@ ul.igiresponses li span {
 	display:block;
 }
 .ourservices {
-	margin:10px 0 0 0;
+	margin:10px 0 0 0px;
 }
 /*
 	*@media query css
@@ -3001,6 +3020,9 @@ ul.igiresponses li span {
 	}
 }
 @media only screen and (min-width:360px) { 
+	.new-user img {
+		width:103%;
+	}
 	.details {
 		width:79.5%;
 	}
@@ -3032,7 +3054,7 @@ ul.igiresponses li span {
 		margin:15px 20px 20px 10px;
 	}
 	.loginform span {
-		margin:10px 0 20px 10px;
+		margin:10px 0 20px 8px;
 	}
 	.sendbtnican {
 		padding:10px 20px 10px 50px;
@@ -3430,6 +3452,9 @@ ul.igiresponses li span {
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right:84px;
+	}
+	.slidemenu {
+		min-height:622px;
 	}
 }
 /* @media query css End*/

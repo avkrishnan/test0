@@ -11,6 +11,7 @@ function EditShortDescriptionViewModel() {
 	
   /* Edit Channel Display observable */	
 	this.channelId = ko.observable();
+	this.channelName = ko.observable();	
 	this.shortDescription = ko.observable();	
 	this.errorMessage = ko.observable(false);	
 	this.errorChannel = ko.observable();
@@ -46,6 +47,7 @@ function EditShortDescriptionViewModel() {
 			that.accountName(localStorage.getItem('accountName'));			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
+			that.channelName(channelObject.channelName);			
 			that.shortDescription(channelObject.channelDescription);						
 			$('textarea').keyup(function () {
 				that.errorMessage(false);				

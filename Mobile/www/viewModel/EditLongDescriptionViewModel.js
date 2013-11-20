@@ -11,6 +11,7 @@ function EditLongDescriptionViewModel() {
 	
   /* Edit Channel Display observable */
 	this.channelId = ko.observable();
+	this.channelName = ko.observable();	
 	this.longDescription = ko.observable();	
 	this.errorMessage = ko.observable(false);	
 	this.errorChannel = ko.observable();
@@ -43,6 +44,7 @@ function EditLongDescriptionViewModel() {
 			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
+			that.channelName(channelObject.channelName);			
 			that.longDescription(channelObject.longDescription);						
 			$('textarea').keyup(function () {
 				that.errorMessage(false);				

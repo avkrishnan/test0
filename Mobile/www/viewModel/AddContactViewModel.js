@@ -120,7 +120,7 @@ function AddContactViewModel() {
 			that.toastText('Phone number deleted');		
 			localStorage.setItem('toastData', that.toastText());
 			localStorage.removeItem("CommethodType");			
-		}		
+		}				
 		goToView('addContactView');
 	}
 
@@ -172,7 +172,7 @@ function AddContactViewModel() {
 			$.mobile.showPageLoadingMsg("a", "Loading Settings");
 			return that.getCommethods().then(that.showCommethods);
 		}
-	};
+	};	
 	
 	this.menuCommand = function () {
 		pushBackNav('Cont. Info', 'addContactView', 'channelMenuView');		
