@@ -26,7 +26,8 @@ function ChannelSingleMessagesViewModel() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else {
+		} 
+		else {
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
