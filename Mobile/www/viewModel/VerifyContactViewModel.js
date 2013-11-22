@@ -49,10 +49,11 @@ function VerifyContactViewModel() {
 		//alert(that.verificationCommethodID());
 		var callbacks = {
 			success: function(responseData) {
-				alert('Verification code sent!');
+				that.toastText('Verification code sent');
+				showToast();
 			},
 			error: function (responseData, status, details) {
-				alert('error');
+				that.errorMessage("<span>ERROR: </span> " + details.message);
 			}
 		};		
 		return ES.commethodService.requestVerification(that.verificationCommethodID(), callbacks);
