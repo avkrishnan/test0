@@ -16,34 +16,34 @@
     
     <h1 class="getmsg" data-bind="visible: createFirstChannel">Be sure your group gets your messages.</h1>
     <h1 class="getmsg" data-bind="visible: createFirstChannel">It's fast. Powerful. FREE.</h1>
-    <div class="Channel" data-bind="visible: createFirstChannel">Create Your First Channel<a href="#" data-bind="click: goCreateFirstChannel">Go</a></div>
+    <a href="#" class="Channel" data-bind="visible: createFirstChannel, click: goCreateFirstChannel">Create Your First Channel<span>Go</span></a>
     
     <h1 class="getmsg" data-bind="visible: addInviteFollowers">Your channel: <span data-bind="text: channelWebAddress"></span></h1>
     <h1 class="getmsg" data-bind="visible: addInviteFollowers">doesn't have any followers yet.</h1>
-    <div class="Channel" data-bind="visible: addInviteFollowers">Add or Invite Followers<a href="#" data-bind="click: goAddInviteFollowers">Go</a></div>    
+    <a href="#" class="Channel" data-bind="visible: addInviteFollowers, click: goAddInviteFollowers">Add or Invite Followers<span>Go</span></a>   
     
     <h1 class="getmsg" data-bind="visible: composeBroadcast">You haven't sent any messages yet to your channel: <span data-bind="text: channelWebAddress"></span></h1>
-    <div class="Channel" data-bind="visible: composeBroadcast">Compose a Broadcast<a href="#" data-bind="click: goComposeBroadcast">Go</a></div>    
+    <a href="#" class="Channel" data-bind="visible: composeBroadcast, click: goComposeBroadcast">Compose a Broadcast<span>Go</span></a>    
     
     <h1 class="getmsg" data-bind="visible: channelDetails">You are the owner of one channel: <span data-bind="text: channelWebAddress"></span></h1>
-    <div class="Channel" data-bind="visible: channelDetails">See Channel Details<a href="#" data-bind="click: goChannelDetails">Go</a></div>    
+    <a href="#" class="Channel" data-bind="visible: channelDetails, click: goChannelDetails">See Channel Details<span>Go</span></a>   
     
-    <div class="Channel" data-bind="visible: channelsIOwn">Go To Channels I Own<a href="#" data-bind="click: goChannelsIOwn">Go</a></div>
+    <a href="#" class="Channel" data-bind="visible: channelsIOwn, click: goChannelsIOwn">Go To Channels I Own<span>Go</span></a>
     <!--Top row end-->    
     
     <!--Bottom row start-->
     <div class="baseline"></div>
     
     <h1 class="getmsg" data-bind="visible: findChannels">It's also FREE to follow other channels.</h1>
-    <div class="Channel" data-bind="visible: findChannels">Find Channels to Follow<a href="#" data-bind="click: goFindChannels">Go</a></div>
+    <a href="#" class="Channel" data-bind="visible: findChannels, click: goFindChannels">Find Channels to Follow<span>Go</span></a>
     
     <h1 class="getmsg" data-bind="visible: createChannel">Do you have another group that Channels can help you get your messages to?</h1>
-    <div class="Channel" data-bind="visible: createChannel">Create Another Channel<a href="#" data-bind="click: goCreateChannel">Go</a></div>
+    <a href="#" class="Channel" data-bind="visible: createChannel, click: goCreateChannel">Create Another Channel<span>Go</span></a>
 
     <h1 class="getmsg" data-bind="visible: channelMessages">You are following one channel: <span data-bind="text: followWebAddress"></span></h1>
-    <div class="Channel" data-bind="visible: channelMessages">See Channel Messages<a href="#" data-bind="click: goChannelMessages">Go</a></div>
+    <a href="#" class="Channel" data-bind="visible: channelMessages, click: goChannelMessages">See Channel Messages<span>Go</span></a>
 
-    <div class="Channel" data-bind="visible: channelsIFollow">Go To Channels I Follow<a href="#" data-bind="click: goChannelsIFollow">Go</a></div>
+    <a href="#" class="Channel" data-bind="visible: channelsIFollow, click: goChannelsIFollow">Go To Channels I Follow<span>Go</span></a>
     <!--Bottom row end-->            
     
   </div>
