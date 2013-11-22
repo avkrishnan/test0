@@ -12,6 +12,7 @@ function LoginViewModel() {
   this.errorMessage = ko.observable();
   this.usernameClass = ko.observable();
   this.passwordClass = ko.observable();
+	this.toastText = ko.observable();	
 	//this.newMessagesCount = ko.observable();
 	
 	/* Methods */
@@ -128,8 +129,11 @@ function LoginViewModel() {
 
   function loginSuccess(args) {
 		var callbacks = {
-			success: function() {alert(JSON.stringify(args))},
-			error: function(data, status, details) {alert(details.message);}
+			success: function() {},
+			error: function(data, status, details) {
+				that.toastText(details.message);		
+				localStorage.setItem('toastData', that.toastText());
+			}
 		};
 		//alert(JSON.stringify(args));
     $.mobile.hidePageLoadingMsg();

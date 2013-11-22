@@ -143,10 +143,10 @@ function ChannelListViewModel() {
 			that.channelMessages(false);
 			that.channelsIFollow(false);			
 		} else {
-			that.findChannels(true);
+			that.findChannels(false);
 			that.createChannel(false);
 			that.channelMessages(false);
-			that.channelsIFollow(false);			
+			that.channelsIFollow(true);			
 		}
 	}
 	
@@ -185,8 +185,9 @@ function ChannelListViewModel() {
 	}	
 	
 	this.goChannelMessages = function() {
-		showMessage('Feature coming soon!');		
-		//pushBackNav('Home', 'channelListView', 'channelMessagesView');		
+		//showMessage('Feature coming soon!');		
+		//pushBackNav('Home', 'channelListView', 'channelMessagesView');
+		pushBackNav('Home', 'channelListView', 'channelView?id='+that.followWebAddress());		
 	}	
 	
 	this.goChannelsIFollow = function() {
