@@ -139,6 +139,7 @@ function ChannelViewModel() {
 		that.channelid(data.id);
 		if(data.relationship == 'F' ) {
 			that.channelAction(false);
+			pushBackNav('Channels', 'channelsFollowingListView', 'channelMessagesView');			
 		}
 		else if(data.relationship == 'O') {
 			if(data.followers == 1) {
