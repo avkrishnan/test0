@@ -197,8 +197,7 @@ function ChannelViewModel() {
 		$.mobile.hidePageLoadingMsg();
 		if (loginPageIfBadLogin(details.code)) {
 			showError("Please log in or register to view this channel.");
-		}
-		else {
+		} else {
 			that.toastText(details.message);		
 			localStorage.setItem('toastData', that.toastText());
 			var token = ES.evernymService.getAccessToken();			
