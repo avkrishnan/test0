@@ -83,11 +83,12 @@ function ChannelViewModel() {
 	this.activate = function (channel) {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
+			that.hasheader(false);			
 			that.hasfooter(false);
-			this.hasheader(false);
 		}
 		else {
-			this.hasheader(true);
+			that.hasheader(true);
+			that.hasfooter(true);			
 		}
 		if(localStorage.getItem('toastData')) {
 			that.toastText(localStorage.getItem('toastData'));
