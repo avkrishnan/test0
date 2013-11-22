@@ -49,6 +49,7 @@ function ChannelListViewModel() {
 			}			
 			that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 			that.accountName(localStorage.getItem('accountName'));
+			localStorage.setItem('counter', 0);			
 			$.mobile.showPageLoadingMsg('a', 'Getting user details');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI }).then(ES.channelService.listFollowingChannels({ success: getChannelsIFollow, error: errorAPI }));			
 		}
@@ -126,7 +127,20 @@ function ChannelListViewModel() {
 	
 	function getChannelsIFollow(responseData){	
 		$.mobile.hidePageLoadingMsg();
-		if(responseData.channel.length == 1) {		
+		if(responseData.channel.length == 1) {
+			//{"id":"1900bcaa-138b-4f7b-872a-5f270dfb058f","name":"karateclass","normName":"karateclass","description":"All about the karate...","followers":4,"relationship":"F"}
+			var channel = [];			
+			channel.push({
+				id: responseData.channel[0].id, 
+				name: responseData.channel[0].name,
+				normName: responseData.channel[0].normName, 
+				description: responseData.channel[0].description,
+				longDescription: responseData.channel[0].longDescription,			
+				followers: responseData.channel[0].followers,
+				relationship: responseData.channel[0].relationship
+			});
+			channel = channel[0];		
+			localStorage.setItem('currentChannel', JSON.stringify(channel));					
 			that.findChannels(false);
 			that.createChannel(false);
 			that.channelMessages(true);
@@ -186,8 +200,7 @@ function ChannelListViewModel() {
 	
 	this.goChannelMessages = function() {
 		//showMessage('Feature coming soon!');		
-		//pushBackNav('Home', 'channelListView', 'channelMessagesView');
-		pushBackNav('Home', 'channelListView', 'channelView?id='+that.followWebAddress());		
+		pushBackNav('Home', 'channelListView', 'channelMessagesView');		
 	}	
 	
 	this.goChannelsIFollow = function() {

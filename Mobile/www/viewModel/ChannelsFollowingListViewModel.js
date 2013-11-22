@@ -34,7 +34,7 @@ function ChannelsFollowingListViewModel() {
 		$.each(JSON.parse(dd), function(indexNotification, valueNotification) {
 			if(valueNotification.read == 'N') {
 				valueNotification.created = time2TimeAgo(valueNotification.created+999);
-				valueNotification.urgencyId = "icon-" + valueNotification.urgencyId.toLowerCase();
+				valueNotification.urgencyId = "icon-" + valueNotification.escLevelId.toLowerCase();
 				that.newMessagesDisplay.push(valueNotification);
 			}
 		});

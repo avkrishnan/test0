@@ -83,7 +83,7 @@ function ChannelMessagesViewModel() {
 				$.each(data.message, function(indexMessage, valueMessage) {
 					//alert(JSON.stringify(valueMessage));
 					var tempCreated = time2TimeAgo(valueMessage.created/1000);
-					var tempClass = valueMessage.urgencyId.toLowerCase().trim();
+					var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 					if(tempClass == 'n') {
 						tempClass = 'announcementicon';
 					}
