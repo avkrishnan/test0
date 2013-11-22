@@ -98,7 +98,11 @@ function ChannelViewModel() {
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
 		that.accountName(_accountName);	
-		that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+		if(typeof backNavText[0] == 'undefined') {
+			that.backText('<em></em>Home');
+		} else {		
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+		}		
 		that.messages([]);
 		that.channelAction(true);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
@@ -107,7 +111,11 @@ function ChannelViewModel() {
 	};
 	
 	this.backCommand = function () {
-		popBackNav();
+		if(typeof backNavText[0] == 'undefined') {
+			goToView('channelListView');
+		} else {		
+			popBackNav();		
+		}
   };
 	
 	this.menuCommand = function () {
@@ -122,7 +130,6 @@ function ChannelViewModel() {
 		that.channelMessage(data);
 		that.title(data.name);
 		that.followers(data.followers);
-		
 		that.description(data.description);
 		that.longdescription(data.longDescription);
 		that.url(data.normName + '.evernym.com');
@@ -131,6 +138,24 @@ function ChannelViewModel() {
 		that.channelid(data.id);
 		if(data.relationship == 'F' ) {
 			that.channelAction(false);
+		}
+		else if(data.relationship == 'O') {
+			if(data.followers == 1) {
+				var followers = data.followers +' follower';
+			} else {
+				var followers = data.followers +' followers';
+			}		
+			var channel = [];			
+			channel.push({
+				channelId: data.id, 
+				channelName: data.name, 
+				channelDescription: data.description,
+				longDescription: data.longDescription,			
+				followerCount: followers
+			});
+			channel = channel[0];		
+			localStorage.setItem('currentChannelData', JSON.stringify(channel));
+			pushBackNav('Channels', 'channelsIOwnView', 'channelMainView');										
 		}
 		else {
 			that.channelAction(true);
@@ -174,7 +199,14 @@ function ChannelViewModel() {
 			showError("Please log in or register to view this channel.");
 		}
 		else {
-			showError("Error Getting Channel: " + ((status==500)?"Internal Server Error":details.message));
+			that.toastText(details.message);		
+			localStorage.setItem('toastData', that.toastText());
+			var token = ES.evernymService.getAccessToken();			
+			if(token == '' || token == null) {
+				goToView('loginView');
+			} else {
+				goToView('channelListView');
+			}
 		}
 	}
     

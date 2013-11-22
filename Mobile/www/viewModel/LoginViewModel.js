@@ -34,7 +34,12 @@ function LoginViewModel() {
   this.activate = function() {
 		//that.newMessagesCount('');
 		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
-			that.errorMessage('');
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}			
+			that.errorMessage('');		
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
 				that.accountName('');
 				that.password('');
