@@ -14,6 +14,12 @@
 
   asyncTest('LOGIN AGAIN', hlpr.login(SCEN1));
 
+  asyncTest('CHANGE PASSWORD', hlpr.changePassword(SCEN1));
+
+  asyncTest('LOGOUT', hlpr.logout(SCEN1));
+
+  asyncTest('LOGIN AGAIN', hlpr.login(SCEN1));
+
   asyncTest('LOGIN INVALID PASSWORD', function() {
     var account = hlpr.clone(SCEN1.account);
     account.password = '~INVALID~PASSWORD~';

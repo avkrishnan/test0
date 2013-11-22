@@ -12,14 +12,6 @@ function EvernymLoginService(api) {
     return api.callAPI('GET', '/account/' + name, undefined, callbacks);
   };
 
-  t.forgotPassword = function(forgotPasswordModel, callbacks) {
-    return api.callAPI('POST', '/account/forgot', forgotPasswordModel, callbacks);
-  };
-
-  t.resetPassword = function(resetPasswordModel, callbacks) {
-    return api.callAPI('PUT', '/account/forgot', resetPasswordModel, callbacks);
-  };
-
   t.accountLogin = function(loginModel, callbacks) {
     return api.callAPI('POST', '/account/login', loginModel, callbacks);
   };
@@ -34,6 +26,18 @@ function EvernymLoginService(api) {
 
   t.accountLogout = function(callbacks) {
     return api.callAPI('POST', '/account/logout', undefined, callbacks, true);
+  };
+
+  t.forgotPassword = function(forgotPasswordModel, callbacks) {
+    return api.callAPI('POST', '/account/forgot', forgotPasswordModel, callbacks);
+  };
+
+  t.resetPassword = function(resetPasswordModel, callbacks) {
+    return api.callAPI('PUT', '/account/forgot', resetPasswordModel, callbacks);
+  };
+
+  t.changePassword = function(passwordChangeRequest, callbacks) {
+    return api.callAPI('PUT', '/account/password', passwordChangeRequest, callbacks, true);
   };
 
 }

@@ -198,7 +198,21 @@ function ApiTestHelper() {
       .then(start,start);
     };
   };
-  
+
+  t.changePassword = function(scenario, newPassword) {
+    return function() {
+      var newPword = 'newpword-' + randomString(5);
+      var pcr = {
+        currentPassword: scenario.account.password,
+        newPassword: newPword
+      };
+      $.when(scenario.ES.loginService.changePassword(pcr))
+      .then(t.CHECK.successNoContent,t.CHECK.shouldNotFail)
+      .then(function() { scenario.account.password = newPword; },t.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  };
+
   t.checkEqualC = function(exp, attribs) { // C = Constrained by the attributes
     // supplied, or by the attributes of
     // exp
