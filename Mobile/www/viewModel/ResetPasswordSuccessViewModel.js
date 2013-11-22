@@ -1,4 +1,5 @@
 ﻿/*globals ko*/
+/* To do - Pradeep Kumar */
 function ResetPasswordSuccessViewModel() {
 	var that = this;
 	this.template = 'resetPasswordSuccessView';
@@ -15,11 +16,11 @@ function ResetPasswordSuccessViewModel() {
 	};
 		 
 	this.activate = function(){
-		var resetAccount = localStorage.getItem('resetAccount');
+		var resetAccount = localStorage.getItem('resetAccount');		
 		if(resetAccount == '' || resetAccount == null) {
 			goToView('forgotPasswordView');
 		} else {					
-			that.accountName(localStorage.getItem('resetAccount'));
+			that.accountName(localStorage.getItem("accountName"));
 		}
 	};
 	

@@ -388,6 +388,7 @@ addInviteFollowersViewModel = new AddInviteFollowersViewModel(),
 addFollowersViewModel = new AddFollowersViewModel(),
 editNameViewModel = new EditNameViewModel(),
 editLongDescriptionViewModel = new EditLongDescriptionViewModel(),
+changePasswordSuccessViewModel = new ChangePasswordSuccessViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -459,7 +460,8 @@ var models = [
 							addFollowersViewModel,
 							editNameViewModel,							
 							editLongDescriptionViewModel,
-							changePasswordViewModel									
+							changePasswordViewModel,
+							changePasswordSuccessViewModel									
               ];
 
 

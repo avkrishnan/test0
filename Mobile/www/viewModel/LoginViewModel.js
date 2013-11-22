@@ -108,8 +108,8 @@ function LoginViewModel() {
       };
       var loginModel = {};
       $.mobile.showPageLoadingMsg("a", "Logging In");
-      loginModel.accountname = this.accountName();
-      loginModel.password = this.password();
+      loginModel.accountname = that.accountName();
+      loginModel.password = that.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
       return ES.loginService.accountLogin(loginModel, callbacks).then(loginSuccess);
     }

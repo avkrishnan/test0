@@ -37,7 +37,7 @@ function EditNameViewModel() {
   this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
-			goToView('channelListView');			
+			goToView('loginView');			
 		} 
 		else {
 			if(localStorage.getItem('toastData')) {
@@ -50,8 +50,7 @@ function EditNameViewModel() {
 				that.lastnameClass('');
 				that.errorFirstLastName('');				
 			});
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);						
+			that.accountName(localStorage.getItem('accountName'));						
 			$.mobile.showPageLoadingMsg('a', 'Loading information');
 			ES.loginService.getAccount({ success: successfulGetAccount, error: errorAPI });						
 		}
@@ -62,10 +61,6 @@ function EditNameViewModel() {
 			that.editNameCommand();
 		}
 	});
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.menuCommand = function () {
 		pushBackNav('Edit Name', 'editNameView', 'channelMenuView');		
