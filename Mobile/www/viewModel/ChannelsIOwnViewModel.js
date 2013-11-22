@@ -58,7 +58,7 @@ function ChannelsIOwnViewModel() {
 	
 	this.menuCommand = function () {
 		pushBackNav('Channels', 'channelsIOwnView', 'channelMenuView');		
-  };			    	
+  };				    	
 	
 	function successfulList(data){	
     $.mobile.hidePageLoadingMsg();
@@ -76,7 +76,7 @@ function ChannelsIOwnViewModel() {
 				longDescription: data.channel[channelslength].longDescription,
 				followerCount: followers
 			});
-		}	
+		}
 	};    
 	
 	function errorAPI(data, status, response){

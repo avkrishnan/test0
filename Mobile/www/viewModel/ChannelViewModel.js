@@ -179,9 +179,11 @@ function ChannelViewModel() {
 	
 	function successfulFollowChannel() {
 		$.mobile.hidePageLoadingMsg();
-		showMessage("Now Following Channel " + that.title());
+		//showMessage("Now Following Channel " + that.title());
 		//localStorage.removeItem("currentChannel");
 		//$.mobile.changePage("#" + channelsFollowingListViewModel.template);
+		that.toastText('Now following '+that.title());		
+		localStorage.setItem('toastData', that.toastText());		
 		$.mobile.changePage("#" + channelMessagesViewModel.template);
 	}
 	

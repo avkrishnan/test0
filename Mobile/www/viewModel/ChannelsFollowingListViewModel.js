@@ -10,6 +10,7 @@ function ChannelsFollowingListViewModel() {
 	this.channels = ko.observableArray([]);
 	this.newMessagesDisplay = ko.observableArray([]);
 	this.newMessagesCount = ko.observable();
+	this.toastText = ko.observable();		
 	
 	var that = this;
 	this.shown = false;
@@ -24,26 +25,38 @@ function ChannelsFollowingListViewModel() {
 	
 	/* Methods */
 	this.activate = function() {
-		that.accountName(localStorage.getItem("accountName"));
-		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
-		console.log("trying to get channels");
-		that.channels.removeAll();
-		var dd = localStorage.getItem('enymNotifications');
-		//that.newMessages(JSON.stringify(dd));
-		that.newMessagesDisplay.removeAll();
-		$.each(JSON.parse(dd), function(indexNotification, valueNotification) {
-			if(valueNotification.read == 'N') {
-				valueNotification.created = time2TimeAgo(valueNotification.created+999);
-				valueNotification.urgencyId = "icon-" + valueNotification.escLevelId.toLowerCase();
-				that.newMessagesDisplay.push(valueNotification);
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {
+			goToView('loginView');  
+		} 
+		else {
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
 			}
-		});
-		that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
-		if ( that.channels() && that.channels().length){
+			that.accountName(localStorage.getItem("accountName"));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);
+			localStorage.setItem('counter', 1);					
+			console.log("trying to get channels");
 			that.channels.removeAll();
+			var dd = localStorage.getItem('enymNotifications');
+			//that.newMessages(JSON.stringify(dd));
+			that.newMessagesDisplay.removeAll();
+			$.each(JSON.parse(dd), function(indexNotification, valueNotification) {
+				if(valueNotification.read == 'N') {
+					valueNotification.created = time2TimeAgo(valueNotification.created+999);
+					valueNotification.urgencyId = "icon-" + valueNotification.escLevelId.toLowerCase();
+					that.newMessagesDisplay.push(valueNotification);
+				}
+			});
+			that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
+			if ( that.channels() && that.channels().length){
+				that.channels.removeAll();
+			}
+			$.mobile.showPageLoadingMsg("a", "Loading Channels");
+			return this.listFollowingChannelsCommand().then(gotChannels);
 		}
-		$.mobile.showPageLoadingMsg("a", "Loading Channels");
-		return this.listFollowingChannelsCommand().then(gotChannels);
 	};
 	
 	this.backCommand = function () {
@@ -148,7 +161,7 @@ function ChannelsFollowingListViewModel() {
 	
 	this.actionFollowChannelCommand = function(data) {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
-		goToView('channelMessagesView');		
+		pushBackNav('Channels', 'channelsFollowingListView', 'channelMessagesView');				
 	}	
 	
 	this.userSettings = function () {

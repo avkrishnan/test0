@@ -5,7 +5,8 @@ function ChannelSingleMessagesViewModel() {
 	this.viewid = "V-55";
 	this.viewname = "ChannelSingleMessagesDetails";
 	this.displayname = "Channel Single Message";
-	this.hasfooter = true;	
+	this.hasfooter = true;
+	this.backText = ko.observable();		
 	
 	this.accountName = ko.observable();	
 	this.title = ko.observable();
@@ -33,7 +34,15 @@ function ChannelSingleMessagesViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');												
 			}		
-			that.accountName(localStorage.getItem("accountName"));		
+			that.accountName(localStorage.getItem("accountName"));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			if(localStorage.getItem('counter') == 1) {
+				localStorage.setItem('counter', 2);
+			} else if(localStorage.getItem('counter') == 2){		
+				localStorage.setItem('counter', 3);
+			}	else {
+				localStorage.setItem('counter', 1);
+			}					
 			var channel = JSON.parse(localStorage.getItem("currentChannel"));
 			var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
 			//alert(localStorage.getItem("currentChannel"));
@@ -47,6 +56,10 @@ function ChannelSingleMessagesViewModel() {
 			//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
 		}
 	};
+	
+	this.backCommand = function () {
+		popBackNav();
+  };	
 
 	this.menuCommand = function () {
 		pushBackNav('Message details', 'channelSingleMessagesView', 'channelMenuView');

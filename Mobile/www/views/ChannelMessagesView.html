@@ -1,7 +1,7 @@
 <div id="channelMessagesView" data-role="page">
 
   <header>
-    <a href="#" class="back" onclick="goToView('channelsFollowingListView');"><em></em>Channels</a>
+    <a href="#" class="back" data-bind="html: backText, click: backCommand"></a>
     <a class="menu" href="#" data-bind="click: menuCommand"></a>
     <div class="linkicon">    
       <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
