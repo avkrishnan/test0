@@ -247,12 +247,12 @@ function ApiTestHelper() {
     };
   };
 
-  t.broadcast = function(scenario, chnlKey, msgText, urgencyId) {
+  t.broadcast = function(scenario, chnlKey, msgText, escLevelId) {
     return function() {
       scenario.msg = {
         text : msgText + ' ' + t.randomStr(8),
         type : 'FYI',
-        urgencyId : urgencyId == undefined ? 'N' : urgencyId
+        escLevelId : escLevelId == undefined ? 'N' : escLevelId
       };
       $.when(scenario.ES.messageService.createChannelMessage(scenario[chnlKey].id, scenario.msg))
           .then(t.CHECK.created).then(start);
