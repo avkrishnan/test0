@@ -13,7 +13,7 @@
     <div class="followerchannel">
       <div class="channelcontent broadecast">
         <span class="channelimg channel1 borderred"></span>
-        <div class="channelinfoname" data-bind="text: channelName">The Hawks</div>
+        <div class="channelinfoname" data-bind="text: channelName"></div>
         <a href="#" class="setting settinginner" data-bind="click: channelSettings"></a>
       </div>
     </div>      
@@ -46,7 +46,7 @@
       </div>
     </div>-->
     <div class="dropdown">
-      <span class="followerssearch" data-bind="text: followerCount"><!--16 Followers:--></span>
+      <span class="followerssearch" data-bind="text: followerCount"></span>
       <form class="chaneldropdown" action="#" method="get" >
         <select>
           <option value="min">A-Z</option>
@@ -57,12 +57,12 @@
       </form>
     </div>
     <div data-bind="foreach: followers">
-      <div class="low-messages allfollowercs">
+      <a href="#" class="low-messages allfollowercs" data-bind="click: $parent.followerDetails.bind($index())">
         <div class="accept-decline">
-          <span data-bind="text: followerName"><!--Biff Jones--></span>
-          <em data-bind="text: accountname"><!--theycallmebiff--></em>
+          <span data-bind="text: followerName"></span>
+          <em data-bind="text: accountname"></em>
         </div>
-      </div>
+      </a>
     </div>
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>  

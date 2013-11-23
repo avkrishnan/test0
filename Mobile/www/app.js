@@ -393,6 +393,8 @@ requestiGiHelpViewModel = new RequestiGiHelpViewModel(),
 escalateHelpViewModel = new EscalateHelpViewModel(),
 escalateSettingsViewModel = new EscalateSettingsViewModel(),
 escalateTimeSettingsViewModel = new EscalateTimeSettingsViewModel(),
+followerDetailsViewModel = new FollowerDetailsViewModel(),
+removeFollowerViewModel = new RemoveFollowerViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -469,7 +471,9 @@ var models = [
 							requestiGiHelpViewModel,
 							escalateHelpViewModel,
 							escalateSettingsViewModel,
-							escalateTimeSettingsViewModel									
+							escalateTimeSettingsViewModel,
+							followerDetailsViewModel,
+							removeFollowerViewModel									
               ];
 
 

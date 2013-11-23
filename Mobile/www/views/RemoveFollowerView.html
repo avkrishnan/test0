@@ -1,0 +1,31 @@
+<!--To do - Pradeep Kumar-->
+<div id="removeFollowerView" data-role="page">
+  <header>
+    <a href="#" class="back" onclick="goToView('followerDetailsView');"><em></em>Follower Details</a>
+    <a class="menu" href="#" data-bind="click: menuCommand"></a>
+    <div class="linkicon">    
+      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
+      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
+      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
+    </div>
+  </header>  
+  <div class="page-content channelsettings">
+    <a class="low-messages allfollowercs ui-link" href="#">
+      <div class="accept-decline">
+        <span data-bind="text: followerName"></span>
+        <em data-bind="text: followerAccount"></em>
+      </div>
+    </a>        
+    <div class="confirmdelete"><span></span>Are you sure you want to delete this follower? This cannot be undone.</div>
+    <div class="login">
+      <div class="loginbtn channeldelete">
+        <a href="#" data-bind="click: removeFollowerCommand">DELETE</a>
+      </div>
+    </div>
+  </div>
+  <div class="toast-notification" data-bind="text: toastText"></div>   
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
+    <a class="announcement" href="#" data-bind="click: composeCommand"></a>
+  </div>
+</div>   

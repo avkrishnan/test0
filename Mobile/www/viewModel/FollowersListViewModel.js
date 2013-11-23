@@ -77,6 +77,7 @@ function FollowersListViewModel() {
 		for(len; len<data.followers.length; len++) {
 			if(data.followers[len].relationship == 'F') {
 				that.followers.push({
+					followerId: data.followers[len].id,
 					followerName: data.followers[len].firstname +' '+ data.followers[len].lastname, 
 					accountname: data.followers[len].accountname
 				});
@@ -89,6 +90,11 @@ function FollowersListViewModel() {
     localStorage.setItem('signUpError', response.message);
     goToView('followersListView');
   };
+	
+	this.followerDetails = function (data) {
+		localStorage.setItem('currentfollowerData', JSON.stringify(data));		
+		pushBackNav('Followers', 'followersListView', 'followerDetailsView');
+  };	
 	
 	this.userSettings = function () {
 		pushBackNav('Followers', 'followersListView', 'escalationPlansView');
