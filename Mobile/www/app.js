@@ -713,7 +713,7 @@ $(document).bind('panelbeforeopen', function(e, data) {
 								 
 /* By pradeep kumar */
 /* Back navigation functions */
-if(!localStorage.getItem('backNavText')) {
+if(!localStorage.getItem('backNavText') || !localStorage.getItem('backNavView')) {
 	var backNavText = [];
 	var backNavView = [];
 } else {
