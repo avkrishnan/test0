@@ -168,6 +168,8 @@ function LoginViewModel() {
 				var channel = JSON.parse(localStorage.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);
 				localStorage.removeItem('action');
+				that.toastText('Now following '+channel.name);		
+				localStorage.setItem('toastData', that.toastText());				
 				goToView('channelMessagesView');
 			}
 			else {

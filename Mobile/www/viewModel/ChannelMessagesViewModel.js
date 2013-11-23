@@ -32,7 +32,11 @@ function ChannelMessagesViewModel() {
 				localStorage.removeItem('toastData');												
 			}		
 			that.accountName(localStorage.getItem("accountName"));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			if(typeof backNavText[0] == 'undefined') {
+				that.backText('<em></em>Home');
+			} else {		
+				that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			}			
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
 			} else {		
@@ -50,7 +54,11 @@ function ChannelMessagesViewModel() {
 	};
 	
 	this.backCommand = function () {
-		popBackNav();
+		if(typeof backNavText[0] == 'undefined') {
+			goToView('channelListView');
+		} else {		
+			popBackNav();		
+		}
   };	
 	
 	this.menuCommand = function () {

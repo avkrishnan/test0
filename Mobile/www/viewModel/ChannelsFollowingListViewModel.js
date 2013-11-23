@@ -36,7 +36,11 @@ function ChannelsFollowingListViewModel() {
 				localStorage.removeItem('toastData');				
 			}
 			that.accountName(localStorage.getItem("accountName"));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);
+			if(typeof backNavText[0] == 'undefined') {
+				that.backText('<em></em>Home');
+			} else {		
+				that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			}
 			localStorage.setItem('counter', 1);					
 			console.log("trying to get channels");
 			that.channels.removeAll();
@@ -60,7 +64,11 @@ function ChannelsFollowingListViewModel() {
 	};
 	
 	this.backCommand = function () {
-		popBackNav();
+		if(typeof backNavText[0] == 'undefined') {
+			goToView('channelListView');
+		} else {		
+			popBackNav();		
+		}
   };
 	
 	this.menuCommand = function () {
