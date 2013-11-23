@@ -27,21 +27,29 @@
       </div>     
       <div class="composebroadcast">
         <div class="yes-no">
-          <label for="flip-1">Request iGi ?</label>
-          <span class="informationicon"></span>
-          <select name="history?" data-role="slider">
-            <option value="yes">YES</option>
-            <option value="no">NO</option>
-          </select> 
+          <a href="#" onclick="goToView('requestiGiHelpView');">
+            <label for="flip-1">Request iGi ?</label>
+            <span class="informationicon"></span>
+          </a>
+          <div class="yes-noclick">
+            <span class="nobutton">Yes</span>
+            <span class="yesbutton">No</span>
+          </div> 
         </div>       
-        <div class="yes-no last">
-          <label for="flip-1">Escalate ?</label>
-          <span class="informationicon"></span>
-          <select name="history?" data-role="slider">
-            <option value="yes">YES</option>
-            <option value="no">NO</option>
-          </select> 
-        </div>         
+        <div class="yes-no last escalate-activesetting">
+          <a href="#" onclick="goToView('escalateHelpView');">        
+            <label for="flip-1">Escalate ?</label>
+            <span class="informationicon"></span>
+          </a>
+          <div class="yes-noclick">
+            <span class="nobutton" data-bind="click: escalateYes">Yes</span>
+            <span class="yesbutton" data-bind="click: escalateNo">No</span>
+          </div>          
+        </div>
+        <div class="yes-no setting-datetime">
+          <label for="flip-1">"Hound" until Oct 28, 2:28 pm</label>
+          <a href="#" class="broadcastsettingbtn" data-bind="click: escalateYes">Settings</a>
+        </div>                 
       </div>
     </div> 
     <div class="schedule">

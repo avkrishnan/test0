@@ -41,15 +41,15 @@ function PrivacyPolicyViewModel() {
 	}
 	
 	this.menuCommand = function () {
-		pushBackNav('Settings', 'privacyPolicyView', 'channelMenuView');		
+		pushBackNav('Privacy Policy', 'privacyPolicyView', 'channelMenuView');		
   };
 	
 	this.userSettings = function () {
-		pushBackNav('Settings', 'privacyPolicyView', 'escalationPlansView');
+		pushBackNav('Privacy Policy', 'privacyPolicyView', 'escalationPlansView');
   };	
 
 	this.composeCommand = function () {
-		pushBackNav('Settings', 'privacyPolicyView', 'sendMessageView');
+		pushBackNav('Privacy Policy', 'privacyPolicyView', 'sendMessageView');
   };	
 	
 }

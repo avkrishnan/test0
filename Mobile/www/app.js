@@ -389,6 +389,10 @@ addFollowersViewModel = new AddFollowersViewModel(),
 editNameViewModel = new EditNameViewModel(),
 editLongDescriptionViewModel = new EditLongDescriptionViewModel(),
 changePasswordSuccessViewModel = new ChangePasswordSuccessViewModel(),
+requestiGiHelpViewModel = new RequestiGiHelpViewModel(),
+escalateHelpViewModel = new EscalateHelpViewModel(),
+escalateSettingsViewModel = new EscalateSettingsViewModel(),
+escalateTimeSettingsViewModel = new EscalateTimeSettingsViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -461,7 +465,11 @@ var models = [
 							editNameViewModel,							
 							editLongDescriptionViewModel,
 							changePasswordViewModel,
-							changePasswordSuccessViewModel									
+							changePasswordSuccessViewModel,
+							requestiGiHelpViewModel,
+							escalateHelpViewModel,
+							escalateSettingsViewModel,
+							escalateTimeSettingsViewModel									
               ];
 
 

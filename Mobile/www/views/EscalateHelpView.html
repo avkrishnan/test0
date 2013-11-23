@@ -1,0 +1,42 @@
+<!--To do - Pradeep Kumar-->
+<div id="escalateHelpView" data-role="page" class="channel-list" >
+   <header>
+    <a href="#" class="back" onclick="goToView('sendMessageView');"><em></em>Compose</a>   
+    <a class="menu" href="#" data-bind="click: menuCommand"></a>
+    <div class="linkicon">    
+      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
+      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
+      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
+    </div>
+  </header>  
+  <div class="page-content">
+    <div class="compose">
+      <h1>Escalate ?</h1>
+      <div class="compose-text">
+        <p>An "Escalated" message may repeat or try different methods, 
+        if the first message isn't responded to. It may first try an 
+        email, then try SMS (text) or the app; or it may start with 
+        the app, repeat the attempt again later, then try SMS (text).</p>
+        <p>The number of attempts and the methods used are determined by 
+        how long you'd like us to escalate your message, and how 
+        aggressively. Escalation will continue for each follower 
+        until a response is received or until the time specified expires.</p>
+        <p><strong>CAUTION:</strong> Escalation is quite powerful; only 
+        use above the lowest aggressiveness when absolutely necessary, 
+        or you might frustrate your followers.</p>
+      </div>
+     </div>
+    <form class="loginform" method="get" action="#">
+      <div class="composecheckbok">
+        <label>
+          <input type="checkbox" name="checkbox-0 "/>Don't show again
+        </label>
+        <div class="loginbtn"><a href="#" onclick="goToView('sendMessageView');">OK, Got it!</a></div>       
+      </div>
+    </form>
+  </div>
+  <div class="toast-notification" data-bind="text: toastText"></div>   
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
+  </div>
+</div>

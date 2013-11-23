@@ -1,0 +1,52 @@
+<!--To do - Pradeep Kumar-->
+<div id="escalateSettingsView" data-role="page" class="channel-list" >
+   <header>
+    <a href="#" class="back" onclick="goToView('sendMessageView');"><em></em>Compose</a>   
+    <a class="menu" href="#" data-bind="click: menuCommand"></a>
+    <div class="linkicon">    
+      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
+      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
+      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
+    </div>
+  </header>  
+  <div class="page-content">
+    <div class="all-setting">
+      <div class="emergency-setting">
+        <em>Is this an Emergency?</em>
+        <a class="emergencybtn" href="#">Emergency</a>
+      </div>
+      <h4>Continues and Overrides All Other Settings</h4>
+    </div>
+    
+    <div class="escalate-settings">
+      <div class="escalatedate-time">
+        <em>Escalate for how long?</em>
+        <a href="#" data-bind="click: setDateTime">Set Date and Time</a>
+      </div>
+      <div class="agressively-slider">
+        <span>How agressively?</span>
+        <div class="slider-value">
+          <span class="remind">Remind</span>
+          <span class="chase">Chase</span>
+          <span class="hound">Hound</span>
+        </div>
+        <div class="slidervalue-img">
+          <a class="remind-sensitive" href="#" data-bind="css: remindClass, click: remindActive"></a>
+          <a class="chase-broadcast" href="#" data-bind="css: chaseClass, click: chaseActive"></a>
+          <a class="hound-critical" href="#" data-bind="css: houndClass, click: houndActive"></a>
+        </div>
+       
+      </div>
+       <div class="escalatesettingstext">
+          <em class="timesensitive">Just a time sensitive FYI</em>
+          <em class="broadcastquite">The broadcast is quite important</em>
+          <em class="critical">It's critical they get this</em>
+        </div>
+    </div>
+    <div class="loginbtn"><a href="#" data-bind="click: saveCommand">Save and Contine</a></div>
+    </div>
+  <div class="toast-notification" data-bind="text: toastText"></div>   
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
+  </div>
+</div>

@@ -166,7 +166,8 @@ function ChannelViewModel() {
 				followerCount: followers
 			});
 			channel = channel[0];		
-			localStorage.setItem('currentChannelData', JSON.stringify(channel));													
+			localStorage.setItem('currentChannelData', JSON.stringify(channel));
+			that.settings(true);																
 		}
 		else {
 			that.settings(false);			

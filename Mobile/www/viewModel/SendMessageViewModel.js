@@ -128,6 +128,16 @@ function SendMessageViewModel() {
 		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
 	};
 	
+	this.escalateYes = function () {
+		localStorage.setItem('escalate', 'yes');
+		goToView('escalateSettingsView');		
+  };
+	
+	this.escalateNo = function () {
+		localStorage.setItem('escalate', 'no');		
+		goToView('sendMessageView');		
+  };		
+	
 	this.userSettings = function () {
 		pushBackNav('Compose', 'sendMessageView', 'escalationPlansView');
   };	
