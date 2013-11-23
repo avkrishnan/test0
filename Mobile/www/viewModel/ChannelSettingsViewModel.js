@@ -37,15 +37,24 @@ function ChannelSettingsViewModel() {
 				localStorage.removeItem('toastData');												
 			}					
 			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);	
+			if(typeof backNavText[0] == 'undefined') {
+				that.backText('<em></em>Home');
+			} else {		
+				that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			}	
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
-			that.shortDescription(channelObject.channelDescription);							
+			that.shortDescription(channelObject.channelDescription);
+			localStorage.removeItem('channelOwner');										
 		}
 	}
 	
 	this.backCommand = function () {
-		popBackNav();
+		if(typeof backNavText[0] == 'undefined') {
+			goToView('channelListView');
+		} else {		
+			popBackNav();		
+		}
   };
 	
 	this.menuCommand = function () {

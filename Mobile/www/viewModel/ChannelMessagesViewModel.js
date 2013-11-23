@@ -23,8 +23,11 @@ function ChannelMessagesViewModel() {
     
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channel = JSON.parse(localStorage.getItem("currentChannel"));		
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channel) {
+			goToView('channelsFollowingListView');			
 		} else {
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
@@ -42,7 +45,6 @@ function ChannelMessagesViewModel() {
 			} else {		
 				localStorage.setItem('counter', 1)
 			}				
-			var channel = JSON.parse(localStorage.getItem("currentChannel"));
 			//alert(localStorage.getItem("currentChannel"));
 			that.channelid(channel.id);
 			localStorage.removeItem("currentChannelMessage");

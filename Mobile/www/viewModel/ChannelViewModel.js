@@ -11,6 +11,7 @@ function ChannelViewModel() {
 	
 	this.hasfooter = ko.observable(true);
 	this.hasheader = ko.observable(false);
+	this.settings = ko.observable(false);	
 	
 	this.isChannelView = true;
 	this.title = ko.observable();
@@ -121,7 +122,15 @@ function ChannelViewModel() {
 	
 	this.menuCommand = function () {
 		pushBackNav('ChannelLandingPage', 'channelView', 'channelMenuView');
-  };	
+  };
+	
+	this.channelSettings = function(){
+		if(localStorage.getItem('channelOwner') == 'yes') {		
+			goToView('channelSettingsView');
+		} else {
+			goToView('channelViewUnfollow');
+		}
+	}		
 	
 	function gotChannel(data) {
 		//alert(JSON.stringify(data));
@@ -141,7 +150,8 @@ function ChannelViewModel() {
 			that.channelAction(false);
 			pushBackNav('Channels', 'channelsFollowingListView', 'channelMessagesView');			
 		}
-		else if(data.relationship == 'O') {
+		else if(data.relationship == 'O') {	
+			localStorage.setItem('channelOwner', 'yes');
 			if(data.followers == 1) {
 				var followers = data.followers +' follower';
 			} else {
@@ -156,11 +166,11 @@ function ChannelViewModel() {
 				followerCount: followers
 			});
 			channel = channel[0];		
-			localStorage.setItem('currentChannelData', JSON.stringify(channel));
-			pushBackNav('Channels', 'channelsIOwnView', 'channelMainView');										
+			localStorage.setItem('currentChannelData', JSON.stringify(channel));													
 		}
 		else {
-			that.channelAction(true);
+			that.settings(false);			
+			that.channelAction(true);			
 		}
 	}
     
@@ -260,7 +270,12 @@ function ChannelViewModel() {
 	// follow/unfollow will be called on the basis of channelAction value
 	this.actionFollowChannelCommand = function() {
 		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
-		that.followChannelCommand();
+		if(localStorage.getItem('channelOwner') == 'yes') {
+			that.toastText('You are channel owner !');
+			showToast();			
+		} else {
+			that.followChannelCommand();
+		}
 	}
 	
 	this.followChannelCommand = function() {
@@ -299,9 +314,9 @@ function ChannelViewModel() {
 		$.mobile.changePage("#" + messageViewModel.template)
 	};
     
-	this.showChannelMenu = function(){
+	/*this.showChannelMenu = function(){
 		$.mobile.changePage("#" + channelMenuViewModel.template);
-	}
+	}*/
 		
 	this.showChannelList = function() {
 		var lrelationship = 'O';
