@@ -9,6 +9,14 @@ function EscalateTimeSettingsViewModel() {
 	this.accountName = ko.observable();	
 	
 	/* Privacy policy observable */
+	//this.startDate = ko.observable("@(Html.Raw(Model.Holiday.StartDate.ToString("dd/MM/yyyy")))");
+	//this.endDate = ko.observable("@(Html.Raw(Model.Holiday.EndDate.ToString("dd/MM/yyyy")))");
+	this.month = ko.observable('Oct');
+	this.day = ko.observable('28');
+	this.year = ko.observable('2013');
+	this.hour = ko.observable('02');
+	this.minute = ko.observable('28');
+	this.meridiem = ko.observable('PM');			 	
 	this.toastText = ko.observable();			
 	
 	/* Methods */
@@ -34,10 +42,29 @@ function EscalateTimeSettingsViewModel() {
 	
 	this.menuCommand = function () {
 		pushBackNav('Escalate Settings', 'escalateSettingsView', 'channelMenuView');		
-  };	
+  };
+	
+	this.upArrow = function () {
+		/*this.month();
+		this.day();
+		this.year();
+		this.hour();
+		this.minute();
+		this.meridiem ();*/		
+  };
+	
+	this.downArrow = function () {
+		/*this.month();
+		this.day();
+		this.year();
+		this.hour();
+		this.minute();
+		this.meridiem();*/		
+  };			
 	
 	this.saveCommand = function () {
-			goToView('escalateSettingsView');					
+		localStorage.setItem('escDuration', that.year()+'/'+that.month()+'/'+that.day()+' '+that.hour()+':'+that.minute()+' '+that.meridiem());		
+		goToView('escalateSettingsView');					
   };				
 	
 	this.userSettings = function () {

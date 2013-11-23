@@ -14,7 +14,11 @@ function SendMessageViewModel() {
 	this.characterCount = ko.observable();		
 	this.channels = ko.observableArray([]);			
 	this.channelId = ko.observable();	
-	this.channelName = ko.observable();		
+	this.channelName = ko.observable();
+	this.escalateClass = ko.observable();
+	this.escalateActive = ko.observable(false);
+	this.escDuration = ko.observable();	
+	this.escLevel = ko.observable();	
 	this.toastText = ko.observable();
 	
 	/* channels options variable */
@@ -41,12 +45,22 @@ function SendMessageViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			that.escalateClass('');
+			that.escalateActive(false);			
+			if(localStorage.getItem('escalate') == 'yes') {
+				that.escalateClass('escalate-activesetting');
+				that.escalateActive(true);
+				that.escLevel(localStorage.getItem('escLevel'));							
+				localStorage.removeItem('escalate');																						
+			} else {
+				that.escLevel('N');
+			}						
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			that.characterCount('0');		
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
-			});				
+			});							
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });		
 		}
@@ -73,14 +87,16 @@ function SendMessageViewModel() {
 				if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'Y' && data.commethod[len].dflt == 'Y') {
 					return that.createChannelMessage();
 				} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'Y') {
-					showMessage('Please verify your email !');				
+					that.toastText('Please verify your email !');
+					showToast();				
 				} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'N') {
-					showMessage('Please add a default email !');				
+					that.toastText('Please add a default email !');
+					showToast();				
 				}
 			}
-		}
-		else {
-			showMessage('Please add a default email !');
+		} else {
+			that.toastText('Please add a default email !');
+			showToast();
 		}
 	};    
 	
@@ -90,7 +106,8 @@ function SendMessageViewModel() {
 	};
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
-			showMessage('Please type some message !');
+			that.toastText('Please type some message !');
+			showToast();			
 		} else {
 			$.mobile.showPageLoadingMsg("a", "Checking email verification !");			
 			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
@@ -99,7 +116,8 @@ function SendMessageViewModel() {
 	
 	function successfulList(data){
 		if(data.channel.length < 1) {
-			showMessage('Please create some channels !');
+			that.toastText('Please create some channels !');
+			showToast();			
 		} else {	
 			$.mobile.hidePageLoadingMsg();
 			that.channels.removeAll();	
@@ -114,6 +132,8 @@ function SendMessageViewModel() {
 	function successfulMessage(data){				
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());
+		localStorage.removeItem('escDuration');		
+		localStorage.removeItem('escLevel');		
 		that.backCommand();							
 	};
 	
@@ -124,17 +144,20 @@ function SendMessageViewModel() {
 	
 	this.createChannelMessage = function () {
 		$.mobile.showPageLoadingMsg("a", "Posting Message");
-		var messageobj = {text: that.messageText(), type: 'FYI'};
+		if(localStorage.getItem('escDuration') == '' || localStorage.getItem('escDuration') == null) {
+			var messageobj = {text: that.messageText(), escLevelId: that.escLevel(), type: 'FYI'};															
+		} else {
+			that.escDuration(new Date(localStorage.getItem('escDuration')));
+			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: 'FYI'};			
+		}
 		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
 	};
 	
 	this.escalateYes = function () {
-		localStorage.setItem('escalate', 'yes');
 		goToView('escalateSettingsView');		
   };
 	
 	this.escalateNo = function () {
-		localStorage.setItem('escalate', 'no');		
 		goToView('sendMessageView');		
   };		
 	

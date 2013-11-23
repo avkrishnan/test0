@@ -1173,7 +1173,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-size:12px;
 }
 .setting {
-	background:url("images/sprites-channel.png") no-repeat -14px -1320px;
+	background:url("images/sprites-channel.png") no-repeat -14px -1599px;
 	color:#FFFFFF;
 	float:right;
 	padding:12px 22px 12px 0;
@@ -1506,7 +1506,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	height:50px;
 	width:50px;
 	margin-right:10px;
-	background:url("images/sprites.png") no-repeat;
+	background:url("images/sprites.png") no-repeat -3px -740px;
 }
 .icon-n {
 	background-position:-3px -1547px;
@@ -1999,6 +1999,9 @@ h1.requests {
 	font-size:14px;
 	padding:0 0 0 10px;
 	margin:0;
+}
+.removefollower {
+	margin-top:20px;
 }
 .createchannel {
 	color:#FFFFFF;
@@ -2503,6 +2506,9 @@ ul.igiresponses li span {
 }
 .loginform .composecheckbok span {
 	margin:10px 0 20px 4px;
+}
+.loginform .composecheckbok span.ui-btn-inner span.ui-btn-text {
+	width:auto;
 }
 /*.composepage .loginform span {
 	margin:10px 0 20px 3px

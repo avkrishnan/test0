@@ -94,19 +94,19 @@ function ChannelMainViewModel() {
 		that.broadcasts.removeAll();			
 		var len = 0;
 		for(len; len<data.message.length; len++) {
-			if(data.message[len].urgencyId == 'N ') {
+			if(data.message[len].escLevelId == 'N') {
 				var message_sensitivity = 'broadcastnormal';
 				var sensitivityText = 'NORMAL';
-			} else if(data.message[len].urgencyId == 'L ') {
+			} else if(data.message[len].escLevelId == 'L') {
 				var message_sensitivity = 'broadcastlow';
 				var sensitivityText = 'LOW';
-			} else if(data.message[len].urgencyId == 'TS') {
+			} else if(data.message[len].escLevelId == 'TS') {
 				var message_sensitivity = 'broadcasttimesensitive';
 				var sensitivityText = 'TIME-SENSITIVE';
-			} else if(data.message[len].urgencyId == 'E ') {
+			} else if(data.message[len].escLevelId == 'E') {
 				var message_sensitivity = 'broadcastemergency';
 				var sensitivityText = 'EMERGENCY';
-			} else if(data.message[len].urgencyId == 'U ') {
+			} else if(data.message[len].escLevelId == 'U') {
 				var message_sensitivity = 'broadcasturgent';
 				var sensitivityText = 'URGENT';
 			} else {

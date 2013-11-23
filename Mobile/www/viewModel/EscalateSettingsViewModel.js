@@ -34,7 +34,10 @@ function EscalateSettingsViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			that.remindClass();
 			that.chaseClass();
-			that.houndClass('criticalicon');												
+			if(localStorage.getItem('escLevel') == '' || localStorage.getItem('escLevel') == null) {
+				that.houndClass('criticalicon');
+				localStorage.setItem('escLevel', 'H');															
+			}
 		}
 	}
 	
@@ -50,25 +53,26 @@ function EscalateSettingsViewModel() {
 		that.remindClass('timesensitiveicon ');
 		that.chaseClass('');
 		that.houndClass('');
-		localStorage.setItem('escLevel', that.remindClass());					
+		localStorage.setItem('escLevel', 'R');					
   };
 	
 	this.chaseActive = function () {
 		that.remindClass('');
 		that.chaseClass('broadcasticon');
 		that.houndClass('');
-		localStorage.setItem('escLevel', that.chaseClass());					
+		localStorage.setItem('escLevel', 'C');					
   };
 	
 	this.houndActive = function () {
 		that.remindClass('');
 		that.chaseClass('');
 		that.houndClass('criticalicon');
-		localStorage.setItem('escLevel', that.houndClass());					
+		localStorage.setItem('escLevel', 'H');					
   };
 	
 	this.saveCommand = function () {
-			pushBackNav('Escalate Settings', 'escalateSettingsView', 'sendMessageView');					
+		localStorage.setItem('escalate', 'yes');		
+	  goToView('sendMessageView');					
   };				
 	
 	this.userSettings = function () {
