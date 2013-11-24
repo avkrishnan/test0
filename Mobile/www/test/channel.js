@@ -4,15 +4,14 @@
 
   var hlpr = new ApiTestHelper();
 
-  var SCEN1 = hlpr.TestScenario();
-  var SCEN2 = hlpr.TestScenario();
+  var SCEN_A = hlpr.TestScenario();
 
-  asyncTest('A ENROLLS', hlpr.enroll(SCEN1));
+  asyncTest('ENROLL', hlpr.enroll(SCEN_A));
 
-  asyncTest('A LOGS IN', hlpr.login(SCEN1));
+  asyncTest('LOGIN', hlpr.login(SCEN_A));
 
-  asyncTest('A GETS COMMUNICATION METHODS', function() {
-    $.when(SCEN1.ES.commethodService.getCommethods())
+  asyncTest('GET COMMUNICATION METHODS', function() {
+    $.when(SCEN_A.ES.commethodService.getCommethods())
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then( function(data) {
         ok(!hlpr.is_empty(data), 'check for communication settings: ' + JSON.stringify(data));
@@ -21,15 +20,15 @@
   });
 
   asyncTest('FETCH CHANNELS WHEN THERE ARE NONE', function() {
-    $.when(SCEN1.ES.channelService.listMyChannels())
+    $.when(SCEN_A.ES.channelService.listMyChannels())
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then(start,start);
   });
 
-  asyncTest('CREATE CHANNEL', hlpr.createChannelF(SCEN1, 'channel'));
+  asyncTest('CREATE CHANNEL', hlpr.createChannelF(SCEN_A, 'channel'));
 
   asyncTest('FETCH A CHANNEL I OWN', function() {
-    $.when(SCEN1.ES.channelService.getChannel(SCEN1.channel.id))
+    $.when(SCEN_A.ES.channelService.getChannel(SCEN_A.channel.id))
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then(function(data) {
         equal(data.followers,0);
@@ -39,36 +38,36 @@
 
   asyncTest('MODIFY CHANNEL SHORT DESCRIPTION', function() {
     var newChnl = {
-      id: SCEN1.channel.id,
-      description: SCEN1.channel.description + "<modified>"
+      id: SCEN_A.channel.id,
+      description: SCEN_A.channel.description + "<modified>"
     };
-    $.when(SCEN1.ES.channelService.modifyChannel(newChnl))
+    $.when(SCEN_A.ES.channelService.modifyChannel(newChnl))
     .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
-    .then(hlpr.fetchChannelAndCheckF(SCEN1, 'channel', newChnl), hlpr.CHECK.shouldNotFail)
+    .then(hlpr.fetchChannelAndCheckF(SCEN_A, 'channel', newChnl), hlpr.CHECK.shouldNotFail)
     .then(function() {
-          SCEN1.channel.description = newChnl.description;
+          SCEN_A.channel.description = newChnl.description;
         }, hlpr.CHECK.shouldNotFail)
     .then(start,start);
   });
 
   asyncTest('MODIFY CHANNEL LONG DESCRIPTION', function() {
     var newChnl = {
-      id: SCEN1.channel.id,
-      longDescription: SCEN1.channel.longDescription + "<modified>"
+      id: SCEN_A.channel.id,
+      longDescription: SCEN_A.channel.longDescription + "<modified>"
     };
-    $.when(SCEN1.ES.channelService.modifyChannel(newChnl))
+    $.when(SCEN_A.ES.channelService.modifyChannel(newChnl))
     .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
-    .then(hlpr.fetchChannelAndCheckF(SCEN1, 'channel', newChnl), hlpr.CHECK.shouldNotFail)
+    .then(hlpr.fetchChannelAndCheckF(SCEN_A, 'channel', newChnl), hlpr.CHECK.shouldNotFail)
     .then(function() {
-          SCEN1.channel.longDescription = newChnl.longDescription;
+          SCEN_A.channel.longDescription = newChnl.longDescription;
         }, hlpr.CHECK.shouldNotFail)
     .then(start,start);
   });
 
-  asyncTest('CREATE A SECOND CHANNEL', hlpr.createChannelF(SCEN1, 'channel2'));
+  asyncTest('CREATE A SECOND CHANNEL', hlpr.createChannelF(SCEN_A, 'channel2'));
 
   asyncTest('FETCH ALL CHANNELS I OWN', function() {
-    $.when(SCEN1.ES.channelService.listMyChannels())
+    $.when(SCEN_A.ES.channelService.listMyChannels())
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then(checkChannelsMatch, hlpr.CHECK.shouldNotFail)
     .then(start,start);
@@ -78,7 +77,7 @@
     equal(data.channel.length, 2, "make sure we return two channels");
     var chnl1 = data.channel[0];
     var chnl2 = data.channel[1];
-    if (data.channel[0].name != SCEN1.channel.name) {
+    if (data.channel[0].name != SCEN_A.channel.name) {
       // swap
       var x = chnl1;
       chnl1 = chnl2;
@@ -87,12 +86,12 @@
     equal(JSON.stringify({
       channel : [ chnl1, chnl2 ]
     }), JSON.stringify({
-      channel : [ SCEN1.channel, SCEN1.channel2 ]
+      channel : [ SCEN_A.channel, SCEN_A.channel2 ]
     }), "and that they match what we expect");
   }
 
   asyncTest('DELETE CHANNEL', function() {
-    $.when(SCEN1.ES.channelService.deleteChannel(SCEN1.channel2.id))
+    $.when(SCEN_A.ES.channelService.deleteChannel(SCEN_A.channel2.id))
     .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
     .then(fetchAndCheckChannels, hlpr.CHECK.shouldNotFail)
     .then(start, start);
@@ -100,17 +99,17 @@
   });
 
   function fetchAndCheckChannels(data) {
-    return $.when(SCEN1.ES.channelService.listMyChannels())
+    return $.when(SCEN_A.ES.channelService.listMyChannels())
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then(checkOneChannel, hlpr.CHECK.shouldNotFail);
   }
 
   function checkOneChannel(data) {
     equal(data.channel.length, 1, "only one channel remains");
-    equal(SCEN1.channel.id, data.channel[0].id, "the correct channel is remaining");
+    equal(SCEN_A.channel.id, data.channel[0].id, "the correct channel is remaining");
   }
 
-  asyncTest('CREATE ANOTHER SECOND CHANNEL', hlpr.createChannelF(SCEN1, 'channel2'));
+  asyncTest('CREATE ANOTHER SECOND CHANNEL', hlpr.createChannelF(SCEN_A, 'channel2'));
 
   function testCreateChannelWithFail(accessToken, checkFuncOvd, chnlOvd) {
     var scenario = hlpr.TestScenario();
@@ -138,24 +137,7 @@
   });
 
   asyncTest('CREATE DUPLICATE CHANNEL', function() {
-    testCreateChannelWithFail(SCEN1.ES.evernymService.getAccessToken(), hlpr.CHECK.badRequest, SCEN1.channel);
+    testCreateChannelWithFail(SCEN_A.ES.evernymService.getAccessToken(), hlpr.CHECK.badRequest, SCEN_A.channel);
   });
 
-  asyncTest('B ENROLLS', hlpr.enroll(SCEN2));
-
-  asyncTest('B LOGS IN', hlpr.login(SCEN2));
-
-  asyncTest("B FOLLOWS A'S CHANNEL", hlpr.followChannel(SCEN2, SCEN1, 'channel'));
-
-  asyncTest("A'S CHANNEL FOLLOWER COUNT INCREASES", function() {
-    $.when(SCEN1.ES.channelService.getChannel(SCEN1.channel.id))
-    .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
-    .then(function(data) {
-        equal(data.followers,1);
-      }, hlpr.CHECK.shouldNotFail)
-    .then(start, start);
-  });
-
-
-  
 })();

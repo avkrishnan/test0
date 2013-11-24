@@ -256,20 +256,55 @@ function ApiTestHelper() {
   t.followChannel = function(scenario, ownerScenario, chnlKey) {
     return function() {
       $.when(scenario.ES.channelService.followChannel(ownerScenario[chnlKey].id))
-      .then(t.CHECK.success)
-      .then(start);
+      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(start,start);
     };
   };
 
-  t.broadcast = function(scenario, chnlKey, msgText, escLevelId) {
+  function build(func, shouldFail) {
+    var success = shouldFail == true ? t.CHECK.shouldFail : t.CHECK.successNoContent;
+    var fail =  shouldFail == true ? t.CHECK.badRequest : t.CHECK.shouldNotFail;
+    return function() {
+      $.when(func())
+      .then(success,fail)
+      .then(start,start);
+    };
+  }
+
+  t.unfollowChannel = function(scenario, ownerScenario, chnlKey, shouldFail) {
+    return build(function() {return scenario.ES.channelService.unfollowChannel(ownerScenario[chnlKey].id);}, shouldFail);
+  };
+
+//  t.unfollowChannel = function(scenario, ownerScenario, chnlKey, shouldFail) {
+//    var success = shouldFail == true ? t.CHECK.shouldFail : t.CHECK.successNoContent;
+//    var fail =  shouldFail == true ? t.CHECK.badRequest : t.CHECK.shouldNotFail;
+//    return function() {
+//      $.when(scenario.ES.channelService.unfollowChannel(ownerScenario[chnlKey].id))
+//      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+//      .then(success,fail)
+//      .then(start,start);
+//    };
+//  };
+
+  t.addFollower = function(scenario, followerScenario, chnlKey, shouldFail) {
+    return build(function() { return scenario.ES.channelService.addFollower(scenario[chnlKey].id, followerScenario.account.accountname);}, shouldFail)
+  };
+  
+  t.removeFollower = function(scenario, followerScenario, chnlKey, shouldFail) {
+    return build(function() { return scenario.ES.channelService.removeFollower(scenario[chnlKey].id, followerScenario.account.accountname);}, shouldFail)
+  };
+  
+  t.broadcast = function(scenario, chnlKey, msgText, escLevelId, escUntil, success, fail) {
     return function() {
       scenario.msg = {
         text : msgText + ' ' + t.randomStr(8),
         type : 'FYI',
-        escLevelId : escLevelId == undefined ? 'N' : escLevelId
+        escLevelId : escLevelId == undefined ? 'N' : escLevelId,
+        escUntil : escUntil
       };
       $.when(scenario.ES.messageService.createChannelMessage(scenario[chnlKey].id, scenario.msg))
-          .then(t.CHECK.created).then(start);
+      .then(success != undefined ? success : t.CHECK.created, fail != undefined ? fail : t.CHECK.shouldNotFail)
+      .then(start, start);
     };
   };
 
@@ -367,4 +402,16 @@ function ApiTestHelper() {
     };
   };
 
+  t.checkFollowCount = function(scenario, count, channelIdentifier) {
+    return function() {
+      var chnlId = channelIdentifier == undefined ? 'channel' : channelIdentifier;
+      $.when(scenario.ES.channelService.getChannel(scenario[chnlId].id))
+      .then(t.CHECK.success, t.CHECK.shouldNotFail)
+      .then(function(data) {
+          equal(data.followers,count);
+        }, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };
+  
 }

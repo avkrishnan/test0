@@ -42,6 +42,10 @@ function EvernymChannelService(api) {
     return api.callAPI('DELETE', '/channel/' + channelid + '/follower', undefined, callbacks, true);
   };
 
+  t.addFollower = function(channelid, followerid, callbacks) {
+    return api.callAPI('POST', '/channel/' + channelid + '/follower/' + followerid, undefined, callbacks, true);
+  };
+
   t.removeFollower = function(channelid, followerid, callbacks) {
     return api.callAPI('DELETE', '/channel/' + channelid + '/follower/' + followerid, undefined, callbacks, true);
   };
