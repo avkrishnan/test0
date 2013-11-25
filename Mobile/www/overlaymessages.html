@@ -1,0 +1,21 @@
+<div class="messagescontent">
+    <div class="msg-hideshow">
+      <h4>NEW MESSAGES</h4>
+      <a data-bind="click:closePopup"></a>
+    </div>
+    <section data-bind="foreach: newMessagesDisplay">
+    <a class="messagesreceived" href="#">
+      <span class="channelicans" data-bind="css: urgencyId"></span>
+      <div class="messageschannel">
+        <span class="received" data-bind="text: displayFrom"></span>
+        <span class="messagebtn">iGi</span>
+        <p class="receive-time"><em data-bind="text: created"></em><span data-bind="text: text"></span></p>
+      </div>
+    </a>
+    </section>
+</div>
+<script>			
+	var overlayViewModel = new OverlayViewModel();
+	ko.applyBindings(overlayViewModel, document.getElementById('newMessages'));
+	overlayViewModel.activate();
+</script>
