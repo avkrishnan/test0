@@ -42,24 +42,27 @@ function ChannelListViewModel() {
 			goToView('loginView');
 		} 
 		else {
+			$('#' + that.template + ' header.logged-in').load('header.html');
+			//$('#newMessages').load('overlaymessages.html');	
+			$('#' + that.template + ' .active-overlay').load('overlaymessages.html');		
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+				localStorage.removeItem('toastData');
+			}
 			//that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 			that.accountName(localStorage.getItem('accountName'));
-			localStorage.setItem('counter', 0);			
+			localStorage.setItem('counter', 0);
 			$.mobile.showPageLoadingMsg('a', 'Getting user details');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI }).then(ES.channelService.listFollowingChannels({ success: getChannelsIFollow, error: errorAPI }));			
 		}
 	}
 	
 	this.menuCommand = function () {
-		pushBackNav('Home', 'channelListView', 'channelMenuView');		
-  };	
+		pushBackNav('Home', 'channelListView', 'channelMenuView');
+  };
 	
-	function successfulList(data){	
+	function successfulList(data){
     $.mobile.hidePageLoadingMsg();	
 		if(data.channel.length < 1) {
 			that.createFirstChannel(true);

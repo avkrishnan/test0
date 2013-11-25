@@ -19,8 +19,16 @@ function HeaderViewModel() {
 		that.newMessageCount(tempCount);
 	}
 	
+	this.newIGIOverlay = function() {
+		alert('Coming soon...');
+	}
+	
+	this.newFollowersOverlay = function() {
+		alert('Coming soon...');	
+	}	
+	
 	this.newMessagesOverlay = function() {
-		$('#newMessages').popup('open');	
+		$('#newMessages').popup('open');
 	}
 }
 /* overlay messages*/
@@ -37,8 +45,8 @@ function OverlayViewModel() {
 		that.newMessagesDisplay.removeAll();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			if(valueNotification.read == 'N') {
-				valueNotification.created = time2TimeAgo(valueNotification.created);
-				valueNotification.urgencyId = "icon-" + valueNotification.escLevelId.toLowerCase();
+				valueNotification.created = dateFormat2(valueNotification.created);
+				valueNotification.type = "icon-" + valueNotification.type.toLowerCase();
 				that.newMessagesDisplay.push(valueNotification);
 			}
 		});
