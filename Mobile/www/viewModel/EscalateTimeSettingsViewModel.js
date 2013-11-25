@@ -8,7 +8,7 @@ function EscalateTimeSettingsViewModel() {
   this.displayname = 'Escalate time settings';
 	this.accountName = ko.observable();	
 	
-	/* Privacy policy observable */
+	/* Escalate date and time observable */
 	this.month = ko.observable();
 	this.day = ko.observable();
 	this.year = ko.observable();

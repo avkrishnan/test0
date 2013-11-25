@@ -8,7 +8,7 @@ function RequestiGiHelpViewModel() {
   this.displayname = 'Request iGi help';
 	this.accountName = ko.observable();	
 	
-	/* Privacy policy observable */
+	/* Request iGi help observable */
 	this.toastText = ko.observable();			
 	
 	/* Methods */

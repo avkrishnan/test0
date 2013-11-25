@@ -8,7 +8,7 @@ function RemoveFollowerViewModel() {
 	this.displayname = 'Remove Follower';	
 	this.accountName = ko.observable();		
 	
-  /* Channel delete observable */
+  /* Remove followers observable */
 	this.channelId = ko.observable();	
 	this.followerId = ko.observable();	
 	this.followerName = ko.observable();

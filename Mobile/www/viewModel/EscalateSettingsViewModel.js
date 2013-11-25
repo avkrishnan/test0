@@ -8,7 +8,7 @@ function EscalateSettingsViewModel() {
   this.displayname = 'Escalate Settings';
 	this.accountName = ko.observable();	
 	
-	/* Privacy policy observable */
+	/* Escalate settings observable */
 	this.remindClass = ko.observable();
 	this.chaseClass = ko.observable();
 	this.houndClass = ko.observable();			
