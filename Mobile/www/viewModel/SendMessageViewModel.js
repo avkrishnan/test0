@@ -15,7 +15,9 @@ function SendMessageViewModel() {
 	this.channels = ko.observableArray([]);			
 	this.channelId = ko.observable();	
 	this.channelName = ko.observable();
-	this.escalateClass = ko.observable();
+	this.escalateClass = ko.observable();	
+	this.yesNoClass = ko.observable();
+	this.noYesClass = ko.observable();	
 	this.escalateActive = ko.observable(false);
 	this.escDuration = ko.observable();	
 	this.escLevel = ko.observable();	
@@ -46,9 +48,13 @@ function SendMessageViewModel() {
 			goToView('loginView');
 		} else {
 			that.escalateClass('');
+			that.yesNoClass('yesbutton');
+			that.noYesClass('nobutton');						
 			that.escalateActive(false);			
 			if(localStorage.getItem('escalate') == 'yes') {
 				that.escalateClass('escalate-activesetting');
+				that.yesNoClass('nobutton');
+				that.noYesClass('yesbutton');								
 				that.escalateActive(true);
 				that.escLevel(localStorage.getItem('escLevel'));							
 				localStorage.removeItem('escalate');																						
@@ -129,23 +135,32 @@ function SendMessageViewModel() {
 		}
 	};    
 	
-	function successfulMessage(data){				
-		that.toastText('Broadcast sent');		
-		localStorage.setItem('toastData', that.toastText());
+	function successfulMessage(data){
 		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('escLevel');		
+		localStorage.removeItem('escLevel');						
+		that.toastText('Broadcast sent');		
+		localStorage.setItem('toastData', that.toastText());		
 		that.backCommand();							
 	};
 	
 	function errorAPI(data, status, details){
-		$.mobile.hidePageLoadingMsg();	
-		showError(details.message);
+		$.mobile.hidePageLoadingMsg();
+		localStorage.removeItem('escDuration');		
+		localStorage.removeItem('escLevel');						
+		that.toastText(details.message);		
+		showToast();			
 	};
 	
 	this.createChannelMessage = function () {
 		$.mobile.showPageLoadingMsg("a", "Posting Message");
-		if(localStorage.getItem('escDuration') == '' || localStorage.getItem('escDuration') == null) {
-			var messageobj = {text: that.messageText(), escLevelId: that.escLevel(), type: 'FYI'};															
+		if(localStorage.getItem('escLevel') == '' || localStorage.getItem('escLevel') == null) {
+			var messageobj = {text: that.messageText(), escLevelId: 'N', type: 'FYI'};															
+		} else if(localStorage.getItem('escDuration') == '' || localStorage.getItem('escDuration') == null) {			
+			var todayDate = new Date();
+			today = todayDate.getDate();
+			tomorrow = todayDate.setDate(today+1);		
+			that.escDuration(tomorrow);			
+			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: 'FYI'};			
 		} else {
 			that.escDuration(new Date(localStorage.getItem('escDuration')));
 			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: 'FYI'};			
@@ -158,6 +173,7 @@ function SendMessageViewModel() {
   };
 	
 	this.escalateNo = function () {
+		localStorage.removeItem('escDuration');		
 		goToView('sendMessageView');		
   };		
 	

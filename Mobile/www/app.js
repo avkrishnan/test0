@@ -758,6 +758,11 @@ function showToast() {
 	}).delay(4000).slideUp(1000);
 }
 
+function _getDate(functionName) {
+	var _date = new Date();
+	return _date[functionName]();	
+}
+
 function msToTime(created){
 	var created = new Date(created);
 	var created = created.getTime(); 
@@ -789,8 +794,8 @@ function dateFormat1(created) {
 	var created = created.getTime();		
 	var date  = new Date(created);
 	return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
-	date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
+	date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12==0?'12':date.getHours()-12) + ":" + 
+	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM'); 
 }
 
 function dateFormat2(created) {
@@ -800,7 +805,7 @@ function dateFormat2(created) {
 	var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
 	return ( ((date.getMonth()+1)<10?'0':'') + (monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
 	", " +((date.getHours()<10?'0':'')+date.getHours()-12==0?'12':date.getHours()-12) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM');
+	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
 }
 
 /* pradeep kumar end */

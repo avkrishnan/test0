@@ -14,41 +14,41 @@
       <h4>Set Date and Time</h4>
       <div class="set-date-time">
         <div class="datetime-setting">
-          <a class="top-clickable" href="#" data-bind="click: upArrow"></a>
-          <span data-bind="text: month"></span>
-          <a class="bottom-clickable" href="#" data-bind="click: downArrow"></a>
+          <a class="top-clickable" href="#" data-bind="click: upArrow.bind($data, 'month')"></a>
+          <span data-bind="text: month, valueUpdate: {valueUpdate: setUp, valueUpdate: setDown}"></span>
+          <a class="bottom-clickable" href="#" data-bind="click: downArrow.bind($data, 'month')"></a>
         </div>
         
         <div class="datetime-setting dateminutesetting">
-          <a class="top-clickable" href="#" data-bind="click: upArrow"></a>
-          <span data-bind="text: day"></span>
-          <a class="bottom-clickable" href="#" data-bind="click: downArrow"></a>
+          <a class="top-clickable" href="#" data-bind="click: upArrow.bind($data, 'day')"></a>
+          <span data-bind="text: day, valueUpdate: {valueUpdate: setUp, valueUpdate: setDown}"></span>
+          <a class="bottom-clickable" href="#" data-bind="click: downArrow.bind($data, 'day')"></a>
         </div>
         
         <div class="datetime-setting">
-          <a class="top-clickable" href="#" data-bind="click: upArrow"></a>
-          <span data-bind="text: year"></span>
-          <a class="bottom-clickable" href="#" data-bind="click: downArrow"></a>
+          <a class="top-clickable" href="#" data-bind="click: upArrow.bind($data, 'year')"></a>
+          <span data-bind="text: year, valueUpdate: {valueUpdate: setUp, valueUpdate: setDown}"></span>
+          <a class="bottom-clickable" href="#" data-bind="click: downArrow.bind($data, 'year')"></a>
         </div>
       </div>
       
       <div class="set-date-time last">
         <div class="datetime-setting">
-          <a class="top-clickable" href="#" data-bind="click: upArrow"></a>
-          <span data-bind="text: hour"></span>
-          <a class="bottom-clickable" href="#" data-bind="click: downArrow"></a>
+          <a class="top-clickable" href="#" data-bind="click: upArrow.bind($data, 'hour')"></a>
+          <span data-bind="text: hour, valueUpdate: {valueUpdate: setUp, valueUpdate: setDown}"></span>
+          <a class="bottom-clickable" href="#" data-bind="click: downArrow.bind($data, 'hour')"></a>
         </div>
         <em>:</em>
         <div class="datetime-setting date-minutesetting">
-          <a class="top-clickable" href="#" data-bind="click: upArrow"></a>
-          <span data-bind="text: minute"></span>
-          <a class="bottom-clickable" href="#" data-bind="click: downArrow"></a>
+          <a class="top-clickable" href="#" data-bind="click: upArrow.bind($data, 'minute')"></a>
+          <span data-bind="text: minute, valueUpdate: {valueUpdate: setUp, valueUpdate: setDown}"></span>
+          <a class="bottom-clickable" href="#" data-bind="click: downArrow.bind($data, 'minute')"></a>
         </div>
         
         <div class="datetime-setting">
-          <a class="top-clickable" href="#" data-bind="click: upArrow"></a>
-          <span data-bind="text: meridiem"></span>
-          <a class="bottom-clickable" href="#" data-bind="click: downArrow"></a>
+          <a class="top-clickable" href="#" data-bind="click: upArrow.bind($data, 'meridiem')"></a>
+          <span data-bind="text: meridiem, valueUpdate: {valueUpdate: setUp, valueUpdate: setDown}"></span>
+          <a class="bottom-clickable" href="#" data-bind="click: downArrow.bind($data, 'meridiem')"></a>
         </div>
       </div>
     </div>

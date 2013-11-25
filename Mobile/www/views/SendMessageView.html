@@ -42,8 +42,8 @@
             <span class="informationicon"></span>
           </a>
           <div class="yes-noclick">
-            <span class="nobutton" data-bind="click: escalateYes">Yes</span>
-            <span class="yesbutton" data-bind="click: escalateNo">No</span>
+            <span data-bind="click: escalateYes, css: yesNoClass">Yes</span>
+            <span data-bind="click: escalateNo, css: noYesClass">No</span>
           </div>          
         </div>
         <div class="yes-no setting-datetime" data-bind="visible: escalateActive">

@@ -34,7 +34,13 @@ function EscalateSettingsViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			that.remindClass();
 			that.chaseClass();
-			if(localStorage.getItem('escLevel') == '' || localStorage.getItem('escLevel') == null) {
+			if(localStorage.getItem('escLevel') == 'R') {
+				that.remindClass('timesensitiveicon');
+				localStorage.setItem('escLevel', 'R');															
+			} else if(localStorage.getItem('escLevel') == 'C') {
+				that.chaseClass('broadcasticon');
+				localStorage.setItem('escLevel', 'C');															
+			} else {
 				that.houndClass('criticalicon');
 				localStorage.setItem('escLevel', 'H');															
 			}
