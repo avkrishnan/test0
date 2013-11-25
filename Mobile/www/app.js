@@ -739,7 +739,12 @@ function pushBackNav(backText, backView, targetView) {
 	backNavView.push(backView);
 	localStorage.setItem('backNavView', JSON.stringify(backNavView));	
 	goToView(targetView);	
-}			
+}		
+
+/**/
+function showMenu() {
+	pushBackNav('Channels', 'channelsFollowingListView', 'channelMenuView');		
+}	
 
 function popBackNav() {
 	backNavText.pop();
@@ -804,18 +809,6 @@ function dateFormat2(created) {
 }
 
 /* pradeep kumar end */
-
-/* New messages*/
-function showNewMessages(data) {
-	var tempCount = 0;
-	var tempNotifications = JSON.parse(data);
-	$.each(tempNotifications, function(indexNotification, valueNotification) {
-		if(valueNotification.read == 'N') {
-			tempCount = tempCount+1;
-		}
-	});
-	return tempCount;	
-}
 
 /* Time conversion into time ago*/
 function time2TimeAgo(ts) {
