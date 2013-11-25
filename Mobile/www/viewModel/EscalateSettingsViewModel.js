@@ -8,7 +8,7 @@ function EscalateSettingsViewModel() {
   this.displayname = 'Escalate Settings';
 	this.accountName = ko.observable();	
 	
-	/* Privacy policy observable */
+	/* Escalate settings observable */
 	this.remindClass = ko.observable();
 	this.chaseClass = ko.observable();
 	this.houndClass = ko.observable();			
@@ -32,8 +32,9 @@ function EscalateSettingsViewModel() {
 				localStorage.removeItem('toastData');				
 			}			
 			that.accountName(localStorage.getItem('accountName'));
-			that.remindClass();
-			that.chaseClass();
+			that.remindClass('');
+			that.chaseClass('');
+			that.houndClass('');			
 			if(localStorage.getItem('escLevel') == 'R') {
 				that.remindClass('timesensitiveicon');
 				localStorage.setItem('escLevel', 'R');															
@@ -69,7 +70,7 @@ function EscalateSettingsViewModel() {
 		localStorage.setItem('escLevel', 'C');					
   };
 	
-	this.houndActive = function () {
+	this.houndActive = function () {		
 		that.remindClass('');
 		that.chaseClass('');
 		that.houndClass('criticalicon');

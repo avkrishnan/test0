@@ -8,7 +8,7 @@ function EscalateTimeSettingsViewModel() {
   this.displayname = 'Escalate time settings';
 	this.accountName = ko.observable();	
 	
-	/* Privacy policy observable */
+	/* Escalate date and time observable */
 	this.month = ko.observable();
 	this.day = ko.observable();
 	this.year = ko.observable();
@@ -26,6 +26,7 @@ function EscalateTimeSettingsViewModel() {
 
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];		
 		if(token == '' || token == null) {
 			goToView('loginView');					
 		} else {
@@ -33,20 +34,31 @@ function EscalateTimeSettingsViewModel() {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));
-			var monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];			
-			that.month(monthNames[_getDate('getMonth')]);			
-			that.day(_getDate('getDate'));
-			that.year(_getDate('getFullYear'));
-			var hours = _getDate('getHours');
-			hours = (hours<10?'0':'')+hours-12==0?'12':hours-12;			
-			that.hour(hours);
-			var mins = _getDate('getMinutes');
-			mins = ((mins<10?'0':'')+mins);			
-			that.minute(mins);
-			var meridiem = _getDate('getHours')>12?'PM':'AM';			
-			that.meridiem(meridiem);												
+			}
+			that.accountName(localStorage.getItem('accountName'));			
+			if(localStorage.getItem('escDuration')) {
+				var DateTime = localStorage.getItem('escDuration').split('/');
+				var day = DateTime[2].split(' ');
+				var time = day[1].split(':');						
+				that.month(DateTime[1]);			
+				that.day(day[0]);
+				that.year(DateTime[0]);			
+				that.hour(time[0]);			
+				that.minute((time[1]<10?'0':'')+time[1]);			
+				that.meridiem(day[2]);										
+			} else {
+				that.month(monthNames[_getDate('getMonth')]);			
+				that.day(_getDate('getDate'));
+				that.year(_getDate('getFullYear'));
+				var hours = _getDate('getHours');
+				hours = (hours<10?'0':'')+hours-12==0?'12':hours-12;			
+				that.hour(hours);
+				var mins = _getDate('getMinutes');
+				mins = ((mins<10?'0':'')+mins);			
+				that.minute(mins);
+				var meridiem = _getDate('getHours')>12?'PM':'AM';			
+				that.meridiem(meridiem);							
+			}
 		}
 	}
 	
@@ -56,28 +68,15 @@ function EscalateTimeSettingsViewModel() {
 	
 	this.upArrow = function (data) {
 		localStorage.setItem('setValue', data);
-		that.setUp();		
-		/*this.month();
-		this.day();
-		this.year();
-		this.hour();
-		this.minute();
-		this.meridiem ();*/		
+		that.setUp();	
   };
 	
 	this.downArrow = function (data) {
 		localStorage.setItem('setValue', data);	
-		that.setDown();		
-		/*this.month();
-		this.day();
-		this.year();
-		this.hour();
-		this.minute();
-		this.meridiem();*/		
+		that.setDown();			
   };
 	
 	this.setUp = function () {
-		alert(localStorage.getItem('setValue'));
 		if(localStorage.getItem('setValue') == 'month') {
 			if(that.month() == 'Jan') {
 				that.month('Dec');
@@ -86,35 +85,41 @@ function EscalateTimeSettingsViewModel() {
 			}				
 		} else if(localStorage.getItem('setValue') == 'day') {
 			if(that.day() == 1) {
-				that.day('31');
+				that.day(31);
 			} else {
-				that.day(that.day()-1);		
+				var day = that.day();
+				day == day--;					
+				that.day(day);		
 			}			
 		} else if(localStorage.getItem('setValue') == 'year') {
 			that.year(that.year()-1);							
 		} else if(localStorage.getItem('setValue') == 'hour') {
 			if(that.hour() == 1) {
-				that.hour('12');
+				that.hour(12);
 			} else {
-				that.hour(that.hour()-1);		
+				var hour = that.hour();
+				hour == hour--;					
+				that.hour(hour);					
 			}
 		} else if(localStorage.getItem('setValue') == 'minute') {
-			if(that.minute() == 1) {
-				that.minute('60');
+			if(that.minute() == 01) {
+				that.minute(60);
 			} else {
-				that.minute(that.minute()-1);		
+				var minute = that.minute();
+				minute == minute --;
+				minute = ((minute<10?'0':'')+minute);					
+				that.minute(minute);									
 			}						
 		} else if(localStorage.getItem('setValue') == 'meridiem') {
-			if(that.meridiem() == 1) {
-				that.meridiem('31');
+			if(that.meridiem() == 'PM') {
+				that.meridiem('AM');
 			} else {
-				that.meridiem(that.meridiem()-1);		
+				that.meridiem('PM');		
 			}			
 		}
 	};
 	
 	this.setDown = function () {
-		alert(localStorage.getItem('setValue'));
 		if(localStorage.getItem('setValue') == 'month') {
 			if(that.month() == 'Dec') {
 				that.month('Jan');
@@ -123,29 +128,38 @@ function EscalateTimeSettingsViewModel() {
 			}			
 		} else if(localStorage.getItem('setValue') == 'day') {
 			if(that.day() == 31) {
-				that.day('1');
+				that.day(1);
 			} else {
-				that.day(that.day()+1);	
+				var day = that.day();
+				day == day++;					
+				that.day(day);	
 			}				
 		} else if(localStorage.getItem('setValue') == 'year') {
-			that.year(that.year()+1);				
+			var year = that.year();
+			year == year++;			
+			that.year(year);				
 		} else if(localStorage.getItem('setValue') == 'hour') {
 			if(that.hour() == 12) {
-				that.hour('1');
+				that.hour(1);
 			} else {
-				that.minute(that.minute()+1);		
+				var hour = that.hour();
+				hour == hour++;					
+				that.hour(hour);		
 			}				
 		} else if(localStorage.getItem('setValue') == 'minute') {
 			if(that.minute() == 60) {
-				that.minute('1');
+				that.minute('01');
 			} else {
-				that.minute(that.minute()+1);		
+				var minute = that.minute();
+				minute == minute ++;				
+				minute = ((minute<10?'0':'')+minute);					
+				that.minute(minute);		
 			}			
-		} else if(localStorage.getItem('setValue') == 'month') {
-			if(that.day() == 1) {
-				that.day('31');
+		} else if(localStorage.getItem('setValue') == 'meridiem') {
+			if(that.meridiem() == 'PM') {
+				that.meridiem('AM');
 			} else {
-				that.day(that.day()-1);		
+				that.meridiem('PM');		
 			}			
 		}							
 	};					
