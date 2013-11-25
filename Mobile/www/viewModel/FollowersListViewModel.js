@@ -45,8 +45,7 @@ function FollowersListViewModel() {
 				localStorage.setItem('counter', 3);
 			}	else {
 				localStorage.setItem('counter', 1);
-			}								
-			that.followers.removeAll();									
+			}																
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
 			that.followerCount(channelObject.followerCount);																			
@@ -73,6 +72,7 @@ function FollowersListViewModel() {
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
+		that.followers.removeAll();			
 		var len = 0;
 		for(len; len<data.followers.length; len++) {
 			if(data.followers[len].relationship == 'F') {
