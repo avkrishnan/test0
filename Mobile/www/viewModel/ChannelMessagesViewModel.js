@@ -103,7 +103,7 @@ function ChannelMessagesViewModel() {
 			success: function(data){
 				$.each(data.message, function(indexMessage, valueMessage) {
 					//alert(JSON.stringify(valueMessage));
-					var tempCreated = time2TimeAgo(valueMessage.created/1000);
+					var tempCreated = msToTime(valueMessage.created);
 					var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 					if(tempClass == 'n') {
 						tempClass = 'announcementicon';
@@ -121,37 +121,6 @@ function ChannelMessagesViewModel() {
 			}
 		};		
 		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
-	}
-	
-	function time2TimeAgo(ts) {
-		// This function computes the delta between the
-		// provided timestamp and the current time, then test
-		// the delta for predefined ranges.
-		
-		var d=new Date();  // Gets the current time
-		var nowTs = Math.floor(d.getTime()/1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
-		var seconds = nowTs-ts;
-		// more that two days
-		if (seconds > 2*24*3600) {
-			 return "a few days ago";
-		}
-		// a day
-		else if (seconds > 24*3600) {
-			 return "yesterday";
-		}
-		
-		else if (seconds > 3600) {
-			 return "a few hours ago";
-		}
-		else if (seconds > 1800) {
-			 return "Half an hour ago";
-		}
-		else if (seconds > 60) {
-			 return Math.floor(seconds/60) + " minutes ago";
-		}
-		else {
-			return  'a few seconds ago';
-		}		
 	}
 	
 	this.userSettings = function () {

@@ -50,7 +50,7 @@ function ReplyDetailViewModel() {
 			that.channelId(channelObject.channelId);	
 			that.channelName(channelObject.channelName);													
 			that.messageId(messageObject.messageId);						
-			that.replyDate(_date(replyObject.created));
+			that.replyDate(dateFormat2(replyObject.created));
 			that.reply(replyObject.reply);
 			that.moreText(replyObject.reply);												
 		}
@@ -60,13 +60,13 @@ function ReplyDetailViewModel() {
 		pushBackNav('Reply detail', 'replyDetailView', 'channelMenuView');		
   };	
 	
-	function _date(created) {	
+/*	function _date(created) {	
 		var date  = new Date(created);
 		var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
     return ( ((date.getMonth()+1)<10?'0':'') + (monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
 		", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
 		(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
-	}
+	}*/
 	
 	this.showMore = function(){
 		that.more(true);

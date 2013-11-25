@@ -40,7 +40,7 @@ function SingleMessageViewModel() {
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
 			that.channelName(channelObject.channelName);					
-			that.time('Sent '+ _date(messageObject.created) +' ('+messageObject.time+'):');	
+			that.time('Sent '+ dateFormat1(messageObject.created) +' ('+messageObject.time+'):');	
 			that.singleMessage(messageObject.broadcast);	
 			that.replies(messageObject.replies);							
 		}
@@ -50,12 +50,12 @@ function SingleMessageViewModel() {
 		pushBackNav('Broadcast Details', 'singleMessageView', 'channelMenuView');		
   };	
 	
-	function _date(created) {	
+/*	function _date(created) {	
 		var date  = new Date(created);
     return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
 		date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
 		(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
-	}
+	}*/
 	
 	this.messageFullText = function(){
 		goToView('singleMessageFullTextView');										

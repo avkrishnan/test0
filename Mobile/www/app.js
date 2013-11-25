@@ -758,6 +758,53 @@ function showToast() {
 	}).delay(4000).slideUp(1000);
 }
 
+function msToTime(created){
+	var created = new Date(created);
+	var created = created.getTime(); 
+	var ms = new Date().getTime() - created;	
+	var secs = Math.floor(ms / 1000);
+	var msleft = ms % 1000;
+	var totalHours = Math.floor(secs / (60 * 60));
+	var days = Math.floor(totalHours / 24);
+	var hours = totalHours % 24;
+	var divisor_for_minutes = secs % (60 * 60);
+	var minutes = Math.floor(divisor_for_minutes / 60);
+	var divisor_for_seconds = divisor_for_minutes % 60;
+	var seconds = Math.ceil(divisor_for_seconds);
+	if(days > 0) {
+		return days+' days ago';
+	} else if(hours > 0) {
+		return hours+' hrs ago';
+	} else if(minutes > 0) {
+		return minutes+' mins ago';
+	} else if(seconds > 0) {
+		return  seconds+' secs ago';
+	} else {
+		return  'just now';
+	}
+}
+
+function dateFormat1(created) {
+	var created = new Date(created);
+	var created = created.getTime();		
+	var date  = new Date(created);
+	return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
+	date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
+	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
+}
+
+function dateFormat2(created) {
+	var created = new Date(created);
+	var created = created.getTime();		
+	var date  = new Date(created);
+	var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
+	return ( ((date.getMonth()+1)<10?'0':'') + (monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
+	", " +((date.getHours()<10?'0':'')+date.getHours()-12==0?'12':date.getHours()-12) + ":" + 
+	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM');
+}
+
+/* pradeep kumar end */
+
 /* New messages*/
 function showNewMessages(data) {
 	var tempCount = 0;

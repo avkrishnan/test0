@@ -65,7 +65,7 @@ function ChannelMainViewModel() {
 		pushBackNav('Main', 'channelMainView', 'channelMenuView');		
   };	
 	
-	function msToTime(created){
+/*	function msToTime(created){
 		var ms = new Date().getTime() - created;	
 		var secs = Math.floor(ms / 1000);
 		var msleft = ms % 1000;
@@ -87,7 +87,7 @@ function ChannelMainViewModel() {
 		} else {
 			return  'just now';
 		}
-	}
+	}*/
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();
