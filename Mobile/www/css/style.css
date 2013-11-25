@@ -116,6 +116,10 @@ h1 {
 h1.additionalsettings {
 	margin:20px 0 10px 14px;
 }
+h1.newcreatechannel {
+	margin:20px 0px 10px 14px;
+	font-size:15px;
+}
 .page-content {
   padding:40px 0 50px 10px;
 	overflow:hidden;
@@ -373,6 +377,10 @@ h1.additionalsettings {
 a.addMore {
 	background:#2D2D2D url("images/gray-plus.png") no-repeat 3px 3px;
 	margin-top:10px;
+}
+a.addchannel {
+	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -628px;
+	padding:4px 0 4px 57px;
 }
 /*msg-alert*/
 .msg-alert {
@@ -637,7 +645,7 @@ select, .ui-icon-arrow-d {
 	display:block;
 }
 .loginform .msginfo {
-		color:#fff;
+	color:#fff;
 }
 .loginform form {
 	border-bottom:1px solid #A0A0A0;
@@ -1280,6 +1288,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-style:italic;
 	margin:8px 0 8px 8px;
 }
+.available {
+	margin-top:20px;
+}
 .loginform .channelavailable span {
 	color:#8DC63F;
 	font-size:12px;
@@ -1395,7 +1406,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .dropdown {
 	overflow:hidden;
-	padding:20px 15px 10px 10px;
+	padding:20px 15px 10px 14px;
 	color:#FFFFFF;
 	font-size:15px;
 	line-height:26px;
@@ -1493,6 +1504,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelmessages {
 	padding:0 10px 0 0;
+/*	border:1px solid red;*/
 }
 .channelmessages a {
 	display:inline-block;
@@ -1501,36 +1513,58 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:4px;
 	margin-bottom:10px;
 }
+/*New Desing CHANGES v-55*/
+.igi {
+	float:left;
+	padding:23px 19px;
+/*	border:1px solid red;*/
+border-right:1px solid #eaeaea;
+	background:url("images/IGI.png") no-repeat 4px 13px;
+}
+.igisent {
+	background:url("images/IGISENT.png") no-repeat 5px 7px;
+}
+.iconchannels {
+/*	border:1px solid blue;*/
+	float:right;
+	height:46px;
+	width:46px;
+	border-left:1px solid #eaeaea;
+	background:url("images/sprites.png") no-repeat;
+}
+/*New Desing CHANGES*/
 .channelicans {
 	float:left;
-	height:50px;
-	width:50px;
-	margin-right:10px;
+	height:46px;
+	width:46px;
+	border-right:1px solid #eaeaea;
 	background:url("images/sprites.png") no-repeat -3px -740px;
 }
 .icon-n {
-	background-position:-3px -1547px;
+	background-position:-4px -1551px;
 }
 .icon-ts {
-	background-position:-3px -740px;
+	background-position:-4px -743px;
 }
 .icon-u {
-	background-position: -3px -682px;
+	background-position: -4px -685px;
 }
 .icon-e {
-	background-position: -3px -625px;
+	background-position: -4px -628px;
 }
 .icon-l {
-	background-position: -3px -798px;
+	background-position: -4px -801px;
 }
 .channelmessages .announcementicon {
 	background:url(images/announcementicon.png) no-repeat 6px 7px;
 }
 .messageschannel {
-	padding:5px 0;
-	margin-left:50px;
+	padding:0px 0px 4px 8px;
+	/*margin-left:50px;*/
 	height:42px;
-	border-left:1px solid #eaeaea;
+	/*border-left:1px solid #eaeaea;*/
+/*	border:1px solid green;*/
+	float:left;
 }
 .messagebtn {
 	float:right;
@@ -1542,7 +1576,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#fff;
 }
 .channelmessages .timemsg {
-	font-size:14px;
+	font-size:13px;
 	color:#a0a0a0;
 }
 .channelmessages p {
@@ -2103,7 +2137,7 @@ h1.requests {
 }
 .msg-hideshow {
 	overflow:hidden;
-	padding:4px 8px 4px 8px;
+	padding:4px 6px 4px 6px;
 	border-bottom:1px solid #ccc;
 }
 .msg-hideshow h4 {
@@ -2117,13 +2151,14 @@ h1.requests {
 	float:right;
 	padding:13px;
 	margin-top:3px;
-	background:url("images/msg-hide.png") no-repeat 0 0;
+	background:url("images/msg-hide.png") no-repeat 0 2px;
 }
 .messagesreceived, .igi-responses {
 	background:#fff;
 	display:block;
 	border-radius:4px;
-	margin:10px 8px 0 8px;
+	margin:10px 6px 0 6px;
+	overflow:hidden;
 }
 .messagesreceived .received, .igi-responses .received {
 	color:#8DC63F;
@@ -2155,6 +2190,7 @@ h1.requests {
 ul.igiresponses, .notification {
 	border-top:1px solid #EAEAEA;
 	padding:2px 0 5px 0;
+	clear:both;
 }
 ul.igiresponses li {
 	font-size:12px;
@@ -2263,9 +2299,9 @@ ul.igiresponses li span {
 	margin-bottom:10px;
 }
 .msghistory{
-	border-left:1px solid #EAEAEA;
-	margin-left:50px;
-	padding:5px 0;
+/*	border-left:1px solid #EAEAEA;*/
+	padding:2px 0 2px 8px;
+	float:left;
 }
 .msghistory span {
 	color:#8DC63F;
@@ -2281,7 +2317,7 @@ ul.igiresponses li span {
 	font-style:normal;
 }
 .messageshistory .announcementicon {
-   background: url("images/announcementicon.png") no-repeat 6px 7px;
+   background: url("images/announcementicon.png") no-repeat 5px 5px;
 }
 .msghistory .messagebtn {
 	color:#fff;
@@ -2408,18 +2444,24 @@ ul.igiresponses li span {
 	padding:5px 0 0 0;
 }
 .snoozedismissbtn {
-	padding:10px 0;
-	text-align:center;
+	padding:10px 0 10px 55px;
+	/*text-align:center;
+	border:1px solid red;*/
+	background:#2d2d2d url("images/IGI-btn.png") no-repeat 5px center;
+	margin:10px 0;
+	border-radius:4px 0px 0px 4px;
 }
-.snoozedismissbtn a {
-	background:#8DC63F;
+
+.snoozedismissbtn a.ui-link {
+	background:#58595b;
 	border-radius:4px 4px 4px 4px;
 	display:inline-block;
 	font-size:14px;
 	margin-right:4px;
 	padding:2px 10px;
+	color:#a7a9ac;
 }
-.snoozedismissbtn a.snoozebtn.ui-link:hover {
+.snoozedismissbtn a.snoozebtn.ui-link:hover, .snoozedismissbtn .snoozebtn.active {
 	background:#8DC63F;
 	border-radius:4px 4px 4px 4px;
 	display:inline-block;
@@ -2428,10 +2470,10 @@ ul.igiresponses li span {
 	padding:2px 10px;
 	color:#fff;
 }
-.snoozedismissbtn a.snoozebtn.ui-link {
+/*.snoozedismissbtn a.snoozebtn.ui-link {
 	background:#2d2d2d;
 	color:#767676;
-}
+}*/
 /*slide menu*/
 .slidemenu {
 	background:#e6e7e8;
