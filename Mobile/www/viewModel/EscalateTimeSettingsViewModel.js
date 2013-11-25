@@ -44,7 +44,7 @@ function EscalateTimeSettingsViewModel() {
 				that.day(day[0]);
 				that.year(DateTime[0]);			
 				that.hour(time[0]);			
-				that.minute(time[1]);			
+				that.minute((time[1]<10?'0':'')+time[1]);			
 				that.meridiem(day[2]);										
 			} else {
 				that.month(monthNames[_getDate('getMonth')]);			
@@ -87,7 +87,9 @@ function EscalateTimeSettingsViewModel() {
 			if(that.day() == 1) {
 				that.day(31);
 			} else {
-				that.day(that.day()-1);		
+				var day = that.day();
+				day == day--;					
+				that.day(day);		
 			}			
 		} else if(localStorage.getItem('setValue') == 'year') {
 			that.year(that.year()-1);							
@@ -95,13 +97,18 @@ function EscalateTimeSettingsViewModel() {
 			if(that.hour() == 1) {
 				that.hour(12);
 			} else {
-				that.hour(that.hour()-1);		
+				var hour = that.hour();
+				hour == hour--;					
+				that.hour(hour);					
 			}
 		} else if(localStorage.getItem('setValue') == 'minute') {
 			if(that.minute() == 1) {
 				that.minute(60);
-			} else {			
-				that.minute(that.minute()-1);		
+			} else {
+				var minute = that.minute();
+				minute == minute --;
+				minute = ((minute<10?'0':'')+minute);					
+				that.minute(minute);									
 			}						
 		} else if(localStorage.getItem('setValue') == 'meridiem') {
 			if(that.meridiem() == 'PM') {
@@ -144,7 +151,8 @@ function EscalateTimeSettingsViewModel() {
 				that.minute(1);
 			} else {
 				var minute = that.minute();
-				minute == minute++;					
+				minute == minute ++;				
+				minute = ((minute<10?'0':'')+minute);					
 				that.minute(minute);		
 			}			
 		} else if(localStorage.getItem('setValue') == 'meridiem') {
