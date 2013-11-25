@@ -47,8 +47,7 @@ function FollowersListViewModel() {
 				localStorage.setItem('counter', 1);
 			}																
 			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);
-			that.followerCount(channelObject.followerCount);																			
+			that.channelName(channelObject.channelName);																			
 			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
 			return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
 		}
@@ -74,13 +73,21 @@ function FollowersListViewModel() {
     $.mobile.hidePageLoadingMsg();
 		that.followers.removeAll();			
 		var len = 0;
-		for(len; len<data.followers.length; len++) {
+		var follower = 0;		
+		for(len; len<data.followers.length; len++) {			
 			if(data.followers[len].relationship == 'F') {
 				that.followers.push({
 					followerId: data.followers[len].id,
 					followerName: data.followers[len].firstname +' '+ data.followers[len].lastname, 
 					accountname: data.followers[len].accountname
 				});
+			follower == follower++;				
+			if(follower == 1) {
+				var followers = follower +' follower';
+			} else {
+				var followers = follower +' followers';
+			}				
+			that.followerCount(followers);
 			}
 		}
 	}; 
