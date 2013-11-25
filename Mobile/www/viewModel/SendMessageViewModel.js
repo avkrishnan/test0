@@ -173,7 +173,8 @@ function SendMessageViewModel() {
   };
 	
 	this.escalateNo = function () {
-		localStorage.removeItem('escDuration');		
+		localStorage.removeItem('escDuration');
+		localStorage.removeItem('escLevel');				
 		goToView('sendMessageView');		
   };		
 	
