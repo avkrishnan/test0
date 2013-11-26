@@ -8,13 +8,13 @@ function ChannelsFollowingListViewModel() {
 	this.accountName = ko.observable();
 	this.backText = ko.observable();
 	this.channels = ko.observableArray([]);
-	this.newMessagesDisplay = ko.observableArray([]);
-	this.newMessagesCount = ko.observable();
+	//this.newMessagesDisplay = ko.observableArray([]);
+	//this.newMessagesCount = ko.observable();
 	this.toastText = ko.observable();		
 	
 	var that = this;
 	this.shown = false;
-	this.applyBindings = function(){
+	this.applyBindings = function() {	
 		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
 			if (!that.shown) {
 				localStorage.removeItem("currentChannel");
@@ -30,6 +30,8 @@ function ChannelsFollowingListViewModel() {
 			goToView('loginView');  
 		} 
 		else {
+			$('header').load('header.html');
+			$('#newMessages').load('overlaymessages.html');
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -44,17 +46,6 @@ function ChannelsFollowingListViewModel() {
 			localStorage.setItem('counter', 1);					
 			console.log("trying to get channels");
 			that.channels.removeAll();
-			var dd = localStorage.getItem('enymNotifications');
-			//that.newMessages(JSON.stringify(dd));
-			that.newMessagesDisplay.removeAll();
-			$.each(JSON.parse(dd), function(indexNotification, valueNotification) {
-				if(valueNotification.read == 'N') {
-					valueNotification.created = time2TimeAgo(valueNotification.created+999);
-					valueNotification.urgencyId = "icon-" + valueNotification.escLevelId.toLowerCase();
-					that.newMessagesDisplay.push(valueNotification);
-				}
-			});
-			that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 			if ( that.channels() && that.channels().length){
 				that.channels.removeAll();
 			}
@@ -78,21 +69,7 @@ function ChannelsFollowingListViewModel() {
 	function successfulCreate(data){
 		//logger.log('success listing channels ' , null, 'channelService', true);
 	};
-	
-	this.newMessages = function() {
-		$("#newMessages").popup('open');
-	}
-	
-	this.newpop = function() {
-		$("#newMessages").popup('close');
-		$("#newPOP").popup('open');
-		$("#newMessages").popup('open');
-	}
-	
-	this.closePopup = function() {
-		$("#newMessages").popup('close');
-	}
-	
+
 	function gotChannels(data){
 		$.mobile.hidePageLoadingMsg();
 		//that.shown = true;

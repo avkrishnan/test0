@@ -50,7 +50,7 @@ function ChannelSingleMessagesViewModel() {
 			that.title(channel.name);
 			that.channelid(channel.id);
 			that.description(channel.description);
-			that.messageCreated(channelMessage.messageCreatedOriginal);
+			that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 			that.messageClass(channelMessage.messageClass);
 			that.messageText(channelMessage.messageText);
 			//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
@@ -64,37 +64,6 @@ function ChannelSingleMessagesViewModel() {
 	this.menuCommand = function () {
 		pushBackNav('Message details', 'channelSingleMessagesView', 'channelMenuView');
   };	
-	
-	function time2TimeAgo(ts) {
-		// This function computes the delta between the
-		// provided timestamp and the current time, then test
-		// the delta for predefined ranges.
-		
-		var d=new Date();  // Gets the current time
-		var nowTs = Math.floor(d.getTime()/1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
-		var seconds = nowTs-ts;
-		// more that two days
-		if (seconds > 2*24*3600) {
-			 return "a few days ago";
-		}
-		// a day
-		else if (seconds > 24*3600) {
-			 return "yesterday";
-		}
-		
-		else if (seconds > 3600) {
-			 return "a few hours ago";
-		}
-		else if (seconds > 1800) {
-			 return "Half an hour ago";
-		}
-		else if (seconds > 60) {
-			 return Math.floor(seconds/60) + " minutes ago";
-		}
-		else {
-			return  'a few seconds ago';
-		}		
-	}
 	
 	this.actionFollowChannelCommand = function(data) {
 		pushBackNav('Message details', 'channelSingleMessagesView', 'channelViewUnfollow');		

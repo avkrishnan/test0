@@ -8,7 +8,7 @@ function EscalateSettingsViewModel() {
   this.displayname = 'Escalate Settings';
 	this.accountName = ko.observable();	
 	
-	/* Privacy policy observable */
+	/* Escalate settings observable */
 	this.remindClass = ko.observable();
 	this.chaseClass = ko.observable();
 	this.houndClass = ko.observable();			
@@ -32,9 +32,16 @@ function EscalateSettingsViewModel() {
 				localStorage.removeItem('toastData');				
 			}			
 			that.accountName(localStorage.getItem('accountName'));
-			that.remindClass();
-			that.chaseClass();
-			if(localStorage.getItem('escLevel') == '' || localStorage.getItem('escLevel') == null) {
+			that.remindClass('');
+			that.chaseClass('');
+			that.houndClass('');			
+			if(localStorage.getItem('escLevel') == 'R') {
+				that.remindClass('timesensitiveicon');
+				localStorage.setItem('escLevel', 'R');															
+			} else if(localStorage.getItem('escLevel') == 'C') {
+				that.chaseClass('broadcasticon');
+				localStorage.setItem('escLevel', 'C');															
+			} else {
 				that.houndClass('criticalicon');
 				localStorage.setItem('escLevel', 'H');															
 			}
@@ -63,7 +70,7 @@ function EscalateSettingsViewModel() {
 		localStorage.setItem('escLevel', 'C');					
   };
 	
-	this.houndActive = function () {
+	this.houndActive = function () {		
 		that.remindClass('');
 		that.chaseClass('');
 		that.houndClass('criticalicon');

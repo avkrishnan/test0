@@ -47,7 +47,7 @@ function ChannelListViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');				
 			}			
-			that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
+			//that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 			that.accountName(localStorage.getItem('accountName'));
 			localStorage.setItem('counter', 0);			
 			$.mobile.showPageLoadingMsg('a', 'Getting user details');

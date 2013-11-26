@@ -8,7 +8,7 @@ function RemoveFollowerViewModel() {
 	this.displayname = 'Remove Follower';	
 	this.accountName = ko.observable();		
 	
-  /* Channel delete observable */
+  /* Remove followers observable */
 	this.channelId = ko.observable();	
 	this.followerId = ko.observable();	
 	this.followerName = ko.observable();
@@ -40,10 +40,13 @@ function RemoveFollowerViewModel() {
 			that.channelId(channelObject.channelId);			
 			that.followerId(followerObject.followerId);
 			that.followerName(followerObject.followerName);			
-			that.followerAccount(followerObject.accountname);										
-			//that.counter(localStorage.getItem('counter'));			
+			that.followerAccount(followerObject.accountname);												
 		}
-	}	
+	}
+	
+	this.backCommand = function () {
+		popBackNav();
+  };		
 	
 	this.menuCommand = function () {
 		pushBackNav('Remove Follower', 'removeFollowerView', 'channelMenuView');		
@@ -51,14 +54,30 @@ function RemoveFollowerViewModel() {
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-		/*for(var ctr = 1; ctr <= that.counter(); ctr++) {
-			that.backCommand();		
-		}
-		localStorage.removeItem('counter')*/		
+		that.backCommand();	
 		that.toastText('Follower deleted');		
 		localStorage.setItem('toastData', that.toastText());
-		goToView('followersListView');		
+		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});			
   };
+	
+	function successfulGetChannel(data) {
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		var channel = [];			
+		channel.push({
+			channelId: data.id, 
+			channelName: data.name, 
+			channelDescription: data.description,
+			longDescription: data.longDescription,			
+			followerCount: followers
+		});
+		channel = channel[0];		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));		
+    goToView('followersListView');					
+	}	
 
   function errorAPI(data, status, response) {
     $.mobile.hidePageLoadingMsg();

@@ -11,7 +11,7 @@ function ChannelViewModel() {
 	
 	this.hasfooter = ko.observable(true);
 	this.hasheader = ko.observable(false);
-	this.settings = ko.observable(false);	
+	this.settings = ko.observable(true);	
 	
 	this.isChannelView = true;
 	this.title = ko.observable();
@@ -107,6 +107,7 @@ function ChannelViewModel() {
 		}		
 		that.messages([]);
 		that.channelAction(true);
+		localStorage.removeItem('channelOwner');		
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		//alert(that.channelid());
 		return that.getChannelCommand(that.channelid()).then(gotChannel);
@@ -148,6 +149,7 @@ function ChannelViewModel() {
 		that.channelid(data.id);
 		if(data.relationship == 'F' ) {
 			that.channelAction(false);
+			that.settings(true);			
 			pushBackNav('Channels', 'channelsFollowingListView', 'channelMessagesView');			
 		}
 		else if(data.relationship == 'O') {	

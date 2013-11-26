@@ -8,7 +8,7 @@ function EscalateHelpViewModel() {
   this.displayname = 'Escalate help';
 	this.accountName = ko.observable();	
 	
-	/* Privacy policy observable */
+	/* Escalate help observable */
 	this.toastText = ko.observable();			
 	
 	/* Methods */

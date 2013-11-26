@@ -1,13 +1,5 @@
 <div id="channelsFollowingListView" data-role="page" data-dom-cache="true" class="channel-list">
-  <header>
-    <a href="#" class="back" data-bind="html: backText, click: backCommand"></a>
-    <a class="menu" href="#" data-bind="click: menuCommand"></a>
-    <div class="linkicon">    
-      <a class="smsicon smsiconwhite" data-bind="click:newMessages"><span class="received-responses-msg" data-bind="text:newMessagesCount"></span></a>
-      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
-      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
-    </div>
-  </header>
+  <header id="header"></header>
   
   <div class="page-content channel_follow">
     <div class="dropdown">
@@ -40,30 +32,6 @@
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>
   </div> 
   
-  <div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0px;">
-    <div class="messagescontent">
-        <div class="msg-hideshow">
-          <h4>NEW MESSAGES</h4>
-          <a data-rel="back" data-bind="click:closePopup"></a>
-        </div>
-        <section data-bind="foreach: newMessagesDisplay">
-        <a class="messagesreceived" href="#" data-bind="click: $parent.newpop">
-          <span class="channelicans" data-bind="css:$data.urgencyId"></span>
-          <div class="messageschannel">
-            <span class="received" data-bind="text: $data.chnlName"></span>
-            <span class="messagebtn">iGi</span>
-            <p class="receive-time"><em data-bind="text: created"></em>: News conference this ...</p>
-          </div>
-        </a>
-        </section>
-    </div>
-  </div>  
-
-  <div id="newPOP" data-role="popup" data-history="false">
-    <div class="msg-hideshow">
-      <h4>NEW MESSAGES</h4>
-      <a data-rel="back" data-bind="click:closePopup"></a>
-    </div>
-  </div>
+  <div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0px;"></div>
 
 </div>
