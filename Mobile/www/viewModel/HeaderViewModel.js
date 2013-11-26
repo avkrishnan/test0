@@ -1,11 +1,12 @@
 ﻿/*globals ko*/
 function HeaderViewModel() {	
 	this.newMessageCount = ko.observable();
+	this.newMessageClass = ko.observable();
+	
 	that = this;
 	/* Methods */
 	this.activate = function() {
 		showNewMessages(localStorage.getItem('enymNotifications'));
-		//alert('2');
 	}
 	
 	/* New messages*/
@@ -17,8 +18,10 @@ function HeaderViewModel() {
 				tempCount = tempCount+1;
 			}
 		});
+		if(tempCount > 0) {
+			that.newMessageClass('smsiconwhite');	
+		}
 		that.newMessageCount(tempCount);
-		//alert(that.newMessageCount());
 	}
 	
 	this.newIGIOverlay = function() {
@@ -43,7 +46,6 @@ function OverlayViewModel() {
 	}
 
 	this.newMessagesOverlay = function() {
-		//alert(localStorage.getItem('enymNotifications'));
 		that.newMessagesDisplay.removeAll();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			if(valueNotification.read == 'N') {
@@ -52,7 +54,6 @@ function OverlayViewModel() {
 				that.newMessagesDisplay.push(valueNotification);
 			}
 		});
-		//alert(JSON.stringify(that.newMessagesDisplay()));
 	}
 	
 	this.closePopup = function() {

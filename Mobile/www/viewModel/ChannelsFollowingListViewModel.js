@@ -28,8 +28,9 @@ function ChannelsFollowingListViewModel() {
 			goToView('loginView');  
 		} 
 		else {
-			$('#' + that.template + ' header.logged-in').load('header.html');
-			$('#' + that.template + ' .active-overlay').load('overlaymessages.html');
+			addExternalMarkup(that.template); // this is for header/overlay message
+			//$('#' + that.template + ' header.logged-in').load('header.html');
+			//$('#' + that.template + ' .active-overlay').load('overlaymessages.html');
 			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
