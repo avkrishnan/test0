@@ -31,6 +31,7 @@ function EscalateTimeSettingsViewModel() {
 			goToView('loginView');					
 		} 
 		else {
+			addExternalMarkup(that.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -45,7 +46,7 @@ function EscalateTimeSettingsViewModel() {
 				that.day(day[0]);
 				that.year(DateTime[0]);			
 				that.hour(time[0]);			
-				that.minute((time[1]<10?'0':'')+time[1]);			
+				that.minute(time[1]);			
 				that.meridiem(day[2]);										
 			} else {
 				that.month(monthNames[_getDate('getMonth')]);			
@@ -103,8 +104,8 @@ function EscalateTimeSettingsViewModel() {
 				that.hour(hour);					
 			}
 		} else if(localStorage.getItem('setValue') == 'minute') {
-			if(that.minute() == 01) {
-				that.minute(60);
+			if(that.minute() == 00) {
+				that.minute(59);
 			} else {
 				var minute = that.minute();
 				minute == minute --;
@@ -148,8 +149,8 @@ function EscalateTimeSettingsViewModel() {
 				that.hour(hour);		
 			}				
 		} else if(localStorage.getItem('setValue') == 'minute') {
-			if(that.minute() == 60) {
-				that.minute('01');
+			if(that.minute() == 59) {
+				that.minute('00');
 			} else {
 				var minute = that.minute();
 				minute == minute ++;				

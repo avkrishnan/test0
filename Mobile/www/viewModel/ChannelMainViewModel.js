@@ -36,6 +36,7 @@ function ChannelMainViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');		
 		} else {
+			addExternalMarkup(that.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -65,50 +66,22 @@ function ChannelMainViewModel() {
 		pushBackNav('Main', 'channelMainView', 'channelMenuView');		
   };	
 	
-/*	function msToTime(created){
-		var ms = new Date().getTime() - created;	
-		var secs = Math.floor(ms / 1000);
-		var msleft = ms % 1000;
-		var totalHours = Math.floor(secs / (60 * 60));
-		var days = Math.floor(totalHours / 24);
-		var hours = totalHours % 24;
-		var divisor_for_minutes = secs % (60 * 60);
-		var minutes = Math.floor(divisor_for_minutes / 60);
-		var divisor_for_seconds = divisor_for_minutes % 60;
-		var seconds = Math.ceil(divisor_for_seconds);
-		if(days > 0) {
-			return days+' days ago';
-		} else if(hours > 0) {
-			return hours+' hrs ago';
-		} else if(minutes > 0) {
-			return minutes+' mins ago';
-		} else if(seconds > 0) {
-			return  seconds+' secs ago';
-		} else {
-			return  'just now';
-		}
-	}*/
-	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();
 		that.broadcasts.removeAll();			
 		var len = 0;
 		for(len; len<data.message.length; len++) {
+			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();			
 			if(data.message[len].escLevelId == 'N') {
-				var message_sensitivity = 'broadcastnormal';
 				var sensitivityText = 'NORMAL';
-			} else if(data.message[len].escLevelId == 'L') {
-				var message_sensitivity = 'broadcastlow';
-				var sensitivityText = 'LOW';
-			} else if(data.message[len].escLevelId == 'TS') {
-				var message_sensitivity = 'broadcasttimesensitive';
-				var sensitivityText = 'TIME-SENSITIVE';
+			} else if(data.message[len].escLevelId == 'R') {
+				var sensitivityText = 'REMIND';
+			} else if(data.message[len].escLevelId == 'C') {
+				var sensitivityText = 'CHASE';
+			} else if(data.message[len].escLevelId == 'H') {
+				var sensitivityText = 'HOUND';
 			} else if(data.message[len].escLevelId == 'E') {
-				var message_sensitivity = 'broadcastemergency';
 				var sensitivityText = 'EMERGENCY';
-			} else if(data.message[len].escLevelId == 'U') {
-				var message_sensitivity = 'broadcasturgent';
-				var sensitivityText = 'URGENT';
 			} else {
 				var message_sensitivity = '';
 				var sensitivityText = '';				
@@ -117,7 +90,7 @@ function ChannelMainViewModel() {
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
 				sensitivityText: sensitivityText,			
-				broadcast: '<strong></strong>'+data.message[len].text+'<em></em>',
+				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',
 				time: msToTime(data.message[len].created),
 				created: data.message[len].created,				
 				replies: 'Replies'

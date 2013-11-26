@@ -52,6 +52,7 @@ function SendMessageViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			addExternalMarkup(that.template); // this is for header/overlay message			
 			that.escalateClass('');
 			that.yesNoClass('yesbutton');
 			that.noYesClass('nobutton');						
@@ -77,7 +78,7 @@ function SendMessageViewModel() {
 				var DateTime = localStorage.getItem('escDuration').split('/');
 				var day = DateTime[2].split(' ');
 				var time = day[1].split(':');						
-				var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+time[0]+':'+(time[1]<10?'0':'')+time[1]+' '+day[2].toLowerCase();
+				var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+time[0]+':'+time[1]+' '+day[2].toLowerCase();
 				that.duration(durationText);														
 			} else {
 				tomorrow = new Date(tomorrow);
@@ -87,8 +88,7 @@ function SendMessageViewModel() {
 				mins = ((mins<10?'0':'')+mins);			
 				var meridiem = tomorrow.getHours()>12?'PM':'AM';
 				var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+hours+':'+mins+' '+meridiem.toLowerCase();
-				that.duration(durationText);				
-												
+				that.duration(durationText);												
 			}									
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
@@ -184,10 +184,7 @@ function SendMessageViewModel() {
 		$.mobile.showPageLoadingMsg("a", "Posting Message");
 		if(localStorage.getItem('escLevel') == '' || localStorage.getItem('escLevel') == null) {
 			var messageobj = {text: that.messageText(), escLevelId: 'N', type: 'FYI'};															
-		} else if(localStorage.getItem('escDuration') == '' || localStorage.getItem('escDuration') == null) {			
-			/*var todayDate = new Date();
-			today = todayDate.getDate();
-			tomorrow = todayDate.setDate(today+1);*/		
+		} else if(localStorage.getItem('escDuration') == '' || localStorage.getItem('escDuration') == null) {					
 			that.escDuration(tomorrow);			
 			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: 'FYI'};			
 		} else {

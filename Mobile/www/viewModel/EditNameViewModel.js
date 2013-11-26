@@ -40,6 +40,7 @@ function EditNameViewModel() {
 			goToView('loginView');			
 		} 
 		else {
+			addExternalMarkup(that.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
