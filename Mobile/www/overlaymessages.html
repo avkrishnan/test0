@@ -1,30 +1,9 @@
-<!--
 <div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0px;">
   <div class="messagescontent">
       <div class="msg-hideshow">
         <h4>NEW MESSAGES</h4>
-        <a data-bind="click:closePopup"></a>
+        <a href="#" data-bind="click:closePopup"></a>
       </div>
-      <section data-bind="foreach: newMessagesDisplay">
-      <a class="messagesreceived" href="#" data-bind="click: $parent.showSingleMessage">
-        <span class="channelicans" data-bind="css: type"></span>
-        <div class="messageschannel">
-          <span class="received" data-bind="text: displayFrom"></span>
-          <span class="messagebtn">iGi</span>
-          <p class="receive-time"><em data-bind="text: created"></em><span data-bind="text: text"></span></p>
-        </div>
-      </a>
-      </section>
-  </div>
-</div>
--->
-<div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0px;">
-  <div class="messagescontent">
-      <div class="msg-hideshow">
-        <h4>NEW MESSAGES</h4>
-        <a data-bind="click:closePopup"></a>
-      </div>
-      
       <section data-bind="foreach: newMessagesDisplay">
         <a class="messagesreceived" href="#" data-bind="click: $parent.showSingleMessage">
           <span class="igibutton"></span>
@@ -35,41 +14,6 @@
           <span class="iconchannels" data-bind="css: escLevelId"></span>
         </a>
       </section>
-      
-      <!--
-      <a class="messagesreceived" href="V-53-message-detail.html">
-        <div class="messageschannel">
-          <span class="received">wasatchwarriors</span>
-          <p class="receive-time"><em>1 hour ago:</em>Friday's field trip list ...</p>
-        </div>
-        <span class="iconchannels icon-ts"></span>
-      </a>
-      
-      <a class="messagesreceived" href="V-53-message-detail.html">
-        <span class="igibutton"></span>
-        <div class="messageschannel">
-          <span class="received">wasatchwarriors</span>
-          <p class="receive-time"><em>1 hour ago:</em>Friday's field trip list...</p>
-        </div>
-         <span class="iconchannels icon-u"></span>
-      </a>
-      
-      <a class="messagesreceived" href="V-53-message-detail.html">
-        <div class="messageschannel">
-          <span class="received">wasatchwarriors</span>
-          <p class="receive-time"><em>1 hour ago:</em>Friday's field trip list ...</p>
-        </div>
-        <span class="iconchannels icon-e"></span>
-      </a>
-      
-      <a class="messagesreceived" href="V-53-message-detail.html">
-        <div class="messageschannel">
-          <span class="received">wasatchwarriors</span>
-          <p class="receive-time"><em>1 hour ago:</em>Friday's field trip list ...</p>
-        </div>
-        <span class="iconchannels icon-l"></span>
-      </a>
-      -->
   </div>
 </div>
 <script>
@@ -80,7 +24,6 @@
 			overlayViewModel.activate();
 		}
 		else {
-			//var nonCurrentViewOverlay = "#" + $(this).parent().attr('id') + " .active-overlay";
 			var nonCurrentViewOverlay = "#" + $(this).parent().attr('id');
 			$(nonCurrentViewOverlay + " .active-overlay").html('');
 			$(nonCurrentViewOverlay + " #newMessages-popup").remove();

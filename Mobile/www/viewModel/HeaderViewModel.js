@@ -61,11 +61,9 @@ function OverlayViewModel() {
 	}
 	
 	this.showSingleMessage = function(data) {
-		//$('#newMessages').popup().popup('close');
-		setTimeout(function(){
-				$("#newMessages").popup( "close" );
-		},1);
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
+		//alert(localStorage.getItem("overlayCurrentChannel"));
+		//$('#newMessages').popup('close');
 		goToView('channelSingleMessagesView');
 	}
 }

@@ -66,14 +66,26 @@ function ChannelSingleMessagesViewModel() {
 				that.description(channel.text);
 				that.messageCreated(channel.created);
 				that.messageClass(channel.type);
-				that.messageText(channel.text);				
+				that.messageText(channel.text);
+				that.readMessage(channel.id);
 			}
 		}
 	};
 	
 	this.backCommand = function () {
 		popBackNav();
-  };	
+  };
+	
+	this.readMessage = function(messageID) {
+		ES.messageService.readMsg(messageID, {
+			success: function(responseData) {
+				//alert(JSON.stringify(responseData));
+			},
+			error: function(data, status, details) {
+				//alert(details.message);
+			}
+		});		
+	}	
 
 	this.menuCommand = function () {
 		pushBackNav('Message details', 'channelSingleMessagesView', 'channelMenuView');
