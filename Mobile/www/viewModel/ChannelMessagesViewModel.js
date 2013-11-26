@@ -81,7 +81,7 @@ function ChannelMessagesViewModel() {
 	this.showSingleMessage = function(data) {
 		//alert(JSON.stringify(data));
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
-		pushBackNav('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');		
+		pushBackNav('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
 	
 	this.getChannelCommand = function(channelid) {

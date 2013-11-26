@@ -50,13 +50,22 @@ function OverlayViewModel() {
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			if(valueNotification.read == 'N') {
 				valueNotification.created = dateFormat2(valueNotification.created);
-				valueNotification.type = "icon-" + valueNotification.type.toLowerCase();
+				valueNotification.escLevelId = "icon-" + valueNotification.escLevelId.toLowerCase();
 				that.newMessagesDisplay.push(valueNotification);
 			}
 		});
 	}
 	
 	this.closePopup = function() {
-		$('#newMessages').popup().popup('close');
+		$('#newMessages').popup('close');
+	}
+	
+	this.showSingleMessage = function(data) {
+		//$('#newMessages').popup().popup('close');
+		setTimeout(function(){
+				$("#newMessages").popup( "close" );
+		},1);
+		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
+		goToView('channelSingleMessagesView');
 	}
 }
