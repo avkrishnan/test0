@@ -846,3 +846,9 @@ function time2TimeAgo(ts) {
 		return  'a few seconds ago';
 	}		
 }
+
+/* External markup for Header/Overlay etc*/
+function addExternalMarkup(viewID) {
+	$('#' + viewID + ' header.logged-in').load('header.html');
+	$('#' + viewID + ' .active-overlay').load('overlaymessages.html');
+}

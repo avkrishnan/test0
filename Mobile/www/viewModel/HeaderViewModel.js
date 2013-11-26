@@ -1,14 +1,16 @@
 ﻿/*globals ko*/
 function HeaderViewModel() {	
 	this.newMessageCount = ko.observable();
+	this.newMessageClass = ko.observable();
+	
 	that = this;
 	/* Methods */
 	this.activate = function() {
-		that.showNewMessages(localStorage.getItem('enymNotifications'));
+		showNewMessages(localStorage.getItem('enymNotifications'));
 	}
 	
 	/* New messages*/
-	this.showNewMessages = function(data) {
+	showNewMessages = function(data) {
 		var tempCount = 0;
 		var tempNotifications = JSON.parse(data);
 		$.each(tempNotifications, function(indexNotification, valueNotification) {
@@ -16,11 +18,22 @@ function HeaderViewModel() {
 				tempCount = tempCount+1;
 			}
 		});
+		if(tempCount > 0) {
+			that.newMessageClass('smsiconwhite');	
+		}
 		that.newMessageCount(tempCount);
 	}
 	
+	this.newIGIOverlay = function() {
+		alert('Coming soon...');
+	}
+	
+	this.newFollowersOverlay = function() {
+		alert('Coming soon...');	
+	}	
+	
 	this.newMessagesOverlay = function() {
-		$('#newMessages').popup('open');	
+		$('#newMessages').popup().popup('open');
 	}
 }
 /* overlay messages*/
@@ -33,19 +46,17 @@ function OverlayViewModel() {
 	}
 
 	this.newMessagesOverlay = function() {
-		//alert(localStorage.getItem('enymNotifications'));
 		that.newMessagesDisplay.removeAll();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			if(valueNotification.read == 'N') {
-				valueNotification.created = time2TimeAgo(valueNotification.created);
-				valueNotification.urgencyId = "icon-" + valueNotification.escLevelId.toLowerCase();
+				valueNotification.created = dateFormat2(valueNotification.created);
+				valueNotification.type = "icon-" + valueNotification.type.toLowerCase();
 				that.newMessagesDisplay.push(valueNotification);
 			}
 		});
-		//alert(JSON.stringify(that.newMessagesDisplay()));
 	}
 	
 	this.closePopup = function() {
-		$('#newMessages').popup('close');
+		$('#newMessages').popup().popup('close');
 	}
 }
