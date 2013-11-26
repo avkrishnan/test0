@@ -346,48 +346,64 @@ function ApiTestHelper() {
 
   t.findEmail = function(scenario, msgText) {
     return function() {
-      $.when(api.checkEmail(scenario.account.emailaddress)).then(t.regexFinder(msgText))
-          .then(start);
+      $.when(api.checkEmail(scenario.account.emailaddress))
+      .then(t.regexFinder(msgText))
+      .then(start);
     };
   };
 
-  t.createComMethod = function(scenario, localNameSuffix) {
+  t.createEmail = function(scenario, name) {
     return function() {
-      var emailAddress = api.generateEmail(scenario.account.accountname + localNameSuffix);
-      var cmName = "email" + localNameSuffix;
+      var emailAddress = api.generateEmail(scenario.account.accountname);
+      name = name == undefined ? "email" : name;
       var comMethod = {
-        name : cmName,
+        name : name,
         type : "EMAIL",
         address : emailAddress
       };
-      $.when(api.sCreateComMethod(scenario.accessToken, comMethod)).then(t.CHECK.created).then(
-          function(data) {
-            scenario[cmName] = data;
-          }).then(start);
+      $.when(scenario.ES.commethodService.addCommethod(comMethod))
+      .then(t.CHECK.created,t.CHECK.shouldNotFail)
+      .then( function(data) {
+          scenario[cmName] = data;
+        },t.CHECK.shouldNotFail)
+      .then(start,start);
     };
   };
 
-  t.createPushComMethod = function(scenario, address, localNameSuffix) {
+  t.createPushComMethod = function(scenario, address, name) {
     return function() {
-      var cmName = "push" + localNameSuffix;
       var comMethod = {
-        name : cmName,
+        name : name,
         type : "PUSH",
         address : address
       };
-      $.when(api.sCreateComMethod(scenario.accessToken, comMethod)).then(t.CHECK.created).then(
-          function(data) {
-            scenario[cmName] = data;
-          }).then(start);
+      $.when(scenario.ES.commethodService.addCommethod(comMethod))
+      .then(t.CHECK.created, t.CHECK.shouldNotFail)
+      .then( function(data) {
+          scenario[name] = data;
+        }, t.CHECK.shouldNotFail)
+      .then(start, start);
     };
   };
 
-  t.deleteComMethod = function(scenario, localNameSuffix) {
+  t.deleteCommethod = function(scenario, name) {
     return function() {
-      var cmName = "email" + localNameSuffix;
-      var email = scenario[cmName];
-      $.when(api.sDeleteComMethod(scenario.accessToken, email.id)).then(t.CHECK.successNoContent)
-          .then(start);
+      var cm = scenario.cm[name];
+      $.when(scenario.ES.commethodService.deleteCommethod(cm.id))
+      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };
+
+  t.getCommethods = function(scenario) {
+    return function() {
+      $.when(scenario.ES.commethodService.getCommethods())
+      .then(t.CHECK.success, t.CHECK.shouldNotFail)
+      .then( function(data) {
+          scenario.cm = {};
+          data.commethod.forEach(function(item) {scenario.cm[item.name] = item;});
+        }, t.CHECK.shouldNotFail)
+      .then(start, start);
     };
   };
 
@@ -413,5 +429,22 @@ function ApiTestHelper() {
       .then(start, start);
     };
   };
+  
+  t.testjason20 = {
+    accountname : "jason20",
+    emailaddress : "jason+20@lawcasa.com",
+    firstname : "Jason",
+    lastname : "Law",
+    password : "testtest"
+  };
+
+  t.testjason21 = {
+    accountname : "jason21",
+    emailaddress : "jason+21@lawcasa.com",
+    firstname : "Jason",
+    lastname : "Law",
+    password : "testtest"
+  };
+
   
 }

@@ -4,26 +4,12 @@
 
   var hlpr = new ApiTestHelper();
 
-  // module("group a");
-
   var SCEN_A = hlpr.TestScenario();
   var SCEN_B = hlpr.TestScenario();
 
-  SCEN_A.account = {
-    accountname : "jason20",
-    emailaddress : "jason+20@lawcasa.com",
-    firstname : "Jason",
-    lastname : "Law",
-    password : "testtest"
-  };
+  SCEN_A.account = hlpr.testjason20;
 
-  SCEN_B.account = {
-    accountname : "jason21",
-    emailaddress : "jason+21@lawcasa.com",
-    firstname : "Jason",
-    lastname : "Law",
-    password : "testtest"
-  };
+  SCEN_B.account = hlpr.testjason21;
 
   // debugger;
   // acctA.phonenumber = '801376334 8 ';
