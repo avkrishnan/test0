@@ -799,7 +799,7 @@ function dateFormat1(created) {
 	var created = created.getTime();		
 	var date  = new Date(created);
 	return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
-	date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12==0?'12':date.getHours()-12) + ":" + 
+	date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM'); 
 }
 
@@ -809,7 +809,7 @@ function dateFormat2(created) {
 	var date  = new Date(created);
 	var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
 	return ( ((date.getMonth()+1)<10?'0':'') + (monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
-	", " +((date.getHours()<10?'0':'')+date.getHours()-12==0?'12':date.getHours()-12) + ":" + 
+	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
 }
 

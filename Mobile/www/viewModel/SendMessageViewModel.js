@@ -17,8 +17,9 @@ function SendMessageViewModel() {
 	this.channelName = ko.observable();
 	this.escalateClass = ko.observable();	
 	this.yesNoClass = ko.observable();
-	this.noYesClass = ko.observable();	
-	this.escalateActive = ko.observable(false);
+	this.noYesClass = ko.observable();
+	this.duration = ko.observable();		
+	this.escalateActive = ko.observable(false);	
 	this.escDuration = ko.observable();	
 	this.escLevel = ko.observable();	
 	this.toastText = ko.observable();
@@ -44,23 +45,51 @@ function SendMessageViewModel() {
 	
 	this.activate = function() {			
 		var token = ES.evernymService.getAccessToken();
+		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+		todayDate = new Date();
+		today = todayDate.getDate();
+		tomorrow = todayDate.setDate(today+1);				
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
 			that.escalateClass('');
 			that.yesNoClass('yesbutton');
 			that.noYesClass('nobutton');						
-			that.escalateActive(false);			
+			that.escalateActive(false);						
 			if(localStorage.getItem('escalate') == 'yes') {
 				that.escalateClass('escalate-activesetting');
 				that.yesNoClass('nobutton');
-				that.noYesClass('yesbutton');								
+				that.noYesClass('yesbutton');														
 				that.escalateActive(true);
 				that.escLevel(localStorage.getItem('escLevel'));							
 				localStorage.removeItem('escalate');																						
 			} else {
 				that.escLevel('N');
-			}						
+			}
+			if(that.escLevel() == 'R') {
+				escalate = 'Remind';
+			} else if(that.escLevel() == 'C') {
+				escalate = 'Chase';
+			} else {
+				escalate = 'Hound';
+			}			
+			if(localStorage.getItem('escDuration')) {
+				var DateTime = localStorage.getItem('escDuration').split('/');
+				var day = DateTime[2].split(' ');
+				var time = day[1].split(':');						
+				var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+time[0]+':'+(time[1]<10?'0':'')+time[1]+' '+day[2].toLowerCase();
+				that.duration(durationText);														
+			} else {
+				tomorrow = new Date(tomorrow);
+				var hours = tomorrow.getHours();
+				hours = (hours<10?'0':'')+(hours-12>12?hours-12:hours);			
+				var mins = tomorrow.getMinutes();
+				mins = ((mins<10?'0':'')+mins);			
+				var meridiem = tomorrow.getHours()>12?'PM':'AM';
+				var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+hours+':'+mins+' '+meridiem.toLowerCase();
+				that.duration(durationText);				
+												
+			}									
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 			that.characterCount('0');		
@@ -156,9 +185,9 @@ function SendMessageViewModel() {
 		if(localStorage.getItem('escLevel') == '' || localStorage.getItem('escLevel') == null) {
 			var messageobj = {text: that.messageText(), escLevelId: 'N', type: 'FYI'};															
 		} else if(localStorage.getItem('escDuration') == '' || localStorage.getItem('escDuration') == null) {			
-			var todayDate = new Date();
+			/*var todayDate = new Date();
 			today = todayDate.getDate();
-			tomorrow = todayDate.setDate(today+1);		
+			tomorrow = todayDate.setDate(today+1);*/		
 			that.escDuration(tomorrow);			
 			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: 'FYI'};			
 		} else {

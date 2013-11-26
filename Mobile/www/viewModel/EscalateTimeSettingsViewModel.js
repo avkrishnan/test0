@@ -51,7 +51,7 @@ function EscalateTimeSettingsViewModel() {
 				that.day(_getDate('getDate'));
 				that.year(_getDate('getFullYear'));
 				var hours = _getDate('getHours');
-				hours = (hours<10?'0':'')+hours-12==0?'12':hours-12;			
+				hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
 				that.hour(hours);
 				var mins = _getDate('getMinutes');
 				mins = ((mins<10?'0':'')+mins);			

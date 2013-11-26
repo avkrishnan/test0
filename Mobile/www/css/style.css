@@ -2655,7 +2655,7 @@ ul.igiresponses li span {
 	background:#8DC63F;
 	font-size:13px;
 	color:#fff;
-	padding:4px 12px;
+	padding:4px 10px;
 	border-radius:12px 4px 4px 12px;
 	margin-top:5px;
 	float:right;
@@ -2880,7 +2880,7 @@ ul.igiresponses li span {
 	margin:0;
 }
 .yes-no.setting-datetime label {
-	width:210px;
+	width:218px;
 }
 .emergencybtn {
 	margin:6px 0 0 0;
