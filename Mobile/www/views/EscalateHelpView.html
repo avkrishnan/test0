@@ -1,14 +1,6 @@
 <!--To do - Pradeep Kumar-->
 <div id="escalateHelpView" data-role="page" class="channel-list" >
-   <header>
-    <a href="#" class="back" onclick="goToView('sendMessageView');"><em></em>Compose</a>   
-    <a class="menu" href="#" data-bind="click: menuCommand"></a>
-    <div class="linkicon">    
-      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
-      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
-      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
-    </div>
-  </header>  
+	<header class="logged-in"></header>  
   <div class="page-content">
     <div class="compose">
       <h1>Escalate ?</h1>
@@ -39,4 +31,5 @@
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
   </div>
+  <div class="active-overlay" style="display:none"></div>  
 </div>

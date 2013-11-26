@@ -1,14 +1,6 @@
 <!--To do - Pradeep Kumar-->
 <div id="singleMessageView" data-role="page" >
-  <header>
-    <a href="#" class="back" onclick="goToView('channelMainView');"><em></em>Main</a>
-    <a class="menu" href="#" data-bind="click: menuCommand"></a>
-    <div class="linkicon">    
-      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
-      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
-      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
-    </div>
-  </header>
+	<header class="logged-in"></header>
   <div class="page-content channelsettings">
     <div class="channelcontent broadecast">
       <span class="channelimg channel1 borderred"></span>
@@ -46,6 +38,7 @@
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>
-  </div>   
+  </div>
+  <div class="active-overlay" style="display:none"></div>     
 </div>
 

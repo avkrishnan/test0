@@ -30,18 +30,20 @@ function ChannelViewUnfollowModel() {
 	this.activate = function (channel) {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
-			that.hasfooter(false);
+			goToView('loginView');
+		} else {		
+			addExternalMarkup(that.template); // this is for header/overlay message		
+			if(localStorage.getItem('toastData')) {			
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');				
+			}		
+			that.channelid(channel.id);
+			that.accountName(localStorage.getItem("accountName"));
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);
+			that.counter(localStorage.getItem('counter'));					
+			$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		}
-		if(localStorage.getItem('toastData')) {
-			that.toastText(localStorage.getItem('toastData'));
-			showToast();
-			localStorage.removeItem('toastData');				
-		}		
-		that.channelid(channel.id);
-		that.accountName(localStorage.getItem("accountName"));
-		that.backText('<em></em>'+backNavText[backNavText.length-1]);
-		that.counter(localStorage.getItem('counter'));					
-		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 	};
 	
 	this.backCommand = function () {

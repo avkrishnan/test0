@@ -52,6 +52,7 @@ function SendMessageViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
+			addExternalMarkup(that.template); // this is for header/overlay message			
 			that.escalateClass('');
 			that.yesNoClass('yesbutton');
 			that.noYesClass('nobutton');						
