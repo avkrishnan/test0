@@ -16,7 +16,7 @@
       </section>
   </div>
 </div>
-<script>			
+<script>
 	var overlayViewModel = new OverlayViewModel();
 	$(".active-overlay").each(function() {
 		if($(this).parent().css('display') != 'none') {
@@ -24,9 +24,13 @@
 			overlayViewModel.activate();
 		}
 		else {
-			ko.cleanNode($(this));	
+			//var nonCurrentViewOverlay = "#" + $(this).parent().attr('id') + " .active-overlay";
+			var nonCurrentViewOverlay = "#" + $(this).parent().attr('id');
+			$(nonCurrentViewOverlay + " .active-overlay").html('');
+			$(nonCurrentViewOverlay + " #newMessages-popup").remove();
+			ko.cleanNode($(this));
 		}
-	});	
+	});
 	//ko.applyBindings(overlayViewModel, document.getElementById('newMessages'));
 	//overlayViewModel.activate();
 </script>

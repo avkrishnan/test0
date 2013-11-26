@@ -8,8 +8,6 @@ function ChannelsFollowingListViewModel() {
 	this.accountName = ko.observable();
 	this.backText = ko.observable();
 	this.channels = ko.observableArray([]);
-	//this.newMessagesDisplay = ko.observableArray([]);
-	//this.newMessagesCount = ko.observable();
 	this.toastText = ko.observable();		
 	
 	var that = this;
@@ -30,9 +28,7 @@ function ChannelsFollowingListViewModel() {
 			goToView('loginView');  
 		} 
 		else {
-			
 			$('#' + that.template + ' header.logged-in').load('header.html');
-			
 			$('#' + that.template + ' .active-overlay').load('overlaymessages.html');
 			
 			if(localStorage.getItem('toastData')) {

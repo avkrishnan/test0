@@ -4,11 +4,12 @@ function HeaderViewModel() {
 	that = this;
 	/* Methods */
 	this.activate = function() {
-		that.showNewMessages(localStorage.getItem('enymNotifications'));
+		showNewMessages(localStorage.getItem('enymNotifications'));
+		//alert('2');
 	}
 	
 	/* New messages*/
-	this.showNewMessages = function(data) {
+	showNewMessages = function(data) {
 		var tempCount = 0;
 		var tempNotifications = JSON.parse(data);
 		$.each(tempNotifications, function(indexNotification, valueNotification) {
@@ -17,6 +18,7 @@ function HeaderViewModel() {
 			}
 		});
 		that.newMessageCount(tempCount);
+		//alert(that.newMessageCount());
 	}
 	
 	this.newIGIOverlay = function() {
@@ -28,7 +30,7 @@ function HeaderViewModel() {
 	}	
 	
 	this.newMessagesOverlay = function() {
-		$('#newMessages').popup('open');
+		$('#newMessages').popup().popup('open');
 	}
 }
 /* overlay messages*/
@@ -54,6 +56,6 @@ function OverlayViewModel() {
 	}
 	
 	this.closePopup = function() {
-		$('#newMessages').popup('close');
+		$('#newMessages').popup().popup('close');
 	}
 }

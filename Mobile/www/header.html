@@ -17,7 +17,8 @@
 			headerViewModel.activate();
 		}
 		else {
-			ko.cleanNode($(this));	
+			var nonCurrentViewHeader = "#" + $(this).parent().attr('id') + " header";
+			$(nonCurrentViewHeader).html('');
 		}
 	});
 	//ko.applyBindings(headerViewModel, document.getElementById('header'));

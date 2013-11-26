@@ -43,8 +43,10 @@ function ChannelListViewModel() {
 		} 
 		else {
 			$('#' + that.template + ' header.logged-in').load('header.html');
-			//$('#newMessages').load('overlaymessages.html');	
-			$('#' + that.template + ' .active-overlay').load('overlaymessages.html');		
+			//$('#newMessages').load('overlaymessages.html');
+			$('#' + that.template + ' .active-overlay').load('overlaymessages.html');
+			
+				
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
