@@ -28,7 +28,6 @@
 			var nonCurrentViewOverlay = "#" + $(this).parent().attr('id');
 			$(nonCurrentViewOverlay + " .active-overlay").html('');
 			$(nonCurrentViewOverlay + " #newMessages-popup").remove();
-			ko.cleanNode($(this));
 		}
 	});
 </script>

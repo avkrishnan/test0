@@ -43,7 +43,7 @@ header {
 	*Back Button 
 */
 
-a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:active {
+a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:active, a.back {
 	background:#fff url(images/back-right-arrow.png) no-repeat top right;
 	margin-left:10px;
 	float:left;
@@ -2186,6 +2186,7 @@ h1.requests {
 	position:absolute;
 	top:4px;
 	cursor:pointer;
+	color:#fff;
 }
 ul.igiresponses, .notification {
 	border-top:1px solid #EAEAEA;
