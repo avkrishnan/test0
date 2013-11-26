@@ -50,13 +50,6 @@ function SingleMessageViewModel() {
 		pushBackNav('Broadcast Details', 'singleMessageView', 'channelMenuView');		
   };	
 	
-/*	function _date(created) {	
-		var date  = new Date(created);
-    return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
-		date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
-		(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
-	}*/
-	
 	this.messageFullText = function(){
 		goToView('singleMessageFullTextView');										
 	};

@@ -37,7 +37,7 @@
     </div>
     <div data-bind="foreach: broadcasts">
       <a href="#" class="channelbroadcast" data-bind="click: $parent.singleMessage.bind($index())">
-        <div class="broadcast-sensitive" data-bind="css: sensitivity">
+        <div class="broadcast-sensitive">
           <span data-bind="html: broadcast"></span><em data-bind="text: time"></em>
         </div>
         <br />

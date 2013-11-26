@@ -103,8 +103,8 @@ function EscalateTimeSettingsViewModel() {
 				that.hour(hour);					
 			}
 		} else if(localStorage.getItem('setValue') == 'minute') {
-			if(that.minute() == 01) {
-				that.minute(60);
+			if(that.minute() == 00) {
+				that.minute(59);
 			} else {
 				var minute = that.minute();
 				minute == minute --;
@@ -148,8 +148,8 @@ function EscalateTimeSettingsViewModel() {
 				that.hour(hour);		
 			}				
 		} else if(localStorage.getItem('setValue') == 'minute') {
-			if(that.minute() == 60) {
-				that.minute('01');
+			if(that.minute() == 59) {
+				that.minute('00');
 			} else {
 				var minute = that.minute();
 				minute == minute ++;				
