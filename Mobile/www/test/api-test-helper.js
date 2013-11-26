@@ -308,10 +308,13 @@ function ApiTestHelper() {
     };
   };
 
-  t.fetchMsgs = function(scenario, ownerScenario, chnlKey) {
+  t.fetchMsgs = function(scenario, ownerScenario, chnlKey, extraCheck) {
     return function() {
-      $.when(scenario.ES.messageService.getChannelMessages(ownerScenario[chnlKey].id)).then(
-          t.CHECK.success).then(checkOneMsgFunc(scenario, ownerScenario.msg)).then(start);
+      $.when(scenario.ES.messageService.getChannelMessages(ownerScenario[chnlKey].id))
+      .then(t.CHECK.success, t.CHECK.shouldNotFail)
+      .then(checkOneMsgFunc(scenario, ownerScenario.msg), t.CHECK.shouldNotFail)
+      .then(extraCheck == undefined ? null : extraCheck, t.CHECK.shouldNotFail)
+      .then(start, start);
     };
   };
 
@@ -320,7 +323,7 @@ function ApiTestHelper() {
       equal(data.message.length, 1, "we get one message back");
       equal(data.message[0].text, msg.text, "and the text matches");
       equal(data.more, false, "there should be no more messages");
-      scenario.msg = data.message[0]
+      scenario.msg = data.message[0];
       ok(true, JSON.stringify(data));
     };
   }

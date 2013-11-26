@@ -30,7 +30,7 @@
   // asyncTest('A verifies email address', hlpr.verify(SCEN_A));
   // asyncTest('B verifies email address', hlpr.verify(SCEN_B));
 
-  var msgText = 'Hello everybody, this is a test broadcast!';
+  var msgText = 'Hello everybody, this is a test broadcast! ' + hlpr.randomStr(10);
 
   asyncTest('A broadcasts a message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));
   asyncTest('B checks message', hlpr.fetchMsgs(SCEN_B, SCEN_A, 'chnl1'));
@@ -40,15 +40,51 @@
 
   // Here's were we do the tests for message read, dismiss, ack, and snooze
 
-  asyncTest('B gets msg notifications', function() {
-    $.when(SCEN_B.ES.systemService.getMsgNotifs()).then(hlpr.CHECK.success).then(start);
+  asyncTest('B gets msg notifications and the msg is there', function() {
+    $.when(SCEN_B.ES.systemService.getMsgNotifs())
+    .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
+    .then(function(data) {
+        var find = data.filter(function(item) { return (item.text == SCEN_A.msg.text); });
+        equal(find.length, 1, "we find one entry");
+      }, null)
+    .then(start, start);
   });
 
   asyncTest('B reads message', function() {
-    $.when(SCEN_B.ES.messageService.readMsg(SCEN_B.msg.id)).then(hlpr.CHECK.successNoContent).then(
-        start);
+    $.when(SCEN_B.ES.messageService.readMsg(SCEN_B.msg.id))
+    .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
+    .then(start, start);
   });
 
+  asyncTest('B gets msg notifications and the msg is not there', function() {
+    $.when(SCEN_B.ES.systemService.getMsgNotifs())
+    .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
+    .then(function(data) {
+        var find = data.filter(function(item) { return (item.text == SCEN_A.msg.text); });
+        equal(find.length, 0, "we should not find an entry");
+      }, null)
+    .then(start, start);
+  });
+
+  /*
+  asyncTest('B fetches message', function() {
+    $.when(SCEN_B.ES.messageService.getChannelMessage(SCEN_A['chnl1'].id, SCEN_B.msg.id))
+    .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
+    .then(function(data) {
+        debugger;
+        
+      }, hlpr.CHECK.shouldNotFail)
+    .then(start, start);
+  });
+  */
+  
+  /*
+  asyncTest('B checks message', hlpr.fetchMsgs(SCEN_B, SCEN_A, 'chnl1', function() {
+    debugger;
+    SCEN_B.msg
+    }));
+  */
+  
   /*
    * asyncTest('B dismisses message', function() {
    * $.when(api.dismissMsg(SCEN_B.accessToken, SCEN_B.msg.id))
