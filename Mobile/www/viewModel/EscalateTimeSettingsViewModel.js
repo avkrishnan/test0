@@ -44,7 +44,7 @@ function EscalateTimeSettingsViewModel() {
 				that.day(day[0]);
 				that.year(DateTime[0]);			
 				that.hour(time[0]);			
-				that.minute((time[1]<10?'0':'')+time[1]);			
+				that.minute(time[1]);			
 				that.meridiem(day[2]);										
 			} else {
 				that.month(monthNames[_getDate('getMonth')]);			
