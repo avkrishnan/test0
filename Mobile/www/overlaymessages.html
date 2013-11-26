@@ -1,21 +1,33 @@
-<div class="messagescontent">
-    <div class="msg-hideshow">
-      <h4>NEW MESSAGES</h4>
-      <a data-bind="click:closePopup"></a>
-    </div>
-    <section data-bind="foreach: newMessagesDisplay">
-    <a class="messagesreceived" href="#">
-      <span class="channelicans" data-bind="css: urgencyId"></span>
-      <div class="messageschannel">
-        <span class="received" data-bind="text: displayFrom"></span>
-        <span class="messagebtn">iGi</span>
-        <p class="receive-time"><em data-bind="text: created"></em><span data-bind="text: text"></span></p>
+<div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0px;">
+  <div class="messagescontent">
+      <div class="msg-hideshow">
+        <h4>NEW MESSAGES</h4>
+        <a data-bind="click:closePopup"></a>
       </div>
-    </a>
-    </section>
+      <section data-bind="foreach: newMessagesDisplay">
+      <a class="messagesreceived" href="#">
+        <span class="channelicans" data-bind="css: type"></span>
+        <div class="messageschannel">
+          <span class="received" data-bind="text: displayFrom"></span>
+          <span class="messagebtn">iGi</span>
+          <p class="receive-time"><em data-bind="text: created"></em><span data-bind="text: text"></span></p>
+        </div>
+      </a>
+      </section>
+  </div>
 </div>
-<script>			
+<script>
 	var overlayViewModel = new OverlayViewModel();
-	ko.applyBindings(overlayViewModel, document.getElementById('newMessages'));
-	overlayViewModel.activate();
+	$(".active-overlay").each(function() {
+		if($(this).parent().css('display') != 'none') {
+			ko.applyBindings(overlayViewModel, document.getElementById('newMessages'));
+			overlayViewModel.activate();
+		}
+		else {
+			//var nonCurrentViewOverlay = "#" + $(this).parent().attr('id') + " .active-overlay";
+			var nonCurrentViewOverlay = "#" + $(this).parent().attr('id');
+			$(nonCurrentViewOverlay + " .active-overlay").html('');
+			$(nonCurrentViewOverlay + " #newMessages-popup").remove();
+		}
+	});
 </script>

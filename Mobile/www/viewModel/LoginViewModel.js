@@ -7,7 +7,7 @@ function LoginViewModel() {
   this.displayname = "Login";	
 	
 	/* Login view observable */
-  this.accountName = ko.observable();	
+  this.accountName = ko.observable();
   this.password = ko.observable();
   this.errorMessage = ko.observable();
   this.usernameClass = ko.observable();
@@ -19,7 +19,7 @@ function LoginViewModel() {
   this.applyBindings = function() {
     $("#" + that.template).on("pagebeforeshow", null, function(e, data) {
       that.clearForm();				
-      that.activate();		
+      that.activate();
     });
   };
 	

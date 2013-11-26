@@ -29,7 +29,8 @@ function EscalateTimeSettingsViewModel() {
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];		
 		if(token == '' || token == null) {
 			goToView('loginView');					
-		} else {
+		} 
+		else {
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();

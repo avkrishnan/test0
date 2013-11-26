@@ -88,6 +88,7 @@ function ChannelViewModel() {
 			that.hasfooter(false);
 		}
 		else {
+			addExternalMarkup(that.template); // this is for header/overlay message
 			that.hasheader(true);
 			that.hasfooter(true);			
 		}

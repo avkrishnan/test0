@@ -26,9 +26,12 @@ function ChannelMessagesViewModel() {
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));		
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channel) {
+		} 
+		else if(!channel) {
 			goToView('channelsFollowingListView');			
-		} else {
+		} 
+		else {
+			addExternalMarkup(that.template); // this is for header/overlay message
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
