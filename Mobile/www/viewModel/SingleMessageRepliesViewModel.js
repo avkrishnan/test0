@@ -82,9 +82,10 @@ function SingleMessageRepliesViewModel() {
 		}
 	}; 
 	
-	function errorAPI(data, status, response) {
+	function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    showError(response.message);
+		that.toastText(details.message);		
+		localStorage.setItem('toastData', that.toastText());
     goToView('singleMessageView');
   };
 	

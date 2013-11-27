@@ -37,7 +37,8 @@ function CommethodVerificationViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		showError(details.message);
+		that.toastText(details.message);		
+		showToast();
 	};
 	
 }

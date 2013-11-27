@@ -167,9 +167,10 @@ function ChannelListViewModel() {
 		}
 	}
 	
-	function errorAPI(data, status, response){
+	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		showError(response.message);
+		that.toastText(details.message);		
+		showToast();
 	};
 	
 	this.goCreateFirstChannel = function() {

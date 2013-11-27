@@ -137,7 +137,8 @@ function SendMessageViewModel() {
 	
 	function errorValidation(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		showError('Not authorized ' + details.message);
+		that.toastText(details.message);		
+		showToast();
 	};
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {

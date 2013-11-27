@@ -64,9 +64,9 @@ function ChannelDeleteViewModel() {
 		goToView('channelsIOwnView');		
   };
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', response.message);
+    localStorage.setItem('signUpError', details.message);
     goToView('channelDeleteView');
   };
 	

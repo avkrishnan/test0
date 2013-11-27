@@ -84,9 +84,9 @@ function SignupStepSecondViewModel() {
 		that.loginCommand();
   };
 
-  function signUpError(data, status, response) {
+  function signUpError(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', response.message);		
+    localStorage.setItem('signUpError', details.message);		
     goToView('signupStepFirstView');
   };
 	
@@ -129,9 +129,10 @@ function SignupStepSecondViewModel() {
 		goToView('registrationVerifyView');
   }
 
-  function loginError(data, status, response) {
+  function loginError(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    showError('LOGIN FAILED');
+		that.toastText(details.message);		
+		showToast();
     ES.evernymService.clearAccessToken();
   }
 	

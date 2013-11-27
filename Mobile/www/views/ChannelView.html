@@ -1,15 +1,6 @@
 <!-- To Do - Devender - Remove this later -->
 <div id="channelView" data-role="page">
-  <header>
-    <a href="#" class="back" data-bind="html: backText, click: backCommand, visible:hasheader"></a>
-    <a class="menu" href="#" data-bind="click: menuCommand, visible:hasheader"></a>    
-    <div class="linkicon" data-bind="visible:hasheader">    
-      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
-      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
-      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
-    </div>
-  </header>
-    
+  <header class="logged-in"></header>    
   <div class="page-content">
   
     <div class="channelinformation">
@@ -61,4 +52,5 @@
     <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
     <a class="announcement" href="#" data-bind="click: composeCommand"></a>
   </div>
+  <div class="active-overlay" style="display:none"></div>  
 </div>

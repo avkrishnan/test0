@@ -213,50 +213,49 @@ function ChannelViewModel() {
 	
 	function errorAPIChannel(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
-		if (loginPageIfBadLogin(details.code)) {
-			showError("Please log in or register to view this channel.");
+		that.toastText(details.message);		
+		localStorage.setItem('toastData', that.toastText());
+		var token = ES.evernymService.getAccessToken();			
+		if(token == '' || token == null) {
+			goToView('loginView');
 		} else {
-			that.toastText(details.message);		
-			localStorage.setItem('toastData', that.toastText());
-			var token = ES.evernymService.getAccessToken();			
-			if(token == '' || token == null) {
-				goToView('loginView');
-			} else {
-				goToView('channelListView');
-			}
+			goToView('channelListView');
 		}
 	}
     
 	function errorAPI(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
-		loginPageIfBadLogin(details.code);
-		showError("Error: " + ((status==500)?"Internal Server Error":details.message));
+		that.toastText(details.message);		
+		showToast();
 	}
     
 	function errorFollowing(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
 		if (details.code == 100601){ // we are already following this channel
-			showError('You are already following this channel');
+			that.toastText(details.message);		
+			showToast();		
 		}
 		else if (isBadLogin(details.code)){
 			localStorage.setItem("action", 'follow_channel');
 			$.mobile.changePage("#" + loginViewModel.template);
 		}
 		else {
-			showError("Error Following Channel: " + details.message);
+			that.toastText(details.message);		
+			showToast();
 		}
 	}
 	
 	function errorPostingMessage(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		loginPageIfBadLogin(details.code);
-		showError("Error Posting Message: " + details.message);
+		that.toastText(details.message);		
+		showToast();
 	}
 	
 	function errorRetrievingMessages(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
-		showError("Error Retrieving Messages: " + ((status==500)?"Internal Server Error":details.message));
+		that.toastText(details.message);		
+		showToast();
 	}
 	
 	this.getChannelCommand = function (lchannelid) {
@@ -304,8 +303,8 @@ function ChannelViewModel() {
     
 	function errorUnfollow(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
-		loginPageIfBadLogin(details.code);
-		showError("Error Unfollowing Channel: " + ((status==500)?"Internal Server Error":details.message));
+		that.toastText(details.message);		
+		showToast();
 	}
 	
 	this.deleteChannelCommand = function () {
@@ -317,10 +316,6 @@ function ChannelViewModel() {
 		localStorage.setItem("currentMessage", JSON.stringify(message));
 		$.mobile.changePage("#" + messageViewModel.template)
 	};
-    
-	/*this.showChannelMenu = function(){
-		$.mobile.changePage("#" + channelMenuViewModel.template);
-	}*/
 		
 	this.showChannelList = function() {
 		var lrelationship = 'O';
