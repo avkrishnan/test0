@@ -79,7 +79,6 @@
     $.when(SCEN_B.ES.messageService.getChannelMessagesForFollower(SCEN_A['chnl1'].id))
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then(function(data) {
-      debugger;
       equal(data.messagealert.length, 1, "we should find one entry");
       }, null)
     .then(start, start);
