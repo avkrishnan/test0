@@ -38,7 +38,7 @@ function HeaderViewModel() {
 	this.newMessagesOverlay = function() {
 		var tCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
 		if(tCount > 0) {
-			$('#newMessages').popup().popup('open');	
+			$('#newMessages').popup().popup('open', {x: 1000, y:1000});	
 		}
 		else {
 			alert('You dont have any new messages');
