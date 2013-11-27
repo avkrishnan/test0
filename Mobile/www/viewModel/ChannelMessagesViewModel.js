@@ -48,10 +48,8 @@ function ChannelMessagesViewModel() {
 			} else {		
 				localStorage.setItem('counter', 1)
 			}				
-			//alert(localStorage.getItem("currentChannel"));
 			that.channelid(channel.id);
-			localStorage.removeItem("currentChannelMessage");
-			//alert(that.channelid());	
+			localStorage.removeItem("currentChannelMessage");	
 			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 			that.channelMessages.removeAll();
 			return that.getChannelCommand(that.channelid()).then(that.gotChannel);
@@ -79,19 +77,18 @@ function ChannelMessagesViewModel() {
 	}	
 	
 	this.showSingleMessage = function(data) {
-		//alert(JSON.stringify(data));
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
 		pushBackNav('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
 	
 	this.getChannelCommand = function(channelid) {
-		//alert(channelid);
 		var callbacks = {
 			success: function(){
 				//alert('success');	
 			},
-			error: function() {
-				alert('error');
+			error: function(data, status, details) {
+				that.toastText(details.message);		
+				localStorage.setItem('toastData', that.toastText());				
 			}
 		};
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
@@ -105,7 +102,6 @@ function ChannelMessagesViewModel() {
 		var callbacks = {
 			success: function(data){
 				$.each(data.message, function(indexMessage, valueMessage) {
-					//alert(JSON.stringify(valueMessage));
 					var tempCreated = msToTime(valueMessage.created);
 					var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 					if(tempClass == 'n') {
@@ -119,8 +115,9 @@ function ChannelMessagesViewModel() {
 					);
 				});
 			},
-			error: function() {
-				alert('error');	
+			error: function(data, status, details) {
+				that.toastText(details.message);		
+				localStorage.setItem('toastData', that.toastText());				
 			}
 		};		
 		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);

@@ -105,8 +105,11 @@ function SignupStepSecondViewModel() {
 	
 	function loginSuccess(args) {
 		var callbacks = {
-			success: function() {;},
-			error: function(data, status, details) {alert(details.message);}
+			success: function() {},
+			error: function(data, status, details) {
+				that.toastText(details.message);		
+				localStorage.setItem('toastData', that.toastText());				
+			}
 		};		
     $.mobile.hidePageLoadingMsg();
     ES.evernymService.clearAccessToken();

@@ -55,30 +55,6 @@ function SingleMessageRepliesViewModel() {
 		pushBackNav('Broadcast Replies', 'singleMessageRepliesView', 'channelMenuView');		
   };	
 	
-	function msToTime(ms){
-		var ms = new Date().getTime() - ms;	
-		var secs = Math.floor(ms / 1000);
-		var msleft = ms % 1000;
-		var totalHours = Math.floor(secs / (60 * 60));
-		var days = Math.floor(totalHours / 24);
-		var hours = totalHours % 24;
-		var divisor_for_minutes = secs % (60 * 60);
-		var minutes = Math.floor(divisor_for_minutes / 60);
-		var divisor_for_seconds = divisor_for_minutes % 60;
-		var seconds = Math.ceil(divisor_for_seconds);
-		if(days > 0) {
-			return days+' days ago';
-		} else if(hours > 0) {
-			return hours+' hrs ago';
-		} else if(minutes > 0) {
-			return minutes+' mins ago';
-		} else if(seconds > 0) {
-			return  seconds+' secs ago';
-		} else {
-			return  'just now';
-		}
-	}
-	
 	/*function replyAuthor() {
 		return ES.loginService.getAccount('bb5156c5-1e95-414b-b76a-299edabd15f7', {success: successfulGetAccountInfo, error: errorAPI});
 	}
