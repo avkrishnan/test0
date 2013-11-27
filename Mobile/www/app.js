@@ -758,7 +758,7 @@ function popBackNav() {
 
 /* Toast messages function */
 function showToast() {
-	$('.toast-notification').delay(500).slideDown(1000, function() {
+	$('.toast-notification').delay(500).slideDown(500, function() {
 		$('.toast-notification').show();
 	}).delay(4000).slideUp(1000);
 }
