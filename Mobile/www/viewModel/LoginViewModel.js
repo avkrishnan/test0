@@ -156,9 +156,24 @@ function LoginViewModel() {
 					//enymNotifications = responseData;
 					localStorage.removeItem('enymNotifications');
 					localStorage.setItem('enymNotifications', JSON.stringify(responseData));
+					var tempCount = 0;
+					var tempNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+					$.each(tempNotifications, function(indexNotification, valueNotification) {
+						if(valueNotification.read == 'N') {
+							tempCount = tempCount+1;
+						}
+					});
+					if(tempCount > 0) {
+						headerViewModel.newMessageClass('smsiconwhite');
+						headerViewModel.newMessageCount(tempCount);
+					}
+					else {
+						headerViewModel.newMessageCount('');
+						headerViewModel.newMessageClass('');
+					}					
 				},
 				error: function(data, status, details) {
-					that.toastText(details.message);		
+					that.toastText(details.message);
 					localStorage.setItem('toastData', that.toastText());				
 				}
 			});

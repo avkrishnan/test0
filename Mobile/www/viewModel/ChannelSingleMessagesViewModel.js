@@ -93,8 +93,6 @@ function ChannelSingleMessagesViewModel() {
 	this.updateMessages = function() {
 		ES.systemService.getMsgNotifs({
 			success: function(responseData) {
-				//alert(JSON.stringify(responseData));
-				//enymNotifications = responseData;
 				localStorage.removeItem('enymNotifications');
 				localStorage.setItem('enymNotifications', JSON.stringify(responseData));
 				var tempCount = 0;

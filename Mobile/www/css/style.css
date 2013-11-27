@@ -43,7 +43,6 @@ header {
 /*
 	*Back Button 
 */
-
 a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:active, a.back {
 	background:#fff url(images/back-right-arrow.png) no-repeat top right;
 	margin-left:10px;
@@ -69,7 +68,6 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 }
 .hamburgermenuhide {
 	margin-left:-10px;
-	/*min-height:464px;*/
 	min-height:394px;
 	padding:0 17px;
 	display:inline-block;
@@ -817,7 +815,6 @@ hr, .baseline {
 	color:#fff;
 	font-style:italic;
 	font-size:12px;
-	/*display:inline-block;*/
 	clear:both;
 	line-height:24px;
 	margin:4px 0 4px 8px;
@@ -960,7 +957,6 @@ span.down-arrow {
 	border-radius:4px;
 	-webkit-border-radius:4px;
 	margin:0 35px 25px 25px;
-	/*overflow:hidden;*/
 	display:block;
 	color:#fff;
 	font-size:14px;
@@ -1327,7 +1323,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelavailable {
 	color:#FFFFFF;
-	/*	display:inline-block;*/
 	line-height:24px;
 	clear:both;
 	font-size:12px;
@@ -1558,7 +1553,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelmessages {
 	padding:0 10px 0 0;
-/*	border:1px solid red;*/
 }
 .channelmessages a {
 	display:inline-block;
@@ -1573,18 +1567,15 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	float:left;
 	padding:23px 0px;
 	width:45px;
-	/*border-right:1px solid #eaeaea;*/
 	background:url("images/IGI.png") no-repeat 7px 13px;
 }
 .igisent {
 	background:url("images/IGISENT.png") no-repeat 7px 7px;
 }
 .iconchannels {
-/*	border:1px solid blue;*/
 	float:right;
 	height:46px;
 	width:46px;
-	/*border-left:1px solid #eaeaea;*/
 	background:url("images/sprites.png") no-repeat;
 }
 /*New Desing CHANGES*/
@@ -1635,7 +1626,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:81.5%;
 }
 .igi-msg-icon {
-	width:65.2%;
+	width:64.6%;
 	border-left:1px solid #eaeaea;
 	border-right:1px solid #eaeaea;
 }
@@ -2010,7 +2001,6 @@ h1.messagesdate {
 	padding:0 0 0 50px;
 	margin:0 4px;
 }
-
 .msgfullread.icon-r {
 	background:url("images/sprites.png") no-repeat -8px -747px;
 }
@@ -2247,7 +2237,6 @@ h1.requests {
 .feedbacktitle {
 	padding:0 0 0 6px;
 }
-
 .praiseicon {
 	background:#2D2D2D url("images/praiseican.png") no-repeat 3px 3px;
 }
@@ -2305,12 +2294,14 @@ h1.requests {
 	font-size:12px;
 	color:#414141;
 	line-height:20px;
+	word-break:break-all;
 }
 .messagesreceived .receive-time em {
 	font-style:normal;
 	color:#a0a0a0;
 	font-size:12px;
 	padding:0 2px 0 0;
+	float:left;
 }
 .normalicon {
 	background:url("images/sprites.png") no-repeat -3px -1547px;
@@ -2526,7 +2517,6 @@ ul.igiresponses li span {
 }
 .msgbuttons a {
 	background:#8DC63F;
-	/*background:#536140;*/
 	border-radius:4px;
 	-webkit-border-radius:4px;
 	color:#FFFFFF;
@@ -2539,10 +2529,8 @@ ul.igiresponses li span {
 }
 .msgbuttons a.active {
 	opacity:1;
-	
 }
 /*-End-*/
-
 .snoozetitle {
 	display:block;
 	margin:30px 0 25px 20px;
@@ -2618,17 +2606,11 @@ ul.igiresponses li span {
 	margin:0 0 10px -10px;
 	padding:15px 0 15px 10px;
 }
-/*.contactchannel .login a.ui-link {
-	
-}*/
 .contact-channel {
 	float:left;
 	line-height:48px;
 	margin-left:8px;
 }
-/*.login .loginbtn a.ui-link {
-	margin-left:0;
-}*/
 .dropdownchanellist li a span.broadcastsdate {
 	float:left;
 	font-size:12px;
@@ -2671,7 +2653,6 @@ ul.igiresponses li span {
 }
 .snoozedismissbtn {
 	padding:7px 0 8px 55px;
-	/*text-align:center;*/
 	background:#2d2d2d url("images/IGI-btn.png") no-repeat 5px center;
 	margin:10px 0;
 	border-radius:4px 0px 0px 4px;
@@ -2698,10 +2679,6 @@ ul.igiresponses li span {
 	padding:2px 10px;
 	color:#fff;
 }
-/*.snoozedismissbtn a.snoozebtn.ui-link {
-	background:#2d2d2d;
-	color:#767676;
-}*/
 /*slide menu*/
 .slidemenu {
 	background:#e6e7e8;
@@ -2780,12 +2757,6 @@ ul.igiresponses li span {
 .loginform .composecheckbok span.ui-btn-inner span.ui-btn-text {
 	width:auto;
 }
-/*.composepage .loginform span {
-	margin:10px 0 20px 3px
-}
-.composepage .ui-checkbox label span.ui-btn-inner span.ui-btn-text {
-	font-size:16px;
-}*/
 .broadcast-textarea {
 	background:#e6e7e8;
 	border-radius:4px 0px 0px 4px;
@@ -2860,7 +2831,6 @@ ul.igiresponses li span {
 .yes-no span.informationicon {
 	display:inline-block;
 	text-align:center;
-	/*width:39%;*/
 	width:28%;
 	padding:10px 0;
 	margin-bottom:-7px;
@@ -3388,9 +3358,6 @@ ul.igiresponses li span {
 	.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover {
 		font-size:14px;
 	}
-	/*.channelmessages p {
-		font-size:14px;
-	}*/
 	.msgbroadcast p em {
 		font-size:14px;
 	}
@@ -3558,8 +3525,7 @@ ul.igiresponses li span {
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right: 47px;
-	}
-	
+	}	
 	.igi-msg{
 		border-left:1px solid #eaeaea;
 		width:92%;
@@ -3635,7 +3601,6 @@ ul.igiresponses li span {
 	.datetime-setting.date-minutesetting {
 		margin-right: 49px;
 	}
-	
 	.igi-msg{
 		border:none;
 	}
