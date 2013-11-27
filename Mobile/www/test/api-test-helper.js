@@ -302,6 +302,7 @@ function ApiTestHelper() {
         escLevelId : escLevelId == undefined ? 'N' : escLevelId,
         escUntil : escUntil
       };
+      console.log('sending message: ' + scenario.msg.text);
       $.when(scenario.ES.messageService.createChannelMessage(scenario[chnlKey].id, scenario.msg))
       .then(success != undefined ? success : t.CHECK.created, fail != undefined ? fail : t.CHECK.shouldNotFail)
       .then(start, start);

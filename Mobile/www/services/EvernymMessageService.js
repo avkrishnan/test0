@@ -35,6 +35,26 @@ function EvernymMessageService(api) {
      */
   };
 
+  this.getChannelMessagesForFollower = function(channelid, params, callbacks) {
+    // logger.log('getChannelMessages' , null, 'dataservice.channelMessage',
+    // true);
+
+    var querystringparams_list = [];
+    var querystring = "";
+
+    for ( var key in params) {
+      querystringparams_list.push(key + "=" + params[key]);
+    }
+
+    if (querystringparams_list.length) {
+      querystring = "?" + querystringparams_list.join("&");
+    }
+
+    return api.callAPI('GET', '/channel/' + channelid + '/messagealert' + querystring, undefined,
+        callbacks, true);
+
+  };
+
   this.getChannelMessage = function(channelid, messageid, callbacks) {
     // logger.log('getChannelMessage' , null, 'dataservice.channelMessage',
     // true);
