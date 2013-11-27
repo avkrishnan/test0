@@ -57,6 +57,8 @@ function ChannelSingleMessagesViewModel() {
 				that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 				that.messageClass(channelMessage.messageClass);
 				that.messageText(channelMessage.messageText);
+				that.readMessage(channel.id);
+				that.updateMessages();		
 			}
 			else {
 				//alert(localStorage.getItem("overlayCurrentChannel"));
@@ -67,7 +69,8 @@ function ChannelSingleMessagesViewModel() {
 				that.messageCreated(channel.created);
 				that.messageClass(channel.type);
 				that.messageText(channel.text);
-				that.readMessage(channel.id);
+				that.readMessage(channel.msgId);
+				that.updateMessages();
 			}
 		}
 	};
@@ -85,7 +88,21 @@ function ChannelSingleMessagesViewModel() {
 				//alert(details.message);
 			}
 		});		
-	}	
+	}
+	
+	this.updateMessages = function() {
+		ES.systemService.getMsgNotifs({
+			success: function(responseData) {
+				//alert(JSON.stringify(responseData));
+				//enymNotifications = responseData;
+				localStorage.removeItem('enymNotifications');
+				localStorage.setItem('enymNotifications', JSON.stringify(responseData));
+			},
+			error: function(data, status, details) {
+				alert(details.message);
+			}
+		});			
+	}
 
 	this.menuCommand = function () {
 		pushBackNav('Message details', 'channelSingleMessagesView', 'channelMenuView');

@@ -1,6 +1,6 @@
 ﻿/*globals ko*/
 function HeaderViewModel() {	
-	this.newMessageCount = ko.observable();
+	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable();
 	
 	that = this;
@@ -19,9 +19,12 @@ function HeaderViewModel() {
 			}
 		});
 		if(tempCount > 0) {
-			that.newMessageClass('smsiconwhite');	
+			that.newMessageClass('smsiconwhite');
+			that.newMessageCount(tempCount);
 		}
-		that.newMessageCount(tempCount);
+		else {
+			that.newMessageCount('');
+		}
 	}
 	
 	this.newIGIOverlay = function() {
@@ -33,7 +36,13 @@ function HeaderViewModel() {
 	}	
 	
 	this.newMessagesOverlay = function() {
-		$('#newMessages').popup().popup('open');
+		var tCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
+		if(tCount > 0) {
+			$('#newMessages').popup().popup('open');	
+		}
+		else {
+			alert('You dont have any new messages');
+		}
 	}
 }
 /* overlay messages*/
@@ -47,6 +56,7 @@ function OverlayViewModel() {
 
 	this.newMessagesOverlay = function() {
 		that.newMessagesDisplay.removeAll();
+		//alert(JSON.parse(localStorage.getItem('enymNotifications')));
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			if(valueNotification.read == 'N') {
 				valueNotification.created = dateFormat2(valueNotification.created);
