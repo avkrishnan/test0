@@ -2,6 +2,7 @@
 function HeaderViewModel() {	
 	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable();
+	this.toastText = ko.observable();		
 	
 	that = this;
 	/* Methods */
@@ -28,11 +29,15 @@ function HeaderViewModel() {
 	}
 	
 	this.newIGIOverlay = function() {
-		alert('Coming soon...');
+		that.toastText('Feature coming soon!');
+		localStorage.setItem('toastData', that.toastText());
+		goToView($.mobile.activePage.attr('id'));
 	}
 	
 	this.newFollowersOverlay = function() {
-		alert('Coming soon...');	
+		that.toastText('Feature coming soon!');
+		localStorage.setItem('toastData', that.toastText());		
+		goToView($.mobile.activePage.attr('id'));		
 	}	
 	
 	this.newMessagesOverlay = function() {
@@ -41,7 +46,9 @@ function HeaderViewModel() {
 			$('#newMessages').popup().popup('open', {x: 1000, y:1000});	
 		}
 		else {
-			alert('You dont have any new messages');
+			that.toastText('You dont have any new messages!');
+			localStorage.setItem('toastData', that.toastText());
+			goToView($.mobile.activePage.attr('id'));
 		}
 	}
 }
@@ -49,6 +56,7 @@ function HeaderViewModel() {
 function OverlayViewModel() {
 	that = this;
 	this.newMessagesDisplay = ko.observableArray([]);
+	this.toastText = ko.observable();		
 	
 	this.activate = function() {
 		that.newMessagesOverlay();

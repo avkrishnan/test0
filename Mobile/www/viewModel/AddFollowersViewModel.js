@@ -101,13 +101,15 @@ function AddFollowersViewModel() {
 	}
 	
 	function successfulAdd(data){
-		showMessage('Follower added successfully');
+		that.toastText('Follower added successfully');		
+		localStorage.setItem('toastData', that.toastText());		
 		goToView('channelMainView');				
 	};
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		showError(details.message);
+		that.toastText(details.message);		
+		showToast();
 	};
 	
 	this.userSettings = function () {

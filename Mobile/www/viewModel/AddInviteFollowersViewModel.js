@@ -65,11 +65,13 @@ function AddInviteFollowersViewModel() {
 	};
 	
 	this.inviteFollowers = function(){
-		showMessage('Feature coming soon!');		
+		that.toastText('Feature coming soon!');
+		showToast();		
 	};
 	
 	this.addFollowers = function(){
-		showMessage('Feature coming soon!');
+		that.toastText('Feature coming soon!');
+		showToast();
 	};
 	
 	this.userSettings = function () {

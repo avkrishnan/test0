@@ -96,12 +96,8 @@ function ChannelsFollowingListViewModel() {
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		if (loginPageIfBadLogin(details.code)){
-			//showMessage("Please log in or register to view channels.");
-		}
-		else {
-			showError("Error listing my channels I'm Following: " + details.message);  
-		}
+		that.toastText(details.message);		
+		showToast();			  
 	};
 	
 	this.mapImage = function(jsonText){

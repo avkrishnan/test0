@@ -86,7 +86,8 @@ function RegistrationVerifyViewModel() {
 				showToast();						
 			},
 			error: function (responseData, status, details) {
-				showError(details.message);
+				that.toastText(details.message);		
+				showToast();
 			}
 		};
 		$.mobile.showPageLoadingMsg('a', 'Resending Verification code');				

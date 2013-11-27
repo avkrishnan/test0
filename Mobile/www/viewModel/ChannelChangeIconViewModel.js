@@ -44,14 +44,15 @@ function ChannelChangeIconViewModel() {
   };	
 	
 	function successfulModify(args) {
-		that.toastText('Description changed');		
+		that.toastText('Icon changed');		
 		localStorage.setItem('toastData', that.toastText());
     goToView('channelSettingsView');
   };
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    showError(response.message);
+		that.toastText(details.message);		
+		showToast();
   };
 	
   this.changeChannelIconCommand = function () {

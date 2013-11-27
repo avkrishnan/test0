@@ -52,7 +52,12 @@ function SendMessageViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+			addExternalMarkup(that.template); // this is for header/overlay message
+			if(localStorage.getItem('toastData')) {
+				that.toastText(localStorage.getItem('toastData'));
+				showToast();
+				localStorage.removeItem('toastData');												
+			}						
 			that.escalateClass('');
 			that.yesNoClass('yesbutton');
 			that.noYesClass('nobutton');						
@@ -137,7 +142,8 @@ function SendMessageViewModel() {
 	
 	function errorValidation(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		showError('Not authorized ' + details.message);
+		that.toastText(details.message);		
+		showToast();
 	};
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {

@@ -92,10 +92,10 @@ function EditShortDescriptionViewModel() {
     goToView('channelSettingsView');					
 	}
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
 		that.errorMessage(true);			
-		that.errorChannel('<span>SORRY:</span> '+response.message);
+		that.errorChannel('<span>SORRY:</span> '+details.message);
   };
 	
   this.shortDescriptionCommand = function () {

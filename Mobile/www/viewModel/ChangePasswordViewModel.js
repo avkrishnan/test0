@@ -108,12 +108,12 @@ function ChangePasswordViewModel() {
 		goToView('changePasswordSuccessView');
   };
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
 		that.currentpasswordClass('validationerror');
 		that.newpasswordClass('validationerror');
 		that.confirmpasswordClass('validationerror');		
-		that.errorMessageConfirm(response.message);		
+		that.errorMessageConfirm(details.message);		
   };
 	
 	this.userSettings = function () {
