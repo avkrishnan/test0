@@ -99,7 +99,6 @@ function LoginViewModel() {
 					//loginSuccess2
 				},
         error : function(data, status, details) {
-					//loginError
 					that.usernameClass('validationerror');
 					that.passwordClass('validationerror');
 					that.errorMessage('<span>SORRY: </span> ' + details.message);
@@ -159,7 +158,8 @@ function LoginViewModel() {
 					localStorage.setItem('enymNotifications', JSON.stringify(responseData));
 				},
 				error: function(data, status, details) {
-					alert(details.message);
+					that.toastText(details.message);		
+					localStorage.setItem('toastData', that.toastText());				
 				}
 			});
 			//ES.systemService.getMsgNotifs(callbacks);

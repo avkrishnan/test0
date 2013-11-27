@@ -70,12 +70,12 @@ function EscalateTimeSettingsViewModel() {
 	
 	this.upArrow = function (data) {
 		localStorage.setItem('setValue', data);
-		that.setUp();	
+		that.setDown();			
   };
 	
 	this.downArrow = function (data) {
 		localStorage.setItem('setValue', data);	
-		that.setDown();			
+		that.setUp();			
   };
 	
 	this.setUp = function () {

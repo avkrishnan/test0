@@ -60,8 +60,9 @@ function ChannelViewUnfollowModel() {
 			success: function(){
 				//alert('success');	
 			},
-			error: function() {
-				alert('error');	
+			error: function(data, status, details) {
+				that.toastText(details.message);		
+				localStorage.setItem('toastData', that.toastText());				
 			}
 		};
 		return ES.channelService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
