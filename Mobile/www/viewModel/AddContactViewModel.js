@@ -49,11 +49,12 @@ function AddContactViewModel() {
 	
 	this.getCommethods = function() {
 		var callbacks = {
-			success: function(){
+			success: function(data){
 				//alert('succ');
 			},
-			error: function() {
-				alert('error');
+			error: function(data, status, details) {
+				that.toastText(details.message);		
+				localStorage.setItem('toastData', that.toastText());				
 			}
 		};		
 		return ES.commethodService.getCommethods(callbacks);
@@ -66,7 +67,8 @@ function AddContactViewModel() {
 				//alert('Verification code sent!');
 			},
 			error: function (responseData, status, details) {
-				alert('error');
+				that.toastText(details.message);		
+				localStorage.setItem('toastData', that.toastText());				
 			}
 		};		
 		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
@@ -104,10 +106,11 @@ function AddContactViewModel() {
 	
 	this.confirmDelete = function() {
 		var callbacks = {
-			success: function(){
+			success: function(data){
 			},
-			error: function() {
-				alert('error');
+			error: function(data, status, details) {
+				that.toastText(details.message);		
+				localStorage.setItem('toastData', that.toastText());				
 			}
 		};	
 		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);

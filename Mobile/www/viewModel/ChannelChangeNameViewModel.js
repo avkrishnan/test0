@@ -115,13 +115,13 @@ function ChannelChangeNameViewModel() {
 		}
 	};	
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     goToView('channelChangeNameView');
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorChannel('<span>SORRY:</span> '+response.message);		
+    that.errorChannel('<span>SORRY:</span> '+details.message);		
   };
 	
   this.confirmChannelChangeNameCommand = function () {		

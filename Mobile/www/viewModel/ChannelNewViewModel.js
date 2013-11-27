@@ -117,13 +117,13 @@ function ChannelNewViewModel() {
 		}
 	};	
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     goToView('channelNameView');
 		that.sectionOne(true);
 		that.sectionTwo(false);
 		that.message('');
-    that.errorNewChannel('<span>SORRY:</span> ' + response.message);		
+    that.errorNewChannel('<span>SORRY:</span> ' + details.message);		
   };
 	
   this.createChannelCommand = function () {

@@ -98,9 +98,10 @@ function ChannelMainViewModel() {
 		}
 	}
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    showError('Error in loading channel: ' + response.message);
+		that.toastText(details.message);		
+		localStorage.setItem('toastData', that.toastText());;
     goToView('channelsIOwnView');
   };
 	

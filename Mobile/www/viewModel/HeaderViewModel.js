@@ -1,7 +1,8 @@
 ﻿/*globals ko*/
 function HeaderViewModel() {	
-	this.newMessageCount = ko.observable();
+	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable();
+	this.toastText = ko.observable();		
 	
 	that = this;
 	/* Methods */
@@ -19,27 +20,43 @@ function HeaderViewModel() {
 			}
 		});
 		if(tempCount > 0) {
-			that.newMessageClass('smsiconwhite');	
+			that.newMessageClass('smsiconwhite');
+			that.newMessageCount(tempCount);
 		}
-		that.newMessageCount(tempCount);
+		else {
+			that.newMessageCount('');
+		}
 	}
 	
 	this.newIGIOverlay = function() {
-		alert('Coming soon...');
+		that.toastText('Feature coming soon!');
+		localStorage.setItem('toastData', that.toastText());
+		goToView($.mobile.activePage.attr('id'));
 	}
 	
 	this.newFollowersOverlay = function() {
-		alert('Coming soon...');	
+		that.toastText('Feature coming soon!');
+		localStorage.setItem('toastData', that.toastText());		
+		goToView($.mobile.activePage.attr('id'));		
 	}	
 	
 	this.newMessagesOverlay = function() {
-		$('#newMessages').popup().popup('open');
+		var tCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
+		if(tCount > 0) {
+			$('#newMessages').popup().popup('open', {x: 10, y:10});	
+		}
+		else {
+			that.toastText('You dont have any new messages!');
+			localStorage.setItem('toastData', that.toastText());
+			goToView($.mobile.activePage.attr('id'));
+		}
 	}
 }
 /* overlay messages*/
 function OverlayViewModel() {
 	that = this;
 	this.newMessagesDisplay = ko.observableArray([]);
+	this.toastText = ko.observable();		
 	
 	this.activate = function() {
 		that.newMessagesOverlay();
@@ -47,6 +64,7 @@ function OverlayViewModel() {
 
 	this.newMessagesOverlay = function() {
 		that.newMessagesDisplay.removeAll();
+		//alert(JSON.parse(localStorage.getItem('enymNotifications')));
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			if(valueNotification.read == 'N') {
 				valueNotification.created = dateFormat2(valueNotification.created);

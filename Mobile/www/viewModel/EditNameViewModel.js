@@ -99,11 +99,11 @@ function EditNameViewModel() {
 		goToView('escalationPlansView');
   };
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
 		that.firstnameClass('validationerror');		
 		that.lastnameClass('validationerror');
-		that.errorFirstLastName('<span>SORRY:</span> '+response.message);		
+		that.errorFirstLastName('<span>SORRY:</span> '+details.message);		
   };
 	
 	this.userSettings = function () {

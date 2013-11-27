@@ -34,9 +34,9 @@ function FollowersListViewModel() {
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
+				that.toastText(localStorage.getItem('toastData'));				
 				showToast();
-				localStorage.removeItem('toastData');												
+				localStorage.removeItem('toastData');				
 			}			
 			that.accountName(localStorage.getItem('accountName'));		
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);
@@ -93,10 +93,10 @@ function FollowersListViewModel() {
 		}
 	}; 
 	
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', response.message);
-    goToView('followersListView');
+		that.toastText(details.message);		
+		showToast();		
   };
 	
 	this.followerDetails = function (data) {

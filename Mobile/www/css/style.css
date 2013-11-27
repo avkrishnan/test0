@@ -34,6 +34,7 @@ header {
 	padding:8px 0;
 	width:100%;
 	border-radius:4px 4px 0 0;
+	-webkit-border-radius:4px 4px 0 0;
 	position:fixed;
 	top:0;
 	z-index:9999;
@@ -137,6 +138,11 @@ h1.newcreatechannel {
 .welcome {
 	font-style:normal;
 }
+.channelcreated {
+	font-style:normal;
+	color:#fff;
+	font-size:16px;
+}
 /*
 	*Home Page
 */
@@ -147,6 +153,7 @@ h1.newcreatechannel {
 	padding:0 2px 2px 2px;
 	background:#8DC63F;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin:0 10px 12px 0;
 	box-shadow:inset 0 0 1px #000;
 }
@@ -167,6 +174,7 @@ h1.newcreatechannel {
 	background:#e6e7e8;
 	padding:8px;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	overflow:hidden;
 }
 .actions span{
@@ -188,6 +196,7 @@ h1.newcreatechannel {
 }
 .actions-info {
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	background:#2c2c2c;
 	padding:3px 3px 1px 3px;
 	overflow:hidden;
@@ -200,12 +209,14 @@ h1.newcreatechannel {
 .actionform {
 	background:#fff;
 	border-radius:3px;
+	-webkit-border-radius:3px;
 	overflow:hidden;
 }
 .actions-info input[type="text"] {
 	border:none;
 	height:36px;
 	border-radius:3px 0 0 3px;
+	-webkit-border-radius:3px 0 0 3px;
 	background:#fff;
 	padding:0 0 0 6px;
 	width:72%;
@@ -255,6 +266,7 @@ h1.newcreatechannel {
 	padding:2px 5px 2px 16px;
 	font-size:13px;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	font-family: 'OpenSansRegular';
 	color:#fff;
 	float:right;
@@ -289,6 +301,7 @@ h1.newcreatechannel {
 .low-messages, .togglearrow {
 	background:#2D2D2D url("images/sprites.png") no-repeat -5px 3px;
 	border-radius:21px 0 0 21px;
+	-webkit-border-radius:21px 0 0 21px;
 	color:#FFFFFF;
 	display:block;
 	font-family:'OpenSansRegular';
@@ -428,6 +441,7 @@ select, .ui-icon-arrow-d {
 	background:#fff url(images/drop-down.png) no-repeat right 0;
 	border:none;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	padding:0px 10px;
 	width:48%;
 	height:35px;
@@ -473,6 +487,7 @@ select, .ui-icon-arrow-d {
 .mycontact {
 	background:#2D2D2D;
 	border-radius:21px 0 0 21px;
+	-webkit-border-radius:21px 0 0 21px;
 	color:#FFFFFF;
 	font-size:17px;
 	line-height:35px;
@@ -485,6 +500,7 @@ select, .ui-icon-arrow-d {
 .mycontact em {
 	background:url("images/sprites.png") no-repeat;
 	border-radius:50%;
+	-webkit-border-radius:50%;
 	float:left;
 	margin:0 15px 0 4px;
 	padding:19px;
@@ -526,6 +542,7 @@ select, .ui-icon-arrow-d {
 .add-action {
 	background:#2D2D2D;
 	border-radius:4px 0 0 4px;
+	-webkit-border-radius:4px 0 0 4px;
 	color:#FFFFFF;
 	display:inline-block;
 	font-size:15px;
@@ -538,6 +555,7 @@ select, .ui-icon-arrow-d {
 .addaction {
 	background:#FFFFFF;
 	border-radius:3px;
+	-webkit-border-radius:3px;
 	margin:0 0 0 3px;
 	width:97%;
 	overflow:hidden;
@@ -546,6 +564,7 @@ select, .ui-icon-arrow-d {
 	background:#FFFFFF;
 	border:none;
 	border-radius:3px 0 0 3px;
+	-webkit-border-radius:3px 0 0 3px;
 	font-family:'OpenSansRegular';
 	font-size:14px;
 	height:36px;
@@ -658,6 +677,7 @@ select, .ui-icon-arrow-d {
 	margin-bottom:10px;
 	min-height:40px;
 	border-radius:7px 0 0 7px;
+	-webkit-border-radius:7px 0 0 7px;
 }
 .loginform input[type="text"], .loginform input[type="password"] {
 	border:none;
@@ -667,6 +687,7 @@ select, .ui-icon-arrow-d {
 	font-family:'OpenSansRegular';
 	color:#000;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	float:left;
 	height:36px;
 }
@@ -713,6 +734,7 @@ input[type="checkbox"]:checked + label span {
 	background:#2d2d2d;
 	padding:10px 15px 10px 10px;
 	border-radius:24px 0 0 24px;
+	-webkit-border-radius:24px 0 0 24px;
 	float:right;
 }
 .loginbtn a.ui-link, .loginbtn a.ui-link:hover {
@@ -723,6 +745,7 @@ input[type="checkbox"]:checked + label span {
 	padding:4px 14px;
 	text-decoration:none;
 	border-radius:20px 4px 4px 20px;
+	-webkit-border-radius:20px 4px 4px 20px;
 }
 .signedup {
 	color:#fff;
@@ -736,7 +759,7 @@ hr, .baseline {
 	height:1px;
 	background:#545454;
 	border:0;
-	margin:10px 20px 5px 10px;
+	margin:10px 20px 10px 10px;
 }
 .loginform span {
 	margin:0 0 8px 8px;
@@ -794,7 +817,9 @@ hr, .baseline {
 	color:#fff;
 	font-style:italic;
 	font-size:12px;
-	display:inline-block;
+	/*display:inline-block;*/
+	clear:both;
+	line-height:24px;
 	margin:4px 0 4px 8px;
 }
 .loginform .msgerror span {
@@ -870,6 +895,7 @@ span.down-arrow {
 	padding:0;
 	width:100%;
 	border-radius:4px 4px 0 0;
+	-webkit-border-radius:4px 4px 0 0;
 	position:fixed;
 	top:0;
 	z-index:9999;
@@ -898,6 +924,7 @@ span.down-arrow {
 .GetStart a {
 	background:#8DC63F;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	color:#FFFFFF;
 	display:inline-block;
 	font-size:20px;
@@ -920,9 +947,9 @@ span.down-arrow {
 /*	CHANNEL	*/
 .getmsg {
 	color:#fff;
-	font-size:16px;
+	font-size:14px;
 	font-style:italic;
-	margin:10px 0 10px 10px;
+	margin:15px 15px 15px 10px;
 	display:block;
 }
 .getmsg span {
@@ -931,21 +958,30 @@ span.down-arrow {
 .Channel {
 	background:#2D2D2D;
 	border-radius:4px;
-	margin:0 20px 0 10px;
+	-webkit-border-radius:4px;
+	margin:0 35px 25px 25px;
 	/*overflow:hidden;*/
 	display:block;
 	color:#fff;
-	font-size:15px;
-	padding:10px 10px 10px 10px;
+	font-size:14px;
+	padding:6px 10px 6px 10px;
 	line-height:28px;
+}
+.browseallbtn {
+	padding:6px 5px;
+	margin:20px 20px 25px 10px;
 }
 .Channel a, .Channel span {
 	background:#8DC63F;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	color:#FFFFFF;
 	float:right;
 	font-size:14px;
 	padding:4px 14px;
+}
+.browseallbtn span {
+	padding:4px 6px;
 }
 /*	Login page css	*/
 /*
@@ -972,13 +1008,14 @@ span.down-arrow {
 .loginform .ui-input-search, .loginform div.ui-input-text {
 	width:99%;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 }
 .loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 	width:85%;
 }
 .errorstate .ui-input-search, .errorstate div.ui-input-text {
 	background:#FEFBD6;
-	border-radius:4px;
+	-webkit-border-radius:4px;
 }
 div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text, .ui-input-search input.ui-input-text {
 	padding:0 0 0 5px;
@@ -995,6 +1032,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:97.8%;
 	background:#FEFBD6;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	float:left;
 }
 .loginform .validationerror .ui-input-search, .loginform .validationerror div.ui-input-text {
@@ -1071,6 +1109,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .action-time .ui-input-search, .action-time div.ui-input-text {
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin:0 1%;
 	width:15%;
 }
@@ -1081,6 +1120,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .action-time .ui-select .ui-btn {
 	margin:0;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 }
 .action-time .ui-select .ui-btn select option {
 	padding:0 0 0 5px;
@@ -1136,6 +1176,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelcontent {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
+	-webkit-border-radius:4px;
 	display:inline-block;
 	width:100%;
 	margin-bottom:10px;
@@ -1191,6 +1232,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin:0 15px 0 0;
 	padding:19px;
 	border-radius:50%;
+	-webkit-border-radius:50%;
 }
 .channel1 {
 	background:url("images/channelimg1.png") no-repeat -1px 0;
@@ -1242,6 +1284,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#27aae1;
 	display:inline-block;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin-right:4px;
 }
 .requestcontent .igi {
@@ -1259,6 +1302,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .editchannel {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -283px;
 	border-radius:21px 0 0 21px;
+	-webkit-border-radius:21px 0 0 21px;
 	color:#FFFFFF;
 	display:block;
 	font-family: 'OpenSansRegular';
@@ -1283,10 +1327,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelavailable {
 	color:#FFFFFF;
-	display:inline-block;
+	/*	display:inline-block;*/
+	line-height:24px;
+	clear:both;
 	font-size:12px;
 	font-style:italic;
-	margin:8px 0 8px 8px;
+	margin:8px 0 8px 8px;	
 }
 .available {
 	margin-top:20px;
@@ -1325,6 +1371,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelicons  {
 	background:#2D2D2D;
 	border-radius:7px 0 0 7px;
+	-webkit-border-radius:7px 0 0 7px;
 	padding:4px 5px 4px 4px;
 	overflow:hidden;
 }
@@ -1332,6 +1379,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	overflow:hidden;
 	background:#fff;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 }
 .channelicons ul {
 	float:left;
@@ -1356,6 +1404,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelicons li img {
 	border:2px solid #be1e2d;
 	border-radius:50%;
+	-webkit-border-radius:50%;
 	background:#be1e2d;
 }
 .disableicon img {
@@ -1371,6 +1420,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:0 12px;
 	border:2px solid #58595b;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	display:inline;
 	margin:0 2px;
 }
@@ -1424,6 +1474,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	height:26px;
 	background:#414141;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 }
 .dropdown .ui-select select, .dropdown .ui-select .ui-icon-arrow-d {
 	background:url("images/sprites-channel.png") no-repeat -18px -1433px;
@@ -1476,6 +1527,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .yes-no .ui-slider-switch .ui-slider-label {
 	border-radius:20px;
+	-webkit-border-radius:20px;
 	background:#e6e7e8;
 	text-shadow:none;
 	color:#898a8a;
@@ -1485,6 +1537,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .yes-no .ui-slider-switch .ui-btn.ui-slider-handle {
 	background:#8DC63F;
 	border-radius:20px;
+	-webkit-border-radius:20px;
 	margin:0 0 0 -14px;
 }
 .yes-no div.ui-slider-switch {
@@ -1501,6 +1554,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:85px;
 	margin:5px 0 0 12px;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 }
 .channelmessages {
 	padding:0 10px 0 0;
@@ -1511,25 +1565,26 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:100%;
 	background:#fff;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin-bottom:10px;
 }
 /*New Desing CHANGES v-55*/
 .igibutton {
 	float:left;
-	padding:23px 19px;
-	/*border:1px solid red;*/
-	border-right:1px solid #eaeaea;
-	background:url("images/IGI.png") no-repeat 4px 13px;
+	padding:23px 0px;
+	width:45px;
+	/*border-right:1px solid #eaeaea;*/
+	background:url("images/IGI.png") no-repeat 7px 13px;
 }
 .igisent {
-	background:url("images/IGISENT.png") no-repeat 5px 7px;
+	background:url("images/IGISENT.png") no-repeat 7px 7px;
 }
 .iconchannels {
 /*	border:1px solid blue;*/
 	float:right;
 	height:46px;
 	width:46px;
-	border-left:1px solid #eaeaea;
+	/*border-left:1px solid #eaeaea;*/
 	background:url("images/sprites.png") no-repeat;
 }
 /*New Desing CHANGES*/
@@ -1555,7 +1610,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .icon-l {
 	background-position: -4px -801px;
 }
-
 .icon-r {
 	background:url("images/sprites.png") no-repeat -5px -743px;
 }
@@ -1565,23 +1619,41 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .icon-h {
 	background:url("images/sprites-channel.png") no-repeat -3px -796px;
 }
-
-
 .channelmessages .announcementicon {
 	background:url(images/announcementicon.png) no-repeat 6px 7px;
 }
 .messageschannel {
-	padding:0px 0px 4px 8px;
-	/*margin-left:50px;*/
-	height:42px;
-	/*border-left:1px solid #eaeaea;*/
-/*	border:1px solid green;*/
+	padding:0px 0px 4px 6px;
 	float:left;
+	width:95.5%;
+}
+.igi-responses .messageschannel {
+	width:auto;
+}
+.igi-msg{
+	border-left:1px solid #eaeaea;
+	width:81.5%;
+}
+.igi-msg-icon {
+	width:65.2%;
+	border-left:1px solid #eaeaea;
+	border-right:1px solid #eaeaea;
+}
+.messagescontent .igi-msg-icon {
+	width:62.8%;
+}
+.msg-icon {
+	border-right:1px solid #eaeaea;
+	width:81%;
+}
+.messagescontent .msg-icon {
+	width:80%;
 }
 .messagebtn {
 	float:right;
 	padding:0 8px;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	font-size:13px;
 	background:#8dc63f;
 	margin:3px 10px 0 0;
@@ -1592,11 +1664,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#a0a0a0;
 }
 .channelmessages p {
-	font-size:12px;
+	font-size:13px;
 	color:#000;
 }
 .broadecast {
 	border-radius:20px 0 0 20px;
+	-webkit-border-radius:20px 0 0 20px;
 }
 .broadcastreplies {
 	color:#fff;
@@ -1610,6 +1683,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#27aae1;
 	float:left;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin:16px 10px 14px 8px;
 	font-style:normal;
 	font-size:13px;
@@ -1637,6 +1711,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .messagesundeliver ul {
 	background:#fff;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	overflow:hidden;
 	margin:8px 0 0 0;
 }
@@ -1685,7 +1760,8 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .addfollowers a {
 	background:#8DC63F;
-	border-radius:4px 4px 4px 4px;
+	border-radius:4px;
+	-webkit-border-radius:4px;
 	display:inline-block;
 	font-size:12px;
 	margin-left:15px;
@@ -1694,6 +1770,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelinformation {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
+	-webkit-border-radius:21px 0 0 10px;
 	display:inline-block;
 	overflow:hidden;
 	padding:0;
@@ -1716,6 +1793,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelbroadcast {
 	background:#e6e7e8;
 	border-radius:21px 10px 10px 10px;
+	-webkit-border-radius:21px 10px 10px 10px;
 	display:block;
 	margin:0 10px 10px 0;
 	overflow:hidden;
@@ -1723,18 +1801,20 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	min-height:50px;
 }
 .broadcast-sensitive {
-	border-radius: 21px 0 0 21px;
+	border-radius:21px 0 0 21px;
+	-webkit-border-radius:21px 0 0 21px;
 	margin:0 0 0 4px;
 	overflow:hidden;
 }
 .broadcast-sensitive span {
 	background:#f1f2f2;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	color:#414141;
 	float:left;
 	font-size:14px;
-	height:36px;
-	line-height:33px;
+	height:38px;
+	line-height:35px;
 	margin-left:12px;
 	padding:0 0 0 12px;
 	width:63%;
@@ -1743,9 +1823,10 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:10px 25px;
 	margin-left:-22px;
 	border-radius:21px 0 0 21px;
+	-webkit-border-radius:21px 0 0 21px;
 }
 .broadcast-sensitive span strong.icon-n {
-	background:url("images/sprites.png") no-repeat -9px -745px;
+	background:url("images/brodecasticon.png") no-repeat 0 2px;
 }
 .broadcast-sensitive span strong.icon-e {
 	background:url("images/sprites.png") no-repeat -9px -630px;
@@ -1842,6 +1923,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .broadcastmsgreplie {
 	background:#d5d7d8 url("images/sprites-channel.png") no-repeat -10px -1204px;
 	border-radius:21px 4px 4px 21px;
+	-webkit-border-radius:21px 4px 4px 21px;
 	color:#414141;
 	float:left;
 	font-size:14px;
@@ -1854,6 +1936,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .broadcastmsgreplie em {
 	background:#27aae1;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	display:inline-block;
 	font-size:13px;
 	margin-left:15px;
@@ -1867,6 +1950,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .broadcast-sensitive.singlemessage {
 	margin: 0 4px;
 	border-radius:21px 4px 4px 21px;
+	-webkit-border-radius:21px 4px 4px 21px;
 	display:block;
 }
 .broadcast-sensitive.singlemessage span {
@@ -1886,6 +1970,7 @@ h1.messagesdate {
 .newrepliesmsg {
 	background:#8DC63F;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	display:inline-block;
 	font-size:14px;
 	margin-left:15px;
@@ -1903,6 +1988,7 @@ h1.messagesdate {
 	background:#ffffff;
 	padding:0 0 5px 0;
 	border-radius:21px 10px 10px 10px;
+	-webkit-border-radius:21px 10px 10px 10px;
 	margin:0 10px 0 0;
 }
 .broadcastmsgredfull p {
@@ -1915,14 +2001,32 @@ h1.messagesdate {
 	margin:0;
 }
 .msgfullread {
-	background:#F1F2F2 url("images/sprites.png") no-repeat scroll -9px -748px;
+	background:#F1F2F2 url("images/sprites.png") no-repeat;
 	border-radius:21px 4px 4px 21px;
+	-webkit-border-radius:21px 4px 4px 21px;
 	color:#414141;
-	height:36px;
+	height:37px;
 	line-height:14px;
 	padding:0 0 0 50px;
 	margin:0 4px;
 }
+
+.msgfullread.icon-r {
+	background:url("images/sprites.png") no-repeat -8px -747px;
+}
+.msgfullread.icon-c {
+	background:#F1F2F2 url("images/brodecasticon.png") no-repeat 0 0;
+}
+.msgfullread.icon-h {
+	background:#F1F2F2 url("images/sprites-channel.png") no-repeat -6px -801px;
+}
+.msgfullread.icon-n {
+	background-position:-8px -1555px;
+}
+.msgfullread.icon-e {
+	background-position: -8px -632px;
+}
+
 .msgfullread span {
 	text-transform:uppercase;
 	font-size:11px;
@@ -1991,6 +2095,7 @@ h1.requests {
 .low-messages.acceptdecline a {
 	background:#8DC63F;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin:0 0 0 3px;
 	font-size:12px;
 	padding:0 6px;
@@ -2034,6 +2139,7 @@ h1.requests {
 	width:99%;
 	background:#fff;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	resize:none;
 	font-size:13px;
 	overflow:auto;
@@ -2050,6 +2156,7 @@ h1.requests {
 .followerincrease .broadcastmsgsend {
 	border:2px solid #ffffff;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin:8px 0 5px 0;
 	width:98.5%;
 }
@@ -2089,6 +2196,7 @@ h1.requests {
 .sendbtnican {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -741px;
 	border-radius:24px 0 0 24px;
+	-webkit-border-radius:24px 0 0 24px;
 	float:right;
 	padding:10px 8px 10px 50px;
 }
@@ -2155,6 +2263,7 @@ h1.requests {
 .messages-content {
 	padding:3px;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	background:#fff;
 	margin:15px 10px 0 0;
 }
@@ -2184,6 +2293,7 @@ h1.requests {
 	background:#fff;
 	display:block;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin:10px 6px 0 6px;
 	overflow:hidden;
 }
@@ -2208,6 +2318,7 @@ h1.requests {
 .received-responses-msg {
 	background:#27AAE1;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	font-size:12px;
 	padding:0 5px;
 	position:absolute;
@@ -2228,7 +2339,8 @@ ul.igiresponses li {
 ul.igiresponses li span {
 	font-size:10px;
 	color:#8d8b8c;
-	padding:0 6px;
+	padding:0 6px 6px 6px;
+	float:left;
 }
 .followersname, .followersname.ui-link, .followersname.ui-link:hover, .followersname.ui-link:visited, .followersname.ui-link:active {
 	font-size:13px;
@@ -2249,10 +2361,19 @@ ul.igiresponses li span {
 	border-bottom:1px solid #828181;
 	padding: 0 0 10px 10px;
 }
+.notingfollowed {
+	border:none;
+	padding:5px 0 0 10px;
+}
+.notingfollowed .msginfo {
+	margin:0 0 15px 5px;
+	font-style:italic;
+}
 .searchtype .ui-icon-searchfield:after {
 	background:url("images/searchicon.png") no-repeat 0 0;
 	border:none;
 	border-radius:0 4px 4px 0;
+	-webkit-border-radius:0 4px 4px 0;
 	height:36px;
 	left:inherit;
 	right:0;
@@ -2324,11 +2445,11 @@ ul.igiresponses li span {
 	width:100%;
 	background:#fff;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin-bottom:10px;
 }
 .msghistory{
-/*	border-left:1px solid #EAEAEA;*/
-	padding:2px 0 2px 8px;
+	padding:2px 0 2px 6px;
 	float:left;
 }
 .msghistory span {
@@ -2359,10 +2480,18 @@ ul.igiresponses li span {
 	background:#e6e7e8;
 	border-right:1px solid #dcddde;
 	border-radius:4px 0px 0px 4px;
+	-webkit-border-radius:4px 0px 0px 4px;
+	min-height:40px;
 }
 .msg-increase span {
 	color:#414141;
 	font-size:14px;
+}
+.msg-increase .nomsg {
+	padding:3px 0px;
+	display:block;
+	font-size:12px;
+	padding:13px 0px 10px 0px;
 }
 .increase-msg {
 	height:10px;
@@ -2391,6 +2520,27 @@ ul.igiresponses li span {
 	background: linear-gradient(to bottom,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8dc63f', endColorstr='#d2dd25',GradientType=0 ); /* IE6-9 */
 }
+.msgbuttons {
+	text-align:center;
+	margin:20px 0 0 0;
+}
+.msgbuttons a {
+	background:#8DC63F;
+	/*background:#536140;*/
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	color:#FFFFFF;
+	display:inline-block;
+	font-size:14px;
+	padding:2px 0px;
+	margin:0px 5px;
+	width:28.5%;
+	opacity:0.5;
+}
+.msgbuttons a.active {
+	opacity:1;
+	
+}
 /*-End-*/
 
 .snoozetitle {
@@ -2399,6 +2549,7 @@ ul.igiresponses li span {
 }
 .snoozesettings {
 	border-radius:20px 0 0 20px;
+	-webkit-border-radius:20px 0 0 20px;
 	float:right;
 	overflow:hidden;
 	padding:8px 15px;
@@ -2433,6 +2584,7 @@ ul.igiresponses li span {
 	margin:20px 10px 10px 0;
 	background:#fff;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	padding:10px;
 	color:#414141;
 }
@@ -2455,6 +2607,7 @@ ul.igiresponses li span {
 .morebtn.ui-link, .morebtn.ui-link:hover, .morebtn.ui-link:visited, .morebtn.ui-link:active {
 	background:#E6E7E8 url("images/sprites-channel.png") no-repeat -13px -1425px;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	color:#A7A9AC;
 	font-size:12px;
 	padding:2px 9px 2px 22px;
@@ -2489,11 +2642,13 @@ ul.igiresponses li span {
 	margin:10px 10px 0 0;
 	background:#f1f2f2;
 	border-radius:25px 4px 4px 4px;
+	-webkit-border-radius:25px 4px 4px 4px;
 }
 .messagedetail {
 	background:#fff;
 	overflow:hidden;
 	border-radius:21px 4px 4px 4px;
+	-webkit-border-radius:21px 4px 4px 4px;
 }
 .messagedetail em {
 	float:left;
@@ -2520,11 +2675,13 @@ ul.igiresponses li span {
 	background:#2d2d2d url("images/IGI-btn.png") no-repeat 5px center;
 	margin:10px 0;
 	border-radius:4px 0px 0px 4px;
+	-webkit-border-radius:4px 0 0 4px;
 }
 
 .snoozedismissbtn a.ui-link {
 	background:#58595b;
-	border-radius:4px 4px 4px 4px;
+	border-radius:4px;
+	-webkit-border-radius:4px;
 	display:inline-block;
 	font-size:14px;
 	margin-right:4px;
@@ -2533,7 +2690,8 @@ ul.igiresponses li span {
 }
 .snoozedismissbtn a.snoozebtn.ui-link:hover, .snoozedismissbtn .snoozebtn.active {
 	background:#8DC63F;
-	border-radius:4px 4px 4px 4px;
+	border-radius:4px;
+	-webkit-border-radius:4px;
 	display:inline-block;
 	font-size:14px;
 	margin-right:4px;
@@ -2631,12 +2789,14 @@ ul.igiresponses li span {
 .broadcast-textarea {
 	background:#e6e7e8;
 	border-radius:4px 0px 0px 4px;
+	-webkit-border-radius:4px 0 0 4px;
 	padding:5px 20px 5px 5px;
 }
 .broadcast-textarea .textarea {
 	resize:none;
 	background:#fff;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	font-size:13px;
 	margin:0;
 	color:#414141;
@@ -2658,6 +2818,7 @@ ul.igiresponses li span {
 	padding:8px 10px;
 	margin:10px 0 10px 0;
 	border-radius:4px 0 0 4px;
+	-webkit-border-radius:4px 0 0 4px;
 	background:#2d2d2d;
 }
 .compose-newbroadcast .ui-select .ui-btn.ui-btn-hover-c {
@@ -2685,10 +2846,8 @@ ul.igiresponses li span {
 .composedropdown .ui-select .ui-btn {
 	margin:0;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 }
-/*.composedropdown .ui-select .ui-btn-text {
-	padding:0 0 0 5px;
-}*/
 .composedropdown .ui-select .ui-btn-text span, .composedropdown .ui-select select{
 	color:#8DC63F;
 	font-size:13px;
@@ -2727,6 +2886,7 @@ ul.igiresponses li span {
 	color:#fff;
 	padding:4px 10px;
 	border-radius:12px 4px 4px 12px;
+	-webkit-border-radius:12px 4px 4px 12px;
 	margin-top:5px;
 	float:right;
 }
@@ -2784,6 +2944,7 @@ ul.igiresponses li span {
 	background:#e6e7e8;
 	float:right;
 	border-radius:4px;
+	-webkit-border-radius:4px;
 	margin:10px 0 0 0;
 }
 .mycontact .delete-address {
@@ -2793,7 +2954,8 @@ ul.igiresponses li span {
 }
 .confirmbtn {
 	background:#ED1C24;
-	border-radius:4px 4px 4px 4px;
+	border-radius:4px;
+	-webkit-border-radius:4px;
 	color:#FFFFFF;
 	float:right;
 	font-size:13px;
@@ -2816,6 +2978,7 @@ ul.igiresponses li span {
 	padding:10px;
 	background:#2D2D2D;
 	border-radius:10px 0 0 10px;
+	-webkit-border-radius:10px 0 0 10px;
 	margin:20px 0 10px 0;
 }
 .emergency-setting em, .escalatedate-time em  {
@@ -2830,6 +2993,7 @@ ul.igiresponses li span {
 	font-size:13px;
 	padding:4px 10px 4px 34px;
 	border-radius:20px 4px 4px 20px;
+	-webkit-border-radius:20px 4px 4px 20px;
 	margin-right:5px;
 	background:#be1e2d url("images/emergency.png") no-repeat 10px 4px;
 }
@@ -2846,6 +3010,7 @@ ul.igiresponses li span {
 	overflow:hidden;
 	background:#2D2D2D;
 	border-radius:10px 0 0 10px;
+	-webkit-border-radius:10px 0 0 10px;
 	padding:5px 0 15px 0;
 	margin-bottom:15px;
 }
@@ -2865,6 +3030,7 @@ ul.igiresponses li span {
 	background:#8DC63F;
 	padding:4px 6px 4px 14px;
 	border-radius:13px 3px 3px 13px;
+	-webkit-border-radius:13px 3px 3px 13px;
 	float:right;
 	font-size:14px;
 	margin:10px 0 0 0;
@@ -2960,6 +3126,7 @@ ul.igiresponses li span {
 	overflow:hidden;
 	padding:15px 10px 10px 10px;
 	border-radius:10px 0 0 10px;
+	-webkit-border-radius:10px 0 0 10px;
 	margin:20px 0 15px 0;
 }
 .datetime-escalation h4 {
@@ -2992,16 +3159,18 @@ ul.igiresponses li span {
 	display:block;
 	padding:12px 10px;
 	border-radius:4px 4px 0 0;
+	-webkit-border-radius:4px 4px 0 0;
 }
 .bottom-clickable {
 	background:#e6e7e8 url(images/bottom-clickable.png) no-repeat center center;
 	border-radius:0 0 4px 4px;
+	-webkit-border-radius:4 0 4px 4px;
 }
 .set-date-time em {
 	float:left;
 	color:#FFF;
 	font-style:normal;
-	padding:35px 7px;
+	padding:35px 6px;
 }
 .datetime-setting.date-minutesetting {
 	margin-right:17px;
@@ -3036,6 +3205,7 @@ ul.igiresponses li span {
 .yesnoclick, .yes-noclick, .yesno-click {
 	float:right;
 	border-radius:20px;
+	-webkit-border-radius:20px;
 	padding:2px 5px;
 	background:#e6e7e8;
 	color:#666;
@@ -3043,6 +3213,7 @@ ul.igiresponses li span {
 }
 .yesnoclick span, .yes-noclick span, .yesno-click span {
 	border-radius:50%;
+	-webkit-border-radius:50%;
 	float:left;
 	height:30px;
 	line-height:30px;
@@ -3137,6 +3308,13 @@ ul.igiresponses li span {
 .ourservices {
 	margin:10px 0 0 0px;
 }
+/*V-20 - Compose Broadcast - NO CHANNELS SET UP*/
+.broadcastbigicon {
+	padding:30px 0px;
+	margin-right:10px;
+	background:url(images/broadcastbigicon.png) no-repeat center center;
+}
+/*End*/
 /*
 	*@media query css
 */
@@ -3210,9 +3388,9 @@ ul.igiresponses li span {
 	.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover {
 		font-size:14px;
 	}
-	.channelmessages p {
+	/*.channelmessages p {
 		font-size:14px;
-	}
+	}*/
 	.msgbroadcast p em {
 		font-size:14px;
 	}
@@ -3246,6 +3424,25 @@ ul.igiresponses li span {
 	}
 	.linkicon a {
 		margin:0 28px 0 0;
+	}
+	.igi-msg{
+		border-left:1px solid #eaeaea;
+		width:82.5%;
+	}
+	.igi-msg-icon {
+		width:70.2%;
+		border-left:1px solid #eaeaea;
+		border-right:1px solid #eaeaea;
+	}
+	.msg-icon {
+		border-right:1px solid #eaeaea;
+		width:83.8%;
+	}
+	.messagescontent .msg-icon {
+		width:83.5%;
+	}
+	.messagescontent .igi-msg-icon {
+		width:68.8%;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -3362,6 +3559,26 @@ ul.igiresponses li span {
 	.datetime-setting.date-minutesetting {
 		margin-right: 47px;
 	}
+	
+	.igi-msg{
+		border-left:1px solid #eaeaea;
+		width:92%;
+	}
+	.igi-msg-icon {
+		width:86.45%;
+		border-left:1px solid #eaeaea;
+		border-right:1px solid #eaeaea;
+	}
+	.msg-icon {
+		border-right:1px solid #eaeaea;
+		width:92.6%;
+	}
+	.messagescontent .msg-icon {
+		width:92.5%;
+	}
+	.messagescontent .igi-msg-icon {
+		width:86.2%;
+	}
 }
 @media only screen and (max-width:1280px) and (min-width:768px) {
 	.msg-content p {
@@ -3417,6 +3634,22 @@ ul.igiresponses li span {
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right: 49px;
+	}
+	
+	.igi-msg{
+		border:none;
+	}
+	.igi-msg-icon {
+		border:none;
+	}
+	.msg-icon {
+		border:none;
+	}
+	.iconchannels {
+		border-left:1px solid #eaeaea;
+	}
+	.igibutton {
+		border-right:1px solid #eaeaea;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -3549,7 +3782,16 @@ ul.igiresponses li span {
 	}
 	.broadcastmsgreplie {
     width:79%;
-}
+	}
+	.igi-msg{
+		width:95.5%;
+	}
+	.igi-msg-icon {
+		width:92%;
+	}
+	.msg-icon {
+		width:95.8%;
+	}
 }
 @media only screen and (max-width: 600px) and (min-width: 599px) {
 	.new-user img {

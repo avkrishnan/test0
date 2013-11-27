@@ -90,11 +90,11 @@ function EditLongDescriptionViewModel() {
     goToView('channelSettingsView');					
 	}
 
-  function errorAPI(data, status, response) {
+  function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     goToView('longDescriptionView');
 		that.errorMessage(true);	
-		that.errorChannel('<span>SORRY:</span> '+response.message);
+		that.errorChannel('<span>SORRY:</span> '+details.message);
   };
 	
   this.longDescriptionCommand = function () {

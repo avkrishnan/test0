@@ -182,7 +182,8 @@ function SignupStepFirstViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		showError('Error in checking Evernym: ' + details.message);
+		that.toastText(details.message);		
+		showToast();
 	};	
 				
 }
