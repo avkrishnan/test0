@@ -58,7 +58,7 @@ function ChannelSingleMessagesViewModel() {
 				that.messageClass(channelMessage.messageClass);
 				that.messageText(channelMessage.messageText);
 				that.readMessage(channel.id);
-				that.updateMessages();		
+				that.updateMessages();	
 			}
 			else {
 				//alert(localStorage.getItem("overlayCurrentChannel"));
@@ -97,6 +97,20 @@ function ChannelSingleMessagesViewModel() {
 				//enymNotifications = responseData;
 				localStorage.removeItem('enymNotifications');
 				localStorage.setItem('enymNotifications', JSON.stringify(responseData));
+				var tempCount = 0;
+				var tempNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+				$.each(tempNotifications, function(indexNotification, valueNotification) {
+					if(valueNotification.read == 'N') {
+						tempCount = tempCount+1;
+					}
+				});
+				if(tempCount > 0) {
+					headerViewModel.newMessageClass('smsiconwhite');
+					headerViewModel.newMessageCount(tempCount);
+				}
+				else {
+					headerViewModel.newMessageCount('');
+				}
 			},
 			error: function(data, status, details) {
 				alert(details.message);

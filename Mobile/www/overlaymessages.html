@@ -7,9 +7,9 @@
       <section data-bind="foreach: newMessagesDisplay">
         <a class="messagesreceived" href="#" data-bind="click: $parent.showSingleMessage">
           <span class="igibutton"></span>
-          <div class="messageschannel">
+          <div class="messageschannel igi-msg-icon">
             <span class="received" data-bind="text: displayFrom"></span>
-            <div class="receive-time"><em data-bind="text: created"></em><span data-bind="text: text"></span></div>
+            <div class="receive-time"><em data-bind="text: created"></em><b data-bind="text: text"></b></div>
           </div>
           <span class="iconchannels" data-bind="css: escLevelId"></span>
         </a>
