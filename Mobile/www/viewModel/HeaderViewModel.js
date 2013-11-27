@@ -46,7 +46,9 @@ function HeaderViewModel() {
 			$('#newMessages').popup().popup('open', {x: 1000, y:1000});	
 		}
 		else {
-			alert('You dont have any new messages');
+			that.toastText('You dont have any new messages!');
+			localStorage.setItem('toastData', that.toastText());
+			goToView($.mobile.activePage.attr('id'));
 		}
 	}
 }
