@@ -138,6 +138,11 @@ h1.newcreatechannel {
 .welcome {
 	font-style:normal;
 }
+.channelcreated {
+	font-style:normal;
+	color:#fff;
+	font-size:16px;
+}
 /*
 	*Home Page
 */
@@ -754,7 +759,7 @@ hr, .baseline {
 	height:1px;
 	background:#545454;
 	border:0;
-	margin:10px 20px 5px 10px;
+	margin:10px 20px 10px 10px;
 }
 .loginform span {
 	margin:0 0 8px 8px;
@@ -942,9 +947,9 @@ span.down-arrow {
 /*	CHANNEL	*/
 .getmsg {
 	color:#fff;
-	font-size:16px;
+	font-size:14px;
 	font-style:italic;
-	margin:10px 0 10px 10px;
+	margin:15px 15px 15px 10px;
 	display:block;
 }
 .getmsg span {
@@ -954,13 +959,17 @@ span.down-arrow {
 	background:#2D2D2D;
 	border-radius:4px;
 	-webkit-border-radius:4px;
-	margin:0 20px 0 10px;
+	margin:0 35px 25px 25px;
 	/*overflow:hidden;*/
 	display:block;
 	color:#fff;
-	font-size:15px;
-	padding:10px 10px 10px 10px;
+	font-size:14px;
+	padding:6px 10px 6px 10px;
 	line-height:28px;
+}
+.browseallbtn {
+	padding:6px 5px;
+	margin:20px 20px 25px 10px;
 }
 .Channel a, .Channel span {
 	background:#8DC63F;
@@ -970,6 +979,9 @@ span.down-arrow {
 	float:right;
 	font-size:14px;
 	padding:4px 14px;
+}
+.browseallbtn span {
+	padding:4px 6px;
 }
 /*	Login page css	*/
 /*
@@ -1623,19 +1635,19 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:81.5%;
 }
 .igi-msg-icon {
-	width:66.2%;
+	width:65.2%;
 	border-left:1px solid #eaeaea;
 	border-right:1px solid #eaeaea;
 }
 .messagescontent .igi-msg-icon {
-	width:64.8%;
+	width:62.8%;
 }
 .msg-icon {
 	border-right:1px solid #eaeaea;
-	width:81.5%;
+	width:81%;
 }
 .messagescontent .msg-icon {
-	width:80.5%;
+	width:80%;
 }
 .messagebtn {
 	float:right;
@@ -1989,15 +2001,32 @@ h1.messagesdate {
 	margin:0;
 }
 .msgfullread {
-	background:#F1F2F2 url("images/sprites.png") no-repeat scroll -9px -748px;
+	background:#F1F2F2 url("images/sprites.png") no-repeat;
 	border-radius:21px 4px 4px 21px;
 	-webkit-border-radius:21px 4px 4px 21px;
 	color:#414141;
-	height:36px;
+	height:37px;
 	line-height:14px;
 	padding:0 0 0 50px;
 	margin:0 4px;
 }
+
+.msgfullread.icon-r {
+	background:url("images/sprites.png") no-repeat -8px -747px;
+}
+.msgfullread.icon-c {
+	background:#F1F2F2 url("images/brodecasticon.png") no-repeat 0 0;
+}
+.msgfullread.icon-h {
+	background:#F1F2F2 url("images/sprites-channel.png") no-repeat -6px -801px;
+}
+.msgfullread.icon-n {
+	background-position:-8px -1555px;
+}
+.msgfullread.icon-e {
+	background-position: -8px -632px;
+}
+
 .msgfullread span {
 	text-transform:uppercase;
 	font-size:11px;
@@ -2331,6 +2360,14 @@ ul.igiresponses li span {
 .search-query {
 	border-bottom:1px solid #828181;
 	padding: 0 0 10px 10px;
+}
+.notingfollowed {
+	border:none;
+	padding:5px 0 0 10px;
+}
+.notingfollowed .msginfo {
+	margin:0 0 15px 5px;
+	font-style:italic;
 }
 .searchtype .ui-icon-searchfield:after {
 	background:url("images/searchicon.png") no-repeat 0 0;
@@ -3133,7 +3170,7 @@ ul.igiresponses li span {
 	float:left;
 	color:#FFF;
 	font-style:normal;
-	padding:35px 7px;
+	padding:35px 6px;
 }
 .datetime-setting.date-minutesetting {
 	margin-right:17px;
@@ -3271,6 +3308,13 @@ ul.igiresponses li span {
 .ourservices {
 	margin:10px 0 0 0px;
 }
+/*V-20 - Compose Broadcast - NO CHANNELS SET UP*/
+.broadcastbigicon {
+	padding:30px 0px;
+	margin-right:10px;
+	background:url(images/broadcastbigicon.png) no-repeat center center;
+}
+/*End*/
 /*
 	*@media query css
 */

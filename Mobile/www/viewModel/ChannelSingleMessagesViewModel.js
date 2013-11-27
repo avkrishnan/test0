@@ -110,6 +110,7 @@ function ChannelSingleMessagesViewModel() {
 				}
 				else {
 					headerViewModel.newMessageCount('');
+					headerViewModel.newMessageClass('');
 				}
 			},
 			error: function(data, status, details) {
