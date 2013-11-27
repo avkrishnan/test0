@@ -794,7 +794,8 @@ hr, .baseline {
 	color:#fff;
 	font-style:italic;
 	font-size:12px;
-	display:inline-block;
+	clear:both;
+	line-height:24px;	
 	margin:4px 0 4px 8px;
 }
 .loginform .msgerror span {
@@ -1283,7 +1284,8 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelavailable {
 	color:#FFFFFF;
-	display:inline-block;
+	clear:both;
+	line-height:24px;
 	font-size:12px;
 	font-style:italic;
 	margin:8px 0 8px 8px;
@@ -1745,7 +1747,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:21px 0 0 21px;
 }
 .broadcast-sensitive span strong.icon-n {
-	background:url("images/sprites.png") no-repeat -9px -745px;
+	background:url("images/brodecasticon.png") no-repeat 0 2px;
 }
 .broadcast-sensitive span strong.icon-e {
 	background:url("images/sprites.png") no-repeat -9px -630px;
