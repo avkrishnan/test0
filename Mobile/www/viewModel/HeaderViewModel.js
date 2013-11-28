@@ -13,11 +13,11 @@ function HeaderViewModel() {
 	/* This Function shows Count of New Message in header badge*/
 	this.showNewMessagesCount = function(data) {
 		if(JSON.parse(data).length > 0) {
-			that.newMessageClass('smsiconwhite');
-			that.newMessageCount(JSON.parse(data).length);
+			this.newMessageClass('smsiconwhite');
+			this.newMessageCount(JSON.parse(data).length);
 		}
 		else {
-			that.newMessageCount('');
+			this.newMessageCount('');
 		}
 	}
 	
