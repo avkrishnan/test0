@@ -116,7 +116,7 @@ h1.additionalsettings {
 	margin:20px 0 10px 14px;
 }
 h1.newcreatechannel {
-	margin:20px 0px 10px 14px;
+	margin:20px 0 10px 14px;
 	font-size:15px;
 }
 .page-content {
@@ -440,7 +440,7 @@ select, .ui-icon-arrow-d {
 	border:none;
 	border-radius:4px;
 	-webkit-border-radius:4px;
-	padding:0px 10px;
+	padding:0 10px;
 	width:48%;
 	height:35px;
 	font-size:16px;
@@ -572,7 +572,7 @@ select, .ui-icon-arrow-d {
 .success {
 	font-size:14px;
 	color:#fff;
-	padding:0 10px 0px 12px;
+	padding:0 10px 0 12px;
 }
 .success p {
 	padding-bottom:15px;
@@ -1172,7 +1172,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelcontent {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
-	-webkit-border-radius:4px;
+	-webkit-border-radius:21px 0 0 10px;
 	display:inline-block;
 	width:100%;
 	margin-bottom:10px;
@@ -1235,12 +1235,15 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .borderred {
 	border:2px solid #be1e2d;
+	border-radius:50%;
 }
 .bordergreen {
 	border:2px solid #006838;
+	border-radius:50%;
 }
 .sky-blue {
 	border:2px solid #1c75bc;
+	border-radius:50%;
 }
 .channel2 {
 	background:url("images/channelimg2.png") no-repeat -1px -1px;
@@ -1259,9 +1262,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .borderblue {
 	border:2px solid #2e3192;
+	border-radius:50%;
 }
 .borderyellow {
 	border:2px solid #f7941e;
+	border-radius:50%;
 }
 .requestcontent {
 	display:block;
@@ -1565,7 +1570,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 /*New Desing CHANGES v-55*/
 .igibutton {
 	float:left;
-	padding:23px 0px;
+	padding:23px 0;
 	width:45px;
 	background:url("images/IGI.png") no-repeat 7px 13px;
 }
@@ -1610,32 +1615,35 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .icon-h {
 	background:url("images/sprites-channel.png") no-repeat -3px -796px;
 }
+.icon-d {
+	background:url("images/default-icon.png") no-repeat 4px 4px;
+}
 .channelmessages .announcementicon {
 	background:url(images/announcementicon.png) no-repeat 6px 7px;
 }
 .messageschannel {
-	padding:0px 0px 4px 6px;
+	padding:0 0 4px 6px;
 	float:left;
-	width:95.5%;
+	width:98%;
 }
 .igi-responses .messageschannel {
 	width:auto;
 }
 .igi-msg{
 	border-left:1px solid #eaeaea;
-	width:81.5%;
+	width:80%;
 }
 .igi-msg-icon {
 	width:64.6%;
 	border-left:1px solid #eaeaea;
 	border-right:1px solid #eaeaea;
 }
-.messagescontent .igi-msg-icon {
-	width:62.8%;
-}
 .msg-icon {
 	border-right:1px solid #eaeaea;
 	width:81%;
+}
+.messagescontent .igi-msg-icon {
+	width:62.8%;
 }
 .messagescontent .msg-icon {
 	width:80%;
@@ -1657,6 +1665,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelmessages p {
 	font-size:13px;
 	color:#000;
+	padding:0 5PX 0 0;
 }
 .broadecast {
 	border-radius:20px 0 0 20px;
@@ -1770,7 +1779,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelinfocontent {
 	border-bottom:1px solid #828181;
-	margin:0 15px 0 0px;
+	margin:0 15px 0 0;
 	padding:8px 0 8px 0;
 	overflow:hidden;
 	display:block;
@@ -2295,6 +2304,7 @@ h1.requests {
 	color:#414141;
 	line-height:20px;
 	word-break:break-all;
+	padding:0 5px 0 0;
 }
 .messagesreceived .receive-time em {
 	font-style:normal;
@@ -2302,6 +2312,7 @@ h1.requests {
 	font-size:12px;
 	padding:0 2px 0 0;
 	float:left;
+	line-height:16px;
 }
 .normalicon {
 	background:url("images/sprites.png") no-repeat -3px -1547px;
@@ -2467,11 +2478,11 @@ ul.igiresponses li span {
 	float:left;
 	width:45px;
 	text-align:center;
-	padding:3px 0px;
+	padding:3px 0;
 	background:#e6e7e8;
 	border-right:1px solid #dcddde;
-	border-radius:4px 0px 0px 4px;
-	-webkit-border-radius:4px 0px 0px 4px;
+	border-radius:4px 0 0 4px;
+	-webkit-border-radius:4px 0 0 4px;
 	min-height:40px;
 }
 .msg-increase span {
@@ -2479,16 +2490,16 @@ ul.igiresponses li span {
 	font-size:14px;
 }
 .msg-increase .nomsg {
-	padding:3px 0px;
+	padding:3px 0;
 	display:block;
 	font-size:12px;
-	padding:13px 0px 10px 0px;
+	padding:13px 0 10px 0;
 }
 .increase-msg {
 	height:10px;
 	float:left;
 	width:100%;
-	margin:3px 0px;
+	margin:3px 0;
 	background: rgb(37,38,37); /* Old browsers */
 	background: -moz-linear-gradient(left,  rgba(37,38,37,1) 2%, rgba(83,82,84,1) 31%, rgba(128,130,133,1) 82%, rgba(83,82,84,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, right top, color-stop(2%,rgba(37,38,37,1)), color-stop(31%,rgba(83,82,84,1)), color-stop(82%,rgba(128,130,133,1)), color-stop(100%,rgba(83,82,84,1))); /* Chrome,Safari4+ */
@@ -2522,8 +2533,8 @@ ul.igiresponses li span {
 	color:#FFFFFF;
 	display:inline-block;
 	font-size:14px;
-	padding:2px 0px;
-	margin:0px 5px;
+	padding:2px 0;
+	margin:0 5px;
 	width:28.5%;
 	opacity:0.5;
 }
@@ -2655,7 +2666,7 @@ ul.igiresponses li span {
 	padding:7px 0 8px 55px;
 	background:#2d2d2d url("images/IGI-btn.png") no-repeat 5px center;
 	margin:10px 0;
-	border-radius:4px 0px 0px 4px;
+	border-radius:4px 0 0 4px;
 	-webkit-border-radius:4px 0 0 4px;
 }
 
@@ -2759,7 +2770,7 @@ ul.igiresponses li span {
 }
 .broadcast-textarea {
 	background:#e6e7e8;
-	border-radius:4px 0px 0px 4px;
+	border-radius:4px 0 0 4px;
 	-webkit-border-radius:4px 0 0 4px;
 	padding:5px 20px 5px 5px;
 }
@@ -3195,6 +3206,7 @@ ul.igiresponses li span {
 .yesnoclick span.nobutton, .yes-noclick span.nobutton, .yesno-click span.nobutton {
 	background:#8dc63f;
 	color:#fff;
+	border-radius:50%;
 }
 .yes-noactive {
 	background:#8dc63f;
@@ -3216,7 +3228,7 @@ ul.igiresponses li span {
 	background:#FDFACC url("images/sprites-channel.png") no-repeat 5px -1142px;
 	bottom:46px;
 	font-size:14px;
-	padding:10px 0px 12px 48px;
+	padding:10px 0 12px 48px;
 	position:fixed;
 	width:100%;
 	border-bottom:1px solid #e4e2b9;
@@ -3257,7 +3269,7 @@ ul.igiresponses li span {
 }
 .terms-service ul li {
 	list-style:disc;
-	padding:2px 0px;
+	padding:2px 0;
 	margin-left:15px;
 }
 .terms-service ul li.inside {
@@ -3276,11 +3288,11 @@ ul.igiresponses li span {
 	display:block;
 }
 .ourservices {
-	margin:10px 0 0 0px;
+	margin:10px 0 0 0;
 }
 /*V-20 - Compose Broadcast - NO CHANNELS SET UP*/
 .broadcastbigicon {
-	padding:30px 0px;
+	padding:30px 0;
 	margin-right:10px;
 	background:url(images/broadcastbigicon.png) no-repeat center center;
 }
@@ -3291,6 +3303,18 @@ ul.igiresponses li span {
 @media only screen and (min-width:320px) {
 	.Emergencymsg {
 		line-height:16px;
+	}
+	.messagescontent .igi-msg-icon {
+		width:62.6%;
+	}
+	.igi-msg{
+		width:80%;
+	}
+	.igi-msg-icon {
+		width:66.6%;
+	}
+	.msg-icon {
+		width:82%;
 	}
 }
 @media only screen and (min-width:360px) { 
@@ -3525,18 +3549,17 @@ ul.igiresponses li span {
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right: 47px;
-	}	
+	}
+	.messageschannel {
+		width:99%;
+	}
 	.igi-msg{
-		border-left:1px solid #eaeaea;
 		width:92%;
 	}
 	.igi-msg-icon {
 		width:86.45%;
-		border-left:1px solid #eaeaea;
-		border-right:1px solid #eaeaea;
 	}
 	.msg-icon {
-		border-right:1px solid #eaeaea;
 		width:92.6%;
 	}
 	.messagescontent .msg-icon {
@@ -3545,12 +3568,16 @@ ul.igiresponses li span {
 	.messagescontent .igi-msg-icon {
 		width:86.2%;
 	}
-}
-@media only screen and (max-width:1280px) and (min-width:768px) {
-	.msg-content p {
-		font-size:18px;
+	.messagescontent .igi-msg {
+		width:86.2%;
 	}
 }
+/*@media only screen and (max-width:1280px) and (min-width:768px) {
+	.msg-content p {
+		font-size:18px;
+		border:2px solid red;
+	}
+}*/
 @media only screen and (min-width:800px) {
 	.details {
 		width:90.9%;
@@ -3602,19 +3629,23 @@ ul.igiresponses li span {
 		margin-right: 49px;
 	}
 	.igi-msg{
-		border:none;
+		width:93%;
 	}
 	.igi-msg-icon {
-		border:none;
+		width:87%;
 	}
 	.msg-icon {
-		border:none;
+		width:93%;
 	}
-	.iconchannels {
-		border-left:1px solid #eaeaea;
+	
+	.messagescontent .igi-msg-icon {
+		width: 86.9%;
 	}
-	.igibutton {
-		border-right:1px solid #eaeaea;
+	.messagescontent .igi-msg{
+		width:92.9%;
+	}
+	.messagescontent .msg-icon {
+		width:92.9%;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -3675,6 +3706,24 @@ ul.igiresponses li span {
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right:60px;
+	}
+	.igi-msg{
+		width:94%;
+	}
+	.igi-msg-icon {
+		width:89.5%;
+	}
+	.msg-icon {
+		width:94.4%;
+	}
+	.messagescontent .msg-icon {
+		width:94.3%;
+	}
+	.messagescontent .igi-msg-icon {
+		width:89.4%;
+	}
+	.messagescontent .igi-msg {
+		width:94.4%;
 	}
 }
 @media only screen and (min-width:1280px) {
@@ -3755,14 +3804,24 @@ ul.igiresponses li span {
 		width:92%;
 	}
 	.msg-icon {
-		width:95.8%;
+		width:95.6%;
+	}
+	.messagescontent .msg-icon {
+		width:95.7%;
+	}
+	.messagescontent .igi-msg-icon {
+		width:92%;
+	}
+	.messagescontent .igi-msg {
+		width:95.5%;
 	}
 }
-@media only screen and (max-width: 600px) and (min-width: 599px) {
+/*@media only screen and (max-width: 600px) and (min-width: 599px) {
 	.new-user img {
 		width:130%;
+		border:3px solid red;
 	}
-}
+}*/
 @media only screen and (min-width:1366px) {
 	.addaction {
 		width:99%;
@@ -3774,11 +3833,12 @@ ul.igiresponses li span {
 		top:69%;
 	}
 }
-@media only screen and (max-width: 900px) and (min-width: 899px) {
+/*@media only screen and (max-width: 900px) and (min-width: 899px) {
 	.new-user img {
 		width:130%;
+		border:4px solid green;
 	}
-}
+}*/
 @media only screen and (min-width:1290px) {
 	.dateminutesetting {
 		margin:0 84px;
@@ -3791,6 +3851,24 @@ ul.igiresponses li span {
 	}
 	.slidemenu {
 		min-height:622px;
+	}
+	.igi-msg{
+		width:95.5%;
+	}
+	.igi-msg-icon {
+		width:92.4%;
+	}
+	.msg-icon {
+		width:95.6%;
+	}
+	.messagescontent .msg-icon {
+		width:95.9%;
+	}
+	.messagescontent .igi-msg-icon {
+		width:92.4%;
+	}
+	.messagescontent .igi-msg {
+		width:95.8%;
 	}
 }
 /* @media query css End*/

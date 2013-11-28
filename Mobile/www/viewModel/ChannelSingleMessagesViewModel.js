@@ -49,8 +49,6 @@ function ChannelSingleMessagesViewModel() {
 			if(localStorage.getItem("currentChannel")) {			
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
-				//alert(localStorage.getItem("currentChannel"));
-				//alert(localStorage.getItem("currentChannelMessage"));
 				that.title(channel.name);
 				that.channelid(channel.id);
 				that.description(channel.description);
