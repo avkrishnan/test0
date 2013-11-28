@@ -31,8 +31,7 @@ function ChannelChangeNameViewModel() {
     that.channelChangeName('');
 		that.channelClass('');			
 		that.message('');
-		that.errorChannel('');
-    that.backNav('');		
+		that.errorChannel('');	
   };
 	  
 	this.activate = function() {
@@ -56,8 +55,7 @@ function ChannelChangeNameViewModel() {
 			$('input').keyup(function () {
 				that.message('');
 				that.errorChannel('');
-			});
-			that.backText('<em></em>Settings');			
+			});	
 		}
 	}
 	

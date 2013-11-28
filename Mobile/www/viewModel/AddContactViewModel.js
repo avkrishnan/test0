@@ -85,7 +85,8 @@ function AddContactViewModel() {
 			localStorage.setItem("CommethodType",data.comMethodType);			
 		}
 		that.showDelete(true);
-		//that.backText('<em></em>Cont. Info');			
+		//headerViewModel.backText('<em></em>Cont. Info');
+		//alert(headerViewModel.backText());		
 	}
 	
 	this.gotoView = function() {

@@ -87,16 +87,16 @@ function SendMessageViewModel() {
 				var DateTime = localStorage.getItem('escDuration').split('/');
 				var day = DateTime[2].split(' ');
 				var time = day[1].split(':');						
-				var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+time[0]+':'+time[1]+' '+day[2].toLowerCase();
+				var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2].toLowerCase();
 				that.duration(durationText);														
 			} else {
 				tomorrow = new Date(tomorrow);
 				var hours = tomorrow.getHours();
-				hours = (hours<10?'0':'')+(hours-12>12?hours-12:hours);			
+				hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
 				var mins = tomorrow.getMinutes();
 				mins = ((mins<10?'0':'')+mins);			
 				var meridiem = tomorrow.getHours()>12?'PM':'AM';
-				var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+hours+':'+mins+' '+meridiem.toLowerCase();
+				var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+tomorrow.getFullYear()+', '+hours+':'+mins+' '+meridiem.toLowerCase();
 				that.duration(durationText);												
 			}									
 			that.accountName(localStorage.getItem('accountName'));

@@ -67,9 +67,6 @@ function ChannelSingleMessagesViewModel() {
 			}
 		}
 	};
-	this.backCommand = function () {
-		popBackNav();
-  };
 	
 	this.readMessageUpdateBadge = function(messageID) {
 		$('.active-overlay').html(''); 

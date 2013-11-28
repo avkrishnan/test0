@@ -42,7 +42,7 @@ function SingleMessageFullTextViewModel() {
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
 			that.channelName(channelObject.channelName);
-			var fullDate = _date(messageObject.created);					
+			var fullDate = dateFormat1(messageObject.created);					
 			that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
 			that.sensitivityText(messageObject.sensitivityText);				
 			that.singleMessage(messageObject.broadcast);
@@ -52,13 +52,6 @@ function SingleMessageFullTextViewModel() {
 	
 	this.menuCommand = function () {
 		viewNavigate('Broadcast details', 'singleMessageFullTextView', 'channelMenuView');		
-  };	
-	
-	function _date(created) {	
-		var date  = new Date(created);
-    return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
-		date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
-		(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
-	}	
+  };		
 				
 }

@@ -17,7 +17,6 @@ function HeaderViewModel() {
 		} else {		
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}		
-		showNewMessages(localStorage.getItem('enymNotifications'));
 		that.showNewMessagesCount(localStorage.getItem('enymNotifications'));
 	}
 	
