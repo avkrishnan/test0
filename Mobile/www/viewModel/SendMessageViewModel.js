@@ -57,7 +57,11 @@ function SendMessageViewModel() {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');												
-			}						
+			}
+			if(localStorage.getItem('messageText')) {
+				that.messageText(localStorage.getItem('messageText'));
+				localStorage.removeItem('messageText');												
+			}												
 			that.escalateClass('');
 			that.yesNoClass('yesbutton');
 			that.noYesClass('nobutton');						
@@ -199,8 +203,19 @@ function SendMessageViewModel() {
 		}
 		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
 	};
+
+	this.requestiGiHelp = function () {
+		localStorage.setItem('messageText', that.messageText());				
+		goToView('requestiGiHelpView');		
+  };
+	
+	this.escalateHelp = function () {
+		localStorage.setItem('messageText', that.messageText());			
+		goToView('escalateHelpView');		
+  };	
 	
 	this.escalateYes = function () {
+		localStorage.setItem('messageText', that.messageText());		
 		goToView('escalateSettingsView');		
   };
 	

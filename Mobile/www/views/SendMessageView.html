@@ -19,7 +19,7 @@
       </div>     
       <div class="composebroadcast">
         <div class="yes-no">
-          <a href="#" onclick="goToView('requestiGiHelpView');">
+          <a href="#" data-bind="click: requestiGiHelp">
             <label for="flip-1">Request iGi ?</label>
             <span class="informationicon"></span>
           </a>
@@ -29,7 +29,7 @@
           </div> 
         </div>       
         <div class="yes-no last" data-bind="css: escalateClass">
-          <a href="#" onclick="goToView('escalateHelpView');">        
+          <a href="#" data-bind="click: escalateHelp">       
             <label for="flip-1">Escalate ?</label>
             <span class="informationicon"></span>
           </a>
