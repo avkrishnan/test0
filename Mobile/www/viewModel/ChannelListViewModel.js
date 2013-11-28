@@ -4,8 +4,8 @@ function ChannelListViewModel() {
   var that = this;
   this.template = 'channelListView';
   this.viewid = 'V-40';
-  this.viewname = 'ChannelsIOwn';
-  this.displayname = 'My Channels';
+  this.viewname = 'Home';
+  this.displayname = 'Home';
   this.accountName = ko.observable();
 	this.responseData = ko.observable();
 	this.newMessagesCount = ko.observable();

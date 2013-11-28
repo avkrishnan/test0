@@ -4,8 +4,8 @@ function ChannelsIOwnViewModel() {
   var that = this;
 	this.template = 'channelsIOwnView';
 	this.viewid = 'V-19';
-	this.viewname = 'ChannelsIOwn';
-	this.displayname = 'My Channels';	
+	this.viewname = 'Channels';
+	this.displayname = 'Channels I Own';	
 	this.accountName = ko.observable();		
 	
   /* Channels observable */

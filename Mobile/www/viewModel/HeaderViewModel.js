@@ -66,7 +66,8 @@ function HeaderViewModel() {
 	}
 	
 	this.menuCommand = function () {
-		viewNavigate($.mobile.activePage.attr('id'), $.mobile.activePage.attr('id'), 'channelMenuView');		
+		var backText = getCurrentViewModel().viewname;	
+		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelMenuView');		
   };
 		
 }
