@@ -6,8 +6,7 @@ function SendMessageViewModel() {
 	this.viewid = "V-20";
 	this.viewname = "Compose Broadcast";
 	this.displayname = "Compose Broadcast";	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();		
 	
   /* Send Message observable */
 	this.messageText = ko.observable();
@@ -22,7 +21,7 @@ function SendMessageViewModel() {
 	this.escalateActive = ko.observable(false);	
 	this.escDuration = ko.observable();	
 	this.escLevel = ko.observable();	
-	this.toastText = ko.observable();
+	//this.toastText = ko.observable();
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id) {
@@ -99,8 +98,7 @@ function SendMessageViewModel() {
 				var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+tomorrow.getFullYear()+', '+hours+':'+mins+' '+meridiem.toLowerCase();
 				that.duration(durationText);												
 			}									
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));		
 			that.characterCount('0');		
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);

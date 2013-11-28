@@ -589,7 +589,7 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a) {
 	console.log("showing page: " + $(this).attr('id'));
 	var vm = ko.dataFor(this);
 	var token = localStorage.getItem("accessToken");
-	document.title = vm.displayname;
+	document.title = vm.displayname;	
 	
 	if ( vm && vm.hasfooter && token){
 		// The reason the footer is appended on the pagebeforeshow instead of pagebeforecreate is because it relies on the viewmodel for some information to build it.

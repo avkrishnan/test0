@@ -7,7 +7,6 @@ function ChangePasswordViewModel() {
   this.viewname = 'Change Password';
   this.displayname = 'Change Password';
   this.accountName = ko.observable();	
-	this.backText = ko.observable();	
 		
 	this.currentPassword = ko.observable();	
 	this.newPassword = ko.observable();
@@ -60,8 +59,7 @@ function ChangePasswordViewModel() {
 				that.errorMessageNew('');
 				that.errorMessageConfirm('');				
 			});			
-			that.accountName(localStorage.getItem("accountName"));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem("accountName"));			
 		}
   };
 	

@@ -6,8 +6,7 @@ function ChannelViewModel() {
 	this.viewname = "Landing Page";
 	this.displayname = "Channel Landing Page";
 	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();	
+	this.accountName = ko.observable();	
 	
 	this.hasfooter = ko.observable(true);
 	this.hasheader = ko.observable(false);
