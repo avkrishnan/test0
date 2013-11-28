@@ -220,6 +220,7 @@ function SendMessageViewModel() {
   };
 	
 	this.escalateNo = function () {
+		localStorage.setItem('messageText', that.messageText());		
 		localStorage.removeItem('escDuration');
 		localStorage.removeItem('escLevel');				
 		goToView('sendMessageView');		
