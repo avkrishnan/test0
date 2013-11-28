@@ -47,15 +47,7 @@ function EscalateSettingsViewModel() {
 				localStorage.setItem('escLevel', 'H');															
 			}
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Escalate Settings', 'escalateSettingsView', 'channelMenuView');		
-  };
-	
-	this.setDateTime = function () {
-		goToView('escalateTimeSettingsView');					
-	};	
+	}	
 	
 	this.remindActive = function () {
 		that.remindClass('timesensitiveicon ');
@@ -80,11 +72,7 @@ function EscalateSettingsViewModel() {
 	
 	this.saveCommand = function () {
 		localStorage.setItem('escalate', 'yes');		
-	  goToView('sendMessageView');					
-  };				
-	
-	this.userSettings = function () {
-		pushBackNav('Escalate Settings', 'escalateSettingsView', 'escalationPlansView');
-  };		
+	  popBackNav();					
+  };						
 	
 }

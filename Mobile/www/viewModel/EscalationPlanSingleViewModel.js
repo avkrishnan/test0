@@ -177,15 +177,15 @@ function EscalationPlanSingleViewModel() {
   };
 	
 	this.menuCommand = function () {
-		pushBackNav('SettingsSingle', 'escalationPlanSingleView', 'channelMenuView');		
+		viewNavigate('SettingsSingle', 'escalationPlanSingleView', 'channelMenuView');		
   };
 	
 	this.userSettings = function () {
-		pushBackNav('SettingsSingle', 'escalationPlanSingleView', 'escalationPlansView');				
+		viewNavigate('SettingsSingle', 'escalationPlanSingleView', 'escalationPlansView');				
   };	
 
 	this.composeCommand = function () {
-		pushBackNav('SettingsSingle', 'escalationPlanSingleView', 'sendMessageView');				
+		viewNavigate('SettingsSingle', 'escalationPlanSingleView', 'sendMessageView');				
   };	
 	
 }

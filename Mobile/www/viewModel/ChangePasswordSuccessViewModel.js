@@ -25,7 +25,8 @@ function ChangePasswordSuccessViewModel() {
 	};
 	
 	this.okayChangeCommand = function () {
-		localStorage.removeItem('changePassword');						
+		localStorage.removeItem('changePassword');
+		popBackNav();								
 		goToView('escalationPlansView');
   };		       
 }

@@ -6,8 +6,7 @@ function ChannelMainViewModel() {
 	this.viewid = 'V-46';
 	this.viewname = 'ChannelMain';
 	this.displayname = 'Channel Main';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();			
+	this.accountName = ko.observable();		
 	
   /* Channel Main observable */	
 	this.channelId = ko.observable();		
@@ -43,7 +42,6 @@ function ChannelMainViewModel() {
 				localStorage.removeItem('toastData');												
 			}			
 			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
 			} else {		
@@ -56,15 +54,7 @@ function ChannelMainViewModel() {
 			that.followerCount(channelObject.followerCount);											
 			that.getMessagesCommand();
 		}
-	}
-	
-	this.backCommand = function () {
-		popBackNav();		
-  };	
-	
-	this.menuCommand = function () {
-		pushBackNav('Main', 'channelMainView', 'channelMenuView');		
-  };	
+	}		
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();
@@ -108,27 +98,11 @@ function ChannelMainViewModel() {
 	this.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
 		return ES.messageService.getChannelMessages(that.channelId(), undefined, {success: successfulMessageGET, error: errorAPI});
-	};
-	
-	this.channelSettings = function(){
-		pushBackNav('Main', 'channelMainView', 'channelSettingsView');					
-	};	
-	
-	this.channelFollowers = function(data){
-		pushBackNav('Main', 'channelMainView', 'followersListView');					
 	};	
 	
 	this.singleMessage = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));							
-		goToView('singleMessageView');
-	};
-	
-	this.userSettings = function () {
-		pushBackNav('Main', 'channelMainView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Main', 'channelMainView', 'sendMessageView');		
-  };	
+		viewNavigate('Main', 'channelMainView', 'singleMessageView');
+	};	
 	
 }

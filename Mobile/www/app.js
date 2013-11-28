@@ -733,27 +733,22 @@ if(!localStorage.getItem('backNavText') || !localStorage.getItem('backNavView'))
 	var backNavView = JSON.parse(localStorage.getItem('backNavView'));
 }
 
-function pushBackNav(backText, backView, targetView) {
+function viewNavigate(backText, backView, targetView) {
 	backNavText.push(backText);
 	localStorage.setItem('backNavText', JSON.stringify(backNavText));	
 	backNavView.push(backView);
-	localStorage.setItem('backNavView', JSON.stringify(backNavView));	
-	goToView(targetView);	
+	localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
 }		
-
-/**/
-function showMenu() {
-	pushBackNav('Channels', 'channelsFollowingListView', 'channelMenuView');		
-}	
 
 function popBackNav() {
 	backNavText.pop();
 	localStorage.removeItem('backNavText');	
 	localStorage.setItem('backNavText', JSON.stringify(backNavText));				
-	var goView = goToView(backNavView.pop());
+	var targetView = goToView(backNavView.pop());
 	localStorage.removeItem('backNavView');		
-	localStorage.setItem('backNavView', JSON.stringify(backNavView));	
-	goToView(goView);		
+	localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});			
 }
 
 /* Toast messages function */

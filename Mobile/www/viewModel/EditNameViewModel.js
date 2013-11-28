@@ -6,8 +6,7 @@ function EditNameViewModel() {
 	this.viewid = 'V-11';
 	this.viewname = 'EditName';
 	this.displayname = 'Edit Name';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();		
 	
 	/* Edit Name observable */
 	this.accountName = ko.observable();	
@@ -61,11 +60,7 @@ function EditNameViewModel() {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'editNameView') {
 			that.editNameCommand();
 		}
-	});
-	
-	this.menuCommand = function () {
-		pushBackNav('Edit Name', 'editNameView', 'channelMenuView');		
-  };	
+	});	
 	
 	this.editNameCommand = function () {
     if (that.firstname() == '') {
@@ -96,6 +91,7 @@ function EditNameViewModel() {
 
   function successfulUpdate(args) {
     $.mobile.hidePageLoadingMsg();
+		popBackNav();
 		goToView('escalationPlansView');
   };
 
@@ -104,14 +100,6 @@ function EditNameViewModel() {
 		that.firstnameClass('validationerror');		
 		that.lastnameClass('validationerror');
 		that.errorFirstLastName('<span>SORRY:</span> '+details.message);		
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Edit Name', 'editNameView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Edit Name', 'editNameView', 'sendMessageView');		
   };	
 	
 }

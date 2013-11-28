@@ -57,11 +57,7 @@ function InviteFollowersIIViewModel() {
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'inviteFollowersIIView') {
 			that.sendFeedbackCommand();
 		}
-	});
-	
-	this.menuCommand = function () {
-		pushBackNav('InviteII', 'inviteFollowersIIView', 'channelMenuView');		
-  };	
+	});	
 	
 	this.sendFeedbackCommand = function () {
 		var feedbackData = $('#'+that.feedbackId()).val();
@@ -72,14 +68,6 @@ function InviteFollowersIIViewModel() {
     } else {
 			showMessage('Testing');		
     }
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('InviteII', 'inviteFollowersIIView', 'escalationPlansView');
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('InviteII', 'inviteFollowersIIView', 'sendMessageView');
   };	
 		
 }

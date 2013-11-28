@@ -17,8 +17,6 @@ function ChannelChangeNameViewModel() {
 	this.message = ko.observable();	
 	this.errorChannel = ko.observable();	
 	this.channelWebAddress = ko.observable();
-	this.backText = ko.observable();
-	this.backNav = ko.observable();
 	this.toastText = ko.observable();								
 	
 	/* Methods */
@@ -67,23 +65,7 @@ function ChannelChangeNameViewModel() {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelChangeNameView') {
 			that.nextViewCommand();
 		}
-	});
-	
-	this.goToBack = function() {
-		if(that.backNav() == 'channelChangeNameView') {			
-			that.sectionOne(true)
-			that.sectionTwo(false);
-			that.backText('<em></em>Settings');
-			that.backNav('');																	
-		}
-		else {
-			goToView('channelSettingsView');
-		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Step 1', 'channelChangeNameView', 'channelMenuView');		
-  };		
+	});		
 	
   this.nextViewCommand = function () {
     if (that.channelChangeName() == '') {
@@ -109,8 +91,7 @@ function ChannelChangeNameViewModel() {
 			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
 			that.sectionTwo(true);
-			that.backText('<em></em>Step 1');
-			that.backNav('channelChangeNameView');				
+			viewNavigate('Step 1', 'channelChangeNameView', 'sendMessageView');						
 			that.channelWebAddress(that.channelChangeName()+'.evernym.com');				
 		}
 	};	
@@ -131,14 +112,6 @@ function ChannelChangeNameViewModel() {
 		};
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
-	}
-	
-	this.userSettings = function () {
-		pushBackNav('Step 1', 'channelChangeNameView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Step 1', 'channelChangeNameView', 'sendMessageView');
-  };	
+	};	
 	
 }

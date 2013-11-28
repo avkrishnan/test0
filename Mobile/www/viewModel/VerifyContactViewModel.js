@@ -132,7 +132,7 @@ function VerifyContactViewModel() {
 	});			
 	
 	this.menuCommand = function () {
-		pushBackNav('Cont. Info', 'verifyContactView', 'channelMenuView');		
+		viewNavigate('Cont. Info', 'verifyContactView', 'channelMenuView');		
   };	
 
 	this.verifyRequest = function(verifyCommethodObject) {
@@ -157,11 +157,11 @@ function VerifyContactViewModel() {
 	};
 	
 	this.userSettings = function () {
-		pushBackNav('Cont. Info', 'verifyContactView', 'escalationPlansView');
+		viewNavigate('Cont. Info', 'verifyContactView', 'escalationPlansView');
   };		
 	
 	this.composeCommand = function () {
-		pushBackNav('Cont. Info', 'verifyContactView', 'sendMessageView');
+		viewNavigate('Cont. Info', 'verifyContactView', 'sendMessageView');
   };
 		
 }

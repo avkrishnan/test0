@@ -37,11 +37,7 @@ function ChannelChangeIconViewModel() {
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);			
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Change Icon', 'channelChangeIconView', 'channelMenuView');		
-  };	
+	}	
 	
 	function successfulModify(args) {
 		that.toastText('Icon changed');		
@@ -62,14 +58,6 @@ function ChannelChangeIconViewModel() {
 		};
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Change Icon', 'channelChangeIconView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Change Icon', 'channelChangeIconView', 'sendMessageView');		
   };	
 	
 }

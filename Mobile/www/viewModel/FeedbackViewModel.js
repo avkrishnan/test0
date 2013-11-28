@@ -29,31 +29,7 @@ function FeedbackViewModel() {
 			}			
 			that.accountName(localStorage.getItem('accountName'));			
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Feedback', 'feedbackView', 'channelMenuView');		
-  };	
-	
-	this.praiseCommand = function () {
-		goToView('inviteFollowersIIView');
-	}
-	
-	this.suggestionsCommand = function () {
-		goToView('inviteFollowersIIView');
-	}
-	
-	this.reportABugCommand = function () {
-		goToView('inviteFollowersIIView');
-	}
-	
-	this.userSettings = function () {
-		pushBackNav('Feedback', 'feedbackView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Feedback', 'feedbackView', 'sendMessageView');		
-  };	
+	}	
 	
 }
 

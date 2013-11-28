@@ -32,15 +32,15 @@ function HelpViewModel() {
 	}
 	
 	this.menuCommand = function () {
-		pushBackNav('Help', 'helpView', 'channelMenuView');
+		viewNavigate('Help', 'helpView', 'channelMenuView');
   };
 	
 	this.userSettings = function () {
-		pushBackNav('Help', 'helpView', 'escalationPlansView');
+		viewNavigate('Help', 'helpView', 'escalationPlansView');
   };	
 
 	this.composeCommand = function () {
-		pushBackNav('Help', 'helpView', 'sendMessageView');
+		viewNavigate('Help', 'helpView', 'sendMessageView');
   };	
 	
 }

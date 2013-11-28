@@ -58,7 +58,7 @@ function ReplyDetailViewModel() {
 	}
 	
 	this.menuCommand = function () {
-		pushBackNav('Reply detail', 'replyDetailView', 'channelMenuView');		
+		viewNavigate('Reply detail', 'replyDetailView', 'channelMenuView');		
   };	
 	
 	this.showMore = function(){
@@ -67,11 +67,11 @@ function ReplyDetailViewModel() {
 	};
 	
 	this.userSettings = function () {
-		pushBackNav('Reply detail', 'replyDetailView', 'escalationPlansView');
+		viewNavigate('Reply detail', 'replyDetailView', 'escalationPlansView');
   };	
 	
 	this.composeCommand = function () {
-		pushBackNav('Reply detail', 'replyDetailView', 'sendMessageView');
+		viewNavigate('Reply detail', 'replyDetailView', 'sendMessageView');
   };	
 				
 }

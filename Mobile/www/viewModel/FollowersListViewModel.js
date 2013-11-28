@@ -6,8 +6,7 @@ function FollowersListViewModel() {
 	this.viewid = 'V-26';
 	this.viewname = 'Followers';
 	this.displayname = 'Followers';	 
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();	
 	
   /* Followers observable */
 	this.channelId = ko.observable();	
@@ -39,7 +38,6 @@ function FollowersListViewModel() {
 				localStorage.removeItem('toastData');				
 			}			
 			that.accountName(localStorage.getItem('accountName'));		
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
 			} else if(localStorage.getItem('counter') == 2){		
@@ -48,27 +46,11 @@ function FollowersListViewModel() {
 				localStorage.setItem('counter', 1);
 			}																
 			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);																			
+			that.channelName(channelObject.channelName);																						
 			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
 			return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
 		}
-	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
-
-	this.menuCommand = function () {
-		pushBackNav('Followers', 'followersListView', 'channelMenuView');
-  };		
-	
-	this.channelSettings = function(){
-		pushBackNav('Followers', 'followersListView', 'channelSettingsView');				
-	};
-	
-	this.addInviteFollowers = function(){
-		pushBackNav('Followers', 'followersListView', 'addInviteFollowersView');				
-	};	
+	}	
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
@@ -82,13 +64,13 @@ function FollowersListViewModel() {
 					followerName: data.followers[len].firstname +' '+ data.followers[len].lastname, 
 					accountname: data.followers[len].accountname
 				});
-			follower == follower++;				
-			if(follower == 1) {
-				var followers = follower +' follower';
-			} else {
-				var followers = follower +' followers';
-			}				
-			that.followerCount(followers);
+				follower == follower++;				
+				if(follower == 1) {
+					var followers = follower +' follower';
+				} else {
+					var followers = follower +' followers';
+				}				
+				that.followerCount(followers);
 			}
 		}
 	}; 
@@ -101,15 +83,7 @@ function FollowersListViewModel() {
 	
 	this.followerDetails = function (data) {
 		localStorage.setItem('currentfollowerData', JSON.stringify(data));		
-		pushBackNav('Followers', 'followersListView', 'followerDetailsView');
-  };	
-	
-	this.userSettings = function () {
-		pushBackNav('Followers', 'followersListView', 'escalationPlansView');
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Followers', 'followersListView', 'sendMessageView');
-  };	
+		viewNavigate('Followers', 'followersListView', 'followerDetailsView');
+  };		
 	
 }

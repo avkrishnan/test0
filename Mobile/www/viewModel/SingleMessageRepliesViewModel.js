@@ -49,19 +49,7 @@ function SingleMessageRepliesViewModel() {
 			$.mobile.showPageLoadingMsg("a", "Loading Message replies");			
 			return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI})			
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Broadcast Replies', 'singleMessageRepliesView', 'channelMenuView');		
-  };	
-	
-	/*function replyAuthor() {
-		return ES.loginService.getAccount('bb5156c5-1e95-414b-b76a-299edabd15f7', {success: successfulGetAccountInfo, error: errorAPI});
-	}
-	
-	function successfulGetAccountInfo(data){
-		alert(data);
-	}*/
+	}	
 	
 	function successfulReliesGET(data){
     $.mobile.hidePageLoadingMsg();
@@ -91,15 +79,7 @@ function SingleMessageRepliesViewModel() {
 	
 	this.replyDetail = function(data){	
 		localStorage.setItem('currentReplyData', JSON.stringify(data));									
-		goToView('replyDetailView');
-	};
-	
-	this.userSettings = function () {
-		pushBackNav('Broadcast Replies', 'singleMessageRepliesView', 'escalationPlansView');
-  };
-			
-	this.composeCommand = function () {
-		pushBackNav('Broadcast Replies', 'singleMessageRepliesView', 'sendMessageView');
-  };	
+		viewNavigate('Broadcast Replies', 'singleMessageRepliesView', 'replyDetailView');
+	};	
 				
 }

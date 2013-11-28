@@ -37,15 +37,15 @@ function FirstChannelViewModel() {
   };
 	
 	this.menuCommand = function () {
-		pushBackNav('FollowFirstChannel', 'firstChannelView', 'channelMenuView');
+		viewNavigate('FollowFirstChannel', 'firstChannelView', 'channelMenuView');
   };
 	
 	this.userSettings = function () {
-		pushBackNav('FollowFirstChannel', 'firstChannelView', 'escalationPlansView');
+		viewNavigate('FollowFirstChannel', 'firstChannelView', 'escalationPlansView');
   };	
 
 	this.composeCommand = function () {
-		pushBackNav('FollowFirstChannel', 'firstChannelView', 'sendMessageView');
+		viewNavigate('FollowFirstChannel', 'firstChannelView', 'sendMessageView');
   };	
 	
 }

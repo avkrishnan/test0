@@ -118,10 +118,6 @@ function SendMessageViewModel() {
 	
 	this.backCommand = function () {
 		popBackNav();
-  };
-	
-	this.menuCommand = function () {
-		pushBackNav('Compose', 'sendMessageView', 'channelMenuView');		
   };	
 	
 	function successfulVerify(data){
@@ -206,17 +202,17 @@ function SendMessageViewModel() {
 
 	this.requestiGiHelp = function () {
 		localStorage.setItem('messageText', that.messageText());				
-		goToView('requestiGiHelpView');		
+		viewNavigate('Compose', 'sendMessageView', 'requestiGiHelpView');		
   };
 	
 	this.escalateHelp = function () {
 		localStorage.setItem('messageText', that.messageText());			
-		goToView('escalateHelpView');		
+		viewNavigate('Compose', 'sendMessageView', 'escalateHelpView');		
   };	
 	
 	this.escalateYes = function () {
 		localStorage.setItem('messageText', that.messageText());		
-		goToView('escalateSettingsView');		
+		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };
 	
 	this.escalateNo = function () {
@@ -224,10 +220,6 @@ function SendMessageViewModel() {
 		localStorage.removeItem('escDuration');
 		localStorage.removeItem('escLevel');				
 		goToView('sendMessageView');		
-  };		
-	
-	this.userSettings = function () {
-		pushBackNav('Compose', 'sendMessageView', 'escalationPlansView');
-  };	
+  };			
 
 }

@@ -13,7 +13,7 @@
     <div class="escalate-settings">
       <div class="escalatedate-time">
         <em>Escalate for how long?</em>
-        <a href="#" data-bind="click: setDateTime">Set Date and Time</a>
+        <a href="#" onclick="viewNavigate('Escalate Settings', 'escalateSettingsView', 'escalateTimeSettingsView');">Set Date and Time</a>
       </div>
       <div class="agressively-slider">
         <span>How agressively?</span>
@@ -39,7 +39,7 @@
     </div>
   <div class="toast-notification" data-bind="text: toastText"></div>   
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Escalate Settings', 'escalateSettingsView', 'escalationPlansView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div>

@@ -11,8 +11,7 @@ function EscalationPlansViewModel() {
 	this.escalationplans = ko.observableArray([]);
 	
 	this.baseUrl = ko.observable();
-	this.accountName = ko.observable();
-	this.backText = ko.observable();	
+	this.accountName = ko.observable();	
 	this.name = ko.observable();
 	
 	this.firstname = ko.observable();
@@ -77,8 +76,7 @@ function EscalationPlansViewModel() {
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
 			
-			that.accountName(_accountName);
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(_accountName);		
 			that.name(_name);
 			that.escalationplans.removeAll();
 			that.getCommethods().then(gotCommethods);
@@ -88,12 +86,8 @@ function EscalationPlansViewModel() {
 		}
 	};
 	
-	this.backCommand = function () {
-		popBackNav();
-  };
-	
 	this.menuCommand = function () {
-		pushBackNav('Settings', 'escalationPlansView', 'channelMenuView');		
+		viewNavigate('Settings', 'escalationPlansView', 'channelMenuView');		
   };	
 	
 	function gotEscPlans (data) {
@@ -198,9 +192,5 @@ function EscalationPlansViewModel() {
 		//notificationsViewModel.removeNotifications();
 		//OVERLAY.removeNotifications();
 	};
-	
-	this.composeCommand = function () {
-		pushBackNav('Settings', 'escalationPlansView', 'sendMessageView');		
-  };
 		
 }

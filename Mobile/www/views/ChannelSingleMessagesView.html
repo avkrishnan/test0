@@ -6,7 +6,7 @@
       <span class="channelimg channel4 sky-blue"></span>
       <div class="channelinfocontent last">
         <span data-bind="text:title"></span>
-        <a href="#" class="setting" data-bind="click: actionFollowChannelCommand"></a>
+        <a href="#" class="setting" onlclick="viewNavigate('Message details', 'channelSingleMessagesView', 'channelViewUnfollow');"></a>
         <em data-bind="text:description"></em>
       </div>
     </div>
@@ -35,8 +35,8 @@
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>    
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
-    <a class="announcement" href="#" data-bind="click: composeCommand"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div> 
 </div>

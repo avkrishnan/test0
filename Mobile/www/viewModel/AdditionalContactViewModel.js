@@ -123,7 +123,7 @@ function AdditionalContactViewModel() {
 	});			
 	
 	this.menuCommand = function () {
-		pushBackNav('Add New', 'additionalContactView', 'channelMenuView');		
+		viewNavigate('Add New', 'additionalContactView', 'channelMenuView');		
   };	
 	
 	this.addNewCommethod = function(newCommethodObject) {
@@ -155,14 +155,6 @@ function AdditionalContactViewModel() {
 			}
 		};
 		ES.commethodService.addCommethod(newCommethodObject, callbacks );
-	};
-	
-	this.userSettings = function () {
-		pushBackNav('Add New', 'additionalContactView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Add New', 'additionalContactView', 'sendMessageView');		
-  };	
+	};	
 	
 }

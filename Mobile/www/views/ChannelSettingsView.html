@@ -12,19 +12,19 @@
       </div>
     </div>
     <h1>Channel Settings</h1>
-    <a class="editchannel" href="#" data-bind="click: editChannelName">
+    <a class="editchannel" href="#" onclick="viewNavigate('Settings', 'channelSettingsView', 'channelChangeNameView');">
       Edit channel name
     </a>
-    <a class="editchannel" href="#" data-bind="click: editShortDescription">
+    <a class="editchannel" href="#" onclick="viewNavigate('Settings', 'channelSettingsView', 'editShortDescriptionView');">
       Edit short description
     </a>
-    <a class="editchannel" href="#" data-bind="click: editLongDescription">
+    <a class="editchannel" href="#" onclick="viewNavigate('Settings', 'channelSettingsView', 'editLongDescriptionView');">
       Edit web page description
     </a>      
-    <a class="editchannel deletechannel" href="#" data-bind="click: deleteChannel">
+    <a class="editchannel deletechannel" href="#" onclick="viewNavigate('Settings', 'channelSettingsView', 'channelDeleteView');">
       Delete this channel
     </a>
-    <a class="editchannel changechannel" href="#" data-bind="click: changeChannelIcon">
+    <a class="editchannel changechannel" href="#" onclick="viewNavigate('Settings', 'channelSettingsView', 'channelChangeIconView');">
       Change channel icon image
     </a>
     <div class="radiobtn">
@@ -53,8 +53,8 @@
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>    
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
-    <a class="announcement" href="#" data-bind="click: composeCommand"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Settings', 'channelSettingsView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Settings', 'channelSettingsView', 'sendMessageView');"></a>
   </div> 
   <div class="active-overlay" style="display:none"></div>  
 </div>

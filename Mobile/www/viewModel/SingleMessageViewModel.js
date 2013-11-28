@@ -45,26 +45,6 @@ function SingleMessageViewModel() {
 			that.singleMessage(messageObject.broadcast);	
 			that.replies(messageObject.replies);							
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Broadcast Details', 'singleMessageView', 'channelMenuView');		
-  };	
-	
-	this.messageFullText = function(){
-		goToView('singleMessageFullTextView');										
-	};
-	
-	this.messageReplies = function(){
-		goToView('singleMessageRepliesView');									
-	};
-	
-	this.userSettings = function () {
-		pushBackNav('Broadcast Details', 'singleMessageView', 'escalationPlansView');				
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Broadcast Details', 'singleMessageView', 'sendMessageView');				
-  };	
+	}		
 				
 }

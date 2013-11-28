@@ -10,7 +10,6 @@ function PrivacyPolicyViewModel() {
 	
 	/* Privacy policy observable */
 	this.hasfooter = ko.observable(false);
-	this.hasheader = ko.observable(false);
 	this.noheader = ko.observable(false);
 	this.toastText = ko.observable();			
 	
@@ -24,9 +23,8 @@ function PrivacyPolicyViewModel() {
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
-			that.hasfooter(false);
-			that.hasheader(false);
-			that.noheader(true);			
+			that.noheader(true);
+			that.hasfooter(false);		
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {
@@ -35,22 +33,8 @@ function PrivacyPolicyViewModel() {
 				localStorage.removeItem('toastData');				
 			}			
 			that.accountName(localStorage.getItem('accountName'));
-			that.hasfooter(true);
-			that.hasheader(true);
-			that.noheader(false);									
+			that.hasfooter(true);								
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Privacy Policy', 'privacyPolicyView', 'channelMenuView');		
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Privacy Policy', 'privacyPolicyView', 'escalationPlansView');
-  };	
-
-	this.composeCommand = function () {
-		pushBackNav('Privacy Policy', 'privacyPolicyView', 'sendMessageView');
-  };	
+	}	
 	
 }

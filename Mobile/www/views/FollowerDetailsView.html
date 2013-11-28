@@ -21,12 +21,14 @@
       <h1 class="response">Average iGi Response Time: <span>1.2 hrs</span></h1>
       
     </div>-->
-    <div class="loginbtn removefollower"><a href="#" data-bind="click: removeFollower">Remove follower from this channel</a></div>
+    <div class="loginbtn removefollower">
+      <a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'removeFollowerView');">Remove follower from this channel</a>
+    </div>
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>   
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
-    <a class="announcement" href="#" data-bind="click: composeCommand"></a>    
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'sendMessageView');"></a>    
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div>

@@ -65,7 +65,7 @@ function EscalateTimeSettingsViewModel() {
 	}
 	
 	this.menuCommand = function () {
-		pushBackNav('Escalate Settings', 'escalateSettingsView', 'channelMenuView');		
+		viewNavigate('Escalate Settings', 'escalateSettingsView', 'channelMenuView');		
   };
 	
 	this.upArrow = function (data) {
@@ -168,11 +168,7 @@ function EscalateTimeSettingsViewModel() {
 	
 	this.saveCommand = function () {
 		localStorage.setItem('escDuration', that.year()+'/'+that.month()+'/'+that.day()+' '+that.hour()+':'+that.minute()+' '+that.meridiem());		
-		goToView('escalateSettingsView');					
-  };				
-	
-	this.userSettings = function () {
-		pushBackNav('Escalate Settings', 'escalateSettingsView', 'escalationPlansView');
-  };		
+		popBackNav();					
+  };					
 	
 }

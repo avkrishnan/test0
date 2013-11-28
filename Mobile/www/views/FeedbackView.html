@@ -3,14 +3,14 @@
 	<header class="logged-in"></header> 
   <div class="page-content">
     <h1 class="help-FAQs feedback">Feedback</h1>
-    <a class="low-messages praise" href="#" data-bind="click: praiseCommand">Praise</a>
-    <a class="low-messages suggestions" href="#" data-bind="click: suggestionsCommand">Suggestions</a>
-    <a class="low-messages bugicon" href="#" data-bind="click: reportABugCommand">Report a Bug</a>
+    <a class="low-messages praise" href="#" onclick="viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');">Praise</a>
+    <a class="low-messages suggestions" href="#" onclick="viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');">Suggestions</a>
+    <a class="low-messages bugicon" href="#" onclick="viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');">Report a Bug</a>
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>   
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
-    <a class="announcement" href="#" data-bind="click: composeCommand"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Feedback', 'feedbackView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Feedback', 'feedbackView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div>   

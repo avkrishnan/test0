@@ -5,8 +5,7 @@ function ChannelMessagesViewModel() {
 	this.viewid = "V-55";
 	this.viewname = "ChannelMessagesDetails";
 	this.displayname = "Channel Messages";
-	this.hasfooter = true;
-	this.backText = ko.observable();		
+	this.hasfooter = true;	
 	
 	this.accountName = ko.observable();	
 	this.title = ko.observable();
@@ -37,12 +36,7 @@ function ChannelMessagesViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');												
 			}		
-			that.accountName(localStorage.getItem("accountName"));
-			if(typeof backNavText[0] == 'undefined') {
-				that.backText('<em></em>Home');
-			} else {		
-				that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-			}			
+			that.accountName(localStorage.getItem("accountName"));			
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
 			} else {		
@@ -54,31 +48,19 @@ function ChannelMessagesViewModel() {
 			that.channelMessages.removeAll();
 			return that.getChannelCommand(that.channelid()).then(that.gotChannel);
 		}
-	};
-	
-	this.backCommand = function () {
-		if(typeof backNavText[0] == 'undefined') {
-			goToView('channelListView');
-		} else {		
-			popBackNav();		
-		}
-  };	
-	
-	this.menuCommand = function () {
-		pushBackNav('Broadcast Msg', 'channelMessagesView', 'channelMenuView');		
-  };	
+	};	
 	
 	this.gotoChannel = function() {
 		goToView('channelView');
 	}
 	
 	this.actionFollowChannelCommand = function(data) {
-		pushBackNav('Broadcast Msg', 'channelMessagesView', 'channelViewUnfollow');		
+		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelViewUnfollow');		
 	}	
 	
 	this.showSingleMessage = function(data) {
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
-		pushBackNav('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
+		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
 	
 	this.getChannelCommand = function(channelid) {
@@ -121,14 +103,6 @@ function ChannelMessagesViewModel() {
 			}
 		};		
 		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
-	}
-	
-	this.userSettings = function () {
-		pushBackNav('Broadcast Msg', 'channelMessagesView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Broadcast Msg', 'channelMessagesView', 'sendMessageView');		
-  };	
+	}	
 	
 }

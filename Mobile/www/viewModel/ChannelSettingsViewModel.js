@@ -7,7 +7,6 @@ function ChannelSettingsViewModel() {
 	this.viewname = 'ChannelSettings';
 	this.displayname = 'Channel Settings';	
 	this.accountName = ko.observable();	
-	this.backText = ko.observable();
 
   /* Channel Settings observable */
 	this.channelId = ko.observable();	
@@ -38,56 +37,11 @@ function ChannelSettingsViewModel() {
 				localStorage.removeItem('toastData');												
 			}					
 			that.accountName(localStorage.getItem('accountName'));
-			if(typeof backNavText[0] == 'undefined') {
-				that.backText('<em></em>Home');
-			} else {		
-				that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-			}	
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
 			that.shortDescription(channelObject.channelDescription);
 			localStorage.removeItem('channelOwner');										
 		}
-	}
-	
-	this.backCommand = function () {
-		if(typeof backNavText[0] == 'undefined') {
-			goToView('channelListView');
-		} else {		
-			popBackNav();		
-		}
-  };
-	
-	this.menuCommand = function () {
-		pushBackNav('Settings', 'channelSettingsView', 'channelMenuView');		
-  };	
-	
-	this.editChannelName = function () {
-		goToView('channelChangeNameView');
-  };
-	
-	this.editShortDescription = function () {
-		goToView('editShortDescriptionView');
-  };
-	
-	this.editLongDescription = function () {
-		goToView('editLongDescriptionView');
-	};	
-	
-	this.deleteChannel = function () {
-		goToView('channelDeleteView');
-  };
-	
-	this.changeChannelIcon = function () {
-		goToView('channelChangeIconView');
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Settings', 'channelSettingsView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Settings', 'channelSettingsView', 'sendMessageView');		
-  };	
+	}	
 	
 }

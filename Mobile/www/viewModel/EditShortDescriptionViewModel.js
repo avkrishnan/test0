@@ -61,11 +61,7 @@ function EditShortDescriptionViewModel() {
 		if (e.keyCode == 13  && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'editShortDescriptionView') {
 			that.shortDescriptionCommand();
 		}
-	});
-	
-	this.menuCommand = function () {
-		pushBackNav('Edit Short Description', 'editShortDescriptionView', 'channelMenuView');		
-  };	
+	});	
 	
 	function successfulModify(args) {
 		that.toastText('Description changed');		
@@ -88,7 +84,8 @@ function EditShortDescriptionViewModel() {
 			followerCount: followers
 		});
 		channel = channel[0];		
-		localStorage.setItem('currentChannelData', JSON.stringify(channel));		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));
+		popBackNav();		
     goToView('channelSettingsView');					
 	}
 
@@ -111,13 +108,5 @@ function EditShortDescriptionViewModel() {
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 		}
   };
-	
-	this.userSettings = function () {
-		pushBackNav('Edit Short Description', 'editShortDescriptionView', 'escalationPlansView');		
-  };
-
-	this.composeCommand = function () {
-		pushBackNav('Edit Short Description', 'editShortDescriptionView', 'sendMessageView');		
-  };	
 	
 }
