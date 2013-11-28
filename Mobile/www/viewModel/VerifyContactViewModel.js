@@ -2,7 +2,7 @@
 function VerifyContactViewModel() {
 	this.template = "verifyContactView";
 	this.viewid = "V-081";
-	this.viewname = "VerifyContact";
+	this.viewname = "Verify Contact";
 	this.displayname = "Verify Contact";
 	this.hasfooter = true;
 	
@@ -129,11 +129,7 @@ function VerifyContactViewModel() {
 			that.errorMessage('');
 			that.verifyRequestCommethod();
 		}
-	});			
-	
-	this.menuCommand = function () {
-		viewNavigate('Cont. Info', 'verifyContactView', 'channelMenuView');		
-  };	
+	});				
 
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
@@ -155,13 +151,5 @@ function VerifyContactViewModel() {
 		};
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
 	};
-	
-	this.userSettings = function () {
-		viewNavigate('Cont. Info', 'verifyContactView', 'escalationPlansView');
-  };		
-	
-	this.composeCommand = function () {
-		viewNavigate('Cont. Info', 'verifyContactView', 'sendMessageView');
-  };
 		
 }

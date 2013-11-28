@@ -75,7 +75,7 @@ function AddContactViewModel() {
 		localStorage.setItem("currentVerificationCommethodID",data.comMethodID);
 		localStorage.setItem("verificationStatus",false);
 		ES.commethodService.requestVerification(data.comMethodID, callbacks);
-		goToView('verifyContactView');
+		viewNavigate('Cont. Info', 'addContactView', 'verifyContactView');		
 	}
 	
 	this.gotoDelete = function(data) {	
@@ -84,18 +84,17 @@ function AddContactViewModel() {
 			that.currentDeleteCommethodID(data.comMethodID);
 			localStorage.setItem("CommethodType",data.comMethodType);			
 		}
-		that.showDelete(true);
-		//headerViewModel.backText('<em></em>Cont. Info');
-		//alert(headerViewModel.backText());		
+		that.showDelete(true);	
+		//alert(headerViewModel.backText());				
 	}
 	
 	this.gotoView = function() {
 		if(that.currentDeleteCommethodID()) {
-			that.currentDeleteCommethodID('');				
+			that.currentDeleteCommethodID('');						
 			goToView('addContactView');
 		}
 		else {
-			that.currentDeleteCommethodID('');			
+			that.currentDeleteCommethodID('');						
 			goToView('escalationPlansView');
 		}
 	}
