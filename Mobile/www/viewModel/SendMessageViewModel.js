@@ -21,7 +21,7 @@ function SendMessageViewModel() {
 	this.escalateActive = ko.observable(false);	
 	this.escDuration = ko.observable();	
 	this.escLevel = ko.observable();	
-	//this.toastText = ko.observable();
+	this.toastText = ko.observable();
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id) {
