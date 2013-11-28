@@ -20,6 +20,15 @@
 	var overlayViewModel = new OverlayViewModel();
 	$(".active-overlay").each(function() {
 		if($(this).parent().css('display') != 'none') {
+			var nonCurrentViewOverlay = "#" + $(this).parent().attr('id');
+			if(nonCurrentViewOverlay == '#channelSingleMessagesView') {
+				if($('#newMessages-popup').length != 0) {
+					$('#newMessages-popup').each(function() {
+						$(nonCurrentViewOverlay + " #newMessages-popup").remove();
+						$(nonCurrentViewOverlay + " #newMessages-screen").remove();						
+					});
+				}
+			}
 			ko.applyBindings(overlayViewModel, document.getElementById('newMessages'));
 			overlayViewModel.activate();
 		}
@@ -28,6 +37,6 @@
 			$(nonCurrentViewOverlay + " .active-overlay").html('');
 			$(nonCurrentViewOverlay + " #newMessages-popup").remove();
 			$(nonCurrentViewOverlay + " #newMessages-screen").remove();
-		}
+		}	
 	});
 </script>
