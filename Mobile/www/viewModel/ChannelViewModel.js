@@ -3,8 +3,8 @@ function ChannelViewModel() {
 	var that = this;
 	this.template = "channelView";
 	this.viewid = "V-18";
-	this.viewname = "ChannelDetails";
-	this.displayname = "Channel";
+	this.viewname = "Landing Page";
+	this.displayname = "Channel Landing Page";
 	
 	this.accountName = ko.observable();
 	this.backText = ko.observable();	
@@ -100,12 +100,7 @@ function ChannelViewModel() {
 		that.channelid(channel.id);
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
-		that.accountName(_accountName);	
-		if(typeof backNavText[0] == 'undefined') {
-			that.backText('<em></em>Home');
-		} else {		
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-		}		
+		that.accountName(_accountName);		
 		that.messages([]);
 		that.channelAction(true);
 		localStorage.removeItem('channelOwner');		
@@ -113,18 +108,6 @@ function ChannelViewModel() {
 		//alert(that.channelid());
 		return that.getChannelCommand(that.channelid()).then(gotChannel);
 	};
-	
-	this.backCommand = function () {
-		if(typeof backNavText[0] == 'undefined') {
-			goToView('channelListView');
-		} else {		
-			popBackNav();		
-		}
-  };
-	
-	this.menuCommand = function () {
-		viewNavigate('ChannelLandingPage', 'channelView', 'channelMenuView');
-  };
 	
 	this.channelSettings = function(){
 		if(localStorage.getItem('channelOwner') == 'yes') {		
@@ -334,13 +317,5 @@ function ChannelViewModel() {
 		//that.title("Channel: " + channel()[0].name );
 		return ES.channelService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
-	
-	this.userSettings = function () {
-		viewNavigate('ChannelLandingPage', 'channelView', 'escalationPlansView');
-  };	
-	
-	this.composeCommand = function () {
-		viewNavigate('ChannelLandingPage', 'channelView', 'sendMessageView');
-  };
 		
 }

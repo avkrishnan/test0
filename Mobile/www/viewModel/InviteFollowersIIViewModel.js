@@ -4,7 +4,7 @@ function InviteFollowersIIViewModel() {
   var that = this;
   this.template = 'inviteFollowersIIView';
   this.viewid = 'V-41';
-  this.viewname = 'GetFollowersII';
+  this.viewname = 'InviteII';
   this.displayname = 'Praise for Evernym Channels';
 	this.accountName = ko.observable();		
 

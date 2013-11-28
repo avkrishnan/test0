@@ -4,7 +4,7 @@ function ChannelChangeNameViewModel() {
   var that = this;
 	this.template = 'channelChangeNameView';
 	this.viewid = 'V-16';
-	this.viewname = 'ChannelChangeName';
+	this.viewname = 'Change Channel Name';
 	this.displayname = 'Change Channel Name';	
 	this.accountName = ko.observable();	
 	

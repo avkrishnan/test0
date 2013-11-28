@@ -4,8 +4,8 @@ function SingleMessageFullTextViewModel() {
   var that = this;
 	this.template = 'singleMessageFullTextView';
 	this.viewid = 'V-23';
-	this.viewname = 'SingleMessageFullText';
-	this.displayname = 'Message Full Text';	
+	this.viewname = 'Broadcast Fulltext';
+	this.displayname = 'Broadcast Full Text';	
 	this.accountName = ko.observable();		
 
   /* Single message observable */		

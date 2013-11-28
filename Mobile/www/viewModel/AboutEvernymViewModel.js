@@ -4,7 +4,7 @@ function AboutEvernymViewModel() {
   var that = this;
 	this.template = 'aboutEvernymView';
 	this.viewid = 'V-46';
-	this.viewname = 'AboutEvernym';
+	this.viewname = 'About Evernym';
 	this.displayname = 'About Evernym Channels';	
 	this.accountName = ko.observable();
 	this.toastText = ko.observable();		

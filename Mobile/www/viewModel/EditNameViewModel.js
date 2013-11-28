@@ -4,7 +4,7 @@ function EditNameViewModel() {
   var that = this;
 	this.template = 'editNameView';
 	this.viewid = 'V-11';
-	this.viewname = 'EditName';
+	this.viewname = 'Edit Name';
 	this.displayname = 'Edit Name';	
 	this.accountName = ko.observable();		
 	

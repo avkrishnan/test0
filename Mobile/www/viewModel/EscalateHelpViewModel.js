@@ -4,7 +4,7 @@ function EscalateHelpViewModel() {
   var that = this;
   this.template = 'escalateHelpView';
   this.viewid = 'V-20b';
-  this.viewname = 'EscalateHelp';
+  this.viewname = 'Escalate Help';
   this.displayname = 'Escalate help';
 	this.accountName = ko.observable();	
 	

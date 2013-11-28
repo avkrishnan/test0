@@ -3,7 +3,7 @@ function ChannelMessagesViewModel() {
 	var that = this;
 	this.template = "channelMessagesView";
 	this.viewid = "V-55";
-	this.viewname = "ChannelMessagesDetails";
+	this.viewname = "Broadcast Msg";
 	this.displayname = "Channel Messages";
 	this.hasfooter = true;	
 	

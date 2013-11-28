@@ -4,8 +4,8 @@ function SingleMessageRepliesViewModel() {
   var that = this;
 	this.template = 'singleMessageRepliesView';
 	this.viewid = 'V-56';
-	this.viewname = 'MessageReplies';
-	this.displayname = 'Message Replies';	
+	this.viewname = 'Broadcast Replies';
+	this.displayname = 'Broadcast Replies';	
 	this.accountName = ko.observable();	
 
   /* Single message observable */		

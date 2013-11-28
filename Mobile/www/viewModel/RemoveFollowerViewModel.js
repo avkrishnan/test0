@@ -4,7 +4,7 @@ function RemoveFollowerViewModel() {
   var that = this;
 	this.template = 'removeFollowerView';
 	this.viewid = 'V-35a';
-	this.viewname = 'RemoveFollower';
+	this.viewname = 'Remove Follower';
 	this.displayname = 'Remove Follower';	
 	this.accountName = ko.observable();		
 	

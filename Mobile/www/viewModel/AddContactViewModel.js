@@ -3,7 +3,7 @@ function AddContactViewModel() {
 	
 	this.template = "addContactView";
 	this.viewid = "V-081";
-	this.viewname = "AddEditContact";
+	this.viewname = "Cont. Info";
 	this.displayname = "Add/Edit Contact";
 	this.hasfooter = true;
 	

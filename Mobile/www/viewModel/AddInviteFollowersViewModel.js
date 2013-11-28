@@ -4,7 +4,7 @@ function AddInviteFollowersViewModel() {
   var that = this;
 	this.template = 'addInviteFollowersView';
 	this.viewid = 'V-27';
-	this.viewname = 'AddInviteFollowers';
+	this.viewname = 'Add/Invite';
 	this.displayname = 'Add/Invite Followers';	
 	this.accountName = ko.observable();	
 	

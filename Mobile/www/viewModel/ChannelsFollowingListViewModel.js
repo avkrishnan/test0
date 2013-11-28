@@ -2,7 +2,7 @@
 function ChannelsFollowingListViewModel() {
 	this.template = "channelsFollowingListView";
 	this.viewid = "V-30";
-	this.viewname = "ChannelsIFollow";
+	this.viewname = "Channels";
 	this.displayname = "Channels I Follow";
 	this.hasfooter = true;
 	this.accountName = ko.observable();

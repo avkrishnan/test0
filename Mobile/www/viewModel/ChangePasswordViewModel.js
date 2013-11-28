@@ -4,7 +4,7 @@ function ChangePasswordViewModel() {
   var that = this;
   this.template = 'changePasswordView';
   this.viewid = 'V-44';
-  this.viewname = 'ChangePassword';
+  this.viewname = 'Change Password';
   this.displayname = 'Change Password';
   this.accountName = ko.observable();	
 	this.backText = ko.observable();	
