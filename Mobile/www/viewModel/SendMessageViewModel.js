@@ -4,7 +4,7 @@ function SendMessageViewModel() {
 	var that = this;
 	this.template = "sendMessageView";
 	this.viewid = "V-20";
-	this.viewname = "Compose Broadcast";
+	this.viewname = "Compose";
 	this.displayname = "Compose Broadcast";	
 	this.accountName = ko.observable();		
 	
