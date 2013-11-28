@@ -55,11 +55,9 @@ function ChannelSingleMessagesViewModel() {
 				that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 				that.messageClass(channelMessage.messageClass);
 				that.messageText(channelMessage.messageText);
-				that.readMessage(channel.id);
-				that.updateMessages();	
+				that.readMessageUpdateBadge(channel.id);
 			}
 			else {
-				//alert(localStorage.getItem("overlayCurrentChannel"));
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
 				that.title(channel.displayFrom);
 				that.channelid(channel.channelId);
@@ -67,48 +65,52 @@ function ChannelSingleMessagesViewModel() {
 				that.messageCreated(channel.created);
 				that.messageClass(channel.type);
 				that.messageText(channel.text);
-				that.readMessage(channel.msgId);
-				that.updateMessages();
+				that.readMessageUpdateBadge(channel.msgId);
 			}
 		}
 	};
 	
+<<<<<<< HEAD
 	this.readMessage = function(messageID) {
 		ES.messageService.readMsg(messageID, {
 			success: function(responseData) {
 				//alert(JSON.stringify(responseData));
 			},
+=======
+	this.backCommand = function () {
+		popBackNav();
+  };
+	
+	this.readMessageUpdateBadge = function(messageID) {
+		$('.active-overlay').html(''); 
+		var callbacks = {
+			success: function(data) {},
+>>>>>>> 1b972d305b004ac2deccf8f23c873bf5ea61d4ac
 			error: function(data, status, details) {
-				//alert(details.message);
+				alert(details.message);
 			}
-		});		
+		};		
+		return ES.messageService.readMsg(messageID, callbacks).then(that.updateMessages);
 	}
 	
-	this.updateMessages = function() {
+	this.updateMessages = function(data) {
 		ES.systemService.getMsgNotifs({
 			success: function(responseData) {
 				localStorage.removeItem('enymNotifications');
 				localStorage.setItem('enymNotifications', JSON.stringify(responseData));
-				var tempCount = 0;
-				var tempNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
-				$.each(tempNotifications, function(indexNotification, valueNotification) {
-					if(valueNotification.read == 'N') {
-						tempCount = tempCount+1;
-					}
-				});
-				if(tempCount > 0) {
-					headerViewModel.newMessageClass('smsiconwhite');
-					headerViewModel.newMessageCount(tempCount);
+				if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+					headerViewModel.showNewMessagesCount(localStorage.getItem('enymNotifications'));
+					overlayViewModel.showNewMessagesOverlay();				
 				}
 				else {
 					headerViewModel.newMessageCount('');
-					headerViewModel.newMessageClass('');
+					headerViewModel.newMessageClass('');			
 				}
 			},
 			error: function(data, status, details) {
 				alert(details.message);
 			}
-		});			
+		});
 	}
 	
 }

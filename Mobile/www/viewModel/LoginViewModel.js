@@ -152,20 +152,12 @@ function LoginViewModel() {
       ES.evernymService.setAccessToken(args.accessToken);
 			ES.systemService.getMsgNotifs({
 				success: function(responseData) {
-					//alert(JSON.stringify(responseData));
-					//enymNotifications = responseData;
 					localStorage.removeItem('enymNotifications');
 					localStorage.setItem('enymNotifications', JSON.stringify(responseData));
-					var tempCount = 0;
-					var tempNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
-					$.each(tempNotifications, function(indexNotification, valueNotification) {
-						if(valueNotification.read == 'N') {
-							tempCount = tempCount+1;
-						}
-					});
-					if(tempCount > 0) {
+					if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 						headerViewModel.newMessageClass('smsiconwhite');
-						headerViewModel.newMessageCount(tempCount);
+						headerViewModel.newMessageCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
+						overlayViewModel.showNewMessagesOverlay();
 					}
 					else {
 						headerViewModel.newMessageCount('');
@@ -174,7 +166,7 @@ function LoginViewModel() {
 				},
 				error: function(data, status, details) {
 					that.toastText(details.message);
-					localStorage.setItem('toastData', that.toastText());				
+					localStorage.setItem('toastData', that.toastText());
 				}
 			});
 			//ES.systemService.getMsgNotifs(callbacks);

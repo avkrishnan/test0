@@ -3,8 +3,8 @@ function HeaderViewModel() {
 	this.backText = ko.observable();
 	this.isBack = ko.observable(true);	
 	this.newMessageCount = ko.observable('');
-	this.newMessageClass = ko.observable();
-	this.toastText = ko.observable();		
+	this.newMessageClass = ko.observable('');
+	this.toastText = ko.observable();
 	
 	that = this;
 	/* Methods */
@@ -18,23 +18,17 @@ function HeaderViewModel() {
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}		
 		showNewMessages(localStorage.getItem('enymNotifications'));
+		that.showNewMessagesCount(localStorage.getItem('enymNotifications'));
 	}
 	
-	/* New messages*/
-	showNewMessages = function(data) {
-		var tempCount = 0;
-		var tempNotifications = JSON.parse(data);
-		$.each(tempNotifications, function(indexNotification, valueNotification) {
-			if(valueNotification.read == 'N') {
-				tempCount = tempCount+1;
-			}
-		});
-		if(tempCount > 0) {
-			that.newMessageClass('smsiconwhite');
-			that.newMessageCount(tempCount);
+	/* This Function shows Count of New Message in header badge*/
+	this.showNewMessagesCount = function(data) {
+		if(JSON.parse(data).length > 0) {
+			this.newMessageClass('smsiconwhite');
+			this.newMessageCount(JSON.parse(data).length);
 		}
 		else {
-			that.newMessageCount('');
+			this.newMessageCount('');
 		}
 	}
 	
@@ -46,21 +40,23 @@ function HeaderViewModel() {
 		}	
   };		
 	
+	/*To Do to show new IGIs*/
 	this.newIGIOverlay = function() {
 		that.toastText('Feature coming soon!');
 		localStorage.setItem('toastData', that.toastText());
 		goToView($.mobile.activePage.attr('id'));
 	}
 	
+	/*To Do to show new Followers*/
 	this.newFollowersOverlay = function() {
 		that.toastText('Feature coming soon!');
 		localStorage.setItem('toastData', that.toastText());		
 		goToView($.mobile.activePage.attr('id'));		
 	}	
 	
-	this.newMessagesOverlay = function() {
-		var tCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
-		if(tCount > 0) {
+	this.newMessagesOverlayPopup = function() {
+		//var tCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
+		if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 			$('#newMessages').popup().popup('open', {x: 10, y:10});	
 		}
 		else {
@@ -78,22 +74,24 @@ function HeaderViewModel() {
 /* overlay messages*/
 function OverlayViewModel() {
 	that = this;
-	this.newMessagesDisplay = ko.observableArray([]);
+	this.newMessagesDisplayList = ko.observableArray([]);
 	this.toastText = ko.observable();		
 	
 	this.activate = function() {
-		that.newMessagesOverlay();
+		that.showNewMessagesOverlay();
 	}
 
-	this.newMessagesOverlay = function() {
-		that.newMessagesDisplay.removeAll();
-		//alert(JSON.parse(localStorage.getItem('enymNotifications')));
+	this.showNewMessagesOverlay = function() {
+		that.newMessagesDisplayList.removeAll();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
-			if(valueNotification.read == 'N') {
-				valueNotification.created = dateFormat2(valueNotification.created);
+			valueNotification.created = dateFormat2(valueNotification.created);
+			if(valueNotification.escLevelId) {
 				valueNotification.escLevelId = "icon-" + valueNotification.escLevelId.toLowerCase();
-				that.newMessagesDisplay.push(valueNotification);
 			}
+			else {
+				valueNotification.escLevelId = "icon-d";
+			}
+			that.newMessagesDisplayList.push(valueNotification);
 		});
 	}
 	
@@ -103,8 +101,8 @@ function OverlayViewModel() {
 	
 	this.showSingleMessage = function(data) {
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
-		//alert(localStorage.getItem("overlayCurrentChannel"));
 		//$('#newMessages').popup('close');
+		//that.closePopup();
 		goToView('channelSingleMessagesView');
 	}
 }
