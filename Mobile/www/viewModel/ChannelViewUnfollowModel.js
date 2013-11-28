@@ -7,7 +7,6 @@ function ChannelViewUnfollowModel() {
 	this.displayname = "Channel Unfollow";
 	
 	this.accountName = ko.observable();
-	this.backText = ko.observable();	
 	
 	this.hasfooter = ko.observable(true);
 	this.channelid = ko.observable();
@@ -40,19 +39,10 @@ function ChannelViewUnfollowModel() {
 			}		
 			that.channelid(channel.id);
 			that.accountName(localStorage.getItem("accountName"));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 			that.counter(localStorage.getItem('counter'));					
 			$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		}
-	};
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
-	
-	this.menuCommand = function () {
-		pushBackNav('Channel Unfollow', 'channelViewUnfollow', 'channelMenuView');
-  };	
+	};	
 	
 	this.unfollowChannelCommand = function() {
 		$.mobile.showPageLoadingMsg("a", "Requesting to Unfollow Channel");
@@ -70,20 +60,12 @@ function ChannelViewUnfollowModel() {
 	
 	function successfulUnfollowChannel(data){
 		for(var ctr = 1; ctr <= that.counter(); ctr++) {
-			that.backCommand();		
+			popBackNav();		
 		}		
 		that.toastText('No longer following '+that.title());		
 		localStorage.setItem('toastData', that.toastText());
 		localStorage.removeItem("currentChannel");				
 		goToView('channelsFollowingListView');
 	}
-	
-	this.userSettings = function () {
-		pushBackNav('Channel Unfollow', 'channelViewUnfollow', 'escalationPlansView');
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Channel Unfollow', 'channelViewUnfollow', 'sendMessageView');
-  };
 		
 }

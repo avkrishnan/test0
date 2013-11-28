@@ -9,41 +9,41 @@
     
     <h1 class="getmsg" data-bind="visible: createFirstChannel">Be sure your group gets your messages.</h1>
     <h1 class="getmsg" data-bind="visible: createFirstChannel">It's fast. Powerful. FREE.</h1>
-    <a href="#" class="Channel" data-bind="visible: createFirstChannel, click: goCreateFirstChannel">Create Your First Channel<span>Go</span></a>
+    <a href="#" class="Channel" data-bind="visible: createFirstChannel" onclick="viewNavigate('Home', 'channelListView', 'channelNewView');">Create Your First Channel<span>Go</span></a>
     
     <h1 class="getmsg" data-bind="visible: addInviteFollowers">Your channel: <span data-bind="text: channelWebAddress"></span></h1>
     <h1 class="getmsg" data-bind="visible: addInviteFollowers">doesn't have any followers yet.</h1>
-    <a href="#" class="Channel" data-bind="visible: addInviteFollowers, click: goAddInviteFollowers">Add or Invite Followers<span>Go</span></a>   
+    <a href="#" class="Channel" data-bind="visible: addInviteFollowers" onclick="viewNavigate('Home', 'channelListView', 'addInviteFollowersView');">Add or Invite Followers<span>Go</span></a>   
     
     <h1 class="getmsg" data-bind="visible: composeBroadcast">You haven't sent any messages yet to your channel: <span data-bind="text: channelWebAddress"></span></h1>
-    <a href="#" class="Channel" data-bind="visible: composeBroadcast, click: goComposeBroadcast">Compose a Broadcast<span>Go</span></a>    
+    <a href="#" class="Channel" data-bind="visible: composeBroadcast" onclick="viewNavigate('Home', 'channelListView', 'sendMessageView');">Compose a Broadcast<span>Go</span></a>    
     
     <h1 class="getmsg" data-bind="visible: channelDetails">You are the owner of one channel: <span data-bind="text: channelWebAddress"></span></h1>
-    <a href="#" class="Channel" data-bind="visible: channelDetails, click: goChannelDetails">See Channel Details<span>Go</span></a>   
+    <a href="#" class="Channel" data-bind="visible: channelDetails" onclick="viewNavigate('Home', 'channelListView', 'channelMainView');">See Channel Details<span>Go</span></a>   
     
-    <a href="#" class="Channel" data-bind="visible: channelsIOwn, click: goChannelsIOwn">Go To Channels I Own<span>Go</span></a>
+    <a href="#" class="Channel" data-bind="visible: channelsIOwn" onclick="viewNavigate('Home', 'channelListView', 'channelsIOwnView');">Go To Channels I Own<span>Go</span></a>
     <!--Top row end-->    
     
     <!--Bottom row start-->
     <div class="baseline"></div>
     
     <h1 class="getmsg" data-bind="visible: findChannels">It's also FREE to follow other channels.</h1>
-    <a href="#" class="Channel" data-bind="visible: findChannels, click: goFindChannels">Find Channels to Follow<span>Go</span></a>
+    <a href="#" class="Channel" data-bind="visible: findChannels" onclick="showMessage('Feature coming soon!');">Find Channels to Follow<span>Go</span></a>
     
     <h1 class="getmsg" data-bind="visible: createChannel">Do you have another group that Channels can help you get your messages to?</h1>
-    <a href="#" class="Channel" data-bind="visible: createChannel, click: goCreateChannel">Create Another Channel<span>Go</span></a>
+    <a href="#" class="Channel" data-bind="visible: createChannel" onclick="viewNavigate('Home', 'channelListView', 'channelNewView');">Create Another Channel<span>Go</span></a>
 
     <h1 class="getmsg" data-bind="visible: channelMessages">You are following one channel: <span data-bind="text: followWebAddress"></span></h1>
-    <a href="#" class="Channel" data-bind="visible: channelMessages, click: goChannelMessages">See Channel Messages<span>Go</span></a>
+    <a href="#" class="Channel" data-bind="visible: channelMessages" onclick="viewNavigate('Home', 'channelListView', 'channelMessagesView');">See Channel Messages<span>Go</span></a>
 
-    <a href="#" class="Channel" data-bind="visible: channelsIFollow, click: goChannelsIFollow">Go To Channels I Follow<span>Go</span></a>
+    <a href="#" class="Channel" data-bind="visible: channelsIFollow" onclick="viewNavigate('Home', 'channelListView', 'channelsFollowingListView');">Go To Channels I Follow<span>Go</span></a>
     <!--Bottom row end-->            
     
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>  
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
-    <a class="announcement" href="#" data-bind="click: composeCommand"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Home', 'channelListView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Home', 'channelListView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>
 </div>

@@ -1,5 +1,7 @@
 ﻿/*globals ko*/
 function HeaderViewModel() {	
+	this.backText = ko.observable();
+	this.isBack = ko.observable(true);	
 	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable('');
 	this.toastText = ko.observable();
@@ -7,6 +9,15 @@ function HeaderViewModel() {
 	that = this;
 	/* Methods */
 	this.activate = function() {
+		if($.mobile.activePage.attr('id') == 'channelListView') {
+			this.isBack = ko.observable(false);			
+		}
+		if(typeof backNavText[0] == 'undefined') {
+			that.backText('<em></em>Home');
+		} else {		
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+		}		
+		showNewMessages(localStorage.getItem('enymNotifications'));
 		that.showNewMessagesCount(localStorage.getItem('enymNotifications'));
 	}
 	
@@ -20,6 +31,14 @@ function HeaderViewModel() {
 			this.newMessageCount('');
 		}
 	}
+	
+	this.backCommand = function () {
+		if(typeof backNavText[0] == 'undefined') {
+			goToView('channelListView');
+		} else {		
+			popBackNav();		
+		}	
+  };		
 	
 	/*To Do to show new IGIs*/
 	this.newIGIOverlay = function() {
@@ -46,6 +65,11 @@ function HeaderViewModel() {
 			goToView($.mobile.activePage.attr('id'));
 		}
 	}
+	
+	this.menuCommand = function () {
+		viewNavigate($.mobile.activePage.attr('id'), $.mobile.activePage.attr('id'), 'channelMenuView');		
+  };
+		
 }
 /* overlay messages*/
 function OverlayViewModel() {

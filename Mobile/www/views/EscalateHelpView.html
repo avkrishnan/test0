@@ -23,13 +23,13 @@
         <label>
           <input type="checkbox" name="checkbox-0 "/>Don't show again
         </label>
-        <div class="loginbtn"><a href="#" onclick="goToView('sendMessageView');">OK, Got it!</a></div>       
+        <div class="loginbtn"><a href="#" onclick="popBackNav();">OK, Got it!</a></div>       
       </div>
     </form>
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>   
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Escalate help', 'escalateHelpView', 'escalationPlansView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div>

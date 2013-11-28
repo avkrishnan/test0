@@ -72,7 +72,7 @@ function ChangePasswordViewModel() {
 	});
 	
 	this.menuCommand = function () {
-		pushBackNav('Change password', 'changePasswordView', 'channelMenuView');		
+		viewNavigate('Change password', 'changePasswordView', 'channelMenuView');		
   };	
 	
   this.changePassword = function () {
@@ -114,14 +114,6 @@ function ChangePasswordViewModel() {
 		that.newpasswordClass('validationerror');
 		that.confirmpasswordClass('validationerror');		
 		that.errorMessageConfirm(details.message);		
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Change password', 'changePasswordView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Change password', 'changePasswordView', 'sendMessageView');		
   };		
 	
 }

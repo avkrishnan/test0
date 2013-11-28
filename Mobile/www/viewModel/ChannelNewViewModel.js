@@ -16,8 +16,6 @@ function ChannelNewViewModel() {
 	this.message = ko.observable();	
 	this.errorNewChannel = ko.observable();
 	this.channelWebAddress = ko.observable();
-	this.backText = ko.observable();
-	this.backNav = ko.observable();
 	this.toastText = ko.observable();
 	this.counter = ko.observable();									
 	
@@ -33,8 +31,7 @@ function ChannelNewViewModel() {
 		that.newChannel('');
 		that.channelClass('');		
 		that.message('');
-		that.errorNewChannel('');
-    that.backNav('');				
+		that.errorNewChannel('');			
   };
 	  
 	this.activate = function() {
@@ -56,7 +53,6 @@ function ChannelNewViewModel() {
 				that.channelClass('');				
 				that.errorNewChannel('');
 			});
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 			that.counter(localStorage.getItem('counter'));							
 		}
 	}
@@ -65,22 +61,7 @@ function ChannelNewViewModel() {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelNewView') {
 			that.nextViewCommand();
 		}
-	});
-	
-	this.backCommand = function() {
-		if(that.backNav() == 'channelNewView') {			
-			that.sectionOne(true)
-			that.sectionTwo(false);
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);
-			that.backNav('');																	
-		} else {
-			popBackNav();
-		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('New Chan', 'channelNewView', 'channelMenuView');		
-  };	
+	});	
 
 	this.nextViewCommand = function (e) {
     if (that.newChannel() == '') {
@@ -96,7 +77,7 @@ function ChannelNewViewModel() {
 	function successfulCreate(args) {
     $.mobile.hidePageLoadingMsg();
 		for(var ctr = 0; ctr <= that.counter(); ctr++) {
-			that.backCommand();		
+			popBackNav();		
 		}		
 		that.toastText('Channel created');		
 		localStorage.setItem('toastData', that.toastText());		
@@ -110,9 +91,7 @@ function ChannelNewViewModel() {
 		} else {
 			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
-			that.sectionTwo(true);
-			that.backText('<em></em>New Chan');
-			that.backNav('channelNewView');
+			that.sectionTwo(true);		
 			that.channelWebAddress(that.newChannel()+'.evernym.com');				
 		}
 	};	
@@ -129,14 +108,6 @@ function ChannelNewViewModel() {
   this.createChannelCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
 		ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});
-  };	
-	
-	this.userSettings = function () {
-		pushBackNav('New Chan', 'channelNewView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('New Chan', 'channelNewView', 'sendMessageView');		
-  };	
+  };		
 	
 }

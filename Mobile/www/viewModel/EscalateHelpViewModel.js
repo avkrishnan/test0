@@ -31,14 +31,6 @@ function EscalateHelpViewModel() {
 			}			
 			that.accountName(localStorage.getItem('accountName'));									
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Escalate help', 'escalateHelpView', 'channelMenuView');		
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Escalate help', 'escalateHelpView', 'escalationPlansView');
-  };		
+	}		
 	
 }

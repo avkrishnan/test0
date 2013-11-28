@@ -6,8 +6,7 @@ function ChannelsIOwnViewModel() {
 	this.viewid = 'V-19';
 	this.viewname = 'ChannelsIOwn';
 	this.displayname = 'My Channels';	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();		
 	
   /* Channels observable */
 	this.channels = ko.observableArray([]);
@@ -36,30 +35,13 @@ function ChannelsIOwnViewModel() {
 				localStorage.removeItem('toastData');												
 			}
 			that.accountName(localStorage.getItem('accountName'));
-			if(typeof backNavText[0] == 'undefined') {
-				that.backText('<em></em>Home');
-			} else {		
-				that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-			}
 			localStorage.setItem('counter', 1);									
 			localStorage.removeItem('currentChannelData');			
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
 		}
-	};
-	
-	this.backCommand = function () {
-		if(typeof backNavText[0] == 'undefined') {
-			goToView('channelListView');
-		} else {		
-			popBackNav();		
-		}				
-  };
-	
-	this.menuCommand = function () {
-		pushBackNav('Channels', 'channelsIOwnView', 'channelMenuView');		
-  };				    	
+	};				    	
 	
 	function successfulList(data){	
     $.mobile.hidePageLoadingMsg();
@@ -88,25 +70,17 @@ function ChannelsIOwnViewModel() {
 	
 	this.channelSettings = function(data){		
 		localStorage.setItem('currentChannelData', JSON.stringify(data));
-		pushBackNav('Channels', 'channelsIOwnView', 'channelSettingsView');		
+		viewNavigate('Channels', 'channelsIOwnView', 'channelSettingsView');		
 	};
 	
 	this.channelMain = function(data){
 		localStorage.setItem('currentChannelData', JSON.stringify(data));
-		pushBackNav('Channels', 'channelsIOwnView', 'channelMainView');					
+		viewNavigate('Channels', 'channelsIOwnView', 'channelMainView');					
 	};
 	
 	this.channelFollowers = function(data){	
 		localStorage.setItem('currentChannelData', JSON.stringify(data));	
-		pushBackNav('Channels', 'channelsIOwnView', 'followersListView');		
-	};
-	
-	this.userSettings = function () {
-		pushBackNav('Channels', 'channelsIOwnView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Channels', 'channelsIOwnView', 'sendMessageView');			
-  };	
+		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');		
+	};	
 	
 }

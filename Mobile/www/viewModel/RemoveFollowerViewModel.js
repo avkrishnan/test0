@@ -44,18 +44,10 @@ function RemoveFollowerViewModel() {
 			that.followerAccount(followerObject.accountname);												
 		}
 	}
-	
-	this.backCommand = function () {
-		popBackNav();
-  };		
-	
-	this.menuCommand = function () {
-		pushBackNav('Remove Follower', 'removeFollowerView', 'channelMenuView');		
-  };	
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-		that.backCommand();	
+		popBackNav();	
 		that.toastText('Follower deleted');		
 		localStorage.setItem('toastData', that.toastText());
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});			
@@ -90,14 +82,6 @@ function RemoveFollowerViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Removing Follower');
 		return ES.channelService.removeFollower(that.channelId(), that.followerId(), { success: successfulDelete, error: errorAPI });
 		localStorage.removeItem('currentChannel');
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Remove Follower', 'removeFollowerView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Remove Follower', 'removeFollowerView', 'sendMessageView');		
   };	
 	
 }

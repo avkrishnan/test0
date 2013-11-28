@@ -51,7 +51,7 @@ function SingleMessageFullTextViewModel() {
 	}
 	
 	this.menuCommand = function () {
-		pushBackNav('Broadcast details', 'singleMessageFullTextView', 'channelMenuView');		
+		viewNavigate('Broadcast details', 'singleMessageFullTextView', 'channelMenuView');		
   };	
 	
 	function _date(created) {	
@@ -59,14 +59,6 @@ function SingleMessageFullTextViewModel() {
     return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
 		date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+date.getHours()-12) + ":" + 
 		(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getMinutes()>12?'PM':'AM'); 
-	}
-	
-	this.userSettings = function () {
-		pushBackNav('Broadcast details', 'singleMessageFullTextView', 'escalationPlansView');
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Broadcast details', 'singleMessageFullTextView', 'sendMessageView');
-  };	
+	}	
 				
 }

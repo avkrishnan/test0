@@ -39,22 +39,6 @@ function FollowerDetailsViewModel() {
 			that.channelName(channelObject.channelName);										
 			that.followerName(followerObject.followerName+' <em>'+followerObject.accountname+'</em>');												
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Follower Details', 'followerDetailsView', 'channelMenuView');		
-  };
-	
-	this.removeFollower = function (data) {
-		goToView('removeFollowerView');		
-  };	
-	
-	this.userSettings = function () {
-		pushBackNav('Follower Details', 'followerDetailsView', 'escalationPlansView');
-  };
-	
-	this.composeCommand = function () {
-		pushBackNav('Follower Details', 'followerDetailsView', 'sendMessageView');			
-  };			
+	}			
 	
 }

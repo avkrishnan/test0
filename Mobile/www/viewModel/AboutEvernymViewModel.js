@@ -29,18 +29,6 @@ function AboutEvernymViewModel() {
 			}			
 			that.accountName(localStorage.getItem('accountName'));		
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('About Evernym', 'aboutEvernymView', 'channelMenuView');		
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('About Evernym', 'aboutEvernymView', 'escalationPlansView');		
-  };	
-
-	this.composeCommand = function () {
-		pushBackNav('About Evernym', 'aboutEvernymView', 'sendMessageView');		
-  };	
+	}	
 	
 }

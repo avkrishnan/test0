@@ -7,7 +7,6 @@ function AddInviteFollowersViewModel() {
 	this.viewname = 'AddInviteFollowers';
 	this.displayname = 'Add/Invite Followers';	
 	this.accountName = ko.observable();	
-	this.backText = ko.observable();	
 	
   /* Add/Invite Followers observable */
 	this.channelName = ko.observable();	
@@ -35,8 +34,7 @@ function AddInviteFollowersViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');				
 			}			
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));	
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
@@ -52,18 +50,6 @@ function AddInviteFollowersViewModel() {
 		}
 	}
 	
-	this.backCommand = function () {
-		popBackNav();
-  };
-	
-	this.menuCommand = function () {
-		pushBackNav('Add/Invite', 'addInviteFollowersView', 'channelMenuView');		
-  };	
-	
-	this.channelSettings = function(){
-		pushBackNav('Add/Invite', 'addInviteFollowersView', 'channelSettingsView');				
-	};
-	
 	this.inviteFollowers = function(){
 		that.toastText('Feature coming soon!');
 		showToast();		
@@ -72,14 +58,6 @@ function AddInviteFollowersViewModel() {
 	this.addFollowers = function(){
 		that.toastText('Feature coming soon!');
 		showToast();
-	};
-	
-	this.userSettings = function () {
-		pushBackNav('Add/Invite', 'addInviteFollowersView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Add/Invite', 'addInviteFollowersView', 'sendMessageView');		
-  };	
+	};	
 	
 }

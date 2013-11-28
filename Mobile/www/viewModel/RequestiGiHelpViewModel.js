@@ -31,14 +31,6 @@ function RequestiGiHelpViewModel() {
 			}			
 			that.accountName(localStorage.getItem('accountName'));									
 		}
-	}
-	
-	this.menuCommand = function () {
-		pushBackNav('Request iGi help', 'escalateHelpView', 'channelMenuView');		
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Request iGi help', 'escalateHelpView', 'escalationPlansView');
-  };		
+	}		
 	
 }

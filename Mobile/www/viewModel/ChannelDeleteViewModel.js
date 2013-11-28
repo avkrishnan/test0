@@ -43,20 +43,12 @@ function ChannelDeleteViewModel() {
 			that.channelDisplayName(channelObject.channeldescription);
 			that.counter(localStorage.getItem('counter'));			
 		}
-	}
-	
-	this.backCommand = function () {
-		popBackNav();		
-  };	
-	
-	this.menuCommand = function () {
-		pushBackNav('Channel Delete', 'ChannelDeleteView', 'channelMenuView');		
-  };	
+	}	
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
 		for(var ctr = 1; ctr <= that.counter(); ctr++) {
-			that.backCommand();		
+			popBackNav();		
 		}
 		localStorage.removeItem('counter')
 		that.toastText('Channel deleted');		
@@ -74,14 +66,6 @@ function ChannelDeleteViewModel() {
 		$.mobile.showPageLoadingMsg('a', 'Removing Channel');
 		return ES.channelService.deleteChannel(that.channelId(), { success: successfulDelete, error: errorAPI });
 		localStorage.removeItem('currentChannel');
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Channel Delete', 'ChannelDeleteView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Channel Delete', 'ChannelDeleteView', 'sendMessageView');		
   };	
 	
 }

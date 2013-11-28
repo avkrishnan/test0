@@ -3,11 +3,11 @@
 	<header class="logged-in"></header>  
   <div class="page-content">   
     <div class="channelinformation">
-      <a href="#" class="channelimg channel1 borderred" data-bind="click: channelFollowers"></a>
+      <a href="#" class="channelimg channel1 borderred" onclick="viewNavigate('Main', 'channelMainView', 'followersListView');"></a>
       <div class="channelinfocontent">
-        <a class="title" href="#" data-bind="text: channelName, click: channelFollowers"></a>
-        <a href="#" class="setting" data-bind="click: channelSettings"></a>
-        <div class="addfollowers" data-bind="html: followerCount, click: channelFollowers"><!--16 followers<a class="add-followers" href="#">Add Followers</a>--></div>
+        <a class="title" href="#" data-bind="text: channelName" onclick="viewNavigate('Main', 'channelMainView', 'followersListView');"></a>
+        <a href="#" class="setting" onclick="viewNavigate('Main', 'channelMainView', 'channelSettingsView');"></a>
+        <div class="addfollowers" data-bind="html: followerCount" onclick="viewNavigate('Main', 'channelMainView', 'followersListView');"><!--16 followers<a class="add-followers" href="#">Add Followers</a>--></div>
       </div>
       <br />
       <!--To do - to be activated when data received-->
@@ -45,8 +45,8 @@
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>  
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName, click: userSettings"></a>
-    <a class="announcement" href="#" data-bind="click: composeCommand"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Main', 'channelMainView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Main', 'channelMainView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div>   

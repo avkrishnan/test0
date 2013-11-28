@@ -115,25 +115,25 @@
 		</div>
     <h1 class="additionalsettings">Additional settings:</h1> 
     -->
-    <a href="#" class="low-messages editcontact" onclick="goToView('addContactView');">
+    <a href="#" class="low-messages editcontact" onclick="viewNavigate('Settings', 'escalationPlansView', 'addContactView');">
       Add or edit contact information
     </a>
-    <a href="#" class="low-messages personalinformation" onclick="goToView('editNameView');">
+    <a href="#" class="low-messages personalinformation" onclick="viewNavigate('Settings', 'escalationPlansView', 'editNameView');">
       Edit name
     </a>    
-    <a href="#" class="low-messages changepassword" onclick="goToView('changePasswordView');">
+    <a href="#" class="low-messages changepassword" onclick="viewNavigate('Settings', 'escalationPlansView', 'changePasswordView');">
       Change password
     </a>
-    <a href="#" class="low-messages help" onclick="goToView('helpView');">
+    <a href="#" class="low-messages help" onclick="viewNavigate('Settings', 'escalationPlansView', 'helpView');">
       Help
     </a>
-    <a href="#" class="low-messages channels" onclick="goToView('aboutEvernymView');">
+    <a href="#" class="low-messages channels" onclick="viewNavigate('Settings', 'escalationPlansView', 'aboutEvernymView');">
       About Evernym Channels
     </a>
-    <a href="#" class="low-messages feedback" onclick="goToView('feedbackView');">
+    <a href="#" class="low-messages feedback" onclick="viewNavigate('Settings', 'escalationPlansView', 'feedbackView');">
       Give us feedback
     </a>
-    <a href="#" class="low-messages policy" onclick="goToView('privacyPolicyView');">
+    <a href="#" class="low-messages policy" onclick="viewNavigate('Settings', 'escalationPlansView', 'privacyPolicyView');">
       Privacy Policy and Terms of Service
     </a>
     <a href="login.html" class="low-messages signout" data-bind="click: logoutCommand">
@@ -142,8 +142,8 @@
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>  
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName" onclick="goToView('escalationPlansView');"></a>
-    <a class="announcement" href="#" data-bind="click: composeCommand"></a>
+    <a class="logo" href="javaScript:;" data-bind="text: accountName"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Settings', 'escalationPlansView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>
 </div>

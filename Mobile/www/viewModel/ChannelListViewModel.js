@@ -58,10 +58,6 @@ function ChannelListViewModel() {
 		}
 	}
 	
-	this.menuCommand = function () {
-		pushBackNav('Home', 'channelListView', 'channelMenuView');
-  };
-	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();	
 		if(data.channel.length < 1) {
@@ -171,52 +167,6 @@ function ChannelListViewModel() {
 		$.mobile.hidePageLoadingMsg();	
 		that.toastText(details.message);		
 		showToast();
-	};
-	
-	this.goCreateFirstChannel = function() {
-		pushBackNav('Home', 'channelListView', 'channelNewView');		
-	}	
-	
-	this.goAddInviteFollowers = function() {
-		pushBackNav('Home', 'channelListView', 'addInviteFollowersView');		
-	}
-	
-	this.goComposeBroadcast = function() {
-		pushBackNav('Home', 'channelListView', 'sendMessageView');		
-	}
-	
-	this.goChannelDetails = function() {
-		pushBackNav('Home', 'channelListView', 'channelMainView');		
-	}				
-	
-	this.goChannelsIOwn = function() {
-		pushBackNav('Home', 'channelListView', 'channelsIOwnView');		
-	}	
-	
-	this.goFindChannels = function() {
-		showMessage('Feature coming soon!');		
-		//pushBackNav('Home', 'channelListView', 'channelView?id=channel2828');		
-	}
-	
-	this.goCreateChannel = function() {
-		pushBackNav('Home', 'channelListView', 'channelNewView');		
-	}	
-	
-	this.goChannelMessages = function() {
-		//showMessage('Feature coming soon!');		
-		pushBackNav('Home', 'channelListView', 'channelMessagesView');		
-	}	
-	
-	this.goChannelsIFollow = function() {
-		pushBackNav('Home', 'channelListView', 'channelsFollowingListView');		
-	}	
-	
-	this.userSettings = function () {
-		pushBackNav('Home', 'channelListView', 'escalationPlansView');
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Home', 'channelListView', 'sendMessageView');
-  };	
+	};		
 	
 }

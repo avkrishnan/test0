@@ -10,8 +10,7 @@ function AddContactViewModel() {
 	this.channels = ko.observableArray([]);
 	this.commethods = ko.observableArray([]);
 	this.baseUrl = ko.observable();
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();	
 	this.name = ko.observable();
 	
 	this.currentDeleteCommethodID = ko.observable();
@@ -86,7 +85,7 @@ function AddContactViewModel() {
 			localStorage.setItem("CommethodType",data.comMethodType);			
 		}
 		that.showDelete(true);
-		that.backText('<em></em>Cont. Info');			
+		//that.backText('<em></em>Cont. Info');			
 	}
 	
 	this.gotoView = function() {
@@ -167,7 +166,7 @@ function AddContactViewModel() {
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
 			that.accountName(_accountName);
-			that.backText('<em></em>Settings');						
+			//that.backText('<em></em>Settings');						
 			that.name(_name);
 			that.commethods.removeAll();
 			that.showDelete(false);
@@ -177,18 +176,6 @@ function AddContactViewModel() {
 			$.mobile.showPageLoadingMsg("a", "Loading Settings");
 			return that.getCommethods().then(that.showCommethods);
 		}
-	};	
-	
-	this.menuCommand = function () {
-		pushBackNav('Cont. Info', 'addContactView', 'channelMenuView');		
-  };
-	
-	this.userSettings = function () {
-		pushBackNav('Cont. Info', 'addContactView', 'escalationPlansView');		
-  };	
-
-	this.composeCommand = function () {
-		pushBackNav('Cont. Info', 'addContactView', 'sendMessageView');		
-  };	
+	};		
 	
 }

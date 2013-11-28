@@ -6,7 +6,6 @@ function ChannelsFollowingListViewModel() {
 	this.displayname = "Channels I Follow";
 	this.hasfooter = true;
 	this.accountName = ko.observable();
-	this.backText = ko.observable();
 	this.channels = ko.observableArray([]);
 	this.toastText = ko.observable();		
 	
@@ -38,11 +37,6 @@ function ChannelsFollowingListViewModel() {
 				localStorage.removeItem('toastData');				
 			}
 			that.accountName(localStorage.getItem("accountName"));
-			if(typeof backNavText[0] == 'undefined') {
-				that.backText('<em></em>Home');
-			} else {		
-				that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-			}
 			localStorage.setItem('counter', 1);					
 			console.log("trying to get channels");
 			that.channels.removeAll();
@@ -52,19 +46,7 @@ function ChannelsFollowingListViewModel() {
 			$.mobile.showPageLoadingMsg("a", "Loading Channels");
 			return this.listFollowingChannelsCommand().then(gotChannels);
 		}
-	};
-	
-	this.backCommand = function () {
-		if(typeof backNavText[0] == 'undefined') {
-			goToView('channelListView');
-		} else {		
-			popBackNav();		
-		}
-  };
-	
-	this.menuCommand = function () {
-		pushBackNav('Channels', 'channelsFollowingListView', 'channelMenuView');
-  };	
+	};	
 	
 	function successfulCreate(data){
 		//logger.log('success listing channels ' , null, 'channelService', true);
@@ -137,20 +119,12 @@ function ChannelsFollowingListViewModel() {
 		var channel = JSON.stringify(data);
 		localStorage.setItem("currentChannel", channel);
 		//goToView('channelViewUnfollow');
-		pushBackNav('Channels', 'channelsFollowingListView', 'channelViewUnfollow');		
+		viewNavigate('Channels', 'channelsFollowingListView', 'channelViewUnfollow');		
 	}
 	
 	this.actionFollowChannelCommand = function(data) {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
-		pushBackNav('Channels', 'channelsFollowingListView', 'channelMessagesView');				
+		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');				
 	}	
-	
-	this.userSettings = function () {
-		pushBackNav('Channels', 'channelsFollowingListView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		pushBackNav('Channels', 'channelsFollowingListView', 'sendMessageView');		
-  };
 	
 }

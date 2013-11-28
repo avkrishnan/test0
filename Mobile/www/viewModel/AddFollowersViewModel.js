@@ -69,7 +69,7 @@ function AddFollowersViewModel() {
 	});
 	
 	this.menuCommand = function () {
-		pushBackNav('Add Followers', 'addFollowersView', 'channelMenuView');		
+		viewNavigate('Add Followers', 'addFollowersView', 'channelMenuView');		
   };	
 	
 	this.addFollowersCommand = function () {		
@@ -113,11 +113,11 @@ function AddFollowersViewModel() {
 	};
 	
 	this.userSettings = function () {
-		pushBackNav('Add Followers', 'addFollowersView', 'escalationPlansView');		
+		viewNavigate('Add Followers', 'addFollowersView', 'escalationPlansView');		
   };	
 	
 	this.composeCommand = function () {
-		pushBackNav('Add Followers', 'addFollowersView', 'sendMessageView');
+		viewNavigate('Add Followers', 'addFollowersView', 'sendMessageView');
   };	
 	
 }

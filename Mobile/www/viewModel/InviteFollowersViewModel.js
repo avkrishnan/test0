@@ -75,7 +75,7 @@ function InviteFollowersViewModel() {
 	});
 	
 	this.menuCommand = function () {
-		pushBackNav('Add/Invite', 'inviteFollowersView', 'channelMenuView');		
+		viewNavigate('Add/Invite', 'inviteFollowersView', 'channelMenuView');		
   };	
 	
 	this.sendInviteCommand = function () {
@@ -94,11 +94,11 @@ function InviteFollowersViewModel() {
   };
 	
 	this.userSettings = function () {
-		pushBackNav('Add/Invite', 'inviteFollowersView', 'escalationPlansView');
+		viewNavigate('Add/Invite', 'inviteFollowersView', 'escalationPlansView');
   };	
 	
 	this.composeCommand = function () {
-		pushBackNav('Add/Invite', 'inviteFollowersView', 'sendMessageView');
+		viewNavigate('Add/Invite', 'inviteFollowersView', 'sendMessageView');
   };	
 	
 }

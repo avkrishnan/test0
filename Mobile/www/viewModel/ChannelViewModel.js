@@ -123,7 +123,7 @@ function ChannelViewModel() {
   };
 	
 	this.menuCommand = function () {
-		pushBackNav('ChannelLandingPage', 'channelView', 'channelMenuView');
+		viewNavigate('ChannelLandingPage', 'channelView', 'channelMenuView');
   };
 	
 	this.channelSettings = function(){
@@ -151,7 +151,7 @@ function ChannelViewModel() {
 		if(data.relationship == 'F' ) {
 			that.channelAction(false);
 			that.settings(true);			
-			pushBackNav('Channels', 'channelsFollowingListView', 'channelMessagesView');			
+			viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');			
 		}
 		else if(data.relationship == 'O') {	
 			localStorage.setItem('channelOwner', 'yes');
@@ -336,11 +336,11 @@ function ChannelViewModel() {
 	};
 	
 	this.userSettings = function () {
-		pushBackNav('ChannelLandingPage', 'channelView', 'escalationPlansView');
+		viewNavigate('ChannelLandingPage', 'channelView', 'escalationPlansView');
   };	
 	
 	this.composeCommand = function () {
-		pushBackNav('ChannelLandingPage', 'channelView', 'sendMessageView');
+		viewNavigate('ChannelLandingPage', 'channelView', 'sendMessageView');
   };
 		
 }
