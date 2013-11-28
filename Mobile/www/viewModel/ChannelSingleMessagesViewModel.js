@@ -67,14 +67,6 @@ function ChannelSingleMessagesViewModel() {
 			}
 		}
 	};
-	
-<<<<<<< HEAD
-	this.readMessage = function(messageID) {
-		ES.messageService.readMsg(messageID, {
-			success: function(responseData) {
-				//alert(JSON.stringify(responseData));
-			},
-=======
 	this.backCommand = function () {
 		popBackNav();
   };
@@ -83,7 +75,6 @@ function ChannelSingleMessagesViewModel() {
 		$('.active-overlay').html(''); 
 		var callbacks = {
 			success: function(data) {},
->>>>>>> 1b972d305b004ac2deccf8f23c873bf5ea61d4ac
 			error: function(data, status, details) {
 				alert(details.message);
 			}
