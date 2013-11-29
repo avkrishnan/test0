@@ -45,7 +45,9 @@ function ChannelNewViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');												
 			}			
-			that.accountName(localStorage.getItem('accountName'));			
+			that.accountName(localStorage.getItem('accountName'));
+			that.sectionOne(true);
+			that.sectionTwo(false);							
 			$('input').keyup(function () {
 				that.message('');
 				that.channelClass('');				

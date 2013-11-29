@@ -47,7 +47,7 @@ function ChannelDeleteViewModel() {
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-		for(var ctr = 1; ctr <= that.counter(); ctr++) {
+		for(var ctr = 0; ctr <= that.counter(); ctr++) {
 			popBackNav();		
 		}
 		localStorage.removeItem('counter')
