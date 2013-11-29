@@ -39,31 +39,35 @@ function ChannelMessagesViewModel() {
 			that.accountName(localStorage.getItem("accountName"));			
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
-			} else {		
-				localStorage.setItem('counter', 1)
+			} 
+			else {		
+				localStorage.setItem('counter', 1);
 			}				
 			that.channelid(channel.id);
 			localStorage.removeItem("currentChannelMessage");
 			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 			that.channelMessages.removeAll();
-			return that.getChannelCommand(that.channelid()).then(that.gotChannel);
+			//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
+			this.gotChannel(channel);
 		}
 	};	
 	
-	this.gotoChannel = function() {
+	/*this.gotoChannel = function() {
 		goToView('channelView');
-	}
+	}*/
 	
+	/* action to chennels unfollow page settings page*/
 	this.actionFollowChannelCommand = function(data) {
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelViewUnfollow');
 	}	
 	
+	/*action to single message page*/
 	this.showSingleMessage = function(data) {
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
 	
-	this.getChannelCommand = function(channelid) {
+	/*this.getChannelCommand = function(channelid) {
 		var callbacks = {
 			success: function(){
 				//alert('success');	
@@ -75,7 +79,7 @@ function ChannelMessagesViewModel() {
 		};
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
 		return ES.channelService.getChannel(channelid, callbacks);
-	};
+	};*/
 		
 	this.gotChannel = function(data) {
 		$.mobile.hidePageLoadingMsg();
@@ -86,12 +90,7 @@ function ChannelMessagesViewModel() {
 				$.each(data.message, function(indexMessage, valueMessage) {
 					var tempCreated = msToTime(valueMessage.created);
 					var tempClass = valueMessage.escLevelId.toLowerCase().trim();
-					if(tempClass == 'n') {
-						tempClass = 'announcementicon';
-					}
-					else {
-						tempClass = 'unknown';
-					}
+					tempClass = 'icon-' + tempClass;
 					that.channelMessages.push( // without push not working
 						{messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.id, messageSender:valueMessage.senderSubscriberId, messageCreatedOriginal:valueMessage.created}
 					);
@@ -99,9 +98,9 @@ function ChannelMessagesViewModel() {
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
+				localStorage.setItem('toastData', that.toastText());
 			}
-		};		
+		};
 		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
 	}	
 }
