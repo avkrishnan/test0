@@ -16,8 +16,7 @@ function ChannelNewViewModel() {
 	this.message = ko.observable();	
 	this.errorNewChannel = ko.observable();
 	this.channelWebAddress = ko.observable();
-	this.toastText = ko.observable();
-	this.counter = ko.observable();									
+	this.toastText = ko.observable();								
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -52,8 +51,7 @@ function ChannelNewViewModel() {
 				that.message('');
 				that.channelClass('');				
 				that.errorNewChannel('');
-			});
-			that.counter(localStorage.getItem('counter'));							
+			});							
 		}
 	}
 	
@@ -75,8 +73,9 @@ function ChannelNewViewModel() {
   };
 	
 	function successfulCreate(args) {
-    $.mobile.hidePageLoadingMsg();
-		for(var ctr = 0; ctr <= that.counter(); ctr++) {
+    $.mobile.hidePageLoadingMsg()
+		var counter = localStorage.getItem('counter');
+		for(var ctr = 0; ctr <= counter+1; ctr++) {
 			popBackNav();		
 		}		
 		that.toastText('Channel created');		
