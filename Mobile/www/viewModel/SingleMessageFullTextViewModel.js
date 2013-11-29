@@ -4,7 +4,7 @@ function SingleMessageFullTextViewModel() {
   var that = this;
 	this.template = 'singleMessageFullTextView';
 	this.viewid = 'V-23';
-	this.viewname = 'Broadcast Fulltext';
+	this.viewname = 'Full Msg';
 	this.displayname = 'Broadcast Full Text';	
 	this.accountName = ko.observable();		
 
@@ -48,10 +48,6 @@ function SingleMessageFullTextViewModel() {
 			that.singleMessage(messageObject.broadcast);
 			that.fullText(messageObject.broadcast);										
 		}
-	}
-	
-	this.menuCommand = function () {
-		viewNavigate('Broadcast details', 'singleMessageFullTextView', 'channelMenuView');		
-  };		
+	}		
 				
 }

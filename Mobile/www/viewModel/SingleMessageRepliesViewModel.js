@@ -4,7 +4,7 @@ function SingleMessageRepliesViewModel() {
   var that = this;
 	this.template = 'singleMessageRepliesView';
 	this.viewid = 'V-56';
-	this.viewname = 'Broadcast Replies';
+	this.viewname = 'Replies';
 	this.displayname = 'Broadcast Replies';	
 	this.accountName = ko.observable();	
 
@@ -79,7 +79,7 @@ function SingleMessageRepliesViewModel() {
 	
 	this.replyDetail = function(data){	
 		localStorage.setItem('currentReplyData', JSON.stringify(data));									
-		viewNavigate('Broadcast Replies', 'singleMessageRepliesView', 'replyDetailView');
+		viewNavigate('Replies', 'singleMessageRepliesView', 'replyDetailView');
 	};	
 				
 }
