@@ -165,8 +165,7 @@ function AddContactViewModel() {
 			}				
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
-			that.accountName(_accountName);
-			//that.backText('<em></em>Settings');						
+			that.accountName(_accountName);					
 			that.name(_name);
 			that.commethods.removeAll();
 			that.showDelete(false);

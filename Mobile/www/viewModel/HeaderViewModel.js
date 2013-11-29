@@ -33,7 +33,7 @@ function HeaderViewModel() {
 	
 	this.backCommand = function () {
 		if(typeof backNavText[0] == 'undefined') {
-			goToView('channelListView');
+			goToView('channelListView');		
 		} else {		
 			popBackNav();		
 		}	

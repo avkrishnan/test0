@@ -45,9 +45,7 @@ function ChannelNewViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');												
 			}			
-			that.accountName(localStorage.getItem('accountName'));	
-			that.sectionOne(true);
-			that.sectionTwo(false);			
+			that.accountName(localStorage.getItem('accountName'));			
 			$('input').keyup(function () {
 				that.message('');
 				that.channelClass('');				
@@ -91,10 +89,11 @@ function ChannelNewViewModel() {
 		} else {
 			//that.message('<span>GREAT! </span> This name is available');
 			that.sectionOne(false);
-			that.sectionTwo(true);		
-			that.channelWebAddress(that.newChannel()+'.evernym.com');				
+			that.sectionTwo(true);							
+			that.channelWebAddress(that.newChannel()+'.evernym.com');			
 		}
-	};	
+	};
+						
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
