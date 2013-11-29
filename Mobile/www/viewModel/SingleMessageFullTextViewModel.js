@@ -11,6 +11,7 @@ function SingleMessageFullTextViewModel() {
   /* Single message observable */		
 	this.channelName = ko.observable();		
 	this.time = ko.observable();	
+	this.sensitivity = ko.observable();	
 	this.sensitivityText = ko.observable();	
 	this.singleMessage = ko.observable();
 	this.fullText = ko.observable();
@@ -44,6 +45,7 @@ function SingleMessageFullTextViewModel() {
 			that.channelName(channelObject.channelName);
 			var fullDate = dateFormat1(messageObject.created);					
 			that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
+			that.sensitivity(messageObject.sensitivity);			
 			that.sensitivityText(messageObject.sensitivityText);				
 			that.singleMessage(messageObject.broadcast);
 			that.fullText(messageObject.broadcast);										
