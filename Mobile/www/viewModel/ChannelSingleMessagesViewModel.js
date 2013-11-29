@@ -44,7 +44,7 @@ function ChannelSingleMessagesViewModel() {
 			else {
 				localStorage.setItem('counter', 1);
 			}
-			if(localStorage.getItem("currentChannel")) {			
+			if(localStorage.getItem("currentChannel")) {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
 				that.title(channel.name);
@@ -73,20 +73,22 @@ function ChannelSingleMessagesViewModel() {
 		var callbacks = {
 			success: function(data) {},
 			error: function(data, status, details) {
-				alert(details.message);
+				//alert(details.message);
+				that.toastText(details.message);
+				localStorage.setItem('toastData', that.toastText());					
 			}
 		};		
 		return ES.messageService.readMsg(messageID, callbacks).then(that.updateMessages);
 	}
 	
-	this.updateMessages = function(data) {
+	this.updateMessages = function() {
 		ES.systemService.getMsgNotifs({
 			success: function(responseData) {
 				localStorage.removeItem('enymNotifications');
 				localStorage.setItem('enymNotifications', JSON.stringify(responseData));
 				if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 					headerViewModel.showNewMessagesCount(localStorage.getItem('enymNotifications'));
-					overlayViewModel.showNewMessagesOverlay();				
+					overlayViewModel.showNewMessagesOverlay();
 				}
 				else {
 					headerViewModel.newMessageCount('');
@@ -94,7 +96,8 @@ function ChannelSingleMessagesViewModel() {
 				}
 			},
 			error: function(data, status, details) {
-				alert(details.message);
+				that.toastText(details.message);
+				localStorage.setItem('toastData', that.toastText());				
 			}
 		});
 	}

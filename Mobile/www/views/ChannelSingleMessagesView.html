@@ -1,17 +1,14 @@
 <div id="channelSingleMessagesView" data-role="page">
 	<header class="logged-in"></header>
   <div class="page-content">
-    
     <div class="channelinformation">
       <span class="channelimg channel4 sky-blue"></span>
       <div class="channelinfocontent last">
         <span data-bind="text:title"></span>
-        <a href="#" class="setting" onlclick="viewNavigate('Message details', 'channelSingleMessagesView', 'channelViewUnfollow');"></a>
+        <a href="#" class="setting" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'channelViewUnfollow');"></a>
         <em data-bind="text:description"></em>
       </div>
     </div>
-    
-        
     <div class="message-detail">
       <div class="messagedetail">
         <em data-bind="css:messageClass"></em>
@@ -22,16 +19,11 @@
       </div>      
     </div>
     
-     <div class="snoozedismissbtn">
-      <a href="#">i Got it</a>
-      <!--<a class="snoozebtn" href="V-60-snooze-settings.html">snooze</a>
-      <a class="snoozebtn" href="#">dismiss</a>-->
-    </div>
-
-    <div class="contactchannel">
-       <!--<div class="login"><div class="loginbtn"><a href="V-20-compose-broadcast.html">REPLY</a></div></div>-->
-    </div>
-         
+    <div class="msgdetailbuttons">
+      <span class="igimsgdetail"></span>
+      <a href="#">snooze</a>
+      <a class="replybtn" href="#">reply</a>
+    </div>         
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>    
   <div class="footer">

@@ -2706,7 +2706,7 @@ border-radius:4px 0 0 4px;
 	margin:6px 0px 0px 6px;
 	padding:12px 18px;
 }
-.msgdetailbuttons a {
+.msgdetailbuttons a, .msgdetailbuttons a.ui-link, .msgdetailbuttons a.ui-link:visited, .msgdetailbuttons a.ui-link:hover, .msgdetailbuttons a.ui-link:active {
 background:#58595b;
 border-radius:4px;
 padding:0 15px 0px 15px;
@@ -2715,7 +2715,11 @@ margin-left:8px;
 font-size:14px;
 color:#a7a9ac;
 }
-.msgdetailbuttons a.replybtn {
+.msgdetailbuttons a.active, .msgdetailbuttons a.active.ui-link {
+	background:#1c75bc;
+	color:#275477;
+}
+.msgdetailbuttons a.replybtn, .msgdetailbuttons a.replybtn.ui-link {
 float:right;
 margin:8px 10px 0 0;
 padding:0px 10px 1px 30px;

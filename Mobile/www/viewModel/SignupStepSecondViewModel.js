@@ -1,5 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
+﻿/* To do - Pradeep Kumar */
 function SignupStepSecondViewModel() {
   var that = this;
   this.template = 'signupStepSecondView';
@@ -7,14 +6,12 @@ function SignupStepSecondViewModel() {
   this.viewname = 'Register';
   this.displayname = 'Register';
 	
-	/* Signup observable */
   this.firstname = ko.observable();
   this.lastname = ko.observable();
   this.errorFirstLastName = ko.observable();
   this.firstnameClass = ko.observable();
   this.lastnameClass = ko.observable();
 
-	/* Methods */
   this.applyBindings = function () {
     $('#' + this.template).on('pagebeforeshow', function (e, data) {
 			that.clearForm();			
@@ -28,7 +25,7 @@ function SignupStepSecondViewModel() {
     that.errorFirstLastName('');
   };
 
-  this.activate = function () {
+	this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
 		var newUser = localStorage.getItem('newusername');		
 		if(token == '' || token == null) {
@@ -37,12 +34,14 @@ function SignupStepSecondViewModel() {
 				that.lastnameClass('');
 				that.errorFirstLastName('');
 			});
-		}	else if(newUser == '' || newUser == null) {
+		}	
+		else if(newUser == '' || newUser == null) {
 			goToView('channelListView');
-		} else {
+		} 
+		else {
 			goToView('tutorialView');
 		}
-  };
+	};
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'signupStepSecondView') {
@@ -65,10 +64,12 @@ function SignupStepSecondViewModel() {
     if (that.firstname() == '') {
       that.firstnameClass('validationerror');
       that.errorFirstLastName('<span>SORRY:</span> Please enter first name');
-    } else if (that.lastname() == '') {
+    } 
+		else if (that.lastname() == '') {
       that.lastnameClass('validationerror');
       that.errorFirstLastName('<span>SORRY:</span> Please enter last name');
-    } else {
+    } 
+		else {
       $.mobile.showPageLoadingMsg('a', 'Enrolling');
       var callbacks = {
         success: signUpSuccess,
@@ -108,7 +109,27 @@ function SignupStepSecondViewModel() {
     ES.evernymService.clearAccessToken();
 		ES.evernymService.setAccessToken(args.accessToken);
 		localStorage.setItem('accountName', args.account.accountname);
-		goToView('registrationVerifyView');			
+		ES.systemService.getMsgNotifs({
+			success: function(responseData) {
+				localStorage.removeItem('enymNotifications');
+				localStorage.setItem('enymNotifications', JSON.stringify(responseData));
+				if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+					headerViewModel.newMessageClass('smsiconwhite');
+					headerViewModel.newMessageCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
+					overlayViewModel.showNewMessagesOverlay();
+				}
+				else {
+					headerViewModel.newMessageCount('');
+					headerViewModel.newMessageClass('');
+				}
+				goToView('registrationVerifyView');				
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				localStorage.setItem('toastData', that.toastText());
+			}
+		});		
+		//goToView('registrationVerifyView');			
   }
 
   function loginError(data, status, details) {

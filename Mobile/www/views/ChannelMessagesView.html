@@ -1,10 +1,8 @@
 <div id="channelMessagesView" data-role="page">
   <header class="logged-in"></header>
-  
   <div class="page-content channelsettings">
-  
-    <div class="channelcontent">
-      <span class="channelimg channel3 sky-blue"></span>
+		<div class="channelcontent">
+			<span class="channelimg channel3 sky-blue"></span>
       <div class="detailschannel last">
         <div class="channelinfo">
           <strong data-bind="text:title"></strong>
@@ -16,15 +14,14 @@
     
     <div class="channelmessages" data-bind="foreach: channelMessages">
       <a href="#" data-bind="click: $parent.showSingleMessage">
-        <span class="channelicans" data-bind="css:$data.messageClass"></span>
+        <span class="igibutton igisent"></span>
         <div class="messageschannel">
           <span class="timemsg" data-bind="text:$data.messageCreated"></span>
-          <span class="messagebtn">iGi</span>
           <p data-bind="text:$data.messageText"></p>
         </div>
+        <span class="iconchannels" data-bind="css:$data.messageClass"></span>
       </a>
     </div>
-    
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>  
   <div class="footer">

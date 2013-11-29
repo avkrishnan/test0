@@ -1,5 +1,4 @@
-﻿/*globals ko*/
-function ChannelsFollowingListViewModel() {
+﻿function ChannelsFollowingListViewModel() {
 	this.template = "channelsFollowingListView";
 	this.viewid = "V-30";
 	this.viewname = "Channels";
@@ -8,9 +7,9 @@ function ChannelsFollowingListViewModel() {
 	this.accountName = ko.observable();
 	this.channels = ko.observableArray([]);
 	this.toastText = ko.observable();		
-	
 	var that = this;
 	this.shown = false;
+	
 	this.applyBindings = function() {	
 		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
 			if (!that.shown) {
@@ -20,7 +19,6 @@ function ChannelsFollowingListViewModel() {
 		});
 	};
 	
-	/* Methods */
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
@@ -28,9 +26,6 @@ function ChannelsFollowingListViewModel() {
 		} 
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
-			//$('#' + that.template + ' header.logged-in').load('header.html');
-			//$('#' + that.template + ' .active-overlay').load('overlaymessages.html');
-			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -38,9 +33,9 @@ function ChannelsFollowingListViewModel() {
 			}
 			that.accountName(localStorage.getItem("accountName"));
 			localStorage.setItem('counter', 1);					
-			console.log("trying to get channels");
+			//console.log("trying to get channels");
 			that.channels.removeAll();
-			if ( that.channels() && that.channels().length){
+			if(that.channels() && that.channels().length){
 				that.channels.removeAll();
 			}
 			$.mobile.showPageLoadingMsg("a", "Loading Channels");
@@ -52,7 +47,7 @@ function ChannelsFollowingListViewModel() {
 		//logger.log('success listing channels ' , null, 'channelService', true);
 	};
 
-	function gotChannels(data){
+	function gotChannels(data) {
 		$.mobile.hidePageLoadingMsg();
 		//that.shown = true;
 		//that.channels.removeAll();
@@ -60,20 +55,18 @@ function ChannelsFollowingListViewModel() {
 			data.channel = [data.channel];
 		}
 		if (!data.channel) {
-			// TODO:  What do we do when there are no channels that we are following?
-			//$.mobile.changePage("#" + channelNewViewModel.template);
-			//$("#no_channels_notification").show();
 			return;
 		}
-		$("#no_channels_notification").hide();
+		//$("#no_channels_notification").hide();
 		if(data.channel.length) {
 			$.each(data.channel, function(indexChannel, valueChannel) {
 				if(typeof valueChannel.description == 'undefined') {
-					valueChannel.description = '';			
+					valueChannel.description = 'Channel description!';			
 				}
 			});
 			that.channels(data.channel);
 		}
+		//alert(JSON.stringify(data));
 	};
 	
 	function errorListChannels(data, status, details){
@@ -82,7 +75,7 @@ function ChannelsFollowingListViewModel() {
 		showToast();			  
 	};
 	
-	this.mapImage = function(jsonText){
+	/*this.mapImage = function(jsonText){
 			 var mappedIcon = undefined;
 			 if (jsonText ){
 			
@@ -94,18 +87,13 @@ function ChannelsFollowingListViewModel() {
 			}
 		}
 		return mappedIcon;
-	};
+	};*/
 	
 	this.listFollowingChannelsCommand = function () {
 		return ES.channelService.listFollowingChannels({ success: successfulCreate, error: errorListChannels });
 	};
 		
-	this.logoutCommand = function(){
-		loginViewModel.logoutCommand();
-		$.mobile.changePage("#" + loginViewModel.template)
-	}
-		
-	this.showChannel = function (channel) {
+	/*this.showChannel = function (channel) {
 		localStorage.setItem("currentChannel", JSON.stringify(channel));
 		$.mobile.changePage("#" + channelBroadcastsViewModel.template)
 	};
@@ -113,18 +101,18 @@ function ChannelsFollowingListViewModel() {
 	this.newChannelCommand = function () {
 		channelNewViewModel.activate();
 		$.mobile.changePage("#" + channelNewViewModel.template)
-	};
+	};*/
 	
+	/* action to channel page to unfollow*/
 	this.channelViewUnfollow = function(data) {
 		var channel = JSON.stringify(data);
 		localStorage.setItem("currentChannel", channel);
-		//goToView('channelViewUnfollow');
 		viewNavigate('Channels', 'channelsFollowingListView', 'channelViewUnfollow');		
 	}
 	
+	/* action to see channels messages*/
 	this.actionFollowChannelCommand = function(data) {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
-		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');				
-	}	
-	
+		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');
+	}
 }
