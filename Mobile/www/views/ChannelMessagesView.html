@@ -1,9 +1,7 @@
 <div id="channelMessagesView" data-role="page">
   <header class="logged-in"></header>
-  
   <div class="page-content channelsettings">
-  
-    <div class="channelcontent">
+     <div class="channelcontent">
       <span class="channelimg channel3 sky-blue"></span>
       <div class="detailschannel last">
         <div class="channelinfo">
@@ -13,7 +11,6 @@
         <a href="#" class="setting" data-bind="click: actionFollowChannelCommand"></a>
       </div>
     </div>
-    
     <div class="channelmessages" data-bind="foreach: channelMessages">
       <a href="#" data-bind="click: $parent.showSingleMessage">
         <span class="channelicans" data-bind="css:$data.messageClass"></span>
@@ -24,7 +21,6 @@
         </div>
       </a>
     </div>
-    
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>  
   <div class="footer">

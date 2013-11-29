@@ -22,12 +22,12 @@ function ChannelMessagesViewModel() {
     
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
-		var channel = JSON.parse(localStorage.getItem("currentChannel"));		
+		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} 
 		else if(!channel) {
-			goToView('channelsFollowingListView');			
+			goToView('channelsFollowingListView');
 		} 
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
@@ -43,7 +43,7 @@ function ChannelMessagesViewModel() {
 				localStorage.setItem('counter', 1)
 			}				
 			that.channelid(channel.id);
-			localStorage.removeItem("currentChannelMessage");	
+			localStorage.removeItem("currentChannelMessage");
 			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 			that.channelMessages.removeAll();
 			return that.getChannelCommand(that.channelid()).then(that.gotChannel);
@@ -55,7 +55,7 @@ function ChannelMessagesViewModel() {
 	}
 	
 	this.actionFollowChannelCommand = function(data) {
-		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelViewUnfollow');		
+		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelViewUnfollow');
 	}	
 	
 	this.showSingleMessage = function(data) {
@@ -104,5 +104,4 @@ function ChannelMessagesViewModel() {
 		};		
 		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
 	}	
-	
 }

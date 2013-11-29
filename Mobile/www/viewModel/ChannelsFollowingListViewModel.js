@@ -8,9 +8,9 @@ function ChannelsFollowingListViewModel() {
 	this.accountName = ko.observable();
 	this.channels = ko.observableArray([]);
 	this.toastText = ko.observable();		
-	
 	var that = this;
 	this.shown = false;
+	
 	this.applyBindings = function() {	
 		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
 			if (!that.shown) {
@@ -28,9 +28,6 @@ function ChannelsFollowingListViewModel() {
 		} 
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
-			//$('#' + that.template + ' header.logged-in').load('header.html');
-			//$('#' + that.template + ' .active-overlay').load('overlaymessages.html');
-			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -40,7 +37,7 @@ function ChannelsFollowingListViewModel() {
 			localStorage.setItem('counter', 1);					
 			console.log("trying to get channels");
 			that.channels.removeAll();
-			if ( that.channels() && that.channels().length){
+			if(that.channels() && that.channels().length){
 				that.channels.removeAll();
 			}
 			$.mobile.showPageLoadingMsg("a", "Loading Channels");
@@ -100,10 +97,10 @@ function ChannelsFollowingListViewModel() {
 		return ES.channelService.listFollowingChannels({ success: successfulCreate, error: errorListChannels });
 	};
 		
-	this.logoutCommand = function(){
+	/*this.logoutCommand = function(){
 		loginViewModel.logoutCommand();
 		$.mobile.changePage("#" + loginViewModel.template)
-	}
+	}*/
 		
 	this.showChannel = function (channel) {
 		localStorage.setItem("currentChannel", JSON.stringify(channel));
@@ -125,6 +122,5 @@ function ChannelsFollowingListViewModel() {
 	this.actionFollowChannelCommand = function(data) {
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');				
-	}	
-	
+	}
 }
