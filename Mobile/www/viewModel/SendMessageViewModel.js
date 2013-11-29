@@ -112,11 +112,7 @@ function SendMessageViewModel() {
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'sendMessageView') {
 			that.sendMessageCommand();
 		}
-	});		
-	
-	this.backCommand = function () {
-		popBackNav();
-  };	
+	});			
 	
 	function successfulVerify(data){
 		if(data.commethod.length >= 1) {
@@ -173,7 +169,7 @@ function SendMessageViewModel() {
 		localStorage.removeItem('escLevel');						
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());		
-		that.backCommand();							
+		popBackNav();							
 	};
 	
 	function errorAPI(data, status, details){
