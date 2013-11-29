@@ -22,7 +22,7 @@
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
-			goToView('loginView');  
+			goToView('loginView');
 		} 
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message

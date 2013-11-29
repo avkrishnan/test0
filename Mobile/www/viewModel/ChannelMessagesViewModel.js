@@ -102,5 +102,6 @@ function ChannelMessagesViewModel() {
 			}
 		};
 		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
+		//return ES.messageService.getChannelMessagesForFollower(that.channelid(), undefined, callbacks);
 	}	
 }
