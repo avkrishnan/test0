@@ -4,7 +4,7 @@ function ChannelMainViewModel() {
   var that = this;
 	this.template = 'channelMainView';
 	this.viewid = 'V-46';
-	this.viewname = 'ChannelMain';
+	this.viewname = 'Main';
 	this.displayname = 'Channel Main';	
 	this.accountName = ko.observable();		
 	

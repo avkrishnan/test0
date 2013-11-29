@@ -68,13 +68,25 @@ function TutorialViewModel() {
 		});
   };
 
-  that.getStartedCommand = function() {
+  this.getStartedCommand = function() {
 		localStorage.removeItem('newuseremail');
 		localStorage.removeItem('newusername');
-		localStorage.removeItem('newuserpassword');		
+		localStorage.removeItem('newuserpassword');	
     if(localStorage.getItem("action") == 'follow_channel') {
-			localStorage.removeItem('action');
-			goToView('channelMessagesView');
+			var callbacks = {
+				success: function() {
+					localStorage.removeItem('action');
+					that.toastText('Now following '+channel.name);		
+					localStorage.setItem('toastData', that.toastText());
+					goToView('channelMessagesView');					
+				},
+				error: function(data, status, details) {
+					that.toastText(details.message);		
+					showToast();
+				}
+			};						
+			var channel = JSON.parse(localStorage.getItem('currentChannel'));
+			ES.channelService.followChannel(channel.id, callbacks);
 		}
 		else {
 			goToView('channelListView');

@@ -17,7 +17,6 @@ function HeaderViewModel() {
 		} else {		
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}		
-		//showNewMessages(localStorage.getItem('enymNotifications'));
 		that.showNewMessagesCount(localStorage.getItem('enymNotifications'));
 	}
 	
@@ -67,7 +66,8 @@ function HeaderViewModel() {
 	}
 	
 	this.menuCommand = function () {
-		viewNavigate($.mobile.activePage.attr('id'), $.mobile.activePage.attr('id'), 'channelMenuView');		
+		var backText = getCurrentViewModel().viewname;	
+		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelMenuView');		
   };
 		
 }

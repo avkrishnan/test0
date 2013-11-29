@@ -4,7 +4,7 @@ function FollowerDetailsViewModel() {
   var that = this;
   this.template = 'followerDetailsView';
   this.viewid = 'V-35';
-  this.viewname = 'FollowerDetails';
+  this.viewname = 'Follower Details';
   this.displayname = 'Follower Details';
 	this.accountName = ko.observable();	
 	

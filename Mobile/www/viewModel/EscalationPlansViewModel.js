@@ -3,7 +3,7 @@ function EscalationPlansViewModel() {
 	var that = this;	
 	this.template = "escalationPlansView";
 	this.viewid = "V-081";
-	this.viewname = "EscalationPlans";
+	this.viewname = "Settings";
 	this.displayname = "Escalation Plans";
     
 	this.channels = ko.observableArray([]);
@@ -188,6 +188,8 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('currentChannel');
 		localStorage.removeItem('accountName');
 		localStorage.removeItem('name');
+		localStorage.removeItem('escDuration');		
+		localStorage.removeItem('escLevel');		
 		//channelListViewModel.clearForm();
 		//notificationsViewModel.removeNotifications();
 		//OVERLAY.removeNotifications();

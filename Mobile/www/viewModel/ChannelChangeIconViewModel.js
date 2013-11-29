@@ -4,7 +4,7 @@ function ChannelChangeIconViewModel() {
   var that = this;
 	this.template = 'channelChangeIconView';
 	this.viewid = 'V-16';
-	this.viewname = 'ChannelChangeIcon';
+	this.viewname = 'Change Icon';
 	this.displayname = 'Channel Chage Icon Image';	   
 	this.accountName = ko.observable();	
 	

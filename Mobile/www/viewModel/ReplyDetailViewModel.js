@@ -1,10 +1,10 @@
-﻿/*globals ko*/
+﻿ /*globals ko*/
 /* To do - Pradeep Kumar */
 function ReplyDetailViewModel() {
   var that = this;
 	this.template = 'replyDetailView';
 	this.viewid = 'V-56';
-	this.viewname = 'ReplyDetail';
+	this.viewname = 'Reply Detail';
 	this.displayname = 'Reply Detail';	
 	this.accountName = ko.observable();		
 

@@ -4,10 +4,9 @@ function SendMessageViewModel() {
 	var that = this;
 	this.template = "sendMessageView";
 	this.viewid = "V-20";
-	this.viewname = "ComposeBroadcast";
+	this.viewname = "Compose";
 	this.displayname = "Compose Broadcast";	
-	this.accountName = ko.observable();
-	this.backText = ko.observable();		
+	this.accountName = ko.observable();		
 	
   /* Send Message observable */
 	this.messageText = ko.observable();
@@ -87,20 +86,19 @@ function SendMessageViewModel() {
 				var DateTime = localStorage.getItem('escDuration').split('/');
 				var day = DateTime[2].split(' ');
 				var time = day[1].split(':');						
-				var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+time[0]+':'+time[1]+' '+day[2].toLowerCase();
+				var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2].toLowerCase();
 				that.duration(durationText);														
 			} else {
 				tomorrow = new Date(tomorrow);
 				var hours = tomorrow.getHours();
-				hours = (hours<10?'0':'')+(hours-12>12?hours-12:hours);			
+				hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
 				var mins = tomorrow.getMinutes();
 				mins = ((mins<10?'0':'')+mins);			
 				var meridiem = tomorrow.getHours()>12?'PM':'AM';
-				var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+hours+':'+mins+' '+meridiem.toLowerCase();
+				var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+tomorrow.getFullYear()+', '+hours+':'+mins+' '+meridiem.toLowerCase();
 				that.duration(durationText);												
 			}									
-			that.accountName(localStorage.getItem('accountName'));
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.accountName(localStorage.getItem('accountName'));		
 			that.characterCount('0');		
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
@@ -114,11 +112,7 @@ function SendMessageViewModel() {
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'sendMessageView') {
 			that.sendMessageCommand();
 		}
-	});		
-	
-	this.backCommand = function () {
-		popBackNav();
-  };	
+	});			
 	
 	function successfulVerify(data){
 		if(data.commethod.length >= 1) {
@@ -175,7 +169,7 @@ function SendMessageViewModel() {
 		localStorage.removeItem('escLevel');						
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());		
-		that.backCommand();							
+		popBackNav();							
 	};
 	
 	function errorAPI(data, status, details){

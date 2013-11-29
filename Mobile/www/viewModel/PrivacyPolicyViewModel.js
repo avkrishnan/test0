@@ -4,7 +4,7 @@ function PrivacyPolicyViewModel() {
   var that = this;
   this.template = 'privacyPolicyView';
   this.viewid = 'V-49';
-  this.viewname = 'PrivacyPolicy';
+  this.viewname = 'Privacy Policy';
   this.displayname = 'Privacy Policy';
 	this.accountName = ko.observable();	
 	

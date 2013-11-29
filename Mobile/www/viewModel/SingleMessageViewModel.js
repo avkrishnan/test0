@@ -4,8 +4,8 @@ function SingleMessageViewModel() {
   var that = this;
 	this.template = 'singleMessageView';
 	this.viewid = 'V-23';
-	this.viewname = 'Message';
-	this.displayname = 'Message';	
+	this.viewname = 'Broadcast Details';
+	this.displayname = 'Broadcast Details';	
 	this.accountName = ko.observable();		
 
   /* Single message observable */		

@@ -3,7 +3,7 @@ function ChannelViewUnfollowModel() {
 	var that = this;
 	this.template = "channelViewUnfollow";
 	this.viewid = "V-16";
-	this.viewname = "ChannelDetails";
+	this.viewname = "'Channel Unfollow'";
 	this.displayname = "Channel Unfollow";
 	
 	this.accountName = ko.observable();

@@ -4,7 +4,7 @@ function EscalateSettingsViewModel() {
   var that = this;
   this.template = 'escalateSettingsView';
   this.viewid = 'V-20c';
-  this.viewname = 'EscalateSettings';
+  this.viewname = 'Escalate Settings';
   this.displayname = 'Escalate Settings';
 	this.accountName = ko.observable();	
 	

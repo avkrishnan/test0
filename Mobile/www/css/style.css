@@ -463,17 +463,13 @@ select, .ui-icon-arrow-d {
 	background:url("images/sprites.png") no-repeat -8px -403px;
 }
 /*	V-12b - Delete - A End	*/
-/*
-	*	V-12b - Delete -B
-*/
+/*	*	V-12b - Delete -B  */
 .deleteicanchange, .mycontact .deleteicanchange {
 	background:url("images/sprites.png") no-repeat -8px -920px;
 	opacity:1;
 }
 /* V-12b - Delete - B End */
-/*
-	*	V- 09 My contact information
-*/
+/*	*	V- 09 My contact information  */
 .details-delete {
 	overflow:hidden;
 	padding:0 15px 0 0;
@@ -530,13 +526,9 @@ select, .ui-icon-arrow-d {
 	opacity:0.4;
 }
 /*	V- 09 My contact information End	*/
-/*
-	*	V-09 - Delete - A B C
-*/
+/*	*	V-09 - Delete - A B C  */
 /* V-09 - Delete - A b c End */
-/*
-	*	V-10
-*/
+/*	*	V-10 */
 .add-action {
 	background:#2D2D2D;
 	border-radius:4px 0 0 4px;
@@ -608,9 +600,7 @@ select, .ui-icon-arrow-d {
 	background:#fefbd6;
 }
 /*V-10 End*/
-/*
-	*Footer css
-*/
+/*	*Footer css */
 .footer {
 	background:#fff;
 	position:fixed;
@@ -636,9 +626,7 @@ select, .ui-icon-arrow-d {
 	padding:22px 60px 22px 0;
 }
 /*Footer End*/
-/*
-	*	Login page css
-*/
+/*	*	Login page css */
 .logininfo {
 	color:#fff;
 	font-size:14px;
@@ -1560,60 +1548,68 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:0 10px 0 0;
 }
 .channelmessages a {
-	display:inline-block;
 	width:100%;
 	background:#fff;
 	border-radius:4px;
 	-webkit-border-radius:4px;
 	margin-bottom:10px;
+	display:table;
+}
+.igibutton, .messageschannel, .iconchannels, .igibtnarrow {
+	display:table-cell;
 }
 /*New Desing CHANGES v-55*/
 .igibutton {
-	float:left;
-	padding:23px 0;
-	width:45px;
-	background:url("images/IGI.png") no-repeat 7px 13px;
+	width:43px;
+	background:url("images/IGI.png") no-repeat 4px 4px;
 }
 .igisent {
-	background:url("images/IGISENT.png") no-repeat 7px 7px;
+	background:url("images/IGISENT.png") no-repeat 4px 7px;
+}
+.igibtnarrow {
+	width:45px;
+	background:url("images/IGI-btn.png") no-repeat 4px 7px;
+	border-right:1px solid #ccc;
+}
+.igisentwhite {
+	background:url("images/IGISENT-h.png") no-repeat 8px 7px;
 }
 .iconchannels {
-	float:right;
-	height:46px;
 	width:46px;
-	background:url("images/sprites.png") no-repeat;
+	border-left:1px solid #EAEAEA;
+	background:url("images/all-icons.png") no-repeat 3px -5px;
 }
 /*New Desing CHANGES*/
 .channelicans {
 	float:left;
 	height:46px;
 	width:46px;
-	border-right:1px solid #eaeaea;
-	background:url("images/sprites.png") no-repeat -3px -740px;
+	background:url("images/all-icons.png") no-repeat scroll 3px -5px;
 }
 .icon-n {
-	background-position:-4px -1551px;
-}
-.icon-ts {
-	background-position:-4px -743px;
-}
-.icon-u {
-	background-position: -4px -685px;
+	background-position:-337px -5px;
 }
 .icon-e {
-	background-position: -4px -628px;
+	background-position:-407px -5px;
+}
+.icon-u {
+	background-position:3px -5px;
 }
 .icon-l {
-	background-position: -4px -801px;
+	background-position:3px -5px;
 }
 .icon-r {
-	background:url("images/sprites.png") no-repeat -5px -743px;
-}
-.icon-c {
-	background:url("images/brodecasticon.png") no-repeat 4px 5px;
+	background-position:-77px -5px;
 }
 .icon-h {
-	background:url("images/sprites-channel.png") no-repeat -3px -796px;
+	background-position:3px -5px;
+}
+.icon-c {
+	background-position:-246px -5px;
+}
+
+.icon-ts {
+	background-position:3px -5px;
 }
 .icon-d {
 	background:url("images/default-icon.png") no-repeat 4px 4px;
@@ -1624,29 +1620,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .messageschannel {
 	padding:0 0 4px 6px;
 	float:left;
-	width:98%;
+	width:96%;
 }
 .igi-responses .messageschannel {
-	width:auto;
-}
-.igi-msg{
+	width:78%;
 	border-left:1px solid #eaeaea;
-	width:80%;
-}
-.igi-msg-icon {
-	width:64.6%;
-	border-left:1px solid #eaeaea;
-	border-right:1px solid #eaeaea;
-}
-.msg-icon {
-	border-right:1px solid #eaeaea;
-	width:81%;
-}
-.messagescontent .igi-msg-icon {
-	width:62.8%;
-}
-.messagescontent .msg-icon {
-	width:80%;
 }
 .messagebtn {
 	float:right;
@@ -1840,7 +1818,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .broadcast-sensitive span strong.icon-h {
 	background:url("images/sprites-channel.png") no-repeat -7px -798px;
 }
-
 .broadcastnormal span {
 	background-position:-9px -1555px;
 }
@@ -2025,7 +2002,6 @@ h1.messagesdate {
 .msgfullread.icon-e {
 	background-position: -8px -632px;
 }
-
 .msgfullread span {
 	text-transform:uppercase;
 	font-size:11px;
@@ -2289,12 +2265,23 @@ h1.requests {
 }
 .messagesreceived, .igi-responses {
 	background:#fff;
-	display:block;
+	display:table;
 	border-radius:4px;
 	-webkit-border-radius:4px;
 	margin:10px 6px 0 6px;
 	overflow:hidden;
 }
+.igi-responses {
+	width:96%;
+}
+/*28-11-2013-*/
+.messagesreceived {
+	width:95%;
+}
+.messagesreceived .igibutton, .messagesreceived .messageschannel, .messagesreceived .iconchannels {
+	display:table-cell;
+}
+/*28-11-2013-End*/
 .messagesreceived .received, .igi-responses .received {
 	color:#8DC63F;
 	font-size:13px;
@@ -2305,6 +2292,9 @@ h1.requests {
 	line-height:20px;
 	word-break:break-all;
 	padding:0 5px 0 0;
+}
+.messagesreceived .messageschannel .receive-time {
+	display:block;
 }
 .messagesreceived .receive-time em {
 	font-style:normal;
@@ -2443,16 +2433,16 @@ ul.igiresponses li span {
 	padding:0 10px;
 }
 .messageshistory a{
-	display:inline-block;
 	width:100%;
 	background:#fff;
 	border-radius:4px;
 	-webkit-border-radius:4px;
 	margin-bottom:10px;
+	display:table;
 }
 .msghistory{
 	padding:2px 0 2px 6px;
-	float:left;
+	display:table-cell;
 }
 .msghistory span {
 	color:#8DC63F;
@@ -2475,7 +2465,7 @@ ul.igiresponses li span {
 }
 /*26-11-2013-*/
 .msg-increase {
-	float:left;
+	display:table-cell;
 	width:45px;
 	text-align:center;
 	padding:3px 0;
@@ -2493,7 +2483,7 @@ ul.igiresponses li span {
 	padding:3px 0;
 	display:block;
 	font-size:12px;
-	padding:13px 0 10px 0;
+	padding:5px 0 1px 0;
 }
 .increase-msg {
 	height:10px;
@@ -2535,7 +2525,7 @@ ul.igiresponses li span {
 	font-size:14px;
 	padding:2px 0;
 	margin:0 5px;
-	width:28.5%;
+	width:28%;
 	opacity:0.5;
 }
 .msgbuttons a.active {
@@ -2573,8 +2563,6 @@ ul.igiresponses li span {
 	color: #000000;
 	font-size:17px;
 	padding: 0 0 0 6px;
-}
-.landingpage {
 }
 .landingpage .detailschannel {
 	display:block;
@@ -2663,32 +2651,76 @@ ul.igiresponses li span {
 	padding:5px 0 0 0;
 }
 .snoozedismissbtn {
-	padding:7px 0 8px 55px;
+	/*padding:7px 0 8px 55px;
 	background:#2d2d2d url("images/IGI-btn.png") no-repeat 5px center;
 	margin:10px 0;
 	border-radius:4px 0 0 4px;
-	-webkit-border-radius:4px 0 0 4px;
+	-webkit-border-radius:4px 0 0 4px;*/
 }
 
 .snoozedismissbtn a.ui-link {
-	background:#58595b;
+	/*background:#58595b;
 	border-radius:4px;
 	-webkit-border-radius:4px;
 	display:inline-block;
 	font-size:14px;
 	margin-right:4px;
 	padding:2px 10px;
-	color:#a7a9ac;
+	color:#a7a9ac;*/
 }
 .snoozedismissbtn a.snoozebtn.ui-link:hover, .snoozedismissbtn .snoozebtn.active {
-	background:#8DC63F;
+	/*background:#8DC63F;
 	border-radius:4px;
 	-webkit-border-radius:4px;
 	display:inline-block;
 	font-size:14px;
 	margin-right:4px;
 	padding:2px 10px;
-	color:#fff;
+	color:#fff;*/
+}
+/*.msgdetailbtns{
+background:url(images/msgdetails.png) no-repeat left center;
+padding:5px 0 4px 0;
+margin:0 0 0 65px;
+}*/
+.msgdetailbuttons {
+padding:0;
+margin:10px 0 10px 55px;
+background:#2d2d2d;
+line-height:32px;
+height:36px;
+overflow:hidden;
+border-radius:4px 0 0 4px;
+/*background:#2d2d2d;*/
+}
+.msgdetailbuttons .igimsgdetail {
+	background:url(images/msgdetails.png) no-repeat left center;
+	float:left;
+	padding:18px 28px;
+	/*width:55px;
+	height:36px;*/
+}
+.igisentimg {
+	background:url(images/msgsentdetails.png) no-repeat left center;
+	float:left;
+	margin:6px 0px 0px 6px;
+	padding:12px 18px;
+}
+.msgdetailbuttons a {
+background:#58595b;
+border-radius:4px;
+padding:0 15px 0px 15px;
+text-decoration:none;
+margin-left:8px;
+font-size:14px;
+color:#a7a9ac;
+}
+.msgdetailbuttons a.replybtn {
+float:right;
+margin:8px 10px 0 0;
+padding:0px 10px 1px 30px;
+color:#58595b;
+background:#a7a9ac url(images/replybg.png) no-repeat 10px 5px;
 }
 /*slide menu*/
 .slidemenu {
@@ -3304,18 +3336,6 @@ ul.igiresponses li span {
 	.Emergencymsg {
 		line-height:16px;
 	}
-	.messagescontent .igi-msg-icon {
-		width:62.6%;
-	}
-	.igi-msg{
-		width:80%;
-	}
-	.igi-msg-icon {
-		width:66.6%;
-	}
-	.msg-icon {
-		width:82%;
-	}
 }
 @media only screen and (min-width:360px) { 
 	.new-user img {
@@ -3416,25 +3436,16 @@ ul.igiresponses li span {
 	.linkicon a {
 		margin:0 28px 0 0;
 	}
-	.igi-msg{
-		border-left:1px solid #eaeaea;
-		width:82.5%;
+	.messagesreceived {
+		width:95.5%;
 	}
-	.igi-msg-icon {
-		width:70.2%;
-		border-left:1px solid #eaeaea;
-		border-right:1px solid #eaeaea;
+	.igi-responses {
+		width: 96.5%;
 	}
-	.msg-icon {
-		border-right:1px solid #eaeaea;
-		width:83.8%;
+	.igi-responses .messageschannel {
+		width:81%;
 	}
-	.messagescontent .msg-icon {
-		width:83.5%;
-	}
-	.messagescontent .igi-msg-icon {
-		width:68.8%;
-	}
+
 }
 @media only screen and (min-width:768px) {
 	.details {
@@ -3551,33 +3562,19 @@ ul.igiresponses li span {
 		margin-right: 47px;
 	}
 	.messageschannel {
-		width:99%;
+		width:98.9%;
 	}
-	.igi-msg{
-		width:92%;
+	.msgbuttons a {
+		padding:3px 0;
+		width:31%;
 	}
-	.igi-msg-icon {
-		width:86.45%;
+	.igi-responses {
+		width: 98.5%;
 	}
-	.msg-icon {
-		width:92.6%;
-	}
-	.messagescontent .msg-icon {
-		width:92.5%;
-	}
-	.messagescontent .igi-msg-icon {
-		width:86.2%;
-	}
-	.messagescontent .igi-msg {
-		width:86.2%;
+	.igi-responses .messageschannel {
+		width: 92%;
 	}
 }
-/*@media only screen and (max-width:1280px) and (min-width:768px) {
-	.msg-content p {
-		font-size:18px;
-		border:2px solid red;
-	}
-}*/
 @media only screen and (min-width:800px) {
 	.details {
 		width:90.9%;
@@ -3627,25 +3624,6 @@ ul.igiresponses li span {
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right: 49px;
-	}
-	.igi-msg{
-		width:93%;
-	}
-	.igi-msg-icon {
-		width:87%;
-	}
-	.msg-icon {
-		width:93%;
-	}
-	
-	.messagescontent .igi-msg-icon {
-		width: 86.9%;
-	}
-	.messagescontent .igi-msg{
-		width:92.9%;
-	}
-	.messagescontent .msg-icon {
-		width:92.9%;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -3707,23 +3685,15 @@ ul.igiresponses li span {
 	.datetime-setting.date-minutesetting {
 		margin-right:60px;
 	}
-	.igi-msg{
-		width:94%;
+	.msgbuttons a {
+		padding:3px 0;
+		width:31.5%;
 	}
-	.igi-msg-icon {
-		width:89.5%;
+	.igi-responses {
+		width: 98.8%;
 	}
-	.msg-icon {
-		width:94.4%;
-	}
-	.messagescontent .msg-icon {
-		width:94.3%;
-	}
-	.messagescontent .igi-msg-icon {
-		width:89.4%;
-	}
-	.messagescontent .igi-msg {
-		width:94.4%;
+	.igi-responses .messageschannel {
+		width: 93.8%;
 	}
 }
 @media only screen and (min-width:1280px) {
@@ -3797,31 +3767,23 @@ ul.igiresponses li span {
 	.broadcastmsgreplie {
     width:79%;
 	}
-	.igi-msg{
-		width:95.5%;
+	.msgbuttons a {
+		padding:3px 0;
+		width:32%;
 	}
-	.igi-msg-icon {
-		width:92%;
+	.messagesreceived {
+    width: 99%;
 	}
-	.msg-icon {
-		width:95.6%;
+	.messageschannel {
+		width:99.5%;
 	}
-	.messagescontent .msg-icon {
-		width:95.7%;
+	.igi-responses {
+    width:99.1%;
 	}
-	.messagescontent .igi-msg-icon {
-		width:92%;
-	}
-	.messagescontent .igi-msg {
-		width:95.5%;
+	.igi-responses .messageschannel {
+		width:95%;
 	}
 }
-/*@media only screen and (max-width: 600px) and (min-width: 599px) {
-	.new-user img {
-		width:130%;
-		border:3px solid red;
-	}
-}*/
 @media only screen and (min-width:1366px) {
 	.addaction {
 		width:99%;
@@ -3833,12 +3795,6 @@ ul.igiresponses li span {
 		top:69%;
 	}
 }
-/*@media only screen and (max-width: 900px) and (min-width: 899px) {
-	.new-user img {
-		width:130%;
-		border:4px solid green;
-	}
-}*/
 @media only screen and (min-width:1290px) {
 	.dateminutesetting {
 		margin:0 84px;
@@ -3851,24 +3807,6 @@ ul.igiresponses li span {
 	}
 	.slidemenu {
 		min-height:622px;
-	}
-	.igi-msg{
-		width:95.5%;
-	}
-	.igi-msg-icon {
-		width:92.4%;
-	}
-	.msg-icon {
-		width:95.6%;
-	}
-	.messagescontent .msg-icon {
-		width:95.9%;
-	}
-	.messagescontent .igi-msg-icon {
-		width:92.4%;
-	}
-	.messagescontent .igi-msg {
-		width:95.8%;
 	}
 }
 /* @media query css End*/

@@ -49,12 +49,12 @@ function SignupStepSecondViewModel() {
 			that.signUpCommand();
 		}
 	});
-
+	
+	/* Create Random AccountName Generator */	
   function generateAccount() {
     return {
       emailaddress: localStorage.getItem('newuseremail'),
-      accountname: localStorage.getItem('newusername'),
-      /* Create Random AccountName Generator */			
+      accountname: localStorage.getItem('newusername'),		
       password: localStorage.getItem('newuserpassword'),
       firstname: that.firstname(),
       lastname: that.lastname()
@@ -103,30 +103,12 @@ function SignupStepSecondViewModel() {
     ES.loginService.accountLogin(loginModel, callbacks);
 	}
 	
-	function loginSuccess(args) {
-		var callbacks = {
-			success: function() {},
-			error: function(data, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
-			}
-		};		
+	function loginSuccess(args) {		
     $.mobile.hidePageLoadingMsg();
     ES.evernymService.clearAccessToken();
-    if (args.accessToken) {
-      ES.evernymService.setAccessToken(args.accessToken);
-      localStorage.setItem('accountName', args.account.accountname);
-      that.first_name = args.account.firstname;
-      that.last_name = args.account.lastname;
-      localStorage.setItem('UserFullName', args.account.firstname + ' '+ args.account.lastname);
-      $.mobile.activePage.find('#thefooter #footer-gear').html(args.account.accountname);
-      var login_nav = JSON.parse(localStorage.getItem('login_nav'));
-      localStorage.removeItem('login_nav');
-    } else {
-      loginError();
-      return;
-    }
-		goToView('registrationVerifyView');
+		ES.evernymService.setAccessToken(args.accessToken);
+		localStorage.setItem('accountName', args.account.accountname);
+		goToView('registrationVerifyView');			
   }
 
   function loginError(data, status, details) {
