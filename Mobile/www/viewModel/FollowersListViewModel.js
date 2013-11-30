@@ -54,23 +54,21 @@ function FollowersListViewModel() {
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
-		that.followers.removeAll();			
-		var len = 0;
-		var follower = 0;		
-		for(len; len<data.followers.length; len++) {			
+		that.followers.removeAll();				
+		for(var len = 0; len<data.followers.length; len++) {
+			var follower = data.followers.length-1;				
+			if(follower == 1) {
+				var followers = follower +' follower';
+			} else {
+				var followers = follower +' followers';
+			}				
+			that.followerCount(followers);						
 			if(data.followers[len].relationship == 'F') {
 				that.followers.push({
 					followerId: data.followers[len].id,
 					followerName: data.followers[len].firstname +' '+ data.followers[len].lastname, 
 					accountname: data.followers[len].accountname
 				});
-				follower == follower++;				
-				if(follower == 1) {
-					var followers = follower +' follower';
-				} else {
-					var followers = follower +' followers';
-				}				
-				that.followerCount(followers);
 			}
 		}
 	}; 
