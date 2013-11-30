@@ -141,7 +141,7 @@ function SendMessageViewModel() {
 	};
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
-			that.toastText('Please type some message !');
+			that.toastText('Please type a message to broadcast.');
 			showToast();			
 		} else {
 			$.mobile.showPageLoadingMsg("a", "Checking email verification !");			
