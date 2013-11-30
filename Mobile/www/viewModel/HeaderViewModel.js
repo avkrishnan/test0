@@ -85,6 +85,9 @@ function OverlayViewModel() {
 		that.newMessagesDisplayList.removeAll();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			valueNotification.created = dateFormat2(valueNotification.created);
+			if(valueNotification.text.length > 60) {
+				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, 60).split(" ").slice(0, -1).join(" ") + "...";
+			}
 			if(valueNotification.escLevelId) {
 				valueNotification.escLevelId = "icon-" + valueNotification.escLevelId.toLowerCase();
 			}
