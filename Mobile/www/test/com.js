@@ -40,69 +40,39 @@
 
   // Here's were we do the tests for message read, dismiss, ack, and snooze
 
-  asyncTest('B gets msg notifications and the msg is there', function() {
-    $.when(SCEN_B.ES.systemService.getMsgNotifs())
-    .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
-    .then(function(data) {
-        console.log("searching for msg in notifs: " + SCEN_A.msg.text);
-        var find = data.messagealert.filter(function(item) { return (item.text == SCEN_A.msg.text); });
-        console.log("found: " + find.length);
-        equal(find.length, 1, "we find one entry");
-      }, hlpr.CHECK.shouldNotFail)
-    .then(start, start);
-  });
-
-  asyncTest('B reads message', function() {
-    $.when(SCEN_B.ES.messageService.readMsg(SCEN_A.msg.id))
-    .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
-    .then(start, start);
-  });
+  asyncTest('B gets msg notifications and the msg is there', hlpr.checkNotif(SCEN_B, SCEN_A, 1));
+  
+  asyncTest('B reads message', hlpr.read(SCEN_B, SCEN_A));
 
   asyncTest('Wait 1 second. (Because read is asynchronous on the back-end, we have a race condition; waiting lets the back-end "win".)', function() { 
     setTimeout( function(){ expect(0); start(); }, 1000);
   });
-  
-  asyncTest('B gets msg notifications and the msg is not there', function() {
-    $.when(SCEN_B.ES.systemService.getMsgNotifs())
-    .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
-    .then(function(data) {
-        console.log("searching for msg in notifs: " + SCEN_A.msg.text);
-        var find = data.messagealert.filter(function(item) { return (item.text == SCEN_A.msg.text); });
-        console.log("found: " + find.length);
 
-        equal(find.length, 0, "we should not find an entry");
-      }, null)
-    .then(start, start);
+  asyncTest('B gets msg notifications and the msg is no longer there', hlpr.checkNotif(SCEN_B, SCEN_A, 0));
+
+  asyncTest('B gets channel messages', hlpr.checkChnlMsgsForFlwr(SCEN_B, SCEN_A, 'chnl1'));
+
+  asyncTest('A creates another channel', hlpr.createChannelF(SCEN_A, 'chnl2'));
+  asyncTest("B follows A's other channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl2'));
+
+  
+  asyncTest('A broadcasts a message, requesting an iGi', hlpr.broadcast(SCEN_A, 'chnl2', msgText, 'N', undefined, 'RAC'));
+
+  asyncTest('A checks message', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2'));
+
+  asyncTest('B gets msg notifications and the msg is there', hlpr.checkNotif(SCEN_B, SCEN_A, 1));
+  
+  asyncTest('B acknowledges message', hlpr.acknowledge(SCEN_B, SCEN_A));
+  
+  asyncTest('Wait 1 second. (Because read is asynchronous on the back-end, we have a race condition; waiting lets the back-end "win".)', function() { 
+    setTimeout( function(){ expect(0); start(); }, 1000);
   });
 
-  asyncTest('B gets channel messages', function() {
-    $.when(SCEN_B.ES.messageService.getChannelMessagesForFollower(SCEN_A['chnl1'].id))
-    .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
-    .then(function(data) {
-      equal(data.messagealert.length, 1, "we should find one entry");
-      }, null)
-    .then(start, start);
-  });
+  asyncTest('B gets msg notifications and the msg is no longer there', hlpr.checkNotif(SCEN_B, SCEN_A, 0));
   
-  
-  /*
-  asyncTest('B fetches message', function() {
-    $.when(SCEN_B.ES.messageService.getChannelMessage(SCEN_A['chnl1'].id, SCEN_B.msg.id))
-    .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
-    .then(function(data) {
-        debugger;
-        
-      }, hlpr.CHECK.shouldNotFail)
-    .then(start, start);
-  });
-  */
-  
-  /*
-  asyncTest('B checks message', hlpr.fetchMsgs(SCEN_B, SCEN_A, 'chnl1', function() {
-    debugger;
-    SCEN_B.msg
-    }));
-  */
+  asyncTest('B gets channel messages', hlpr.checkChnlMsgsForFlwr(SCEN_B, SCEN_A, 'chnl2'));
+
+  //TODO confirm the last message is acknowledged
   
   /*
    * asyncTest('B dismisses message', function() {
@@ -114,4 +84,6 @@
    * .then(api.CHECK.successNoContent) .then(start); });
    */
 
+  
+  
 })();

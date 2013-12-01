@@ -294,11 +294,11 @@ function ApiTestHelper() {
     return build(function() { return scenario.ES.channelService.removeFollower(scenario[chnlKey].id, followerScenario.account.accountname);}, shouldFail)
   };
   
-  t.broadcast = function(scenario, chnlKey, msgText, escLevelId, escUntil, success, fail) {
+  t.broadcast = function(scenario, chnlKey, msgText, escLevelId, escUntil, ovrdType, success, fail) {
     return function() {
       scenario.msg = {
         text : msgText + ' ' + t.randomStr(8),
-        type : 'FYI',
+        type : ovrdType == undefined ? 'FYI' : ovrdType,
         escLevelId : escLevelId == undefined ? 'N' : escLevelId,
         escUntil : escUntil
       };
@@ -417,8 +417,9 @@ function ApiTestHelper() {
         accountname : scenario.account.accountname,
         emailAddress : ovrdEmailAddress ? ovrdEmailAddress : scenario.account.emailaddress
       };
-      $.when(api.sForgot(fpRequest)).then(ovrdCHECK ? ovrdCHECK : t.CHECK.successNoContent).then(
-          start);
+      $.when(api.sForgot(fpRequest))
+      .then(ovrdCHECK ? ovrdCHECK : t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(start, start);
     };
   };
 
@@ -434,6 +435,55 @@ function ApiTestHelper() {
     };
   };
   
+
+  /*
+   * followScen: Scenario of follower; makes the call to get message notifications
+   * msgHolder: Usually msg sender scenario; object with a 'msg' attribute; msg.text used to match with notif
+   * expectedNotifCount: Expected notification count
+   */
+  t.checkNotif = function(followScen, msgHolder, expectedNotifCount) {
+    return function() {
+      $.when(followScen.ES.systemService.getMsgNotifs())
+      .then(t.CHECK.success, t.CHECK.shouldNotFail)
+      .then(function(data) {
+          console.log("searching for msg in notifs: " + msgHolder.msg.text);
+          var find = data.messagealert.filter(function(item) { return (item.text == msgHolder.msg.text); });
+          console.log("found: " + find.length);
+          equal(find.length, expectedNotifCount, "we expect to find " + expectedNotifCount + " entry");
+        }, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };
+
+  t.read = function(followScen, msgHolder) {
+    return function() {
+      $.when(followScen.ES.messageService.readMsg(msgHolder.msg.id))
+      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };  
+
+  t.acknowledge = function(followScen, msgHolder) {
+    return function() {
+      $.when(followScen.ES.messageService.acknowledgeMsg(msgHolder.msg.id))
+      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };  
+
+  t.checkChnlMsgsForFlwr = function(scenario, chnlHolder, chnlAttribName, extraCheck) {
+    return function() {
+      $.when(scenario.ES.messageService.getChannelMessagesForFollower(chnlHolder[chnlAttribName].id))
+      .then(t.CHECK.success, t.CHECK.shouldNotFail)
+      .then(function(data) {
+        equal(data.messagealert.length, 1, "we should find one entry");
+        }, t.CHECK.shouldNotFail)
+      .then(extraCheck == undefined ? null : extraCheck, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };
+  
+
   t.testjason20 = {
     accountname : "jason20",
     emailaddress : "jason+20@lawcasa.com",
@@ -451,4 +501,4 @@ function ApiTestHelper() {
   };
 
   
-}
+};

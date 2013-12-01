@@ -43,14 +43,14 @@
   var inOneMin = new Date(now.getTime() + oneMin);
   
   /*TODO Uncomment at earliest: temporarily disable for debugging purposes
-  asyncTest('A broadcasts a CHASE message without a duration', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'C', null, hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
-  asyncTest('A broadcasts a NORMAL message with a duration', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N', inFourHours, hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
+  asyncTest('A broadcasts a CHASE message without a duration', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'C', null, null, hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
+  asyncTest('A broadcasts a NORMAL message with a duration', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N', inFourHours, null, hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
   */
   
   asyncTest('A broadcasts a CHASE message with 10 minute escalation', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'C', inOneMin));
 
   /*
-  asyncTest('A broadcasts a NORMAL message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N', null));
+  asyncTest('A broadcasts a NORMAL message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));
   asyncTest('B checks message', hlpr.fetchMsgs(SCEN_B, SCEN_A, 'chnl1'));
 
   // asyncTest('B receives email with message', hlpr.findEmail(SCEN_B,
