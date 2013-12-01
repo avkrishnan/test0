@@ -33,7 +33,7 @@
   var msgText = 'Hello everybody, this is a test broadcast! ';
 
   asyncTest('A broadcasts a message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));
-  asyncTest('B checks message', hlpr.fetchMsgs(SCEN_B, SCEN_A, 'chnl1'));
+  asyncTest('A checks message', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl1'));
 
   // asyncTest('B receives email with message', hlpr.findEmail(SCEN_B,
   // msgText));
@@ -45,15 +45,15 @@
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then(function(data) {
         console.log("searching for msg in notifs: " + SCEN_A.msg.text);
-        var find = data.filter(function(item) { return (item.text == SCEN_A.msg.text); });
+        var find = data.messagealert.filter(function(item) { return (item.text == SCEN_A.msg.text); });
         console.log("found: " + find.length);
         equal(find.length, 1, "we find one entry");
-      }, null)
+      }, hlpr.CHECK.shouldNotFail)
     .then(start, start);
   });
 
   asyncTest('B reads message', function() {
-    $.when(SCEN_B.ES.messageService.readMsg(SCEN_B.msg.id))
+    $.when(SCEN_B.ES.messageService.readMsg(SCEN_A.msg.id))
     .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
     .then(start, start);
   });
@@ -67,7 +67,7 @@
     .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
     .then(function(data) {
         console.log("searching for msg in notifs: " + SCEN_A.msg.text);
-        var find = data.filter(function(item) { return (item.text == SCEN_A.msg.text); });
+        var find = data.messagealert.filter(function(item) { return (item.text == SCEN_A.msg.text); });
         console.log("found: " + find.length);
 
         equal(find.length, 0, "we should not find an entry");

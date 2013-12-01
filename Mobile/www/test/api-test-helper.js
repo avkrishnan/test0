@@ -309,7 +309,7 @@ function ApiTestHelper() {
     };
   };
 
-  t.fetchMsgs = function(scenario, ownerScenario, chnlKey, extraCheck) {
+  t.fetchMsgsAsOwner = function(scenario, ownerScenario, chnlKey, extraCheck) {
     return function() {
       $.when(scenario.ES.messageService.getChannelMessages(ownerScenario[chnlKey].id))
       .then(t.CHECK.success, t.CHECK.shouldNotFail)
