@@ -27,6 +27,8 @@
   asyncTest('A creates channel', hlpr.createChannelF(SCEN_A, 'chnl1'));
   asyncTest("B follows A's channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl1'));
 
+  asyncTest('B gets msg notification summary', hlpr.checkNotifSmry(SCEN_B, SCEN_A));
+
   // asyncTest('A verifies email address', hlpr.verify(SCEN_A));
   // asyncTest('B verifies email address', hlpr.verify(SCEN_B));
 
@@ -43,6 +45,8 @@
 
   // Here's were we do the tests for message read, dismiss, ack, and snooze
 
+  asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, SCEN_A, 1));
+  
   asyncTest('B gets msg notifications and the msg is there', hlpr.checkNotif(SCEN_B, SCEN_A, 1));
   
   asyncTest('B reads message', hlpr.read(SCEN_B, SCEN_A));
@@ -50,6 +54,8 @@
   asyncTest('Wait 1 second. (Because read is asynchronous on the back-end, we have a race condition; waiting lets the back-end "win".)', function() { 
     setTimeout( function(){ expect(0); start(); }, 1000);
   });
+
+  asyncTest('B gets msg notification summary, expects an decrease of one', hlpr.checkNotifSmry(SCEN_B, SCEN_A, -1));
 
   asyncTest('B gets msg notifications and the msg is no longer there', hlpr.checkNotif(SCEN_B, SCEN_A, 0));
 
@@ -62,6 +68,8 @@
 
   asyncTest('A checks message', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2'));
 
+  asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, SCEN_A, 1));
+
   asyncTest('B gets msg notifications and the msg is there', hlpr.checkNotif(SCEN_B, SCEN_A, 1));
   
   asyncTest('B acknowledges message', hlpr.acknowledge(SCEN_B, SCEN_A));
@@ -71,6 +79,8 @@
   asyncTest('Wait 1 second. (Because read is asynchronous on the back-end, we have a race condition; waiting lets the back-end "win".)', function() { 
     setTimeout( function(){ expect(0); start(); }, 1000);
   });
+
+  asyncTest('B gets msg notification summary, expects an decrease of one', hlpr.checkNotifSmry(SCEN_B, SCEN_A, -1));
 
   asyncTest('B gets msg notifications and the msg is no longer there', hlpr.checkNotif(SCEN_B, SCEN_A, 0));
   

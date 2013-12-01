@@ -455,6 +455,29 @@ function ApiTestHelper() {
     };
   };
 
+  t.checkNotifSmry = function(followScen, msgHolder, expectedNotifChange) {
+    return function() {
+      $.when(followScen.ES.systemService.getMsgNotifsSmry())
+      .then(t.CHECK.success, t.CHECK.shouldNotFail)
+      .then(function(data) {
+          if (expectedNotifChange != undefined) {
+            equal(data.unreadCount - followScen.smry.unreadCount, 
+                expectedNotifChange, 
+                "we expect to find a change of " + expectedNotifChange + 
+                "; old count: " + followScen.smry.unreadCount + 
+                ", new count: " + data.unreadCount);
+            ok(data.unreadLastCreated !== followScen.smry.unreadLastCreated, 
+                "we expect the unreadLastCreated date to change");
+          }
+          followScen.smry = {
+            unreadCount: data.unreadCount,
+            unreadLastCreated: data.unreadLastCreated
+          };
+        }, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };
+
   t.read = function(followScen, msgHolder) {
     return function() {
       $.when(followScen.ES.messageService.readMsg(msgHolder.msg.id))
