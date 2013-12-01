@@ -471,6 +471,19 @@ function ApiTestHelper() {
     };
   };  
 
+  t.fetchMsgRecips = function(scenario, chnlAttribName, recipScenario, igiFilter) {
+    return function() {
+      $.when(scenario.ES.messageService.getMessageRecipients(scenario[chnlAttribName].id, scenario.msg.id, igiFilter))
+      .then(t.CHECK.success, t.CHECK.shouldNotFail)
+      .then(function(data) {
+        var find = data.recipients.filter(function(item) { return (item.rcvrAccountname == recipScenario.account.accountname); });
+          console.log("found: " + find.length);
+          equal(find.length, 1, "we expect to find the recipient");
+        }, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };
+
   t.checkChnlMsgsForFlwr = function(scenario, chnlHolder, chnlAttribName, extraCheck) {
     return function() {
       $.when(scenario.ES.messageService.getChannelMessagesForFollower(chnlHolder[chnlAttribName].id))

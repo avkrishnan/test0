@@ -33,8 +33,11 @@
   var msgText = 'Hello everybody, this is a test broadcast! ';
 
   asyncTest('A broadcasts a message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));
-  asyncTest('A checks message', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl1'));
 
+  asyncTest('A checks message', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl1'));
+  
+  asyncTest('A confirms B as a message recipient that has NOT acknowledged', hlpr.fetchMsgRecips(SCEN_A, 'chnl1', SCEN_B, 'N'));
+  
   // asyncTest('B receives email with message', hlpr.findEmail(SCEN_B,
   // msgText));
 
@@ -55,7 +58,6 @@
   asyncTest('A creates another channel', hlpr.createChannelF(SCEN_A, 'chnl2'));
   asyncTest("B follows A's other channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl2'));
 
-  
   asyncTest('A broadcasts a message, requesting an iGi', hlpr.broadcast(SCEN_A, 'chnl2', msgText, 'N', undefined, 'RAC'));
 
   asyncTest('A checks message', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2'));
@@ -63,7 +65,9 @@
   asyncTest('B gets msg notifications and the msg is there', hlpr.checkNotif(SCEN_B, SCEN_A, 1));
   
   asyncTest('B acknowledges message', hlpr.acknowledge(SCEN_B, SCEN_A));
-  
+
+  asyncTest('A confirms B as a message recipient that HAS acknowledged', hlpr.fetchMsgRecips(SCEN_A, 'chnl2', SCEN_B, 'Y'));
+
   asyncTest('Wait 1 second. (Because read is asynchronous on the back-end, we have a race condition; waiting lets the back-end "win".)', function() { 
     setTimeout( function(){ expect(0); start(); }, 1000);
   });
@@ -73,6 +77,8 @@
   asyncTest('B gets channel messages', hlpr.checkChnlMsgsForFlwr(SCEN_B, SCEN_A, 'chnl2'));
 
   //TODO confirm the last message is acknowledged
+  
+  
   
   /*
    * asyncTest('B dismisses message', function() {

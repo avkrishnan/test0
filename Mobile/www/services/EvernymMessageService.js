@@ -67,6 +67,19 @@ function EvernymMessageService(api) {
         callbacks, true);
   };
 
+  /*
+   * igiFilter should be 'Y', 'N', or null/undefined
+   * 'Y' -> return only recipients who have acknowledged
+   * 'N' -> return only recipients who have not yet acknowledged
+   * any other value -> return all recipients; do not filter results
+   */
+  this.getMessageRecipients = function(channelid, messageid, igiFilter, callbacks) {
+    var igiFilterStr = "";
+    if (igiFilter === 'Y' || igiFilter === 'N') igiFilterStr = '?iGi=' + igiFilter; 
+    return api.callAPI('GET', '/channel/' + channelid + '/message/' + messageid + "/recipient" + igiFilterStr, undefined,
+        callbacks, true);
+  };
+
   this.readMsg = function(msgId, callbacks) {
     return api.callAPI('POST', '/message/' + msgId + '/read', undefined, callbacks, true);
   };
