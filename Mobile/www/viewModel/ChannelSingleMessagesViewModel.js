@@ -47,13 +47,15 @@ function ChannelSingleMessagesViewModel() {
 			if(localStorage.getItem("currentChannel")) {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
-				that.title(channel.name);
-				that.channelid(channel.id);
-				that.description(channel.description);
+				//alert(JSON.stringify(channel));
+				//alert(channelMessage);
+				that.title(channel.displayFrom);
+				that.channelid(channel.channelId);
+				that.description(channel.text);
 				that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 				that.messageClass(channelMessage.messageClass);
 				that.messageText(channelMessage.messageText);
-				that.readMessageUpdateBadge(channel.id);
+				that.readMessageUpdateBadge(channel.channelId);
 			}
 			else {
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));

@@ -876,3 +876,19 @@ function truncatedText() {
 		return screenSize/4;	
 	}
 }
+/* Function to truncate message text on the basis of screen szie*/
+function truncatedTextScreen() {
+	var screenSize = $(window).width();
+	if(screenSize < 400) {
+		return screenSize/5;
+	}
+	else if (screenSize > 400 && screenSize < 600) {
+		return screenSize/4;
+	}
+	else if(screenSize > 600 && screenSize < 800) {
+		return screenSize/3;
+	}
+	else {
+		return screenSize/2;	
+	}
+}

@@ -45,8 +45,8 @@ function ChannelMessagesViewModel() {
 			} 
 			else {		
 				localStorage.setItem('counter', 1);
-			}				
-			that.channelid(channel.id);
+			}
+			that.channelid(channel.channelId);
 			localStorage.removeItem("currentChannelMessage");
 			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 			that.channelMessages.removeAll();
@@ -86,16 +86,17 @@ function ChannelMessagesViewModel() {
 		
 	this.gotChannel = function(data) {
 		$.mobile.hidePageLoadingMsg();
-		that.title(data.name );
-		that.description(data.description);
+		that.title(data.displayFrom);
+		that.description(data.text);
 		var callbacks = {
 			success: function(data){
-				$.each(data.message, function(indexMessage, valueMessage) {
+				$.each(data.messagealert, function(indexMessage, valueMessage) {
 					var tempCreated = msToTime(valueMessage.created);
 					var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 					tempClass = 'icon-' + tempClass;
+					var tempText = jQuery.trim(valueMessage.text).substring(0, truncatedTextScreen()).split(" ").slice(0, -1).join(" ") + "...";
 					that.channelMessages.push( // without push not working
-						{messageCreated: tempCreated, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.id, messageSender:valueMessage.senderSubscriberId, messageCreatedOriginal:valueMessage.created}
+						{messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
 			},
@@ -104,7 +105,7 @@ function ChannelMessagesViewModel() {
 				showToast();	
 			}
 		};
-		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
-		//return ES.messageService.getChannelMessagesForFollower(that.channelid(), undefined, callbacks);
+		//return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
+		return ES.messageService.getChannelMessagesForFollower(that.channelid(), undefined, callbacks);
 	}	
 }
