@@ -1,53 +1,56 @@
 <!--To do - Pradeep Kumar-->
 <div id="sendMessageView" data-role="page" class="channel-list">
 	<header class="logged-in"></header>
-  <div class="page-content"> 
-  <section>
-    <label class="invited-followChannel">Compose a New Broadcast</label>
-    <div class="broadcast-textarea">
-      <textarea class="textarea" data-bind="value: messageText, valueUpdate: 'afterkeydown'" placeholder="Add text here..."></textarea>
-      <span data-bind="text: characterCount"></span>
-    </div>
-    <div class="compose-newbroadcast">
-      <div class="composedropdown"> 
-        <label>Channel</label>
-        <select data-bind="options: channels, optionsText: 'channelName', value: selectedChannels, optionsValue: 'channelId'">
-        </select>
-        <div data-bind="visible: selectedChannels">
-          <span data-bind="text: selectedChannels() ? selectedChannels().channelId: 'unknown'"></span>.
+  <div class="page-content">
+    <section>
+      <div class="dropdown sattingtdropdown">
+        Send a Broadcast
+        <div class="chaneldropdown">
+          <select data-bind="options: channels, optionsText: 'channelName', value: selectedChannels, optionsValue: 'channelId'">
+          </select>
+          <div data-bind="visible: selectedChannels">
+            <span data-bind="text: selectedChannels() ? selectedChannels().channelId: 'unknown'"></span>
+          </div>        
         </div>
-      </div>     
-      <div class="composebroadcast">
-        <div class="yes-no">
-          <a href="#" data-bind="click: requestiGiHelp">
-            <label for="flip-1">Request iGi ?</label>
-            <span class="informationicon"></span>
-          </a>
-          <div class="yes-noclick">
-            <span class="nobutton">Yes</span>
-            <span class="yesbutton">No</span>
-          </div> 
-        </div>       
-        <div class="yes-no last" data-bind="css: escalateClass">
-          <a href="#" data-bind="click: escalateHelp">       
-            <label for="flip-1">Escalate ?</label>
-            <span class="informationicon"></span>
-          </a>
-          <div class="yes-noclick">
-            <span data-bind="click: escalateYes, css: yesNoClass">Yes</span>
-            <span data-bind="click: escalateNo, css: noYesClass">No</span>
-          </div>          
-        </div>
-        <div class="yes-no setting-datetime" data-bind="visible: escalateActive">
-          <label for="flip-1" data-bind="text: duration"></label>
-          <a href="#" class="broadcastsettingbtn" data-bind="click: escalateYes">Settings</a>
-        </div>                 
       </div>
-    </div> 
-    <div class="schedule">
-    <!--<a class="schedulecalendar" href="#">Schedule</a>-->
-    <a href="#" class="sendbtnican broadcast-icon" data-bind="click: sendMessageCommand"><span>send</span></a></div>        
-  </section>
+      <div class="broadcast-textarea sattingtextarea longdescription">
+        <textarea class="textarea" data-bind="value: messageText, valueUpdate: 'afterkeydown'" placeholder="Add text here..."></textarea>
+        <span data-bind="text: characterCount"></span>      
+      </div>          
+      <div class="escalate-settings escalatesettings">
+        <div class="settingscontent">
+          <div class="slider-value">
+            <span class="normal" data-bind="css: normalText">Normal</span>
+            <span class="fast" data-bind="css: fastText">Fast</span>
+            <span class="escalate" data-bind="css: escalateText">Escalate</span>
+          </div>        
+          <div class="slidervalue-img">
+            <a class="normalfastescalate" href="#" data-bind="click: normalYes, css: normalClass"></a>
+            <a class="normalfastescalate fastcenter" href="#" data-bind="click: fastYes, css: fastClass"></a>
+            <a class="normalfastescalate escalateright" href="#" data-bind="click: escalateYes, css: escalateClass"></a>
+          </div>
+          <div class="broadcastinform">
+            <span data-bind="html: duration, css: activeType"></span>
+            <a class="escalateedit" href="#" data-bind="click: escalateYes, visible: escalateEdit">EDIT</a>            
+          </div>        
+        </div>
+        <div class="igi-send">
+          <div class="igiyesno">
+            <span class="reguestigi">Request iGi ?</span>
+            <em data-bind="css: igiClass"></em>
+            <div class="yes-noclick">
+              <a href="#">
+                <span data-bind="click: iGiYes, css: yesClass">Yes</span>
+                <span data-bind="click: iGiNo, css: noClass">No</span>              
+              </a>
+            </div>
+          </div>
+          <div class="sendcontent">
+            <div class="broadcastsend"><a class="sendbtnican broadcast-icon" href="#" data-bind="click: sendMessageCommand">SEND</a></div>
+          </div>
+        </div>
+      </div>
+    </section> 
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>  
   <div class="footer">

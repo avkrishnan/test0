@@ -294,37 +294,50 @@ function ApiTestHelper() {
     return build(function() { return scenario.ES.channelService.removeFollower(scenario[chnlKey].id, followerScenario.account.accountname);}, shouldFail)
   };
   
-  t.broadcast = function(scenario, chnlKey, msgText, escLevelId, escUntil, ovrdType, success, fail) {
+  t.sendMsg = function(senderScen, chnlHolder, chnlKey, msgText, replyToMsgHolder, escLevelId, escUntil, ovrdType, ovrdSuccess, ovrdFail) {
     return function() {
-      scenario.msg = {
-        text : msgText + ' ' + t.randomStr(8),
-        type : ovrdType == undefined ? 'FYI' : ovrdType,
-        escLevelId : escLevelId == undefined ? 'N' : escLevelId,
-        escUntil : escUntil
+      senderScen.msg = {
+        text: msgText + ' ' + t.randomStr(8),
+        type: ovrdType == undefined ? 'FYI' : ovrdType,
+        escLevelId: escLevelId == undefined ? 'N' : escLevelId,
+        escUntil: escUntil,
+        responseToMsgId: replyToMsgHolder == undefined ? undefined : replyToMsgHolder.msg.id
       };
-      console.log('sending message: ' + scenario.msg.text);
-      $.when(scenario.ES.messageService.createChannelMessage(scenario[chnlKey].id, scenario.msg))
-      .then(success != undefined ? success : t.CHECK.created, fail != undefined ? fail : t.CHECK.shouldNotFail)
+      console.log('sending message: ' + senderScen.msg.text);
+      $.when(senderScen.ES.messageService.createChannelMessage(chnlHolder[chnlKey].id, senderScen.msg))
+      .then(ovrdSuccess != undefined ? ovrdSuccess : t.CHECK.created, ovrdFail != undefined ? ovrdFail : t.CHECK.shouldNotFail)
       .then(start, start);
     };
   };
 
-  t.fetchMsgsAsOwner = function(scenario, ownerScenario, chnlKey, extraCheck) {
+  t.reply = function(senderScen, chnlHolder, chnlKey, msgText, replyToMsgHolder) {
+    return t.sendMsg(senderScen, chnlHolder, chnlKey, msgText, replyToMsgHolder);
+  };
+  
+  t.broadcast = function(scenario, chnlKey, msgText, escLevelId, escUntil, ovrdType, success, fail) {
+    return t.sendMsg(scenario, scenario, chnlKey, msgText, null, escLevelId, escUntil, ovrdType, success, fail);
+  };
+
+  t.fetchMsgsAsOwner = function(scenario, ownerScenario, chnlKey, extraCheck, checkAck) {
     return function() {
       $.when(scenario.ES.messageService.getChannelMessages(ownerScenario[chnlKey].id))
       .then(t.CHECK.success, t.CHECK.shouldNotFail)
-      .then(checkOneMsgFunc(scenario, ownerScenario.msg), t.CHECK.shouldNotFail)
+      .then(checkOneMsgFunc(scenario, ownerScenario.msg, checkAck), t.CHECK.shouldNotFail)
       .then(extraCheck == undefined ? null : extraCheck, t.CHECK.shouldNotFail)
       .then(start, start);
     };
   };
 
-  function checkOneMsgFunc(scenario, msg) {
+  function checkOneMsgFunc(scenario, msg, checkAck) {
     return function checkOneMsg(data) {
       equal(data.message.length, 1, "we get one message back");
       equal(data.message[0].text, msg.text, "and the text matches");
       equal(data.more, false, "there should be no more messages");
       scenario.msg = data.message[0];
+      if (checkAck !== undefined) {
+        equal(scenario.msg.acks, checkAck.acks, "ack count is correct");
+        equal(scenario.msg.noacks, checkAck.noacks, "noack count is correct");
+      }
       ok(true, JSON.stringify(data));
     };
   }
@@ -455,21 +468,21 @@ function ApiTestHelper() {
     };
   };
 
-  t.checkNotifSmry = function(followScen, msgHolder, expectedNotifChange) {
+  t.checkNotifSmry = function(rcvrScen, expectedNotifChange) {
     return function() {
-      $.when(followScen.ES.systemService.getMsgNotifsSmry())
+      $.when(rcvrScen.ES.systemService.getMsgNotifsSmry())
       .then(t.CHECK.success, t.CHECK.shouldNotFail)
       .then(function(data) {
           if (expectedNotifChange != undefined) {
-            equal(data.unreadCount - followScen.smry.unreadCount, 
+            equal(data.unreadCount - rcvrScen.smry.unreadCount, 
                 expectedNotifChange, 
                 "we expect to find a change of " + expectedNotifChange + 
-                "; old count: " + followScen.smry.unreadCount + 
+                "; old count: " + rcvrScen.smry.unreadCount + 
                 ", new count: " + data.unreadCount);
-            ok(data.unreadLastCreated !== followScen.smry.unreadLastCreated, 
+            ok(data.unreadLastCreated !== rcvrScen.smry.unreadLastCreated, 
                 "we expect the unreadLastCreated date to change");
           }
-          followScen.smry = {
+          rcvrScen.smry = {
             unreadCount: data.unreadCount,
             unreadLastCreated: data.unreadLastCreated
           };

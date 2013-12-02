@@ -14,13 +14,26 @@ function SendMessageViewModel() {
 	this.channels = ko.observableArray([]);			
 	this.channelId = ko.observable();	
 	this.channelName = ko.observable();
-	this.escalateClass = ko.observable();	
-	this.yesNoClass = ko.observable();
-	this.noYesClass = ko.observable();
-	this.duration = ko.observable();		
-	this.escalateActive = ko.observable(false);	
+	this.normalText = ko.observable();
+	this.fastText = ko.observable();	
+	this.escalateText = ko.observable();	
+	this.normalClass = ko.observable();
+	this.fastClass = ko.observable();	
+	this.escalateClass = ko.observable();
+	this.normalActive = ko.observable();	
+	this.fastActive = ko.observable();					
+	this.escalateActive = ko.observable();	
 	this.escDuration = ko.observable();	
 	this.escLevel = ko.observable();	
+	this.duration = ko.observable();
+	this.activeType = ko.observable();
+	this.escalateEdit = ko.observable(false);	
+	this.igiClass = ko.observable();	
+	this.iGiYes = ko.observable();
+	this.iGiNo = ko.observable();				
+	this.yesClass = ko.observable();
+	this.noClass = ko.observable();
+	this.broadcastType = ko.observable();	
 	this.toastText = ko.observable();
 	
 	/* channels options variable */
@@ -60,20 +73,6 @@ function SendMessageViewModel() {
 			if(localStorage.getItem('messageText')) {
 				that.messageText(localStorage.getItem('messageText'));
 				localStorage.removeItem('messageText');												
-			}												
-			that.escalateClass('');
-			that.yesNoClass('yesbutton');
-			that.noYesClass('nobutton');						
-			that.escalateActive(false);						
-			if(localStorage.getItem('escalate') == 'yes') {
-				that.escalateClass('escalate-activesetting');
-				that.yesNoClass('nobutton');
-				that.noYesClass('yesbutton');														
-				that.escalateActive(true);
-				that.escLevel(localStorage.getItem('escLevel'));							
-				localStorage.removeItem('escalate');																						
-			} else {
-				that.escLevel('N');
 			}
 			if(that.escLevel() == 'R') {
 				escalate = 'Remind';
@@ -81,23 +80,48 @@ function SendMessageViewModel() {
 				escalate = 'Chase';
 			} else {
 				escalate = 'Hound';
-			}			
-			if(localStorage.getItem('escDuration')) {
-				var DateTime = localStorage.getItem('escDuration').split('/');
-				var day = DateTime[2].split(' ');
-				var time = day[1].split(':');						
-				var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2].toLowerCase();
-				that.duration(durationText);														
-			} else {
-				tomorrow = new Date(tomorrow);
-				var hours = tomorrow.getHours();
-				hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
-				var mins = tomorrow.getMinutes();
-				mins = ((mins<10?'0':'')+mins);			
-				var meridiem = tomorrow.getHours()>12?'PM':'AM';
-				var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+tomorrow.getFullYear()+', '+hours+':'+mins+' '+meridiem.toLowerCase();
-				that.duration(durationText);												
-			}									
+			}																									
+			if(localStorage.getItem('escalate') == 'yes') {
+				that.normalText('');
+				that.fastText('');
+				that.escalateText('escalatecolor');				
+				that.normalClass('');
+				that.fastClass('');
+				that.escalateClass('escalatecoloricon');				
+				that.escLevel(localStorage.getItem('escLevel'));							
+				if(localStorage.getItem('escDuration')) {
+					var DateTime = localStorage.getItem('escDuration').split('/');
+					var day = DateTime[2].split(' ');
+					var time = day[1].split(':');						
+					var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
+					that.duration(durationText);
+					that.activeType('escalatecolor');
+					that.escalateEdit(true);																			
+				} else {
+					tomorrow = new Date(tomorrow);
+					var hours = tomorrow.getHours();
+					hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
+					var mins = tomorrow.getMinutes();
+					mins = ((mins<10?'0':'')+mins);			
+					var meridiem = tomorrow.getHours()>12?'PM':'AM';
+					var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+tomorrow.getFullYear()+', '+hours+':'+mins+' '+meridiem;
+					that.duration(durationText);
+					that.activeType('escalatecolor');
+					that.escalateEdit(true);																	
+				}			
+				localStorage.removeItem('escalate');																											
+			} else {				
+				that.escLevel('N');
+				that.normalClass('normalcoloricon');
+				that.fastClass('');
+				that.escalateClass('');
+				that.duration("Normal: <em>Send one time to follower's preferred device</em>");
+				that.activeType('normalcolor');
+				that.yesClass('yesbutton');
+				that.noClass('nobutton');
+				that.igiClass('igiimageoff');				
+			}
+			that.broadcastType('FYI');											
 			that.accountName(localStorage.getItem('accountName'));		
 			that.characterCount('0');		
 			$('textarea').keyup(function () {								
@@ -183,13 +207,13 @@ function SendMessageViewModel() {
 	this.createChannelMessage = function () {
 		$.mobile.showPageLoadingMsg("a", "Posting Message");
 		if(localStorage.getItem('escLevel') == '' || localStorage.getItem('escLevel') == null) {
-			var messageobj = {text: that.messageText(), escLevelId: 'N', type: 'FYI'};															
+			var messageobj = {text: that.messageText(), escLevelId: that.escLevel(), type: that.broadcastType()};															
 		} else if(localStorage.getItem('escDuration') == '' || localStorage.getItem('escDuration') == null) {					
 			that.escDuration(tomorrow);			
-			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: 'FYI'};			
+			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: that.broadcastType()};			
 		} else {
 			that.escDuration(new Date(localStorage.getItem('escDuration')));
-			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: 'FYI'};			
+			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: that.broadcastType()};			
 		}
 		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
 	};
@@ -202,18 +226,51 @@ function SendMessageViewModel() {
 	this.escalateHelp = function () {
 		localStorage.setItem('messageText', that.messageText());			
 		viewNavigate('Compose', 'sendMessageView', 'escalateHelpView');		
-  };	
+  };
+	
+	this.normalYes = function () {
+		that.normalText('normalcolor');
+		that.fastText('');
+		that.escalateText('');		
+		that.normalClass('normalcoloricon');
+		that.fastClass('');
+		that.escalateClass('');
+    that.duration("Normal: <em>Send one time to follower's preferred device</em>");
+		that.activeType('normalcolor');		
+		that.escalateEdit(false);		
+		that.escLevel('N');		
+  };
+	
+	this.fastYes = function () {
+		that.normalText('');
+		that.fastText('fastcolor');
+		that.escalateText('');		
+		that.normalClass('');
+		that.fastClass('fastcoloricon');
+		that.escalateClass('');
+    that.duration("Fast: <em>Send one time to follower's mobile devices</em>");
+		that.activeType('fastcolor');
+		that.escalateEdit(false);				
+		that.escLevel('F');						
+  };		
 	
 	this.escalateYes = function () {
 		localStorage.setItem('messageText', that.messageText());		
 		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };
 	
-	this.escalateNo = function () {
-		localStorage.setItem('messageText', that.messageText());		
-		localStorage.removeItem('escDuration');
-		localStorage.removeItem('escLevel');				
-		goToView('sendMessageView');		
-  };			
+	this.iGiYes = function () {
+		that.yesClass('nobutton');
+		that.noClass('yesbutton');
+		that.igiClass('igiimage');
+		that.broadcastType('RAC');											
+  };
+	
+	this.iGiNo = function () {
+		that.yesClass('yesbutton');
+		that.noClass('nobutton');
+		that.igiClass('igiimageoff');
+		that.broadcastType('FYI');											
+  };								
 
 }
