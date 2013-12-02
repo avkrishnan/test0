@@ -106,6 +106,6 @@ function OverlayViewModel() {
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
-		goToView('channelSingleMessagesView');
+		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
 }

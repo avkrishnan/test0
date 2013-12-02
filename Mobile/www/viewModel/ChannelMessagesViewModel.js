@@ -22,6 +22,9 @@ function ChannelMessagesViewModel() {
     
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		if(localStorage.getItem("overlayCurrentChannel")) {
+			localStorage.setItem("currentChannel", localStorage.getItem("overlayCurrentChannel"));
+		}
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		if(token == '' || token == null) {
 			goToView('loginView');
@@ -97,8 +100,8 @@ function ChannelMessagesViewModel() {
 				});
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());
+				that.toastText(details.message);
+				showToast();	
 			}
 		};
 		return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
