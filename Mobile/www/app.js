@@ -808,6 +808,18 @@ function dateFormat2(created) {
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
 }
 
+/* Short Format for date like Dec 02, 11:00*/
+function shortFormat(created) {
+	var created = new Date(created);
+	var created = created.getTime();		
+	var date  = new Date(created);
+	//var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
+	var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+	return ((monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
+	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
+	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " ";// + (date.getHours()>12?'PM':'AM');
+}
+
 /* pradeep kumar end */
 
 /* Time conversion into time ago*/
@@ -846,4 +858,21 @@ function time2TimeAgo(ts) {
 function addExternalMarkup(viewID) {
 	$('#' + viewID + ' header.logged-in').load('header.html');
 	$('#' + viewID + ' .active-overlay').load('overlaymessages.html');
+}
+
+/* Function to truncate message text on the basis of screen szie*/
+function truncatedText() {
+	var screenSize = $(window).width();
+	if(screenSize < 400) {
+		return screenSize/7;
+	}
+	else if (screenSize > 400 && screenSize < 600) {
+		return screenSize/6;
+	}
+	else if(screenSize > 600 && screenSize < 800) {
+		return screenSize/5;
+	}
+	else {
+		return screenSize/4;	
+	}
 }
