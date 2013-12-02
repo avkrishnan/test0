@@ -84,10 +84,18 @@ function OverlayViewModel() {
 	this.showNewMessagesOverlay = function() {
 		that.newMessagesDisplayList.removeAll();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
+<<<<<<< HEAD
 			valueNotification.created = shortFormat(valueNotification.created);
 			//if(valueNotification.text.length > 200) {
 				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, truncatedText()).split(" ").slice(0, -1).join(" ") + "...";
 			//}
+=======
+			valueNotification.created = dateFormat2(valueNotification.created);
+			//alert(valueNotification.text.length);
+			if(valueNotification.text.length > 200) {
+				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, 200).split(" ").slice(0, -1).join(" ") + "...";
+			}
+>>>>>>> 8245849e67623f9847d26276ec6b8dfcd10f9ba1
 			if(valueNotification.escLevelId) {
 				valueNotification.escLevelId = "icon-" + valueNotification.escLevelId.toLowerCase();
 			}

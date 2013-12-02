@@ -74,6 +74,7 @@ function SendMessageViewModel() {
 				that.messageText(localStorage.getItem('messageText'));
 				localStorage.removeItem('messageText');												
 			}
+			that.escLevel(localStorage.getItem('escLevel'));				
 			if(that.escLevel() == 'R') {
 				escalate = 'Remind';
 			} else if(that.escLevel() == 'C') {
@@ -87,18 +88,19 @@ function SendMessageViewModel() {
 				that.escalateText('escalatecolor');				
 				that.normalClass('');
 				that.fastClass('');
-				that.escalateClass('escalatecoloricon');				
-				that.escLevel(localStorage.getItem('escLevel'));							
+				that.escalateClass('escalatecoloricon');										
 				if(localStorage.getItem('escDuration')) {
+					that.escDuration(new Date(localStorage.getItem('escDuration')));					
 					var DateTime = localStorage.getItem('escDuration').split('/');
 					var day = DateTime[2].split(' ');
 					var time = day[1].split(':');						
 					var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
 					that.duration(durationText);
 					that.activeType('escalatecolor');
-					that.escalateEdit(true);																			
+					that.escalateEdit(true);																								
 				} else {
 					tomorrow = new Date(tomorrow);
+					that.escDuration(tomorrow);					
 					var hours = tomorrow.getHours();
 					hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
 					var mins = tomorrow.getMinutes();
@@ -206,13 +208,9 @@ function SendMessageViewModel() {
 	
 	this.createChannelMessage = function () {
 		$.mobile.showPageLoadingMsg("a", "Posting Message");
-		if(localStorage.getItem('escLevel') == '' || localStorage.getItem('escLevel') == null) {
-			var messageobj = {text: that.messageText(), escLevelId: that.escLevel(), type: that.broadcastType()};															
-		} else if(localStorage.getItem('escDuration') == '' || localStorage.getItem('escDuration') == null) {					
-			that.escDuration(tomorrow);			
-			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: that.broadcastType()};			
+		if(that.escLevel() == 'N' || that.escLevel() == 'F') {
+			var messageobj = {text: that.messageText(), escLevelId: that.escLevel(), type: that.broadcastType()};																	
 		} else {
-			that.escDuration(new Date(localStorage.getItem('escDuration')));
 			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: that.broadcastType()};			
 		}
 		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
@@ -237,7 +235,8 @@ function SendMessageViewModel() {
 		that.escalateClass('');
     that.duration("Normal: <em>Send one time to follower's preferred device</em>");
 		that.activeType('normalcolor');		
-		that.escalateEdit(false);		
+		that.escalateEdit(false);
+		localStorage.removeItem('escDuration');				
 		that.escLevel('N');		
   };
 	
@@ -250,7 +249,8 @@ function SendMessageViewModel() {
 		that.escalateClass('');
     that.duration("Fast: <em>Send one time to follower's mobile devices</em>");
 		that.activeType('fastcolor');
-		that.escalateEdit(false);				
+		that.escalateEdit(false);
+		localStorage.removeItem('escDuration');						
 		that.escLevel('F');						
   };		
 	
