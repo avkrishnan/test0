@@ -113,16 +113,20 @@ function SendMessageViewModel() {
 				}			
 				localStorage.removeItem('escalate');																											
 			} else {				
-				that.escLevel('N');
-				that.normalText('normalcolor');				
+				that.normalText('normalcolor');
+				that.fastText('');
+				that.escalateText('');								
 				that.normalClass('normalcoloricon');
 				that.fastClass('');
 				that.escalateClass('');
 				that.duration("Normal: <em>Send one time to follower's preferred device</em>");
 				that.activeType('normalcolor');				
 				that.yesClass('yesbutton');
-				that.noClass('nobutton');
-				that.igiClass('igiimageoff');				
+				that.noClass('nobutton');					
+				that.escalateEdit(false);
+				localStorage.removeItem('escDuration');
+				that.escLevel('N');				
+				that.igiClass('igiimageoff');										
 			}
 			that.broadcastType('FYI');											
 			that.accountName(localStorage.getItem('accountName'));		
