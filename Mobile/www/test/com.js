@@ -77,7 +77,7 @@
 
   asyncTest('A broadcasts a message, requesting an iGi', hlpr.broadcast(SCEN_A, 'chnl2', msgText, 'N', undefined, 'RAC'));
 
-  asyncTest('A checks message', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2'));
+  asyncTest('A checks message, confirming that iGi count is 0 and not-yet iGi count is 1', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2', undefined, {acks: 0, noacks: 1}));
 
   asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, 1));
 
@@ -85,11 +85,13 @@
   
   asyncTest('B acknowledges message', hlpr.acknowledge(SCEN_B, SCEN_A));
 
-  asyncTest('A confirms B as a message recipient that HAS acknowledged', hlpr.fetchMsgRecips(SCEN_A, 'chnl2', SCEN_B, 'Y'));
-
   asyncTest('Wait 1 second. (Because read is asynchronous on the back-end, we have a race condition; waiting lets the back-end "win".)', function() { 
     setTimeout( function(){ expect(0); start(); }, 1000);
   });
+
+  asyncTest('A confirms B as a message recipient that HAS acknowledged', hlpr.fetchMsgRecips(SCEN_A, 'chnl2', SCEN_B, 'Y'));
+
+  asyncTest('A checks message, confirming that iGi count is 1 and not-yet iGi count is 0', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2', undefined, {acks: 1, noacks: 0}));
 
   asyncTest('B gets msg notification summary, expects a decrease of one', hlpr.checkNotifSmry(SCEN_B, -1));
 

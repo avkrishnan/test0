@@ -318,22 +318,26 @@ function ApiTestHelper() {
     return t.sendMsg(scenario, scenario, chnlKey, msgText, null, escLevelId, escUntil, ovrdType, success, fail);
   };
 
-  t.fetchMsgsAsOwner = function(scenario, ownerScenario, chnlKey, extraCheck) {
+  t.fetchMsgsAsOwner = function(scenario, ownerScenario, chnlKey, extraCheck, checkAck) {
     return function() {
       $.when(scenario.ES.messageService.getChannelMessages(ownerScenario[chnlKey].id))
       .then(t.CHECK.success, t.CHECK.shouldNotFail)
-      .then(checkOneMsgFunc(scenario, ownerScenario.msg), t.CHECK.shouldNotFail)
+      .then(checkOneMsgFunc(scenario, ownerScenario.msg, checkAck), t.CHECK.shouldNotFail)
       .then(extraCheck == undefined ? null : extraCheck, t.CHECK.shouldNotFail)
       .then(start, start);
     };
   };
 
-  function checkOneMsgFunc(scenario, msg) {
+  function checkOneMsgFunc(scenario, msg, checkAck) {
     return function checkOneMsg(data) {
       equal(data.message.length, 1, "we get one message back");
       equal(data.message[0].text, msg.text, "and the text matches");
       equal(data.more, false, "there should be no more messages");
       scenario.msg = data.message[0];
+      if (checkAck !== undefined) {
+        equal(scenario.msg.acks, checkAck.acks, "ack count is correct");
+        equal(scenario.msg.noacks, checkAck.noacks, "noack count is correct");
+      }
       ok(true, JSON.stringify(data));
     };
   }
