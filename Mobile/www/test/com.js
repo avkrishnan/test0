@@ -27,7 +27,9 @@
   asyncTest('A creates channel', hlpr.createChannelF(SCEN_A, 'chnl1'));
   asyncTest("B follows A's channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl1'));
 
-  asyncTest('B gets msg notification summary', hlpr.checkNotifSmry(SCEN_B, SCEN_A));
+  asyncTest('A gets msg notification summary, establishes current unread count and last-created', hlpr.checkNotifSmry(SCEN_A));
+
+  asyncTest('B gets msg notification summary, establishes current unread count and last-created', hlpr.checkNotifSmry(SCEN_B));
 
   // asyncTest('A verifies email address', hlpr.verify(SCEN_A));
   // asyncTest('B verifies email address', hlpr.verify(SCEN_B));
@@ -45,7 +47,7 @@
 
   // Here's were we do the tests for message read, dismiss, ack, and snooze
 
-  asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, SCEN_A, 1));
+  asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, 1));
   
   asyncTest('B gets msg notifications and the msg is there', hlpr.checkNotif(SCEN_B, SCEN_A, 1));
   
@@ -55,12 +57,21 @@
     setTimeout( function(){ expect(0); start(); }, 1000);
   });
 
-  asyncTest('B gets msg notification summary, expects an decrease of one', hlpr.checkNotifSmry(SCEN_B, SCEN_A, -1));
+  asyncTest('B gets msg notification summary, expects a decrease of one', hlpr.checkNotifSmry(SCEN_B, -1));
 
   asyncTest('B gets msg notifications and the msg is no longer there', hlpr.checkNotif(SCEN_B, SCEN_A, 0));
 
   asyncTest('B gets channel messages', hlpr.checkChnlMsgsForFlwr(SCEN_B, SCEN_A, 'chnl1'));
 
+  asyncTest('B replies to broadcast', hlpr.reply(SCEN_B, SCEN_A, 'chnl1', 'this is my reply', SCEN_A));
+
+  asyncTest('A gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_A, 1));
+  
+  //TODO A sees that reply count is one
+  asyncTest('A checks channel messages to see that Reply count has changed', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl1', function() { 
+    ok(SCEN_A.msg.replies === 1, 'replies count is one');
+  }));
+  
   asyncTest('A creates another channel', hlpr.createChannelF(SCEN_A, 'chnl2'));
   asyncTest("B follows A's other channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl2'));
 
@@ -68,7 +79,7 @@
 
   asyncTest('A checks message', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2'));
 
-  asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, SCEN_A, 1));
+  asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, 1));
 
   asyncTest('B gets msg notifications and the msg is there', hlpr.checkNotif(SCEN_B, SCEN_A, 1));
   
@@ -80,7 +91,7 @@
     setTimeout( function(){ expect(0); start(); }, 1000);
   });
 
-  asyncTest('B gets msg notification summary, expects an decrease of one', hlpr.checkNotifSmry(SCEN_B, SCEN_A, -1));
+  asyncTest('B gets msg notification summary, expects a decrease of one', hlpr.checkNotifSmry(SCEN_B, -1));
 
   asyncTest('B gets msg notifications and the msg is no longer there', hlpr.checkNotif(SCEN_B, SCEN_A, 0));
   
