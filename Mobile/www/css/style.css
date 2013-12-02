@@ -447,7 +447,7 @@ select, .ui-icon-arrow-d {
 /*Emergency action details end*/
 /*	*	V-12- Delete - A */
 .portal-name a.deleteicanred {
-	background-position: -8px -975px;
+	background-position:-8px -975px;
 }
 .remove {
 	background:url("images/sprites.png") no-repeat -8px -403px;
@@ -793,21 +793,25 @@ hr, .baseline {
 }
 /*	New User	*/
 .page-content.tutorials {
-	padding:0;
+	/*padding:0;
 	width:auto;
-	overflow:hidden;
+	overflow:hidden;*/
+	padding:40px 0px 0px 0px;
 }
 .new-user {
-	height:100%;
+	/*height:100%;
 	position:absolute;
 	top:0;
-	width:auto;
+	width:auto;*/
+	text-align:center;
+	position:fixed;
 }
 .new-user img {
-	margin:42px auto auto auto;
+/*	margin:42px auto auto auto;
 	top:0;
 	position:fixed;
-	width:100%;
+	width:100%;*/
+	width:84%;
 }
 .msg-content {
 	padding:15px 0;
@@ -1573,7 +1577,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background-position:-77px -5px;
 }
 .icon-d {
-	background:url("images/default-icon.png") no-repeat 4px 4px;
+	background:url("images/all-icons.png") no-repeat scroll -477px -5px;
 }
 .channelmessages .announcementicon {
 	background:url(images/announcementicon.png) no-repeat 6px 7px;
@@ -1936,7 +1940,6 @@ h1.messagesdate {
 	background:url("images/sprites.png") no-repeat -8px -747px;
 }
 .msgfullread.icon-c {
-	/*background:#F1F2F2 url("images/brodecasticon.png") no-repeat 0 0;*/
 	background:#F1F2F2 url("images/all-icons.png") no-repeat -342px -7px;
 }
 .msgfullread.icon-h {
@@ -2236,14 +2239,6 @@ h1.requests {
 	word-break:break-all;
 	padding:0 5px 0 0;
 }
-/*.messagesreceived .messageschannel .receive-time {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 72%;
-	border:1px solid green;
-}*/
 .messagesreceived .messageschannel .receive-time {
 	display:block;
 }
@@ -2947,23 +2942,11 @@ ul.igiresponses li span {
 .agressively-slider {
     padding: 0 10px;
 }
-/*.agressively-slider {
-	padding:10px 10px 5px 10px;
-	background:#363636;
-	margin:0px 20px 10px 10px;
-	border-radius:10px;
-}*/
 .agressively-slider span {
 	font-size:14px;
 	color:#fff;
 	font-style:italic;
 }
-/*.slider-value {
-	overflow:hidden;
-	font-size:14px;
-	color:#fff;
-	margin:0;
-}*/
 .slider-value {
 	margin: 10px 0 0;
 	overflow: hidden;
@@ -3007,10 +2990,10 @@ ul.igiresponses li span {
 	background:url("images/sprites-channel.png") no-repeat -3px -800px;
 }
 .slidervalue-img .broadcasticon {
-	background:url("images/all-icons.png") no-repeat -341px -7px;
+	background:url("images/sprites.png") no-repeat -5px -746px;
 }
 .slidervalue-img .timesensitiveicon {
-	background:url("images/sprites.png") no-repeat -5px -746px;
+	background:url("images/all-icons.png") no-repeat -341px -7px;
 }
 /*-29-11-2013-*/
 .broadcastinform {
@@ -3019,7 +3002,7 @@ ul.igiresponses li span {
 	padding:8px 0px 2px 10px;
 	margin:5px -11px 0px -11px;
 }
-.broadcastinform .normalcolor {
+.broadcastinform .normalcolor, .slider-value .normalcolor {
 	color:#27aae1;
 }
 .broadcastinform span em {
@@ -3060,7 +3043,6 @@ ul.igiresponses li span {
 	background:#7c7c7c;
 	border-radius:50px;
 	-webkit-border-radius:50px;
-	/*background:url("images/emergency-setting-dot.png") no-repeat -5px 0;*/
 }
 .slidervalue-img .normalcoloricon {
 	background:#27aae1;
@@ -3154,8 +3136,8 @@ ul.igiresponses li span {
 	padding:25px 0 40px 0;
 }
 .broadcast-icon {
-    background: url("images/broadcast-icon.png") no-repeat scroll 0 1px #2D2D2D;
-    padding: 7px 20px 7px 46px;
+	background: url("images/broadcast-icon.png") no-repeat scroll 0 1px #2D2D2D;
+	padding: 7px 20px 7px 46px;
 }
 .escalatesettingstext {
 	overflow:hidden;
@@ -3503,7 +3485,6 @@ ul.igiresponses li span {
 	.slider-value span.fast {
 		margin:0 27%;
 	}
-
 }
 @media only screen and (min-width:768px) {
 	.details {
@@ -3641,6 +3622,9 @@ ul.igiresponses li span {
 	.slider-value span.fast {
 		margin:0 40.4%;
 	}
+	.new-user img {
+		width: 80%;
+	}
 }
 @media only screen and (min-width:800px) {
 	.details {
@@ -3694,6 +3678,9 @@ ul.igiresponses li span {
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right: 49px;
+	}
+	.new-user img {
+		width: 97%;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -3770,6 +3757,9 @@ ul.igiresponses li span {
 	}
 	.slider-value span.fast {
 		margin:0 42.4%;
+	}
+	.new-user img {
+		width: 79%;
 	}
 }
 @media only screen and (min-width:1280px) {
@@ -3864,6 +3854,9 @@ ul.igiresponses li span {
 	}
 	.slider-value span.fast {
 		margin:0 44.2%;
+	}
+	.new-user img {
+		width: 27%;
 	}
 }
 @media only screen and (min-width:1366px) {

@@ -114,11 +114,12 @@ function SendMessageViewModel() {
 				localStorage.removeItem('escalate');																											
 			} else {				
 				that.escLevel('N');
+				that.normalText('normalcolor');				
 				that.normalClass('normalcoloricon');
 				that.fastClass('');
 				that.escalateClass('');
 				that.duration("Normal: <em>Send one time to follower's preferred device</em>");
-				that.activeType('normalcolor');
+				that.activeType('normalcolor');				
 				that.yesClass('yesbutton');
 				that.noClass('nobutton');
 				that.igiClass('igiimageoff');				
@@ -260,16 +261,16 @@ function SendMessageViewModel() {
   };
 	
 	this.iGiYes = function () {
+		that.igiClass('igiimage');		
 		that.yesClass('nobutton');
 		that.noClass('yesbutton');
-		that.igiClass('igiimage');
 		that.broadcastType('RAC');											
   };
 	
 	this.iGiNo = function () {
+		that.igiClass('igiimageoff');		
 		that.yesClass('yesbutton');
 		that.noClass('nobutton');
-		that.igiClass('igiimageoff');
 		that.broadcastType('FYI');											
   };								
 
