@@ -153,7 +153,9 @@ function LoginViewModel() {
 			ES.systemService.getMsgNotifs({
 				success: function(responseData) {
 					localStorage.removeItem('enymNotifications');
-					localStorage.setItem('enymNotifications', JSON.stringify(responseData));
+					localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
+					//localStorage.setItem('enymNotifications', JSON.stringify(responseData));
+					//alert(localStorage.getItem('enymNotifications'));
 					if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 						headerViewModel.newMessageClass('smsiconwhite');
 						headerViewModel.newMessageCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
