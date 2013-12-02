@@ -86,7 +86,6 @@ function OverlayViewModel() {
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			valueNotification.created = dateFormat2(valueNotification.created);
 			//alert(valueNotification.text.length);
-			alert($(window).width());
 			if(valueNotification.text.length > 200) {
 				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, 200).split(" ").slice(0, -1).join(" ") + "...";
 			}
