@@ -22,7 +22,7 @@ function ChannelMessagesViewModel() {
     
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
-		if(localStorage.getItem("overlayCurrentChannel")) {
+		if(localStorage.getItem("overlayCurrentChannel") && localStorage.getItem("overlayCurrentChannel")!= 'null') {		
 			localStorage.setItem("currentChannel", localStorage.getItem("overlayCurrentChannel"));
 			localStorage.removeItem("overlayCurrentChannel");
 		}
@@ -47,7 +47,8 @@ function ChannelMessagesViewModel() {
 			else {		
 				localStorage.setItem('counter', 1);
 			}
-			that.channelid(channel.channelId);
+			//that.channelid(channel.channelId);
+			that.channelid(channel.id);
 			localStorage.removeItem("currentChannelMessage");
 			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 			that.channelMessages.removeAll();

@@ -51,7 +51,7 @@
 		$.mobile.hidePageLoadingMsg();
 		//that.shown = true;
 		//that.channels.removeAll();
-		if (data.channel && data.channel.constructor == Object){
+		if (data.channel && data.channel.constructor == Object) {
 			data.channel = [data.channel];
 		}
 		if (!data.channel) {
@@ -61,7 +61,7 @@
 		if(data.channel.length) {
 			$.each(data.channel, function(indexChannel, valueChannel) {
 				if(typeof valueChannel.description == 'undefined') {
-					valueChannel.description = 'Channel description!';			
+					valueChannel.description = 'Channel description!';
 				}
 			});
 			that.channels(data.channel);
@@ -74,20 +74,6 @@
 		that.toastText(details.message);		
 		showToast();			  
 	};
-	
-	/*this.mapImage = function(jsonText){
-			 var mappedIcon = undefined;
-			 if (jsonText ){
-			
-			var iconJSON = JSON.parse(jsonText);
-			if (iconJSON && iconJSON.id){
-				var set = iconJSON.set;
-				var id = iconJSON.id;
-				mappedIcon = selectIconViewModel.mapImage(set, id, 63);
-			}
-		}
-		return mappedIcon;
-	};*/
 	
 	this.listFollowingChannelsCommand = function () {
 		return ES.channelService.listFollowingChannels({ success: successfulCreate, error: errorListChannels });
