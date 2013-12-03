@@ -302,7 +302,7 @@ h1.newcreatechannel {
 	text-shadow:none;
 }
 .personalinformation {
-	background:#2D2D2D url("images/sprites-icons.png") no-repeat -6px -494px;
+	background-position:-5px -1750px;
 }
 .changepassword {
 	background-position:-5px -55px;

@@ -70,6 +70,19 @@ function SendMessageViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');												
 			}
+			that.normalText('normalcolor');
+			that.fastText('');
+			that.escalateText('');								
+			that.normalClass('normalcoloricon');
+			that.fastClass('');
+			that.escalateClass('');
+			that.duration("Normal: <em>Send one time to follower's preferred device</em>");
+			that.activeType('normalcolor');				
+			that.yesClass('yesbutton');
+			that.noClass('nobutton');					
+			that.escalateEdit(false);
+			that.escLevel('N');				
+			that.igiClass('igiimageoff');				
 			if(localStorage.getItem('messageText')) {
 				that.messageText(localStorage.getItem('messageText'));
 				localStorage.removeItem('messageText');												
