@@ -860,7 +860,7 @@ function addExternalMarkup(viewID) {
 	$('#' + viewID + ' .active-overlay').load('overlaymessages.html');
 }
 
-/* Function to truncate message text on the basis of screen szie*/
+/* Function to truncate message text on the basis of screen szie for overlay*/
 function truncatedText() {
 	var screenSize = $(window).width();
 	if(screenSize < 400) {
@@ -882,13 +882,10 @@ function truncatedTextScreen() {
 	if(screenSize < 400) {
 		return screenSize/5;
 	}
-	else if (screenSize > 400 && screenSize < 600) {
-		return screenSize/4;
-	}
-	else if(screenSize > 600 && screenSize < 800) {
-		return screenSize/3;
+	else if (screenSize > 400 && screenSize < 700) {
+		return screenSize/5;
 	}
 	else {
-		return screenSize/2;	
+		return screenSize/4;
 	}
 }
