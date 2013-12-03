@@ -24,6 +24,7 @@ function ChannelMessagesViewModel() {
 		var token = ES.evernymService.getAccessToken();
 		if(localStorage.getItem("overlayCurrentChannel")) {
 			localStorage.setItem("currentChannel", localStorage.getItem("overlayCurrentChannel"));
+			localStorage.removeItem("overlayCurrentChannel");
 		}
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		if(token == '' || token == null) {
