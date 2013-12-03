@@ -72,9 +72,8 @@ function SingleMessageRepliesViewModel() {
 	
 	function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		localStorage.setItem('toastData', that.toastText());
-    goToView('singleMessageView');
+		that.toastText(details.message);			
+		showToast();
   };
 	
 	this.replyDetail = function(data){	

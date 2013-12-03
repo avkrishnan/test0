@@ -91,8 +91,7 @@ function ChannelMainViewModel() {
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
 		that.toastText(details.message);		
-		localStorage.setItem('toastData', that.toastText());;
-    goToView('channelsIOwnView');
+		showToast();
   };
 	
 	this.getMessagesCommand = function(){

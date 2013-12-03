@@ -74,8 +74,8 @@ function RemoveFollowerViewModel() {
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', details.message);
-    goToView('removeFollowerView');
+		that.toastText(details.message);			
+		showToast();
   };
 	
   this.removeFollowerCommand = function () {

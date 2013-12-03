@@ -58,8 +58,8 @@ function ChannelDeleteViewModel() {
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', details.message);
-    goToView('channelDeleteView');
+		that.toastText(details.message);			
+		showToast();
   };
 	
   this.channelDeleteCommand = function () {
