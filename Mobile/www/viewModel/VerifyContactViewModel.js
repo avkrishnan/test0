@@ -134,13 +134,13 @@ function VerifyContactViewModel() {
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				if(localStorage.getItem("currentVerificationCommethodType") == 'EMAIL') {
-					that.toastText('Email verified');		
-					localStorage.setItem('toastData', that.toastText());
+				if(localStorage.getItem("currentVerificationCommethodType") == 'TEXT') {
+					that.toastText('Phone number verified');		
+					localStorage.setItem('toastData', that.toastText());					
 				}
 				else {
-					that.toastText('Phone number verified');		
-					localStorage.setItem('toastData', that.toastText());
+					that.toastText('Email verified');		
+					localStorage.setItem('toastData', that.toastText());					
 				}				
 				goToView('addContactView');
 			},

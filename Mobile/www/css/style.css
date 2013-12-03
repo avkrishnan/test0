@@ -1946,7 +1946,7 @@ h1.messagesdate {
 	background:#F1F2F2 url("images/sprites-channel.png") no-repeat -6px -801px;
 }
 .msgfullread.icon-n {
-	background-position:-8px -1555px;
+	background-position:-8px -933px;
 }
 .msgfullread.icon-r {
 	background:url("images/sprites.png") no-repeat -8px -747px;
@@ -2248,6 +2248,7 @@ h1.requests {
 	font-size:12px;
 	padding:0 2px 0 0;
 	float:left;
+/*	line-height:16px;*/
 }
 .normalicon {
 	background:url("images/sprites.png") no-repeat -3px -1547px;
@@ -3855,7 +3856,7 @@ ul.igiresponses li span {
 		margin:0 44.2%;
 	}
 	.new-user img {
-		width: 29%;
+		width:29%;
 	}
 }
 @media only screen and (min-width:1366px) {
