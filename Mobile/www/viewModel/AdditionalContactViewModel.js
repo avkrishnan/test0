@@ -131,6 +131,7 @@ function AdditionalContactViewModel() {
 		var callbacks = {
 			success: function(responseData) {
 				//alert(JSON.stringify(responseData));
+				localStorage.setItem("commethodType",responseData.type);
 				if (responseData.address == 'TEXT') {
 					localStorage.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
 					localStorage.setItem("currentVerificationCommethodID",responseData.id);

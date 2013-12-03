@@ -110,7 +110,7 @@ function VerifyContactViewModel() {
 			else {
 				that.verificationStatus(true);
 			}
-			if(localStorage.getItem("currentVerificationCommethodType") == 'EMAIL') {
+			if(localStorage.getItem("commethodType") == 'EMAIL') {
 				that.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below).');
 			}
 			else {
@@ -134,21 +134,22 @@ function VerifyContactViewModel() {
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				if(localStorage.getItem("currentVerificationCommethodType") == 'TEXT') {
+				if(localStorage.getItem("commethodType") == 'TEXT') {
 					that.toastText('Phone number verified');		
 					localStorage.setItem('toastData', that.toastText());					
 				}
 				else {
 					that.toastText('Email verified');		
 					localStorage.setItem('toastData', that.toastText());					
-				}				
+				}
+				localStorage.removeItem("commethodType")				
 				goToView('addContactView');
 			},
 			error: function (responseData, status, details) {
 				//alert('error');
 				that.errorMessage("<span>ERROR: </span>" + details.message);
 			}
-		};
+		};	
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
 	};
 		
