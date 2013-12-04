@@ -55,6 +55,7 @@ function SingleMessageViewModel() {
 			that.noiGiClass(messageObject.noiGiClass);		
 			that.noiGi(messageObject.noiGi);				
 			that.replies(messageObject.replies);
+			that.iGivisibility(false);			
 			if(messageObject.type == 'REQUEST_ACKNOWLEDGEMENT') {
 				that.iGivisibility(true);
 				that.noacks(messageObject.noacks+" Haven't Got It Yet");
