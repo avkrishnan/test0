@@ -93,7 +93,6 @@ function ChannelMessagesViewModel() {
 		var callbacks = {
 			success: function(data) {
 				var screenSizeText = truncatedTextScreen();
-				
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
 					var tempCreated = msToTime(valueMessage.created);
 					if(valueMessage.escLevelId) {

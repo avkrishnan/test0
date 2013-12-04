@@ -85,7 +85,6 @@ function OverlayViewModel() {
 
 	this.showNewMessagesOverlay = function() {
 		that.newMessagesDisplayList.removeAll();
-		//alert(localStorage.getItem('enymNotifications'));
 		var screenSizeText = truncatedText();
 		//alert(screenSizeText);
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {

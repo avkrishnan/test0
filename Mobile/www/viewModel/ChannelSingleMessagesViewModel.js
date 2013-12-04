@@ -45,19 +45,17 @@ function ChannelSingleMessagesViewModel() {
 				localStorage.setItem('counter', 1);
 			}
 			//alert(localStorage.getItem("currentChannel"));
-			if(localStorage.getItem("currentChannel")) {
-				var channel = JSON.parse(localStorage.getItem("currentChannel"));
-				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
-				that.title(channel.name);
-				that.channelid(channel.channelId);
-				that.description(channel.description);
-				that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
-				that.messageClass(channelMessage.messageClass);
-				that.messageText(channelMessage.messageText);
-				that.readMessageUpdateBadge(channelMessage.messageID);
-			}
-			else {
+			if(localStorage.getItem("overlayCurrentChannel")) {
+				var callbacks = {
+					success: function(data) {alert('succ');},
+					error: function(data, status, details) {
+						that.toastText(details.message);
+						localStorage.setItem('toastData', that.toastText());					
+					}
+				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
+				ES.messageService.getChannel(channel.channelId, callbacks);
+				//alert('1');
 				that.title(channel.displayFrom);
 				that.channelid(channel.channelId);
 				that.description(channel.text);
@@ -65,12 +63,25 @@ function ChannelSingleMessagesViewModel() {
 				that.messageClass(channel.type);
 				that.messageText(channel.text);
 				that.readMessageUpdateBadge(channel.msgId);
+			}			
+			else {
+				var channel = JSON.parse(localStorage.getItem("currentChannel"));
+				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
+				that.title(channel.name);
+				that.channelid(channel.channelId);
+				that.description(channel.description);
+				if(channelMessage) {
+					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
+					that.messageClass(channelMessage.messageClass);
+					that.messageText(channelMessage.messageText);
+					that.readMessageUpdateBadge(channelMessage.messageID);
+				}
 			}
 		}
 	};
 	
 	this.readMessageUpdateBadge = function(messageID) {
-		$('.active-overlay').html(''); 
+		//$('.active-overlay').html(''); 
 		var callbacks = {
 			success: function(data) {},
 			error: function(data, status, details) {
@@ -86,12 +97,13 @@ function ChannelSingleMessagesViewModel() {
 			success: function(responseData) {
 				localStorage.removeItem('enymNotifications');
 				localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
-				alert(JSON.parse(localStorage.getItem('enymNotifications')).length);
 				if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+					//alert('1');
 					headerViewModel.showNewMessagesCount(localStorage.getItem('enymNotifications'));
 					overlayViewModel.showNewMessagesOverlay();
 				}
 				else {
+					//alert('2');
 					headerViewModel.newMessageCount('');
 					headerViewModel.newMessageClass('');			
 				}
