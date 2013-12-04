@@ -98,6 +98,7 @@
 	
 	/* action to see channels messages*/
 	this.actionFollowChannelCommand = function(data) {
+		//alert(JSON.stringify(data));
 		localStorage.setItem("currentChannel", JSON.stringify(data));
 		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');
 	}
