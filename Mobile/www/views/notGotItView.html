@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="broadcastreplies broadcastbuddy" data-bind="text: noacks"></div>
-    <div class="messagesundeliver" data-bind="foreach: recipients">
-      <ul>
+    <div class="messagesundeliver">
+      <ul data-bind="foreach: recipients">
         <li data-bind="css: recipientsClass">
           <a href="#" data-bind="html: recipient, click: $parent.recipientDetails.bind($index())"></a>
         </li>

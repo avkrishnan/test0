@@ -37,7 +37,8 @@ function NotGotItViewModel() {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');				
-			}			
+			}	
+			localStorage.removeItem('currentRecipientData');					
 			that.accountName(localStorage.getItem('accountName'));											
 			that.channelId(channelObject.channelId);			
 			that.channelName(channelObject.channelName);
@@ -51,10 +52,16 @@ function NotGotItViewModel() {
 	function successfulList(data){
 		$.mobile.hidePageLoadingMsg();
 		that.recipients.removeAll();		
-		for(var len = 0; len<data.recipients.length; len++) {					
+		for(var len = 0; len<data.recipients.length; len++) {
+			if (len % 2 === 0) {
+				var recipientsClass = 'even';
+      }
+			else {
+				var recipientsClass = 'odd';
+			}								
 			that.recipients.push({
 				recipientId: data.recipients[len].subscriberId,
-				recipientsClass: 'even',
+				recipientsClass: recipientsClass,
 				recipient: '<span></span>'+data.recipients[len].rcvrFirstname +' '+ data.recipients[len].rcvrLastname+', <em>'+data.recipients[len].rcvrAccountname+'</em>'
 			});
 		}

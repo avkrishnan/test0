@@ -37,7 +37,8 @@ function RecipientDetailsViewModel() {
 			}			
 			that.accountName(localStorage.getItem('accountName'));													
 			that.channelName(channelObject.channelName);
-			that.recipient(recipientObject.recipient);								
+			var recipient = recipientObject.recipient.split(',');
+			that.recipient(recipient[0]+' '+recipient[1]);								
 		}
 	}					
 				
