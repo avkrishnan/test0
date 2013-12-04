@@ -88,23 +88,36 @@ function ChannelMessagesViewModel() {
 		
 	this.gotChannel = function(data) {
 		$.mobile.hidePageLoadingMsg();
-		that.title(data.displayFrom);
-		that.description(data.text);
+		that.title(data.name);
+		that.description(data.description);
 		var callbacks = {
-			success: function(data){
+			success: function(data) {
+				var screenSizeText = truncatedTextScreen();
+				
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
 					var tempCreated = msToTime(valueMessage.created);
-					var tempClass = valueMessage.escLevelId.toLowerCase().trim();
-					tempClass = 'icon-' + tempClass;
-					var tempText = jQuery.trim(valueMessage.text).substring(0, truncatedTextScreen()).split(" ").slice(0, -1).join(" ") + "...";
+					if(valueMessage.escLevelId) {
+						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
+						tempClass = 'icon-' + tempClass;
+					}
+					else {
+						tempClass = 'icon-d'
+					}
+					if(valueMessage.text.length > screenSizeText) {
+						var tempText = jQuery.trim(valueMessage.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";
+					}
+					else {
+						var tempText = jQuery.trim(valueMessage.text);
+					}
 					that.channelMessages.push( // without push not working
 						{messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
+				
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
-				showToast();	
+				showToast();
 			}
 		};
 		//return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);

@@ -95,9 +95,7 @@ function LoginViewModel() {
 				localStorage.removeItem('password');
 			}
       var callbacks = {
-        success : function(responseData) {
-					//loginSuccess2
-				},
+        success : function(responseData) {;},
         error : function(data, status, details) {
 					that.usernameClass('validationerror');
 					that.passwordClass('validationerror');
@@ -139,7 +137,6 @@ function LoginViewModel() {
 				localStorage.setItem('toastData', that.toastText());
 			}
 		};
-		//alert(JSON.stringify(args));
     $.mobile.hidePageLoadingMsg();
     // if (isPhoneGap()) {
     // alert("Running on PhoneGap!");
