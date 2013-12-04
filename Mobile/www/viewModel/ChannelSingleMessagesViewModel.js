@@ -47,22 +47,28 @@ function ChannelSingleMessagesViewModel() {
 			//alert(localStorage.getItem("currentChannel"));
 			if(localStorage.getItem("overlayCurrentChannel")) {
 				var callbacks = {
-					success: function(data) {alert('succ');},
+					success: function(data) {
+						//alert('succ');
+						that.title(data.name);
+						if(data.description) {
+							that.description(data.description);
+						}
+						else {
+							that.description('Channel description');
+						}
+					},
 					error: function(data, status, details) {
 						that.toastText(details.message);
 						localStorage.setItem('toastData', that.toastText());					
 					}
 				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
-				ES.messageService.getChannel(channel.channelId, callbacks);
-				//alert('1');
-				that.title(channel.displayFrom);
 				that.channelid(channel.channelId);
-				that.description(channel.text);
 				that.messageCreated(channel.created);
 				that.messageClass(channel.type);
 				that.messageText(channel.text);
-				that.readMessageUpdateBadge(channel.msgId);
+				//that.readMessageUpdateBadge(channel.msgId);
+				return ES.channelService.getChannel(channel.channelId, callbacks).then(this.readMessageUpdateBadge(channel.msgId));
 			}			
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
@@ -81,14 +87,14 @@ function ChannelSingleMessagesViewModel() {
 	};
 	
 	this.readMessageUpdateBadge = function(messageID) {
-		//$('.active-overlay').html(''); 
+		$('.active-overlay').html(''); 
 		var callbacks = {
 			success: function(data) {},
 			error: function(data, status, details) {
 				that.toastText(details.message);
 				localStorage.setItem('toastData', that.toastText());					
 			}
-		};		
+		};
 		return ES.messageService.readMsg(messageID, callbacks).then(that.updateMessages);
 	}
 	
