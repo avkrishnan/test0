@@ -13,16 +13,6 @@ function ChannelMainViewModel() {
 	this.channelName = ko.observable();
 	this.followerCount = ko.observable();
 	this.broadcasts = ko.observableArray([]);	
-	this.messageId = ko.observable();	
-	this.sensitivity = ko.observable();	
-	this.broadcast = ko.observable();
-	this.time = ko.observable();
-	this.iGi = ko.observable();
-	this.iGiClass = ko.observable();
-	this.percentage = ko.observable();	
-	this.noiGiClass = ko.observable();		
-	this.noiGi = ko.observable();				
-	this.replies = ko.observable();	
 	this.toastText = ko.observable();			
 	
 	/* Methods */

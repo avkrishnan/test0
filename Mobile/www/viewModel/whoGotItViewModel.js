@@ -13,9 +13,7 @@ function WhoGotItViewModel() {
 	this.channelName = ko.observable();
 	this.messageId = ko.observable();				
 	this.acks = ko.observable();
-	this.recipients = ko.observableArray([]);
-	this.recipientsClass = ko.observableArray();
-	this.recipients = ko.observableArray();				
+	this.recipients = ko.observableArray([]);			
 	this.toastText = ko.observable();			
 	
 	/* Methods */
@@ -50,7 +48,9 @@ function WhoGotItViewModel() {
 		}
 	}	
 	
-	function successfulList(data){			
+	function successfulList(data){
+		$.mobile.hidePageLoadingMsg();
+		that.recipients.removeAll();						
 		for(var len = 0; len<data.recipients.length; len++) {					
 			that.recipients.push({
 				recipientId: data.recipients[len].subscriberId,
@@ -64,6 +64,11 @@ function WhoGotItViewModel() {
     $.mobile.hidePageLoadingMsg();
 		that.toastText(details.message);		
 		showToast();
-  };		
+  };
+	
+	this.recipientDetails = function(data){
+		localStorage.setItem('currentRecipientData', JSON.stringify(data));							
+		viewNavigate('Who Got it', 'whoGotItView', 'recipientDetailsView');
+	};			
 				
 }

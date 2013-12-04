@@ -10,25 +10,19 @@
         </div>
       </div>
     </div>
-    
-    <div class="broadcastreplies broadcastbuddy" data-bind="text: noacks">
-      <!--4 Haven't Got It Yet-->
-    </div>
+    <div class="broadcastreplies broadcastbuddy" data-bind="text: noacks"></div>
     <div class="messagesundeliver" data-bind="foreach: recipients">
       <ul>
         <li data-bind="css: recipientsClass">
-          <a href="#" data-bind="html: recipient"><!--<span></span>CHAD DUNCAN, <em>chadduncan12</em>--></a>
+          <a href="#" data-bind="html: recipient, click: $parent.recipientDetails.bind($index())"></a>
         </li>
-        <!--<li class="odd"><a href="V-qustion.html">GEOFFREY BOWIE, <em>g-bowie</em></a></li>
-        <li class="even"><a href="V-qustion.html"><span></span>BRETT HARDY <em>brett.s.hardy</em></a></li>
-        <li class="odd"><a href="V-qustion.html"><span></span>JOHN CLOUD, <em>cloudman</em></a></li>-->
       </ul>
     </div>
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>    
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Not Got it', 'notGotItView', 'escalationPlansView');"></a>
-    <a class="announcement" href="#" onclick="viewNavigate('Not Got it', 'notGotItView',, 'sendMessageView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Not Got it', 'notGotItView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>     
 </div>

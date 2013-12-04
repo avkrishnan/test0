@@ -397,6 +397,7 @@ followerDetailsViewModel = new FollowerDetailsViewModel(),
 removeFollowerViewModel = new RemoveFollowerViewModel(),
 notGotItViewModel = new NotGotItViewModel(),
 whoGotItViewModel = new WhoGotItViewModel(),
+recipientDetailsViewModel = new RecipientDetailsViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -477,7 +478,8 @@ var models = [
 							followerDetailsViewModel,
 							removeFollowerViewModel,
 							notGotItViewModel,
-							whoGotItViewModel									
+							whoGotItViewModel,
+							recipientDetailsViewModel									
               ];
 
 
