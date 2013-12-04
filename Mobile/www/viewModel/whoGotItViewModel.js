@@ -8,12 +8,14 @@ function WhoGotItViewModel() {
 	this.displayname = 'Who got iGi';	
 	this.accountName = ko.observable();		
 
-  /* Not got it observable */
+  /* Got it observable */
 	this.channelId = ko.observable();				
 	this.channelName = ko.observable();
 	this.messageId = ko.observable();				
 	this.acks = ko.observable();
-	this.followers = ko.observableArray([]);		
+	this.recipients = ko.observableArray([]);
+	this.recipientsClass = ko.observableArray();
+	this.recipients = ko.observableArray();				
 	this.toastText = ko.observable();			
 	
 	/* Methods */
@@ -42,17 +44,20 @@ function WhoGotItViewModel() {
 			that.channelId(channelObject.channelId);			
 			that.channelName(channelObject.channelName);
 			that.messageId(messageObject.messageId);								
-			that.noacks(messageObject.acks+" Got It");
+			that.acks(messageObject.acks+" Got It");
 			$.mobile.showPageLoadingMsg("a", "Loading Followers");
-			return ES.messageService.getChannelMessages(that.channelId(), undefined, {success: successfulList, error: errorAPI});																				
+			return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'Y', {success: successfulList, error: errorAPI});																			
 		}
 	}	
 	
 	function successfulList(data){			
-		that.followers.push({
-			followerId: data.followers[len].id,
-			follower: '<span class="timeundeliver">9/16, 3:35 PM</span>'+data.followers[len].firstname +' '+ data.followers[len].lastname+', <em>'+data.followers[len].accountname+'</em>'
-		});
+		for(var len = 0; len<data.recipients.length; len++) {					
+			that.recipients.push({
+				recipientId: data.recipients[len].subscriberId,
+				recipientsClass: 'even',
+				recipient: '<span class="timeundeliver">9/16, 3:35 PM</span>'+data.recipients[len].rcvrFirstname +' '+ data.recipients[len].rcvrLastname+', <em>'+data.recipients[len].rcvrAccountname+'</em>'
+			});
+		}		
 	}
 
   function errorAPI(data, status, details) {

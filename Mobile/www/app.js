@@ -395,6 +395,8 @@ escalateSettingsViewModel = new EscalateSettingsViewModel(),
 escalateTimeSettingsViewModel = new EscalateTimeSettingsViewModel(),
 followerDetailsViewModel = new FollowerDetailsViewModel(),
 removeFollowerViewModel = new RemoveFollowerViewModel(),
+notGotItViewModel = new NotGotItViewModel(),
+whoGotItViewModel = new WhoGotItViewModel(),
 /* end */
 
 messageViewModel = new MessageViewModel(),
@@ -473,7 +475,9 @@ var models = [
 							escalateSettingsViewModel,
 							escalateTimeSettingsViewModel,
 							followerDetailsViewModel,
-							removeFollowerViewModel									
+							removeFollowerViewModel,
+							notGotItViewModel,
+							whoGotItViewModel									
               ];
 
 

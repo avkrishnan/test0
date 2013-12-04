@@ -13,7 +13,9 @@ function NotGotItViewModel() {
 	this.channelName = ko.observable();
 	this.messageId = ko.observable();				
 	this.noacks = ko.observable();
-	this.followers = ko.observableArray([]);		
+	this.recipients = ko.observableArray([]);
+	this.recipientsClass = ko.observableArray();
+	this.recipients = ko.observableArray();				
 	this.toastText = ko.observable();			
 	
 	/* Methods */
@@ -44,15 +46,18 @@ function NotGotItViewModel() {
 			that.messageId(messageObject.messageId);								
 			that.noacks(messageObject.noacks+" Haven't Got It Yet");
 			$.mobile.showPageLoadingMsg("a", "Loading Followers");
-			return ES.messageService.getChannelMessages(that.channelId(), undefined, {success: successfulList, error: errorAPI});																				
+			return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'N', {success: successfulList, error: errorAPI});																				
 		}
 	}	
 	
-	function successfulList(data){			
-		that.followers.push({
-			followerId: data.followers[len].id,
-			follower: '<span></span>'+data.followers[len].firstname +' '+ data.followers[len].lastname+', <em>'+data.followers[len].accountname+'</em>'
-		});
+	function successfulList(data){
+		for(var len = 0; len<data.recipients.length; len++) {					
+			that.recipients.push({
+				recipientId: data.recipients[len].subscriberId,
+				recipientsClass: 'even',
+				recipient: '<span></span>'+data.recipients[len].rcvrFirstname +' '+ data.recipients[len].rcvrLastname+', <em>'+data.recipients[len].rcvrAccountname+'</em>'
+			});
+		}
 	}
 
   function errorAPI(data, status, details) {

@@ -25,9 +25,9 @@
     <a class="low-messages repliesmsg" href="#" data-bind="text: replies" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');">
       <!--<span class="newrepliesmsg">3 new</span>-->
     </a>
-    <a class="low-messages messagenotsend" href="#" data-bind="text: noacks, visible: iGivisibility, click: notGotIt">
+    <a class="low-messages messagenotsend" href="#" data-bind="text: noacks, visible: iGivisibility" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'notGotItView');">
     </a>
-    <a class="low-messages messagesend" href="#" data-bind="text: acks, visible: iGivisibility" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'gotItView');">
+    <a class="low-messages messagesend" href="#" data-bind="text: acks, visible: iGivisibility" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');">
     </a>
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>    

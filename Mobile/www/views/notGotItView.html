@@ -14,10 +14,10 @@
     <div class="broadcastreplies broadcastbuddy" data-bind="text: noacks">
       <!--4 Haven't Got It Yet-->
     </div>
-    <div class="messagesundeliver" data-bind="foreach: followers">
+    <div class="messagesundeliver" data-bind="foreach: recipients">
       <ul>
-        <li class="even" data-bind="css: followersClass">
-          <a href="#" data-bind="html: follower"><span></span>CHAD DUNCAN, <em>chadduncan12</em></a>
+        <li data-bind="css: recipientsClass">
+          <a href="#" data-bind="html: recipient"><!--<span></span>CHAD DUNCAN, <em>chadduncan12</em>--></a>
         </li>
         <!--<li class="odd"><a href="V-qustion.html">GEOFFREY BOWIE, <em>g-bowie</em></a></li>
         <li class="even"><a href="V-qustion.html"><span></span>BRETT HARDY <em>brett.s.hardy</em></a></li>
