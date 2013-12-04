@@ -15,24 +15,20 @@
       <a href="#" class="broadcast-sensitive singlemessage" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageFullTextView');">
         <span data-bind="html: singleMessage"></span>
       </a>
-      <!--<div class="broadcastmsgsend">
-        <a href="#">
-          <span>12 Got it<em class="percentage">75%</em></span>
-        </a>
-        <a href="V-57-who-hasn't-got-it.html">
-          <em class="broadcastmsgunsend">4 Haven't</em>
-        </a>
-      </div>-->
+      <div class="broadcastmsgsend">      
+        <span data-bind="html: iGi, css: iGiClass, style: { width: $data.percentage}">
+          <em class="percentage"><!--75%--></em>
+        </span>
+        <em data-bind="text: noiGi, css: noiGiClass"></em>
+      </div> 
     </div>    
     <a class="low-messages repliesmsg" href="#" data-bind="text: replies" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');">
       <!--<span class="newrepliesmsg">3 new</span>-->
     </a>
-    <!--<a class="low-messages messagenotsend" href="#">
-      4 Haven't Got It Yet
+    <a class="low-messages messagenotsend" href="#" data-bind="text: noacks, visible: iGivisibility, click: notGotIt">
     </a>
-    <a class="low-messages messagesend" href="#">
-      12 Got It
-    </a>-->
+    <a class="low-messages messagesend" href="#" data-bind="text: acks, visible: iGivisibility" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'gotItView');">
+    </a>
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>    
   <div class="footer">

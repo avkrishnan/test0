@@ -31,12 +31,13 @@
       <a href="#" class="channelbroadcast" data-bind="click: $parent.singleMessage.bind($index())">
         <div class="broadcast-sensitive">
           <span data-bind="html: broadcast"></span><em data-bind="text: time"></em>
-        </div>
-        <br />
-        <!--To do - to be activated when data received-->        
-        <!--<div class="broadcastmsgsend">
-          <span>12 Got it<em class="percentage">75%</em></span><em class="broadcastmsgunsend">4 Haven't</em>
-        </div>-->
+        </div>       
+        <div class="broadcastmsgsend">
+          <span data-bind="html: iGi, css: iGiClass, style: { width: $data.percentage}">
+            <em class="percentage"><!--75%--></em>
+          </span>
+          <em data-bind="text: noiGi, css: noiGiClass"></em>
+        </div>      
         <div class="broadcastmsgreplie">
           <span data-bind="text: replies"></span><!--<em>3 new</em>-->
         </div>
