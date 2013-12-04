@@ -880,12 +880,12 @@ function truncatedText() {
 function truncatedTextScreen() {
 	var screenSize = $(window).width();
 	if(screenSize < 400) {
-		return screenSize/5;
+		return screenSize/11;
 	}
 	else if (screenSize > 400 && screenSize < 700) {
-		return screenSize/5;
+		return screenSize/8;
 	}
 	else {
-		return screenSize/4;
+		return screenSize/8;
 	}
 }

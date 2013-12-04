@@ -1,5 +1,4 @@
-﻿/*globals ko*/
-function HeaderViewModel() {	
+﻿function HeaderViewModel() {	
 	this.backText = ko.observable();
 	this.isBack = ko.observable(true);	
 	this.newMessageCount = ko.observable('');
@@ -14,7 +13,8 @@ function HeaderViewModel() {
 		}
 		if(typeof backNavText[0] == 'undefined') {
 			that.backText('<em></em>Home');
-		} else {		
+		} 
+		else {
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}		
 		that.showNewMessagesCount(localStorage.getItem('enymNotifications'));
@@ -22,6 +22,7 @@ function HeaderViewModel() {
 	
 	/* This Function shows Count of New Message in header badge*/
 	this.showNewMessagesCount = function(data) {
+		//alert(JSON.parse(data).length);
 		if(JSON.parse(data).length > 0) {
 			this.newMessageClass('smsiconwhite');
 			this.newMessageCount(JSON.parse(data).length);
@@ -34,7 +35,8 @@ function HeaderViewModel() {
 	this.backCommand = function () {
 		if(typeof backNavText[0] == 'undefined') {
 			goToView('channelListView');		
-		} else {		
+		} 
+		else {		
 			popBackNav();		
 		}	
   };		
@@ -83,11 +85,13 @@ function OverlayViewModel() {
 
 	this.showNewMessagesOverlay = function() {
 		that.newMessagesDisplayList.removeAll();
+		var screenSizeText = truncatedText();
+		//alert(screenSizeText);
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			valueNotification.created = shortFormat(valueNotification.created);
-			//if(valueNotification.text.length > 200) {
-				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, truncatedText()).split(" ").slice(0, -1).join(" ") + "...";
-			//}
+			if(valueNotification.text.length > screenSizeText) {
+				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";
+			}
 			if(valueNotification.escLevelId) {
 				valueNotification.escLevelId = "icon-" + valueNotification.escLevelId.toLowerCase();
 			}
