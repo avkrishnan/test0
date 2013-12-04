@@ -57,10 +57,7 @@ function ChannelSingleMessagesViewModel() {
 							that.description('Channel description');
 						}
 					},
-					error: function(data, status, details) {
-						that.toastText(details.message);
-						localStorage.setItem('toastData', that.toastText());					
-					}
+					error: function(data, status, details) {;}
 				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
 				that.channelid(channel.channelId);

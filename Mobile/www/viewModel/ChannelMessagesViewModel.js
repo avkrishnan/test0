@@ -22,10 +22,10 @@ function ChannelMessagesViewModel() {
     
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
-		if(localStorage.getItem("overlayCurrentChannel") && localStorage.getItem("overlayCurrentChannel")!= 'null') {		
+		/*if(localStorage.getItem("overlayCurrentChannel") && localStorage.getItem("overlayCurrentChannel") != 'null') {
 			localStorage.setItem("currentChannel", localStorage.getItem("overlayCurrentChannel"));
 			localStorage.removeItem("overlayCurrentChannel");
-		}
+		}*/
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		if(token == '' || token == null) {
 			goToView('loginView');
