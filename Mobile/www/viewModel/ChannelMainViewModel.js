@@ -16,7 +16,12 @@ function ChannelMainViewModel() {
 	this.messageId = ko.observable();	
 	this.sensitivity = ko.observable();	
 	this.broadcast = ko.observable();
-	this.time = ko.observable();	
+	this.time = ko.observable();
+	this.iGi = ko.observable();
+	this.iGiClass = ko.observable();
+	this.percentage = ko.observable();	
+	this.noiGiClass = ko.observable();		
+	this.noiGi = ko.observable();				
 	this.replies = ko.observable();	
 	this.toastText = ko.observable();			
 	
@@ -76,14 +81,35 @@ function ChannelMainViewModel() {
 				var message_sensitivity = '';
 				var sensitivityText = '';				
 			}
+			if(data.message[len].type == 'REQUEST_ACKNOWLEDGEMENT') {
+				var iGiClass = '';
+				var noiGiClass = 'broadcastmsgunsend';				
+				var iGi = data.message[len].acks+' Got it<em class="percentage"></em></span>';
+				var percentage = data.message[len].acks+'%';			
+				var noiGi = data.message[len].noacks+" Haven't";												
+			} else {
+				var iGiClass = 'norequested';
+				var noiGiClass = 'norequestedican';				
+				var iGi = 'No iGi requested';
+				var percentage = '84%';								
+				var noiGi = '';															
+			}			
 			that.broadcasts.push({
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
 				sensitivityText: sensitivityText,			
 				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',
 				time: msToTime(data.message[len].created),
-				created: data.message[len].created,				
-				replies: 'Replies'
+				created: data.message[len].created,
+				iGi: iGi,
+				iGiClass: iGiClass,
+				percentage: percentage,
+				noiGiClass: noiGiClass,
+				noiGi: noiGi,		
+				replies: 'Replies',
+				acks: data.message[len].acks,
+				noacks: data.message[len].noacks,
+				type: data.message[len].type
 			});
 		}
 	}

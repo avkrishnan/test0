@@ -11,8 +11,16 @@ function SingleMessageViewModel() {
   /* Single message observable */		
 	this.channelName = ko.observable();		
 	this.time = ko.observable();	
-	this.singleMessage = ko.observable();	
-	this.replies = ko.observable();
+	this.singleMessage = ko.observable();
+	this.iGi = ko.observable();
+	this.iGiClass = ko.observable();
+	this.percentage = ko.observable();	
+	this.noiGiClass = ko.observable();		
+	this.noiGi = ko.observable();
+	this.iGivisibility = ko.observable(false);	
+	this.noacks = ko.observable();
+	this.acks = ko.observable();
+	this.replies = ko.observable();		
 	this.toastText = ko.observable();			
 	
 	/* Methods */
@@ -37,13 +45,21 @@ function SingleMessageViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');				
 			}			
-			that.accountName(localStorage.getItem('accountName'));	
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
+			that.accountName(localStorage.getItem('accountName'));											
 			that.channelName(channelObject.channelName);					
 			that.time('Sent '+ dateFormat1(messageObject.created) +' ('+messageObject.time+'):');	
-			that.singleMessage(messageObject.broadcast);	
-			that.replies(messageObject.replies);							
+			that.singleMessage(messageObject.broadcast);
+			that.iGi(messageObject.iGi);
+			that.iGiClass(messageObject.iGiClass);
+			that.percentage(messageObject.percentage);	
+			that.noiGiClass(messageObject.noiGiClass);		
+			that.noiGi(messageObject.noiGi);				
+			that.replies(messageObject.replies);
+			if(messageObject.type == 'REQUEST_ACKNOWLEDGEMENT') {
+				that.iGivisibility(true);
+				that.noacks(messageObject.noacks+" Haven't Got It Yet");
+				that.acks(messageObject.acks+' Got It');											
+			}							
 		}
 	}		
 				
