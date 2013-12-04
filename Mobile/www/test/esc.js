@@ -9,9 +9,9 @@
   var SCEN_A = hlpr.TestScenario();
   var SCEN_B = hlpr.TestScenario();
 
-  SCEN_A.account = hlpr.testjason20;
+  SCEN_B.account = hlpr.testjason20;
 
-  SCEN_B.account = hlpr.testjason21;
+  SCEN_A.account = hlpr.testjason21;
 
   // debugger;
   // acctA.phonenumber = '801376334 8 ';
@@ -37,8 +37,10 @@
   var now = new Date();
   var fourHours = 4 * 60 * 60 * 1000;
   var sixMins = 6 * 60 * 1000;
+  var tenMins = 10 * 60 * 1000;
   var oneMin = 60 * 1000;
   var inFourHours = new Date(now.getTime() + fourHours);
+  var inTenMins = new Date(now.getTime() + tenMins);
   var inSixMins = new Date(now.getTime() + sixMins);
   var inOneMin = new Date(now.getTime() + oneMin);
   
@@ -47,7 +49,7 @@
   asyncTest('A broadcasts a NORMAL message with a duration', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N', inFourHours, null, hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
   */
   
-  asyncTest('A broadcasts a CHASE message with 10 minute escalation', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'C', inOneMin));
+  asyncTest('A broadcasts a CHASE message with 6 minute escalation', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'C', inSixMins));
 
   /*
   asyncTest('A broadcasts a NORMAL message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));

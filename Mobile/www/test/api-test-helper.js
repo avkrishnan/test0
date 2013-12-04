@@ -287,11 +287,11 @@ function ApiTestHelper() {
 //  };
 
   t.addFollower = function(scenario, followerScenario, chnlKey, shouldFail) {
-    return build(function() { return scenario.ES.channelService.addFollower(scenario[chnlKey].id, followerScenario.account.accountname);}, shouldFail)
+    return build(function() { return scenario.ES.channelService.addFollower(scenario[chnlKey].id, followerScenario.account.accountname);}, shouldFail);
   };
   
   t.removeFollower = function(scenario, followerScenario, chnlKey, shouldFail) {
-    return build(function() { return scenario.ES.channelService.removeFollower(scenario[chnlKey].id, followerScenario.account.accountname);}, shouldFail)
+    return build(function() { return scenario.ES.channelService.removeFollower(scenario[chnlKey].id, followerScenario.account.accountname);}, shouldFail);
   };
   
   t.sendMsg = function(senderScen, chnlHolder, chnlKey, msgText, replyToMsgHolder, escLevelId, escUntil, ovrdType, ovrdSuccess, ovrdFail) {
@@ -306,6 +306,7 @@ function ApiTestHelper() {
       console.log('sending message: ' + senderScen.msg.text);
       $.when(senderScen.ES.messageService.createChannelMessage(chnlHolder[chnlKey].id, senderScen.msg))
       .then(ovrdSuccess != undefined ? ovrdSuccess : t.CHECK.created, ovrdFail != undefined ? ovrdFail : t.CHECK.shouldNotFail)
+      .then(ovrdSuccess != undefined ? null : function(data) {senderScen.msg = data;}, ovrdFail != undefined ? null : t.CHECK.shouldNotFail)
       .then(start, start);
     };
   };
@@ -392,6 +393,22 @@ function ApiTestHelper() {
       var comMethod = {
         name : name,
         type : "PUSH",
+        address : address
+      };
+      $.when(scenario.ES.commethodService.addCommethod(comMethod))
+      .then(t.CHECK.created, t.CHECK.shouldNotFail)
+      .then( function(data) {
+          scenario[name] = data;
+        }, t.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };
+
+  t.createTextComMethod = function(scenario, address, name) {
+    return function() {
+      var comMethod = {
+        name : name,
+        type : "TEXT",
         address : address
       };
       $.when(scenario.ES.commethodService.addCommethod(comMethod))

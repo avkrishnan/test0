@@ -11,13 +11,16 @@
 
   SCEN_B.account = hlpr.testjason21;
 
-  // debugger;
-  // acctA.phonenumber = '801376334 8 ';
-  // asyncTest('A enrolls', hlpr.enroll(SCEN_A, acctA));
+  SCEN_A.phonenumber = '8013763348';
+  //asyncTest('A enrolls', hlpr.enroll(SCEN_A, acctA));
+
+  module("broadcast");
 
   asyncTest('A logs in', hlpr.login(SCEN_A));
 
-  // asyncTest('B enrolls', hlpr.enroll(SCEN_B));
+  //asyncTest('A adds phone number as com method', hlpr.createTextComMethod(SCEN_A, SCEN_A.phonenumber, 'phone'));
+
+    // asyncTest('B enrolls', hlpr.enroll(SCEN_B));
   asyncTest('B logs in', hlpr.login(SCEN_B));
 
   // asyncTest('CREATE PUSH COM METHOD', hlpr.createPushComMethod(SCEN_B,
@@ -71,6 +74,27 @@
   asyncTest('A checks channel messages to see that Reply count has changed', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl1', function() { 
     ok(SCEN_A.msg.replies === 1, 'replies count is one');
   }));
+
+
+  
+  module("reply means read");
+  
+  asyncTest('A broadcasts another message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));
+
+  asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, 1));
+  
+  asyncTest('B replies to broadcast', hlpr.reply(SCEN_B, SCEN_A, 'chnl1', 'this is my reply', SCEN_A));
+
+  asyncTest('Wait 1 second. (Because read is asynchronous on the back-end, we have a race condition; waiting lets the back-end "win".)', function() { 
+    setTimeout( function(){ expect(0); start(); }, 1000);
+  });
+
+  asyncTest('B gets msg notification summary, expects a decrease of one', hlpr.checkNotifSmry(SCEN_B, -1));
+  
+
+  
+  
+  module("acknowledgement");
   
   asyncTest('A creates another channel', hlpr.createChannelF(SCEN_A, 'chnl2'));
   asyncTest("B follows A's other channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl2'));
@@ -100,7 +124,6 @@
   asyncTest('B gets channel messages', hlpr.checkChnlMsgsForFlwr(SCEN_B, SCEN_A, 'chnl2'));
 
   //TODO confirm the last message is acknowledged
-  
   
   
   /*
