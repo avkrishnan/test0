@@ -9,26 +9,20 @@
           <strong data-bind="text: channelName"></strong>
         </div>
       </div>
-    </div>
-    
-    <div class="broadcastreplies undelivermsg" data-bind="text: acks">
-      <!--12 Got It-->
-    </div>
+    </div>    
+    <div class="broadcastreplies undelivermsg" data-bind="text: acks"></div>
     <div class="messagesundeliver messagesdeliver" data-bind="foreach: recipients">
       <ul>      
         <li class="even" data-bind="css: recipientsClass">
-          <a href="#" data-bind="html: recipient"><span class="timeundeliver">9/16, 3:35 PM</span>BOB SULLIVAN,<em>bobbysullivan</em></a>
+          <a href="#" data-bind="html: recipient, click: $parent.recipientDetails.bind($index())"><span class="timeundeliver">9/16, 3:35 PM</span>BOB SULLIVAN,<em>bobbysullivan</em></a>
         </li>
-        <!--<li class="odd"><a href="V-qustion.html">GEOFFREY BOWIE, <em>g-bowie</em></a></li>
-        <li class="even"><a href="V-qustion.html"><span></span>BRETT HARDY <em>brett.s.hardy</em></a></li>
-        <li class="odd"><a href="V-qustion.html"><span></span>JOHN CLOUD, <em>cloudman</em></a></li>-->
       </ul>
     </div>
   </div>
   <div class="toast-notification" data-bind="text: toastText"></div>    
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Who Got it', 'whoGotItView', 'escalationPlansView');"></a>
-    <a class="announcement" href="#" onclick="viewNavigate('Who Got it', 'whoGotItView',, 'sendMessageView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Who Got it', 'whoGotItView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>     
 </div>

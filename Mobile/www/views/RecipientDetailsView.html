@@ -1,0 +1,22 @@
+<!--To do - Pradeep Kumar-->
+<div id="recipientDetailsView" data-role="page" >
+	<header class="logged-in"></header>
+  <div class="page-content channelsettings">
+    <div class="channelcontent broadecast">
+      <span class="channelimg channel1 borderred"></span>
+      <div class="detailschannel last">
+        <div class="channelinfo">
+          <strong data-bind="text: channelName"></strong>
+        </div>
+      </div>
+    </div>
+    <div class="broadcastreplies msg-nameuserid" data-bind="html: recipient"><!--Bob Sullivan <em>bobbysullivan</em>--></div>
+  </div>
+  <div class="toast-notification" data-bind="text: toastText"></div>    
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Recipient Details', 'recipientDetailsView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Recipient Details', 'recipientDetailsView', 'sendMessageView');"></a>
+  </div>
+  <div class="active-overlay" style="display:none"></div>     
+</div>
+

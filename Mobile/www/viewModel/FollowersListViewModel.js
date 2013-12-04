@@ -13,7 +13,6 @@ function FollowersListViewModel() {
 	this.channelName = ko.observable();			
   this.followers = ko.observableArray([]);
 	this.followerCount = ko.observable();
-	this.followerName = ko.observable();
 	this.toastText = ko.observable();		
 	
 	/* Methods */	

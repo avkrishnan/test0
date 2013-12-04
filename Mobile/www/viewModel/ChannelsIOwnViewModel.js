@@ -10,10 +10,6 @@ function ChannelsIOwnViewModel() {
 	
   /* Channels observable */
 	this.channels = ko.observableArray([]);
-	this.channelId = ko.observable();
-	this.channelName = ko.observable();
-	this.channelDescription = ko.observable();
-	this.followerCount = ko.observable();
 	this.toastText = ko.observable();		
 
 	/* Methods */
