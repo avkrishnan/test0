@@ -1579,9 +1579,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .icon-d {
 	background:url("images/all-icons.png") no-repeat scroll -477px -5px;
 }
-.channelmessages .announcementicon {
-	background:url(images/announcementicon.png) no-repeat 6px 7px;
-}
 .messageschannel {
 	padding:0 0 4px 6px;
 	float:left;
@@ -1641,7 +1638,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:url("images/sprites-channel.png") no-repeat -5px -1029px;
 }
 .undelivermsg {
-	background:url("images/undelivermsg.png") no-repeat 1px 0;
+	background:url("images/sprites.png") no-repeat -6px -1826px;
 }
 /*-------23-10-2013--------*/
 .messagesundeliver {
@@ -1910,7 +1907,7 @@ h1.messagesdate {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1027px;
 }
 .messagesend {
-	background:#2D2D2D url("images/undelivermsg.png") no-repeat 3px 3px;
+	background:#2D2D2D url("images/sprites.png") no-repeat -6px -1824px;
 }
 .broadcastmsgredfull {
 	background:#ffffff;
@@ -1936,11 +1933,14 @@ h1.messagesdate {
 	padding:0 0 0 50px;
 	margin:0 4px;
 }
-.msgfullread.icon-r {
+/*.msgfullread.icon-r {
+	background-position:-8px -747px;
 	background:url("images/sprites.png") no-repeat -8px -747px;
-}
+}*/
 .msgfullread.icon-c {
-	background:#F1F2F2 url("images/all-icons.png") no-repeat -342px -7px;
+	/*background:#F1F2F2 url("images/sprites.png") no-repeat -9px -747px;*/
+	background-position:-8px -747px;
+	/*background:#F1F2F2 url("images/all-icons.png") no-repeat -342px -7px;*/
 }
 .msgfullread.icon-h {
 	background:#F1F2F2 url("images/sprites-channel.png") no-repeat -6px -801px;
@@ -1949,10 +1949,10 @@ h1.messagesdate {
 	background-position:-8px -933px;
 }
 .msgfullread.icon-r {
-	background:url("images/sprites.png") no-repeat -8px -747px;
+	background-position:-8px -933px;
 }
 .msgfullread.icon-e {
-	background-position: -8px -632px;
+	background-position:-8px -632px;
 }
 .msgfullread span {
 	text-transform:uppercase;
@@ -2399,9 +2399,6 @@ ul.igiresponses li span {
 	color:#ccc;
 	padding:0 3px 0 0;
 	font-style:normal;
-}
-.messageshistory .announcementicon {
-   background: url("images/announcementicon.png") no-repeat 5px 5px;
 }
 .msghistory .messagebtn {
 	color:#fff;
@@ -3136,7 +3133,7 @@ ul.igiresponses li span {
 	padding:25px 0 40px 0;
 }
 .broadcast-icon {
-	background: url("images/broadcast-icon.png") no-repeat scroll 0 1px #2D2D2D;
+	background:#2D2D2D url("images/sprites.png") no-repeat -10px -1911px;
 	padding: 7px 20px 7px 46px;
 }
 .escalatesettingstext {
