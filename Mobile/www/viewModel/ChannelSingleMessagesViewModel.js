@@ -72,7 +72,7 @@ function ChannelSingleMessagesViewModel() {
 				that.channelid(channel.channelId);			
 				that.messageCreated(channel.created);
 				that.messageClass(channel.type);
-				that.messageText(channel.text);
+				that.messageText(channel.fullText);
 				//that.readMessageUpdateBadge(channel.msgId);
 				return ES.channelService.getChannel(channel.channelId, callbacks).then(this.readMessageUpdateBadge(channel.msgId));
 			}			
@@ -86,7 +86,7 @@ function ChannelSingleMessagesViewModel() {
 					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
-					that.readMessageUpdateBadge(channelMessage.messageID);
+					that.readMessageUpdateBadge(channelMessage.messageId);
 					if(channelMessage.iGiClass != '') {
 						that.iGiButton(true);
 						if(channelMessage.ack == 'N') {
@@ -116,12 +116,10 @@ function ChannelSingleMessagesViewModel() {
 				localStorage.removeItem('enymNotifications');
 				localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
 				if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-					//alert('1');
 					headerViewModel.showNewMessagesCount(localStorage.getItem('enymNotifications'));
 					overlayViewModel.showNewMessagesOverlay();
 				}
 				else {
-					//alert('2');
 					headerViewModel.newMessageCount('');
 					headerViewModel.newMessageClass('');			
 				}
