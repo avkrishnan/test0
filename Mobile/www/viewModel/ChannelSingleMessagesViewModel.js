@@ -49,10 +49,10 @@ function ChannelSingleMessagesViewModel() {
 				localStorage.setItem('counter', 1);
 			}
 			//alert(localStorage.getItem("currentChannel"));
+			//alert(localStorage.getItem("overlayCurrentChannel"));
 			if(localStorage.getItem("overlayCurrentChannel")) {
 				var callbacks = {
 					success: function(data) {
-						//alert('succ');
 						that.title(data.name);
 						if(data.description) {
 							that.description(data.description);
@@ -61,7 +61,12 @@ function ChannelSingleMessagesViewModel() {
 							that.description('Channel description');
 						}
 					},
-					error: function(data, status, details) {;}
+					error: function(data, status, details) {
+						if(status == '404') {
+							that.title('Evernym, Inc.');
+							that.description('System Notifications');
+						}
+					}
 				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
 				that.channelid(channel.channelId);
