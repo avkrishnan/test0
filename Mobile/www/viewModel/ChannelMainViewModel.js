@@ -96,7 +96,7 @@ function ChannelMainViewModel() {
 				percentage: percentage,
 				noiGiClass: noiGiClass,
 				noiGi: noiGi,		
-				replies: 'Replies',
+				replies: data.message[len].replies+' Replies',
 				acks: data.message[len].acks,
 				noacks: data.message[len].noacks,
 				type: data.message[len].type
