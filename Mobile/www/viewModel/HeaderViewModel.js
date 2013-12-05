@@ -110,6 +110,7 @@ function OverlayViewModel() {
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
-		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
+		var backText = getCurrentViewModel().viewname;	
+		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelSingleMessagesView');
 	}
 }
