@@ -32,8 +32,8 @@ function ChannelSingleMessagesViewModel() {
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
-			that.iGiButton(true);
-			that.activeClass('active');							
+			that.iGiButton(false);
+			that.activeClass('');							
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -87,6 +87,12 @@ function ChannelSingleMessagesViewModel() {
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
 					that.readMessageUpdateBadge(channelMessage.messageID);
+					if(channelMessage.iGiClass != '') {
+						that.iGiButton(true);
+						if(channelMessage.ack == 'N') {
+							that.activeClass('active');													
+						}
+					}
 				}
 			}
 		}
@@ -131,7 +137,7 @@ function ChannelSingleMessagesViewModel() {
 		var callbacks = {
 			success: function(data) {
 				that.activeClass('');					
-				that.toastText('iGi sent');
+				that.toastText('iGi Acknowledgement sent !');
 				showToast();
 			},
 			error: function(data, status, details) {
@@ -139,9 +145,15 @@ function ChannelSingleMessagesViewModel() {
 				showToast();					
 			}
 		};		
-		var channelMessage = JSON.parse(localStorage.getItem('currentChannelMessage'));// to be removed when devender sir done with his work !	
-		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
-		return ES.messageService.acknowledgeMsg(channelMessage.messageID, callbacks);
+		var channelMessage = JSON.parse(localStorage.getItem('currentChannelMessage'));// to be removed when devender sir done with his work !
+		if(channelMessage.ack == 'Y' || that.activeClass() == '') {
+			that.toastText('iGi Acknowledgement already sent !');
+			showToast();												
+		}
+		else {			
+			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+			return ES.messageService.acknowledgeMsg(channelMessage.messageId, callbacks);
+		}
 	}	
 	
 }
