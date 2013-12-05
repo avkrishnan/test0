@@ -72,16 +72,29 @@ function ChannelMainViewModel() {
 				var sensitivityText = '';				
 			}
 			if(data.message[len].type == 'REQUEST_ACKNOWLEDGEMENT') {
-				var iGiClass = '';
-				var noiGiClass = 'broadcastmsgunsend';				
-				var iGi = data.message[len].acks+' Got it<em class="percentage"></em></span>';
-				var percentage = data.message[len].acks+'%';			
-				var noiGi = data.message[len].noacks+" Haven't";												
-			} else {
-				var iGiClass = 'norequested';
-				var noiGiClass = 'norequestedican';				
-				var iGi = 'No iGi requested';
-				var percentage = '84%';								
+				var percentage = (Math.ceil(data.message[len].acks*100/data.message[len].noacks))+'%';													
+				if(data.message[len].acks == 0) {
+					var iGi = '0%. . . no responses yet';
+					var noiGi = '';
+					var percentageClass = 'zero-percentage';
+					var percentage = '';
+				  var percentageText = '';														 					
+				} else if(percentage == '100%') {
+					var iGi = 'All followers Got it';
+					var noiGi = '';
+					var percentageClass = '';
+					var percentageText = '<em>'+percentage+'</em>';						
+				} else {
+					var iGi = data.message[len].acks+' Got it';
+					var noiGi = data.message[len].noacks+" Haven't";
+					var percentageClass = '';
+					var percentageText = '<em>'+percentage+'</em>';														 					
+				}																	
+			} else {			
+				var iGi = '';
+				var percentageClass = 'norequested';				
+				var percentage = '100%';
+				var percentageText = 'No iGi requested<em class="norequestedican"></em>';													
 				var noiGi = '';															
 			}			
 			that.broadcasts.push({
@@ -92,9 +105,9 @@ function ChannelMainViewModel() {
 				time: msToTime(data.message[len].created),
 				created: data.message[len].created,
 				iGi: iGi,
-				iGiClass: iGiClass,
+				percentageText: percentageText,				
 				percentage: percentage,
-				noiGiClass: noiGiClass,
+				percentageClass: percentageClass,				
 				noiGi: noiGi,		
 				replies: data.message[len].replies+' Replies',
 				acks: data.message[len].acks,

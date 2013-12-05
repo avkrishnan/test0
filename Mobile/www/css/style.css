@@ -1733,6 +1733,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	overflow:hidden;
 	padding:4px 0 0 0;
 	min-height:50px;
+	position:relative;
 }
 .broadcast-sensitive {
 	border-radius:21px 0 0 21px;
@@ -1800,14 +1801,30 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background: linear-gradient(to right,  rgba(37,38,37,1) 2%,rgba(83,82,84,1) 31%,rgba(128,130,133,1) 82%,rgba(83,82,84,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#252625', endColorstr='#535254',GradientType=1 ); /* IE6-9 */
 }
-.broadcastmsgsend span {
-	float:left;
+.igigot {
+	position:absolute;
+	z-index:9999;
+	font-size:14px;
+	padding:4px 10px 4px 10px;
+}
+.iginotgot {
+	float:right;
+	position:relative;
+	padding:0px 12px;
+	font-size:14px;
+	font-style:normal;
+}
+.percentage em {
+	float:right;
+	font-style:normal;
+	padding:0 10px 0 0;
+}
+.percentage {
+	position:absolute;
+	width:100%;
+	font-size:14px;
 	height:30px;
 	line-height:30px;
-	padding:0 2% 0 2%;
-	width:64%;
-	font-size:14px;
-	color:#fff;
 	background: rgb(141,198,63); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(141,198,63,1) 0%, rgba(163,205,55,1) 50%, rgba(141,198,63,1) 51%, rgba(210,221,37,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(141,198,63,1)), color-stop(50%,rgba(163,205,55,1)), color-stop(51%,rgba(141,198,63,1)), color-stop(100%,rgba(210,221,37,1))); /* Chrome,Safari4+ */
@@ -1817,6 +1834,30 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background: linear-gradient(to bottom,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8dc63f', endColorstr='#d2dd25',GradientType=0 ); /* IE6-9 */
 }
+.hundred {
+	width:100%;
+}
+.zero-percentage {
+	background:none;
+	padding:0px 20px;
+}
+/*.broadcastmsgsend span {
+	float:left;
+	height:30px;
+	line-height:30px;
+	padding:0 2% 0 2%;
+	width:64%;
+	font-size:14px;
+	color:#fff;
+	background: rgb(141,198,63);  Old browsers 
+	background: -moz-linear-gradient(top,  rgba(141,198,63,1) 0%, rgba(163,205,55,1) 50%, rgba(141,198,63,1) 51%, rgba(210,221,37,1) 100%);  FF3.6+ 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(141,198,63,1)), color-stop(50%,rgba(163,205,55,1)), color-stop(51%,rgba(141,198,63,1)), color-stop(100%,rgba(210,221,37,1)));  Chrome,Safari4+ 
+	background: -webkit-linear-gradient(top,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%);  Chrome10+,Safari5.1+ 
+	background: -o-linear-gradient(top,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%);  Opera 11.10+ 
+	background: -ms-linear-gradient(top,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%);  IE10+ 
+	background: linear-gradient(to bottom,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%);  W3C 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8dc63f', endColorstr='#d2dd25',GradientType=0 );  IE6-9 
+}*/
 .broadcastmsgsend span.msgincreasefull {
 	width:96.5%;
 }
@@ -1826,18 +1867,20 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .broadcastmsgsend span.norequested {
 	text-align:center;
 	background:none;
-	width:84%;
+	/*width:84%;*/
+	display:inline-block;
+	font-size:14px;
 }
 .broadcastmsgsend em.norequestedican {
 	background:url("images/sprites-login.png") no-repeat -25px -341px;
 	float:right;
 	padding:14px 15px;
 }
-.broadcastmsgsend span em.percentage {
+/*.broadcastmsgsend span em.percentage {
 	float:right;
 	font-style:normal;
-}
-.broadcastmsgsend em.broadcastmsgunsend {
+}*/
+/*.broadcastmsgsend em.broadcastmsgunsend {
 	float:right;
 	font-size:14px;
 	padding:0;
@@ -1846,7 +1889,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#fff;
 	text-align:center;
 	line-height:30px;
-}
+}*/
 .broadcastmsgsend em.msgnoincrease {
 	width:91%;
 }
@@ -2580,7 +2623,7 @@ ul.igiresponses li span {
 }
 .msgdetailbuttons {
 	padding:0;
-	margin:10px 0 10px 55px;
+	margin:10px 0 10px 0px;
 	background:#2d2d2d;
 	line-height:33px;
 	height:36px;
@@ -2588,9 +2631,9 @@ ul.igiresponses li span {
 	border-radius:4px 0 0 4px;
 }
 .msgdetailbuttons .igimsgdetail {
-	background:url(images/msgdetails.png) no-repeat left center;
+	background:url(images/IGI-btn.png) no-repeat 5px center;
 	float:left;
-	padding:18px 28px;
+	padding:18px 24px;
 }
 .igisentimg {
 	background:url(images/msgsentdetails.png) no-repeat left center;
@@ -2598,26 +2641,26 @@ ul.igiresponses li span {
 	margin:6px 0px 0px 6px;
 	padding:12px 18px;
 }
-.msgdetailbuttons a, .msgdetailbuttons a.ui-link, .msgdetailbuttons a.ui-link:visited, .msgdetailbuttons a.ui-link:hover, .msgdetailbuttons a.ui-link:active {
+.msgdetailbuttons a, .msgdetailbuttons a.ui-link, .msgdetailbuttons a.ui-link:visited/*, .msgdetailbuttons a.ui-link:hover*/, .msgdetailbuttons a.ui-link:active {
 	background:#58595b;
 	border-radius:4px;
-	padding:0 15px 0px 15px;
+	padding:2px 15px;
 	text-decoration:none;
-	margin-left:8px;
+	margin-left:4px;
 	font-size:14px;
 	color:#a7a9ac;
 }
-.msgdetailbuttons a.active, .msgdetailbuttons a.active.ui-link {
-	background:#1c75bc;
-	color:#275477;
+.msgdetailbuttons a.active, .msgdetailbuttons a.active.ui-link, .msgdetailbuttons a:hover {
+	background:#8DC63F;
+	color:#fff;
 }
-.msgdetailbuttons a.replybtn, .msgdetailbuttons a.replybtn.ui-link {
+/*.msgdetailbuttons a.replybtn, .msgdetailbuttons a.replybtn.ui-link {
 	float:right;
 	margin:8px 10px 0 0;
 	padding:0px 10px 1px 30px;
 	color:#58595b;
 	background:#a7a9ac url(images/replybg.png) no-repeat 10px 5px;
-}
+}*/
 /*slide menu*/
 .slidemenu {
 	background:#e6e7e8;
@@ -3522,9 +3565,9 @@ ul.igiresponses li span {
 		padding:8px 22px;
 		font-size:14px;
 	}
-	.broadcastmsgsend span {
+	/*.broadcastmsgsend span {
 		width:81%;
-	}
+	}*/
 	.broadcastmsgsend em.broadcastmsgunsend {
 		width:15%;
 	}

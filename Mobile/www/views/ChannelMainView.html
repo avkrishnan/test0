@@ -33,11 +33,10 @@
           <span data-bind="html: broadcast"></span><em data-bind="text: time"></em>
         </div>       
         <div class="broadcastmsgsend">
-          <span data-bind="html: iGi, css: iGiClass, style: { width: $data.percentage}">
-            <em class="percentage"><!--75%--></em>
-          </span>
-          <em data-bind="text: noiGi, css: noiGiClass"></em>
-        </div>      
+          <span class="igigot" data-bind="text: iGi, style: { display: $data.display }"></span>
+          <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }"><!--75%--></span>
+          <em class="iginotgot" data-bind="text: noiGi, style: { display: $data.display }"></em>
+        </div>    
         <div class="broadcastmsgreplie">
           <span data-bind="text: replies"></span><!--<em>3 new</em>-->
         </div>
