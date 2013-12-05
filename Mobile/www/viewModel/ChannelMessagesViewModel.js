@@ -72,6 +72,7 @@ function ChannelMessagesViewModel() {
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
 	
+	
 	/*this.getChannelCommand = function(channelid) {
 		var callbacks = {
 			success: function(){
@@ -108,8 +109,17 @@ function ChannelMessagesViewModel() {
 					else {
 						var tempText = jQuery.trim(valueMessage.text);
 					}
+					if(valueMessage.ackRequested == 'Y' && valueMessage.acknowledged == 'N') {
+						var iGiClass = 'igibutton';
+					}
+					else if(valueMessage.acknowledged == 'Y') {
+						var iGiClass = 'igibutton igisent';						
+					}
+					else {
+						var iGiClass = '';						
+					}
 					that.channelMessages.push( // without push not working
-						{messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
+						{iGiClass: iGiClass, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
 				

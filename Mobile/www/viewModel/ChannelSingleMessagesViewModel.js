@@ -14,6 +14,8 @@ function ChannelSingleMessagesViewModel() {
 	this.messageCreated = ko.observable();
 	this.messageClass = ko.observable();
 	this.messageText = ko.observable();
+	this.activeClass = ko.observable();	
+	this.iGiButton = ko.observable(false);
 	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
@@ -30,6 +32,8 @@ function ChannelSingleMessagesViewModel() {
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
+			that.iGiButton(true);
+			that.activeClass('active');							
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -117,5 +121,22 @@ function ChannelSingleMessagesViewModel() {
 			}
 		});
 	}
+	
+	this.iGiAck = function(data) {
+		var callbacks = {
+			success: function(data) {
+				that.activeClass('');					
+				that.toastText('iGi sent');
+				showToast();
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				showToast();					
+			}
+		};		
+		var channelMessage = JSON.parse(localStorage.getItem('currentChannelMessage'));// to be removed when devender sir done with his work !	
+		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+		return ES.messageService.acknowledgeMsg(channelMessage.messageID, callbacks);
+	}	
 	
 }
