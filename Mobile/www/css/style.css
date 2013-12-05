@@ -2862,7 +2862,7 @@ ul.igiresponses li span {
 	color:#8DC63F;
 	margin:0 25px 0 15px;
 }
-.ui-link:visited, .ui-link:hover, .ui-link:active{
+a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active {
 	outline:none;
 }
 .reply-detail {
@@ -3058,7 +3058,7 @@ ul.igiresponses li span {
 }
 .broadcastinform .escalatecolor {
 	color:#d7df23;
-	font-size:13px
+	font-size:12px
 }
 /*30-11-2013*/
 .settingscontent {
@@ -3137,12 +3137,13 @@ ul.igiresponses li span {
 .escalateedit, .escalateedit.ui-link {
 	float:right;
 	color:#faffff;
-	margin-right:15px;
+	margin-right:11px;
 }
 .igi-send {
 	overflow:hidden;
 	margin:0px 0px 0px 10px;
 	background:#414141;
+	width:100%;
 }
 .igiyesno {
 	float:left;

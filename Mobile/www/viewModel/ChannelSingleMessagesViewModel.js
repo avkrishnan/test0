@@ -10,10 +10,12 @@ function ChannelSingleMessagesViewModel() {
 	this.accountName = ko.observable();	
 	this.title = ko.observable();
 	this.description = ko.observable('');
-	this.channelid = ko.observable();
+	this.channelid = ko.observable();	
 	this.messageCreated = ko.observable();
 	this.messageClass = ko.observable();
 	this.messageText = ko.observable();
+	this.activeClass = ko.observable();	
+	this.iGiButton = ko.observable(false);
 	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
@@ -30,6 +32,8 @@ function ChannelSingleMessagesViewModel() {
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
+			that.iGiButton(false);
+			that.activeClass('');							
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -65,7 +69,7 @@ function ChannelSingleMessagesViewModel() {
 					}
 				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
-				that.channelid(channel.channelId);
+				that.channelid(channel.channelId);			
 				that.messageCreated(channel.created);
 				that.messageClass(channel.type);
 				that.messageText(channel.fullText);
@@ -78,11 +82,17 @@ function ChannelSingleMessagesViewModel() {
 				that.title(channel.name);
 				that.channelid(channel.channelId);
 				that.description(channel.description);
-				if(channelMessage) {
+				if(channelMessage) {					
 					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
-					that.readMessageUpdateBadge(channelMessage.messageID);
+					that.readMessageUpdateBadge(channelMessage.messageId);
+					if(channelMessage.iGiClass != '') {
+						that.iGiButton(true);
+						if(channelMessage.ack == 'N') {
+							that.activeClass('active');													
+						}
+					}
 				}
 			}
 		}
@@ -120,5 +130,57 @@ function ChannelSingleMessagesViewModel() {
 			}
 		});
 	}
+	
+	this.iGiAck = function(data) {
+		var callbacks = {
+			success: function(data) {
+				that.activeClass('');					
+				that.toastText('iGi Acknowledgement sent !');
+				showToast();
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				showToast();					
+			}
+		};		
+		var channelMessage = JSON.parse(localStorage.getItem('currentChannelMessage'));// to be removed when devender sir done with his work !
+		if(channelMessage.ack == 'Y' || that.activeClass() == '') {
+			that.toastText('iGi Acknowledgement already sent !');
+			showToast();												
+		}
+		else {			
+			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+			return ES.messageService.acknowledgeMsg(channelMessage.messageId, callbacks);
+		}
+	}
+	
+	this.iGiAck = function(data) {
+		var callbacks = {
+			success: function(data) {
+				that.activeClass('');					
+				that.toastText('iGi Acknowledgement sent !');
+				showToast();
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				showToast();					
+			}
+		};		
+		var channelMessage = JSON.parse(localStorage.getItem('currentChannelMessage'));// to be removed when devender sir done with his work !
+		if(channelMessage.ack == 'Y' || that.activeClass() == '') {
+			that.toastText('iGi Acknowledgement already sent !');
+			showToast();												
+		}
+		else {			
+			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+			return ES.messageService.acknowledgeMsg(channelMessage.messageId, callbacks);
+		}
+	}	
+	
+	this.replyMessage = function(data) {
+		that.toastText('Feature coming soon!');
+		showToast();		
+		//viewNavigate('Message details', 'channelSingleMessagesView', 'sendMessageView');
+	}		
 	
 }

@@ -14,7 +14,7 @@
     
     <div class="channelmessages" data-bind="foreach: channelMessages">
       <a href="#" data-bind="click: $parent.showSingleMessage">
-        <span class="igibutton igisent"></span>
+        <span data-bind="css: iGiClass"></span>
         <div class="messageschannel">
           <span class="timemsg" data-bind="text:$data.messageCreated"></span>
           <p data-bind="html:$data.messageShortText"></p>
