@@ -17,10 +17,11 @@
           <span data-bind="text: sensitivityText"></span>
           <em data-bind="html: singleMessage"></em>
         </div>
-        <!--<div class="broadcastmsgsend">
-          <a href="#"><span>12 Got it<em class="percentage">75%</em></span></a>
-          <a href="#"><em class="broadcastmsgunsend">4 Haven't</em></a>
-        </div>-->
+        <div class="broadcastmsgsend">
+          <span class="igigot" data-bind="text: iGi"></span>
+          <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }"><!--75%--></span>
+          <em class="iginotgot" data-bind="text: noiGi"></em>
+        </div>
       </div>
       <p data-bind="html: fullText"></p>
     </div>    
