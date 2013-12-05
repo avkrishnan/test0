@@ -42,8 +42,16 @@ function WhoGotItViewModel() {
 			that.accountName(localStorage.getItem('accountName'));											
 			that.channelId(channelObject.channelId);			
 			that.channelName(channelObject.channelName);
-			that.messageId(messageObject.messageId);								
-			that.acks(messageObject.acks+" Got It");
+			that.messageId(messageObject.messageId);
+			if(messageObject.acks) {								
+				that.acks(messageObject.acks+' Got It');
+			} 
+			else if(messageObject.acks == 0) {
+				that.acks(messageObject.acks+' Got It');				
+			}
+			else {
+				that.acks('No iGi requested');
+			}
 			$.mobile.showPageLoadingMsg("a", "Loading Followers");
 			return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'Y', {success: successfulList, error: errorAPI});																			
 		}
@@ -62,7 +70,7 @@ function WhoGotItViewModel() {
 			that.recipients.push({
 				recipientId: data.recipients[len].subscriberId,
 				recipientsClass: recipientsClass,
-				recipient: '<span class="timeundeliver">9/16, 3:35 PM</span>'+data.recipients[len].rcvrFirstname +' '+ data.recipients[len].rcvrLastname+', <em>'+data.recipients[len].rcvrAccountname+'</em>'
+				recipient: data.recipients[len].rcvrFirstname +' '+ data.recipients[len].rcvrLastname+', <em>'+data.recipients[len].rcvrAccountname+'</em>'
 			});
 		}		
 	}
