@@ -109,7 +109,7 @@ function ChannelMessagesViewModel() {
 						var tempText = jQuery.trim(valueMessage.text);
 					}
 					that.channelMessages.push( // without push not working
-						{messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
+						{messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.msgId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
 				
