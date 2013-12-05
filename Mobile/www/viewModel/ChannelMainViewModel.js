@@ -46,7 +46,7 @@ function ChannelMainViewModel() {
 			that.broadcasts.removeAll();							
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
-			that.followerCount(channelObject.followerCount);											
+			that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
 			that.getMessagesCommand();
 		}
 	}		
