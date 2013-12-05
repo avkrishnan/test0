@@ -58,7 +58,7 @@ function EscalateTimeSettingsViewModel() {
 				var mins = _getDate('getMinutes');
 				mins = ((mins<10?'0':'')+mins);			
 				that.minute(mins);
-				var meridiem = _getDate('getHours')>12?'PM':'AM';			
+				var meridiem = _getDate('getHours')>11?'PM':'AM';			
 				that.meridiem(meridiem);							
 			}
 		}
@@ -176,10 +176,18 @@ function EscalateTimeSettingsViewModel() {
 			localStorage.setItem('escDuration', duration);		
 			popBackNav();			
 		}
-		else if(that.year() == _getDate('getFullYear') && $.inArray( that.month(), monthNames) == _getDate('getMonth') && that.day() >= _getDate('getDate')) {
+		else if(that.year() == _getDate('getFullYear') && $.inArray( that.month(), monthNames) == _getDate('getMonth') && that.day() > _getDate('getDate')) {
 			localStorage.setItem('escDuration', duration);		
 			popBackNav();						
-		}				
+		}
+		else if(that.year() == _getDate('getFullYear') && $.inArray( that.month(), monthNames) == _getDate('getMonth') && that.day() == _getDate('getDate') && that.hour() > _getDate('getHours')) {
+			localStorage.setItem('escDuration', duration);		
+			popBackNav();			
+		}
+		else if(that.year() == _getDate('getFullYear') && $.inArray( that.month(), monthNames) == _getDate('getMonth') && that.day() == _getDate('getDate') && that.hour() == _getDate('getHours') && that.minute() >= _getDate('getMinutes')) {
+			localStorage.setItem('escDuration', duration);		
+			popBackNav();						
+		}						
 		else {
 			that.toastText('Please set date greater than current date !');
 			showToast();				
