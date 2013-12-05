@@ -14,6 +14,11 @@ function SingleMessageFullTextViewModel() {
 	this.sensitivity = ko.observable();	
 	this.sensitivityText = ko.observable();	
 	this.singleMessage = ko.observable();
+	this.iGi = ko.observable();
+	this.percentageText = ko.observable();
+	this.percentageClass = ko.observable();	
+	this.percentage = ko.observable();			
+	this.noiGi = ko.observable();	
 	this.fullText = ko.observable();
 	this.toastText = ko.observable();			
 	
@@ -48,6 +53,11 @@ function SingleMessageFullTextViewModel() {
 			that.sensitivity(messageObject.sensitivity);			
 			that.sensitivityText(messageObject.sensitivityText);				
 			that.singleMessage(messageObject.broadcast);
+			that.iGi(messageObject.iGi);
+			that.percentageText(messageObject.percentageText);
+			that.percentageClass(messageObject.percentageClass);			
+			that.percentage(messageObject.percentage);			
+			that.noiGi(messageObject.noiGi);			
 			that.fullText(messageObject.broadcast);										
 		}
 	}		

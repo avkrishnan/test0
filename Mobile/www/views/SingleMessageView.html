@@ -15,12 +15,11 @@
       <a href="#" class="broadcast-sensitive singlemessage" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageFullTextView');">
         <span data-bind="html: singleMessage"></span>
       </a>
-      <div class="broadcastmsgsend">      
-        <span data-bind="html: iGi, css: iGiClass, style: { width: $data.percentage}">
-          <em class="percentage"><!--75%--></em>
-        </span>
-        <em data-bind="text: noiGi, css: noiGiClass"></em>
-      </div> 
+      <div class="broadcastmsgsend">
+        <span class="igigot" data-bind="text: iGi"></span>
+        <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }"><!--75%--></span>
+        <em class="iginotgot" data-bind="text: noiGi"></em>
+      </div>      
     </div>    
     <a class="low-messages repliesmsg" href="#" data-bind="text: replies" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');">
       <!--<span class="newrepliesmsg">3 new</span>-->

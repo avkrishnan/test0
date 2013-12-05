@@ -13,9 +13,9 @@ function SingleMessageViewModel() {
 	this.time = ko.observable();	
 	this.singleMessage = ko.observable();
 	this.iGi = ko.observable();
-	this.iGiClass = ko.observable();
-	this.percentage = ko.observable();	
-	this.noiGiClass = ko.observable();		
+	this.percentageText = ko.observable();
+	this.percentageClass = ko.observable();	
+	this.percentage = ko.observable();			
 	this.noiGi = ko.observable();
 	this.iGivisibility = ko.observable(false);	
 	this.noacks = ko.observable();
@@ -50,9 +50,9 @@ function SingleMessageViewModel() {
 			that.time('Sent '+ dateFormat1(messageObject.created) +' ('+messageObject.time+'):');	
 			that.singleMessage(messageObject.broadcast);
 			that.iGi(messageObject.iGi);
-			that.iGiClass(messageObject.iGiClass);
-			that.percentage(messageObject.percentage);	
-			that.noiGiClass(messageObject.noiGiClass);		
+			that.percentageText(messageObject.percentageText);
+			that.percentageClass(messageObject.percentageClass);			
+			that.percentage(messageObject.percentage);			
 			that.noiGi(messageObject.noiGi);				
 			that.replies(messageObject.replies);
 			that.iGivisibility(false);			
