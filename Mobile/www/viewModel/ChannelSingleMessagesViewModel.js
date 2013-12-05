@@ -10,8 +10,7 @@ function ChannelSingleMessagesViewModel() {
 	this.accountName = ko.observable();	
 	this.title = ko.observable();
 	this.description = ko.observable('');
-	this.channelid = ko.observable();
-	this.messageId = ko.observable();	
+	this.channelid = ko.observable();	
 	this.messageCreated = ko.observable();
 	this.messageClass = ko.observable();
 	this.messageText = ko.observable();
