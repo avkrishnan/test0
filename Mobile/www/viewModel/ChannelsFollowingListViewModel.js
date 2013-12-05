@@ -14,6 +14,7 @@
 		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
 			if (!that.shown) {
 				localStorage.removeItem("currentChannel");
+				localStorage.removeItem("overlayCurrentChannel");
 				that.activate();
 			}
 		});
