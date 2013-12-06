@@ -170,7 +170,7 @@ function EscalateTimeSettingsViewModel() {
 		var duration = that.year()+'/'+that.month()+'/'+that.day()+' '+that.hour()+':'+that.minute()+' '+that.meridiem();
 		var CurrentDate = new Date();
 		var SelectedDate = new Date(duration);		
-		if(SelectedDate > CurrentDate){
+		if(SelectedDate >= CurrentDate){
 			localStorage.setItem('escDuration', duration);		
 			popBackNav();				
 		}					

@@ -82,10 +82,12 @@ function SendMessageViewModel() {
 			that.noClass('nobutton');					
 			that.escalateEdit(false);
 			that.escLevel('N');				
-			that.igiClass('igiimageoff');				
+			that.igiClass('igiimageoff');
+			that.characterCount('0');							
 			if(localStorage.getItem('messageText')) {
 				that.messageText(localStorage.getItem('messageText'));
-				localStorage.removeItem('messageText');												
+				localStorage.removeItem('messageText');
+				that.characterCount(that.messageText().length);																
 			}
 			that.escLevel(localStorage.getItem('escLevel'));				
 			if(that.escLevel() == 'R') {
@@ -142,8 +144,7 @@ function SendMessageViewModel() {
 				that.igiClass('igiimageoff');										
 			}
 			that.broadcastType('FYI');											
-			that.accountName(localStorage.getItem('accountName'));		
-			that.characterCount('0');		
+			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
 			});							

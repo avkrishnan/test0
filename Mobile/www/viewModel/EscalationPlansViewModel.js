@@ -190,7 +190,7 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('name');
 		localStorage.removeItem('escDuration');		
 		localStorage.removeItem('escLevel');
-		localStorage.setItem('currentChannel');				
+		//localStorage.setItem('currentChannel');				
 		//channelListViewModel.clearForm();
 		//notificationsViewModel.removeNotifications();
 		//OVERLAY.removeNotifications();
