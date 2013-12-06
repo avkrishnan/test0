@@ -72,7 +72,7 @@ function ChannelMainViewModel() {
 				var sensitivityText = '';				
 			}
 			if(data.message[len].type == 'REQUEST_ACKNOWLEDGEMENT') {
-				var percentage = (Math.ceil(data.message[len].acks*100/data.message[len].noacks))+'%';													
+				var percentage = (Math.round(Math.ceil(data.message[len].acks*100)/(data.message[len].acks+data.message[len].noacks)))+'%';										
 				if(data.message[len].acks == 0) {
 					var iGi = '0%. . . no responses yet';
 					var noiGi = '';
@@ -80,15 +80,15 @@ function ChannelMainViewModel() {
 					var percentage = '';
 				  var percentageText = '';														 					
 				} else if(percentage == '100%') {
-					var iGi = 'All followers Got it';
+					var iGi = 'All followers Got it '+percentage;
 					var noiGi = '';
 					var percentageClass = '';
-					var percentageText = '<em>'+percentage+'</em>';						
+					var percentageText = '';						
 				} else {
-					var iGi = data.message[len].acks+' Got it';
+					var iGi = data.message[len].acks+' Got it <em class="percentage-text">'+percentage+'</em>';
 					var noiGi = data.message[len].noacks+" Haven't";
 					var percentageClass = '';
-					var percentageText = '<em>'+percentage+'</em>';														 					
+					var percentageText = '';														 					
 				}																	
 			} else {			
 				var iGi = '';

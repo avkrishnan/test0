@@ -16,7 +16,7 @@
         <span data-bind="html: singleMessage"></span>
       </a>
       <div class="broadcastmsgsend">
-        <span class="igigot" data-bind="text: iGi" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');"></span>
+        <span class="igigot" data-bind="html: iGi" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');"></span>
         <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');"></span>
         <em class="iginotgot" data-bind="text: noiGi" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'notGotItView');"></em>
       </div>      
