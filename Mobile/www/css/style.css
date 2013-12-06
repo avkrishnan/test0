@@ -24,6 +24,11 @@ body {
 	margin:0 auto;
 	font-family: 'OpenSansRegular';
 	background:#414141;
+	min-width:320px;
+	overflow:auto;
+}
+body.ui-mobile-viewport, div.ui-mobile-viewport {
+	overflow:auto;
 }
 .clear {
 	clear:both;
@@ -746,15 +751,20 @@ input[type="checkbox"]:checked + label span {
 	padding:0 0 0 20px;
 }
 .loginform .registration {
-	padding:4px 0 0 4px;
+	padding:4px 0 4px 4px;
+	/*border:1px solid red;*/
+	display:table;
+	width:100%;
 }
 .loginform .registration em, .loginform .registration a.informatiniconmsg{
-	float:right;
-	background:#2d2d2d url("images/sprites-login.png") no-repeat -22px -338px;
-	padding:19px 24px 19px 15px;
+	/*float:right;*/
+	background:#2d2d2d url("images/sprites-login.png") no-repeat -18px -338px;
+	/*padding:19px 24px 19px 15px;*/
+	width:40px;
+	display:table-cell;
 }
 .loginform .registration em.enable, .loginform .registration a.informatiniconmsg.enable, .loginform .registration a.informatiniconmsg:hover {
-	background:#2d2d2d url("images/sprites-login.png") no-repeat -22px -474px;
+	background:#2d2d2d url("images/sprites-login.png") no-repeat -18px -474px;
 }
 .signedup span {
 	color:#8DC63F;
@@ -971,7 +981,9 @@ span.down-arrow {
 	border-radius:4px;
 }
 .loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
-	width:85%;
+	/*width:85%;*/
+	display:table-cell;
+	width:100%;
 }
 .errorstate .ui-input-search, .errorstate div.ui-input-text {
 	background:#FEFBD6;
@@ -979,14 +991,15 @@ span.down-arrow {
 div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text, .ui-input-search input.ui-input-text {
 	padding:0 0 0 5px;
 	height:36px;
+	width:97%;
 }
 .ui-btn-corner-all,
 .ui-corner-all {
 	border-radius:0;
 }
-.ui-hide-label input.ui-input-text, .ui-hide-label textarea.ui-input-text, .ui-hide-label .ui-input-search, .ui-hide-label div.ui-input-text, .ui-input-search input.ui-input-text, div.ui-input-text input.ui-input-text {
+/*.ui-hide-label input.ui-input-text, .ui-hide-label textarea.ui-input-text, .ui-hide-label .ui-input-search, .ui-hide-label div.ui-input-text, .ui-input-search input.ui-input-text, div.ui-input-text input.ui-input-text {
 	width:98%;
-}
+}*/
 .loginform div.ui-input-text .typeerrormsg.ui-input-text {
 	width:97.8%;
 	background:#FEFBD6;
@@ -1291,7 +1304,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-size:12px;
 	font-style:italic;
 	margin:8px 0 8px 8px;
-/*	padding:4px 0px;*/
+	/*padding:4px 0px;*/
 }
 .availablechan {
 	padding:0px;
@@ -2595,7 +2608,7 @@ ul.igiresponses li span {
 }
 .messagedetail-info p {
 	font-size:14px;
-	padding:5px 0 0 0;
+/*	padding:5px 0 0 0;*/
 }
 .msgdetailbuttons {
 	background:#2D2D2D;
@@ -2607,16 +2620,18 @@ ul.igiresponses li span {
 	padding:0;
 	float:right;
 }
-.msgdetailbuttons .igimsgdetail {
+.msgdetailbuttons a.igimsgdetail, .msgdetailbuttons a.igimsgdetail.ui-link, .msgdetailbuttons a.igimsgdetail.ui-link:visited, .msgdetailbuttons a.igimsgdetail.ui-link:hover, .msgdetailbuttons a.igimsgdetail.ui-link:active {
 	background:url(images/msgdetails.png) no-repeat left center;
 	float:left;
 	padding:18px 28px 18px 27px;
+	margin:0px;
 }
-.igisentimg {
+.msgdetailbuttons a.igisentimg, .msgdetailbuttons a.igisentimg.ui-link, .msgdetailbuttons a.igisentimg.ui-link:visited, .msgdetailbuttons a.igisentimg.ui-link:hover, .msgdetailbuttons a.igisentimg.ui-link:active {
 	background:url(images/msgsentdetails.png) no-repeat left center;
 	float:left;
 	margin:6px 0px 0px 6px;
 	padding:12px 18px;
+	cursor:auto;
 }
 .msgdetailbuttons a, .msgdetailbuttons a.ui-link, .msgdetailbuttons a.ui-link:visited, .msgdetailbuttons a.ui-link:hover, .msgdetailbuttons a.ui-link:active {
 	background:#58595b;
@@ -3449,9 +3464,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.msgbroadcast p em {
 		font-size:14px;
 	}
-	.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
+	/*.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 		width:87%;
-	}
+	}*/
 	.hamburgermenuhide {
 		min-height:554px;
 		padding:0 19px;
@@ -3585,9 +3600,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.yes-no span.informationicon {
 		width:72%;
 	}
-	.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
+	/*.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 		width: 94%;
-	}
+	}*/
 	.addfollowers a {
 		font-size:15px;
 	}
@@ -3730,9 +3745,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.yes-no span.informationicon {
 		width:78%;
 	}
-	.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
+	/*.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 		width: 95.5%;
-	}
+	}*/
 	.hamburgermenuhide {
 		min-height:1195px;
 		padding:0 26px;
@@ -3818,9 +3833,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.yes-no span.informationicon {
 		width:83%;
 	}
-	.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
+	/*.loginform .registration .ui-input-search, .loginform .registration div.ui-input-text {
 		width:96.5%;
-	}
+	}*/
 	.hamburgermenuhide {
 		min-height:515px;
 		padding:0 33px;

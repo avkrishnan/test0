@@ -152,7 +152,7 @@ function ChannelSingleMessagesViewModel() {
 				showToast();					
 			}
 		};		
-		if(that.ack() == 'Y' || that.activeClass() == '') {
+		if(that.ack() == 'Y' || that.activeClass() == 'igisentimg') {
 			that.toastText('iGi Acknowledgement already sent !');
 			showToast();												
 		}
