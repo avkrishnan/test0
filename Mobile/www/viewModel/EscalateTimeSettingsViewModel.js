@@ -168,26 +168,12 @@ function EscalateTimeSettingsViewModel() {
 	
 	this.saveCommand = function () {
 		var duration = that.year()+'/'+that.month()+'/'+that.day()+' '+that.hour()+':'+that.minute()+' '+that.meridiem();
-		if(that.year() > _getDate('getFullYear')) {
+		var CurrentDate = new Date();
+		var SelectedDate = new Date(duration);		
+		if(SelectedDate > CurrentDate){
 			localStorage.setItem('escDuration', duration);		
 			popBackNav();				
-		}
-		else if(that.year() == _getDate('getFullYear') && $.inArray( that.month(), monthNames) > _getDate('getMonth')) {
-			localStorage.setItem('escDuration', duration);		
-			popBackNav();			
-		}
-		else if(that.year() == _getDate('getFullYear') && $.inArray( that.month(), monthNames) == _getDate('getMonth') && that.day() > _getDate('getDate')) {
-			localStorage.setItem('escDuration', duration);		
-			popBackNav();						
-		}
-		else if(that.year() == _getDate('getFullYear') && $.inArray( that.month(), monthNames) == _getDate('getMonth') && that.day() == _getDate('getDate') && that.hour() > _getDate('getHours')) {
-			localStorage.setItem('escDuration', duration);		
-			popBackNav();			
-		}
-		else if(that.year() == _getDate('getFullYear') && $.inArray( that.month(), monthNames) == _getDate('getMonth') && that.day() == _getDate('getDate') && that.hour() == _getDate('getHours') && that.minute() >= _getDate('getMinutes')) {
-			localStorage.setItem('escDuration', duration);		
-			popBackNav();						
-		}						
+		}					
 		else {
 			that.toastText('Please set date greater than current date !');
 			showToast();				
