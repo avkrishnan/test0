@@ -13,8 +13,7 @@ function ChannelViewUnfollowModel() {
 	
 	this.title = ko.observable('');
 	this.description = ko.observable('');
-	this.toastText = ko.observable();
-	this.counter = ko.observable();			
+	this.toastText = ko.observable();			
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -38,8 +37,7 @@ function ChannelViewUnfollowModel() {
 				localStorage.removeItem('toastData');				
 			}		
 			that.channelid(channel.id);
-			that.accountName(localStorage.getItem("accountName"));
-			that.counter(localStorage.getItem('counter'));					
+			that.accountName(localStorage.getItem("accountName"));					
 			$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		}
 	};	
@@ -59,9 +57,12 @@ function ChannelViewUnfollowModel() {
 	};
 	
 	function successfulUnfollowChannel(data){
-		for(var ctr = 1; ctr <= that.counter(); ctr++) {
-			popBackNav();		
-		}		
+		var counter = localStorage.getItem('counter');
+		for(var ctr = 0; ctr < counter; ctr++) {
+			backNavText.pop();
+			backNavView.pop();	
+		}
+		localStorage.removeItem('counter');				
 		that.toastText('No longer following '+that.title());		
 		localStorage.setItem('toastData', that.toastText());
 		localStorage.removeItem("currentChannel");				
