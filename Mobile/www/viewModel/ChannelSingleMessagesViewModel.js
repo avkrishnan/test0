@@ -33,7 +33,7 @@ function ChannelSingleMessagesViewModel() {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
 			that.iGiButton(false);
-			that.activeClass('');							
+			that.activeClass('igimsgdetail');							
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -87,11 +87,13 @@ function ChannelSingleMessagesViewModel() {
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
 					that.readMessageUpdateBadge(channelMessage.messageId);
-					if(channelMessage.iGiClass != '') {
-						that.iGiButton(true);
-						if(channelMessage.ack == 'N') {
-							that.activeClass('active');													
-						}
+					if(channelMessage.ack == 'N') {
+						that.iGiButton(true);							
+						that.activeClass('igimsgdetail');													
+					}
+					else {
+						that.iGiButton(false);							
+						that.activeClass('igisentimg');							
 					}
 				}
 			}
@@ -134,30 +136,8 @@ function ChannelSingleMessagesViewModel() {
 	this.iGiAck = function(data) {
 		var callbacks = {
 			success: function(data) {
-				that.activeClass('');					
-				that.toastText('iGi Acknowledgement sent !');
-				showToast();
-			},
-			error: function(data, status, details) {
-				that.toastText(details.message);
-				showToast();					
-			}
-		};		
-		var channelMessage = JSON.parse(localStorage.getItem('currentChannelMessage'));// to be removed when devender sir done with his work !
-		if(channelMessage.ack == 'Y' || that.activeClass() == '') {
-			that.toastText('iGi Acknowledgement already sent !');
-			showToast();												
-		}
-		else {			
-			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
-			return ES.messageService.acknowledgeMsg(channelMessage.messageId, callbacks);
-		}
-	}
-	
-	this.iGiAck = function(data) {
-		var callbacks = {
-			success: function(data) {
-				that.activeClass('');					
+				that.iGiButton(false);				
+				that.activeClass('igisentimg');					
 				that.toastText('iGi Acknowledgement sent !');
 				showToast();
 			},
@@ -180,7 +160,6 @@ function ChannelSingleMessagesViewModel() {
 	this.replyMessage = function(data) {
 		that.toastText('Feature coming soon!');
 		showToast();		
-		//viewNavigate('Message details', 'channelSingleMessagesView', 'sendMessageView');
 	}		
 	
 }

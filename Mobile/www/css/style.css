@@ -332,7 +332,7 @@ h1.newcreatechannel {
 	padding:10px 10px 12px 56px;
 	font-size:15px;
 	height:36px;
-	display: table-cell; 
+	display:table-cell; 
   vertical-align: middle;
 }
 .message-arrives {
@@ -718,7 +718,7 @@ input[type="checkbox"]:checked + label span {
 	font-style:italic;
 	margin:10px 20px 10px 10px;
 }
-hr, .baseline {
+.baseline {
 	height:1px;
 	background:#545454;
 	border:0;
@@ -1580,7 +1580,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:url("images/all-icons.png") no-repeat scroll -477px -5px;
 }
 .messageschannel {
-	padding:0 0 4px 6px;
+	padding:0 0 4px 4px;
 	float:left;
 	width:96%;
 }
@@ -1849,23 +1849,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:none;
 	padding:0px 20px;
 }
-/*.broadcastmsgsend span {
-	float:left;
-	height:30px;
-	line-height:30px;
-	padding:0 2% 0 2%;
-	width:64%;
-	font-size:14px;
-	color:#fff;
-	background: rgb(141,198,63);  Old browsers 
-	background: -moz-linear-gradient(top,  rgba(141,198,63,1) 0%, rgba(163,205,55,1) 50%, rgba(141,198,63,1) 51%, rgba(210,221,37,1) 100%);  FF3.6+ 
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(141,198,63,1)), color-stop(50%,rgba(163,205,55,1)), color-stop(51%,rgba(141,198,63,1)), color-stop(100%,rgba(210,221,37,1)));  Chrome,Safari4+ 
-	background: -webkit-linear-gradient(top,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%);  Chrome10+,Safari5.1+ 
-	background: -o-linear-gradient(top,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%);  Opera 11.10+ 
-	background: -ms-linear-gradient(top,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%);  IE10+ 
-	background: linear-gradient(to bottom,  rgba(141,198,63,1) 0%,rgba(163,205,55,1) 50%,rgba(141,198,63,1) 51%,rgba(210,221,37,1) 100%);  W3C 
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8dc63f', endColorstr='#d2dd25',GradientType=0 );  IE6-9 
-}*/
 .broadcastmsgsend span.msgincreasefull {
 	width:96.5%;
 }
@@ -1884,20 +1867,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	float:right;
 	padding:14px 15px;
 }
-/*.broadcastmsgsend span em.percentage {
-	float:right;
-	font-style:normal;
-}*/
-/*.broadcastmsgsend em.broadcastmsgunsend {
-	float:right;
-	font-size:14px;
-	padding:0;
-	width:32%;
-	font-style:normal;
-	color:#fff;
-	text-align:center;
-	line-height:30px;
-}*/
 .broadcastmsgsend em.msgnoincrease {
 	width:91%;
 }
@@ -2129,10 +2098,11 @@ h1.requests {
 	border-radius:4px;
 	margin:8px 0 5px 0;
 	width:98.5%;
+	position:relative;
 }
-.followerincrease .broadcastmsgsend .msgincreasefull {
+/*.followerincrease .broadcastmsgsend .msgincreasefull {
 	width:75%;
-}
+}*/
 .response {
 	font-size:14px;
 	padding:0 0 0 10px;
@@ -2281,7 +2251,6 @@ h1.requests {
 .messagesreceived .messageschannel .receive-time, .igi-responses .receive-time {
 	font-size:12px;
 	color:#414141;
-	/*line-height:20px;*/
 	word-break:break-all;
 	padding:0 5px 0 0;
 }
@@ -2294,7 +2263,6 @@ h1.requests {
 	font-size:12px;
 	padding:0 2px 0 0;
 	float:left;
-/*	line-height:16px;*/
 }
 .normalicon {
 	background:url("images/sprites.png") no-repeat -3px -1547px;
@@ -2482,7 +2450,7 @@ ul.igiresponses li span {
 	background: -o-linear-gradient(left,  rgba(37,38,37,1) 2%,rgba(83,82,84,1) 31%,rgba(128,130,133,1) 82%,rgba(83,82,84,1) 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(left,  rgba(37,38,37,1) 2%,rgba(83,82,84,1) 31%,rgba(128,130,133,1) 82%,rgba(83,82,84,1) 100%); /* IE10+ */
 	background: linear-gradient(to right,  rgba(37,38,37,1) 2%,rgba(83,82,84,1) 31%,rgba(128,130,133,1) 82%,rgba(83,82,84,1) 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#252625', endColorstr='#535254',GradientType=1 ); /* IE6-9 */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#252625', endColorstr='#535254',GradientType=1 ); /* IE6-9 */s
 }
 .increase-msg span {
 	height:10px;
@@ -2630,18 +2598,19 @@ ul.igiresponses li span {
 	padding:5px 0 0 0;
 }
 .msgdetailbuttons {
-	padding:0;
-	margin:10px 0 10px 0px;
-	background:#2d2d2d;
-	line-height:33px;
-	height:36px;
-	overflow:hidden;
+	background:#2D2D2D;
 	border-radius:4px 0 0 4px;
+	height:36px;
+	line-height:33px;
+	margin:10px 0 10px 0;
+	overflow:hidden;
+	padding:0;
+	float:right;
 }
 .msgdetailbuttons .igimsgdetail {
-	background:url(images/IGI-btn.png) no-repeat 5px center;
+	background:url(images/msgdetails.png) no-repeat left center;
 	float:left;
-	padding:18px 24px;
+	padding:18px 28px 18px 27px;
 }
 .igisentimg {
 	background:url(images/msgsentdetails.png) no-repeat left center;
@@ -2649,26 +2618,26 @@ ul.igiresponses li span {
 	margin:6px 0px 0px 6px;
 	padding:12px 18px;
 }
-.msgdetailbuttons a, .msgdetailbuttons a.ui-link, .msgdetailbuttons a.ui-link:visited/*, .msgdetailbuttons a.ui-link:hover*/, .msgdetailbuttons a.ui-link:active {
+.msgdetailbuttons a, .msgdetailbuttons a.ui-link, .msgdetailbuttons a.ui-link:visited, .msgdetailbuttons a.ui-link:hover, .msgdetailbuttons a.ui-link:active {
 	background:#58595b;
 	border-radius:4px;
-	padding:2px 15px;
+	padding:2px 13px;
 	text-decoration:none;
-	margin-left:4px;
+	margin-left:8px;
 	font-size:14px;
 	color:#a7a9ac;
 }
-.msgdetailbuttons a.active, .msgdetailbuttons a.active.ui-link, .msgdetailbuttons a:hover {
-	background:#8DC63F;
-	color:#fff;
-}
-/*.msgdetailbuttons a.replybtn, .msgdetailbuttons a.replybtn.ui-link {
+.msgdetailbuttons a.replybtn, .msgdetailbuttons a.replybtn.ui-link, .msgdetailbuttons a.replybtn.ui-link:visited, .msgdetailbuttons a.replybtn.ui-link:hover, .msgdetailbuttons a.replybtn.ui-link:active {
+	background:#A7A9AC url("images/replybg.png") no-repeat 10px 5px;
+	color:#58595B;
 	float:right;
-	margin:8px 10px 0 0;
-	padding:0px 10px 1px 30px;
-	color:#58595b;
-	background:#a7a9ac url(images/replybg.png) no-repeat 10px 5px;
-}*/
+	margin:8px 10px 0 8px;
+	padding:0 10px 1px 30px;
+}
+.msgdetailbuttons a.active, .msgdetailbuttons a.active.ui-link, .msgdetailbuttons a:hover {
+	background:#1C75BC;
+	color:#275477;
+}
 /*slide menu*/
 .slidemenu {
 	background:#e6e7e8;
@@ -2862,7 +2831,7 @@ ul.igiresponses li span {
 	color:#8DC63F;
 	margin:0 25px 0 15px;
 }
-a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active {
+a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	outline:none;
 }
 .reply-detail {
@@ -3443,7 +3412,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active {
 	.channelicons ul {
 		width:84%;
 	}
-	hr, .baseline {
+	.baseline {
 		margin:15px 20px 20px 10px;
 	}
 	.loginform span {
