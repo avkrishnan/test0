@@ -1,4 +1,4 @@
-﻿ /*globals ko*/
+﻿/*globals ko*/
 /* To do - Pradeep Kumar */
 function ReplyDetailViewModel() {
   var that = this;

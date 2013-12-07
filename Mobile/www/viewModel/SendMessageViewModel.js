@@ -142,14 +142,14 @@ function SendMessageViewModel() {
 				localStorage.removeItem('escDuration');
 				that.escLevel('N');				
 				that.igiClass('igiimageoff');										
-			}
+			}			
+			that.broadcastType('FYI');
 			if(localStorage.getItem('iGiStatus')) {
 				that.igiClass('igiimage');		
 				that.yesClass('nobutton');
 				that.noClass('yesbutton');
 				that.broadcastType('RAC');															
-			}			
-			that.broadcastType('FYI');											
+			}														
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
