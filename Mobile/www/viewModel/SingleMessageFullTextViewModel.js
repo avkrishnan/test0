@@ -52,13 +52,13 @@ function SingleMessageFullTextViewModel() {
 			that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
 			that.sensitivity(messageObject.sensitivity);			
 			that.sensitivityText(messageObject.sensitivityText);				
-			that.singleMessage(messageObject.broadcast);
+			that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+$.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...<em></em>');
 			that.iGi(messageObject.iGi);
 			that.percentageText(messageObject.percentageText);
 			that.percentageClass(messageObject.percentageClass);			
 			that.percentage(messageObject.percentage);			
 			that.noiGi(messageObject.noiGi);			
-			that.fullText(messageObject.broadcast);										
+			that.fullText(messageObject.broadcastFull);										
 		}
 	}		
 				

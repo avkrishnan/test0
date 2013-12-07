@@ -133,8 +133,9 @@ function ChannelMainViewModel() {
 			that.broadcasts.push({
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
-				sensitivityText: sensitivityText,			
-				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',
+				sensitivityText: sensitivityText,
+				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',	
+				broadcastFull: data.message[len].text, 
 				time: msToTime(data.message[len].created),
 				created: data.message[len].created,
 				iGi: iGi,

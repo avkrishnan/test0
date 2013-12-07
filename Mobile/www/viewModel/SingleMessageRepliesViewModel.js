@@ -63,7 +63,11 @@ function SingleMessageRepliesViewModel() {
 					responseToMsgId: data.message[len].responseToMsgId,		
 					created: data.message[len].created,				
 					replyTime: msToTime(data.message[len].created),
-					reply: data.message[len].text,							
+					reply: '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+$.trim(data.message[len].text).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...',
+					replyLess: $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...',					
+					replyFull: data.message[len].text,
+					senderFirstname: data.message[len].senderFirstname,
+					senderLastname: data.message[len].senderLastname,										
 					replyToReply: data.message[len].replies
 				});
 			}
