@@ -56,7 +56,7 @@ function EscalateTimeSettingsViewModel() {
 				hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
 				that.hour(hours);
 				var mins = _getDate('getMinutes');
-				mins = ((mins<10?'0':'')+(mins+1));			
+				mins = ((mins+1<10?'0':'')+(mins+1));			
 				that.minute(mins);
 				var meridiem = _getDate('getHours')>11?'PM':'AM';			
 				that.meridiem(meridiem);							
@@ -167,8 +167,6 @@ function EscalateTimeSettingsViewModel() {
 	};					
 	
 	this.saveCommand = function () {
-		//var minutes = that.minute();
-		//minutes = minutes + 1;
 		var duration = that.year()+'/'+that.month()+'/'+that.day()+' '+that.hour()+':'+that.minute()+' '+that.meridiem();
 		var CurrentDate = new Date();
 		var SelectedDate = new Date(duration);		

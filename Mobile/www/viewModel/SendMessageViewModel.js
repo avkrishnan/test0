@@ -214,7 +214,9 @@ function SendMessageViewModel() {
 		localStorage.removeItem('escLevel');						
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());		
-		popBackNav();							
+		//popBackNav();
+		localStorage.setItem('currentChannelId', that.selectedChannels())
+		goToView('channelMainView');									
 	};
 	
 	function errorAPI(data, status, details){
