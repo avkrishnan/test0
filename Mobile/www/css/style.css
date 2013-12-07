@@ -1770,9 +1770,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin-left:-22px;
 	border-radius:21px 0 0 21px;
 }
-.broadcast-sensitive span strong.icon-n {
+/*.broadcast-sensitive span strong.icon-n {
 	background:url("images/all-icons.png") no-repeat -342px -7px;
-}
+}*/
 .broadcast-sensitive span strong.icon-r {
 	background:url("images/all-icons.png") no-repeat -342px -7px;
 }
@@ -1973,9 +1973,9 @@ h1.messagesdate {
 .msgfullread.icon-h {
 	background:#F1F2F2 url("images/sprites-channel.png") no-repeat -6px -801px;
 }
-.msgfullread.icon-n {
+/*.msgfullread.icon-n {
 	background-position:-8px -933px;
-}
+}*/
 .msgfullread.icon-r {
 	background-position:-8px -933px;
 }

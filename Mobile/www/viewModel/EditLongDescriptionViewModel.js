@@ -35,6 +35,8 @@ function EditLongDescriptionViewModel() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 			goToView('loginView');
+		} else if(!channelObject) {
+			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {

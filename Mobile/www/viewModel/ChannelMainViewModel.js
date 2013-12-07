@@ -27,7 +27,7 @@ function ChannelMainViewModel() {
 		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));					
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channelObject) {
+		} else if(!channelObject && localStorage.getItem('currentChannelId')) {
 			goToView('channelsIOwnView');		
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
@@ -66,7 +66,22 @@ function ChannelMainViewModel() {
 		else {
 			var followers = data.followers +' followers';
 		}					
-		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');		
+		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		var channel = [];			
+		channel.push({
+			channelId: data.id, 
+			channelName: data.name, 
+			channelDescription: data.description,
+			followerCount: followers
+		});
+		channel = channel[0];		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));
+		localStorage.removeItem('currentChannelId')					
   };			
 	
 	function successfulMessageGET(data){

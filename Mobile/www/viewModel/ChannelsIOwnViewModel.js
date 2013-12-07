@@ -71,7 +71,6 @@ function ChannelsIOwnViewModel() {
 	
 	this.channelMain = function(data){
 		localStorage.removeItem('currentChannelData');		
-		localStorage.removeItem('currentChannelId');		
 		localStorage.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelMainView');					
 	};
