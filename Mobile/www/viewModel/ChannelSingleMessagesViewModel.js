@@ -10,12 +10,14 @@ function ChannelSingleMessagesViewModel() {
 	this.accountName = ko.observable();	
 	this.title = ko.observable();
 	this.description = ko.observable('');
-	this.channelid = ko.observable();	
+	this.channelid = ko.observable();
+	this.messageId = ko.observable();
+	this.ack = ko.observable();	
 	this.messageCreated = ko.observable();
 	this.messageClass = ko.observable();
 	this.messageText = ko.observable();
 	this.activeClass = ko.observable();	
-	this.iGiButton = ko.observable(false);
+	this.iGiButton = ko.observable(true);
 	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
@@ -32,7 +34,7 @@ function ChannelSingleMessagesViewModel() {
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
-			that.iGiButton(false);
+			that.iGiButton(true);
 			that.activeClass('igimsgdetail');							
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
@@ -69,7 +71,9 @@ function ChannelSingleMessagesViewModel() {
 					}
 				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
-				that.channelid(channel.channelId);			
+				that.channelid(channel.channelId);
+				that.messageId(channel.msgId);
+				that.ack(channel.ack);							
 				that.messageCreated(channel.created);
 				that.messageClass(channel.type);
 				that.messageText(channel.fullText);
@@ -82,7 +86,9 @@ function ChannelSingleMessagesViewModel() {
 				that.title(channel.name);
 				that.channelid(channel.channelId);
 				that.description(channel.description);
-				if(channelMessage) {					
+				if(channelMessage) {
+					that.messageId(channelMessage.messageId);
+					that.ack(channelMessage.ack);																
 					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
@@ -154,14 +160,13 @@ function ChannelSingleMessagesViewModel() {
 				showToast();					
 			}
 		};		
-		var channelMessage = JSON.parse(localStorage.getItem('currentChannelMessage'));// to be removed when devender sir done with his work !
-		if(channelMessage.ack == 'Y' || that.activeClass() == '') {
+		if(that.ack() == 'Y' || that.activeClass() == 'igisentimg') {
 			that.toastText('iGi Acknowledgement already sent !');
 			showToast();												
 		}
 		else {			
 			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
-			return ES.messageService.acknowledgeMsg(channelMessage.messageId, callbacks);
+			return ES.messageService.acknowledgeMsg(that.messageId(), callbacks);
 		}
 	}	
 	

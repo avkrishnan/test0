@@ -43,13 +43,31 @@ function ChannelMainViewModel() {
 				localStorage.setItem('counter', 1)
 			}								
 			localStorage.removeItem('currentMessageData');			
-			that.broadcasts.removeAll();							
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);
-			that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
+			that.broadcasts.removeAll();
+			if(localStorage.getItem('currentChannelId')) {
+				that.channelId(localStorage.getItem('currentChannelId'));								
+				return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI}).then(that.getMessagesCommand());								
+			}
+			else {									
+				that.channelId(channelObject.channelId);
+				that.channelName(channelObject.channelName);
+				that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
+			}
 			that.getMessagesCommand();
 		}
-	}		
+	}
+	
+	function successfulGetChannel(data) {
+		$.mobile.hidePageLoadingMsg();								
+		that.channelName(data.name);
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} 
+		else {
+			var followers = data.followers +' followers';
+		}					
+		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');		
+  };			
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();

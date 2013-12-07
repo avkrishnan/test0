@@ -12,8 +12,7 @@ function ChannelDeleteViewModel() {
 	this.channelId = ko.observable();
 	this.channelName = ko.observable();
 	this.channelDisplayName = ko.observable();
-	this.toastText = ko.observable();
-	this.counter = ko.observable();							
+	this.toastText = ko.observable();						
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -40,17 +39,18 @@ function ChannelDeleteViewModel() {
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
-			that.channelDisplayName(channelObject.channeldescription);
-			that.counter(localStorage.getItem('counter'));			
+			that.channelDisplayName(channelObject.channeldescription);			
 		}
 	}	
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-		for(var ctr = 0; ctr <= that.counter(); ctr++) {
-			popBackNav();		
+		var counter = localStorage.getItem('counter');
+		for(var ctr = 0; ctr <= counter; ctr++) {	
+			backNavText.pop();
+			backNavView.pop();
 		}
-		localStorage.removeItem('counter')
+		localStorage.removeItem('counter');
 		that.toastText('Channel deleted');		
 		localStorage.setItem('toastData', that.toastText());
 		goToView('channelsIOwnView');		

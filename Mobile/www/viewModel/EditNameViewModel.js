@@ -92,7 +92,6 @@ function EditNameViewModel() {
   function successfulUpdate(args) {
     $.mobile.hidePageLoadingMsg();
 		popBackNav();
-		goToView('escalationPlansView');
   };
 
   function errorAPI(data, status, details) {
