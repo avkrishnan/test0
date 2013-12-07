@@ -124,12 +124,15 @@ function OverlayViewModel() {
 			if(valueNotification.text.length > screenSizeText) {
 				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";
 			}
-			if(valueNotification.escLevelId) {
-				valueNotification.escLevelId = "icon-" + valueNotification.escLevelId.toLowerCase();
+			if(valueNotification.escLevelId && valueNotification.escLevelId != 'N' && valueNotification.escLevelId != 'F') {
+				valueNotification.escLevelId = "iconchannels icon-" + valueNotification.escLevelId.toLowerCase();
 			}
+			else if (valueNotification.escLevelId == 'N' || valueNotification.escLevelId == 'F') {
+				tempClass = '';						
+			}			
 			else {
-				valueNotification.escLevelId = "icon-d";
-			}
+				valueNotification.escLevelId = "iconchannels icon-d";
+			}		
 			that.newMessagesDisplayList.push(valueNotification);
 		});
 	}

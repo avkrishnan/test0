@@ -27,7 +27,7 @@ function ChannelMainViewModel() {
 		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));					
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channelObject && localStorage.getItem('currentChannelId')) {
+		} else if(!channelObject && !localStorage.getItem('currentChannelId')) {
 			goToView('channelsIOwnView');		
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			

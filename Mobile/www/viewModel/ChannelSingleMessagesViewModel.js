@@ -17,7 +17,8 @@ function ChannelSingleMessagesViewModel() {
 	this.messageClass = ko.observable();
 	this.messageText = ko.observable();
 	this.activeClass = ko.observable();	
-	this.iGiButton = ko.observable(true);
+	this.iGiButton = ko.observable(false);	
+	this.snoozeButton = ko.observable(true);
 	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
@@ -34,7 +35,8 @@ function ChannelSingleMessagesViewModel() {
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
-			that.iGiButton(true);
+			that.iGiButton(false);
+			that.snoozeButton(true);			
 			that.activeClass('igimsgdetail');							
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
@@ -93,13 +95,17 @@ function ChannelSingleMessagesViewModel() {
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
 					that.readMessageUpdateBadge(channelMessage.messageId);
-					if(channelMessage.ack == 'N') {
-						that.iGiButton(true);							
-						that.activeClass('igimsgdetail');													
-					}
-					else {
-						that.iGiButton(false);							
-						that.activeClass('igisentimg');							
+					if(channelMessage.iGiClass != '') {
+						if(channelMessage.ack == 'N') {
+							that.iGiButton(true);
+							that.snoozeButton(true);													
+							that.activeClass('igimsgdetail');													
+						}
+						else {
+							that.iGiButton(true);	
+							that.snoozeButton(false);													
+							that.activeClass('igisentimg');							
+						}
 					}
 				}
 			}
@@ -150,7 +156,8 @@ function ChannelSingleMessagesViewModel() {
 	this.iGiAck = function(data) {
 		var callbacks = {
 			success: function(data) {
-				that.iGiButton(false);				
+				that.iGiButton(true);
+				that.snoozeButton(false);								
 				that.activeClass('igisentimg');					
 				that.toastText('iGi Acknowledgement sent !');
 				showToast();

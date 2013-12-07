@@ -51,8 +51,13 @@ function SingleMessageFullTextViewModel() {
 			var fullDate = dateFormat1(messageObject.created);					
 			that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
 			that.sensitivity(messageObject.sensitivity);			
-			that.sensitivityText(messageObject.sensitivityText);				
-			that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+$.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...<em></em>');
+			that.sensitivityText(messageObject.sensitivityText);
+			if(messageObject.broadcastFull.length > truncatedTextScreen()) {
+				that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+$.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...<em></em>');
+			}
+			else {
+				that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+messageObject.broadcastFull+'<em></em>');				
+			}							
 			that.iGi(messageObject.iGi);
 			that.percentageText(messageObject.percentageText);
 			that.percentageClass(messageObject.percentageClass);			

@@ -88,7 +88,7 @@ function SendMessageViewModel() {
 				that.messageText(localStorage.getItem('messageText'));
 				localStorage.removeItem('messageText');
 				that.characterCount(that.messageText().length);																
-			}
+			}			
 			that.escLevel(localStorage.getItem('escLevel'));				
 			if(that.escLevel() == 'R') {
 				escalate = 'Remind';
@@ -143,6 +143,12 @@ function SendMessageViewModel() {
 				that.escLevel('N');				
 				that.igiClass('igiimageoff');										
 			}
+			if(localStorage.getItem('iGiStatus')) {
+				that.igiClass('igiimage');		
+				that.yesClass('nobutton');
+				that.noClass('yesbutton');
+				that.broadcastType('RAC');															
+			}			
 			that.broadcastType('FYI');											
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {								
@@ -211,7 +217,8 @@ function SendMessageViewModel() {
 	
 	function successfulMessage(data){
 		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('escLevel');						
+		localStorage.removeItem('escLevel');
+		localStorage.removeItem('iGiStatus');								
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());		
 		localStorage.setItem('currentChannelId', that.selectedChannels())
@@ -221,7 +228,8 @@ function SendMessageViewModel() {
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
 		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('escLevel');						
+		localStorage.removeItem('escLevel');
+		localStorage.removeItem('iGiStatus');								
 		that.toastText(details.message);		
 		showToast();			
 	};
@@ -283,14 +291,16 @@ function SendMessageViewModel() {
 		that.igiClass('igiimage');		
 		that.yesClass('nobutton');
 		that.noClass('yesbutton');
-		that.broadcastType('RAC');											
+		that.broadcastType('RAC');
+		localStorage.setItem('iGiStatus', 'yes');													
   };
 	
 	this.iGiNo = function () {
 		that.igiClass('igiimageoff');		
 		that.yesClass('yesbutton');
 		that.noClass('nobutton');
-		that.broadcastType('FYI');											
+		that.broadcastType('FYI');
+		localStorage.removeItem('iGiStatus');													
   };								
 
 }

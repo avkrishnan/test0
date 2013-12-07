@@ -96,12 +96,15 @@ function ChannelMessagesViewModel() {
 				var screenSizeText = truncatedTextScreen();
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
 					var tempCreated = msToTime(valueMessage.created);
-					if(valueMessage.escLevelId) {
+					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
 						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
-						tempClass = 'icon-' + tempClass;
+						tempClass = 'iconchannels icon-' + tempClass;
+					}
+					else if(valueMessage.escLevelId == 'N' || valueMessage.escLevelId == 'F') {
+						tempClass = '';						
 					}
 					else {
-						tempClass = 'icon-d'
+						tempClass = 'iconchannels icon-d'
 					}
 					if(valueMessage.text.length > screenSizeText) {
 						var tempText = jQuery.trim(valueMessage.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";

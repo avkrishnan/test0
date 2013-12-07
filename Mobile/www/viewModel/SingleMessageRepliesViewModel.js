@@ -57,14 +57,22 @@ function SingleMessageRepliesViewModel() {
 		var len = 0;
 		for(len; len<data.message.length; len++) {
 			if(data.message[len].replies < 1) {
+				if(data.message[len].text.length > truncatedTextScreen()) {
+					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+$.trim(data.message[len].text).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...';
+				  var replyLess = $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...'
+				}
+				else {
+					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+data.message[len].text;
+					var replyLess = data.message[len].text;					
+				}				
 				that.replies.push({
 					replyId: data.message[len].id,
 					senderSubscriberId: data.message[len].senderSubscriberId,
 					responseToMsgId: data.message[len].responseToMsgId,		
 					created: data.message[len].created,				
 					replyTime: msToTime(data.message[len].created),
-					reply: '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+$.trim(data.message[len].text).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...',
-					replyLess: $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...',					
+					reply: reply,
+					replyLess: replyLess,					
 					replyFull: data.message[len].text,
 					senderFirstname: data.message[len].senderFirstname,
 					senderLastname: data.message[len].senderLastname,										
