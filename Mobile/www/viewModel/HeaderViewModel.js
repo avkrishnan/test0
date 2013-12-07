@@ -16,8 +16,40 @@
 		} 
 		else {
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-		}		
-		that.showNewMessagesCount(localStorage.getItem('enymNotifications'));
+		}
+		this.updateBadges();	
+	}
+	
+	/* This function changes badge count as per the new api*/
+	this.updateBadges = function() {
+		ES.systemService.getMsgNotifsSmry({
+			success: function(responseData) {
+				if(responseData.unreadCount > 0) {
+					headerViewModel.newMessageCount(responseData.unreadCount)
+					ES.systemService.getMsgNotifs({
+						success: function(responseData) {
+							localStorage.removeItem('enymNotifications');
+							localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
+							if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+								overlayViewModel.showNewMessagesOverlay();
+							}			
+						},
+						error: function(data, status, details) {
+							that.toastText(details.message);
+							localStorage.setItem('toastData', that.toastText());
+						}
+					});			
+				}
+				else {
+					headerViewModel.newMessageCount('');
+					headerViewModel.newMessageClass('');			
+				}
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				localStorage.setItem('toastData', that.toastText());				
+			}
+		});		
 	}
 	
 	/* This Function shows Count of New Message in header badge*/
@@ -80,7 +112,7 @@ function OverlayViewModel() {
 	this.toastText = ko.observable();
 	
 	this.activate = function() {
-		that.showNewMessagesOverlay();
+		//that.showNewMessagesOverlay();
 	}
 
 	this.showNewMessagesOverlay = function() {

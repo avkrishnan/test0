@@ -119,7 +119,15 @@ function ChannelSingleMessagesViewModel() {
 	}
 	
 	this.updateMessages = function() {
-		ES.systemService.getMsgNotifs({
+		//alert(headerViewModel.newMessageCount());
+		if(responseData.unreadCount > 0) {
+			headerViewModel.newMessageCount(responseData.unreadCount)
+		}
+		else {
+			headerViewModel.newMessageCount('');
+			headerViewModel.newMessageClass('');			
+		}
+		/*ES.systemService.getMsgNotifs({
 			success: function(responseData) {
 				localStorage.removeItem('enymNotifications');
 				localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
@@ -136,7 +144,7 @@ function ChannelSingleMessagesViewModel() {
 				that.toastText(details.message);
 				localStorage.setItem('toastData', that.toastText());				
 			}
-		});
+		});*/
 	}
 	
 	this.iGiAck = function(data) {
