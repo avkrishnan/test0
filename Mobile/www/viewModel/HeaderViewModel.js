@@ -134,17 +134,15 @@ function OverlayViewModel() {
 				valueNotification.escLevelId = "iconchannels icon-d";
 			}
 			if(valueNotification.ackRequested == 'Y' && valueNotification.acknowledged == 'N') {
-				var iGiClass = 'igibutton';
-				valueNotification.iGiClass = 'igibutton';			
+				var iGiClass = 'igibutton';		
 			}
 			else if(valueNotification.acknowledged == 'Y') {
-				var iGiClass = 'igibutton igisent';
-				valueNotification.iGiClass = 'igibutton igisent';										
+				var iGiClass = 'igibutton igisent';										
 			}
 			else {
-				var iGiClass = '';
-				valueNotification.iGiClass = '';										
-			}					
+				var iGiClass = '';										
+			}
+			valueNotification.iGiClass = iGiClass;								
 			that.newMessagesDisplayList.push(valueNotification);
 		});
 	}
@@ -157,9 +155,9 @@ function OverlayViewModel() {
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
-		if($.mobile.activePage.attr('id') == 'channelSingleMessagesView') {
-			popBackNav();			
-		}		
+		/*if($.mobile.activePage.attr('id') == 'channelSingleMessagesView') {
+			popBackNav();	
+		}*/	
 		var backText = getCurrentViewModel().viewname;	
 		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelSingleMessagesView');
 	}

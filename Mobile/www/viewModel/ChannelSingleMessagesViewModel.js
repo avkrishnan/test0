@@ -77,8 +77,20 @@ function ChannelSingleMessagesViewModel() {
 				that.messageId(channel.msgId);
 				that.ack(channel.ack);							
 				that.messageCreated(channel.created);
-				that.messageClass(channel.type);
+				that.messageClass(channel.escLevelId);
 				that.messageText(channel.fullText);
+				if(channel.iGiClass != '') {
+					if(channel.acknowledged == 'N') {
+						that.iGiButton(true);
+						that.snoozeButton(true);													
+						that.activeClass('igimsgdetail');													
+					}
+					else {
+						that.iGiButton(true);	
+						that.snoozeButton(false);													
+						that.activeClass('igisentimg');							
+					}
+				}				
 				//that.readMessageUpdateBadge(channel.msgId);
 				return ES.channelService.getChannel(channel.channelId, callbacks).then(this.readMessageUpdateBadge(channel.msgId));
 			}			
