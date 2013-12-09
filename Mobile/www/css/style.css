@@ -225,7 +225,8 @@ h1.newcreatechannel {
 	color:#fff;
 	font-style:italic;
 	line-height:normal;
-	margin:8px 15px 8px 10px;
+	margin:0 0 0 10px;
+	line-height:32px;
 }
 .error-message span {
 	background:none;

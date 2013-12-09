@@ -33,6 +33,7 @@ function EditLongDescriptionViewModel() {
 	
 	this.activate = function() {
 		var token = ES.evernymService.getAccessToken();
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else if(!channelObject) {
@@ -45,7 +46,6 @@ function EditLongDescriptionViewModel() {
 				localStorage.removeItem('toastData');												
 			}			
 			that.accountName(localStorage.getItem('accountName'));		
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);			
 			that.longDescription(channelObject.longDescription);						
