@@ -284,7 +284,7 @@ function SendMessageViewModel() {
 		that.escLevel('F');						
   };		
 	
-	this.escalateYes = function () {
+	this.escalateYes = function () {	
 		localStorage.setItem('messageText', that.messageText());		
 		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };

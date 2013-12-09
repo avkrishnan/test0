@@ -128,11 +128,23 @@ function OverlayViewModel() {
 				valueNotification.escLevelId = "iconchannels icon-" + valueNotification.escLevelId.toLowerCase();
 			}
 			else if (valueNotification.escLevelId == 'N' || valueNotification.escLevelId == 'F') {
-				tempClass = '';						
+				valueNotification.escLevelId = '';						
 			}			
 			else {
 				valueNotification.escLevelId = "iconchannels icon-d";
-			}		
+			}
+			if(valueNotification.ackRequested == 'Y' && valueNotification.acknowledged == 'N') {
+				var iGiClass = 'igibutton';
+				valueNotification.iGiClass = 'igibutton';			
+			}
+			else if(valueNotification.acknowledged == 'Y') {
+				var iGiClass = 'igibutton igisent';
+				valueNotification.iGiClass = 'igibutton igisent';										
+			}
+			else {
+				var iGiClass = '';
+				valueNotification.iGiClass = '';										
+			}					
 			that.newMessagesDisplayList.push(valueNotification);
 		});
 	}
