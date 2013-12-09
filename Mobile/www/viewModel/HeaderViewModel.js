@@ -17,7 +17,7 @@
 		else {
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
-		this.updateBadges();	
+		this.updateBadges();
 	}
 	
 	/* This function changes badge count as per the new api*/
@@ -67,6 +67,7 @@
 	}
 	
 	this.backCommand = function () {
+		//addContactView.currentDeleteCommethod();
 		if(typeof backNavText[0] == 'undefined') {
 			goToView('channelListView');		
 		} 

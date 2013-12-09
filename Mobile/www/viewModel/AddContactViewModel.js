@@ -19,6 +19,7 @@ function AddContactViewModel() {
 	this.currentDeleteCommethod = ko.observable();
 	this.verify = ko.observable();
 	this.toastText = ko.observable();	
+	this.deletedID = ko.observable('');
 	
 	this.navText = ko.observable();
 	this.pView = '';
@@ -82,10 +83,10 @@ function AddContactViewModel() {
 		if(that.verify() == false) {
 			that.currentDeleteCommethod(data.comMethodAddress);
 			that.currentDeleteCommethodID(data.comMethodID);
-			localStorage.setItem("CommethodType",data.comMethodType);			
+			localStorage.setItem("CommethodType",data.comMethodType);
 		}
-		that.showDelete(true);	
-		//alert(headerViewModel.backText());				
+		that.showDelete(true);
+		//alert(headerViewModel.backText());
 	}
 	
 	this.gotoView = function() {
@@ -106,6 +107,7 @@ function AddContactViewModel() {
 	this.confirmDelete = function() {
 		var callbacks = {
 			success: function(data){
+				that.deletedID(that.currentDeleteCommethodID());
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);		
@@ -119,7 +121,7 @@ function AddContactViewModel() {
 			localStorage.removeItem("CommethodType");			
 		}
 		else {
-			that.toastText('Phone number deleted');		
+			that.toastText('Phone number deleted');
 			localStorage.setItem('toastData', that.toastText());
 			localStorage.removeItem("CommethodType");			
 		}				
@@ -144,7 +146,7 @@ function AddContactViewModel() {
 				else {
 					tempCommethodTypeClass = "texticon";	
 				}
-				if(that.currentDeleteCommethodID() != valueCommethods.id) {
+				if(that.deletedID() != valueCommethods.id) {
 					that.commethods.push({ comMethodID: valueCommethods.id, comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify, comMethodType: valueCommethods.type, comMethodTypeClass: tempCommethodTypeClass});
 				}
 			});
@@ -165,7 +167,7 @@ function AddContactViewModel() {
 			}				
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
-			that.accountName(_accountName);					
+			that.accountName(_accountName);
 			that.name(_name);
 			that.commethods.removeAll();
 			that.showDelete(false);
@@ -175,6 +177,5 @@ function AddContactViewModel() {
 			$.mobile.showPageLoadingMsg("a", "Loading Settings");
 			return that.getCommethods().then(that.showCommethods);
 		}
-	};		
-	
+	};
 }
