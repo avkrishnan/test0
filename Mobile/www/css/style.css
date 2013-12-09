@@ -680,14 +680,13 @@ input[type="checkbox"]:checked + label span {
 	padding:0 0 0 20px;
 }
 .loginform .registration {
-	padding:4px 0 4px 4px;
-	display:table;
+	/*padding:4px 0 0 4px;
+	display:table;*/
 	width:100%;
-	min-height:36px;
 }
 .loginform .registration em, .loginform .registration a.informatiniconmsg{
 	background:#2d2d2d url("images/sprites-login.png") no-repeat -18px -338px;
-	width:40px;
+	width:45px;
 	display:table-cell;
 }
 .loginform .registration em.enable, .loginform .registration a.informatiniconmsg.enable, .loginform .registration a.informatiniconmsg:hover {
@@ -715,15 +714,14 @@ input[type="checkbox"]:checked + label span {
 }
 .loginform .registration .errorimg {
 	background:#2d2d2d url("images/sprites-login.png") no-repeat -18px -399px;
-/*	float:right;*/
 }
 .msgerror {
-	color:#fff;
-	font-style:italic;
-	font-size:12px;
 	clear:both;
-	line-height:24px;
-	margin:4px 0 4px 8px;
+	color:#FFFFFF;
+	font-size:12px;
+	font-style:italic;
+	line-height:32px;
+	margin:0 0 0 8px;
 }
 .loginform .msgerror span {
 	color:#ED1C24;
@@ -1216,7 +1214,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelavailable {
 	color:#FFFFFF;
-	line-height:24px;
+	line-height:32px;
 	clear:both;
 	font-size:12px;
 	font-style:italic;
@@ -1730,7 +1728,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .igigot {
 	position:absolute;
-	z-index:9999;
+	z-index:1;
 	font-size:14px;
 	color:#fff;
 	padding:4px 10px 4px 10px;
@@ -1887,8 +1885,7 @@ h1.messagesdate {
 	background:#F1F2F2 url("images/sprites-channel.png") no-repeat -6px -801px;
 }
 .msgfullread.icon-n {
-/*	background-position:-8px -933px;*/
-background:#fff;
+	background:#fff;
 }
 .msgfullread.icon-r {
 	background-position:-8px -933px;
