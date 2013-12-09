@@ -1,4 +1,4 @@
-﻿ /*globals ko*/
+﻿/*globals ko*/
 /* To do - Pradeep Kumar */
 function ReplyDetailViewModel() {
   var that = this;
@@ -12,10 +12,11 @@ function ReplyDetailViewModel() {
 	this.channelId = ko.observable();
 	this.channelName = ko.observable();
 	this.messageId = ko.observable();
-	//this.replyAuthor = ko.observable();			
+	this.senderName = ko.observable();			
 	this.replyDate = ko.observable();	
 	this.reply = ko.observable();	
 	this.moreText = ko.observable();	
+	this.less = ko.observable(true);		
 	this.more = ko.observable(false);
 	this.moreButton = ko.observable(true);
 	this.toastText = ko.observable();											
@@ -43,17 +44,17 @@ function ReplyDetailViewModel() {
 				localStorage.removeItem('toastData');				
 			}			
 			that.accountName(localStorage.getItem('accountName'));		
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
 			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));
+			that.less(true);				
 			that.more(false);		
 			that.moreButton(true);																								
 			that.channelId(channelObject.channelId);	
 			that.channelName(channelObject.channelName);													
-			that.messageId(messageObject.messageId);						
+			that.messageId(messageObject.messageId);
+			that.senderName(replyObject.senderFirstname+' '+replyObject.senderLastname+':');						
 			that.replyDate(dateFormat2(replyObject.created));
-			that.reply(replyObject.reply);
-			that.moreText(replyObject.reply);												
+			that.reply(replyObject.replyLess);
+			that.moreText(replyObject.replyFull);												
 		}
 	}
 	
@@ -62,6 +63,7 @@ function ReplyDetailViewModel() {
   };	
 	
 	this.showMore = function(){
+		that.less(false);		
 		that.more(true);
 		that.moreButton(false);														
 	};

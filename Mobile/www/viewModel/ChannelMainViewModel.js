@@ -27,7 +27,7 @@ function ChannelMainViewModel() {
 		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));					
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channelObject) {
+		} else if(!channelObject && !localStorage.getItem('currentChannelId')) {
 			goToView('channelsIOwnView');		
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
@@ -66,7 +66,22 @@ function ChannelMainViewModel() {
 		else {
 			var followers = data.followers +' followers';
 		}					
-		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');		
+		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		var channel = [];			
+		channel.push({
+			channelId: data.id, 
+			channelName: data.name, 
+			channelDescription: data.description,
+			followerCount: followers
+		});
+		channel = channel[0];		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));
+		localStorage.removeItem('currentChannelId')					
   };			
 	
 	function successfulMessageGET(data){
@@ -118,8 +133,9 @@ function ChannelMainViewModel() {
 			that.broadcasts.push({
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
-				sensitivityText: sensitivityText,			
-				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',
+				sensitivityText: sensitivityText,
+				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',	
+				broadcastFull: data.message[len].text, 
 				time: msToTime(data.message[len].created),
 				created: data.message[len].created,
 				iGi: iGi,

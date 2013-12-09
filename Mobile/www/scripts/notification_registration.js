@@ -1,4 +1,5 @@
 var pushNotification;
+
 function successHandler (result) {
     alert('result = '+result);
 }
@@ -17,6 +18,7 @@ function tokenHandler (result) {
 }
 
 function registerPushNotifications(){
+
     pushNotification = window.plugins.pushNotification;
     
     if (device.platform == 'android' || device.platform == 'Android') {
@@ -144,6 +146,7 @@ function onNotificationGCM(e) {
                 
                 submitFeedbackForRegid(e.regid);
                 addNewPushComMethod(e.regid, 'GCM');
+                
                 // Your GCM push server needs to know the regID before it can push to this device
                 // here is where you might want to send it the regID for later use.
                 console.log("regid = " + e.regid);

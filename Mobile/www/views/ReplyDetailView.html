@@ -10,10 +10,10 @@
         </div>
       </div>
     </div>  
-    <!--<h5 class="replydetail">Will Bowen:</h5>-->
+    <h5 class="replydetail" data-bind="text: senderName">Will Bowen:</h5>
     <div class="channelprivate reply-detail">
       <span data-bind="text: replyDate"></span>
-        <p data-bind="text: reply"></p>
+        <p data-bind="text: reply, visible: less"></p>
         <p class="more" data-bind="text: moreText, visible: more">The more</p>
         <a class="morebtn" href="#" data-bind="visible:moreButton, click: showMore">MORE</a>
     </div>   
