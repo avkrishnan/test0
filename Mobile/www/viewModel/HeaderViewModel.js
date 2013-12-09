@@ -157,9 +157,6 @@ function OverlayViewModel() {
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
-		/*if($.mobile.activePage.attr('id') == 'channelSingleMessagesView') {
-			popBackNav();			
-		}*/
 		var backText = getCurrentViewModel().viewname;	
 		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelSingleMessagesView');
 	}

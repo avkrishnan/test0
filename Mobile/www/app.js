@@ -740,10 +740,12 @@ if(!localStorage.getItem('backNavText') || !localStorage.getItem('backNavView'))
 }
 
 function viewNavigate(backText, backView, targetView) {
-	backNavText.push(backText);
-	localStorage.setItem('backNavText', JSON.stringify(backNavText));	
-	backNavView.push(backView);
-	localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	if($.mobile.activePage.attr('id') != targetView) {
+		backNavText.push(backText);
+		localStorage.setItem('backNavText', JSON.stringify(backNavText));	
+		backNavView.push(backView);
+		localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	}
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
 }		
 
