@@ -529,6 +529,7 @@ function ApiTestHelper() {
       $.when(scenario.ES.messageService.getMessageRecipients(scenario[chnlAttribName].id, scenario.msg.id, igiFilter))
       .then(t.CHECK.success, t.CHECK.shouldNotFail)
       .then(function(data) {
+        ok(data.recipients != undefined);
         var find = data.recipients.filter(function(item) { return (item.rcvrAccountname == recipScenario.account.accountname); });
           console.log("found: " + find.length);
           equal(find.length, 1, "we expect to find the recipient");
@@ -559,12 +560,24 @@ function ApiTestHelper() {
   };
 
   t.testjason21 = {
-    accountname : "jason21",
-    emailaddress : "jason+21@lawcasa.com",
-    firstname : "Jason",
-    lastname : "Law",
-    password : "testtest"
-  };
+      accountname : "jason21",
+      emailaddress : "jason+21@lawcasa.com",
+      firstname : "Jason",
+      lastname : "Law",
+      password : "testtest"
+    };
 
+  t.testjason22 = {
+      accountname : "jason22",
+      emailaddress : "jason+22@lawcasa.com",
+      firstname : "Jason",
+      lastname : "Law",
+      password : "testtest"
+    };
+
+  t.waitToStart = function(millis) { 
+    return function() { setTimeout( function(){ expect(0); start(); }, millis == undefined ? 1000 : millis); };
+  };
   
+
 };

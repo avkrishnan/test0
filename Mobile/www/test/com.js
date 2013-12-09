@@ -9,7 +9,7 @@
 
   SCEN_A.account = hlpr.testjason20;
 
-  SCEN_B.account = hlpr.testjason21;
+  SCEN_B.account = hlpr.testjason22;
 
   SCEN_A.phonenumber = '8013763348';
   //asyncTest('A enrolls', hlpr.enroll(SCEN_A, acctA));
@@ -20,7 +20,7 @@
 
   //asyncTest('A adds phone number as com method', hlpr.createTextComMethod(SCEN_A, SCEN_A.phonenumber, 'phone'));
 
-    // asyncTest('B enrolls', hlpr.enroll(SCEN_B));
+  //asyncTest('B enrolls', hlpr.enroll(SCEN_B, SCEN_B.account));
   asyncTest('B logs in', hlpr.login(SCEN_B));
 
   // asyncTest('CREATE PUSH COM METHOD', hlpr.createPushComMethod(SCEN_B,
@@ -71,7 +71,7 @@
   asyncTest('A gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_A, 1));
   
   //TODO A sees that reply count is one
-  asyncTest('A checks channel messages to see that Reply count has changed', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl1', function() { 
+  asyncTest('A checks channel messages to see that Reply count has changed', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl1', function() {
     ok(SCEN_A.msg.replies === 1, 'replies count is one');
   }));
 
@@ -92,39 +92,6 @@
   asyncTest('B gets msg notification summary, expects a decrease of one', hlpr.checkNotifSmry(SCEN_B, -1));
   
 
-  
-  
-  module("acknowledgement");
-  
-  asyncTest('A creates another channel', hlpr.createChannelF(SCEN_A, 'chnl2'));
-  asyncTest("B follows A's other channel", hlpr.followChannel(SCEN_B, SCEN_A, 'chnl2'));
-
-  asyncTest('A broadcasts a message, requesting an iGi', hlpr.broadcast(SCEN_A, 'chnl2', msgText, 'N', undefined, 'RAC'));
-
-  asyncTest('A checks message, confirming that iGi count is 0 and not-yet iGi count is 1', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2', undefined, {acks: 0, noacks: 1}));
-
-  asyncTest('B gets msg notification summary, expects an increase of one', hlpr.checkNotifSmry(SCEN_B, 1));
-
-  asyncTest('B gets msg notifications and the msg is there', hlpr.checkNotif(SCEN_B, SCEN_A, 1));
-  
-  asyncTest('B acknowledges message', hlpr.acknowledge(SCEN_B, SCEN_A));
-
-  asyncTest('Wait 1 second. (Because read is asynchronous on the back-end, we have a race condition; waiting lets the back-end "win".)', function() { 
-    setTimeout( function(){ expect(0); start(); }, 1000);
-  });
-
-  asyncTest('A confirms B as a message recipient that HAS acknowledged', hlpr.fetchMsgRecips(SCEN_A, 'chnl2', SCEN_B, 'Y'));
-
-  asyncTest('A checks message, confirming that iGi count is 1 and not-yet iGi count is 0', hlpr.fetchMsgsAsOwner(SCEN_A, SCEN_A, 'chnl2', undefined, {acks: 1, noacks: 0}));
-
-  asyncTest('B gets msg notification summary, expects a decrease of one', hlpr.checkNotifSmry(SCEN_B, -1));
-
-  asyncTest('B gets msg notifications and the msg is no longer there', hlpr.checkNotif(SCEN_B, SCEN_A, 0));
-  
-  asyncTest('B gets channel messages', hlpr.checkChnlMsgsForFlwr(SCEN_B, SCEN_A, 'chnl2'));
-
-  //TODO confirm the last message is acknowledged
-  
   
   /*
    * asyncTest('B dismisses message', function() {
