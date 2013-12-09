@@ -221,7 +221,9 @@ function SendMessageViewModel() {
 		localStorage.removeItem('iGiStatus');								
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());		
-		localStorage.setItem('currentChannelId', that.selectedChannels())
+		localStorage.setItem('currentChannelId', that.selectedChannels());
+		backNavText.pop();
+		backNavView.pop();		
 		goToView('channelMainView');									
 	};
 	
