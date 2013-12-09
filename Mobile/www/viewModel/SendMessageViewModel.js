@@ -155,7 +155,7 @@ function SendMessageViewModel() {
 				that.characterCount(that.messageText().length);
 			});							
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
-			ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
+			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
 		}
 	}
 	
