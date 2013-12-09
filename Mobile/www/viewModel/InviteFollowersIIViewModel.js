@@ -66,7 +66,8 @@ function InviteFollowersIIViewModel() {
 			that.error(true);				
 			that.errorFeedback('<span>SORRY:</span> Please give feedback');
     } else {
-			showMessage('Testing');		
+			that.toastText('Feature coming soon!');
+			showToast();			
     }
   };	
 		

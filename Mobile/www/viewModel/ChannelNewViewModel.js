@@ -73,13 +73,10 @@ function ChannelNewViewModel() {
   };
 	
 	function successfulCreate(args) {
-    $.mobile.hidePageLoadingMsg()
-		var counter = localStorage.getItem('counter');
-		for(var ctr = 0; ctr <= counter+1; ctr++) {
-			popBackNav();		
-		}		
+    $.mobile.hidePageLoadingMsg()			
 		that.toastText('Channel created');		
-		localStorage.setItem('toastData', that.toastText());		
+		localStorage.setItem('toastData', that.toastText());
+		selectedChannel = '';				
     goToView('channelsIOwnView');
   };
 	
@@ -95,7 +92,6 @@ function ChannelNewViewModel() {
 		}
 	};
 						
-
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     goToView('channelNameView');

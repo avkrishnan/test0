@@ -16,8 +16,42 @@
 		} 
 		else {
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
-		}		
-		that.showNewMessagesCount(localStorage.getItem('enymNotifications'));
+		}
+		this.updateBadges();
+	}
+	
+	/* This function changes badge count as per the new api*/
+	this.updateBadges = function() {
+		ES.systemService.getMsgNotifsSmry({
+			success: function(responseData) {
+				if(responseData && responseData.unreadCount > 0) {
+					headerViewModel.newMessageCount(responseData.unreadCount);
+					headerViewModel.newMessageClass('smsiconwhite');
+					ES.systemService.getMsgNotifs({
+						success: function(responseData) {
+							localStorage.removeItem('enymNotifications');
+							localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
+							if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+								overlayViewModel.showNewMessagesOverlay();
+							}
+						},
+						error: function(data, status, details) {
+							that.toastText(details.message);
+							localStorage.setItem('toastData', that.toastText());
+						}
+					});			
+				}
+				else {
+					headerViewModel.newMessageCount('');
+					headerViewModel.newMessageClass('');
+					localStorage.removeItem('enymNotifications');
+				}
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				localStorage.setItem('toastData', that.toastText());				
+			}
+		});		
 	}
 	
 	/* This Function shows Count of New Message in header badge*/
@@ -33,6 +67,7 @@
 	}
 	
 	this.backCommand = function () {
+		//addContactView.currentDeleteCommethod();
 		if(typeof backNavText[0] == 'undefined') {
 			goToView('channelListView');		
 		} 
@@ -56,9 +91,10 @@
 	}	
 	
 	this.newMessagesOverlayPopup = function() {
-		//var tCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
-		if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-			$('#newMessages').popup().popup('open', {x: 10, y:10});	
+		if(localStorage.getItem('enymNotifications')) {
+			if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+				$('#newMessages').popup().popup('open', {x: 10, y:10});	
+			}
 		}
 		else {
 			that.toastText('You dont have any new messages!');
@@ -80,7 +116,7 @@ function OverlayViewModel() {
 	this.toastText = ko.observable();
 	
 	this.activate = function() {
-		that.showNewMessagesOverlay();
+		//that.showNewMessagesOverlay();
 	}
 
 	this.showNewMessagesOverlay = function() {
@@ -92,12 +128,25 @@ function OverlayViewModel() {
 			if(valueNotification.text.length > screenSizeText) {
 				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";
 			}
-			if(valueNotification.escLevelId) {
-				valueNotification.escLevelId = "icon-" + valueNotification.escLevelId.toLowerCase();
+			if(valueNotification.escLevelId && valueNotification.escLevelId != 'N' && valueNotification.escLevelId != 'F') {
+				valueNotification.escLevelId = "iconchannels icon-" + valueNotification.escLevelId.toLowerCase();
+			}
+			else if (valueNotification.escLevelId == 'N' || valueNotification.escLevelId == 'F') {
+				valueNotification.escLevelId = '';						
+			}			
+			else {
+				valueNotification.escLevelId = "iconchannels icon-d";
+			}
+			if(valueNotification.ackRequested == 'Y' && valueNotification.acknowledged == 'N') {
+				var iGiClass = 'igibutton';		
+			}
+			else if(valueNotification.acknowledged == 'Y') {
+				var iGiClass = 'igibutton igisent';										
 			}
 			else {
-				valueNotification.escLevelId = "icon-d";
+				var iGiClass = '';										
 			}
+			valueNotification.iGiClass = iGiClass;								
 			that.newMessagesDisplayList.push(valueNotification);
 		});
 	}
@@ -110,9 +159,6 @@ function OverlayViewModel() {
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
-		if($.mobile.activePage.attr('id') == 'channelSingleMessagesView') {
-			popBackNav();			
-		}		
 		var backText = getCurrentViewModel().viewname;	
 		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelSingleMessagesView');
 	}

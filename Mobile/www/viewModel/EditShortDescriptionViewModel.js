@@ -85,8 +85,7 @@ function EditShortDescriptionViewModel() {
 		});
 		channel = channel[0];		
 		localStorage.setItem('currentChannelData', JSON.stringify(channel));
-		popBackNav();		
-    goToView('channelSettingsView');					
+		popBackNav();							
 	}
 
   function errorAPI(data, status, details) {

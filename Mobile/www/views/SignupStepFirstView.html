@@ -1,7 +1,7 @@
 <!--To do - Pradeep Kumar-->
 <div id="signupStepFirstView" data-role="page">
   <header>
-    <a class="back logintop" onclick="goToView('loginView');"><em></em>Login</a>
+    <a href="#" class="back logintop" onclick="goToView('loginView');"><em></em>Login</a>
   </header>
   <div class="page-content nofooterbar">
     <div class="portal-name">
@@ -10,18 +10,24 @@
     <section class="loginform">
       <label class="msginfo">Sign up - Step 1 of 2:</label>
       <div class="formtype registration" data-bind="css: emailClass">
-        <input type="text" data-bind="value: emailaddress" placeholder="email address" />
-        <em data-bind="css: { enable: emailhighlight, errorimg: errorIconEmail, righttick: tickIconEmail }, click: emailActiveInfo"></em>
+        <div class="validationerrormsg">      
+          <input type="text" data-bind="value: emailaddress" placeholder="email address" />
+          <em data-bind="css: { enable: emailhighlight, errorimg: errorIconEmail, righttick: tickIconEmail }, click: emailActiveInfo"></em>
+        </div>
         <div class="msgerror" data-bind="html: errorEmail"></div>
       </div>
       <div class="formtype registration" data-bind="css: accountNameClass">
-        <input type="text" data-bind="value: accountName, valueUpdate: 'afterkeydown'" placeholder="choose an Evernym" />
-        <em data-bind="css: { enable: namehighlight, errorimg: errorIconAccountName, righttick: tickIconAccountName }, click: nameActiveInfo"></em>
+        <div class="validationerrormsg">      
+          <input type="text" data-bind="value: accountName, valueUpdate: 'afterkeydown'" placeholder="choose an Evernym" />
+          <em data-bind="css: { enable: namehighlight, errorimg: errorIconAccountName, righttick: tickIconAccountName }, click: nameActiveInfo"></em>
+        </div>
         <div class="msgerror" data-bind="html: errorAccountName"></div>
       </div>
       <div class="formtype registration" data-bind="css: passwordClass">
-        <input type="password" data-bind="value: password" placeholder="choose a password" />
-        <em data-bind="css: { enable: passwordhighlight, errorimg: errorIconPassword, righttick: tickIconPassword }, click: passwordActiveInfo"></em>
+        <div class="validationerrormsg">      
+          <input type="password" data-bind="value: password" placeholder="choose a password" />
+          <em data-bind="css: { enable: passwordhighlight, errorimg: errorIconPassword, righttick: tickIconPassword }, click: passwordActiveInfo"></em>
+        </div>
         <div class="msgerror" data-bind="html: errorPassword"></div>
       </div>
       <div class="login">
@@ -30,7 +36,7 @@
         </p>
       </div>
     </section>
-    <hr noshade>
+    <div class="baseline"></div>
     <div class="signedup userunique" data-bind="visible: emailInfo">
       <!-- Todo: required text form client -->
       For receiving email communication from channels you follow. No channels will see this or any of your contact information, unless you allow it.
@@ -44,7 +50,7 @@
     </div>
     <div class="signedup" data-bind="visible: aboutEvernym">
       <span>Evernym is all about privacy.</span> We never share your information with anyone, and we never read or scan your communications</div>
-    <hr noshade data-bind="visible: aboutEvernym">
+    <div class="baseline" data-bind="visible: aboutEvernym"></div>
     <div class="terms" data-bind="visible: aboutEvernym">By signing up you are agreeing to our
       <a href="#" onclick="goToView('privacyPolicyView');">Terms of Use and Privacy Policy</a>
     </div>

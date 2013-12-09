@@ -134,7 +134,7 @@ function LoginViewModel() {
 			success: function() {},
 			error: function(data, status, details) {
 				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());
+				showToast();
 			}
 		};
     $.mobile.hidePageLoadingMsg();
@@ -147,12 +147,10 @@ function LoginViewModel() {
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
-			ES.systemService.getMsgNotifs({
+			/*ES.systemService.getMsgNotifs({
 				success: function(responseData) {
 					localStorage.removeItem('enymNotifications');
 					localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
-					//localStorage.setItem('enymNotifications', JSON.stringify(responseData));
-					//alert(localStorage.getItem('enymNotifications'));
 					if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 						headerViewModel.newMessageClass('smsiconwhite');
 						headerViewModel.newMessageCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
@@ -168,7 +166,7 @@ function LoginViewModel() {
 					localStorage.setItem('toastData', that.toastText());
 				}
 			});
-			//ES.systemService.getMsgNotifs(callbacks);
+			*/
       localStorage.setItem("accountName", that.accountName());
 			if(localStorage.getItem("action") == 'follow_channel') {
 				var channel = JSON.parse(localStorage.getItem('currentChannel'));

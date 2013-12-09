@@ -27,7 +27,7 @@ function ChannelMainViewModel() {
 		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));					
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else if(!channelObject) {
+		} else if(!channelObject && !localStorage.getItem('currentChannelId')) {
 			goToView('channelsIOwnView');		
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
@@ -43,13 +43,46 @@ function ChannelMainViewModel() {
 				localStorage.setItem('counter', 1)
 			}								
 			localStorage.removeItem('currentMessageData');			
-			that.broadcasts.removeAll();							
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);
-			that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
+			that.broadcasts.removeAll();
+			if(localStorage.getItem('currentChannelId')) {
+				that.channelId(localStorage.getItem('currentChannelId'));								
+				return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI}).then(that.getMessagesCommand());								
+			}
+			else {									
+				that.channelId(channelObject.channelId);
+				that.channelName(channelObject.channelName);
+				that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
+			}
 			that.getMessagesCommand();
 		}
-	}		
+	}
+	
+	function successfulGetChannel(data) {
+		$.mobile.hidePageLoadingMsg();								
+		that.channelName(data.name);
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} 
+		else {
+			var followers = data.followers +' followers';
+		}					
+		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		var channel = [];			
+		channel.push({
+			channelId: data.id, 
+			channelName: data.name, 
+			channelDescription: data.description,
+			followerCount: followers
+		});
+		channel = channel[0];		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));
+		localStorage.removeItem('currentChannelId')					
+  };			
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();
@@ -72,7 +105,7 @@ function ChannelMainViewModel() {
 				var sensitivityText = '';				
 			}
 			if(data.message[len].type == 'REQUEST_ACKNOWLEDGEMENT') {
-				var percentage = (Math.ceil(data.message[len].acks*100/data.message[len].noacks))+'%';													
+				var percentage = (Math.round(Math.ceil(data.message[len].acks*100)/(data.message[len].acks+data.message[len].noacks)))+'%';										
 				if(data.message[len].acks == 0) {
 					var iGi = '0%. . . no responses yet';
 					var noiGi = '';
@@ -80,15 +113,15 @@ function ChannelMainViewModel() {
 					var percentage = '';
 				  var percentageText = '';														 					
 				} else if(percentage == '100%') {
-					var iGi = 'All followers Got it';
+					var iGi = 'All followers Got it '+percentage;
 					var noiGi = '';
 					var percentageClass = '';
-					var percentageText = '<em>'+percentage+'</em>';						
+					var percentageText = '';						
 				} else {
-					var iGi = data.message[len].acks+' Got it';
+					var iGi = data.message[len].acks+' Got it <em class="percentage-text">'+percentage+'</em>';
 					var noiGi = data.message[len].noacks+" Haven't";
 					var percentageClass = '';
-					var percentageText = '<em>'+percentage+'</em>';														 					
+					var percentageText = '';														 					
 				}																	
 			} else {			
 				var iGi = '';
@@ -100,8 +133,9 @@ function ChannelMainViewModel() {
 			that.broadcasts.push({
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
-				sensitivityText: sensitivityText,			
-				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',
+				sensitivityText: sensitivityText,
+				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',	
+				broadcastFull: data.message[len].text, 
 				time: msToTime(data.message[len].created),
 				created: data.message[len].created,
 				iGi: iGi,

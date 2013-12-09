@@ -47,7 +47,10 @@ function RemoveFollowerViewModel() {
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-		popBackNav();	
+		for(var ctr = 0; ctr <= 1; ctr++) {
+			backNavText.pop();
+			backNavView.pop();
+		}
 		that.toastText('Follower deleted');		
 		localStorage.setItem('toastData', that.toastText());
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});			

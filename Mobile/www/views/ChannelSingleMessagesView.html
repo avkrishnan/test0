@@ -20,9 +20,8 @@
     </div>
     
     <div class="msgdetailbuttons">
-      <span class="igimsgdetail" data-bind="visible: iGiButton"></span>
-      <a href="#" data-bind="css: activeClass, visible: iGiButton, click: iGiAck">i Got it</a>      
-      <a href="#">snooze</a>
+      <a href="#" data-bind="css: activeClass, click: iGiAck, visible: iGiButton"></a>      
+      <a href="#" data-bind="visible: snoozeButton">snooze</a>
       <a class="replybtn" href="#" data-bind="click: replyMessage">reply</a>
     </div>         
   </div>

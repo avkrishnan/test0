@@ -31,8 +31,7 @@ function ChannelsIOwnViewModel() {
 				localStorage.removeItem('toastData');												
 			}
 			that.accountName(localStorage.getItem('accountName'));
-			localStorage.setItem('counter', 1);									
-			localStorage.removeItem('currentChannelData');			
+			localStorage.setItem('counter', 1);												
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
@@ -64,17 +63,20 @@ function ChannelsIOwnViewModel() {
 		showToast();
 	};
 	
-	this.channelSettings = function(data){		
+	this.channelSettings = function(data){
+		localStorage.removeItem('currentChannelData');				
 		localStorage.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelSettingsView');		
 	};
 	
 	this.channelMain = function(data){
+		localStorage.removeItem('currentChannelData');		
 		localStorage.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelMainView');					
 	};
 	
-	this.channelFollowers = function(data){	
+	this.channelFollowers = function(data){
+		localStorage.removeItem('currentChannelData');			
 		localStorage.setItem('currentChannelData', JSON.stringify(data));	
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');		
 	};	

@@ -740,10 +740,12 @@ if(!localStorage.getItem('backNavText') || !localStorage.getItem('backNavView'))
 }
 
 function viewNavigate(backText, backView, targetView) {
-	backNavText.push(backText);
-	localStorage.setItem('backNavText', JSON.stringify(backNavText));	
-	backNavView.push(backView);
-	localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	if($.mobile.activePage.attr('id') != targetView) {
+		backNavText.push(backText);
+		localStorage.setItem('backNavText', JSON.stringify(backNavText));	
+		backNavView.push(backView);
+		localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	}
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
 }		
 
@@ -825,6 +827,8 @@ function shortFormat(created) {
 	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " ";// + (date.getHours()>12?'PM':'AM');
 }
+
+selectedChannel = ''; // channel selected option in compose broadcast
 
 /* pradeep kumar end */
 
