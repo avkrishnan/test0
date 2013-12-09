@@ -9,7 +9,7 @@
           <select data-bind="options: channels, optionsText: 'channelName', value: selectedChannels, optionsValue: 'channelId'">
           </select>
           <div data-bind="visible: selectedChannels">
-            <span data-bind="text: selectedChannels() ? selectedChannels().channelId: 'unknown'"></span>
+            <span data-bind="text: selectedChannels() ? selectedChannels().channelId: 'setDefault'"></span>
           </div>        
         </div>
       </div>
