@@ -26,6 +26,7 @@ function ChannelMessagesViewModel() {
 			localStorage.setItem("currentChannel", localStorage.getItem("overlayCurrentChannel"));
 			localStorage.removeItem("overlayCurrentChannel");
 		}*/
+		localStorage.removeItem("overlayCurrentChannel");		
 		var channel = JSON.parse(localStorage.getItem("currentChannel"));
 		if(token == '' || token == null) {
 			goToView('loginView');

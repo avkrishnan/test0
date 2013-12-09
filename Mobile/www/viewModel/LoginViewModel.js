@@ -134,7 +134,7 @@ function LoginViewModel() {
 			success: function() {},
 			error: function(data, status, details) {
 				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());
+				showToast();
 			}
 		};
     $.mobile.hidePageLoadingMsg();

@@ -41,7 +41,7 @@ function SendMessageViewModel() {
 		this.channelName = name;
 		this.channelId = id;
 	};
-	this.selectedChannels = ko.observable()				
+	this.selectedChannels = ko.observable();				
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -155,7 +155,7 @@ function SendMessageViewModel() {
 				that.characterCount(that.messageText().length);
 			});							
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
-			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });		
+			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
 		}
 	}
 	

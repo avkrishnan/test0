@@ -11,8 +11,8 @@
       </div>
     </div>    
     <div class="broadcastreplies undelivermsg" data-bind="text: acks"></div>
-    <div class="messagesundeliver messagesdeliver" data-bind="foreach: recipients">
-      <ul>      
+    <div class="messagesundeliver messagesdeliver">
+      <ul data-bind="foreach: recipients">      
         <li class="even" data-bind="css: recipientsClass">
           <a href="#" data-bind="html: recipient, click: $parent.recipientDetails.bind($index())"></a>
         </li>
