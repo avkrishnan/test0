@@ -25,7 +25,8 @@
 		ES.systemService.getMsgNotifsSmry({
 			success: function(responseData) {
 				if(responseData && responseData.unreadCount > 0) {
-					headerViewModel.newMessageCount(responseData.unreadCount)
+					headerViewModel.newMessageCount(responseData.unreadCount);
+					headerViewModel.newMessageClass('smsiconwhite');
 					ES.systemService.getMsgNotifs({
 						success: function(responseData) {
 							localStorage.removeItem('enymNotifications');
