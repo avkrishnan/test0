@@ -153,9 +153,11 @@ function SendMessageViewModel() {
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
-			});							
-			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
-			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
+			});
+			if(selectedChannel == '') {						
+				$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
+				return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
+			}
 		}
 	}
 	
@@ -220,7 +222,8 @@ function SendMessageViewModel() {
 		localStorage.removeItem('escLevel');
 		localStorage.removeItem('iGiStatus');								
 		that.toastText('Broadcast sent');		
-		localStorage.setItem('toastData', that.toastText());		
+		localStorage.setItem('toastData', that.toastText());
+		selectedChannel = '';				
 		localStorage.setItem('currentChannelId', that.selectedChannels());
 		backNavText.pop();
 		backNavView.pop();		
@@ -284,7 +287,8 @@ function SendMessageViewModel() {
 		that.escLevel('F');						
   };		
 	
-	this.escalateYes = function () {	
+	this.escalateYes = function () {
+		selectedChannel = that.selectedChannels();
 		localStorage.setItem('messageText', that.messageText());		
 		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };

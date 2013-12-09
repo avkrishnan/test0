@@ -75,7 +75,8 @@ function ChannelNewViewModel() {
 	function successfulCreate(args) {
     $.mobile.hidePageLoadingMsg()			
 		that.toastText('Channel created');		
-		localStorage.setItem('toastData', that.toastText());		
+		localStorage.setItem('toastData', that.toastText());
+		selectedChannel = '';				
     goToView('channelsIOwnView');
   };
 	
