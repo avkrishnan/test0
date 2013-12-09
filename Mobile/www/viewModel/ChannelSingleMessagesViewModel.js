@@ -78,8 +78,9 @@ function ChannelSingleMessagesViewModel() {
 				that.messageClass(channel.type);
 				that.messageText(channel.fullText);
 				//that.readMessageUpdateBadge(channel.msgId);
+				//alert(channel.msgId);
 				return ES.channelService.getChannel(channel.channelId, callbacks).then(this.readMessageUpdateBadge(channel.msgId));
-			}			
+			}
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
@@ -98,8 +99,8 @@ function ChannelSingleMessagesViewModel() {
 						that.activeClass('igimsgdetail');													
 					}
 					else {
-						that.iGiButton(false);							
-						that.activeClass('igisentimg');							
+						that.iGiButton(false);
+						that.activeClass('igisentimg');
 					}
 				}
 			}
@@ -107,9 +108,11 @@ function ChannelSingleMessagesViewModel() {
 	};
 	
 	this.readMessageUpdateBadge = function(messageID) {
-		$('.active-overlay').html(''); 
+		$('.active-overlay').html('');
 		var callbacks = {
-			success: function(data) {},
+			success: function(data) {
+				//alert('success');	
+			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
 				localStorage.setItem('toastData', that.toastText());					
@@ -118,9 +121,8 @@ function ChannelSingleMessagesViewModel() {
 		return ES.messageService.readMsg(messageID, callbacks).then(that.updateMessages);
 	}
 	
-	this.updateMessages = function() {
-		//alert(headerViewModel.newMessageCount());
-		if(responseData.unreadCount > 0) {
+	this.updateMessages = function(responseData) {
+		if(responseData && responseData.unreadCount > 0) {
 			headerViewModel.newMessageCount(responseData.unreadCount)
 		}
 		else {

@@ -24,7 +24,7 @@
 	this.updateBadges = function() {
 		ES.systemService.getMsgNotifsSmry({
 			success: function(responseData) {
-				if(responseData.unreadCount > 0) {
+				if(responseData && responseData.unreadCount > 0) {
 					headerViewModel.newMessageCount(responseData.unreadCount)
 					ES.systemService.getMsgNotifs({
 						success: function(responseData) {
@@ -32,7 +32,7 @@
 							localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
 							if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 								overlayViewModel.showNewMessagesOverlay();
-							}			
+							}
 						},
 						error: function(data, status, details) {
 							that.toastText(details.message);
@@ -42,7 +42,8 @@
 				}
 				else {
 					headerViewModel.newMessageCount('');
-					headerViewModel.newMessageClass('');			
+					headerViewModel.newMessageClass('');
+					localStorage.removeItem('enymNotifications');
 				}
 			},
 			error: function(data, status, details) {
@@ -88,9 +89,10 @@
 	}	
 	
 	this.newMessagesOverlayPopup = function() {
-		//var tCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
-		if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-			$('#newMessages').popup().popup('open', {x: 10, y:10});	
+		if(localStorage.getItem('enymNotifications')) {
+			if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+				$('#newMessages').popup().popup('open', {x: 10, y:10});	
+			}
 		}
 		else {
 			that.toastText('You dont have any new messages!');
@@ -142,9 +144,9 @@ function OverlayViewModel() {
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
-		if($.mobile.activePage.attr('id') == 'channelSingleMessagesView') {
+		/*if($.mobile.activePage.attr('id') == 'channelSingleMessagesView') {
 			popBackNav();			
-		}		
+		}*/
 		var backText = getCurrentViewModel().viewname;	
 		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelSingleMessagesView');
 	}
