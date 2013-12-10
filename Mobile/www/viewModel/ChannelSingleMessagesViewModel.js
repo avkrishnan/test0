@@ -217,17 +217,7 @@ function ChannelSingleMessagesViewModel() {
 				that.iGiButton(false);
 				that.dismissButton(true);								
 				that.dismissClass('active');					
-				that.toastText('Escalation is now halted for this message. No further delivery attempts will be made.');
-				var callback = {
-					success: function(data) {
-						localStorage.setItem("overlayCurrentChannel", data)						
-					},
-					error: function(data, status, details) {
-						that.toastText(details.message);
-						showToast();					
-					}
-				};				
-				ES.messageService.getChannelMessage(that.channelid, that.messageId(), callback);								
+				that.toastText('Escalation is now halted for this message. No further delivery attempts will be made.');								
 				showToast();
 			},
 			error: function(data, status, details) {
