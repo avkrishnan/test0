@@ -193,8 +193,7 @@ function ChannelSingleMessagesViewModel() {
 				that.iGiButton(true);
 				that.dismissButton(false);								
 				that.activeClass('igisentimg');					
-				that.toastText('iGi Acknowledgement sent !');
-				//that.readMessageUpdateBadge(that.messageId());				
+				that.toastText('iGi Acknowledgement sent !');				
 				showToast();
 			},
 			error: function(data, status, details) {
@@ -219,7 +218,6 @@ function ChannelSingleMessagesViewModel() {
 				that.dismissButton(true);								
 				that.dismissClass('active');					
 				that.toastText('Escalation is now halted for this message. No further delivery attempts will be made.');
-				//that.readMessageUpdateBadge(that.messageId());
 				var callback = {
 					success: function(data) {
 						localStorage.setItem("overlayCurrentChannel", data)						
