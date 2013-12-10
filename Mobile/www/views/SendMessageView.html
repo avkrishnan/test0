@@ -6,11 +6,8 @@
       <div class="dropdown sattingtdropdown">
         Send a Broadcast
         <div class="chaneldropdown">
-          <select data-bind="options: channels, optionsText: 'channelName', value: selectedChannels, optionsValue: 'channelId'">
-          </select>
-          <div data-bind="visible: selectedChannels">
-            <span data-bind="text: selectedChannels() ? selectedChannels().channelId: 'unknown'"></span>
-          </div>        
+          <select data-bind="options: channels, optionsText: 'channelName', value: selectedChannels, preSelect: {key : 'channelId', propertyName : 'selectedChannels', value : 'channelId', optionsValue: 'channelId'}">
+          </select>      
         </div>
       </div>
       <div class="broadcast-textarea sattingtextarea longdescription">
