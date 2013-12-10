@@ -172,11 +172,12 @@ function SendMessageViewModel() {
 			var len = 0;			
 			for(len; len<data.commethod.length; len++) {
 				if(data.commethod[len].verified == 'Y') {
-					return that.createChannelMessage();
-				} else {				
+					that.createChannelMessage();
+					return true;
+				}
+				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {				
 					that.toastText('Please verify your email !');
-					showToast();
-					return false;				
+					showToast();			
 				}
 			}
 		} else {
