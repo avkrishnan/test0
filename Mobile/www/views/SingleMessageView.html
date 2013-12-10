@@ -16,9 +16,9 @@
         <span data-bind="html: singleMessage"></span>
       </a>
       <div class="broadcastmsgsend">
-        <span class="igigot" data-bind="html: iGi" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');"></span>
-        <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');"></span>
-        <em class="iginotgot" data-bind="text: noiGi" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'notGotItView');"></em>
+        <a href="#" class="igigot" data-bind="html: iGi" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');"></a>
+        <a href="#" class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');"></a>
+        <a href="#" class="iginotgot" data-bind="text: noiGi" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'notGotItView');"></a>
       </div>      
     </div>    
     <a class="low-messages repliesmsg" href="#" data-bind="text: replies" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');">
@@ -29,7 +29,7 @@
     <a class="low-messages messagesend" href="#" data-bind="text: acks, visible: iGivisibility" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');">
     </a>
   </div>
-  <div class="toast-notification" data-bind="text: toastText"></div>    
+  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>    
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'sendMessageView');"></a>

@@ -18,15 +18,15 @@
           <em data-bind="html: singleMessage"></em>
         </div>
         <div class="broadcastmsgsend">
-          <span class="igigot" data-bind="html: iGi"></span>
-          <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }"><!--75%--></span>
-          <em class="iginotgot" data-bind="text: noiGi"></em>
+          <a href="#" class="igigot" data-bind="html: iGi" onclick="viewNavigate('Full Msg', 'singleMessageFullTextView', 'whoGotItView');"></a>
+          <a href="#" class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }" onclick="viewNavigate('Full Msg', 'singleMessageFullTextView', 'whoGotItView');"></a>
+          <a href="#" class="iginotgot" data-bind="text: noiGi" onclick="viewNavigate('Full Msg', 'singleMessageFullTextView', 'notGotItView');"></a>
         </div>
       </div>
       <p data-bind="html: fullText"></p>
     </div>    
   </div>
-  <div class="toast-notification" data-bind="text: toastText"></div>    
+  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>    
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Full Msg', 'singleMessageFullTextView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Full Msg', 'singleMessageFullTextView', 'sendMessageView');"></a>

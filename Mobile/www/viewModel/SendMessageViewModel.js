@@ -171,14 +171,13 @@ function SendMessageViewModel() {
 		if(data.commethod.length >= 1) {
 			var len = 0;			
 			for(len; len<data.commethod.length; len++) {
-				if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'Y' && data.commethod[len].dflt == 'Y') {
-					return that.createChannelMessage();
-				} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'Y') {
+				if(data.commethod[len].verified == 'Y') {
+					that.createChannelMessage();
+					return true;
+				}
+				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {				
 					that.toastText('Please verify your email !');
-					showToast();				
-				} else if(data.commethod[len].type == 'EMAIL' && data.commethod[len].verified == 'N' && data.commethod[len].dflt == 'N') {
-					that.toastText('Please add a default email !');
-					showToast();				
+					showToast();			
 				}
 			}
 		} else {
@@ -224,7 +223,7 @@ function SendMessageViewModel() {
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());
 		selectedChannel = '';				
-		localStorage.setItem('currentChannelId', that.selectedChannels());
+		localStorage.setItem('currentChannelId', that.selectedChannels().channelId);
 		backNavText.pop();
 		backNavView.pop();		
 		goToView('channelMainView');									
@@ -246,7 +245,7 @@ function SendMessageViewModel() {
 		} else {
 			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: that.broadcastType()};			
 		}
-		return ES.messageService.createChannelMessage(that.selectedChannels(), messageobj, {success: successfulMessage, error: errorAPI});
+		return ES.messageService.createChannelMessage(that.selectedChannels().channelId, messageobj, {success: successfulMessage, error: errorAPI});
 	};
 
 	this.requestiGiHelp = function () {
@@ -288,7 +287,7 @@ function SendMessageViewModel() {
   };		
 	
 	this.escalateYes = function () {
-		selectedChannel = that.selectedChannels();
+		selectedChannel = that.selectedChannels().channelId;
 		localStorage.setItem('messageText', that.messageText());		
 		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };

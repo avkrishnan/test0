@@ -4,18 +4,18 @@
   <section data-bind="if: showDelete">
     <div class="page-content">
       <h4 class="information-delete" data-bind="text: currentDeleteCommethod"></h4>
-      
+
       <section data-bind="{ifnot: showConfirm, click: showConfirmButton}">
         <a href="#" class="mycontact">
           <em class="gray-delete"></em><span class="delete-address">Delete This Address</span>
-        </a>  
+        </a>
       </section>
       <section data-bind="if: showConfirm">
         <div class="mycontact">
           <em class="gray-delete"></em>
           <span class="delete-address">Delete This Address</span>
           <a class="confirmbtn" href="#" data-bind="click: confirmDelete">CONFIRM</a>
-        </div>  
+        </div>
       </section>
     </div>
   </section>
@@ -28,7 +28,7 @@
         <section data-bind="ifnot: $data.comMethodVerify">
           <a href="#" class="mycontact" data-bind="click: $parent.gotoDelete.bind('verifyContactView')">
             <em data-bind="css: $data.comMethodTypeClass"></em><span data-bind="text: $data.comMethodAddress"></span>
-          </a>          
+          </a>
         </section>
         <section data-bind="if: $data.comMethodVerify">
           <a href="#" class="mycontact" data-bind="css: $data.comMethodClass, click: $parent.gotoDelete.bind('verifyContactView')">
@@ -41,7 +41,7 @@
     </div>
   </section>
   
-  <div class="toast-notification" data-bind="text: toastText"></div>   
+  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>   
   
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Cont. Info', 'addContactView', 'escalationPlansView');"></a>

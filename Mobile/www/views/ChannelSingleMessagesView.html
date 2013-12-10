@@ -21,11 +21,12 @@
     
     <div class="msgdetailbuttons">
       <a href="#" data-bind="css: activeClass, click: iGiAck, visible: iGiButton"></a>      
-      <a href="#" data-bind="visible: snoozeButton">snooze</a>
+      <a href="#" data-bind="css: dismissClass, click: dismissEscalation, visible: dismissButton">dismiss</a>
+      <!--<a href="#" data-bind="visible: snoozeButton">snooze</a>-->      
       <a class="replybtn" href="#" data-bind="click: replyMessage">reply</a>
     </div>         
   </div>
-  <div class="toast-notification" data-bind="text: toastText"></div>    
+  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>    
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'sendMessageView');"></a>

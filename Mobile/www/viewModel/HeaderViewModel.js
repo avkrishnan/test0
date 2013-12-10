@@ -9,13 +9,13 @@
 	/* Methods */
 	this.activate = function() {
 		if($.mobile.activePage.attr('id') == 'channelListView') {
-			this.isBack = ko.observable(false);			
+			this.isBack = ko.observable(false);
 		}
 		if(typeof backNavText[0] == 'undefined') {
 			that.backText('<em></em>Home');
-		} 
+		}
 		else {
-			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
+			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 		}
 		this.updateBadges();
 	}
@@ -66,16 +66,40 @@
 		}
 	}
 	
-	this.backCommand = function () {
+	this.backCommand = function (data, event) {
+		var activeViewModel = event.currentTarget.parentNode.parentNode.parentNode.getAttribute('id');
+		//alert(activeViewModel);
+		switch(activeViewModel) {
+			case 'addContactView':
+				if(addContactViewModel.showConfirm() == true) {
+					addContactViewModel.showDelete(true);				
+					addContactViewModel.showConfirm(false);
+				}
+				else if(addContactViewModel.showDelete() == true) {			
+					addContactViewModel.showDelete(false);
+					goToView('addContactView');	
+				}
+				else {
+					popBackNav();
+				}
+				break;
+			default:
+				if(typeof backNavText[0] == 'undefined') {
+					goToView('channelListView');
+				}
+				else {
+					popBackNav();
+				}				
+		}
 		//addContactView.currentDeleteCommethod();
-		if(typeof backNavText[0] == 'undefined') {
-			goToView('channelListView');		
-		} 
-		else {		
-			popBackNav();		
-		}	
-  };		
-	
+		/*if(typeof backNavText[0] == 'undefined') {
+			goToView('channelListView');
+		}
+		else {
+			popBackNav();
+		}*/
+  };
+
 	/*To Do to show new IGIs*/
 	this.newIGIOverlay = function() {
 		that.toastText('Feature coming soon!');
@@ -137,10 +161,10 @@ function OverlayViewModel() {
 			else {
 				valueNotification.escLevelId = "iconchannels icon-d";
 			}
-			if(valueNotification.ackRequested == 'Y' && valueNotification.acknowledged == 'N') {
+			if(valueNotification.ackRequested == 'Y' && valueNotification.acknowledged == 'N' && valueNotification.dismissed == 'N') {
 				var iGiClass = 'igibutton';		
 			}
-			else if(valueNotification.acknowledged == 'Y') {
+			else if(valueNotification.acknowledged == 'Y' && valueNotification.dismissed == 'N') {
 				var iGiClass = 'igibutton igisent';										
 			}
 			else {

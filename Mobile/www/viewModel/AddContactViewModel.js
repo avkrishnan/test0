@@ -108,6 +108,7 @@ function AddContactViewModel() {
 		var callbacks = {
 			success: function(data){
 				that.deletedID(that.currentDeleteCommethodID());
+				//alert(that.deletedID());
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);		
@@ -116,9 +117,9 @@ function AddContactViewModel() {
 		};	
 		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
 		if(localStorage.getItem("CommethodType") == 'EMAIL') {
-			that.toastText('Email address deleted');		
+			that.toastText('Email address deleted');
 			localStorage.setItem('toastData', that.toastText());
-			localStorage.removeItem("CommethodType");			
+			localStorage.removeItem("CommethodType");
 		}
 		else {
 			that.toastText('Phone number deleted');
