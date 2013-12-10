@@ -137,10 +137,10 @@ function OverlayViewModel() {
 			else {
 				valueNotification.escLevelId = "iconchannels icon-d";
 			}
-			if(valueNotification.ackRequested == 'Y' && valueNotification.acknowledged == 'N') {
+			if(valueNotification.ackRequested == 'Y' && valueNotification.acknowledged == 'N' && valueNotification.dismissed == 'N') {
 				var iGiClass = 'igibutton';		
 			}
-			else if(valueNotification.acknowledged == 'Y') {
+			else if(valueNotification.acknowledged == 'Y' && valueNotification.dismissed == 'N') {
 				var iGiClass = 'igibutton igisent';										
 			}
 			else {

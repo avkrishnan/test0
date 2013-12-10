@@ -21,7 +21,8 @@
     
     <div class="msgdetailbuttons">
       <a href="#" data-bind="css: activeClass, click: iGiAck, visible: iGiButton"></a>      
-      <a href="#" data-bind="visible: snoozeButton">snooze</a>
+      <a href="#" data-bind="css: dismissClass, click: dismissEscalation, visible: dismissButton">dismiss</a>
+      <!--<a href="#" data-bind="visible: snoozeButton">snooze</a>-->      
       <a class="replybtn" href="#" data-bind="click: replyMessage">reply</a>
     </div>         
   </div>

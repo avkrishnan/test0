@@ -17,8 +17,9 @@ function ChannelSingleMessagesViewModel() {
 	this.messageClass = ko.observable();
 	this.messageText = ko.observable();
 	this.activeClass = ko.observable();	
-	this.iGiButton = ko.observable(false);	
-	this.snoozeButton = ko.observable(true);
+	this.iGiButton = ko.observable(false);
+	this.dismissClass = ko.observable();		
+	this.dismissButton = ko.observable(true);
 	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
@@ -36,8 +37,9 @@ function ChannelSingleMessagesViewModel() {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
 			that.iGiButton(false);
-			that.snoozeButton(true);			
-			that.activeClass('igimsgdetail');							
+			that.dismissButton(true);			
+			that.activeClass('igimsgdetail');
+			that.dismissClass('');										
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -81,19 +83,28 @@ function ChannelSingleMessagesViewModel() {
 				that.messageText(channel.fullText);
 				if(channel.iGiClass != '') {
 					if(channel.acknowledged == 'N') {
-						that.iGiButton(true);
-						that.snoozeButton(true);													
-						that.activeClass('igimsgdetail');													
+						that.iGiButton(true);												
+						that.activeClass('igimsgdetail');																		
 					}
 					else {
-						that.iGiButton(true);	
-						that.snoozeButton(false);													
-						that.activeClass('igisentimg');							
+						that.iGiButton(true);														
+						that.activeClass('igisentimg');													
 					}
+				}
+				if(that.messageClass() == '' || that.messageClass() == 'iconchannels icon-d') {
+					that.dismissButton(false);																													
+				}
+				else if(channel.dismissed == 'Y') {
+					that.iGiButton(false);						
+					that.dismissButton(true);
+					that.dismissClass('active');												
+				}
+				else {
+					that.dismissButton(true);							
 				}				
 				//that.readMessageUpdateBadge(channel.msgId);
 				//alert(channel.msgId);
-				return ES.channelService.getChannel(channel.channelId, callbacks).then(this.readMessageUpdateBadge(channel.msgId));
+				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId));
 			}
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
@@ -110,16 +121,25 @@ function ChannelSingleMessagesViewModel() {
 					that.readMessageUpdateBadge(channelMessage.messageId);
 					if(channelMessage.iGiClass != '') {
 						if(channelMessage.ack == 'N') {
-							that.iGiButton(true);
-							that.snoozeButton(true);													
-							that.activeClass('igimsgdetail');													
+							that.iGiButton(true);													
+							that.activeClass('igimsgdetail');																		
 						}
 						else {
-							that.iGiButton(true);	
-							that.snoozeButton(false);													
+							that.iGiButton(true);														
 							that.activeClass('igisentimg');							
 						}
 					}
+					if(that.messageClass() == '' || that.messageClass() == 'iconchannels icon-d') {
+						that.dismissButton(false);																													
+					}
+					else if(channelMessage.dismissed == 'Y') {
+						that.iGiButton(false);						
+						that.dismissButton(true);
+						that.dismissClass('active');												
+					}
+					else {
+						that.dismissButton(true);							
+					}					
 				}
 			}
 		}
@@ -171,9 +191,10 @@ function ChannelSingleMessagesViewModel() {
 		var callbacks = {
 			success: function(data) {
 				that.iGiButton(true);
-				that.snoozeButton(false);								
+				that.dismissButton(false);								
 				that.activeClass('igisentimg');					
 				that.toastText('iGi Acknowledgement sent !');
+				//that.readMessageUpdateBadge(that.messageId());				
 				showToast();
 			},
 			error: function(data, status, details) {
@@ -189,7 +210,42 @@ function ChannelSingleMessagesViewModel() {
 			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
 			return ES.messageService.acknowledgeMsg(that.messageId(), callbacks);
 		}
-	}	
+	}
+	
+	this.dismissEscalation = function(data) {
+		var callbacks = {
+			success: function(data) {
+				that.iGiButton(false);
+				that.dismissButton(true);								
+				that.dismissClass('active');					
+				that.toastText('Escalation is now halted for this message. No further delivery attempts will be made.');
+				//that.readMessageUpdateBadge(that.messageId());
+				var callback = {
+					success: function(data) {
+						localStorage.setItem("overlayCurrentChannel", data)						
+					},
+					error: function(data, status, details) {
+						that.toastText(details.message);
+						showToast();					
+					}
+				};				
+				ES.messageService.getChannelMessage(that.channelid, that.messageId(), callback);								
+				showToast();
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				showToast();					
+			}
+		};		
+		if(that.dismissClass() == 'active') {
+			that.toastText('Escalation is already halted !');
+			showToast();												
+		}
+		else {			
+			$.mobile.showPageLoadingMsg('a', 'Sending Dismiss escalation request !');		
+			return ES.messageService.dismissMsg(that.messageId(), callbacks);
+		}
+	}		
 	
 	this.replyMessage = function(data) {
 		that.toastText('Feature coming soon!');
