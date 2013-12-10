@@ -117,6 +117,12 @@ function ChannelMainViewModel() {
 					var noiGi = '';
 					var percentageClass = '';
 					var percentageText = '';						
+				} else if(!data.message[len].acks) {
+					var iGi = '';
+					var percentageClass = 'norequested';				
+					var percentage = '100%';
+					var percentageText = 'No followers to acknowledge iGi!';													
+					var noiGi = '';								
 				} else {
 					var iGi = data.message[len].acks+' Got it <em class="percentage-text">'+percentage+'</em>';
 					var noiGi = data.message[len].noacks+" Haven't";
