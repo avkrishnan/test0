@@ -75,7 +75,7 @@ function ChannelSingleMessagesViewModel() {
 					}
 				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
-				that.channelid(channel.channelId);
+				that.channelid(channel.channelId);				
 				that.messageId(channel.msgId);
 				that.ack(channel.ack);							
 				that.messageCreated(channel.created);
@@ -87,7 +87,8 @@ function ChannelSingleMessagesViewModel() {
 						that.activeClass('igimsgdetail');																		
 					}
 					else {
-						that.iGiButton(true);														
+						that.iGiButton(true);
+					  that.dismissButton(false);																				
 						that.activeClass('igisentimg');													
 					}
 				}
@@ -96,12 +97,8 @@ function ChannelSingleMessagesViewModel() {
 				}
 				else if(channel.dismissed == 'Y') {
 					that.iGiButton(false);						
-					that.dismissButton(true);
 					that.dismissClass('active');												
-				}
-				else {
-					that.dismissButton(true);							
-				}				
+				}			
 				//that.readMessageUpdateBadge(channel.msgId);
 				//alert(channel.msgId);
 				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId));
@@ -110,7 +107,7 @@ function ChannelSingleMessagesViewModel() {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
 				that.title(channel.name);
-				that.channelid(channel.channelId);
+				that.channelid(channel.channelId);	
 				that.description(channel.description);
 				if(channelMessage) {
 					that.messageId(channelMessage.messageId);
@@ -125,7 +122,8 @@ function ChannelSingleMessagesViewModel() {
 							that.activeClass('igimsgdetail');																		
 						}
 						else {
-							that.iGiButton(true);														
+							that.iGiButton(true);
+					    that.dismissButton(false);																					
 							that.activeClass('igisentimg');							
 						}
 					}
@@ -134,12 +132,8 @@ function ChannelSingleMessagesViewModel() {
 					}
 					else if(channelMessage.dismissed == 'Y') {
 						that.iGiButton(false);						
-						that.dismissButton(true);
 						that.dismissClass('active');												
-					}
-					else {
-						that.dismissButton(true);							
-					}					
+					}				
 				}
 			}
 		}
@@ -149,8 +143,7 @@ function ChannelSingleMessagesViewModel() {
 		$('.active-overlay').html('');
 		var callbacks = {
 			success: function(data) {
-				//alert('success');
-				setTimeout(function(){}, 2000);				
+				//alert('success');	
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
@@ -187,6 +180,24 @@ function ChannelSingleMessagesViewModel() {
 			}
 		});*/
 	}
+	function successfulGetMessage(data) {
+						
+	};
+	function successfulGetMessageII(data) {
+	  $.mobile.hidePageLoadingMsg();
+		localStorage.setItem("overlayCurrentChannel", data);
+		goToView('channelSingleMessagesView');	
+		that.iGiButton(false);
+		that.dismissButton(true);								
+		that.dismissClass('active');					
+		that.toastText('Escalation is now halted for this message. No further delivery attempts will be made.');								
+		showToast();						
+	};	
+	function errorAPI(data, status, details) {
+		$.mobile.hidePageLoadingMsg();
+		that.toastText(details.message);		
+		showToast();
+	};
 	
 	this.iGiAck = function(data) {
 		var callbacks = {
