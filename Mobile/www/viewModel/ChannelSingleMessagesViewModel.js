@@ -149,7 +149,8 @@ function ChannelSingleMessagesViewModel() {
 		$('.active-overlay').html('');
 		var callbacks = {
 			success: function(data) {
-				//alert('success');	
+				//alert('success');
+				setTimeout(function(){}, 2000);				
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
