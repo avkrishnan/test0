@@ -1,6 +1,7 @@
 function EnymAmpSvc() {
 
   var t = this;
+  
   t.request = function(resourceId, data) {
     var dfrd = $.Deferred();
     amplify.request({
