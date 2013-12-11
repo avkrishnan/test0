@@ -24,7 +24,7 @@ function ChannelListViewModel() {
 	this.channelsIFollow = ko.observable(false);
 	
   /* Home view observable */	
-  this.firstChannelId = ko.observable(false);
+  this.firstChannelId = ko.observable();
   this.channel = ko.observable();	
   this.channelOwn = ko.observable();		
   this.channelFollowing = ko.observable();
@@ -43,7 +43,16 @@ function ChannelListViewModel() {
 			goToView('loginView');
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message				
+			addExternalMarkup(that.template); // this is for header/overlay message			
+			that.createFirstChannel(false);
+			that.addInviteFollowers(false);
+			that.composeBroadcast(false);
+			that.channelDetails(false);
+			that.channelsIOwn(false);	
+			that.findChannels(false);
+			that.createChannel(false);
+			that.channelMessages(false);
+			that.channelsIFollow(false);							
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
