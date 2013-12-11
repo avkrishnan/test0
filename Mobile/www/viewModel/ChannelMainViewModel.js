@@ -30,7 +30,8 @@ function ChannelMainViewModel() {
 		} else if(!channelObject && !localStorage.getItem('currentChannelId')) {
 			goToView('channelsIOwnView');		
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+			addExternalMarkup(that.template); // this is for header/overlay message	
+			that.broadcasts.removeAll();					
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -85,8 +86,7 @@ function ChannelMainViewModel() {
   };			
 	
 	function successfulMessageGET(data){
-		$.mobile.hidePageLoadingMsg();
-		that.broadcasts.removeAll();			
+		$.mobile.hidePageLoadingMsg();			
 		var len = 0;
 		for(len; len<data.message.length; len++) {
 			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();			

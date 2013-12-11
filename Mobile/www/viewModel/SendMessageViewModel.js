@@ -37,23 +37,27 @@ function SendMessageViewModel() {
 	this.toastText = ko.observable();
 	
 	/* channels options variable */
-	var channelsOptions = function(name, id) {
+	var channelsOptions = function(name, id, followers) {
 		this.channelName = name;
 		this.channelId = id;
+		this.followerCount = followers;		
 	};
 	this.selectedChannels = ko.observable();				
 	
 	/* Methods */
 	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();				
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {			
       that.activate();
     });	
 	};
 	
 	this.clearForm = function () {
 		that.messageText('');
-  };	  
+  };
+	
+	this.clearOptionList = function () {
+		that.channels.removeAll();
+  };		  
 	
 	this.activate = function() {			
 		var token = ES.evernymService.getAccessToken();
@@ -83,19 +87,14 @@ function SendMessageViewModel() {
 			that.escalateEdit(false);
 			that.escLevel('N');				
 			that.igiClass('igiimageoff');
-			that.characterCount('0');							
-			if(localStorage.getItem('messageText')) {
-				that.messageText(localStorage.getItem('messageText'));
-				localStorage.removeItem('messageText');
-				that.characterCount(that.messageText().length);																
-			}			
+			that.characterCount('0');										
 			that.escLevel(localStorage.getItem('escLevel'));				
-			if(that.escLevel() == 'R') {
-				escalate = 'Remind';
+			if(that.escLevel() == 'H') {
+				escalate = 'Hound';
 			} else if(that.escLevel() == 'C') {
 				escalate = 'Chase';
 			} else {
-				escalate = 'Hound';
+				escalate = 'Remind';
 			}																									
 			if(localStorage.getItem('escalate') == 'yes') {
 				that.normalText('');
@@ -154,14 +153,15 @@ function SendMessageViewModel() {
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
 			});
-			if(selectedChannel == '') {						
+			if(selectedChannel == '') {
+				that.channels.removeAll();										
 				$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
 				return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
 			}
 		}
 	}
 	
-	$(document).keyup(function (e) {
+	$(document).keyup(function (e) {	
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'sendMessageView') {
 			that.sendMessageCommand();
 		}
@@ -191,12 +191,16 @@ function SendMessageViewModel() {
 		that.toastText(details.message);		
 		showToast();
 	};
+	
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
 			that.toastText('Please type a message to broadcast.');
 			showToast();			
+		} else if(that.selectedChannels().followerCount == 0) {
+			that.toastText('Message not sent - Zero followers on '+ that.selectedChannels().channelName);
+			showToast();				
 		} else {
-			$.mobile.showPageLoadingMsg('a', 'Checking email verification !');			
+			$.mobile.showPageLoadingMsg('a', 'Posting Message');			
 			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
 		}
 	};
@@ -206,11 +210,10 @@ function SendMessageViewModel() {
 			that.toastText('Please create some channels !');
 			showToast();			
 		} else {	
-			$.mobile.hidePageLoadingMsg();
-			that.channels.removeAll();	
+			$.mobile.hidePageLoadingMsg();	
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 				that.channels.push(
-					new channelsOptions(data.channel[channelslength].name, data.channel[channelslength].id)
+					new channelsOptions(data.channel[channelslength].name, data.channel[channelslength].id, data.channel[channelslength].followers)
 				);
 			}
 		}
@@ -219,7 +222,8 @@ function SendMessageViewModel() {
 	function successfulMessage(data){
 		localStorage.removeItem('escDuration');		
 		localStorage.removeItem('escLevel');
-		localStorage.removeItem('iGiStatus');								
+		localStorage.removeItem('iGiStatus');	
+		that.clearForm();									
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());
 		selectedChannel = '';				
@@ -239,7 +243,7 @@ function SendMessageViewModel() {
 	};
 	
 	this.createChannelMessage = function () {
-		$.mobile.showPageLoadingMsg('a', 'Posting Message');
+		$.mobile.showPageLoadingMsg('a', 'Posting Message');		
 		if(that.escLevel() == 'N' || that.escLevel() == 'F') {
 			var messageobj = {text: that.messageText(), escLevelId: that.escLevel(), type: that.broadcastType()};																	
 		} else {
@@ -248,13 +252,11 @@ function SendMessageViewModel() {
 		return ES.messageService.createChannelMessage(that.selectedChannels().channelId, messageobj, {success: successfulMessage, error: errorAPI});
 	};
 
-	this.requestiGiHelp = function () {
-		localStorage.setItem('messageText', that.messageText());				
+	this.requestiGiHelp = function () {				
 		viewNavigate('Compose', 'sendMessageView', 'requestiGiHelpView');		
   };
 	
-	this.escalateHelp = function () {
-		localStorage.setItem('messageText', that.messageText());			
+	this.escalateHelp = function () {			
 		viewNavigate('Compose', 'sendMessageView', 'escalateHelpView');		
   };
 	
@@ -268,7 +270,8 @@ function SendMessageViewModel() {
     that.duration("Normal: <em>Send one time to follower's preferred device</em>");
 		that.activeType('normalcolor');		
 		that.escalateEdit(false);
-		localStorage.removeItem('escDuration');				
+		localStorage.removeItem('escLevel');
+		localStorage.removeItem('escDuration');						
 		that.escLevel('N');		
   };
 	
@@ -282,13 +285,13 @@ function SendMessageViewModel() {
     that.duration("Fast: <em>Send one time to follower's mobile devices</em>");
 		that.activeType('fastcolor');
 		that.escalateEdit(false);
-		localStorage.removeItem('escDuration');						
+		localStorage.removeItem('escLevel');
+		localStorage.removeItem('escDuration');								
 		that.escLevel('F');						
   };		
 	
 	this.escalateYes = function () {
-		selectedChannel = that.selectedChannels().channelId;
-		localStorage.setItem('messageText', that.messageText());		
+		selectedChannel = that.selectedChannels().channelId;	
 		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };
 	

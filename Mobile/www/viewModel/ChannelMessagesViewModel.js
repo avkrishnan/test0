@@ -68,6 +68,11 @@ function ChannelMessagesViewModel() {
 	}	
 	
 	/*action to single message page*/
+	this.iGiAckMessage = function(data) {
+		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
+		evernymAction = 'iGiAckMessage';		
+		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
+	}	
 	this.showSingleMessage = function(data) {
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
@@ -124,7 +129,7 @@ function ChannelMessagesViewModel() {
 						var iGiClass = '';						
 					}
 					that.channelMessages.push( // without push not working
-						{read:valueMessage.read, dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
+						{dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
 				

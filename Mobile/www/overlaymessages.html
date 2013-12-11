@@ -5,13 +5,13 @@
         <a href="#" data-bind="click:closePopup"></a>
       </div>
       <section data-bind="foreach: newMessagesDisplayList">
-        <a class="messagesreceived" href="#" data-bind="click: $parent.showSingleMessage">
-          <span data-bind="css: iGiClass"></span>
-          <div class="messageschannel igi-msg-icon">
+        <a class="messagesreceived" href="#">
+          <span data-bind="css: iGiClass, click: $parent.iGiAckOverlay"></span>
+          <div class="messageschannel igi-msg-icon" data-bind="click: $parent.showSingleMessage">
             <span class="received" data-bind="text: displayFrom"></span>
             <div class="receive-time ellipsis"><em data-bind="text: created"></em> : <span data-bind="html: text"></span></div>
           </div>
-          <span data-bind="css: escLevelId"></span>
+          <span data-bind="css: escLevelId, click: $parent.showSingleMessage"></span>
         </a>
       </section>
   </div>

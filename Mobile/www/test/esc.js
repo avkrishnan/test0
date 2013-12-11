@@ -1,5 +1,5 @@
 ﻿(function() {
-	QUnit.config.testTimeout = 90000;
+	QUnit.config.testTimeout = 180000; // 3 mins
 	QUnit.config.reorder = false;
 
   var hlpr = new ApiTestHelper();
@@ -51,6 +51,21 @@
   
   asyncTest('A broadcasts a CHASE message with 6 minute escalation', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'C', inSixMins));
 
+  asyncTest('Wait 1 minute, because we want to observe communication coming to the follower.', function() { 
+    setTimeout( function(){ expect(0); start(); }, 60000);
+  });
+  
+  asyncTest('B reads message', hlpr.read(SCEN_B, SCEN_A));
+
+  asyncTest('Manually observe logs and see that no more communication is coming.', function() { 
+    setTimeout( function(){ expect(0); start(); }, 1000);
+  });
+
+
+  
+  
+  
+  
   /*
   asyncTest('A broadcasts a NORMAL message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));
   asyncTest('B checks message', hlpr.fetchMsgs(SCEN_B, SCEN_A, 'chnl1'));

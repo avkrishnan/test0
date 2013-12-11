@@ -19,7 +19,7 @@ function ChannelSingleMessagesViewModel() {
 	this.activeClass = ko.observable();	
 	this.iGiButton = ko.observable(false);
 	this.dismissClass = ko.observable();		
-	this.dismissButton = ko.observable(true);
+	this.dismissButton = ko.observable(true);	
 	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
@@ -75,7 +75,6 @@ function ChannelSingleMessagesViewModel() {
 					}
 				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
-				//alert(JSON.stringify(channel));
 				that.channelid(channel.channelId);
 				that.messageId(channel.msgId);
 				that.ack(channel.ack);							
@@ -102,14 +101,14 @@ function ChannelSingleMessagesViewModel() {
 				}			
 				//that.readMessageUpdateBadge(channel.msgId);
 				//alert(channel.msgId);
-				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId, channel.read, channel.acknowledged));
+				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId));
 			}
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
 				//alert(JSON.stringify(channelMessage));
 				that.title(channel.name);
-				that.channelid(channel.channelId);
+				that.channelid(channel.channelId);	
 				that.description(channel.description);
 				if(channelMessage) {
 					that.messageId(channelMessage.messageId);
@@ -117,7 +116,7 @@ function ChannelSingleMessagesViewModel() {
 					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
-					that.readMessageUpdateBadge(channelMessage.messageId, channelMessage.read, channelMessage.ack);
+					that.readMessageUpdateBadge(channelMessage.messageId);
 					if(channelMessage.iGiClass != '') {
 						if(channelMessage.ack == 'N') {
 							that.iGiButton(true);													
@@ -139,14 +138,20 @@ function ChannelSingleMessagesViewModel() {
 				}
 			}
 		}
+		if(evernymAction == 'iGiAckOverlay' || evernymAction == 'iGiAckMessage') {
+			that.iGiAck();
+		}
 	};
 	
-	this.readMessageUpdateBadge = function(messageID, read, igi) {
-		//alert(read + igi);
+	this.iGiAckOverlay = function() {		
+		that.activate().then(that.iGiAck());
+	}
+	
+	this.readMessageUpdateBadge = function(messageID) {
 		$('.active-overlay').html('');
 		var callbacks = {
 			success: function(data) {
-				//setTimeout(function(){}, 10000);
+				//alert('success');	
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);

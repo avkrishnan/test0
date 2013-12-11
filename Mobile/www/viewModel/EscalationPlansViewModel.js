@@ -179,7 +179,6 @@ function EscalationPlansViewModel() {
   }	
 	
   this.cleanApplication = function() {
-		//sendMessageViewModel.clearForm();
 		//inviteFollowersViewModel.clearForm();
 		ES.evernymService.clearAccessToken();
 		localStorage.removeItem('login_nav');
@@ -192,7 +191,9 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('escLevel');
 		localStorage.removeItem('iGiStatus');		
 		localStorage.removeItem('currentChannelData');
-		selectedChannel = '';				
+		selectedChannel = '';
+		sendMessageViewModel.clearOptionList();
+		sendMessageViewModel.clearForm();									
 		//localStorage.setItem('currentChannel');				
 		//channelListViewModel.clearForm();
 		//notificationsViewModel.removeNotifications();
