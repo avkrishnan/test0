@@ -25,8 +25,9 @@ function ChannelListViewModel() {
 	
   /* Home view observable */	
   this.firstChannelId = ko.observable(false);
-  this.channelWebAddress = ko.observable();	
-  this.followWebAddress = ko.observable();
+  this.channel = ko.observable();	
+  this.channelOwn = ko.observable();		
+  this.channelFollowing = ko.observable();
 	this.toastText = ko.observable();													
 	
 	/* Methods */
@@ -42,10 +43,7 @@ function ChannelListViewModel() {
 			goToView('loginView');
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			//$('#' + that.template + ' header.logged-in').load('header.html');
-			//$('#' + that.template + ' .active-overlay').load('overlaymessages.html');
-				
+			addExternalMarkup(that.template); // this is for header/overlay message				
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -67,9 +65,9 @@ function ChannelListViewModel() {
 			that.channelDetails(false);
 			that.channelsIOwn(false);									
 		} else if(data.channel.length == 1) {
-      that.firstChannelId(data.channel[0].id);
-			that.channelWebAddress(data.channel[0].name+'.evernym.com');
-			
+      that.firstChannelId(data.channel[0].id);			
+			that.channel(data.channel[0].name);
+			that.channelOwn(data.channel[0].name+'<span>Go</span>');					
 			if(data.channel[0].followers == 1) {
 				var followers = data.channel[0].followers +' follower';
 			} else {
@@ -109,7 +107,7 @@ function ChannelListViewModel() {
 	
 	function getMessages(data){
 		$.mobile.hidePageLoadingMsg();
-		if(data.message.length < 1) {
+		if(typeof data.message == 'undefined') {
 			that.createFirstChannel(false);
 			that.addInviteFollowers(false);
 			that.composeBroadcast (true);
@@ -127,7 +125,6 @@ function ChannelListViewModel() {
 	function getChannelsIFollow(responseData){	
 		$.mobile.hidePageLoadingMsg();
 		if(responseData.channel.length == 1) {
-			//{"id":"1900bcaa-138b-4f7b-872a-5f270dfb058f","name":"karateclass","normName":"karateclass","description":"All about the karate...","followers":4,"relationship":"F"}
 			var channel = [];			
 			channel.push({
 				id: responseData.channel[0].id, 
@@ -144,7 +141,7 @@ function ChannelListViewModel() {
 			that.createChannel(false);
 			that.channelMessages(true);
 			that.channelsIFollow(false);
-			that.followWebAddress(responseData.channel[0].name+'.evernym.com');			
+			that.channelFollowing(responseData.channel[0].name+'<span>Go</span>');			
 		} else if(responseData.channel.length > 1) {
 			that.findChannels(false);
 			that.createChannel(false);
