@@ -180,24 +180,6 @@ function ChannelSingleMessagesViewModel() {
 			}
 		});*/
 	}
-	function successfulGetMessage(data) {
-						
-	};
-	function successfulGetMessageII(data) {
-	  $.mobile.hidePageLoadingMsg();
-		localStorage.setItem("overlayCurrentChannel", data);
-		goToView('channelSingleMessagesView');	
-		that.iGiButton(false);
-		that.dismissButton(true);								
-		that.dismissClass('active');					
-		that.toastText('Escalation is now halted for this message. No further delivery attempts will be made.');								
-		showToast();						
-	};	
-	function errorAPI(data, status, details) {
-		$.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
-	};
 	
 	this.iGiAck = function(data) {
 		var callbacks = {
