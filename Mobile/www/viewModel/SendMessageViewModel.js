@@ -37,9 +37,10 @@ function SendMessageViewModel() {
 	this.toastText = ko.observable();
 	
 	/* channels options variable */
-	var channelsOptions = function(name, id) {
+	var channelsOptions = function(name, id, followers) {
 		this.channelName = name;
 		this.channelId = id;
+		this.followerCount = followers;		
 	};
 	this.selectedChannels = ko.observable();				
 	
@@ -195,6 +196,9 @@ function SendMessageViewModel() {
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
 			that.toastText('Please type a message to broadcast.');
 			showToast();			
+		} else if(that.selectedChannels().followerCount == 0) {
+			that.toastText('Message not sent - Zero followers on '+ that.selectedChannels().channelName);
+			showToast();				
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Checking email verification !');			
 			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
@@ -209,7 +213,7 @@ function SendMessageViewModel() {
 			$.mobile.hidePageLoadingMsg();	
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 				that.channels.push(
-					new channelsOptions(data.channel[channelslength].name, data.channel[channelslength].id)
+					new channelsOptions(data.channel[channelslength].name, data.channel[channelslength].id, data.channel[channelslength].followers)
 				);
 			}
 		}
