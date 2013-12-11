@@ -166,7 +166,7 @@ function ChannelSingleMessagesViewModel() {
 			headerViewModel.newMessageCount(responseData.unreadCount);
 		}
 		else {
-			headerViewModel.newMessageCount(badgeCount);
+			headerViewModel.newMessageCount();
 			headerViewModel.newMessageClass('');
 		}
 		/*ES.systemService.getMsgNotifs({
