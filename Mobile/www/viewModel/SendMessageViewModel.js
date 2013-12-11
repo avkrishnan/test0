@@ -53,7 +53,11 @@ function SendMessageViewModel() {
 	
 	this.clearForm = function () {
 		that.messageText('');
-  };	  
+  };
+	
+	this.clearOptionList = function () {
+		that.channels.removeAll();
+  };		  
 	
 	this.activate = function() {			
 		var token = ES.evernymService.getAccessToken();
@@ -154,7 +158,8 @@ function SendMessageViewModel() {
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
 			});
-			if(selectedChannel == '') {						
+			if(selectedChannel == '') {
+				that.channels.removeAll();										
 				$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
 				return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
 			}
@@ -206,8 +211,7 @@ function SendMessageViewModel() {
 			that.toastText('Please create some channels !');
 			showToast();			
 		} else {	
-			$.mobile.hidePageLoadingMsg();
-			that.channels.removeAll();	
+			$.mobile.hidePageLoadingMsg();	
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 				that.channels.push(
 					new channelsOptions(data.channel[channelslength].name, data.channel[channelslength].id)
