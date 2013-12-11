@@ -32,7 +32,8 @@ function NotGotItViewModel() {
 		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+			addExternalMarkup(that.template); // this is for header/overlay message
+			that.recipients.removeAll();						
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -50,8 +51,7 @@ function NotGotItViewModel() {
 	}	
 	
 	function successfulList(data){
-		$.mobile.hidePageLoadingMsg();
-		that.recipients.removeAll();		
+		$.mobile.hidePageLoadingMsg();	
 		for(var len = 0; len<data.recipients.length; len++) {
 			if (len % 2 === 0) {
 				var recipientsClass = 'even';

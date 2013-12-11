@@ -32,7 +32,8 @@ function WhoGotItViewModel() {
 		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+			addExternalMarkup(that.template); // this is for header/overlay message
+			that.recipients.removeAll();						
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -49,8 +50,11 @@ function WhoGotItViewModel() {
 			else if(messageObject.acks == 0) {
 				that.acks(messageObject.acks+' Got It');				
 			}
+			else if(messageObject.type != 'REQUEST_ACKNOWLEDGEMENT') {
+				that.acks('No iGi requested');				
+			}			
 			else {
-				that.acks('No iGi requested');
+				that.acks('No followers to acknowledge iGi!');				
 			}
 			$.mobile.showPageLoadingMsg("a", "Loading Followers");
 			return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'Y', {success: successfulList, error: errorAPI});																			
@@ -58,8 +62,7 @@ function WhoGotItViewModel() {
 	}	
 	
 	function successfulList(data){
-		$.mobile.hidePageLoadingMsg();
-		that.recipients.removeAll();						
+		$.mobile.hidePageLoadingMsg();						
 		for(var len = 0; len<data.recipients.length; len++) {
 			if (len % 2 === 0) {
 				var recipientsClass = 'even';

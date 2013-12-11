@@ -33,7 +33,8 @@ function SingleMessageRepliesViewModel() {
 		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+			addExternalMarkup(that.template); // this is for header/overlay message
+			that.replies.removeAll();						
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -52,8 +53,7 @@ function SingleMessageRepliesViewModel() {
 	}	
 	
 	function successfulReliesGET(data){
-    $.mobile.hidePageLoadingMsg();
-		that.replies.removeAll();			
+    $.mobile.hidePageLoadingMsg();			
 		var len = 0;
 		for(len; len<data.message.length; len++) {
 			if(data.message[len].replies < 1) {

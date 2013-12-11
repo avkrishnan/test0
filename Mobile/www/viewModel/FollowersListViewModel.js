@@ -29,8 +29,10 @@ function FollowersListViewModel() {
 			goToView('loginView');
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+		} else {				
+			addExternalMarkup(that.template); // this is for header/overlay message	
+			that.followers.removeAll();
+			that.followerCount('0 followers');						
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));				
 				showToast();
@@ -52,8 +54,7 @@ function FollowersListViewModel() {
 	}	
 	
 	function successfulList(data){
-    $.mobile.hidePageLoadingMsg();
-		that.followers.removeAll();				
+    $.mobile.hidePageLoadingMsg();				
 		for(var len = 0; len<data.followers.length; len++) {
 			var follower = data.followers.length-1;				
 			if(follower == 1) {
