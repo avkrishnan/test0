@@ -96,6 +96,7 @@ function ChannelMessagesViewModel() {
 			success: function(data) {
 				var screenSizeText = truncatedTextScreen();
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
+					//alert(JSON.stringify(valueMessage));
 					var tempCreated = msToTime(valueMessage.created);
 					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
 						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
@@ -123,7 +124,7 @@ function ChannelMessagesViewModel() {
 						var iGiClass = '';						
 					}
 					that.channelMessages.push( // without push not working
-						{dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
+						{read:valueMessage.read, dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
 				

@@ -75,6 +75,7 @@ function ChannelSingleMessagesViewModel() {
 					}
 				};					
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
+				//alert(JSON.stringify(channel));
 				that.channelid(channel.channelId);
 				that.messageId(channel.msgId);
 				that.ack(channel.ack);							
@@ -101,11 +102,12 @@ function ChannelSingleMessagesViewModel() {
 				}			
 				//that.readMessageUpdateBadge(channel.msgId);
 				//alert(channel.msgId);
-				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId));
+				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId, channel.read, channel.acknowledged));
 			}
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
+				//alert(JSON.stringify(channelMessage));
 				that.title(channel.name);
 				that.channelid(channel.channelId);
 				that.description(channel.description);
@@ -115,7 +117,7 @@ function ChannelSingleMessagesViewModel() {
 					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
-					that.readMessageUpdateBadge(channelMessage.messageId);
+					that.readMessageUpdateBadge(channelMessage.messageId, channelMessage.read, channelMessage.ack);
 					if(channelMessage.iGiClass != '') {
 						if(channelMessage.ack == 'N') {
 							that.iGiButton(true);													
@@ -139,12 +141,12 @@ function ChannelSingleMessagesViewModel() {
 		}
 	};
 	
-	this.readMessageUpdateBadge = function(messageID) {
+	this.readMessageUpdateBadge = function(messageID, read, igi) {
+		//alert(read + igi);
 		$('.active-overlay').html('');
 		var callbacks = {
 			success: function(data) {
-				//alert('success');
-				setTimeout(function(){}, 2000);				
+				//setTimeout(function(){}, 10000);
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
@@ -156,11 +158,11 @@ function ChannelSingleMessagesViewModel() {
 	
 	this.updateMessages = function(responseData) {
 		if(responseData && responseData.unreadCount > 0) {
-			headerViewModel.newMessageCount(responseData.unreadCount)
+			headerViewModel.newMessageCount(responseData.unreadCount);
 		}
 		else {
-			headerViewModel.newMessageCount('');
-			headerViewModel.newMessageClass('');			
+			headerViewModel.newMessageCount(badgeCount);
+			headerViewModel.newMessageClass('');
 		}
 		/*ES.systemService.getMsgNotifs({
 			success: function(responseData) {

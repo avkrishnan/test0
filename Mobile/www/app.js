@@ -114,15 +114,9 @@ function initiateBroadcast(){
 
 }
 
-
 var messages = 0;
-
 var activePage = '';
-
-
 var openPanel = false;
-
-
 
 function startBroadcast(channel){
     $.mobile.activePage.find('#mypanel').panel("close");

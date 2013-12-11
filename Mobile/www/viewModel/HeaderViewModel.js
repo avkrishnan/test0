@@ -1,8 +1,8 @@
 ﻿function HeaderViewModel() {	
 	this.backText = ko.observable();
 	this.isBack = ko.observable(true);	
-	this.newMessageCount = ko.observable('');
-	this.newMessageClass = ko.observable('');
+	this.newMessageCount = ko.observable(badgeCount);
+	this.newMessageClass = ko.observable();
 	this.toastText = ko.observable();
 	
 	that = this;
@@ -23,17 +23,23 @@
 	/* This function changes badge count as per the new api*/
 	this.updateBadges = function() {
 		ES.systemService.getMsgNotifsSmry({
-			success: function(responseData) {
-				if(responseData && responseData.unreadCount > 0) {
-					headerViewModel.newMessageCount(responseData.unreadCount);
-					headerViewModel.newMessageClass('smsiconwhite');
+			success: function(responseDataSmry) {
+				if(responseDataSmry && responseDataSmry.unreadCount > 0) {
 					ES.systemService.getMsgNotifs({
 						success: function(responseData) {
 							localStorage.removeItem('enymNotifications');
 							localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
 							if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 								overlayViewModel.showNewMessagesOverlay();
-							}
+								var badgeCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
+								if(badgeCount > 0){
+									headerViewModel.newMessageCount(badgeCount);
+									headerViewModel.newMessageClass('smsiconwhite');
+								}
+								else {
+									headerViewModel.newMessageCount('');
+								}
+							}						
 						},
 						error: function(data, status, details) {
 							that.toastText(details.message);
