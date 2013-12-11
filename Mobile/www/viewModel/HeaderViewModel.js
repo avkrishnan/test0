@@ -179,6 +179,13 @@ function OverlayViewModel() {
 		$('#newMessages').popup('close');
 	}
 	
+	this.iGiAckOverlay = function(data) {
+		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
+		channelSingleMessagesViewModel.iGiAckOverlay();					
+		var backText = getCurrentViewModel().viewname;	
+		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelSingleMessagesView');
+	}	
+	
 	this.showSingleMessage = function(data) {
 		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');

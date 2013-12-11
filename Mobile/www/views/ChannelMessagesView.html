@@ -13,13 +13,13 @@
     </div>
     
     <div class="channelmessages" data-bind="foreach: channelMessages">
-      <a href="#" data-bind="click: $parent.showSingleMessage">
-        <span data-bind="css: iGiClass"></span>
-        <div class="messageschannel">
+      <a href="#">
+        <span data-bind="css: iGiClass, click: $parent.iGiAckMessage"></span>
+        <div class="messageschannel" data-bind="click: $parent.showSingleMessage">
           <span class="timemsg" data-bind="text:$data.messageCreated"></span>
           <p data-bind="html:$data.messageShortText"></p>
         </div>
-        <span data-bind="css:$data.messageClass"></span>
+        <span data-bind="css:$data.messageClass, click: $parent.showSingleMessage"></span>
       </a>
     </div>
   </div>

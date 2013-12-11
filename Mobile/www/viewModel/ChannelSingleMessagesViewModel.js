@@ -19,7 +19,7 @@ function ChannelSingleMessagesViewModel() {
 	this.activeClass = ko.observable();	
 	this.iGiButton = ko.observable(false);
 	this.dismissClass = ko.observable();		
-	this.dismissButton = ko.observable(true);
+	this.dismissButton = ko.observable(true);	
 	this.toastText = ko.observable();	
 
 	this.applyBindings = function() {
@@ -137,7 +137,14 @@ function ChannelSingleMessagesViewModel() {
 				}
 			}
 		}
+		if(evernymAction == 'iGiAckOverlay' || evernymAction == 'iGiAckMessage') {
+			that.iGiAck();
+		}
 	};
+	
+	this.iGiAckOverlay = function() {		
+		that.activate().then(that.iGiAck());
+	}
 	
 	this.readMessageUpdateBadge = function(messageID) {
 		$('.active-overlay').html('');

@@ -68,6 +68,11 @@ function ChannelMessagesViewModel() {
 	}	
 	
 	/*action to single message page*/
+	this.iGiAckMessage = function(data) {
+		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
+		evernymAction = 'iGiAckMessage';		
+		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
+	}	
 	this.showSingleMessage = function(data) {
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
