@@ -200,7 +200,7 @@ function SendMessageViewModel() {
 			that.toastText('Message not sent - Zero followers on '+ that.selectedChannels().channelName);
 			showToast();				
 		} else {
-			$.mobile.showPageLoadingMsg('a', 'Checking email verification !');			
+			$.mobile.showPageLoadingMsg('a', 'Posting Message');			
 			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
 		}
 	};
@@ -243,7 +243,7 @@ function SendMessageViewModel() {
 	};
 	
 	this.createChannelMessage = function () {
-		$.mobile.showPageLoadingMsg('a', 'Posting Message');
+		$.mobile.showPageLoadingMsg('a', 'Posting Message');		
 		if(that.escLevel() == 'N' || that.escLevel() == 'F') {
 			var messageobj = {text: that.messageText(), escLevelId: that.escLevel(), type: that.broadcastType()};																	
 		} else {
