@@ -45,8 +45,7 @@ function SendMessageViewModel() {
 	
 	/* Methods */
 	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();				
+		$('#' + that.template).on('pagebeforeshow', function (e, data) {			
       that.activate();
     });	
 	};
@@ -87,12 +86,7 @@ function SendMessageViewModel() {
 			that.escalateEdit(false);
 			that.escLevel('N');				
 			that.igiClass('igiimageoff');
-			that.characterCount('0');							
-			if(localStorage.getItem('messageText')) {
-				that.messageText(localStorage.getItem('messageText'));
-				localStorage.removeItem('messageText');
-				that.characterCount(that.messageText().length);																
-			}			
+			that.characterCount('0');										
 			that.escLevel(localStorage.getItem('escLevel'));				
 			if(that.escLevel() == 'H') {
 				escalate = 'Hound';
@@ -166,7 +160,7 @@ function SendMessageViewModel() {
 		}
 	}
 	
-	$(document).keyup(function (e) {
+	$(document).keyup(function (e) {	
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'sendMessageView') {
 			that.sendMessageCommand();
 		}
@@ -224,7 +218,8 @@ function SendMessageViewModel() {
 	function successfulMessage(data){
 		localStorage.removeItem('escDuration');		
 		localStorage.removeItem('escLevel');
-		localStorage.removeItem('iGiStatus');								
+		localStorage.removeItem('iGiStatus');	
+		that.clearForm();									
 		that.toastText('Broadcast sent');		
 		localStorage.setItem('toastData', that.toastText());
 		selectedChannel = '';				
@@ -253,13 +248,11 @@ function SendMessageViewModel() {
 		return ES.messageService.createChannelMessage(that.selectedChannels().channelId, messageobj, {success: successfulMessage, error: errorAPI});
 	};
 
-	this.requestiGiHelp = function () {
-		localStorage.setItem('messageText', that.messageText());				
+	this.requestiGiHelp = function () {				
 		viewNavigate('Compose', 'sendMessageView', 'requestiGiHelpView');		
   };
 	
-	this.escalateHelp = function () {
-		localStorage.setItem('messageText', that.messageText());			
+	this.escalateHelp = function () {			
 		viewNavigate('Compose', 'sendMessageView', 'escalateHelpView');		
   };
 	
@@ -292,8 +285,7 @@ function SendMessageViewModel() {
   };		
 	
 	this.escalateYes = function () {
-		selectedChannel = that.selectedChannels().channelId;
-		localStorage.setItem('messageText', that.messageText());		
+		selectedChannel = that.selectedChannels().channelId;	
 		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };
 	

@@ -193,7 +193,9 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('iGiStatus');		
 		localStorage.removeItem('currentChannelData');
 		selectedChannel = '';
-		sendMessageViewModel.clearOptionList();						
+		sendMessageViewModel.clearOptionList();
+		sendMessageViewModel.clearForm();		
+		//localStorage.removeItem('messageText');								
 		//localStorage.setItem('currentChannel');				
 		//channelListViewModel.clearForm();
 		//notificationsViewModel.removeNotifications();
