@@ -94,12 +94,12 @@ function SendMessageViewModel() {
 				that.characterCount(that.messageText().length);																
 			}			
 			that.escLevel(localStorage.getItem('escLevel'));				
-			if(that.escLevel() == 'R') {
-				escalate = 'Remind';
+			if(that.escLevel() == 'H') {
+				escalate = 'Hound';
 			} else if(that.escLevel() == 'C') {
 				escalate = 'Chase';
 			} else {
-				escalate = 'Hound';
+				escalate = 'Remind';
 			}																									
 			if(localStorage.getItem('escalate') == 'yes') {
 				that.normalText('');
@@ -196,6 +196,7 @@ function SendMessageViewModel() {
 		that.toastText(details.message);		
 		showToast();
 	};
+	
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
 			that.toastText('Please type a message to broadcast.');

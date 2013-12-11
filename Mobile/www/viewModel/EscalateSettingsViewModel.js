@@ -35,16 +35,16 @@ function EscalateSettingsViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			that.remindClass('');
 			that.chaseClass('');
-			that.houndClass('');			
-			if(localStorage.getItem('escLevel') == 'R') {
-				that.remindClass('timesensitiveicon');
-				localStorage.setItem('escLevel', 'R');															
+			that.houndClass('');
+			if(localStorage.getItem('escLevel') == 'H') {
+				that.houndClass('criticalicon');
+				localStorage.setItem('escLevel', 'H');																														
 			} else if(localStorage.getItem('escLevel') == 'C') {
 				that.chaseClass('broadcasticon');
 				localStorage.setItem('escLevel', 'C');															
 			} else {
-				that.houndClass('criticalicon');
-				localStorage.setItem('escLevel', 'H');															
+				that.remindClass('timesensitiveicon');
+				localStorage.setItem('escLevel', 'R');															
 			}
 		}
 	}	
