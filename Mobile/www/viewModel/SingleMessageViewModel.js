@@ -62,6 +62,16 @@ function SingleMessageViewModel() {
 				that.acks(messageObject.acks+' Got It');											
 			}							
 		}
-	}		
+	}
+	
+	this.showReplies = function(){
+		if(that.replies() == '0 Replies') {
+			that.toastText('No replies to display');		
+			showToast();			
+		}
+		else {						
+			viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');
+		}
+	};			
 				
 }
