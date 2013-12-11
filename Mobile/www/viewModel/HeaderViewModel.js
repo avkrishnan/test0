@@ -1,7 +1,7 @@
 ﻿function HeaderViewModel() {	
 	this.backText = ko.observable();
 	this.isBack = ko.observable(true);	
-	this.newMessageCount = ko.observable(badgeCount);
+	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable();
 	this.toastText = ko.observable();
 	
