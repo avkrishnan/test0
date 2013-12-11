@@ -266,7 +266,8 @@ function SendMessageViewModel() {
     that.duration("Normal: <em>Send one time to follower's preferred device</em>");
 		that.activeType('normalcolor');		
 		that.escalateEdit(false);
-		localStorage.removeItem('escDuration');				
+		localStorage.removeItem('escLevel');
+		localStorage.removeItem('escDuration');						
 		that.escLevel('N');		
   };
 	
@@ -280,7 +281,8 @@ function SendMessageViewModel() {
     that.duration("Fast: <em>Send one time to follower's mobile devices</em>");
 		that.activeType('fastcolor');
 		that.escalateEdit(false);
-		localStorage.removeItem('escDuration');						
+		localStorage.removeItem('escLevel');
+		localStorage.removeItem('escDuration');								
 		that.escLevel('F');						
   };		
 	
