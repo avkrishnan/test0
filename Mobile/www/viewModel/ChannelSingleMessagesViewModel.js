@@ -87,8 +87,7 @@ function ChannelSingleMessagesViewModel() {
 						that.activeClass('igimsgdetail');																		
 					}
 					else {
-						that.iGiButton(true);
-					  that.dismissButton(false);																				
+						that.iGiButton(true);														
 						that.activeClass('igisentimg');													
 					}
 				}
@@ -97,8 +96,12 @@ function ChannelSingleMessagesViewModel() {
 				}
 				else if(channel.dismissed == 'Y') {
 					that.iGiButton(false);						
+					that.dismissButton(true);
 					that.dismissClass('active');												
-				}			
+				}
+				else {
+					that.dismissButton(true);							
+				}				
 				//that.readMessageUpdateBadge(channel.msgId);
 				//alert(channel.msgId);
 				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId));
@@ -122,8 +125,7 @@ function ChannelSingleMessagesViewModel() {
 							that.activeClass('igimsgdetail');																		
 						}
 						else {
-							that.iGiButton(true);
-					    that.dismissButton(false);																					
+							that.iGiButton(true);														
 							that.activeClass('igisentimg');							
 						}
 					}
@@ -132,8 +134,12 @@ function ChannelSingleMessagesViewModel() {
 					}
 					else if(channelMessage.dismissed == 'Y') {
 						that.iGiButton(false);						
+						that.dismissButton(true);
 						that.dismissClass('active');												
-					}				
+					}
+					else {
+						that.dismissButton(true);							
+					}					
 				}
 			}
 		}
