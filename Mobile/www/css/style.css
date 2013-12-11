@@ -244,7 +244,6 @@ select, .ui-icon-arrow-d {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
-
 /*Emergency action details end*/
 /*	*	V-12- Delete - A */
 .remove {
@@ -1332,12 +1331,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .messageschannel {
 	padding:0 0 4px 4px;
-	float:left;
-	width:96%;
 }
 .igi-responses .messageschannel {
-	width:78%;
-	border-left:1px solid #eaeaea;
+	border-left: 1px solid #EAEAEA;
+	display: table-cell;
+	padding:0 0 4px 4px;
 }
 .messagebtn {
 	float:right;
@@ -1578,6 +1576,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-size:14px;
 	height:30px;
 	line-height:30px;
+	cursor:pointer;
 	background: rgb(141,198,63); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(141,198,63,1) 0%, rgba(163,205,55,1) 50%, rgba(141,198,63,1) 51%, rgba(210,221,37,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(141,198,63,1)), color-stop(50%,rgba(163,205,55,1)), color-stop(51%,rgba(141,198,63,1)), color-stop(100%,rgba(210,221,37,1))); /* Chrome,Safari4+ */
@@ -1954,40 +1953,51 @@ h1.requests {
 }
 .messagescontent {
 	background:#e6e7e8;
-	padding:0 0 8px 0;
+	padding:0 8px 8px 8px;
 }
 .msg-hideshow {
 	overflow:hidden;
-	padding:4px 6px 4px 6px;
+	margin:0 -8px;
+	padding:12px 8px 10px 8px;
 	border-bottom:1px solid #ccc;
 }
 .msg-hideshow h4 {
+	color:#2D2D2D;
 	float:left;
-	font-size:15px;
-	color:#2d2d2d;
-	padding:5px 0;
+	font-size: 15px;
 	font-weight:normal;
 }
 .msg-hideshow a {
 	float:right;
-	padding:13px;
-	margin-top:3px;
-	background:url("images/msg-hide.png") no-repeat 0 2px;
+	padding:12px;
+	background:url("images/msg-hide.png") no-repeat 0 0;
 }
-.messagesreceived, .igi-responses {
+.messagesreceived {
 	background:#fff;
 	display:table;
 	border-radius:4px;
-	margin:10px 6px 0 6px;
-	overflow:hidden;
+	margin:10px 0 0 0;
+	width:100%;
 }
 .igi-responses {
-	width:96%;
+	background:#FFFFFF;
+	border-radius:4px;
+	display:table;
+	margin:10px 0 0;
+	width:100%;
+}
+.igi-responses a {
+	display:table;
+	width:100%;
+}
+.igi-responses .channelicans {
+	background:url("images/all-icons.png") no-repeat 3px -5px;
+	display:table-cell;
+	width:46px;
+	height:auto;
+	float:none;
 }
 /*28-11-2013-*/
-.messagesreceived {
-	width:96%;
-}
 .messagesreceived .igibutton, .messagesreceived .messageschannel, .messagesreceived .iconchannels {
 	display:table-cell;
 }
@@ -2027,13 +2037,15 @@ h1.requests {
 }
 ul.igiresponses, .notification {
 	border-top:1px solid #EAEAEA;
-	padding:2px 0 5px 0;
 	clear:both;
 }
 ul.igiresponses li {
 	font-size:12px;
 	color:#8DC63F;
-	padding:5px 0;
+	padding:7px 0;
+}
+ul.igiresponses li em{
+	font-size:11px;
 }
 ul.igiresponses li span {
 	font-size:10px;
@@ -2042,19 +2054,19 @@ ul.igiresponses li span {
 	float:left;
 }
 .followersname, .followersname.ui-link, .followersname.ui-link:hover, .followersname.ui-link:visited, .followersname.ui-link:active {
-	font-size:13px;
+	font-size:14px;
 	color:#8DC63F;
-	padding:8px 10px;
-	display: block;
+	padding:10px 10px;
+	display:block;
 }
 .notification li {
 	color:#2d2d2d;
-	font-size:12px;
-	padding:5px 10px;
+	font-size:13px;
+	padding:7px 10px;
 }
 .notification li em {
 	color:#8DC63F;
-	font-size:11px;
+	font-size:12px;
 }
 .search-query {
 	border-bottom:1px solid #828181;
@@ -2114,7 +2126,7 @@ ul.igiresponses li span {
 	padding:5px 0;
 }
 .dropdownchanellist li.even {
-	background:#f1f2f2
+	background:#f1f2f2;
 }
 .dropdownchanellist li a.ui-link, .dropdownchanellist li a.ui-link:hover, .dropdownchanellist li a.ui-link:visited, .dropdownchanellist li a.ui-link:active {
 	font-size:12px;
@@ -2281,7 +2293,7 @@ ul.igiresponses li span {
 }
 .channelprivate a.lock-channel {
 	float:right;
-	 background:url("images/lock.png") no-repeat 0 8px;
+	background:url("images/lock.png") no-repeat 0 8px;
 	padding:14px 10px;
 }
 .channelprivate p {
@@ -2324,13 +2336,14 @@ ul.igiresponses li span {
 }
 .messagedetail {
 	background:#fff;
-	overflow:hidden;
 	border-radius:21px 4px 4px 4px;
+	display:table;
+	padding:0px 0px 5px 0px;
+	width:100%;
 }
 .messagedetail .iconchannels {
-	float:left;
-	padding:20px;
-	width:auto;
+	border:none;
+	width:37px;
 	background:url("images/sprites.png") no-repeat;
 }
 .messagedetail .iconchannels.icon-h {
@@ -2351,8 +2364,7 @@ ul.igiresponses li span {
 .messagedetail-info {
 	float:left;
 	margin:0 0 0 10px;
-	padding:0;
-	width:81%;
+	padding:0 10px 0 0;
 }
 .messagedetail-info span {
 	font-size:14px;
@@ -2691,14 +2703,14 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin-top:8px;
 }
 .escalate-settings {
-	background: none repeat scroll 0 0 #2D2D2D;
-	border-radius: 10px 0 0 10px;
-	margin-bottom: 15px;
-	overflow: hidden;
-	padding: 5px 0 15px;
+	background:#2D2D2D;
+	border-radius:10px 0 0 10px;
+	margin-bottom:15px;
+	overflow:hidden;
+	padding:5px 0 15px;
 }
 .escalate-settings.escalatesettings-deseable {
-	opacity: 0.5;
+	opacity:0.5;
 }
 .escalatedate-time {
 	overflow:hidden;
@@ -2719,7 +2731,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#fff;
 }
 .agressively-slider {
-    padding: 0 10px;
+    padding:0 10px;
 }
 .agressively-slider span {
 	font-size:14px;
@@ -2727,8 +2739,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-style:italic;
 }
 .slider-value {
-	margin: 10px 0 0;
-	overflow: hidden;
+	margin:10px 0 0;
+	overflow:hidden;
 }
 .slider-value span {
 	font-size:15px;
@@ -2821,7 +2833,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	padding:16px;
 	background:#7c7c7c;
 	border-radius:50px;
-	-webkit-border-radius:50px;
 }
 .slidervalue-img .normalcoloricon {
 	background:#27aae1;
@@ -3003,6 +3014,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .set-date-time.last {
 	border:none;
 }
+.picker-date {
+	color:#fff;
+	font-size:14px;
+	padding:10px 0px 0px 0px;
+}
+
 /*
 	*	A short description
 */
@@ -3076,9 +3093,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	z-index:9999;
 }
 .toast-text {
-	background:url("images/toastimg.png") no-repeat 10px 11px;
+	background:url("images/toastimg.png") no-repeat 20px 11px;
 	font-size:14px;
-	padding:10px 10px 12px 40px;
+	padding:10px 10px 12px 50px;
+}
+.toast-error {
+	background:url("images/toasterror.png") no-repeat 20px 11px;
 }
 .toast-tutorial {
 	bottom:12px;
@@ -3155,18 +3175,21 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:16px;
 	font-style:normal;
 	padding:2px 0 2px 30px;
-	font-family: 'OpenSansRegular';
+	font-family:'OpenSansRegular';
 }
 /* IGI Confirmation End*/
+.escalatebroadcast {
+	font-size:14px;
+	color:#414141;
+	padding:0 0 10px 6px;
+	display:block;
+}
 /*
 	*@media query css
 */
 @media only screen and (min-width:360px) { 
 	.new-user img {
 		width:103%;
-	}
-	.removedelete {
-		width:79%;
 	}
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:80.5%;
@@ -3251,15 +3274,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.linkicon a {
 		margin:0 28px 0 0;
 	}
-	.messagesreceived {
-		width:95.5%;
-	}
-	.igi-responses {
-		width: 96.5%;
-	}
-	.igi-responses .messageschannel {
-		width:81%;
-	}
 	.slider-value span.fast {
 		margin:0 27%;
 	}
@@ -3276,9 +3290,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:91%;
-	}
-	.removedelete {
-		width:90.2%;
 	}
 	.GetStart {
 		top:63.5%;
@@ -3338,9 +3349,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.followerincrease .broadcastmsgsend {
 		width:99.5%;
 	}
-	.messagedetail-info {
-		width:93%;
-	}
 	.yes-no span.informationicon {
 		width:72%;
 	}
@@ -3375,18 +3383,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.datetime-setting.date-minutesetting {
 		margin-right: 47px;
 	}
-	.messageschannel {
-		width:98.9%;
-	}
 	.msgbuttons a {
 		padding:3px 0;
 		width:31%;
-	}
-	.igi-responses {
-		width: 98.5%;
-	}
-	.igi-responses .messageschannel {
-		width: 92%;
 	}
 	.slider-value span.fast {
 		margin:0 40.4%;
@@ -3396,9 +3395,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 }
 @media only screen and (min-width:800px) {
-	.removedelete {
-		width:90.2%;
-	}
 	.msg-content p, .msg-content h1 {
 		width:90%;
 	}
@@ -3438,9 +3434,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 }
 @media only screen and (min-width:980px) {
-	.removedelete {
-		width:92.6%;
-	}
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:95%;
 	}
@@ -3488,12 +3481,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		padding:3px 0;
 		width:31.5%;
 	}
-	.igi-responses {
-		width: 98.8%;
-	}
-	.igi-responses .messageschannel {
-		width: 93.8%;
-	}
 	.slider-value span.fast {
 		margin:0 42.4%;
 	}
@@ -3504,9 +3491,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 @media only screen and (min-width:1280px) {
 	.searchtype .ui-input-search input.ui-input-text {
 		width:96.5%;
-	}
-	.removedelete {
-		width:94.4%;
 	}
 	.msg-content p, .msg-content h1 {
 		width:94%;
@@ -3525,9 +3509,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.broadcast-sensitive.singlemessage span {
 		width:97.8%;
-	}
-	.messagedetail-info {
-		width:95.5%;
 	}
 	.yes-no span.informationicon {
 		width:83%;
@@ -3563,18 +3544,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.msgbuttons a {
 		padding:3px 0;
 		width:32%;
-	}
-	.messagesreceived {
-    width: 99%;
-	}
-	.messageschannel {
-		width:99.5%;
-	}
-	.igi-responses {
-    width:99.1%;
-	}
-	.igi-responses .messageschannel {
-		width:95%;
 	}
 	.slider-value span.fast {
 		margin:0 44.2%;
