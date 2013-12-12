@@ -18,12 +18,12 @@
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 		}
 		//if($.isEmptyObject(ES.systemService.MnsCacheData)) {
-			this.updateBadges(ES.systemService.MnsCacheData);
+			this.updateBadges();
 		//}
 	}
 	
 	/* This function changes badge count as per the new api*/
-	this.updateBadges = function(dataObject) {
+	this.updateBadges = function() {
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 			setTimeout(function() {
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
@@ -199,7 +199,7 @@ function OverlayViewModel() {
 	
 	this.iGiAckOverlay = function(data) {
 		var callbacks = {
-			success: function(data) {					
+			success: function(data) {
 				that.toastText('iGi Acknowledgement sent !');
 				localStorage.setItem('toastData', that.toastText());
 				goToView($.mobile.activePage.attr('id'));

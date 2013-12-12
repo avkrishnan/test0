@@ -145,7 +145,9 @@ function ChannelSingleMessagesViewModel() {
 		//localStorage.removeItem('enymNotifications');
 		if(read == 'N' && igiAcknowledge == "N") {
 			//alert('1');
-			ES.systemService.adjMnsCount(-1);
+			if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
+				ES.systemService.adjMnsCount(-1);
+			}
 		}
 		else if(read == 'N' && igiAcknowledge != "N") {
 			//alert(ES.systemService.MnsCacheData);	
