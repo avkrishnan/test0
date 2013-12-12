@@ -37,7 +37,8 @@ function ChannelMainViewModel() {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');												
-			}			
+			}
+			that.toastClass('');						
 			that.accountName(localStorage.getItem('accountName'));
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);

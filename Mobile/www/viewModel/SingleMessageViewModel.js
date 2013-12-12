@@ -49,7 +49,8 @@ function SingleMessageViewModel() {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');				
-			}			
+			}
+			that.toastClass('');					
 			that.accountName(localStorage.getItem('accountName'));											
 			that.channelName(channelObject.channelName);					
 			that.time('Sent '+ dateFormat1(messageObject.created) +' ('+messageObject.time+'):');	
@@ -65,7 +66,7 @@ function SingleMessageViewModel() {
 			that.escalateTime(false);			
 			if(messageObject.escUntil != '' &&  typeof messageObject.escUntil != 'undefined') {
 				that.escalateTime(true);								
-				that.escalateUntil('<span class="singlemsgicon '+messageObject.sensitivity+'"></span>'+messageObject.sensitivityText+'" until '+shortFormatYear(messageObject.escUntil));			
+				that.escalateUntil('<span class="singlemsgicon '+messageObject.sensitivity+'"></span>"'+messageObject.sensitivityText+'" until '+shortFormatYear(messageObject.escUntil));			
 			}
 			that.replies(messageObject.replies);						
 			if(messageObject.type == 'REQUEST_ACKNOWLEDGEMENT' && typeof messageObject.noacks != 'undefined') {

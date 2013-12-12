@@ -147,7 +147,8 @@ function SendMessageViewModel() {
 				that.yesClass('nobutton');
 				that.noClass('yesbutton');
 				that.broadcastType('RAC');															
-			}														
+			}
+			that.toastClass('');																	
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);

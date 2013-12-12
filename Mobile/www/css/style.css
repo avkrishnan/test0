@@ -3125,7 +3125,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	clear:both;
 	font-size:14px;
 	font-style:italic;
-	min-height:120px;
+	min-height:140px;
 	overflow:auto;
 }
 .formtype.channellanding.textareatype {
@@ -3232,6 +3232,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 @media only screen and (min-width:360px) { 
 	.new-user img {
 		width:103%;
+	}
+	.channellanding textarea.ui-input-text {
+		min-height:120px;
 	}
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:80.5%;
