@@ -35,6 +35,7 @@ function SendMessageViewModel() {
 	this.noClass = ko.observable();
 	this.broadcastType = ko.observable();	
 	this.toastText = ko.observable();
+	this.toastClass = ko.observable();	
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id, followers) {
@@ -173,12 +174,14 @@ function SendMessageViewModel() {
 					that.createChannelMessage();
 					return true;
 				}
-				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {				
+				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
+					that.toastClass('toast-error');									
 					that.toastText('Please verify your email !');
 					showToast();			
 				}
 			}
 		} else {
+			that.toastClass('toast-error');
 			that.toastText('Please add a default email !');
 			showToast();
 		}
@@ -192,9 +195,11 @@ function SendMessageViewModel() {
 	
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
+			that.toastClass('toast-error');			
 			that.toastText('Please type a message to broadcast.');
 			showToast();			
 		} else if(that.selectedChannels().followerCount == 0) {
+			that.toastClass('toast-error');			
 			that.toastText('Message not sent - Zero followers on '+ that.selectedChannels().channelName);
 			showToast();				
 		} else {
@@ -205,6 +210,7 @@ function SendMessageViewModel() {
 	
 	function successfulList(data){
 		if(data.channel.length < 1) {
+			that.toastClass('toast-error');			
 			that.toastText('Please create some channels !');
 			showToast();			
 		} else {	

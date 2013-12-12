@@ -21,7 +21,8 @@ function SingleMessageViewModel() {
 	this.noacks = ko.observable();
 	this.acks = ko.observable();
 	this.replies = ko.observable();		
-	this.toastText = ko.observable();			
+	this.toastText = ko.observable();
+	this.toastClass = ko.observable();				
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -66,6 +67,7 @@ function SingleMessageViewModel() {
 	
 	this.showReplies = function(){
 		if(that.replies() == '0 Replies') {
+			that.toastClass('toast-error');			
 			that.toastText('No replies to display');		
 			showToast();			
 		}
