@@ -53,7 +53,7 @@ function ChannelDeleteViewModel() {
 		localStorage.removeItem('counter');
 		that.toastText('Channel deleted');		
 		localStorage.setItem('toastData', that.toastText());
-		selectedChannel = '';		
+		sendMessageViewModel.clearForm();		
 		goToView('channelsIOwnView');		
   };
 

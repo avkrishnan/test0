@@ -822,8 +822,6 @@ function shortFormat(created) {
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " ";// + (date.getHours()>12?'PM':'AM');
 }
 
-selectedChannel = ''; // channel selected option in compose broadcast
-
 /* pradeep kumar end */
 
 /* Time conversion into time ago*/

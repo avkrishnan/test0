@@ -52,11 +52,9 @@ function SendMessageViewModel() {
 	};
 	
 	this.clearForm = function () {
-		that.messageText('');
-  };
-	
-	this.clearOptionList = function () {
 		that.channels.removeAll();
+		that.selectedChannels('');				
+		that.messageText('');		
   };		  
 	
 	this.activate = function() {			
@@ -153,7 +151,7 @@ function SendMessageViewModel() {
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
 			});
-			if(selectedChannel == '') {
+			if(typeof that.selectedChannels() == 'undefined' || that.selectedChannels() == '') {
 				that.channels.removeAll();										
 				$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
 				return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
@@ -222,12 +220,11 @@ function SendMessageViewModel() {
 	function successfulMessage(data){
 		localStorage.removeItem('escDuration');		
 		localStorage.removeItem('escLevel');
-		localStorage.removeItem('iGiStatus');	
-		that.clearForm();									
+		localStorage.removeItem('iGiStatus');										
 		that.toastText('Broadcast sent');		
-		localStorage.setItem('toastData', that.toastText());
-		selectedChannel = '';				
+		localStorage.setItem('toastData', that.toastText());					
 		localStorage.setItem('currentChannelId', that.selectedChannels().channelId);
+		that.clearForm();		
 		backNavText.pop();
 		backNavView.pop();		
 		goToView('channelMainView');									
@@ -290,8 +287,7 @@ function SendMessageViewModel() {
 		that.escLevel('F');						
   };		
 	
-	this.escalateYes = function () {
-		selectedChannel = that.selectedChannels().channelId;	
+	this.escalateYes = function () {	
 		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };
 	
