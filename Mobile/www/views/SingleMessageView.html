@@ -27,7 +27,7 @@
     </a>
     <a class="low-messages messagenotsend" href="#" data-bind="text: noacks, visible: noacksVisibility" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'notGotItView');">
     </a>
-    <a class="low-messages messagesend" href="#" data-bind="text: acks, visible: acksVisibility" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');">
+    <a class="low-messages messagesend" href="#" data-bind="text: acks, visible: acksVisibility, click: showWhoGotIt">
     </a>
   </div>
   <div class="toast-notification"><div class="toast-text" data-bind="text: toastText, css: toastClass"></div></div>    

@@ -91,6 +91,17 @@ function SingleMessageViewModel() {
 		else {						
 			viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');
 		}
-	};			
+	};
+	
+	this.showWhoGotIt = function(){
+		if(that.acks() == '0 Got It') {
+			that.toastClass('toast-error');			
+			that.toastText("No iGi's received yet");		
+			showToast();			
+		}
+		else {						
+			viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');
+		}
+	};					
 				
 }
