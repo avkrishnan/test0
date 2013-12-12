@@ -170,7 +170,8 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('newuseremail');
 		localStorage.removeItem('newusername');
 		localStorage.removeItem('newuserpassword');		
-    localStorage.removeItem('signUpError');		
+    localStorage.removeItem('signUpError');
+		localStorage.removeItem('toastData');				
 		goToView('loginView');
   }
 
@@ -191,8 +192,7 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('escLevel');
 		localStorage.removeItem('iGiStatus');		
 		localStorage.removeItem('currentChannelData');
-		sendMessageViewModel.clearForm();
-		localStorage.removeItem('toastData');											
+		sendMessageViewModel.clearForm();											
 		//localStorage.setItem('currentChannel');				
 		//channelListViewModel.clearForm();
 		//notificationsViewModel.removeNotifications();

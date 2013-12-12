@@ -17,7 +17,8 @@ function SingleMessageViewModel() {
 	this.percentageClass = ko.observable();	
 	this.percentage = ko.observable();			
 	this.noiGi = ko.observable();
-	this.iGivisibility = ko.observable(false);	
+	this.noacksVisibility = ko.observable(false);
+	this.acksVisibility = ko.observable(false);			
 	this.noacks = ko.observable();
 	this.acks = ko.observable();
 	this.replies = ko.observable();		
@@ -56,11 +57,20 @@ function SingleMessageViewModel() {
 			that.percentage(messageObject.percentage);			
 			that.noiGi(messageObject.noiGi);				
 			that.replies(messageObject.replies);
-			that.iGivisibility(false);			
+			that.noacksVisibility(false);
+			that.acksVisibility(false);						
 			if(messageObject.type == 'REQUEST_ACKNOWLEDGEMENT' && typeof messageObject.noacks != 'undefined') {
-				that.iGivisibility(true);
-				that.noacks(messageObject.noacks+" Haven't Got It Yet");
-				that.acks(messageObject.acks+' Got It');											
+				if(messageObject.acks+messageObject.noacks == messageObject.acks){
+					that.noacksVisibility(false);
+					that.acksVisibility(true);					
+					that.acks(messageObject.acks+' Got It');										
+				}
+				else {
+					that.noacksVisibility(true);
+					that.acksVisibility(true);	
+					that.noacks(messageObject.noacks+" Haven't Got It Yet");
+					that.acks(messageObject.acks+' Got It');					
+				}
 			}							
 		}
 	}
