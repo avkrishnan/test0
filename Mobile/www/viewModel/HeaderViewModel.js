@@ -196,7 +196,8 @@ function OverlayViewModel() {
 			error: function(data, status, details) {
 				that.toastText(details.message);
 				localStorage.setItem('toastData', that.toastText());
-				goToView($.mobile.activePage.attr('id'));								
+				goToView($.mobile.activePage.attr('id'));
+				that.closePopup();												
 			}
 		};					
 		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
