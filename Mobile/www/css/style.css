@@ -1498,12 +1498,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	height:38px;
 	line-height:35px;
 	margin-left:12px;
-	padding:0 0 0 12px;
+	padding:0 0 0 8px;
 	width:63%;
 }
 .broadcast-sensitive span strong {
-	padding:10px 25px;
-	margin-left:-22px;
+	padding:10px 22px;
+	margin-left:-19px;
 	border-radius:21px 0 0 21px;
 }
 .broadcast-sensitive span strong.icon-r {
@@ -1532,7 +1532,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-top:2px solid #a7a9ac;
 	border-bottom:2px solid #fff;
 	overflow:hidden;
-	margin:8px 0;
+	margin:8px 0 3px 0px;
 	background:#67676a;
 	height:30px;
 	line-height:30px;
@@ -1621,11 +1621,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#d5d7d8 url("images/sprites-channel.png") no-repeat -10px -1204px;
 	border-radius:21px 4px 4px 21px;
 	color:#414141;
-	float:left;
+	/*float:left;*/
 	font-size:14px;
 	height:29px;
 	line-height:29px;
-	margin:0 0 10px 5px;
+	margin:0 0 8px 5px;
 	padding:0 0 0 40px;
 	width:56%;
 }
@@ -1643,17 +1643,41 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	line-height:23px;
 }
 .broadcast-sensitive.singlemessage {
-	margin: 0 4px;
+	margin:0 4px;
 	border-radius:21px 4px 4px 21px;
 	display:block;
 }
 .broadcast-sensitive.singlemessage span {
-	width:91%;
+	margin:0;
+	width:99.8%;
+}
+.escalatebroadcast {
+	font-size:13px;
+	color:#414141;
+	padding:10px 0 10px 4px;
+	margin:0 0 8px 0;
+}
+.singlemsgicon {
+	background:url("images/all-icons.png") no-repeat;
+	padding:12px 19px;
+	margin-right:6px;
+}
+.singlemsgicon.icon-h {
+	background-position:-1px -7px;
+}
+.singlemsgicon.icon-e {
+	background-position:-412px -7px;
+}
+.singlemsgicon.icon-c {
+	background-position:-81px -7px;
+}
+.singlemsgicon.icon-r {
+	background-position:-342px -7px;
 }
 .broadcast-sensitive.singlemessage em {
 	padding:16px 15px;
 	float:right;
-	background:url("images/singalmsgread.png") no-repeat 8px 8px;
+	background:url("images/singalmsgread.png") no-repeat 8px 9px;
 }
 h1.messagesdate {
 	font-size:14px;
@@ -2727,8 +2751,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	border-radius:13px 3px 3px 13px;
 	float:right;
 	font-size:14px;
-	margin:10px 0 0 0;
 	color:#fff;
+}
+.escalatedatetime {
+	color:#FFFFFF;
+	display:inline-block;
+	font-size:14px;
+	line-height:28px;
+	margin-top:15px;
+	width:100%;
 }
 .agressively-slider {
     padding:0 10px;
@@ -3178,12 +3209,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-family:'OpenSansRegular';
 }
 /* IGI Confirmation End*/
-.escalatebroadcast {
-	font-size:14px;
-	color:#414141;
-	padding:0 0 10px 6px;
-	display:block;
-}
 /*
 	*@media query css
 */
@@ -3231,8 +3256,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slidemenu {
 		min-height:640px;
 	}
-	.broadcast-sensitive.singlemessage span {
-		width:92.5%;
+	.escalatebroadcast {
+		font-size:14px;
 	}
 	.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover {
 		font-size:14px;
@@ -3328,7 +3353,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:78%;
 	}
 	.broadcast-sensitive span {
-		width:80.5%;
+		width:80.8%;
 	}
 	.channelinfo.channelfollow {
 		width:95%;
@@ -3343,9 +3368,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:95%;
 		min-height:1025px;
 	}
-	.broadcast-sensitive.singlemessage span {
+	/*.broadcast-sensitive.singlemessage span {
 		width:96.5%;
-	}
+	}*/
 	.followerincrease .broadcastmsgsend {
 		width:99.5%;
 	}
@@ -3446,9 +3471,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.channelicons ul {
 		width:94.5%;
 	}
-	.broadcast-sensitive.singlemessage span {
+	/*.broadcast-sensitive.singlemessage span {
 		width:97.2%;
-	}
+	}*/
 	.yes-no span.informationicon {
 		width:78%;
 	}
@@ -3507,9 +3532,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slidemenu {
 		min-height:601px;
 	}
-	.broadcast-sensitive.singlemessage span {
+	/*.broadcast-sensitive.singlemessage span {
 		width:97.8%;
-	}
+	}*/
 	.yes-no span.informationicon {
 		width:83%;
 	}
