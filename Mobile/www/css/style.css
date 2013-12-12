@@ -937,7 +937,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelimg {
 	float:left;
-	margin:0 15px 0 0;
+	margin:0 10px 0 0;
 	padding:19px;
 	border-radius:50px;
 }
@@ -1498,25 +1498,26 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	height:38px;
 	line-height:35px;
 	margin-left:12px;
-	padding:0 0 0 12px;
+	padding:0 0 0 8px;
 	width:63%;
 }
 .broadcast-sensitive span strong {
-	padding:10px 25px;
-	margin-left:-22px;
+	padding:10px 22px;
+	margin-left:-19px;
 	border-radius:21px 0 0 21px;
+	background:url("images/all-icons.png") no-repeat;
 }
 .broadcast-sensitive span strong.icon-r {
-	background:url("images/all-icons.png") no-repeat -342px -7px;
+	background-position:-342px -7px;
 }
 .broadcast-sensitive span strong.icon-e {
-	background:url("images/sprites.png") no-repeat -9px -630px;
+	background-position:-411px -7px;
 }
 .broadcast-sensitive span strong.icon-c {
-	background:url("images/all-icons.png") no-repeat -81px -7px;
+	background-position:-81px -7px;
 }
 .broadcast-sensitive span strong.icon-h {
-	background:url("images/sprites-channel.png") no-repeat -7px -798px;
+	background-position:-2px -7px;
 }
 .broadcastnormal span {
 	background-position:-9px -1555px;
@@ -1532,7 +1533,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-top:2px solid #a7a9ac;
 	border-bottom:2px solid #fff;
 	overflow:hidden;
-	margin:8px 0;
+	margin:8px 0 3px 0px;
 	background:#67676a;
 	height:30px;
 	line-height:30px;
@@ -1621,11 +1622,10 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#d5d7d8 url("images/sprites-channel.png") no-repeat -10px -1204px;
 	border-radius:21px 4px 4px 21px;
 	color:#414141;
-	float:left;
 	font-size:14px;
 	height:29px;
 	line-height:29px;
-	margin:0 0 10px 5px;
+	margin:0 0 8px 5px;
 	padding:0 0 0 40px;
 	width:56%;
 }
@@ -1643,17 +1643,41 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	line-height:23px;
 }
 .broadcast-sensitive.singlemessage {
-	margin: 0 4px;
+	margin:0 4px;
 	border-radius:21px 4px 4px 21px;
 	display:block;
 }
 .broadcast-sensitive.singlemessage span {
-	width:91%;
+	margin:0;
+	width:99.8%;
+}
+.escalatebroadcast {
+	font-size:13px;
+	color:#414141;
+	padding:10px 0 10px 4px;
+	margin:0 0 8px 0;
+}
+.singlemsgicon {
+	background:url("images/all-icons.png") no-repeat;
+	padding:12px 19px;
+	margin-right:6px;
+}
+.singlemsgicon.icon-h {
+	background-position:-1px -7px;
+}
+.singlemsgicon.icon-e {
+	background-position:-412px -7px;
+}
+.singlemsgicon.icon-c {
+	background-position:-81px -7px;
+}
+.singlemsgicon.icon-r {
+	background-position:-342px -7px;
 }
 .broadcast-sensitive.singlemessage em {
 	padding:16px 15px;
 	float:right;
-	background:url("images/singalmsgread.png") no-repeat 8px 8px;
+	background:url("images/singalmsgread.png") no-repeat 8px 9px;
 }
 h1.messagesdate {
 	font-size:14px;
@@ -2727,8 +2751,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	border-radius:13px 3px 3px 13px;
 	float:right;
 	font-size:14px;
-	margin:10px 0 0 0;
 	color:#fff;
+}
+.escalatedatetime {
+	color:#FFFFFF;
+	display:inline-block;
+	font-size:14px;
+	line-height:28px;
+	margin-top:15px;
+	width:100%;
 }
 .agressively-slider {
     padding:0 10px;
@@ -2894,7 +2925,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .igiyesno {
 	float:left;
-	width:50%;
+	width:62%;
 	background:#2D2D2D;
 	padding:0 0 11px 0;
 	border-radius:0 0 10px 0;
@@ -2905,10 +2936,27 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#fff;
 	padding:0 0 5px 0;
 }
+.igiyesnoinner {
+	padding:0 10px 0 0;
+}
+.igi-yesno {
+	width:100%;
+	display:table;
+}
+.i-icon {
+	display:inline-block;
+	width:42.8%;
+	padding:7px 0;
+	text-align:center;
+}
+.i-icon a {
+	background:url("images/informationicon.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+	padding:0 10px;
+}
 .igiimage, .igiimageoff {
-	background:url(images/broadcastigi.png) no-repeat center center;
-	padding:20px;
-	float:left;
+	background:url(images/broadcastigi.png) no-repeat 0px 0px;
+	width:40px;
+	display:table-cell;
 }
 .igiimageoff {
 	background:url(images/igigray.png) no-repeat center center;
@@ -2918,7 +2966,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .sendcontent {
 	float:right;
-	width:50%;
+	width:38%;
 	background:#2d2d2d;	
 }
 .broadcastsend {
@@ -3077,7 +3125,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	clear:both;
 	font-size:14px;
 	font-style:italic;
-	min-height:120px;
+	min-height:140px;
 	overflow:auto;
 }
 .formtype.channellanding.textareatype {
@@ -3178,18 +3226,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-family:'OpenSansRegular';
 }
 /* IGI Confirmation End*/
-.escalatebroadcast {
-	font-size:14px;
-	color:#414141;
-	padding:0 0 10px 6px;
-	display:block;
-}
 /*
 	*@media query css
 */
 @media only screen and (min-width:360px) { 
 	.new-user img {
 		width:103%;
+	}
+	.channellanding textarea.ui-input-text {
+		min-height:120px;
 	}
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:80.5%;
@@ -3231,8 +3276,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slidemenu {
 		min-height:640px;
 	}
-	.broadcast-sensitive.singlemessage span {
-		width:92.5%;
+	.escalatebroadcast {
+		font-size:14px;
 	}
 	.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover {
 		font-size:14px;
@@ -3276,6 +3321,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.slider-value span.fast {
 		margin:0 27%;
+	}
+	.i-icon {
+		width:52%;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -3328,7 +3376,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:78%;
 	}
 	.broadcast-sensitive span {
-		width:80.5%;
+		width:80.8%;
 	}
 	.channelinfo.channelfollow {
 		width:95%;
@@ -3342,9 +3390,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slidemenu {
 		width:95%;
 		min-height:1025px;
-	}
-	.broadcast-sensitive.singlemessage span {
-		width:96.5%;
 	}
 	.followerincrease .broadcastmsgsend {
 		width:99.5%;
@@ -3392,6 +3437,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.new-user img {
 		width: 80%;
+	}
+	.i-icon {
+		width:80%;
 	}
 }
 @media only screen and (min-width:800px) {
@@ -3446,8 +3494,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.channelicons ul {
 		width:94.5%;
 	}
-	.broadcast-sensitive.singlemessage span {
-		width:97.2%;
+	.i-icon {
+		width:85%;
 	}
 	.yes-no span.informationicon {
 		width:78%;
@@ -3507,8 +3555,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slidemenu {
 		min-height:601px;
 	}
-	.broadcast-sensitive.singlemessage span {
-		width:97.8%;
+	.i-icon {
+		width:89%;
 	}
 	.yes-no span.informationicon {
 		width:83%;

@@ -34,13 +34,16 @@
         <div class="igi-send">
           <div class="igiyesno">
             <span class="reguestigi">Request iGi ?</span>
-            <em data-bind="css: igiClass"></em>
-            <div class="yes-noclick">
+            <div class="igi-yesno">
+              <em data-bind="css: igiClass"></em>
+              <span class="i-icon"><a href="#" onclick="viewNavigate('Compose', 'sendMessageView', 'requestiGiHelpView');"></a></span>
+              <div class="yes-noclick">
               <a href="#">
                 <span data-bind="click: iGiYes, css: yesClass">Yes</span>
                 <span data-bind="click: iGiNo, css: noClass">No</span>              
               </a>
             </div>
+            </div>            
           </div>
           <div class="sendcontent">
             <div class="broadcastsend"><a class="sendbtnican broadcast-icon" href="#" data-bind="click: sendMessageCommand">SEND</a></div>
