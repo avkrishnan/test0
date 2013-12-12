@@ -937,7 +937,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelimg {
 	float:left;
-	margin:0 15px 0 0;
+	margin:0 10px 0 0;
 	padding:19px;
 	border-radius:50px;
 }
@@ -1505,18 +1505,19 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:10px 22px;
 	margin-left:-19px;
 	border-radius:21px 0 0 21px;
+	background:url("images/all-icons.png") no-repeat;
 }
 .broadcast-sensitive span strong.icon-r {
-	background:url("images/all-icons.png") no-repeat -342px -7px;
+	background-position:-342px -7px;
 }
 .broadcast-sensitive span strong.icon-e {
-	background:url("images/sprites.png") no-repeat -9px -630px;
+	background-position:-411px -7px;
 }
 .broadcast-sensitive span strong.icon-c {
-	background:url("images/all-icons.png") no-repeat -81px -7px;
+	background-position:-81px -7px;
 }
 .broadcast-sensitive span strong.icon-h {
-	background:url("images/sprites-channel.png") no-repeat -7px -798px;
+	background-position:-2px -7px;
 }
 .broadcastnormal span {
 	background-position:-9px -1555px;
@@ -1621,7 +1622,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#d5d7d8 url("images/sprites-channel.png") no-repeat -10px -1204px;
 	border-radius:21px 4px 4px 21px;
 	color:#414141;
-	/*float:left;*/
 	font-size:14px;
 	height:29px;
 	line-height:29px;
@@ -2925,7 +2925,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .igiyesno {
 	float:left;
-	width:50%;
+	width:62%;
 	background:#2D2D2D;
 	padding:0 0 11px 0;
 	border-radius:0 0 10px 0;
@@ -2936,10 +2936,27 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#fff;
 	padding:0 0 5px 0;
 }
+.igiyesnoinner {
+	padding:0 10px 0 0;
+}
+.igi-yesno {
+	width:100%;
+	display:table;
+}
+.i-icon {
+	display:inline-block;
+	width:42.8%;
+	padding:7px 0;
+	text-align:center;
+}
+.i-icon a {
+	background:url("images/informationicon.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+	padding:0 10px;
+}
 .igiimage, .igiimageoff {
-	background:url(images/broadcastigi.png) no-repeat center center;
-	padding:20px;
-	float:left;
+	background:url(images/broadcastigi.png) no-repeat 0px 0px;
+	width:40px;
+	display:table-cell;
 }
 .igiimageoff {
 	background:url(images/igigray.png) no-repeat center center;
@@ -2949,7 +2966,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .sendcontent {
 	float:right;
-	width:50%;
+	width:38%;
 	background:#2d2d2d;	
 }
 .broadcastsend {
@@ -3302,6 +3319,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slider-value span.fast {
 		margin:0 27%;
 	}
+	.i-icon {
+		width:52%;
+	}
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3368,9 +3388,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:95%;
 		min-height:1025px;
 	}
-	/*.broadcast-sensitive.singlemessage span {
-		width:96.5%;
-	}*/
 	.followerincrease .broadcastmsgsend {
 		width:99.5%;
 	}
@@ -3417,6 +3434,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.new-user img {
 		width: 80%;
+	}
+	.i-icon {
+		width:80%;
 	}
 }
 @media only screen and (min-width:800px) {
@@ -3471,9 +3491,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.channelicons ul {
 		width:94.5%;
 	}
-	/*.broadcast-sensitive.singlemessage span {
-		width:97.2%;
-	}*/
+	.i-icon {
+		width:85%;
+	}
 	.yes-no span.informationicon {
 		width:78%;
 	}
@@ -3532,9 +3552,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slidemenu {
 		min-height:601px;
 	}
-	/*.broadcast-sensitive.singlemessage span {
-		width:97.8%;
-	}*/
+	.i-icon {
+		width:89%;
+	}
 	.yes-no span.informationicon {
 		width:83%;
 	}

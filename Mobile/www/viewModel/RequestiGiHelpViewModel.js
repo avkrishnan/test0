@@ -4,8 +4,8 @@ function RequestiGiHelpViewModel() {
   var that = this;
   this.template = 'requestiGiHelpView';
   this.viewid = 'V-20b';
-  this.viewname = 'Request iGi Help';
-  this.displayname = 'Request iGi help';
+  this.viewname = 'iGi Help';
+  this.displayname = 'iGi help';
 	this.accountName = ko.observable();	
 	
 	/* Request iGi help observable */
