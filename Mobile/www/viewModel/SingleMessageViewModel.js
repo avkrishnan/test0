@@ -12,6 +12,7 @@ function SingleMessageViewModel() {
 	this.channelName = ko.observable();		
 	this.time = ko.observable();	
 	this.singleMessage = ko.observable();
+	this.broadcastType = ko.observable();	
 	this.iGi = ko.observable();
 	this.percentageText = ko.observable();
 	this.percentageClass = ko.observable();	
@@ -53,6 +54,7 @@ function SingleMessageViewModel() {
 			that.channelName(channelObject.channelName);					
 			that.time('Sent '+ dateFormat1(messageObject.created) +' ('+messageObject.time+'):');	
 			that.singleMessage(messageObject.broadcastFull);
+			that.broadcastType(messageObject.type);
 			that.iGi(messageObject.iGi);
 			that.percentageText(messageObject.percentageText);
 			that.percentageClass(messageObject.percentageClass);			
@@ -94,12 +96,17 @@ function SingleMessageViewModel() {
 	};
 	
 	this.showWhoGotIt = function(){
-		if(that.acks() == '0 Got It') {
+		if(that.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
+			that.toastClass('toast-error');			
+			that.toastText('No iGi requested');		
+			showToast();				
+		}
+		else if(that.acks() == '0 Got It') {
 			that.toastClass('toast-error');			
 			that.toastText("No iGi's received yet");		
 			showToast();			
 		}
-		else {						
+		else {					
 			viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');
 		}
 	};					

@@ -13,7 +13,8 @@ function ChannelMainViewModel() {
 	this.channelName = ko.observable();
 	this.followerCount = ko.observable();
 	this.broadcasts = ko.observableArray([]);	
-	this.toastText = ko.observable();			
+	this.toastText = ko.observable();
+	this.toastClass = ko.observable();				
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -172,6 +173,45 @@ function ChannelMainViewModel() {
 	this.singleMessage = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));							
 		viewNavigate('Main', 'channelMainView', 'singleMessageView');
+	};
+	
+	this.showWhoGotIt = function(data){		
+		if(data.acks == 0) {
+			that.toastClass('toast-error');			
+			that.toastText("No iGi's received yet");		
+			showToast();			
+		}
+		else {
+			localStorage.setItem('currentMessageData', JSON.stringify(data));									
+			viewNavigate('Main', 'channelMainView', 'whoGotItView');
+		}
+	};
+	
+	this.iGiPercentage = function(data){
+		localStorage.setItem('currentMessageData', JSON.stringify(data));
+		if(data.percentageClass != '') {							
+			viewNavigate('Main', 'channelMainView', 'singleMessageView');
+		}
+		else {
+			viewNavigate('Main', 'channelMainView', 'whoGotItView');			
+		}
 	};	
+	
+	this.showNotGotIt = function(data){
+		localStorage.setItem('currentMessageData', JSON.stringify(data));								
+		viewNavigate('Main', 'channelMainView', 'whoGotItView');
+	};
+	
+	this.showReplies = function(data){	
+		if(data.replies == '0 Replies') {
+			that.toastClass('toast-error');			
+			that.toastText('No replies to display');		
+			showToast();			
+		}
+		else {
+			localStorage.setItem('currentMessageData', JSON.stringify(data));									
+			viewNavigate('Main', 'channelMainView', 'singleMessageRepliesView');
+		}
+	};				
 	
 }
