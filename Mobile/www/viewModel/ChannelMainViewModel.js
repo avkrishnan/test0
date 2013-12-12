@@ -199,7 +199,7 @@ function ChannelMainViewModel() {
 	
 	this.showNotGotIt = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));								
-		viewNavigate('Main', 'channelMainView', 'whoGotItView');
+		viewNavigate('Main', 'channelMainView', 'notGotItView');
 	};
 	
 	this.showReplies = function(data){	
