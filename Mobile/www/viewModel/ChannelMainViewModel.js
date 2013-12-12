@@ -91,9 +91,14 @@ function ChannelMainViewModel() {
 		$.mobile.hidePageLoadingMsg();			
 		var len = 0;
 		for(len; len<data.message.length; len++) {
-			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();			
+			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();
+			var broadcast = '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>';			
 			if(data.message[len].escLevelId == 'N') {
+        var broadcast = data.message[len].text+'<em></em>';				
 				var sensitivityText = 'NORMAL';
+			} else if(data.message[len].escLevelId == 'F') {
+        var broadcast = data.message[len].text+'<em></em>';				
+				var sensitivityText = 'FAST';				
 			} else if(data.message[len].escLevelId == 'R') {
 				var sensitivityText = 'REMIND';
 			} else if(data.message[len].escLevelId == 'C') {
@@ -142,7 +147,7 @@ function ChannelMainViewModel() {
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
 				sensitivityText: sensitivityText,
-				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',				
+				broadcast: broadcast,				
 				broadcastFull: data.message[len].text, 
 				time: msToTime(data.message[len].created),
 				created: data.message[len].created,
