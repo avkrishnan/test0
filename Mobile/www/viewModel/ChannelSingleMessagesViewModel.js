@@ -100,8 +100,8 @@ function ChannelSingleMessagesViewModel() {
 					that.dismissClass('active');												
 				}			
 				//that.readMessageUpdateBadge(channel.msgId);
-				//alert(channel.msgId);
-				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId));
+				//alert(JSON.stringify(channel));
+				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId, channel.read, channel.acknowledged));
 			}
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
@@ -140,17 +140,45 @@ function ChannelSingleMessagesViewModel() {
 		}
 	};
 	
-	this.readMessageUpdateBadge = function(messageID) {
+	this.readMessageUpdateBadge = function(messageID, read, igiAcknowledge) {
 		$('.active-overlay').html('');
+		//localStorage.removeItem('enymNotifications');
+		if(read == 'N' && igiAcknowledge == "N") {
+			//alert('1');
+			ES.systemService.adjMnsCount(-1);
+		}
+		else if(read == 'N' && igiAcknowledge != "N") {
+			//alert(ES.systemService.MnsCacheData);	
+			//alert('2');
+		}
+		else if(read == 'Y' && igiAcknowledge == "N") {
+			//alert('3');	
+		}
+		else {
+			//alert('4');
+			//ES.systemService.adjMnsCount(-1);	
+		}		
 		var callbacks = {
 			success: function(data) {
-				//alert('success');	
+				//alert('success');
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
-				localStorage.setItem('toastData', that.toastText());					
+				localStorage.setItem('toastData', that.toastText());
 			}
 		};
+		//
+		//setTimeout(function() {
+			var tempEnymNotifications = [];
+			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
+				if(valueNotification.msgId == messageID) {
+					tempEnymNotifications.pop();
+				}
+			});
+			localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+		//}, 1000);				
+		//
 		return ES.messageService.readMsg(messageID, callbacks).then(that.updateMessages);
 	}
 	
@@ -162,24 +190,6 @@ function ChannelSingleMessagesViewModel() {
 			headerViewModel.newMessageCount();
 			headerViewModel.newMessageClass('');
 		}
-		/*ES.systemService.getMsgNotifs({
-			success: function(responseData) {
-				localStorage.removeItem('enymNotifications');
-				localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
-				if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-					headerViewModel.showNewMessagesCount(localStorage.getItem('enymNotifications'));
-					overlayViewModel.showNewMessagesOverlay();
-				}
-				else {
-					headerViewModel.newMessageCount('');
-					headerViewModel.newMessageClass('');			
-				}
-			},
-			error: function(data, status, details) {
-				that.toastText(details.message);
-				localStorage.setItem('toastData', that.toastText());				
-			}
-		});*/
 	}
 	
 	this.iGiAck = function(data) {
