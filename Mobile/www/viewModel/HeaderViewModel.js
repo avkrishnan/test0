@@ -186,10 +186,21 @@ function OverlayViewModel() {
 	}
 	
 	this.iGiAckOverlay = function(data) {
-		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
-		channelSingleMessagesViewModel.iGiAckOverlay();					
-		var backText = getCurrentViewModel().viewname;	
-		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelSingleMessagesView');
+		var callbacks = {
+			success: function(data) {					
+				that.toastText('iGi Acknowledgement sent !');
+				localStorage.setItem('toastData', that.toastText());
+				goToView($.mobile.activePage.attr('id'));
+				that.closePopup();								
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				localStorage.setItem('toastData', that.toastText());
+				goToView($.mobile.activePage.attr('id'));								
+			}
+		};					
+		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);								
 	}	
 	
 	this.showSingleMessage = function(data) {

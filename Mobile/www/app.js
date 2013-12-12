@@ -823,7 +823,6 @@ function shortFormat(created) {
 }
 
 selectedChannel = ''; // channel selected option in compose broadcast
-evernymAction = ''; // type of action perform by user
 
 /* pradeep kumar end */
 

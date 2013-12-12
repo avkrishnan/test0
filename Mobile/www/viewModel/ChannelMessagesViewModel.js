@@ -69,10 +69,21 @@ function ChannelMessagesViewModel() {
 	
 	/*action to single message page*/
 	this.iGiAckMessage = function(data) {
-		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
-		evernymAction = 'iGiAckMessage';		
-		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
-	}	
+		var callbacks = {
+			success: function(data) {					
+				that.toastText('iGi Acknowledgement sent !');
+				localStorage.setItem('toastData', that.toastText());
+				goToView($.mobile.activePage.attr('id'));								
+			},
+			error: function(data, status, details) {
+				that.toastText(details.message);
+				showToast();				
+			}
+		};					
+		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+		return ES.messageService.acknowledgeMsg(data.messageId, callbacks);
+	}
+		
 	this.showSingleMessage = function(data) {
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');

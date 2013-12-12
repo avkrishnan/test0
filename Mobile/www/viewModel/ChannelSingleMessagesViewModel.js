@@ -138,14 +138,7 @@ function ChannelSingleMessagesViewModel() {
 				}
 			}
 		}
-		if(evernymAction == 'iGiAckOverlay' || evernymAction == 'iGiAckMessage') {
-			that.iGiAck();
-		}
 	};
-	
-	this.iGiAckOverlay = function() {		
-		that.activate().then(that.iGiAck());
-	}
 	
 	this.readMessageUpdateBadge = function(messageID) {
 		$('.active-overlay').html('');

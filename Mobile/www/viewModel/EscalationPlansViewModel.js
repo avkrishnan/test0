@@ -193,7 +193,8 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('currentChannelData');
 		selectedChannel = '';
 		sendMessageViewModel.clearOptionList();
-		sendMessageViewModel.clearForm();									
+		sendMessageViewModel.clearForm();
+		localStorage.removeItem('toastData');											
 		//localStorage.setItem('currentChannel');				
 		//channelListViewModel.clearForm();
 		//notificationsViewModel.removeNotifications();
