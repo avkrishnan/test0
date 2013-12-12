@@ -465,6 +465,10 @@ function ApiTestHelper() {
     };
   };
   
+  function isFunction(functionToCheck) {
+    var getType = {};
+    return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
+   }
 
   /*
    * followScen: Scenario of follower; makes the call to get message notifications
@@ -476,18 +480,40 @@ function ApiTestHelper() {
       $.when(followScen.ES.systemService.getMsgNotifs())
       .then(t.CHECK.success, t.CHECK.shouldNotFail)
       .then(function(data) {
-          console.log("searching for msg in notifs: " + msgHolder.msg.text);
-          var find = data.messagealert.filter(function(item) { return (item.text == msgHolder.msg.text); });
+          var find;
+          if (msgHolder == undefined) {
+            find = data.messagealert;
+          } else {
+            console.log("searching for msg in notifs: " + msgHolder.msg.text);
+            find = data.messagealert.filter(function(item) { return (item.text == msgHolder.msg.text); });
+          }
           console.log("found: " + find.length);
-          equal(find.length, expectedNotifCount, "we expect to find " + expectedNotifCount + " entry");
+          
+          var exp = expectedNotifCount;
+          if (isFunction(expectedNotifCount)) {
+            exp = expectedNotifCount();
+          }
+          equal(find.length, exp, "we expect to find " + exp + " entry");
         }, t.CHECK.shouldNotFail)
       .then(start, start);
     };
   };
 
-  t.checkNotifSmry = function(rcvrScen, expectedNotifChange) {
+  /*
+   * 
+  t.checkNotifSmry = function(rcvrScen, expectedNotifChange, useCache) {
     return function() {
-      $.when(rcvrScen.ES.systemService.getMsgNotifsSmry())
+      val func = useCache ? rcvrScen.ES.systemService.getMsgNotifsSmry_C : rcvrScen.ES.systemService.getMsgNotifsSmry;
+      $.when(func())
+
+   * 
+   */
+  
+  
+  t.checkNotifSmry = function(rcvrScen, expectedNotifChange, useCache) {
+    return function() {
+      var func = (useCache==true) ? rcvrScen.ES.systemService.getMsgNotifsSmry_C : rcvrScen.ES.systemService.getMsgNotifsSmry;
+      $.when(func())
       .then(t.CHECK.success, t.CHECK.shouldNotFail)
       .then(function(data) {
           if (expectedNotifChange != undefined) {
@@ -496,8 +522,8 @@ function ApiTestHelper() {
                 "we expect to find a change of " + expectedNotifChange + 
                 "; old count: " + rcvrScen.smry.unreadCount + 
                 ", new count: " + data.unreadCount);
-            ok(data.unreadLastCreated !== rcvrScen.smry.unreadLastCreated, 
-                "we expect the unreadLastCreated date to change");
+//            ok(data.unreadLastCreated !== rcvrScen.smry.unreadLastCreated, 
+//                "we expect the unreadLastCreated date to change");
           }
           rcvrScen.smry = {
             unreadCount: data.unreadCount,
@@ -573,6 +599,11 @@ function ApiTestHelper() {
       firstname : "Jason",
       lastname : "Law",
       password : "testtest"
+    };
+
+  t.testtimothy = {
+      accountname : "timothy.ruff",
+      password : "password"
     };
 
   t.waitToStart = function(millis) { 

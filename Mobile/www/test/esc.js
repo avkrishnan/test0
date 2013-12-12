@@ -9,9 +9,9 @@
   var SCEN_A = hlpr.TestScenario();
   var SCEN_B = hlpr.TestScenario();
 
-  SCEN_B.account = hlpr.testjason20;
+  SCEN_A.account = hlpr.testjason20;
 
-  SCEN_A.account = hlpr.testjason21;
+  SCEN_B.account = hlpr.testjason22;
 
   // debugger;
   // acctA.phonenumber = '801376334 8 ';
