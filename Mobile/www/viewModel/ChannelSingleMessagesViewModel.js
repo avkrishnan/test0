@@ -99,9 +99,12 @@ function ChannelSingleMessagesViewModel() {
 					that.iGiButton(false);						
 					that.dismissClass('active');												
 				}			
-				//that.readMessageUpdateBadge(channel.msgId);
-				//alert(JSON.stringify(channel));
-				return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId, channel.read, channel.acknowledged));
+				if(channel.read == 'N' && channel.acknowledged == 'N') {
+					return ES.channelService.getChannel(channel.channelId, callbacks).then(that.readMessageUpdateBadge(channel.msgId, channel.read, channel.ackRequested));
+				}
+				else {
+					return ES.channelService.getChannel(channel.channelId, callbacks);
+				}
 			}
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
@@ -141,12 +144,8 @@ function ChannelSingleMessagesViewModel() {
 	};
 	
 	this.readMessageUpdateBadge = function(messageID, read, igiAcknowledge) {
+		//alert(messageID + read + igiAcknowledge);
 		$('.active-overlay').html('');
-		if(read == 'N' && igiAcknowledge == "N") {
-			if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
-				ES.systemService.adjMnsCount(-1);
-			}
-		}
 		var callbacks = {
 			success: function(data) {
 				//alert('success');
@@ -156,9 +155,31 @@ function ChannelSingleMessagesViewModel() {
 				localStorage.setItem('toastData', that.toastText());
 			}
 		};
-		var tempEnymNotifications = [];
+		if(read == 'N' && igiAcknowledge == "N") {
+			if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
+				ES.systemService.adjMnsCount(-1);
+			}
+			var tempEnymNotifications = [];
+			//alert(localStorage.getItem('enymNotifications'));
+			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+			//alert(JSON.stringify(tempEnymNotifications));
+			if(tempEnymNotifications.length > 0) {
+				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
+					if(typeof valueNotification != 'undefined' && valueNotification.msgId == messageID) {
+						//tempEnymNotifications.pop();
+						tempEnymNotifications.splice(indexNotification,1)
+					}
+				});
+				localStorage.removeItem('enymNotifications');
+				localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			}
+		}
+		else {
+			//alert('2');	
+		}
+		/*var tempEnymNotifications = [];
 		tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
-		if(tempEnymNotifications) {
+		if(tempEnymNotifications.length > 0) {
 			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 				if(valueNotification.msgId == messageID) {
 					tempEnymNotifications.pop();
@@ -170,8 +191,8 @@ function ChannelSingleMessagesViewModel() {
 			ES.systemService.MnsCacheData = {};
 			if(localStorage.getItem('enymNotifications')) {
 				localStorage.removeItem('enymNotifications');
-			}		
-		}
+			}
+		}*/
 		/*
 		if(tempEnymNotifications.length > 0) {
 			localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
@@ -215,7 +236,26 @@ function ChannelSingleMessagesViewModel() {
 			showToast();												
 		}
 		else {			
-			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
+//
+			if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
+				ES.systemService.adjMnsCount(-1);
+			}
+			var tempEnymNotifications = [];
+			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+			if(tempEnymNotifications.length > 0) {
+				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
+					if(valueNotification.msgId == that.messageId()) {
+						tempEnymNotifications.pop();
+					}
+				});
+				setTimeout(function() {
+					showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
+					overlayViewModel.showNewMessagesOverlay();
+				}, 1000);				
+				localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			}	
+//			
 			return ES.messageService.acknowledgeMsg(that.messageId(), callbacks);
 		}
 	}

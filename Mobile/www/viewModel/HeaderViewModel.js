@@ -67,6 +67,7 @@
 		}
 		else {
 			headerViewModel.newMessageCount('');
+			headerViewModel.newMessageClass('');
 		}
 	}
 	
@@ -140,12 +141,14 @@
 			localStorage.setItem('toastData', that.toastText());
 			goToView($.mobile.activePage.attr('id'));
 		}
+		/*
 		if(this.newMessageClass() == '') {
 			that.toastText('You dont have any new messages!');
 			localStorage.setItem('toastData', that.toastText());
 			showToast();
 			goToView($.mobile.activePage.attr('id'));			
 		}
+		*/
 	}
 	
 	this.menuCommand = function () {
