@@ -92,8 +92,8 @@ function ChannelMessagesViewModel() {
 	
 	/*this.getChannelCommand = function(channelid) {
 		var callbacks = {
-			success: function(){
-				//alert('success');	
+			success: function() {
+				//alert('success');
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);		
