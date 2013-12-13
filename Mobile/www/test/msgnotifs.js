@@ -6,7 +6,7 @@
 
   var SCEN_A = hlpr.TestScenario();
 
-  SCEN_A.account = hlpr.testtimothy;
+  SCEN_A.account = hlpr.jason20;
 
   asyncTest('A logs in', hlpr.login(SCEN_A));
 
