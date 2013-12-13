@@ -87,7 +87,7 @@ function SingleMessageViewModel() {
 	
 	this.showReplies = function(){
 		if(that.replies() == '0 Replies') {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText('No replies to display');		
 			showToast();			
 		}
@@ -98,12 +98,12 @@ function SingleMessageViewModel() {
 	
 	this.showWhoGotIt = function(){
 		if(that.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText('No iGi requested');		
 			showToast();				
 		}
 		else if(that.acks() == '0 Got It') {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText("No iGi's received yet");		
 			showToast();			
 		}

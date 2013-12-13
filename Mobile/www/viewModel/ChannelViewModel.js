@@ -148,7 +148,8 @@ function ChannelViewModel() {
 		}
 		else if(data.relationship == 'O') {
 			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
-				that.longdescription('This is the web page for '+that.title()+'. To follow '+that.title()+', click the Follow button below.\n\nHello, '+that.accountName()+'!  Your channel needs a better description than what we came up with for you... tap HERE to change it.');			
+			var account = JSON.parse(localStorage.getItem('account'));				
+				that.longdescription('This is the web page for '+that.title()+'. To follow '+that.title()+', click the Follow button below.\n\nHello, '+account.firstname+'!  Your channel needs a better description than what we came up with for you... tap HERE to change it.');			
 			}				
 			localStorage.setItem('channelOwner', 'yes');
 			if(data.followers == 1) {

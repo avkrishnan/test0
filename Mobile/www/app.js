@@ -760,6 +760,7 @@ function showToast() {
 	}).delay(4000).slideUp(1000);
 }
 
+/* Get current date/time values */
 function _getDate(functionName) {
 	var _date = new Date();
 	return _date[functionName]();	
