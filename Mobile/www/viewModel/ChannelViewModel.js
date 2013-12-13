@@ -271,7 +271,7 @@ function ChannelViewModel() {
 	this.actionFollowChannelCommand = function() {
 		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
 		if(localStorage.getItem('channelOwner') == 'yes') {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText('You are channel owner !');
 			showToast();			
 		} else {

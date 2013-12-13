@@ -71,7 +71,7 @@ function ChannelChangeNameViewModel() {
 		} else if (that.channelChangeName().match(/\s/)) {
 			 that.errorChannel('<span>SORRY:</span> Please choose a short name with no spaces');
 		} else if(that.channelChangeName().length > 15) {
-			that.errorChannel('<span>SORRY:</span> Please choose a short name of 15 characters');			 
+			that.errorChannel('<span>SORRY:</span> Please choose name of max. 15 characters');			 
     } else {
 			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
 			ES.loginService.checkName(that.channelChangeName(), { success: successAvailable, error: errorAPI });					

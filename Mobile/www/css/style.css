@@ -565,14 +565,34 @@ input[type="checkbox"]:checked + label span {
 }
 /*	New User	*/
 .page-content.tutorials {
-	padding:40px 0 0 0;
+	padding:15px 0 0 0;
 }
 .new-user {
 	text-align:center;
 	position:fixed;
+	width:100%;
+	height:100%;
 }
-.new-user img {
-	width:84%;
+.new-user a{
+	width:100%;
+	height:100%;
+	box-shadow:0 3px 56px #9e8342 inset;
+	display:inline-block;
+}
+.tutorial-1 a {
+	background:#fae49c url(images/v-51-320.png) no-repeat center center;
+}
+.tutorial-2 a {
+	background:#fae49c url(images/v-52-320.png) no-repeat center center;
+}
+.tutorial-3 a {
+	background:#fae49c url(images/v-53-320.png) no-repeat center center;
+}
+.tutorial-4 a {
+	background:#fae49c url(images/v-54-320.png) no-repeat center center;
+}
+.tutorial-5 {
+	background:#fae49c url(images/v-55-320.png) no-repeat center center;
 }
 .msg-content {
 	padding:15px 0;
@@ -1184,6 +1204,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#414141;
 	border-radius:4px;
 }
+.sattingtdropdown .ui-select .ui-btn {
+	width:170px;
+}
 .dropdown .ui-select select, .dropdown .ui-select .ui-icon-arrow-d {
 	background:url("images/sprites-channel.png") no-repeat -18px -1433px;
 	border-radius:0;
@@ -1191,6 +1214,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin:0 92px 0 0;
 	padding:0 6px;
 	color:#969696;
+}
+.sattingtdropdown .ui-select select, .sattingtdropdown .ui-select .ui-icon-arrow-d {
+	margin:0 135px 0 0;
 }
 .dropdown .ui-select select option {
 	border-bottom:1px solid #828181;
@@ -2569,6 +2595,7 @@ ul.igiresponses li span {
 .sattingtdropdown {
 	margin:5px 5px 5px 0;
 	border:none;
+	padding:20px 5px 10px 0;
 }
 .sattingtdropdown .ui-select .ui-btn-inner .ui-btn-text,
 .sattingtdropdown .ui-select select, .sattingtdropdown .ui-select .ui-icon-arrow-d {
@@ -3233,9 +3260,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	*@media query css
 */
 @media only screen and (min-width:360px) { 
-	.new-user img {
-		width:103%;
-	}
 	.channellanding textarea.ui-input-text {
 		min-height:120px;
 	}
@@ -3438,8 +3462,20 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slider-value span.fast {
 		margin:0 40.4%;
 	}
-	.new-user img {
-		width: 80%;
+	.tutorial-1 a {
+		background:#fae49c url(images/v-51-all.png) no-repeat center center;
+	}
+	.tutorial-2 a {
+		background:#fae49c url(images/v-52-all.png) no-repeat center center;
+	}
+	.tutorial-3 a {
+		background:#fae49c url(images/v-53-all.png) no-repeat center center;
+	}
+	.tutorial-4 a {
+		background:#fae49c url(images/v-54-all.png) no-repeat center center;
+	}
+	.tutorial-5 {
+		background:#fae49c url(images/v-55-all.png) no-repeat center center;
 	}
 	.i-icon {
 		width:80%;
@@ -3479,9 +3515,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right: 49px;
-	}
-	.new-user img {
-		width: 97%;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -3534,9 +3567,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.slider-value span.fast {
 		margin:0 42.4%;
-	}
-	.new-user img {
-		width: 79%;
 	}
 }
 @media only screen and (min-width:1280px) {
@@ -3598,9 +3628,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.slider-value span.fast {
 		margin:0 44.2%;
-	}
-	.new-user img {
-		width:29%;
 	}
 }
 @media only screen and (min-width:1290px) {
