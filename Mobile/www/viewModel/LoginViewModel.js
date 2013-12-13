@@ -131,7 +131,8 @@ function LoginViewModel() {
 
   function loginSuccess(args) {
 		var callbacks = {
-			success: function() {},
+			success: function() {
+			},
 			error: function(data, status, details) {
 				that.toastText(details.message);		
 				showToast();
@@ -167,7 +168,8 @@ function LoginViewModel() {
 				}
 			});
 			*/
-      localStorage.setItem("accountName", that.accountName());
+			localStorage.setItem('account', JSON.stringify(args.account));							
+      localStorage.setItem("accountName", that.accountName());						
 			if(localStorage.getItem("action") == 'follow_channel') {
 				var channel = JSON.parse(localStorage.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);

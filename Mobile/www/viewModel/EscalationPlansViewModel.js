@@ -187,6 +187,7 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('backNavView');				
 		localStorage.removeItem('currentChannel');
 		localStorage.removeItem('accountName');
+		localStorage.removeItem('account');		
 		localStorage.removeItem('name');
 		localStorage.removeItem('escDuration');		
 		localStorage.removeItem('escLevel');
