@@ -54,27 +54,20 @@ function EscalateSettingsViewModel() {
 			if(localStorage.getItem('escDuration')) {
 				var DateTime = localStorage.getItem('escDuration').split('/');
 				var day = DateTime[2].split(' ');
-				var time = day[1].split(':');						
-				//that.month(DateTime[1]);			
-				//that.day(day[0]);
-				//that.year(DateTime[0]);			
-				//that.hour(time[0]);			
-				//that.minute(time[1]);			
-				//that.meridiem(day[2]);
+				var time = day[1].split(':');
 				that.escalateUntil(' until: '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2]);														
 			} else {
-				//that.month(monthNames[_getDate('getMonth')]);			
-				//that.day(_getDate('getDate'));
-				//that.year(_getDate('getFullYear'));
-				var hours = _getDate('getHours');
+				monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+				todayDate = new Date();
+				today = todayDate.getDate();
+				tomorrow = todayDate.setDate(today+1);								
+				tomorrow = new Date(tomorrow);					
+				var hours = tomorrow.getHours();
 				hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
-				//that.hour(hours);
-				var mins = _getDate('getMinutes');
-				mins = ((mins+1<10?'0':'')+(mins+1));			
-				//that.minute(mins);
-				var meridiem = _getDate('getHours')>11?'PM':'AM';			
-				//that.meridiem(meridiem);
-				that.escalateUntil(' until: '+monthNames[_getDate('getMonth')]+' '+_getDate('getDate')+', '+_getDate('getFullYear')+', '+hours+':'+mins+' '+meridiem);														
+				var mins = tomorrow.getMinutes();
+				mins = ((mins<10?'0':'')+mins);			
+				var meridiem = tomorrow.getHours()>12?'PM':'AM';			
+				that.escalateUntil(' until: '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+tomorrow.getFullYear()+', '+hours+':'+mins+' '+meridiem);														
 			}						
 		}
 	}	
