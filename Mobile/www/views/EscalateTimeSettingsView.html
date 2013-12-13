@@ -24,7 +24,7 @@
         </div>
       </div>
       
-      <div class="set-date-time last">
+      <div class="set-date-time">
         <div class="datetime-setting">
           <a class="top-clickable" href="#" data-bind="click: upArrow.bind($data, 'hour')"></a>
           <span data-bind="text: hour, valueUpdate: {valueUpdate: setUp, valueUpdate: setDown}"></span>
@@ -43,6 +43,7 @@
           <a class="bottom-clickable" href="#" data-bind="click: downArrow.bind($data, 'meridiem')"></a>
         </div>
       </div>
+      <div class="picker-date" data-bind="text: pickerDate, valueUpdate: {valueUpdate: setUp, valueUpdate: setDown}"></div>      
     </div>
     <div class="loginbtn"><a href="#" data-bind="click: saveCommand">Save and Contine</a></div>
   </div>
