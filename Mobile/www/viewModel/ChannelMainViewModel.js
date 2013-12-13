@@ -69,12 +69,7 @@ function ChannelMainViewModel() {
 		else {
 			var followers = data.followers +' followers';
 		}					
-		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');
-		if(data.followers == 1) {
-			var followers = data.followers +' follower';
-		} else {
-			var followers = data.followers +' followers';
-		}		
+		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');		
 		var channel = [];			
 		channel.push({
 			channelId: data.id, 
@@ -120,7 +115,7 @@ function ChannelMainViewModel() {
 					var percentage = '';
 				  var percentageText = '';														 					
 				} else if(percentage == '100%') {
-					var iGi = 'All followers Got it '+percentage;
+					var iGi = 'All followers Got it ('+percentage+')';
 					var noiGi = '';
 					var percentageClass = '';
 					var percentageText = '';						
@@ -131,7 +126,7 @@ function ChannelMainViewModel() {
 					var percentageText = 'No followers to acknowledge iGi!';													
 					var noiGi = '';								
 				} else {
-					var iGi = data.message[len].acks+' Got it <em class="percentage-text">'+percentage+'</em>';
+					var iGi = data.message[len].acks+' Got it <span class="percentage-text">('+percentage+')</span>';
 					var noiGi = data.message[len].noacks+" Haven't";
 					var percentageClass = '';
 					var percentageText = '';														 					
@@ -142,7 +137,12 @@ function ChannelMainViewModel() {
 				var percentage = '100%';
 				var percentageText = 'No iGi requested<em class="norequestedican"></em>';													
 				var noiGi = '';															
-			}			
+			}
+			if(data.message[len].replies == 1) {
+				var replies = data.message[len].replies +' Reply';
+			} else {
+				var replies = data.message[len].replies +' Replies';
+			}						
 			that.broadcasts.push({
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
@@ -157,7 +157,7 @@ function ChannelMainViewModel() {
 				percentage: percentage,
 				percentageClass: percentageClass,				
 				noiGi: noiGi,		
-				replies: data.message[len].replies+' Replies',
+				replies: replies,
 				acks: data.message[len].acks,
 				noacks: data.message[len].noacks,
 				type: data.message[len].type
