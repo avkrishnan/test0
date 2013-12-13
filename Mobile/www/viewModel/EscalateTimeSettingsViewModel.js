@@ -14,7 +14,8 @@ function EscalateTimeSettingsViewModel() {
 	this.year = ko.observable();
 	this.hour = ko.observable();
 	this.minute = ko.observable();
-	this.meridiem = ko.observable();			 	
+	this.meridiem = ko.observable();
+	this.pickerDate = ko.observable();				 	
 	this.toastText = ko.observable();
 	this.toastClass = ko.observable();			
 	
@@ -49,7 +50,8 @@ function EscalateTimeSettingsViewModel() {
 				that.year(DateTime[0]);			
 				that.hour(time[0]);			
 				that.minute(time[1]);			
-				that.meridiem(day[2]);										
+				that.meridiem(day[2]);
+				that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());														
 			} else {
 				that.month(monthNames[_getDate('getMonth')]);			
 				that.day(_getDate('getDate'));
@@ -61,7 +63,8 @@ function EscalateTimeSettingsViewModel() {
 				mins = ((mins+1<10?'0':'')+(mins+1));			
 				that.minute(mins);
 				var meridiem = _getDate('getHours')>11?'PM':'AM';			
-				that.meridiem(meridiem);							
+				that.meridiem(meridiem);
+				that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());											
 			}
 		}
 	}
@@ -122,7 +125,8 @@ function EscalateTimeSettingsViewModel() {
 			} else {
 				that.meridiem('PM');		
 			}			
-		}							
+		}
+		that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());									
 	};	
 	
 	this.setDown = function () {
@@ -166,6 +170,7 @@ function EscalateTimeSettingsViewModel() {
 				that.meridiem('PM');		
 			}			
 		}
+		that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());		
 	};					
 	
 	this.saveCommand = function () {

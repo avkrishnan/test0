@@ -28,22 +28,22 @@
       </form>
     </div>
     <div data-bind="foreach: broadcasts">
-      <a href="#" class="channelbroadcast" data-bind="click: $parent.singleMessage.bind($index())">
-        <div class="broadcast-sensitive">
+      <a href="#" class="channelbroadcast">
+        <div class="broadcast-sensitive" data-bind="click: $parent.singleMessage.bind($index())">
           <span data-bind="html: broadcast"></span><em data-bind="text: time"></em>
         </div>       
         <div class="broadcastmsgsend">
-          <span class="igigot" data-bind="html: iGi"></span>
-          <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }"></span>
-          <em class="iginotgot" data-bind="text: noiGi"></em>
+          <span class="igigot" data-bind="html: iGi, click: $parent.showWhoGotIt.bind($index())"></span>
+          <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }, click: $parent.iGiPercentage.bind($index())"></span>
+          <em class="iginotgot" data-bind="text: noiGi, click: $parent.showNotGotIt.bind($index())"></em>
         </div>    
-        <div class="broadcastmsgreplie">
+        <div class="broadcastmsgreplie" data-bind="click: $parent.showReplies.bind($index())">
           <span data-bind="text: replies"></span><!--<em>3 new</em>-->
         </div>
       </a>
     </div>
   </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>  
+  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText, css: toastClass""></div></div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Main', 'channelMainView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Main', 'channelMainView', 'sendMessageView');"></a>

@@ -13,7 +13,8 @@ function ChannelMainViewModel() {
 	this.channelName = ko.observable();
 	this.followerCount = ko.observable();
 	this.broadcasts = ko.observableArray([]);	
-	this.toastText = ko.observable();			
+	this.toastText = ko.observable();
+	this.toastClass = ko.observable();				
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -36,7 +37,8 @@ function ChannelMainViewModel() {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');												
-			}			
+			}
+			that.toastClass('');						
 			that.accountName(localStorage.getItem('accountName'));
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
@@ -67,12 +69,7 @@ function ChannelMainViewModel() {
 		else {
 			var followers = data.followers +' followers';
 		}					
-		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');
-		if(data.followers == 1) {
-			var followers = data.followers +' follower';
-		} else {
-			var followers = data.followers +' followers';
-		}		
+		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');		
 		var channel = [];			
 		channel.push({
 			channelId: data.id, 
@@ -89,9 +86,14 @@ function ChannelMainViewModel() {
 		$.mobile.hidePageLoadingMsg();			
 		var len = 0;
 		for(len; len<data.message.length; len++) {
-			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();			
+			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();
+			var broadcast = '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>';			
 			if(data.message[len].escLevelId == 'N') {
+        var broadcast = data.message[len].text+'<em></em>';				
 				var sensitivityText = 'NORMAL';
+			} else if(data.message[len].escLevelId == 'F') {
+        var broadcast = data.message[len].text+'<em></em>';				
+				var sensitivityText = 'FAST';				
 			} else if(data.message[len].escLevelId == 'R') {
 				var sensitivityText = 'REMIND';
 			} else if(data.message[len].escLevelId == 'C') {
@@ -113,7 +115,7 @@ function ChannelMainViewModel() {
 					var percentage = '';
 				  var percentageText = '';														 					
 				} else if(percentage == '100%') {
-					var iGi = 'All followers Got it '+percentage;
+					var iGi = 'All followers Got it ('+percentage+')';
 					var noiGi = '';
 					var percentageClass = '';
 					var percentageText = '';						
@@ -124,7 +126,7 @@ function ChannelMainViewModel() {
 					var percentageText = 'No followers to acknowledge iGi!';													
 					var noiGi = '';								
 				} else {
-					var iGi = data.message[len].acks+' Got it <em class="percentage-text">'+percentage+'</em>';
+					var iGi = data.message[len].acks+' Got it <span class="percentage-text">('+percentage+')</span>';
 					var noiGi = data.message[len].noacks+" Haven't";
 					var percentageClass = '';
 					var percentageText = '';														 					
@@ -135,21 +137,27 @@ function ChannelMainViewModel() {
 				var percentage = '100%';
 				var percentageText = 'No iGi requested<em class="norequestedican"></em>';													
 				var noiGi = '';															
-			}			
+			}
+			if(data.message[len].replies == 1) {
+				var replies = data.message[len].replies +' Reply';
+			} else {
+				var replies = data.message[len].replies +' Replies';
+			}						
 			that.broadcasts.push({
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
 				sensitivityText: sensitivityText,
-				broadcast: '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>',	
+				broadcast: broadcast,				
 				broadcastFull: data.message[len].text, 
 				time: msToTime(data.message[len].created),
 				created: data.message[len].created,
+				escUntil: data.message[len].escUntil,
 				iGi: iGi,
 				percentageText: percentageText,				
 				percentage: percentage,
 				percentageClass: percentageClass,				
 				noiGi: noiGi,		
-				replies: data.message[len].replies+' Replies',
+				replies: replies,
 				acks: data.message[len].acks,
 				noacks: data.message[len].noacks,
 				type: data.message[len].type
@@ -171,6 +179,45 @@ function ChannelMainViewModel() {
 	this.singleMessage = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));							
 		viewNavigate('Main', 'channelMainView', 'singleMessageView');
+	};
+	
+	this.showWhoGotIt = function(data){		
+		if(data.acks == 0) {
+			that.toastClass('toast-info');			
+			that.toastText("No iGi's received yet");		
+			showToast();			
+		}
+		else {
+			localStorage.setItem('currentMessageData', JSON.stringify(data));									
+			viewNavigate('Main', 'channelMainView', 'whoGotItView');
+		}
+	};
+	
+	this.iGiPercentage = function(data){
+		localStorage.setItem('currentMessageData', JSON.stringify(data));
+		if(data.percentageClass != '') {							
+			viewNavigate('Main', 'channelMainView', 'singleMessageView');
+		}
+		else {
+			viewNavigate('Main', 'channelMainView', 'whoGotItView');			
+		}
 	};	
+	
+	this.showNotGotIt = function(data){
+		localStorage.setItem('currentMessageData', JSON.stringify(data));								
+		viewNavigate('Main', 'channelMainView', 'notGotItView');
+	};
+	
+	this.showReplies = function(data){	
+		if(data.replies == '0 Replies') {
+			that.toastClass('toast-info');			
+			that.toastText('No replies to display');		
+			showToast();			
+		}
+		else {
+			localStorage.setItem('currentMessageData', JSON.stringify(data));									
+			viewNavigate('Main', 'channelMainView', 'singleMessageRepliesView');
+		}
+	};				
 	
 }

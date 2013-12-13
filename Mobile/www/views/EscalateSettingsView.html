@@ -13,7 +13,10 @@
     <div class="escalate-settings">
       <div class="escalatedate-time">
         <em>Escalate for how long?</em>
-        <a href="#" onclick="viewNavigate('Escalate Settings', 'escalateSettingsView', 'escalateTimeSettingsView');">Set Date and Time</a>
+        <div class="escalatedatetime">
+          <span data-bind="text: escalationType, valueUpdate: {valueUpdate: remindActive, valueUpdate: chaseActive, valueUpdate: houndActive}"></span><span data-bind="text: escalateUntil"></span>
+          <a href="#" onclick="viewNavigate('Escalate Settings', 'escalateSettingsView', 'escalateTimeSettingsView');">Set Date and Time</a>
+        </div>
       </div>
       <div class="agressively-slider">
         <span>How agressively?</span>

@@ -66,14 +66,6 @@ function ReplyDetailViewModel() {
 		that.less(false);		
 		that.more(true);
 		that.moreButton(false);														
-	};
-	
-	this.userSettings = function () {
-		viewNavigate('Reply detail', 'replyDetailView', 'escalationPlansView');
-  };	
-	
-	this.composeCommand = function () {
-		viewNavigate('Reply detail', 'replyDetailView', 'sendMessageView');
-  };	
+	};	
 				
 }

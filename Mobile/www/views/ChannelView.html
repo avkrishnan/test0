@@ -15,8 +15,9 @@
       <!--<h4 data-bind="visible:hasheader"><b data-bind="text:followers"></b> followers</h4>-->
       <!--<a class="lock-channel" href="#"></a>-->
       <div class="formtype textareatype channellanding">
-        <textarea class="textarea" data-bind="html:longdescription" readonly></textarea>
-        <!--<a class="morebtn" href="#">MORE</a> -->       
+        <textarea class="textarea" data-bind="html:longdescription, click: editLongDescription, visible: less" readonly></textarea>
+        <textarea class="textarea" data-bind="html: moreText, click: editLongDescription, visible: more" readonly></textarea>        
+        <a class="morebtn" href="#" data-bind="visible: moreButton, click: showMore">MORE</a>                       
       </div>
     </div>
     
@@ -47,7 +48,7 @@
     </div>
     -->
   </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>
+  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText, css: toastClass"></div></div>
   <div class="footer" data-bind="visible:hasfooter">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Landing Page', 'channelView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Landing Page', 'channelView', 'sendMessageView');"></a>

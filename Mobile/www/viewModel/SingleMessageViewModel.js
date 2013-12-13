@@ -12,6 +12,7 @@ function SingleMessageViewModel() {
 	this.channelName = ko.observable();		
 	this.time = ko.observable();	
 	this.singleMessage = ko.observable();
+	this.broadcastType = ko.observable();	
 	this.iGi = ko.observable();
 	this.percentageText = ko.observable();
 	this.percentageClass = ko.observable();	
@@ -21,6 +22,8 @@ function SingleMessageViewModel() {
 	this.acksVisibility = ko.observable(false);			
 	this.noacks = ko.observable();
 	this.acks = ko.observable();
+	this.escalateUntil = ko.observable();	
+	this.escalateTime = ko.observable(false);	
 	this.replies = ko.observable();		
 	this.toastText = ko.observable();
 	this.toastClass = ko.observable();				
@@ -46,19 +49,26 @@ function SingleMessageViewModel() {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');				
-			}			
+			}
+			that.toastClass('');					
 			that.accountName(localStorage.getItem('accountName'));											
 			that.channelName(channelObject.channelName);					
 			that.time('Sent '+ dateFormat1(messageObject.created) +' ('+messageObject.time+'):');	
-			that.singleMessage(messageObject.broadcast);
+			that.singleMessage(messageObject.broadcastFull);
+			that.broadcastType(messageObject.type);
 			that.iGi(messageObject.iGi);
 			that.percentageText(messageObject.percentageText);
 			that.percentageClass(messageObject.percentageClass);			
 			that.percentage(messageObject.percentage);			
-			that.noiGi(messageObject.noiGi);				
-			that.replies(messageObject.replies);
+			that.noiGi(messageObject.noiGi);
 			that.noacksVisibility(false);
-			that.acksVisibility(false);						
+			that.acksVisibility(false);			
+			that.escalateTime(false);			
+			if(messageObject.escUntil != '' &&  typeof messageObject.escUntil != 'undefined') {
+				that.escalateTime(true);								
+				that.escalateUntil('<span class="singlemsgicon '+messageObject.sensitivity+'"></span>"'+messageObject.sensitivityText+'" until '+shortFormatYear(messageObject.escUntil));			
+			}
+			that.replies(messageObject.replies);						
 			if(messageObject.type == 'REQUEST_ACKNOWLEDGEMENT' && typeof messageObject.noacks != 'undefined') {
 				if(messageObject.acks+messageObject.noacks == messageObject.acks){
 					that.noacksVisibility(false);
@@ -77,13 +87,29 @@ function SingleMessageViewModel() {
 	
 	this.showReplies = function(){
 		if(that.replies() == '0 Replies') {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText('No replies to display');		
 			showToast();			
 		}
 		else {						
 			viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');
 		}
-	};			
+	};
+	
+	this.showWhoGotIt = function(){
+		if(that.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
+			that.toastClass('toast-info');			
+			that.toastText('No iGi requested');		
+			showToast();				
+		}
+		else if(that.acks() == '0 Got It') {
+			that.toastClass('toast-info');			
+			that.toastText("No iGi's received yet");		
+			showToast();			
+		}
+		else {					
+			viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');
+		}
+	};					
 				
 }

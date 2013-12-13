@@ -22,7 +22,13 @@
 	
 	/* This function changes badge count as per the new api*/
 	this.updateBadges = function() {
-		ES.systemService.getMsgNotifsSmry({
+		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
+			setTimeout(function() {
+				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
+				overlayViewModel.showNewMessagesOverlay();
+			}, 1000);
+		}
+		var callbacks = {
 			success: function(responseDataSmry) {
 				if(responseDataSmry && responseDataSmry.unreadCount > 0) {
 					ES.systemService.getMsgNotifs({
@@ -31,47 +37,50 @@
 							localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
 							if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 								overlayViewModel.showNewMessagesOverlay();
-								var badgeCount = JSON.parse(localStorage.getItem('enymNotifications')).length;
-								if(badgeCount > 0){
-									headerViewModel.newMessageCount(badgeCount);
-									headerViewModel.newMessageClass('smsiconwhite');
-								}
-								else {
-									headerViewModel.newMessageCount('');
-								}
-							}						
+								showNewMessagesCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
+							}
 						},
 						error: function(data, status, details) {
 							that.toastText(details.message);
 							showToast();
 						}
-					});			
+					});
 				}
 				else {
-					headerViewModel.newMessageCount('');
-					headerViewModel.newMessageClass('');
+					showNewMessagesCount(0);
 					localStorage.removeItem('enymNotifications');
 				}
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
-				//localStorage.setItem('toastData', that.toastText());
-				showToast();
+				showToast();									
 			}
-		});		
+		};
+		ES.systemService.getMsgNotifsSmry_C(callbacks);
 	}
 	
 	/* This Function shows Count of New Message in header badge*/
-	this.showNewMessagesCount = function(data) {
-		//alert(JSON.parse(data).length);
-		if(JSON.parse(data).length > 0) {
-			this.newMessageClass('smsiconwhite');
-			this.newMessageCount(JSON.parse(data).length);
+	showNewMessagesCount = function(badgeCountData) {
+		if(badgeCountData > 0) {
+			headerViewModel.newMessageClass('smsiconwhite');
+			headerViewModel.newMessageCount(badgeCountData);
 		}
 		else {
-			this.newMessageCount('');
+			headerViewModel.newMessageCount('');
+			headerViewModel.newMessageClass('');
 		}
 	}
+	
+	/* This Function shows New Messages in overlay*/
+	showNewMessagesList = function(badgeCountData) {
+		if(badgeCountData > 0) {
+			headerViewModel.newMessageClass('smsiconwhite');
+			headerViewModel.newMessageCount(badgeCountData);
+		}
+		else {
+			headerViewModel.newMessageCount('');
+		}
+	}	
 	
 	this.backCommand = function (data, event) {
 		var activeViewModel = event.currentTarget.parentNode.parentNode.parentNode.getAttribute('id');
@@ -124,7 +133,7 @@
 	this.newMessagesOverlayPopup = function() {
 		if(localStorage.getItem('enymNotifications')) {
 			if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-				$('#newMessages').popup().popup('open', {x: 10, y:10});	
+				$('#newMessages').popup().popup('open', {x: 10, y:10});
 			}
 		}
 		else {
@@ -132,26 +141,32 @@
 			localStorage.setItem('toastData', that.toastText());
 			goToView($.mobile.activePage.attr('id'));
 		}
+		if(this.newMessageClass() == '') {
+			that.toastText('You dont have any new messages!');
+			localStorage.setItem('toastData', that.toastText());
+			showToast();
+			goToView($.mobile.activePage.attr('id'));			
+		}
 	}
 	
 	this.menuCommand = function () {
 		var backText = getCurrentViewModel().viewname;	
-		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelMenuView');		
+		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelMenuView');
   };
-		
 }
 /* overlay messages*/
 function OverlayViewModel() {
 	that = this;
 	this.newMessagesDisplayList = ko.observableArray([]);
 	this.toastText = ko.observable();
+	this.toastClass = ko.observable();	
 	
 	this.activate = function() {
 		//that.showNewMessagesOverlay();
 	}
 
 	this.showNewMessagesOverlay = function() {
-		that.newMessagesDisplayList.removeAll();
+		overlayViewModel.newMessagesDisplayList.removeAll();
 		var screenSizeText = truncatedText();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 			valueNotification.created = shortFormat(valueNotification.created);
@@ -175,10 +190,10 @@ function OverlayViewModel() {
 				var iGiClass = 'igibutton igisent';										
 			}
 			else {
-				var iGiClass = '';										
+				var iGiClass = '';
 			}
 			valueNotification.iGiClass = iGiClass;								
-			that.newMessagesDisplayList.push(valueNotification);
+			overlayViewModel.newMessagesDisplayList.push(valueNotification);
 		});
 	}
 	
@@ -188,20 +203,18 @@ function OverlayViewModel() {
 	
 	this.iGiAckOverlay = function(data) {
 		var callbacks = {
-			success: function(data) {					
+			success: function(data) {
 				that.toastText('iGi Acknowledgement sent !');
-				localStorage.setItem('toastData', that.toastText());
-				goToView($.mobile.activePage.attr('id'));
-				that.closePopup();								
+				localStorage.setItem('toastData', that.toastText());			
+				goToView($.mobile.activePage.attr('id'));																	
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
 				localStorage.setItem('toastData', that.toastText());
-				goToView($.mobile.activePage.attr('id'));
-				that.closePopup();												
+				goToView($.mobile.activePage.attr('id'));						
 			}
 		};					
-		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
 		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);								
 	}	
 	

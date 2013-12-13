@@ -25,9 +25,14 @@ function ChannelViewModel() {
 	this.url = ko.observable('');
 	this.description = ko.observable('');
 	this.longdescription = ko.observable('');
+	this.moreText = ko.observable('');	
+	this.less = ko.observable(true);		
+	this.more = ko.observable(false);
+	this.moreButton = ko.observable(false);		
 	this.email = ko.observable('');
 	this.followers = ko.observable('');
-	this.toastText = ko.observable();	
+	this.toastText = ko.observable();
+	this.toastClass = ko.observable();		
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -97,6 +102,7 @@ function ChannelViewModel() {
 			localStorage.removeItem('toastData');				
 		}		
 		that.channelid(channel.id);
+		that.toastClass('');		
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
 		that.accountName(_accountName);		
@@ -114,7 +120,13 @@ function ChannelViewModel() {
 		} else {
 			goToView('channelViewUnfollow');
 		}
-	}		
+	}
+	
+	this.editLongDescription = function() {
+		if(localStorage.getItem('channelOwner') == 'yes') {
+			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'editLongDescriptionView');
+		}
+	}			
 	
 	function gotChannel(data) {
 		//alert(JSON.stringify(data));
@@ -125,7 +137,21 @@ function ChannelViewModel() {
 		that.title(data.name);
 		that.followers(data.followers);
 		that.description(data.description);
-		that.longdescription(data.longDescription);
+		if(typeof data.longDescription != 'undefined') {
+			if(data.longDescription.length > truncatedTextScreen()) {
+				that.longdescription($.trim(data.longDescription).substring(0, truncatedTextScreen()*4).split(' ').slice(0, -1).join(' ') + '...');
+				that.moreText(data.longDescription);
+				that.moreButton(true);							
+			}
+			else {
+				that.longdescription(data.longDescription);			
+			}
+		}
+		else {
+			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
+				that.longdescription('This is the web page for '+that.title()+'. To follow '+that.title()+', click the Follow button below.');			
+			}
+		}
 		that.url(data.normName + '.evernym.com');
 		that.email(data.normName + '@evernym.com');
 		that.showMainIcon(data);
@@ -135,7 +161,11 @@ function ChannelViewModel() {
 			that.settings(true);			
 			viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');			
 		}
-		else if(data.relationship == 'O') {	
+		else if(data.relationship == 'O') {
+			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
+			var account = JSON.parse(localStorage.getItem('account'));				
+				that.longdescription('This is the web page for '+that.title()+'. To follow '+that.title()+', click the Follow button below.\n\nHello, '+account.firstname+'!  Your channel needs a better description than what we came up with for you... tap HERE to change it.');			
+			}				
 			localStorage.setItem('channelOwner', 'yes');
 			if(data.followers == 1) {
 				var followers = data.followers +' follower';
@@ -256,6 +286,7 @@ function ChannelViewModel() {
 	this.actionFollowChannelCommand = function() {
 		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
 		if(localStorage.getItem('channelOwner') == 'yes') {
+			that.toastClass('toast-info');			
 			that.toastText('You are channel owner !');
 			showToast();			
 		} else {
@@ -316,5 +347,11 @@ function ChannelViewModel() {
 		//that.title("Channel: " + channel()[0].name );
 		return ES.channelService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
+	
+	this.showMore = function(){
+		that.less(false);		
+		that.more(true);
+		that.moreButton(false);														
+	};	
 		
 }
