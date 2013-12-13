@@ -66,6 +66,8 @@ function ChannelNewViewModel() {
       that.errorNewChannel('<span>SORRY:</span> Please enter channel name');
     } else if (that.newChannel().match(/\s/)) {
 			that.errorNewChannel('<span>SORRY:</span> Please choose a short name with no spaces');
+		} else if(that.newChannel().length > 15) {
+			that.errorNewChannel('<span>SORRY:</span> Please choose a short name of 15 characters');			
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
 			ES.loginService.checkName(that.newChannel(), { success: successAvailable, error: errorAPI });			
