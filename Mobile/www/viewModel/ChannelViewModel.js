@@ -24,7 +24,11 @@ function ChannelViewModel() {
 	
 	this.url = ko.observable('');
 	this.description = ko.observable('');
-	this.longdescription = ko.observable('');	
+	this.longdescription = ko.observable('');
+	this.moreText = ko.observable('');	
+	this.less = ko.observable(true);		
+	this.more = ko.observable(false);
+	this.moreButton = ko.observable(false);		
 	this.email = ko.observable('');
 	this.followers = ko.observable('');
 	this.toastText = ko.observable();
@@ -133,9 +137,20 @@ function ChannelViewModel() {
 		that.title(data.name);
 		that.followers(data.followers);
 		that.description(data.description);
-		that.longdescription(data.longDescription);	
-		if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
-			that.longdescription('This is the web page for '+that.title()+'. To follow '+that.title()+', click the Follow button below.');			
+		if(typeof data.longDescription != 'undefined') {
+			if(data.longDescription.length > truncatedTextScreen()) {
+				that.longdescription($.trim(data.longDescription).substring(0, truncatedTextScreen()*4).split(' ').slice(0, -1).join(' ') + '...');
+				that.moreText(data.longDescription);
+				that.moreButton(true);							
+			}
+			else {
+				that.longdescription(data.longDescription);			
+			}
+		}
+		else {
+			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
+				that.longdescription('This is the web page for '+that.title()+'. To follow '+that.title()+', click the Follow button below.');			
+			}
 		}
 		that.url(data.normName + '.evernym.com');
 		that.email(data.normName + '@evernym.com');
@@ -332,5 +347,11 @@ function ChannelViewModel() {
 		//that.title("Channel: " + channel()[0].name );
 		return ES.channelService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
+	
+	this.showMore = function(){
+		that.less(false);		
+		that.more(true);
+		that.moreButton(false);														
+	};	
 		
 }
