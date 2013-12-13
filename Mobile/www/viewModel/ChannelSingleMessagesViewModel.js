@@ -109,7 +109,6 @@ function ChannelSingleMessagesViewModel() {
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
-				//alert(JSON.stringify(channelMessage));
 				that.title(channel.name);
 				that.channelid(channel.channelId);	
 				that.description(channel.description);
@@ -119,7 +118,7 @@ function ChannelSingleMessagesViewModel() {
 					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
-					that.readMessageUpdateBadge(channelMessage.messageId, channel.read, channel.acknowledged);
+					that.readMessageUpdateBadge(channelMessage.messageId, channelMessage.read, channelMessage.ackRequested);
 					if(channelMessage.iGiClass != '') {
 						if(channelMessage.ack == 'N') {
 							that.iGiButton(true);													
@@ -160,22 +159,16 @@ function ChannelSingleMessagesViewModel() {
 				ES.systemService.adjMnsCount(-1);
 			}
 			var tempEnymNotifications = [];
-			//alert(localStorage.getItem('enymNotifications'));
 			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
-			//alert(JSON.stringify(tempEnymNotifications));
 			if(tempEnymNotifications.length > 0) {
 				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 					if(typeof valueNotification != 'undefined' && valueNotification.msgId == messageID) {
-						//tempEnymNotifications.pop();
 						tempEnymNotifications.splice(indexNotification,1)
 					}
 				});
 				localStorage.removeItem('enymNotifications');
 				localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 			}
-		}
-		else {
-			//alert('2');	
 		}
 		/*var tempEnymNotifications = [];
 		tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));

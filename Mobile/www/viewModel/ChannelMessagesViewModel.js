@@ -140,7 +140,7 @@ function ChannelMessagesViewModel() {
 						var iGiClass = '';						
 					}
 					that.channelMessages.push( // without push not working
-						{dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
+						{read:valueMessage.read, ackRequested:valueMessage.ackRequested, dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
 				
