@@ -200,7 +200,7 @@ function SendMessageViewModel() {
 			that.toastText('Please type a message to broadcast.');
 			showToast();			
 		} else if(that.selectedChannels().followerCount == 0) {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText('Message not sent - Zero followers on '+ that.selectedChannels().channelName);
 			showToast();				
 		} else {
@@ -211,7 +211,7 @@ function SendMessageViewModel() {
 	
 	function successfulList(data){
 		if(data.channel.length < 1) {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText('Please create some channels !');
 			showToast();			
 		} else {	

@@ -183,7 +183,7 @@ function ChannelMainViewModel() {
 	
 	this.showWhoGotIt = function(data){		
 		if(data.acks == 0) {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText("No iGi's received yet");		
 			showToast();			
 		}
@@ -210,7 +210,7 @@ function ChannelMainViewModel() {
 	
 	this.showReplies = function(data){	
 		if(data.replies == '0 Replies') {
-			that.toastClass('toast-error');			
+			that.toastClass('toast-info');			
 			that.toastText('No replies to display');		
 			showToast();			
 		}

@@ -3148,6 +3148,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .toast-error {
 	background:url("images/toasterror.png") no-repeat 20px 11px;
 }
+.toast-info {
+	background:url("images/toastinfo.png") no-repeat 20px 11px;
+}
 .toast-tutorial {
 	bottom:12px;
 }
