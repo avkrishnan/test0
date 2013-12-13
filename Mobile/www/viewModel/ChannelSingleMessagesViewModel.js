@@ -245,9 +245,9 @@ function ChannelSingleMessagesViewModel() {
 			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
 			if(tempEnymNotifications.length > 0) {
 				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
-					if(valueNotification.msgId == that.messageId()) {
-						tempEnymNotifications.pop();
-					}
+					if(typeof valueNotification != 'undefined' && valueNotification.msgId == that.messageId()) {
+						tempEnymNotifications.splice(indexNotification,1)
+					}					
 				});
 				setTimeout(function() {
 					showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
