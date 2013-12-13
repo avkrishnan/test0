@@ -156,6 +156,7 @@ function OverlayViewModel() {
 	that = this;
 	this.newMessagesDisplayList = ko.observableArray([]);
 	this.toastText = ko.observable();
+	this.toastClass = ko.observable();	
 	
 	this.activate = function() {
 		//that.showNewMessagesOverlay();
@@ -201,15 +202,13 @@ function OverlayViewModel() {
 		var callbacks = {
 			success: function(data) {
 				that.toastText('iGi Acknowledgement sent !');
-				localStorage.setItem('toastData', that.toastText());
-				goToView($.mobile.activePage.attr('id'));
-				that.closePopup();
+				localStorage.setItem('toastData', that.toastText());			
+				goToView($.mobile.activePage.attr('id'));																	
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
 				localStorage.setItem('toastData', that.toastText());
-				goToView($.mobile.activePage.attr('id'));
-				that.closePopup();
+				goToView($.mobile.activePage.attr('id'));						
 			}
 		};					
 		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
