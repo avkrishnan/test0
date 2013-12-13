@@ -17,9 +17,7 @@
 		else {
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 		}
-		//if($.isEmptyObject(ES.systemService.MnsCacheData)) {
-			this.updateBadges();
-		//}
+		this.updateBadges();
 	}
 	
 	/* This function changes badge count as per the new api*/
@@ -28,8 +26,7 @@
 			setTimeout(function() {
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
 				overlayViewModel.showNewMessagesOverlay();
-			}, 1000);					
-			//overlayViewModel.showNewMessagesOverlay();
+			}, 1000);
 		}
 		var callbacks = {
 			success: function(responseDataSmry) {
@@ -41,7 +38,7 @@
 							if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
 								overlayViewModel.showNewMessagesOverlay();
 								showNewMessagesCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
-							}						
+							}
 						},
 						error: function(data, status, details) {
 							that.toastText(details.message);
@@ -135,7 +132,7 @@
 	this.newMessagesOverlayPopup = function() {
 		if(localStorage.getItem('enymNotifications')) {
 			if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-				$('#newMessages').popup().popup('open', {x: 10, y:10});	
+				$('#newMessages').popup().popup('open', {x: 10, y:10});
 			}
 		}
 		else {
@@ -143,13 +140,18 @@
 			localStorage.setItem('toastData', that.toastText());
 			goToView($.mobile.activePage.attr('id'));
 		}
+		if(this.newMessageClass() == '') {
+			that.toastText('You dont have any new messages!');
+			localStorage.setItem('toastData', that.toastText());
+			showToast();
+			goToView($.mobile.activePage.attr('id'));			
+		}
 	}
 	
 	this.menuCommand = function () {
 		var backText = getCurrentViewModel().viewname;	
-		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelMenuView');		
+		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelMenuView');
   };
-		
 }
 /* overlay messages*/
 function OverlayViewModel() {
@@ -211,7 +213,7 @@ function OverlayViewModel() {
 				goToView($.mobile.activePage.attr('id'));						
 			}
 		};					
-		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
 		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);								
 	}	
 	

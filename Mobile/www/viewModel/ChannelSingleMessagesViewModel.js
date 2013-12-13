@@ -116,11 +116,11 @@ function ChannelSingleMessagesViewModel() {
 					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 					that.messageClass(channelMessage.messageClass);
 					that.messageText(channelMessage.messageText);
-					that.readMessageUpdateBadge(channelMessage.messageId);
+					that.readMessageUpdateBadge(channelMessage.messageId, channel.read, channel.acknowledged);
 					if(channelMessage.iGiClass != '') {
 						if(channelMessage.ack == 'N') {
 							that.iGiButton(true);													
-							that.activeClass('igimsgdetail');																		
+							that.activeClass('igimsgdetail');
 						}
 						else {
 							that.iGiButton(true);
@@ -142,24 +142,11 @@ function ChannelSingleMessagesViewModel() {
 	
 	this.readMessageUpdateBadge = function(messageID, read, igiAcknowledge) {
 		$('.active-overlay').html('');
-		//localStorage.removeItem('enymNotifications');
 		if(read == 'N' && igiAcknowledge == "N") {
-			//alert('1');
 			if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 				ES.systemService.adjMnsCount(-1);
 			}
 		}
-		else if(read == 'N' && igiAcknowledge != "N") {
-			//alert(ES.systemService.MnsCacheData);	
-			//alert('2');
-		}
-		else if(read == 'Y' && igiAcknowledge == "N") {
-			//alert('3');	
-		}
-		else {
-			//alert('4');
-			//ES.systemService.adjMnsCount(-1);	
-		}		
 		var callbacks = {
 			success: function(data) {
 				//alert('success');
@@ -169,18 +156,33 @@ function ChannelSingleMessagesViewModel() {
 				localStorage.setItem('toastData', that.toastText());
 			}
 		};
-		//
-		//setTimeout(function() {
-			var tempEnymNotifications = [];
-			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+		var tempEnymNotifications = [];
+		tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+		if(tempEnymNotifications) {
 			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 				if(valueNotification.msgId == messageID) {
 					tempEnymNotifications.pop();
 				}
 			});
 			localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
-		//}, 1000);				
-		//
+		}
+		else {
+			ES.systemService.MnsCacheData = {};
+			if(localStorage.getItem('enymNotifications')) {
+				localStorage.removeItem('enymNotifications');
+			}		
+		}
+		/*
+		if(tempEnymNotifications.length > 0) {
+			localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+		}
+		else {
+			ES.systemService.MnsCacheData = {};
+			if(localStorage.getItem('enymNotifications')) {
+				localStorage.removeItem('enymNotifications');	
+			}
+		}
+		*/
 		return ES.messageService.readMsg(messageID, callbacks).then(that.updateMessages);
 	}
 	
@@ -198,9 +200,9 @@ function ChannelSingleMessagesViewModel() {
 		var callbacks = {
 			success: function(data) {
 				that.iGiButton(true);
-				that.dismissButton(false);								
-				that.activeClass('igisentimg');					
-				that.toastText('iGi Acknowledgement sent !');				
+				that.dismissButton(false);
+				that.activeClass('igisentimg');
+				that.toastText('iGi Acknowledgement sent !');
 				showToast();
 			},
 			error: function(data, status, details) {

@@ -44,12 +44,14 @@ function EvernymSystemService(api) {
       t.getMsgNotifsSmry(callbacks)
       .then(
         function(data, textStatus, status, responseText) {
-          t.MnsLastUpdated = Date.now();
-          t.MnsCacheData.data = data;
-          t.MnsCacheData.textStatus = textStatus;
-          t.MnsCacheData.status = status;
-          t.MnsCacheData.responseText = responseText;
-          dfrd.resolve(data, textStatus, status, responseText);
+					if(status != '204') {
+						t.MnsLastUpdated = Date.now();
+						t.MnsCacheData.data = data;
+						t.MnsCacheData.textStatus = textStatus;
+						t.MnsCacheData.status = status;
+						t.MnsCacheData.responseText = responseText;
+						dfrd.resolve(data, textStatus, status, responseText);
+					}
         }, 
         function(textStatus, status, details) {
           t.MnsLastUpdated = 0;
