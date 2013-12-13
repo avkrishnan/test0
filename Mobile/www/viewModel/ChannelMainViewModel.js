@@ -115,7 +115,7 @@ function ChannelMainViewModel() {
 					var percentage = '';
 				  var percentageText = '';														 					
 				} else if(percentage == '100%') {
-					var iGi = 'All followers Got it '+percentage;
+					var iGi = 'All followers Got it ('+percentage+')';
 					var noiGi = '';
 					var percentageClass = '';
 					var percentageText = '';						
@@ -126,7 +126,7 @@ function ChannelMainViewModel() {
 					var percentageText = 'No followers to acknowledge iGi!';													
 					var noiGi = '';								
 				} else {
-					var iGi = data.message[len].acks+' Got it <em class="percentage-text">'+percentage+'</em>';
+					var iGi = data.message[len].acks+' Got it <span class="percentage-text">('+percentage+')</span>';
 					var noiGi = data.message[len].noacks+" Haven't";
 					var percentageClass = '';
 					var percentageText = '';														 					
