@@ -572,27 +572,29 @@ input[type="checkbox"]:checked + label span {
 	position:fixed;
 	width:100%;
 	height:100%;
+	box-shadow:0 3px 56px #9e8342 inset;
 }
-.new-user a{
+/*.new-user a{
 	width:100%;
 	height:100%;
 	box-shadow:0 3px 56px #9e8342 inset;
 	display:inline-block;
-}
-.tutorial-1 a {
+}*/
+.tutorial-1 {
 	background:#fae49c url(images/v-51-320.png) no-repeat center center;
 }
-.tutorial-2 a {
+.tutorial-2 {
 	background:#fae49c url(images/v-52-320.png) no-repeat center center;
 }
-.tutorial-3 a {
+.tutorial-3 {
 	background:#fae49c url(images/v-53-320.png) no-repeat center center;
 }
-.tutorial-4 a {
+.tutorial-4 {
 	background:#fae49c url(images/v-54-320.png) no-repeat center center;
 }
 .tutorial-5 {
 	background:#fae49c url(images/v-55-320.png) no-repeat center center;
+	box-shadow: 0 3px 56px #9E8342 inset;
 }
 .msg-content {
 	padding:15px 0;
@@ -3462,16 +3464,16 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slider-value span.fast {
 		margin:0 40.4%;
 	}
-	.tutorial-1 a {
+	.tutorial-1 {
 		background:#fae49c url(images/v-51-all.png) no-repeat center center;
 	}
-	.tutorial-2 a {
+	.tutorial-2 {
 		background:#fae49c url(images/v-52-all.png) no-repeat center center;
 	}
-	.tutorial-3 a {
+	.tutorial-3 {
 		background:#fae49c url(images/v-53-all.png) no-repeat center center;
 	}
-	.tutorial-4 a {
+	.tutorial-4 {
 		background:#fae49c url(images/v-54-all.png) no-repeat center center;
 	}
 	.tutorial-5 {
