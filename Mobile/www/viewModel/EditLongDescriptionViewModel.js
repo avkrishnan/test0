@@ -4,8 +4,8 @@ function EditLongDescriptionViewModel() {
   var that = this;
 	this.template = 'editLongDescriptionView';
 	this.viewid = 'V-67';
-	this.viewname = 'Edit Long Description';
-	this.displayname = 'Edit Long Description';	  
+	this.viewname = 'Edit Long Desc';
+	this.displayname = 'Edit Long Desc';	  
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	

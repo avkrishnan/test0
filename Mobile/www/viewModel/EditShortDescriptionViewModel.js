@@ -4,8 +4,8 @@ function EditShortDescriptionViewModel() {
   var that = this;
 	this.template = 'editShortDescriptionView';
 	this.viewid = 'V-66';
-	this.viewname = 'Edit Short Description';
-	this.displayname = 'Edit Short Description';	  
+	this.viewname = 'Edit Short Desc';
+	this.displayname = 'Edit Short Desc';	  
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
