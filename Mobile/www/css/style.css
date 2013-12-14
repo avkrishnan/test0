@@ -2336,6 +2336,7 @@ ul.igiresponses li span {
 	float:left;
 	font-size:18px;
 	font-weight:normal;
+	margin-bottom:5px;
 }
 .channelprivate a.lock-channel {
 	float:right;
@@ -3143,16 +3144,11 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:#8dc63f;
 }
 /* Channel Landing Page */
-.channellanding textarea.ui-input-text {
-	padding:0;
+.channellanding {
 	clear:both;
 	font-size:14px;
 	font-style:italic;
-	min-height:215px;
-	overflow:auto;
-}
-.formtype.channellanding.textareatype {
-	padding:0;
+	cursor:pointer;
 }
 /* TOAST-NOTIFICATION */
 .toast-notification {
@@ -3256,9 +3252,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	*@media query css
 */
 @media only screen and (min-width:360px) { 
-	.channellanding textarea.ui-input-text {
-		min-height:120px;
-	}
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:80.5%;
 	}

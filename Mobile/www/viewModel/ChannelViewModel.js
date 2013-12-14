@@ -22,7 +22,7 @@ function ChannelViewModel() {
 	this.channelIconObj = ko.observable();
 	this.channelMessage = ko.observable();
 	
-	this.url = ko.observable('');
+	this.url = ko.observable('');	
 	this.description = ko.observable('');
 	this.longdescription = ko.observable('');
 	this.moreText = ko.observable('');	
@@ -108,7 +108,12 @@ function ChannelViewModel() {
 		that.accountName(_accountName);		
 		that.messages([]);
 		that.channelAction(true);
-		localStorage.removeItem('channelOwner');		
+		localStorage.removeItem('channelOwner');
+		that.followers('');
+		that.description('');
+		that.less(true);		
+		that.more(false);				
+		that.moreButton(false);				
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		//alert(that.channelid());
 		return that.getChannelCommand(that.channelid()).then(gotChannel);
@@ -135,16 +140,23 @@ function ChannelViewModel() {
 		that.channel([data]);
 		that.channelMessage(data);
 		that.title(data.name);
-		that.followers(data.followers);
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		that.followers(followers);
 		that.description(data.description);
 		if(typeof data.longDescription != 'undefined') {
+			//alert(data.longDescription.replace());
 			if(data.longDescription.length > truncatedTextScreen()) {
-				that.longdescription($.trim(data.longDescription).substring(0, truncatedTextScreen()*4).split(' ').slice(0, -1).join(' ') + '...');
-				that.moreText(data.longDescription);
+				var logDesc = ($.trim(data.longDescription).substring(0, truncatedTextScreen()*4).split(' ').slice(0, -1).join(' ') + '...').replace(/\n/g, '<br/>');
+				that.longdescription(logDesc);
+				that.moreText(data.longDescription.replace(/\n/g, '<br/>'));
 				that.moreButton(true);							
 			}
 			else {
-				that.longdescription(data.longDescription);			
+				that.longdescription(data.longDescription.replace(/\n/g, '<br/>'));			
 			}
 		}
 		else {
@@ -164,7 +176,7 @@ function ChannelViewModel() {
 		else if(data.relationship == 'O') {
 			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
 			var account = JSON.parse(localStorage.getItem('account'));				
-				that.longdescription("This is the web page for "+that.title()+". To follow "+that.title()+", click the Follow button below.\n\nHello, "+account.firstname+"!  Your channel needs a better description than what we came up with for you, so go ahead and type that in this box.\n\nMake sure to include an invitation for visitors to click the Follow button in order to get your channel's broadcasts.");							
+				that.longdescription("This is the web page for "+that.title()+". To follow "+that.title()+", click the Follow button below.<br/><br/>Hello, "+account.firstname+"!  Your channel needs a better description than what we came up with for you, so go ahead and type that in this box.<br/>Make sure to include an invitation for visitors to click the Follow button in order to get your channel's broadcasts.");							
 			}				
 			localStorage.setItem('channelOwner', 'yes');
 			if(data.followers == 1) {

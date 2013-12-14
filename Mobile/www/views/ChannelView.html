@@ -12,11 +12,11 @@
       </div>
     </div>
     <div class="channelprivate">
-      <!--<h4 data-bind="visible:hasheader"><b data-bind="text:followers"></b> followers</h4>-->
+      <h4 data-bind="text: followers"></h4>
       <!--<a class="lock-channel" href="#"></a>-->
-      <div class="formtype textareatype channellanding">
-        <textarea class="textarea" data-bind="html:longdescription, click: editLongDescription, visible: less" readonly></textarea>
-        <textarea class="textarea" data-bind="html: moreText, click: editLongDescription, visible: more" readonly></textarea>        
+      <div class="channellanding">
+        <div data-bind="html:longdescription, click: editLongDescription, visible: less"></div>
+        <div data-bind="html: moreText, click: editLongDescription, visible: more"></div>        
         <a class="morebtn" href="#" data-bind="visible: moreButton, click: showMore">MORE</a>                       
       </div>
     </div>
