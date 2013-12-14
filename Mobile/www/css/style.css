@@ -575,16 +575,16 @@ input[type="checkbox"]:checked + label span {
 	box-shadow:0 3px 56px #9e8342 inset;
 }
 .tutorial-1 {
-	background:#fae49c url(images/v-51-320.png) no-repeat center center;
+	background:#fae49c url(images/v-51-320.png) no-repeat center 50px;
 }
 .tutorial-2 {
-	background:#fae49c url(images/v-52-320.png) no-repeat center center;
+	background:#fae49c url(images/v-52-320.png) no-repeat center 40px;
 }
 .tutorial-3 {
-	background:#fae49c url(images/v-53-320.png) no-repeat center center;
+	background:#fae49c url(images/v-53-320.png) no-repeat center 50px;
 }
 .tutorial-4 {
-	background:#fae49c url(images/v-54-320.png) no-repeat center center;
+	background:#fae49c url(images/v-54-320.png) no-repeat center 85px;
 }
 .tutorial-5 {
 	background:#fae49c url(images/v-55-320.png) no-repeat center center;
@@ -593,7 +593,7 @@ input[type="checkbox"]:checked + label span {
 .msg-content {
 	padding:15px 0;
 	position:fixed;
-	top:55%;
+	top:60%;
 	z-index:1;
 	background:#000;
 	opacity:0.8;
@@ -659,7 +659,7 @@ span.down-arrow {
 .GetStart {
 	position:fixed;
 	text-align:center;
-	top:73%;
+	top:79%;
 	width:100%;
 	z-index:9999;
 }
@@ -2779,7 +2779,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .escalatedatetime {
 	color:#FFFFFF;
 	display:inline-block;
-	font-size:14px;
+	font-size:13px;
 	line-height:28px;
 	margin-top:15px;
 	width:100%;
@@ -3299,21 +3299,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slidemenu {
 		min-height:640px;
 	}
-	.escalatebroadcast {
-		font-size:14px;
-	}
 	.messagesundeliver li a.ui-link, .messagesundeliver li a.ui-link:hover {
 		font-size:14px;
 	}
-	.msgbroadcast p em {
+	.msgbroadcast p em, .escalatedatetime, .escalatebroadcast, .broadcastinform .escalatecolor {
 		font-size:14px;
 	}
 	.hamburgermenuhide {
 		min-height:554px;
 		padding:0 19px;
-	}
-	.broadcastinform .escalatecolor {
-		font-size:14px
 	}
 	.slider-value span.chase {
 		margin: 0 27%;
@@ -3363,7 +3357,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:91%;
 	}
 	.GetStart {
-		top:63.5%;
+		top:68.5%;
 	}
 	.msg-content p, .msg-content h1 {
 		width:90%;
@@ -3459,16 +3453,16 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		margin:0 40.4%;
 	}
 	.tutorial-1 {
-		background:#fae49c url(images/v-51-all.png) no-repeat center center;
+		background:#fae49c url(images/v-51-all.png) no-repeat center 110px;
 	}
 	.tutorial-2 {
-		background:#fae49c url(images/v-52-all.png) no-repeat center center;
+		background:#fae49c url(images/v-52-all.png) no-repeat center 100px;
 	}
 	.tutorial-3 {
 		background:#fae49c url(images/v-53-all.png) no-repeat center center;
 	}
 	.tutorial-4 {
-		background:#fae49c url(images/v-54-all.png) no-repeat center center;
+		background:#fae49c url(images/v-54-all.png) no-repeat center 110px;
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-all.png) no-repeat center center;
@@ -3482,7 +3476,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:90%;
 	}
 	.GetStart {
-		top:62%;
+		top:67%;
 	}
 	.slidemenu {
 		min-height:1280px;
@@ -3521,7 +3515,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:92%;
 	}
 	.GetStart {
-		top:61.5%;
+		top:67%;
 	}
 	.channelicons ul {
 		width:94.5%;
@@ -3573,7 +3567,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:94%;
 	}
 	.GetStart {
-		top:69%;
+		top:74.5%;
 	}
 	.msg-content p {
 		font-size:18px;
@@ -3624,6 +3618,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.slider-value span.fast {
 		margin:0 44.2%;
+	}
+	.tutorial-1 {
+		background:#fae49c url(images/v-51-all.png) no-repeat center 30px;
+	}
+	.tutorial-2 {
+		background:#fae49c url(images/v-52-all.png) no-repeat center 40px;
+	}
+	.tutorial-4 {
+		background:#fae49c url(images/v-54-all.png) no-repeat center 110px;
 	}
 }
 @media only screen and (min-width:1290px) {

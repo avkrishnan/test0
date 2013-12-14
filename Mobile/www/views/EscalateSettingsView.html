@@ -14,8 +14,8 @@
       <div class="escalatedate-time">
         <em>Escalate for how long?</em>
         <div class="escalatedatetime">
-          <span data-bind="text: escalationType, valueUpdate: {valueUpdate: remindActive, valueUpdate: chaseActive, valueUpdate: houndActive}"></span><span data-bind="text: escalateUntil"></span>
-          <a href="#" onclick="viewNavigate('Escalate Settings', 'escalateSettingsView', 'escalateTimeSettingsView');">Set Date and Time</a>
+          <span data-bind="text: escalationType, visible: escType, valueUpdate: {valueUpdate: remindActive, valueUpdate: chaseActive, valueUpdate: houndActive}"></span><span data-bind="text: escalateUntil"></span>
+          <a href="#" data-bind="text: ecalateTime" onclick="viewNavigate('Escalate Settings', 'escalateSettingsView', 'escalateTimeSettingsView');"></a>
         </div>
       </div>
       <div class="agressively-slider">
@@ -40,7 +40,7 @@
     </div>
     <div class="loginbtn"><a href="#" data-bind="click: saveCommand">Save and Contine</a></div>
     </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>   
+  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText, css: toastClass"></div></div>   
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Escalate Settings', 'escalateSettingsView', 'escalationPlansView');"></a>
   </div>

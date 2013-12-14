@@ -60,10 +60,7 @@ function SendMessageViewModel() {
 	
 	this.activate = function() {			
 		var token = ES.evernymService.getAccessToken();
-		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
-		todayDate = new Date();
-		today = todayDate.getDate();
-		tomorrow = todayDate.setDate(today+1);				
+		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];				
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
@@ -111,19 +108,7 @@ function SendMessageViewModel() {
 					that.duration(durationText);
 					that.activeType('escalatecolor');
 					that.escalateEdit(true);																								
-				} else {
-					tomorrow = new Date(tomorrow);
-					that.escDuration(tomorrow);					
-					var hours = tomorrow.getHours();
-					hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
-					var mins = tomorrow.getMinutes();
-					mins = ((mins<10?'0':'')+mins);			
-					var meridiem = tomorrow.getHours()>12?'PM':'AM';
-					var durationText = '"'+escalate+'" until '+monthNames[tomorrow.getMonth()]+' '+tomorrow.getDate()+', '+tomorrow.getFullYear()+', '+hours+':'+mins+' '+meridiem;
-					that.duration(durationText);
-					that.activeType('escalatecolor');
-					that.escalateEdit(true);																	
-				}			
+				}		
 				localStorage.removeItem('escalate');																											
 			} else {				
 				that.normalText('normalcolor');
