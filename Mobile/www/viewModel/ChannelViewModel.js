@@ -164,7 +164,7 @@ function ChannelViewModel() {
 		else if(data.relationship == 'O') {
 			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
 			var account = JSON.parse(localStorage.getItem('account'));				
-				that.longdescription('This is the web page for '+that.title()+'. To follow '+that.title()+', click the Follow button below.\n\nHello, '+account.firstname+'!  Your channel needs a better description than what we came up with for you... tap HERE to change it.');			
+				that.longdescription("This is the web page for "+that.title()+". To follow "+that.title()+", click the Follow button below.\n\nHello, "+account.firstname+"!  Your channel needs a better description than what we came up with for you, so go ahead and type that in this box.\n\nMake sure to include an invitation for visitors to click the Follow button in order to get your channel's broadcasts.");							
 			}				
 			localStorage.setItem('channelOwner', 'yes');
 			if(data.followers == 1) {
