@@ -39,7 +39,8 @@ function EditNameViewModel() {
 			goToView('loginView');			
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+			addExternalMarkup(that.template); // this is for header/overlay message	
+			var account = JSON.parse(localStorage.getItem('account'));					
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
@@ -51,8 +52,8 @@ function EditNameViewModel() {
 				that.errorFirstLastName('');				
 			});
 			that.accountName(localStorage.getItem('accountName'));						
-			$.mobile.showPageLoadingMsg('a', 'Loading information');
-			ES.loginService.getAccount({ success: successfulGetAccount, error: errorAPI });						
+			that.firstname(account.firstname);
+			that.lastname(account.lastname);;						
 		}
   };
 	
@@ -82,15 +83,19 @@ function EditNameViewModel() {
       lastname: that.lastname()
     };
   };
-	
-	function successfulGetAccount(data) {
-    $.mobile.hidePageLoadingMsg();
-		that.firstname(data.firstname);
-		that.lastname(data.lastname);		
-  };
 
   function successfulUpdate(args) {
     $.mobile.hidePageLoadingMsg();
+		that.toastText('Name updated successfully !');		
+		localStorage.setItem('toastData', that.toastText());
+		var account = [];			
+		account.push({
+			accountname: that.accountName(),			
+			firstname: that.firstname(), 
+			lastname: that.lastname()
+		});
+		account = account[0];				
+		localStorage.setItem('account', JSON.stringify(account));				
 		popBackNav();
   };
 
