@@ -76,7 +76,7 @@ function SendMessageViewModel() {
 			that.normalClass('normalcoloricon');
 			that.fastClass('');
 			that.escalateClass('');
-			that.duration("Normal: <em>Send one time to follower's preferred device</em>");
+			that.duration("Normal: <em>Send once (usually to email)</em>");
 			that.activeType('normalcolor');				
 			that.yesClass('yesbutton');
 			that.noClass('nobutton');					
@@ -117,7 +117,7 @@ function SendMessageViewModel() {
 				that.normalClass('normalcoloricon');
 				that.fastClass('');
 				that.escalateClass('');
-				that.duration("Normal: <em>Send one time to follower's preferred device</em>");
+				that.duration("Normal: <em>Send once (usually to email)</em>");
 				that.activeType('normalcolor');				
 				that.yesClass('yesbutton');
 				that.noClass('nobutton');					
@@ -256,7 +256,7 @@ function SendMessageViewModel() {
 		that.normalClass('normalcoloricon');
 		that.fastClass('');
 		that.escalateClass('');
-    that.duration("Normal: <em>Send one time to follower's preferred device</em>");
+    that.duration("Normal: <em>Send once (usually to email)</em>");
 		that.activeType('normalcolor');		
 		that.escalateEdit(false);
 		localStorage.removeItem('escLevel');
@@ -271,7 +271,7 @@ function SendMessageViewModel() {
 		that.normalClass('');
 		that.fastClass('fastcoloricon');
 		that.escalateClass('');
-    that.duration("Fast: <em>Send one time to follower's mobile devices</em>");
+    that.duration("Fast: <em>Send once (usually text or app)</em>");
 		that.activeType('fastcolor');
 		that.escalateEdit(false);
 		localStorage.removeItem('escLevel');
