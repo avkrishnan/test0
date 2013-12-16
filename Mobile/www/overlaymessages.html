@@ -1,11 +1,11 @@
-<div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0;top:-3px;overflow-y:scroll;">
+<div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0;top:-1px;overflow-y:scroll;">
   <div class="messagescontent">
       <div class="msg-hideshow">
         <h4>NEW MESSAGES</h4>
         <a href="#" data-bind="click:closePopup"></a>
       </div>
       <section data-bind="foreach: newMessagesDisplayList">
-        <a class="messagesreceived" href="#" data-bind="attr: {id : msgId}">
+        <a class="messagesreceived" href="#" data-bind="attr: {id : msgId}, css:readClass">
           <span data-bind="css: iGiClass, click: $parent.iGiAckOverlay"></span>
           <div class="messageschannel igi-msg-icon" data-bind="click: $parent.showSingleMessage">
             <span class="received" data-bind="text: displayFrom"></span>
@@ -41,7 +41,7 @@
 	});
 	$('#newMessages').on({
 	popupbeforeposition: function() {
-		var maxHeight = $(window).height() - 105;
+		var maxHeight = $(window).height() - 102;
 		$('#newMessages').css('max-height', maxHeight + 'px')
 	}
 	})

@@ -186,6 +186,7 @@ function OverlayViewModel() {
 				var iGiClass = '';
 			}
 			valueNotification.iGiClass = iGiClass;
+			valueNotification.readClass = "read-" + valueNotification.read.toLowerCase();
 			//alert(JSON.stringify(valueNotification));					
 			overlayViewModel.newMessagesDisplayList.push(valueNotification);
 		});
