@@ -217,7 +217,8 @@ function ChannelSingleMessagesViewModel() {
 				that.dismissButton(false);
 				that.activeClass('igisentimg');
 				that.toastText('iGi Acknowledgement sent !');
-				showToast();
+				localStorage.setItem('toastData', that.toastText());				
+				popBackNav();
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);

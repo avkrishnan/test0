@@ -55,7 +55,8 @@ function InviteFollowersIIViewModel() {
 			else {
 				that.feedbackType('Report a Bug for Evernym Channels');
 				that.feedbackLabel('Report a Bug:');				
-			}			
+			}
+			localStorage.removeItem('feedbackType');						
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {
 				that.feedbackClass('');
