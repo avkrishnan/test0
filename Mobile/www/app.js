@@ -779,13 +779,19 @@ function msToTime(created){
 	var minutes = Math.floor(divisor_for_minutes / 60);
 	var divisor_for_seconds = divisor_for_minutes % 60;
 	var seconds = Math.ceil(divisor_for_seconds);
-	if(days > 0) {
+	if(days == 1) {
+		return days+' day ago';
+	}	else if(days > 1) {
 		return days+' days ago';
-	} else if(hours > 0) {
+	} else if(hours == 1) {
+		return hours+' hr ago';		
+	} else if(hours > 1) {
 		return hours+' hrs ago';
-	} else if(minutes > 0) {
-		return minutes+' mins ago';
-	} else if(seconds > 0) {
+	} else if(minutes == 1) {
+		return minutes+' min ago';
+	} else if(minutes > 1) {
+		return minutes+' mins ago';		
+	} else if(seconds > 1) {
 		return  seconds+' secs ago';
 	} else {
 		return  'just now';

@@ -299,7 +299,7 @@ function ChannelViewModel() {
 		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
 		if(localStorage.getItem('channelOwner') == 'yes') {
 			that.toastClass('toast-info');			
-			that.toastText('You are channel owner !');
+			that.toastText('See Channel Settings to receive your own broadcasts.');
 			showToast();			
 		} else {
 			that.followChannelCommand();
