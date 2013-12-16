@@ -1201,7 +1201,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:4px;
 }
 .sattingtdropdown .ui-select .ui-btn {
-	width:170px;
+	width:177px;
 }
 .dropdown .ui-select select, .dropdown .ui-select .ui-icon-arrow-d {
 	background:url("images/sprites-channel.png") no-repeat -18px -1433px;
@@ -1212,7 +1212,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#969696;
 }
 .sattingtdropdown .ui-select select, .sattingtdropdown .ui-select .ui-icon-arrow-d {
-	margin:0 135px 0 0;
+	margin:0 142px 0 0;
 }
 .dropdown .ui-select select option {
 	border-bottom:1px solid #828181;
