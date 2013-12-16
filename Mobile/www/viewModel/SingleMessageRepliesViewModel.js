@@ -48,7 +48,7 @@ function SingleMessageRepliesViewModel() {
 			that.channelName(channelObject.channelName);												
 			that.messageId(messageObject.messageId);
 			$.mobile.showPageLoadingMsg("a", "Loading Message replies");			
-			return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI})			
+			return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI});			
 		}
 	}	
 	

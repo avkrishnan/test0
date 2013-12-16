@@ -29,7 +29,22 @@ function FeedbackViewModel() {
 			}			
 			that.accountName(localStorage.getItem('accountName'));			
 		}
-	}	
+	}
+	
+	this.praise = function() {
+		localStorage.setItem('feedbackType', 'praise');
+		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
+	}
+	
+	this.suggestions = function() {
+		localStorage.setItem('feedbackType', 'suggestions');
+		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
+	}
+	
+	this.reportABug = function() {
+		localStorage.setItem('feedbackType', 'reportABug');
+		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
+	}				
 	
 }
 
