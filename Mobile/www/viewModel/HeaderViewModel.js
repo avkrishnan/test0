@@ -215,7 +215,10 @@ function OverlayViewModel() {
 			setTimeout(function() {			
 				ES.systemService.adjMnsCount(-1);
 				$("#"+event.currentTarget.parentNode.getAttribute('id')).remove();
-			}, 1000);				
+			}, 1000);
+			if(ES.systemService.MnsCacheData.data.unreadCount == 1) {
+				$('#newMessages').remove();
+			}
 		}
 		var tempEnymNotifications = [];
 		tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
