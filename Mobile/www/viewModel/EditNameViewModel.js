@@ -12,6 +12,7 @@ function EditNameViewModel() {
 	this.accountName = ko.observable();	
   this.firstname = ko.observable();
   this.lastname = ko.observable();
+  this.errorFirstName = ko.observable();	
   this.errorFirstLastName = ko.observable();
   this.firstnameClass = ko.observable();
   this.lastnameClass = ko.observable();
@@ -30,6 +31,7 @@ function EditNameViewModel() {
     that.lastname('');
 		that.firstnameClass('');
 		that.lastnameClass('');		
+		that.errorFirstName('');		
 		that.errorFirstLastName('');
   };
 
@@ -49,6 +51,7 @@ function EditNameViewModel() {
 			$('input').keyup(function () {
 				that.firstnameClass('');
 				that.lastnameClass('');
+				that.errorFirstName('');				
 				that.errorFirstLastName('');				
 			});
 			that.accountName(localStorage.getItem('accountName'));						
@@ -66,10 +69,16 @@ function EditNameViewModel() {
 	this.editNameCommand = function () {
     if (that.firstname() == '') {
       that.firstnameClass('validationerror');
-      that.errorFirstLastName('<span>SORRY:</span> Please enter first name');
+      that.errorFirstName('<span>SORRY:</span> Please enter first name');
+    } else if (that.firstname().length > 20) {
+      that.firstnameClass('validationerror');
+      that.errorFirstName('<span>SORRY:</span> Please enter name of max. 20 characters');
     } else if (that.lastname() == '') {
       that.lastnameClass('validationerror');
       that.errorFirstLastName('<span>SORRY:</span> Last name cannot be left empty');
+    } else if (that.lastname().length > 20) {
+      that.lastnameClass('validationerror');
+      that.errorFirstLastName('<span>SORRY:</span> Please enter name of max. 20 characters');
     } else {
       $.mobile.showPageLoadingMsg('a', 'Updating Name');
       var account = modifyAccount();
