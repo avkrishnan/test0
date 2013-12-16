@@ -60,12 +60,7 @@ function ChannelSingleMessagesViewModel() {
 				var callbacks = {
 					success: function(data) {
 						that.title(data.name);
-						if(data.description) {
-							that.description(data.description);
-						}
-						else {
-							that.description('Channel description');
-						}
+						that.description(data.description);
 					},
 					error: function(data, status, details) {
 						if(status == '404') {
