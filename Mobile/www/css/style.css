@@ -1201,7 +1201,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-radius:4px;
 }
 .sattingtdropdown .ui-select .ui-btn {
-	width:177px;
+	width:170px;
 }
 .dropdown .ui-select select, .dropdown .ui-select .ui-icon-arrow-d {
 	background:url("images/sprites-channel.png") no-repeat -18px -1433px;
@@ -1934,6 +1934,18 @@ h1.requests {
 }
 .loginform .sendbtnican span {
 	margin:0;
+}
+.textsettingsicon {
+	background:#2D2D2D;
+	border-radius:4px 0 0 4px;
+	padding:10px 0 10px 10px;
+	font-size:14px;
+	color:#fff;
+	margin-bottom:10px;
+}
+.textsettingsicon a {
+	background:url(images/sprites-channel.png) no-repeat -8px -1598px;
+	padding:2px 15px;
 }
 /*-25-10-2013-*/
 .help-FAQs {
