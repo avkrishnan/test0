@@ -62,7 +62,7 @@
 		if(data.channel.length) {
 			$.each(data.channel, function(indexChannel, valueChannel) {
 				if(typeof valueChannel.description == 'undefined') {
-					valueChannel.description = 'Channel description!';
+					valueChannel.description = '';
 				}
 			});
 			that.channels(data.channel);
