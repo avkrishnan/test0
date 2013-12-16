@@ -8,6 +8,7 @@ function SignupStepSecondViewModel() {
 	
   this.firstname = ko.observable();
   this.lastname = ko.observable();
+  this.errorFirstName = ko.observable();	
   this.errorFirstLastName = ko.observable();
   this.firstnameClass = ko.observable();
   this.lastnameClass = ko.observable();
@@ -22,6 +23,7 @@ function SignupStepSecondViewModel() {
 	this.clearForm = function () {
     that.firstname('');
     that.lastname('');
+    that.errorFirstName('');		
     that.errorFirstLastName('');
   };
 
@@ -32,6 +34,7 @@ function SignupStepSecondViewModel() {
 			$('input').keyup(function () {
 				that.firstnameClass('');
 				that.lastnameClass('');
+				that.errorFirstName('');				
 				that.errorFirstLastName('');
 			});
 		}	
@@ -63,11 +66,19 @@ function SignupStepSecondViewModel() {
   this.signUpCommand = function () {
     if (that.firstname() == '') {
       that.firstnameClass('validationerror');
-      that.errorFirstLastName('<span>SORRY:</span> Please enter first name');
-    } 
+      that.errorFirstName('<span>SORRY:</span> Please enter first name');
+    }
+		else if (that.firstname().length > 20) {
+      that.firstnameClass('validationerror');
+      that.errorFirstName('<span>SORRY:</span> Please enter name of max. 20 characters');
+    }
 		else if (that.lastname() == '') {
       that.lastnameClass('validationerror');
       that.errorFirstLastName('<span>SORRY:</span> Please enter last name');
+    }				 
+		else if (that.lastname().length > 20) {
+      that.lastnameClass('validationerror');
+      that.errorFirstLastName('<span>SORRY:</span> Please enter name of max. 20 characters');
     } 
 		else {
       $.mobile.showPageLoadingMsg('a', 'Enrolling');

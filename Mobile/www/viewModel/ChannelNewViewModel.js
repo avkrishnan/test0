@@ -11,10 +11,11 @@ function ChannelNewViewModel() {
   /* New Channel Step First observable */
 	this.sectionOne = ko.observable(true);
 	this.sectionTwo = ko.observable(false);		
-	this.newChannel = ko.observable('');	
+	this.newChannel = ko.observable();	
 	this.channelClass = ko.observable();	
 	this.message = ko.observable();	
 	this.errorNewChannel = ko.observable();
+	this.channelName = ko.observable();	
 	this.channelWebAddress = ko.observable();
 	this.toastText = ko.observable();								
 	
@@ -57,11 +58,11 @@ function ChannelNewViewModel() {
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelNewView') {
-			that.nextViewCommand();
+			that.createChannelCommand();
 		}
 	});	
 
-	this.nextViewCommand = function (e) {
+	this.createChannelCommand = function (e) {
     if (that.newChannel() == '') {
       that.errorNewChannel('<span>SORRY:</span> Please enter channel name');
     } else if (that.newChannel().match(/\s/)) {
@@ -74,12 +75,25 @@ function ChannelNewViewModel() {
     }
   };
 	
-	function successfulCreate(args) {
-    $.mobile.hidePageLoadingMsg()			
+	function successfulCreate(data) {
+    $.mobile.hidePageLoadingMsg();
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		var channel = [];			
+		channel.push({
+			channelId: data.id, 
+			channelName: data.name, 
+			channelDescription: data.description,
+			longDescription: data.longDescription,			
+			followerCount: followers
+		});
+		channel = channel[0];		
+		localStorage.setItem('currentChannelData', JSON.stringify(channel));					
 		that.toastText('Channel created');		
-		localStorage.setItem('toastData', that.toastText());
-		sendMessageViewModel.clearForm();				
-    goToView('channelsIOwnView');
+		showToast();
   };
 	
 	function successAvailable(data){
@@ -88,8 +102,11 @@ function ChannelNewViewModel() {
       that.errorNewChannel('<span>SORRY:</span> This channel name has already been taken');
 		} else {
 			//that.message('<span>GREAT! </span> This name is available');
+			$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
+			ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});			
 			that.sectionOne(false);
 			that.sectionTwo(true);							
+			that.channelName(that.newChannel()+' is now LIVE!');			
 			that.channelWebAddress(that.newChannel()+'.evernym.com');			
 		}
 	};
@@ -103,9 +120,9 @@ function ChannelNewViewModel() {
     that.errorNewChannel('<span>SORRY:</span> ' + details.message);		
   };
 	
-  this.createChannelCommand = function () {
-		$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
-		ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});
+  this.OkCommand = function () {
+		sendMessageViewModel.clearForm();				
+    goToView('channelsIOwnView');
   };		
 	
 }

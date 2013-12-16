@@ -836,6 +836,16 @@ function shortFormat(created) {
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " ";// + (date.getHours()>12?'PM':'AM');
 }
 
+/* Hide footer on mobile keypad */
+var initialScreenSize = window.innerHeight;
+window.addEventListener("resize", function() {
+ if(window.innerHeight < initialScreenSize){
+   $('.footer').hide();
+ } else {
+   $('.footer').show();
+ }
+})
+
 /* pradeep kumar end */
 
 /* Time conversion into time ago*/

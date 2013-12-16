@@ -14,18 +14,21 @@
       </div>
       <div class="login">
         <p class="loginbtn">
-          <a href="#" data-bind="click: nextViewCommand">NEXT</a>
+          <a href="#" data-bind="click: createChannelCommand">Create</a>
         </p>
       </div>
     </section>
   </div>
   <div class="page-content" data-bind="visible: sectionTwo">
-    <div class="changename">Create a Channel</div>
-    <em class="webaddress">Your channel's web page will be:</em>
+    <div class="changename" data-bind="text: channelName"></div>
+    <em class="webaddress">You can now invite others to follow your channel at:</em>
     <div class="createchannel"><em data-bind="text: channelWebAddress"></em></div>
+    <div class="textsettingsicon">
+      You can create your channel's Web Page Description now or later by tapping the Channel Settings icon:<a href="#" onclick="goToView('channelSettingsView')"></a>
+    </div>    
     <div class="login">
       <p class="loginbtn">
-        <a href="#" data-bind="click: createChannelCommand">CREATE</a>
+        <a href="#" data-bind="click: OkCommand">OK, Got it!</a>
       </p>
     </div>
   </div>
