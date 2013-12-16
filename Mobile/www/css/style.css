@@ -44,9 +44,7 @@ header {
 	z-index:9999;
 	height:26px;
 }
-/*
-	*Back Button 
-*/
+/*	*Back Button  */
 a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:active, a.back {
 	background:#fff url(images/back-right-arrow.png) no-repeat top right;
 	margin-left:10px;
@@ -106,9 +104,7 @@ a.smsicon.smsiconwhite {
 	background-position:1px -55px;
 }
 /*	Header end	*/
-/*	
-	*	Page Content	
-*/
+/*	*	Page Content	*/
 h1 {
 	font-size:16px;
 	font-weight:normal;
@@ -145,9 +141,7 @@ h1.newcreatechannel {
 	color:#fff;
 	font-size:16px;
 }
-/*
-	*Home Page
-*/
+/*	*Home Page  */
 .error-message {
 	font-size:12px;
 	color:#fff;
@@ -210,9 +204,7 @@ h1.newcreatechannel {
 	background-position:-5px -343px;
 }
 /* Home-Index End */
-/*
-	*Emergency page
-*/
+/*	*Emergency page  */
 a.addMore {
 	background:#2D2D2D url("images/sprites-icons.png") no-repeat -6px -160px;
 	margin-top:10px;
@@ -222,9 +214,7 @@ a.addchannel {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -628px;
 	padding:4px 0 4px 57px;
 }
-/*
-	*Page V-36b
-*/
+/*	*Page V-36b  */
 .low-messages.deliver-txt.addno.ui-link, .addno {
 	color:#8DC63F;
 }
@@ -722,9 +712,7 @@ span.down-arrow {
 	padding:4px 6px;
 }
 /*	Login page css	*/
-/*
-	*	Overwrite css jquery Mobile
-*/
+/*	*	Overwrite css jquery Mobile  */
 .ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button {
 	font-family: 'OpenSansRegular';
 }
@@ -782,17 +770,17 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .ui-checkbox .ui-btn-up-c, .ui-btn-hover-c {
 	background:#414141;
-	border: medium none;
+	border:none;
 	text-shadow:none;
 }
 .ui-checkbox .ui-btn-icon-left .ui-btn-inner, .ui-radio .ui-btn-icon-left .ui-btn-inner {
-	padding-left: 0;
+	padding-left:0;
 }
 .ui-checkbox .ui-btn-inner {
-	display: inline;
+	display:inline;
 }
 .ui-checkbox label span.ui-btn-inner span.ui-btn-text {
-	font-size: 21px;
+	font-size:21px;
 }
 .ui-checkbox label span.ui-btn-inner span.ui-btn-text {
 	color:#7F7F7F;
@@ -813,12 +801,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border:none;
 }
 .ui-checkbox-off .ui-icon {
-	background: url("images/checkbox.png") no-repeat 0 0;
+	background:url("images/checkbox.png") no-repeat 0 0;
 	height:28px;
 	width:28px;
 }
 .ui-checkbox-on .ui-icon, .ui-radio-on .ui-icon {
-	background: url("images/checkbox2.png") no-repeat 0 0;
+	background:url("images/checkbox2.png") no-repeat 0 0;
 	height:28px;
 	width:28px;
 }
@@ -896,9 +884,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	position:relative;
 }
 /* Overwrite css jquery Mobile End	*/
-/*
-	* CHANNELS PAGES CSS
-*/
+/*	CHANNELS PAGES CSS  */
 .channelcontent {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
@@ -986,6 +972,10 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channel6 {
 	background:url("images/channelimg5.png") no-repeat 0 0;
+}
+.evernymicon {
+	background:url("images/evernymicon.png") no-repeat 0 0;
+	padding:20px;
 }
 .borderblue {
 	border:2px solid #2e3192;
@@ -1349,7 +1339,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background-position:-77px -5px;
 }
 .icon-d {
-	background:url("images/all-icons.png") no-repeat scroll -477px -5px;
+	background:url("images/all-icons.png") no-repeat -477px -5px;
 }
 .messageschannel {
 	padding:0 0 4px 4px;
@@ -1375,7 +1365,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelmessages p {
 	font-size:13px;
 	color:#000;
-	padding:0 5PX 0 0;
+	padding:0 5px 0 0;
 }
 .broadecast {
 	border-radius:20px 0 0 20px;
@@ -1782,7 +1772,6 @@ h1.messagesdate {
 .settinginner {
 	margin:10px 20px 0 0;
 }
-/*-24-10-2013-*/
 .page-content.followerpage {
 	padding:50px 0 50px 0;
 }
@@ -1908,7 +1897,7 @@ h1.requests {
 	color:#FFFFFF;
 	display:block;
 	font-size:14px;
-	margin:0 0 30px 15px;
+	margin:0 0 15px 15px;
 }
 .createchannel em {
 	font-style:normal;
@@ -1938,7 +1927,7 @@ h1.requests {
 .textsettingsicon {
 	background:#2D2D2D;
 	border-radius:4px 0 0 4px;
-	padding:10px 0 10px 10px;
+	padding:10px;
 	font-size:14px;
 	color:#fff;
 	margin-bottom:10px;
@@ -1947,7 +1936,6 @@ h1.requests {
 	background:url(images/sprites-channel.png) no-repeat -8px -1598px;
 	padding:2px 15px;
 }
-/*-25-10-2013-*/
 .help-FAQs {
 	font-size:18px;
 	margin:15px 0 15px 5px;
@@ -2037,6 +2025,9 @@ h1.requests {
 	margin:10px 0 0 0;
 	width:100%;
 }
+.read-n, .read-n.ui-link {
+	font-weight:bold;
+}
 .igi-responses {
 	background:#FFFFFF;
 	border-radius:4px;
@@ -2055,11 +2046,9 @@ h1.requests {
 	height:auto;
 	float:none;
 }
-/*28-11-2013-*/
 .messagesreceived .igibutton, .messagesreceived .messageschannel, .messagesreceived .iconchannels {
 	display:table-cell;
 }
-/*28-11-2013-End*/
 .messagesreceived .received, .igi-responses .received {
 	color:#8DC63F;
 	font-size:13px;
@@ -2205,7 +2194,6 @@ ul.igiresponses li span {
 	color:#a7a9ac;
 	background:#f1f2f2 url("images/sprites-channel.png") no-repeat -9px -1421px;
 }
-/*26-10-2013*/
 .messageshistory {
 	padding:0 10px;
 }
@@ -2236,7 +2224,6 @@ ul.igiresponses li span {
 .msghistory .messagebtn {
 	color:#fff;
 }
-/*26-11-2013-*/
 .msg-increase {
 	display:table-cell;
 	width:45px;
@@ -2302,7 +2289,6 @@ ul.igiresponses li span {
 .msgbuttons a.active {
 	opacity:1;
 }
-/*-End-*/
 .snoozetitle {
 	display:block;
 	margin:30px 0 25px 20px;
@@ -2367,6 +2353,9 @@ ul.igiresponses li span {
 	color:#A7A9AC;
 	font-size:12px;
 	padding:2px 9px 2px 22px;
+}
+.lessbtn.ui-link, .lessbtn.ui-link:hover, .lessbtn.ui-link:visited, .lessbtn.ui-link:active {
+	background:#E6E7E8 url("images/sprites-channel.png") no-repeat -13px -1656px;
 }
 .contactchannel {
 	border-top:1px solid #828181;
@@ -2516,7 +2505,6 @@ ul.igiresponses li span {
 	background-position:0 -737px;
 }
 /*slide menu End*/
-/*-28-10-2013-*/
 .compose {
 	margin:0 10px 0 0;
 }
@@ -2685,7 +2673,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#a0a0a0;
 	font-size:14px;
 }
-/*-V-09-*//*-30-10-2013-*/
+/*-V-09-*/
 .information-delete {
 	font-size:14px;
 	color:#8DC63F;
@@ -2721,16 +2709,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin:8px 10px 8px 0;
 	padding:0 5px;
 }
-/* 1-11-2013 */
 .searchbtn.ui-link {
 	float:right;
 	margin:0 0 0 -35px;
 	padding:17px;
 	position:absolute;
 }
-/*
-	*Escalate Settings
-*/
+/*	Escalate Settings  */
 .all-setting {
 	overflow:hidden;
 	padding:10px;
@@ -2853,7 +2838,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .slidervalue-img .timesensitiveicon {
 	background:url("images/all-icons.png") no-repeat -341px -7px;
 }
-/*-29-11-2013-*/
 .broadcastinform {
 	border-top:1px solid #2d2d2d;
 	font-size:14px;
@@ -2875,7 +2859,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#d7df23;
 	font-size:12px
 }
-/*30-11-2013*/
 .settingscontent {
 	padding:5px 10px 5px 10px;
 	background:#363636;
@@ -2947,7 +2930,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	outline:none;
 	float:right;
 }
-/*30-11-2013 End*/
 .escalateedit, .escalateedit.ui-link {
 	float:right;
 	color:#faffff;
@@ -3103,10 +3085,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:14px;
 	padding:10px 0px 0px 0px;
 }
-
-/*
-	*	A short description
-*/
+/*	A short description  */
 .loginform .short-description {
 	font-size:14px;
 	color:#fff;
@@ -3150,7 +3129,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:#8dc63f;
 	color:#fff;
 	border-radius:50px;
-	-webkit-border-radius:50px;
 }
 .yes-noactive {
 	background:#8dc63f;
@@ -3509,7 +3487,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		padding:35px 22px;
 	}
 	.datetime-setting.date-minutesetting {
-		margin-right: 49px;
+		margin-right:49px;
 	}
 }
 @media only screen and (min-width:980px) {
