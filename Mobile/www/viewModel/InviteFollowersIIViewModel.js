@@ -9,7 +9,8 @@ function InviteFollowersIIViewModel() {
 	this.accountName = ko.observable();		
 
   /* Feedback value and error observable */
-	this.emailaddress = ko.observable();		
+	this.feedbackType = ko.observable();
+	this.feedbackLabel = ko.observable();			
 	this.feedbackClass = ko.observable();
 	this.feedback = ko.observable();
 	this.feedbackId = ko.observable('feedback');
@@ -26,7 +27,6 @@ function InviteFollowersIIViewModel() {
 	};
 	
 	this.clearForm = function () {
-		that.emailaddress('');
 		that.feedback('');
 		that.feedbackClass('');
 		that.error(false);		
@@ -43,6 +43,18 @@ function InviteFollowersIIViewModel() {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');				
+			}
+			if(localStorage.getItem('feedbackType') == 'praise') {
+				that.feedbackType('Praise for Evernym Channels');
+				that.feedbackLabel('Your feedback:');					
+			}
+			else if(localStorage.getItem('feedbackType') == 'suggestions') {
+				that.feedbackType('Suggestions for Evernym Channels');
+				that.feedbackLabel('Your Suggestions:');				
+			}
+			else {
+				that.feedbackType('Report a Bug for Evernym Channels');
+				that.feedbackLabel('Report a Bug:');				
 			}			
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {

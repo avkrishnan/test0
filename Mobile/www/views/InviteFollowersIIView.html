@@ -2,14 +2,10 @@
 <div id="inviteFollowersIIView" data-role="page" class="channel-list" >
 	<header class="logged-in"></header>  
   <div class="page-content channelsettings">
-    <h1 class="help-FAQs">Praise for Evernym Channels</h1>
+    <h1 class="help-FAQs" data-bind="text: feedbackType"></h1>
     <section class="loginform">
-      <label class="invited-followChannel">Your email address (optional):</label>
-      <div class="formtype">
-        <input type="text" data-bind="value: emailaddress" placeholder="email here" />
-      </div>
-      <label class="invited-followChannel">Your feedback:</label>
-      <div class="formtype textareatype" data-bind="css: feedbackClass">
+      <label class="invited-followChannel" data-bind="text: feedbackLabel"></label>
+      <div class="formtype textareatype longdescription" data-bind="css: feedbackClass">
         <textarea class="textarea" data-bind="attr: { id: feedbackId }, value: feedback" placeholder="Add text here..."></textarea>
         <div class="msgerror" data-bind="visible: error, html: errorFeedback"></div>
       </div>

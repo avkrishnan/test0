@@ -14,11 +14,12 @@ function ReplyDetailViewModel() {
 	this.messageId = ko.observable();
 	this.senderName = ko.observable();			
 	this.replyDate = ko.observable();	
-	this.reply = ko.observable();	
+	this.reply = ko.observable();		
 	this.moreText = ko.observable();	
 	this.less = ko.observable(true);		
-	this.more = ko.observable(false);
+	this.more = ko.observable(false);	
 	this.moreButton = ko.observable(true);
+	this.lessButton = ko.observable(false);	
 	this.toastText = ko.observable();											
 
 	/* Methods */
@@ -44,10 +45,11 @@ function ReplyDetailViewModel() {
 				localStorage.removeItem('toastData');				
 			}			
 			that.accountName(localStorage.getItem('accountName'));		
-			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));
+			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));			
 			that.less(true);				
 			that.more(false);		
-			that.moreButton(true);																								
+			that.moreButton(true);
+			that.lessButton(false);																											
 			that.channelId(channelObject.channelId);	
 			that.channelName(channelObject.channelName);													
 			that.messageId(messageObject.messageId);
@@ -65,7 +67,15 @@ function ReplyDetailViewModel() {
 	this.showMore = function(){
 		that.less(false);		
 		that.more(true);
-		that.moreButton(false);														
-	};	
+		that.moreButton(false);
+		that.lessButton(true);																
+	};
+	
+	this.showLess = function(){
+		that.less(true);		
+		that.more(false);
+		that.moreButton(true);
+		that.lessButton(false);															
+	};		
 				
 }
