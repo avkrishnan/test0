@@ -47,7 +47,8 @@ function ChannelNewViewModel() {
 			}			
 			that.accountName(localStorage.getItem('accountName'));
 			that.sectionOne(true);
-			that.sectionTwo(false);							
+			that.sectionTwo(false);
+			$('input').focus();							
 			$('input').keyup(function () {
 				that.message('');
 				that.channelClass('');				

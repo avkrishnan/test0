@@ -214,10 +214,54 @@ function ChannelMainViewModel() {
 			that.toastText('No replies to display');		
 			showToast();			
 		}
+		else if(data.replies == '1 Reply') {
+			localStorage.setItem('currentMessageData', JSON.stringify(data));
+			$.mobile.showPageLoadingMsg("a", "Loading Message reply");			
+			return ES.messageService.getChannelMessages(that.channelId(), {replyto: data.messageId}, {success: successfulReliesGET, error: errorAPI});														
+		}
 		else {
 			localStorage.setItem('currentMessageData', JSON.stringify(data));									
 			viewNavigate('Main', 'channelMainView', 'singleMessageRepliesView');
 		}
-	};				
+	};
+	
+	function successfulReliesGET(data){
+    $.mobile.hidePageLoadingMsg();			
+		for(var len = 0; len<data.message.length; len++) {
+			if(data.message[len].replies < 1) {
+				if(data.message[len].text.length > truncatedTextScreen()) {
+					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+$.trim(data.message[len].text).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...';
+				  var replyLess = $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...';
+				}
+				else {
+					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+data.message[len].text;
+					var replyLess = data.message[len].text;					
+				}				
+				var reply = [];			
+				reply.push({
+					replyId: data.message[len].id,
+					senderSubscriberId: data.message[len].senderSubscriberId,
+					responseToMsgId: data.message[len].responseToMsgId,		
+					created: data.message[len].created,				
+					replyTime: msToTime(data.message[len].created),
+					replyLess: replyLess,					
+					replyFull: data.message[len].text,
+					senderFirstname: data.message[len].senderFirstname,
+					senderLastname: data.message[len].senderLastname,										
+					replyToReply: data.message[len].replies
+				});
+				reply = reply[0];		
+				localStorage.setItem('currentReplyData', JSON.stringify(reply));					
+			}
+		}
+		viewNavigate('Main', 'channelMainView', 'replyDetailView');
+		replyDetailViewModel.showMore();				
+	}; 
+	
+	function errorAPI(data, status, details) {
+    $.mobile.hidePageLoadingMsg();
+		that.toastText(details.message);			
+		showToast();
+  };						
 	
 }
