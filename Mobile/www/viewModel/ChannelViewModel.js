@@ -94,7 +94,7 @@ function ChannelViewModel() {
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.hasheader(true);
-			that.hasfooter(true);			
+			that.hasfooter(true);
 		}
 		if(localStorage.getItem('toastData')) {
 			that.toastText(localStorage.getItem('toastData'));

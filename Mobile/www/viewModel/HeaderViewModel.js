@@ -217,7 +217,6 @@ function OverlayViewModel() {
 				$("#"+event.currentTarget.parentNode.getAttribute('id')).remove();
 			}, 1000);				
 		}
-		$(this).parent().remove();
 		var tempEnymNotifications = [];
 		tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
 		if(tempEnymNotifications.length > 0) {
@@ -228,7 +227,6 @@ function OverlayViewModel() {
 			});
 			setTimeout(function() {
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
-				//overlayViewModel.showNewMessagesOverlay();
 			}, 1000);				
 			localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 		}	

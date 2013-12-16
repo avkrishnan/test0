@@ -120,6 +120,8 @@ function SignupStepSecondViewModel() {
     ES.evernymService.clearAccessToken();
 		ES.evernymService.setAccessToken(args.accessToken);
 		localStorage.setItem('accountName', args.account.accountname);
+//
+		/*
 		ES.systemService.getMsgNotifs({
 			success: function(responseData) {
 				localStorage.removeItem('enymNotifications');
@@ -139,8 +141,10 @@ function SignupStepSecondViewModel() {
 				that.toastText(details.message);
 				localStorage.setItem('toastData', that.toastText());
 			}
-		});		
-		//goToView('registrationVerifyView');			
+		});
+		*/
+//			
+		goToView('registrationVerifyView');			
   }
 
   function loginError(data, status, details) {
