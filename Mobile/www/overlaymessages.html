@@ -1,4 +1,4 @@
-<div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0;top:27px;padding-bottom:50px;">
+<div class="messages-content" data-role="popup" id="newMessages" data-history="false" style="right:0;top:-3px;overflow-y:scroll;">
   <div class="messagescontent">
       <div class="msg-hideshow">
         <h4>NEW MESSAGES</h4>
@@ -39,4 +39,10 @@
 			$(nonCurrentViewOverlay + " #newMessages-screen").remove();
 		}	
 	});
+	$('#newMessages').on({
+	popupbeforeposition: function() {
+		var maxHeight = $(window).height() - 105;
+		$('#newMessages').css('max-height', maxHeight + 'px')
+	}
+	})
 </script>
