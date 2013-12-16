@@ -5,7 +5,7 @@
         <a href="#" data-bind="click:closePopup"></a>
       </div>
       <section data-bind="foreach: newMessagesDisplayList">
-        <a class="messagesreceived" href="#">
+        <a class="messagesreceived" href="#" data-bind="attr: {id : msgId}">
           <span data-bind="css: iGiClass, click: $parent.iGiAckOverlay"></span>
           <div class="messageschannel igi-msg-icon" data-bind="click: $parent.showSingleMessage">
             <span class="received" data-bind="text: displayFrom"></span>

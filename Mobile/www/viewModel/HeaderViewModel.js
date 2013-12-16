@@ -107,13 +107,6 @@
 					popBackNav();
 				}				
 		}
-		//addContactView.currentDeleteCommethod();
-		/*if(typeof backNavText[0] == 'undefined') {
-			goToView('channelListView');
-		}
-		else {
-			popBackNav();
-		}*/
   };
 
 	/*To Do to show new IGIs*/
@@ -192,7 +185,8 @@ function OverlayViewModel() {
 			else {
 				var iGiClass = '';
 			}
-			valueNotification.iGiClass = iGiClass;								
+			valueNotification.iGiClass = iGiClass;
+			//alert(JSON.stringify(valueNotification));					
 			overlayViewModel.newMessagesDisplayList.push(valueNotification);
 		});
 	}
@@ -201,12 +195,13 @@ function OverlayViewModel() {
 		$('#newMessages').popup('close');
 	}
 	
-	this.iGiAckOverlay = function(data) {
+	this.iGiAckOverlay = function(data, event) {
+		//alert(event.currentTarget.parentNode.getAttribute('id'));
 		var callbacks = {
 			success: function(data) {
 				that.toastText('iGi Acknowledgement sent !');
 				localStorage.setItem('toastData', that.toastText());			
-				goToView($.mobile.activePage.attr('id'));																	
+				//goToView($.mobile.activePage.attr('id'));																	
 			},
 			error: function(data, status, details) {
 				that.toastText(details.message);
@@ -215,7 +210,30 @@ function OverlayViewModel() {
 			}
 		};					
 		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
-		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);								
+//
+		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
+			setTimeout(function() {			
+				ES.systemService.adjMnsCount(-1);
+				$("#"+event.currentTarget.parentNode.getAttribute('id')).remove();
+			}, 1000);				
+		}
+		$(this).parent().remove();
+		var tempEnymNotifications = [];
+		tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+		if(tempEnymNotifications.length > 0) {
+			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
+				if(typeof valueNotification != 'undefined' && valueNotification.msgId == data.msgId) {
+					tempEnymNotifications.splice(indexNotification,1)
+				}					
+			});
+			setTimeout(function() {
+				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
+				//overlayViewModel.showNewMessagesOverlay();
+			}, 1000);				
+			localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+		}	
+//		
+		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);
 	}	
 	
 	this.showSingleMessage = function(data) {
