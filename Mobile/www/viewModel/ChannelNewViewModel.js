@@ -10,7 +10,7 @@ function ChannelNewViewModel() {
 	
   /* New Channel Step First observable */
 	this.sectionOne = ko.observable(true);
-	this.sectionTwo = ko.observable(false);		
+	this.sectionTwo = ko.observable(false);
 	this.newChannel = ko.observable();	
 	this.channelClass = ko.observable();	
 	this.message = ko.observable();	
