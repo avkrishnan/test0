@@ -28,7 +28,8 @@ function ChannelListViewModel() {
   this.channel = ko.observable();	
   this.channelOwn = ko.observable();		
   this.channelFollowing = ko.observable();
-	this.toastText = ko.observable();													
+	this.toastText = ko.observable();
+	this.toastClass = ko.observable();													
 	
 	/* Methods */
 	this.applyBindings = function() {

@@ -34,11 +34,11 @@ function LoginViewModel() {
   this.activate = function() {
 		//that.newMessagesCount('');
 		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
-			if(localStorage.getItem('toastData')) {
+			/*if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');												
-			}			
+			}*/			
 			that.errorMessage('');		
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
 				that.accountName('');
@@ -169,14 +169,25 @@ function LoginViewModel() {
 			});
 			*/
 			localStorage.setItem('account', JSON.stringify(args.account));							
-      localStorage.setItem("accountName", that.accountName());						
+      localStorage.setItem("accountName", that.accountName());
 			if(localStorage.getItem("action") == 'follow_channel') {
+				var callbacks = {
+					success: function() {
+						localStorage.removeItem('action');
+						that.toastText('Now following '+channel.name);		
+						localStorage.setItem('toastData', that.toastText());
+						goToView('channelMessagesView');					
+					},
+					error: function(data, status, details) {
+						localStorage.removeItem('action');					
+						channelListViewModel.toastClass('toast-info');
+						that.toastText('Cannot follow a channel you own');		
+						localStorage.setItem('toastData', that.toastText());
+						goToView('channelListView');
+					}
+				};						
 				var channel = JSON.parse(localStorage.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);
-				localStorage.removeItem('action');
-				that.toastText('Now following '+channel.name);		
-				localStorage.setItem('toastData', that.toastText());				
-				goToView('channelMessagesView');
 			}
 			else {
 				goToView('channelListView');
