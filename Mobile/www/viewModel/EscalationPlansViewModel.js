@@ -196,7 +196,6 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('enymNotifications');
 		ES.systemService.MnsCacheData = {};
 		ES.systemService.MnsLastUpdated = 0;
-		alert(ES.systemService.MnsLastUpdated);
 		sendMessageViewModel.clearForm();											
 		//localStorage.setItem('currentChannel');				
 		//channelListViewModel.clearForm();
