@@ -137,10 +137,11 @@ function ChannelMessagesViewModel() {
 						var iGiClass = 'igibutton igisent';						
 					}
 					else {
-						var iGiClass = '';						
+						var iGiClass = '';
 					}
+					var readClass = 'read-' + valueMessage.read.toLowerCase(); 
 					that.channelMessages.push( // without push not working
-						{read:valueMessage.read, ackRequested:valueMessage.ackRequested, dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
+						{readClass:readClass, read:valueMessage.read, ackRequested:valueMessage.ackRequested, dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created}
 					);
 				});
 				
