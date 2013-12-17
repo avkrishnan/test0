@@ -28,7 +28,8 @@ function ChannelViewModel() {
 	this.moreText = ko.observable('');	
 	this.less = ko.observable(true);		
 	this.more = ko.observable(false);
-	this.moreButton = ko.observable(false);		
+	this.moreButton = ko.observable(false);
+	this.lessButton = ko.observable(false);			
 	this.email = ko.observable('');
 	this.followers = ko.observable('');
 	this.toastText = ko.observable();
@@ -149,8 +150,8 @@ function ChannelViewModel() {
 		that.description(data.description);
 		if(typeof data.longDescription != 'undefined') {
 			//alert(data.longDescription.replace());
-			if(data.longDescription.length > truncatedTextScreen()) {
-				var logDesc = ($.trim(data.longDescription).substring(0, truncatedTextScreen()*4).split(' ').slice(0, -1).join(' ') + '...').replace(/\n/g, '<br/>');
+			if(data.longDescription.length > truncatedTextScreen()*12) {
+				var logDesc = ($.trim(data.longDescription).substring(0, truncatedTextScreen()*7).split(' ').slice(0, -1).join(' ') + '...').replace(/\n/g, '<br/>');
 				that.longdescription(logDesc);
 				that.moreText(data.longDescription.replace(/\n/g, '<br/>'));
 				that.moreButton(true);							
@@ -363,7 +364,15 @@ function ChannelViewModel() {
 	this.showMore = function(){
 		that.less(false);		
 		that.more(true);
-		that.moreButton(false);														
-	};	
+		that.moreButton(false);	
+		that.lessButton(true);															
+	};
+	
+	this.showLess = function(){
+		that.less(true);		
+		that.more(false);
+		that.moreButton(true);
+		that.lessButton(false);															
+	};		
 		
 }
