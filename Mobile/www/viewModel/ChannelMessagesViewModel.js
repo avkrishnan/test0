@@ -132,9 +132,8 @@ function ChannelMessagesViewModel() {
 			success: function(data) {
 				var screenSizeText = truncatedTextScreen();
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
-					//alert(JSON.stringify(valueMessage));
-					//var tempCreated = msToTime(valueMessage.created);
-					var tempCreated = convertUTCDateToLocalDate(valueMessage.created);
+					var tempCreated = msToTime(valueMessage.created);
+					//var tempCreated = convertUTCDateToLocalDate(valueMessage.created);
 					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
 						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 						tempClass = 'iconchannels icon-' + tempClass;
