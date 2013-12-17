@@ -819,6 +819,16 @@ function dateFormat2(created) {
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
 }
 
+function convertUTCDateToLocalDate(date) {
+	var newDate = new Date(date).getTime();
+	date = new Date(date);
+	//alert(date.getMinutes());
+	//alert(date.getTimezoneOffset());
+	//newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+	//alert(newDate);
+	return newDate;   
+}
+
 /* Date Format for date like Dec 13, 2013, 11:10 AM */
 function shortFormatYear(created) {
 	var created = new Date(created);

@@ -22,7 +22,8 @@ function CommethodVerificationViewModel() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 			goToView('loginView');
-		} else {
+		} 
+		else {
 			that.accountName(localStorage.getItem('accountName'));
 			$.mobile.showPageLoadingMsg("a", "Verifying");
 			var key = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
