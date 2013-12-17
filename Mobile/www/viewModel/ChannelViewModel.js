@@ -8,7 +8,7 @@ function ChannelViewModel() {
 	
 	this.accountName = ko.observable();	
 	
-	this.hasfooter = ko.observable(true);
+	this.hasfooter = ko.observable(false);
 	this.hasheader = ko.observable(false);
 	this.settings = ko.observable(true);	
 	
@@ -121,9 +121,9 @@ function ChannelViewModel() {
 	
 	this.channelSettings = function(){
 		if(localStorage.getItem('channelOwner') == 'yes') {		
-			goToView('channelSettingsView');
+			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'channelSettingsView');
 		} else {
-			goToView('channelViewUnfollow');
+			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'channelViewUnfollow');
 		}
 	}
 	

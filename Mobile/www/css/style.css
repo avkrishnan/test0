@@ -2329,6 +2329,7 @@ ul.igiresponses li span {
 	border-radius:4px;
 	padding:10px;
 	color:#414141;
+	min-height:100px;
 }
 .channelprivate h4 {
 	float:left;
