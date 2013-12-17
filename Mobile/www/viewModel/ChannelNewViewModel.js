@@ -42,8 +42,8 @@ function ChannelNewViewModel() {
 			addExternalMarkup(that.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
+				localStorage.removeItem('toastData');				
+				showToast();												
 			}			
 			that.accountName(localStorage.getItem('accountName'));
 			that.sectionOne(true);
@@ -122,7 +122,7 @@ function ChannelNewViewModel() {
   };
 	
   this.OkCommand = function () {
-		sendMessageViewModel.clearForm();				
+		sendMessageViewModel.clearForm();					
     goToView('channelsIOwnView');
   };		
 	
