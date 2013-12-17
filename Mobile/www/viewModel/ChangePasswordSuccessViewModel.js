@@ -2,11 +2,11 @@
 /* To do - Pradeep Kumar */
 function ChangePasswordSuccessViewModel() {
 	var that = this;
+	this.prototype = AppCtx.ViewModelProto;
 	this.template = 'changePasswordSuccessView';
 	this.viewid = 'V-44e';
 	this.viewname = 'ChangePasswordSuccess';
 	this.displayname = 'Change password success';
-	this.accountName = ko.observable();		
 	
 	/* Methods */				
 	this.applyBindings = function(){

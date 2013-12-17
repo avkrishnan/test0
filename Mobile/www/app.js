@@ -1,3 +1,5 @@
+var AppCtx = {};
+
 var ES = {
 	evernymService: new EvernymService()
 };
