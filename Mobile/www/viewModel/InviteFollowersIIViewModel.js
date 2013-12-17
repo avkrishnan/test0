@@ -44,12 +44,12 @@ function InviteFollowersIIViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');				
 			}
-			if(localStorage.getItem('feedbackType') == 'praise') {
+			if(feedbackType == 'praise') {
 				that.feedbackType('Praise for Evernym Channels');
 				that.feedbackLabel('Your feedback:');
 				that.feedbackContext('praise');									
 			}
-			else if(localStorage.getItem('feedbackType') == 'suggestions') {
+			else if(feedbackType == 'suggestions') {
 				that.feedbackType('Suggestions for Evernym Channels');
 				that.feedbackLabel('Your Suggestions:');
 				that.feedbackContext('suggestions');								
@@ -59,7 +59,7 @@ function InviteFollowersIIViewModel() {
 				that.feedbackLabel('Report a Bug:');
 				that.feedbackContext('bug');								
 			}
-			localStorage.removeItem('feedbackType');						
+			feedbackType = '';						
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {
 				that.feedbackClass('');

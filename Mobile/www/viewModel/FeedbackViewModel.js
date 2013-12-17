@@ -32,17 +32,18 @@ function FeedbackViewModel() {
 	}
 	
 	this.praise = function() {
-		localStorage.setItem('feedbackType', 'praise');
+		feedbackType = 'praise';
 		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
 	}
 	
 	this.suggestions = function() {
+		feedbackType = 'suggestions';		
 		localStorage.setItem('feedbackType', 'suggestions');
 		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
 	}
 	
 	this.reportABug = function() {
-		localStorage.setItem('feedbackType', 'reportABug');
+		feedbackType = 'bug';		
 		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
 	}				
 	

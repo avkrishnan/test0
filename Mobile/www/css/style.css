@@ -565,31 +565,34 @@ input[type="checkbox"]:checked + label span {
 	box-shadow:0 3px 56px #9e8342 inset;
 }
 .tutorial-1 {
-	background:#fae49c url(images/v-51-320.png) no-repeat center 50px;
+	background:#fae49c url(images/v-51-320.png) no-repeat center 30px;
 }
 .tutorial-2 {
-	background:#fae49c url(images/v-52-320.png) no-repeat center 40px;
+	background:#fae49c url(images/v-52-320.png) no-repeat center 22px;
 }
 .tutorial-3 {
-	background:#fae49c url(images/v-53-320.png) no-repeat center 50px;
+	background:#fae49c url(images/v-53-320.png) no-repeat center 33px;
 }
 .tutorial-4 {
-	background:#fae49c url(images/v-54-320.png) no-repeat center 85px;
+	background:#fae49c url(images/v-54-320.png) no-repeat center 26px;
 }
 .tutorial-5 {
-	background:#fae49c url(images/v-55-320.png) no-repeat center center;
-	box-shadow: 0 3px 56px #9E8342 inset;
+	background:#fae49c url(images/v-55-320.png) no-repeat center 30px;
+	box-shadow:0 3px 56px #9E8342 inset;
 }
 .msg-content {
-	padding:15px 0;
+	padding:10px 0;
 	position:fixed;
-	top:60%;
+	top:43%;
 	z-index:1;
 	background:#000;
 	opacity:0.8;
 	width:100%;
 	text-align:center;
 	min-height:78px;
+}
+.resolution-2 {
+	top:33%;
 }
 .msg-content h1 {
 	font-size:18px;
@@ -649,7 +652,7 @@ span.down-arrow {
 .GetStart {
 	position:fixed;
 	text-align:center;
-	top:79%;
+	top:59%;
 	width:100%;
 	z-index:9999;
 }
@@ -3250,7 +3253,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		padding:12px 0;
 	}
 	.GetStart {
-		top:73.8%;
+		top:55%;
 	}
 	.channelicons ul {
 		width:84%;
@@ -3326,6 +3329,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.i-icon {
 		width:52%;
 	}
+	.resolution {
+		top:33%;
+	}
+	.resolution-2 {
+		top:25%;
+	}
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3341,7 +3350,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:91%;
 	}
 	.GetStart {
-		top:68.5%;
+		top:50.5%;
 	}
 	.msg-content p, .msg-content h1 {
 		width:90%;
@@ -3437,22 +3446,28 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		margin:0 40.4%;
 	}
 	.tutorial-1 {
-		background:#fae49c url(images/v-51-all.png) no-repeat center 110px;
+		background:#fae49c url(images/v-51-all.png) no-repeat center 40px;
 	}
 	.tutorial-2 {
-		background:#fae49c url(images/v-52-all.png) no-repeat center 100px;
+		background:#fae49c url(images/v-52-all.png) no-repeat center 45px;
 	}
 	.tutorial-3 {
-		background:#fae49c url(images/v-53-all.png) no-repeat center 70px;
+		background:#fae49c url(images/v-53-all.png) no-repeat center 35px;
 	}
 	.tutorial-4 {
-		background:#fae49c url(images/v-54-all.png) no-repeat center 110px;
+		background:#fae49c url(images/v-54-all.png) no-repeat center 88px;
 	}
 	.tutorial-5 {
-		background:#fae49c url(images/v-55-all.png) no-repeat center center;
+		background:#fae49c url(images/v-55-all.png) no-repeat center 35px;
 	}
 	.i-icon {
 		width:80%;
+	}
+	.resolution-2 {
+		top:44%;
+	}
+	.resolution-3 {
+		top:42%;
 	}
 }
 @media only screen and (min-width:800px) {
@@ -3460,7 +3475,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:90%;
 	}
 	.GetStart {
-		top:67%;
+		top:49%;
 	}
 	.slidemenu {
 		min-height:1280px;
@@ -3490,6 +3505,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.datetime-setting.date-minutesetting {
 		margin-right:49px;
 	}
+	.resolution {
+		top:35%;
+	}
+	.resolution-2 {
+		top:35%;
+	}
 }
 @media only screen and (min-width:980px) {
 	.addaction .ui-input-search, .addaction div.ui-input-text {
@@ -3498,9 +3519,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.msg-content p, .msg-content h1 {
 		width:92%;
 	}
-	.GetStart {
+	/*.GetStart {
 		top:67%;
-	}
+	}*/
 	.channelicons ul {
 		width:94.5%;
 	}
@@ -3551,7 +3572,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:94%;
 	}
 	.GetStart {
-		top:74.5%;
+		top:56%;
 	}
 	.msg-content p {
 		font-size:18px;
@@ -3604,13 +3625,28 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		margin:0 44.2%;
 	}
 	.tutorial-1 {
-		background:#fae49c url(images/v-51-all.png) no-repeat center 30px;
+		background:#fae49c url(images/v-51-fullsize.png) no-repeat center 30px;
 	}
 	.tutorial-2 {
-		background:#fae49c url(images/v-52-all.png) no-repeat center 40px;
+		background:#fae49c url(images/v-52-fullsize.png) no-repeat center 40px;
+	}
+	.tutorial-3 {
+		background:#fae49c url(images/v-53-fullsize.png) no-repeat center 35px;
 	}
 	.tutorial-4 {
-		background:#fae49c url(images/v-54-all.png) no-repeat center 110px;
+		background:#fae49c url(images/v-54-fullsize.png) no-repeat center 55px;
+	}
+	.tutorial-5 {
+		background:#fae49c url(images/v-55-fullsize.png) no-repeat center 35px;
+	}
+	.resolution {
+		top:43%;
+	}
+	.resolution-2 {
+		top:50%;
+	}
+	.resolution-3 {
+		top:55%;
 	}
 }
 @media only screen and (min-width:1290px) {

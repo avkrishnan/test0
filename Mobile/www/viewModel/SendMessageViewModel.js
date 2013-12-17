@@ -9,6 +9,8 @@ function SendMessageViewModel() {
 	this.accountName = ko.observable();		
 	
   /* Send Message observable */
+	this.sectionOne = ko.observable(false);
+	this.sectionTwo = ko.observable(false);		
 	this.messageText = ko.observable();
 	this.characterCount = ko.observable();		
 	this.channels = ko.observableArray([]);			
@@ -65,10 +67,12 @@ function SendMessageViewModel() {
 			goToView('loginView');
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message
+			that.sectionOne(false);
+			that.sectionTwo(false);			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
+				localStorage.removeItem('toastData');				
+				showToast();												
 			}
 			that.normalText('normalcolor');
 			that.fastText('');
@@ -195,11 +199,10 @@ function SendMessageViewModel() {
 	};
 	
 	function successfulList(data){
-		if(data.channel.length < 1) {
-			that.toastClass('toast-info');			
-			that.toastText('Please create some channels !');
-			showToast();			
-		} else {	
+		if(data.channel.length == 0) {
+			that.sectionOne(true);								
+		} else {
+			that.sectionTwo(true);				
 			$.mobile.hidePageLoadingMsg();	
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 				that.channels.push(

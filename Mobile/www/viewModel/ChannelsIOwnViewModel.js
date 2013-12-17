@@ -9,6 +9,8 @@ function ChannelsIOwnViewModel() {
 	this.accountName = ko.observable();		
 	
   /* Channels observable */
+	this.sectionOne = ko.observable(false);
+	this.sectionTwo = ko.observable(false);	
 	this.channels = ko.observableArray([]);
 	this.toastText = ko.observable();		
 
@@ -27,10 +29,12 @@ function ChannelsIOwnViewModel() {
 			addExternalMarkup(that.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
+				localStorage.removeItem('toastData');				
+				showToast();											
 			}
 			that.accountName(localStorage.getItem('accountName'));
+			that.sectionOne(false);
+			that.sectionTwo(false);			
 			localStorage.setItem('counter', 1);												
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
@@ -40,20 +44,26 @@ function ChannelsIOwnViewModel() {
 	
 	function successfulList(data){	
     $.mobile.hidePageLoadingMsg();
-		that.channels.removeAll();	
-		for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
-			if(data.channel[channelslength].followers == 1) {
-				var followers = data.channel[channelslength].followers +' follower';
-			} else {
-				var followers = data.channel[channelslength].followers +' followers';
+		that.channels.removeAll();
+		if(data.channel.length == 0) {
+			that.sectionOne(true);			
+		}
+		else {
+			that.sectionTwo(true);				
+			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
+				if(data.channel[channelslength].followers == 1) {
+					var followers = data.channel[channelslength].followers +' follower';
+				} else {
+					var followers = data.channel[channelslength].followers +' followers';
+				}			
+				that.channels.push({
+					channelId: data.channel[channelslength].id, 
+					channelName: data.channel[channelslength].name, 
+					channelDescription: data.channel[channelslength].description,
+					longDescription: data.channel[channelslength].longDescription,
+					followerCount: followers
+				});
 			}			
-			that.channels.push({
-				channelId: data.channel[channelslength].id, 
-				channelName: data.channel[channelslength].name, 
-				channelDescription: data.channel[channelslength].description,
-				longDescription: data.channel[channelslength].longDescription,
-				followerCount: followers
-			});
 		}
 	};    
 	
