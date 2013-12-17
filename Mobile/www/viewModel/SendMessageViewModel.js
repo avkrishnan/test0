@@ -71,8 +71,8 @@ function SendMessageViewModel() {
 			that.sectionTwo(false);			
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
+				localStorage.removeItem('toastData');				
+				showToast();												
 			}
 			that.normalText('normalcolor');
 			that.fastText('');
