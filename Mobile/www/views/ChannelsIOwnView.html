@@ -1,7 +1,16 @@
 <!--To do - Pradeep Kumar-->
 <div id="channelsIOwnView" data-role="page">
-	<header class="logged-in"></header> 
-  <div class="page-content">
+	<header class="logged-in"></header>
+  <div class="page-content" data-bind="visible: sectionOne">  
+    <div class="portal-name channelcreated">
+      Channels I Own
+    </div>
+    <div class="baseline"></div>
+    <div class="getmsg">You haven't created any channels yet. Be sure your group gets your messages, and Know they know&trade;</div>
+    <a href="#" class="Channel">Create Your First Channel<span>Go</span></a>
+    </div>
+  </div>   
+  <div class="page-content" data-bind="visible: sectionTwo">
     <div class="dropdown">
       Channels I Own
       <form class="chaneldropdown" action="#" method="get" >
