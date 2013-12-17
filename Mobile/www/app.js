@@ -852,6 +852,8 @@ window.addEventListener("resize", function() {
  }
 })
 
+feedbackType = ''; // For setting feedback type
+
 /* pradeep kumar end */
 
 /* Time conversion into time ago*/

@@ -98,8 +98,8 @@ function ChannelViewModel() {
 		}
 		if(localStorage.getItem('toastData')) {
 			that.toastText(localStorage.getItem('toastData'));
-			showToast();
-			localStorage.removeItem('toastData');				
+			localStorage.removeItem('toastData');
+			showToast();				
 		}		
 		that.channelid(channel.id);
 		that.toastClass('');		
