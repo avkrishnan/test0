@@ -80,7 +80,26 @@ function ChannelMessagesViewModel() {
 				showToast();				
 			}
 		};					
-		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');		
+		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
+//
+			if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
+				ES.systemService.adjMnsCount(-1);
+			}
+			var tempEnymNotifications = [];
+			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+			if(tempEnymNotifications.length > 0) {
+				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
+					if(typeof valueNotification != 'undefined' && valueNotification.msgId == data.messageId) {
+						tempEnymNotifications.splice(indexNotification,1)
+					}					
+				});
+				setTimeout(function() {
+					showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
+					overlayViewModel.showNewMessagesOverlay();
+				}, 1000);				
+				localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			}	
+//		
 		return ES.messageService.acknowledgeMsg(data.messageId, callbacks);
 	}
 		
