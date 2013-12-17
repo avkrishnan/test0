@@ -13,7 +13,7 @@
     </div>
     
     <div class="channelmessages" data-bind="foreach: channelMessages">
-      <a href="#">
+      <a href="#" data-bind="css:$data.readClass">
         <span data-bind="css: iGiClass, click: $parent.iGiAckMessage"></span>
         <div class="messageschannel" data-bind="click: $parent.showSingleMessage">
           <span class="timemsg" data-bind="text:$data.messageCreated"></span>
