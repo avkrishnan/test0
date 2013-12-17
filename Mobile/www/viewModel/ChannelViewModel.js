@@ -86,10 +86,10 @@ function ChannelViewModel() {
 	};
     
 	this.activate = function (channel) {
+		that.hasheader(false);			
+		that.hasfooter(false);		
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
-			that.hasheader(false);			
-			that.hasfooter(false);
 		}
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
