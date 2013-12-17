@@ -4,8 +4,8 @@ function EscalateTimeSettingsViewModel() {
   var that = this;
   this.template = 'escalateTimeSettingsView';
   this.viewid = 'V-20d';
-  this.viewname = 'Escalate Time Settings';
-  this.displayname = 'Escalate time settings';
+  this.viewname = 'Escalate Time';
+  this.displayname = 'Escalate time';
 	this.accountName = ko.observable();	
 	
 	/* Escalate date and time observable */
