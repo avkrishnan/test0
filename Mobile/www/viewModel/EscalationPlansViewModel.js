@@ -193,6 +193,8 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('escLevel');
 		localStorage.removeItem('iGiStatus');		
 		localStorage.removeItem('currentChannelData');
+		localStorage.removeItem('enymNotifications');
+		ES.systemService.MnsCacheData = {};
 		sendMessageViewModel.clearForm();											
 		//localStorage.setItem('currentChannel');				
 		//channelListViewModel.clearForm();
