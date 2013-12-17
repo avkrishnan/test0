@@ -4,8 +4,8 @@ function InviteFollowersIIViewModel() {
   var that = this;
   this.template = 'inviteFollowersIIView';
   this.viewid = 'V-41';
-  this.viewname = 'InviteII';
-  this.displayname = 'Praise for Evernym Channels';
+  this.viewname = 'Send Feedback';
+  this.displayname = 'Send Feedback';
 	this.accountName = ko.observable();		
 
   /* Feedback value and error observable */
@@ -13,7 +13,7 @@ function InviteFollowersIIViewModel() {
 	this.feedbackLabel = ko.observable();			
 	this.feedbackClass = ko.observable();
 	this.feedback = ko.observable();
-	this.feedbackId = ko.observable('feedback');
+	this.feedbackContext = ko.observable();
 	this.error = ko.observable(false);									
 	this.errorFeedback = ko.observable();
 	this.toastText = ko.observable();		
@@ -46,15 +46,18 @@ function InviteFollowersIIViewModel() {
 			}
 			if(localStorage.getItem('feedbackType') == 'praise') {
 				that.feedbackType('Praise for Evernym Channels');
-				that.feedbackLabel('Your feedback:');					
+				that.feedbackLabel('Your feedback:');
+				that.feedbackContext('praise');									
 			}
 			else if(localStorage.getItem('feedbackType') == 'suggestions') {
 				that.feedbackType('Suggestions for Evernym Channels');
-				that.feedbackLabel('Your Suggestions:');				
+				that.feedbackLabel('Your Suggestions:');
+				that.feedbackContext('suggestions');								
 			}
 			else {
 				that.feedbackType('Report a Bug for Evernym Channels');
-				that.feedbackLabel('Report a Bug:');				
+				that.feedbackLabel('Report a Bug:');
+				that.feedbackContext('bug');								
 			}
 			localStorage.removeItem('feedbackType');						
 			that.accountName(localStorage.getItem('accountName'));			
@@ -73,15 +76,31 @@ function InviteFollowersIIViewModel() {
 	});	
 	
 	this.sendFeedbackCommand = function () {
-		var feedbackData = $('#'+that.feedbackId()).val();
-    if (feedbackData == '') {
+    if (that.feedback() == '' || typeof that.feedback() == 'undefined') {
 			that.feedbackClass('validationerror');
 			that.error(true);				
 			that.errorFeedback('<span>SORRY:</span> Please give feedback');
     } else {
-			that.toastText('Feature coming soon!');
-			showToast();			
+      $.mobile.showPageLoadingMsg("a", "Sending Feedback");			
+			var feedbackObject = {};
+      feedbackObject.comments = that.feedback();
+      feedbackObject.context = that.feedbackContext();				
+			return ES.systemService.sendFeedback(feedbackObject, {success: successfulSend, error: errorAPI});			
     }
-  };	
+  };
+	
+	function successfulSend(data){	
+    $.mobile.hidePageLoadingMsg();
+		that.toastText('Feedback sent successfully');		
+		localStorage.setItem('toastData', that.toastText());
+		popBackNav();
+	};    
+	
+	function errorAPI(data, status, details){
+		$.mobile.hidePageLoadingMsg();	
+		that.toastText(details.message);		
+		showToast();
+	};	
+	
 		
 }

@@ -6,7 +6,7 @@
     <section class="loginform">
       <label class="invited-followChannel" data-bind="text: feedbackLabel"></label>
       <div class="formtype textareatype longdescription" data-bind="css: feedbackClass">
-        <textarea class="textarea" data-bind="attr: { id: feedbackId }, value: feedback" placeholder="Add text here..."></textarea>
+        <textarea class="textarea" data-bind="value: feedback" placeholder="Add text here..."></textarea>
         <div class="msgerror" data-bind="visible: error, html: errorFeedback"></div>
       </div>
       <a href="#" class="sendbtnican" data-bind="click: sendFeedbackCommand">
@@ -16,8 +16,8 @@
   </div>
   <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>   
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('InviteII', 'inviteFollowersIIView', 'escalationPlansView');"></a>
-    <a class="announcement" href="#" onclick="viewNavigate('InviteII', 'inviteFollowersIIView', 'sendMessageView');"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Send Feedback', 'inviteFollowersIIView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Send Feedback', 'inviteFollowersIIView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div> 
