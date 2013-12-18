@@ -3,7 +3,6 @@
 function ChangePasswordSuccessViewModel() {
 
   var self = this;
-	self.prototype = AppCtx.ViewModelProto;
 	
 	self.template = 'changePasswordSuccessView';
 	self.viewid = 'V-44e';
@@ -31,3 +30,5 @@ function ChangePasswordSuccessViewModel() {
 		popBackNav();								
   };		       
 }
+
+ChangePasswordSuccessViewModel.prototype = new ViewModel();
