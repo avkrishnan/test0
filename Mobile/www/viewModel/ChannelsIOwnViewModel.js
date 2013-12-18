@@ -26,7 +26,8 @@ function ChannelsIOwnViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+			addExternalMarkup(that.template); // this is for header/overlay message
+			that.toastText('');						
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				localStorage.removeItem('toastData');				
