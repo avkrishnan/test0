@@ -8,13 +8,6 @@ function ChangePasswordSuccessViewModel() {
 	self.viewid = 'V-44e';
 	self.viewname = 'ChangePasswordSuccess';
 	self.displayname = 'Change password success';
-	
-	/* Methods */				
-	self.applyBindings = function(){
-		$('#' + self.template).on('pagebeforeshow', function(e, data){																	
-			self.activate();
-		});
-	};
 		 
 	self.activate = function(){
 		var changePassword = localStorage.getItem('changePassword');
