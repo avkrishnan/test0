@@ -26,6 +26,11 @@ function ChangePasswordViewModel() {
 
   self.toastText = ko.observable();
   
+  self.applyBindings = function () {
+    $('#' + self.template).on('pagebeforeshow', null, function (e, data) {
+      self.activate();
+    });
+  };
 
 	/* Methods */
 	

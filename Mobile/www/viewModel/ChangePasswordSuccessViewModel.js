@@ -31,4 +31,4 @@ function ChangePasswordSuccessViewModel() {
   };		       
 }
 
-ChangePasswordSuccessViewModel.prototype = new ViewModel();
+ChangePasswordSuccessViewModel.prototype = new AppCtx.ViewModel();
