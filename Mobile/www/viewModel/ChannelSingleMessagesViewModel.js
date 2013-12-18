@@ -8,7 +8,8 @@ function ChannelSingleMessagesViewModel() {
 	this.hasfooter = true;		
 	
 	this.accountName = ko.observable();	
-	this.title = ko.observable();
+	this.channelIcon = ko.observable();
+	this.title = ko.observable();	
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
 	this.messageId = ko.observable();
@@ -59,11 +60,13 @@ function ChannelSingleMessagesViewModel() {
 			if(localStorage.getItem("overlayCurrentChannel")) {
 				var callbacks = {
 					success: function(data) {
+						that.channelIcon('sky-blue');						
 						that.title(data.name);
 						that.description(data.description);
 					},
 					error: function(data, status, details) {
 						if(status == '404') {
+							that.channelIcon('evernymicon');							
 							that.title('Evernym, Inc.');
 							that.description('System Notifications');
 						}
@@ -104,6 +107,7 @@ function ChannelSingleMessagesViewModel() {
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
+				that.channelIcon('sky-blue');				
 				that.title(channel.name);
 				that.channelid(channel.channelId);	
 				that.description(channel.description);
