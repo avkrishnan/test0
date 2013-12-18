@@ -52,7 +52,6 @@ function EvernymMessageService(api) {
 
     return api.callAPI('GET', '/channel/' + channelid + '/messagealert' + querystring, undefined,
         callbacks, true);
-
   };
 
   this.getChannelMessage = function(channelid, messageid, callbacks) {
