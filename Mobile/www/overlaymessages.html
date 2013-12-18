@@ -40,9 +40,13 @@
 		}	
 	});
 	$('#newMessages').on({
-	popupbeforeposition: function() {
-		var maxHeight = $(window).height() - 102;
-		$('#newMessages').css('max-height', maxHeight + 'px')
-	}
+		popupbeforeposition: function() {
+			var maxHeight = $(window).height() - 98;
+			$('#newMessages').css('max-height', maxHeight + 'px');
+			$('body').css('overflow','hidden');
+		},
+		popupafterclose: function() {
+			$('body').css('overflow','auto');
+		}		
 	})
 </script>

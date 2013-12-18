@@ -114,7 +114,8 @@ function ChannelViewModel() {
 		that.description('');
 		that.less(true);		
 		that.more(false);				
-		that.moreButton(false);				
+		that.moreButton(false);
+		that.lessButton(false);						
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 		//alert(that.channelid());
 		return that.getChannelCommand(that.channelid()).then(gotChannel);
@@ -149,7 +150,6 @@ function ChannelViewModel() {
 		that.followers(followers);
 		that.description(data.description);
 		if(typeof data.longDescription != 'undefined') {
-			//alert(data.longDescription.replace());
 			if(data.longDescription.length > truncatedTextScreen()*12) {
 				var logDesc = ($.trim(data.longDescription).substring(0, truncatedTextScreen()*7).split(' ').slice(0, -1).join(' ') + '...').replace(/\n/g, '<br/>');
 				that.longdescription(logDesc);

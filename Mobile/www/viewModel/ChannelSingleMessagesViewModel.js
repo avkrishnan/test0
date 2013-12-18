@@ -8,7 +8,8 @@ function ChannelSingleMessagesViewModel() {
 	this.hasfooter = true;		
 	
 	this.accountName = ko.observable();	
-	this.title = ko.observable();
+	this.channelIcon = ko.observable();
+	this.title = ko.observable();	
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
 	this.messageId = ko.observable();
@@ -16,6 +17,11 @@ function ChannelSingleMessagesViewModel() {
 	this.messageCreated = ko.observable();
 	this.messageClass = ko.observable();
 	this.messageText = ko.observable();
+	this.moreText = ko.observable();	
+	this.less = ko.observable(true);		
+	this.more = ko.observable(false);	
+	this.moreButton = ko.observable(false);
+	this.lessButton = ko.observable(false);		
 	this.activeClass = ko.observable();	
 	this.iGiButton = ko.observable(false);
 	this.dismissClass = ko.observable();		
@@ -36,6 +42,10 @@ function ChannelSingleMessagesViewModel() {
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
+			that.less(true);				
+			that.more(false);		
+			that.moreButton(false);
+			that.lessButton(false);				
 			that.iGiButton(false);
 			that.dismissButton(true);			
 			that.activeClass('igimsgdetail');
@@ -59,11 +69,13 @@ function ChannelSingleMessagesViewModel() {
 			if(localStorage.getItem("overlayCurrentChannel")) {
 				var callbacks = {
 					success: function(data) {
+						that.channelIcon('sky-blue');						
 						that.title(data.name);
 						that.description(data.description);
 					},
 					error: function(data, status, details) {
 						if(status == '404') {
+							that.channelIcon('evernymicon');							
 							that.title('Evernym, Inc.');
 							that.description('System Notifications');
 						}
@@ -75,7 +87,16 @@ function ChannelSingleMessagesViewModel() {
 				that.ack(channel.ack);							
 				that.messageCreated(channel.created);
 				that.messageClass(channel.escLevelId);
-				that.messageText(channel.fullText);
+				that.moreText(channel.fullText);				
+				if(channel.fullText.length > truncatedTextScreen()*6) {
+				  var fullText = $.trim(channel.fullText).substring(0, truncatedTextScreen()*6).split(' ').slice(0, -1).join(' ') + '...';
+					that.messageText(fullText);	
+					that.less(true);				
+					that.moreButton(true);										
+				}
+				else {
+					that.messageText(channel.fullText);										
+				}					
 				if(channel.iGiClass != '') {
 					if(channel.acknowledged == 'N') {
 						that.iGiButton(true);												
@@ -104,6 +125,7 @@ function ChannelSingleMessagesViewModel() {
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
+				that.channelIcon('sky-blue');				
 				that.title(channel.name);
 				that.channelid(channel.channelId);	
 				that.description(channel.description);
@@ -112,7 +134,16 @@ function ChannelSingleMessagesViewModel() {
 					that.ack(channelMessage.ack);																
 					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
 					that.messageClass(channelMessage.messageClass);
-					that.messageText(channelMessage.messageText);
+					that.moreText(channelMessage.messageText);					
+					if(channelMessage.messageText.length > truncatedTextScreen()*6) {
+						var fullText = $.trim(channelMessage.messageText).substring(0, truncatedTextScreen()*6).split(' ').slice(0, -1).join(' ') + '...';
+						that.messageText(fullText);	
+						that.less(true);				
+						that.moreButton(true);										
+					}
+					else {
+						that.messageText(channelMessage.messageText);										
+					}					
 					that.readMessageUpdateBadge(channelMessage.messageId, channelMessage.read, channelMessage.ackRequested);
 					if(channelMessage.iGiClass != '') {
 						if(channelMessage.ack == 'N') {
@@ -204,6 +235,20 @@ function ChannelSingleMessagesViewModel() {
 			headerViewModel.newMessageClass('');
 		}
 	}
+	
+	this.showMore = function(){
+		that.less(false);		
+		that.more(true);
+		that.moreButton(false);
+		that.lessButton(true);																
+	};
+	
+	this.showLess = function(){
+		that.less(true);		
+		that.more(false);
+		that.moreButton(true);
+		that.lessButton(false);															
+	};	
 	
 	this.iGiAck = function(data) {
 		var callbacks = {

@@ -12,7 +12,8 @@ function ChannelMessagesViewModel() {
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
 	this.channelMessages = ko.observableArray([]);
-	this.toastText = ko.observable();	
+	this.toastText = ko.observable();
+	this.toastClass = ko.observable();		
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -131,7 +132,6 @@ function ChannelMessagesViewModel() {
 			success: function(data) {
 				var screenSizeText = truncatedTextScreen();
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
-					//alert(JSON.stringify(valueMessage));
 					var tempCreated = msToTime(valueMessage.created);
 					//var tempCreated = convertUTCDateToLocalDate(valueMessage.created);
 					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
@@ -175,7 +175,7 @@ function ChannelMessagesViewModel() {
 				showToast();
 			}
 		};
-		//return ES.messageService.getChannelMessages(that.channelid(), undefined, callbacks);
-		return ES.messageService.getChannelMessagesForFollower(that.channelid(), undefined, callbacks);
+		//return ES.messageService.getChannelMessagesForFollower(that.channelid(), undefined, callbacks);
+		return ES.messageService.getChannelMessagesForFollower(that.channelid(), {limit: 10000}, callbacks);
 	}	
 }
