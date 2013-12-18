@@ -24,4 +24,10 @@ function ChannelMenuViewModel() {
 		}
 	}
 	
+	this.menuHide = function() {
+		backNavText.pop();
+		backNavView.pop();
+		goToView('sendMessageView');		
+	}	
+	
 }
