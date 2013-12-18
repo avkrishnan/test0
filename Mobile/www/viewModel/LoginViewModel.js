@@ -175,15 +175,14 @@ function LoginViewModel() {
 					success: function() {
 						localStorage.removeItem('action');
 						that.toastText('Now following '+channel.name);		
-						localStorage.setItem('toastData', that.toastText());
-						goToView('channelMessagesView');					
+						localStorage.setItem('toastData', that.toastText());					
 					},
 					error: function(data, status, details) {
 						localStorage.removeItem('action');					
-						channelListViewModel.toastClass('toast-info');
-						that.toastText('Cannot follow a channel you own');		
+						channelMessagesViewModel.toastClass('toast-info');
+						that.toastText(details.message);		
 						localStorage.setItem('toastData', that.toastText());
-						goToView('channelListView');
+						goToView('channelMessagesView');
 					}
 				};						
 				var channel = JSON.parse(localStorage.getItem('currentChannel'));

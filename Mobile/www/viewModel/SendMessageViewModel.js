@@ -147,6 +147,10 @@ function SendMessageViewModel() {
 				$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
 				return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
 			}
+			else {
+				that.sectionOne(false);
+				that.sectionTwo(true);				
+			}
 		}
 	}
 	
@@ -201,7 +205,7 @@ function SendMessageViewModel() {
 	function successfulList(data){
 		if(data.channel.length == 0) {
 			that.sectionOne(true);								
-		} else {
+		} else {			
 			that.sectionTwo(true);				
 			$.mobile.hidePageLoadingMsg();	
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {

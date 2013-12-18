@@ -44,10 +44,10 @@ function InviteFollowersIIViewModel() {
 				showToast();
 				localStorage.removeItem('toastData');				
 			}
-			if(feedbackType == 'praise') {
+			if(feedbackType == 'feedback') {
 				that.feedbackType('Praise for Evernym Channels');
 				that.feedbackLabel('Your feedback:');
-				that.feedbackContext('praise');									
+				that.feedbackContext('feedback');									
 			}
 			else if(feedbackType == 'suggestions') {
 				that.feedbackType('Suggestions for Evernym Channels');

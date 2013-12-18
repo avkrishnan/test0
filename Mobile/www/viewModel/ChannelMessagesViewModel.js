@@ -12,7 +12,8 @@ function ChannelMessagesViewModel() {
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
 	this.channelMessages = ko.observableArray([]);
-	this.toastText = ko.observable();	
+	this.toastText = ko.observable();
+	this.toastClass = ko.observable();		
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {

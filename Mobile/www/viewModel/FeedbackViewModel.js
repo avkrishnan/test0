@@ -32,7 +32,7 @@ function FeedbackViewModel() {
 	}
 	
 	this.praise = function() {
-		feedbackType = 'praise';
+		feedbackType = 'feedback';
 		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
 	}
 	
