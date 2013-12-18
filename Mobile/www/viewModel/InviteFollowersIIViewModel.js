@@ -79,7 +79,7 @@ function InviteFollowersIIViewModel() {
     if (that.feedback() == '' || typeof that.feedback() == 'undefined') {
 			that.feedbackClass('validationerror');
 			that.error(true);				
-			that.errorFeedback('<span>SORRY:</span> Please give feedback');
+			that.errorFeedback('<span>SORRY:</span> Please enter text above');
     } else {
       $.mobile.showPageLoadingMsg("a", "Sending Feedback");			
 			var feedbackObject = {};
