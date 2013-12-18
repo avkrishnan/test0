@@ -9,9 +9,11 @@
 	this.toastText = ko.observable();		
 	var that = this;
 	this.shown = false;
+	this.noFollow = ko.observable();
 	
 	this.applyBindings = function() {	
 		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
+			that.noFollow(false);
 			if (!that.shown) {
 				localStorage.removeItem("currentChannel");
 				localStorage.removeItem("overlayCurrentChannel");
@@ -67,13 +69,16 @@
 			});
 			that.channels(data.channel);
 		}
+		else {
+			that.noFollow(true);
+		}
 		//alert(JSON.stringify(data));
 	};
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();			  
+		that.toastText(details.message);
+		showToast();
 	};
 	
 	this.listFollowingChannelsCommand = function () {
