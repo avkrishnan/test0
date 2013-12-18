@@ -32,3 +32,4 @@ function ChangePasswordSuccessViewModel() {
 }
 
 ChangePasswordSuccessViewModel.prototype = new AppCtx.ViewModel();
+ChangePasswordSuccessViewModel.prototype.constructor = ChangePasswordSuccessViewModel;

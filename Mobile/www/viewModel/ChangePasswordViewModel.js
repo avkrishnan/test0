@@ -108,3 +108,5 @@ function ChangePasswordViewModel() {
 }
 
 ChangePasswordViewModel.prototype = new AppCtx.ViewModel();
+ChangePasswordViewModel.prototype.constructor = ChangePasswordViewModel;
+
