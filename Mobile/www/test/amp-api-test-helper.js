@@ -50,9 +50,11 @@ function ApiTestHelper() {
     (env === "prod") ? 'https://api.evernym.com/' + apiver + '/rest' :
     'https://api.evernym.com/' + apiver + '/rest';
 
+  EnymAmpSetup(baseUrl);
+  
   t.TestScenario = function() {
     return {
-      ES : ServiceContext(t.genMockLocalStorage(), baseUrl)
+      ES : new EnymAmpSvc(t.genMockLocalStorage(), baseUrl)
     };
   };
 
@@ -71,7 +73,8 @@ function ApiTestHelper() {
   };
 
   function checkFunc(expectedStatus) {
-    return function(data, status) {
+    return function(data, status, a, b, c) {
+      debugger;
       equal(status, expectedStatus, "data: " + JSON.stringify(data));
       return data;
     };
@@ -164,8 +167,9 @@ function ApiTestHelper() {
     return function() {
       scenario.account = account ? account : t.generateAccount();
       scenario.account.accountname = scenario.account.accountname.toLowerCase();
-      $.when(scenario.ES.loginService.accountEnroll(scenario.account)).then(
-          t.CHECK.successNoContent, t.CHECK.shouldNotFail).then(start);
+      $.when(scenario.ES.request('enroll', scenario.account))
+      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(start,start);
     };
   };
 
