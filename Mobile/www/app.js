@@ -21,7 +21,6 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 	  localStorage.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
 
 	}
-					  
 };
 
 
@@ -820,8 +819,9 @@ function dateFormat2(created) {
 }
 
 function convertUTCDateToLocalDate(date) {
-	var newDate = new Date(date).getTime();
-	date = new Date(date);
+	var newDate = new Date(date);
+	//var newDate = new Date(date).getTime();
+	alert(date);
 	//alert(date.getMinutes());
 	//alert(date.getTimezoneOffset());
 	//newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
