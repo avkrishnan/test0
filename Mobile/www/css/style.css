@@ -2396,19 +2396,19 @@ ul.igiresponses li span {
 .messagedetail .iconchannels {
 	border:none;
 	width:37px;
-	background:url("images/sprites.png") no-repeat;
+	background:url("images/all-icons.png") no-repeat;
 }
 .messagedetail .iconchannels.icon-h {
-	background-position:-9px -1010px;
+	background-position:-2px -9px;
 }
 .messagedetail .iconchannels.icon-r{
-	background-position:-9px -932px;
+	background-position:-342px -9px;
 }
 .messagedetail .iconchannels.icon-e {
-	background-position:-9px -632px;
+	background-position:-411px -9px;
 }
 .messagedetail .iconchannels.icon-c {
-	background-position:-9px -748px;
+	background-position:-81px -9px;
 }
 .messagedetail .iconchannels.icon-n, .messagedetail .iconchannels.icon-f {
 	background:none;
