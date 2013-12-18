@@ -1,5 +1,3 @@
-var AppCtx = {};
-
 var ES = {
 	evernymService: new EvernymService()
 };
@@ -859,12 +857,12 @@ function shortFormat(created) {
 /* Hide footer on mobile keypad */
 var initialScreenSize = window.innerHeight;
 window.addEventListener("resize", function() {
- if(window.innerHeight < initialScreenSize){
-   $('.footer').hide();
- } else {
-   $('.footer').show();
- }
-})
+  if(window.innerHeight < initialScreenSize) {
+    $('.footer').hide();
+  } else {
+    $('.footer').show();
+  }
+});
 
 feedbackType = ''; // For setting feedback type
 

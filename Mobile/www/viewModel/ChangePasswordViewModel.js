@@ -1,117 +1,105 @@
 ﻿/*globals ko*/
 /* To do - Pradeep Kumar */
 function ChangePasswordViewModel() {
-  var that = this;
-  this.template = 'changePasswordView';
-  this.viewid = 'V-44';
-  this.viewname = 'Change Password';
-  this.displayname = 'Change Password';
-  this.accountName = ko.observable();	
-		
-	this.currentPassword = ko.observable();	
-	this.newPassword = ko.observable();
-	this.newConfirmPassword = ko.observable();
-	this.currentpasswordClass = ko.observable();
-	this.newpasswordClass = ko.observable();
-	this.confirmpasswordClass = ko.observable();			
-	this.errorMessageCurrent = ko.observable();	
-	this.errorMessageNew = ko.observable();
-	this.errorMessageConfirm = ko.observable();
-	this.toastText = ko.observable();	
-	
+
+  var self = this;
+
+  self.template = 'changePasswordView';
+  self.viewid = 'V-44';
+  self.viewname = 'Change Password';
+  self.displayname = 'Change Password';
+
+  self.inputObs = [ 
+    'currentPassword', 
+    'newPassword', 
+    'newConfirmPassword' ]; 
+  
+  self.errorObs = [ 
+    'currentpasswordClass',
+    'newpasswordClass', 
+    'confirmpasswordClass', 
+    'errorMessageCurrent', 
+    'errorMessageNew',
+    'errorMessageConfirm' ];
+
+  $.each(self.allObs(), function(i,v) {self[v] = ko.observable();});
+
+  self.toastText = ko.observable();
+  
+
 	/* Methods */
-  this.applyBindings = function () {
-    $('#' + that.template).on('pagebeforeshow', null, function (e, data) {
-      that.clearForm();			     
-			that.activate();	
-    });
-  };
 	
-	this.clearForm = function () {
-		that.currentPassword('');		
-		that.newPassword('');
-		that.newConfirmPassword('');
-		that.currentpasswordClass('');
-		that.newpasswordClass('');
-		that.confirmpasswordClass('');		
-		that.errorMessageCurrent('');	
-		that.errorMessageNew('');
-		that.errorMessageConfirm('');
-  };
-	
-  this.activate = function () {
+  self.activate = function () {
+    self.clearForm();
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 			goToView('loginView');  
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
+			addExternalMarkup(self.template); // this is for header/overlay message			
 			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
+				self.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');				
 			}			
 			$('input').keyup(function () {
-				that.currentpasswordClass('');
-				that.newpasswordClass('');
-				that.confirmpasswordClass('');		
-				that.errorMessageCurrent('');	
-				that.errorMessageNew('');
-				that.errorMessageConfirm('');				
+			  self.clearErrorObs();
 			});			
-			that.accountName(localStorage.getItem("accountName"));			
+			self.accountName(localStorage.getItem("accountName"));			
 		}
   };
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'changePasswordView') {
-			that.changePassword();
+			self.changePassword();
 		}
 	});
 	
-	this.menuCommand = function () {
+	self.menuCommand = function () {
 		viewNavigate('Change password', 'changePasswordView', 'channelMenuView');		
   };	
 	
-  this.changePassword = function () {
-		if(that.currentPassword() == '') {
-			that.currentpasswordClass('validationerror');			
-			that.errorMessageCurrent("Please input your current password!");
+  self.changePassword = function () {
+		if(self.currentPassword() == '') {
+			self.currentpasswordClass('validationerror');			
+			self.errorMessageCurrent("Please input your current password!");
 		}		
-		else if(that.newPassword() == '') {
-			that.newpasswordClass('validationerror');			
-			that.errorMessageNew("Please input new password!");
+		else if(self.newPassword() == '') {
+			self.newpasswordClass('validationerror');			
+			self.errorMessageNew("Please input new password!");
 		}
-		else if(that.newConfirmPassword() == '') {
-			that.confirmpasswordClass('validationerror');			
-			that.errorMessageConfirm("Please input new confirm password!");
+		else if(self.newConfirmPassword() == '') {
+			self.confirmpasswordClass('validationerror');			
+			self.errorMessageConfirm("Please input new confirm password!");
 		}
-		else if(that.newPassword() != that.newConfirmPassword()) {
-			that.newpasswordClass('validationerror');				
-			that.confirmpasswordClass('validationerror');			
-			that.errorMessageConfirm("Password's don't match");
+		else if(self.newPassword() != self.newConfirmPassword()) {
+			self.newpasswordClass('validationerror');				
+			self.confirmpasswordClass('validationerror');			
+			self.errorMessageConfirm("Password's don't match");
 		}
 		else {
       $.mobile.showPageLoadingMsg("a", "Sending change password request");			
 			var passwordChangeRequest = {};
-      passwordChangeRequest.currentPassword = that.currentPassword();
-      passwordChangeRequest.newPassword = that.newPassword();				
+      passwordChangeRequest.currentPassword = self.currentPassword();
+      passwordChangeRequest.newPassword = self.newPassword();				
 			return ES.loginService.changePassword(passwordChangeRequest, { success: successfulChange, error: errorAPI });
 		}
 	};	
 
   function successfulChange(args) {
     $.mobile.hidePageLoadingMsg();
-		localStorage.setItem('changePassword', that.newPassword());		
+		localStorage.setItem('changePassword', self.newPassword());		
 		goToView('changePasswordSuccessView');
   };
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.currentpasswordClass('validationerror');
-		that.newpasswordClass('validationerror');
-		that.confirmpasswordClass('validationerror');		
-		that.errorMessageConfirm(details.message);		
+		self.currentpasswordClass('validationerror');
+		self.newpasswordClass('validationerror');
+		self.confirmpasswordClass('validationerror');		
+		self.errorMessageConfirm(details.message);		
   };		
 	
 }
+
+ChangePasswordViewModel.prototype = new AppCtx.ViewModel();
