@@ -24,8 +24,10 @@
 	this.updateBadges = function() {
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 			setTimeout(function() {
-				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
-				overlayViewModel.showNewMessagesOverlay();
+				if(typeof ES.systemService.MnsCacheData.data != 'undefined') {
+					showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
+					overlayViewModel.showNewMessagesOverlay();
+				}
 			}, 1000);
 		}
 		var callbacks = {
@@ -162,7 +164,8 @@ function OverlayViewModel() {
 		overlayViewModel.newMessagesDisplayList.removeAll();
 		var screenSizeText = truncatedText();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
-			valueNotification.created = shortFormat(valueNotification.created);
+			//valueNotification.created = shortFormat(valueNotification.created);
+			valueNotification.created = dateFormat2(valueNotification.created);
 			valueNotification.fullText = jQuery.trim(valueNotification.text);
 			if(valueNotification.text.length > screenSizeText) {
 				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";

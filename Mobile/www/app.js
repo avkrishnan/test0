@@ -780,19 +780,26 @@ function msToTime(created){
 	var seconds = Math.ceil(divisor_for_seconds);
 	if(days == 1) {
 		return days+' day ago';
-	}	else if(days > 1) {
+	}	
+	else if(days > 1) {
 		return days+' days ago';
-	} else if(hours == 1) {
+	} 
+	else if(hours == 1) {
 		return hours+' hr ago';		
-	} else if(hours > 1) {
+	} 
+	else if(hours > 1) {
 		return hours+' hrs ago';
-	} else if(minutes == 1) {
+	} 
+	else if(minutes == 1) {
 		return minutes+' min ago';
-	} else if(minutes > 1) {
+	} 
+	else if(minutes > 1) {
 		return minutes+' mins ago';		
-	} else if(seconds > 1) {
+	} 
+	else if(seconds > 1) {
 		return  seconds+' secs ago';
-	} else {
+	} 
+	else {
 		return  'just now';
 	}
 }
@@ -820,13 +827,8 @@ function dateFormat2(created) {
 
 function convertUTCDateToLocalDate(date) {
 	var newDate = new Date(date);
-	//var newDate = new Date(date).getTime();
-	alert(date);
-	//alert(date.getMinutes());
-	//alert(date.getTimezoneOffset());
-	//newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-	//alert(newDate);
-	return newDate;   
+	//newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset());
+	return newDate.toLocaleString();
 }
 
 /* Date Format for date like Dec 13, 2013, 11:10 AM */
@@ -849,7 +851,7 @@ function shortFormat(created) {
 	var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
 	return ((monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
 	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " ";// + (date.getHours()>12?'PM':'AM');
+	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " "; + (date.getHours()>12?'PM':'AM');
 }
 
 /* Hide footer on mobile keypad */
