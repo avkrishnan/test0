@@ -12,7 +12,8 @@ function ChannelSettingsViewModel() {
 	this.channelId = ko.observable();	
 	this.channelName = ko.observable();
 	this.shortDescription = ko.observable();
-	this.toastText = ko.observable();		
+	this.toastText = ko.observable();
+	this.toastClass = ko.observable();		
 	
 	/* Methods */	
 	this.applyBindings = function() {
@@ -42,6 +43,31 @@ function ChannelSettingsViewModel() {
 			that.shortDescription(channelObject.channelDescription);
 			localStorage.removeItem('channelOwner');										
 		}
-	}	
+	}
+	
+	this.changeChannelIcon = function() {
+		//viewNavigate('Settings', 'channelSettingsView', 'channelChangeIconView');
+		that.toastClass('toast-info');
+		that.toastText('Feature coming soon!');
+		showToast();		
+	}
+	
+	this.makeChannelPublic = function() {
+		that.toastClass('toast-info');		
+		that.toastText('Feature coming soon!');
+		showToast();		
+	}
+	
+	this.hideChannelHistory = function() {
+		that.toastClass('toast-info');		
+		that.toastText('Feature coming soon!');
+		showToast();		
+	}
+	
+	this.approvalRequired = function() {
+		that.toastClass('toast-info');		
+		that.toastText('Feature coming soon!');
+		showToast();		
+	}			
 	
 }

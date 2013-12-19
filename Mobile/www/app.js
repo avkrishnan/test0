@@ -891,12 +891,15 @@ window.addEventListener("resize", function() {
    $('.footer').show();
  }
 })*/
+
 document.addEventListener("showkeyboard", function() {
-	$('.footer').hide();
+		alert('show');	
+    $('.footer').hide();
 }, false);
 
 document.addEventListener("hidekeyboard", function() {
-	$('.footer').show();
+		alert('hide');	
+    $('.footer').show();
 }, false);
 
 feedbackType = ''; // For setting feedback type
