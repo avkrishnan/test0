@@ -946,7 +946,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelimg {
 	float:left;
 	margin:0 10px 0 0;
-	padding:19px;
+	padding:19.5px;
 	border-radius:50px;
 }
 .channel1 {
@@ -980,8 +980,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:url("images/channelimg5.png") no-repeat 0 0;
 }
 .evernymicon {
-	background:url("images/evernymicon.png") no-repeat 0 0;
-	padding:20px;
+	background:#fff url("images/evernymicon.png") no-repeat 0 0;
+	/*padding:20px;*/
+	border:2px solid #8dc63f;
 }
 .borderblue {
 	border:2px solid #2e3192;
@@ -2422,7 +2423,7 @@ ul.igiresponses li span {
 	padding:0 10px 0 0;
 }
 .messagedetail-info span {
-	font-size:14px;
+	font-size:13px;
 	color:#a0a0a0;
 }
 .messagedetail-info p {
