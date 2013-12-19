@@ -854,7 +854,7 @@ function shortFormat(created) {
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " "; + (date.getHours()>12?'PM':'AM');
 }
 
-/* Hide footer on mobile keypad */
+/* Hide footer on mobile keypad 
 var initialScreenSize = window.innerHeight;
 window.addEventListener("resize", function() {
  if(window.innerHeight < initialScreenSize){
@@ -862,7 +862,14 @@ window.addEventListener("resize", function() {
  } else {
    $('.footer').show();
  }
-})
+})*/
+document.addEventListener("showkeyboard", function() {
+	$('.footer').hide();
+}, false);
+
+document.addEventListener("hidekeyboard", function() {
+	$('.footer').show();
+}, false);
 
 feedbackType = ''; // For setting feedback type
 
