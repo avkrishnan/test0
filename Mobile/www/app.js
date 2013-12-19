@@ -846,10 +846,10 @@ function formatDate(date, format) {
 	switch(format) {
 		case 'short' :
 			if(day == todaysDay) {
-				var output 	= ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ' : ' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'A' : 'P');
+				var output 	= ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + '' + (hour < 12? 'A' : 'P');
 			}
 			else {
-				var output 	= shortMonths[month] + ' ' + day + ', ' + ((hour == 0|| hour == 12 )?12:hour%12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'A' : 'P');					
+				var output 	= shortMonths[month] + ' ' + day + ', ' + ((hour == 0|| hour == 12 )?12:hour%12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + '' + (hour < 12? 'A' : 'P');					
 			}
 			break;
 		case 'long':
