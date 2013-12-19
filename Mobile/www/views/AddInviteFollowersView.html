@@ -20,7 +20,7 @@
       <a href="#" class="low-messages invitation" data-bind="click: inviteFollowers">Sending them an invitation (email)</a>
       <a href="#" class="low-messages addMore addinformation" data-bind="click: addFollowers">Adding their information manually</a>
   </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>  
+  <div class="toast-notification" data-bind="html: toastText"></div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Add/Invite', 'addInviteFollowersView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Add/Invite', 'addInviteFollowersView', 'sendMessageView');"></a>

@@ -864,6 +864,16 @@ window.addEventListener("resize", function() {
  }
 })*/
 
+document.addEventListener("showkeyboard", function() {
+		alert('show');	
+    $('.footer').hide();
+}, false);
+
+document.addEventListener("hidekeyboard", function() {
+		alert('hide');	
+    $('.footer').show();
+}, false);
+
 feedbackType = ''; // For setting feedback type
 
 /* pradeep kumar end */
