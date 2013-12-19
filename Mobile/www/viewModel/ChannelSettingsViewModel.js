@@ -42,6 +42,27 @@ function ChannelSettingsViewModel() {
 			that.shortDescription(channelObject.channelDescription);
 			localStorage.removeItem('channelOwner');										
 		}
-	}	
+	}
+	
+	this.changeChannelIcon = function() {
+		//viewNavigate('Settings', 'channelSettingsView', 'channelChangeIconView');		
+		that.toastText('Feature coming soon!');
+		showToast();		
+	}
+	
+	this.makeChannelPublic = function() {
+		that.toastText('Feature coming soon!');
+		showToast();		
+	}
+	
+	this.hideChannelHistory = function() {
+		that.toastText('Feature coming soon!');
+		showToast();		
+	}
+	
+	this.approvalRequired = function() {
+		that.toastText('Feature coming soon!');
+		showToast();		
+	}			
 	
 }

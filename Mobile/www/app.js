@@ -863,13 +863,6 @@ window.addEventListener("resize", function() {
    $('.footer').show();
  }
 })*/
-document.addEventListener("showkeyboard", function() {
-	$('.footer').hide();
-}, false);
-
-document.addEventListener("hidekeyboard", function() {
-	$('.footer').show();
-}, false);
 
 feedbackType = ''; // For setting feedback type
 
