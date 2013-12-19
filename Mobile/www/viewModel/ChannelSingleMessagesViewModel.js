@@ -84,8 +84,9 @@ function ChannelSingleMessagesViewModel() {
 				var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
 				that.channelid(channel.channelId);
 				that.messageId(channel.msgId);
-				that.ack(channel.ack);							
-				that.messageCreated(channel.created);
+				that.ack(channel.ack);
+				//alert(channel.createdLong);					
+				that.messageCreated(channel.createdLong);
 				that.messageClass(channel.escLevelId);
 				that.moreText(channel.fullText);				
 				if(channel.fullText.length > truncatedTextScreen()*6) {
@@ -132,7 +133,8 @@ function ChannelSingleMessagesViewModel() {
 				if(channelMessage) {
 					that.messageId(channelMessage.messageId);
 					that.ack(channelMessage.ack);																
-					that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
+					//that.messageCreated(dateFormat2(channelMessage.messageCreatedOriginal));
+					that.messageCreated(formatDate(channelMessage.messageCreatedOriginal, 'long'));
 					that.messageClass(channelMessage.messageClass);
 					that.moreText(channelMessage.messageText);					
 					if(channelMessage.messageText.length > truncatedTextScreen()*6) {
