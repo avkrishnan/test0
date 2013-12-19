@@ -175,7 +175,7 @@ function ChannelMessagesViewModel() {
 				showToast();
 			}
 		};
-		return ES.messageService.getChannelMessagesForFollower(that.channelid(), undefined, callbacks);
-		//return ES.messageService.getChannelMessagesForFollower(that.channelid(), {limit: 10000}, callbacks);
+		//return ES.messageService.getChannelMessagesForFollower(that.channelid(), undefined, callbacks);
+		return ES.messageService.getChannelMessagesForFollower(that.channelid(), {limit: 10000}, callbacks);
 	}	
 }
