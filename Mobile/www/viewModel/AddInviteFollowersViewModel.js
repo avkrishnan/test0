@@ -51,12 +51,12 @@ function AddInviteFollowersViewModel() {
 	}
 	
 	this.inviteFollowers = function(){
-		that.toastText('Feature coming soon!');
+		that.toastText('<div class="toast-text toast-info">Feature coming soon!</div>');
 		showToast();		
 	};
 	
 	this.addFollowers = function(){
-		that.toastText('Feature coming soon!');
+		that.toastText('<div class="toast-text toast-info">Feature coming soon!</div>');
 		showToast();
 	};	
 	

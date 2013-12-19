@@ -765,10 +765,10 @@ function _getDate(functionName) {
 	return _date[functionName]();	
 }
 
-function msToTime(created){
-	var created = new Date(created);
-	var created = created.getTime(); 
-	var ms = new Date().getTime() - created;	
+function msToTime(date){
+	var newDate = new Date(date).getTime();
+	//var created = newDate.getTime(); 
+	var ms = new Date().getTime() - newDate;	
 	var secs = Math.floor(ms / 1000);
 	var msleft = ms % 1000;
 	var totalHours = Math.floor(secs / (60 * 60));
@@ -779,25 +779,25 @@ function msToTime(created){
 	var divisor_for_seconds = divisor_for_minutes % 60;
 	var seconds = Math.ceil(divisor_for_seconds);
 	if(days == 1) {
-		return days+' day ago';
+		return ' yesterday';
 	}	
 	else if(days > 1) {
-		return days+' days ago';
+		return formatDate(date, 'short');
 	} 
 	else if(hours == 1) {
-		return hours+' hr ago';		
+		return hours + ' hr ago';		
 	} 
 	else if(hours > 1) {
-		return hours+' hrs ago';
+		return hours + ' hrs ago';
 	} 
 	else if(minutes == 1) {
-		return minutes+' min ago';
+		return minutes + ' min ago';
 	} 
 	else if(minutes > 1) {
-		return minutes+' mins ago';		
+		return minutes + ' mins ago';		
 	} 
 	else if(seconds > 1) {
-		return  seconds+' secs ago';
+		return  seconds + ' secs ago';
 	} 
 	else {
 		return  'just now';
@@ -825,10 +825,38 @@ function dateFormat2(created) {
 	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
 }
 
-function convertUTCDateToLocalDate(date) {
+/* This function converts passed date into a desired format*/
+function formatDate(date, format) {
+	if(typeof(date)==='undefined') {
+		date = new Date();
+	}
+	if(typeof(format)==='undefined') {
+		format = 'short';
+	}
 	var newDate = new Date(date);
-	//newDate.setMinutes(newDate.getMinutes() - newDate.getTimezoneOffset());
-	return newDate.toLocaleString();
+	var shortMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'];
+	var longMonths  = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'];
+	var month 	= newDate.getMonth();
+	var day			= newDate.getDate();
+	var hour 		= newDate.getHours();
+	var minute 	= newDate.getMinutes();
+	var second 	= newDate.getSeconds();
+	var todaysDay = new Date().getDate();
+	//var output 	= months[month] + ' ' + day + ', ' + newDate.getFullYear() +  ', ' +((hour == 0|| hour == 12 )?12:hour%12) + ':' +((''+minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'am' : 'pm');
+	switch(format) {
+		case 'short' :
+			if(day == todaysDay) {
+				var output 	= ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + '' + (hour < 12? 'A' : 'P');
+			}
+			else {
+				var output 	= shortMonths[month] + ' ' + day + ', ' + ((hour == 0|| hour == 12 )?12:hour%12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + '' + (hour < 12? 'A' : 'P');					
+			}
+			break;
+		case 'long':
+			var output 	= newDate.toLocaleString();
+			break;	
+	}
+	return output;
 }
 
 /* Date Format for date like Dec 13, 2013, 11:10 AM */
@@ -855,14 +883,17 @@ function shortFormat(created) {
 }
 
 /* Hide footer on mobile keypad */
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 var initialScreenSize = window.innerHeight;
 window.addEventListener("resize", function() {
-  if(window.innerHeight < initialScreenSize) {
-    $('.footer').hide();
-  } else {
-    $('.footer').show();
+  if(window.innerHeight < initialScreenSize){
+   $('.footer').hide();
+  }
+  else{
+   $('.footer').show();
   }
 });
+}
 
 feedbackType = ''; // For setting feedback type
 
@@ -870,34 +901,51 @@ feedbackType = ''; // For setting feedback type
 
 /* Time conversion into time ago*/
 function time2TimeAgo(ts) {
-	// This function computes the delta between the
-	// provided timestamp and the current time, then test
-	// the delta for predefined ranges.
-	var d=new Date();  // Gets the current time
-	var nowTs = Math.floor(d.getTime()/1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
-	var seconds = nowTs-ts;
-	//alert(nowTs +" - "+ ts + "-" + seconds);
-	// more that two days
-	if (seconds > 2*24*3600) {
-		 return "a few days ago";
+	endDate = new Date();
+	startDate = new Date(ts);
+	var diff = startDate - endDate;
+	var millisecondsPerDay = 86400 * 1000; // Day in milliseconds
+	startDate.setHours(0,0,0,1);  // Start just after midnight
+	endDate.setHours(23,59,59,999);  // End just before midnight
+	var diff = endDate - startDate;  // Milliseconds between datetime objects    
+	var days = Math.ceil(diff / millisecondsPerDay);
+	days = days-1;
+	if(days == 1) {
+		return ' yesterday';
+	}	
+	else if(days > 1) {
+		return formatDate(ts, 'short');
 	}
-	// a day
-	else if (seconds > 24*3600) {
-		 return "yesterday";
+	else if(days < 1) {
+		var newDate = new Date(ts).getTime();
+		var ms = new Date().getTime() - newDate;				
+		var secs = Math.floor(ms / 1000);
+		var msleft = ms % 1000;
+		var totalHours = Math.floor(secs / (60 * 60));
+		var hours = totalHours % 24;
+		var divisor_for_minutes = secs % (60 * 60);
+		var minutes = Math.floor(divisor_for_minutes / 60);
+		var divisor_for_seconds = divisor_for_minutes % 60;
+		var seconds = Math.ceil(divisor_for_seconds);
+		if(hours == 1) {
+			return hours + ' hr ago';		
+		} 
+		else if(hours > 1) {
+			return hours + ' hrs ago';
+		} 
+		else if(minutes == 1) {
+			return minutes + ' min ago';
+		} 
+		else if(minutes > 1) {
+			return minutes + ' mins ago';		
+		} 
+		else if(seconds > 1) {
+			return  seconds + ' secs ago';
+		}
+		else {
+			return  'just now';
+		}						
 	}
-	
-	else if (seconds > 3600) {
-		 return "a few hours ago";
-	}
-	else if (seconds > 1800) {
-		 return "Half an hour ago";
-	}
-	else if (seconds > 60) {
-		 return Math.floor(seconds/60) + " minutes ago";
-	}
-	else {
-		return  'a few seconds ago';
-	}		
 }
 
 /* External markup for Header/Overlay etc*/

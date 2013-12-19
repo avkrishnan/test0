@@ -164,8 +164,10 @@ function OverlayViewModel() {
 		overlayViewModel.newMessagesDisplayList.removeAll();
 		var screenSizeText = truncatedText();
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
-			//valueNotification.created = shortFormat(valueNotification.created);
-			valueNotification.created = dateFormat2(valueNotification.created);
+
+			valueNotification.createdLong = formatDate(valueNotification.created, 'long');
+			valueNotification.created = formatDate(valueNotification.created, 'short');
+
 			valueNotification.fullText = jQuery.trim(valueNotification.text);
 			if(valueNotification.text.length > screenSizeText) {
 				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";

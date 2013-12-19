@@ -48,7 +48,7 @@ function SingleMessageFullTextViewModel() {
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
 			that.channelName(channelObject.channelName);
-			var fullDate = dateFormat1(messageObject.created);					
+			var fullDate = formatDate(messageObject.created,'short');					
 			that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
 			that.sensitivity(messageObject.sensitivity);			
 			that.sensitivityText(messageObject.sensitivityText);
