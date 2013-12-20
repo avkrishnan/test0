@@ -34,11 +34,6 @@ function EscalateTimeSettingsViewModel() {
 		} 
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}
 			that.toastClass('');		
 			that.accountName(localStorage.getItem('accountName'));			
 			if(localStorage.getItem('escDuration')) {

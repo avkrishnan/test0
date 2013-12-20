@@ -175,7 +175,8 @@ function LoginViewModel() {
 					success: function() {
 						localStorage.removeItem('action');
 						that.toastText('Now following '+channel.name);		
-						localStorage.setItem('toastData', that.toastText());					
+						localStorage.setItem('toastData', that.toastText());
+						goToView('channelMessagesView');					
 					},
 					error: function(data, status, details) {
 						localStorage.removeItem('action');					
