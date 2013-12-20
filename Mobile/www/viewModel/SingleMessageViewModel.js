@@ -52,8 +52,8 @@ function SingleMessageViewModel() {
 			}
 			that.toastClass('');					
 			that.accountName(localStorage.getItem('accountName'));											
-			that.channelName(channelObject.channelName);					
-			that.time('Sent '+ dateFormat1(messageObject.created) +' ('+messageObject.time+'):');	
+			that.channelName(channelObject.channelName);		
+			that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');	
 			that.singleMessage(messageObject.broadcastFull);
 			that.broadcastType(messageObject.type);
 			that.iGi(messageObject.iGi);
