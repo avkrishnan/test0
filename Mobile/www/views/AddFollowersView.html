@@ -1,14 +1,6 @@
 <!--To do - Pradeep Kumar-->
 <div id="addFollowersView" data-role="page">
-  <header>
-    <a href="#" class="back" onclick="goToView('followersListView');"><em></em>Add/Invite</a>
-    <a class="menu" href="#" data-bind="click: menuCommand"></a>
-    <div class="linkicon">    
-      <a class="smsicon smsiconwhite" href="#"><span class="received-responses-msg">2</span></a>
-      <a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
-      <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a> 
-    </div>
-  </header>  
+  <header class="logged-in"></header> 
   <div class="page-content channelsettings">
     <div class="channelcontent broadecast">
       <span class="channelimg channel1 borderred"></span>
@@ -28,8 +20,7 @@
       </div>
       <div class="login"><div class="loginbtn"><a href="#" data-bind="click: addFollowersCommand">ADD</a></div></div>
     </section>
-  </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>  
+  </div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Settings', 'escalationPlansView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Settings', 'escalationPlansView', 'sendMessageView');"></a>

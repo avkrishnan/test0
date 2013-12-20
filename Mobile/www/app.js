@@ -756,7 +756,9 @@ function popBackNav() {
 function showToast() {
 	$('.toast-notification').delay(500).slideDown(500, function() {
 		$('.toast-notification').show();
-	}).delay(4000).slideUp(1000);
+	}).delay(4000).slideUp(1000);//, function() {
+		//$('#'+$.mobile.activePage.attr('id')+' .toast-notification .toast-text').remove();
+	//});
 }
 
 /* Get current date/time values */

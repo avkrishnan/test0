@@ -30,22 +30,6 @@ function FirstChannelViewModel() {
 			that.accountName(localStorage.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
-	};
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
-	
-	this.menuCommand = function () {
-		viewNavigate('FollowFirstChannel', 'firstChannelView', 'channelMenuView');
-  };
-	
-	this.userSettings = function () {
-		viewNavigate('FollowFirstChannel', 'firstChannelView', 'escalationPlansView');
-  };	
-
-	this.composeCommand = function () {
-		viewNavigate('FollowFirstChannel', 'firstChannelView', 'sendMessageView');
-  };	
+	};	
 	
 }

@@ -34,11 +34,6 @@ function WhoGotItViewModel() {
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.recipients.removeAll();						
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}
 			localStorage.removeItem('currentRecipientData');						
 			that.accountName(localStorage.getItem('accountName'));											
 			that.channelId(channelObject.channelId);			

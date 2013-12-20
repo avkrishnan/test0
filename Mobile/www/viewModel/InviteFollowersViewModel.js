@@ -18,8 +18,7 @@ function InviteFollowersViewModel() {
 	this.text = ko.observable();
 	this.textId = ko.observable('message');								
 	this.error = ko.observable(false);	
-	this.errorText = ko.observable();
-	this.toastText = ko.observable();			
+	this.errorText = ko.observable();			
 		
 	/* Methods */
 	this.applyBindings = function() {
@@ -46,12 +45,7 @@ function InviteFollowersViewModel() {
 			goToView('loginView');
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
-		} else {
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+		} else {		
 			that.accountName(localStorage.getItem('accountName'));	
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
 			that.channelName(channelObject.channelName);
@@ -72,11 +66,7 @@ function InviteFollowersViewModel() {
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'inviteFollowersView') {
 			that.sendInviteCommand();
 		}
-	});
-	
-	this.menuCommand = function () {
-		viewNavigate('Add/Invite', 'inviteFollowersView', 'channelMenuView');		
-  };	
+	});	
 	
 	this.sendInviteCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
@@ -91,14 +81,6 @@ function InviteFollowersViewModel() {
     } else {
 			showMessage('Testing');			
     }
-  };
-	
-	this.userSettings = function () {
-		viewNavigate('Add/Invite', 'inviteFollowersView', 'escalationPlansView');
-  };	
-	
-	this.composeCommand = function () {
-		viewNavigate('Add/Invite', 'inviteFollowersView', 'sendMessageView');
   };	
 	
 }
