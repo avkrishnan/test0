@@ -739,6 +739,7 @@ function viewNavigate(backText, backView, targetView) {
 		backNavView.push(backView);
 		localStorage.setItem('backNavView', JSON.stringify(backNavView));
 	}
+	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');	
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
 }		
 
@@ -749,6 +750,7 @@ function popBackNav() {
 	var targetView = goToView(backNavView.pop());
 	localStorage.removeItem('backNavView');		
 	localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});			
 }
 
