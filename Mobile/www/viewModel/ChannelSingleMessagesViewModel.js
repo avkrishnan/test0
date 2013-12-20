@@ -41,8 +41,9 @@ function ChannelSingleMessagesViewModel() {
 		} 
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message
-			that.setting(false);
 			that.accountName(localStorage.getItem("accountName"));
+			that.channelIcon('');
+			that.setting(false);			
 			that.less(true);				
 			that.more(false);		
 			that.moreButton(false);
