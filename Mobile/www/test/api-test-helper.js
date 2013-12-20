@@ -164,8 +164,9 @@ function ApiTestHelper() {
     return function() {
       scenario.account = account ? account : t.generateAccount();
       scenario.account.accountname = scenario.account.accountname.toLowerCase();
-      $.when(scenario.ES.loginService.accountEnroll(scenario.account)).then(
-          t.CHECK.successNoContent, t.CHECK.shouldNotFail).then(start);
+      $.when(scenario.ES.loginService.accountEnroll(scenario.account))
+      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(start,start);
     };
   };
 
