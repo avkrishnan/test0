@@ -46,7 +46,8 @@ function EscalateTimeSettingsViewModel() {
 				that.hour(time[0]);			
 				that.minute(time[1]);			
 				that.meridiem(day[2]);
-				that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());														
+				//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+				that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 			} else {
 				that.month(monthNames[_getDate('getMonth')]);			
 				that.day(_getDate('getDate'));
@@ -59,7 +60,8 @@ function EscalateTimeSettingsViewModel() {
 				that.minute(mins);
 				var meridiem = _getDate('getHours')>11?'PM':'AM';			
 				that.meridiem(meridiem);
-				that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());											
+				//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+				that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 			}
 		}
 	}
@@ -121,7 +123,8 @@ function EscalateTimeSettingsViewModel() {
 				that.meridiem('PM');		
 			}			
 		}
-		that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());									
+		//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+		that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 	};	
 	
 	this.setDown = function () {
@@ -165,7 +168,8 @@ function EscalateTimeSettingsViewModel() {
 				that.meridiem('PM');		
 			}			
 		}
-		that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());		
+		//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+		that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 	};					
 	
 	this.saveCommand = function () {
