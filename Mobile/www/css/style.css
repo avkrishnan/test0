@@ -555,80 +555,75 @@ input[type="checkbox"]:checked + label span {
 }
 /*	New User	*/
 .page-content.tutorials {
-	padding:15px 0 0 0;
-}
-.new-user {
-	text-align:center;
+	padding:0 0 0 0;
 	position:fixed;
 	width:100%;
 	height:100%;
-	box-shadow:0 3px 56px #9e8342 inset;
+	margin:42px 0px 0px 0px;
+	background:#fae49c;
+}
+.new-user {
+	position:fixed;
+	width:100%;
+	height:100%;
+	box-shadow:0 0 20px #9e8342 inset;
 }
 .tutorial-1 {
-	background:#fae49c url(images/v-51-320.png) no-repeat center center;
+	background:url(images/v-51-320.png) no-repeat top center;
 }
 .tutorial-2 {
-	background:#fae49c url(images/v-52-320.png) no-repeat center 22px;
+	background:#fae49c url(images/v-52-320.png) no-repeat center top;
 }
 .tutorial-3 {
-	background:#fae49c url(images/v-53-320.png) no-repeat center 33px;
+	background:#fae49c url(images/v-53-320.png) no-repeat center 0px;
 }
 .tutorial-4 {
-	background:#fae49c url(images/v-54-320.png) no-repeat center 26px;
+	background:#fae49c url(images/v-54-320.png) no-repeat center 0px;
 }
 .tutorial-5 {
-	background:#fae49c url(images/v-55-320.png) no-repeat center 30px;
-	box-shadow:0 3px 56px #9E8342 inset;
+	background:#fae49c url(images/v-55-320.png) no-repeat center 3px;
 }
 .msg-content {
-	padding:10px 0;
-	position:fixed;
-	top:43%;
-	z-index:1;
-	background:#000;
+	background:#000000;
+	display:table;
 	opacity:0.8;
+	padding:10px 0 10px 10px;
+	position:fixed;
 	width:100%;
+	z-index:1;
+	top:50%;
+	height:70px;
+	margin-top:-35px;
+}
+.msg-content.GetStart {
+	display:block;
 	text-align:center;
-	min-height:70px;
 }
-.resolution-2 {
-	top:33%;
+.msg-content div {
+	display:table-cell;
+	padding:0 10px 0 0;
+	vertical-align:middle;
+	font-size:16px;
+	color:#fff;
+	text-align:left;
 }
-.msg-content h1 {
+.msg-content strong{
 	font-size:18px;
-	margin:10px 15px 0 15px;
+	margin:5px 0 0 0;
 	color:#8DC63F;
 	display:block;
 	clear:both;
-	text-align:left;
-}
-.msg-content p {
-	padding:0 10px 8px 10px;
-	font-size:14px;
-	color:#fff;
-	float:left;
-	width:82%;
-	text-align:left;
-}
-.resolution-5 p {
-	width:auto;
+	font-weight:normal;
 }
 .msg-content span {
-	background:url(images/new-user.png) no-repeat center center;
+	font-size:16px;
 	color:#fff;
-	float:left;
-	cursor:pointer;
-	height:70px;
-	top:50%;
-	width:20px;
-}
-span.down-arrow {
-	clear:both;
 	display:block;
-	float:none;
-	margin-right:30px;
-	padding:16px 10px;
-	background:url(images/new-user.png) no-repeat right top;
+}
+.msg-content em{
+	background:url(images/new-user.png) no-repeat left center;
+	display: table-cell;
+	width: 45px;
 }
 .tutorial {
 	background:#8dc63f;
@@ -653,13 +648,6 @@ span.down-arrow {
 .tutorial ul li.active {
 	background:url("images/sprites-login.png") no-repeat -22px -139px;
 }
-.GetStart {
-	position:fixed;
-	text-align:center;
-	top:59%;
-	width:100%;
-	z-index:9999;
-}
 .GetStart a {
 	background:#8DC63F;
 	border-radius:4px;
@@ -668,6 +656,7 @@ span.down-arrow {
 	font-size:20px;
 	font-weight:normal;
 	padding:4px 15px;
+	margin:-8px 0 0 15px;
 }
 .tutorialbottombar {
 	background:#8DC63F;
@@ -982,7 +971,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .evernymicon {
 	background:#fff url("images/evernymicon.png") no-repeat 0 0;
-	/*padding:20px;*/
 	border:2px solid #8dc63f;
 }
 .borderblue {
@@ -3260,8 +3248,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.bottombar {
 		padding:12px 0;
 	}
-	.GetStart {
-		top:55%;
+	.GetStart a {
+		margin-top:15px;
 	}
 	.channelicons ul {
 		width:84%;
@@ -3337,12 +3325,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.i-icon {
 		width:52%;
 	}
-	.resolution {
-		top:33%;
-	}
-	.resolution-2 {
-		top:25%;
-	}
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3356,12 +3338,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:91%;
-	}
-	.GetStart {
-		top:54.5%;
-	}
-	.msg-content p, .msg-content h1 {
-		width:90%;
 	}
 	.tutorial h1 {
 		font-size:22px;
@@ -3463,7 +3439,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		background:#fae49c url(images/v-53-all.png) no-repeat center center;
 	}
 	.tutorial-4 {
-		background:#fae49c url(images/v-54-all.png) no-repeat center center;
+		background:#fae49c url(images/v-54-all.png) no-repeat center 30px;
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-all.png) no-repeat center center;
@@ -3471,64 +3447,26 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.i-icon {
 		width:80%;
 	}
-	.resolution {
-		top:48%;
-	}
-	.resolution-2 {
-		top:46%;
-	}
-	.resolution-3 {
-		top:50%;
-	}
-	.resolution-4 {
-		top:45%;
-	}
-	.resolution-5 {
-		top:47%;
-	}
 }
 @media screen and (min-height: 600px) and (max-height:768px) {
 	.tutorial-1 {
-		background:#fae49c url(images/v-51-604.png) no-repeat center center;
-	}
-	.resolution {
-		top:43%;
+		background:#fae49c url(images/v-51-600.png) no-repeat center 16px;
 	}
 	.tutorial-2 {
-		background:#fae49c url(images/v-52-600.png) no-repeat center center;
-	}
-	.resolution-2 {
-		top:46%;
+		background:#fae49c url(images/v-52-600.png) no-repeat center 5px;
 	}
 	.tutorial-3 {
-		background:#fae49c url(images/v-53-600.png) no-repeat center center;
-	}
-	.resolution-3 {
-		top:46%;
+		background:#fae49c url(images/v-53-600.png) no-repeat center 5px;
 	}
 	.tutorial-4 {
-		background:#fae49c url(images/v-54-600.png) no-repeat center center;
-	}
-	.resolution-4 {
-		top:39%;
+		background:#fae49c url(images/v-54-600.png) no-repeat center 15px;
 	}
 	.tutorial-5 {
-		background:#fae49c url(images/v-55-600.png) no-repeat center center;
-	}
-	.resolution-5 {
-		top:34%;
-	}
-	.GetStart {
-		top:46%;
+		background:#fae49c url(images/v-55-600.png) no-repeat center 0px;
 	}
 }
+
 @media only screen and (min-width:800px) {
-	.msg-content p, .msg-content h1 {
-		width:90%;
-	}
-	.GetStart {
-		top:53%;
-	}
 	.slidemenu {
 		min-height:1280px;
 	}
@@ -3557,16 +3495,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.datetime-setting.date-minutesetting {
 		margin-right:49px;
 	}
-	.resolution {
-		top:49%;
-	}
 }
 @media only screen and (min-width:980px) {
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:95%;
-	}
-	.msg-content p, .msg-content h1 {
-		width:92%;
 	}
 	.channelicons ul {
 		width:94.5%;
@@ -3610,19 +3542,27 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		margin:0 42.4%;
 	}
 }
+@media only screen and (min-width:950px) and (max-height:768px){
+	.tutorial-1 {
+		background:#fae49c url(images/v-51-new.png) no-repeat center 8px;
+	}
+	.tutorial-2 {v-53-new
+		background:#fae49c url(images/v-52-new.png) no-repeat center 8px;
+	}
+	.tutorial-3 {
+		background:#fae49c url(images/v-53-new.png) no-repeat center 8px;
+	}
+	.tutorial-4 {
+		background:#fae49c url(images/v-54-new.png) no-repeat center 8px;
+	}
+	.tutorial-5 {
+		background:#fae49c url(images/v-55-new.png) no-repeat center 8px;
+	}
+}
 
 @media only screen and (min-width:1280px) {
 	.searchtype .ui-input-search input.ui-input-text {
 		width:96.5%;
-	}
-	.msg-content p, .msg-content h1 {
-		width:94%;
-	}
-	.GetStart {
-		top:56%;
-	}
-	.msg-content p {
-		font-size:18px;
 	}
 	.channelicons ul {
 		width:95.8%;
@@ -3672,24 +3612,19 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		margin:0 44.2%;
 	}
 	.tutorial-1 {
-		background:#fae49c url(images/v-51-fullsize.png) no-repeat center 30px;
+		background:#fae49c url(images/v-51-fullsize.png) no-repeat center 8px;
 	}
 	.tutorial-2 {
-		background:#fae49c url(images/v-52-fullsize.png) no-repeat center 40px;
+		background:#fae49c url(images/v-52-fullsize.png) no-repeat center 0px;
 	}
 	.tutorial-3 {
-		background:#fae49c url(images/v-53-fullsize.png) no-repeat center 35px;
+		background:#fae49c url(images/v-53-fullsize.png) no-repeat center 5px;
 	}
 	.tutorial-4 {
 		background:#fae49c url(images/v-54-fullsize.png) no-repeat center 55px;
 	}
 	.tutorial-5 {
-		background:#fae49c url(images/v-55-fullsize.png) no-repeat center 35px;
-	}
-	.resolution, .resolution-2, .resolution-3, .resolution-4, .resolution-5  {
-		top:50%;
-		height:70px;
-		margin-top:-35px;
+		background:#fae49c url(images/v-55-fullsize.png) no-repeat center 25px;
 	}
 }
 @media only screen and (min-width:1290px) {

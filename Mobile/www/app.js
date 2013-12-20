@@ -758,7 +758,7 @@ function popBackNav() {
 function showToast(toastobj) {
 	if(toastobj.redirect) {	
 		$('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');
-		$.mobile.changePage( "#" + toastobj.redirect, {allowSamePageTransition: true});			
+		//$.mobile.changePage( "#" + toastobj.redirect, {allowSamePageTransition: true});			
 	}
 	else {
 		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
