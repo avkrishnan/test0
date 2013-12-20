@@ -182,8 +182,7 @@ function SignupStepFirstViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
+		that.errorPassword('<span>SORRY:</span> Please enter password');
 	};	
 				
 }

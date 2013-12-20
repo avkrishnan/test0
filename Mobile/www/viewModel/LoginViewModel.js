@@ -12,7 +12,6 @@ function LoginViewModel() {
   this.errorMessage = ko.observable();
   this.usernameClass = ko.observable();
   this.passwordClass = ko.observable();
-	this.toastText = ko.observable();	
 	//this.newMessagesCount = ko.observable();
 	
 	/* Methods */
@@ -33,12 +32,7 @@ function LoginViewModel() {
 	
   this.activate = function() {
 		//that.newMessagesCount('');
-		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
-			/*if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}*/			
+		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {		
 			that.errorMessage('');		
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
 				that.accountName('');
@@ -134,8 +128,8 @@ function LoginViewModel() {
 			success: function() {
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);		
-				showToast();
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);
 			}
 		};
     $.mobile.hidePageLoadingMsg();
@@ -163,8 +157,6 @@ function LoginViewModel() {
 					}					
 				},
 				error: function(data, status, details) {
-					that.toastText(details.message);
-					localStorage.setItem('toastData', that.toastText());
 				}
 			});
 			*/
@@ -174,14 +166,14 @@ function LoginViewModel() {
 				var callbacks = {
 					success: function() {
 						localStorage.removeItem('action');
-						that.toastText('Now following '+channel.name);		
-						localStorage.setItem('toastData', that.toastText());					
+						var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
+						showToast(toastobj);						
+						goToView('channelMessagesView');					
 					},
 					error: function(data, status, details) {
-						localStorage.removeItem('action');					
-						channelMessagesViewModel.toastClass('toast-info');
-						that.toastText(details.message);		
-						localStorage.setItem('toastData', that.toastText());
+						localStorage.removeItem('action');
+						var toastobj = {redirect: 'channelMessagesView', type: 'toast-info', text: details.message};
+						showToast(toastobj);											
 						goToView('channelMessagesView');
 					}
 				};						

@@ -15,7 +15,6 @@ function EditLongDescriptionViewModel() {
 	this.longDescription = ko.observable();	
 	this.errorMessage = ko.observable(false);	
 	this.errorChannel = ko.observable();
-	this.toastText = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -39,12 +38,7 @@ function EditLongDescriptionViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));		
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);			
@@ -62,9 +56,7 @@ function EditLongDescriptionViewModel() {
 		}
 	});	
 	
-	function successfulModify(args) {
-		that.toastText('Description changed');		
-		localStorage.setItem('toastData', that.toastText());		
+	function successfulModify(args) {		
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});		
   };
@@ -85,12 +77,13 @@ function EditLongDescriptionViewModel() {
 		});
 		channel = channel[0];		
 		localStorage.setItem('currentChannelData', JSON.stringify(channel));
+		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Description changed'};
+		showToast(toastobj);		
 		popBackNav();									
 	}
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    goToView('longDescriptionView');
 		that.errorMessage(true);	
 		that.errorChannel('<span>SORRY:</span> '+details.message);
   };

@@ -10,8 +10,7 @@ function RecipientDetailsViewModel() {
 
   /* Not got it observable */				
 	this.channelName = ko.observable();
-	this.recipient = ko.observableArray();				
-	this.toastText = ko.observable();			
+	this.recipient = ko.observableArray();						
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -29,12 +28,7 @@ function RecipientDetailsViewModel() {
 		} else if(!channelObject || !recipientObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message						
 			that.accountName(localStorage.getItem('accountName'));													
 			that.channelName(channelObject.channelName);
 			var recipient = recipientObject.recipient.split(',');

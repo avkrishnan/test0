@@ -11,9 +11,7 @@ function ChannelMessagesViewModel() {
 	this.title = ko.observable();
 	this.description = ko.observable('');
 	this.channelid = ko.observable();
-	this.channelMessages = ko.observableArray([]);
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();		
+	this.channelMessages = ko.observableArray([]);		
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -36,12 +34,7 @@ function ChannelMessagesViewModel() {
 			goToView('channelsFollowingListView');
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}		
+			addExternalMarkup(that.template); // this is for header/overlay message	
 			that.accountName(localStorage.getItem("accountName"));			
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
@@ -72,13 +65,13 @@ function ChannelMessagesViewModel() {
 	this.iGiAckMessage = function(data) {
 		var callbacks = {
 			success: function(data) {					
-				that.toastText('iGi Acknowledgement sent !');
-				localStorage.setItem('toastData', that.toastText());
+				var toastobj = {type: '', text: 'iGi Acknowledgement sent !'};
+				showToast(toastobj);				
 				goToView($.mobile.activePage.attr('id'));								
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				showToast();				
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);			
 			}
 		};					
 		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
@@ -109,15 +102,12 @@ function ChannelMessagesViewModel() {
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
 	
-	
 	/*this.getChannelCommand = function(channelid) {
 		var callbacks = {
 			success: function() {
 				//alert('success');
 			},
-			error: function(data, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
+			error: function(data, status, details) {			
 			}
 		};
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
@@ -134,6 +124,7 @@ function ChannelMessagesViewModel() {
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
 					//var tempCreated = msToTime(valueMessage.created);
 					var tempCreated = time2TimeAgo(valueMessage.created);
+					var tempCreated = formatDate(valueMessage.created, 'short', 'follow');
 					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
 						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 						tempClass = 'iconchannels icon-' + tempClass;
@@ -171,8 +162,8 @@ function ChannelMessagesViewModel() {
 				
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				showToast();
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);
 			}
 		};
 		//return ES.messageService.getChannelMessagesForFollower(that.channelid(), undefined, callbacks);

@@ -17,8 +17,7 @@ function AddContactViewModel() {
 	this.showDelete = ko.observable(false);
 	this.showConfirm = ko.observable(false);
 	this.currentDeleteCommethod = ko.observable();
-	this.verify = ko.observable();
-	this.toastText = ko.observable();	
+	this.verify = ko.observable();	
 	this.deletedID = ko.observable('');
 	
 	this.navText = ko.observable();
@@ -53,8 +52,8 @@ function AddContactViewModel() {
 				//alert('succ');
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);			
 			}
 		};		
 		return ES.commethodService.getCommethods(callbacks);
@@ -67,8 +66,8 @@ function AddContactViewModel() {
 				//alert('Verification code sent!');
 			},
 			error: function (responseData, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);				
 			}
 		};		
 		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
@@ -111,21 +110,21 @@ function AddContactViewModel() {
 				//alert(that.deletedID());
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);				
 			}
 		};	
 		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
 		if(localStorage.getItem("CommethodType") == 'EMAIL') {
-			that.toastText('Email address deleted');
-			localStorage.setItem('toastData', that.toastText());
+			var toastText = 'Email address deleted';
 			localStorage.removeItem("CommethodType");
 		}
 		else {
-			that.toastText('Phone number deleted');
-			localStorage.setItem('toastData', that.toastText());
+			var toastText = 'Phone number deleted';
 			localStorage.removeItem("CommethodType");			
-		}				
+		}
+		var toastobj = {redirect: 'addContactView', type: '', text: toastText};		
+		showToast(toastobj);					
 		goToView('addContactView');
 	}
 
@@ -160,12 +159,7 @@ function AddContactViewModel() {
 			goToView('loginView');
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}				
+			addExternalMarkup(that.template); // this is for header/overlay message			
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
 			that.accountName(_accountName);

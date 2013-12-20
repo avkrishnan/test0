@@ -15,8 +15,7 @@ function EditNameViewModel() {
   this.errorFirstName = ko.observable();	
   this.errorFirstLastName = ko.observable();
   this.firstnameClass = ko.observable();
-  this.lastnameClass = ko.observable();
-	this.toastText = ko.observable();		
+  this.lastnameClass = ko.observable();		
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -42,12 +41,7 @@ function EditNameViewModel() {
 		} 
 		else {
 			addExternalMarkup(that.template); // this is for header/overlay message	
-			var account = JSON.parse(localStorage.getItem('account'));					
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			var account = JSON.parse(localStorage.getItem('account'));							
 			$('input').keyup(function () {
 				that.firstnameClass('');
 				that.lastnameClass('');
@@ -95,8 +89,6 @@ function EditNameViewModel() {
 
   function successfulUpdate(args) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText('Name updated successfully !');		
-		localStorage.setItem('toastData', that.toastText());
 		var account = [];			
 		account.push({
 			accountname: that.accountName(),			
@@ -104,7 +96,9 @@ function EditNameViewModel() {
 			lastname: that.lastname()
 		});
 		account = account[0];				
-		localStorage.setItem('account', JSON.stringify(account));				
+		localStorage.setItem('account', JSON.stringify(account));
+		var toastobj = {redirect: 'escalationPlansView', type: '', text: 'Name updated successfully !'};
+		showToast(toastobj);						
 		popBackNav();
   };
 

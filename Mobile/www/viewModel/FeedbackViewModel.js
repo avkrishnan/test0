@@ -6,8 +6,7 @@ function FeedbackViewModel() {
 	this.viewid = 'V-47';
 	this.viewname = 'Feedback';
 	this.displayname = 'Feedback';	 
-	this.accountName = ko.observable();
-	this.toastText = ko.observable();		
+	this.accountName = ko.observable();		
 	
 	/* Methods */			
 	this.applyBindings = function() {
@@ -21,12 +20,7 @@ function FeedbackViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message						
 			that.accountName(localStorage.getItem('accountName'));			
 		}
 	}

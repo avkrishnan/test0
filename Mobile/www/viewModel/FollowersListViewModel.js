@@ -13,7 +13,6 @@ function FollowersListViewModel() {
 	this.channelName = ko.observable();			
   this.followers = ko.observableArray([]);
 	this.followerCount = ko.observable();
-	this.toastText = ko.observable();		
 	
 	/* Methods */	
 	this.applyBindings = function() {
@@ -32,12 +31,7 @@ function FollowersListViewModel() {
 		} else {				
 			addExternalMarkup(that.template); // this is for header/overlay message	
 			that.followers.removeAll();
-			that.followerCount('0 followers');						
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));				
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			that.followerCount('0 followers');								
 			that.accountName(localStorage.getItem('accountName'));		
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
@@ -75,8 +69,8 @@ function FollowersListViewModel() {
 	
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();		
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);		
   };
 	
 	this.followerDetails = function (data) {

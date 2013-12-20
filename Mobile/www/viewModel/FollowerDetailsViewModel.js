@@ -10,8 +10,7 @@ function FollowerDetailsViewModel() {
 	
   /* Follower observable */	
 	this.channelName = ko.observable();			
-	this.followerName = ko.observable();
-	this.toastText = ko.observable();			
+	this.followerName = ko.observable();		
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -29,12 +28,7 @@ function FollowerDetailsViewModel() {
 		} else if(!channelObject) {
 			goToView('followersListView');							
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));
 			that.channelName(channelObject.channelName);										
 			that.followerName(followerObject.followerName+' <em>'+followerObject.accountname+'</em>');												

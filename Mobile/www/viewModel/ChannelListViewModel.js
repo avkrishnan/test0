@@ -26,9 +26,7 @@ function ChannelListViewModel() {
   this.firstChannelId = ko.observable();
   this.channel = ko.observable();	
   this.channelOwn = ko.observable();		
-  this.channelFollowing = ko.observable();
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();													
+  this.channelFollowing = ko.observable();												
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -53,11 +51,6 @@ function ChannelListViewModel() {
 			that.createChannel(false);
 			that.channelMessages(false);
 			that.channelsIFollow(false);							
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');
-			}
 			that.accountName(localStorage.getItem('accountName'));
 			localStorage.setItem('counter', 0);
 			$.mobile.showPageLoadingMsg('a', 'Getting user details');
@@ -171,8 +164,8 @@ function ChannelListViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
 	};		
 	
 }

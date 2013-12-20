@@ -18,8 +18,7 @@ function VerifyContactViewModel() {
 	
 	this.navText = ko.observable();
 	this.pView = '';
-	this.errorMessage = ko.observable();
-	this.toastText = ko.observable();	
+	this.errorMessage = ko.observable();	
 	
 	var that = this;
 	
@@ -49,8 +48,8 @@ function VerifyContactViewModel() {
 		//alert(that.verificationCommethodID());
 		var callbacks = {
 			success: function(responseData) {
-				that.toastText('Verification code sent');
-				showToast();
+				var toastobj = {type: '', text: 'Verification code sent'};
+				showToast(toastobj);
 			},
 			error: function (responseData, status, details) {
 				that.errorMessage("<span>ERROR: </span> " + details.message);
@@ -88,12 +87,7 @@ function VerifyContactViewModel() {
 			goToView('loginView');
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message			
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
 			
@@ -135,14 +129,14 @@ function VerifyContactViewModel() {
 		var callbacks = {
 			success: function(responseData) {
 				if(localStorage.getItem("commethodType") == 'TEXT') {
-					that.toastText('Phone number verified');		
-					localStorage.setItem('toastData', that.toastText());					
+					var toastText = 'Phone number verified';					
 				}
 				else {
-					that.toastText('Email verified');		
-					localStorage.setItem('toastData', that.toastText());					
+					var toastText = 'Email verified';				
 				}
-				localStorage.removeItem("commethodType")				
+				localStorage.removeItem("commethodType");
+				var toastobj = {redirect: 'addContactView', type: '', text: toastText};		
+				showToast(toastobj);								
 				goToView('addContactView');
 			},
 			error: function (responseData, status, details) {

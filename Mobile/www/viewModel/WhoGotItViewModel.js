@@ -13,8 +13,7 @@ function WhoGotItViewModel() {
 	this.channelName = ko.observable();
 	this.messageId = ko.observable();				
 	this.acks = ko.observable();
-	this.recipients = ko.observableArray([]);			
-	this.toastText = ko.observable();			
+	this.recipients = ko.observableArray([]);					
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -34,11 +33,6 @@ function WhoGotItViewModel() {
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.recipients.removeAll();						
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}
 			localStorage.removeItem('currentRecipientData');						
 			that.accountName(localStorage.getItem('accountName'));											
 			that.channelId(channelObject.channelId);			
@@ -80,8 +74,8 @@ function WhoGotItViewModel() {
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
   };
 	
 	this.recipientDetails = function(data){
