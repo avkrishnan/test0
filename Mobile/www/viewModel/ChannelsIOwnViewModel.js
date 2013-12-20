@@ -11,8 +11,7 @@ function ChannelsIOwnViewModel() {
   /* Channels observable */
 	this.sectionOne = ko.observable(false);
 	this.sectionTwo = ko.observable(false);	
-	this.channels = ko.observableArray([]);
-	this.toastText = ko.observable();		
+	this.channels = ko.observableArray([]);		
 
 	/* Methods */
 	this.applyBindings = function(){	
@@ -26,13 +25,7 @@ function ChannelsIOwnViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.toastText('');						
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				localStorage.removeItem('toastData');				
-				showToast();											
-			}
+			addExternalMarkup(that.template); // this is for header/overlay message				
 			that.accountName(localStorage.getItem('accountName'));
 			that.sectionOne(false);
 			that.sectionTwo(false);			
@@ -70,8 +63,8 @@ function ChannelsIOwnViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
 	};
 	
 	this.channelSettings = function(data){

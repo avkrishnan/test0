@@ -31,9 +31,7 @@ function ChannelViewModel() {
 	this.moreButton = ko.observable(false);
 	this.lessButton = ko.observable(false);			
 	this.email = ko.observable('');
-	this.followers = ko.observable('');
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();		
+	this.followers = ko.observable('');	
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -96,14 +94,8 @@ function ChannelViewModel() {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.hasheader(true);
 			that.hasfooter(true);
-		}
-		if(localStorage.getItem('toastData')) {
-			that.toastText(localStorage.getItem('toastData'));
-			localStorage.removeItem('toastData');
-			showToast();				
 		}		
-		that.channelid(channel.id);
-		that.toastClass('');		
+		that.channelid(channel.id);	
 		var _accountName = localStorage.getItem("accountName");
 		var _name = localStorage.getItem("UserFullName");
 		that.accountName(_accountName);		
@@ -222,9 +214,9 @@ function ChannelViewModel() {
 		//showMessage("Now Following Channel " + that.title());
 		//localStorage.removeItem("currentChannel");
 		//$.mobile.changePage("#" + channelsFollowingListViewModel.template);
-		that.toastText('Now following '+that.title());		
-		localStorage.setItem('toastData', that.toastText());		
-		$.mobile.changePage("#" + channelMessagesViewModel.template);
+		var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+that.title()};
+		showToast(toastobj);				
+		goToView('channelMessagesView');
 	}
 	
 	function successfulMessageGET(data) {
@@ -237,50 +229,52 @@ function ChannelViewModel() {
 	};
 	
 	function errorAPIChannel(data, status, details) {
-		$.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		localStorage.setItem('toastData', that.toastText());
+		$.mobile.hidePageLoadingMsg();		
 		var token = ES.evernymService.getAccessToken();			
 		if(token == '' || token == null) {
+			var toastobj = {redirect: 'loginView', type: 'toast-error', text: details.message};
+			showToast(toastobj);			
 			goToView('loginView');
 		} else {
+			var toastobj = {redirect: 'channelListView', type: 'toast-error', text: details.message};
+			showToast(toastobj);			
 			goToView('channelListView');
 		}
 	}
     
 	function errorAPI(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
 	}
     
 	function errorFollowing(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
 		if (details.code == 100601){ // we are already following this channel
-			that.toastText(details.message);		
-			showToast();		
+			var toastobj = {type: 'toast-error', text: details.message};
+			showToast(toastobj);		
 		}
 		else if (isBadLogin(details.code)){
 			localStorage.setItem("action", 'follow_channel');
 			$.mobile.changePage("#" + loginViewModel.template);
 		}
 		else {
-			that.toastText(details.message);		
-			showToast();
+			var toastobj = {type: 'toast-error', text: details.message};
+			showToast(toastobj);
 		}
 	}
 	
 	function errorPostingMessage(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
 	}
 	
 	function errorRetrievingMessages(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
 		loginPageIfBadLogin(details.code);
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
 	}
 	
 	this.getChannelCommand = function (lchannelid) {
@@ -299,9 +293,8 @@ function ChannelViewModel() {
 	this.actionFollowChannelCommand = function() {
 		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
 		if(localStorage.getItem('channelOwner') == 'yes') {
-			that.toastClass('toast-info');			
-			that.toastText('See Channel Settings to receive your own broadcasts.');
-			showToast();			
+			var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
+			showToast(toastobj);			
 		} else {
 			that.followChannelCommand();
 		}
@@ -329,8 +322,8 @@ function ChannelViewModel() {
     
 	function errorUnfollow(data, status, details) {
 		$.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
 	}
 	
 	this.deleteChannelCommand = function () {

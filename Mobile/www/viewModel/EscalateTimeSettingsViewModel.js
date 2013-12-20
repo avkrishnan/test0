@@ -15,9 +15,7 @@ function EscalateTimeSettingsViewModel() {
 	this.hour = ko.observable();
 	this.minute = ko.observable();
 	this.meridiem = ko.observable();
-	this.pickerDate = ko.observable();				 	
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();			
+	this.pickerDate = ko.observable();				 				
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -33,8 +31,7 @@ function EscalateTimeSettingsViewModel() {
 			goToView('loginView');					
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			that.toastClass('');		
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));			
 			if(localStorage.getItem('escDuration')) {
 				var DateTime = localStorage.getItem('escDuration').split('/');
@@ -176,10 +173,9 @@ function EscalateTimeSettingsViewModel() {
 			localStorage.setItem('escDuration', duration);		
 			popBackNav();				
 		}					
-		else {
-			that.toastClass('toast-error');			
-			that.toastText('Please set date greater than current date !');
-			showToast();				
+		else {	
+			var toastobj = {type: 'toast-error', text: 'Please set date greater than current date !'};
+			showToast(toastobj);						
 		}
   };					
 	

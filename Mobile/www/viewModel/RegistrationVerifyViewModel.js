@@ -13,8 +13,7 @@ function RegistrationVerifyViewModel() {
 	this.verificationCommethod = ko.observable();
 	this.verificationCommethodID = ko.observable();		
 	this.verificationCode = ko.observable();
-	this.errorMessage = ko.observable();
-	this.toastText = ko.observable();						
+	this.errorMessage = ko.observable();						
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -82,12 +81,12 @@ function RegistrationVerifyViewModel() {
 	this.requestVerificationCode = function() {
 		var callbacks = {
 			success: function(responseData) {
-				that.toastText('Verification code sent');
-				showToast();						
+				var toastobj = {type: '', text: 'Verification code sent'};
+				showToast(toastobj);										
 			},
 			error: function (responseData, status, details) {
-				that.toastText(details.message);		
-				showToast();
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);
 			}
 		};
 		$.mobile.showPageLoadingMsg('a', 'Resending Verification code');				
@@ -97,8 +96,8 @@ function RegistrationVerifyViewModel() {
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				that.toastText('Email verified');		
-				localStorage.setItem('toastData', that.toastText());											
+				var toastobj = {redirect: 'tutorialView', type: '', text: 'Email verified'};
+				showToast(toastobj);															
 				goToView('tutorialView');
 			},
 			error: function (responseData, status, details) {

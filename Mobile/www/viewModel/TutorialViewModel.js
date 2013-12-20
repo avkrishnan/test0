@@ -5,8 +5,7 @@ function TutorialViewModel() {
   this.template = 'tutorialView';
   this.viewid = 'V-51';
   this.viewname = 'Tutorial';
-  this.displayname = 'Tutorials';
-	this.toastText = ko.observable();			
+  this.displayname = 'Tutorials';		
 
   this.applyBindings = function() {
     $('#' + that.template).on('pagebeforeshow', function(e, data) {
@@ -22,12 +21,7 @@ function TutorialViewModel() {
 			goToView('loginView');
 		} else if(newUser == '' || newUser == null) {
 			goToView('channelListView');
-		}
-		if(localStorage.getItem('toastData')) {
-			that.toastText(localStorage.getItem('toastData'));
-			showToast();
-			localStorage.removeItem('toastData');												
-		}				
+		}			
 		$('.tutorial ul li').removeClass('active');
 		$('.tutorial ul li:first-child').addClass('active');		
 		$('.tutorials .tutorialslides').hide();
@@ -76,13 +70,13 @@ function TutorialViewModel() {
 			var callbacks = {
 				success: function() {
 					localStorage.removeItem('action');
-					that.toastText('Now following '+channel.name);		
-					localStorage.setItem('toastData', that.toastText());
+					var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
+					showToast(toastobj);
 					goToView('channelMessagesView');					
 				},
 				error: function(data, status, details) {
-					that.toastText(details.message);		
-					showToast();
+					var toastobj = {type: 'toast-error', text: details.message};
+					showToast(toastobj);
 				}
 			};						
 			var channel = JSON.parse(localStorage.getItem('currentChannel'));

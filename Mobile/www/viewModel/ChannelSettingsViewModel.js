@@ -11,9 +11,7 @@ function ChannelSettingsViewModel() {
   /* Channel Settings observable */
 	this.channelId = ko.observable();	
 	this.channelName = ko.observable();
-	this.shortDescription = ko.observable();
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();		
+	this.shortDescription = ko.observable();		
 	
 	/* Methods */	
 	this.applyBindings = function() {
@@ -31,12 +29,7 @@ function ChannelSettingsViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}					
+			addExternalMarkup(that.template); // this is for header/overlay message								
 			that.accountName(localStorage.getItem('accountName'));
 			that.channelId(channelObject.channelId);
 			that.channelName(channelObject.channelName);
@@ -45,29 +38,10 @@ function ChannelSettingsViewModel() {
 		}
 	}
 	
-	this.changeChannelIcon = function() {
-		//viewNavigate('Settings', 'channelSettingsView', 'channelChangeIconView');
-		that.toastClass('toast-info');
-		that.toastText('Feature coming soon!');
-		showToast();		
-	}
-	
-	this.makeChannelPublic = function() {
-		that.toastClass('toast-info');		
-		that.toastText('Feature coming soon!');
-		showToast();		
-	}
-	
-	this.hideChannelHistory = function() {
-		that.toastClass('toast-info');		
-		that.toastText('Feature coming soon!');
-		showToast();		
-	}
-	
-	this.approvalRequired = function() {
-		that.toastClass('toast-info');		
-		that.toastText('Feature coming soon!');
-		showToast();		
-	}			
+	this.comingSoon = function() {
+		//viewNavigate('Settings', 'channelSettingsView', 'channelChangeIconView');		
+		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
+		showToast(toastobj);		
+	}		
 	
 }

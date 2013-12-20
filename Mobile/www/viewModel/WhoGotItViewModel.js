@@ -13,8 +13,7 @@ function WhoGotItViewModel() {
 	this.channelName = ko.observable();
 	this.messageId = ko.observable();				
 	this.acks = ko.observable();
-	this.recipients = ko.observableArray([]);			
-	this.toastText = ko.observable();			
+	this.recipients = ko.observableArray([]);					
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -75,8 +74,8 @@ function WhoGotItViewModel() {
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
   };
 	
 	this.recipientDetails = function(data){
