@@ -44,8 +44,9 @@ function SingleMessageFullTextViewModel() {
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
 			that.channelName(channelObject.channelName);
-			var fullDate = formatDate(messageObject.created,'short');					
-			that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
+			var fullDate = formatDate(messageObject.created,'long');					
+			//that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
+			that.time('Sent - '+ fullDate);
 			that.sensitivity(messageObject.sensitivity);			
 			that.sensitivityText(messageObject.sensitivityText);
 			if(messageObject.broadcastFull.length > truncatedTextScreen()) {

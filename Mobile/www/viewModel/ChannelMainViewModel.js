@@ -142,7 +142,7 @@ function ChannelMainViewModel() {
 				broadcast: broadcast,				
 				broadcastFull: data.message[len].text, 
 				//time: msToTime(data.message[len].created),
-				time: time2TimeAgo(data.message[len].created),
+				time: formatDate(data.message[len].created, 'short', 'main'),
 				created: data.message[len].created,
 				escUntil: data.message[len].escUntil,
 				iGi: iGi,

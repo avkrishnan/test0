@@ -102,7 +102,6 @@ function ChannelMessagesViewModel() {
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
 	
-	
 	/*this.getChannelCommand = function(channelid) {
 		var callbacks = {
 			success: function() {
@@ -125,6 +124,7 @@ function ChannelMessagesViewModel() {
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
 					//var tempCreated = msToTime(valueMessage.created);
 					var tempCreated = time2TimeAgo(valueMessage.created);
+					var tempCreated = formatDate(valueMessage.created, 'short', 'follow');
 					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
 						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 						tempClass = 'iconchannels icon-' + tempClass;

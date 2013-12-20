@@ -45,7 +45,8 @@ function SingleMessageViewModel() {
 			addExternalMarkup(that.template); // this is for header/overlay message							
 			that.accountName(localStorage.getItem('accountName'));											
 			that.channelName(channelObject.channelName);		
-			that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');	
+			//that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');
+			that.time('Sent - '+ formatDate(messageObject.created, 'long'));
 			that.singleMessage(messageObject.broadcastFull);
 			that.broadcastType(messageObject.type);
 			that.iGi(messageObject.iGi);
