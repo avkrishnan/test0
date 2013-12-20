@@ -14,8 +14,7 @@ function EditShortDescriptionViewModel() {
 	this.channelName = ko.observable();	
 	this.shortDescription = ko.observable();	
 	this.errorMessage = ko.observable(false);	
-	this.errorChannel = ko.observable();
-	this.toastText = ko.observable();		
+	this.errorChannel = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -39,12 +38,7 @@ function EditShortDescriptionViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);
@@ -63,9 +57,7 @@ function EditShortDescriptionViewModel() {
 		}
 	});	
 	
-	function successfulModify(args) {
-		that.toastText('Description changed');		
-		localStorage.setItem('toastData', that.toastText());		
+	function successfulModify(args) {		
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});
   };
@@ -85,6 +77,8 @@ function EditShortDescriptionViewModel() {
 		});
 		channel = channel[0];		
 		localStorage.setItem('currentChannelData', JSON.stringify(channel));
+		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Description changed'};
+		showToast(toastobj);		
 		popBackNav();							
 	}
 

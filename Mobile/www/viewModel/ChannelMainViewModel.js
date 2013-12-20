@@ -12,9 +12,7 @@ function ChannelMainViewModel() {
 	this.channelId = ko.observable();		
 	this.channelName = ko.observable();
 	this.followerCount = ko.observable();
-	this.broadcasts = ko.observableArray([]);	
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();				
+	this.broadcasts = ko.observableArray([]);				
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -32,13 +30,7 @@ function ChannelMainViewModel() {
 			goToView('channelsIOwnView');		
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message	
-			that.broadcasts.removeAll();					
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}
-			that.toastClass('');						
+			that.broadcasts.removeAll();											
 			that.accountName(localStorage.getItem('accountName'));
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
@@ -167,9 +159,9 @@ function ChannelMainViewModel() {
 	}
 
   function errorAPI(data, status, details) {
-    $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+    $.mobile.hidePageLoadingMsg();		
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);		
   };
 	
 	this.getMessagesCommand = function(){
@@ -184,9 +176,8 @@ function ChannelMainViewModel() {
 	
 	this.showWhoGotIt = function(data){		
 		if(data.acks == 0) {
-			that.toastClass('toast-info');			
-			that.toastText("No iGi's received yet");		
-			showToast();			
+			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
+			showToast(toastobj);						
 		}
 		else {
 			localStorage.setItem('currentMessageData', JSON.stringify(data));									
@@ -211,9 +202,8 @@ function ChannelMainViewModel() {
 	
 	this.showReplies = function(data){	
 		if(data.replies == '0 Replies') {
-			that.toastClass('toast-info');			
-			that.toastText('No replies to display');		
-			showToast();			
+			var toastobj = {type: 'toast-info', text: 'No replies to display'};
+			showToast(toastobj);						
 		}
 		else if(data.replies == '1 Reply') {
 			localStorage.setItem('currentMessageData', JSON.stringify(data));
@@ -261,8 +251,8 @@ function ChannelMainViewModel() {
 	
 	function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);			
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
   };						
 	
 }

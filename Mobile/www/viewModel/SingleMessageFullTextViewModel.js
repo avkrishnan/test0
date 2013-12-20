@@ -20,7 +20,8 @@ function SingleMessageFullTextViewModel() {
 	this.percentage = ko.observable();			
 	this.noiGi = ko.observable();	
 	this.fullText = ko.observable();
-	this.toastText = ko.observable();			
+	this.broadcastType = ko.observable();
+	this.acks = ko.observable();					
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -38,12 +39,7 @@ function SingleMessageFullTextViewModel() {
 		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message						
 			that.accountName(localStorage.getItem('accountName'));			
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
@@ -64,8 +60,24 @@ function SingleMessageFullTextViewModel() {
 			that.percentageClass(messageObject.percentageClass);			
 			that.percentage(messageObject.percentage);			
 			that.noiGi(messageObject.noiGi);			
-			that.fullText(messageObject.broadcastFull);										
+			that.fullText(messageObject.broadcastFull);
+			that.broadcastType(messageObject.type);
+			that.acks(messageObject.acks+' Got It');																
 		}
-	}		
+	}
+	
+	this.showWhoGotIt = function(){
+		if(that.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
+			var toastobj = {type: 'toast-info', text: 'No iGi requested'};
+			showToast(toastobj);						
+		}
+		else if(that.acks() == '0 Got It') {
+			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
+			showToast(toastobj);			
+		}
+		else {					
+			viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');
+		}
+	};			
 				
 }

@@ -753,12 +753,19 @@ function popBackNav() {
 }
 
 /* Toast messages function */
-function showToast() {
+function showToast(toastobj) {
+	if(toastobj.redirect) {	
+		$('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');
+		$.mobile.changePage( "#" + toastobj.redirect, {allowSamePageTransition: true});			
+	}
+	else {
+		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
+	}
 	$('.toast-notification').delay(500).slideDown(500, function() {
 		$('.toast-notification').show();
-	}).delay(4000).slideUp(1000);//, function() {
-		//$('#'+$.mobile.activePage.attr('id')+' .toast-notification .toast-text').remove();
-	//});
+	}).delay(4000).slideUp(1000, function() {
+		$('#'+$.mobile.activePage.attr('id')+' .toast-notification .toast-text').remove();
+	});
 }
 
 /* Get current date/time values */

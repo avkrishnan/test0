@@ -14,8 +14,7 @@ function SingleMessageRepliesViewModel() {
 	this.messageId = ko.observable();	
 	this.replies = ko.observableArray([]);
 	this.replyTime = ko.observable();	
-	this.reply = ko.observable();
-	this.toastText = ko.observable();								
+	this.reply = ko.observable();							
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -34,12 +33,7 @@ function SingleMessageRepliesViewModel() {
 			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message
-			that.replies.removeAll();						
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			that.replies.removeAll();									
 			that.accountName(localStorage.getItem('accountName'));		
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
 			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
@@ -84,8 +78,8 @@ function SingleMessageRepliesViewModel() {
 	
 	function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);			
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
   };
 	
 	this.replyDetail = function(data){	

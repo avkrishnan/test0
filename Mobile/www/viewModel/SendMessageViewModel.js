@@ -36,8 +36,6 @@ function SendMessageViewModel() {
 	this.yesClass = ko.observable();
 	this.noClass = ko.observable();
 	this.broadcastType = ko.observable();	
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();	
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id, followers) {
@@ -68,12 +66,7 @@ function SendMessageViewModel() {
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.sectionOne(false);
-			that.sectionTwo(false);			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				localStorage.removeItem('toastData');				
-				showToast();												
-			}
+			that.sectionTwo(false);
 			that.normalText('normalcolor');
 			that.fastText('');
 			that.escalateText('');								
@@ -137,8 +130,7 @@ function SendMessageViewModel() {
 				that.yesClass('nobutton');
 				that.noClass('yesbutton');
 				that.broadcastType('RAC');															
-			}
-			that.toastClass('');																	
+			}																
 			that.accountName(localStorage.getItem('accountName'));			
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
@@ -170,33 +162,29 @@ function SendMessageViewModel() {
 					return true;
 				}
 				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
-					that.toastClass('toast-error');									
-					that.toastText('Please verify your email !');
-					showToast();			
+					var toastobj = {type: 'toast-error', text: 'Please verify your email !'};
+					showToast(toastobj);								
 				}
 			}
 		} else {
-			that.toastClass('toast-error');
-			that.toastText('Please add a default email !');
-			showToast();
+			var toastobj = {type: 'toast-error', text: 'Please add a default email !'};
+			showToast(toastobj);
 		}
 	};    
 	
 	function errorValidation(data, status, details){
-		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
+		$.mobile.hidePageLoadingMsg();		
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);		
 	};
 	
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
-			that.toastClass('toast-error');			
-			that.toastText('Please type a message to broadcast.');
-			showToast();			
+			var toastobj = {type: 'toast-error', text: 'Please type a message to broadcast.'};
+			showToast(toastobj);					
 		} else if(that.selectedChannels().followerCount == 0) {
-			that.toastClass('toast-info');			
-			that.toastText('Message not sent - Zero followers on '+ that.selectedChannels().channelName);
-			showToast();				
+			var toastobj = {type: 'toast-info', text: 'Message not sent - Zero followers on '+ that.selectedChannels().channelName};
+			showToast(toastobj);				
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Posting Message');			
 			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
@@ -221,8 +209,8 @@ function SendMessageViewModel() {
 		localStorage.removeItem('escDuration');		
 		localStorage.removeItem('escLevel');
 		localStorage.removeItem('iGiStatus');										
-		that.toastText('Broadcast sent');		
-		localStorage.setItem('toastData', that.toastText());					
+		var toastobj = {redirect: 'channelMainView', type: '', text: 'Broadcast sent'};
+		showToast(toastobj);									
 		localStorage.setItem('currentChannelId', that.selectedChannels().channelId);
 		that.clearForm();		
 		backNavText.pop();
@@ -235,8 +223,8 @@ function SendMessageViewModel() {
 		localStorage.removeItem('escDuration');		
 		localStorage.removeItem('escLevel');
 		localStorage.removeItem('iGiStatus');								
-		that.toastText(details.message);		
-		showToast();			
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);						
 	};
 	
 	this.createChannelMessage = function () {

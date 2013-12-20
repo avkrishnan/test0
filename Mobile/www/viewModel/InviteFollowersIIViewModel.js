@@ -15,8 +15,7 @@ function InviteFollowersIIViewModel() {
 	this.feedback = ko.observable();
 	this.feedbackContext = ko.observable();
 	this.error = ko.observable(false);									
-	this.errorFeedback = ko.observable();
-	this.toastText = ko.observable();		
+	this.errorFeedback = ko.observable();	
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -39,11 +38,6 @@ function InviteFollowersIIViewModel() {
 			goToView('loginView');
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}
 			if(feedbackType == 'feedback') {
 				that.feedbackType('Praise for Evernym Channels');
 				that.feedbackLabel('Your feedback:');
@@ -91,15 +85,16 @@ function InviteFollowersIIViewModel() {
 	
 	function successfulSend(data){	
     $.mobile.hidePageLoadingMsg();
-		that.toastText('Feedback sent successfully');		
-		localStorage.setItem('toastData', that.toastText());
+		var toastobj = {redirect: 'feedbackView', type: '', text: 'Feedback sent successfully'};
+		showToast(toastobj);			
 		popBackNav();
 	};    
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
+		that.feedbackClass('validationerror');
+		that.error(true);				
+		that.errorFeedback('<span>SORRY:</span> '+details.message);		
 	};	
 	
 		

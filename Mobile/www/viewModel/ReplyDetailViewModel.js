@@ -19,8 +19,7 @@ function ReplyDetailViewModel() {
 	this.less = ko.observable(true);		
 	this.more = ko.observable(false);	
 	this.moreButton = ko.observable(true);
-	this.lessButton = ko.observable(false);	
-	this.toastText = ko.observable();											
+	this.lessButton = ko.observable(false);											
 
 	/* Methods */
 	this.applyBindings = function() {
@@ -38,12 +37,7 @@ function ReplyDetailViewModel() {
 		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message						
 			that.accountName(localStorage.getItem('accountName'));		
 			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));			
 			that.less(true);				

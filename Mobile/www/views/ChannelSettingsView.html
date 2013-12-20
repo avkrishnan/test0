@@ -24,13 +24,13 @@
     <a class="editchannel deletechannel" href="#" onclick="viewNavigate('Settings', 'channelSettingsView', 'channelDeleteView');">
       Delete this channel
     </a>
-    <a class="editchannel changechannel" href="#" data-bind="click: changeChannelIcon">
+    <a class="editchannel changechannel" href="#" data-bind="click: comingSoon">
       Change channel icon image
     </a>
     <div class="radiobtn">
       <div class="yes-no">
         <label for="flip-1">Make this channel public</label>
-        <div class="yes-noclick" data-bind="click: makeChannelPublic">
+        <div class="yes-noclick" data-bind="click: comingSoon">
           <span class="yesbutton">Yes</span>
           <span class="nobutton">No</span>
         </div>
@@ -38,7 +38,7 @@
       
       <div class="yes-no">
         <label for="flip-1">Hide broadcast history</label>
-        <div class="yesnoclick" data-bind="click: hideChannelHistory">
+        <div class="yesnoclick" data-bind="click: comingSoon">
           <span class="yesbutton">Yes</span>
           <span class="nobutton">No</span>
         </div>
@@ -46,7 +46,7 @@
       
       <div class="yes-no">
         <label for="flip-1">Followers must be approved</label>
-         <div class="yesno-click" data-bind="click: approvalRequired">
+         <div class="yesno-click" data-bind="click: comingSoon">
           <span class="yesbutton">Yes</span>
           <span class="nobutton">No</span>
         </div>
@@ -54,7 +54,7 @@
 
     </div>
   </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText, css: toastClass"></div></div>    
+  <div class="toast-notification"></div>    
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Settings', 'channelSettingsView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Settings', 'channelSettingsView', 'sendMessageView');"></a>

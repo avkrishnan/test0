@@ -10,8 +10,7 @@ function AddInviteFollowersViewModel() {
 	
   /* Add/Invite Followers observable */
 	this.channelName = ko.observable();	
-	this.channelWebAddress = ko.observable();
-	this.toastText = ko.observable();				
+	this.channelWebAddress = ko.observable();			
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -28,12 +27,7 @@ function AddInviteFollowersViewModel() {
 		} else if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message						
 			that.accountName(localStorage.getItem('accountName'));	
 			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
 			if(localStorage.getItem('counter') == 1) {
@@ -50,14 +44,9 @@ function AddInviteFollowersViewModel() {
 		}
 	}
 	
-	this.inviteFollowers = function(){
-		that.toastText('<div class="toast-text toast-info">Feature coming soon!</div>');
-		showToast();		
-	};
-	
-	this.addFollowers = function(){
-		that.toastText('<div class="toast-text toast-info">Feature coming soon!</div>');
-		showToast();
+	this.comingSoon = function(){
+		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
+		showToast(toastobj);		
 	};	
 	
 }

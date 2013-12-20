@@ -15,9 +15,7 @@ function EscalateSettingsViewModel() {
 	this.ecalateTime = ko.observable();	
 	this.remindClass = ko.observable();
 	this.chaseClass = ko.observable();
-	this.houndClass = ko.observable();			
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();				
+	this.houndClass = ko.observable();							
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -94,9 +92,8 @@ function EscalateSettingsViewModel() {
 			popBackNav();					
 		}
 		else {
-			that.toastClass('toast-error');			
-			that.toastText('Please set Date and time for escalation !');
-			showToast();			
+			var toastobj = {type: 'toast-error', text: 'Please set Date and time for escalation !'};
+			showToast(toastobj);			
 		}
   };						
 	

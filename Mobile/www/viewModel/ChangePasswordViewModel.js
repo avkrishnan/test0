@@ -17,7 +17,6 @@ function ChangePasswordViewModel() {
 	this.errorMessageCurrent = ko.observable();	
 	this.errorMessageNew = ko.observable();
 	this.errorMessageConfirm = ko.observable();
-	this.toastText = ko.observable();	
 	
 	/* Methods */
   this.applyBindings = function () {
@@ -45,12 +44,7 @@ function ChangePasswordViewModel() {
 			goToView('loginView');  
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			$('input').keyup(function () {
 				that.currentpasswordClass('');
 				that.newpasswordClass('');
@@ -102,7 +96,7 @@ function ChangePasswordViewModel() {
 
   function successfulChange(args) {
     $.mobile.hidePageLoadingMsg();
-		localStorage.setItem('changePassword', that.newPassword());		
+		localStorage.setItem('changePassword', that.newPassword());				
 		goToView('changePasswordSuccessView');
   };
 

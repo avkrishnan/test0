@@ -24,9 +24,7 @@ function SingleMessageViewModel() {
 	this.acks = ko.observable();
 	this.escalateUntil = ko.observable();	
 	this.escalateTime = ko.observable(false);	
-	this.replies = ko.observable();		
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();				
+	this.replies = ko.observable();					
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -44,13 +42,7 @@ function SingleMessageViewModel() {
 		} else if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}
-			that.toastClass('');					
+			addExternalMarkup(that.template); // this is for header/overlay message							
 			that.accountName(localStorage.getItem('accountName'));											
 			that.channelName(channelObject.channelName);		
 			//that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');
@@ -88,9 +80,8 @@ function SingleMessageViewModel() {
 	
 	this.showReplies = function(){
 		if(that.replies() == '0 Replies') {
-			that.toastClass('toast-info');			
-			that.toastText('No replies to display');		
-			showToast();			
+			var toastobj = {type: 'toast-info', text: 'No replies to display'};
+			showToast(toastobj);			
 		}
 		else {						
 			viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');
@@ -99,14 +90,12 @@ function SingleMessageViewModel() {
 	
 	this.showWhoGotIt = function(){
 		if(that.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
-			that.toastClass('toast-info');			
-			that.toastText('No iGi requested');		
-			showToast();				
+			var toastobj = {type: 'toast-info', text: 'No iGi requested'};
+			showToast(toastobj);						
 		}
 		else if(that.acks() == '0 Got It') {
-			that.toastClass('toast-info');			
-			that.toastText("No iGi's received yet");		
-			showToast();			
+			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
+			showToast(toastobj);			
 		}
 		else {					
 			viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');

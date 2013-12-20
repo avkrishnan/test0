@@ -16,8 +16,7 @@ function AdditionalContactViewModel() {
 	this.navText = ko.observable();
 	this.pView = '';
 	this.errorMessage = ko.observable();
-	this.errorMessageInput = ko.observable();
-	this.toastText = ko.observable();		
+	this.errorMessageInput = ko.observable();		
 	
 	var that = this;
 		
@@ -99,12 +98,7 @@ function AdditionalContactViewModel() {
 			goToView('loginView');
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}		
+			addExternalMarkup(that.template); // this is for header/overlay message		
 			that.accountName(localStorage.getItem("accountName"));		
 			that.name(localStorage.getItem("UserFullName"));
 			that.comMethodName('');
@@ -142,13 +136,13 @@ function AdditionalContactViewModel() {
 				}
 				localStorage.setItem("verificationStatus",true);
 				if(responseData.type == 'EMAIL') {
-					that.toastText('Email added');		
-					localStorage.setItem('toastData', that.toastText());
+					var toastText = 'Email added';
 				}
 				else {
-					that.toastText('Phone number added');		
-					localStorage.setItem('toastData', that.toastText());
-				}					
+					var toastText = 'Phone number added';
+				}
+				var toastobj = {redirect: 'verifyContactView', type: '', text: toastText};		
+				showToast(toastobj);										
 				goToView('verifyContactView');
 			},
 			error: function (responseData, status, details) {
