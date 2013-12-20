@@ -589,7 +589,7 @@ input[type="checkbox"]:checked + label span {
 	opacity:0.8;
 	width:100%;
 	text-align:center;
-	min-height:78px;
+	min-height:70px;
 }
 .resolution-2 {
 	top:33%;
@@ -614,12 +614,13 @@ input[type="checkbox"]:checked + label span {
 	width:auto;
 }
 .msg-content span {
-	background:url(images/new-user.png) no-repeat right 10px;
+	background:url(images/new-user.png) no-repeat center center;
 	color:#fff;
-	margin:0 0 0 10px;
-	padding:20px 10px;
 	float:left;
 	cursor:pointer;
+	height:70px;
+	top:50%;
+	width:20px;
 }
 span.down-arrow {
 	clear:both;
@@ -3685,17 +3686,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-fullsize.png) no-repeat center 35px;
 	}
-	.resolution {
-		top:43%;
-	}
-	.resolution-2 {
+	.resolution, .resolution-2, .resolution-3, .resolution-4, .resolution-5  {
 		top:50%;
-	}
-	.resolution-3 {
-		top:55%;
-	}
-	.resolution-5 {
-		top:43%;
+		height:70px;
+		margin-top:-35px;
 	}
 }
 @media only screen and (min-width:1290px) {

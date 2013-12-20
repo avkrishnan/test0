@@ -108,21 +108,6 @@ function ChannelMessagesViewModel() {
 		localStorage.setItem("currentChannelMessage",JSON.stringify(data));
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	}
-	
-	
-	/*this.getChannelCommand = function(channelid) {
-		var callbacks = {
-			success: function() {
-				//alert('success');
-			},
-			error: function(data, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
-			}
-		};
-		$.mobile.showPageLoadingMsg("a", "Loading Channel");
-		return ES.channelService.getChannel(channelid, callbacks);
-	};*/
 		
 	this.gotChannel = function(data) {
 		$.mobile.hidePageLoadingMsg();
@@ -134,6 +119,7 @@ function ChannelMessagesViewModel() {
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
 					//var tempCreated = msToTime(valueMessage.created);
 					var tempCreated = time2TimeAgo(valueMessage.created);
+					var tempCreated = formatDate(valueMessage.created, 'short', 'follow');
 					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
 						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 						tempClass = 'iconchannels icon-' + tempClass;

@@ -826,35 +826,61 @@ function dateFormat2(created) {
 }
 
 /* This function converts passed date into a desired format*/
-function formatDate(date, format) {
-	if(typeof(date)==='undefined') {
+function formatDate(date, format, source) {
+	if(typeof(date) === 'undefined') {
 		date = new Date();
 	}
-	if(typeof(format)==='undefined') {
+	if(typeof(format) === 'undefined') {
 		format = 'short';
 	}
+	if(typeof(source) === 'undefined') {
+		source = '';
+	}	
 	var newDate = new Date(date);
 	var shortMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'];
 	var longMonths  = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'];
+	var longDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+	var year 	= newDate.getFullYear();
 	var month 	= newDate.getMonth();
 	var day			= newDate.getDate();
+	var weekDay	= newDate.getDay();
 	var hour 		= newDate.getHours();
 	var minute 	= newDate.getMinutes();
-	var second 	= newDate.getSeconds();
 	var todaysDay = new Date().getDate();
+	var todaysYear = new Date().getFullYear();
 	//var output 	= months[month] + ' ' + day + ', ' + newDate.getFullYear() +  ', ' +((hour == 0|| hour == 12 )?12:hour%12) + ':' +((''+minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'am' : 'pm');
+	var output;
 	switch(format) {
 		case 'short' :
 			if(day == todaysDay) {
-				var output 	= ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + '' + (hour < 12? 'A' : 'P');
+				if(source == 'follow' || source == 'main') {
+					output 	= 'TODAY, ' + ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+				}
+				else {
+					output 	= ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+				}
+			}
+			else if(year > todaysYear) {
+				if(source == 'follow' || source == 'main') {
+					output 	= month + '/' + day + '/' + year;	
+				}
+				else {
+					output 	= month + '/' + day + '/' + year + ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+				}
 			}
 			else {
-				var output 	= shortMonths[month] + ' ' + day + ', ' + ((hour == 0|| hour == 12 )?12:hour%12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + '' + (hour < 12? 'A' : 'P');					
+				if(source == 'follow' || source == 'main') {
+					output 	= shortMonths[month] + '. ' + day + ', ' +  ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+				}
+				else {
+					output 	= shortMonths[month] + '. ' + day;
+				}
 			}
 			break;
 		case 'long':
-			var output 	= newDate.toLocaleString();
-			break;	
+			//output 	= newDate.toLocaleString();
+			output = longDays[weekDay] + ' ' + shortMonths[month] + '. ' + day + ', ' + year + ' ' +  ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+			break;
 	}
 	return output;
 }
