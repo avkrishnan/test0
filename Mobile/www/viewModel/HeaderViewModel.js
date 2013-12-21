@@ -155,7 +155,7 @@ function OverlayViewModel() {
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 
 			valueNotification.createdLong = formatDate(valueNotification.created, 'long');
-			valueNotification.created = formatDate(valueNotification.created, 'short');
+			valueNotification.created = formatDate(valueNotification.created, 'short', 'main');
 
 			valueNotification.fullText = jQuery.trim(valueNotification.text);
 			if(valueNotification.text.length > screenSizeText) {

@@ -569,16 +569,16 @@ input[type="checkbox"]:checked + label span {
 	box-shadow:0 0 20px #9e8342 inset;
 }
 .tutorial-1 {
-	background:url(images/v-51-320.png) no-repeat top center;
+	background:url(images/v-51-320.png) no-repeat center 20px;
 }
 .tutorial-2 {
-	background:#fae49c url(images/v-52-320.png) no-repeat center top;
+	background:#fae49c url(images/v-52-320.png) no-repeat center 40px;
 }
 .tutorial-3 {
 	background:#fae49c url(images/v-53-320.png) no-repeat center 0px;
 }
 .tutorial-4 {
-	background:#fae49c url(images/v-54-320.png) no-repeat center 0px;
+	background:#fae49c url(images/v-54-320.png) no-repeat center 40px;
 }
 .tutorial-5 {
 	background:#fae49c url(images/v-55-320.png) no-repeat center 3px;
@@ -3241,7 +3241,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 /*
 	*@media query css
 */
-@media only screen and (min-width:360px) { 
+@media only screen and (min-width:360px) and (min-height:620px) { 
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:80.5%;
 	}
@@ -3325,6 +3325,21 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.i-icon {
 		width:52%;
 	}
+	.tutorial-1 {
+		background:#fae49c url(images/v-51-600.png) no-repeat center 16px;
+	}
+	.tutorial-2 {
+		background:#fae49c url(images/v-52-600.png) no-repeat center 5px;
+	}
+	.tutorial-3 {
+		background:#fae49c url(images/v-53-600.png) no-repeat center 5px;
+	}
+	.tutorial-4 {
+		background:#fae49c url(images/v-54-600.png) no-repeat center 15px;
+	}
+	.tutorial-5 {
+		background:#fae49c url(images/v-55-600.png) no-repeat center 0px;
+	}	
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3429,7 +3444,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slider-value span.fast {
 		margin:0 40.4%;
 	}
-	.tutorial-1 {
+	/*.tutorial-1 {
 		background:#fae49c url(images/v-51-all.png) no-repeat center center;
 	}
 	.tutorial-2 {
@@ -3443,11 +3458,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-all.png) no-repeat center center;
-	}
+	}*/
 	.i-icon {
 		width:80%;
 	}
 }
+/*
 @media screen and (min-height: 600px) and (max-height:768px) {
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-600.png) no-repeat center 16px;
@@ -3465,7 +3481,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		background:#fae49c url(images/v-55-600.png) no-repeat center 0px;
 	}
 }
-
+*/
 @media only screen and (min-width:800px) {
 	.slidemenu {
 		min-height:1280px;
@@ -3542,7 +3558,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		margin:0 42.4%;
 	}
 }
-@media only screen and (min-width:950px) and (max-height:768px){
+/*@media only screen and (min-width:950px) and (max-height:768px){
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-new.png) no-repeat center 8px;
 	}
@@ -3558,7 +3574,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-new.png) no-repeat center 8px;
 	}
-}
+}*/
 
 @media only screen and (min-width:1280px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3611,6 +3627,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slider-value span.fast {
 		margin:0 44.2%;
 	}
+	/*
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-fullsize.png) no-repeat center 8px;
 	}
@@ -3625,7 +3642,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-fullsize.png) no-repeat center 25px;
-	}
+	}*/
 }
 @media only screen and (min-width:1290px) {
 	.dateminutesetting {

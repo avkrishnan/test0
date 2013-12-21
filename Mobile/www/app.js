@@ -775,67 +775,6 @@ function _getDate(functionName) {
 	var _date = new Date();
 	return _date[functionName]();	
 }
-
-function msToTime(date){
-	var newDate = new Date(date).getTime();
-	//var created = newDate.getTime(); 
-	var ms = new Date().getTime() - newDate;	
-	var secs = Math.floor(ms / 1000);
-	var msleft = ms % 1000;
-	var totalHours = Math.floor(secs / (60 * 60));
-	var days = Math.floor(totalHours / 24);
-	var hours = totalHours % 24;
-	var divisor_for_minutes = secs % (60 * 60);
-	var minutes = Math.floor(divisor_for_minutes / 60);
-	var divisor_for_seconds = divisor_for_minutes % 60;
-	var seconds = Math.ceil(divisor_for_seconds);
-	if(days == 1) {
-		return ' yesterday';
-	}	
-	else if(days > 1) {
-		return formatDate(date, 'short');
-	} 
-	else if(hours == 1) {
-		return hours + ' hr ago';		
-	} 
-	else if(hours > 1) {
-		return hours + ' hrs ago';
-	} 
-	else if(minutes == 1) {
-		return minutes + ' min ago';
-	} 
-	else if(minutes > 1) {
-		return minutes + ' mins ago';		
-	} 
-	else if(seconds > 1) {
-		return  seconds + ' secs ago';
-	} 
-	else {
-		return  'just now';
-	}
-}
-
-/* Date Format for date like 13/12/2013, 11:10 AM */
-function dateFormat1(created) {
-	var created = new Date(created);
-	var created = created.getTime();		
-	var date  = new Date(created);
-	return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
-	date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM'); 
-}
-
-/* Date Format for date like December 13, 11:10 AM */
-function dateFormat2(created) {
-	var created = new Date(created);
-	var created = created.getTime();		
-	var date  = new Date(created);
-	var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
-	return ((monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
-	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
-}
-
 /* This function converts passed date into a desired format*/
 function formatDate(date, format, source) {
 	if(typeof(date) === 'undefined') {
@@ -894,29 +833,6 @@ function formatDate(date, format, source) {
 			break;
 	}
 	return output;
-}
-
-/* Date Format for date like Dec 13, 2013, 11:10 AM */
-function shortFormatYear(created) {
-	var created = new Date(created);
-	var created = created.getTime();		
-	var date  = new Date(created);
-	var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-	return ((monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + ", " +(date.getFullYear()) + 
-	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
-}
-
-/* Short Format for date like Dec 02, 11:00*/
-function shortFormat(created) {
-	var created = new Date(created);
-	var created = created.getTime();		
-	var date  = new Date(created);
-	//var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
-	var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-	return ((monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
-	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " "; + (date.getHours()>12?'PM':'AM');
 }
 
 /* Hide footer on mobile keypad */
