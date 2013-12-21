@@ -135,8 +135,8 @@ function VerifyContactViewModel() {
 					var toastText = 'Email verified';				
 				}
 				localStorage.removeItem("commethodType");
-				var toastobj = {redirect: 'addContactView', type: '', text: toastText};		
-				showToast(toastobj);								
+				var toastobj = {redirect: 'addContactView', type: '', text: toastText};
+				showToast(toastobj);	
 				goToView('addContactView');
 			},
 			error: function (responseData, status, details) {
