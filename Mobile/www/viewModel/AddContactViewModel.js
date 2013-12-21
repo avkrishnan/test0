@@ -159,18 +159,19 @@ function AddContactViewModel() {
 			goToView('loginView');
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			var _accountName = localStorage.getItem("accountName");
-			var _name = localStorage.getItem("UserFullName");
-			that.accountName(_accountName);
-			that.name(_name);
+			addExternalMarkup(that.template); // this is for header/overlay message
+			that.accountName(localStorage.getItem("accountName"));
+			that.name(localStorage.getItem("UserFullName"));
 			that.commethods.removeAll();
 			that.showDelete(false);
 			that.showConfirm(false);
 			that.verify(false);
 			localStorage.removeItem("currentVerificationCommethodID");
-			$.mobile.showPageLoadingMsg("a", "Loading Settings");
-			return that.getCommethods().then(that.showCommethods);
+			setTimeout(function() {
+				$.mobile.showPageLoadingMsg("a", "Loading commmethods.");
+				return that.getCommethods().then(that.showCommethods);
+			}, 1000);			
+			//return that.getCommethods().then(that.showCommethods);
 		}
 	};
 }

@@ -114,7 +114,7 @@ function VerifyContactViewModel() {
 			//that.getCommethods().then(gotCommethods);
 			
 			$.mobile.showPageLoadingMsg("a", "Loading Settings");
-			return true;     
+			return true;
 		}
 	};
 	
@@ -123,7 +123,7 @@ function VerifyContactViewModel() {
 			that.errorMessage('');
 			that.verifyRequestCommethod();
 		}
-	});				
+	});
 
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
