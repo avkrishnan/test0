@@ -3429,7 +3429,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slider-value span.fast {
 		margin:0 40.4%;
 	}
-	.tutorial-1 {
+	/*.tutorial-1 {
 		background:#fae49c url(images/v-51-all.png) no-repeat center center;
 	}
 	.tutorial-2 {
@@ -3443,12 +3443,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-all.png) no-repeat center center;
-	}
+	}*/
 	.i-icon {
 		width:80%;
 	}
 }
-@media screen and (min-height: 600px) and (max-height:768px) {
+/*@media screen and (min-height: 600px) and (max-height:768px) {*/
+@media screen and (min-height: 400px) {
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-600.png) no-repeat center 16px;
 	}
@@ -3542,7 +3543,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		margin:0 42.4%;
 	}
 }
-@media only screen and (min-width:950px) and (max-height:768px){
+/*@media only screen and (min-width:950px) and (max-height:768px){
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-new.png) no-repeat center 8px;
 	}
@@ -3558,7 +3559,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-new.png) no-repeat center 8px;
 	}
-}
+}*/
 
 @media only screen and (min-width:1280px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3611,6 +3612,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slider-value span.fast {
 		margin:0 44.2%;
 	}
+	/*
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-fullsize.png) no-repeat center 8px;
 	}
@@ -3625,7 +3627,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-fullsize.png) no-repeat center 25px;
-	}
+	}*/
 }
 @media only screen and (min-width:1290px) {
 	.dateminutesetting {
