@@ -3241,7 +3241,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 /*
 	*@media query css
 */
-@media only screen and (min-width:360px) { 
+@media only screen and (min-width:360px) and (min-height:620px) { 
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:80.5%;
 	}
@@ -3325,6 +3325,21 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.i-icon {
 		width:52%;
 	}
+	.tutorial-1 {
+		background:#fae49c url(images/v-51-600.png) no-repeat center 16px;
+	}
+	.tutorial-2 {
+		background:#fae49c url(images/v-52-600.png) no-repeat center 5px;
+	}
+	.tutorial-3 {
+		background:#fae49c url(images/v-53-600.png) no-repeat center 5px;
+	}
+	.tutorial-4 {
+		background:#fae49c url(images/v-54-600.png) no-repeat center 15px;
+	}
+	.tutorial-5 {
+		background:#fae49c url(images/v-55-600.png) no-repeat center 0px;
+	}	
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3448,8 +3463,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:80%;
 	}
 }
-/*@media screen and (min-height: 600px) and (max-height:768px) {*/
-@media screen and (min-height: 400px) {
+/*
+@media screen and (min-height: 600px) and (max-height:768px) {
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-600.png) no-repeat center 16px;
 	}
@@ -3466,7 +3481,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		background:#fae49c url(images/v-55-600.png) no-repeat center 0px;
 	}
 }
-
+*/
 @media only screen and (min-width:800px) {
 	.slidemenu {
 		min-height:1280px;

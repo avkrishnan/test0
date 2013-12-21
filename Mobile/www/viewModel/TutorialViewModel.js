@@ -28,7 +28,7 @@ function TutorialViewModel() {
 		$('.tutorials .tutorialslides:first-child').show();
 		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
 		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
-		navigation('.msg-content span', 'next', 'div.tutorialslides');
+		navigation('.msg-content em', 'next', 'div.tutorialslides');
 
 		/* This function will swipe tutorial slides */
 		function SwipeSlide(Element, Event, functionName) {
