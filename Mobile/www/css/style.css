@@ -569,16 +569,16 @@ input[type="checkbox"]:checked + label span {
 	box-shadow:0 0 20px #9e8342 inset;
 }
 .tutorial-1 {
-	background:url(images/v-51-320.png) no-repeat top center;
+	background:url(images/v-51-320.png) no-repeat center 20px;
 }
 .tutorial-2 {
-	background:#fae49c url(images/v-52-320.png) no-repeat center top;
+	background:#fae49c url(images/v-52-320.png) no-repeat center 40px;
 }
 .tutorial-3 {
 	background:#fae49c url(images/v-53-320.png) no-repeat center 0px;
 }
 .tutorial-4 {
-	background:#fae49c url(images/v-54-320.png) no-repeat center 0px;
+	background:#fae49c url(images/v-54-320.png) no-repeat center 40px;
 }
 .tutorial-5 {
 	background:#fae49c url(images/v-55-320.png) no-repeat center 3px;
