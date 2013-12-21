@@ -49,9 +49,9 @@ function TutorialViewModel() {
 			$(clickElement).on('click',function() {
 				$('header ul li').removeClass('active');
 				$(Element).hide();
-				var slideview = $(this).parent().parent()[functionName]("div "+Element).attr('id');
+				var slideview = $(this).parent().parent().parent()[functionName]("div "+Element).attr('id');
 				if(typeof slideview == 'undefined') {
-					slideview = $(this).parent().parent().attr('id');
+					slideview = $(this).parent().parent().parent().attr('id');
 				}
 				$('#'+slideview).show();
 				$('header ul li#' + slideview + 'Active').addClass('active');
