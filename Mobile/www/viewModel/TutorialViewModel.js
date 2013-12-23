@@ -15,33 +15,32 @@ function TutorialViewModel() {
 
   /* Methods */
   this.activate = function() {
-		var token = ES.evernymService.getAccessToken();		
-		var newUser = localStorage.getItem('newusername');
-		if(token == '' || token == null){
-			goToView('loginView');
-		} else if(newUser == '' || newUser == null) {
-			goToView('channelListView');
-		}			
-		$('.tutorial ul li').removeClass('active');
-		$('.tutorial ul li:first-child').addClass('active');		
-		$('.tutorials .tutorialslides').hide();
-		$('.tutorials .tutorialslides:first-child').show();
-		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
-		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
-		navigation('.msg-content em', 'next', 'div.tutorialslides');
-
-		/* This function will swipe tutorial slides */
-		function SwipeSlide(Element, Event, functionName) {
-			$(Element).on(Event, function() {
-				$('header ul li').removeClass('active');
-				var swipeView = $(this)[functionName](Element).attr('id');
-				$(this).hide();
-				if (typeof swipeView == 'undefined') {
-					swipeView = $(this).attr('id');
-				}
-				$('header ul li#' + swipeView + 'Active').addClass('active');
-				$('#' + swipeView).show();
-			});
+		if(authenticate()) {		
+			var newUser = localStorage.getItem('newusername');
+			if(newUser == '' || newUser == null) {
+				goToView('channelListView');
+			}			
+			$('.tutorial ul li').removeClass('active');
+			$('.tutorial ul li:first-child').addClass('active');		
+			$('.tutorials .tutorialslides').hide();
+			$('.tutorials .tutorialslides:first-child').show();
+			SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
+			SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
+			navigation('.msg-content em', 'next', 'div.tutorialslides');
+	
+			/* This function will swipe tutorial slides */
+			function SwipeSlide(Element, Event, functionName) {
+				$(Element).on(Event, function() {
+					$('header ul li').removeClass('active');
+					var swipeView = $(this)[functionName](Element).attr('id');
+					$(this).hide();
+					if (typeof swipeView == 'undefined') {
+						swipeView = $(this).attr('id');
+					}
+					$('header ul li#' + swipeView + 'Active').addClass('active');
+					$('#' + swipeView).show();
+				});
+			}
 		}
 		
 		/* This function will slide tutorial slides on arrow click */

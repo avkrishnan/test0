@@ -20,10 +20,7 @@ function ChannelMenuViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else {
+		if(authenticate()) {
 			that.accountName(localStorage.getItem('accountName'));
 		}
 	}

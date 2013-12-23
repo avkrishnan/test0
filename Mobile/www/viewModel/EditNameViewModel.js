@@ -34,12 +34,8 @@ function EditNameViewModel() {
 		that.errorFirstLastName('');
   };
 
-  this.activate = function () {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');			
-		} 
-		else {
+  this.activate = function () {		
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message	
 			var account = JSON.parse(localStorage.getItem('account'));							
 			$('input').keyup(function () {

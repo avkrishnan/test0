@@ -20,35 +20,33 @@ function ChannelMessagesViewModel() {
 	};
     
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		/*if(localStorage.getItem("overlayCurrentChannel") && localStorage.getItem("overlayCurrentChannel") != 'null') {
-			localStorage.setItem("currentChannel", localStorage.getItem("overlayCurrentChannel"));
-			localStorage.removeItem("overlayCurrentChannel");
-		}*/
-		localStorage.removeItem("overlayCurrentChannel");		
-		var channel = JSON.parse(localStorage.getItem("currentChannel"));
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} 
-		else if(!channel) {
-			goToView('channelsFollowingListView');
-		} 
-		else {
-			addExternalMarkup(that.template); // this is for header/overlay message	
-			that.accountName(localStorage.getItem("accountName"));			
-			if(localStorage.getItem('counter') == 1) {
-				localStorage.setItem('counter', 2);
+		if(authenticate()) {
+			/*if(localStorage.getItem("overlayCurrentChannel") && localStorage.getItem("overlayCurrentChannel") != 'null') {
+				localStorage.setItem("currentChannel", localStorage.getItem("overlayCurrentChannel"));
+				localStorage.removeItem("overlayCurrentChannel");
+			}*/
+			localStorage.removeItem("overlayCurrentChannel");		
+			var channel = JSON.parse(localStorage.getItem("currentChannel"));
+			if(!channel) {
+				goToView('channelsFollowingListView');
 			} 
-			else {		
-				localStorage.setItem('counter', 1);
+			else {
+				addExternalMarkup(that.template); // this is for header/overlay message	
+				that.accountName(localStorage.getItem("accountName"));			
+				if(localStorage.getItem('counter') == 1) {
+					localStorage.setItem('counter', 2);
+				} 
+				else {		
+					localStorage.setItem('counter', 1);
+				}
+				//that.channelid(channel.channelId);
+				that.channelid(channel.id);
+				localStorage.removeItem("currentChannelMessage");
+				$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
+				that.channelMessages.removeAll();
+				//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
+				this.gotChannel(channel);
 			}
-			//that.channelid(channel.channelId);
-			that.channelid(channel.id);
-			localStorage.removeItem("currentChannelMessage");
-			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
-			that.channelMessages.removeAll();
-			//return that.getChannelCommand(that.channelid()).then(that.gotChannel);
-			this.gotChannel(channel);
 		}
 	};	
 	

@@ -25,10 +25,7 @@ function ChannelViewUnfollowModel() {
 	};
     
 	this.activate = function (channel) {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else {		
+		if(authenticate()) {		
 			addExternalMarkup(that.template); // this is for header/overlay message			
 			that.channelid(channel.id);
 			that.accountName(localStorage.getItem("accountName"));					

@@ -22,20 +22,19 @@ function RemoveFollowerViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-		var followerObject = JSON.parse(localStorage.getItem('currentfollowerData'));;		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!followerObject) {
-			goToView('followersListView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message						
-			that.accountName(localStorage.getItem('accountName'));	
-			that.channelId(channelObject.channelId);			
-			that.followerId(followerObject.followerId);
-			that.followerName(followerObject.followerName);			
-			that.followerAccount(followerObject.accountname);												
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+			var followerObject = JSON.parse(localStorage.getItem('currentfollowerData'));;		
+			if(!followerObject) {
+				goToView('followersListView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message						
+				that.accountName(localStorage.getItem('accountName'));	
+				that.channelId(channelObject.channelId);			
+				that.followerId(followerObject.followerId);
+				that.followerName(followerObject.followerName);			
+				that.followerAccount(followerObject.accountname);												
+			}
 		}
 	}
 

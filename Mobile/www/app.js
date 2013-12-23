@@ -851,11 +851,13 @@ window.addEventListener("resize", function() {
 feedbackType = ''; // For setting feedback type
 
 /* Validate user via access token */
-function validateToken() {
+function authenticate() {
 	var token = ES.evernymService.getAccessToken();
 	if(token == '' || token == null) {
 		goToView('loginView');
+		return false;
 	}
+	return true;
 }
 
 /* pradeep kumar end */

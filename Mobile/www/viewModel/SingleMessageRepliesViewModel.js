@@ -24,25 +24,24 @@ function SingleMessageRepliesViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.replies.removeAll();									
-			that.accountName(localStorage.getItem('accountName'));		
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
-			localStorage.removeItem('currentReplyData');													
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);												
-			that.messageId(messageObject.messageId);
-			$.mobile.showPageLoadingMsg("a", "Loading Message replies");			
-			return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI});			
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+			if(!channelObject || !messageObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message
+				that.replies.removeAll();									
+				that.accountName(localStorage.getItem('accountName'));		
+				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+				var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
+				localStorage.removeItem('currentReplyData');													
+				that.channelId(channelObject.channelId);
+				that.channelName(channelObject.channelName);												
+				that.messageId(messageObject.messageId);
+				$.mobile.showPageLoadingMsg("a", "Loading Message replies");			
+				return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI});			
+			}
 		}
 	}	
 	

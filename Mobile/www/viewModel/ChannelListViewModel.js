@@ -36,11 +36,7 @@ function ChannelListViewModel() {
 	};	  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} 
-		else {
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message			
 			that.createFirstChannel(false);
 			that.addInviteFollowers(false);

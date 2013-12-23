@@ -21,34 +21,33 @@ function ChannelMainViewModel() {
     });	
 	};  
 	
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();	
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));					
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject && !localStorage.getItem('currentChannelId')) {
-			goToView('channelsIOwnView');		
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message	
-			that.broadcasts.removeAll();											
-			that.accountName(localStorage.getItem('accountName'));
-			if(localStorage.getItem('counter') == 1) {
-				localStorage.setItem('counter', 2);
-			} else {		
-				localStorage.setItem('counter', 1)
-			}								
-			localStorage.removeItem('currentMessageData');			
-			that.broadcasts.removeAll();
-			if(localStorage.getItem('currentChannelId')) {
-				that.channelId(localStorage.getItem('currentChannelId'));								
-				return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI}).then(that.getMessagesCommand());								
+	this.activate = function() {					
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+			if(!channelObject && !localStorage.getItem('currentChannelId')) {
+				goToView('channelsIOwnView');		
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message	
+				that.broadcasts.removeAll();											
+				that.accountName(localStorage.getItem('accountName'));
+				if(localStorage.getItem('counter') == 1) {
+					localStorage.setItem('counter', 2);
+				} else {
+					localStorage.setItem('counter', 1)
+				}								
+				localStorage.removeItem('currentMessageData');			
+				that.broadcasts.removeAll();
+				if(localStorage.getItem('currentChannelId')) {
+					that.channelId(localStorage.getItem('currentChannelId'));								
+					return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI}).then(that.getMessagesCommand());								
+				}
+				else {									
+					that.channelId(channelObject.channelId);
+					that.channelName(channelObject.channelName);
+					that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
+				}
+				that.getMessagesCommand();
 			}
-			else {									
-				that.channelId(channelObject.channelId);
-				that.channelName(channelObject.channelName);
-				that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
-			}
-			that.getMessagesCommand();
 		}
 	}
 	

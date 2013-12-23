@@ -20,11 +20,7 @@ function PrivacyPolicyViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			that.noheader(true);
-			that.hasfooter(false);		
-		} else {
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));
 			that.hasfooter(true);								

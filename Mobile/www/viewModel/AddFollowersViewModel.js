@@ -36,23 +36,22 @@ function AddFollowersViewModel() {
 	};	  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {			
-			that.accountName(localStorage.getItem('accountName'));		
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-			that.channelId(channelObject.channelId);										
-			that.channelName(channelObject.channelName);
-			$('input').keyup(function () {
-				that.nameClass('');
-				that.errorName('');			
-				that.emailClass('');
-				that.errorEmail('');
-			});						
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {			
+				that.accountName(localStorage.getItem('accountName'));		
+				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
+				that.channelId(channelObject.channelId);										
+				that.channelName(channelObject.channelName);
+				$('input').keyup(function () {
+					that.nameClass('');
+					that.errorName('');			
+					that.emailClass('');
+					that.errorEmail('');
+				});						
+			}
 		}
 	}
 	

@@ -82,11 +82,7 @@ function VerifyContactViewModel() {
 	};
     
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} 
-		else {
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message			
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");

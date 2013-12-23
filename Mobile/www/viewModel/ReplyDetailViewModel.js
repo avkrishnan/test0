@@ -29,28 +29,27 @@ function ReplyDetailViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message						
-			that.accountName(localStorage.getItem('accountName'));		
-			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));			
-			that.less(true);				
-			that.more(false);		
-			that.moreButton(true);
-			that.lessButton(false);																											
-			that.channelId(channelObject.channelId);	
-			that.channelName(channelObject.channelName);													
-			that.messageId(messageObject.messageId);
-			that.senderName(replyObject.senderFirstname+' '+replyObject.senderLastname+':');						
-			that.replyDate(dateFormat2(replyObject.created));
-			that.reply(replyObject.replyLess);
-			that.moreText(replyObject.replyFull);												
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+			if(!channelObject || !messageObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message						
+				that.accountName(localStorage.getItem('accountName'));		
+				var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));			
+				that.less(true);				
+				that.more(false);		
+				that.moreButton(true);
+				that.lessButton(false);																											
+				that.channelId(channelObject.channelId);	
+				that.channelName(channelObject.channelName);													
+				that.messageId(messageObject.messageId);
+				that.senderName(replyObject.senderFirstname+' '+replyObject.senderLastname+':');						
+				that.replyDate(dateFormat2(replyObject.created));
+				that.reply(replyObject.replyLess);
+				that.moreText(replyObject.replyFull);												
+			}
 		}
 	}
 	

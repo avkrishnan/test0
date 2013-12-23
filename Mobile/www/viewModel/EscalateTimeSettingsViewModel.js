@@ -25,12 +25,8 @@ function EscalateTimeSettingsViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];		
-		if(token == '' || token == null) {
-			goToView('loginView');					
-		} 
-		else {
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));			
 			if(localStorage.getItem('escDuration')) {

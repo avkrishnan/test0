@@ -23,26 +23,25 @@ function NotGotItViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.recipients.removeAll();						
-			localStorage.removeItem('currentRecipientData');					
-			that.accountName(localStorage.getItem('accountName'));											
-			that.channelId(channelObject.channelId);			
-			that.channelName(channelObject.channelName);
-			that.messageId(messageObject.messageId);								
-			that.noacks(messageObject.noacks+" Haven't Got It Yet");
-			$.mobile.showPageLoadingMsg("a", "Loading Followers");
-			return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'N', {success: successfulList, error: errorAPI});																				
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+			if(!channelObject || !messageObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message
+				that.recipients.removeAll();						
+				localStorage.removeItem('currentRecipientData');					
+				that.accountName(localStorage.getItem('accountName'));											
+				that.channelId(channelObject.channelId);			
+				that.channelName(channelObject.channelName);
+				that.messageId(messageObject.messageId);								
+				that.noacks(messageObject.noacks+" Haven't Got It Yet");
+				$.mobile.showPageLoadingMsg("a", "Loading Followers");
+				return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'N', {success: successfulList, error: errorAPI});																				
+			}
 		}
-	}	
+	}
 	
 	function successfulList(data){
 		$.mobile.hidePageLoadingMsg();	

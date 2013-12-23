@@ -39,26 +39,25 @@ function InviteFollowersViewModel() {
 	};	
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {		
-			that.accountName(localStorage.getItem('accountName'));	
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
-			that.channelName(channelObject.channelName);
-			that.channelWebAddress(channelObject.channelName+'.evernym.dom');		
-			$('textarea').keyup(function () {
-				that.textClass('');
-				that.error(false);				
-				that.errorText('');												
-			});							
-			$('input, textarea').keyup(function () {
-				that.emailClass('');
-				that.errorEmail('');									
-			});			
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {		
+				that.accountName(localStorage.getItem('accountName'));	
+				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+				that.channelName(channelObject.channelName);
+				that.channelWebAddress(channelObject.channelName+'.evernym.dom');		
+				$('textarea').keyup(function () {
+					that.textClass('');
+					that.error(false);				
+					that.errorText('');												
+				});							
+				$('input, textarea').keyup(function () {
+					that.emailClass('');
+					that.errorEmail('');									
+				});			
+			}
 		}
 	}
 	

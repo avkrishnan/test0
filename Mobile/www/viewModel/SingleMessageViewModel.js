@@ -34,47 +34,46 @@ function SingleMessageViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message							
-			that.accountName(localStorage.getItem('accountName'));											
-			that.channelName(channelObject.channelName);		
-			//that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');
-			that.time('Sent - '+ formatDate(messageObject.created, 'long'));
-			that.singleMessage(messageObject.broadcastFull);
-			that.broadcastType(messageObject.type);
-			that.iGi(messageObject.iGi);
-			that.percentageText(messageObject.percentageText);
-			that.percentageClass(messageObject.percentageClass);			
-			that.percentage(messageObject.percentage);			
-			that.noiGi(messageObject.noiGi);
-			that.noacksVisibility(false);
-			that.acksVisibility(false);			
-			that.escalateTime(false);			
-			if(messageObject.escUntil != '' &&  typeof messageObject.escUntil != 'undefined') {
-				that.escalateTime(true);								
-				that.escalateUntil('<span class="singlemsgicon '+messageObject.sensitivity+'"></span>"'+messageObject.sensitivityText+'" until '+shortFormatYear(messageObject.escUntil));			
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+			if(!channelObject || !messageObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message							
+				that.accountName(localStorage.getItem('accountName'));											
+				that.channelName(channelObject.channelName);		
+				//that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');
+				that.time('Sent - '+ formatDate(messageObject.created, 'long'));
+				that.singleMessage(messageObject.broadcastFull);
+				that.broadcastType(messageObject.type);
+				that.iGi(messageObject.iGi);
+				that.percentageText(messageObject.percentageText);
+				that.percentageClass(messageObject.percentageClass);
+				that.percentage(messageObject.percentage);			
+				that.noiGi(messageObject.noiGi);
+				that.noacksVisibility(false);
+				that.acksVisibility(false);			
+				that.escalateTime(false);			
+				if(messageObject.escUntil != '' &&  typeof messageObject.escUntil != 'undefined') {
+					that.escalateTime(true);								
+					that.escalateUntil('<span class="singlemsgicon '+messageObject.sensitivity+'"></span>"'+messageObject.sensitivityText+'" until '+formatDate(messageObject.escUntil, 'short', 'main'));			
+				}
+				that.replies(messageObject.replies);						
+				if(messageObject.type == 'REQUEST_ACKNOWLEDGEMENT' && typeof messageObject.noacks != 'undefined') {
+					if(messageObject.acks+messageObject.noacks == messageObject.acks){
+						that.noacksVisibility(false);
+						that.acksVisibility(true);					
+						that.acks(messageObject.acks+' Got It');										
+					}
+					else {
+						that.noacksVisibility(true);
+						that.acksVisibility(true);	
+						that.noacks(messageObject.noacks+" Haven't Got It Yet");
+						that.acks(messageObject.acks+' Got It');					
+					}
+				}							
 			}
-			that.replies(messageObject.replies);						
-			if(messageObject.type == 'REQUEST_ACKNOWLEDGEMENT' && typeof messageObject.noacks != 'undefined') {
-				if(messageObject.acks+messageObject.noacks == messageObject.acks){
-					that.noacksVisibility(false);
-					that.acksVisibility(true);					
-					that.acks(messageObject.acks+' Got It');										
-				}
-				else {
-					that.noacksVisibility(true);
-					that.acksVisibility(true);	
-					that.noacks(messageObject.noacks+" Haven't Got It Yet");
-					that.acks(messageObject.acks+' Got It');					
-				}
-			}							
 		}
 	}
 	

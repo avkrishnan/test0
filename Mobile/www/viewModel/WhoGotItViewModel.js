@@ -23,35 +23,34 @@ function WhoGotItViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.recipients.removeAll();						
-			localStorage.removeItem('currentRecipientData');						
-			that.accountName(localStorage.getItem('accountName'));											
-			that.channelId(channelObject.channelId);			
-			that.channelName(channelObject.channelName);
-			that.messageId(messageObject.messageId);
-			if(messageObject.acks) {								
-				that.acks(messageObject.acks+' Got It');
-			} 
-			else if(messageObject.acks == 0) {
-				that.acks(messageObject.acks+' Got It');				
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+			if(!channelObject || !messageObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message
+				that.recipients.removeAll();						
+				localStorage.removeItem('currentRecipientData');						
+				that.accountName(localStorage.getItem('accountName'));											
+				that.channelId(channelObject.channelId);			
+				that.channelName(channelObject.channelName);
+				that.messageId(messageObject.messageId);
+				if(messageObject.acks) {								
+					that.acks(messageObject.acks+' Got It');
+				} 
+				else if(messageObject.acks == 0) {
+					that.acks(messageObject.acks+' Got It');				
+				}
+				else if(messageObject.type != 'REQUEST_ACKNOWLEDGEMENT') {
+					that.acks('No iGi requested');				
+				}			
+				else {
+					that.acks('No followers to acknowledge iGi!');				
+				}
+				$.mobile.showPageLoadingMsg("a", "Loading Followers");
+				return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'Y', {success: successfulList, error: errorAPI});																			
 			}
-			else if(messageObject.type != 'REQUEST_ACKNOWLEDGEMENT') {
-				that.acks('No iGi requested');				
-			}			
-			else {
-				that.acks('No followers to acknowledge iGi!');				
-			}
-			$.mobile.showPageLoadingMsg("a", "Loading Followers");
-			return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'Y', {success: successfulList, error: errorAPI});																			
 		}
 	}	
 	

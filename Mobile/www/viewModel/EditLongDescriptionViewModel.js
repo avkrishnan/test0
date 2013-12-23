@@ -30,23 +30,22 @@ function EditLongDescriptionViewModel() {
 		that.errorChannel('');		
   };
 	
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message					
-			that.accountName(localStorage.getItem('accountName'));		
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);			
-			that.longDescription(channelObject.longDescription);						
-			$('textarea').keyup(function () {
-				that.errorMessage(false);				
-				that.errorChannel('');
-			});
+	this.activate = function() {		
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message					
+				that.accountName(localStorage.getItem('accountName'));		
+				that.channelId(channelObject.channelId);
+				that.channelName(channelObject.channelName);			
+				that.longDescription(channelObject.longDescription);						
+				$('textarea').keyup(function () {
+					that.errorMessage(false);				
+					that.errorChannel('');
+				});
+			}
 		}
 	}
 	

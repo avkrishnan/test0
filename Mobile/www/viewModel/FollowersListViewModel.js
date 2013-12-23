@@ -21,29 +21,28 @@ function FollowersListViewModel() {
     });	
 	};
 	  
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));				
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {				
-			addExternalMarkup(that.template); // this is for header/overlay message	
-			that.followers.removeAll();
-			that.followerCount('0 followers');								
-			that.accountName(localStorage.getItem('accountName'));		
-			if(localStorage.getItem('counter') == 1) {
-				localStorage.setItem('counter', 2);
-			} else if(localStorage.getItem('counter') == 2){		
-				localStorage.setItem('counter', 3);
-			}	else {
-				localStorage.setItem('counter', 1);
-			}																
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);																						
-			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
-			return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
+	this.activate = function() {			
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));				
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {				
+				addExternalMarkup(that.template); // this is for header/overlay message	
+				that.followers.removeAll();
+				that.followerCount('0 followers');								
+				that.accountName(localStorage.getItem('accountName'));		
+				if(localStorage.getItem('counter') == 1) {
+					localStorage.setItem('counter', 2);
+				} else if(localStorage.getItem('counter') == 2){		
+					localStorage.setItem('counter', 3);
+				}	else {
+					localStorage.setItem('counter', 1);
+				}																
+				that.channelId(channelObject.channelId);
+				that.channelName(channelObject.channelName);																						
+				$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
+				return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
+			}
 		}
 	}	
 	
