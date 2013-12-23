@@ -42,8 +42,8 @@
 							}
 						},
 						error: function(data, status, details) {
-							var toastobj = {type: 'toast-error', text: details.message};
-							showToast(toastobj);
+							//var toastobj = {type: 'toast-error', text: details.message};
+							//showToast(toastobj);
 						}
 					});
 				}
@@ -53,8 +53,8 @@
 				}
 			},
 			error: function(data, status, details) {
-				var toastobj = {type: 'toast-error', text: details.message};
-				showToast(toastobj);									
+				//var toastobj = {type: 'toast-error', text: details.message};
+				//showToast(toastobj);									
 			}
 		};
 		ES.systemService.getMsgNotifsSmry_C(callbacks);
