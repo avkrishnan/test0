@@ -32,7 +32,8 @@ function LoginViewModel() {
 	
   this.activate = function() {
 		//that.newMessagesCount('');
-		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {		
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {			
 			that.errorMessage('');		
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
 				that.accountName('');
@@ -59,7 +60,7 @@ function LoginViewModel() {
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'loginView') {
-			that.errorMessage('');
+			//that.errorMessage('');
 			that.loginCommand();
 		}
 	});

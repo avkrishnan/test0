@@ -850,6 +850,14 @@ window.addEventListener("resize", function() {
 
 feedbackType = ''; // For setting feedback type
 
+/* Validate user via access token */
+function validateToken() {
+	var token = ES.evernymService.getAccessToken();
+	if(token == '' || token == null) {
+		goToView('loginView');
+	}
+}
+
 /* pradeep kumar end */
 
 /* Time conversion into time ago*/

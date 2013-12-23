@@ -220,7 +220,8 @@ function SignupStepFirstViewModel() {
     ES.evernymService.clearAccessToken();
 		ES.evernymService.setAccessToken(args.accessToken);
 		localStorage.setItem('accountName', args.account.accountname);
-		localStorage.setItem('newusername', that.accountName());			
+		localStorage.setItem('newusername', that.accountName());
+		localStorage.setItem('newuseremail', that.emailaddress());					
 		goToView('registrationVerifyView');			
   }
 

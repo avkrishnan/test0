@@ -9,6 +9,7 @@ function RegistrationVerifyViewModel() {
 	this.accountName = ko.observable();	
 	
 	/* Registration verify observable */
+	this.verificationCommethodType = ko.observable();	
 	this.verificationCommethod = ko.observable();
 	this.verificationCommethodID = ko.observable();		
 	this.verificationCode = ko.observable();
@@ -33,7 +34,8 @@ function RegistrationVerifyViewModel() {
 			goToView('channelListView');
 		} else {
 			that.getCommethods();
-			that.accountName('Your evernym is: '+localStorage.getItem('accountName')+" (Don't forget!)");	
+			that.accountName('Your evernym is: '+localStorage.getItem('accountName')+" (Don't forget!)");
+			that.verificationCommethodType(localStorage.getItem('newuseremail'));				
 			$('input').keyup(function () {
 				that.errorMessage('');
 			});					
