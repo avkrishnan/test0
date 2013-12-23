@@ -1,0 +1,56 @@
+<!--  CHANNEL DETAILS VIEW -->
+<div id="followChannelView" class="channel-list"  data-role="page" >
+    <div id="gpanel"></div>
+    <div id="gpaneldots"></div>
+    <div data-role="header" xdata-theme="b" class="header">
+
+        
+        <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button">&nbsp;</a>
+        <a id="notification-star" href="#" data-rel="popup" data-role="none" onclick="OVERLAY.show();" data-inline="true" class="ui-btn-left menu-button-star" style="margin:auto !important;">&nbsp;</a>
+        
+        <button id="hnav" class="hnav" data-role="none"  data-bind="click: backNav, text: navText" ></button>
+        
+    </div>
+    
+    
+    <div class="message-list"  data-role="content" xdata-theme="b" data-iscroll>
+        
+        <ul data-role="listview" >
+            
+            <li class="channel-message-item " data-icon="false">
+                
+                    <div  class="channel-message-container">
+                        
+                        <div class="message-list-stripe"></div>
+                        
+                        <div class="channel-message-info">
+                            <div class="channel-message-avatar" style="background:white;"></div>
+                            
+                            
+                            
+                            <div class="channel-message-text" >
+                            <form>
+                            <input type="text"  data-bind="value: channelid" /><br/>
+                            <input type="submit" value="find" data-bind="click: getChannelCommand"/>
+                            </form>
+                            
+                            </div>
+                    
+                            
+                        </div>
+                        
+                        
+                    </div>
+                
+                
+            </li>
+            
+            
+            
+            
+        </ul>
+        
+        
+    </div>
+    <div id="gfooter"></div>
+</div>
