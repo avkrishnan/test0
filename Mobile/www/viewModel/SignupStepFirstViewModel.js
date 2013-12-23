@@ -65,6 +65,9 @@ function SignupStepFirstViewModel() {
     that.errorIconEmail('');
     that.errorIconAccountName('');
     that.errorIconPassword('');
+		that.tickIconEmail('');
+		that.tickIconAccountName('');															
+		that.tickIconPassword('');		
   };
 
   this.activate = function () {
