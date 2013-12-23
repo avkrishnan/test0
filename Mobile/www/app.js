@@ -317,6 +317,19 @@ function getClassName(classobject) {
 
 
 // create the various view models
+
+/* Jared's Code to be activated when required */
+//unsubscribeModel = new UnsubscribeModel(),
+//selectIconViewModel = new SelectIconViewModel(),
+//followChannelViewModel = new FollowChannelViewModel()
+//channelBroadcastsViewModel = new ChannelBroadcastsViewModel(),
+//followerViewModel = new FollowerViewModel(),
+//userSettingsModel = new UserSettingsViewModel(),
+//devSettingsModel = new DevSettingsViewModel(),
+//panelHelpViewModel = new PanelHelpViewModel(),
+//notificationsViewModel = new NotificationsViewModel(),
+//panelHelpViewModel = new PanelHelpViewModel(),
+
 var
 loginViewModel = new LoginViewModel(),
 channelListViewModel = new ChannelListViewModel(),
@@ -325,24 +338,17 @@ channelViewModel = new ChannelViewModel(),
 
 channelMenuViewModel = new ChannelMenuViewModel(),
 channelSettingsViewModel = new ChannelSettingsViewModel(),
-channelBroadcastsViewModel = new ChannelBroadcastsViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 
 sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
 inviteFollowersViewModel = new InviteFollowersViewModel(),
-
-followerViewModel = new FollowerViewModel(),
 commethodVerificationViewModel = new CommethodVerificationViewModel(),
-userSettingsModel = new UserSettingsViewModel(),
-devSettingsModel = new DevSettingsViewModel(),
 
-notificationsViewModel = new NotificationsViewModel(),
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
 forgotPasswordSuccessViewModel = new ForgotPasswordSuccessViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
 resetPasswordSuccessViewModel = new ResetPasswordSuccessViewModel(),
-panelHelpViewModel = new PanelHelpViewModel(),
 
 /*By Devedner*/
 escalationPlansViewModel = new EscalationPlansViewModel(),
@@ -371,33 +377,35 @@ channelMainViewModel = new ChannelMainViewModel(),
 channelChangeNameViewModel = new ChannelChangeNameViewModel(),
 editShortDescriptionViewModel = new EditShortDescriptionViewModel(),
 channelDeleteViewModel = new ChannelDeleteViewModel(),
+
 channelChangeIconViewModel = new ChannelChangeIconViewModel(),
 firstChannelViewModel = new FirstChannelViewModel(),
 registrationVerifyViewModel = new RegistrationVerifyViewModel(),
 singleMessageFullTextViewModel = new SingleMessageFullTextViewModel(),
+
 singleMessageRepliesViewModel = new SingleMessageRepliesViewModel(),
 replyDetailViewModel = new ReplyDetailViewModel(),
 addInviteFollowersViewModel = new AddInviteFollowersViewModel(),
 addFollowersViewModel = new AddFollowersViewModel(),
+
 editNameViewModel = new EditNameViewModel(),
 editLongDescriptionViewModel = new EditLongDescriptionViewModel(),
 changePasswordSuccessViewModel = new ChangePasswordSuccessViewModel(),
 requestiGiHelpViewModel = new RequestiGiHelpViewModel(),
+
 escalateHelpViewModel = new EscalateHelpViewModel(),
 escalateSettingsViewModel = new EscalateSettingsViewModel(),
 escalateTimeSettingsViewModel = new EscalateTimeSettingsViewModel(),
 followerDetailsViewModel = new FollowerDetailsViewModel(),
+
 removeFollowerViewModel = new RemoveFollowerViewModel(),
 notGotItViewModel = new NotGotItViewModel(),
 whoGotItViewModel = new WhoGotItViewModel(),
 recipientDetailsViewModel = new RecipientDetailsViewModel(),
+
+singleMessageViewModel = new SingleMessageViewModel()
 /* end */
 
-messageViewModel = new MessageViewModel(),
-singleMessageViewModel = new SingleMessageViewModel(),
-unsubscribeModel = new UnsubscribeModel(),
-selectIconViewModel = new SelectIconViewModel(),
-followChannelViewModel = new FollowChannelViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -405,32 +413,33 @@ followChannelViewModel = new FollowChannelViewModel()
 $.mobile.defaultPageTransition = ""; //"slide";
 
 var models = [
+							/* Jared's Code to be activated when required */
+              //unsubscribeModel,
+              //selectIconViewModel,
+              //followChannelViewModel,
+              //channelBroadcastsViewModel,
+              //followerViewModel,
+              //userSettingsModel, 
+              //devSettingsModel, 
+              //notificationsViewModel,
+              //panelHelpViewModel, 
+              //messageViewModel,																												
               loginViewModel,
               channelListViewModel,
               channelsFollowingListViewModel,
               channelViewModel,
               channelMenuViewModel,
               channelSettingsViewModel,
-              channelBroadcastsViewModel,
               channelNewViewModel,            
               sendMessageViewModel,
               followersListViewModel,
               inviteFollowersViewModel,
-              followerViewModel,
-              commethodVerificationViewModel,
-              userSettingsModel, 
-              devSettingsModel, 
-              notificationsViewModel, 
+              commethodVerificationViewModel, 
               forgotPasswordViewModel,
 							forgotPasswordSuccessViewModel, 
               resetPasswordViewModel,
 							resetPasswordSuccessViewModel, 
-              panelHelpViewModel, 
-              messageViewModel,
               singleMessageViewModel,
-              unsubscribeModel,
-              selectIconViewModel,
-              followChannelViewModel,
               escalationPlansViewModel,
               escalationPlanSingleViewModel,
               addContactViewModel,
