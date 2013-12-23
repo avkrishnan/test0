@@ -69,18 +69,7 @@ function SignupStepFirstViewModel() {
 
   this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			if(localStorage.getItem('signUpError') == 'communication method already used') {
-				that.emailaddress(localStorage.getItem('newuseremail'));
-				that.accountName(localStorage.getItem('newusername'));
-				that.password(localStorage.getItem('newuserpassword'));
-				that.emailClass('validationerror');										
-				that.errorIconEmail('errorimg');
-				that.errorEmail('<span>SORRY: </span> ' + localStorage.getItem('signUpError'));
-				that.tickIconAccountName('righttick');															
-				that.tickIconPassword('righttick');					
-			}
-			localStorage.removeItem('signUpError');				
+		if(token == '' || token == null) {			
 			$('input').keyup(function () {
 				that.errorEmail('');
 				that.errorAccountName('');
@@ -91,7 +80,6 @@ function SignupStepFirstViewModel() {
 				that.errorIconEmail('');
 				that.errorIconAccountName('');
 				that.errorIconPassword('');
-				localStorage.removeItem('signUpError');
 			});
 		} 
 		else {
@@ -147,6 +135,15 @@ function SignupStepFirstViewModel() {
     }
   }
 	
+	/* Create Random AccountName Generator */	
+  function generateAccount() {
+    return {
+      emailaddress: that.emailaddress(),
+      accountname: that.accountName(),		
+      password: that.password()	
+    };
+  };	
+	
   this.nextViewCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
     if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
@@ -162,9 +159,6 @@ function SignupStepFirstViewModel() {
       that.errorIconPassword('errorimg');
       that.errorPassword('<span>SORRY:</span> Please enter password');
     } else {
-      localStorage.setItem('newuseremail', that.emailaddress());
-      localStorage.setItem('newusername', that.accountName());
-      localStorage.setItem('newuserpassword', that.password());
 			$.mobile.showPageLoadingMsg('a', 'Checking Evernym availability');
 			return ES.loginService.checkName(that.accountName(), { success: successAvailable, error: errorAPI });
     }
@@ -176,13 +170,64 @@ function SignupStepFirstViewModel() {
       that.errorIconAccountName('errorimg');
       that.errorAccountName('<span>SORRY:</span> This Evernym has already been taken');
 		} else {
-			goToView('signupStepSecondView');
+      $.mobile.showPageLoadingMsg('a', 'Enrolling');
+      var callbacks = {
+        success: signUpSuccess,
+        error: signUpError
+      };
+      var account = generateAccount();
+      ES.loginService.accountEnroll(account, callbacks);
 		}
-	};    
+	};
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
 		that.errorPassword('<span>SORRY:</span> Please enter password');
 	};	
+	
+
+  function signUpSuccess(args) {
+    $.mobile.hidePageLoadingMsg();
+		that.loginCommand();
+  };
+
+  function signUpError(data, status, details) {
+    $.mobile.hidePageLoadingMsg();
+		if(details.message == 'communication method already used') {
+			that.emailClass('validationerror');										
+			that.errorIconEmail('errorimg');
+			that.errorEmail('<span>SORRY: </span> ' + details.message);
+			that.tickIconAccountName('righttick');															
+			that.tickIconPassword('righttick');
+		}
+  };
+	
+	this.loginCommand = function() {
+    $.mobile.showPageLoadingMsg('a', 'Logging In With New Credentials');
+    var callbacks = {
+      success : loginSuccess,
+      error : loginError
+    };
+    var loginModel = {};
+    loginModel.accountname = that.accountName();
+    loginModel.password = that.password();
+    loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
+    ES.loginService.accountLogin(loginModel, callbacks);
+	}
+	
+	function loginSuccess(args) {		
+    $.mobile.hidePageLoadingMsg();
+    ES.evernymService.clearAccessToken();
+		ES.evernymService.setAccessToken(args.accessToken);
+		localStorage.setItem('accountName', args.account.accountname);
+		localStorage.setItem('newusername', that.accountName());			
+		goToView('registrationVerifyView');			
+  }
+
+  function loginError(data, status, details) {
+    $.mobile.hidePageLoadingMsg();		
+		that.errorFirstLastName('<span>SORRY:</span> '+details.message);
+    ES.evernymService.clearAccessToken();
+  }	    	
 				
 }
