@@ -170,22 +170,6 @@ function EscalationPlanSingleViewModel() {
 		that.name(_name);
 		that.activeEscPlan = localStorage.getItem("activeEscPlan");
 		return that.getEscPlans().then(gotEscPlans);   
-	};
-	
-	this.backCommand = function () {
-		popBackNav();
-  };
-	
-	this.menuCommand = function () {
-		viewNavigate('SettingsSingle', 'escalationPlanSingleView', 'channelMenuView');		
-  };
-	
-	this.userSettings = function () {
-		viewNavigate('SettingsSingle', 'escalationPlanSingleView', 'escalationPlansView');				
-  };	
-
-	this.composeCommand = function () {
-		viewNavigate('SettingsSingle', 'escalationPlanSingleView', 'sendMessageView');				
-  };	
+	};	
 	
 }

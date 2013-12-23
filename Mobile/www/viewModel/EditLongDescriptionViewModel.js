@@ -78,7 +78,9 @@ function EditLongDescriptionViewModel() {
 		localStorage.setItem('currentChannelData', JSON.stringify(channel));
 		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Description changed'};
 		showToast(toastobj);		
-		popBackNav();									
+		backNavText.pop();
+		backNavView.pop();		
+		goToView('channelSettingsView');								
 	}
 
   function errorAPI(data, status, details) {

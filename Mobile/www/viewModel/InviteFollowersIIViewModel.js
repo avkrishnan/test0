@@ -84,7 +84,9 @@ function InviteFollowersIIViewModel() {
     $.mobile.hidePageLoadingMsg();
 		var toastobj = {redirect: 'feedbackView', type: '', text: 'Feedback sent successfully'};
 		showToast(toastobj);			
-		popBackNav();
+		backNavText.pop();
+		backNavView.pop();		
+		goToView('feedbackView');
 	};    
 	
 	function errorAPI(data, status, details){

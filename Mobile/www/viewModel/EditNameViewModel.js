@@ -95,7 +95,9 @@ function EditNameViewModel() {
 		localStorage.setItem('account', JSON.stringify(account));
 		var toastobj = {redirect: 'escalationPlansView', type: '', text: 'Name updated successfully !'};
 		showToast(toastobj);						
-		popBackNav();
+		backNavText.pop();
+		backNavView.pop();		
+		goToView('escalationPlansView');
   };
 
   function errorAPI(data, status, details) {

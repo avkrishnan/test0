@@ -4,8 +4,8 @@ function EditShortDescriptionViewModel() {
   var that = this;
 	this.template = 'editShortDescriptionView';
 	this.viewid = 'V-66';
-	this.viewname = 'Edit Short Desc';
-	this.displayname = 'Edit Short Desc';	  
+	this.viewname = 'Edit Tagline';
+	this.displayname = 'Edit Channel Tagline';	  
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
@@ -76,9 +76,11 @@ function EditShortDescriptionViewModel() {
 		});
 		channel = channel[0];		
 		localStorage.setItem('currentChannelData', JSON.stringify(channel));
-		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Description changed'};
-		showToast(toastobj);		
-		popBackNav();							
+		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Channel Tagline changed'};
+		showToast(toastobj);
+		backNavText.pop();
+		backNavView.pop();		
+		goToView('channelSettingsView');							
 	}
 
   function errorAPI(data, status, details) {
@@ -90,7 +92,7 @@ function EditShortDescriptionViewModel() {
   this.shortDescriptionCommand = function () {
 		if (that.shortDescription() == '' || typeof that.shortDescription() == 'undefined') {
 			that.errorMessage(true);			
-      that.errorChannel('<span>SORRY:</span> Please enter short description');
+      that.errorChannel('<span>SORRY:</span> Please enter channel tagline');
     } else {
 			var channelObject = {
 				id: that.channelId(),
