@@ -76,7 +76,7 @@ function EditShortDescriptionViewModel() {
 		});
 		channel = channel[0];		
 		localStorage.setItem('currentChannelData', JSON.stringify(channel));
-		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Channel Tagline changed'};
+		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Channel Tagline updated'};
 		showToast(toastobj);
 		backNavText.pop();
 		backNavView.pop();		
