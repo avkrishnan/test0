@@ -1,6 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChannelMainViewModel() {	
+﻿function ChannelMainViewModel() {	
   var that = this;
 	this.template = 'channelMainView';
 	this.viewid = 'V-46';
