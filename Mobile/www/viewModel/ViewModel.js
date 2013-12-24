@@ -1,14 +1,15 @@
 AppCtx.ViewModel = function() {
   this.accountName = ko.observable();
+  this.toastText = ko.observable();
 	
 	this.defineObservables = function() {
 	  var vm = this;
-		$.each(this.observables, function(i,v) { vm[v] = ko.observable(); });
+		$.each(this.allObs, function(i,v) { vm[v] = ko.observable(); });
 	};
 	
-  this.clearObs = function() {
+  this.clearObs = function(obs) {
 		var vm = this;
-    $.each(this.obs, function(i,v) {vm[v]('');});
+    $.each(obs, function(i,v) {vm[v]('');});
   };
   
   this.clearForm = function () {

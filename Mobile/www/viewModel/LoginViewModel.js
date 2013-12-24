@@ -5,15 +5,15 @@
   self.viewname = "Login";
   self.displayname = "Login";	
 	
-	self.observables = ['accountName', 'password', 'errorMessage', 'usernameClass', 'passwordClass', 'toastText'];
-	
-	//$.each(self.observables, function(i,v) {self[v] = ko.observable();});
+  self.inputObs = [ 'accountName', 'password']; 
+                 
+  self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
+
 	self.defineObservables();
 	
   self.applyBindings = function() {
     $("#" + self.template).on("pagebeforeshow", null, function(e, data) {
-			//$.each(self.observables, function(i,v) {self[v]('');});
-			self.clearObs();
+			self.clearForm();
       self.activate();
     });
   };
