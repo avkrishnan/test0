@@ -7,13 +7,13 @@
 	
 	self.observables = ['accountName', 'password', 'errorMessage', 'usernameClass', 'passwordClass', 'toastText'];
 	
-	$.each(self.observables, function(i,v) {self[v] = ko.observable();});
-	//self.defineObservables(self.observables,false);
+	//$.each(self.observables, function(i,v) {self[v] = ko.observable();});
+	self.defineObservables();
 	
   self.applyBindings = function() {
     $("#" + self.template).on("pagebeforeshow", null, function(e, data) {
-			$.each(self.observables, function(i,v) {self[v]('');});
-			//self.clearObs(self.observables);
+			//$.each(self.observables, function(i,v) {self[v]('');});
+			self.clearObs();
       self.activate();
     });
   };
