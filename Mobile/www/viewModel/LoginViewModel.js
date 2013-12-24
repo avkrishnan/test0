@@ -90,7 +90,7 @@ function LoginViewModel() {
 				localStorage.removeItem('password');
 			}
       var callbacks = {
-        success : function(responseData) {;},
+        success : function(responseData) {},
         error : function(data, status, details) {
 					that.usernameClass('validationerror');
 					that.passwordClass('validationerror');
