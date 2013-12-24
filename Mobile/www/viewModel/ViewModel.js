@@ -1,7 +1,7 @@
 AppCtx.ViewModel = function() {
   this.accountName = ko.observable();
   
-	this.defineObservables = function(arrayObs,isArray) {
+	this.defineObservables = function(arrayObs, isArray) {
 		$.each(arrayObs, function(i,v) {this[v] = ko.observable();});
 	}
 	
