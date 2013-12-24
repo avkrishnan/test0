@@ -8,12 +8,20 @@
 	self.observables = ['accountName', 'password', 'errorMessage', 'usernameClass', 'passwordClass', 'toastText'];
 	
 	//$.each(self.observables, function(i,v) {self[v] = ko.observable();});
+<<<<<<< HEAD
+	self.defineObservables(self.observables,false);
+=======
 	self.defineObservables();
+>>>>>>> 41952447df420df348edbd74e2b39dda4f282e80
 	
   self.applyBindings = function() {
     $("#" + self.template).on("pagebeforeshow", null, function(e, data) {
 			//$.each(self.observables, function(i,v) {self[v]('');});
+<<<<<<< HEAD
+			self.clearObs(self.observables);
+=======
 			self.clearObs();
+>>>>>>> 41952447df420df348edbd74e2b39dda4f282e80
       self.activate();
     });
   };
