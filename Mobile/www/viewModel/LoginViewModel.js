@@ -44,12 +44,10 @@ function LoginViewModel() {
 				that.password(localStorage.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
-			$('#loginView input').keyup(function(e) {
-				if(e.keyCode != 13) {
-					that.errorMessage('');
-					that.usernameClass('');
-					that.passwordClass('');
-				}
+			$('input').keyup(function(e) {
+				that.errorMessage('');
+				that.usernameClass('');
+				that.passwordClass('');
 			});
 			//that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 		} 

@@ -18,7 +18,7 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
 			ES.evernymService.clearAccessToken();
 			authenticate();
-			var toastobj = {redirect: 'loginView', type: 'toast-error', text: jqXHR.responseJSON.message};
+			var toastobj = {type: 'toast-error', text: jqXHR.responseJSON.message};
 			showToast(toastobj);
 		}
 		else {
@@ -774,8 +774,7 @@ function popBackNav() {
 /* Toast messages function */
 function showToast(toastobj) {
 	if(toastobj.redirect) {	
-		$('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');
-		//$.mobile.changePage( "#" + toastobj.redirect, {allowSamePageTransition: true});			
+		$('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');			
 	}
 	else {
 		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
