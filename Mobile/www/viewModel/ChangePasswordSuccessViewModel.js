@@ -1,7 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChangePasswordSuccessViewModel() {
-
+﻿function ChangePasswordSuccessViewModel() {
   var self = this;
 	
 	self.template = 'changePasswordSuccessView';

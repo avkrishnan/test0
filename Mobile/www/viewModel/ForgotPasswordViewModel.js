@@ -1,6 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ForgotPasswordViewModel() {
+﻿function ForgotPasswordViewModel() {
   var that = this;
   this.template = 'forgotPasswordView';
   this.viewid = 'V-03';

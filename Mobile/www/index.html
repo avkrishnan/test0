@@ -107,119 +107,12 @@
     <script type="text/javascript" src="viewModel/HeaderViewModel.js"></script>
     <script type="text/javascript" src="viewModel/NotGotItViewModel.js"></script>
     <script type="text/javascript" src="viewModel/WhoGotItViewModel.js"></script> 
-    <script type="text/javascript" src="viewModel/RecipientDetailsViewModel.js"></script>                                                                                               
-
+    <script type="text/javascript" src="viewModel/RecipientDetailsViewModel.js"></script>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/tutorial.css" rel="stylesheet" type="text/css" />
-
     <script type="text/javascript" src="app.js" ></script>
-		<script type="text/javascript">
-			function goToView(view) {
-				$.mobile.changePage( "#" + view, {allowSamePageTransition: true});
-			}
-			
-			function goToChannel(select) {
-				startBroadcast(select.value);
-			}
-    </script>
-    <!--<script type="text/javascript" src="cordova.js"></script>--> 
 	</head>
-  <body style="margin:0 !important;">		
-    <!--
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-      app.initialize();
-    </script>
-    -->
-    <div id="globalfooter" style="display:none;">
-      <div data-role="footer" id="thefooter" >
-
-		<!--JAL: Devender, is this a temporary replacement? -->
-        <!--<a href="#" data-role="none" onclick="goToView('userSettingsView');" class="a-button" id="footer-gear">test</a>-->
-        <a href="#" data-role="none" onclick="goToView('escalationPlansView');" class="a-button" id="footer-gear">test</a>
-
-        <a href="#" data-role="none" onclick="inviteFollowers();" class="a-button" id="footer-followers"></a>
-        <a href="#" data-role="none" onclick="initiateBroadcast();" class="a-button" id="footer-megaphone"></a>
-        <span id="viewid">view id</span>
-      </div>
-    </div>
-    <div id="globalpanel" style="display:none;">
-    	<div data-role="panel" id="mypanel" data-position="right" data-display="reveal" >
-      	<div id="innerpanel" class="panel-inner" style="">
-        	<div data-role="none" class="green-gradient-2" style="">
-          	<!--  <div style="padding-left:15px;padding-top:5px;" id="panel_name"> name </div> -->
-          </div>
-          <div>
-            <ul data-role="listview" data-icon="" data-corners="false" xdata-inset="true" style="min-width:210px;" xdata-theme="d">
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" />
-              	<a href="" onclick="goToView('channelListView');">Channels I Own</a>
-              </li>
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" />
-								<a href="#" onclick="goToView('channelsFollowingListView');">Channels I Follow</a>
-              </li>
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" />
-								<a href="#" onclick="goToView('channelNewView');">Create a New Channel</a>
-              </li>
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-g.png" />
-								<a href="#" onclick="goToView('followChannelView');">Follow Channel</a>
-              </li>
-              <!--
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-h.png" />
-                <a href="#" onclick="goToView('allMessagesHistoryView');">All Messages</a>
-              </li>
-              -->
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" />
-								<a href="#" onclick="goToView('userSettingsView');">User Settings</a>
-              </li>
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-d.png" />
-								<a href="#" onclick="showMessage('help under construction');">Help</a>
-              </li>
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-e.png" />
-								<a href="#" onclick="showMessage('about under construction');">About</a>
-              </li>
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-f.png" />
-								<a href="#" onclick="showFeedback();" >Feedback</a>
-              </li>
-              <li class="white-gradient-2 white_menu "><img class="ui-li-icon" src="resources/V-04-i.png" />
-								<a href="index.html#loginView?a=logout">Logout</a>
-              </li>
-            </ul>
-          </div>
-      		<h3 style="font-size:8pt;color:#BBB;">BETA V-04 Tray</h3>
-				</div>
-    	</div>
-    </div>
-    <div id="allpages" >
-            
-      <!--  ALL MESSAGE HISTORY VIEW -->
-      <div id="allMessagesHistoryView" class="channel-list" data-role="page" Xdata-theme="b" >
-        <div id="gpanel"></div>
-        <div id="gpaneldots"></div>
-        <div data-role="header" class="header" Xdata-theme="b">
-          <h1>AllMessagesHistory</h1>
-          <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
-          <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
-        </div>
-        <div data-role="content" Xdata-theme="b" >
-        	<h2 style="color:white;">AllMessagesHistory</h2>
-        </div>
-        <div class="footer" data-role="footer" >BETA V-31 AllMessagesHistory</div>
-      </div>
-      
-      <!--  FOLLOW ANOTHER CHANNEL VIEW -->
-      <div id="followAnotherChannelView" class="channel-list" data-role="page" Xdata-theme="b" >
-      	<div id="gpanel"></div>
-      	<div id="gpaneldots"></div>
-        <div data-role="header" class="header" Xdata-theme="b">
-          <h1>FollowAnotherChannel</h1>
-          <a href="#mypanel" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-left menu-button">&nbsp;</a>
-          <a href="#mypaneldots" data-rel="popup" data-role="none" data-inline="true" class="ui-btn-right menu-button-dots">&nbsp;</a>
-        </div>
-        <div data-role="content" Xdata-theme="b" >
-          <h2 style="color:white;">Follow Another Channel</h2>
-        </div>
-      	<div class="footer" data-role="footer" >BETA V-17 FollowAnotherChannel</div>
-      </div>
-    </div>
+  <body>
+    <div id="allpages"></div>
   </body>
 </html>

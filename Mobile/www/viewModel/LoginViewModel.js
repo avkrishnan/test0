@@ -1,49 +1,29 @@
-﻿/*globals ko*/
-function LoginViewModel() {
+﻿function LoginViewModel() {
   var that = this;
   this.template = "loginView";
   this.viewid = "V-01";
   this.viewname = "Login";
   this.displayname = "Login";	
 	
-	/* Login view observable */
-  this.accountName = ko.observable();
-  this.password = ko.observable();
-  this.errorMessage = ko.observable();
-  this.usernameClass = ko.observable();
-  this.passwordClass = ko.observable();
-	this.toastText = ko.observable();	
-	//this.newMessagesCount = ko.observable();
+	that.observables = ['accountName', 'password', 'errorMessage', 'usernameClass', 'passwordClass', 'toastText'];
+	
+	$.each(that.observables, function(i,v) {that[v] = ko.observable();});
 	
 	/* Methods */
   this.applyBindings = function() {
     $("#" + that.template).on("pagebeforeshow", null, function(e, data) {
-      that.clearForm();				
+			$.each(that.observables, function(i,v) {that[v]('');});		
       that.activate();
     });
   };
-	
-	this.clearForm = function () {
-		that.accountName('');	
-		that.password('');
-		that.errorMessage('');
-		that.usernameClass('');
-		that.passwordClass('');		
-  };
-	
+
   this.activate = function() {
-		//that.newMessagesCount('');
-		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
-			/*if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}*/			
+		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {		
 			that.errorMessage('');		
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
 				that.accountName('');
 				that.password('');
-			} 
+			}
 			else {
 				that.accountName(localStorage.getItem("username"));
 				that.password(localStorage.getItem("password"));
@@ -56,7 +36,6 @@ function LoginViewModel() {
 					that.passwordClass('');
 				}
 			});
-			//that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
 		} 
 		else {
 			goToView('channelListView');
@@ -148,34 +127,14 @@ function LoginViewModel() {
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
-			/*ES.systemService.getMsgNotifs({
-				success: function(responseData) {
-					localStorage.removeItem('enymNotifications');
-					localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
-					if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-						headerViewModel.newMessageClass('smsiconwhite');
-						headerViewModel.newMessageCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
-						overlayViewModel.showNewMessagesOverlay();
-					}
-					else {
-						headerViewModel.newMessageCount('');
-						headerViewModel.newMessageClass('');
-					}					
-				},
-				error: function(data, status, details) {
-					that.toastText(details.message);
-					localStorage.setItem('toastData', that.toastText());
-				}
-			});
-			*/
-			localStorage.setItem('account', JSON.stringify(args.account));							
+			localStorage.setItem('account', JSON.stringify(args.account));
       localStorage.setItem("accountName", that.accountName());
 			if(localStorage.getItem("action") == 'follow_channel') {
 				var callbacks = {
 					success: function() {
 						localStorage.removeItem('action');
-						that.toastText('Now following '+channel.name);		
-						localStorage.setItem('toastData', that.toastText());					
+						that.toastText('Now following '+channel.name);
+						localStorage.setItem('toastData', that.toastText());		
 					},
 					error: function(data, status, details) {
 						localStorage.removeItem('action');					
@@ -193,10 +152,11 @@ function LoginViewModel() {
 			}
     } 
 		else {
-      //loginError();
 			that.errorMessage('<span>SORRY: </span> Unknown Error.');
       return;
     }
   }
-		
 }
+
+LoginViewModel.prototype = new AppCtx.ViewModel();
+LoginViewModel.prototype.constructor = LoginViewModel;

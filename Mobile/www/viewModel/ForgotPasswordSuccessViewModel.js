@@ -25,5 +25,4 @@ function ForgotPasswordSuccessViewModel() {
   this.okayCommand = function () {		
 		goToView('loginView');
   };
-	
 }

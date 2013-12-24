@@ -23,6 +23,13 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 	}
 };
 
+function goToView(view) {
+	$.mobile.changePage( "#" + view, {allowSamePageTransition: true});
+}
+
+function goToChannel(select) {
+	startBroadcast(select.value);
+}
 
 ko.virtualElements.allowedBindings.updateListviewOnChange = true;
 
