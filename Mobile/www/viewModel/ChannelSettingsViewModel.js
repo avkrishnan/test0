@@ -39,8 +39,7 @@ function ChannelSettingsViewModel() {
 	
 	this.comingSoon = function() {
 		//viewNavigate('Settings', 'channelSettingsView', 'channelChangeIconView');		
-		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
-		showToast(toastobj);		
+		headerViewModel.comingSoon();		
 	}		
 	
 }

@@ -60,8 +60,7 @@ function ChannelChangeNameViewModel() {
 	});		
 	
   this.nextViewCommand = function () {
-		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
-		showToast(toastobj);
+		headerViewModel.comingSoon();
 		// commented for temparary basis		
     /*if (that.channelChangeName() == '') {
       that.errorChannel('<span>SORRY:</span> Please enter channel name');

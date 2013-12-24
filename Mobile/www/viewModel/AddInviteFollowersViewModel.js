@@ -44,8 +44,7 @@ function AddInviteFollowersViewModel() {
 	}
 	
 	this.comingSoon = function(){
-		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
-		showToast(toastobj);		
+		headerViewModel.comingSoon();	
 	};	
 	
 }

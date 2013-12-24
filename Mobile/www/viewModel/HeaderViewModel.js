@@ -114,7 +114,6 @@
 	this.comingSoon = function() {
 		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
 		showToast(toastobj);
-		goToView($.mobile.activePage.attr('id'));
 	}	
 	
 	this.newMessagesOverlayPopup = function() {
@@ -126,12 +125,10 @@
 		else {
 			var toastobj = {type: 'toast-info', text: 'You dont have any new messages!'};
 			showToast(toastobj);			
-			goToView($.mobile.activePage.attr('id'));
 		}
 		if(this.newMessageClass() == '') {
 			var toastobj = {type: 'toast-info', text: 'You dont have any new messages!'};
-			showToast(toastobj);
-			goToView($.mobile.activePage.attr('id'));			
+			showToast(toastobj);		
 		}
 	}
 	
@@ -200,8 +197,7 @@ function OverlayViewModel() {
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
-				showToast(toastobj);
-				goToView($.mobile.activePage.attr('id'));						
+				showToast(toastobj);					
 			}
 		};					
 		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
