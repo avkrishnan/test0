@@ -83,7 +83,7 @@ function ChannelMainViewModel() {
         var broadcast = data.message[len].text+'<em></em>';				
 				var sensitivityText = 'NORMAL';
 			} else if(data.message[len].escLevelId == 'F') {
-        var broadcast = data.message[len].text+'<em></em>';				
+        //var broadcast = data.message[len].text+'<em></em>';				
 				var sensitivityText = 'FAST';				
 			} else if(data.message[len].escLevelId == 'R') {
 				var sensitivityText = 'REMIND';

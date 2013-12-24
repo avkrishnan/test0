@@ -89,10 +89,10 @@ function SendMessageViewModel() {
 			if(localStorage.getItem('escalate') == 'yes') {
 				that.normalText('');
 				that.fastText('');
-				that.escalateText('escalatecolor');				
+				that.escalateText(escalate);				
 				that.normalClass('');
 				that.fastClass('');
-				that.escalateClass('escalatecoloricon');										
+				that.escalateClass('escalatecoloricon icon-'+escalate);										
 				if(localStorage.getItem('escDuration')) {
 					that.escDuration(new Date(localStorage.getItem('escDuration')));					
 					var DateTime = localStorage.getItem('escDuration').split('/');
@@ -101,7 +101,7 @@ function SendMessageViewModel() {
 					//var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
 					var durationText = '"' + escalate + '" until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0];
 					that.duration(durationText);
-					that.activeType('escalatecolor');
+					that.activeType('escalatecolor '+escalate);
 					that.escalateEdit(true);																								
 				}		
 				localStorage.removeItem('escalate');																											
