@@ -15,12 +15,20 @@ ES.evernymService.doAfterDone = function(){
 
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
     $.mobile.hidePageLoadingMsg();
-    var hash = $.mobile.urlHistory.getActive().hash;
-	if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
-
-	  localStorage.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
-
-	}
+		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
+			ES.evernymService.clearAccessToken();
+			authenticate();
+			var toastobj = {redirect: 'loginView', type: 'toast-error', text: jqXHR.responseJSON.message};
+			showToast(toastobj);
+		}
+		else {
+			var hash = $.mobile.urlHistory.getActive().hash;
+			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
+			
+			localStorage.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
+			
+			}
+		}
 };
 
 

@@ -3166,6 +3166,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .toast-tutorial {
 	bottom:12px;
 }
+.toast-login {
+	bottom:0px;
+}
 /* CHANNELS PAGES CSS	END	 */
 /* ui-popup-container */
 .ui-popup-container {
