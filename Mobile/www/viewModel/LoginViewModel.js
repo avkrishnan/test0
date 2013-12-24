@@ -44,7 +44,7 @@ function LoginViewModel() {
 				that.password(localStorage.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
-			$('input').keyup(function(e) {
+			$('input').keyup(function() {
 				that.errorMessage('');
 				that.usernameClass('');
 				that.passwordClass('');
