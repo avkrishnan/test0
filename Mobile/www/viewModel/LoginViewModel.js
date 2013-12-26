@@ -64,21 +64,19 @@
 				localStorage.removeItem('username');
 				localStorage.removeItem('password');
 			}
-      var callbacks = {
-        success : function(responseData) {},
-        error : function(data, status, details) {
-					self.usernameClass('validationerror');
-					self.passwordClass('validationerror');
-					self.errorMessage('<span>SORRY: </span> ' + details.message);
-					self.password('');
-				}
-      };
+      var loginError = function(data, status, details) {
+				self.usernameClass('validationerror');
+				self.passwordClass('validationerror');
+				self.errorMessage('<span>SORRY: </span> ' + details.message);
+			  self.password('');
+			};
       var loginModel = {};
       $.mobile.showPageLoadingMsg("a", "Logging In");
       loginModel.accountname = self.username();
       loginModel.password = self.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
-      return ES.loginService.accountLogin(loginModel, callbacks).then(loginSuccess);
+      return ES.loginService.accountLogin(loginModel)
+        .then(loginSuccess, loginError);
     }
   };
 	
