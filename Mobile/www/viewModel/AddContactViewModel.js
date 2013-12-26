@@ -164,7 +164,7 @@ function AddContactViewModel() {
 			if(localStorage.getItem('toastData')) {
 				that.toastText(localStorage.getItem('toastData'));
 				showToast();
-				localStorage.removeItem('toastData');												
+				localStorage.removeItem('toastData');
 			}				
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
