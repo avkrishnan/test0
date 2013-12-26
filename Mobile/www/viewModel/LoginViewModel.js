@@ -26,11 +26,7 @@
 				self.password(localStorage.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
-			$('input').keyup(function() {
-				self.errorMessage('');
-				self.usernameClass('');
-				self.passwordClass('');
-			});
+			$('input').keyup(self.clearErrorObs);
 		} 
 		else {
 			goToView('channelListView');
@@ -121,7 +117,7 @@
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
 			localStorage.setItem('account', JSON.stringify(args.account));
-      localStorage.setItem("accountName", self.accountName());
+      localStorage.setItem("accountName", self.username());
 			if(localStorage.getItem("action") == 'follow_channel') {
 				var callbacks = {
 					success: function() {
