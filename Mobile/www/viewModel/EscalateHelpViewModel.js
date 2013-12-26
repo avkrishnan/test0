@@ -6,10 +6,7 @@ function EscalateHelpViewModel() {
   this.viewid = 'V-20b';
   this.viewname = 'Escalate Help';
   this.displayname = 'Escalate help';
-	this.accountName = ko.observable();	
-	
-	/* Escalate help observable */
-	this.toastText = ko.observable();			
+	this.accountName = ko.observable();			
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -19,16 +16,8 @@ function EscalateHelpViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');					
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message						
 			that.accountName(localStorage.getItem('accountName'));									
 		}
 	}		

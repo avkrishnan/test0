@@ -20,7 +20,8 @@ function SingleMessageFullTextViewModel() {
 	this.percentage = ko.observable();			
 	this.noiGi = ko.observable();	
 	this.fullText = ko.observable();
-	this.toastText = ko.observable();			
+	this.broadcastType = ko.observable();
+	this.acks = ko.observable();					
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -30,41 +31,52 @@ function SingleMessageFullTextViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));			
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
-			that.channelName(channelObject.channelName);
-			var fullDate = formatDate(messageObject.created,'short');					
-			that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
-			that.sensitivity(messageObject.sensitivity);			
-			that.sensitivityText(messageObject.sensitivityText);
-			if(messageObject.broadcastFull.length > truncatedTextScreen()) {
-				that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+$.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...<em></em>');
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+			if(!channelObject || !messageObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message						
+				that.accountName(localStorage.getItem('accountName'));			
+				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+				var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
+				that.channelName(channelObject.channelName);
+				var fullDate = formatDate(messageObject.created,'long');					
+				//that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
+				that.time('Sent - '+ fullDate);
+				that.sensitivity(messageObject.sensitivity);			
+				that.sensitivityText(messageObject.sensitivityText);
+				if(messageObject.broadcastFull.length > truncatedTextScreen()) {
+					that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+$.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...<em></em>');
+				}
+				else {
+					that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+messageObject.broadcastFull+'<em></em>');				
+				}							
+				that.iGi(messageObject.iGi);
+				that.percentageText(messageObject.percentageText);
+				that.percentageClass(messageObject.percentageClass);			
+				that.percentage(messageObject.percentage);			
+				that.noiGi(messageObject.noiGi);			
+				that.fullText(messageObject.broadcastFull);
+				that.broadcastType(messageObject.type);
+				that.acks(messageObject.acks+' Got It');																
 			}
-			else {
-				that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+messageObject.broadcastFull+'<em></em>');				
-			}							
-			that.iGi(messageObject.iGi);
-			that.percentageText(messageObject.percentageText);
-			that.percentageClass(messageObject.percentageClass);			
-			that.percentage(messageObject.percentage);			
-			that.noiGi(messageObject.noiGi);			
-			that.fullText(messageObject.broadcastFull);										
 		}
-	}		
+	}
+	
+	this.showWhoGotIt = function(){
+		if(that.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
+			var toastobj = {type: 'toast-info', text: 'No iGi requested'};
+			showToast(toastobj);						
+		}
+		else if(that.acks() == '0 Got It') {
+			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
+			showToast(toastobj);			
+		}
+		else {					
+			viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');
+		}
+	};			
 				
 }

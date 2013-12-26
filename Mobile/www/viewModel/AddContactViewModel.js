@@ -17,8 +17,7 @@ function AddContactViewModel() {
 	this.showDelete = ko.observable(false);
 	this.showConfirm = ko.observable(false);
 	this.currentDeleteCommethod = ko.observable();
-	this.verify = ko.observable();
-	this.toastText = ko.observable();	
+	this.verify = ko.observable();	
 	this.deletedID = ko.observable('');
 	
 	this.navText = ko.observable();
@@ -53,8 +52,8 @@ function AddContactViewModel() {
 				//alert('succ');
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);			
 			}
 		};		
 		return ES.commethodService.getCommethods(callbacks);
@@ -67,8 +66,8 @@ function AddContactViewModel() {
 				//alert('Verification code sent!');
 			},
 			error: function (responseData, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);				
 			}
 		};		
 		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
@@ -111,21 +110,21 @@ function AddContactViewModel() {
 				//alert(that.deletedID());
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);		
-				localStorage.setItem('toastData', that.toastText());				
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);				
 			}
 		};	
 		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
 		if(localStorage.getItem("CommethodType") == 'EMAIL') {
-			that.toastText('Email address deleted');
-			localStorage.setItem('toastData', that.toastText());
+			var toastText = 'Email address deleted';
 			localStorage.removeItem("CommethodType");
 		}
 		else {
-			that.toastText('Phone number deleted');
-			localStorage.setItem('toastData', that.toastText());
+			var toastText = 'Phone number deleted';
 			localStorage.removeItem("CommethodType");			
-		}				
+		}
+		var toastobj = {redirect: 'addContactView', type: '', text: toastText};		
+		showToast(toastobj);					
 		goToView('addContactView');
 	}
 
@@ -155,28 +154,20 @@ function AddContactViewModel() {
 	}	
     
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} 
-		else {
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');
-			}				
-			var _accountName = localStorage.getItem("accountName");
-			var _name = localStorage.getItem("UserFullName");
-			that.accountName(_accountName);
-			that.name(_name);
+			that.accountName(localStorage.getItem("accountName"));
+			that.name(localStorage.getItem("UserFullName"));
 			that.commethods.removeAll();
 			that.showDelete(false);
 			that.showConfirm(false);
 			that.verify(false);
 			localStorage.removeItem("currentVerificationCommethodID");
-			$.mobile.showPageLoadingMsg("a", "Loading Settings");
-			return that.getCommethods().then(that.showCommethods);
+			setTimeout(function() {
+				$.mobile.showPageLoadingMsg("a", "Loading commmethods.");
+				return that.getCommethods().then(that.showCommethods);
+			}, 1000);			
+			//return that.getCommethods().then(that.showCommethods);
 		}
 	};
 }

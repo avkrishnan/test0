@@ -10,8 +10,7 @@ function PrivacyPolicyViewModel() {
 	
 	/* Privacy policy observable */
 	this.hasfooter = ko.observable(false);
-	this.noheader = ko.observable(false);
-	this.toastText = ko.observable();			
+	this.noheader = ko.observable(false);		
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -21,17 +20,8 @@ function PrivacyPolicyViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			that.noheader(true);
-			that.hasfooter(false);		
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));
 			that.hasfooter(true);								
 		}

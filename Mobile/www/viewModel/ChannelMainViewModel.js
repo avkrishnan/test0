@@ -1,6 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChannelMainViewModel() {	
+﻿function ChannelMainViewModel() {	
   var that = this;
 	this.template = 'channelMainView';
 	this.viewid = 'V-46';
@@ -12,9 +10,7 @@ function ChannelMainViewModel() {
 	this.channelId = ko.observable();		
 	this.channelName = ko.observable();
 	this.followerCount = ko.observable();
-	this.broadcasts = ko.observableArray([]);	
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();				
+	this.broadcasts = ko.observableArray([]);				
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -23,40 +19,33 @@ function ChannelMainViewModel() {
     });	
 	};  
 	
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();	
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));					
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject && !localStorage.getItem('currentChannelId')) {
-			goToView('channelsIOwnView');		
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message	
-			that.broadcasts.removeAll();					
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
+	this.activate = function() {					
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+			if(!channelObject && !localStorage.getItem('currentChannelId')) {
+				goToView('channelsIOwnView');		
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message	
+				that.broadcasts.removeAll();											
+				that.accountName(localStorage.getItem('accountName'));
+				if(localStorage.getItem('counter') == 1) {
+					localStorage.setItem('counter', 2);
+				} else {
+					localStorage.setItem('counter', 1)
+				}								
+				localStorage.removeItem('currentMessageData');			
+				that.broadcasts.removeAll();
+				if(localStorage.getItem('currentChannelId')) {
+					that.channelId(localStorage.getItem('currentChannelId'));								
+					return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI}).then(that.getMessagesCommand());								
+				}
+				else {									
+					that.channelId(channelObject.channelId);
+					that.channelName(channelObject.channelName);
+					that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
+				}
+				that.getMessagesCommand();
 			}
-			that.toastClass('');						
-			that.accountName(localStorage.getItem('accountName'));
-			if(localStorage.getItem('counter') == 1) {
-				localStorage.setItem('counter', 2);
-			} else {		
-				localStorage.setItem('counter', 1)
-			}								
-			localStorage.removeItem('currentMessageData');			
-			that.broadcasts.removeAll();
-			if(localStorage.getItem('currentChannelId')) {
-				that.channelId(localStorage.getItem('currentChannelId'));								
-				return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI}).then(that.getMessagesCommand());								
-			}
-			else {									
-				that.channelId(channelObject.channelId);
-				that.channelName(channelObject.channelName);
-				that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
-			}
-			that.getMessagesCommand();
 		}
 	}
 	
@@ -92,7 +81,7 @@ function ChannelMainViewModel() {
         var broadcast = data.message[len].text+'<em></em>';				
 				var sensitivityText = 'NORMAL';
 			} else if(data.message[len].escLevelId == 'F') {
-        var broadcast = data.message[len].text+'<em></em>';				
+        //var broadcast = data.message[len].text+'<em></em>';				
 				var sensitivityText = 'FAST';				
 			} else if(data.message[len].escLevelId == 'R') {
 				var sensitivityText = 'REMIND';
@@ -150,7 +139,7 @@ function ChannelMainViewModel() {
 				broadcast: broadcast,				
 				broadcastFull: data.message[len].text, 
 				//time: msToTime(data.message[len].created),
-				time: time2TimeAgo(data.message[len].created),
+				time: formatDate(data.message[len].created, 'short', 'main'),
 				created: data.message[len].created,
 				escUntil: data.message[len].escUntil,
 				iGi: iGi,
@@ -167,9 +156,9 @@ function ChannelMainViewModel() {
 	}
 
   function errorAPI(data, status, details) {
-    $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+    $.mobile.hidePageLoadingMsg();		
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);		
   };
 	
 	this.getMessagesCommand = function(){
@@ -184,9 +173,8 @@ function ChannelMainViewModel() {
 	
 	this.showWhoGotIt = function(data){		
 		if(data.acks == 0) {
-			that.toastClass('toast-info');			
-			that.toastText("No iGi's received yet");		
-			showToast();			
+			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
+			showToast(toastobj);						
 		}
 		else {
 			localStorage.setItem('currentMessageData', JSON.stringify(data));									
@@ -211,9 +199,8 @@ function ChannelMainViewModel() {
 	
 	this.showReplies = function(data){	
 		if(data.replies == '0 Replies') {
-			that.toastClass('toast-info');			
-			that.toastText('No replies to display');		
-			showToast();			
+			var toastobj = {type: 'toast-info', text: 'No replies to display'};
+			showToast(toastobj);						
 		}
 		else if(data.replies == '1 Reply') {
 			localStorage.setItem('currentMessageData', JSON.stringify(data));
@@ -261,8 +248,8 @@ function ChannelMainViewModel() {
 	
 	function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);			
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
   };						
 	
 }

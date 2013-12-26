@@ -15,9 +15,7 @@ function EscalateTimeSettingsViewModel() {
 	this.hour = ko.observable();
 	this.minute = ko.observable();
 	this.meridiem = ko.observable();
-	this.pickerDate = ko.observable();				 	
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();			
+	this.pickerDate = ko.observable();				 				
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -27,19 +25,9 @@ function EscalateTimeSettingsViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];		
-		if(token == '' || token == null) {
-			goToView('loginView');					
-		} 
-		else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}
-			that.toastClass('');		
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));			
 			if(localStorage.getItem('escDuration')) {
 				var DateTime = localStorage.getItem('escDuration').split('/');
@@ -51,7 +39,8 @@ function EscalateTimeSettingsViewModel() {
 				that.hour(time[0]);			
 				that.minute(time[1]);			
 				that.meridiem(day[2]);
-				that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());														
+				//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+				that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 			} else {
 				that.month(monthNames[_getDate('getMonth')]);			
 				that.day(_getDate('getDate'));
@@ -64,7 +53,8 @@ function EscalateTimeSettingsViewModel() {
 				that.minute(mins);
 				var meridiem = _getDate('getHours')>11?'PM':'AM';			
 				that.meridiem(meridiem);
-				that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());											
+				//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+				that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 			}
 		}
 	}
@@ -126,7 +116,8 @@ function EscalateTimeSettingsViewModel() {
 				that.meridiem('PM');		
 			}			
 		}
-		that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());									
+		//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+		that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 	};	
 	
 	this.setDown = function () {
@@ -170,7 +161,8 @@ function EscalateTimeSettingsViewModel() {
 				that.meridiem('PM');		
 			}			
 		}
-		that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());		
+		//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+		that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 	};					
 	
 	this.saveCommand = function () {
@@ -181,10 +173,9 @@ function EscalateTimeSettingsViewModel() {
 			localStorage.setItem('escDuration', duration);		
 			popBackNav();				
 		}					
-		else {
-			that.toastClass('toast-error');			
-			that.toastText('Please set date greater than current date !');
-			showToast();				
+		else {	
+			var toastobj = {type: 'toast-error', text: 'Please set date greater than current date !'};
+			showToast(toastobj);						
 		}
   };					
 	

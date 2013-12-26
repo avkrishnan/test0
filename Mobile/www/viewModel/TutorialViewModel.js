@@ -5,8 +5,7 @@ function TutorialViewModel() {
   this.template = 'tutorialView';
   this.viewid = 'V-51';
   this.viewname = 'Tutorial';
-  this.displayname = 'Tutorials';
-	this.toastText = ko.observable();			
+  this.displayname = 'Tutorials';		
 
   this.applyBindings = function() {
     $('#' + that.template).on('pagebeforeshow', function(e, data) {
@@ -21,20 +20,15 @@ function TutorialViewModel() {
 		if(token == '' || token == null){
 			goToView('loginView');
 		} else if(newUser == '' || newUser == null) {
-			goToView('channelListView');
-		}
-		if(localStorage.getItem('toastData')) {
-			that.toastText(localStorage.getItem('toastData'));
-			showToast();
-			localStorage.removeItem('toastData');												
-		}				
+				goToView('channelListView');
+		}			
 		$('.tutorial ul li').removeClass('active');
 		$('.tutorial ul li:first-child').addClass('active');		
 		$('.tutorials .tutorialslides').hide();
 		$('.tutorials .tutorialslides:first-child').show();
 		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
 		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
-		navigation('.msg-content span', 'next', 'div.tutorialslides');
+		navigation('.msg-content em', 'next', 'div.tutorialslides');
 
 		/* This function will swipe tutorial slides */
 		function SwipeSlide(Element, Event, functionName) {
@@ -55,9 +49,9 @@ function TutorialViewModel() {
 			$(clickElement).on('click',function() {
 				$('header ul li').removeClass('active');
 				$(Element).hide();
-				var slideview = $(this).parent().parent()[functionName]("div "+Element).attr('id');
+				var slideview = $(this).parent().parent().parent()[functionName]("div "+Element).attr('id');
 				if(typeof slideview == 'undefined') {
-					slideview = $(this).parent().parent().attr('id');
+					slideview = $(this).parent().parent().parent().attr('id');
 				}
 				$('#'+slideview).show();
 				$('header ul li#' + slideview + 'Active').addClass('active');
@@ -76,13 +70,13 @@ function TutorialViewModel() {
 			var callbacks = {
 				success: function() {
 					localStorage.removeItem('action');
-					that.toastText('Now following '+channel.name);		
-					localStorage.setItem('toastData', that.toastText());
+					var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
+					showToast(toastobj);
 					goToView('channelMessagesView');					
 				},
 				error: function(data, status, details) {
-					that.toastText(details.message);		
-					showToast();
+					var toastobj = {type: 'toast-error', text: details.message};
+					showToast(toastobj);
 				}
 			};						
 			var channel = JSON.parse(localStorage.getItem('currentChannel'));

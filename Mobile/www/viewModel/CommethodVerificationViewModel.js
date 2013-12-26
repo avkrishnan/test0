@@ -19,11 +19,7 @@ function CommethodVerificationViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} 
-		else {
+		if(authenticate()) {
 			that.accountName(localStorage.getItem('accountName'));
 			$.mobile.showPageLoadingMsg("a", "Verifying");
 			var key = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
@@ -37,9 +33,8 @@ function CommethodVerificationViewModel() {
 	};    
 	
 	function errorAPI(data, status, details){
-		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
+		$.mobile.hidePageLoadingMsg();
+		that.message(details.message);	
 	};
 	
 }

@@ -28,17 +28,8 @@ function ChangePasswordViewModel() {
 	
   self.activate = function () {
     self.clearForm();
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');  
-		} 
-		else {
+		if(authenticate()) {
 			addExternalMarkup(self.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				self.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
 			$('input').keyup(function () {
 			  self.clearErrorObs();
 			});			

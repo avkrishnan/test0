@@ -5,8 +5,7 @@
 	this.displayname = "Channels I Follow";
 	this.hasfooter = true;
 	this.accountName = ko.observable();
-	this.channels = ko.observableArray([]);
-	this.toastText = ko.observable();		
+	this.channels = ko.observableArray([]);		
 	var that = this;
 	this.shown = false;
 	this.noFollow = ko.observable();
@@ -23,17 +22,8 @@
 	};
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} 
-		else {
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}
 			that.accountName(localStorage.getItem("accountName"));
 			localStorage.setItem('counter', 1);					
 			//console.log("trying to get channels");
@@ -77,8 +67,8 @@
 	
 	function errorListChannels(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
 	};
 	
 	this.listFollowingChannelsCommand = function () {

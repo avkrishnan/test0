@@ -3,7 +3,6 @@
 	this.isBack = ko.observable(true);	
 	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable();
-	this.toastText = ko.observable();
 	
 	that = this;
 	/* Methods */
@@ -43,8 +42,8 @@
 							}
 						},
 						error: function(data, status, details) {
-							that.toastText(details.message);
-							showToast();
+							//var toastobj = {type: 'toast-error', text: details.message};
+							//showToast(toastobj);
 						}
 					});
 				}
@@ -54,8 +53,8 @@
 				}
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				showToast();									
+				//var toastobj = {type: 'toast-error', text: details.message};
+				//showToast(toastobj);									
 			}
 		};
 		ES.systemService.getMsgNotifsSmry_C(callbacks);
@@ -111,18 +110,10 @@
 		}
   };
 
-	/*To Do to show new IGIs*/
-	this.newIGIOverlay = function() {
-		that.toastText('Feature coming soon!');
-		localStorage.setItem('toastData', that.toastText());
-		goToView($.mobile.activePage.attr('id'));
-	}
-	
-	/*To Do to show new Followers*/
-	this.newFollowersOverlay = function() {
-		that.toastText('Feature coming soon!');
-		localStorage.setItem('toastData', that.toastText());		
-		goToView($.mobile.activePage.attr('id'));		
+	/*To Do to show new feature coming soon*/
+	this.comingSoon = function() {
+		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
+		showToast(toastobj);
 	}	
 	
 	this.newMessagesOverlayPopup = function() {
@@ -132,15 +123,12 @@
 			}
 		}
 		else {
-			that.toastText('You dont have any new messages!');
-			localStorage.setItem('toastData', that.toastText());
-			goToView($.mobile.activePage.attr('id'));
+			var toastobj = {type: 'toast-info', text: 'You dont have any new messages!'};
+			showToast(toastobj);			
 		}
 		if(this.newMessageClass() == '') {
-			that.toastText('You dont have any new messages!');
-			localStorage.setItem('toastData', that.toastText());
-			showToast();
-			goToView($.mobile.activePage.attr('id'));			
+			var toastobj = {type: 'toast-info', text: 'You dont have any new messages!'};
+			showToast(toastobj);		
 		}
 	}
 	
@@ -152,9 +140,7 @@
 /* overlay messages*/
 function OverlayViewModel() {
 	that = this;
-	this.newMessagesDisplayList = ko.observableArray([]);
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();	
+	this.newMessagesDisplayList = ko.observableArray([]);	
 	
 	this.activate = function() {
 		//that.showNewMessagesOverlay();
@@ -166,7 +152,7 @@ function OverlayViewModel() {
 		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 
 			valueNotification.createdLong = formatDate(valueNotification.created, 'long');
-			valueNotification.created = formatDate(valueNotification.created, 'short');
+			valueNotification.created = formatDate(valueNotification.created, 'short', 'main');
 
 			valueNotification.fullText = jQuery.trim(valueNotification.text);
 			if(valueNotification.text.length > screenSizeText) {
@@ -205,14 +191,13 @@ function OverlayViewModel() {
 		//alert(event.currentTarget.parentNode.getAttribute('id'));
 		var callbacks = {
 			success: function(data) {
-				that.toastText('iGi Acknowledgement sent !');
-				localStorage.setItem('toastData', that.toastText());			
+				var toastobj = {type: '', text: 'iGi Acknowledgement sent !'};
+				showToast(toastobj);							
 				//goToView($.mobile.activePage.attr('id'));																	
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				localStorage.setItem('toastData', that.toastText());
-				goToView($.mobile.activePage.attr('id'));						
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);					
 			}
 		};					
 		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');

@@ -10,8 +10,7 @@ function FollowerDetailsViewModel() {
 	
   /* Follower observable */	
 	this.channelName = ko.observable();			
-	this.followerName = ko.observable();
-	this.toastText = ko.observable();			
+	this.followerName = ko.observable();		
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -21,23 +20,17 @@ function FollowerDetailsViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var followerObject = JSON.parse(localStorage.getItem('currentfollowerData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('followersListView');							
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));
-			that.channelName(channelObject.channelName);										
-			that.followerName(followerObject.followerName+' <em>'+followerObject.accountname+'</em>');												
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			var followerObject = JSON.parse(localStorage.getItem('currentfollowerData'));		
+			if(!channelObject) {
+				goToView('followersListView');							
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message					
+				that.accountName(localStorage.getItem('accountName'));
+				that.channelName(channelObject.channelName);										
+				that.followerName(followerObject.followerName+' <em>'+followerObject.accountname+'</em>');												
+			}
 		}
 	}			
 	

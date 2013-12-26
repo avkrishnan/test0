@@ -13,8 +13,7 @@ function NotGotItViewModel() {
 	this.channelName = ko.observable();
 	this.messageId = ko.observable();				
 	this.noacks = ko.observable();
-	this.recipients = ko.observableArray([]);			
-	this.toastText = ko.observable();			
+	this.recipients = ko.observableArray([]);					
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -24,31 +23,25 @@ function NotGotItViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.recipients.removeAll();						
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}	
-			localStorage.removeItem('currentRecipientData');					
-			that.accountName(localStorage.getItem('accountName'));											
-			that.channelId(channelObject.channelId);			
-			that.channelName(channelObject.channelName);
-			that.messageId(messageObject.messageId);								
-			that.noacks(messageObject.noacks+" Haven't Got It Yet");
-			$.mobile.showPageLoadingMsg("a", "Loading Followers");
-			return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'N', {success: successfulList, error: errorAPI});																				
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+			if(!channelObject || !messageObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message
+				that.recipients.removeAll();						
+				localStorage.removeItem('currentRecipientData');					
+				that.accountName(localStorage.getItem('accountName'));											
+				that.channelId(channelObject.channelId);			
+				that.channelName(channelObject.channelName);
+				that.messageId(messageObject.messageId);								
+				that.noacks(messageObject.noacks+" Haven't Got It Yet");
+				$.mobile.showPageLoadingMsg("a", "Loading Followers");
+				return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'N', {success: successfulList, error: errorAPI});																				
+			}
 		}
-	}	
+	}
 	
 	function successfulList(data){
 		$.mobile.hidePageLoadingMsg();	
@@ -69,8 +62,8 @@ function NotGotItViewModel() {
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
   };
 	
 	this.recipientDetails = function(data){

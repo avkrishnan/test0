@@ -6,10 +6,7 @@ function RequestiGiHelpViewModel() {
   this.viewid = 'V-20b';
   this.viewname = 'iGi Help';
   this.displayname = 'iGi help';
-	this.accountName = ko.observable();	
-	
-	/* Request iGi help observable */
-	this.toastText = ko.observable();			
+	this.accountName = ko.observable();			
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -19,16 +16,8 @@ function RequestiGiHelpViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');					
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message						
 			that.accountName(localStorage.getItem('accountName'));									
 		}
 	}		

@@ -16,8 +16,7 @@ function ChannelNewViewModel() {
 	this.message = ko.observable();	
 	this.errorNewChannel = ko.observable();
 	this.channelName = ko.observable();	
-	this.channelWebAddress = ko.observable();
-	this.toastText = ko.observable();								
+	this.channelWebAddress = ko.observable();							
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -35,16 +34,8 @@ function ChannelNewViewModel() {
   };
 	  
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				localStorage.removeItem('toastData');				
-				showToast();												
-			}			
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));
 			that.sectionOne(true);
 			that.sectionTwo(false);
@@ -93,8 +84,8 @@ function ChannelNewViewModel() {
 		});
 		channel = channel[0];		
 		localStorage.setItem('currentChannelData', JSON.stringify(channel));					
-		that.toastText('Channel created');		
-		showToast();
+		var toastobj = {type: '', text: 'Channel created'};
+		showToast(toastobj);				
   };
 	
 	function successAvailable(data){

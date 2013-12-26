@@ -25,8 +25,8 @@ function ChannelSingleMessagesViewModel() {
 	this.activeClass = ko.observable();	
 	this.iGiButton = ko.observable(false);
 	this.dismissClass = ko.observable();		
-	this.dismissButton = ko.observable(true);	
-	this.toastText = ko.observable();	
+	this.dismissButton = ko.observable(true);
+	this.setting = ko.observable(false);			
 
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
@@ -35,13 +35,11 @@ function ChannelSingleMessagesViewModel() {
 	};
     
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} 
-		else {
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.accountName(localStorage.getItem("accountName"));
+			that.channelIcon('');
+			that.setting(false);			
 			that.less(true);				
 			that.more(false);		
 			that.moreButton(false);
@@ -50,11 +48,6 @@ function ChannelSingleMessagesViewModel() {
 			that.dismissButton(true);			
 			that.activeClass('igimsgdetail');
 			that.dismissClass('');										
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');
-			}
 			if(localStorage.getItem('counter') == 1) {
 				localStorage.setItem('counter', 2);
 			} 
@@ -69,15 +62,17 @@ function ChannelSingleMessagesViewModel() {
 			if(localStorage.getItem("overlayCurrentChannel")) {
 				var callbacks = {
 					success: function(data) {
-						that.channelIcon('sky-blue');						
+						that.channelIcon('channel4 sky-blue');						
 						that.title(data.name);
 						that.description(data.description);
+						that.setting(true);
 					},
 					error: function(data, status, details) {
 						if(status == '404') {
 							that.channelIcon('evernymicon');							
 							that.title('Evernym, Inc.');
 							that.description('System Notifications');
+							that.setting(false);
 						}
 					}
 				};					
@@ -126,10 +121,11 @@ function ChannelSingleMessagesViewModel() {
 			else {
 				var channel = JSON.parse(localStorage.getItem("currentChannel"));
 				var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
-				that.channelIcon('sky-blue');				
+				that.channelIcon('channel4 sky-blue');				
 				that.title(channel.name);
 				that.channelid(channel.channelId);	
 				that.description(channel.description);
+				that.setting(true);
 				if(channelMessage) {
 					that.messageId(channelMessage.messageId);
 					that.ack(channelMessage.ack);																
@@ -178,8 +174,8 @@ function ChannelSingleMessagesViewModel() {
 				//alert('success');
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				localStorage.setItem('toastData', that.toastText());
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);
 			}
 		};
 		if(read == 'N' && igiAcknowledge == "N") {
@@ -258,18 +254,20 @@ function ChannelSingleMessagesViewModel() {
 				that.iGiButton(true);
 				that.dismissButton(false);
 				that.activeClass('igisentimg');
-				that.toastText('iGi Acknowledgement sent !');
-				localStorage.setItem('toastData', that.toastText());				
-				popBackNav();
+				backNavText.pop();
+				var redirectView = backNavView.pop();				
+				var toastobj = {redirect: redirectView, type: '', text: 'iGi Acknowledgement sent !'};
+				showToast(toastobj);				
+				goToView(redirectView);
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				showToast();					
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);					
 			}
 		};		
 		if(that.ack() == 'Y' || that.activeClass() == 'igisentimg') {
-			that.toastText('iGi Acknowledgement already sent !');
-			showToast();												
+			var toastobj = {type: 'toast-info', text: 'iGi Acknowledgement already sent !'};
+			showToast(toastobj);												
 		}
 		else {			
 			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
@@ -301,18 +299,18 @@ function ChannelSingleMessagesViewModel() {
 			success: function(data) {
 				that.iGiButton(false);
 				that.dismissButton(true);								
-				that.dismissClass('active');					
-				that.toastText('Escalation is now halted for this message. No further delivery attempts will be made.');								
-				showToast();
+				that.dismissClass('active');
+				var toastobj = {type: '', text: 'Escalation is now halted for this message. No further delivery attempts will be made.'};
+				showToast(toastobj);									
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				showToast();					
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);					
 			}
 		};		
 		if(that.dismissClass() == 'active') {
-			that.toastText('Escalation is already halted !');
-			showToast();												
+			var toastobj = {type: 'toast-info', text: 'Escalation is already halted !'};
+			showToast(toastobj);															
 		}
 		else {			
 			$.mobile.showPageLoadingMsg('a', 'Sending Dismiss escalation request !');		
@@ -320,9 +318,8 @@ function ChannelSingleMessagesViewModel() {
 		}
 	}		
 	
-	this.replyMessage = function(data) {
-		that.toastText('Feature coming soon!');
-		showToast();		
+	this.comingSoon = function(data) {
+		headerViewModel.comingSoon();		
 	}		
 	
 }

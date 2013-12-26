@@ -25,7 +25,6 @@ function EscalationPlansViewModel() {
 	this.pView = '';
 	
 	this.defaultCommethods = '';
-	this.toastText = ko.observable();	
 	
 	/*this.gotoView = function(pageView) {
 		//alert(JSON.parse(JSON.stringify(pageView)).urgencyName);
@@ -63,19 +62,10 @@ function EscalationPlansViewModel() {
 	};
 			
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}					
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message								
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
-			
 			that.accountName(_accountName);		
 			that.name(_name);
 			that.escalationplans.removeAll();
@@ -84,11 +74,7 @@ function EscalationPlansViewModel() {
 			return that.getEscPlans().then(gotEscPlans);
 			//return true;
 		}
-	};
-	
-	this.menuCommand = function () {
-		viewNavigate('Settings', 'escalationPlansView', 'channelMenuView');		
-  };	
+	};	
 	
 	function gotEscPlans (data) {
 		//localStorage.setItem('allEscPlans',JSON.stringify(data));
@@ -170,8 +156,7 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('newuseremail');
 		localStorage.removeItem('newusername');
 		localStorage.removeItem('newuserpassword');		
-    localStorage.removeItem('signUpError');
-		localStorage.removeItem('toastData');				
+    localStorage.removeItem('signUpError');				
 		goToView('loginView');
   }
 

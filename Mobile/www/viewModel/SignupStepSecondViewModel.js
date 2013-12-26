@@ -138,8 +138,6 @@ function SignupStepSecondViewModel() {
 				goToView('registrationVerifyView');				
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				localStorage.setItem('toastData', that.toastText());
 			}
 		});
 		*/
@@ -148,9 +146,8 @@ function SignupStepSecondViewModel() {
   }
 
   function loginError(data, status, details) {
-    $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+    $.mobile.hidePageLoadingMsg();		
+		that.errorFirstLastName('<span>SORRY:</span> '+details.message);
     ES.evernymService.clearAccessToken();
   }
 	

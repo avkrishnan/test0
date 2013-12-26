@@ -11,8 +11,7 @@ function ChannelDeleteViewModel() {
   /* Channel delete observable */
 	this.channelId = ko.observable();
 	this.channelName = ko.observable();
-	this.channelDisplayName = ko.observable();
-	this.toastText = ko.observable();						
+	this.channelDisplayName = ko.observable();				
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -21,25 +20,19 @@ function ChannelDeleteViewModel() {
     });	
 	};  
 	
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				localStorage.removeItem('toastData');				
-				showToast();				
-			}			
-			that.accountName(localStorage.getItem('accountName'));	
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);
-			that.channelDisplayName(channelObject.channeldescription);			
+	this.activate = function() {		
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message					
+				that.accountName(localStorage.getItem('accountName'));	
+				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+				that.channelId(channelObject.channelId);
+				that.channelName(channelObject.channelName);
+				that.channelDisplayName(channelObject.channeldescription);			
+			}
 		}
 	}	
 
@@ -51,16 +44,16 @@ function ChannelDeleteViewModel() {
 			backNavView.pop();
 		}
 		localStorage.removeItem('counter');
-		that.toastText('Channel deleted');		
-		localStorage.setItem('toastData', that.toastText());
+		var toastobj = {redirect: 'channelsIOwnView', type: '', text: 'Channel deleted'};
+		showToast(toastobj);				
 		sendMessageViewModel.clearForm();		
 		goToView('channelsIOwnView');		
   };
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);			
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);					
   };
 	
   this.channelDeleteCommand = function () {

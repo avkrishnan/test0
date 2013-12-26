@@ -16,8 +16,7 @@ function ChannelChangeNameViewModel() {
 	this.channelClass = ko.observable();		
 	this.message = ko.observable();	
 	this.errorChannel = ko.observable();	
-	this.channelWebAddress = ko.observable();
-	this.toastText = ko.observable();								
+	this.channelWebAddress = ko.observable();								
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -35,27 +34,22 @@ function ChannelChangeNameViewModel() {
   };
 	  
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));		
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
-			that.channelId(channelObject.channelId);	
-			that.channelChangeName(channelObject.channelName);						
-			$('input').keyup(function () {
-				that.message('');
-				that.errorChannel('');
-			});	
+		if(authenticate()) {
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message						
+				that.accountName(localStorage.getItem('accountName'));		
+				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+				that.channelId(channelObject.channelId);	
+				that.channelChangeName(channelObject.channelName);						
+				$('input').keyup(function () {
+					that.message('');
+					that.errorChannel('');
+					that.channelClass('');
+				});	
+			}
 		}
 	}
 	
@@ -66,7 +60,9 @@ function ChannelChangeNameViewModel() {
 	});		
 	
   this.nextViewCommand = function () {
-    if (that.channelChangeName() == '') {
+		headerViewModel.comingSoon();
+		// commented for temparary basis		
+    /*if (that.channelChangeName() == '') {
       that.errorChannel('<span>SORRY:</span> Please enter channel name');
 		} else if (that.channelChangeName().match(/\s/)) {
 			 that.errorChannel('<span>SORRY:</span> Please choose a short name with no spaces');
@@ -75,7 +71,7 @@ function ChannelChangeNameViewModel() {
     } else {
 			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
 			ES.loginService.checkName(that.channelChangeName(), { success: successAvailable, error: errorAPI });					
-    }
+    }*/
   };
 	
 	function successfulModify(args) {
@@ -108,9 +104,7 @@ function ChannelChangeNameViewModel() {
 		var channelObject = {
 			id: that.channelId(),
 			name: that.channelChangeName()
-		};
-		that.toastText('Feature coming soon!');		
-		showToast();		
+		};	
 		//$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		//ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 	};	

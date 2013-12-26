@@ -6,8 +6,7 @@ function HelpViewModel() {
 	this.viewid = 'V-45';
 	this.viewname = 'Help';
 	this.displayname = 'Help and FAQs';	
-	this.accountName = ko.observable();
-	this.toastText = ko.observable();		
+	this.accountName = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -17,30 +16,10 @@ function HelpViewModel() {
 	};
 	  
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message					
 			that.accountName(localStorage.getItem('accountName'));			
 		}
-	}
-	
-	this.menuCommand = function () {
-		viewNavigate('Help', 'helpView', 'channelMenuView');
-  };
-	
-	this.userSettings = function () {
-		viewNavigate('Help', 'helpView', 'escalationPlansView');
-  };	
-
-	this.composeCommand = function () {
-		viewNavigate('Help', 'helpView', 'sendMessageView');
-  };	
+	}	
 	
 }

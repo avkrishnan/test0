@@ -65,4 +65,11 @@
     .then(start,start);
   });
 
+  var SCEN2 = hlpr.TestScenario();
+  var acct2 = hlpr.generateAccount();
+  delete acct2.firstname;
+  delete acct2.lastname;
+  
+  asyncTest('TEST ENROLLMENT with missing firstname and lastname ', hlpr.enroll(SCEN2,acct2));
+
 })();

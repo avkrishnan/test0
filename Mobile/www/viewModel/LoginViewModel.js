@@ -11,7 +11,8 @@
   self.defineObservables();
 	
   self.activate = function() {
-		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {			
 			self.errorMessage('');
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
 				self.accountName('');
@@ -22,12 +23,10 @@
 				self.password(localStorage.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
-			$('#loginView input').keyup(function(e) {
-				if(e.keyCode != 13) {
-					self.errorMessage('');
-					self.usernameClass('');
-					self.passwordClass('');
-				}
+			$('input').keyup(function() {
+				self.errorMessage('');
+				self.usernameClass('');
+				self.passwordClass('');
 			});
 		} 
 		else {
@@ -37,7 +36,7 @@
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'loginView') {
-			self.errorMessage('');
+			//self.errorMessage('');
 			self.loginCommand();
 		}
 	});
@@ -67,7 +66,7 @@
 				localStorage.removeItem('password');
 			}
       var callbacks = {
-        success : function(responseData) {;},
+        success : function(responseData) {},
         error : function(data, status, details) {
 					self.usernameClass('validationerror');
 					self.passwordClass('validationerror');
@@ -86,9 +85,17 @@
 	
   self.cleanApplication = function() {
     ES.evernymService.clearAccessToken();
-		
-		self.localStorage = [ 'login_nav', 'currentChannel', 'accountName', 'name', 'signUpError', 'newuseremail', 'newusername', 'newuserpassword' ]; 
-		self.removelLocalStorage(self.localStorage);
+    localStorage.removeItem('login_nav');
+    localStorage.removeItem('currentChannel');
+    localStorage.removeItem('accountName');
+    localStorage.removeItem('name');
+    localStorage.removeItem('signUpError');
+		localStorage.removeItem('newuseremail');
+		localStorage.removeItem('newusername');
+		localStorage.removeItem('newuserpassword');
+    //channelListViewModel.clearForm();
+    //notificationsViewModel.removeNotifications();
+    //OVERLAY.removeNotifications();
   };
 
   function loginSuccess(args) {
@@ -96,8 +103,8 @@
 			success: function() {
 			},
 			error: function(data, status, details) {
-				self.toastText(details.message);		
-				showToast();
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);
 			}
 		};
     $.mobile.hidePageLoadingMsg();
@@ -116,14 +123,14 @@
 				var callbacks = {
 					success: function() {
 						localStorage.removeItem('action');
-						self.toastText('Now following '+channel.name);
-						localStorage.setItem('toastData', self.toastText());		
+						var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
+						showToast(toastobj);						
+						goToView('channelMessagesView');					
 					},
 					error: function(data, status, details) {
-						localStorage.removeItem('action');					
-						channelMessagesViewModel.toastClass('toast-info');
-						self.toastText(details.message);		
-						localStorage.setItem('toastData', self.toastText());
+						localStorage.removeItem('action');
+						var toastobj = {redirect: 'channelMessagesView', type: 'toast-info', text: details.message};
+						showToast(toastobj);											
 						goToView('channelMessagesView');
 					}
 				};						
@@ -139,6 +146,7 @@
       return;
     }
   }
+		
 }
 
 LoginViewModel.prototype = new AppCtx.ViewModel();

@@ -2,10 +2,10 @@
 	<header class="logged-in"></header>
   <div class="page-content">
     <div class="channelinformation">
-      <span class="channelimg channel4" data-bind="css: channelIcon"></span>
+      <span class="channelimg" data-bind="css: channelIcon"></span>
       <div class="channelinfocontent last">
         <span data-bind="text:title"></span>
-        <a href="#" class="setting" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'channelViewUnfollow');"></a>
+        <a href="#" class="setting" data-bind="visible: setting" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'channelViewUnfollow');"></a>
         <em data-bind="text:description"></em>
       </div>
     </div>
@@ -26,10 +26,10 @@
       <a href="#" data-bind="css: activeClass, click: iGiAck, visible: iGiButton"></a>      
       <a href="#" data-bind="css: dismissClass, click: dismissEscalation, visible: dismissButton">dismiss</a>
       <!--<a href="#" data-bind="visible: snoozeButton">snooze</a>-->      
-      <a class="replybtn" href="#" data-bind="click: replyMessage">reply</a>
+      <a class="replybtn" href="#" data-bind="click: comingSoon">reply</a>
     </div>         
   </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>    
+  <div class="toast-notification"></div>    
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Message details', 'channelSingleMessagesView', 'sendMessageView');"></a>

@@ -22,7 +22,8 @@
     <script type="text/javascript">
 			$.mobile.autoInitializePage = false;
 			$.support.cors = true;
-			registerPushNotifications();
+			//TODO when we enable Push Notification, we'll need this next line uncommented
+			//registerPushNotifications();
     </script>
 
     <!-- application context -->
@@ -45,26 +46,16 @@
     <script type="text/javascript" src="viewModel/ChannelsFollowingListViewModel.js"></script>
     <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
     <script type="text/javascript" src="viewModel/ChannelMenuViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelBroadcastsViewModel.js"></script>
     <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>   
     <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
     <script type="text/javascript" src="viewModel/FollowersListViewModel.js"></script>
     <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/FollowerViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/UserSettingsViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/DevSettingsViewModel.js"></script>
     <script type="text/javascript" src="viewModel/CommethodVerificationViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/NotificationsViewModel.js"></script>
     <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>
     <script type="text/javascript" src="viewModel/ForgotPasswordSuccessViewModel.js"></script>    
     <script type="text/javascript" src="viewModel/ResetPasswordViewModel.js"></script>
     <script type="text/javascript" src="viewModel/ResetPasswordSuccessViewModel.js"></script>    
-    <script type="text/javascript" src="viewModel/MessageViewModel.js"></script>
     <script type="text/javascript" src="viewModel/SingleMessageViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/PanelHelpViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/UnsubscribeModel.js"></script>
-    <script type="text/javascript" src="viewModel/SelectIconViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/FollowChannelViewModel.js"></script>
     <script type="text/javascript" src="viewModel/EscalationPlansViewModel.js"></script>
     <script type="text/javascript" src="viewModel/EscalationPlanSingleViewModel.js"></script>
     <script type="text/javascript" src="viewModel/AddContactViewModel.js"></script>
@@ -107,7 +98,8 @@
     <script type="text/javascript" src="viewModel/HeaderViewModel.js"></script>
     <script type="text/javascript" src="viewModel/NotGotItViewModel.js"></script>
     <script type="text/javascript" src="viewModel/WhoGotItViewModel.js"></script> 
-    <script type="text/javascript" src="viewModel/RecipientDetailsViewModel.js"></script>
+    <script type="text/javascript" src="viewModel/RecipientDetailsViewModel.js"></script>                                                                                               
+
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/tutorial.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="app.js" ></script>
