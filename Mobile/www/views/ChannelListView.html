@@ -1,39 +1,13 @@
 <div id="channelListView" data-role="page">
   <header class="logged-in"></header>
-  
   <div class="page-content">
     <div class="portal-name">Evernym Channels</div>
-    
     <div class="baseline"></div>
-    
-    <h1 class="getmsg" data-bind="visible: createFirstChannel">Be sure your group gets your messages.</h1>
-    <a href="#" class="Channel" data-bind="visible: createFirstChannel" onclick="viewNavigate('Home', 'channelListView', 'channelNewView');">Create Your First Channel<span>Go</span></a>
-    
-    <h1 class="getmsg" data-bind="visible: addInviteFollowers"><span data-bind="text: channel"></span> doesn't have followers yet...</h1>
-    <a href="#" class="Channel" data-bind="visible: addInviteFollowers" onclick="viewNavigate('Home', 'channelListView', 'addInviteFollowersView');">Add or Invite Followers<span>Go</span></a>   
-    
-    <h1 class="getmsg" data-bind="visible: composeBroadcast">Send your first broadcast to <span data-bind="text: channel"></span></h1>
-    <a href="#" class="Channel" data-bind="visible: composeBroadcast" onclick="viewNavigate('Home', 'channelListView', 'sendMessageView');">Compose a Broadcast<span>Go</span></a>    
-    
-    <a href="#" class="Channel" data-bind="visible: channelDetails, html: channelOwn" onclick="viewNavigate('Home', 'channelListView', 'channelMainView');"></a>   
-    
-    <a href="#" class="Channel" data-bind="visible: channelsIOwn" onclick="viewNavigate('Home', 'channelListView', 'channelsIOwnView');">Channels I Own<span>Go</span></a>
-    <!--Top row end-->    
-    
-    <!--Bottom row start-->
+    <a href="#" class="Channel" onclick="viewNavigate('Home', 'channelListView', 'channelNewView');">Create a new channel<span>Go</span></a>
     <div class="baseline"></div>
-    
-    <h1 class="getmsg" data-bind="visible: findChannels">It's also FREE to follow other channels.</h1>
-    <a href="#" class="Channel" data-bind="visible: findChannels" onclick="showMessage('Feature coming soon!');">Find Channels to Follow<span>Go</span></a>
-    
-    <h1 class="getmsg" data-bind="visible: createChannel">Every group should have a channel...</h1>
-    <a href="#" class="Channel" data-bind="visible: createChannel" onclick="viewNavigate('Home', 'channelListView', 'channelNewView');">Create Another Channel<span>Go</span></a>
-
-    <a href="#" class="Channel" data-bind="visible: channelMessages, html: channelFollowing" onclick="viewNavigate('Home', 'channelListView', 'channelMessagesView');"></a>
-
-    <a href="#" class="Channel" data-bind="visible: channelsIFollow" onclick="viewNavigate('Home', 'channelListView', 'channelsFollowingListView');">Channels I Follow<span>Go</span></a>
-    <!--Bottom row end-->            
-    
+    <a href="#" class="Channel" onclick="viewNavigate('Home', 'channelListView', 'channelsIOwnView');">Channels I Own<span>Go</span></a>
+    <div class="baseline"></div>
+    <a href="#" class="Channel" onclick="viewNavigate('Home', 'channelListView', 'channelsFollowingListView');">Channels I Follow<span>Go</span></a>             
   </div>
   <div class="toast-notification"></div>
   <div class="footer">

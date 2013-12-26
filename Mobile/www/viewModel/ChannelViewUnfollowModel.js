@@ -59,5 +59,9 @@ function ChannelViewUnfollowModel() {
 		localStorage.removeItem("currentChannel");				
 		goToView('channelsFollowingListView');
 	}
+	
+	this.comingSoon = function() {		
+		headerViewModel.comingSoon();	
+	}
 		
 }

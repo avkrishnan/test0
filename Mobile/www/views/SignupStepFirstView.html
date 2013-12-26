@@ -6,26 +6,24 @@
   <div class="page-content nofooterbar">
     <section class="loginform">
       <label class="msginfo">Quick & easy sign-up:</label>
-      <div class="formtype registration" data-bind="css: emailClass">
+      <div class="formtype" data-bind="css: emailClass">
         <div class="validationerrormsg">      
           <input type="text" data-bind="value: emailaddress" placeholder="email address" />
-          <em data-bind="css: { enable: emailhighlight, errorimg: errorIconEmail, righttick: tickIconEmail }, click: emailActiveInfo"></em>
+          <div class="msgerror" data-bind="html: errorEmail"></div>
         </div>
-        <div class="msgerror" data-bind="html: errorEmail"></div>
       </div>
-      <div class="formtype registration" data-bind="css: accountNameClass">
+      <div class="formtype" data-bind="css: accountNameClass">
         <div class="validationerrormsg">      
-          <input type="text" data-bind="value: accountName, valueUpdate: 'afterkeydown'" placeholder="choose your evernym (username)" />
-          <em data-bind="css: { enable: namehighlight, errorimg: errorIconAccountName, righttick: tickIconAccountName }, click: nameActiveInfo"></em>
+          <input type="text" data-bind="value: accountName, valueUpdate: 'afterkeydown'" placeholder="create your evernym" />
+          <div class="msgerror" data-bind="html: errorAccountName"></div>
         </div>
-        <div class="msgerror" data-bind="html: errorAccountName"></div>
       </div>
-      <div class="formtype registration" data-bind="css: passwordClass">
+      <div class="helptext">Your evernym is your unique public username, visible by the channels you follow. It can be any combination of letters and numbers, but no spaces.</div>
+      <div class="formtype" data-bind="css: passwordClass">
         <div class="validationerrormsg">      
-          <input type="password" data-bind="value: password" placeholder="choose a password" />
-          <em data-bind="css: { enable: passwordhighlight, errorimg: errorIconPassword, righttick: tickIconPassword }, click: passwordActiveInfo"></em>
+          <input type="password" data-bind="value: password" placeholder="create your password" />
+          <div class="msgerror" data-bind="html: errorPassword"></div>
         </div>
-        <div class="msgerror" data-bind="html: errorPassword"></div>
       </div>
       <div class="login">
         <p class="loginbtn">
@@ -34,21 +32,10 @@
       </div>
     </section>
     <div class="baseline"></div>
-    <div class="signedup userunique" data-bind="visible: emailInfo">
-      <!-- Todo: required text form client -->
-      For receiving email communication from channels you follow. No channels will see this or any of your contact information, unless you allow it.
-    </div>
-    <div class="signedup userunique" data-bind="visible: nameInfo">
-      Your evernym is your unique public username, visible by the channels you follow.
-    </div>
-    <div class="signedup userunique" data-bind="visible: passwordInfo">
-      <!-- Todo: required text form client -->
-      Choose a password that's not easy to guess.
-    </div>
-    <div class="signedup" data-bind="visible: aboutEvernym">
+    <div class="signedup">
       <span>Evernym is all about privacy.</span> We never share your information with anyone, and we never read or scan your communications</div>
-    <div class="baseline" data-bind="visible: aboutEvernym"></div>
-    <div class="terms" data-bind="visible: aboutEvernym">By signing up you are agreeing to our
+    <div class="baseline"></div>
+    <div class="terms">By signing up you are agreeing to our
       <a href="#" onclick="goToView('privacyPolicyView');">Terms of Use and Privacy Policy</a>
     </div>
   </div>
