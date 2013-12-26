@@ -173,9 +173,7 @@ function EscalationPlansViewModel() {
 		localStorage.removeItem('currentChannel');
 		localStorage.removeItem('accountName');
 		localStorage.removeItem('account');		
-		localStorage.removeItem('name');
-		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('escLevel');
+		localStorage.removeItem('name');		
 		localStorage.removeItem('iGiStatus');		
 		localStorage.removeItem('currentChannelData');
 		localStorage.removeItem('enymNotifications');

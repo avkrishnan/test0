@@ -870,10 +870,16 @@ feedbackType = ''; // For setting feedback type
 function authenticate() {
 	var token = ES.evernymService.getAccessToken();
 	if(token == '' || token == null) {
+		sendMessageViewModel.clearForm();		
 		goToView('loginView');
 		return false;
 	}
 	return true;
+}
+
+/* Validate user via access token */
+function footerMenu() {
+	$('#'+$.mobile.activePage.attr('id')).append(load('footerMenu'));
 }
 
 /* pradeep kumar end */

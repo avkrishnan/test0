@@ -55,7 +55,10 @@ function SendMessageViewModel() {
 	this.clearForm = function () {
 		that.channels.removeAll();
 		that.selectedChannels('');				
-		that.messageText('');		
+		that.messageText('');
+		localStorage.removeItem('escLevel');
+		localStorage.removeItem('escDuration');		
+		localStorage.removeItem('iGiStatus');		
   };		  
 	
 	this.activate = function() {			
