@@ -1,11 +1,14 @@
 ﻿function LoginViewModel() {
   var self = this;
+  
+  self.requiresAuth = false;
+  
   self.template = "loginView";
   self.viewid = "V-01";
   self.viewname = "Login";
   self.displayname = "Login";	
 	
-  self.inputObs = [ 'accountName', 'password']; 
+  self.inputObs = [ 'username', 'password']; 
   self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
 
   self.defineObservables();
@@ -15,11 +18,11 @@
 		if(token == '' || token == null) {			
 			self.errorMessage('');
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
-				self.accountName('');
+				self.username('');
 				self.password('');
 			}
 			else {
-				self.accountName(localStorage.getItem("username"));
+				self.username(localStorage.getItem("username"));
 				self.password(localStorage.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
@@ -42,12 +45,12 @@
 	});
 	
   self.loginCommand = function() {
-    if (self.accountName() == '' && self.password() == '') {
+    if (self.username() == '' && self.password() == '') {
       self.usernameClass('validationerror');
       self.passwordClass('validationerror');
       self.errorMessage('<span>SORRY:</span> Please enter username and password');
     } 
-		else if(self.accountName() == '') {
+		else if(self.username() == '') {
       self.usernameClass('validationerror');
       self.errorMessage('<span>SORRY:</span> Please enter username');
     } 
@@ -58,7 +61,7 @@
 		else {
 			self.errorMessage('');
       if ($('input[name="rememberPassword"]:checked').length == 1) {
-				localStorage.setItem("username", self.accountName());
+				localStorage.setItem("username", self.username());
         localStorage.setItem("password", self.password());
       }
 			else {
@@ -76,7 +79,7 @@
       };
       var loginModel = {};
       $.mobile.showPageLoadingMsg("a", "Logging In");
-      loginModel.accountname = self.accountName();
+      loginModel.accountname = self.username();
       loginModel.password = self.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
       return ES.loginService.accountLogin(loginModel, callbacks).then(loginSuccess);

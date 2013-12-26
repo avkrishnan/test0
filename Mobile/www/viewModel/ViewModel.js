@@ -5,6 +5,8 @@ AppCtx.ViewModel = function() {
 
   this.inputObs = []; //default input observables; subclasses with input observables should override this default
   this.errorObs = []; //default error observables; subclasses with error observables should override this default
+
+  this.requiresAuth = true; //default; subclasses can override
   
 	this.defineObservables = function() {
 	  var vm = this;
@@ -40,8 +42,11 @@ AppCtx.ViewModel = function() {
   this.applyBindings = function () {
 		var vm = this;
     $('#' + vm.template).on('pagebeforeshow', null, function (e, data) {
-			vm.clearForm();
-      vm.activate();
+      if(!vm.requiresAuth || authenticate()) {
+			  vm.clearForm();
+			  vm.activate();
+	      vm.accountName(localStorage.getItem("accountName"));
+      }
     });
   };
 	
@@ -66,4 +71,4 @@ AppCtx.ViewModel = function() {
 	
 };
 
-//AppCtx.ViewModelProto = new AppCtx.ViewModel();
+//Implemented in Login, AboutEvernym, ChangePassword, ChangePasswordSuccess, ChannelList (Home)

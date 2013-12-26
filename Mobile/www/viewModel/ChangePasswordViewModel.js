@@ -27,14 +27,10 @@ function ChangePasswordViewModel() {
 	/* Methods */
 	
   self.activate = function () {
-    self.clearForm();
-		if(authenticate()) {
-			addExternalMarkup(self.template); // this is for header/overlay message			
-			$('input').keyup(function () {
-			  self.clearErrorObs();
-			});			
-			self.accountName(localStorage.getItem("accountName"));			
-		}
+		addExternalMarkup(self.template); // this is for header/overlay message			
+		$('input').keyup(function () {
+		  self.clearErrorObs();
+		});			
   };
 	
 	$(document).keyup(function (e) {

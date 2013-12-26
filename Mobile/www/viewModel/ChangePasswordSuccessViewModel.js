@@ -6,12 +6,10 @@
 	self.viewname = 'ChangePasswordSuccess';
 	self.displayname = 'Change password success';
 		 
-	self.activate = function(){
+	self.activate = function() {
 		var changePassword = localStorage.getItem('changePassword');
 		if(changePassword == '' || changePassword == null) {
 			goToView('changePasswordView');
-		} else {					
-			self.accountName(localStorage.getItem("accountName"));
 		}
 	};
 	

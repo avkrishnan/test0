@@ -1,21 +1,14 @@
 ﻿function AboutEvernymViewModel() {
-  var that = this;
-	this.template = 'aboutEvernymView';
-	this.viewid = 'V-46';
-	this.viewname = 'About Evernym';
-	this.displayname = 'About Evernym Channels';
-	this.accountName = ko.observable();
+  var self = this;
+	self.template = 'aboutEvernymView';
+	self.viewid = 'V-46';
+	self.viewname = 'About Evernym';
+	self.displayname = 'About Evernym Channels';
 	
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });
+	self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message
 	};
-	
-	this.activate = function() {
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.accountName(localStorage.getItem('accountName'));
-		}
-	}
 }
+
+AboutEvernymViewModel.prototype = new AppCtx.ViewModel();
+AboutEvernymViewModel.prototype.constructor = AboutEvernymViewModel;
