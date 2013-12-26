@@ -97,11 +97,11 @@ function AddContactViewModel() {
 			that.currentDeleteCommethodID('');						
 			goToView('escalationPlansView');
 		}
-	}
+	};
 	
 	this.showConfirmButton = function(data) {
 		that.showConfirm(true);
-	}
+	};
 	
 	this.confirmDelete = function() {
 		var callbacks = {

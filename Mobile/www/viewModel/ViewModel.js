@@ -1,3 +1,19 @@
+/*
+ * This is the prototype for all ViewModels
+ * 
+ * make sure we setup this ViewModel as the prototype, and set the constructor properly
+ * Example: 
+ *   LoginViewModel.prototype = new AppCtx.ViewModel();
+ *   LoginViewModel.prototype.constructor = LoginViewModel;
+ * set up inputObs and errorObs
+ * optionally override requiresAuth (defaults to true)
+ * remove applyBindings
+ * pull out unnecessary items from activate()
+ *   note: applyBindings optionally calls authenticate, clears the form, calls activate, and sets accountName observable
+ * 
+ * 
+ */
+
 AppCtx.ViewModel = function() {
   
   this.accountName = ko.observable();
