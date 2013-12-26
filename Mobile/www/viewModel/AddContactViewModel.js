@@ -17,7 +17,7 @@ function AddContactViewModel() {
 	this.showDelete = ko.observable(false);
 	this.showConfirm = ko.observable(false);
 	this.currentDeleteCommethod = ko.observable();
-	this.verify = ko.observable();	
+	this.verify = ko.observable();
 	this.deletedID = ko.observable('');
 	
 	this.navText = ko.observable();
@@ -166,7 +166,7 @@ function AddContactViewModel() {
 			setTimeout(function() {
 				$.mobile.showPageLoadingMsg("a", "Loading commmethods.");
 				return that.getCommethods().then(that.showCommethods);
-			}, 1000);			
+			}, 1000);
 			//return that.getCommethods().then(that.showCommethods);
 		}
 	};
