@@ -1508,7 +1508,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	line-height:35px;
 	margin-left:12px;
 	padding:0 0 0 8px;
-	width:63%;
+	width:58%;
 }
 .broadcast-sensitive span strong {
 	padding:10px 22px;
@@ -1536,9 +1536,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .broadcast-sensitive em {
 	color:#626262;
 	float:right;
-	font-size:12px;
+	font-size:11px;
 	font-style:normal;
-	padding:10px 6px;
+	padding:10px 6px 10px 0;
 }
 .broadcastmsgsend {
 	border-top:2px solid #a7a9ac;
@@ -1638,7 +1638,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	line-height:29px;
 	margin:0 0 8px 5px;
 	padding:0 0 0 40px;
-	width:56%;
+	width:51%;
 }
 .broadcastmsgreplie em {
 	background:#27aae1;
@@ -3368,7 +3368,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-600.png) no-repeat center 0px;
-	}	
+	}
+	.broadcast-sensitive em {
+		font-size:12px;
+	}
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3411,10 +3414,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
     width:86%;
 	}
 	.broadcastmsgreplie {
-		width:78%;
+		width:70.6%;
 	}
 	.broadcast-sensitive span {
-		width:80.8%;
+		width:73.8%;
 	}
 	.channelinfo.channelfollow {
 		width:95%;
@@ -3606,6 +3609,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.broadcastinform .escalatecolor {
 		font-size: 14px;
+	}
+	.broadcastmsgreplie {
+		width:78.1%;
+	}
+	.broadcast-sensitive span {
+		width:80%;
 	}
 }
 @media only screen and (min-width:1290px) {
