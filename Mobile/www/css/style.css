@@ -515,6 +515,11 @@ input[type="checkbox"]:checked + label span {
 .loginform .registration em.enable, .loginform .registration a.informatiniconmsg.enable, .loginform .registration a.informatiniconmsg:hover {
 	background:#2d2d2d url("images/sprites-login.png") no-repeat -18px -474px;
 }
+.helptext {
+	color:#FFFFFF;
+	font-size:13px;
+	margin:-8px 10px 10px 8px;
+}
 .signedup span {
 	color:#8DC63F;
 }
