@@ -7,11 +7,12 @@
 	
   self.inputObs = [ 'accountName', 'password']; 
   self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
+
   self.defineObservables();
-  
+	
   self.activate = function() {
-		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {		
-			self.errorMessage('');		
+		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
+			self.errorMessage('');
 			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
 				self.accountName('');
 				self.password('');
@@ -84,20 +85,10 @@
   };
 	
   self.cleanApplication = function() {
-    //sendMessageViewModel.clearForm();
-    //inviteFollowersViewModel.clearForm();
     ES.evernymService.clearAccessToken();
-    localStorage.removeItem('login_nav');
-    localStorage.removeItem('currentChannel');
-    localStorage.removeItem('accountName');
-    localStorage.removeItem('name');
-    localStorage.removeItem('signUpError');
-		localStorage.removeItem('newuseremail');
-		localStorage.removeItem('newusername');
-		localStorage.removeItem('newuserpassword');
-    //channelListViewModel.clearForm();
-    //notificationsViewModel.removeNotifications();
-    //OVERLAY.removeNotifications();
+		
+		self.localStorage = [ 'login_nav', 'currentChannel', 'accountName', 'name', 'signUpError', 'newuseremail', 'newusername', 'newuserpassword' ]; 
+		self.removelLocalStorage(self.localStorage);
   };
 
   function loginSuccess(args) {

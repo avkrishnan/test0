@@ -1,64 +1,53 @@
 ﻿/* To do - Pradeep Kumar */
 function ChannelListViewModel() {
-  var that = this;
-  this.template = 'channelListView';
-  this.viewid = 'V-40';
-  this.viewname = 'Home';
-  this.displayname = 'Home';
-  this.accountName = ko.observable();
-	this.responseData = ko.observable();
-	this.newMessagesCount = ko.observable();
+  var self = this;
+  self.template = 'channelListView';
+  self.viewid = 'V-40';
+  self.viewname = 'Home';
+  self.displayname = 'Home';
 	
-  /* Home view observable top row */
-	this.createFirstChannel = ko.observable(false);
-	this.addInviteFollowers = ko.observable(false);
-	this.composeBroadcast = ko.observable(false);
-	this.channelDetails = ko.observable(false);
-	this.channelsIOwn = ko.observable(false);
-	
-  /* Home view observable bottm row */	
-	this.findChannels = ko.observable(false);
-	this.createChannel = ko.observable(false);
-	this.channelMessages = ko.observable(false);
-	this.channelsIFollow = ko.observable(false);
-	
-  /* Home view observable */	
-  this.firstChannelId = ko.observable();
-  this.channel = ko.observable();	
-  this.channelOwn = ko.observable();		
-  this.channelFollowing = ko.observable();
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();													
+  self.inputObs = [ 'accountName', 'responseData', 'firstChannelId', 'channel', 'channelOwn', 'channelFollowing', 'toastText', 'toastClass' ];
+	self.initObs = [ 'createFirstChannel', 'addInviteFollowers', 'composeBroadcast', 'channelDetails', 'channelsIOwn', 'findChannels', 'createChannel', 'channelMessages', 'channelsIFollow' ];
+
+	self.defineObservables(self.allObs());
+	self.initializeObservables(self.initObs, 'false');
 	
 	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
+	self.applyBindings();
+	/*
+	self.applyBindings = function() {
+		$('#' + self.template).on('pagebeforeshow', function (e, data) {
+      self.activate();
     });	
 	};	  
-	
-	this.activate = function() {
+	*/
+	self.activate = function() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} 
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			that.createFirstChannel(false);
-			that.addInviteFollowers(false);
-			that.composeBroadcast(false);
-			that.channelDetails(false);
-			that.channelsIOwn(false);	
-			that.findChannels(false);
-			that.createChannel(false);
-			that.channelMessages(false);
-			that.channelsIFollow(false);							
+			addExternalMarkup(self.template); // this is for header/overlay message			
+			
+			self.createFirstChannel(false);
+			self.addInviteFollowers(false);
+			self.composeBroadcast(false);
+			self.channelDetails(false);
+			self.channelsIOwn(false);	
+			self.findChannels(false);
+			self.createChannel(false);
+			self.channelMessages(false);
+			self.channelsIFollow(false);
+			
+			self.initObs = [ 'createFirstChannel', 'addInviteFollowers', 'composeBroadcast', 'channelDetails', 'channelsIOwn', 'findChannels', 'createChannel', 'channelMessages', 'channelsIFollow' ];
+			self.initializeObservables(self.initObs, 'false');
+							
 			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
+				self.toastText(localStorage.getItem('toastData'));
 				showToast();
 				localStorage.removeItem('toastData');
 			}
-			that.accountName(localStorage.getItem('accountName'));
+			self.accountName(localStorage.getItem('accountName'));
 			localStorage.setItem('counter', 0);
 			$.mobile.showPageLoadingMsg('a', 'Getting user details');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI }).then(ES.channelService.listFollowingChannels({ success: getChannelsIFollow, error: errorAPI }));			
@@ -68,15 +57,15 @@ function ChannelListViewModel() {
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();	
 		if(data.channel.length < 1) {
-			that.createFirstChannel(true);
-			that.addInviteFollowers(false);
-			that.composeBroadcast (false);
-			that.channelDetails(false);
-			that.channelsIOwn(false);									
+			self.createFirstChannel(true);
+			self.addInviteFollowers(false);
+			self.composeBroadcast (false);
+			self.channelDetails(false);
+			self.channelsIOwn(false);									
 		} else if(data.channel.length == 1) {
-      that.firstChannelId(data.channel[0].id);			
-			that.channel(data.channel[0].name);
-			that.channelOwn(data.channel[0].name+'<span>Go</span>');					
+      self.firstChannelId(data.channel[0].id);			
+			self.channel(data.channel[0].name);
+			self.channelOwn(data.channel[0].name+'<span>Go</span>');					
 			if(data.channel[0].followers == 1) {
 				var followers = data.channel[0].followers +' follower';
 			} else {
@@ -93,41 +82,42 @@ function ChannelListViewModel() {
 			localStorage.setItem('currentChannelData', JSON.stringify(channel));
 			return ES.channelService.getFollowers(data.channel[0].id, { success: getFollowers, error: errorAPI });
 		}	else {
-			that.createFirstChannel(false);
-			that.addInviteFollowers(false);
-			that.composeBroadcast (false);
-			that.channelDetails(false);
-			that.channelsIOwn(true);							
+			self.createFirstChannel(false);
+			self.addInviteFollowers(false);
+			self.composeBroadcast (false);
+			self.channelDetails(false);
+			self.channelsIOwn(true);			
 		}
+		alert(self.channelsIOwn());
 	};
 	
 	function getFollowers(data){	
 		$.mobile.hidePageLoadingMsg();
 		if(data.followers.length < 2) {
-			that.createFirstChannel(false);
-			that.addInviteFollowers(true);
-			that.composeBroadcast (false);
-			that.channelDetails(false);
-			that.channelsIOwn(false);						
+			self.createFirstChannel(false);
+			self.addInviteFollowers(true);
+			self.composeBroadcast (false);
+			self.channelDetails(false);
+			self.channelsIOwn(false);						
 		} else {						
-			return ES.messageService.getChannelMessages(that.firstChannelId(), undefined, {success: getMessages, error: errorAPI});
+			return ES.messageService.getChannelMessages(self.firstChannelId(), undefined, {success: getMessages, error: errorAPI});
 		}	
 	};
 	
 	function getMessages(data){
 		$.mobile.hidePageLoadingMsg();
 		if(typeof data.message == 'undefined') {
-			that.createFirstChannel(false);
-			that.addInviteFollowers(false);
-			that.composeBroadcast (true);
-			that.channelDetails(false);
-			that.channelsIOwn(false);	
+			self.createFirstChannel(false);
+			self.addInviteFollowers(false);
+			self.composeBroadcast (true);
+			self.channelDetails(false);
+			self.channelsIOwn(false);	
 		} else {
-			that.createFirstChannel(false);
-			that.addInviteFollowers(false);
-			that.composeBroadcast (false);
-			that.channelDetails(true);
-			that.channelsIOwn(false);		
+			self.createFirstChannel(false);
+			self.addInviteFollowers(false);
+			self.composeBroadcast (false);
+			self.channelDetails(true);
+			self.channelsIOwn(false);		
 		}
 	}
 	
@@ -146,33 +136,35 @@ function ChannelListViewModel() {
 			});
 			channel = channel[0];		
 			localStorage.setItem('currentChannel', JSON.stringify(channel));					
-			that.findChannels(false);
-			that.createChannel(false);
-			that.channelMessages(true);
-			that.channelsIFollow(false);
-			that.channelFollowing(responseData.channel[0].name+'<span>Go</span>');			
+			self.findChannels(false);
+			self.createChannel(false);
+			self.channelMessages(true);
+			self.channelsIFollow(false);
+			self.channelFollowing(responseData.channel[0].name+'<span>Go</span>');			
 		} else if(responseData.channel.length > 1) {
-			that.findChannels(false);
-			that.createChannel(false);
-			that.channelMessages(false);
-			that.channelsIFollow(true);
-		} else if (that.createFirstChannel() == false){
-			that.findChannels(false);
-			that.createChannel(true);
-			that.channelMessages(false);
-			that.channelsIFollow(false);			
+			self.findChannels(false);
+			self.createChannel(false);
+			self.channelMessages(false);
+			self.channelsIFollow(true);
+		} else if (self.createFirstChannel() == false){
+			self.findChannels(false);
+			self.createChannel(true);
+			self.channelMessages(false);
+			self.channelsIFollow(false);			
 		} else {
-			that.findChannels(false);
-			that.createChannel(false);
-			that.channelMessages(false);
-			that.channelsIFollow(true);			
+			self.findChannels(false);
+			self.createChannel(false);
+			self.channelMessages(false);
+			self.channelsIFollow(true);			
 		}
 	}
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
+		self.toastText(details.message);		
 		showToast();
-	};		
-	
+	};
 }
+
+ChannelListViewModel.prototype = new AppCtx.ViewModel();
+ChannelListViewModel.prototype.constructor = ChannelListViewModel;
