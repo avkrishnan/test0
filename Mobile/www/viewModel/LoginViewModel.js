@@ -9,7 +9,7 @@
                  
   self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
 
-	self.defineObservables();
+	self.defineObservables(self.inputObs);
 	
   self.applyBindings = function() {
     $("#" + self.template).on("pagebeforeshow", null, function(e, data) {
