@@ -11,3 +11,6 @@ function ChannelListViewModel() {
 		localStorage.setItem('counter', 0);
 	};
 }
+
+ChannelListViewModel.prototype = new AppCtx.ViewModel();
+ChannelListViewModel.prototype.constructor = ChannelListViewModel;
