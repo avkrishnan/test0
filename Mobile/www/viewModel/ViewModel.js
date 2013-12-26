@@ -9,6 +9,13 @@ AppCtx.ViewModel = function() {
 		});
 	};
 	
+	this.initializeObservables = function(value) {
+	  var vm = this;
+		$.each(this.initObs, function(i,v) {
+		  vm[v] = ko.observable(value);
+		});		
+	}
+	
   this.clearObs = function(obs) {
 		var vm = this;
     $.each(obs, function(i,v) {vm[v]('');});

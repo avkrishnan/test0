@@ -10,14 +10,6 @@
 
 	self.defineObservables(self.allObs());
 	
-	/*	
-  self.applyBindings = function() {
-    $("#" + self.template).on("pagebeforeshow", null, function(e, data) {
-			self.clearForm();
-      self.activate();
-    });
-  };
-	*/
 	self.applyBindings();
 
   self.activate = function() {
@@ -98,17 +90,7 @@
     ES.evernymService.clearAccessToken();
 		
 		self.localStorage = [ 'login_nav', 'currentChannel', 'accountName', 'name', 'signUpError', 'newuseremail', 'newusername', 'newuserpassword' ]; 
-		self.removelLocalStorage(self.localStorage );
-		/*
-    localStorage.removeItem('login_nav');
-    localStorage.removeItem('currentChannel');
-    localStorage.removeItem('accountName');
-    localStorage.removeItem('name');
-    localStorage.removeItem('signUpError');
-		localStorage.removeItem('newuseremail');
-		localStorage.removeItem('newusername');
-		localStorage.removeItem('newuserpassword');
-		*/
+		self.removelLocalStorage(self.localStorage);
   };
 
   function loginSuccess(args) {
