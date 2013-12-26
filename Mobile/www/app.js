@@ -541,7 +541,6 @@ function loadAllPages() {
       var view = getViewName(model);
       console.log("binding ko: " + view);
       ko.applyBindings(model, document.getElementById(view));
-      debugger;
       if (model.applyBindings){
         model.applyBindings();
       }
@@ -858,15 +857,14 @@ function formatDate(date, format, source) {
 
 /* Hide footer on mobile keypad */
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-var initialScreenSize = window.innerHeight;
-window.addEventListener("resize", function() {
-  if(window.innerHeight < initialScreenSize){
-   $('.footer').hide();
-  }
-  else{
-   $('.footer').show();
-  }
-});
+  var initialScreenSize = window.innerHeight;
+  window.addEventListener("resize", function() {
+    if(window.innerHeight < initialScreenSize) {
+      $('.footer').hide();
+    } else {
+      $('.footer').show();
+    }
+  });
 }
 
 feedbackType = ''; // For setting feedback type
