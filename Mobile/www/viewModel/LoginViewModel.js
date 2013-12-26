@@ -6,18 +6,9 @@
   self.displayname = "Login";	
 	
   self.inputObs = [ 'accountName', 'password']; 
-                 
   self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
-
-	self.defineObservables();
-	
-  self.applyBindings = function() {
-    $("#" + self.template).on("pagebeforeshow", null, function(e, data) {
-			self.clearForm();
-      self.activate();
-    });
-  };
-
+  self.defineObservables();
+  
   self.activate = function() {
 		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {		
 			self.errorMessage('');		

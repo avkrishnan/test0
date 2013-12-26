@@ -510,28 +510,26 @@ function getViewName(viewModel){
 
 function loadAllPages() {
     
-    var getarray = [], i, len;
+  var getarray = [], i, len;
+  for (i = 0, len = models.length; i < len; i += 1) {
+    var page = getHTMLName(models[i]);
+    console.log("loading page: " + page);
+    var promise = $.mobile.loadPage( "views/" + page, {pageContainer: $('#allpages'), allowSamePageTransition: true} );
+    getarray.push( promise );
+  };
+  return $.when.apply($, getarray).done(function () {
     for (i = 0, len = models.length; i < len; i += 1) {
-        var page = getHTMLName(models[i]);
-        console.log("loading page: " + page);
-        var promise = $.mobile.loadPage( "views/" + page, {pageContainer: $('#allpages'), allowSamePageTransition: true} );
-        getarray.push( promise );
-    };
-    return $.when.apply($, getarray).done(function () {
-                                   
-                                   for (i = 0, len = models.length; i < len; i += 1) {
-                                   var name = getClassName(models[i]);
-                                   
-                                       var model = models[i];
-                                       var view = getViewName(model);
-                                       console.log("binding ko: " + view);
-                                       ko.applyBindings(model, document.getElementById(view));
-                                          if (model.applyBindings){
-                                              model.applyBindings();
-                                          }
-                                    }
-                                   
-                                   });
+      var name = getClassName(models[i]);
+      var model = models[i];
+      var view = getViewName(model);
+      console.log("binding ko: " + view);
+      ko.applyBindings(model, document.getElementById(view));
+      debugger;
+      if (model.applyBindings){
+        model.applyBindings();
+      }
+    }
+  });
 };
 
 	$(document).ready(function () {

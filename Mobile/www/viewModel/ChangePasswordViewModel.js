@@ -24,8 +24,6 @@ function ChangePasswordViewModel() {
 
   $.each(self.allObs(), function(i,v) {self[v] = ko.observable();});
 
-  self.toastText = ko.observable();
-
 	/* Methods */
 	
   self.activate = function () {

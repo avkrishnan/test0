@@ -1,7 +1,19 @@
 AppCtx.ViewModel = function() {
+  
   this.accountName = ko.observable();
   this.toastText = ko.observable();
-	
+
+  this.inputObs = []; //default input observables; subclasses with input observables should override this default
+  this.errorObs = []; //default error observables; subclasses with error observables should override this default
+  
+  this.applyBindings = function() {
+    var vm = this;
+    $("#" + self.template).on("pagebeforeshow", null, function(e, data) {
+      vm.clearForm();
+      vm.activate();
+    });
+  };
+
 	this.defineObservables = function() {
 	  var vm = this;
 		$.each(this.allObs(), function(i,v) { 
@@ -20,12 +32,6 @@ AppCtx.ViewModel = function() {
 
   this.clearErrorObs = function() {
     this.clearObs(this.errorObs);
-  };
-  
-  this.applyBindings = function () {
-    $('#' + this.template).on('pagebeforeshow', null, function (e, data) {
-      this.activate();
-    });
   };
   
   this.allObs = function() {
