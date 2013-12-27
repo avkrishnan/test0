@@ -37,11 +37,7 @@ function ChangePasswordViewModel() {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'changePasswordView') {
 			self.changePassword();
 		}
-	});
-	
-	self.menuCommand = function () {
-		viewNavigate('Change password', 'changePasswordView', 'channelMenuView');		
-  };	
+	});	
 	
   self.changePassword = function () {
 		if(self.currentPassword() == '') {

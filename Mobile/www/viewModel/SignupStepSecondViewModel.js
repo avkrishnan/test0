@@ -39,7 +39,7 @@ function SignupStepSecondViewModel() {
 			});
 		}	
 		else if(newUser == '' || newUser == null) {
-			goToView('channelListView');
+			goToView('homeView');
 		} 
 		else {
 			goToView('tutorialView');

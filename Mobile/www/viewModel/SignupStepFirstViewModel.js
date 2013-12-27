@@ -55,7 +55,7 @@ function SignupStepFirstViewModel() {
 			});
 		} 
 		else {
-			goToView('channelListView');
+			goToView('homeView');
 		}
   };
 	

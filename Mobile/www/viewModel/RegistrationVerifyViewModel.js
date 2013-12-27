@@ -31,7 +31,7 @@ function RegistrationVerifyViewModel() {
 	this.activate = function() {
 		var newUser = localStorage.getItem('newusername');		
 		if(newUser == '' || newUser == null) {
-			goToView('channelListView');
+			goToView('homeView');
 		} else {
 			that.getCommethods();
 			that.accountName('Your evernym is: '+localStorage.getItem('accountName')+" (Don't forget!)");

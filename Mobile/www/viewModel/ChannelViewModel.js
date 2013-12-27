@@ -203,7 +203,7 @@ function ChannelViewModel() {
 	}
 	
 	function successfulDelete(data) {
-		$.mobile.changePage("#" + channelListViewModel.template);
+		$.mobile.changePage("#" + homeViewModel.template);
 	}
 	
 	function successfulModify(data) { ;
@@ -236,9 +236,9 @@ function ChannelViewModel() {
 			showToast(toastobj);			
 			goToView('loginView');
 		} else {
-			var toastobj = {redirect: 'channelListView', type: 'toast-error', text: details.message};
+			var toastobj = {redirect: 'homeView', type: 'toast-error', text: details.message};
 			showToast(toastobj);			
-			goToView('channelListView');
+			goToView('homeView');
 		}
 	}
     
@@ -345,7 +345,7 @@ function ChannelViewModel() {
 			$.mobile.changePage("#" + channelsFollowingListViewModel.template);
 		}
 		else {
-			$.mobile.changePage("#" + channelListViewModel.template);
+			$.mobile.changePage("#" + homeViewModel.template);
 		}
 	}
 	

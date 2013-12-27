@@ -347,7 +347,7 @@ function getClassName(classobject) {
 
 var
 loginViewModel = new LoginViewModel(),
-channelListViewModel = new ChannelListViewModel(),
+homeViewModel = new HomeViewModel(),
 channelsFollowingListViewModel = new ChannelsFollowingListViewModel(),
 channelViewModel = new ChannelViewModel(),
 
@@ -384,7 +384,7 @@ channelsIOwnViewModel = new ChannelsIOwnViewModel(),
 helpViewModel = new HelpViewModel(),
 aboutEvernymViewModel = new AboutEvernymViewModel(),
 feedbackViewModel = new FeedbackViewModel(),
-inviteFollowersIIViewModel = new InviteFollowersIIViewModel(),
+sendFeedbackViewModel = new SendFeedbackViewModel(),
 privacyPolicyViewModel = new PrivacyPolicyViewModel(),
 
 /* By Pradeep */
@@ -440,7 +440,7 @@ var models = [
               //panelHelpViewModel, 
               //messageViewModel,																												
               loginViewModel,
-              channelListViewModel,
+              homeViewModel,
               channelsFollowingListViewModel,
               channelViewModel,
               channelMenuViewModel,
@@ -467,7 +467,7 @@ var models = [
 							helpViewModel,
 							aboutEvernymViewModel,
 							feedbackViewModel,
-							inviteFollowersIIViewModel,
+							sendFeedbackViewModel,
 							privacyPolicyViewModel,
 							channelMainViewModel,
 							channelChangeNameViewModel,
