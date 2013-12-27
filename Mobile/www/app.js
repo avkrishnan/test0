@@ -25,7 +25,7 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 			var hash = $.mobile.urlHistory.getActive().hash;
 			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
 			
-			localStorage.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
+			appCtx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
 			
 			}
 		}
@@ -76,7 +76,7 @@ function inviteFollowers(){
         showError('First create a channel, then you can invite followers to it.<br/> <button onclick="goToView(\'channelNewView\');closeError();">create channel</button><br/>');
     }
     else if (channelCount == 1){
-        localStorage.setItem("currentChannel", JSON.stringify(channelListViewModel.channels()[0]));
+        appCtx.setItem("currentChannel", JSON.stringify(channelListViewModel.channels()[0]));
         $.mobile.changePage( "#inviteFollowersView" , {allowSamePageTransition: true});
         
     }
@@ -114,7 +114,7 @@ function initiateBroadcast(){
     }
     else if (cvm.isChannelView){
     
-        var currentChannel = localStorage.getItem("currentChannel");
+        var currentChannel = appCtx.getItem("currentChannel");
         var lchannel = JSON.parse(currentChannel);
                
         startBroadcast(lchannel.normName);                     
@@ -551,7 +551,7 @@ function loadAllPages() {
 	$(document).ready(function () {
 		// bind each view model to a jQueryMobile page
 		console.log("document ready");
-		var token = localStorage.getItem("accessToken");
+		var token = appCtx.getItem("accessToken");
 		if (document.location.hash == ""){
 			if (token) {
 				//document.location.hash = "#channelListView";
@@ -566,7 +566,7 @@ function loadAllPages() {
 		//$("#channelListView").page("destroy").page();
 		//var currentUrl = $.mobile.path.parseUrl(window.location.href);
 		//console.log("currentUrl: " + currentUrl.hash);
-		localStorage.removeItem('baseUrl');
+		appCtx.removeItem('baseUrl');
 		loadAllPages().done(function() {
 			console.log('done loading all pages.');
 			console.log("INITIALIZE PAGE");
@@ -600,7 +600,7 @@ $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
 $(document).on('pagebeforehide', '[data-role="page"]', function(e,a){
                
                console.log("hiding page: " + $(this).attr('id'));
-               localStorage.setItem('previousView', $(this).attr('id') );
+               appCtx.setItem('previousView', $(this).attr('id') );
                
                });
 
@@ -608,7 +608,7 @@ $(document).on('pagebeforehide', '[data-role="page"]', function(e,a){
 $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a) {
 	console.log("showing page: " + $(this).attr('id'));
 	var vm = ko.dataFor(this);
-	var token = localStorage.getItem("accessToken");
+	var token = appCtx.getItem("accessToken");
 	document.title = vm.displayname;	
 	
 	if ( vm && vm.hasfooter && token){
@@ -621,7 +621,7 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a) {
 		$(this).append($("#globalfooter #thefooter").clone());
 		}
 		*/
-		var name = localStorage.getItem('accountName');
+		var name = appCtx.getItem('accountName');
 		$(this).find('#thefooter #footer-gear').html(name);
 		$(this).find('#thefooter #viewid').html(viewid + " " + viewname);
 	}
@@ -745,20 +745,20 @@ $(document).bind('panelbeforeopen', function(e, data) {
 								 
 /* By pradeep kumar */
 /* Back navigation functions */
-if(!localStorage.getItem('backNavText') || !localStorage.getItem('backNavView')) {
+if(!appCtx.getItem('backNavText') || !appCtx.getItem('backNavView')) {
 	var backNavText = [];
 	var backNavView = [];
 } else {
-	var backNavText = JSON.parse(localStorage.getItem('backNavText'));
-	var backNavView = JSON.parse(localStorage.getItem('backNavView'));
+	var backNavText = JSON.parse(appCtx.getItem('backNavText'));
+	var backNavView = JSON.parse(appCtx.getItem('backNavView'));
 }
 
 function viewNavigate(backText, backView, targetView) {
 	if($.mobile.activePage.attr('id') != targetView) {
 		backNavText.push(backText);
-		localStorage.setItem('backNavText', JSON.stringify(backNavText));	
+		appCtx.setItem('backNavText', JSON.stringify(backNavText));	
 		backNavView.push(backView);
-		localStorage.setItem('backNavView', JSON.stringify(backNavView));
+		appCtx.setItem('backNavView', JSON.stringify(backNavView));
 	}
 	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');	
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
@@ -766,11 +766,11 @@ function viewNavigate(backText, backView, targetView) {
 
 function popBackNav() {
 	backNavText.pop();
-	localStorage.removeItem('backNavText');	
-	localStorage.setItem('backNavText', JSON.stringify(backNavText));				
+	appCtx.removeItem('backNavText');	
+	appCtx.setItem('backNavText', JSON.stringify(backNavText));				
 	var targetView = goToView(backNavView.pop());
-	localStorage.removeItem('backNavView');		
-	localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	appCtx.removeItem('backNavView');		
+	appCtx.setItem('backNavView', JSON.stringify(backNavView));
 	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});			
 }

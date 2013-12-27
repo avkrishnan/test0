@@ -23,7 +23,7 @@
 			self.feedbackLabel('Report a Bug:');
 			self.feedbackContext('bug');								
 		} feedbackType = '';						
-		self.accountName(localStorage.getItem('accountName'));			
+		self.accountName(appCtx.getItem('accountName'));			
 		$('textarea').keyup(function () {
 			self.feedbackClass('');
 			self.error(false);				
@@ -68,5 +68,5 @@
 	};
 }
 
-SendFeedbackViewModel.prototype = new AppCtx.ViewModel();
+SendFeedbackViewModel.prototype = new ENYM.ViewModel();
 SendFeedbackViewModel.prototype.constructor = SendFeedbackViewModel;

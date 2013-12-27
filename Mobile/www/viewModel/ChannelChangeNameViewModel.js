@@ -35,13 +35,13 @@ function ChannelChangeNameViewModel() {
 	  
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
 			if(!channelObject) {
 				goToView('channelsIOwnView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message						
-				that.accountName(localStorage.getItem('accountName'));		
-				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+				that.accountName(appCtx.getItem('accountName'));		
+				var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));
 				that.channelId(channelObject.channelId);	
 				that.channelChangeName(channelObject.channelName);						
 				$('input').keyup(function () {

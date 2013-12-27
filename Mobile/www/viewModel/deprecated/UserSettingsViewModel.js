@@ -37,10 +37,10 @@ function UserSettingsViewModel() {
 	this.applyBindings = function(){
         $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
                                     
-                                    var currentBaseUrl = localStorage.getItem("baseUrl");
+                                    var currentBaseUrl = appCtx.getItem("baseUrl");
                                     
                                     
-                                    var previousView = localStorage.getItem('previousView');
+                                    var previousView = appCtx.getItem('previousView');
                                     console.log("previousView: " + previousView);
                                     var vm = ko.dataFor($("#" + previousView).get(0));
                                     console.log("previousView Model viewid: " + vm.displayname);
@@ -69,8 +69,8 @@ function UserSettingsViewModel() {
     this.activate = function() {
         
         
-        var _accountName = localStorage.getItem("accountName");
-        var _name = localStorage.getItem("UserFullName");
+        var _accountName = appCtx.getItem("accountName");
+        var _name = appCtx.getItem("UserFullName");
         
         that.accountName(_accountName);
 		that.name(_name);
@@ -103,7 +103,7 @@ function UserSettingsViewModel() {
     
     this.changeBaseUrl = function(){
         showMessage('stored base url: ' + that.baseUrl());
-        localStorage.setItem("baseUrl", that.baseUrl());
+        appCtx.setItem("baseUrl", that.baseUrl());
     };
 	
     function commethodError(data, status, details){

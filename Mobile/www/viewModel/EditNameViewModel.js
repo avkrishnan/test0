@@ -15,7 +15,7 @@
 		$('input').keyup(function () {
 		  self.clearErrorObs();
 		});
-		var account = JSON.parse(localStorage.getItem('account'));
+		var account = JSON.parse(appCtx.getItem('account'));
 		self.firstname(account.firstname);
 		self.lastname(account.lastname);					
   };
@@ -62,7 +62,7 @@
 			lastname: self.lastname()
 		});
 		account = account[0];				
-		localStorage.setItem('account', JSON.stringify(account));
+		appCtx.setItem('account', JSON.stringify(account));
 		var toastobj = {redirect: 'escalationPlansView', type: '', text: 'Name updated successfully !'};
 		showToast(toastobj);						
 		backNavText.pop();
@@ -79,5 +79,5 @@
 	
 }
 
-EditNameViewModel.prototype = new AppCtx.ViewModel();
+EditNameViewModel.prototype = new ENYM.ViewModel();
 EditNameViewModel.prototype.constructor = EditNameViewModel;

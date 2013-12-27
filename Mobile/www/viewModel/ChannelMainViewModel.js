@@ -10,21 +10,21 @@
 	self.broadcasts = ko.observableArray([]);				 
 	
 	self.activate = function() {					
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-		if(!channelObject && !localStorage.getItem('currentChannelId')) {
+		var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
+		if(!channelObject && !appCtx.getItem('currentChannelId')) {
 			goToView('channelsIOwnView');		
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message	
 			self.broadcasts.removeAll();											
-			if(localStorage.getItem('counter') == 1) {
-				localStorage.setItem('counter', 2);
+			if(appCtx.getItem('counter') == 1) {
+				appCtx.setItem('counter', 2);
 			} else {
-				localStorage.setItem('counter', 1)
+				appCtx.setItem('counter', 1)
 			}								
-			localStorage.removeItem('currentMessageData');			
+			appCtx.removeItem('currentMessageData');			
 			self.broadcasts.removeAll();
-			if(localStorage.getItem('currentChannelId')) {
-				self.channelId(localStorage.getItem('currentChannelId'));								
+			if(appCtx.getItem('currentChannelId')) {
+				self.channelId(appCtx.getItem('currentChannelId'));								
 				return ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI}).then(self.getMessagesCommand());								
 			}
 			else {									
@@ -54,8 +54,8 @@
 			followerCount: followers
 		});
 		channel = channel[0];		
-		localStorage.setItem('currentChannelData', JSON.stringify(channel));
-		localStorage.removeItem('currentChannelId')					
+		appCtx.setItem('currentChannelData', JSON.stringify(channel));
+		appCtx.removeItem('currentChannelId')					
   };			
 	
 	function successfulMessageGET(data){
@@ -159,7 +159,7 @@
 	};	
 	
 	self.singleMessage = function(data){
-		localStorage.setItem('currentMessageData', JSON.stringify(data));							
+		appCtx.setItem('currentMessageData', JSON.stringify(data));							
 		viewNavigate('Main', 'channelMainView', 'singleMessageView');
 	};
 	
@@ -169,13 +169,13 @@
 			showToast(toastobj);						
 		}
 		else {
-			localStorage.setItem('currentMessageData', JSON.stringify(data));									
+			appCtx.setItem('currentMessageData', JSON.stringify(data));									
 			viewNavigate('Main', 'channelMainView', 'whoGotItView');
 		}
 	};
 	
 	self.iGiPercentage = function(data){
-		localStorage.setItem('currentMessageData', JSON.stringify(data));
+		appCtx.setItem('currentMessageData', JSON.stringify(data));
 		if(data.percentageClass != '') {							
 			viewNavigate('Main', 'channelMainView', 'singleMessageView');
 		}
@@ -185,7 +185,7 @@
 	};	
 	
 	self.showNotGotIt = function(data){
-		localStorage.setItem('currentMessageData', JSON.stringify(data));								
+		appCtx.setItem('currentMessageData', JSON.stringify(data));								
 		viewNavigate('Main', 'channelMainView', 'notGotItView');
 	};
 	
@@ -195,12 +195,12 @@
 			showToast(toastobj);						
 		}
 		else if(data.replies == '1 Reply') {
-			localStorage.setItem('currentMessageData', JSON.stringify(data));
+			appCtx.setItem('currentMessageData', JSON.stringify(data));
 			$.mobile.showPageLoadingMsg("a", "Loading Message reply");			
 			return ES.messageService.getChannelMessages(self.channelId(), {replyto: data.messageId}, {success: successfulReliesGET, error: errorAPI});														
 		}
 		else {
-			localStorage.setItem('currentMessageData', JSON.stringify(data));									
+			appCtx.setItem('currentMessageData', JSON.stringify(data));									
 			viewNavigate('Main', 'channelMainView', 'singleMessageRepliesView');
 		}
 	};
@@ -231,7 +231,7 @@
 					replyToReply: data.message[len].replies
 				});
 				reply = reply[0];		
-				localStorage.setItem('currentReplyData', JSON.stringify(reply));					
+				appCtx.setItem('currentReplyData', JSON.stringify(reply));					
 			}
 		}
 		viewNavigate('Main', 'channelMainView', 'replyDetailView');
@@ -246,5 +246,5 @@
 	
 }
 
-ChannelMainViewModel.prototype = new AppCtx.ViewModel();
+ChannelMainViewModel.prototype = new ENYM.ViewModel();
 ChannelMainViewModel.prototype.constructor = ChannelMainViewModel;

@@ -33,11 +33,11 @@ function ResetPasswordViewModel() {
 	};
 		 
 	this.activate = function(){
-		var resetAccount = localStorage.getItem('resetAccount');
+		var resetAccount = appCtx.getItem('resetAccount');
 		if(resetAccount == '' || resetAccount == null) {
 			goToView('forgotPasswordView');
 		} else {			
-			that.accountName(localStorage.getItem('accountName'));
+			that.accountName(appCtx.getItem('accountName'));
 			$('input').keyup(function (){ 
 				that.passwordClass('');
 				that.confirmPasswordClass('');				

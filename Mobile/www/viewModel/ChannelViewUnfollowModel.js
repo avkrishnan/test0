@@ -13,7 +13,7 @@
 	self.activate = function () {
 		addExternalMarkup(self.template); // this is for header/overlay message
 		
-		var channelObject = JSON.parse(localStorage.getItem("currentChannel"));
+		var channelObject = JSON.parse(appCtx.getItem("currentChannel"));
 		self.channelid(channelObject.id);
 		self.title(channelObject.name);
 		self.description(channelObject.description);		
@@ -36,15 +36,15 @@
 	};
 	
 	function successfulUnfollowChannel(data){
-		var counter = localStorage.getItem('counter');
+		var counter = appCtx.getItem('counter');
 		for(var ctr = 0; ctr < counter; ctr++) {
 			backNavText.pop();
 			backNavView.pop();	
 		}
-		localStorage.removeItem('counter');
+		appCtx.removeItem('counter');
 		var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'No longer following '+self.title()};
 		showToast(toastobj);						
-		localStorage.removeItem("currentChannel");				
+		appCtx.removeItem("currentChannel");				
 		goToView('channelsFollowingListView');
 	}
 	
@@ -53,5 +53,5 @@
 	}
 }
 
-ChannelViewUnfollowModel.prototype = new AppCtx.ViewModel();
+ChannelViewUnfollowModel.prototype = new ENYM.ViewModel();
 ChannelViewUnfollowModel.prototype.constructor = ChannelViewUnfollowModel;

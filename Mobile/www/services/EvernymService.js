@@ -33,7 +33,7 @@ function EvernymService(altStorage, altBaseUrl) {
   that.doAfterFail = function() {
   };
 
-  that.storage = altStorage ? altStorage : localStorage;
+  that.storage = altStorage ? altStorage : appCtx;
 
   that.getAccessToken = function() {
     return that.storage.getItem('accessToken');

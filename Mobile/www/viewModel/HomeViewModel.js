@@ -8,9 +8,9 @@ function HomeViewModel() {
 	
   self.activate = function() {
   	addExternalMarkup(self.template); // this is for header/overlay message									
-		localStorage.setItem('counter', 0);
+		appCtx.setItem('counter', 0);
 	};
 }
 
-HomeViewModel.prototype = new AppCtx.ViewModel();
+HomeViewModel.prototype = new ENYM.ViewModel();
 HomeViewModel.prototype.constructor = HomeViewModel;

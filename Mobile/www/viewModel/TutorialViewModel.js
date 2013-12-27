@@ -16,7 +16,7 @@ function TutorialViewModel() {
   /* Methods */
   this.activate = function() {
 		var token = ES.evernymService.getAccessToken();		
-		var newUser = localStorage.getItem('newusername');
+		var newUser = appCtx.getItem('newusername');
 		if(token == '' || token == null){
 			goToView('loginView');
 		} else if(newUser == '' || newUser == null) {
@@ -63,13 +63,13 @@ function TutorialViewModel() {
   };
 
   this.getStartedCommand = function() {
-		localStorage.removeItem('newuseremail');
-		localStorage.removeItem('newusername');
-		localStorage.removeItem('newuserpassword');	
-    if(localStorage.getItem("action") == 'follow_channel') {
+		appCtx.removeItem('newuseremail');
+		appCtx.removeItem('newusername');
+		appCtx.removeItem('newuserpassword');	
+    if(appCtx.getItem("action") == 'follow_channel') {
 			var callbacks = {
 				success: function() {
-					localStorage.removeItem('action');
+					appCtx.removeItem('action');
 					var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
 					showToast(toastobj);
 					goToView('channelMessagesView');					
@@ -79,7 +79,7 @@ function TutorialViewModel() {
 					showToast(toastobj);
 				}
 			};						
-			var channel = JSON.parse(localStorage.getItem('currentChannel'));
+			var channel = JSON.parse(appCtx.getItem('currentChannel'));
 			ES.channelService.followChannel(channel.id, callbacks);
 		}
 		else {

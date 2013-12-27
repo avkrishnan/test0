@@ -7,17 +7,17 @@
 	self.displayname = 'Change password success';
 		 
 	self.activate = function() {
-		var changePassword = localStorage.getItem('changePassword');
+		var changePassword = appCtx.getItem('changePassword');
 		if(changePassword == '' || changePassword == null) {
 			goToView('changePasswordView');
 		}
 	};
 	
 	self.okayChangeCommand = function () {
-		localStorage.removeItem('changePassword');
+		appCtx.removeItem('changePassword');
 		popBackNav();								
   };		       
 }
 
-ChangePasswordSuccessViewModel.prototype = new AppCtx.ViewModel();
+ChangePasswordSuccessViewModel.prototype = new ENYM.ViewModel();
 ChangePasswordSuccessViewModel.prototype.constructor = ChangePasswordSuccessViewModel;

@@ -29,16 +29,16 @@
 		self.dismissButton(true);			
 		self.activeClass('igimsgdetail');
 		self.dismissClass('');										
-		if(localStorage.getItem('counter') == 1) {
-			localStorage.setItem('counter', 2);
+		if(appCtx.getItem('counter') == 1) {
+			appCtx.setItem('counter', 2);
 		} 
-		else if(localStorage.getItem('counter') == 2) {		
-			localStorage.setItem('counter', 3);
+		else if(appCtx.getItem('counter') == 2) {		
+			appCtx.setItem('counter', 3);
 		}	
 		else {
-			localStorage.setItem('counter', 1);
+			appCtx.setItem('counter', 1);
 		}
-		if(localStorage.getItem("overlayCurrentChannel")) {
+		if(appCtx.getItem("overlayCurrentChannel")) {
 			var callbacks = {
 				success: function(data) {
 					self.channelIcon('channel4 sky-blue');						
@@ -55,7 +55,7 @@
 					}
 				}
 			};					
-			var channel = JSON.parse(localStorage.getItem("overlayCurrentChannel"));
+			var channel = JSON.parse(appCtx.getItem("overlayCurrentChannel"));
 			self.channelid(channel.channelId);
 			self.messageId(channel.msgId);
 			self.ack(channel.ack);
@@ -98,8 +98,8 @@
 			}
 		}
 		else {
-			var channel = JSON.parse(localStorage.getItem("currentChannel"));
-			var channelMessage = JSON.parse(localStorage.getItem("currentChannelMessage"));
+			var channel = JSON.parse(appCtx.getItem("currentChannel"));
+			var channelMessage = JSON.parse(appCtx.getItem("currentChannelMessage"));
 			self.channelIcon('channel4 sky-blue');				
 			self.title(channel.name);
 			self.channelid(channel.channelId);	
@@ -160,15 +160,15 @@
 				ES.systemService.adjMnsCount(-1);
 			}
 			var tempEnymNotifications = [];
-			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+			tempEnymNotifications = JSON.parse(appCtx.getItem('enymNotifications'));
 			if(tempEnymNotifications.length > 0) {
 				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 					if(typeof valueNotification != 'undefined' && valueNotification.msgId == messageID) {
 						tempEnymNotifications.splice(indexNotification,1)
 					}
 				});
-				localStorage.removeItem('enymNotifications');
-				localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+				appCtx.removeItem('enymNotifications');
+				appCtx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 			}
 		}
 		return ES.messageService.readMsg(messageID, callbacks).then(self.updateMessages);
@@ -226,7 +226,7 @@
 				ES.systemService.adjMnsCount(-1);
 			}
 			var tempEnymNotifications = [];
-			tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+			tempEnymNotifications = JSON.parse(appCtx.getItem('enymNotifications'));
 			if(tempEnymNotifications.length > 0) {
 				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 					if(typeof valueNotification != 'undefined' && valueNotification.msgId == self.messageId()) {
@@ -237,7 +237,7 @@
 					showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
 					overlayViewModel.showNewMessagesOverlay();
 				}, 1000);				
-				localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+				appCtx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 			}	
 			//			
 			return ES.messageService.acknowledgeMsg(self.messageId(), callbacks);
@@ -273,5 +273,5 @@
 	};
 }
 
-ChannelSingleMessagesViewModel.prototype = new AppCtx.ViewModel();
+ChannelSingleMessagesViewModel.prototype = new ENYM.ViewModel();
 ChannelSingleMessagesViewModel.prototype.constructor = ChannelSingleMessagesViewModel;

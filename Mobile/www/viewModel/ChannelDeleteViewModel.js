@@ -22,13 +22,13 @@ function ChannelDeleteViewModel() {
 	
 	this.activate = function() {		
 		if(authenticate()) {
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
 			if(!channelObject) {
 				goToView('channelsIOwnView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message					
-				that.accountName(localStorage.getItem('accountName'));	
-				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+				that.accountName(appCtx.getItem('accountName'));	
+				var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));
 				that.channelId(channelObject.channelId);
 				that.channelName(channelObject.channelName);
 				that.channelDisplayName(channelObject.channeldescription);			
@@ -38,12 +38,12 @@ function ChannelDeleteViewModel() {
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-		var counter = localStorage.getItem('counter');
+		var counter = appCtx.getItem('counter');
 		for(var ctr = 0; ctr <= counter; ctr++) {	
 			backNavText.pop();
 			backNavView.pop();
 		}
-		localStorage.removeItem('counter');
+		appCtx.removeItem('counter');
 		var toastobj = {redirect: 'channelsIOwnView', type: '', text: 'Channel deleted'};
 		showToast(toastobj);				
 		sendMessageViewModel.clearForm();		
@@ -59,7 +59,7 @@ function ChannelDeleteViewModel() {
   this.channelDeleteCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Removing Channel');
 		return ES.channelService.deleteChannel(that.channelId(), { success: successfulDelete, error: errorAPI });
-		localStorage.removeItem('currentChannel');
+		appCtx.removeItem('currentChannel');
   };	
 	
 }

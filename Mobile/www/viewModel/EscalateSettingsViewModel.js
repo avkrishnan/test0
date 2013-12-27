@@ -27,28 +27,28 @@ function EscalateSettingsViewModel() {
 	this.activate = function() {
 		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message						
-			that.accountName(localStorage.getItem('accountName'));
+			that.accountName(appCtx.getItem('accountName'));
 			that.escType(false);
 			that.escalateUntil('');						
 			that.ecalateTime('Set Date and Time');
 			that.remindClass('');
 			that.chaseClass('');
 			that.houndClass('');
-			if(localStorage.getItem('escLevel') == 'H') {
+			if(appCtx.getItem('escLevel') == 'H') {
 				that.houndClass('criticalicon');
-				localStorage.setItem('escLevel', 'H');
+				appCtx.setItem('escLevel', 'H');
 				that.escalationType('"Hound"');																													
-			} else if(localStorage.getItem('escLevel') == 'C') {
+			} else if(appCtx.getItem('escLevel') == 'C') {
 				that.chaseClass('broadcasticon');
-				localStorage.setItem('escLevel', 'C');															
+				appCtx.setItem('escLevel', 'C');															
 				that.escalationType('"Chase"');				
 			} else {
 				that.remindClass('timesensitiveicon');
-				localStorage.setItem('escLevel', 'R');															
+				appCtx.setItem('escLevel', 'R');															
 				that.escalationType('"Remind"');				
 			}
-			if(localStorage.getItem('escDuration')) {
-				var DateTime = localStorage.getItem('escDuration').split('/');
+			if(appCtx.getItem('escDuration')) {
+				var DateTime = appCtx.getItem('escDuration').split('/');
 				var day = DateTime[2].split(' ');
 				var time = day[1].split(':');
 				//that.escalateUntil(' until: '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2]);
@@ -63,7 +63,7 @@ function EscalateSettingsViewModel() {
 		that.remindClass('timesensitiveicon ');
 		that.chaseClass('');
 		that.houndClass('');
-		localStorage.setItem('escLevel', 'R');
+		appCtx.setItem('escLevel', 'R');
 		that.escalationType('"Remind"');					
   };
 	
@@ -71,7 +71,7 @@ function EscalateSettingsViewModel() {
 		that.remindClass('');
 		that.chaseClass('broadcasticon');
 		that.houndClass('');
-		localStorage.setItem('escLevel', 'C');
+		appCtx.setItem('escLevel', 'C');
 		that.escalationType('"Chase"');							
   };
 	
@@ -79,13 +79,13 @@ function EscalateSettingsViewModel() {
 		that.remindClass('');
 		that.chaseClass('');
 		that.houndClass('criticalicon');
-		localStorage.setItem('escLevel', 'H');
+		appCtx.setItem('escLevel', 'H');
 		that.escalationType('"Hound"');							
   };
 	
 	this.saveCommand = function () {
-		if(localStorage.getItem('escDuration')) {
-			localStorage.setItem('escalate', 'yes');		
+		if(appCtx.getItem('escDuration')) {
+			appCtx.setItem('escalate', 'yes');		
 			popBackNav();					
 		}
 		else {

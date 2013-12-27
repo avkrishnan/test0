@@ -58,8 +58,8 @@
 
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message
-		var currentBaseUrl = localStorage.getItem("baseUrl");
-		var previousView = localStorage.getItem('previousView');
+		var currentBaseUrl = appCtx.getItem("baseUrl");
+		var previousView = appCtx.getItem('previousView');
 		var vm = ko.dataFor($("#" + previousView).get(0));
 		self.navText(vm.displayname);
 		self.pView = previousView;
@@ -73,7 +73,7 @@
 		
 		self.comMethodName('');
 		self.errorMessage('');
-		localStorage.removeItem("currentVerificationCommethodID");	
+		appCtx.removeItem("currentVerificationCommethodID");	
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;
 	};
@@ -88,15 +88,15 @@
 	self.addNewCommethod = function(newCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				localStorage.setItem("commethodType",responseData.type);
+				appCtx.setItem("commethodType",responseData.type);
 				if (responseData.address == 'TEXT') {
-					localStorage.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
-					localStorage.setItem("currentVerificationCommethodID",responseData.id);
+					appCtx.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
+					appCtx.setItem("currentVerificationCommethodID",responseData.id);
 				} else {
-					localStorage.setItem("currentVerificationCommethod",responseData.address);
-					localStorage.setItem("currentVerificationCommethodID",responseData.id);
+					appCtx.setItem("currentVerificationCommethod",responseData.address);
+					appCtx.setItem("currentVerificationCommethodID",responseData.id);
 				}
-				localStorage.setItem("verificationStatus",true);
+				appCtx.setItem("verificationStatus",true);
 				if(responseData.type == 'EMAIL') {
 					var toastText = 'Email added';
 				} else {
@@ -114,5 +114,5 @@
 	};
 }
 
-AdditionalContactViewModel.prototype = new AppCtx.ViewModel();
+AdditionalContactViewModel.prototype = new ENYM.ViewModel();
 AdditionalContactViewModel.prototype.constructor = AdditionalContactViewModel;

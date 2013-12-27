@@ -64,7 +64,7 @@
 
   function forgotPasswordSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-		localStorage.setItem('resetAccount', that.email());	
+		appCtx.setItem('resetAccount', that.email());	
 		goToView('forgotPasswordSuccessView');		
   }
 

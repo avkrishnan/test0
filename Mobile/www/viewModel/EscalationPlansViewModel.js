@@ -23,8 +23,8 @@
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message	
 
-		var currentBaseUrl = localStorage.getItem("baseUrl");
-		var previousView = localStorage.getItem('previousView');
+		var currentBaseUrl = appCtx.getItem("baseUrl");
+		var previousView = appCtx.getItem('previousView');
 		
 		console.log("previousView: " + previousView);
 		var vm = ko.dataFor($("#" + previousView).get(0));
@@ -113,10 +113,10 @@
 	
   function logoutSuccess() {
     ES.evernymService.clearAccessToken();
-		localStorage.removeItem('newuseremail');
-		localStorage.removeItem('newusername');
-		localStorage.removeItem('newuserpassword');		
-    localStorage.removeItem('signUpError');				
+		appCtx.removeItem('newuseremail');
+		appCtx.removeItem('newusername');
+		appCtx.removeItem('newuserpassword');		
+    appCtx.removeItem('signUpError');				
 		goToView('loginView');
   }
 
@@ -126,21 +126,21 @@
 	
   self.cleanApplication = function() {
 		ES.evernymService.clearAccessToken();
-		localStorage.removeItem('login_nav');
-		localStorage.removeItem('backNavText');	
-		localStorage.removeItem('backNavView');				
-		localStorage.removeItem('currentChannel');
-		//localStorage.removeItem('accountName');
-		localStorage.removeItem('account');		
-		localStorage.removeItem('name');		
-		localStorage.removeItem('iGiStatus');		
-		localStorage.removeItem('currentChannelData');
-		localStorage.removeItem('enymNotifications');
+		appCtx.removeItem('login_nav');
+		appCtx.removeItem('backNavText');	
+		appCtx.removeItem('backNavView');				
+		appCtx.removeItem('currentChannel');
+		//appCtx.removeItem('accountName');
+		appCtx.removeItem('account');		
+		appCtx.removeItem('name');		
+		appCtx.removeItem('iGiStatus');		
+		appCtx.removeItem('currentChannelData');
+		appCtx.removeItem('enymNotifications');
 		ES.systemService.MnsCacheData = {};
 		ES.systemService.MnsLastUpdated = 0;
 		sendMessageViewModel.clearForm();											
 	};
 }
 
-EscalationPlansViewModel.prototype = new AppCtx.ViewModel();
+EscalationPlansViewModel.prototype = new ENYM.ViewModel();
 EscalationPlansViewModel.prototype.constructor = EscalationPlansViewModel;

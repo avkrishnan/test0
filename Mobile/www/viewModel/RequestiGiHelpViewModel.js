@@ -18,7 +18,7 @@ function RequestiGiHelpViewModel() {
 	this.activate = function() {
 		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message						
-			that.accountName(localStorage.getItem('accountName'));									
+			that.accountName(appCtx.getItem('accountName'));									
 		}
 	}		
 	

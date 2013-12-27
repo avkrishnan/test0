@@ -28,8 +28,8 @@ function SingleMessageViewModel() {
 	self.escalateTime = ko.observable(false);					  
 	
   self.activate = function () {
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+		var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));	
+		var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));			
 		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
@@ -100,5 +100,5 @@ function SingleMessageViewModel() {
 				
 }
 
-SingleMessageViewModel.prototype = new AppCtx.ViewModel();
+SingleMessageViewModel.prototype = new ENYM.ViewModel();
 SingleMessageViewModel.prototype.constructor = SingleMessageViewModel;

@@ -10,5 +10,5 @@
 	};
 }
 
-AboutEvernymViewModel.prototype = new AppCtx.ViewModel();
+AboutEvernymViewModel.prototype = new ENYM.ViewModel();
 AboutEvernymViewModel.prototype.constructor = AboutEvernymViewModel;

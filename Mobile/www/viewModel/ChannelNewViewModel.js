@@ -58,7 +58,7 @@
 			followerCount: followers
 		});
 		channel = channel[0];		
-		localStorage.setItem('currentChannelData', JSON.stringify(channel));					
+		appCtx.setItem('currentChannelData', JSON.stringify(channel));					
 		var toastobj = {type: '', text: 'Channel created'};
 		showToast(toastobj);				
   };
@@ -93,5 +93,5 @@
   };
 }
 
-ChannelNewViewModel.prototype = new AppCtx.ViewModel();
+ChannelNewViewModel.prototype = new ENYM.ViewModel();
 ChannelNewViewModel.prototype.constructor = ChannelNewViewModel;

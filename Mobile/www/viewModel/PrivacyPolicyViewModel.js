@@ -10,10 +10,10 @@
 
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message					
-		self.accountName(localStorage.getItem('accountName'));
+		self.accountName(appCtx.getItem('accountName'));
 		self.hasfooter(true);								
 	}
 }
 
-PrivacyPolicyViewModel.prototype = new AppCtx.ViewModel();
+PrivacyPolicyViewModel.prototype = new ENYM.ViewModel();
 PrivacyPolicyViewModel.prototype.constructor = PrivacyPolicyViewModel;

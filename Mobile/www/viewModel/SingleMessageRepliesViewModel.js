@@ -11,16 +11,16 @@ function SingleMessageRepliesViewModel() {
 	self.replies = ko.observableArray([]);  
 	
 	self.activate = function() {
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+		var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));			
 		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.replies.removeAll();										
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
-			localStorage.removeItem('currentReplyData');													
+			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
+			var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));
+			appCtx.removeItem('currentReplyData');													
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);												
 			self.messageId(messageObject.messageId);
@@ -65,11 +65,11 @@ function SingleMessageRepliesViewModel() {
   };
 	
 	self.replyDetail = function(data){	
-		localStorage.setItem('currentReplyData', JSON.stringify(data));									
+		appCtx.setItem('currentReplyData', JSON.stringify(data));									
 		viewNavigate('Replies', 'singleMessageRepliesView', 'replyDetailView');
 	};	
 				
 }
 
-SingleMessageRepliesViewModel.prototype = new AppCtx.ViewModel();
+SingleMessageRepliesViewModel.prototype = new ENYM.ViewModel();
 SingleMessageRepliesViewModel.prototype.constructor = SingleMessageRepliesViewModel;

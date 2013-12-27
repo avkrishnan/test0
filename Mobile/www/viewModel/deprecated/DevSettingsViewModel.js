@@ -24,7 +24,7 @@ function DevSettingsViewModel() {
         
         $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
                                     
-                                    var currentBaseUrl = localStorage.getItem("baseUrl");
+                                    var currentBaseUrl = appCtx.getItem("baseUrl");
                                     
                                     if (currentBaseUrl){
                                         that.baseUrl(currentBaseUrl);
@@ -59,7 +59,7 @@ function DevSettingsViewModel() {
     this.changeBaseUrl = function(){
         
         showMessage('stored base url: ' + that.baseUrl());
-        localStorage.setItem("baseUrl", that.baseUrl())
+        appCtx.setItem("baseUrl", that.baseUrl())
         
     };
 	

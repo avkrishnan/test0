@@ -3,7 +3,7 @@
  * 
  * make sure we setup this ViewModel as the prototype, and set the constructor properly
  * Example: 
- *   LoginViewModel.prototype = new AppCtx.ViewModel();
+ *   LoginViewModel.prototype = new ENYM.ViewModel();
  *   LoginViewModel.prototype.constructor = LoginViewModel;
  * set up inputObs and errorObs
  * optionally override requiresAuth (defaults to true)
@@ -14,7 +14,7 @@
  * 
  */
 
-AppCtx.ViewModel = function() {
+ENYM.ViewModel = function() {
   
   this.accountName = ko.observable();
   this.toastText = ko.observable();
@@ -61,15 +61,15 @@ AppCtx.ViewModel = function() {
       if(!vm.requiresAuth || authenticate()) {
 			  vm.clearForm();
 			  vm.activate();
-	      vm.accountName(localStorage.getItem("accountName"));
+	      vm.accountName(appCtx.getItem("accountName"));
       }
     });
   };
 	
 	this.removelLocalStorage = function() {
 		var vm = this;
-		$.each(this.localStorage(), function(i,v) {
-			localStorage.removeItem(vm[v]);
+		$.each(this.appCtx(), function(i,v) {
+			appCtx.removeItem(vm[v]);
 		});		
 	};
 	

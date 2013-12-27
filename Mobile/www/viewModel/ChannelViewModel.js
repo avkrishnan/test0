@@ -36,14 +36,14 @@ function ChannelViewModel() {
 	this.applyBindings = function() {
 		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
 			//$('.more_messages_button').hide();
-			//var action = localStorage.getItem("action");
+			//var action = appCtx.getItem("action");
 			if ($.mobile.pageData && $.mobile.pageData.id) {
 				that.activate({id:$.mobile.pageData.id});
 			}
 			else {
-				var currentChannel = localStorage.getItem("currentChannel");
+				var currentChannel = appCtx.getItem("currentChannel");
 				//alert(currentChannel);
-				//alert(localStorage.getItem("currentChannelMessages"));
+				//alert(appCtx.getItem("currentChannelMessages"));
 				
 				var lchannel = JSON.parse(currentChannel);
 				if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)) {
@@ -96,12 +96,12 @@ function ChannelViewModel() {
 			that.hasfooter(true);
 		}		
 		that.channelid(channel.id);	
-		var _accountName = localStorage.getItem("accountName");
-		var _name = localStorage.getItem("UserFullName");
+		var _accountName = appCtx.getItem("accountName");
+		var _name = appCtx.getItem("UserFullName");
 		that.accountName(_accountName);		
 		that.messages([]);
 		that.channelAction(true);
-		localStorage.removeItem('channelOwner');
+		appCtx.removeItem('channelOwner');
 		that.followers('');
 		that.description('');
 		that.less(true);		
@@ -114,7 +114,7 @@ function ChannelViewModel() {
 	};
 	
 	this.channelSettings = function(){
-		if(localStorage.getItem('channelOwner') == 'yes') {		
+		if(appCtx.getItem('channelOwner') == 'yes') {		
 			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'channelSettingsView');
 		} else {
 			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'channelViewUnfollow');
@@ -122,7 +122,7 @@ function ChannelViewModel() {
 	}
 	
 	this.editLongDescription = function() {
-		if(localStorage.getItem('channelOwner') == 'yes') {
+		if(appCtx.getItem('channelOwner') == 'yes') {
 			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'editLongDescriptionView');
 		}
 	}			
@@ -130,7 +130,7 @@ function ChannelViewModel() {
 	function gotChannel(data) {
 		//alert(JSON.stringify(data));
 		$.mobile.hidePageLoadingMsg();
-		localStorage.setItem("currentChannel", JSON.stringify(data));
+		appCtx.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.channelMessage(data);
 		that.title(data.name);
@@ -168,10 +168,10 @@ function ChannelViewModel() {
 		}
 		else if(data.relationship == 'O') {
 			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
-			var account = JSON.parse(localStorage.getItem('account'));				
+			var account = JSON.parse(appCtx.getItem('account'));				
 				that.longdescription("This is the web page for "+that.title()+". To follow "+that.title()+", click the Follow button below.<br/><br/>Hello, "+account.firstname+"!  Your channel needs a better description than what we came up with for you, so go ahead and type that in this box.<br/>Make sure to include an invitation for visitors to click the Follow button in order to get your channel's broadcasts.");							
 			}				
-			localStorage.setItem('channelOwner', 'yes');
+			appCtx.setItem('channelOwner', 'yes');
 			if(data.followers == 1) {
 				var followers = data.followers +' follower';
 			} else {
@@ -186,7 +186,7 @@ function ChannelViewModel() {
 				followerCount: followers
 			});
 			channel = channel[0];		
-			localStorage.setItem('currentChannelData', JSON.stringify(channel));
+			appCtx.setItem('currentChannelData', JSON.stringify(channel));
 			that.settings(true);																
 		}
 		else {
@@ -212,7 +212,7 @@ function ChannelViewModel() {
 	function successfulFollowChannel() {
 		$.mobile.hidePageLoadingMsg();
 		//showMessage("Now Following Channel " + that.title());
-		//localStorage.removeItem("currentChannel");
+		//appCtx.removeItem("currentChannel");
 		//$.mobile.changePage("#" + channelsFollowingListViewModel.template);
 		var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+that.title()};
 		showToast(toastobj);				
@@ -255,7 +255,7 @@ function ChannelViewModel() {
 			showToast(toastobj);		
 		}
 		else if (isBadLogin(details.code)){
-			localStorage.setItem("action", 'follow_channel');
+			appCtx.setItem("action", 'follow_channel');
 			$.mobile.changePage("#" + loginViewModel.template);
 		}
 		else {
@@ -291,12 +291,12 @@ function ChannelViewModel() {
 	
 	// follow/unfollow will be called on the basis of channelAction value
 	this.actionFollowChannelCommand = function() {
-		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
-		if(localStorage.getItem('channelOwner') == 'yes') {
+		appCtx.setItem("currentChannel", JSON.stringify(that.channelMessage()));
+		if(appCtx.getItem('channelOwner') == 'yes') {
 			var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
 			showToast(toastobj);			
 		}
-		else if(localStorage.getItem('accountName') == '' || localStorage.getItem('accountName') == null){
+		else if(appCtx.getItem('accountName') == '' || appCtx.getItem('accountName') == null){
 			goToView('signupStepFirstView');
 		} 
 		else {
@@ -320,7 +320,7 @@ function ChannelViewModel() {
 	};
 	
 	function successfulUnfollowChannel(data){
-		localStorage.removeItem("currentChannel");
+		appCtx.removeItem("currentChannel");
 		that.showChannelList();
 	}
     
@@ -336,7 +336,7 @@ function ChannelViewModel() {
 	};
     
 	this.showMessage = function (message) {
-		localStorage.setItem("currentMessage", JSON.stringify(message));
+		appCtx.setItem("currentMessage", JSON.stringify(message));
 		$.mobile.changePage("#" + messageViewModel.template)
 	};
 		

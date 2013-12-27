@@ -14,13 +14,13 @@
 	self.activate = function() {
 		self.noFollow(false);
 		if (!self.shown) {
-			localStorage.removeItem("currentChannel");
-			localStorage.removeItem("overlayCurrentChannel");
+			appCtx.removeItem("currentChannel");
+			appCtx.removeItem("overlayCurrentChannel");
 		}
 		
 		if(authenticate()) {
 			addExternalMarkup(self.template); // this is for header/overlay message
-			localStorage.setItem('counter', 1);
+			appCtx.setItem('counter', 1);
 			self.channels.removeAll();
 			if(self.channels() && self.channels().length){
 				self.channels.removeAll();
@@ -60,16 +60,16 @@
 	/* action to channel page to unfollow*/
 	self.channelViewUnfollow = function(data) {
 		var channel = JSON.stringify(data);
-		localStorage.setItem("currentChannel", channel);
+		appCtx.setItem("currentChannel", channel);
 		viewNavigate('Channels', 'channelsFollowingListView', 'channelViewUnfollow');
 	};
 	
 	/* action to see channels messages*/
 	self.actionFollowChannelCommand = function(data) {
-		localStorage.setItem("currentChannel", JSON.stringify(data));
+		appCtx.setItem("currentChannel", JSON.stringify(data));
 		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');
 	};
 }
 
-ChannelsFollowingListViewModel.prototype = new AppCtx.ViewModel();
+ChannelsFollowingListViewModel.prototype = new ENYM.ViewModel();
 ChannelsFollowingListViewModel.prototype.constructor = ChannelsFollowingListViewModel;

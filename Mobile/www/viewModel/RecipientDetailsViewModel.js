@@ -21,13 +21,13 @@ function RecipientDetailsViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-			var recipientObject = JSON.parse(localStorage.getItem('currentRecipientData'));			
+			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));	
+			var recipientObject = JSON.parse(appCtx.getItem('currentRecipientData'));			
 			if(!channelObject || !recipientObject) {
 				goToView('channelsIOwnView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message						
-				that.accountName(localStorage.getItem('accountName'));													
+				that.accountName(appCtx.getItem('accountName'));													
 				that.channelName(channelObject.channelName);
 				var recipient = recipientObject.recipient.split(',');
 				that.recipient(recipient[0]+' '+recipient[1]);								

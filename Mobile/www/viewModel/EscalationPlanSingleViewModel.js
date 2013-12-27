@@ -110,8 +110,8 @@ function EscalationPlanSingleViewModel() {
   
 	this.applyBindings = function(){
 		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
-			var currentBaseUrl = localStorage.getItem("baseUrl");
-			var previousView = localStorage.getItem('previousView');
+			var currentBaseUrl = appCtx.getItem("baseUrl");
+			var previousView = appCtx.getItem('previousView');
 			console.log("previousView: " + previousView);
 			var vm = ko.dataFor($("#" + previousView).get(0));
 			console.log("previousView Model viewid: " + vm.displayname);
@@ -162,13 +162,13 @@ function EscalationPlanSingleViewModel() {
     
 	this.activate = function() {
 		addExternalMarkup(that.template); // this is for header/overlay message
-		var _accountName = localStorage.getItem("accountName");
-		var _name = localStorage.getItem("UserFullName");
+		var _accountName = appCtx.getItem("accountName");
+		var _name = appCtx.getItem("UserFullName");
 		that.activeEscalationPlan.removeAll()
 		that.accountName(_accountName);
 		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
 		that.name(_name);
-		that.activeEscPlan = localStorage.getItem("activeEscPlan");
+		that.activeEscPlan = appCtx.getItem("activeEscPlan");
 		return that.getEscPlans().then(gotEscPlans);   
 	};	
 	

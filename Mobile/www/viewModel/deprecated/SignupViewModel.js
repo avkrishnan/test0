@@ -30,7 +30,7 @@ function SignupViewModel() {
 
       if ($.mobile.pageData && $.mobile.pageData.follow) {
 
-        // localStorage.setItem("follow",
+        // appCtx.setItem("follow",
         // JSON.stringify($.mobile.pageData.follow));
 
       }
@@ -102,25 +102,25 @@ function SignupViewModel() {
 
       ES.evernymService.setAccessToken(args.accessToken);
 
-      localStorage.setItem("accountName", args.account.accountname);
+      appCtx.setItem("accountName", args.account.accountname);
 
       that.first_name = args.account.firstname;
       that.last_name = args.account.lastname;
-      localStorage.setItem('UserFullName', args.account.firstname + ' '
+      appCtx.setItem('UserFullName', args.account.firstname + ' '
           + args.account.lastname);
       $.mobile.activePage.find('#thefooter #footer-gear').html(
           args.account.accountname);
 
-      var login_nav = JSON.parse(localStorage.getItem("login_nav"));
-      localStorage.removeItem("login_nav");
+      var login_nav = JSON.parse(appCtx.getItem("login_nav"));
+      appCtx.removeItem("login_nav");
 
-      var follow = localStorage.getItem("follow");
+      var follow = appCtx.getItem("follow");
 
       if (follow) {
 
         // alert('hello, we are going to now go to or follow the channel ' +
         // follow);
-        localStorage.removeItem("follow");
+        appCtx.removeItem("follow");
       } else if (login_nav) {
         var hash = login_nav.hash;
         // var parameters = login_nav.parameters;
@@ -157,7 +157,7 @@ function SignupViewModel() {
   function signUpSuccess(args) {
     $.mobile.hidePageLoadingMsg();
     that.loginCommand();
-    localStorage.setItem('flags.signup_complete', 1);
+    appCtx.setItem('flags.signup_complete', 1);
 
   }
   ;

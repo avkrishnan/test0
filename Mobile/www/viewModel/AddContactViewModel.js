@@ -41,10 +41,10 @@
 				showToast(toastobj);				
 			}
 		};		
-		localStorage.setItem("currentVerificationCommethod",data.comMethodAddress);
-		localStorage.setItem("currentVerificationCommethodType",data.comMethodType);
-		localStorage.setItem("currentVerificationCommethodID",data.comMethodID);
-		localStorage.setItem("verificationStatus",false);
+		appCtx.setItem("currentVerificationCommethod",data.comMethodAddress);
+		appCtx.setItem("currentVerificationCommethodType",data.comMethodType);
+		appCtx.setItem("currentVerificationCommethodID",data.comMethodID);
+		appCtx.setItem("verificationStatus",false);
 		ES.commethodService.requestVerification(data.comMethodID, callbacks);
 		viewNavigate('Cont. Info', 'addContactView', 'verifyContactView');		
 	}
@@ -53,7 +53,7 @@
 		if(self.verify() == false) {
 			self.currentDeleteCommethod(data.comMethodAddress);
 			self.currentDeleteCommethodID(data.comMethodID);
-			localStorage.setItem("CommethodType",data.comMethodType);
+			appCtx.setItem("CommethodType",data.comMethodType);
 		}
 		self.showDelete(true);
 	}
@@ -84,13 +84,13 @@
 			}
 		};	
 		ES.commethodService.deleteCommethod(self.currentDeleteCommethodID(), callbacks);
-		if(localStorage.getItem("CommethodType") == 'EMAIL') {
+		if(appCtx.getItem("CommethodType") == 'EMAIL') {
 			var toastText = 'Email address deleted';
-			localStorage.removeItem("CommethodType");
+			appCtx.removeItem("CommethodType");
 		}
 		else {
 			var toastText = 'Phone number deleted';
-			localStorage.removeItem("CommethodType");			
+			appCtx.removeItem("CommethodType");			
 		}
 		var toastobj = {redirect: 'addContactView', type: '', text: toastText};		
 		showToast(toastobj);					
@@ -125,8 +125,8 @@
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message
 		
-		var currentBaseUrl = localStorage.getItem("baseUrl");
-		var previousView = localStorage.getItem('previousView');
+		var currentBaseUrl = appCtx.getItem("baseUrl");
+		var previousView = appCtx.getItem('previousView');
 		console.log("previousView: " + previousView);
 		var vm = ko.dataFor($("#" + previousView).get(0));
 		console.log("previousView Model viewid: " + vm.displayname);
@@ -144,7 +144,7 @@
 		self.showDelete(false);
 		self.showConfirm(false);
 		self.verify(false);
-		localStorage.removeItem("currentVerificationCommethodID");
+		appCtx.removeItem("currentVerificationCommethodID");
 		setTimeout(function() {
 			$.mobile.showPageLoadingMsg("a", "Loading commmethods.");
 			return self.getCommethods().then(self.showCommethods);
@@ -152,5 +152,5 @@
 	};
 }
 
-AddContactViewModel.prototype = new AppCtx.ViewModel();
+AddContactViewModel.prototype = new ENYM.ViewModel();
 AddContactViewModel.prototype.constructor = AddContactViewModel;

@@ -24,15 +24,15 @@ function WhoGotItViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));	
+			var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));			
 			if(!channelObject || !messageObject) {
 				goToView('channelsIOwnView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message
 				that.recipients.removeAll();						
-				localStorage.removeItem('currentRecipientData');						
-				that.accountName(localStorage.getItem('accountName'));											
+				appCtx.removeItem('currentRecipientData');						
+				that.accountName(appCtx.getItem('accountName'));											
 				that.channelId(channelObject.channelId);			
 				that.channelName(channelObject.channelName);
 				that.messageId(messageObject.messageId);
@@ -78,7 +78,7 @@ function WhoGotItViewModel() {
   };
 	
 	this.recipientDetails = function(data){
-		localStorage.setItem('currentRecipientData', JSON.stringify(data));							
+		appCtx.setItem('currentRecipientData', JSON.stringify(data));							
 		viewNavigate('Who Got it', 'whoGotItView', 'recipientDetailsView');
 	};			
 				

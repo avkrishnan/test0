@@ -25,5 +25,5 @@
 	}
 }
 
-FeedbackViewModel.prototype = new AppCtx.ViewModel();
+FeedbackViewModel.prototype = new ENYM.ViewModel();
 FeedbackViewModel.prototype.constructor = FeedbackViewModel;

@@ -23,13 +23,13 @@ function ReplyDetailViewModel() {
 	self.lessButton = ko.observable(false);											  
 	
 	self.activate = function() {
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+		var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));			
 		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message								
-			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));			
+			var replyObject = JSON.parse(appCtx.getItem('currentReplyData'));			
 			self.less(true);				
 			self.more(false);		
 			self.moreButton(true);
@@ -60,5 +60,5 @@ function ReplyDetailViewModel() {
 				
 }
 
-ReplyDetailViewModel.prototype = new AppCtx.ViewModel();
+ReplyDetailViewModel.prototype = new ENYM.ViewModel();
 ReplyDetailViewModel.prototype.constructor = ReplyDetailViewModel;

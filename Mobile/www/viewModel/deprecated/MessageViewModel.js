@@ -55,9 +55,9 @@ function MessageViewModel() {
                                     }
                                     
                                     else {
-					var currentChannel = localStorage.getItem("currentChannel");
+					var currentChannel = appCtx.getItem("currentChannel");
 					var lchannel = JSON.parse(currentChannel);
-                                        var currentMessage = localStorage.getItem("currentMessage");
+                                        var currentMessage = appCtx.getItem("currentMessage");
                                         var lmessage = JSON.parse(currentMessage);
                                     
                                         if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)){
@@ -133,7 +133,7 @@ function MessageViewModel() {
 	
 	function gotChannel(data){
 		$.mobile.hidePageLoadingMsg();
-		localStorage.setItem("currentChannel", JSON.stringify(data));
+		appCtx.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.title(data.name );
 		that.relationship(data.relationship);

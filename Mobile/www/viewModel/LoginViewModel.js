@@ -17,13 +17,13 @@
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {			
 			self.errorMessage('');
-			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
+			if (appCtx.getItem("username") == null && appCtx.getItem("password") == null) {
 				self.username('');
 				self.password('');
 			}
 			else {
-				self.username(localStorage.getItem("username"));
-				self.password(localStorage.getItem("password"));
+				self.username(appCtx.getItem("username"));
+				self.password(appCtx.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
 			$('input').keyup(self.clearErrorObs);
@@ -57,12 +57,12 @@
 		else {
 			self.errorMessage('');
       if ($('input[name="rememberPassword"]:checked').length == 1) {
-				localStorage.setItem("username", self.username());
-        localStorage.setItem("password", self.password());
+				appCtx.setItem("username", self.username());
+        appCtx.setItem("password", self.password());
       }
 			else {
-				localStorage.removeItem('username');
-				localStorage.removeItem('password');
+				appCtx.removeItem('username');
+				appCtx.removeItem('password');
 			}
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
@@ -82,14 +82,14 @@
 	
   self.cleanApplication = function() {
     ES.evernymService.clearAccessToken();
-    localStorage.removeItem('login_nav');
-    localStorage.removeItem('currentChannel');
-    localStorage.removeItem('accountName');
-    localStorage.removeItem('name');
-    localStorage.removeItem('signUpError');
-		localStorage.removeItem('newuseremail');
-		localStorage.removeItem('newusername');
-		localStorage.removeItem('newuserpassword');
+    appCtx.removeItem('login_nav');
+    appCtx.removeItem('currentChannel');
+    appCtx.removeItem('accountName');
+    appCtx.removeItem('name');
+    appCtx.removeItem('signUpError');
+		appCtx.removeItem('newuseremail');
+		appCtx.removeItem('newusername');
+		appCtx.removeItem('newuserpassword');
     //channelListViewModel.clearForm();
     //notificationsViewModel.removeNotifications();
     //OVERLAY.removeNotifications();
@@ -114,24 +114,24 @@
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
-			localStorage.setItem('account', JSON.stringify(args.account));
-      localStorage.setItem("accountName", self.username());
-			if(localStorage.getItem("action") == 'follow_channel') {
+			appCtx.setItem('account', JSON.stringify(args.account));
+      appCtx.setItem("accountName", self.username());
+			if(appCtx.getItem("action") == 'follow_channel') {
 				var callbacks = {
 					success: function() {
-						localStorage.removeItem('action');
+						appCtx.removeItem('action');
 						var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
 						showToast(toastobj);						
 						goToView('channelMessagesView');					
 					},
 					error: function(data, status, details) {
-						localStorage.removeItem('action');
+						appCtx.removeItem('action');
 						var toastobj = {redirect: 'channelMessagesView', type: 'toast-info', text: details.message};
 						showToast(toastobj);											
 						goToView('channelMessagesView');
 					}
 				};						
-				var channel = JSON.parse(localStorage.getItem('currentChannel'));
+				var channel = JSON.parse(appCtx.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);
 			}
 			else {
@@ -146,5 +146,5 @@
 		
 }
 
-LoginViewModel.prototype = new AppCtx.ViewModel();
+LoginViewModel.prototype = new ENYM.ViewModel();
 LoginViewModel.prototype.constructor = LoginViewModel;

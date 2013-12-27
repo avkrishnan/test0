@@ -49,7 +49,7 @@
 
   function successfulChange(args) {
     $.mobile.hidePageLoadingMsg();
-		localStorage.setItem('changePassword', self.newPassword());		
+		appCtx.setItem('changePassword', self.newPassword());		
 		goToView('changePasswordSuccessView');
   };
 
@@ -63,5 +63,5 @@
 	
 }
 
-ChangePasswordViewModel.prototype = new AppCtx.ViewModel();
+ChangePasswordViewModel.prototype = new ENYM.ViewModel();
 ChangePasswordViewModel.prototype.constructor = ChangePasswordViewModel;

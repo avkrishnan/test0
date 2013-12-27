@@ -12,7 +12,7 @@
 	self.pView = '';
 	
 	self.gotoView = function() {
-		localStorage.removeItem("currentVerificationCommethodID");
+		appCtx.removeItem("currentVerificationCommethodID");
 		goToView("addContactView");
 	};
 	
@@ -53,8 +53,8 @@
     
 	self.activate = function() {
 		addExternalMarkup(self.template); // This is for header/overlay message
-		var currentBaseUrl = localStorage.getItem("baseUrl");
-		var previousView = localStorage.getItem('previousView');
+		var currentBaseUrl = appCtx.getItem("baseUrl");
+		var previousView = appCtx.getItem('previousView');
 		console.log("previousView: " + previousView);
 		var vm = ko.dataFor($("#" + previousView).get(0));
 		console.log("previousView Model viewid: " + vm.displayname);
@@ -63,15 +63,15 @@
 		$('#verifyContactView input').on("keyup", self.inputKeyUp);
 		self.verificationCode('');
 		self.errorMessage('');
-		self.verificationCommethod(localStorage.getItem("currentVerificationCommethod"));
-		self.verificationCommethodID(localStorage.getItem("currentVerificationCommethodID"));
-		self.verificationStatus(localStorage.getItem("verificationStatus"));
+		self.verificationCommethod(appCtx.getItem("currentVerificationCommethod"));
+		self.verificationCommethodID(appCtx.getItem("currentVerificationCommethodID"));
+		self.verificationStatus(appCtx.getItem("verificationStatus"));
 		if (self.verificationStatus() == 'false') {
 			self.verificationStatus(false);
 		} else {
 			self.verificationStatus(true);
 		}
-		if(localStorage.getItem("commethodType") == 'EMAIL') {
+		if(appCtx.getItem("commethodType") == 'EMAIL') {
 			self.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below).');
 		} else {
 			self.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below.');
@@ -90,13 +90,13 @@
 	self.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				if(localStorage.getItem("commethodType") == 'TEXT') {
+				if(appCtx.getItem("commethodType") == 'TEXT') {
 					var toastText = 'Phone number verified';					
 				}
 				else {
 					var toastText = 'Email verified';				
 				}
-				localStorage.removeItem("commethodType");
+				appCtx.removeItem("commethodType");
 				var toastobj = {redirect: 'addContactView', type: '', text: toastText};
 				showToast(toastobj);	
 				goToView('addContactView');
@@ -109,5 +109,5 @@
 	};
 }
 
-VerifyContactViewModel.prototype = new AppCtx.ViewModel();
+VerifyContactViewModel.prototype = new ENYM.ViewModel();
 VerifyContactViewModel.prototype.constructor = VerifyContactViewModel;

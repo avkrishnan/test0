@@ -10,5 +10,5 @@
 	};
 }
 
-HelpViewModel.prototype = new AppCtx.ViewModel();
+HelpViewModel.prototype = new ENYM.ViewModel();
 HelpViewModel.prototype.constructor = HelpViewModel;

@@ -23,14 +23,14 @@ function SingleMessageFullTextViewModel() {
 	self.defineObservables();					  
 	
 	self.activate = function() {
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+		var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));			
 		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message								
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
+			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
+			var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));										
 			self.channelName(channelObject.channelName);
 			var fullDate = formatDate(messageObject.created,'long');					
 			//that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
@@ -70,5 +70,5 @@ function SingleMessageFullTextViewModel() {
 				
 }
 
-SingleMessageFullTextViewModel.prototype = new AppCtx.ViewModel();
+SingleMessageFullTextViewModel.prototype = new ENYM.ViewModel();
 SingleMessageFullTextViewModel.prototype.constructor = SingleMessageFullTextViewModel;

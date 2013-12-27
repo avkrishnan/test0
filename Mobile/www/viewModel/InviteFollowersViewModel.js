@@ -40,12 +40,12 @@ function InviteFollowersViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
 			if(!channelObject) {
 				goToView('channelsIOwnView');			
 			} else {		
-				that.accountName(localStorage.getItem('accountName'));	
-				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));								
+				that.accountName(appCtx.getItem('accountName'));	
+				var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));								
 				that.channelName(channelObject.channelName);
 				that.channelWebAddress(channelObject.channelName+'.evernym.dom');		
 				$('textarea').keyup(function () {

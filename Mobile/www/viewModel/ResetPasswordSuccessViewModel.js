@@ -16,16 +16,16 @@ function ResetPasswordSuccessViewModel() {
 	};
 		 
 	this.activate = function(){
-		var resetAccount = localStorage.getItem('resetAccount');		
+		var resetAccount = appCtx.getItem('resetAccount');		
 		if(resetAccount == '' || resetAccount == null) {
 			goToView('forgotPasswordView');
 		} else {					
-			that.accountName(localStorage.getItem("accountName"));
+			that.accountName(appCtx.getItem("accountName"));
 		}
 	};
 	
 	this.okayResetCommand = function () {
-		localStorage.removeItem('resetAccount');						
+		appCtx.removeItem('resetAccount');						
 		goToView('loginView');
   };		       
 }

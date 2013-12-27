@@ -56,9 +56,9 @@ function SendMessageViewModel() {
 		that.channels.removeAll();
 		that.selectedChannels('');				
 		that.messageText('');
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('iGiStatus');		
+		appCtx.removeItem('escLevel');
+		appCtx.removeItem('escDuration');		
+		appCtx.removeItem('iGiStatus');		
   };		  
 	
 	this.activate = function() {			
@@ -81,7 +81,7 @@ function SendMessageViewModel() {
 			that.escLevel('N');				
 			that.igiClass('igiimageoff');
 			that.characterCount('0');										
-			that.escLevel(localStorage.getItem('escLevel'));				
+			that.escLevel(appCtx.getItem('escLevel'));				
 			if(that.escLevel() == 'H') {
 				escalate = 'Hound';
 			} else if(that.escLevel() == 'C') {
@@ -89,16 +89,16 @@ function SendMessageViewModel() {
 			} else {
 				escalate = 'Remind';
 			}																									
-			if(localStorage.getItem('escalate') == 'yes') {
+			if(appCtx.getItem('escalate') == 'yes') {
 				that.normalText('');
 				that.fastText('');
 				that.escalateText(escalate);				
 				that.normalClass('');
 				that.fastClass('');
 				that.escalateClass('escalatecoloricon icon-'+escalate);										
-				if(localStorage.getItem('escDuration')) {
-					that.escDuration(new Date(localStorage.getItem('escDuration')));					
-					var DateTime = localStorage.getItem('escDuration').split('/');
+				if(appCtx.getItem('escDuration')) {
+					that.escDuration(new Date(appCtx.getItem('escDuration')));					
+					var DateTime = appCtx.getItem('escDuration').split('/');
 					var day = DateTime[2].split(' ');
 					var time = day[1].split(':');						
 					//var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
@@ -107,7 +107,7 @@ function SendMessageViewModel() {
 					that.activeType('escalatecolor '+escalate);
 					that.escalateEdit(true);																								
 				}		
-				localStorage.removeItem('escalate');																											
+				appCtx.removeItem('escalate');																											
 			} else {				
 				that.normalText('normalcolor');
 				that.fastText('');
@@ -120,18 +120,18 @@ function SendMessageViewModel() {
 				that.yesClass('yesbutton');
 				that.noClass('nobutton');					
 				that.escalateEdit(false);
-				localStorage.removeItem('escDuration');
+				appCtx.removeItem('escDuration');
 				that.escLevel('N');				
 				that.igiClass('igiimageoff');										
 			}			
 			that.broadcastType('FYI');
-			if(localStorage.getItem('iGiStatus')) {
+			if(appCtx.getItem('iGiStatus')) {
 				that.igiClass('igiimage');		
 				that.yesClass('nobutton');
 				that.noClass('yesbutton');
 				that.broadcastType('RAC');															
 			}																
-			that.accountName(localStorage.getItem('accountName'));			
+			that.accountName(appCtx.getItem('accountName'));			
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
 			});
@@ -206,12 +206,12 @@ function SendMessageViewModel() {
 	};    
 	
 	function successfulMessage(data){
-		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('iGiStatus');										
+		appCtx.removeItem('escDuration');		
+		appCtx.removeItem('escLevel');
+		appCtx.removeItem('iGiStatus');										
 		var toastobj = {redirect: 'channelMainView', type: '', text: 'Broadcast sent'};
 		showToast(toastobj);									
-		localStorage.setItem('currentChannelId', that.selectedChannels().channelId);
+		appCtx.setItem('currentChannelId', that.selectedChannels().channelId);
 		that.clearForm();		
 		backNavText.pop();
 		backNavView.pop();		
@@ -220,9 +220,9 @@ function SendMessageViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('iGiStatus');								
+		appCtx.removeItem('escDuration');		
+		appCtx.removeItem('escLevel');
+		appCtx.removeItem('iGiStatus');								
 		var toastobj = {type: 'toast-error', text: details.message};
 		showToast(toastobj);						
 	};
@@ -255,8 +255,8 @@ function SendMessageViewModel() {
     that.duration("Normal: <em>Send once (usually to email)</em>");
 		that.activeType('normalcolor');		
 		that.escalateEdit(false);
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('escDuration');						
+		appCtx.removeItem('escLevel');
+		appCtx.removeItem('escDuration');						
 		that.escLevel('N');		
   };
 	
@@ -270,8 +270,8 @@ function SendMessageViewModel() {
     that.duration("Fast: <em>Send once (usually text or app)</em>");
 		that.activeType('fastcolor');
 		that.escalateEdit(false);
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('escDuration');								
+		appCtx.removeItem('escLevel');
+		appCtx.removeItem('escDuration');								
 		that.escLevel('F');						
   };		
 	
@@ -284,7 +284,7 @@ function SendMessageViewModel() {
 		that.yesClass('nobutton');
 		that.noClass('yesbutton');
 		that.broadcastType('RAC');
-		localStorage.setItem('iGiStatus', 'yes');													
+		appCtx.setItem('iGiStatus', 'yes');													
   };
 	
 	this.iGiNo = function () {
@@ -292,7 +292,7 @@ function SendMessageViewModel() {
 		that.yesClass('yesbutton');
 		that.noClass('nobutton');
 		that.broadcastType('FYI');
-		localStorage.removeItem('iGiStatus');													
+		appCtx.removeItem('iGiStatus');													
   };								
 
 }

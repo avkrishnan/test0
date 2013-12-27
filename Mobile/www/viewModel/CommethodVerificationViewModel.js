@@ -20,7 +20,7 @@ function CommethodVerificationViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			that.accountName(localStorage.getItem('accountName'));
+			that.accountName(appCtx.getItem('accountName'));
 			$.mobile.showPageLoadingMsg("a", "Verifying");
 			var key = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
 			return ES.commethodService.verification(key, { success: successfulVerify, error: errorAPI });

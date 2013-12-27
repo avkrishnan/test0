@@ -52,7 +52,7 @@ function ChannelBroadcastsViewModel() {
 								}
 								
 								else {
-									var currentChannel = localStorage.getItem("currentChannel");
+									var currentChannel = appCtx.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
                                 
                                 
@@ -114,7 +114,7 @@ function ChannelBroadcastsViewModel() {
 	
 	function gotChannel(data){
 		$.mobile.hidePageLoadingMsg();
-		localStorage.setItem("currentChannel", JSON.stringify(data));
+		appCtx.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.title(data.name );
         that.relationship(data.relationship);
@@ -333,7 +333,7 @@ function ChannelBroadcastsViewModel() {
     
     
     this.showMessage = function (message) {
-        localStorage.setItem("currentMessage", JSON.stringify(message));
+        appCtx.setItem("currentMessage", JSON.stringify(message));
         
 		
 		$.mobile.changePage("#" + messageViewModel.template)

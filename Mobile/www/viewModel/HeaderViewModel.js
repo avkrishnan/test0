@@ -34,11 +34,11 @@
 				if(responseDataSmry && responseDataSmry.unreadCount > 0) {
 					ES.systemService.getMsgNotifs({
 						success: function(responseData) {
-							localStorage.removeItem('enymNotifications');
-							localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
-							if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+							appCtx.removeItem('enymNotifications');
+							appCtx.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
+							if(JSON.parse(appCtx.getItem('enymNotifications')).length > 0) {
 								overlayViewModel.showNewMessagesOverlay();
-								showNewMessagesCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
+								showNewMessagesCount(JSON.parse(appCtx.getItem('enymNotifications')).length);
 							}
 						},
 						error: function(data, status, details) {
@@ -49,7 +49,7 @@
 				}
 				else {
 					showNewMessagesCount(0);
-					localStorage.removeItem('enymNotifications');
+					appCtx.removeItem('enymNotifications');
 				}
 			},
 			error: function(data, status, details) {
@@ -117,8 +117,8 @@
 	}	
 	
 	this.newMessagesOverlayPopup = function() {
-		if(localStorage.getItem('enymNotifications')) {
-			if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+		if(appCtx.getItem('enymNotifications')) {
+			if(JSON.parse(appCtx.getItem('enymNotifications')).length > 0) {
 				$('#newMessages').popup().popup('open', {x: 10, y:10});
 			}
 		}
@@ -149,7 +149,7 @@ function OverlayViewModel() {
 	this.showNewMessagesOverlay = function() {
 		overlayViewModel.newMessagesDisplayList.removeAll();
 		var screenSizeText = truncatedText();
-		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
+		$.each(JSON.parse(appCtx.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 
 			valueNotification.createdLong = formatDate(valueNotification.created, 'long');
 			valueNotification.created = formatDate(valueNotification.created, 'short', 'main');
@@ -212,7 +212,7 @@ function OverlayViewModel() {
 			}
 		}
 		var tempEnymNotifications = [];
-		tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+		tempEnymNotifications = JSON.parse(appCtx.getItem('enymNotifications'));
 		if(tempEnymNotifications.length > 0) {
 			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 				if(typeof valueNotification != 'undefined' && valueNotification.msgId == data.msgId) {
@@ -222,14 +222,14 @@ function OverlayViewModel() {
 			setTimeout(function() {
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
 			}, 1000);				
-			localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			appCtx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 		}	
 //		
 		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);
 	}	
 	
 	this.showSingleMessage = function(data) {
-		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
+		appCtx.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
 		var backText = getCurrentViewModel().viewname;	
