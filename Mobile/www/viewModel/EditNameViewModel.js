@@ -10,7 +10,7 @@ function EditNameViewModel() {
   self.inputObs = [ 'firstname', 'lastname']; 
   self.errorObs = [ 'errorFirstName', 'errorFirstLastName', 'firstnameClass', 'lastnameClass' ];
 	
-  $.each(self.allObs(), function(i,v) {self[v] = ko.observable();});			
+  self.defineObservables();			
 	
   self.activate = function () {
 		addExternalMarkup(self.template); // this is for header/overlay message			

@@ -22,7 +22,7 @@ function ChangePasswordViewModel() {
     'errorMessageNew',
     'errorMessageConfirm' ];
 
-  $.each(self.allObs(), function(i,v) {self[v] = ko.observable();});
+  self.defineObservables();
 
 	/* Methods */
 	
