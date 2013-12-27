@@ -1,39 +1,27 @@
-﻿/* To Do - Devender - Remove later*/
-function ChannelViewUnfollowModel() {
-	var that = this;
-	this.template = "channelViewUnfollow";
-	this.viewid = "V-16";
-	this.viewname = "'Channel Unfollow'";
-	this.displayname = "Channel Unfollow";
+﻿function ChannelViewUnfollowModel() {
+	var self = this;
+	self.template = "channelViewUnfollow";
+	self.viewid = "V-16";
+	self.viewname = "'Channel Unfollow'";
+	self.displayname = "Channel Unfollow";
 	
-	this.accountName = ko.observable();
-	
-	this.hasfooter = ko.observable(true);
-	this.channelid = ko.observable();
-	
-	this.title = ko.observable('');
-	this.description = ko.observable('');		
+  self.inputObs = [ 'title', 'description', 'channelid' ];
+  self.defineObservables();
+		
+	self.hasfooter = ko.observable(true);
 
-	this.applyBindings = function() {
-		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
-			var channelObject = JSON.parse(localStorage.getItem("currentChannel"));
-			that.channelid(channelObject.id);
-			that.title(channelObject.name);
-			that.description(channelObject.description);
-			that.activate(channelObject);
-		});
-	};
-    
-	this.activate = function (channel) {
-		if(authenticate()) {		
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			that.channelid(channel.id);
-			that.accountName(localStorage.getItem("accountName"));					
-			$.mobile.showPageLoadingMsg("a", "Loading The Channel");
-		}
+	self.activate = function () {
+		addExternalMarkup(self.template); // this is for header/overlay message
+		
+		var channelObject = JSON.parse(localStorage.getItem("currentChannel"));
+		self.channelid(channelObject.id);
+		self.title(channelObject.name);
+		self.description(channelObject.description);		
+		
+		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 	};	
 	
-	this.unfollowChannelCommand = function() {
+	self.unfollowChannelCommand = function() {
 		$.mobile.showPageLoadingMsg("a", "Requesting to Unfollow Channel");
 		var callbacks = {
 			success: function(){
@@ -44,7 +32,7 @@ function ChannelViewUnfollowModel() {
 				showToast(toastobj);				
 			}
 		};
-		return ES.channelService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
+		return ES.channelService.unfollowChannel(self.channelid(),callbacks).then(successfulUnfollowChannel);
 	};
 	
 	function successfulUnfollowChannel(data){
@@ -54,14 +42,16 @@ function ChannelViewUnfollowModel() {
 			backNavView.pop();	
 		}
 		localStorage.removeItem('counter');
-		var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'No longer following '+that.title()};
+		var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'No longer following '+self.title()};
 		showToast(toastobj);						
 		localStorage.removeItem("currentChannel");				
 		goToView('channelsFollowingListView');
 	}
 	
-	this.comingSoon = function() {		
-		headerViewModel.comingSoon();	
+	self.comingSoon = function() {		
+		headerViewModel.comingSoon();
 	}
-		
 }
+
+ChannelViewUnfollowModel.prototype = new AppCtx.ViewModel();
+ChannelViewUnfollowModel.prototype.constructor = ChannelViewUnfollowModel;

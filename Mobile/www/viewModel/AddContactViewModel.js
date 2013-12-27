@@ -1,52 +1,23 @@
-﻿/*globals ko*/
-function AddContactViewModel() {
+﻿function AddContactViewModel() {
+	var self = this;
+	self.template = "addContactView";
+	self.viewid = "V-081";
+	self.viewname = "Cont. Info";
+	self.displayname = "Add/Edit Contact";
+	self.hasfooter = true;
 	
-	this.template = "addContactView";
-	this.viewid = "V-081";
-	this.viewname = "Cont. Info";
-	this.displayname = "Add/Edit Contact";
-	this.hasfooter = true;
-	
-	this.channels = ko.observableArray([]);
-	this.commethods = ko.observableArray([]);
-	this.baseUrl = ko.observable();
-	this.accountName = ko.observable();	
-	this.name = ko.observable();
-	
-	this.currentDeleteCommethodID = ko.observable();
-	this.showDelete = ko.observable(false);
-	this.showConfirm = ko.observable(false);
-	this.currentDeleteCommethod = ko.observable();
-	this.verify = ko.observable();
-	this.deletedID = ko.observable('');
-	
-	this.navText = ko.observable();
-	this.pView = '';
-	
-	var that = this;
+	self.channels = ko.observableArray([]);
+	self.commethods = ko.observableArray([]);
 
-	this.applyBindings = function(){
-		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
-			var currentBaseUrl = localStorage.getItem("baseUrl");
-			var previousView = localStorage.getItem('previousView');
-			console.log("previousView: " + previousView);
-			var vm = ko.dataFor($("#" + previousView).get(0));
-			console.log("previousView Model viewid: " + vm.displayname);
-			that.navText(vm.displayname);
-			that.pView = previousView;
-			
-			if (currentBaseUrl){
-				that.baseUrl(currentBaseUrl);
-			}
-			else {
-				var es = new EvernymService();
-				that.baseUrl(es.getBaseUrl());
-			}
-			that.activate();
-		});
-	};
+  self.inputObs = [ 'baseUrl', 'currentDeleteCommethod', 'verify', 'deletedID', 'navText', 'currentDeleteCommethodID' ];
+  self.defineObservables();	
 	
-	this.getCommethods = function() {
+	self.showDelete = ko.observable(false);
+	self.showConfirm = ko.observable(false);
+
+	self.pView = '';
+	
+	self.getCommethods = function() {
 		var callbacks = {
 			success: function(data){
 				//alert('succ');
@@ -59,8 +30,8 @@ function AddContactViewModel() {
 		return ES.commethodService.getCommethods(callbacks);
 	}
 	
-	this.gotoVerify = function(data) {
-		that.verify(true);
+	self.gotoVerify = function(data) {
+		self.verify(true);
 		var callbacks = {
 			success: function(responseData) {
 				//alert('Verification code sent!');
@@ -78,43 +49,41 @@ function AddContactViewModel() {
 		viewNavigate('Cont. Info', 'addContactView', 'verifyContactView');		
 	}
 	
-	this.gotoDelete = function(data) {	
-		if(that.verify() == false) {
-			that.currentDeleteCommethod(data.comMethodAddress);
-			that.currentDeleteCommethodID(data.comMethodID);
+	self.gotoDelete = function(data) {	
+		if(self.verify() == false) {
+			self.currentDeleteCommethod(data.comMethodAddress);
+			self.currentDeleteCommethodID(data.comMethodID);
 			localStorage.setItem("CommethodType",data.comMethodType);
 		}
-		that.showDelete(true);
-		//alert(headerViewModel.backText());
+		self.showDelete(true);
 	}
 	
-	this.gotoView = function() {
-		if(that.currentDeleteCommethodID()) {
-			that.currentDeleteCommethodID('');						
+	self.gotoView = function() {
+		if(self.currentDeleteCommethodID()) {
+			self.currentDeleteCommethodID('');						
 			goToView('addContactView');
 		}
 		else {
-			that.currentDeleteCommethodID('');						
+			self.currentDeleteCommethodID('');						
 			goToView('escalationPlansView');
 		}
 	};
 	
-	this.showConfirmButton = function(data) {
-		that.showConfirm(true);
+	self.showConfirmButton = function(data) {
+		self.showConfirm(true);
 	};
 	
-	this.confirmDelete = function() {
+	self.confirmDelete = function() {
 		var callbacks = {
 			success: function(data){
-				that.deletedID(that.currentDeleteCommethodID());
-				//alert(that.deletedID());
+				self.deletedID(self.currentDeleteCommethodID());
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
 				showToast(toastobj);				
 			}
 		};	
-		ES.commethodService.deleteCommethod(that.currentDeleteCommethodID(), callbacks);
+		ES.commethodService.deleteCommethod(self.currentDeleteCommethodID(), callbacks);
 		if(localStorage.getItem("CommethodType") == 'EMAIL') {
 			var toastText = 'Email address deleted';
 			localStorage.removeItem("CommethodType");
@@ -128,7 +97,7 @@ function AddContactViewModel() {
 		goToView('addContactView');
 	}
 
-	this.showCommethods = function(data) {
+	self.showCommethods = function(data) {
 		if(data.commethod.length > 0) {
 			var tempCommethodClass = '', tempshowVerify = false;
 			$.each(data.commethod, function(indexCommethods, valueCommethods) {
@@ -146,28 +115,42 @@ function AddContactViewModel() {
 				else {
 					tempCommethodTypeClass = "texticon";	
 				}
-				if(that.deletedID() != valueCommethods.id) {
-					that.commethods.push({ comMethodID: valueCommethods.id, comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify, comMethodType: valueCommethods.type, comMethodTypeClass: tempCommethodTypeClass});
+				if(self.deletedID() != valueCommethods.id) {
+					self.commethods.push({ comMethodID: valueCommethods.id, comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify, comMethodType: valueCommethods.type, comMethodTypeClass: tempCommethodTypeClass});
 				}
 			});
 		}
 	}	
     
-	this.activate = function() {
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.accountName(localStorage.getItem("accountName"));
-			that.name(localStorage.getItem("UserFullName"));
-			that.commethods.removeAll();
-			that.showDelete(false);
-			that.showConfirm(false);
-			that.verify(false);
-			localStorage.removeItem("currentVerificationCommethodID");
-			setTimeout(function() {
-				$.mobile.showPageLoadingMsg("a", "Loading commmethods.");
-				return that.getCommethods().then(that.showCommethods);
-			}, 1000);
-			//return that.getCommethods().then(that.showCommethods);
-		}
+	self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message
+		
+		var currentBaseUrl = localStorage.getItem("baseUrl");
+		var previousView = localStorage.getItem('previousView');
+		console.log("previousView: " + previousView);
+		var vm = ko.dataFor($("#" + previousView).get(0));
+		console.log("previousView Model viewid: " + vm.displayname);
+		self.navText(vm.displayname);
+		self.pView = previousView;
+		
+		if (currentBaseUrl){
+			self.baseUrl(currentBaseUrl);
+		} else {
+			var es = new EvernymService();
+			self.baseUrl(es.getBaseUrl());
+		}			
+		
+		self.commethods.removeAll();
+		self.showDelete(false);
+		self.showConfirm(false);
+		self.verify(false);
+		localStorage.removeItem("currentVerificationCommethodID");
+		setTimeout(function() {
+			$.mobile.showPageLoadingMsg("a", "Loading commmethods.");
+			return self.getCommethods().then(self.showCommethods);
+		}, 1000);
 	};
 }
+
+AddContactViewModel.prototype = new AppCtx.ViewModel();
+AddContactViewModel.prototype.constructor = AddContactViewModel;
