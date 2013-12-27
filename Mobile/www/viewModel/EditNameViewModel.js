@@ -1,74 +1,46 @@
 ﻿/*globals ko*/
 /* To do - Pradeep Kumar */
 function EditNameViewModel() {	
-  var that = this;
-	this.template = 'editNameView';
-	this.viewid = 'V-11';
-	this.viewname = 'Edit Name';
-	this.displayname = 'Edit Name';	
-	this.accountName = ko.observable();		
-	
-	/* Edit Name observable */
-	this.accountName = ko.observable();	
-  this.firstname = ko.observable();
-  this.lastname = ko.observable();
-  this.errorFirstName = ko.observable();	
-  this.errorFirstLastName = ko.observable();
-  this.firstnameClass = ko.observable();
-  this.lastnameClass = ko.observable();		
-	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();			
-      that.activate();
-    });
-  };
-	
-	this.clearForm = function () {
-    that.firstname('');
-    that.lastname('');
-		that.firstnameClass('');
-		that.lastnameClass('');		
-		that.errorFirstName('');		
-		that.errorFirstLastName('');
-  };
+  var self = this;
+	self.template = 'editNameView';
+	self.viewid = 'V-11';
+	self.viewname = 'Edit Name';
+	self.displayname = 'Edit Name';	
 
-  this.activate = function () {		
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message	
-			var account = JSON.parse(localStorage.getItem('account'));							
-			$('input').keyup(function () {
-				that.firstnameClass('');
-				that.lastnameClass('');
-				that.errorFirstName('');				
-				that.errorFirstLastName('');				
-			});
-			that.accountName(localStorage.getItem('accountName'));						
-			that.firstname(account.firstname);
-			that.lastname(account.lastname);;						
-		}
+  self.inputObs = [ 'firstname', 'lastname']; 
+  self.errorObs = [ 'errorFirstName', 'errorFirstLastName', 'firstnameClass', 'lastnameClass' ];
+	
+  $.each(self.allObs(), function(i,v) {self[v] = ko.observable();});			
+	
+  self.activate = function () {
+		addExternalMarkup(self.template); // this is for header/overlay message			
+		$('input').keyup(function () {
+		  self.clearErrorObs();
+		});
+		var account = JSON.parse(localStorage.getItem('account'));
+		self.firstname(account.firstname);
+		self.lastname(account.lastname);					
   };
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'editNameView') {
-			that.editNameCommand();
+			self.editNameCommand();
 		}
 	});	
 	
-	this.editNameCommand = function () {
-    if (that.firstname() == '') {
-      that.firstnameClass('validationerror');
-      that.errorFirstName('<span>SORRY:</span> Please enter first name');
-    } else if (that.firstname().length > 20) {
-      that.firstnameClass('validationerror');
-      that.errorFirstName('<span>SORRY:</span> Please enter name of max. 20 characters');
-    } else if (that.lastname() == '') {
-      that.lastnameClass('validationerror');
-      that.errorFirstLastName('<span>SORRY:</span> Last name cannot be left empty');
-    } else if (that.lastname().length > 20) {
-      that.lastnameClass('validationerror');
-      that.errorFirstLastName('<span>SORRY:</span> Please enter name of max. 20 characters');
+	self.editNameCommand = function () {
+    if (self.firstname() == '') {
+      self.firstnameClass('validationerror');
+      self.errorFirstName('<span>SORRY:</span> Please enter first name');
+    } else if (self.firstname().length > 20) {
+      self.firstnameClass('validationerror');
+      self.errorFirstName('<span>SORRY:</span> Please enter name of max. 20 characters');
+    } else if (self.lastname() == '') {
+      self.lastnameClass('validationerror');
+      self.errorFirstLastName('<span>SORRY:</span> Last name cannot be left empty');
+    } else if (self.lastname().length > 20) {
+      self.lastnameClass('validationerror');
+      self.errorFirstLastName('<span>SORRY:</span> Please enter name of max. 20 characters');
     } else {
       $.mobile.showPageLoadingMsg('a', 'Updating Name');
       var account = modifyAccount();
@@ -78,8 +50,8 @@ function EditNameViewModel() {
 	
 	function modifyAccount() {
     return {
-      firstname: that.firstname(),
-      lastname: that.lastname()
+      firstname: self.firstname(),
+      lastname: self.lastname()
     };
   };
 
@@ -87,9 +59,9 @@ function EditNameViewModel() {
     $.mobile.hidePageLoadingMsg();
 		var account = [];			
 		account.push({
-			accountname: that.accountName(),			
-			firstname: that.firstname(), 
-			lastname: that.lastname()
+			accountname: self.accountName(),			
+			firstname: self.firstname(), 
+			lastname: self.lastname()
 		});
 		account = account[0];				
 		localStorage.setItem('account', JSON.stringify(account));
@@ -102,9 +74,12 @@ function EditNameViewModel() {
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.firstnameClass('validationerror');		
-		that.lastnameClass('validationerror');
-		that.errorFirstLastName('<span>SORRY:</span> '+details.message);		
+		self.firstnameClass('validationerror');		
+		self.lastnameClass('validationerror');
+		self.errorFirstLastName('<span>SORRY:</span> '+details.message);		
   };	
 	
 }
+
+EditNameViewModel.prototype = new AppCtx.ViewModel();
+EditNameViewModel.prototype.constructor = EditNameViewModel;
