@@ -1,6 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function EditNameViewModel() {	
+﻿function EditNameViewModel() {	
   var self = this;
 	self.template = 'editNameView';
 	self.viewid = 'V-11';
