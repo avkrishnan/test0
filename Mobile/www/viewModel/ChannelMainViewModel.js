@@ -70,7 +70,7 @@
 			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();
 			var broadcast = '<strong class='+message_sensitivity+'></strong>'+message+'<em></em>';			
 			if(data.message[len].escLevelId == 'N') {
-        var broadcast = data.message[len].text+'<em></em>';				
+        var broadcast = message+'<em></em>';				
 				var sensitivityText = 'NORMAL';
 			} else if(data.message[len].escLevelId == 'F') {
         //var broadcast = data.message[len].text+'<em></em>';				
