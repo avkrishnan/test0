@@ -8,7 +8,7 @@
   self.viewname = "Login";
   self.displayname = "Login";	
 	
-  self.inputObs = [ 'username', 'password']; 
+  self.inputObs = [ 'username', 'password'];
   self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
 
   self.defineObservables();

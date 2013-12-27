@@ -880,11 +880,6 @@ function authenticate() {
 	return true;
 }
 
-/* Validate user via access token */
-function footerMenu() {
-	$('#'+$.mobile.activePage.attr('id')).append(load('footerMenu'));
-}
-
 /* pradeep kumar end */
 
 /* Time conversion into time ago*/

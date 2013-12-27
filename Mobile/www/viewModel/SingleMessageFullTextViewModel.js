@@ -1,76 +1,65 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
+﻿/* To do - Pradeep Kumar */
 function SingleMessageFullTextViewModel() {
-  var that = this;
-	this.template = 'singleMessageFullTextView';
-	this.viewid = 'V-23';
-	this.viewname = 'Full Msg';
-	this.displayname = 'Broadcast Full Text';	
-	this.accountName = ko.observable();		
+  var self = this;
+	self.template = 'singleMessageFullTextView';
+	self.viewid = 'V-23';
+	self.viewname = 'Full Msg';
+	self.displayname = 'Broadcast Full Text';	
 
-  /* Single message observable */		
-	this.channelName = ko.observable();		
-	this.time = ko.observable();	
-	this.sensitivity = ko.observable();	
-	this.sensitivityText = ko.observable();	
-	this.singleMessage = ko.observable();
-	this.iGi = ko.observable();
-	this.percentageText = ko.observable();
-	this.percentageClass = ko.observable();	
-	this.percentage = ko.observable();			
-	this.noiGi = ko.observable();	
-	this.fullText = ko.observable();
-	this.broadcastType = ko.observable();
-	this.acks = ko.observable();					
+  self.inputObs = [
+    'channelName',
+		'time',
+		'sensitivity',
+		'sensitivityText',
+    'singleMessage', 
+    'broadcastType', 
+    'iGi', 
+    'percentageText',
+    'percentageClass',
+		'percentage',
+		'noiGi',
+		'fullText',
+		'acks'];		
+	self.defineObservables();					  
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
-	
-	this.activate = function() {
-		if(authenticate()) {
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-			if(!channelObject || !messageObject) {
-				goToView('channelsIOwnView');			
-			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message						
-				that.accountName(localStorage.getItem('accountName'));			
-				var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-				var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
-				that.channelName(channelObject.channelName);
-				var fullDate = formatDate(messageObject.created,'long');					
-				//that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
-				that.time('Sent - '+ fullDate);
-				that.sensitivity(messageObject.sensitivity);			
-				that.sensitivityText(messageObject.sensitivityText);
-				if(messageObject.broadcastFull.length > truncatedTextScreen()) {
-					that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+$.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...<em></em>');
-				}
-				else {
-					that.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+messageObject.broadcastFull+'<em></em>');				
-				}							
-				that.iGi(messageObject.iGi);
-				that.percentageText(messageObject.percentageText);
-				that.percentageClass(messageObject.percentageClass);			
-				that.percentage(messageObject.percentage);			
-				that.noiGi(messageObject.noiGi);			
-				that.fullText(messageObject.broadcastFull);
-				that.broadcastType(messageObject.type);
-				that.acks(messageObject.acks+' Got It');																
+	self.activate = function() {
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
+		if(!channelObject || !messageObject) {
+			goToView('channelsIOwnView');			
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message								
+			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));										
+			self.channelName(channelObject.channelName);
+			var fullDate = formatDate(messageObject.created,'long');					
+			//that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
+			self.time('Sent - '+ fullDate);
+			self.sensitivity(messageObject.sensitivity);			
+			self.sensitivityText(messageObject.sensitivityText);
+			if(messageObject.broadcastFull.length > truncatedTextScreen()) {
+				self.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+$.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...<em></em>');
 			}
+			else {
+				self.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+messageObject.broadcastFull+'<em></em>');				
+			}							
+			self.iGi(messageObject.iGi);
+			self.percentageText(messageObject.percentageText);
+			self.percentageClass(messageObject.percentageClass);			
+			self.percentage(messageObject.percentage);			
+			self.noiGi(messageObject.noiGi);			
+			self.fullText(messageObject.broadcastFull);
+			self.broadcastType(messageObject.type);
+			self.acks(messageObject.acks+' Got It');																
 		}
 	}
 	
-	this.showWhoGotIt = function(){
-		if(that.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
+	self.showWhoGotIt = function(){
+		if(self.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
 			var toastobj = {type: 'toast-info', text: 'No iGi requested'};
 			showToast(toastobj);						
 		}
-		else if(that.acks() == '0 Got It') {
+		else if(self.acks() == '0 Got It') {
 			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
 			showToast(toastobj);			
 		}
@@ -80,3 +69,6 @@ function SingleMessageFullTextViewModel() {
 	};			
 				
 }
+
+SingleMessageFullTextViewModel.prototype = new AppCtx.ViewModel();
+SingleMessageFullTextViewModel.prototype.constructor = SingleMessageFullTextViewModel;

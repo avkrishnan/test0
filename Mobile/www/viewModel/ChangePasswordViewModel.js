@@ -1,5 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
+﻿/* To do - Pradeep Kumar */
 function ChangePasswordViewModel() {
 
   var self = this;

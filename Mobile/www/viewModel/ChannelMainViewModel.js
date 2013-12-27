@@ -1,64 +1,51 @@
 ﻿function ChannelMainViewModel() {	
-  var that = this;
-	this.template = 'channelMainView';
-	this.viewid = 'V-46';
-	this.viewname = 'Main';
-	this.displayname = 'Channel Main';	
-	this.accountName = ko.observable();		
+  var self = this;
+	self.template = 'channelMainView';
+	self.viewid = 'V-46';
+	self.viewname = 'Main';
+	self.displayname = 'Channel Main';			
 	
-  /* Channel Main observable */	
-	this.channelId = ko.observable();		
-	this.channelName = ko.observable();
-	this.followerCount = ko.observable();
-	this.broadcasts = ko.observableArray([]);				
+  self.inputObs = [ 'channelId', 'channelName', 'followerCount'];
+	self.defineObservables();
+	self.broadcasts = ko.observableArray([]);				 
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {	
-      that.activate();
-    });	
-	};  
-	
-	this.activate = function() {					
-		if(authenticate()) {
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			if(!channelObject && !localStorage.getItem('currentChannelId')) {
-				goToView('channelsIOwnView');		
+	self.activate = function() {					
+		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
+		if(!channelObject && !localStorage.getItem('currentChannelId')) {
+			goToView('channelsIOwnView');		
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message	
+			self.broadcasts.removeAll();											
+			if(localStorage.getItem('counter') == 1) {
+				localStorage.setItem('counter', 2);
 			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message	
-				that.broadcasts.removeAll();											
-				that.accountName(localStorage.getItem('accountName'));
-				if(localStorage.getItem('counter') == 1) {
-					localStorage.setItem('counter', 2);
-				} else {
-					localStorage.setItem('counter', 1)
-				}								
-				localStorage.removeItem('currentMessageData');			
-				that.broadcasts.removeAll();
-				if(localStorage.getItem('currentChannelId')) {
-					that.channelId(localStorage.getItem('currentChannelId'));								
-					return ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI}).then(that.getMessagesCommand());								
-				}
-				else {									
-					that.channelId(channelObject.channelId);
-					that.channelName(channelObject.channelName);
-					that.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
-				}
-				that.getMessagesCommand();
+				localStorage.setItem('counter', 1)
+			}								
+			localStorage.removeItem('currentMessageData');			
+			self.broadcasts.removeAll();
+			if(localStorage.getItem('currentChannelId')) {
+				self.channelId(localStorage.getItem('currentChannelId'));								
+				return ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI}).then(self.getMessagesCommand());								
 			}
+			else {									
+				self.channelId(channelObject.channelId);
+				self.channelName(channelObject.channelName);
+				self.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
+			}
+			self.getMessagesCommand();
 		}
 	}
 	
 	function successfulGetChannel(data) {
 		$.mobile.hidePageLoadingMsg();								
-		that.channelName(data.name);
+		self.channelName(data.name);
 		if(data.followers == 1) {
 			var followers = data.followers +' follower';
 		} 
 		else {
 			var followers = data.followers +' followers';
 		}					
-		that.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');		
+		self.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');		
 		var channel = [];			
 		channel.push({
 			channelId: data.id, 
@@ -73,10 +60,15 @@
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();			
-		var len = 0;
-		for(len; len<data.message.length; len++) {
+		for(var len = 0; len<data.message.length; len++) {
+			if(data.message[len].text.length > truncatedTextScreen()-20) {
+				var message = $.trim(data.message[len].text).substring(0, truncatedTextScreen()-20).split(' ').slice(0, -1).join(' ') + '...';
+			}
+			else {
+				var message = data.message[len].text;					
+			}			
 			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();
-			var broadcast = '<strong class='+message_sensitivity+'></strong>'+data.message[len].text+'<em></em>';			
+			var broadcast = '<strong class='+message_sensitivity+'></strong>'+message+'<em></em>';			
 			if(data.message[len].escLevelId == 'N') {
         var broadcast = data.message[len].text+'<em></em>';				
 				var sensitivityText = 'NORMAL';
@@ -132,7 +124,7 @@
 			} else {
 				var replies = data.message[len].replies +' Replies';
 			}						
-			that.broadcasts.push({
+			self.broadcasts.push({
 				messageId: data.message[len].id,
 				sensitivity: message_sensitivity,
 				sensitivityText: sensitivityText,
@@ -161,17 +153,17 @@
 		showToast(toastobj);		
   };
 	
-	this.getMessagesCommand = function(){
+	self.getMessagesCommand = function(){
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		return ES.messageService.getChannelMessages(that.channelId(), undefined, {success: successfulMessageGET, error: errorAPI});
+		return ES.messageService.getChannelMessages(self.channelId(), undefined, {success: successfulMessageGET, error: errorAPI});
 	};	
 	
-	this.singleMessage = function(data){
+	self.singleMessage = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));							
 		viewNavigate('Main', 'channelMainView', 'singleMessageView');
 	};
 	
-	this.showWhoGotIt = function(data){		
+	self.showWhoGotIt = function(data){		
 		if(data.acks == 0) {
 			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
 			showToast(toastobj);						
@@ -182,7 +174,7 @@
 		}
 	};
 	
-	this.iGiPercentage = function(data){
+	self.iGiPercentage = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));
 		if(data.percentageClass != '') {							
 			viewNavigate('Main', 'channelMainView', 'singleMessageView');
@@ -192,12 +184,12 @@
 		}
 	};	
 	
-	this.showNotGotIt = function(data){
+	self.showNotGotIt = function(data){
 		localStorage.setItem('currentMessageData', JSON.stringify(data));								
 		viewNavigate('Main', 'channelMainView', 'notGotItView');
 	};
 	
-	this.showReplies = function(data){	
+	self.showReplies = function(data){	
 		if(data.replies == '0 Replies') {
 			var toastobj = {type: 'toast-info', text: 'No replies to display'};
 			showToast(toastobj);						
@@ -205,7 +197,7 @@
 		else if(data.replies == '1 Reply') {
 			localStorage.setItem('currentMessageData', JSON.stringify(data));
 			$.mobile.showPageLoadingMsg("a", "Loading Message reply");			
-			return ES.messageService.getChannelMessages(that.channelId(), {replyto: data.messageId}, {success: successfulReliesGET, error: errorAPI});														
+			return ES.messageService.getChannelMessages(self.channelId(), {replyto: data.messageId}, {success: successfulReliesGET, error: errorAPI});														
 		}
 		else {
 			localStorage.setItem('currentMessageData', JSON.stringify(data));									
@@ -253,3 +245,6 @@
   };						
 	
 }
+
+ChannelMainViewModel.prototype = new AppCtx.ViewModel();
+ChannelMainViewModel.prototype.constructor = ChannelMainViewModel;
