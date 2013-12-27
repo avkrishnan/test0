@@ -1,6 +1,4 @@
-﻿/* To do - Pradeep Kumar */
-function ChangePasswordViewModel() {
-
+﻿function ChangePasswordViewModel() {
   var self = this;
 
   self.template = 'changePasswordView';
@@ -8,23 +6,10 @@ function ChangePasswordViewModel() {
   self.viewname = 'Change Password';
   self.displayname = 'Change Password';
 
-  self.inputObs = [ 
-    'currentPassword', 
-    'newPassword', 
-    'newConfirmPassword' ]; 
-  
-  self.errorObs = [ 
-    'currentpasswordClass',
-    'newpasswordClass', 
-    'confirmpasswordClass', 
-    'errorMessageCurrent', 
-    'errorMessageNew',
-    'errorMessageConfirm' ];
-
+  self.inputObs = [ 'currentPassword', 'newPassword', 'newConfirmPassword' ]; 
+  self.errorObs = [ 'currentpasswordClass', 'newpasswordClass', 'confirmpasswordClass', 'errorMessageCurrent', 'errorMessageNew', 'errorMessageConfirm' ];
   self.defineObservables();
 
-	/* Methods */
-	
   self.activate = function () {
 		addExternalMarkup(self.template); // this is for header/overlay message			
 		$('input').keyup(function () {
@@ -46,17 +31,14 @@ function ChangePasswordViewModel() {
 		else if(self.newPassword() == '') {
 			self.newpasswordClass('validationerror');			
 			self.errorMessageNew("Please input new password!");
-		}
-		else if(self.newConfirmPassword() == '') {
+		} else if(self.newConfirmPassword() == '') {
 			self.confirmpasswordClass('validationerror');			
 			self.errorMessageConfirm("Please input new confirm password!");
-		}
-		else if(self.newPassword() != self.newConfirmPassword()) {
+		} else if(self.newPassword() != self.newConfirmPassword()) {
 			self.newpasswordClass('validationerror');				
 			self.confirmpasswordClass('validationerror');			
 			self.errorMessageConfirm("Password's don't match");
-		}
-		else {
+		} else {
       $.mobile.showPageLoadingMsg("a", "Sending change password request");			
 			var passwordChangeRequest = {};
       passwordChangeRequest.currentPassword = self.currentPassword();
@@ -83,4 +65,3 @@ function ChangePasswordViewModel() {
 
 ChangePasswordViewModel.prototype = new AppCtx.ViewModel();
 ChangePasswordViewModel.prototype.constructor = ChangePasswordViewModel;
-
