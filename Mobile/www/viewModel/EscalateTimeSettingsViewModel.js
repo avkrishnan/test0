@@ -59,10 +59,6 @@ function EscalateTimeSettingsViewModel() {
 		}
 	}
 	
-	this.menuCommand = function () {
-		viewNavigate('Escalate Settings', 'escalateSettingsView', 'channelMenuView');		
-  };
-	
 	this.upArrow = function (data) {
 		localStorage.setItem('setValue', data);
 		that.setUp();			

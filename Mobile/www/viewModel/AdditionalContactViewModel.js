@@ -110,11 +110,7 @@ function AdditionalContactViewModel() {
 			that.errorMessage('');
 			that.addCommethod();
 		}
-	});			
-	
-	this.menuCommand = function () {
-		viewNavigate('Add New', 'additionalContactView', 'channelMenuView');		
-  };	
+	});				
 	
 	this.addNewCommethod = function(newCommethodObject) {
 		//alert(JSON.stringify(newCommethodObject));

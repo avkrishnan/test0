@@ -51,11 +51,7 @@ function ReplyDetailViewModel() {
 				that.moreText(replyObject.replyFull);												
 			}
 		}
-	}
-	
-	this.menuCommand = function () {
-		viewNavigate('Reply detail', 'replyDetailView', 'channelMenuView');		
-  };	
+	}	
 	
 	this.showMore = function(){
 		that.less(false);		
