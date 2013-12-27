@@ -26,6 +26,12 @@ ENYM.Ctx = function() {
     return result == undefined ? null : result;
   };
   
+  self.removeAll = function() {
+    $.each(amplify.store(), function(k,v) {
+      amplify.store(k,null);
+    });
+  };
+  
 };
 
 ENYM.ctx = new ENYM.Ctx();
