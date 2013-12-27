@@ -7,7 +7,7 @@
 	that = this;
 	/* Methods */
 	this.activate = function() {
-		if($.mobile.activePage.attr('id') == 'channelListView') {
+		if($.mobile.activePage.attr('id') == 'homeView') {
 			this.isBack = ko.observable(false);
 		}
 		if(typeof backNavText[0] == 'undefined') {
@@ -102,7 +102,7 @@
 				break;
 			default:
 				if(typeof backNavText[0] == 'undefined') {
-					goToView('channelListView');
+					goToView('homeView');
 				}
 				else {
 					popBackNav();

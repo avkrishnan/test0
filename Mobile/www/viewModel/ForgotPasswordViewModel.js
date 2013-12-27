@@ -32,7 +32,7 @@
 				that.emailClass('');
 			});
 		} else {
-			goToView('channelListView');
+			goToView('homeView');
 		}
   };
 	

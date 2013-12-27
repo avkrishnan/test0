@@ -18,7 +18,7 @@ function ForgotPasswordSuccessViewModel() {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {				
 		} else {
-			goToView('channelListView');
+			goToView('homeView');
 		}		
   };
 

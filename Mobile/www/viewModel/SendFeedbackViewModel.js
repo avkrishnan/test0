@@ -1,8 +1,7 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function InviteFollowersIIViewModel() {
+﻿/* To do - Pradeep Kumar */
+function SendFeedbackViewModel() {
   var that = this;
-  this.template = 'inviteFollowersIIView';
+  this.template = 'sendFeedbackView';
   this.viewid = 'V-41';
   this.viewname = 'Send Feedback';
   this.displayname = 'Send Feedback';
@@ -61,7 +60,7 @@ function InviteFollowersIIViewModel() {
 	}
 	
 	$(document).keyup(function (e) {
-		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'inviteFollowersIIView') {
+		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'sendFeedbackView') {
 			that.sendFeedbackCommand();
 		}
 	});	

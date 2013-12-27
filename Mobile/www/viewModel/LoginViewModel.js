@@ -29,7 +29,7 @@
 			$('input').keyup(self.clearErrorObs);
 		} 
 		else {
-			goToView('channelListView');
+			goToView('homeView');
 		}
   };
 	
@@ -135,7 +135,7 @@
 				ES.channelService.followChannel(channel.id, callbacks);
 			}
 			else {
-				goToView('channelListView');
+				goToView('homeView');
 			}
     } 
 		else {

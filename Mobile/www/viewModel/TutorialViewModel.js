@@ -20,7 +20,7 @@ function TutorialViewModel() {
 		if(token == '' || token == null){
 			goToView('loginView');
 		} else if(newUser == '' || newUser == null) {
-				goToView('channelListView');
+				goToView('homeView');
 		}			
 		$('.tutorial ul li').removeClass('active');
 		$('.tutorial ul li:first-child').addClass('active');		
@@ -83,7 +83,7 @@ function TutorialViewModel() {
 			ES.channelService.followChannel(channel.id, callbacks);
 		}
 		else {
-			goToView('channelListView');
+			goToView('homeView');
 		}
   }
 	
