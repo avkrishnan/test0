@@ -880,9 +880,22 @@ function authenticate() {
 	return true;
 }
 
-/* Validate user via access token */
-function footerMenu() {
-	$('#'+$.mobile.activePage.attr('id')).append(load('footerMenu'));
+/* Function to truncate message text on the basis of screen szie for overlay*/
+function truncatedText(data) {
+	var screenSize = $(window).width();
+	if(screenSize < 400) {
+		return screenSize/7;
+	}
+	else if (screenSize > 400 && screenSize < 600) {
+		return screenSize/6;
+	}
+	else if(screenSize > 600 && screenSize < 800) {
+		return screenSize/5;
+	}
+	else {
+		return screenSize/4;	
+	}
+	return result = $.trim(data).substring(0, screenSize-150).split(' ').slice(0, -1).join(' ') + '...';
 }
 
 /* pradeep kumar end */
