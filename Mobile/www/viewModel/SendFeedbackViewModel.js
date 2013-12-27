@@ -23,7 +23,7 @@
 			self.feedbackLabel('Report a Bug:');
 			self.feedbackContext('bug');								
 		} feedbackType = '';						
-		self.accountName(appCtx.getItem('accountName'));			
+		self.accountName(ENYM.ctx.getItem('accountName'));			
 		$('textarea').keyup(function () {
 			self.feedbackClass('');
 			self.error(false);				

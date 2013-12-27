@@ -23,10 +23,10 @@ function ChannelsIOwnViewModel() {
   this.activate = function() {
 		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message				
-			that.accountName(appCtx.getItem('accountName'));
+			that.accountName(ENYM.ctx.getItem('accountName'));
 			that.sectionOne(false);
 			that.sectionTwo(false);			
-			appCtx.setItem('counter', 1);												
+			ENYM.ctx.setItem('counter', 1);												
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
@@ -65,20 +65,20 @@ function ChannelsIOwnViewModel() {
 	};
 	
 	this.channelSettings = function(data){
-		appCtx.removeItem('currentChannelData');				
-		appCtx.setItem('currentChannelData', JSON.stringify(data));
+		ENYM.ctx.removeItem('currentChannelData');				
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelSettingsView');		
 	};
 	
 	this.channelMain = function(data){
-		appCtx.removeItem('currentChannelData');		
-		appCtx.setItem('currentChannelData', JSON.stringify(data));
+		ENYM.ctx.removeItem('currentChannelData');		
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelMainView');					
 	};
 	
 	this.channelFollowers = function(data){
-		appCtx.removeItem('currentChannelData');			
-		appCtx.setItem('currentChannelData', JSON.stringify(data));	
+		ENYM.ctx.removeItem('currentChannelData');			
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));	
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');		
 	};	
 	

@@ -30,7 +30,7 @@ function SignupViewModel() {
 
       if ($.mobile.pageData && $.mobile.pageData.follow) {
 
-        // appCtx.setItem("follow",
+        // ENYM.ctx.setItem("follow",
         // JSON.stringify($.mobile.pageData.follow));
 
       }
@@ -102,25 +102,25 @@ function SignupViewModel() {
 
       ES.evernymService.setAccessToken(args.accessToken);
 
-      appCtx.setItem("accountName", args.account.accountname);
+      ENYM.ctx.setItem("accountName", args.account.accountname);
 
       that.first_name = args.account.firstname;
       that.last_name = args.account.lastname;
-      appCtx.setItem('UserFullName', args.account.firstname + ' '
+      ENYM.ctx.setItem('UserFullName', args.account.firstname + ' '
           + args.account.lastname);
       $.mobile.activePage.find('#thefooter #footer-gear').html(
           args.account.accountname);
 
-      var login_nav = JSON.parse(appCtx.getItem("login_nav"));
-      appCtx.removeItem("login_nav");
+      var login_nav = JSON.parse(ENYM.ctx.getItem("login_nav"));
+      ENYM.ctx.removeItem("login_nav");
 
-      var follow = appCtx.getItem("follow");
+      var follow = ENYM.ctx.getItem("follow");
 
       if (follow) {
 
         // alert('hello, we are going to now go to or follow the channel ' +
         // follow);
-        appCtx.removeItem("follow");
+        ENYM.ctx.removeItem("follow");
       } else if (login_nav) {
         var hash = login_nav.hash;
         // var parameters = login_nav.parameters;
@@ -157,7 +157,7 @@ function SignupViewModel() {
   function signUpSuccess(args) {
     $.mobile.hidePageLoadingMsg();
     that.loginCommand();
-    appCtx.setItem('flags.signup_complete', 1);
+    ENYM.ctx.setItem('flags.signup_complete', 1);
 
   }
   ;

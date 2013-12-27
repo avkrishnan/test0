@@ -32,12 +32,12 @@ function EditLongDescriptionViewModel() {
 	
 	this.activate = function() {		
 		if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
 			if(!channelObject) {
 				goToView('channelsIOwnView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message					
-				that.accountName(appCtx.getItem('accountName'));		
+				that.accountName(ENYM.ctx.getItem('accountName'));		
 				that.channelId(channelObject.channelId);
 				that.channelName(channelObject.channelName);			
 				that.longDescription(channelObject.longDescription);						
@@ -75,7 +75,7 @@ function EditLongDescriptionViewModel() {
 			followerCount: followers
 		});
 		channel = channel[0];		
-		appCtx.setItem('currentChannelData', JSON.stringify(channel));
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
 		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Description changed'};
 		showToast(toastobj);		
 		backNavText.pop();

@@ -49,7 +49,7 @@
 
   function successfulChange(args) {
     $.mobile.hidePageLoadingMsg();
-		appCtx.setItem('changePassword', self.newPassword());		
+		ENYM.ctx.setItem('changePassword', self.newPassword());		
 		goToView('changePasswordSuccessView');
   };
 

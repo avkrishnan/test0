@@ -17,13 +17,13 @@
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {			
 			self.errorMessage('');
-			if (appCtx.getItem("username") == null && appCtx.getItem("password") == null) {
+			if (ENYM.ctx.getItem("username") == null && ENYM.ctx.getItem("password") == null) {
 				self.username('');
 				self.password('');
 			}
 			else {
-				self.username(appCtx.getItem("username"));
-				self.password(appCtx.getItem("password"));
+				self.username(ENYM.ctx.getItem("username"));
+				self.password(ENYM.ctx.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
 			$('input').keyup(self.clearErrorObs);
@@ -57,12 +57,12 @@
 		else {
 			self.errorMessage('');
       if ($('input[name="rememberPassword"]:checked').length == 1) {
-				appCtx.setItem("username", self.username());
-        appCtx.setItem("password", self.password());
+				ENYM.ctx.setItem("username", self.username());
+        ENYM.ctx.setItem("password", self.password());
       }
 			else {
-				appCtx.removeItem('username');
-				appCtx.removeItem('password');
+				ENYM.ctx.removeItem('username');
+				ENYM.ctx.removeItem('password');
 			}
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
@@ -82,14 +82,14 @@
 	
   self.cleanApplication = function() {
     ES.evernymService.clearAccessToken();
-    appCtx.removeItem('login_nav');
-    appCtx.removeItem('currentChannel');
-    appCtx.removeItem('accountName');
-    appCtx.removeItem('name');
-    appCtx.removeItem('signUpError');
-		appCtx.removeItem('newuseremail');
-		appCtx.removeItem('newusername');
-		appCtx.removeItem('newuserpassword');
+    ENYM.ctx.removeItem('login_nav');
+    ENYM.ctx.removeItem('currentChannel');
+    ENYM.ctx.removeItem('accountName');
+    ENYM.ctx.removeItem('name');
+    ENYM.ctx.removeItem('signUpError');
+		ENYM.ctx.removeItem('newuseremail');
+		ENYM.ctx.removeItem('newusername');
+		ENYM.ctx.removeItem('newuserpassword');
     //channelListViewModel.clearForm();
     //notificationsViewModel.removeNotifications();
     //OVERLAY.removeNotifications();
@@ -114,24 +114,24 @@
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
-			appCtx.setItem('account', JSON.stringify(args.account));
-      appCtx.setItem("accountName", self.username());
-			if(appCtx.getItem("action") == 'follow_channel') {
+			ENYM.ctx.setItem('account', JSON.stringify(args.account));
+      ENYM.ctx.setItem("accountName", self.username());
+			if(ENYM.ctx.getItem("action") == 'follow_channel') {
 				var callbacks = {
 					success: function() {
-						appCtx.removeItem('action');
+						ENYM.ctx.removeItem('action');
 						var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
 						showToast(toastobj);						
 						goToView('channelMessagesView');					
 					},
 					error: function(data, status, details) {
-						appCtx.removeItem('action');
+						ENYM.ctx.removeItem('action');
 						var toastobj = {redirect: 'channelMessagesView', type: 'toast-info', text: details.message};
 						showToast(toastobj);											
 						goToView('channelMessagesView');
 					}
 				};						
-				var channel = JSON.parse(appCtx.getItem('currentChannel'));
+				var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);
 			}
 			else {

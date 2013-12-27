@@ -38,7 +38,7 @@ function FollowerViewModel() {
 
     this.activate = function (lfollower) {
 
-        var currentChannel = appCtx.getItem("currentChannel");
+        var currentChannel = ENYM.ctx.getItem("currentChannel");
         var channel = JSON.parse(currentChannel);
         
         that.follower(lfollower);

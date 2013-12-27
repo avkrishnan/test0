@@ -64,7 +64,7 @@
 
   function forgotPasswordSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-		appCtx.setItem('resetAccount', that.email());	
+		ENYM.ctx.setItem('resetAccount', that.email());	
 		goToView('forgotPasswordSuccessView');		
   }
 

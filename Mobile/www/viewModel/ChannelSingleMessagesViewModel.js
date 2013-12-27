@@ -29,16 +29,16 @@
 		self.dismissButton(true);			
 		self.activeClass('igimsgdetail');
 		self.dismissClass('');										
-		if(appCtx.getItem('counter') == 1) {
-			appCtx.setItem('counter', 2);
+		if(ENYM.ctx.getItem('counter') == 1) {
+			ENYM.ctx.setItem('counter', 2);
 		} 
-		else if(appCtx.getItem('counter') == 2) {		
-			appCtx.setItem('counter', 3);
+		else if(ENYM.ctx.getItem('counter') == 2) {		
+			ENYM.ctx.setItem('counter', 3);
 		}	
 		else {
-			appCtx.setItem('counter', 1);
+			ENYM.ctx.setItem('counter', 1);
 		}
-		if(appCtx.getItem("overlayCurrentChannel")) {
+		if(ENYM.ctx.getItem("overlayCurrentChannel")) {
 			var callbacks = {
 				success: function(data) {
 					self.channelIcon('channel4 sky-blue');						
@@ -55,7 +55,7 @@
 					}
 				}
 			};					
-			var channel = JSON.parse(appCtx.getItem("overlayCurrentChannel"));
+			var channel = JSON.parse(ENYM.ctx.getItem("overlayCurrentChannel"));
 			self.channelid(channel.channelId);
 			self.messageId(channel.msgId);
 			self.ack(channel.ack);
@@ -98,8 +98,8 @@
 			}
 		}
 		else {
-			var channel = JSON.parse(appCtx.getItem("currentChannel"));
-			var channelMessage = JSON.parse(appCtx.getItem("currentChannelMessage"));
+			var channel = JSON.parse(ENYM.ctx.getItem("currentChannel"));
+			var channelMessage = JSON.parse(ENYM.ctx.getItem("currentChannelMessage"));
 			self.channelIcon('channel4 sky-blue');				
 			self.title(channel.name);
 			self.channelid(channel.channelId);	
@@ -160,15 +160,15 @@
 				ES.systemService.adjMnsCount(-1);
 			}
 			var tempEnymNotifications = [];
-			tempEnymNotifications = JSON.parse(appCtx.getItem('enymNotifications'));
+			tempEnymNotifications = JSON.parse(ENYM.ctx.getItem('enymNotifications'));
 			if(tempEnymNotifications.length > 0) {
 				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 					if(typeof valueNotification != 'undefined' && valueNotification.msgId == messageID) {
 						tempEnymNotifications.splice(indexNotification,1)
 					}
 				});
-				appCtx.removeItem('enymNotifications');
-				appCtx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+				ENYM.ctx.removeItem('enymNotifications');
+				ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 			}
 		}
 		return ES.messageService.readMsg(messageID, callbacks).then(self.updateMessages);
@@ -226,7 +226,7 @@
 				ES.systemService.adjMnsCount(-1);
 			}
 			var tempEnymNotifications = [];
-			tempEnymNotifications = JSON.parse(appCtx.getItem('enymNotifications'));
+			tempEnymNotifications = JSON.parse(ENYM.ctx.getItem('enymNotifications'));
 			if(tempEnymNotifications.length > 0) {
 				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 					if(typeof valueNotification != 'undefined' && valueNotification.msgId == self.messageId()) {
@@ -237,7 +237,7 @@
 					showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
 					overlayViewModel.showNewMessagesOverlay();
 				}, 1000);				
-				appCtx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+				ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 			}	
 			//			
 			return ES.messageService.acknowledgeMsg(self.messageId(), callbacks);

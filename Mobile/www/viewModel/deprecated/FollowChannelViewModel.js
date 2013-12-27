@@ -33,7 +33,7 @@
             that.clean();
             
             
-            var previousView = appCtx.getItem('previousView');
+            var previousView = ENYM.ctx.getItem('previousView');
 			console.log("previousView: " + previousView);
 			var vm = ko.dataFor($("#" + previousView).get(0));
 			console.log("previousView Model viewid: " + vm.displayname);
@@ -58,7 +58,7 @@
 	function gotChannel(data){
 		
 		$.mobile.hidePageLoadingMsg();
-		appCtx.setItem("currentChannel", JSON.stringify(data));
+		ENYM.ctx.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		//alert(JSON.stringify(data));
 		$.mobile.changePage("#" + channelViewModel.template);

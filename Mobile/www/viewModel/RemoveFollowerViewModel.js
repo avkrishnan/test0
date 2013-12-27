@@ -23,13 +23,13 @@ function RemoveFollowerViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
-			var followerObject = JSON.parse(appCtx.getItem('currentfollowerData'));;		
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+			var followerObject = JSON.parse(ENYM.ctx.getItem('currentfollowerData'));;		
 			if(!followerObject) {
 				goToView('followersListView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message						
-				that.accountName(appCtx.getItem('accountName'));	
+				that.accountName(ENYM.ctx.getItem('accountName'));	
 				that.channelId(channelObject.channelId);			
 				that.followerId(followerObject.followerId);
 				that.followerName(followerObject.followerName);			
@@ -62,7 +62,7 @@ function RemoveFollowerViewModel() {
 			followerCount: followers
 		});
 		channel = channel[0];		
-		appCtx.setItem('currentChannelData', JSON.stringify(channel));
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
 		var toastobj = {redirect: 'followersListView', type: '', text: 'Follower deleted'};
 		showToast(toastobj);						
     goToView('followersListView');					
@@ -77,7 +77,7 @@ function RemoveFollowerViewModel() {
   this.removeFollowerCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Removing Follower');
 		return ES.channelService.removeFollower(that.channelId(), that.followerId(), { success: successfulDelete, error: errorAPI });
-		appCtx.removeItem('currentChannel');
+		ENYM.ctx.removeItem('currentChannel');
   };	
 	
 }

@@ -15,7 +15,7 @@
 		$('input').keyup(function () {
 		  self.clearErrorObs();
 		});
-		var account = JSON.parse(appCtx.getItem('account'));
+		var account = JSON.parse(ENYM.ctx.getItem('account'));
 		self.firstname(account.firstname);
 		self.lastname(account.lastname);					
   };
@@ -62,7 +62,7 @@
 			lastname: self.lastname()
 		});
 		account = account[0];				
-		appCtx.setItem('account', JSON.stringify(account));
+		ENYM.ctx.setItem('account', JSON.stringify(account));
 		var toastobj = {redirect: 'escalationPlansView', type: '', text: 'Name updated successfully !'};
 		showToast(toastobj);						
 		backNavText.pop();

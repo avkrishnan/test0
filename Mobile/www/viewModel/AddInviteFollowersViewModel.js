@@ -21,21 +21,21 @@ function AddInviteFollowersViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
 			if(!channelObject) {
 				goToView('channelsIOwnView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message						
-				that.accountName(appCtx.getItem('accountName'));	
-				var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));
-				if(appCtx.getItem('counter') == 1) {
-					appCtx.setItem('counter', 2);
-				} else if(appCtx.getItem('counter') == 2){		
-					appCtx.setItem('counter', 3);
-				}	else if(appCtx.getItem('counter') == 3){
-					appCtx.setItem('counter', 4);
+				that.accountName(ENYM.ctx.getItem('accountName'));	
+				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
+				if(ENYM.ctx.getItem('counter') == 1) {
+					ENYM.ctx.setItem('counter', 2);
+				} else if(ENYM.ctx.getItem('counter') == 2){		
+					ENYM.ctx.setItem('counter', 3);
+				}	else if(ENYM.ctx.getItem('counter') == 3){
+					ENYM.ctx.setItem('counter', 4);
 				}	else {
-					appCtx.setItem('counter', 1);
+					ENYM.ctx.setItem('counter', 1);
 				}										
 				that.channelName(channelObject.channelName);
 				that.channelWebAddress(channelObject.channelName+'.evernym.com');			

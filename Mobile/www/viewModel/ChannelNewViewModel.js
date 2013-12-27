@@ -58,7 +58,7 @@
 			followerCount: followers
 		});
 		channel = channel[0];		
-		appCtx.setItem('currentChannelData', JSON.stringify(channel));					
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));					
 		var toastobj = {type: '', text: 'Channel created'};
 		showToast(toastobj);				
   };

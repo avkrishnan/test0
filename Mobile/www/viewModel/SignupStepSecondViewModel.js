@@ -29,7 +29,7 @@ function SignupStepSecondViewModel() {
 
 	this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
-		var newUser = appCtx.getItem('newusername');		
+		var newUser = ENYM.ctx.getItem('newusername');		
 		if(token == '' || token == null) {
 			$('input').keyup(function () {
 				that.firstnameClass('');
@@ -55,9 +55,9 @@ function SignupStepSecondViewModel() {
 	/* Create Random AccountName Generator */	
   function generateAccount() {
     return {
-      emailaddress: appCtx.getItem('newuseremail'),
-      accountname: appCtx.getItem('newusername'),		
-      password: appCtx.getItem('newuserpassword'),
+      emailaddress: ENYM.ctx.getItem('newuseremail'),
+      accountname: ENYM.ctx.getItem('newusername'),		
+      password: ENYM.ctx.getItem('newuserpassword'),
       firstname: that.firstname(),
       lastname: that.lastname()
     };
@@ -98,7 +98,7 @@ function SignupStepSecondViewModel() {
 
   function signUpError(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    appCtx.setItem('signUpError', details.message);		
+    ENYM.ctx.setItem('signUpError', details.message);		
     goToView('signupStepFirstView');
   };
 	
@@ -109,8 +109,8 @@ function SignupStepSecondViewModel() {
       error : loginError
     };
     var loginModel = {};
-    loginModel.accountname = appCtx.getItem('newusername');
-    loginModel.password = appCtx.getItem('newuserpassword');
+    loginModel.accountname = ENYM.ctx.getItem('newusername');
+    loginModel.password = ENYM.ctx.getItem('newuserpassword');
     loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
     ES.loginService.accountLogin(loginModel, callbacks);
 	}
@@ -119,16 +119,16 @@ function SignupStepSecondViewModel() {
     $.mobile.hidePageLoadingMsg();
     ES.evernymService.clearAccessToken();
 		ES.evernymService.setAccessToken(args.accessToken);
-		appCtx.setItem('accountName', args.account.accountname);
+		ENYM.ctx.setItem('accountName', args.account.accountname);
 //
 		/*
 		ES.systemService.getMsgNotifs({
 			success: function(responseData) {
-				appCtx.removeItem('enymNotifications');
-				appCtx.setItem('enymNotifications', JSON.stringify(responseData));
-				if(JSON.parse(appCtx.getItem('enymNotifications')).length > 0) {
+				ENYM.ctx.removeItem('enymNotifications');
+				ENYM.ctx.setItem('enymNotifications', JSON.stringify(responseData));
+				if(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length > 0) {
 					headerViewModel.newMessageClass('smsiconwhite');
-					headerViewModel.newMessageCount(JSON.parse(appCtx.getItem('enymNotifications')).length);
+					headerViewModel.newMessageCount(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length);
 					overlayViewModel.showNewMessagesOverlay();
 				}
 				else {

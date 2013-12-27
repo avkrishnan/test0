@@ -7,14 +7,14 @@
 	self.displayname = 'Change password success';
 		 
 	self.activate = function() {
-		var changePassword = appCtx.getItem('changePassword');
+		var changePassword = ENYM.ctx.getItem('changePassword');
 		if(changePassword == '' || changePassword == null) {
 			goToView('changePasswordView');
 		}
 	};
 	
 	self.okayChangeCommand = function () {
-		appCtx.removeItem('changePassword');
+		ENYM.ctx.removeItem('changePassword');
 		popBackNav();								
   };		       
 }

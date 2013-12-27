@@ -28,9 +28,9 @@ function EscalateTimeSettingsViewModel() {
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];		
 		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message					
-			that.accountName(appCtx.getItem('accountName'));			
-			if(appCtx.getItem('escDuration')) {
-				var DateTime = appCtx.getItem('escDuration').split('/');
+			that.accountName(ENYM.ctx.getItem('accountName'));			
+			if(ENYM.ctx.getItem('escDuration')) {
+				var DateTime = ENYM.ctx.getItem('escDuration').split('/');
 				var day = DateTime[2].split(' ');
 				var time = day[1].split(':');						
 				that.month(DateTime[1]);			
@@ -60,23 +60,23 @@ function EscalateTimeSettingsViewModel() {
 	}
 	
 	this.upArrow = function (data) {
-		appCtx.setItem('setValue', data);
+		ENYM.ctx.setItem('setValue', data);
 		that.setUp();			
   };
 	
 	this.downArrow = function (data) {
-		appCtx.setItem('setValue', data);	
+		ENYM.ctx.setItem('setValue', data);	
 		that.setDown();			
   };
 	
 	this.setUp = function () {
-		if(appCtx.getItem('setValue') == 'month') {
+		if(ENYM.ctx.getItem('setValue') == 'month') {
 			if(that.month() == 'Dec') {
 				that.month('Jan');
 			} else {
 				that.month(monthNames[$.inArray( that.month(), monthNames)+1]);		
 			}			
-		} else if(appCtx.getItem('setValue') == 'day') {
+		} else if(ENYM.ctx.getItem('setValue') == 'day') {
 			if(that.day() == 31) {
 				that.day(1);
 			} else {
@@ -84,11 +84,11 @@ function EscalateTimeSettingsViewModel() {
 				day == day++;					
 				that.day(day);	
 			}				
-		} else if(appCtx.getItem('setValue') == 'year') {
+		} else if(ENYM.ctx.getItem('setValue') == 'year') {
 			var year = that.year();
 			year == year++;			
 			that.year(year);				
-		} else if(appCtx.getItem('setValue') == 'hour') {
+		} else if(ENYM.ctx.getItem('setValue') == 'hour') {
 			if(that.hour() == 12) {
 				that.hour(1);
 			} else {
@@ -96,7 +96,7 @@ function EscalateTimeSettingsViewModel() {
 				hour == hour++;					
 				that.hour(hour);		
 			}				
-		} else if(appCtx.getItem('setValue') == 'minute') {
+		} else if(ENYM.ctx.getItem('setValue') == 'minute') {
 			if(that.minute() == 59) {
 				that.minute('00');
 			} else {
@@ -105,7 +105,7 @@ function EscalateTimeSettingsViewModel() {
 				minute = ((minute<10?'0':'')+minute);					
 				that.minute(minute);		
 			}			
-		} else if(appCtx.getItem('setValue') == 'meridiem') {
+		} else if(ENYM.ctx.getItem('setValue') == 'meridiem') {
 			if(that.meridiem() == 'PM') {
 				that.meridiem('AM');
 			} else {
@@ -117,13 +117,13 @@ function EscalateTimeSettingsViewModel() {
 	};	
 	
 	this.setDown = function () {
-		if(appCtx.getItem('setValue') == 'month') {
+		if(ENYM.ctx.getItem('setValue') == 'month') {
 			if(that.month() == 'Jan') {
 				that.month('Dec');
 			} else {
 				that.month(monthNames[$.inArray( that.month(), monthNames)-1]);		
 			}				
-		} else if(appCtx.getItem('setValue') == 'day') {
+		} else if(ENYM.ctx.getItem('setValue') == 'day') {
 			if(that.day() == 1) {
 				that.day(31);
 			} else {
@@ -131,9 +131,9 @@ function EscalateTimeSettingsViewModel() {
 				day == day--;					
 				that.day(day);		
 			}			
-		} else if(appCtx.getItem('setValue') == 'year') {
+		} else if(ENYM.ctx.getItem('setValue') == 'year') {
 			that.year(that.year()-1);							
-		} else if(appCtx.getItem('setValue') == 'hour') {
+		} else if(ENYM.ctx.getItem('setValue') == 'hour') {
 			if(that.hour() == 1) {
 				that.hour(12);
 			} else {
@@ -141,7 +141,7 @@ function EscalateTimeSettingsViewModel() {
 				hour == hour--;					
 				that.hour(hour);					
 			}
-		} else if(appCtx.getItem('setValue') == 'minute') {
+		} else if(ENYM.ctx.getItem('setValue') == 'minute') {
 			if(that.minute() == 00) {
 				that.minute(59);
 			} else {
@@ -150,7 +150,7 @@ function EscalateTimeSettingsViewModel() {
 				minute = ((minute<10?'0':'')+minute);					
 				that.minute(minute);									
 			}						
-		} else if(appCtx.getItem('setValue') == 'meridiem') {
+		} else if(ENYM.ctx.getItem('setValue') == 'meridiem') {
 			if(that.meridiem() == 'PM') {
 				that.meridiem('AM');
 			} else {
@@ -166,7 +166,7 @@ function EscalateTimeSettingsViewModel() {
 		var CurrentDate = new Date();
 		var SelectedDate = new Date(duration);		
 		if(SelectedDate >= CurrentDate){
-			appCtx.setItem('escDuration', duration);		
+			ENYM.ctx.setItem('escDuration', duration);		
 			popBackNav();				
 		}					
 		else {	

@@ -13,7 +13,7 @@
 	self.activate = function () {
 		addExternalMarkup(self.template); // this is for header/overlay message
 		
-		var channelObject = JSON.parse(appCtx.getItem("currentChannel"));
+		var channelObject = JSON.parse(ENYM.ctx.getItem("currentChannel"));
 		self.channelid(channelObject.id);
 		self.title(channelObject.name);
 		self.description(channelObject.description);		
@@ -36,15 +36,15 @@
 	};
 	
 	function successfulUnfollowChannel(data){
-		var counter = appCtx.getItem('counter');
+		var counter = ENYM.ctx.getItem('counter');
 		for(var ctr = 0; ctr < counter; ctr++) {
 			backNavText.pop();
 			backNavView.pop();	
 		}
-		appCtx.removeItem('counter');
+		ENYM.ctx.removeItem('counter');
 		var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'No longer following '+self.title()};
 		showToast(toastobj);						
-		appCtx.removeItem("currentChannel");				
+		ENYM.ctx.removeItem("currentChannel");				
 		goToView('channelsFollowingListView');
 	}
 	

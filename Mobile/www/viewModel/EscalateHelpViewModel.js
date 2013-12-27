@@ -18,7 +18,7 @@ function EscalateHelpViewModel() {
 	this.activate = function() {
 		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message						
-			that.accountName(appCtx.getItem('accountName'));									
+			that.accountName(ENYM.ctx.getItem('accountName'));									
 		}
 	}		
 	

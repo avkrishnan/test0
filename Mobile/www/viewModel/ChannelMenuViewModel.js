@@ -21,7 +21,7 @@ function ChannelMenuViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			that.accountName(appCtx.getItem('accountName'));
+			that.accountName(ENYM.ctx.getItem('accountName'));
 		}
 	}
 	

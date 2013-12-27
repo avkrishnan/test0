@@ -23,8 +23,8 @@
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message	
 
-		var currentBaseUrl = appCtx.getItem("baseUrl");
-		var previousView = appCtx.getItem('previousView');
+		var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
+		var previousView = ENYM.ctx.getItem('previousView');
 		
 		console.log("previousView: " + previousView);
 		var vm = ko.dataFor($("#" + previousView).get(0));
@@ -113,10 +113,10 @@
 	
   function logoutSuccess() {
     ES.evernymService.clearAccessToken();
-		appCtx.removeItem('newuseremail');
-		appCtx.removeItem('newusername');
-		appCtx.removeItem('newuserpassword');		
-    appCtx.removeItem('signUpError');				
+		ENYM.ctx.removeItem('newuseremail');
+		ENYM.ctx.removeItem('newusername');
+		ENYM.ctx.removeItem('newuserpassword');		
+    ENYM.ctx.removeItem('signUpError');				
 		goToView('loginView');
   }
 
@@ -126,16 +126,16 @@
 	
   self.cleanApplication = function() {
 		ES.evernymService.clearAccessToken();
-		appCtx.removeItem('login_nav');
-		appCtx.removeItem('backNavText');	
-		appCtx.removeItem('backNavView');				
-		appCtx.removeItem('currentChannel');
-		//appCtx.removeItem('accountName');
-		appCtx.removeItem('account');		
-		appCtx.removeItem('name');		
-		appCtx.removeItem('iGiStatus');		
-		appCtx.removeItem('currentChannelData');
-		appCtx.removeItem('enymNotifications');
+		ENYM.ctx.removeItem('login_nav');
+		ENYM.ctx.removeItem('backNavText');	
+		ENYM.ctx.removeItem('backNavView');				
+		ENYM.ctx.removeItem('currentChannel');
+		//ENYM.ctx.removeItem('accountName');
+		ENYM.ctx.removeItem('account');		
+		ENYM.ctx.removeItem('name');		
+		ENYM.ctx.removeItem('iGiStatus');		
+		ENYM.ctx.removeItem('currentChannelData');
+		ENYM.ctx.removeItem('enymNotifications');
 		ES.systemService.MnsCacheData = {};
 		ES.systemService.MnsLastUpdated = 0;
 		sendMessageViewModel.clearForm();											

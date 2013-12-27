@@ -29,13 +29,13 @@ function RegistrationVerifyViewModel() {
   };
 	
 	this.activate = function() {
-		var newUser = appCtx.getItem('newusername');		
+		var newUser = ENYM.ctx.getItem('newusername');		
 		if(newUser == '' || newUser == null) {
 			goToView('homeView');
 		} else {
 			that.getCommethods();
-			that.accountName('Your evernym is: '+appCtx.getItem('accountName')+" (Don't forget!)");
-			that.verificationCommethodType(appCtx.getItem('newuseremail'));				
+			that.accountName('Your evernym is: '+ENYM.ctx.getItem('accountName')+" (Don't forget!)");
+			that.verificationCommethodType(ENYM.ctx.getItem('newuseremail'));				
 			$('input').keyup(function () {
 				that.errorMessage('');
 			});					

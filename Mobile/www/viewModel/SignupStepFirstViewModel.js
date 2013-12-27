@@ -142,9 +142,9 @@ function SignupStepFirstViewModel() {
     $.mobile.hidePageLoadingMsg();
     ES.evernymService.clearAccessToken();
 		ES.evernymService.setAccessToken(args.accessToken);
-		appCtx.setItem('accountName', args.account.accountname);
-		appCtx.setItem('newusername', that.accountName());
-		appCtx.setItem('newuseremail', that.emailaddress());					
+		ENYM.ctx.setItem('accountName', args.account.accountname);
+		ENYM.ctx.setItem('newusername', that.accountName());
+		ENYM.ctx.setItem('newuseremail', that.emailaddress());					
 		goToView('registrationVerifyView');			
   }
 

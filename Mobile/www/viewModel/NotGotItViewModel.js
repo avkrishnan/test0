@@ -24,15 +24,15 @@ function NotGotItViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));	
-			var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));			
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
+			var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
 			if(!channelObject || !messageObject) {
 				goToView('channelsIOwnView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message
 				that.recipients.removeAll();						
-				appCtx.removeItem('currentRecipientData');					
-				that.accountName(appCtx.getItem('accountName'));											
+				ENYM.ctx.removeItem('currentRecipientData');					
+				that.accountName(ENYM.ctx.getItem('accountName'));											
 				that.channelId(channelObject.channelId);			
 				that.channelName(channelObject.channelName);
 				that.messageId(messageObject.messageId);								
@@ -67,7 +67,7 @@ function NotGotItViewModel() {
   };
 	
 	this.recipientDetails = function(data){
-		appCtx.setItem('currentRecipientData', JSON.stringify(data));							
+		ENYM.ctx.setItem('currentRecipientData', JSON.stringify(data));							
 		viewNavigate('Not Got it', 'notGotItView', 'recipientDetailsView');
 	};				
 				

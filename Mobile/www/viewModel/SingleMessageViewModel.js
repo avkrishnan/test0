@@ -28,8 +28,8 @@ function SingleMessageViewModel() {
 	self.escalateTime = ko.observable(false);					  
 	
   self.activate = function () {
-		var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));	
-		var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));			
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
+		var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
 		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {

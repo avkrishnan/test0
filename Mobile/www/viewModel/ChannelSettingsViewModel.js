@@ -23,16 +23,16 @@ function ChannelSettingsViewModel() {
 	  
 	this.activate = function() {				
 		if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
 			if(!channelObject) {
 				goToView('channelsIOwnView');
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message								
-				that.accountName(appCtx.getItem('accountName'));
+				that.accountName(ENYM.ctx.getItem('accountName'));
 				that.channelId(channelObject.channelId);
 				that.channelName(channelObject.channelName);
 				that.shortDescription(channelObject.channelDescription);
-				appCtx.removeItem('channelOwner');										
+				ENYM.ctx.removeItem('channelOwner');										
 			}
 		}
 	}

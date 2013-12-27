@@ -14,13 +14,13 @@
 	self.activate = function() {
 		self.noFollow(false);
 		if (!self.shown) {
-			appCtx.removeItem("currentChannel");
-			appCtx.removeItem("overlayCurrentChannel");
+			ENYM.ctx.removeItem("currentChannel");
+			ENYM.ctx.removeItem("overlayCurrentChannel");
 		}
 		
 		if(authenticate()) {
 			addExternalMarkup(self.template); // this is for header/overlay message
-			appCtx.setItem('counter', 1);
+			ENYM.ctx.setItem('counter', 1);
 			self.channels.removeAll();
 			if(self.channels() && self.channels().length){
 				self.channels.removeAll();
@@ -60,13 +60,13 @@
 	/* action to channel page to unfollow*/
 	self.channelViewUnfollow = function(data) {
 		var channel = JSON.stringify(data);
-		appCtx.setItem("currentChannel", channel);
+		ENYM.ctx.setItem("currentChannel", channel);
 		viewNavigate('Channels', 'channelsFollowingListView', 'channelViewUnfollow');
 	};
 	
 	/* action to see channels messages*/
 	self.actionFollowChannelCommand = function(data) {
-		appCtx.setItem("currentChannel", JSON.stringify(data));
+		ENYM.ctx.setItem("currentChannel", JSON.stringify(data));
 		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');
 	};
 }

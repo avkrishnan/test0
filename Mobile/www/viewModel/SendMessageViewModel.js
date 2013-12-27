@@ -56,9 +56,9 @@ function SendMessageViewModel() {
 		that.channels.removeAll();
 		that.selectedChannels('');				
 		that.messageText('');
-		appCtx.removeItem('escLevel');
-		appCtx.removeItem('escDuration');		
-		appCtx.removeItem('iGiStatus');		
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('escDuration');		
+		ENYM.ctx.removeItem('iGiStatus');		
   };		  
 	
 	this.activate = function() {			
@@ -81,7 +81,7 @@ function SendMessageViewModel() {
 			that.escLevel('N');				
 			that.igiClass('igiimageoff');
 			that.characterCount('0');										
-			that.escLevel(appCtx.getItem('escLevel'));				
+			that.escLevel(ENYM.ctx.getItem('escLevel'));				
 			if(that.escLevel() == 'H') {
 				escalate = 'Hound';
 			} else if(that.escLevel() == 'C') {
@@ -89,16 +89,16 @@ function SendMessageViewModel() {
 			} else {
 				escalate = 'Remind';
 			}																									
-			if(appCtx.getItem('escalate') == 'yes') {
+			if(ENYM.ctx.getItem('escalate') == 'yes') {
 				that.normalText('');
 				that.fastText('');
 				that.escalateText(escalate);				
 				that.normalClass('');
 				that.fastClass('');
 				that.escalateClass('escalatecoloricon icon-'+escalate);										
-				if(appCtx.getItem('escDuration')) {
-					that.escDuration(new Date(appCtx.getItem('escDuration')));					
-					var DateTime = appCtx.getItem('escDuration').split('/');
+				if(ENYM.ctx.getItem('escDuration')) {
+					that.escDuration(new Date(ENYM.ctx.getItem('escDuration')));					
+					var DateTime = ENYM.ctx.getItem('escDuration').split('/');
 					var day = DateTime[2].split(' ');
 					var time = day[1].split(':');						
 					//var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
@@ -107,7 +107,7 @@ function SendMessageViewModel() {
 					that.activeType('escalatecolor '+escalate);
 					that.escalateEdit(true);																								
 				}		
-				appCtx.removeItem('escalate');																											
+				ENYM.ctx.removeItem('escalate');																											
 			} else {				
 				that.normalText('normalcolor');
 				that.fastText('');
@@ -120,18 +120,18 @@ function SendMessageViewModel() {
 				that.yesClass('yesbutton');
 				that.noClass('nobutton');					
 				that.escalateEdit(false);
-				appCtx.removeItem('escDuration');
+				ENYM.ctx.removeItem('escDuration');
 				that.escLevel('N');				
 				that.igiClass('igiimageoff');										
 			}			
 			that.broadcastType('FYI');
-			if(appCtx.getItem('iGiStatus')) {
+			if(ENYM.ctx.getItem('iGiStatus')) {
 				that.igiClass('igiimage');		
 				that.yesClass('nobutton');
 				that.noClass('yesbutton');
 				that.broadcastType('RAC');															
 			}																
-			that.accountName(appCtx.getItem('accountName'));			
+			that.accountName(ENYM.ctx.getItem('accountName'));			
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
 			});
@@ -206,12 +206,12 @@ function SendMessageViewModel() {
 	};    
 	
 	function successfulMessage(data){
-		appCtx.removeItem('escDuration');		
-		appCtx.removeItem('escLevel');
-		appCtx.removeItem('iGiStatus');										
+		ENYM.ctx.removeItem('escDuration');		
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('iGiStatus');										
 		var toastobj = {redirect: 'channelMainView', type: '', text: 'Broadcast sent'};
 		showToast(toastobj);									
-		appCtx.setItem('currentChannelId', that.selectedChannels().channelId);
+		ENYM.ctx.setItem('currentChannelId', that.selectedChannels().channelId);
 		that.clearForm();		
 		backNavText.pop();
 		backNavView.pop();		
@@ -220,9 +220,9 @@ function SendMessageViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		appCtx.removeItem('escDuration');		
-		appCtx.removeItem('escLevel');
-		appCtx.removeItem('iGiStatus');								
+		ENYM.ctx.removeItem('escDuration');		
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('iGiStatus');								
 		var toastobj = {type: 'toast-error', text: details.message};
 		showToast(toastobj);						
 	};
@@ -255,8 +255,8 @@ function SendMessageViewModel() {
     that.duration("Normal: <em>Send once (usually to email)</em>");
 		that.activeType('normalcolor');		
 		that.escalateEdit(false);
-		appCtx.removeItem('escLevel');
-		appCtx.removeItem('escDuration');						
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('escDuration');						
 		that.escLevel('N');		
   };
 	
@@ -270,8 +270,8 @@ function SendMessageViewModel() {
     that.duration("Fast: <em>Send once (usually text or app)</em>");
 		that.activeType('fastcolor');
 		that.escalateEdit(false);
-		appCtx.removeItem('escLevel');
-		appCtx.removeItem('escDuration');								
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('escDuration');								
 		that.escLevel('F');						
   };		
 	
@@ -284,7 +284,7 @@ function SendMessageViewModel() {
 		that.yesClass('nobutton');
 		that.noClass('yesbutton');
 		that.broadcastType('RAC');
-		appCtx.setItem('iGiStatus', 'yes');													
+		ENYM.ctx.setItem('iGiStatus', 'yes');													
   };
 	
 	this.iGiNo = function () {
@@ -292,7 +292,7 @@ function SendMessageViewModel() {
 		that.yesClass('yesbutton');
 		that.noClass('nobutton');
 		that.broadcastType('FYI');
-		appCtx.removeItem('iGiStatus');													
+		ENYM.ctx.removeItem('iGiStatus');													
   };								
 
 }

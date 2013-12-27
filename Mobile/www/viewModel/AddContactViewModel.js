@@ -41,10 +41,10 @@
 				showToast(toastobj);				
 			}
 		};		
-		appCtx.setItem("currentVerificationCommethod",data.comMethodAddress);
-		appCtx.setItem("currentVerificationCommethodType",data.comMethodType);
-		appCtx.setItem("currentVerificationCommethodID",data.comMethodID);
-		appCtx.setItem("verificationStatus",false);
+		ENYM.ctx.setItem("currentVerificationCommethod",data.comMethodAddress);
+		ENYM.ctx.setItem("currentVerificationCommethodType",data.comMethodType);
+		ENYM.ctx.setItem("currentVerificationCommethodID",data.comMethodID);
+		ENYM.ctx.setItem("verificationStatus",false);
 		ES.commethodService.requestVerification(data.comMethodID, callbacks);
 		viewNavigate('Cont. Info', 'addContactView', 'verifyContactView');		
 	}
@@ -53,7 +53,7 @@
 		if(self.verify() == false) {
 			self.currentDeleteCommethod(data.comMethodAddress);
 			self.currentDeleteCommethodID(data.comMethodID);
-			appCtx.setItem("CommethodType",data.comMethodType);
+			ENYM.ctx.setItem("CommethodType",data.comMethodType);
 		}
 		self.showDelete(true);
 	}
@@ -84,13 +84,13 @@
 			}
 		};	
 		ES.commethodService.deleteCommethod(self.currentDeleteCommethodID(), callbacks);
-		if(appCtx.getItem("CommethodType") == 'EMAIL') {
+		if(ENYM.ctx.getItem("CommethodType") == 'EMAIL') {
 			var toastText = 'Email address deleted';
-			appCtx.removeItem("CommethodType");
+			ENYM.ctx.removeItem("CommethodType");
 		}
 		else {
 			var toastText = 'Phone number deleted';
-			appCtx.removeItem("CommethodType");			
+			ENYM.ctx.removeItem("CommethodType");			
 		}
 		var toastobj = {redirect: 'addContactView', type: '', text: toastText};		
 		showToast(toastobj);					
@@ -125,8 +125,8 @@
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message
 		
-		var currentBaseUrl = appCtx.getItem("baseUrl");
-		var previousView = appCtx.getItem('previousView');
+		var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
+		var previousView = ENYM.ctx.getItem('previousView');
 		console.log("previousView: " + previousView);
 		var vm = ko.dataFor($("#" + previousView).get(0));
 		console.log("previousView Model viewid: " + vm.displayname);
@@ -144,7 +144,7 @@
 		self.showDelete(false);
 		self.showConfirm(false);
 		self.verify(false);
-		appCtx.removeItem("currentVerificationCommethodID");
+		ENYM.ctx.removeItem("currentVerificationCommethodID");
 		setTimeout(function() {
 			$.mobile.showPageLoadingMsg("a", "Loading commmethods.");
 			return self.getCommethods().then(self.showCommethods);

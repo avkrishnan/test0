@@ -61,15 +61,15 @@ ENYM.ViewModel = function() {
       if(!vm.requiresAuth || authenticate()) {
 			  vm.clearForm();
 			  vm.activate();
-	      vm.accountName(appCtx.getItem("accountName"));
+	      vm.accountName(ENYM.ctx.getItem("accountName"));
       }
     });
   };
 	
 	this.removelLocalStorage = function() {
 		var vm = this;
-		$.each(this.appCtx(), function(i,v) {
-			appCtx.removeItem(vm[v]);
+		$.each(this.ENYM.ctx(), function(i,v) {
+			ENYM.ctx.removeItem(vm[v]);
 		});		
 	};
 	

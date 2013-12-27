@@ -8,7 +8,7 @@ function HomeViewModel() {
 	
   self.activate = function() {
   	addExternalMarkup(self.template); // this is for header/overlay message									
-		appCtx.setItem('counter', 0);
+		ENYM.ctx.setItem('counter', 0);
 	};
 }
 

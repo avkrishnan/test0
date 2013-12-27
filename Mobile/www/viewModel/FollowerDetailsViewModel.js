@@ -21,13 +21,13 @@ function FollowerDetailsViewModel() {
 
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
-			var followerObject = JSON.parse(appCtx.getItem('currentfollowerData'));		
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+			var followerObject = JSON.parse(ENYM.ctx.getItem('currentfollowerData'));		
 			if(!channelObject) {
 				goToView('followersListView');							
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message					
-				that.accountName(appCtx.getItem('accountName'));
+				that.accountName(ENYM.ctx.getItem('accountName'));
 				that.channelName(channelObject.channelName);										
 				that.followerName(followerObject.followerName+' <em>'+followerObject.accountname+'</em>');												
 			}

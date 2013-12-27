@@ -58,8 +58,8 @@
 
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message
-		var currentBaseUrl = appCtx.getItem("baseUrl");
-		var previousView = appCtx.getItem('previousView');
+		var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
+		var previousView = ENYM.ctx.getItem('previousView');
 		var vm = ko.dataFor($("#" + previousView).get(0));
 		self.navText(vm.displayname);
 		self.pView = previousView;
@@ -73,7 +73,7 @@
 		
 		self.comMethodName('');
 		self.errorMessage('');
-		appCtx.removeItem("currentVerificationCommethodID");	
+		ENYM.ctx.removeItem("currentVerificationCommethodID");	
 		$.mobile.showPageLoadingMsg("a", "Loading Settings");
 		return true;
 	};
@@ -88,15 +88,15 @@
 	self.addNewCommethod = function(newCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				appCtx.setItem("commethodType",responseData.type);
+				ENYM.ctx.setItem("commethodType",responseData.type);
 				if (responseData.address == 'TEXT') {
-					appCtx.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
-					appCtx.setItem("currentVerificationCommethodID",responseData.id);
+					ENYM.ctx.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
+					ENYM.ctx.setItem("currentVerificationCommethodID",responseData.id);
 				} else {
-					appCtx.setItem("currentVerificationCommethod",responseData.address);
-					appCtx.setItem("currentVerificationCommethodID",responseData.id);
+					ENYM.ctx.setItem("currentVerificationCommethod",responseData.address);
+					ENYM.ctx.setItem("currentVerificationCommethodID",responseData.id);
 				}
-				appCtx.setItem("verificationStatus",true);
+				ENYM.ctx.setItem("verificationStatus",true);
 				if(responseData.type == 'EMAIL') {
 					var toastText = 'Email added';
 				} else {

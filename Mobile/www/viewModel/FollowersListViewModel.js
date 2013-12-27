@@ -23,20 +23,20 @@ function FollowersListViewModel() {
 	  
 	this.activate = function() {			
 		if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));				
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));				
 			if(!channelObject) {
 				goToView('channelsIOwnView');			
 			} else {				
 				addExternalMarkup(that.template); // this is for header/overlay message	
 				that.followers.removeAll();
 				that.followerCount('0 followers');								
-				that.accountName(appCtx.getItem('accountName'));		
-				if(appCtx.getItem('counter') == 1) {
-					appCtx.setItem('counter', 2);
-				} else if(appCtx.getItem('counter') == 2){		
-					appCtx.setItem('counter', 3);
+				that.accountName(ENYM.ctx.getItem('accountName'));		
+				if(ENYM.ctx.getItem('counter') == 1) {
+					ENYM.ctx.setItem('counter', 2);
+				} else if(ENYM.ctx.getItem('counter') == 2){		
+					ENYM.ctx.setItem('counter', 3);
 				}	else {
-					appCtx.setItem('counter', 1);
+					ENYM.ctx.setItem('counter', 1);
 				}																
 				that.channelId(channelObject.channelId);
 				that.channelName(channelObject.channelName);																						
@@ -73,7 +73,7 @@ function FollowersListViewModel() {
   };
 	
 	this.followerDetails = function (data) {
-		appCtx.setItem('currentfollowerData', JSON.stringify(data));		
+		ENYM.ctx.setItem('currentfollowerData', JSON.stringify(data));		
 		viewNavigate('Followers', 'followersListView', 'followerDetailsView');
   };		
 	

@@ -58,7 +58,7 @@ function UnsubscribeModel() {
                                     
                                     else {
                                     
-									var currentChannel = appCtx.getItem("currentChannel");
+									var currentChannel = ENYM.ctx.getItem("currentChannel");
 									var lchannel = JSON.parse(currentChannel);
                                     
                                     
@@ -115,7 +115,7 @@ function UnsubscribeModel() {
 	
 	function gotChannel(data){
 		$.mobile.hidePageLoadingMsg();
-		appCtx.setItem("currentChannel", JSON.stringify(data));
+		ENYM.ctx.setItem("currentChannel", JSON.stringify(data));
 		that.channel([data]);
 		that.title(data.name );
         that.relationship(data.relationship);
@@ -305,7 +305,7 @@ function UnsubscribeModel() {
     
     
     this.showMessage = function (message) {
-        appCtx.setItem("currentMessage", JSON.stringify(message));
+        ENYM.ctx.setItem("currentMessage", JSON.stringify(message));
         
 		
 		$.mobile.changePage("#" + messageViewModel.template)

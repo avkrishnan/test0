@@ -10,21 +10,21 @@
 	self.broadcasts = ko.observableArray([]);				 
 	
 	self.activate = function() {					
-		var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
-		if(!channelObject && !appCtx.getItem('currentChannelId')) {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+		if(!channelObject && !ENYM.ctx.getItem('currentChannelId')) {
 			goToView('channelsIOwnView');		
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message	
 			self.broadcasts.removeAll();											
-			if(appCtx.getItem('counter') == 1) {
-				appCtx.setItem('counter', 2);
+			if(ENYM.ctx.getItem('counter') == 1) {
+				ENYM.ctx.setItem('counter', 2);
 			} else {
-				appCtx.setItem('counter', 1)
+				ENYM.ctx.setItem('counter', 1)
 			}								
-			appCtx.removeItem('currentMessageData');			
+			ENYM.ctx.removeItem('currentMessageData');			
 			self.broadcasts.removeAll();
-			if(appCtx.getItem('currentChannelId')) {
-				self.channelId(appCtx.getItem('currentChannelId'));								
+			if(ENYM.ctx.getItem('currentChannelId')) {
+				self.channelId(ENYM.ctx.getItem('currentChannelId'));								
 				return ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI}).then(self.getMessagesCommand());								
 			}
 			else {									
@@ -54,8 +54,8 @@
 			followerCount: followers
 		});
 		channel = channel[0];		
-		appCtx.setItem('currentChannelData', JSON.stringify(channel));
-		appCtx.removeItem('currentChannelId')					
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
+		ENYM.ctx.removeItem('currentChannelId')					
   };			
 	
 	function successfulMessageGET(data){
@@ -159,7 +159,7 @@
 	};	
 	
 	self.singleMessage = function(data){
-		appCtx.setItem('currentMessageData', JSON.stringify(data));							
+		ENYM.ctx.setItem('currentMessageData', JSON.stringify(data));							
 		viewNavigate('Main', 'channelMainView', 'singleMessageView');
 	};
 	
@@ -169,13 +169,13 @@
 			showToast(toastobj);						
 		}
 		else {
-			appCtx.setItem('currentMessageData', JSON.stringify(data));									
+			ENYM.ctx.setItem('currentMessageData', JSON.stringify(data));									
 			viewNavigate('Main', 'channelMainView', 'whoGotItView');
 		}
 	};
 	
 	self.iGiPercentage = function(data){
-		appCtx.setItem('currentMessageData', JSON.stringify(data));
+		ENYM.ctx.setItem('currentMessageData', JSON.stringify(data));
 		if(data.percentageClass != '') {							
 			viewNavigate('Main', 'channelMainView', 'singleMessageView');
 		}
@@ -185,7 +185,7 @@
 	};	
 	
 	self.showNotGotIt = function(data){
-		appCtx.setItem('currentMessageData', JSON.stringify(data));								
+		ENYM.ctx.setItem('currentMessageData', JSON.stringify(data));								
 		viewNavigate('Main', 'channelMainView', 'notGotItView');
 	};
 	
@@ -195,12 +195,12 @@
 			showToast(toastobj);						
 		}
 		else if(data.replies == '1 Reply') {
-			appCtx.setItem('currentMessageData', JSON.stringify(data));
+			ENYM.ctx.setItem('currentMessageData', JSON.stringify(data));
 			$.mobile.showPageLoadingMsg("a", "Loading Message reply");			
 			return ES.messageService.getChannelMessages(self.channelId(), {replyto: data.messageId}, {success: successfulReliesGET, error: errorAPI});														
 		}
 		else {
-			appCtx.setItem('currentMessageData', JSON.stringify(data));									
+			ENYM.ctx.setItem('currentMessageData', JSON.stringify(data));									
 			viewNavigate('Main', 'channelMainView', 'singleMessageRepliesView');
 		}
 	};
@@ -231,7 +231,7 @@
 					replyToReply: data.message[len].replies
 				});
 				reply = reply[0];		
-				appCtx.setItem('currentReplyData', JSON.stringify(reply));					
+				ENYM.ctx.setItem('currentReplyData', JSON.stringify(reply));					
 			}
 		}
 		viewNavigate('Main', 'channelMainView', 'replyDetailView');

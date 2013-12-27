@@ -21,7 +21,7 @@ function FirstChannelViewModel() {
 		if(token == '' || token == null) {
 			goToView('loginView');
 		} else {			
-			that.accountName(appCtx.getItem('accountName'));
+			that.accountName(ENYM.ctx.getItem('accountName'));
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);			
 		}
 	};	

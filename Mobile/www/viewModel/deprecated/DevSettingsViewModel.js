@@ -24,7 +24,7 @@ function DevSettingsViewModel() {
         
         $("#" + that.template).on("pagebeforeshow", null, function (e, data) {
                                     
-                                    var currentBaseUrl = appCtx.getItem("baseUrl");
+                                    var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
                                     
                                     if (currentBaseUrl){
                                         that.baseUrl(currentBaseUrl);
@@ -59,7 +59,7 @@ function DevSettingsViewModel() {
     this.changeBaseUrl = function(){
         
         showMessage('stored base url: ' + that.baseUrl());
-        appCtx.setItem("baseUrl", that.baseUrl())
+        ENYM.ctx.setItem("baseUrl", that.baseUrl())
         
     };
 	

@@ -34,11 +34,11 @@
 				if(responseDataSmry && responseDataSmry.unreadCount > 0) {
 					ES.systemService.getMsgNotifs({
 						success: function(responseData) {
-							appCtx.removeItem('enymNotifications');
-							appCtx.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
-							if(JSON.parse(appCtx.getItem('enymNotifications')).length > 0) {
+							ENYM.ctx.removeItem('enymNotifications');
+							ENYM.ctx.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
+							if(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length > 0) {
 								overlayViewModel.showNewMessagesOverlay();
-								showNewMessagesCount(JSON.parse(appCtx.getItem('enymNotifications')).length);
+								showNewMessagesCount(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length);
 							}
 						},
 						error: function(data, status, details) {
@@ -49,7 +49,7 @@
 				}
 				else {
 					showNewMessagesCount(0);
-					appCtx.removeItem('enymNotifications');
+					ENYM.ctx.removeItem('enymNotifications');
 				}
 			},
 			error: function(data, status, details) {
@@ -117,8 +117,8 @@
 	}	
 	
 	this.newMessagesOverlayPopup = function() {
-		if(appCtx.getItem('enymNotifications')) {
-			if(JSON.parse(appCtx.getItem('enymNotifications')).length > 0) {
+		if(ENYM.ctx.getItem('enymNotifications')) {
+			if(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length > 0) {
 				$('#newMessages').popup().popup('open', {x: 10, y:10});
 			}
 		}
@@ -149,7 +149,7 @@ function OverlayViewModel() {
 	this.showNewMessagesOverlay = function() {
 		overlayViewModel.newMessagesDisplayList.removeAll();
 		var screenSizeText = truncatedText();
-		$.each(JSON.parse(appCtx.getItem('enymNotifications')), function(indexNotification, valueNotification) {
+		$.each(JSON.parse(ENYM.ctx.getItem('enymNotifications')), function(indexNotification, valueNotification) {
 
 			valueNotification.createdLong = formatDate(valueNotification.created, 'long');
 			valueNotification.created = formatDate(valueNotification.created, 'short', 'main');
@@ -212,7 +212,7 @@ function OverlayViewModel() {
 			}
 		}
 		var tempEnymNotifications = [];
-		tempEnymNotifications = JSON.parse(appCtx.getItem('enymNotifications'));
+		tempEnymNotifications = JSON.parse(ENYM.ctx.getItem('enymNotifications'));
 		if(tempEnymNotifications.length > 0) {
 			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 				if(typeof valueNotification != 'undefined' && valueNotification.msgId == data.msgId) {
@@ -222,14 +222,14 @@ function OverlayViewModel() {
 			setTimeout(function() {
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
 			}, 1000);				
-			appCtx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 		}	
 //		
 		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);
 	}	
 	
 	this.showSingleMessage = function(data) {
-		appCtx.setItem("overlayCurrentChannel",JSON.stringify(data));
+		ENYM.ctx.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
 		var backText = getCurrentViewModel().viewname;	

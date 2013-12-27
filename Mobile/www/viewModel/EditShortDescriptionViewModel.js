@@ -32,13 +32,13 @@ function EditShortDescriptionViewModel() {
 	
 	this.activate = function() {
     if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));						
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));						
 			if(!channelObject) {
 				goToView('channelsIOwnView');			
 			} else {
 				addExternalMarkup(that.template); // this is for header/overlay message					
-				that.accountName(appCtx.getItem('accountName'));			
-				var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));
+				that.accountName(ENYM.ctx.getItem('accountName'));			
+				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
 				that.channelId(channelObject.channelId);
 				that.channelName(channelObject.channelName);			
 				that.shortDescription(channelObject.channelDescription);						
@@ -75,7 +75,7 @@ function EditShortDescriptionViewModel() {
 			followerCount: followers
 		});
 		channel = channel[0];		
-		appCtx.setItem('currentChannelData', JSON.stringify(channel));
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
 		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Channel Tagline updated'};
 		showToast(toastobj);
 		backNavText.pop();

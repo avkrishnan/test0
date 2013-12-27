@@ -11,16 +11,16 @@ function SingleMessageRepliesViewModel() {
 	self.replies = ko.observableArray([]);  
 	
 	self.activate = function() {
-		var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));			
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
 		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.replies.removeAll();										
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(appCtx.getItem('currentMessageData'));
-			appCtx.removeItem('currentReplyData');													
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+			var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));
+			ENYM.ctx.removeItem('currentReplyData');													
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);												
 			self.messageId(messageObject.messageId);
@@ -65,7 +65,7 @@ function SingleMessageRepliesViewModel() {
   };
 	
 	self.replyDetail = function(data){	
-		appCtx.setItem('currentReplyData', JSON.stringify(data));									
+		ENYM.ctx.setItem('currentReplyData', JSON.stringify(data));									
 		viewNavigate('Replies', 'singleMessageRepliesView', 'replyDetailView');
 	};	
 				

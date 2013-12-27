@@ -10,7 +10,7 @@
 
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message					
-		self.accountName(appCtx.getItem('accountName'));
+		self.accountName(ENYM.ctx.getItem('accountName'));
 		self.hasfooter(true);								
 	}
 }

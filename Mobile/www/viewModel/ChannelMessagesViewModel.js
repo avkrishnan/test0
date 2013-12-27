@@ -12,21 +12,21 @@
 	self.channelMessages = ko.observableArray([]);
     
 	self.activate = function() {
-		appCtx.removeItem("overlayCurrentChannel");
-		var channel = JSON.parse(appCtx.getItem("currentChannel"));
+		ENYM.ctx.removeItem("overlayCurrentChannel");
+		var channel = JSON.parse(ENYM.ctx.getItem("currentChannel"));
 		if(!channel) {
 			goToView('channelsFollowingListView');
 		} 
 		else {
 			addExternalMarkup(self.template); // this is for header/overlay message		
-			if(appCtx.getItem('counter') == 1) {
-				appCtx.setItem('counter', 2);
+			if(ENYM.ctx.getItem('counter') == 1) {
+				ENYM.ctx.setItem('counter', 2);
 			} 
 			else {		
-				appCtx.setItem('counter', 1);
+				ENYM.ctx.setItem('counter', 1);
 			}
 			self.channelid(channel.id);
-			appCtx.removeItem("currentChannelMessage");
+			ENYM.ctx.removeItem("currentChannelMessage");
 			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");
 			self.channelMessages.removeAll();
 			self.gotChannel(channel);
@@ -57,7 +57,7 @@
 			ES.systemService.adjMnsCount(-1);
 		}
 		var tempEnymNotifications = [];
-		tempEnymNotifications = JSON.parse(appCtx.getItem('enymNotifications'));
+		tempEnymNotifications = JSON.parse(ENYM.ctx.getItem('enymNotifications'));
 		if(tempEnymNotifications.length > 0) {
 			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 				if(typeof valueNotification != 'undefined' && valueNotification.msgId == data.messageId) {
@@ -68,13 +68,13 @@
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
 				overlayViewModel.showNewMessagesOverlay();
 			}, 1000);				
-			appCtx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 		}
 		return ES.messageService.acknowledgeMsg(data.messageId, callbacks);
 	};
 		
 	self.showSingleMessage = function(data) {
-		appCtx.setItem("currentChannelMessage",JSON.stringify(data));
+		ENYM.ctx.setItem("currentChannelMessage",JSON.stringify(data));
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	};
 		

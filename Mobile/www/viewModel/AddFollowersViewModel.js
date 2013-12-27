@@ -37,12 +37,12 @@ function AddFollowersViewModel() {
 	
 	this.activate = function() {
 		if(authenticate()) {
-			var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));		
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
 			if(!channelObject) {
 				goToView('channelsIOwnView');			
 			} else {			
-				that.accountName(appCtx.getItem('accountName'));		
-				var channelObject = JSON.parse(appCtx.getItem('currentChannelData'));	
+				that.accountName(ENYM.ctx.getItem('accountName'));		
+				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
 				that.channelId(channelObject.channelId);										
 				that.channelName(channelObject.channelName);
 				$('input').keyup(function () {

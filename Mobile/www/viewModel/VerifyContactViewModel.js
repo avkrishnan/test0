@@ -12,7 +12,7 @@
 	self.pView = '';
 	
 	self.gotoView = function() {
-		appCtx.removeItem("currentVerificationCommethodID");
+		ENYM.ctx.removeItem("currentVerificationCommethodID");
 		goToView("addContactView");
 	};
 	
@@ -53,8 +53,8 @@
     
 	self.activate = function() {
 		addExternalMarkup(self.template); // This is for header/overlay message
-		var currentBaseUrl = appCtx.getItem("baseUrl");
-		var previousView = appCtx.getItem('previousView');
+		var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
+		var previousView = ENYM.ctx.getItem('previousView');
 		console.log("previousView: " + previousView);
 		var vm = ko.dataFor($("#" + previousView).get(0));
 		console.log("previousView Model viewid: " + vm.displayname);
@@ -63,15 +63,15 @@
 		$('#verifyContactView input').on("keyup", self.inputKeyUp);
 		self.verificationCode('');
 		self.errorMessage('');
-		self.verificationCommethod(appCtx.getItem("currentVerificationCommethod"));
-		self.verificationCommethodID(appCtx.getItem("currentVerificationCommethodID"));
-		self.verificationStatus(appCtx.getItem("verificationStatus"));
+		self.verificationCommethod(ENYM.ctx.getItem("currentVerificationCommethod"));
+		self.verificationCommethodID(ENYM.ctx.getItem("currentVerificationCommethodID"));
+		self.verificationStatus(ENYM.ctx.getItem("verificationStatus"));
 		if (self.verificationStatus() == 'false') {
 			self.verificationStatus(false);
 		} else {
 			self.verificationStatus(true);
 		}
-		if(appCtx.getItem("commethodType") == 'EMAIL') {
+		if(ENYM.ctx.getItem("commethodType") == 'EMAIL') {
 			self.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below).');
 		} else {
 			self.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below.');
@@ -90,13 +90,13 @@
 	self.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				if(appCtx.getItem("commethodType") == 'TEXT') {
+				if(ENYM.ctx.getItem("commethodType") == 'TEXT') {
 					var toastText = 'Phone number verified';					
 				}
 				else {
 					var toastText = 'Email verified';				
 				}
-				appCtx.removeItem("commethodType");
+				ENYM.ctx.removeItem("commethodType");
 				var toastobj = {redirect: 'addContactView', type: '', text: toastText};
 				showToast(toastobj);	
 				goToView('addContactView');
