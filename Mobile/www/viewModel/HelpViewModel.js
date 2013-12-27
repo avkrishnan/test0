@@ -1,5 +1,4 @@
-﻿/* To do - Pradeep Kumar */
-function HelpViewModel() {	
+﻿function HelpViewModel() {	
   var self = this;
 	self.template = 'helpView';
 	self.viewid = 'V-45';
@@ -8,8 +7,7 @@ function HelpViewModel() {
 	
   self.activate = function() {
   	addExternalMarkup(self.template); // this is for header/overlay message									
-	};	
-	
+	};
 }
 
 HelpViewModel.prototype = new AppCtx.ViewModel();

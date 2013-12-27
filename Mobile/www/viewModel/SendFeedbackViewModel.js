@@ -1,80 +1,52 @@
-﻿/* To do - Pradeep Kumar */
-function SendFeedbackViewModel() {
-  var that = this;
-  this.template = 'sendFeedbackView';
-  this.viewid = 'V-41';
-  this.viewname = 'Send Feedback';
-  this.displayname = 'Send Feedback';
-	this.accountName = ko.observable();		
-
-  /* Feedback value and error observable */
-	this.feedbackType = ko.observable();
-	this.feedbackLabel = ko.observable();			
-	this.feedbackClass = ko.observable();
-	this.feedback = ko.observable();
-	this.feedbackContext = ko.observable();
-	this.error = ko.observable(false);									
-	this.errorFeedback = ko.observable();	
+﻿function SendFeedbackViewModel() {
+  var self = this;
+  self.template = 'sendFeedbackView';
+  self.viewid = 'V-41';
+  self.viewname = 'Send Feedback';
+  self.displayname = 'Send Feedback';
 	
-	/* Methods */
-  this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();						
-      that.activate();
-    });	
-	};
-	
-	this.clearForm = function () {
-		that.feedback('');
-		that.feedbackClass('');
-		that.error(false);		
-		that.errorFeedback('');				
-	};  
+  self.inputObs = [ 'feedbackType', 'feedbackLabel', 'feedbackClass', 'feedback', 'feedbackContext', 'error', 'errorFeedback' ];
+  self.defineObservables();	
 
-	this.activate = function() {
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(feedbackType == 'feedback') {
-				that.feedbackType('Praise for Evernym Channels');
-				that.feedbackLabel('Your feedback:');
-				that.feedbackContext('feedback');									
-			}
-			else if(feedbackType == 'suggestions') {
-				that.feedbackType('Suggestions for Evernym Channels');
-				that.feedbackLabel('Your Suggestions:');
-				that.feedbackContext('suggestions');								
-			}
-			else {
-				that.feedbackType('Report a Bug for Evernym Channels');
-				that.feedbackLabel('Report a Bug:');
-				that.feedbackContext('bug');								
-			}
-			feedbackType = '';						
-			that.accountName(localStorage.getItem('accountName'));			
-			$('textarea').keyup(function () {
-				that.feedbackClass('');
-				that.error(false);				
-				that.errorFeedback('');													
-			});					
-		}
+	self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message			
+		if(feedbackType == 'feedback') {
+			self.feedbackType('Praise for Evernym Channels');
+			self.feedbackLabel('Your feedback:');
+			self.feedbackContext('feedback');									
+		} else if(feedbackType == 'suggestions') {
+			self.feedbackType('Suggestions for Evernym Channels');
+			self.feedbackLabel('Your Suggestions:');
+			self.feedbackContext('suggestions');								
+		} else {
+			self.feedbackType('Report a Bug for Evernym Channels');
+			self.feedbackLabel('Report a Bug:');
+			self.feedbackContext('bug');								
+		} feedbackType = '';						
+		self.accountName(localStorage.getItem('accountName'));			
+		$('textarea').keyup(function () {
+			self.feedbackClass('');
+			self.error(false);				
+			self.errorFeedback('');													
+		});
 	}
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'sendFeedbackView') {
-			that.sendFeedbackCommand();
+			self.sendFeedbackCommand();
 		}
 	});	
 	
-	this.sendFeedbackCommand = function () {
-    if (that.feedback() == '' || typeof that.feedback() == 'undefined') {
-			that.feedbackClass('validationerror');
-			that.error(true);				
-			that.errorFeedback('<span>SORRY:</span> Please enter text above');
+	self.sendFeedbackCommand = function () {
+    if (self.feedback() == '' || typeof self.feedback() == 'undefined') {
+			self.feedbackClass('validationerror');
+			self.error(true);				
+			self.errorFeedback('<span>SORRY:</span> Please enter text above');
     } else {
       $.mobile.showPageLoadingMsg("a", "Sending Feedback");			
 			var feedbackObject = {};
-      feedbackObject.comments = that.feedback();
-      feedbackObject.context = that.feedbackContext();				
+      feedbackObject.comments = self.feedback();
+      feedbackObject.context = self.feedbackContext();				
 			return ES.systemService.sendFeedback(feedbackObject, {success: successfulSend, error: errorAPI});			
     }
   };
@@ -90,10 +62,11 @@ function SendFeedbackViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		that.feedbackClass('validationerror');
-		that.error(true);				
-		that.errorFeedback('<span>SORRY:</span> '+details.message);		
-	};	
-	
-		
+		self.feedbackClass('validationerror');
+		self.error(true);				
+		self.errorFeedback('<span>SORRY:</span> '+details.message);		
+	};
 }
+
+SendFeedbackViewModel.prototype = new AppCtx.ViewModel();
+SendFeedbackViewModel.prototype.constructor = SendFeedbackViewModel;
