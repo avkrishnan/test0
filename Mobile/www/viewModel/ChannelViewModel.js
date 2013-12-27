@@ -292,7 +292,6 @@ function ChannelViewModel() {
 	// follow/unfollow will be called on the basis of channelAction value
 	this.actionFollowChannelCommand = function() {
 		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
-		var token = ES.evernymService.getAccessToken();
 		if(localStorage.getItem('channelOwner') == 'yes') {
 			var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
 			showToast(toastobj);			
