@@ -44,7 +44,7 @@ AppCtx.ViewModel = function() {
   };
   
   this.clearForm = function () {
-    this.clearObs(this.allObs);
+    this.clearObs(this.allObs()); // Pradeep - added parentheses 'this.allObs()' because allObs is a function 
   };
 
   this.clearErrorObs = function() {
