@@ -9,16 +9,15 @@
     <a class="groupicon" href="#" data-bind="click: comingSoon"><span class="received-responses-msg"></span></a>
   </div>
 </div>
-<script>
-	var headerViewModel = new HeaderViewModel();
-	$(".logged-in").each(function() {
-		if($(this).parent().css('display') != 'none') {
-			ko.applyBindings(headerViewModel, document.getElementById('header'));
-			headerViewModel.activate();
-		}
-		else {
-			var nonCurrentViewHeader = "#" + $(this).parent().attr('id') + " header";
-			$(nonCurrentViewHeader).html('');
-		}
-	});
+<script type="text/javascript">
+var headerViewModel = new HeaderViewModel();
+$(".logged-in").each(function() {
+	if($(this).parent().css('display') != 'none') {
+		ko.applyBindings(headerViewModel, document.getElementById('header'));
+		headerViewModel.activate();
+	} else {
+		var nonCurrentViewHeader = "#" + $(this).parent().attr('id') + " header";
+		$(nonCurrentViewHeader).html('');
+	}
+});
 </script>

@@ -10,7 +10,7 @@
 	self.escalationplans = ko.observableArray([]);
 	self.comMethodType = ko.observable("EMAIL");
 	
-  self.inputObs = [ 'baseUrl', 'name', 'firstname', 'lastname', 'newComMethod', 'newComMethodName', 'navText' ];
+  self.inputObs = [ 'baseUrl', 'firstname', 'lastname', 'newComMethod', 'newComMethodName', 'navText' ];
   self.defineObservables();	
 	
 	self.pView = '';
