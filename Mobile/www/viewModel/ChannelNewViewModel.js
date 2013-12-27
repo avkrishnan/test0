@@ -1,69 +1,44 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChannelNewViewModel() {	
-  var that = this;
-	this.template = 'channelNewView';
-	this.viewid = 'V-13';
-	this.viewname = 'New Chan';
-	this.displayname = 'Create a channel';	
-	this.accountName = ko.observable();	
+﻿function ChannelNewViewModel() {	
+  var self = this;
+	self.template = 'channelNewView';
+	self.viewid = 'V-13';
+	self.viewname = 'New Chan';
+	self.displayname = 'Create a channel';
 	
-  /* New Channel Step First observable */
-	this.sectionOne = ko.observable(true);
-	this.sectionTwo = ko.observable(false);
-	this.newChannel = ko.observable();	
-	this.channelClass = ko.observable();	
-	this.message = ko.observable();	
-	this.errorNewChannel = ko.observable();
-	this.channelName = ko.observable();	
-	this.channelWebAddress = ko.observable();							
+	self.sectionOne = ko.observable(true);
+	self.sectionTwo = ko.observable(false);
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();			
-      that.activate();					
-    });	
-	};
-	
-	this.clearForm = function () {
-		that.newChannel('');
-		that.channelClass('');		
-		that.message('');
-		that.errorNewChannel('');			
-  };
+  self.inputObs = [ 'newChannel', 'channelClass', 'message', 'errorNewChannel', 'channelName', 'channelWebAddress' ];
+  self.defineObservables();
 	  
-	this.activate = function() {
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message					
-			that.accountName(localStorage.getItem('accountName'));
-			that.sectionOne(true);
-			that.sectionTwo(false);
-			$('input').focus();							
-			$('input').keyup(function () {
-				that.message('');
-				that.channelClass('');				
-				that.errorNewChannel('');
-			});							
-		}
+	self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message					
+		self.sectionOne(true);
+		self.sectionTwo(false);
+		$('input').focus();							
+		$('input').keyup(function () {
+			self.message('');
+			self.channelClass('');				
+			self.errorNewChannel('');
+		});							
 	}
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'channelNewView') {
-			that.createChannelCommand();
+			self.createChannelCommand();
 		}
 	});	
 
-	this.createChannelCommand = function (e) {
-    if (that.newChannel() == '') {
-      that.errorNewChannel('<span>SORRY:</span> Please enter channel name');
-    } else if (that.newChannel().match(/\s/)) {
-			that.errorNewChannel('<span>SORRY:</span> Please choose a short name with no spaces');
-		} else if(that.newChannel().length > 15) {
-			that.errorNewChannel('<span>SORRY:</span> Please choose name of max. 15 characters');			
+	self.createChannelCommand = function (e) {
+    if (self.newChannel() == '') {
+      self.errorNewChannel('<span>SORRY:</span> Please enter channel name');
+    } else if (self.newChannel().match(/\s/)) {
+			self.errorNewChannel('<span>SORRY:</span> Please choose a short name with no spaces');
+		} else if(self.newChannel().length > 15) {
+			self.errorNewChannel('<span>SORRY:</span> Please choose name of max. 15 characters');			
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
-			ES.loginService.checkName(that.newChannel(), { success: successAvailable, error: errorAPI });			
+			ES.loginService.checkName(self.newChannel(), { success: successAvailable, error: errorAPI });			
     }
   };
 	
@@ -90,31 +65,33 @@ function ChannelNewViewModel() {
 	
 	function successAvailable(data){
 		if(data){
-			that.channelClass('validationerror');
-      that.errorNewChannel('<span>SORRY:</span> This channel name has already been taken');
+			self.channelClass('validationerror');
+      self.errorNewChannel('<span>SORRY:</span> This channel name has already been taken');
 		} else {
-			//that.message('<span>GREAT! </span> This name is available');
+			//self.message('<span>GREAT! </span> This name is available');
 			$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
-			ES.channelService.createChannel({name: that.newChannel()}, {success: successfulCreate, error: errorAPI});			
-			that.sectionOne(false);
-			that.sectionTwo(true);							
-			that.channelName(that.newChannel()+' is now LIVE!');			
-			that.channelWebAddress(that.newChannel()+'.evernym.com');			
+			ES.channelService.createChannel({name: self.newChannel()}, {success: successfulCreate, error: errorAPI});			
+			self.sectionOne(false);
+			self.sectionTwo(true);							
+			self.channelName(self.newChannel()+' is now LIVE!');			
+			self.channelWebAddress(self.newChannel()+'.evernym.com');			
 		}
 	};
 						
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     goToView('channelNameView');
-		that.sectionOne(true);
-		that.sectionTwo(false);
-		that.message('');
-    that.errorNewChannel('<span>SORRY:</span> ' + details.message);		
+		self.sectionOne(true);
+		self.sectionTwo(false);
+		self.message('');
+    self.errorNewChannel('<span>SORRY:</span> ' + details.message);		
   };
 	
-  this.OkCommand = function () {
+  self.OkCommand = function () {
 		sendMessageViewModel.clearForm();					
     goToView('channelsIOwnView');
-  };		
-	
+  };
 }
+
+ChannelNewViewModel.prototype = new AppCtx.ViewModel();
+ChannelNewViewModel.prototype.constructor = ChannelNewViewModel;
