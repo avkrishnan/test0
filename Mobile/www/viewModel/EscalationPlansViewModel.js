@@ -130,7 +130,7 @@
 		localStorage.removeItem('backNavText');	
 		localStorage.removeItem('backNavView');				
 		localStorage.removeItem('currentChannel');
-		localStorage.removeItem('accountName');
+		//localStorage.removeItem('accountName');
 		localStorage.removeItem('account');		
 		localStorage.removeItem('name');		
 		localStorage.removeItem('iGiStatus');		

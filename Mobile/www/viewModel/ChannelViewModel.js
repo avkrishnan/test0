@@ -233,7 +233,7 @@ function ChannelViewModel() {
 		var token = ES.evernymService.getAccessToken();			
 		if(token == '' || token == null) {
 			var toastobj = {redirect: 'loginView', type: 'toast-error', text: details.message};
-			showToast(toastobj);			
+			showToast(toastobj);		
 			goToView('loginView');
 		} else {
 			var toastobj = {redirect: 'homeView', type: 'toast-error', text: details.message};
@@ -292,10 +292,15 @@ function ChannelViewModel() {
 	// follow/unfollow will be called on the basis of channelAction value
 	this.actionFollowChannelCommand = function() {
 		localStorage.setItem("currentChannel", JSON.stringify(that.channelMessage()));
+		var token = ES.evernymService.getAccessToken();
 		if(localStorage.getItem('channelOwner') == 'yes') {
 			var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
 			showToast(toastobj);			
-		} else {
+		}
+		else if(localStorage.getItem('accountName') == '' || localStorage.getItem('accountName') == null){
+			goToView('signupStepFirstView');
+		} 
+		else {
 			that.followChannelCommand();
 		}
 	}
