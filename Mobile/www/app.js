@@ -783,10 +783,10 @@ function showToast(toastobj) {
 	else {
 		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
 	}
-	$('.toast-notification').delay(500).slideDown(500, function() {
+	$('.toast-notification').slideDown(500, function() {
 		$('.toast-notification').show();
-	}).delay(4000).slideUp(1000, function() {
-		$('#'+$.mobile.activePage.attr('id')+' .toast-notification .toast-text').remove();
+	}).delay(1800).slideUp(700, function() {
+		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
 	});
 }
 
