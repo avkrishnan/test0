@@ -1,147 +1,118 @@
-﻿/*globals ko*/
-function AdditionalContactViewModel() {
-	
-	this.template = "additionalContactView";
-	this.viewid = "V-081";
-	this.viewname = "AdditionalContact";
-	this.displayname = "Additional Contact";
-	this.hasfooter = true;
-	
-	this.baseUrl = ko.observable();
-	this.accountName = ko.observable();
-	this.name = ko.observable();
+﻿function AdditionalContactViewModel() {
+	var self = this;
+	self.template = "additionalContactView";
+	self.viewid = "V-081";
+	self.viewname = "AdditionalContact";
+	self.displayname = "Additional Contact";
+	self.hasfooter = true;
 
-	this.comMethodName = ko.observable();
-	
-	this.navText = ko.observable();
-	this.pView = '';
-	this.errorMessage = ko.observable();
-	this.errorMessageInput = ko.observable();		
-	
-	var that = this;
+  self.inputObs = [ 'baseUrl', 'comMethodName', 'navText', 'errorMessage', 'errorMessageInput' ];
+  self.defineObservables();	
 		
-	that.addCommethod = function() {
+	self.pView = '';
+		
+	self.addCommethod = function() {
 		var emailPattern = /^([\w-\.\+]+@([\w-]+\.)+[\w-]{2,4})?$/;
 		var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 		var phonepatternforhyphen = /^\d+(-\d+)*$/;
-		if(that.comMethodName() == '') {
-			that.errorMessage("<span>ERROR: </span>Please input email or phone!");
-			that.errorMessageInput('validationerror');
-		}
-		else if(!phonepatternforhyphen.test(that.comMethodName())) { /* for email*/
-			if(!emailPattern.test(that.comMethodName())) {
-				that.errorMessage("<span>ERROR: </span>Not a valid email address!");
+		if(self.comMethodName() == '') {
+			self.errorMessage("<span>ERROR: </span>Please input email or phone!");
+			self.errorMessageInput('validationerror');
+		} else if(!phonepatternforhyphen.test(self.comMethodName())) { /* for email*/
+			if(!emailPattern.test(self.comMethodName())) {
+				self.errorMessage("<span>ERROR: </span>Not a valid email address!");
 				return false;
-			}
-			else if(emailPattern.test(that.comMethodName())) {
+			} else if(emailPattern.test(self.comMethodName())) {
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
 					type : 'EMAIL',
-					address : that.comMethodName()
+					address : self.comMethodName()
 				};
-				that.addNewCommethod(newCommethodObject);
+				self.addNewCommethod(newCommethodObject);
 			}
-		}
-		else { // for phone
-			if(!phoneNumberPattern.test(that.comMethodName()) || (10 > that.comMethodName().length > 12 )){
-				that.errorMessage("<span>ERROR: </span>Not a valid phone number!");
-			}
-			else if(phoneNumberPattern.test(that.comMethodName())){  
-				if(that.comMethodName().match(/^[0-9]{3}\-[0-9]{3}\-[0-9]{4}$/)) {
-					tempCommethodName = that.comMethodName();
+		} else { // for phone
+			if(!phoneNumberPattern.test(self.comMethodName()) || (10 > self.comMethodName().length > 12 )){
+				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
+			} else if(phoneNumberPattern.test(self.comMethodName())){  
+				if(self.comMethodName().match(/^[0-9]{3}\-[0-9]{3}\-[0-9]{4}$/)) {
+					tempCommethodName = self.comMethodName();
+				} else if(self.comMethodName().indexOf('-') == 3 || self.comMethodName().indexOf('-') == 6) {
+					tempCommethodName = (self.comMethodName().indexOf('-') == 3) ? self.comMethodName().substring(0, 7) + "-" + self.comMethodName().substring(7, self.comMethodName().length) : self.comMethodName().substring(0, 3) + "-" + self.comMethodName().substring(3, self.comMethodName().length);
+				} else {
+					tempCommethodName = self.comMethodName().replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
 				}
-				else if(that.comMethodName().indexOf('-') == 3 || that.comMethodName().indexOf('-') == 6) {
-					tempCommethodName = (that.comMethodName().indexOf('-') == 3) ? that.comMethodName().substring(0, 7) + "-" + that.comMethodName().substring(7, that.comMethodName().length) : that.comMethodName().substring(0, 3) + "-" + that.comMethodName().substring(3, that.comMethodName().length);
-				}
-				else {
-					tempCommethodName = that.comMethodName().replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-				}
-				that.comMethodName(tempCommethodName);
+				self.comMethodName(tempCommethodName);
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
 					type : 'TEXT',
-					address : that.comMethodName()
+					address : self.comMethodName()
 				};
-				that.addNewCommethod(newCommethodObject);				    
-			}    
-		} 	
+				self.addNewCommethod(newCommethodObject);				    
+			}
+		}
 	}
 	
-	this.inputKeyUp = function () {
-		that.errorMessage('');
+	self.inputKeyUp = function () {
+		self.errorMessage('');
 	}	
+
+	self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message
+		var currentBaseUrl = localStorage.getItem("baseUrl");
+		var previousView = localStorage.getItem('previousView');
+		var vm = ko.dataFor($("#" + previousView).get(0));
+		self.navText(vm.displayname);
+		self.pView = previousView;
+		if (currentBaseUrl){
+			self.baseUrl(currentBaseUrl);
+		} else {
+			var es = new EvernymService();
+			self.baseUrl(es.getBaseUrl());
+		}		
+		$('#additionalContactView input').on("keyup", self.inputKeyUp);
 		
-	this.applyBindings = function(){
-		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
-			var currentBaseUrl = localStorage.getItem("baseUrl");
-			var previousView = localStorage.getItem('previousView');
-			console.log("previousView: " + previousView);
-			var vm = ko.dataFor($("#" + previousView).get(0));
-			console.log("previousView Model viewid: " + vm.displayname);
-			that.navText(vm.displayname);
-			that.pView = previousView;
-			if (currentBaseUrl){
-				that.baseUrl(currentBaseUrl);
-			}
-			else {
-				var es = new EvernymService();
-				that.baseUrl(es.getBaseUrl());
-			}
-			that.activate();
-		});
-		$('#additionalContactView input').on("keyup", that.inputKeyUp);
-	};
-    
-	this.activate = function() {
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message		
-			that.accountName(localStorage.getItem("accountName"));		
-			that.name(localStorage.getItem("UserFullName"));
-			that.comMethodName('');
-			that.errorMessage('');
-			localStorage.removeItem("currentVerificationCommethodID");	
-			$.mobile.showPageLoadingMsg("a", "Loading Settings");
-			return true;
-		}
+		self.comMethodName('');
+		self.errorMessage('');
+		localStorage.removeItem("currentVerificationCommethodID");	
+		$.mobile.showPageLoadingMsg("a", "Loading Settings");
+		return true;
 	};
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13  && $.mobile.activePage.attr('id') == 'additionalContactView') {
-			that.errorMessage('');
-			that.addCommethod();
+			self.errorMessage('');
+			self.addCommethod();
 		}
 	});				
 	
-	this.addNewCommethod = function(newCommethodObject) {
-		//alert(JSON.stringify(newCommethodObject));
+	self.addNewCommethod = function(newCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				//alert(JSON.stringify(responseData));
 				localStorage.setItem("commethodType",responseData.type);
 				if (responseData.address == 'TEXT') {
 					localStorage.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
 					localStorage.setItem("currentVerificationCommethodID",responseData.id);
-				}
-				else {
+				} else {
 					localStorage.setItem("currentVerificationCommethod",responseData.address);
 					localStorage.setItem("currentVerificationCommethodID",responseData.id);
 				}
 				localStorage.setItem("verificationStatus",true);
 				if(responseData.type == 'EMAIL') {
 					var toastText = 'Email added';
-				}
-				else {
+				} else {
 					var toastText = 'Phone number added';
 				}
 				var toastobj = {redirect: 'verifyContactView', type: '', text: toastText};		
-				showToast(toastobj);										
+				showToast(toastobj);
 				goToView('verifyContactView');
 			},
 			error: function (responseData, status, details) {
-				that.errorMessage("<span>ERROR: </span>" + details.message);
+				self.errorMessage("<span>ERROR: </span>" + details.message);
 			}
 		};
 		ES.commethodService.addCommethod(newCommethodObject, callbacks );
-	};	
-	
+	};
 }
+
+AdditionalContactViewModel.prototype = new AppCtx.ViewModel();
+AdditionalContactViewModel.prototype.constructor = AdditionalContactViewModel;
