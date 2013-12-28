@@ -68,12 +68,11 @@
 			self.channelClass('validationerror');
       self.errorNewChannel('<span>SORRY:</span> This channel name has already been taken');
 		} else {
-			//self.message('<span>GREAT! </span> This name is available');
 			$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
 			ES.channelService.createChannel({name: self.newChannel()}, {success: successfulCreate, error: errorAPI});			
 			self.sectionOne(false);
 			self.sectionTwo(true);							
-			self.channelName(self.newChannel()+' is now LIVE!');			
+			self.channelName(self.newChannel()+' is now live.');			
 			self.channelWebAddress(self.newChannel()+'.evernym.com');			
 		}
 	};
@@ -87,9 +86,9 @@
     self.errorNewChannel('<span>SORRY:</span> ' + details.message);		
   };
 	
-  self.OkCommand = function () {
+  self.goToNext = function () {
 		sendMessageViewModel.clearForm();					
-    goToView('channelsIOwnView');
+    goToView('channelIntroView');
   };
 }
 

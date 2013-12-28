@@ -20,16 +20,14 @@
     </section>
   </div>
   <div class="page-content" data-bind="visible: sectionTwo">
-    <div class="changename" data-bind="text: channelName"></div>
-    <em class="webaddress">You can now invite others to follow your channel at:</em>
-    <div class="createchannel"><em data-bind="text: channelWebAddress"></em></div>
-    <div class="textsettingsicon">
-      You can create your channel's Web Page Description now or later by tapping the Channel Settings icon:<a href="#" onclick="goToView('channelSettingsView')"></a>
-    </div>    
-    <div class="login">
-      <p class="loginbtn">
-        <a href="#" data-bind="click: OkCommand">OK, Got it!</a>
-      </p>
+    <div class="congrats">CONGRATS!!</div>
+    <div class="channel-live" data-bind="text: channelName"></div>
+    <div class="channelvisiting">
+      <span>Others can now follow it by visiting:</span>
+      <strong data-bind="text: channelWebAddress"></strong>
+    </div>
+    <div class="nextinfo">
+      <a href="#" data-bind="click: goToNext">NEXT &raquo;</a>
     </div>
   </div>
   <div class="toast-notification"></div>   

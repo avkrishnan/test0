@@ -1,0 +1,59 @@
+<div id="channelIntroView" data-role="page">
+  <header class="logged-in" data-bind="visible: sectionOne"></header>
+  <div class="page-content" data-bind="visible: sectionOne">
+    <div class="editinformation">
+      <span data-bind="text: channelWebAddress"><!--This is your channel web page, now live at XYZchannel.evernym.com--></span>
+      <span>You can edit your Tagline and Description now.</span>
+    </div>      
+    <div class="channelinformation">
+      <span class="channelimg channel4 sky-blue"></span>
+      <div class="channelinfocontent last">
+        <span data-bind="text: channelName"><!--XYZchannel--></span>
+        <em data-bind="text: tagline"><!--(sample tagline for XYZchannel)--></em>
+      </div>
+      <div class="edit-button">
+        <a href="#" class="changeiconbtn" data-bind="click: comingSoon">Change Icon</a>
+        <a href="#" class="taglinebtn" onclick="viewNavigate('Channel Intro', 'channelIntroView', 'editShortDescriptionView');">Edit Tagline</a>
+      </div>
+    </div>
+    <div class="channellanding chandescription">
+      <span data-bind="html: channelDescription"><!--This is the web page for XYZchannel.</br>
+      To follow XYZchannel, click the "Follow" Button below.--></span>
+     <a class="editbtn" href="#" onclick="viewNavigate('Channel Intro', 'channelIntroView', 'editLongDescriptionView');">Edit This Description</a>
+    </div>
+    <div class="contactchannel">
+       <div class="loginbtn"><span class="disablebtn">FOLLOW</span></div>
+    </div>
+    <div class="nextinfo previewdonebtn">
+      <a href="#" data-bind="click: showPreview">Preview</a>
+    </div>
+    <div class="nextinfo previewdonebtn">
+      <a href="#" data-bind="click: okCommand">Done</a>
+    </div>          
+  </div>
+  <div class="toast-notification"></div>
+  <div class="footer" data-bind="visible: sectionOne">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Channel Intro', 'channelIntroView', 'userSettingsView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Channel Intro', 'channelIntroView', 'plusMenuView');"></a>
+  </div>
+  <div class="active-overlay" style="display:none"></div>  
+  <div class="page-content exitpreview" data-bind="visible: sectionTwo">   
+    <div class="channelinformation">
+      <span class="channelimg channel4 sky-blue"></span>
+      <div class="channelinfocontent last">
+        <span data-bind="text: channelName"><!--XYZchannel--></span>
+        <em data-bind="text: tagline"><!--(sample tagline for XYZchannel)--></em>
+      </div>
+    </div>   
+    <div class="channellanding chandescription">
+      <span data-bind="html: channelDescription">This is the web page for XYZchannel.</br>
+      To follow XYZchannel, click the "Follow" Button below.</span>
+    </div>
+    <div class="contactchannel">
+       <div class="loginbtn"><span class="disablebtn">FOLLOW</span></div>
+    </div>      
+    <div class="nextinfo previewdonebtn">
+      <a href="#" data-bind="click: exitPreview">Exit Preview</a>
+    </div>      
+  </div>
+</div>

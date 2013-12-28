@@ -16,7 +16,6 @@
 		self.sectionOne(true);
 		self.sectionTwo(false);		
   	addExternalMarkup(self.template); // this is for header/overlay message									
-		ENYM.ctx.setItem('counter', 0);
 	};
 
   self.goToNext = function() {
