@@ -36,14 +36,8 @@ function SingleMessageViewModel() {
 			addExternalMarkup(self.template); // this is for header/overlay message																		
 			self.channelName(channelObject.channelName);		
 			//that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');
-			self.time('Sent - '+ formatDate(messageObject.created, 'long'));
-			if(messageObject.broadcastFull.length > truncatedTextScreen()) {
-				var message = $.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...';
-			}
-			else {
-				var message = messageObject.broadcastFull;					
-			}				
-			self.singleMessage(message+'<em></em>');
+			self.time('Sent - '+ formatDate(messageObject.created, 'long'));			
+			self.singleMessage('<span>'+messageObject.broadcastFull+'</span><em></em>');
 			self.broadcastType(messageObject.type);
 			self.iGi(messageObject.iGi);
 			self.percentageText(messageObject.percentageText);

@@ -13,9 +13,7 @@
     <h1 class="messagesdate" data-bind="text: time"></h1>
     <div class="broadcastmsgredfull">
       <div class="channelbroadcast broadcastmsgred">
-        <div class="msgfullread" data-bind="css: sensitivity">
-          <span data-bind="text: sensitivityText"></span>
-          <em data-bind="html: singleMessage"></em>
+        <div class="msgfullread" data-bind="css: sensitivity, html: singleMessage">
         </div>
         <div class="broadcastmsgsend">
           <a href="#" class="igigot" data-bind="html: iGi, click: showWhoGotIt"></a>

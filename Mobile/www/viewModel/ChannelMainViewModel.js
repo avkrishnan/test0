@@ -60,20 +60,13 @@
 	
 	function successfulMessageGET(data){
 		$.mobile.hidePageLoadingMsg();			
-		for(var len = 0; len<data.message.length; len++) {
-			if(data.message[len].text.length > truncatedTextScreen()-20) {
-				var message = $.trim(data.message[len].text).substring(0, truncatedTextScreen()-20).split(' ').slice(0, -1).join(' ') + '...';
-			}
-			else {
-				var message = data.message[len].text;					
-			}			
+		for(var len = 0; len<data.message.length; len++) {			
 			var message_sensitivity = 'icon-'+data.message[len].escLevelId.toLowerCase();
-			var broadcast = '<strong class='+message_sensitivity+'></strong>'+message+'<em></em>';			
+			var broadcast = '<strong class='+message_sensitivity+'></strong><span>'+data.message[len].text+'</span>';			
 			if(data.message[len].escLevelId == 'N') {
-        var broadcast = message+'<em></em>';				
+        var broadcast = '<span>'+data.message[len].text+'</span>';				
 				var sensitivityText = 'NORMAL';
-			} else if(data.message[len].escLevelId == 'F') {
-        //var broadcast = data.message[len].text+'<em></em>';				
+			} else if(data.message[len].escLevelId == 'F') {				
 				var sensitivityText = 'FAST';				
 			} else if(data.message[len].escLevelId == 'R') {
 				var sensitivityText = 'REMIND';
