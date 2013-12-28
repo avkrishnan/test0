@@ -1,6 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function TutorialViewModel() {
+﻿function TutorialViewModel() {
   var that = this;
   this.template = 'tutorialView';
   this.viewid = 'V-51';
@@ -13,7 +11,6 @@ function TutorialViewModel() {
     });
   };
 
-  /* Methods */
   this.activate = function() {
 		var token = ES.evernymService.getAccessToken();		
 		var newUser = ENYM.ctx.getItem('newusername');
@@ -65,5 +62,4 @@ function TutorialViewModel() {
   this.getStartedCommand = function() {
 		goToView('userGuideView');
   }
-	
 }
