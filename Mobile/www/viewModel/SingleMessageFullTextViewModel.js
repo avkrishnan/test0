@@ -10,7 +10,6 @@ function SingleMessageFullTextViewModel() {
     'channelName',
 		'time',
 		'sensitivity',
-		'sensitivityText',
     'singleMessage', 
     'broadcastType', 
     'iGi', 
@@ -33,16 +32,9 @@ function SingleMessageFullTextViewModel() {
 			var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));										
 			self.channelName(channelObject.channelName);
 			var fullDate = formatDate(messageObject.created,'long');					
-			//that.time('Sent '+ fullDate +' ('+messageObject.time+'):');
 			self.time('Sent - '+ fullDate);
 			self.sensitivity(messageObject.sensitivity);			
-			self.sensitivityText(messageObject.sensitivityText);
-			if(messageObject.broadcastFull.length > truncatedTextScreen()) {
-				self.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+$.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...<em></em>');
-			}
-			else {
-				self.singleMessage('<strong class='+messageObject.sensitivity+'></strong>'+messageObject.broadcastFull+'<em></em>');				
-			}							
+			self.singleMessage('<span>'+messageObject.sensitivityText+'</span><em>'+messageObject.broadcastFull+'</em>');						
 			self.iGi(messageObject.iGi);
 			self.percentageText(messageObject.percentageText);
 			self.percentageClass(messageObject.percentageClass);			

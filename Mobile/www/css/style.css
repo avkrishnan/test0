@@ -1530,7 +1530,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	overflow:hidden;
 	float:left;
 	width:63%;
-	background:green;
 	background:#F1F2F2;
 	border-radius:21px 4px 4px 21px;
 }
@@ -1544,11 +1543,12 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	overflow:hidden;
 	width:75%;
 	float:left;
+	padding:0 0 0 5px;
 	white-space:nowrap;
 }
 .broadcast-sensitive strong {
 	float:left;
-	padding:19px 22px;
+	padding:19px;
 }
 .broadcast-sensitive strong.icon-r {
 	background:url("images/icon-r.png") no-repeat 0px 0px;
@@ -1780,6 +1780,10 @@ h1.messagesdate {
 	color:#414141;
 	font-style:normal;
 	display:block;
+	padding:0px 10px 0px 0px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
 }
 .channelinfoname {
 	display:inline-block;
@@ -3373,6 +3377,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	text-align:center;
 	color:#8DC63F;
 	font-size:22px;
+	border-radius:4px;
 }
 .channelvisiting {
 	text-align:center;
@@ -3868,10 +3873,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:96.8%;
 	}
 	.broadcastsensitive {
-		width: 81.4%;
+		width:81.4%;
 	}
 	.broadcast-sensitive span {
-		width: 95.5%;
+		width:95%;
 	}
 }
 @media only screen and (min-width:1290px) {

@@ -12,8 +12,8 @@
     </div>   
     <h1 class="messagesdate" data-bind="text: time"></h1>    
     <div class="channelbroadcast">
-      <a href="#" class="broadcast-sensitive singlemessage" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageFullTextView');">
-        <span data-bind="html: singleMessage"></span>
+      <a href="#" class="singlemessage" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageFullTextView');">
+        <div class="singlemsg" data-bind="html: singleMessage"></div>
       </a>
       <div class="broadcastmsgsend">
         <a href="#" class="igigot" data-bind="html: iGi, click: showWhoGotIt"></a>

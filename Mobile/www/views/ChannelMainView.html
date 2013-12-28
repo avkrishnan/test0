@@ -30,7 +30,7 @@
     <div data-bind="foreach: broadcasts">
       <a href="#" class="channelbroadcast">
         <div class="broadcast-sensitive" data-bind="click: $parent.singleMessage.bind($index())">
-          <span data-bind="html: broadcast"></span><em data-bind="text: time"></em>
+          <div class="broadcastsensitive" data-bind="html: broadcast"></div><em data-bind="text: time"></em>
         </div>       
         <div class="broadcastmsgsend">
           <span class="igigot" data-bind="html: iGi, click: $parent.showWhoGotIt.bind($index())"></span>
