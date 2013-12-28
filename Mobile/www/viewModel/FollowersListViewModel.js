@@ -1,23 +1,23 @@
 ﻿function FollowersListViewModel() {
-  var that = this;
-	this.template = 'followersListView';
-	this.viewid = 'V-26';
-	this.viewname = 'Followers';
-	this.displayname = 'Followers';
+  var self = this;
+	self.template = 'followersListView';
+	self.viewid = 'V-26';
+	self.viewname = 'Followers';
+	self.displayname = 'Followers';
 
   self.inputObs = [ 'channelId', 'channelName', 'followerCount'];
 	self.defineObservables();	
-  this.followers = ko.observableArray([]);
+  self.followers = ko.observableArray([]);
 	  
-	this.activate = function() {			
+	self.activate = function() {			
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));				
 		if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {				
-			addExternalMarkup(that.template); // this is for header/overlay message	
-			that.followers.removeAll();
-			that.followerCount('0 followers');								
-			that.accountName(ENYM.ctx.getItem('accountName'));		
+			addExternalMarkup(self.template); // this is for header/overlay message	
+			self.followers.removeAll();
+			self.followerCount('0 followers');								
+			self.accountName(ENYM.ctx.getItem('accountName'));		
 			if(ENYM.ctx.getItem('counter') == 1) {
 				ENYM.ctx.setItem('counter', 2);
 			} else if(ENYM.ctx.getItem('counter') == 2){		
@@ -25,10 +25,10 @@
 			}	else {
 				ENYM.ctx.setItem('counter', 1);
 			}																
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);																						
+			self.channelId(channelObject.channelId);
+			self.channelName(channelObject.channelName);																						
 			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
-			return ES.channelService.getFollowers(that.channelId(), { success: successfulList, error: errorAPI });
+			return ES.channelService.getFollowers(self.channelId(), { success: successfulList, error: errorAPI });
 		}
 	};	
 	
@@ -41,9 +41,9 @@
 			} else {
 				var followers = follower +' followers';
 			}				
-			that.followerCount(followers);						
+			self.followerCount(followers);						
 			if(data.followers[len].relationship == 'F') {
-				that.followers.push({
+				self.followers.push({
 					followerId: data.followers[len].id,
 					followerName: data.followers[len].firstname +' '+ data.followers[len].lastname, 
 					accountname: data.followers[len].accountname
@@ -58,8 +58,11 @@
 		showToast(toastobj);		
   };
 	
-	this.followerDetails = function (data) {
+	self.followerDetails = function (data) {
 		ENYM.ctx.setItem('currentfollowerData', JSON.stringify(data));		
 		viewNavigate('Followers', 'followersListView', 'followerDetailsView');
   };
 }
+
+FollowersListViewModel.prototype = new ENYM.ViewModel();
+FollowersListViewModel.prototype.constructor = FollowersListViewModel;
