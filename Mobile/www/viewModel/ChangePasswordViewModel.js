@@ -38,6 +38,10 @@
 			self.newpasswordClass('validationerror');				
 			self.confirmpasswordClass('validationerror');			
 			self.errorMessageConfirm("Password's don't match");
+		} else if (self.newPassword().length < 8) {
+			self.newpasswordClass('validationerror');				
+			self.confirmpasswordClass('validationerror');			
+			self.errorMessageConfirm('Password of min. 8 characters');
 		} else {
       $.mobile.showPageLoadingMsg("a", "Sending change password request");			
 			var passwordChangeRequest = {};

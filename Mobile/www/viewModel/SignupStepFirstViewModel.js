@@ -90,7 +90,7 @@ function SignupStepFirstViewModel() {
       that.errorAccountName('<span>SORRY:</span> Evernym min. 5 and max. 25 characters');			
     } else if (that.password().length < 8) {
       that.passwordClass('validationerror');
-      that.errorPassword('<span>SORRY:</span> Minimum 8 characters');
+      that.errorPassword('<span>SORRY:</span> Password of min. 8 characters');
 		} else if (that.password() == '') {
       that.passwordClass('validationerror');
       that.errorPassword('<span>SORRY:</span> Please enter password');
