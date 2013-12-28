@@ -88,6 +88,24 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 .helpicon .userguide, .helpicon .received-responses-msg {
 	cursor:auto;
 }
+a.smsicon {
+	background-position:1px 5px;
+}
+a.processingicon {
+	background-position:1px -115px;
+}
+a.groupicon {
+	background-position:1px -255px;
+}
+a.groupicon.groupiconwhite {
+	background-position:1px -324px;
+}
+a.processingicon.processingiconwhite {
+	background-position:1px -185px;
+}
+a.smsicon.smsiconwhite {
+	background-position:1px -55px;
+}
 .smsicon {
 	background-position:1px 5px;
 }
