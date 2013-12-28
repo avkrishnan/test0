@@ -1,5 +1,4 @@
-﻿/* To do - Pradeep Kumar */
-function HomeViewModel() {
+﻿function HomeViewModel() {
   var self = this;
   self.template = 'homeView';
   self.viewid = 'V-40';

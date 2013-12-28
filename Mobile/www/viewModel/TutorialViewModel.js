@@ -63,7 +63,7 @@ function TutorialViewModel() {
   };
 
   this.getStartedCommand = function() {
-		ENYM.ctx.removeItem('newuseremail');
+		/*ENYM.ctx.removeItem('newuseremail');
 		ENYM.ctx.removeItem('newusername');
 		ENYM.ctx.removeItem('newuserpassword');	
     if(ENYM.ctx.getItem("action") == 'follow_channel') {
@@ -82,9 +82,9 @@ function TutorialViewModel() {
 			var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
 			ES.channelService.followChannel(channel.id, callbacks);
 		}
-		else {
-			goToView('homeView');
-		}
+		else {*/
+			goToView('userGuideView');
+		//}
   }
 	
 }
