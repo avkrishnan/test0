@@ -297,6 +297,7 @@ function ChannelViewModel() {
 			showToast(toastobj);			
 		}
 		else if(ENYM.ctx.getItem('accountName') == '' || ENYM.ctx.getItem('accountName') == null){
+			ENYM.ctx.setItem("action", 'follow_channel');
 			goToView('signupStepFirstView');
 		} 
 		else {
