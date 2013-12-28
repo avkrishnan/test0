@@ -15,9 +15,11 @@
 		$('input').keyup(function () {
 		  self.clearErrorObs();
 		});
-		var account = JSON.parse(ENYM.ctx.getItem('account'));
-		self.firstname(account.firstname);
-		self.lastname(account.lastname);					
+		if(ENYM.ctx.getItem('account')) {
+			var account = JSON.parse(ENYM.ctx.getItem('account'));
+			self.firstname(account.firstname);
+			self.lastname(account.lastname);					
+		}
   };
 	
 	$(document).keyup(function (e) {
