@@ -120,11 +120,14 @@ h1.newcreatechannel {
 	font-size:15px;
 }
 .page-content {
-  padding:40px 0 50px 10px;
+  padding:42px 0 50px 10px;
 	overflow:hidden;
 }
 .page-content.nofooterbar, .page-content.hamburgermenupage {
-	padding:40px 0 0 10px;
+	padding:42px 0 0 10px;
+}
+.channel-broadcast {
+	padding:62px 0 50px 10px;
 }
 .portal-name {
 	font-size:18px;
@@ -371,7 +374,7 @@ select, .ui-icon-arrow-d {
 	background:url("images/sprites.png") no-repeat -14px -1325px;
 }
 .announcement {
-	background:url("images/sprites.png") no-repeat -3px -1486px;
+	background:url("images/plussign.png") no-repeat 0px 0px;
 	float:right;
 	margin:-5px 0 4px 0;
 	padding:22px 60px 22px 0;
@@ -690,7 +693,7 @@ input[type="checkbox"]:checked + label span {
 .Channel {
 	background:#2D2D2D;
 	border-radius:4px;
-	margin:0 35px 25px 25px;
+	margin:16px 35px 16px 25px;
 	display:block;
 	color:#fff;
 	font-size:14px;
@@ -2360,6 +2363,7 @@ ul.igiresponses li span {
 	border-bottom:1px solid #828181;
 	margin:0 0 10px -10px;
 	padding:15px 0 15px 10px;
+	overflow:hidden;
 }
 .contact-channel {
 	float:left;
@@ -2463,10 +2467,10 @@ ul.igiresponses li span {
 .slidemenu {
 	background:#e6e7e8;
 	float:right;
-	margin-top: -41px;
+	margin-top:-42px;
 	position: relative;
 	width:90%;
-	z-index: 9999;
+	z-index:9999;
 	min-height:480px;
 }
 .slidemenu h4 {
@@ -2658,6 +2662,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .reply-detail {
 	margin:4px 25px 10px 15px;
 	padding:5px 10px 10px 10px;
+	min-height:70px;
 }
 .reply-detail p {
 	font-style:normal;
@@ -3267,10 +3272,161 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .nofollowedyet {
   margin-top:-15px;
 }
+/* Help Page */
+.helpinfo {
+	display:inline-block;
+	left:0;
+	position:absolute;
+	text-align:center;
+	top:48%;
+	width:100%;
+}
+.helpinfo a {
+	padding:5px 15px;
+	font-size:14px;
+	border-radius:4px;
+	display:inline-block;
+	border:2px solid #2D2D2D;
+	background:#8DC63F;
+}
+/*27-12-2013*/
+.messagecenter {
+	background:url("images/followersarrow.png") no-repeat center top;
+	color: #FFFFFF;
+	font-size: 14px;
+	padding: 101px 90px 0 0;
+	position: absolute;
+	right: 110px;
+}
+.navigation {
+	background:url("images/navigationarrow.png") no-repeat 44px top;
+	color:#FFFFFF;
+	font-size:14px;
+	padding:69px 0 0 0;
+	position:absolute;
+	right:5px;
+}
+.igihelp {
+	background:url("images/igihelparrow.png") no-repeat center top;
+	color: #FFFFFF;
+	font-size: 14px;
+	padding: 164px 114px 0 0;
+	position: absolute;
+	right: 29px;
+}
+.followershelp {
+	background:url("images/new-lostarrow.png") no-repeat center top;
+	color:#FFFFFF;
+	font-size:14px;
+	padding:115px 8px 0 0;
+	position:absolute;
+	right:2px;
+}
+.settingshelp {
+	background:url("images/settingarrow.png") no-repeat center bottom;
+	bottom:48px;
+	color:#FFFFFF;
+	font-size:14px;
+	left:25px;
+	padding:0 0 65px 15px;
+	position:absolute;
+}
+.broadcasthelp {
+	background:url("images/broadcasthelparrow.png") no-repeat center bottom;
+	bottom:53px;
+	color:#FFFFFF;
+	font-size:14px;
+	padding:0 0 110px;
+	position:absolute;
+	right:30px;
+	width:116px;
+}
+/* New Channel create after information */
+.congrats {
+	font-size:24px;
+	color:#fff;
+	margin:50px 10px 30px 0px;
+	text-align:center;
+}
+.channel-live {
+	padding:15px 10px;
+	background:#2D2D2D;
+	margin:0px 10px 0px 0px;
+	text-align:center;
+	color:#8DC63F;
+	font-size:22px;
+}
+.channelvisiting {
+	text-align:center;
+	font-size:17px;
+	color:#fff;
+	margin:35px 10px 35px 0px;
+}
+.channelvisiting strong {
+	display:block;
+	font-size:20px;
+	margin:4px 0px 0px 0px;
+}
+.nextinfo {
+	text-align:center;
+	margin:0 10px 0 0;
+}
+.nextinfo a {
+	background:#8DC63F;
+	border:2px solid #2D2D2D;
+	border-radius:4px;
+	display:inline-block;
+	font-size:16px;
+	padding:4px 20px;
+}
+.editinformation {
+	padding:8px;
+	background:#2D2D2D;
+	margin:20px 0px 0px 0px;
+	color:#fff;
+	font-size:14px;
+	border-radius:4px 0px 0px 4px;
+}
+.editinformation span {
+	display:block;
+}
+.disablebtn {
+	background:#8DC63F;
+	border-radius:20px 4px 4px 20px;
+	color:#FFFFFF;
+	float:left;
+	font-size:14px;
+	opacity: 0.5;
+	padding:4px 14px;
+}
+.chandescription {
+	background:#FFFFFF;
+	border-radius:4px;
+	color:#414141;
+	margin:20px 10px 10px 0;
+	padding:5px;
+	overflow:hidden;
+}
+.edit-button {
+	padding:0px 10px 6px 4px;
+	overflow:hidden;
+}
+.changeiconbtn, .changeiconbtn.ui-link, .changeiconbtn.ui-link:visited, .changeiconbtn.ui-link:hover, .changeiconbtn.ui-link:active,
+.taglinebtn, .taglinebtn.ui-link, .taglinebtn.ui-link:visited, .taglinebtn.ui-link:hover, .taglinebtn.ui-link:active {
+	background:#E6E7E8;
+	border-radius:4px;
+	color:#898A8A;
+	float:left;
+	font-size:13px;
+	padding:2px 10px;
+}
+.taglinebtn, .taglinebtn.ui-link, .taglinebtn.ui-link:visited, .taglinebtn.ui-link:hover, .taglinebtn.ui-link:active{
+	float:right;
+}
 /*
 	*@media query css
 */
-@media only screen and (min-width:360px) and (min-height:620px) { 
+@media only screen and (min-width:360px) and (min-height:620px) {
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:80.5%;
 	}
@@ -3371,6 +3527,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.broadcast-sensitive em {
 		font-size:12px;
+	}
+	.messagecenter {
+		right:127px;
+	}	
+	.igihelp {
+		right:44px;
+	}
+	.followershelp {
+		right:13px;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -3479,6 +3644,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.i-icon {
 		width:80%;
 	}
+	.messagecenter {
+		right:127px;
+	}	
 }
 @media only screen and (min-width:800px) {
 	.slidemenu {
@@ -3616,6 +3784,18 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.broadcast-sensitive span {
 		width:80%;
 	}
+	.messagecenter {
+		right:135px;
+	}	
+	.igihelp {
+		right: 69px;
+	}
+	.messagecenter {
+		right:110px;
+	}	
+	.igihelp {
+		right:28px;
+	}
 }
 @media only screen and (min-width:1290px) {
 	.dateminutesetting {
@@ -3629,6 +3809,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.slidemenu {
 		min-height:622px;
+	}
+	.messagecenter {
+		right:125px;
+	}
+	.igihelp {
+		right:40px;
+	}
+	.followershelp {
+		right:8px;
 	}
 }
 /* @media query css End*/

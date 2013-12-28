@@ -418,7 +418,9 @@ notGotItViewModel = new NotGotItViewModel(),
 whoGotItViewModel = new WhoGotItViewModel(),
 recipientDetailsViewModel = new RecipientDetailsViewModel(),
 
-singleMessageViewModel = new SingleMessageViewModel()
+singleMessageViewModel = new SingleMessageViewModel(),
+userGuideViewModel = new UserGuideViewModel(),
+plusMenuViewModel = new PlusMenuViewModel()
 /* end */
 
 ;
@@ -496,7 +498,9 @@ var models = [
 							removeFollowerViewModel,
 							notGotItViewModel,
 							whoGotItViewModel,
-							recipientDetailsViewModel									
+							recipientDetailsViewModel	,
+							userGuideViewModel,
+							plusMenuViewModel								
               ];
 
 
