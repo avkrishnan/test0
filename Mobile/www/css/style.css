@@ -77,13 +77,16 @@ a.back.ui-link, a.back.ui-link:visited, a.back.ui-link:hover, a.back.ui-link:act
 .linkicon {
 	float:right;
 }
-.linkicon a {
+.linkicon a, .helpicon .userguide {
 	margin:0 20px 0 0;
 	padding:0 12px;
 	background:url("images/notification-img.png") no-repeat;
 	cursor:pointer;
 	float:left;
 	height:24px;
+}
+.helpicon .userguide, .helpicon .received-responses-msg {
+	cursor:auto;
 }
 a.smsicon {
 	background-position:1px 5px;
@@ -101,6 +104,24 @@ a.processingicon.processingiconwhite {
 	background-position:1px -185px;
 }
 a.smsicon.smsiconwhite {
+	background-position:1px -55px;
+}
+.smsicon {
+	background-position:1px 5px;
+}
+.processingicon {
+	background-position:1px -115px;
+}
+.groupicon {
+	background-position:1px -255px;
+}
+.groupicon.groupiconwhite {
+	background-position:1px -324px;
+}
+.processingicon.processingiconwhite {
+	background-position:1px -185px;
+}
+.smsicon.smsiconwhite {
 	background-position:1px -55px;
 }
 /*	Header end	*/
@@ -128,6 +149,9 @@ h1.newcreatechannel {
 }
 .channel-broadcast {
 	padding:62px 0 50px 10px;
+}
+.exitpreview {
+	padding:0 0 0 10px;
 }
 .portal-name {
 	font-size:18px;
@@ -3396,7 +3420,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#FFFFFF;
 	float:left;
 	font-size:14px;
-	opacity: 0.5;
+	/*opacity: 0.5;*/
 	padding:4px 14px;
 }
 .chandescription {
@@ -3422,6 +3446,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .taglinebtn, .taglinebtn.ui-link, .taglinebtn.ui-link:visited, .taglinebtn.ui-link:hover, .taglinebtn.ui-link:active{
 	float:right;
+}
+.previewdonebtn a{
+	padding:4px 0;
+	font-weight:18px;
+	width:110px;
+	margin:0 0 10px 0px;
 }
 /*
 	*@media query css
@@ -3529,13 +3559,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		font-size:12px;
 	}
 	.messagecenter {
-		right:127px;
+		right:107px;
 	}	
 	.igihelp {
-		right:44px;
+		right:27px;
 	}
 	.followershelp {
-		right:13px;
+		right:3px;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -3644,9 +3674,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.i-icon {
 		width:80%;
 	}
-	.messagecenter {
-		right:127px;
-	}	
 }
 @media only screen and (min-width:800px) {
 	.slidemenu {
@@ -3810,14 +3837,11 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.slidemenu {
 		min-height:622px;
 	}
-	.messagecenter {
-		right:125px;
-	}
 	.igihelp {
-		right:40px;
+		right:28px;
 	}
 	.followershelp {
-		right:8px;
+		right:0px;
 	}
 }
 /* @media query css End*/
