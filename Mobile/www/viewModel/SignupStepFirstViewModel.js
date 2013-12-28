@@ -82,7 +82,16 @@ function SignupStepFirstViewModel() {
     } else if (that.accountName() == '') {
       that.accountNameClass('validationerror');
       that.errorAccountName('<span>SORRY:</span> Please enter Evernym name');
-    } else if (that.password() == '') {
+    } else if (that.accountName().length < 5) {
+      that.accountNameClass('validationerror');
+      that.errorAccountName('<span>SORRY:</span> Evernym min. 5 and max. 25 characters');
+		} else if (that.accountName().length > 25) {
+      that.accountNameClass('validationerror');
+      that.errorAccountName('<span>SORRY:</span> Evernym min. 5 and max. 25 characters');			
+    } else if (that.password().length < 8) {
+      that.passwordClass('validationerror');
+      that.errorPassword('<span>SORRY:</span> Minimum 8 characters');
+		} else if (that.password() == '') {
       that.passwordClass('validationerror');
       that.errorPassword('<span>SORRY:</span> Please enter password');
     } else {

@@ -18,13 +18,14 @@
           <div class="msgerror" data-bind="html: errorAccountName"></div>
         </div>
       </div>
-      <div class="helptext">Your evernym is your unique public username, visible by the channels you follow. It can be any combination of letters and numbers, but no spaces.</div>
+      <div class="helptext">It can be from 5 to 25 letters and numbers, but no spaces.</div>
       <div class="formtype" data-bind="css: passwordClass">
         <div class="validationerrormsg">      
           <input type="password" data-bind="value: password" placeholder="create your password" />
           <div class="msgerror" data-bind="html: errorPassword"></div>
         </div>
       </div>
+      <div class="helptext">Minimum 8 characters, and hard to guess!</div>
       <div class="login">
         <p class="loginbtn">
           <a href="#" data-bind="click: nextViewCommand">Sign up!</a>
