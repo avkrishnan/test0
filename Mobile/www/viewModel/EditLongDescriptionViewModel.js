@@ -1,63 +1,40 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function EditLongDescriptionViewModel() {	
-  var that = this;
-	this.template = 'editLongDescriptionView';
-	this.viewid = 'V-67';
-	this.viewname = 'Edit Long Desc';
-	this.displayname = 'Edit Long Desc';	  
-	this.accountName = ko.observable();	
-	this.notification = ko.observable();
+﻿function EditLongDescriptionViewModel() {	
+  var self = this;
+	self.template = 'editLongDescriptionView';
+	self.viewid = 'V-67';
+	self.viewname = 'Edit Long Desc';
+	self.displayname = 'Edit Long Desc';	  
+
+  self.inputObs = [ 'channelId', 'channelName', 'longDescription', 'errorChannel', 'notification' ];
+	self.defineObservables();		
+	self.errorMessage = ko.observable(false);
 	
-  /* Edit Channel Display observable */
-	this.channelId = ko.observable();
-	this.channelName = ko.observable();	
-	this.longDescription = ko.observable();	
-	this.errorMessage = ko.observable(false);	
-	this.errorChannel = ko.observable();
-	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();			
-      that.activate();			
-    });	
-	};  
-	
-	this.clearForm = function () {
-    that.longDescription('');
-		that.errorMessage(false);		
-		that.errorChannel('');		
-  };
-	
-	this.activate = function() {		
-		if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
-			if(!channelObject) {
-				goToView('channelsIOwnView');			
-			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message					
-				that.accountName(ENYM.ctx.getItem('accountName'));		
-				that.channelId(channelObject.channelId);
-				that.channelName(channelObject.channelName);			
-				that.longDescription(channelObject.longDescription);						
-				$('textarea').keyup(function () {
-					that.errorMessage(false);				
-					that.errorChannel('');
-				});
-			}
+	self.activate = function() {		
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+		if(!channelObject) {
+			goToView('channelsIOwnView');			
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message					
+			self.accountName(ENYM.ctx.getItem('accountName'));		
+			self.channelId(channelObject.channelId);
+			self.channelName(channelObject.channelName);			
+			self.longDescription(channelObject.longDescription);						
+			$('textarea').keyup(function () {
+				self.errorMessage(false);				
+				self.errorChannel('');
+			});
 		}
-	}
+	};
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13  && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'editLongDescriptionView') {
-			that.longDescriptionCommand();
+			self.longDescriptionCommand();
 		}
 	});	
 	
 	function successfulModify(args) {		
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
-		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});		
+		ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI});		
   };
 	
 	function successfulGetChannel(data) {
@@ -81,26 +58,28 @@ function EditLongDescriptionViewModel() {
 		backNavText.pop();
 		backNavView.pop();		
 		goToView('channelSettingsView');								
-	}
+	};
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.errorMessage(true);	
-		that.errorChannel('<span>SORRY:</span> '+details.message);
+		self.errorMessage(true);	
+		self.errorChannel('<span>SORRY:</span> '+details.message);
   };
 	
-  this.longDescriptionCommand = function () {
-		if (that.longDescription() == '' || typeof that.longDescription() == 'undefined') {
-			that.errorMessage(true);						
-      that.errorChannel('<span>SORRY:</span> Please enter long description');
+  self.longDescriptionCommand = function () {
+		if (self.longDescription() == '' || typeof self.longDescription() == 'undefined') {
+			self.errorMessage(true);						
+      self.errorChannel('<span>SORRY:</span> Please enter long description');
     } else {
 			var channelObject = {
-				id: that.channelId(),
-				longDescription: that.longDescription()
+				id: self.channelId(),
+				longDescription: self.longDescription()
 			};
 			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 		}
-  };	
-	
+  };
 }
+
+EditLongDescriptionViewModel.prototype = new ENYM.ViewModel();
+EditLongDescriptionViewModel.prototype.constructor = EditLongDescriptionViewModel;

@@ -9,24 +9,22 @@
 	self.defineObservables();		
 	  
 	self.activate = function() {				
-		if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
-			if(!channelObject) {
-				goToView('channelsIOwnView');
-			} else {
-				addExternalMarkup(self.template); // this is for header/overlay message								
-				self.accountName(ENYM.ctx.getItem('accountName'));
-				self.channelId(channelObject.channelId);
-				self.channelName(channelObject.channelName);
-				self.shortDescription(channelObject.channelDescription);
-				ENYM.ctx.removeItem('channelOwner');										
-			}
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+		if(!channelObject) {
+			goToView('channelsIOwnView');
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message								
+			self.accountName(ENYM.ctx.getItem('accountName'));
+			self.channelId(channelObject.channelId);
+			self.channelName(channelObject.channelName);
+			self.shortDescription(channelObject.channelDescription);
+			ENYM.ctx.removeItem('channelOwner');										
 		}
-	}
+	};
 	
 	self.comingSoon = function() {
 		headerViewModel.comingSoon();		
-	}
+	};
 }
 
 ChannelSettingsViewModel.prototype = new ENYM.ViewModel();

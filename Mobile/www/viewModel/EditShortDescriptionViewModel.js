@@ -1,64 +1,42 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function EditShortDescriptionViewModel() {	
-  var that = this;
-	this.template = 'editShortDescriptionView';
-	this.viewid = 'V-66';
-	this.viewname = 'Edit Tagline';
-	this.displayname = 'Edit Channel Tagline';	  
-	this.accountName = ko.observable();	
-	this.notification = ko.observable();
+﻿function EditShortDescriptionViewModel() {	
+  var self = this;
+	self.template = 'editShortDescriptionView';
+	self.viewid = 'V-66';
+	self.viewname = 'Edit Tagline';
+	self.displayname = 'Edit Channel Tagline';	  
+
+	self.errorMessage = ko.observable(false);
 	
-  /* Edit Channel Display observable */	
-	this.channelId = ko.observable();
-	this.channelName = ko.observable();	
-	this.shortDescription = ko.observable();	
-	this.errorMessage = ko.observable(false);	
-	this.errorChannel = ko.observable();	
+  self.inputObs = [ 'channelId', 'channelName', 'shortDescription', 'errorChannel', 'notification' ];
+	self.defineObservables();
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();			
-      that.activate();			
-    });	
-	};  
-	
-	this.clearForm = function () {
-    that.shortDescription('');
-		that.errorMessage(false);		
-		that.errorChannel('');		
-  };
-	
-	this.activate = function() {
-    if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));						
-			if(!channelObject) {
-				goToView('channelsIOwnView');			
-			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message					
-				that.accountName(ENYM.ctx.getItem('accountName'));			
-				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
-				that.channelId(channelObject.channelId);
-				that.channelName(channelObject.channelName);			
-				that.shortDescription(channelObject.channelDescription);						
-				$('textarea').keyup(function () {
-					that.errorMessage(false);				
-					that.errorChannel('');
-				});
-			}
-    }
+	self.activate = function() {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));						
+		if(!channelObject) {
+			goToView('channelsIOwnView');			
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message
+			self.accountName(ENYM.ctx.getItem('accountName'));
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
+			self.channelId(channelObject.channelId);
+			self.channelName(channelObject.channelName);	
+			self.shortDescription(channelObject.channelDescription);	
+			$('textarea').keyup(function () {
+				self.errorMessage(false);
+				self.errorChannel('');
+			});
+		}
 	}
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13  && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'editShortDescriptionView') {
-			that.shortDescriptionCommand();
+			self.shortDescriptionCommand();
 		}
 	});	
 	
 	function successfulModify(args) {		
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
-		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});
+		ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI});
   };
 	
 	function successfulGetChannel(data) {
@@ -85,22 +63,24 @@ function EditShortDescriptionViewModel() {
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.errorMessage(true);			
-		that.errorChannel('<span>SORRY:</span> '+details.message);
+		self.errorMessage(true);			
+		self.errorChannel('<span>SORRY:</span> '+details.message);
   };
 	
-  this.shortDescriptionCommand = function () {
-		if (that.shortDescription() == '' || typeof that.shortDescription() == 'undefined') {
-			that.errorMessage(true);			
-      that.errorChannel('<span>SORRY:</span> Please enter channel tagline');
+  self.shortDescriptionCommand = function () {
+		if (self.shortDescription() == '' || typeof self.shortDescription() == 'undefined') {
+			self.errorMessage(true);			
+      self.errorChannel('<span>SORRY:</span> Please enter channel tagline');
     } else {
 			var channelObject = {
-				id: that.channelId(),
-				description: that.shortDescription()
+				id: self.channelId(),
+				description: self.shortDescription()
 			};
 			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
 		}
   };
-	
 }
+
+EditShortDescriptionViewModel.prototype = new ENYM.ViewModel();
+EditShortDescriptionViewModel.prototype.constructor = EditShortDescriptionViewModel;
