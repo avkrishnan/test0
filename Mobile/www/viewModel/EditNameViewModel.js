@@ -63,11 +63,11 @@
 		});
 		account = account[0];				
 		ENYM.ctx.setItem('account', JSON.stringify(account));
-		var toastobj = {redirect: 'escalationPlansView', type: '', text: 'Name updated successfully !'};
+		var toastobj = {redirect: 'userSettingsView', type: '', text: 'Name updated successfully !'};
 		showToast(toastobj);						
 		backNavText.pop();
 		backNavView.pop();		
-		goToView('escalationPlansView');
+		goToView('userSettingsView');
   };
 
   function errorAPI(data, status, details) {

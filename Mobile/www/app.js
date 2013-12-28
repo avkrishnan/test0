@@ -366,7 +366,7 @@ resetPasswordViewModel = new ResetPasswordViewModel(),
 resetPasswordSuccessViewModel = new ResetPasswordSuccessViewModel(),
 
 /*By Devedner*/
-escalationPlansViewModel = new EscalationPlansViewModel(),
+userSettingsViewModel = new UserSettingsViewModel(),
 escalationPlanSingleViewModel = new EscalationPlanSingleViewModel(),
 addContactViewModel = new AddContactViewModel(),
 additionalContactViewModel = new AdditionalContactViewModel(),
@@ -455,7 +455,7 @@ var models = [
               resetPasswordViewModel,
 							resetPasswordSuccessViewModel, 
               singleMessageViewModel,
-              escalationPlansViewModel,
+              userSettingsViewModel,
               escalationPlanSingleViewModel,
               addContactViewModel,
               additionalContactViewModel,
@@ -783,7 +783,7 @@ function showToast(toastobj) {
 	else {
 		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
 	}
-	$('.toast-notification').slideDown(500, function() {
+	$('.toast-notification').delay(500).slideDown(500, function() {
 		$('.toast-notification').show();
 	}).delay(1800).slideUp(700, function() {
 		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');

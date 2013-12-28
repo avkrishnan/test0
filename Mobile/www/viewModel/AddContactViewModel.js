@@ -65,7 +65,7 @@
 		}
 		else {
 			self.currentDeleteCommethodID('');						
-			goToView('escalationPlansView');
+			goToView('userSettingsView');
 		}
 	};
 	
