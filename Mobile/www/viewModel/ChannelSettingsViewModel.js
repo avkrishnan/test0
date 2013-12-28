@@ -1,45 +1,33 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChannelSettingsViewModel() {	
-  var that = this;
-	this.template = 'channelSettingsView';
-	this.viewid = 'V-16';
-	this.viewname = 'Settings';
-	this.displayname = 'Channel Settings';	
-	this.accountName = ko.observable();	
-
-  /* Channel Settings observable */
-	this.channelId = ko.observable();	
-	this.channelName = ko.observable();
-	this.shortDescription = ko.observable();		
+﻿function ChannelSettingsViewModel() {	
+  var self = this;
+	self.template = 'channelSettingsView';
+	self.viewid = 'V-16';
+	self.viewname = 'Settings';
+	self.displayname = 'Channel Settings';
 	
-	/* Methods */	
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};
-	
+  self.inputObs = [ 'channelId', 'channelName', 'shortDescription'];
+	self.defineObservables();		
 	  
-	this.activate = function() {				
+	self.activate = function() {				
 		if(authenticate()) {
 			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
 			if(!channelObject) {
 				goToView('channelsIOwnView');
 			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message								
-				that.accountName(ENYM.ctx.getItem('accountName'));
-				that.channelId(channelObject.channelId);
-				that.channelName(channelObject.channelName);
-				that.shortDescription(channelObject.channelDescription);
+				addExternalMarkup(self.template); // this is for header/overlay message								
+				self.accountName(ENYM.ctx.getItem('accountName'));
+				self.channelId(channelObject.channelId);
+				self.channelName(channelObject.channelName);
+				self.shortDescription(channelObject.channelDescription);
 				ENYM.ctx.removeItem('channelOwner');										
 			}
 		}
 	}
 	
-	this.comingSoon = function() {
-		//viewNavigate('Settings', 'channelSettingsView', 'channelChangeIconView');		
+	self.comingSoon = function() {
 		headerViewModel.comingSoon();		
-	}		
-	
+	}
 }
+
+ChannelSettingsViewModel.prototype = new ENYM.ViewModel();
+ChannelSettingsViewModel.prototype.constructor = ChannelSettingsViewModel;

@@ -1,53 +1,38 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChannelsIOwnViewModel() {	
-  var that = this;
-	this.template = 'channelsIOwnView';
-	this.viewid = 'V-19';
-	this.viewname = 'Channels';
-	this.displayname = 'Channels I Own';	
-	this.accountName = ko.observable();		
+﻿function ChannelsIOwnViewModel() {
+  var self = this;
+	self.template = 'channelsIOwnView';
+	self.viewid = 'V-19';
+	self.viewname = 'Channels';
+	self.displayname = 'Channels I Own';
 	
-  /* Channels observable */
-	this.sectionOne = ko.observable(false);
-	this.sectionTwo = ko.observable(false);	
-	this.channels = ko.observableArray([]);		
-
-	/* Methods */
-	this.applyBindings = function(){	
-		$('#' + that.template).on('pagebeforeshow', null, function (e, data) {	
-			that.activate();	
-		});		
-	};
+	self.sectionOne = ko.observable(false);
+	self.sectionTwo = ko.observable(false);
+	self.channels = ko.observableArray([]);
 	
-  this.activate = function() {
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message				
-			that.accountName(ENYM.ctx.getItem('accountName'));
-			that.sectionOne(false);
-			that.sectionTwo(false);			
-			ENYM.ctx.setItem('counter', 1);												
-			that.channels.removeAll();			
-			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
-			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
-		}
+  self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message				
+		self.sectionOne(false);
+		self.sectionTwo(false);			
+		ENYM.ctx.setItem('counter', 1);												
+		self.channels.removeAll();			
+		$.mobile.showPageLoadingMsg('a', 'Loading Channels');
+		return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
 	};				    	
 	
 	function successfulList(data){	
     $.mobile.hidePageLoadingMsg();
-		that.channels.removeAll();
+		self.channels.removeAll();
 		if(data.channel.length == 0) {
-			that.sectionOne(true);			
-		}
-		else {
-			that.sectionTwo(true);				
+			self.sectionOne(true);			
+		} else {
+			self.sectionTwo(true);				
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 				if(data.channel[channelslength].followers == 1) {
 					var followers = data.channel[channelslength].followers +' follower';
 				} else {
 					var followers = data.channel[channelslength].followers +' followers';
 				}			
-				that.channels.push({
+				self.channels.push({
 					channelId: data.channel[channelslength].id, 
 					channelName: data.channel[channelslength].name, 
 					channelDescription: data.channel[channelslength].description,
@@ -64,22 +49,24 @@ function ChannelsIOwnViewModel() {
 		showToast(toastobj);
 	};
 	
-	this.channelSettings = function(data){
+	self.channelSettings = function(data){
 		ENYM.ctx.removeItem('currentChannelData');				
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelSettingsView');		
 	};
 	
-	this.channelMain = function(data){
+	self.channelMain = function(data){
 		ENYM.ctx.removeItem('currentChannelData');		
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelMainView');					
 	};
 	
-	this.channelFollowers = function(data){
+	self.channelFollowers = function(data){
 		ENYM.ctx.removeItem('currentChannelData');			
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));	
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');		
-	};	
-	
+	};
 }
+
+ChannelsIOwnViewModel.prototype = new ENYM.ViewModel();
+ChannelsIOwnViewModel.prototype.constructor = ChannelsIOwnViewModel;
