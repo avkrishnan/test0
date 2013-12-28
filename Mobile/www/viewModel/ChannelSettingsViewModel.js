@@ -5,7 +5,7 @@
 	self.viewname = 'Settings';
 	self.displayname = 'Channel Settings';
 	
-  self.inputObs = [ 'channelId', 'channelName', 'shortDescription'];
+  self.inputObs = [ 'channelId', 'channelName', 'shortDescription' ];
 	self.defineObservables();		
 	  
 	self.activate = function() {				
@@ -13,8 +13,7 @@
 		if(!channelObject) {
 			goToView('channelsIOwnView');
 		} else {
-			addExternalMarkup(self.template); // this is for header/overlay message								
-			self.accountName(ENYM.ctx.getItem('accountName'));
+			addExternalMarkup(self.template); // this is for header/overlay message
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);
 			self.shortDescription(channelObject.channelDescription);

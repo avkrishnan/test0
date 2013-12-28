@@ -15,7 +15,6 @@
 			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message					
-			self.accountName(ENYM.ctx.getItem('accountName'));		
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);			
 			self.longDescription(channelObject.longDescription);						

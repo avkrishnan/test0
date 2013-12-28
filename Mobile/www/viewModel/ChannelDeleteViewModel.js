@@ -1,40 +1,25 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChannelDeleteViewModel() {	
-  var that = this;
-	this.template = 'channelDeleteView';
-	this.viewid = 'V-16';
-	this.viewname = 'Channel Delete';
-	this.displayname = 'Channel Delete';	
-	this.accountName = ko.observable();		
+﻿function ChannelDeleteViewModel() {	
+  var self = this;
+	self.template = 'channelDeleteView';
+	self.viewid = 'V-16';
+	self.viewname = 'Channel Delete';
+	self.displayname = 'Channel Delete';
 	
-  /* Channel delete observable */
-	this.channelId = ko.observable();
-	this.channelName = ko.observable();
-	this.channelDisplayName = ko.observable();				
+  self.inputObs = [ 'channelId', 'channelName', 'channelDisplayName' ];
+	self.defineObservables();		
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
-	
-	this.activate = function() {		
-		if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
-			if(!channelObject) {
-				goToView('channelsIOwnView');			
-			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message					
-				that.accountName(ENYM.ctx.getItem('accountName'));	
-				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
-				that.channelId(channelObject.channelId);
-				that.channelName(channelObject.channelName);
-				that.channelDisplayName(channelObject.channeldescription);			
-			}
+	self.activate = function() {		
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+		if(!channelObject) {
+			goToView('channelsIOwnView');			
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message					
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
+			self.channelId(channelObject.channelId);
+			self.channelName(channelObject.channelName);
+			self.channelDisplayName(channelObject.channeldescription);			
 		}
-	}	
+	};
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
@@ -56,10 +41,12 @@ function ChannelDeleteViewModel() {
 		showToast(toastobj);					
   };
 	
-  this.channelDeleteCommand = function () {
+  self.channelDeleteCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Removing Channel');
-		return ES.channelService.deleteChannel(that.channelId(), { success: successfulDelete, error: errorAPI });
+		return ES.channelService.deleteChannel(self.channelId(), { success: successfulDelete, error: errorAPI });
 		ENYM.ctx.removeItem('currentChannel');
-  };	
-	
+  };
 }
+
+ChannelDeleteViewModel.prototype = new ENYM.ViewModel();
+ChannelDeleteViewModel.prototype.constructor = ChannelDeleteViewModel;
