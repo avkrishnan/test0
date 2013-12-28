@@ -1,155 +1,119 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function SendMessageViewModel() {
-	var that = this;
-	this.template = "sendMessageView";
-	this.viewid = "V-20";
-	this.viewname = "Compose";
-	this.displayname = "Compose Broadcast";	
-	this.accountName = ko.observable();		
+﻿function SendMessageViewModel() {
+	var self = this;
+	self.template = "sendMessageView";
+	self.viewid = "V-20";
+	self.viewname = "Compose";
+	self.displayname = "Compose Broadcast";
 	
-  /* Send Message observable */
-	this.sectionOne = ko.observable(false);
-	this.sectionTwo = ko.observable(false);		
-	this.messageText = ko.observable();
-	this.characterCount = ko.observable();		
-	this.channels = ko.observableArray([]);			
-	this.channelId = ko.observable();	
-	this.channelName = ko.observable();
-	this.normalText = ko.observable();
-	this.fastText = ko.observable();	
-	this.escalateText = ko.observable();	
-	this.normalClass = ko.observable();
-	this.fastClass = ko.observable();	
-	this.escalateClass = ko.observable();
-	this.normalActive = ko.observable();	
-	this.fastActive = ko.observable();					
-	this.escalateActive = ko.observable();	
-	this.escDuration = ko.observable();	
-	this.escLevel = ko.observable();	
-	this.duration = ko.observable();
-	this.activeType = ko.observable();
-	this.escalateEdit = ko.observable(false);	
-	this.igiClass = ko.observable();	
-	this.iGiYes = ko.observable();
-	this.iGiNo = ko.observable();				
-	this.yesClass = ko.observable();
-	this.noClass = ko.observable();
-	this.broadcastType = ko.observable();	
+	self.sectionOne = ko.observable(false);
+	self.sectionTwo = ko.observable(false);	
+	self.escalateEdit = ko.observable(false);
+	self.channels = ko.observableArray([]);		
+
+  self.inputObs = [ 'channelId', 'channelName', 'messageText', 'characterCount', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
+	'normalActive', 'fastActive', 'escalateActive', 'escDuration', 'escLevel', 'duration', 'activeType', 'escalateEdit', 'igiClass', 'iGiYes', 'iGiNo', 'yesClass', 'noClass', 
+	'broadcastType', 'selectedChannels' ];
+	self.defineObservables();	
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id, followers) {
 		this.channelName = name;
 		this.channelId = id;
-		this.followerCount = followers;		
-	};
-	this.selectedChannels = ko.observable();				
-	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {			
-      that.activate();
-    });	
+		this.followerCount = followers;
 	};
 	
-	this.clearForm = function () {
-		that.channels.removeAll();
-		that.selectedChannels('');				
-		that.messageText('');
+	self.activate = function() {			
+		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+		self.channels.removeAll();		
 		ENYM.ctx.removeItem('escLevel');
 		ENYM.ctx.removeItem('escDuration');		
-		ENYM.ctx.removeItem('iGiStatus');		
-  };		  
-	
-	this.activate = function() {			
-		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];				
+		ENYM.ctx.removeItem('iGiStatus');					
 		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.sectionOne(false);
-			that.sectionTwo(false);
-			that.normalText('normalcolor');
-			that.fastText('');
-			that.escalateText('');								
-			that.normalClass('normalcoloricon');
-			that.fastClass('');
-			that.escalateClass('');
-			that.duration("Normal: <em>Send once (usually to email)</em>");
-			that.activeType('normalcolor');				
-			that.yesClass('yesbutton');
-			that.noClass('nobutton');					
-			that.escalateEdit(false);
-			that.escLevel('N');				
-			that.igiClass('igiimageoff');
-			that.characterCount('0');										
-			that.escLevel(ENYM.ctx.getItem('escLevel'));				
-			if(that.escLevel() == 'H') {
+			addExternalMarkup(self.template); // this is for header/overlay message
+			self.sectionOne(false);
+			self.sectionTwo(false);
+			self.normalText('normalcolor');
+			self.fastText('');
+			self.escalateText('');								
+			self.normalClass('normalcoloricon');
+			self.fastClass('');
+			self.escalateClass('');
+			self.duration("Normal: <em>Send once (usually to email)</em>");
+			self.activeType('normalcolor');				
+			self.yesClass('yesbutton');
+			self.noClass('nobutton');					
+			self.escalateEdit(false);
+			self.escLevel('N');				
+			self.igiClass('igiimageoff');
+			self.characterCount('0');										
+			self.escLevel(ENYM.ctx.getItem('escLevel'));				
+			if(self.escLevel() == 'H') {
 				escalate = 'Hound';
-			} else if(that.escLevel() == 'C') {
+			} else if(self.escLevel() == 'C') {
 				escalate = 'Chase';
 			} else {
 				escalate = 'Remind';
 			}																									
 			if(ENYM.ctx.getItem('escalate') == 'yes') {
-				that.normalText('');
-				that.fastText('');
-				that.escalateText(escalate);				
-				that.normalClass('');
-				that.fastClass('');
-				that.escalateClass('escalatecoloricon icon-'+escalate);										
+				self.normalText('');
+				self.fastText('');
+				self.escalateText(escalate);				
+				self.normalClass('');
+				self.fastClass('');
+				self.escalateClass('escalatecoloricon icon-'+escalate);										
 				if(ENYM.ctx.getItem('escDuration')) {
-					that.escDuration(new Date(ENYM.ctx.getItem('escDuration')));					
+					self.escDuration(new Date(ENYM.ctx.getItem('escDuration')));					
 					var DateTime = ENYM.ctx.getItem('escDuration').split('/');
 					var day = DateTime[2].split(' ');
 					var time = day[1].split(':');						
 					//var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
 					var durationText = '"' + escalate + '" until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0];
-					that.duration(durationText);
-					that.activeType('escalatecolor '+escalate);
-					that.escalateEdit(true);																								
+					self.duration(durationText);
+					self.activeType('escalatecolor '+escalate);
+					self.escalateEdit(true);																								
 				}		
 				ENYM.ctx.removeItem('escalate');																											
 			} else {				
-				that.normalText('normalcolor');
-				that.fastText('');
-				that.escalateText('');								
-				that.normalClass('normalcoloricon');
-				that.fastClass('');
-				that.escalateClass('');
-				that.duration("Normal: <em>Send once (usually to email)</em>");
-				that.activeType('normalcolor');				
-				that.yesClass('yesbutton');
-				that.noClass('nobutton');					
-				that.escalateEdit(false);
+				self.normalText('normalcolor');
+				self.fastText('');
+				self.escalateText('');								
+				self.normalClass('normalcoloricon');
+				self.fastClass('');
+				self.escalateClass('');
+				self.duration("Normal: <em>Send once (usually to email)</em>");
+				self.activeType('normalcolor');				
+				self.yesClass('yesbutton');
+				self.noClass('nobutton');					
+				self.escalateEdit(false);
 				ENYM.ctx.removeItem('escDuration');
-				that.escLevel('N');				
-				that.igiClass('igiimageoff');										
+				self.escLevel('N');				
+				self.igiClass('igiimageoff');										
 			}			
-			that.broadcastType('FYI');
+			self.broadcastType('FYI');
 			if(ENYM.ctx.getItem('iGiStatus')) {
-				that.igiClass('igiimage');		
-				that.yesClass('nobutton');
-				that.noClass('yesbutton');
-				that.broadcastType('RAC');															
-			}																
-			that.accountName(ENYM.ctx.getItem('accountName'));			
+				self.igiClass('igiimage');		
+				self.yesClass('nobutton');
+				self.noClass('yesbutton');
+				self.broadcastType('RAC');															
+			}	
 			$('textarea').keyup(function () {								
-				that.characterCount(that.messageText().length);
+				self.characterCount(self.messageText().length);
 			});
-			if(typeof that.selectedChannels() == 'undefined' || that.selectedChannels() == '') {
-				that.channels.removeAll();										
+			if(typeof self.selectedChannels() == 'undefined' || self.selectedChannels() == '') {
+				self.channels.removeAll();										
 				$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
 				return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
 			}
 			else {
-				that.sectionOne(false);
-				that.sectionTwo(true);				
+				self.sectionOne(false);
+				self.sectionTwo(true);				
 			}
 		}
-	}
+	};
 	
 	$(document).keyup(function (e) {	
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'sendMessageView') {
-			that.sendMessageCommand();
+			self.sendMessageCommand();
 		}
 	});			
 	
@@ -158,7 +122,7 @@ function SendMessageViewModel() {
 			var len = 0;			
 			for(len; len<data.commethod.length; len++) {
 				if(data.commethod[len].verified == 'Y') {
-					that.createChannelMessage();
+					self.createChannelMessage();
 					return true;
 				}
 				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
@@ -178,12 +142,12 @@ function SendMessageViewModel() {
 		showToast(toastobj);		
 	};
 	
-	this.sendMessageCommand = function(){
-		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
+	self.sendMessageCommand = function(){
+		if(self.messageText() == '' || typeof self.messageText() == 'undefined') {
 			var toastobj = {type: 'toast-error', text: 'Please type a message to broadcast.'};
 			showToast(toastobj);					
-		} else if(that.selectedChannels().followerCount == 0) {
-			var toastobj = {type: 'toast-info', text: 'Message not sent - Zero followers on '+ that.selectedChannels().channelName};
+		} else if(self.selectedChannels().followerCount == 0) {
+			var toastobj = {type: 'toast-info', text: 'Message not sent - Zero followers on '+ self.selectedChannels().channelName};
 			showToast(toastobj);				
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Posting Message');			
@@ -193,12 +157,12 @@ function SendMessageViewModel() {
 	
 	function successfulList(data){
 		if(data.channel.length == 0) {
-			that.sectionOne(true);								
+			self.sectionOne(true);								
 		} else {			
-			that.sectionTwo(true);				
+			self.sectionTwo(true);				
 			$.mobile.hidePageLoadingMsg();	
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
-				that.channels.push(
+				self.channels.push(
 					new channelsOptions(data.channel[channelslength].name, data.channel[channelslength].id, data.channel[channelslength].followers)
 				);
 			}
@@ -211,8 +175,8 @@ function SendMessageViewModel() {
 		ENYM.ctx.removeItem('iGiStatus');										
 		var toastobj = {redirect: 'channelMainView', type: '', text: 'Broadcast sent'};
 		showToast(toastobj);									
-		ENYM.ctx.setItem('currentChannelId', that.selectedChannels().channelId);
-		that.clearForm();		
+		ENYM.ctx.setItem('currentChannelId', self.selectedChannels().channelId);
+		self.clearForm();		
 		backNavText.pop();
 		backNavView.pop();		
 		goToView('channelMainView');									
@@ -227,72 +191,74 @@ function SendMessageViewModel() {
 		showToast(toastobj);						
 	};
 	
-	this.createChannelMessage = function () {
+	self.createChannelMessage = function () {
 		$.mobile.showPageLoadingMsg('a', 'Posting Message');		
-		if(that.escLevel() == 'N' || that.escLevel() == 'F') {
-			var messageobj = {text: that.messageText(), escLevelId: that.escLevel(), type: that.broadcastType()};																	
+		if(self.escLevel() == 'N' || self.escLevel() == 'F') {
+			var messageobj = {text: self.messageText(), escLevelId: self.escLevel(), type: self.broadcastType()};																	
 		} else {
-			var messageobj = {text: that.messageText(), escUntil: that.escDuration(), escLevelId: that.escLevel(), type: that.broadcastType()};			
+			var messageobj = {text: self.messageText(), escUntil: self.escDuration(), escLevelId: self.escLevel(), type: self.broadcastType()};			
 		}
-		return ES.messageService.createChannelMessage(that.selectedChannels().channelId, messageobj, {success: successfulMessage, error: errorAPI});
+		return ES.messageService.createChannelMessage(self.selectedChannels().channelId, messageobj, {success: successfulMessage, error: errorAPI});
 	};
 
-	this.requestiGiHelp = function () {				
+	self.requestiGiHelp = function () {				
 		viewNavigate('Compose', 'sendMessageView', 'requestiGiHelpView');		
   };
 	
-	this.escalateHelp = function () {			
+	self.escalateHelp = function () {			
 		viewNavigate('Compose', 'sendMessageView', 'escalateHelpView');		
   };
 	
-	this.normalYes = function () {
-		that.normalText('normalcolor');
-		that.fastText('');
-		that.escalateText('');		
-		that.normalClass('normalcoloricon');
-		that.fastClass('');
-		that.escalateClass('');
-    that.duration("Normal: <em>Send once (usually to email)</em>");
-		that.activeType('normalcolor');		
-		that.escalateEdit(false);
+	self.normalYes = function () {
+		self.normalText('normalcolor');
+		self.fastText('');
+		self.escalateText('');		
+		self.normalClass('normalcoloricon');
+		self.fastClass('');
+		self.escalateClass('');
+    self.duration("Normal: <em>Send once (usually to email)</em>");
+		self.activeType('normalcolor');		
+		self.escalateEdit(false);
 		ENYM.ctx.removeItem('escLevel');
 		ENYM.ctx.removeItem('escDuration');						
-		that.escLevel('N');		
+		self.escLevel('N');		
   };
 	
-	this.fastYes = function () {
-		that.normalText('');
-		that.fastText('fastcolor');
-		that.escalateText('');		
-		that.normalClass('');
-		that.fastClass('fastcoloricon');
-		that.escalateClass('');
-    that.duration("Fast: <em>Send once (usually text or app)</em>");
-		that.activeType('fastcolor');
-		that.escalateEdit(false);
+	self.fastYes = function () {
+		self.normalText('');
+		self.fastText('fastcolor');
+		self.escalateText('');		
+		self.normalClass('');
+		self.fastClass('fastcoloricon');
+		self.escalateClass('');
+    self.duration("Fast: <em>Send once (usually text or app)</em>");
+		self.activeType('fastcolor');
+		self.escalateEdit(false);
 		ENYM.ctx.removeItem('escLevel');
 		ENYM.ctx.removeItem('escDuration');								
-		that.escLevel('F');						
+		self.escLevel('F');						
   };		
 	
-	this.escalateYes = function () {	
+	self.escalateYes = function () {	
 		viewNavigate('Compose', 'sendMessageView', 'escalateSettingsView');		
   };
 	
-	this.iGiYes = function () {
-		that.igiClass('igiimage');		
-		that.yesClass('nobutton');
-		that.noClass('yesbutton');
-		that.broadcastType('RAC');
+	self.iGiYes = function () {
+		self.igiClass('igiimage');		
+		self.yesClass('nobutton');
+		self.noClass('yesbutton');
+		self.broadcastType('RAC');
 		ENYM.ctx.setItem('iGiStatus', 'yes');													
   };
 	
-	this.iGiNo = function () {
-		that.igiClass('igiimageoff');		
-		that.yesClass('yesbutton');
-		that.noClass('nobutton');
-		that.broadcastType('FYI');
+	self.iGiNo = function () {
+		self.igiClass('igiimageoff');		
+		self.yesClass('yesbutton');
+		self.noClass('nobutton');
+		self.broadcastType('FYI');
 		ENYM.ctx.removeItem('iGiStatus');													
-  };								
-
+  };
 }
+
+SendMessageViewModel.prototype = new ENYM.ViewModel();
+SendMessageViewModel.prototype.constructor = SendMessageViewModel;
