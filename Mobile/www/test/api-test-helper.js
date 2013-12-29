@@ -83,6 +83,7 @@ function ApiTestHelper() {
     successNoContent : checkFunc("nocontent"),// "204: No Content"),
     badRequest : checkFunc("400"),// : Bad Request"),
     unauthorized : checkFunc("401"),// : Unauthorized"),
+    forbidden : checkFunc("403"),// : Forbidden"),
     notFound : checkFunc("404: Not Found"),
     notImplemented : checkFunc("501"),//: Not Implemented"),
     shouldNotSucceed : function(a,b,c,d) { 
@@ -170,11 +171,19 @@ function ApiTestHelper() {
     };
   };
 
-  t.checkLogin = function(scenario) {
+  t.checkLogin = function(scenario, expectPrivs) {
     return function(data) {
       ok(data, 'data returned');
       ok(data.accessToken, 'should have access token');
       ok(data.account, 'should have account');
+      if (expectPrivs !== undefined) {
+        if (expectPrivs == true) {
+          ok(data.privs, 'should have privs attribute');
+        }
+        if (expectPrivs == false) {
+          ok(data.privs == undefined, 'should not have privs attribute');
+        }
+      }
       equal(scenario.account.accountname, data.account.accountname, 'accountnames match');
       equal(data.accessToken.length, 32, 'access token should be 32 characters');
       // scenario.accessToken = data.accessToken;
@@ -182,12 +191,12 @@ function ApiTestHelper() {
     };
   };
 
-  t.login = function(scenario) {
+  t.login = function(scenario, expectPrivs) {
     return function() {
       scenario.login = t.generateLogin(scenario.account);
       $.when(scenario.ES.loginService.accountLogin(scenario.login))
       .then(t.CHECK.success,t.CHECK.shouldNotFail)
-      .then(t.checkLogin(scenario),t.CHECK.shouldNotFail)
+      .then(t.checkLogin(scenario, expectPrivs),t.CHECK.shouldNotFail)
       .then(start,start);
     };
   };
