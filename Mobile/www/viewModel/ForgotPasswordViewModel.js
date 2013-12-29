@@ -1,6 +1,4 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ForgotPasswordViewModel() {
+﻿function ForgotPasswordViewModel() {
   var that = this;
   this.template = 'forgotPasswordView';
   this.viewid = 'V-03';
@@ -34,7 +32,7 @@ function ForgotPasswordViewModel() {
 				that.emailClass('');
 			});
 		} else {
-			goToView('channelListView');
+			goToView('homeView');
 		}
   };
 	
@@ -66,7 +64,7 @@ function ForgotPasswordViewModel() {
 
   function forgotPasswordSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-		localStorage.setItem('resetAccount', that.email());	
+		ENYM.ctx.setItem('resetAccount', that.email());	
 		goToView('forgotPasswordSuccessView');		
   }
 

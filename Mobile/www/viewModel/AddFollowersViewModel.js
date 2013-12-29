@@ -16,8 +16,7 @@ function AddFollowersViewModel() {
 	this.errorName = ko.observable();		
 	this.emailaddress = ko.observable();
 	this.emailClass = ko.observable();
-	this.errorEmail = ko.observable();
-	this.toastText = ko.observable();								
+	this.errorEmail = ko.observable();							
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -37,28 +36,22 @@ function AddFollowersViewModel() {
 	};	  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));		
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-			that.channelId(channelObject.channelId);										
-			that.channelName(channelObject.channelName);
-			$('input').keyup(function () {
-				that.nameClass('');
-				that.errorName('');			
-				that.emailClass('');
-				that.errorEmail('');
-			});						
+		if(authenticate()) {
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {			
+				that.accountName(ENYM.ctx.getItem('accountName'));		
+				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
+				that.channelId(channelObject.channelId);										
+				that.channelName(channelObject.channelName);
+				$('input').keyup(function () {
+					that.nameClass('');
+					that.errorName('');			
+					that.emailClass('');
+					that.errorEmail('');
+				});						
+			}
 		}
 	}
 	
@@ -66,11 +59,7 @@ function AddFollowersViewModel() {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'addFollowersView') {
 			that.addFollowersCommand();
 		}
-	});
-	
-	this.menuCommand = function () {
-		viewNavigate('Add Followers', 'addFollowersView', 'channelMenuView');		
-  };	
+	});	
 	
 	this.addFollowersCommand = function () {		
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
@@ -100,24 +89,12 @@ function AddFollowersViewModel() {
 		};
 	}
 	
-	function successfulAdd(data){
-		that.toastText('Follower added successfully');		
-		localStorage.setItem('toastData', that.toastText());		
+	function successfulAdd(data){			
 		goToView('channelMainView');				
 	};
 	
 	function errorAPI(data, status, details){
-		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
-	};
-	
-	this.userSettings = function () {
-		viewNavigate('Add Followers', 'addFollowersView', 'escalationPlansView');		
-  };	
-	
-	this.composeCommand = function () {
-		viewNavigate('Add Followers', 'addFollowersView', 'sendMessageView');
-  };	
+		$.mobile.hidePageLoadingMsg();		
+	};	
 	
 }

@@ -29,7 +29,7 @@ function SignupStepSecondViewModel() {
 
 	this.activate = function () {
 		var token = ES.evernymService.getAccessToken();
-		var newUser = localStorage.getItem('newusername');		
+		var newUser = ENYM.ctx.getItem('newusername');		
 		if(token == '' || token == null) {
 			$('input').keyup(function () {
 				that.firstnameClass('');
@@ -39,7 +39,7 @@ function SignupStepSecondViewModel() {
 			});
 		}	
 		else if(newUser == '' || newUser == null) {
-			goToView('channelListView');
+			goToView('homeView');
 		} 
 		else {
 			goToView('tutorialView');
@@ -55,9 +55,9 @@ function SignupStepSecondViewModel() {
 	/* Create Random AccountName Generator */	
   function generateAccount() {
     return {
-      emailaddress: localStorage.getItem('newuseremail'),
-      accountname: localStorage.getItem('newusername'),		
-      password: localStorage.getItem('newuserpassword'),
+      emailaddress: ENYM.ctx.getItem('newuseremail'),
+      accountname: ENYM.ctx.getItem('newusername'),		
+      password: ENYM.ctx.getItem('newuserpassword'),
       firstname: that.firstname(),
       lastname: that.lastname()
     };
@@ -98,7 +98,7 @@ function SignupStepSecondViewModel() {
 
   function signUpError(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    localStorage.setItem('signUpError', details.message);		
+    ENYM.ctx.setItem('signUpError', details.message);		
     goToView('signupStepFirstView');
   };
 	
@@ -109,8 +109,8 @@ function SignupStepSecondViewModel() {
       error : loginError
     };
     var loginModel = {};
-    loginModel.accountname = localStorage.getItem('newusername');
-    loginModel.password = localStorage.getItem('newuserpassword');
+    loginModel.accountname = ENYM.ctx.getItem('newusername');
+    loginModel.password = ENYM.ctx.getItem('newuserpassword');
     loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
     ES.loginService.accountLogin(loginModel, callbacks);
 	}
@@ -119,16 +119,16 @@ function SignupStepSecondViewModel() {
     $.mobile.hidePageLoadingMsg();
     ES.evernymService.clearAccessToken();
 		ES.evernymService.setAccessToken(args.accessToken);
-		localStorage.setItem('accountName', args.account.accountname);
+		ENYM.ctx.setItem('accountName', args.account.accountname);
 //
 		/*
 		ES.systemService.getMsgNotifs({
 			success: function(responseData) {
-				localStorage.removeItem('enymNotifications');
-				localStorage.setItem('enymNotifications', JSON.stringify(responseData));
-				if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+				ENYM.ctx.removeItem('enymNotifications');
+				ENYM.ctx.setItem('enymNotifications', JSON.stringify(responseData));
+				if(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length > 0) {
 					headerViewModel.newMessageClass('smsiconwhite');
-					headerViewModel.newMessageCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
+					headerViewModel.newMessageCount(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length);
 					overlayViewModel.showNewMessagesOverlay();
 				}
 				else {
@@ -138,8 +138,6 @@ function SignupStepSecondViewModel() {
 				goToView('registrationVerifyView');				
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				localStorage.setItem('toastData', that.toastText());
 			}
 		});
 		*/
@@ -148,9 +146,8 @@ function SignupStepSecondViewModel() {
   }
 
   function loginError(data, status, details) {
-    $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
+    $.mobile.hidePageLoadingMsg();		
+		that.errorFirstLastName('<span>SORRY:</span> '+details.message);
     ES.evernymService.clearAccessToken();
   }
 	

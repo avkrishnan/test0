@@ -1,10 +1,10 @@
 <!--To do - Pradeep Kumar-->
 <div id="channelMenuView" data-role="page" class="hamburgermenubody">
   <header>
-    <a class="menu hamburgermenu" href="#" data-rel="back"></a>
+    <a class="menu hamburgermenu" href="#" data-bind="click: menuHide"></a>
   </header>
   <div class="page-content">
-    <a class="hamburgermenuhide" data-rel="back" href="#"></a>
+    <a class="hamburgermenuhide" href="#" data-bind="click: menuHide"></a>
     <div class="slidemenu">
       <h4 data-bind="text: accountName"></h4>
       <a href="#" onclick="goToView('channelsIOwnView');">Channels I Own</a>

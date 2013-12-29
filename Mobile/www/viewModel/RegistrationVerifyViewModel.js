@@ -9,12 +9,11 @@ function RegistrationVerifyViewModel() {
 	this.accountName = ko.observable();	
 	
 	/* Registration verify observable */
-	this.verificationCommethodType = ko.observable();
+	this.verificationCommethodType = ko.observable();	
 	this.verificationCommethod = ko.observable();
 	this.verificationCommethodID = ko.observable();		
 	this.verificationCode = ko.observable();
-	this.errorMessage = ko.observable();
-	this.toastText = ko.observable();						
+	this.errorMessage = ko.observable();						
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -30,13 +29,13 @@ function RegistrationVerifyViewModel() {
   };
 	
 	this.activate = function() {
-		var newUser = localStorage.getItem('newusername');		
+		var newUser = ENYM.ctx.getItem('newusername');		
 		if(newUser == '' || newUser == null) {
-			goToView('channelListView');
+			goToView('homeView');
 		} else {
 			that.getCommethods();
-			that.accountName(localStorage.getItem('newusername'));
-			that.verificationCommethodType(localStorage.getItem('newuseremail'));		
+			that.accountName('Your evernym is: '+ENYM.ctx.getItem('accountName')+" (Don't forget!)");
+			that.verificationCommethodType(ENYM.ctx.getItem('newuseremail'));				
 			$('input').keyup(function () {
 				that.errorMessage('');
 			});					
@@ -82,12 +81,12 @@ function RegistrationVerifyViewModel() {
 	this.requestVerificationCode = function() {
 		var callbacks = {
 			success: function(responseData) {
-				that.toastText('Verification code sent');
-				showToast();						
+				var toastobj = {type: '', text: 'Verification code sent'};
+				showToast(toastobj);										
 			},
 			error: function (responseData, status, details) {
-				that.toastText(details.message);		
-				showToast();
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);
 			}
 		};
 		$.mobile.showPageLoadingMsg('a', 'Resending Verification code');				
@@ -97,8 +96,8 @@ function RegistrationVerifyViewModel() {
 	this.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				that.toastText('Email verified');		
-				localStorage.setItem('toastData', that.toastText());											
+				var toastobj = {redirect: 'tutorialView', type: '', text: 'Email verified'};
+				showToast(toastobj);															
 				goToView('tutorialView');
 			},
 			error: function (responseData, status, details) {

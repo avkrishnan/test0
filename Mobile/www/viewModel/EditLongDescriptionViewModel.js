@@ -15,7 +15,6 @@ function EditLongDescriptionViewModel() {
 	this.longDescription = ko.observable();	
 	this.errorMessage = ko.observable(false);	
 	this.errorChannel = ko.observable();
-	this.toastText = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -31,28 +30,22 @@ function EditLongDescriptionViewModel() {
 		that.errorChannel('');		
   };
 	
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}			
-			that.accountName(localStorage.getItem('accountName'));		
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);			
-			that.longDescription(channelObject.longDescription);						
-			$('textarea').keyup(function () {
-				that.errorMessage(false);				
-				that.errorChannel('');
-			});
+	this.activate = function() {		
+		if(authenticate()) {
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message					
+				that.accountName(ENYM.ctx.getItem('accountName'));		
+				that.channelId(channelObject.channelId);
+				that.channelName(channelObject.channelName);			
+				that.longDescription(channelObject.longDescription);						
+				$('textarea').keyup(function () {
+					that.errorMessage(false);				
+					that.errorChannel('');
+				});
+			}
 		}
 	}
 	
@@ -62,9 +55,7 @@ function EditLongDescriptionViewModel() {
 		}
 	});	
 	
-	function successfulModify(args) {
-		that.toastText('Description changed');		
-		localStorage.setItem('toastData', that.toastText());		
+	function successfulModify(args) {		
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});		
   };
@@ -84,13 +75,16 @@ function EditLongDescriptionViewModel() {
 			followerCount: followers
 		});
 		channel = channel[0];		
-		localStorage.setItem('currentChannelData', JSON.stringify(channel));
-		popBackNav();									
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
+		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Description changed'};
+		showToast(toastobj);		
+		backNavText.pop();
+		backNavView.pop();		
+		goToView('channelSettingsView');								
 	}
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-    goToView('longDescriptionView');
 		that.errorMessage(true);	
 		that.errorChannel('<span>SORRY:</span> '+details.message);
   };

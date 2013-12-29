@@ -1,17 +1,17 @@
 <div id="channelMessagesView" data-role="page">
-  <header class="logged-in"></header>
-  <div class="page-content channelsettings">
+	<header class="logged-in"></header>
+	<div class="page-content channelsettings">
 		<div class="channelcontent">
 			<span class="channelimg channel3 sky-blue"></span>
-      <div class="detailschannel last">
-        <div class="channelinfo">
-          <strong data-bind="text:title"></strong>
-          <em data-bind="text:description"></em>
-        </div>
-        <a href="#" class="setting" data-bind="click: actionFollowChannelCommand"></a>
-      </div>
-    </div>
-    
+			<div class="detailschannel last">
+				<div class="channelinfo">
+					<strong data-bind="text:title"></strong>
+					<em data-bind="text:description"></em>
+				</div>
+				<a href="#" class="setting" data-bind="click: actionFollowChannelCommand"></a>
+			</div>
+		</div>
+
     <div class="channelmessages" data-bind="foreach: channelMessages">
       <a href="#" data-bind="css:$data.readClass">
         <span data-bind="css: iGiClass, click: $parent.iGiAckMessage"></span>
@@ -22,11 +22,11 @@
         <span data-bind="css:$data.messageClass, click: $parent.showSingleMessage"></span>
       </a>
     </div>
-  </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>  
-  <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Broadcast Msg', 'channelMessagesView', 'escalationPlansView');"></a>
-    <a class="announcement" href="#" onclick="viewNavigate('Broadcast Msg', 'channelMessagesView', 'sendMessageView');"></a>
-  </div>
-  <div class="active-overlay" style="display:none"></div>
+	</div>
+	<div class="toast-notification"></div>  
+	<div class="footer">
+		<a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Broadcast Msg', 'channelMessagesView', 'escalationPlansView');"></a>
+		<a class="announcement" href="#" onclick="viewNavigate('Broadcast Msg', 'channelMessagesView', 'sendMessageView');"></a>
+	</div>
+	<div class="active-overlay" style="display:none"></div>
 </div>

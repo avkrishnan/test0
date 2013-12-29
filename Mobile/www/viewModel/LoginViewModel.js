@@ -1,129 +1,95 @@
-﻿/*globals ko*/
-function LoginViewModel() {
-  var that = this;
-  this.template = "loginView";
-  this.viewid = "V-01";
-  this.viewname = "Login";
-  this.displayname = "Login";	
+﻿function LoginViewModel() {
+  var self = this;
+  
+  self.requiresAuth = false;
+  
+  self.template = "loginView";
+  self.viewid = "V-01";
+  self.viewname = "Login";
+  self.displayname = "Login";	
 	
-	/* Login view observable */
-  this.accountName = ko.observable();
-  this.password = ko.observable();
-  this.errorMessage = ko.observable();
-  this.usernameClass = ko.observable();
-  this.passwordClass = ko.observable();
-	this.toastText = ko.observable();	
-	//this.newMessagesCount = ko.observable();
+  self.inputObs = [ 'username', 'password'];
+  self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
+
+  self.defineObservables();
 	
-	/* Methods */
-  this.applyBindings = function() {
-    $("#" + that.template).on("pagebeforeshow", null, function(e, data) {
-      that.clearForm();				
-      that.activate();
-    });
-  };
-	
-	this.clearForm = function () {
-		that.accountName('');	
-		that.password('');
-		that.errorMessage('');
-		that.usernameClass('');
-		that.passwordClass('');		
-  };
-	
-  this.activate = function() {
-		//that.newMessagesCount('');
-		if(ES.evernymService.getAccessToken() == '' || ES.evernymService.getAccessToken() == null) {
-			/*if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}*/			
-			that.errorMessage('');		
-			if (localStorage.getItem("username") == null && localStorage.getItem("password") == null) {
-				that.accountName('');
-				that.password('');
-			} 
+  self.activate = function() {
+		var token = ES.evernymService.getAccessToken();
+		if(token == '' || token == null) {			
+			self.errorMessage('');
+			if (ENYM.ctx.getItem("username") == null && ENYM.ctx.getItem("password") == null) {
+				self.username('');
+				self.password('');
+			}
 			else {
-				that.accountName(localStorage.getItem("username"));
-				that.password(localStorage.getItem("password"));
+				self.username(ENYM.ctx.getItem("username"));
+				self.password(ENYM.ctx.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
-			$('#loginView input').keyup(function(e) {
-				if(e.keyCode != 13) {
-					that.errorMessage('');
-					that.usernameClass('');
-					that.passwordClass('');
-				}
-			});
-			//that.newMessagesCount(showNewMessages(localStorage.getItem('enymNotifications')));
+			$('input').keyup(self.clearErrorObs);
 		} 
 		else {
-			goToView('channelListView');
+			goToView('homeView');
 		}
   };
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'loginView') {
-			that.errorMessage('');
-			that.loginCommand();
+			//self.errorMessage('');
+			self.loginCommand();
 		}
 	});
 	
-  this.loginCommand = function() {
-    if (that.accountName() == '' && that.password() == '') {
-      that.usernameClass('validationerror');
-      that.passwordClass('validationerror');
-      that.errorMessage('<span>SORRY:</span> Please enter username and password');
+  self.loginCommand = function() {
+    if (self.username() == '' && self.password() == '') {
+      self.usernameClass('validationerror');
+      self.passwordClass('validationerror');
+      self.errorMessage('<span>SORRY:</span> Please enter username and password');
     } 
-		else if(that.accountName() == '') {
-      that.usernameClass('validationerror');
-      that.errorMessage('<span>SORRY:</span> Please enter username');
+		else if(self.username() == '') {
+      self.usernameClass('validationerror');
+      self.errorMessage('<span>SORRY:</span> Please enter username');
     } 
-		else if(that.password() == '') {
-      that.passwordClass('validationerror');
-      that.errorMessage('<span>SORRY:</span> Please enter password');
+		else if(self.password() == '') {
+      self.passwordClass('validationerror');
+      self.errorMessage('<span>SORRY:</span> Please enter password');
     } 
 		else {
-			that.errorMessage('');
+			self.errorMessage('');
       if ($('input[name="rememberPassword"]:checked').length == 1) {
-				localStorage.setItem("username", that.accountName());
-        localStorage.setItem("password", that.password());
+				ENYM.ctx.setItem("username", self.username());
+        ENYM.ctx.setItem("password", self.password());
       }
 			else {
-				localStorage.removeItem('username');
-				localStorage.removeItem('password');
+				ENYM.ctx.removeItem('username');
+				ENYM.ctx.removeItem('password');
 			}
-      var callbacks = {
-        success : function(responseData) {;},
-        error : function(data, status, details) {
-					that.usernameClass('validationerror');
-					that.passwordClass('validationerror');
-					that.errorMessage('<span>SORRY: </span> ' + details.message);
-					that.password('');
-				}
-      };
+      var loginError = function(data, status, details) {
+				self.usernameClass('validationerror');
+				self.passwordClass('validationerror');
+				self.errorMessage('<span>SORRY: </span> ' + details.message);
+			  self.password('');
+			};
       var loginModel = {};
       $.mobile.showPageLoadingMsg("a", "Logging In");
-      loginModel.accountname = that.accountName();
-      loginModel.password = that.password();
+      loginModel.accountname = self.username();
+      loginModel.password = self.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
-      return ES.loginService.accountLogin(loginModel, callbacks).then(loginSuccess);
+      return ES.loginService.accountLogin(loginModel)
+        .then(loginSuccess, loginError);
     }
   };
 	
-  this.cleanApplication = function() {
-    //sendMessageViewModel.clearForm();
-    //inviteFollowersViewModel.clearForm();
+  self.cleanApplication = function() {
     ES.evernymService.clearAccessToken();
-    localStorage.removeItem('login_nav');
-    localStorage.removeItem('currentChannel');
-    localStorage.removeItem('accountName');
-    localStorage.removeItem('name');
-    localStorage.removeItem('signUpError');
-		localStorage.removeItem('newuseremail');
-		localStorage.removeItem('newusername');
-		localStorage.removeItem('newuserpassword');
+    ENYM.ctx.removeItem('login_nav');
+    ENYM.ctx.removeItem('currentChannel');
+    ENYM.ctx.removeItem('accountName');
+    ENYM.ctx.removeItem('name');
+    ENYM.ctx.removeItem('signUpError');
+		ENYM.ctx.removeItem('newuseremail');
+		ENYM.ctx.removeItem('newusername');
+		ENYM.ctx.removeItem('newuserpassword');
     //channelListViewModel.clearForm();
     //notificationsViewModel.removeNotifications();
     //OVERLAY.removeNotifications();
@@ -134,8 +100,8 @@ function LoginViewModel() {
 			success: function() {
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);		
-				showToast();
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);
 			}
 		};
     $.mobile.hidePageLoadingMsg();
@@ -148,56 +114,37 @@ function LoginViewModel() {
     ES.evernymService.clearAccessToken();
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
-			/*ES.systemService.getMsgNotifs({
-				success: function(responseData) {
-					localStorage.removeItem('enymNotifications');
-					localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
-					if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-						headerViewModel.newMessageClass('smsiconwhite');
-						headerViewModel.newMessageCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
-						overlayViewModel.showNewMessagesOverlay();
-					}
-					else {
-						headerViewModel.newMessageCount('');
-						headerViewModel.newMessageClass('');
-					}					
-				},
-				error: function(data, status, details) {
-					that.toastText(details.message);
-					localStorage.setItem('toastData', that.toastText());
-				}
-			});
-			*/
-			localStorage.setItem('account', JSON.stringify(args.account));							
-      localStorage.setItem("accountName", that.accountName());
-			if(localStorage.getItem("action") == 'follow_channel') {
+			ENYM.ctx.setItem('account', JSON.stringify(args.account));
+      ENYM.ctx.setItem("accountName", self.username());
+			if(ENYM.ctx.getItem("action") == 'follow_channel') {
 				var callbacks = {
 					success: function() {
-						localStorage.removeItem('action');
-						that.toastText('Now following '+channel.name);		
-						localStorage.setItem('toastData', that.toastText());
+						ENYM.ctx.removeItem('action');
+						var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
+						showToast(toastobj);						
 						goToView('channelMessagesView');					
 					},
 					error: function(data, status, details) {
-						localStorage.removeItem('action');					
-						channelListViewModel.toastClass('toast-info');
-						that.toastText('Cannot follow a channel you own');		
-						localStorage.setItem('toastData', that.toastText());
-						goToView('channelListView');
+						ENYM.ctx.removeItem('action');
+						var toastobj = {redirect: 'channelMessagesView', type: 'toast-info', text: details.message};
+						showToast(toastobj);											
+						goToView('channelMessagesView');
 					}
 				};						
-				var channel = JSON.parse(localStorage.getItem('currentChannel'));
+				var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);
 			}
 			else {
-				goToView('channelListView');
+				goToView('homeView');
 			}
     } 
 		else {
-      //loginError();
-			that.errorMessage('<span>SORRY: </span> Unknown Error.');
+			self.errorMessage('<span>SORRY: </span> Unknown Error.');
       return;
     }
   }
 		
 }
+
+LoginViewModel.prototype = new ENYM.ViewModel();
+LoginViewModel.prototype.constructor = LoginViewModel;

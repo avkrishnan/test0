@@ -3,14 +3,16 @@
   <div class="page-content channel_follow">
     <div class="dropdown">
       Channels I Follow:
-      <form class="chaneldropdown" action="#" method="get" >
-        <select>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
-        </select>
-      </form>
+      <div data-bind="ifnot:noFollow">
+        <form class="chaneldropdown" action="#" method="get">
+          <select>
+            <option value="min">A-Z</option>
+            <option value="min">A-Z</option>
+            <option value="min">A-Z</option>
+            <option value="min">A-Z</option>
+          </select>
+        </form>
+      </div>
     </div>
     <section data-bind="foreach: channels">
       <div class="channelinformation channel-follow">
@@ -23,9 +25,13 @@
           <a href="#" class="setting" data-bind="click: $parent.channelViewUnfollow"></a>
         </div>
       </div>
-    </section>  
+    </section>
+    <div class="nofollowedyet" data-bind="if:noFollow">
+      <div class="baseline"></div>
+      <div class="getmsg">You're not following any channels yet. Visit a channels website:<span> NAME</span>.evernym.com to follow it.</div>
+    </div>
   </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div> 
+  <div class="toast-notification"></div> 
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Channels', 'channelsFollowingListView', 'escalationPlansView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Channels', 'channelsFollowingListView', 'sendMessageView');"></a>

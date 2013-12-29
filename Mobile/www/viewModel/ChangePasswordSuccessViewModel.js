@@ -1,31 +1,23 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChangePasswordSuccessViewModel() {
-	var that = this;
-	this.prototype = AppCtx.ViewModelProto;
-	this.template = 'changePasswordSuccessView';
-	this.viewid = 'V-44e';
-	this.viewname = 'ChangePasswordSuccess';
-	this.displayname = 'Change password success';
+﻿function ChangePasswordSuccessViewModel() {
+  var self = this;
 	
-	/* Methods */				
-	this.applyBindings = function(){
-		$('#' + that.template).on('pagebeforeshow', function(e, data){																	
-			that.activate();
-		});
-	};
+	self.template = 'changePasswordSuccessView';
+	self.viewid = 'V-44e';
+	self.viewname = 'ChangePasswordSuccess';
+	self.displayname = 'Change password success';
 		 
-	this.activate = function(){
-		var changePassword = localStorage.getItem('changePassword');
+	self.activate = function() {
+		var changePassword = ENYM.ctx.getItem('changePassword');
 		if(changePassword == '' || changePassword == null) {
 			goToView('changePasswordView');
-		} else {					
-			that.accountName(localStorage.getItem("accountName"));
 		}
 	};
 	
-	this.okayChangeCommand = function () {
-		localStorage.removeItem('changePassword');
+	self.okayChangeCommand = function () {
+		ENYM.ctx.removeItem('changePassword');
 		popBackNav();								
   };		       
 }
+
+ChangePasswordSuccessViewModel.prototype = new ENYM.ViewModel();
+ChangePasswordSuccessViewModel.prototype.constructor = ChangePasswordSuccessViewModel;

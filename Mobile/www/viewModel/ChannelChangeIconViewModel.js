@@ -11,7 +11,6 @@ function ChannelChangeIconViewModel() {
   /* Channel Icon Image observable */
 	this.channelId = ko.observable();	
 	this.picId = ko.observable();
-	this.toastText = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -20,35 +19,25 @@ function ChannelChangeIconViewModel() {
     });	
 	};  
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
+		if(authenticate()) {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+			if(!channelObject) {
 			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));			
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
+			that.accountName(ENYM.ctx.getItem('accountName'));			
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
 			that.channelId(channelObject.channelId);			
+			}
 		}
 	}	
 	
 	function successfulModify(args) {
-		that.toastText('Icon changed');		
-		localStorage.setItem('toastData', that.toastText());
     goToView('channelSettingsView');
   };
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);		
-		showToast();
   };
 	
   this.changeChannelIconCommand = function () {

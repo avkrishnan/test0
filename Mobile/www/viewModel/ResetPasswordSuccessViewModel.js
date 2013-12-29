@@ -16,16 +16,16 @@ function ResetPasswordSuccessViewModel() {
 	};
 		 
 	this.activate = function(){
-		var resetAccount = localStorage.getItem('resetAccount');		
+		var resetAccount = ENYM.ctx.getItem('resetAccount');		
 		if(resetAccount == '' || resetAccount == null) {
 			goToView('forgotPasswordView');
 		} else {					
-			that.accountName(localStorage.getItem("accountName"));
+			that.accountName(ENYM.ctx.getItem("accountName"));
 		}
 	};
 	
 	this.okayResetCommand = function () {
-		localStorage.removeItem('resetAccount');						
+		ENYM.ctx.removeItem('resetAccount');						
 		goToView('loginView');
   };		       
 }

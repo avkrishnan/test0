@@ -15,9 +15,7 @@ function EscalateTimeSettingsViewModel() {
 	this.hour = ko.observable();
 	this.minute = ko.observable();
 	this.meridiem = ko.observable();
-	this.pickerDate = ko.observable();				 	
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();			
+	this.pickerDate = ko.observable();				 				
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -27,22 +25,12 @@ function EscalateTimeSettingsViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];		
-		if(token == '' || token == null) {
-			goToView('loginView');					
-		} 
-		else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}
-			that.toastClass('');		
-			that.accountName(localStorage.getItem('accountName'));			
-			if(localStorage.getItem('escDuration')) {
-				var DateTime = localStorage.getItem('escDuration').split('/');
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message					
+			that.accountName(ENYM.ctx.getItem('accountName'));			
+			if(ENYM.ctx.getItem('escDuration')) {
+				var DateTime = ENYM.ctx.getItem('escDuration').split('/');
 				var day = DateTime[2].split(' ');
 				var time = day[1].split(':');						
 				that.month(DateTime[1]);			
@@ -51,7 +39,8 @@ function EscalateTimeSettingsViewModel() {
 				that.hour(time[0]);			
 				that.minute(time[1]);			
 				that.meridiem(day[2]);
-				that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());														
+				//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+				that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 			} else {
 				that.month(monthNames[_getDate('getMonth')]);			
 				that.day(_getDate('getDate'));
@@ -64,33 +53,30 @@ function EscalateTimeSettingsViewModel() {
 				that.minute(mins);
 				var meridiem = _getDate('getHours')>11?'PM':'AM';			
 				that.meridiem(meridiem);
-				that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());											
+				//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+				that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 			}
 		}
 	}
 	
-	this.menuCommand = function () {
-		viewNavigate('Escalate Settings', 'escalateSettingsView', 'channelMenuView');		
-  };
-	
 	this.upArrow = function (data) {
-		localStorage.setItem('setValue', data);
+		ENYM.ctx.setItem('setValue', data);
 		that.setUp();			
   };
 	
 	this.downArrow = function (data) {
-		localStorage.setItem('setValue', data);	
+		ENYM.ctx.setItem('setValue', data);	
 		that.setDown();			
   };
 	
 	this.setUp = function () {
-		if(localStorage.getItem('setValue') == 'month') {
+		if(ENYM.ctx.getItem('setValue') == 'month') {
 			if(that.month() == 'Dec') {
 				that.month('Jan');
 			} else {
 				that.month(monthNames[$.inArray( that.month(), monthNames)+1]);		
 			}			
-		} else if(localStorage.getItem('setValue') == 'day') {
+		} else if(ENYM.ctx.getItem('setValue') == 'day') {
 			if(that.day() == 31) {
 				that.day(1);
 			} else {
@@ -98,11 +84,11 @@ function EscalateTimeSettingsViewModel() {
 				day == day++;					
 				that.day(day);	
 			}				
-		} else if(localStorage.getItem('setValue') == 'year') {
+		} else if(ENYM.ctx.getItem('setValue') == 'year') {
 			var year = that.year();
 			year == year++;			
 			that.year(year);				
-		} else if(localStorage.getItem('setValue') == 'hour') {
+		} else if(ENYM.ctx.getItem('setValue') == 'hour') {
 			if(that.hour() == 12) {
 				that.hour(1);
 			} else {
@@ -110,7 +96,7 @@ function EscalateTimeSettingsViewModel() {
 				hour == hour++;					
 				that.hour(hour);		
 			}				
-		} else if(localStorage.getItem('setValue') == 'minute') {
+		} else if(ENYM.ctx.getItem('setValue') == 'minute') {
 			if(that.minute() == 59) {
 				that.minute('00');
 			} else {
@@ -119,24 +105,25 @@ function EscalateTimeSettingsViewModel() {
 				minute = ((minute<10?'0':'')+minute);					
 				that.minute(minute);		
 			}			
-		} else if(localStorage.getItem('setValue') == 'meridiem') {
+		} else if(ENYM.ctx.getItem('setValue') == 'meridiem') {
 			if(that.meridiem() == 'PM') {
 				that.meridiem('AM');
 			} else {
 				that.meridiem('PM');		
 			}			
 		}
-		that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());									
+		//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+		that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 	};	
 	
 	this.setDown = function () {
-		if(localStorage.getItem('setValue') == 'month') {
+		if(ENYM.ctx.getItem('setValue') == 'month') {
 			if(that.month() == 'Jan') {
 				that.month('Dec');
 			} else {
 				that.month(monthNames[$.inArray( that.month(), monthNames)-1]);		
 			}				
-		} else if(localStorage.getItem('setValue') == 'day') {
+		} else if(ENYM.ctx.getItem('setValue') == 'day') {
 			if(that.day() == 1) {
 				that.day(31);
 			} else {
@@ -144,9 +131,9 @@ function EscalateTimeSettingsViewModel() {
 				day == day--;					
 				that.day(day);		
 			}			
-		} else if(localStorage.getItem('setValue') == 'year') {
+		} else if(ENYM.ctx.getItem('setValue') == 'year') {
 			that.year(that.year()-1);							
-		} else if(localStorage.getItem('setValue') == 'hour') {
+		} else if(ENYM.ctx.getItem('setValue') == 'hour') {
 			if(that.hour() == 1) {
 				that.hour(12);
 			} else {
@@ -154,7 +141,7 @@ function EscalateTimeSettingsViewModel() {
 				hour == hour--;					
 				that.hour(hour);					
 			}
-		} else if(localStorage.getItem('setValue') == 'minute') {
+		} else if(ENYM.ctx.getItem('setValue') == 'minute') {
 			if(that.minute() == 00) {
 				that.minute(59);
 			} else {
@@ -163,14 +150,15 @@ function EscalateTimeSettingsViewModel() {
 				minute = ((minute<10?'0':'')+minute);					
 				that.minute(minute);									
 			}						
-		} else if(localStorage.getItem('setValue') == 'meridiem') {
+		} else if(ENYM.ctx.getItem('setValue') == 'meridiem') {
 			if(that.meridiem() == 'PM') {
 				that.meridiem('AM');
 			} else {
 				that.meridiem('PM');		
 			}			
 		}
-		that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());		
+		//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
+		that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
 	};					
 	
 	this.saveCommand = function () {
@@ -178,13 +166,12 @@ function EscalateTimeSettingsViewModel() {
 		var CurrentDate = new Date();
 		var SelectedDate = new Date(duration);		
 		if(SelectedDate >= CurrentDate){
-			localStorage.setItem('escDuration', duration);		
+			ENYM.ctx.setItem('escDuration', duration);		
 			popBackNav();				
 		}					
-		else {
-			that.toastClass('toast-error');			
-			that.toastText('Please set date greater than current date !');
-			showToast();				
+		else {	
+			var toastobj = {type: 'toast-error', text: 'Please set date greater than current date !'};
+			showToast(toastobj);						
 		}
   };					
 	

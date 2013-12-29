@@ -36,8 +36,6 @@ function SendMessageViewModel() {
 	this.yesClass = ko.observable();
 	this.noClass = ko.observable();
 	this.broadcastType = ko.observable();	
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();	
 	
 	/* channels options variable */
 	var channelsOptions = function(name, id, followers) {
@@ -57,23 +55,18 @@ function SendMessageViewModel() {
 	this.clearForm = function () {
 		that.channels.removeAll();
 		that.selectedChannels('');				
-		that.messageText('');		
+		that.messageText('');
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('escDuration');		
+		ENYM.ctx.removeItem('iGiStatus');		
   };		  
 	
 	this.activate = function() {			
-		var token = ES.evernymService.getAccessToken();
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];				
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else {
+		if(authenticate()) {
 			addExternalMarkup(that.template); // this is for header/overlay message
 			that.sectionOne(false);
-			that.sectionTwo(false);			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				localStorage.removeItem('toastData');				
-				showToast();												
-			}
+			that.sectionTwo(false);
 			that.normalText('normalcolor');
 			that.fastText('');
 			that.escalateText('');								
@@ -88,7 +81,7 @@ function SendMessageViewModel() {
 			that.escLevel('N');				
 			that.igiClass('igiimageoff');
 			that.characterCount('0');										
-			that.escLevel(localStorage.getItem('escLevel'));				
+			that.escLevel(ENYM.ctx.getItem('escLevel'));				
 			if(that.escLevel() == 'H') {
 				escalate = 'Hound';
 			} else if(that.escLevel() == 'C') {
@@ -96,24 +89,25 @@ function SendMessageViewModel() {
 			} else {
 				escalate = 'Remind';
 			}																									
-			if(localStorage.getItem('escalate') == 'yes') {
+			if(ENYM.ctx.getItem('escalate') == 'yes') {
 				that.normalText('');
 				that.fastText('');
-				that.escalateText('escalatecolor');				
+				that.escalateText(escalate);				
 				that.normalClass('');
 				that.fastClass('');
-				that.escalateClass('escalatecoloricon');										
-				if(localStorage.getItem('escDuration')) {
-					that.escDuration(new Date(localStorage.getItem('escDuration')));					
-					var DateTime = localStorage.getItem('escDuration').split('/');
+				that.escalateClass('escalatecoloricon icon-'+escalate);										
+				if(ENYM.ctx.getItem('escDuration')) {
+					that.escDuration(new Date(ENYM.ctx.getItem('escDuration')));					
+					var DateTime = ENYM.ctx.getItem('escDuration').split('/');
 					var day = DateTime[2].split(' ');
 					var time = day[1].split(':');						
-					var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
+					//var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
+					var durationText = '"' + escalate + '" until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0];
 					that.duration(durationText);
-					that.activeType('escalatecolor');
+					that.activeType('escalatecolor '+escalate);
 					that.escalateEdit(true);																								
 				}		
-				localStorage.removeItem('escalate');																											
+				ENYM.ctx.removeItem('escalate');																											
 			} else {				
 				that.normalText('normalcolor');
 				that.fastText('');
@@ -126,19 +120,18 @@ function SendMessageViewModel() {
 				that.yesClass('yesbutton');
 				that.noClass('nobutton');					
 				that.escalateEdit(false);
-				localStorage.removeItem('escDuration');
+				ENYM.ctx.removeItem('escDuration');
 				that.escLevel('N');				
 				that.igiClass('igiimageoff');										
 			}			
 			that.broadcastType('FYI');
-			if(localStorage.getItem('iGiStatus')) {
+			if(ENYM.ctx.getItem('iGiStatus')) {
 				that.igiClass('igiimage');		
 				that.yesClass('nobutton');
 				that.noClass('yesbutton');
 				that.broadcastType('RAC');															
-			}
-			that.toastClass('');																	
-			that.accountName(localStorage.getItem('accountName'));			
+			}																
+			that.accountName(ENYM.ctx.getItem('accountName'));			
 			$('textarea').keyup(function () {								
 				that.characterCount(that.messageText().length);
 			});
@@ -146,6 +139,10 @@ function SendMessageViewModel() {
 				that.channels.removeAll();										
 				$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
 				return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
+			}
+			else {
+				that.sectionOne(false);
+				that.sectionTwo(true);				
 			}
 		}
 	}
@@ -165,33 +162,29 @@ function SendMessageViewModel() {
 					return true;
 				}
 				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
-					that.toastClass('toast-error');									
-					that.toastText('Please verify your email !');
-					showToast();			
+					var toastobj = {type: 'toast-error', text: 'Please verify your email !'};
+					showToast(toastobj);								
 				}
 			}
 		} else {
-			that.toastClass('toast-error');
-			that.toastText('Please add a default email !');
-			showToast();
+			var toastobj = {type: 'toast-error', text: 'Please add a default email !'};
+			showToast(toastobj);
 		}
 	};    
 	
 	function errorValidation(data, status, details){
-		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
+		$.mobile.hidePageLoadingMsg();		
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);		
 	};
 	
 	this.sendMessageCommand = function(){
 		if(that.messageText() == '' || typeof that.messageText() == 'undefined') {
-			that.toastClass('toast-error');			
-			that.toastText('Please type a message to broadcast.');
-			showToast();			
+			var toastobj = {type: 'toast-error', text: 'Please type a message to broadcast.'};
+			showToast(toastobj);					
 		} else if(that.selectedChannels().followerCount == 0) {
-			that.toastClass('toast-info');			
-			that.toastText('Message not sent - Zero followers on '+ that.selectedChannels().channelName);
-			showToast();				
+			var toastobj = {type: 'toast-info', text: 'Message not sent - Zero followers on '+ that.selectedChannels().channelName};
+			showToast(toastobj);				
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Posting Message');			
 			return ES.commethodService.getCommethods({success: successfulVerify, error: errorValidation});
@@ -201,7 +194,7 @@ function SendMessageViewModel() {
 	function successfulList(data){
 		if(data.channel.length == 0) {
 			that.sectionOne(true);								
-		} else {
+		} else {			
 			that.sectionTwo(true);				
 			$.mobile.hidePageLoadingMsg();	
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
@@ -213,12 +206,12 @@ function SendMessageViewModel() {
 	};    
 	
 	function successfulMessage(data){
-		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('iGiStatus');										
-		that.toastText('Broadcast sent');		
-		localStorage.setItem('toastData', that.toastText());					
-		localStorage.setItem('currentChannelId', that.selectedChannels().channelId);
+		ENYM.ctx.removeItem('escDuration');		
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('iGiStatus');										
+		var toastobj = {redirect: 'channelMainView', type: '', text: 'Broadcast sent'};
+		showToast(toastobj);									
+		ENYM.ctx.setItem('currentChannelId', that.selectedChannels().channelId);
 		that.clearForm();		
 		backNavText.pop();
 		backNavView.pop();		
@@ -227,11 +220,11 @@ function SendMessageViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		localStorage.removeItem('escDuration');		
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('iGiStatus');								
-		that.toastText(details.message);		
-		showToast();			
+		ENYM.ctx.removeItem('escDuration');		
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('iGiStatus');								
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);						
 	};
 	
 	this.createChannelMessage = function () {
@@ -262,8 +255,8 @@ function SendMessageViewModel() {
     that.duration("Normal: <em>Send once (usually to email)</em>");
 		that.activeType('normalcolor');		
 		that.escalateEdit(false);
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('escDuration');						
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('escDuration');						
 		that.escLevel('N');		
   };
 	
@@ -277,8 +270,8 @@ function SendMessageViewModel() {
     that.duration("Fast: <em>Send once (usually text or app)</em>");
 		that.activeType('fastcolor');
 		that.escalateEdit(false);
-		localStorage.removeItem('escLevel');
-		localStorage.removeItem('escDuration');								
+		ENYM.ctx.removeItem('escLevel');
+		ENYM.ctx.removeItem('escDuration');								
 		that.escLevel('F');						
   };		
 	
@@ -291,7 +284,7 @@ function SendMessageViewModel() {
 		that.yesClass('nobutton');
 		that.noClass('yesbutton');
 		that.broadcastType('RAC');
-		localStorage.setItem('iGiStatus', 'yes');													
+		ENYM.ctx.setItem('iGiStatus', 'yes');													
   };
 	
 	this.iGiNo = function () {
@@ -299,7 +292,7 @@ function SendMessageViewModel() {
 		that.yesClass('yesbutton');
 		that.noClass('nobutton');
 		that.broadcastType('FYI');
-		localStorage.removeItem('iGiStatus');													
+		ENYM.ctx.removeItem('iGiStatus');													
   };								
 
 }

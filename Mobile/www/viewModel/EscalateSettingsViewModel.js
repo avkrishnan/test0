@@ -15,9 +15,7 @@ function EscalateSettingsViewModel() {
 	this.ecalateTime = ko.observable();	
 	this.remindClass = ko.observable();
 	this.chaseClass = ko.observable();
-	this.houndClass = ko.observable();			
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();				
+	this.houndClass = ko.observable();							
 	
 	/* Methods */
   this.applyBindings = function() {
@@ -27,41 +25,34 @@ function EscalateSettingsViewModel() {
 	};  
 
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');					
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message						
+			that.accountName(ENYM.ctx.getItem('accountName'));
 			that.escType(false);
 			that.escalateUntil('');						
 			that.ecalateTime('Set Date and Time');
 			that.remindClass('');
 			that.chaseClass('');
 			that.houndClass('');
-			if(localStorage.getItem('escLevel') == 'H') {
+			if(ENYM.ctx.getItem('escLevel') == 'H') {
 				that.houndClass('criticalicon');
-				localStorage.setItem('escLevel', 'H');
+				ENYM.ctx.setItem('escLevel', 'H');
 				that.escalationType('"Hound"');																													
-			} else if(localStorage.getItem('escLevel') == 'C') {
+			} else if(ENYM.ctx.getItem('escLevel') == 'C') {
 				that.chaseClass('broadcasticon');
-				localStorage.setItem('escLevel', 'C');															
+				ENYM.ctx.setItem('escLevel', 'C');															
 				that.escalationType('"Chase"');				
 			} else {
 				that.remindClass('timesensitiveicon');
-				localStorage.setItem('escLevel', 'R');															
+				ENYM.ctx.setItem('escLevel', 'R');															
 				that.escalationType('"Remind"');				
 			}
-			if(localStorage.getItem('escDuration')) {
-				var DateTime = localStorage.getItem('escDuration').split('/');
+			if(ENYM.ctx.getItem('escDuration')) {
+				var DateTime = ENYM.ctx.getItem('escDuration').split('/');
 				var day = DateTime[2].split(' ');
 				var time = day[1].split(':');
-				that.escalateUntil(' until: '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2]);
+				//that.escalateUntil(' until: '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2]);
+				that.escalateUntil(' until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0]);
 				that.ecalateTime('Edit');
 				that.escType(true);																						
 			}						
@@ -72,7 +63,7 @@ function EscalateSettingsViewModel() {
 		that.remindClass('timesensitiveicon ');
 		that.chaseClass('');
 		that.houndClass('');
-		localStorage.setItem('escLevel', 'R');
+		ENYM.ctx.setItem('escLevel', 'R');
 		that.escalationType('"Remind"');					
   };
 	
@@ -80,7 +71,7 @@ function EscalateSettingsViewModel() {
 		that.remindClass('');
 		that.chaseClass('broadcasticon');
 		that.houndClass('');
-		localStorage.setItem('escLevel', 'C');
+		ENYM.ctx.setItem('escLevel', 'C');
 		that.escalationType('"Chase"');							
   };
 	
@@ -88,19 +79,18 @@ function EscalateSettingsViewModel() {
 		that.remindClass('');
 		that.chaseClass('');
 		that.houndClass('criticalicon');
-		localStorage.setItem('escLevel', 'H');
+		ENYM.ctx.setItem('escLevel', 'H');
 		that.escalationType('"Hound"');							
   };
 	
 	this.saveCommand = function () {
-		if(localStorage.getItem('escDuration')) {
-			localStorage.setItem('escalate', 'yes');		
+		if(ENYM.ctx.getItem('escDuration')) {
+			ENYM.ctx.setItem('escalate', 'yes');		
 			popBackNav();					
 		}
 		else {
-			that.toastClass('toast-error');			
-			that.toastText('Please set Date and time for escalation !');
-			showToast();			
+			var toastobj = {type: 'toast-error', text: 'Please set Date and time for escalation !'};
+			showToast(toastobj);			
 		}
   };						
 	

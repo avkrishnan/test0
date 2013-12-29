@@ -12,8 +12,7 @@ function RemoveFollowerViewModel() {
 	this.channelId = ko.observable();	
 	this.followerId = ko.observable();	
 	this.followerName = ko.observable();
-	this.followerAccount = ko.observable();	
-	this.toastText = ko.observable();							
+	this.followerAccount = ko.observable();							
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -23,25 +22,19 @@ function RemoveFollowerViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-		var followerObject = JSON.parse(localStorage.getItem('currentfollowerData'));;		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!followerObject) {
-			goToView('followersListView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));	
-			that.channelId(channelObject.channelId);			
-			that.followerId(followerObject.followerId);
-			that.followerName(followerObject.followerName);			
-			that.followerAccount(followerObject.accountname);												
+		if(authenticate()) {
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+			var followerObject = JSON.parse(ENYM.ctx.getItem('currentfollowerData'));;		
+			if(!followerObject) {
+				goToView('followersListView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message						
+				that.accountName(ENYM.ctx.getItem('accountName'));	
+				that.channelId(channelObject.channelId);			
+				that.followerId(followerObject.followerId);
+				that.followerName(followerObject.followerName);			
+				that.followerAccount(followerObject.accountname);												
+			}
 		}
 	}
 
@@ -51,8 +44,6 @@ function RemoveFollowerViewModel() {
 			backNavText.pop();
 			backNavView.pop();
 		}
-		that.toastText('Follower deleted');		
-		localStorage.setItem('toastData', that.toastText());
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});			
   };
 	
@@ -71,20 +62,22 @@ function RemoveFollowerViewModel() {
 			followerCount: followers
 		});
 		channel = channel[0];		
-		localStorage.setItem('currentChannelData', JSON.stringify(channel));		
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
+		var toastobj = {redirect: 'followersListView', type: '', text: 'Follower deleted'};
+		showToast(toastobj);						
     goToView('followersListView');					
 	}	
 
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);			
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
   };
 	
   this.removeFollowerCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Removing Follower');
 		return ES.channelService.removeFollower(that.channelId(), that.followerId(), { success: successfulDelete, error: errorAPI });
-		localStorage.removeItem('currentChannel');
+		ENYM.ctx.removeItem('currentChannel');
   };	
 	
 }

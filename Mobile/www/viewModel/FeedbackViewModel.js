@@ -1,51 +1,29 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function FeedbackViewModel() {	
-  var that = this;
-	this.template = 'feedbackView';
-	this.viewid = 'V-47';
-	this.viewname = 'Feedback';
-	this.displayname = 'Feedback';	 
-	this.accountName = ko.observable();
-	this.toastText = ko.observable();		
+﻿function FeedbackViewModel() {
+  var self = this;
+	self.template = 'feedbackView';
+	self.viewid = 'V-47';
+	self.viewname = 'Feedback';
+	self.displayname = 'Feedback';
 	
-	/* Methods */			
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
+  self.activate = function() {
+  	addExternalMarkup(self.template); // this is for header/overlay message			
 	};
-	  
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));			
-		}
+	
+	self.praise = function() {
+		feedbackType = 'feedback';
+		viewNavigate('Feedback', 'feedbackView', 'sendFeedbackView');
 	}
 	
-	this.praise = function() {
-		feedbackType = 'praise';
-		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
+	self.suggestions = function() {
+		feedbackType = 'suggestions';
+		viewNavigate('Feedback', 'feedbackView', 'sendFeedbackView');
 	}
 	
-	this.suggestions = function() {
-		feedbackType = 'suggestions';		
-		localStorage.setItem('feedbackType', 'suggestions');
-		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
+	self.reportABug = function() {
+		feedbackType = 'bug';
+		viewNavigate('Feedback', 'feedbackView', 'sendFeedbackView');
 	}
-	
-	this.reportABug = function() {
-		feedbackType = 'bug';		
-		viewNavigate('Feedback', 'feedbackView', 'inviteFollowersIIView');		
-	}				
-	
 }
 
+FeedbackViewModel.prototype = new ENYM.ViewModel();
+FeedbackViewModel.prototype.constructor = FeedbackViewModel;

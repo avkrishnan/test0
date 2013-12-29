@@ -1,5 +1,3 @@
-var AppCtx = {};
-
 var ES = {
 	evernymService: new EvernymService()
 };
@@ -17,15 +15,29 @@ ES.evernymService.doAfterDone = function(){
 
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
     $.mobile.hidePageLoadingMsg();
-    var hash = $.mobile.urlHistory.getActive().hash;
-	if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
-
-	  localStorage.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
-
-	}
-					  
+		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
+			ES.evernymService.clearAccessToken();
+			authenticate();
+			var toastobj = {type: 'toast-error', text: jqXHR.responseJSON.message};
+			showToast(toastobj);
+		}
+		else {
+			var hash = $.mobile.urlHistory.getActive().hash;
+			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
+			
+			ENYM.ctx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
+			
+			}
+		}
 };
 
+function goToView(view) {
+	$.mobile.changePage( "#" + view, {allowSamePageTransition: true});
+}
+
+function goToChannel(select) {
+	startBroadcast(select.value);
+}
 
 ko.virtualElements.allowedBindings.updateListviewOnChange = true;
 
@@ -64,7 +76,7 @@ function inviteFollowers(){
         showError('First create a channel, then you can invite followers to it.<br/> <button onclick="goToView(\'channelNewView\');closeError();">create channel</button><br/>');
     }
     else if (channelCount == 1){
-        localStorage.setItem("currentChannel", JSON.stringify(channelListViewModel.channels()[0]));
+        ENYM.ctx.setItem("currentChannel", JSON.stringify(channelListViewModel.channels()[0]));
         $.mobile.changePage( "#inviteFollowersView" , {allowSamePageTransition: true});
         
     }
@@ -102,7 +114,7 @@ function initiateBroadcast(){
     }
     else if (cvm.isChannelView){
     
-        var currentChannel = localStorage.getItem("currentChannel");
+        var currentChannel = ENYM.ctx.getItem("currentChannel");
         var lchannel = JSON.parse(currentChannel);
                
         startBroadcast(lchannel.normName);                     
@@ -320,32 +332,38 @@ function getClassName(classobject) {
 
 
 // create the various view models
+
+/* Jared's Code to be activated when required */
+//unsubscribeModel = new UnsubscribeModel(),
+//selectIconViewModel = new SelectIconViewModel(),
+//followChannelViewModel = new FollowChannelViewModel()
+//channelBroadcastsViewModel = new ChannelBroadcastsViewModel(),
+//followerViewModel = new FollowerViewModel(),
+//userSettingsModel = new UserSettingsViewModel(),
+//devSettingsModel = new DevSettingsViewModel(),
+//panelHelpViewModel = new PanelHelpViewModel(),
+//notificationsViewModel = new NotificationsViewModel(),
+//panelHelpViewModel = new PanelHelpViewModel(),
+
 var
 loginViewModel = new LoginViewModel(),
-channelListViewModel = new ChannelListViewModel(),
+homeViewModel = new HomeViewModel(),
 channelsFollowingListViewModel = new ChannelsFollowingListViewModel(),
 channelViewModel = new ChannelViewModel(),
 
 channelMenuViewModel = new ChannelMenuViewModel(),
 channelSettingsViewModel = new ChannelSettingsViewModel(),
-channelBroadcastsViewModel = new ChannelBroadcastsViewModel(),
 channelNewViewModel = new ChannelNewViewModel(),
 
 sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
 inviteFollowersViewModel = new InviteFollowersViewModel(),
-
-followerViewModel = new FollowerViewModel(),
 commethodVerificationViewModel = new CommethodVerificationViewModel(),
-userSettingsModel = new UserSettingsViewModel(),
-devSettingsModel = new DevSettingsViewModel(),
 
-notificationsViewModel = new NotificationsViewModel(),
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
 forgotPasswordSuccessViewModel = new ForgotPasswordSuccessViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
 resetPasswordSuccessViewModel = new ResetPasswordSuccessViewModel(),
-panelHelpViewModel = new PanelHelpViewModel(),
 
 /*By Devedner*/
 escalationPlansViewModel = new EscalationPlansViewModel(),
@@ -366,7 +384,7 @@ channelsIOwnViewModel = new ChannelsIOwnViewModel(),
 helpViewModel = new HelpViewModel(),
 aboutEvernymViewModel = new AboutEvernymViewModel(),
 feedbackViewModel = new FeedbackViewModel(),
-inviteFollowersIIViewModel = new InviteFollowersIIViewModel(),
+sendFeedbackViewModel = new SendFeedbackViewModel(),
 privacyPolicyViewModel = new PrivacyPolicyViewModel(),
 
 /* By Pradeep */
@@ -374,33 +392,35 @@ channelMainViewModel = new ChannelMainViewModel(),
 channelChangeNameViewModel = new ChannelChangeNameViewModel(),
 editShortDescriptionViewModel = new EditShortDescriptionViewModel(),
 channelDeleteViewModel = new ChannelDeleteViewModel(),
+
 channelChangeIconViewModel = new ChannelChangeIconViewModel(),
 firstChannelViewModel = new FirstChannelViewModel(),
 registrationVerifyViewModel = new RegistrationVerifyViewModel(),
 singleMessageFullTextViewModel = new SingleMessageFullTextViewModel(),
+
 singleMessageRepliesViewModel = new SingleMessageRepliesViewModel(),
 replyDetailViewModel = new ReplyDetailViewModel(),
 addInviteFollowersViewModel = new AddInviteFollowersViewModel(),
 addFollowersViewModel = new AddFollowersViewModel(),
+
 editNameViewModel = new EditNameViewModel(),
 editLongDescriptionViewModel = new EditLongDescriptionViewModel(),
 changePasswordSuccessViewModel = new ChangePasswordSuccessViewModel(),
 requestiGiHelpViewModel = new RequestiGiHelpViewModel(),
+
 escalateHelpViewModel = new EscalateHelpViewModel(),
 escalateSettingsViewModel = new EscalateSettingsViewModel(),
 escalateTimeSettingsViewModel = new EscalateTimeSettingsViewModel(),
 followerDetailsViewModel = new FollowerDetailsViewModel(),
+
 removeFollowerViewModel = new RemoveFollowerViewModel(),
 notGotItViewModel = new NotGotItViewModel(),
 whoGotItViewModel = new WhoGotItViewModel(),
 recipientDetailsViewModel = new RecipientDetailsViewModel(),
+
+singleMessageViewModel = new SingleMessageViewModel()
 /* end */
 
-messageViewModel = new MessageViewModel(),
-singleMessageViewModel = new SingleMessageViewModel(),
-unsubscribeModel = new UnsubscribeModel(),
-selectIconViewModel = new SelectIconViewModel(),
-followChannelViewModel = new FollowChannelViewModel()
 ;
 
 // load the stored state (recent searches)
@@ -408,32 +428,33 @@ followChannelViewModel = new FollowChannelViewModel()
 $.mobile.defaultPageTransition = ""; //"slide";
 
 var models = [
+							/* Jared's Code to be activated when required */
+              //unsubscribeModel,
+              //selectIconViewModel,
+              //followChannelViewModel,
+              //channelBroadcastsViewModel,
+              //followerViewModel,
+              //userSettingsModel, 
+              //devSettingsModel, 
+              //notificationsViewModel,
+              //panelHelpViewModel, 
+              //messageViewModel,																												
               loginViewModel,
-              channelListViewModel,
+              homeViewModel,
               channelsFollowingListViewModel,
               channelViewModel,
               channelMenuViewModel,
               channelSettingsViewModel,
-              channelBroadcastsViewModel,
               channelNewViewModel,            
               sendMessageViewModel,
               followersListViewModel,
               inviteFollowersViewModel,
-              followerViewModel,
-              commethodVerificationViewModel,
-              userSettingsModel, 
-              devSettingsModel, 
-              notificationsViewModel, 
+              commethodVerificationViewModel, 
               forgotPasswordViewModel,
 							forgotPasswordSuccessViewModel, 
               resetPasswordViewModel,
 							resetPasswordSuccessViewModel, 
-              panelHelpViewModel, 
-              messageViewModel,
               singleMessageViewModel,
-              unsubscribeModel,
-              selectIconViewModel,
-              followChannelViewModel,
               escalationPlansViewModel,
               escalationPlanSingleViewModel,
               addContactViewModel,
@@ -446,7 +467,7 @@ var models = [
 							helpViewModel,
 							aboutEvernymViewModel,
 							feedbackViewModel,
-							inviteFollowersIIViewModel,
+							sendFeedbackViewModel,
 							privacyPolicyViewModel,
 							channelMainViewModel,
 							channelChangeNameViewModel,
@@ -506,34 +527,31 @@ function getViewName(viewModel){
 
 function loadAllPages() {
     
-    var getarray = [], i, len;
+  var getarray = [], i, len;
+  for (i = 0, len = models.length; i < len; i += 1) {
+    var page = getHTMLName(models[i]);
+    console.log("loading page: " + page);
+    var promise = $.mobile.loadPage( "views/" + page, {pageContainer: $('#allpages'), allowSamePageTransition: true} );
+    getarray.push( promise );
+  };
+  return $.when.apply($, getarray).done(function () {
     for (i = 0, len = models.length; i < len; i += 1) {
-        var page = getHTMLName(models[i]);
-        console.log("loading page: " + page);
-        var promise = $.mobile.loadPage( "views/" + page, {pageContainer: $('#allpages'), allowSamePageTransition: true} );
-        getarray.push( promise );
-    };
-    return $.when.apply($, getarray).done(function () {
-                                   
-                                   for (i = 0, len = models.length; i < len; i += 1) {
-                                   var name = getClassName(models[i]);
-                                   
-                                       var model = models[i];
-                                       var view = getViewName(model);
-                                       console.log("binding ko: " + view);
-                                       ko.applyBindings(model, document.getElementById(view));
-                                          if (model.applyBindings){
-                                              model.applyBindings();
-                                          }
-                                    }
-                                   
-                                   });
+      var name = getClassName(models[i]);
+      var model = models[i];
+      var view = getViewName(model);
+      console.log("binding ko: " + view);
+      ko.applyBindings(model, document.getElementById(view));
+      if (model.applyBindings){
+        model.applyBindings();
+      }
+    }
+  });
 };
 
 	$(document).ready(function () {
 		// bind each view model to a jQueryMobile page
 		console.log("document ready");
-		var token = localStorage.getItem("accessToken");
+		var token = ENYM.ctx.getItem("accessToken");
 		if (document.location.hash == ""){
 			if (token) {
 				//document.location.hash = "#channelListView";
@@ -548,7 +566,7 @@ function loadAllPages() {
 		//$("#channelListView").page("destroy").page();
 		//var currentUrl = $.mobile.path.parseUrl(window.location.href);
 		//console.log("currentUrl: " + currentUrl.hash);
-		localStorage.removeItem('baseUrl');
+		ENYM.ctx.removeItem('baseUrl');
 		loadAllPages().done(function() {
 			console.log('done loading all pages.');
 			console.log("INITIALIZE PAGE");
@@ -582,7 +600,7 @@ $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
 $(document).on('pagebeforehide', '[data-role="page"]', function(e,a){
                
                console.log("hiding page: " + $(this).attr('id'));
-               localStorage.setItem('previousView', $(this).attr('id') );
+               ENYM.ctx.setItem('previousView', $(this).attr('id') );
                
                });
 
@@ -590,7 +608,7 @@ $(document).on('pagebeforehide', '[data-role="page"]', function(e,a){
 $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a) {
 	console.log("showing page: " + $(this).attr('id'));
 	var vm = ko.dataFor(this);
-	var token = localStorage.getItem("accessToken");
+	var token = ENYM.ctx.getItem("accessToken");
 	document.title = vm.displayname;	
 	
 	if ( vm && vm.hasfooter && token){
@@ -603,7 +621,7 @@ $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a) {
 		$(this).append($("#globalfooter #thefooter").clone());
 		}
 		*/
-		var name = localStorage.getItem('accountName');
+		var name = ENYM.ctx.getItem('accountName');
 		$(this).find('#thefooter #footer-gear').html(name);
 		$(this).find('#thefooter #viewid').html(viewid + " " + viewname);
 	}
@@ -727,39 +745,49 @@ $(document).bind('panelbeforeopen', function(e, data) {
 								 
 /* By pradeep kumar */
 /* Back navigation functions */
-if(!localStorage.getItem('backNavText') || !localStorage.getItem('backNavView')) {
+if(!ENYM.ctx.getItem('backNavText') || !ENYM.ctx.getItem('backNavView')) {
 	var backNavText = [];
 	var backNavView = [];
 } else {
-	var backNavText = JSON.parse(localStorage.getItem('backNavText'));
-	var backNavView = JSON.parse(localStorage.getItem('backNavView'));
+	var backNavText = JSON.parse(ENYM.ctx.getItem('backNavText'));
+	var backNavView = JSON.parse(ENYM.ctx.getItem('backNavView'));
 }
 
 function viewNavigate(backText, backView, targetView) {
 	if($.mobile.activePage.attr('id') != targetView) {
 		backNavText.push(backText);
-		localStorage.setItem('backNavText', JSON.stringify(backNavText));	
+		ENYM.ctx.setItem('backNavText', JSON.stringify(backNavText));	
 		backNavView.push(backView);
-		localStorage.setItem('backNavView', JSON.stringify(backNavView));
+		ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
 	}
+	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');	
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
 }		
 
 function popBackNav() {
 	backNavText.pop();
-	localStorage.removeItem('backNavText');	
-	localStorage.setItem('backNavText', JSON.stringify(backNavText));				
+	ENYM.ctx.removeItem('backNavText');	
+	ENYM.ctx.setItem('backNavText', JSON.stringify(backNavText));				
 	var targetView = goToView(backNavView.pop());
-	localStorage.removeItem('backNavView');		
-	localStorage.setItem('backNavView', JSON.stringify(backNavView));
+	ENYM.ctx.removeItem('backNavView');		
+	ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
+	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});			
 }
 
 /* Toast messages function */
-function showToast() {
-	$('.toast-notification').delay(500).slideDown(500, function() {
+function showToast(toastobj) {
+	if(toastobj.redirect) {	
+		$('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');			
+	}
+	else {
+		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
+	}
+	$('.toast-notification').slideDown(500, function() {
 		$('.toast-notification').show();
-	}).delay(4000).slideUp(1000);
+	}).delay(1800).slideUp(700, function() {
+		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
+	});
 }
 
 /* Get current date/time values */
@@ -767,137 +795,140 @@ function _getDate(functionName) {
 	var _date = new Date();
 	return _date[functionName]();	
 }
-
-function msToTime(created){
-	var created = new Date(created);
-	var created = created.getTime(); 
-	var ms = new Date().getTime() - created;	
-	var secs = Math.floor(ms / 1000);
-	var msleft = ms % 1000;
-	var totalHours = Math.floor(secs / (60 * 60));
-	var days = Math.floor(totalHours / 24);
-	var hours = totalHours % 24;
-	var divisor_for_minutes = secs % (60 * 60);
-	var minutes = Math.floor(divisor_for_minutes / 60);
-	var divisor_for_seconds = divisor_for_minutes % 60;
-	var seconds = Math.ceil(divisor_for_seconds);
-	if(days == 1) {
-		return days+' day ago';
-	}	else if(days > 1) {
-		return days+' days ago';
-	} else if(hours == 1) {
-		return hours+' hr ago';		
-	} else if(hours > 1) {
-		return hours+' hrs ago';
-	} else if(minutes == 1) {
-		return minutes+' min ago';
-	} else if(minutes > 1) {
-		return minutes+' mins ago';		
-	} else if(seconds > 1) {
-		return  seconds+' secs ago';
-	} else {
-		return  'just now';
+/* This function converts passed date into a desired format*/
+function formatDate(date, format, source) {
+	if(typeof(date) === 'undefined') {
+		date = new Date();
 	}
-}
-
-/* Date Format for date like 13/12/2013, 11:10 AM */
-function dateFormat1(created) {
-	var created = new Date(created);
-	var created = created.getTime();		
-	var date  = new Date(created);
-	return ((date.getDate()<10?'0':'')+date.getDate()) + "/"+ (((date.getMonth()+1)<10?'0':'') + (date.getMonth()+1)) + "/" + 
-	date.getFullYear()  + ", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM'); 
-}
-
-/* Date Format for date like December 13, 11:10 AM */
-function dateFormat2(created) {
-	var created = new Date(created);
-	var created = created.getTime();		
-	var date  = new Date(created);
-	var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
-	return ((monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
-	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
-}
-
-function convertUTCDateToLocalDate(date) {
-	var newDate = new Date(date).getTime();
-	date = new Date(date);
-	//alert(date.getMinutes());
-	//alert(date.getTimezoneOffset());
-	//newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-	//alert(newDate);
-	return newDate;   
-}
-
-/* Date Format for date like Dec 13, 2013, 11:10 AM */
-function shortFormatYear(created) {
-	var created = new Date(created);
-	var created = created.getTime();		
-	var date  = new Date(created);
-	var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-	return ((monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + ", " +(date.getFullYear()) + 
-	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " " + (date.getHours()>12?'PM':'AM');
-}
-
-/* Short Format for date like Dec 02, 11:00*/
-function shortFormat(created) {
-	var created = new Date(created);
-	var created = created.getTime();		
-	var date  = new Date(created);
-	//var monthNames = [ "January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December" ];
-	var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-	return ((monthNames[date.getMonth()]) + " " +(date.getDate()<10?'0':'')+date.getDate()) + 
-	", " +((date.getHours()<10?'0':'')+(date.getHours()>12?date.getHours()-12:date.getHours())) + ":" + 
-	(date.getMinutes()<10?'0':'') +  date.getMinutes() + " ";// + (date.getHours()>12?'PM':'AM');
+	if(typeof(format) === 'undefined') {
+		format = 'short';
+	}
+	if(typeof(source) === 'undefined') {
+		source = '';
+	}	
+	var newDate = new Date(date);
+	var shortMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'];
+	var longMonths  = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'];
+	var longDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+	var year 	= newDate.getFullYear();
+	var month 	= newDate.getMonth();
+	var day			= newDate.getDate();
+	var weekDay	= newDate.getDay();
+	var hour 		= newDate.getHours();
+	var minute 	= newDate.getMinutes();
+	var todaysDay = new Date().getDate();
+	var todaysYear = new Date().getFullYear();
+	//var output 	= months[month] + ' ' + day + ', ' + newDate.getFullYear() +  ', ' +((hour == 0|| hour == 12 )?12:hour%12) + ':' +((''+minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'am' : 'pm');
+	var output;
+	switch(format) {
+		case 'short' :
+			if(day == todaysDay) {
+				if(source == 'follow' || source == 'main') {
+					output 	= 'TODAY, ' + ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+				}
+				else {
+					output 	= ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+				}
+			}
+			else if(year > todaysYear) {
+				if(source == 'follow' || source == 'main') {
+					output 	= month + '/' + day + '/' + year;	
+				}
+				else {
+					output 	= month + '/' + day + '/' + year + ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+				}
+			}
+			else {
+				if(source == 'follow' || source == 'main') {
+					output 	= shortMonths[month] + '. ' + day + ', ' +  ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+				}
+				else {
+					output 	= shortMonths[month] + '. ' + day;
+				}
+			}
+			break;
+		case 'long':
+			//output 	= newDate.toLocaleString();
+			output = longDays[weekDay] + ' ' + shortMonths[month] + '. ' + day + ', ' + year + ' ' +  ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+			break;
+	}
+	return output;
 }
 
 /* Hide footer on mobile keypad */
-var initialScreenSize = window.innerHeight;
-window.addEventListener("resize", function() {
- if(window.innerHeight < initialScreenSize){
-   $('.footer').hide();
- } else {
-   $('.footer').show();
- }
-})
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  var initialScreenSize = window.innerHeight;
+  window.addEventListener("resize", function() {
+    if(window.innerHeight < initialScreenSize) {
+      $('.footer').hide();
+    } else {
+      $('.footer').show();
+    }
+  });
+}
 
 feedbackType = ''; // For setting feedback type
+
+/* Validate user via access token */
+function authenticate() {
+	var token = ES.evernymService.getAccessToken();
+	if(token == '' || token == null) {
+		sendMessageViewModel.clearForm();		
+		goToView('loginView');
+		return false;
+	}
+	return true;
+}
 
 /* pradeep kumar end */
 
 /* Time conversion into time ago*/
 function time2TimeAgo(ts) {
-	// This function computes the delta between the
-	// provided timestamp and the current time, then test
-	// the delta for predefined ranges.
-	var d=new Date();  // Gets the current time
-	var nowTs = Math.floor(d.getTime()/1000); // getTime() returns milliseconds, and we need seconds, hence the Math.floor and division by 1000
-	var seconds = nowTs-ts;
-	//alert(nowTs +" - "+ ts + "-" + seconds);
-	// more that two days
-	if (seconds > 2*24*3600) {
-		 return "a few days ago";
+	endDate = new Date();
+	startDate = new Date(ts);
+	var diff = startDate - endDate;
+	var millisecondsPerDay = 86400 * 1000; // Day in milliseconds
+	startDate.setHours(0,0,0,1);  // Start just after midnight
+	endDate.setHours(23,59,59,999);  // End just before midnight
+	var diff = endDate - startDate;  // Milliseconds between datetime objects    
+	var days = Math.ceil(diff / millisecondsPerDay);
+	days = days-1;
+	if(days == 1) {
+		return ' yesterday';
+	}	
+	else if(days > 1) {
+		return formatDate(ts, 'short');
 	}
-	// a day
-	else if (seconds > 24*3600) {
-		 return "yesterday";
+	else if(days < 1) {
+		var newDate = new Date(ts).getTime();
+		var ms = new Date().getTime() - newDate;				
+		var secs = Math.floor(ms / 1000);
+		var msleft = ms % 1000;
+		var totalHours = Math.floor(secs / (60 * 60));
+		var hours = totalHours % 24;
+		var divisor_for_minutes = secs % (60 * 60);
+		var minutes = Math.floor(divisor_for_minutes / 60);
+		var divisor_for_seconds = divisor_for_minutes % 60;
+		var seconds = Math.ceil(divisor_for_seconds);
+		if(hours == 1) {
+			return hours + ' hr ago';		
+		} 
+		else if(hours > 1) {
+			return hours + ' hrs ago';
+		} 
+		else if(minutes == 1) {
+			return minutes + ' min ago';
+		} 
+		else if(minutes > 1) {
+			return minutes + ' mins ago';		
+		} 
+		else if(seconds > 1) {
+			return  seconds + ' secs ago';
+		}
+		else {
+			return  'just now';
+		}						
 	}
-	
-	else if (seconds > 3600) {
-		 return "a few hours ago";
-	}
-	else if (seconds > 1800) {
-		 return "Half an hour ago";
-	}
-	else if (seconds > 60) {
-		 return Math.floor(seconds/60) + " minutes ago";
-	}
-	else {
-		return  'a few seconds ago';
-	}		
 }
 
 /* External markup for Header/Overlay etc*/

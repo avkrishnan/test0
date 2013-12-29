@@ -1,61 +1,37 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
+﻿/* To do - Pradeep Kumar */
 function SingleMessageRepliesViewModel() {
-  var that = this;
-	this.template = 'singleMessageRepliesView';
-	this.viewid = 'V-56';
-	this.viewname = 'Replies';
-	this.displayname = 'Broadcast Replies';	
-	this.accountName = ko.observable();	
-
-  /* Single message observable */		
-	this.channelId = ko.observable();
-	this.channelName = ko.observable();
-	this.messageId = ko.observable();	
-	this.replies = ko.observableArray([]);
-	this.replyTime = ko.observable();	
-	this.reply = ko.observable();
-	this.toastText = ko.observable();								
+  var self = this;
+	self.template = 'singleMessageRepliesView';
+	self.viewid = 'V-56';
+	self.viewname = 'Replies';
+	self.displayname = 'Broadcast Replies';	
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
+	self.inputObs = [ 'channelId', 'channelName', 'messageId'];
+	self.defineObservables();		
+	self.replies = ko.observableArray([]);  
 	
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
+	self.activate = function() {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
+		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.replies.removeAll();						
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));		
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));			
-			var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));
-			localStorage.removeItem('currentReplyData');													
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);												
-			that.messageId(messageObject.messageId);
+			addExternalMarkup(self.template); // this is for header/overlay message
+			self.replies.removeAll();										
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+			var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));
+			ENYM.ctx.removeItem('currentReplyData');													
+			self.channelId(channelObject.channelId);
+			self.channelName(channelObject.channelName);												
+			self.messageId(messageObject.messageId);
 			$.mobile.showPageLoadingMsg("a", "Loading Message replies");			
-			return ES.messageService.getChannelMessages(that.channelId(), {replyto: that.messageId()}, {success: successfulReliesGET, error: errorAPI});			
+			return ES.messageService.getChannelMessages(self.channelId(), {replyto: self.messageId()}, {success: successfulReliesGET, error: errorAPI});			
 		}
 	}	
 	
 	function successfulReliesGET(data){
     $.mobile.hidePageLoadingMsg();			
-		var len = 0;
-		for(len; len<data.message.length; len++) {
+		for(len = 0; len<data.message.length; len++) {
 			if(data.message[len].replies < 1) {
 				if(data.message[len].text.length > truncatedTextScreen()) {
 					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+$.trim(data.message[len].text).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...';
@@ -65,7 +41,7 @@ function SingleMessageRepliesViewModel() {
 					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+data.message[len].text;
 					var replyLess = data.message[len].text;					
 				}				
-				that.replies.push({
+				self.replies.push({
 					replyId: data.message[len].id,
 					senderSubscriberId: data.message[len].senderSubscriberId,
 					responseToMsgId: data.message[len].responseToMsgId,		
@@ -84,13 +60,16 @@ function SingleMessageRepliesViewModel() {
 	
 	function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		that.toastText(details.message);			
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
   };
 	
-	this.replyDetail = function(data){	
-		localStorage.setItem('currentReplyData', JSON.stringify(data));									
+	self.replyDetail = function(data){	
+		ENYM.ctx.setItem('currentReplyData', JSON.stringify(data));									
 		viewNavigate('Replies', 'singleMessageRepliesView', 'replyDetailView');
 	};	
 				
 }
+
+SingleMessageRepliesViewModel.prototype = new ENYM.ViewModel();
+SingleMessageRepliesViewModel.prototype.constructor = SingleMessageRepliesViewModel;

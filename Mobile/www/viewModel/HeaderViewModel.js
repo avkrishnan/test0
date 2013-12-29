@@ -3,12 +3,11 @@
 	this.isBack = ko.observable(true);	
 	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable();
-	this.toastText = ko.observable();
 	
 	that = this;
 	/* Methods */
 	this.activate = function() {
-		if($.mobile.activePage.attr('id') == 'channelListView') {
+		if($.mobile.activePage.attr('id') == 'homeView') {
 			this.isBack = ko.observable(false);
 		}
 		if(typeof backNavText[0] == 'undefined') {
@@ -24,8 +23,10 @@
 	this.updateBadges = function() {
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 			setTimeout(function() {
-				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
-				overlayViewModel.showNewMessagesOverlay();
+				if(typeof ES.systemService.MnsCacheData.data != 'undefined') {
+					showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
+					overlayViewModel.showNewMessagesOverlay();
+				}
 			}, 1000);
 		}
 		var callbacks = {
@@ -33,27 +34,27 @@
 				if(responseDataSmry && responseDataSmry.unreadCount > 0) {
 					ES.systemService.getMsgNotifs({
 						success: function(responseData) {
-							localStorage.removeItem('enymNotifications');
-							localStorage.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
-							if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+							ENYM.ctx.removeItem('enymNotifications');
+							ENYM.ctx.setItem('enymNotifications', JSON.stringify(responseData.messagealert));
+							if(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length > 0) {
 								overlayViewModel.showNewMessagesOverlay();
-								showNewMessagesCount(JSON.parse(localStorage.getItem('enymNotifications')).length);
+								showNewMessagesCount(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length);
 							}
 						},
 						error: function(data, status, details) {
-							that.toastText(details.message);
-							showToast();
+							//var toastobj = {type: 'toast-error', text: details.message};
+							//showToast(toastobj);
 						}
 					});
 				}
 				else {
 					showNewMessagesCount(0);
-					localStorage.removeItem('enymNotifications');
+					ENYM.ctx.removeItem('enymNotifications');
 				}
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				showToast();									
+				//var toastobj = {type: 'toast-error', text: details.message};
+				//showToast(toastobj);									
 			}
 		};
 		ES.systemService.getMsgNotifsSmry_C(callbacks);
@@ -101,7 +102,7 @@
 				break;
 			default:
 				if(typeof backNavText[0] == 'undefined') {
-					goToView('channelListView');
+					goToView('homeView');
 				}
 				else {
 					popBackNav();
@@ -109,36 +110,25 @@
 		}
   };
 
-	/*To Do to show new IGIs*/
-	this.newIGIOverlay = function() {
-		that.toastText('Feature coming soon!');
-		localStorage.setItem('toastData', that.toastText());
-		goToView($.mobile.activePage.attr('id'));
-	}
-	
-	/*To Do to show new Followers*/
-	this.newFollowersOverlay = function() {
-		that.toastText('Feature coming soon!');
-		localStorage.setItem('toastData', that.toastText());		
-		goToView($.mobile.activePage.attr('id'));		
+	/*To Do to show new feature coming soon*/
+	this.comingSoon = function() {
+		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
+		showToast(toastobj);
 	}	
 	
 	this.newMessagesOverlayPopup = function() {
-		if(localStorage.getItem('enymNotifications')) {
-			if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
+		if(ENYM.ctx.getItem('enymNotifications')) {
+			if(JSON.parse(ENYM.ctx.getItem('enymNotifications')).length > 0) {
 				$('#newMessages').popup().popup('open', {x: 10, y:10});
 			}
 		}
 		else {
-			that.toastText('You dont have any new messages!');
-			localStorage.setItem('toastData', that.toastText());
-			goToView($.mobile.activePage.attr('id'));
+			var toastobj = {type: 'toast-info', text: 'You dont have any new messages!'};
+			showToast(toastobj);			
 		}
 		if(this.newMessageClass() == '') {
-			that.toastText('You dont have any new messages!');
-			localStorage.setItem('toastData', that.toastText());
-			showToast();
-			goToView($.mobile.activePage.attr('id'));			
+			var toastobj = {type: 'toast-info', text: 'You dont have any new messages!'};
+			showToast(toastobj);		
 		}
 	}
 	
@@ -150,9 +140,7 @@
 /* overlay messages*/
 function OverlayViewModel() {
 	that = this;
-	this.newMessagesDisplayList = ko.observableArray([]);
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();	
+	this.newMessagesDisplayList = ko.observableArray([]);	
 	
 	this.activate = function() {
 		//that.showNewMessagesOverlay();
@@ -161,8 +149,11 @@ function OverlayViewModel() {
 	this.showNewMessagesOverlay = function() {
 		overlayViewModel.newMessagesDisplayList.removeAll();
 		var screenSizeText = truncatedText();
-		$.each(JSON.parse(localStorage.getItem('enymNotifications')), function(indexNotification, valueNotification) {
-			valueNotification.created = shortFormat(valueNotification.created);
+		$.each(JSON.parse(ENYM.ctx.getItem('enymNotifications')), function(indexNotification, valueNotification) {
+
+			valueNotification.createdLong = formatDate(valueNotification.created, 'long');
+			valueNotification.created = formatDate(valueNotification.created, 'short', 'main');
+
 			valueNotification.fullText = jQuery.trim(valueNotification.text);
 			if(valueNotification.text.length > screenSizeText) {
 				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";
@@ -200,14 +191,13 @@ function OverlayViewModel() {
 		//alert(event.currentTarget.parentNode.getAttribute('id'));
 		var callbacks = {
 			success: function(data) {
-				that.toastText('iGi Acknowledgement sent !');
-				localStorage.setItem('toastData', that.toastText());			
+				var toastobj = {type: '', text: 'iGi Acknowledgement sent !'};
+				showToast(toastobj);							
 				//goToView($.mobile.activePage.attr('id'));																	
 			},
 			error: function(data, status, details) {
-				that.toastText(details.message);
-				localStorage.setItem('toastData', that.toastText());
-				goToView($.mobile.activePage.attr('id'));						
+				var toastobj = {type: 'toast-error', text: details.message};
+				showToast(toastobj);					
 			}
 		};					
 		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
@@ -222,7 +212,7 @@ function OverlayViewModel() {
 			}
 		}
 		var tempEnymNotifications = [];
-		tempEnymNotifications = JSON.parse(localStorage.getItem('enymNotifications'));
+		tempEnymNotifications = JSON.parse(ENYM.ctx.getItem('enymNotifications'));
 		if(tempEnymNotifications.length > 0) {
 			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 				if(typeof valueNotification != 'undefined' && valueNotification.msgId == data.msgId) {
@@ -232,14 +222,14 @@ function OverlayViewModel() {
 			setTimeout(function() {
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
 			}, 1000);				
-			localStorage.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 		}	
 //		
 		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);
 	}	
 	
 	this.showSingleMessage = function(data) {
-		localStorage.setItem("overlayCurrentChannel",JSON.stringify(data));
+		ENYM.ctx.setItem("overlayCurrentChannel",JSON.stringify(data));
 		//$('#newMessages').popup('close');
 		//that.closePopup();
 		var backText = getCurrentViewModel().viewname;	

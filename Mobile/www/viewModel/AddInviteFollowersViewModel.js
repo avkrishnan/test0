@@ -10,8 +10,7 @@ function AddInviteFollowersViewModel() {
 	
   /* Add/Invite Followers observable */
 	this.channelName = ko.observable();	
-	this.channelWebAddress = ko.observable();
-	this.toastText = ko.observable();				
+	this.channelWebAddress = ko.observable();			
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -21,43 +20,31 @@ function AddInviteFollowersViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));	
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
-			if(localStorage.getItem('counter') == 1) {
-				localStorage.setItem('counter', 2);
-			} else if(localStorage.getItem('counter') == 2){		
-				localStorage.setItem('counter', 3);
-			}	else if(localStorage.getItem('counter') == 3){
-				localStorage.setItem('counter', 4);
-			}	else {
-				localStorage.setItem('counter', 1);
-			}										
-			that.channelName(channelObject.channelName);
-			that.channelWebAddress(channelObject.channelName+'.evernym.com');			
+		if(authenticate()) {
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message						
+				that.accountName(ENYM.ctx.getItem('accountName'));	
+				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
+				if(ENYM.ctx.getItem('counter') == 1) {
+					ENYM.ctx.setItem('counter', 2);
+				} else if(ENYM.ctx.getItem('counter') == 2){		
+					ENYM.ctx.setItem('counter', 3);
+				}	else if(ENYM.ctx.getItem('counter') == 3){
+					ENYM.ctx.setItem('counter', 4);
+				}	else {
+					ENYM.ctx.setItem('counter', 1);
+				}										
+				that.channelName(channelObject.channelName);
+				that.channelWebAddress(channelObject.channelName+'.evernym.com');			
+			}
 		}
 	}
 	
-	this.inviteFollowers = function(){
-		that.toastText('Feature coming soon!');
-		showToast();		
-	};
-	
-	this.addFollowers = function(){
-		that.toastText('Feature coming soon!');
-		showToast();
+	this.comingSoon = function(){
+		headerViewModel.comingSoon();	
 	};	
 	
 }

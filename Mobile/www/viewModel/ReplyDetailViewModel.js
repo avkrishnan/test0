@@ -1,81 +1,64 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
+﻿/* To do - Pradeep Kumar */
 function ReplyDetailViewModel() {
-  var that = this;
-	this.template = 'replyDetailView';
-	this.viewid = 'V-56';
-	this.viewname = 'Reply Detail';
-	this.displayname = 'Reply Detail';	
-	this.accountName = ko.observable();		
-
-  /* Single message observable */		
-	this.channelId = ko.observable();
-	this.channelName = ko.observable();
-	this.messageId = ko.observable();
-	this.senderName = ko.observable();			
-	this.replyDate = ko.observable();	
-	this.reply = ko.observable();		
-	this.moreText = ko.observable();	
-	this.less = ko.observable(true);		
-	this.more = ko.observable(false);	
-	this.moreButton = ko.observable(true);
-	this.lessButton = ko.observable(false);	
-	this.toastText = ko.observable();											
-
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
+  var self = this;
+	self.template = 'replyDetailView';
+	self.viewid = 'V-56';
+	self.viewname = 'Reply Detail';
+	self.displayname = 'Reply Detail';
 	
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
+  self.inputObs = [
+    'channelId',
+		'channelName',
+		'messageId',
+    'senderName', 
+    'replyDate', 
+    'reply', 
+    'moreText'];	
+	self.defineObservables();					
+
+  /* Single message observable */			
+	self.less = ko.observable(true);		
+	self.more = ko.observable(false);	
+	self.moreButton = ko.observable(true);
+	self.lessButton = ko.observable(false);											  
+	
+	self.activate = function() {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+		var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
+		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));		
-			var replyObject = JSON.parse(localStorage.getItem('currentReplyData'));			
-			that.less(true);				
-			that.more(false);		
-			that.moreButton(true);
-			that.lessButton(false);																											
-			that.channelId(channelObject.channelId);	
-			that.channelName(channelObject.channelName);													
-			that.messageId(messageObject.messageId);
-			that.senderName(replyObject.senderFirstname+' '+replyObject.senderLastname+':');						
-			that.replyDate(dateFormat2(replyObject.created));
-			that.reply(replyObject.replyLess);
-			that.moreText(replyObject.replyFull);												
+			addExternalMarkup(self.template); // this is for header/overlay message								
+			var replyObject = JSON.parse(ENYM.ctx.getItem('currentReplyData'));			
+			self.less(true);				
+			self.more(false);		
+			self.moreButton(true);
+			self.lessButton(false);																											
+			self.channelId(channelObject.channelId);	
+			self.channelName(channelObject.channelName);													
+			self.messageId(messageObject.messageId);
+			self.senderName(replyObject.senderFirstname+' '+replyObject.senderLastname+':');						
+			self.replyDate(dateFormat2(replyObject.created));
+			self.reply(replyObject.replyLess);
+			self.moreText(replyObject.replyFull);												
 		}
-	}
+	}	
 	
-	this.menuCommand = function () {
-		viewNavigate('Reply detail', 'replyDetailView', 'channelMenuView');		
-  };	
-	
-	this.showMore = function(){
-		that.less(false);		
-		that.more(true);
-		that.moreButton(false);
-		that.lessButton(true);																
+	self.showMore = function(){
+		self.less(false);		
+		self.more(true);
+		self.moreButton(false);
+		self.lessButton(true);																
 	};
 	
-	this.showLess = function(){
-		that.less(true);		
-		that.more(false);
-		that.moreButton(true);
-		that.lessButton(false);															
+	self.showLess = function(){
+		self.less(true);		
+		self.more(false);
+		self.moreButton(true);
+		self.lessButton(false);															
 	};		
 				
 }
+
+ReplyDetailViewModel.prototype = new ENYM.ViewModel();
+ReplyDetailViewModel.prototype.constructor = ReplyDetailViewModel;

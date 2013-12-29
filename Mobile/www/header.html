@@ -5,20 +5,19 @@
     <a class="smsicon" href='#' data-bind="css: newMessageClass, click: newMessagesOverlayPopup"><span class="received-responses-msg" data-bind="text: newMessageCount"></span></a>
     <!--<a class="processingicon processingiconwhite" href="#"><span class="received-responses-msg">4</span></a>
     <a class="groupicon groupiconwhite" href="#"><span class="received-responses-msg">3</span></a>-->
-    <a class="processingicon" href="#" data-bind="click: newIGIOverlay"><span class="received-responses-msg"></span></a>
-    <a class="groupicon" href="#" data-bind="click: newFollowersOverlay"><span class="received-responses-msg"></span></a>
+    <a class="processingicon" href="#" data-bind="click: comingSoon"><span class="received-responses-msg"></span></a>
+    <a class="groupicon" href="#" data-bind="click: comingSoon"><span class="received-responses-msg"></span></a>
   </div>
 </div>
-<script>
-	var headerViewModel = new HeaderViewModel();
-	$(".logged-in").each(function() {
-		if($(this).parent().css('display') != 'none') {
-			ko.applyBindings(headerViewModel, document.getElementById('header'));
-			headerViewModel.activate();
-		}
-		else {
-			var nonCurrentViewHeader = "#" + $(this).parent().attr('id') + " header";
-			$(nonCurrentViewHeader).html('');
-		}
-	});
+<script type="text/javascript">
+var headerViewModel = new HeaderViewModel();
+$(".logged-in").each(function() {
+	if($(this).parent().css('display') != 'none') {
+		ko.applyBindings(headerViewModel, document.getElementById('header'));
+		headerViewModel.activate();
+	} else {
+		var nonCurrentViewHeader = "#" + $(this).parent().attr('id') + " header";
+		$(nonCurrentViewHeader).html('');
+	}
+});
 </script>

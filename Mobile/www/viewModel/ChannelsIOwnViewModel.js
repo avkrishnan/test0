@@ -11,8 +11,7 @@ function ChannelsIOwnViewModel() {
   /* Channels observable */
 	this.sectionOne = ko.observable(false);
 	this.sectionTwo = ko.observable(false);	
-	this.channels = ko.observableArray([]);
-	this.toastText = ko.observable();		
+	this.channels = ko.observableArray([]);		
 
 	/* Methods */
 	this.applyBindings = function(){	
@@ -22,20 +21,12 @@ function ChannelsIOwnViewModel() {
 	};
 	
   this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				localStorage.removeItem('toastData');				
-				showToast();											
-			}
-			that.accountName(localStorage.getItem('accountName'));
+		if(authenticate()) {
+			addExternalMarkup(that.template); // this is for header/overlay message				
+			that.accountName(ENYM.ctx.getItem('accountName'));
 			that.sectionOne(false);
 			that.sectionTwo(false);			
-			localStorage.setItem('counter', 1);												
+			ENYM.ctx.setItem('counter', 1);												
 			that.channels.removeAll();			
 			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
@@ -69,25 +60,25 @@ function ChannelsIOwnViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		that.toastText(details.message);		
-		showToast();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
 	};
 	
 	this.channelSettings = function(data){
-		localStorage.removeItem('currentChannelData');				
-		localStorage.setItem('currentChannelData', JSON.stringify(data));
+		ENYM.ctx.removeItem('currentChannelData');				
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelSettingsView');		
 	};
 	
 	this.channelMain = function(data){
-		localStorage.removeItem('currentChannelData');		
-		localStorage.setItem('currentChannelData', JSON.stringify(data));
+		ENYM.ctx.removeItem('currentChannelData');		
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));
 		viewNavigate('Channels', 'channelsIOwnView', 'channelMainView');					
 	};
 	
 	this.channelFollowers = function(data){
-		localStorage.removeItem('currentChannelData');			
-		localStorage.setItem('currentChannelData', JSON.stringify(data));	
+		ENYM.ctx.removeItem('currentChannelData');			
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));	
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');		
 	};	
 	

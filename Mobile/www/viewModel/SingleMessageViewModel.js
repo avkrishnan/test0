@@ -1,111 +1,97 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
+﻿/* To do - Pradeep Kumar */
 function SingleMessageViewModel() {
-  var that = this;
-	this.template = 'singleMessageView';
-	this.viewid = 'V-23';
-	this.viewname = 'Broadcast Details';
-	this.displayname = 'Broadcast Details';	
-	this.accountName = ko.observable();		
+  var self = this;
+	self.template = 'singleMessageView';
+	self.viewid = 'V-23';
+	self.viewname = 'Broadcast Details';
+	self.displayname = 'Broadcast Details';
+	
+  self.inputObs = [
+    'channelName',
+		'time',
+    'singleMessage', 
+    'broadcastType', 
+    'iGi', 
+    'percentageText',
+    'percentageClass',
+		'percentage',
+		'noiGi',
+		'noacks',
+		'acks',
+		'escalateUntil',
+		'replies'];		
+	self.defineObservables();		
 
   /* Single message observable */		
-	this.channelName = ko.observable();		
-	this.time = ko.observable();	
-	this.singleMessage = ko.observable();
-	this.broadcastType = ko.observable();	
-	this.iGi = ko.observable();
-	this.percentageText = ko.observable();
-	this.percentageClass = ko.observable();	
-	this.percentage = ko.observable();			
-	this.noiGi = ko.observable();
-	this.noacksVisibility = ko.observable(false);
-	this.acksVisibility = ko.observable(false);			
-	this.noacks = ko.observable();
-	this.acks = ko.observable();
-	this.escalateUntil = ko.observable();	
-	this.escalateTime = ko.observable(false);	
-	this.replies = ko.observable();		
-	this.toastText = ko.observable();
-	this.toastClass = ko.observable();				
+	self.noacksVisibility = ko.observable(false);
+	self.acksVisibility = ko.observable(false);			
+	self.escalateTime = ko.observable(false);					  
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
-	
-	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-		var messageObject = JSON.parse(localStorage.getItem('currentMessageData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !messageObject) {
+  self.activate = function () {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
+		var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
+		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
+			addExternalMarkup(self.template); // this is for header/overlay message																		
+			self.channelName(channelObject.channelName);		
+			//that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');
+			self.time('Sent - '+ formatDate(messageObject.created, 'long'));
+			if(messageObject.broadcastFull.length > truncatedTextScreen()) {
+				var message = $.trim(messageObject.broadcastFull).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...';
 			}
-			that.toastClass('');					
-			that.accountName(localStorage.getItem('accountName'));											
-			that.channelName(channelObject.channelName);					
-			that.time('Sent '+ dateFormat1(messageObject.created) +' ('+messageObject.time+'):');	
-			that.singleMessage(messageObject.broadcastFull);
-			that.broadcastType(messageObject.type);
-			that.iGi(messageObject.iGi);
-			that.percentageText(messageObject.percentageText);
-			that.percentageClass(messageObject.percentageClass);			
-			that.percentage(messageObject.percentage);			
-			that.noiGi(messageObject.noiGi);
-			that.noacksVisibility(false);
-			that.acksVisibility(false);			
-			that.escalateTime(false);			
+			else {
+				var message = messageObject.broadcastFull;					
+			}				
+			self.singleMessage(message+'<em></em>');
+			self.broadcastType(messageObject.type);
+			self.iGi(messageObject.iGi);
+			self.percentageText(messageObject.percentageText);
+			self.percentageClass(messageObject.percentageClass);
+			self.percentage(messageObject.percentage);			
+			self.noiGi(messageObject.noiGi);
+			self.noacksVisibility(false);
+			self.acksVisibility(false);			
+			self.escalateTime(false);			
 			if(messageObject.escUntil != '' &&  typeof messageObject.escUntil != 'undefined') {
-				that.escalateTime(true);								
-				that.escalateUntil('<span class="singlemsgicon '+messageObject.sensitivity+'"></span>"'+messageObject.sensitivityText+'" until '+shortFormatYear(messageObject.escUntil));			
+				self.escalateTime(true);								
+				self.escalateUntil('<span class="singlemsgicon '+messageObject.sensitivity+'"></span>"'+messageObject.sensitivityText+'" until '+formatDate(messageObject.escUntil, 'short', 'main'));			
 			}
-			that.replies(messageObject.replies);						
+			self.replies(messageObject.replies);						
 			if(messageObject.type == 'REQUEST_ACKNOWLEDGEMENT' && typeof messageObject.noacks != 'undefined') {
 				if(messageObject.acks+messageObject.noacks == messageObject.acks){
-					that.noacksVisibility(false);
-					that.acksVisibility(true);					
-					that.acks(messageObject.acks+' Got It');										
+					self.noacksVisibility(false);
+					self.acksVisibility(true);					
+					self.acks(messageObject.acks+' Got It');										
 				}
 				else {
-					that.noacksVisibility(true);
-					that.acksVisibility(true);	
-					that.noacks(messageObject.noacks+" Haven't Got It Yet");
-					that.acks(messageObject.acks+' Got It');					
+					self.noacksVisibility(true);
+					self.acksVisibility(true);	
+					self.noacks(messageObject.noacks+" Haven't Got It Yet");
+					self.acks(messageObject.acks+' Got It');					
 				}
 			}							
 		}
 	}
 	
-	this.showReplies = function(){
-		if(that.replies() == '0 Replies') {
-			that.toastClass('toast-info');			
-			that.toastText('No replies to display');		
-			showToast();			
+	self.showReplies = function(){
+		if(self.replies() == '0 Replies') {
+			var toastobj = {type: 'toast-info', text: 'No replies to display'};
+			showToast(toastobj);			
 		}
 		else {						
 			viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageRepliesView');
 		}
 	};
 	
-	this.showWhoGotIt = function(){
-		if(that.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
-			that.toastClass('toast-info');			
-			that.toastText('No iGi requested');		
-			showToast();				
+	self.showWhoGotIt = function(){
+		if(self.broadcastType() != 'REQUEST_ACKNOWLEDGEMENT') {
+			var toastobj = {type: 'toast-info', text: 'No iGi requested'};
+			showToast(toastobj);						
 		}
-		else if(that.acks() == '0 Got It') {
-			that.toastClass('toast-info');			
-			that.toastText("No iGi's received yet");		
-			showToast();			
+		else if(self.acks() == '0 Got It') {
+			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
+			showToast(toastobj);			
 		}
 		else {					
 			viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');
@@ -113,3 +99,6 @@ function SingleMessageViewModel() {
 	};					
 				
 }
+
+SingleMessageViewModel.prototype = new ENYM.ViewModel();
+SingleMessageViewModel.prototype.constructor = SingleMessageViewModel;

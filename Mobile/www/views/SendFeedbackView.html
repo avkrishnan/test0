@@ -1,5 +1,5 @@
 <!--To do - Pradeep Kumar-->
-<div id="inviteFollowersIIView" data-role="page" class="channel-list" >
+<div id="sendFeedbackView" data-role="page" class="channel-list" >
 	<header class="logged-in"></header>  
   <div class="page-content channelsettings">
     <h1 class="help-FAQs" data-bind="text: feedbackType"></h1>
@@ -10,14 +10,13 @@
         <div class="msgerror" data-bind="visible: error, html: errorFeedback"></div>
       </div>
       <a href="#" class="sendbtnican" data-bind="click: sendFeedbackCommand">
-        <span>send</span>
+        <span>SEND</span>
       </a>
     </section> 
-  </div>
-  <div class="toast-notification"><div class="toast-text" data-bind="text: toastText"></div></div>   
+  </div>  
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Send Feedback', 'inviteFollowersIIView', 'escalationPlansView');"></a>
-    <a class="announcement" href="#" onclick="viewNavigate('Send Feedback', 'inviteFollowersIIView', 'sendMessageView');"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Send Feedback', 'sendFeedbackView', 'escalationPlansView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Send Feedback', 'sendFeedbackView', 'sendMessageView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div> 

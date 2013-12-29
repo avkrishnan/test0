@@ -10,8 +10,7 @@ function RecipientDetailsViewModel() {
 
   /* Not got it observable */				
 	this.channelName = ko.observable();
-	this.recipient = ko.observableArray();				
-	this.toastText = ko.observable();			
+	this.recipient = ko.observableArray();						
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -21,24 +20,18 @@ function RecipientDetailsViewModel() {
 	};  
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));	
-		var recipientObject = JSON.parse(localStorage.getItem('currentRecipientData'));			
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject || !recipientObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');				
-			}			
-			that.accountName(localStorage.getItem('accountName'));													
-			that.channelName(channelObject.channelName);
-			var recipient = recipientObject.recipient.split(',');
-			that.recipient(recipient[0]+' '+recipient[1]);								
+		if(authenticate()) {
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
+			var recipientObject = JSON.parse(ENYM.ctx.getItem('currentRecipientData'));			
+			if(!channelObject || !recipientObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message						
+				that.accountName(ENYM.ctx.getItem('accountName'));													
+				that.channelName(channelObject.channelName);
+				var recipient = recipientObject.recipient.split(',');
+				that.recipient(recipient[0]+' '+recipient[1]);								
+			}
 		}
 	}					
 				

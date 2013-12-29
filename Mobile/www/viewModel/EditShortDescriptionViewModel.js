@@ -4,8 +4,8 @@ function EditShortDescriptionViewModel() {
   var that = this;
 	this.template = 'editShortDescriptionView';
 	this.viewid = 'V-66';
-	this.viewname = 'Edit Short Desc';
-	this.displayname = 'Edit Short Desc';	  
+	this.viewname = 'Edit Tagline';
+	this.displayname = 'Edit Channel Tagline';	  
 	this.accountName = ko.observable();	
 	this.notification = ko.observable();
 	
@@ -14,8 +14,7 @@ function EditShortDescriptionViewModel() {
 	this.channelName = ko.observable();	
 	this.shortDescription = ko.observable();	
 	this.errorMessage = ko.observable(false);	
-	this.errorChannel = ko.observable();
-	this.toastText = ko.observable();		
+	this.errorChannel = ko.observable();	
 	
 	/* Methods */
 	this.applyBindings = function() {
@@ -32,29 +31,23 @@ function EditShortDescriptionViewModel() {
   };
 	
 	this.activate = function() {
-		var token = ES.evernymService.getAccessToken();
-		var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));		
-		if(token == '' || token == null) {
-			goToView('loginView');
-		} else if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			if(localStorage.getItem('toastData')) {
-				that.toastText(localStorage.getItem('toastData'));
-				showToast();
-				localStorage.removeItem('toastData');												
-			}			
-			that.accountName(localStorage.getItem('accountName'));			
-			var channelObject = JSON.parse(localStorage.getItem('currentChannelData'));
-			that.channelId(channelObject.channelId);
-			that.channelName(channelObject.channelName);			
-			that.shortDescription(channelObject.channelDescription);						
-			$('textarea').keyup(function () {
-				that.errorMessage(false);				
-				that.errorChannel('');
-			});
-		}
+    if(authenticate()) {
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));						
+			if(!channelObject) {
+				goToView('channelsIOwnView');			
+			} else {
+				addExternalMarkup(that.template); // this is for header/overlay message					
+				that.accountName(ENYM.ctx.getItem('accountName'));			
+				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
+				that.channelId(channelObject.channelId);
+				that.channelName(channelObject.channelName);			
+				that.shortDescription(channelObject.channelDescription);						
+				$('textarea').keyup(function () {
+					that.errorMessage(false);				
+					that.errorChannel('');
+				});
+			}
+    }
 	}
 	
 	$(document).keyup(function (e) {
@@ -63,9 +56,7 @@ function EditShortDescriptionViewModel() {
 		}
 	});	
 	
-	function successfulModify(args) {
-		that.toastText('Description changed');		
-		localStorage.setItem('toastData', that.toastText());		
+	function successfulModify(args) {		
 		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
 		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});
   };
@@ -84,8 +75,12 @@ function EditShortDescriptionViewModel() {
 			followerCount: followers
 		});
 		channel = channel[0];		
-		localStorage.setItem('currentChannelData', JSON.stringify(channel));
-		popBackNav();							
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
+		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Channel Tagline updated'};
+		showToast(toastobj);
+		backNavText.pop();
+		backNavView.pop();		
+		goToView('channelSettingsView');							
 	}
 
   function errorAPI(data, status, details) {
@@ -97,7 +92,7 @@ function EditShortDescriptionViewModel() {
   this.shortDescriptionCommand = function () {
 		if (that.shortDescription() == '' || typeof that.shortDescription() == 'undefined') {
 			that.errorMessage(true);			
-      that.errorChannel('<span>SORRY:</span> Please enter short description');
+      that.errorChannel('<span>SORRY:</span> Please enter channel tagline');
     } else {
 			var channelObject = {
 				id: that.channelId(),
