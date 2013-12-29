@@ -4,6 +4,7 @@ function EnymAmpSetup(altBaseUrl) {
 
   var baseUrl = altBaseUrl ? altBaseUrl : 'https://api.evernym.com/api24/rest';
 
+  var admin = 'admin';
   var acct = 'account';
   var chnl = 'channel';
   var flwr = 'follower';
