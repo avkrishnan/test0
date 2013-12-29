@@ -21,6 +21,10 @@ function EvernymSystemService(api) {
     return api.callAPI('GET', '/notification/summary?type=msg', undefined, callbacks, true);
   };
 
+  t.getFeedback = function() {
+    return api.callAPI('GET', '/admin/feedback', undefined, undefined, true);
+  };
+  
   t.MnsCacheData = {};
   t.MnsLastUpdated = 0;
 
