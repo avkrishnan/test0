@@ -173,11 +173,14 @@ function ApiTestHelper() {
     };
   };
 
-  t.checkLogin = function(scenario) {
+  t.checkLogin = function(scenario, expectPrivs) {
     return function(data) {
       ok(data, 'data returned');
       ok(data.accessToken, 'should have access token');
       ok(data.account, 'should have account');
+      if (expectPrivs) {
+        ok(data.privs, 'should have privileges');
+      }
       equal(scenario.account.accountname, data.account.accountname, 'accountnames match');
       equal(data.accessToken.length, 32, 'access token should be 32 characters');
       // scenario.accessToken = data.accessToken;
@@ -185,12 +188,12 @@ function ApiTestHelper() {
     };
   };
 
-  t.login = function(scenario) {
+  t.login = function(scenario, expectPrivs) {
     return function() {
       scenario.login = t.generateLogin(scenario.account);
       $.when(scenario.ES.loginService.accountLogin(scenario.login))
       .then(t.CHECK.success,t.CHECK.shouldNotFail)
-      .then(t.checkLogin(scenario),t.CHECK.shouldNotFail)
+      .then(t.checkLogin(scenario, expectPrivs),t.CHECK.shouldNotFail)
       .then(start,start);
     };
   };

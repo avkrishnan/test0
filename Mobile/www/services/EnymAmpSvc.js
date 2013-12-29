@@ -22,7 +22,10 @@ function EnymAmpSetup(altBaseUrl) {
     amplify.request.define(name, 'ajax', settings);
   }
 
-  //Account/Login services
+  //Admin services (privileged services only available to certain users, like Evernym corporate employees
+  defineGet('feedback', admin, '/feedback');
+  
+  //Account (Login) services
   definePost('enroll', acct, '/enroll');
   defineGet('checkName', acct, '/{name}');
   definePost('login', acct, '/login');
