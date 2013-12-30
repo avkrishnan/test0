@@ -11,7 +11,8 @@
   self.defineObservables();
 
   self.activate = function () {
-		addExternalMarkup(self.template); // this is for header/overlay message			
+		addExternalMarkup(self.template); // this is for header/overlay message
+		$('input').focus();			
 		$('input').keyup(function () {
 		  self.clearErrorObs();
 		});			
