@@ -32,7 +32,7 @@
 	});	
 	
 	function successfulModify(args) {		
-		$.mobile.showPageLoadingMsg('a', 'Loading channel settings');
+		$.mobile.showPageLoadingMsg('a', 'Loading channel Infomation');
 		ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI});		
   };
 	
@@ -52,11 +52,9 @@
 		});
 		channel = channel[0];		
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
-		var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Description changed'};
-		showToast(toastobj);		
-		backNavText.pop();
-		backNavView.pop();		
-		goToView('channelSettingsView');								
+		var toastobj = {redirect: self.previousViewID(), type: '', text: 'Description changed'};
+		showToast(toastobj);	
+		popBackNav();								
 	};
 
   function errorAPI(data, status, details) {

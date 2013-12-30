@@ -18,6 +18,7 @@ ENYM.ViewModel = function() {
   
   this.accountName = ko.observable();
   this.toastText = ko.observable();
+  this.previousViewID = ko.observable();	//Pradeep - Require previous view id on channel tagline/descripton view for setting toast.
 
   this.inputObs = []; //default input observables; subclasses with input observables should override this default
   this.errorObs = []; //default error observables; subclasses with error observables should override this default
@@ -62,6 +63,7 @@ ENYM.ViewModel = function() {
 			  vm.clearForm();
 			  vm.activate();
 	      vm.accountName(ENYM.ctx.getItem("accountName"));
+				vm.previousViewID(data.prevPage.attr('id'));
       }
     });
   };

@@ -17,8 +17,10 @@
       </div>
     </div>
     <div class="channellanding chandescription">
-      <span data-bind="html: channelDescription">
-      </span>
+      <div data-bind="html: longdescription, visible: less"></div>
+      <div data-bind="html: moreText, visible: more"></div>        
+      <a class="morebtn" href="#" data-bind="visible: moreButton, click: showMore">MORE</a>
+      <a class="morebtn lessbtn" href="#" data-bind="visible: lessButton, click: showLess">LESS</a>    
      <a class="editbtn" href="#" onclick="viewNavigate('Channel Intro', 'channelIntroView', 'editLongDescriptionView');">Edit This Description</a>
     </div>
     <div class="contactchannel">
@@ -46,8 +48,10 @@
       </div>
     </div>   
     <div class="channellanding chandescription">
-      <span data-bind="html: channelDescription">This is the web page for XYZchannel.</br>
-      To follow XYZchannel, click the "Follow" Button below.</span>
+      <div data-bind="html: longdescription, visible: less"></div>
+      <div data-bind="html: moreText, visible: more"></div>        
+      <a class="morebtn" href="#" data-bind="visible: moreButton, click: showMore">MORE</a>
+      <a class="morebtn lessbtn" href="#" data-bind="visible: lessButton, click: showLess">LESS</a>    
     </div>
     <div class="contactchannel">
        <div class="loginbtn"><span class="disablebtn">FOLLOW</span></div>
