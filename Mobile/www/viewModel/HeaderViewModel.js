@@ -155,28 +155,34 @@ function OverlayViewModel() {
 			valueNotification.created = formatDate(valueNotification.created, 'short', 'main');
 
 			valueNotification.fullText = jQuery.trim(valueNotification.text);
-			if(valueNotification.text.length > screenSizeText) {
-				valueNotification.text = jQuery.trim(valueNotification.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";
-			}
+			valueNotification.text = '<em>'+valueNotification.created+'</em>:&nbsp;'+valueNotification.text;
 			if(valueNotification.escLevelId && valueNotification.escLevelId != 'N' && valueNotification.escLevelId != 'F') {
 				valueNotification.escLevelId = "iconchannels icon-" + valueNotification.escLevelId.toLowerCase();
+				var messageType = 'msg-icon';
 			}
 			else if (valueNotification.escLevelId == 'N' || valueNotification.escLevelId == 'F') {
-				valueNotification.escLevelId = '';						
+				valueNotification.escLevelId = '';
+				var messageType = 'onlymsg';					
 			}			
 			else {
 				valueNotification.escLevelId = "iconchannels icon-d";
 			}
 			if(valueNotification.ackRequested == 'Y' && valueNotification.acknowledged == 'N' && valueNotification.dismissed == 'N') {
-				var iGiClass = 'igibutton';		
+				var iGiClass = 'igibutton';
+				var messageType = 'igi-msg';	
 			}
 			else if(valueNotification.acknowledged == 'Y' && valueNotification.dismissed == 'N') {
-				var iGiClass = 'igibutton igisent';										
+				var iGiClass = 'igibutton igisent';
+				var messageType = 'igi-msg';										
 			}
 			else {
 				var iGiClass = '';
 			}
+			if(iGiClass != '' && valueNotification.escLevelId != '') {
+				var messageType = '';
+			}
 			valueNotification.iGiClass = iGiClass;
+			valueNotification.messageType = messageType;
 			valueNotification.readClass = "read-" + valueNotification.read.toLowerCase();
 			//alert(JSON.stringify(valueNotification));					
 			overlayViewModel.newMessagesDisplayList.push(valueNotification);

@@ -33,12 +33,11 @@ function SingleMessageRepliesViewModel() {
     $.mobile.hidePageLoadingMsg();			
 		for(len = 0; len<data.message.length; len++) {
 			if(data.message[len].replies < 1) {
+				var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+data.message[len].text;
 				if(data.message[len].text.length > truncatedTextScreen()) {
-					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+$.trim(data.message[len].text).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...';
 				  var replyLess = $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...';
 				}
 				else {
-					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+data.message[len].text;
 					var replyLess = data.message[len].text;					
 				}				
 				self.replies.push({
@@ -46,7 +45,7 @@ function SingleMessageRepliesViewModel() {
 					senderSubscriberId: data.message[len].senderSubscriberId,
 					responseToMsgId: data.message[len].responseToMsgId,		
 					created: data.message[len].created,				
-					replyTime: msToTime(data.message[len].created),
+					replyTime: formatDate(data.message[len].created, 'short', 'main'),
 					reply: reply,
 					replyLess: replyLess,					
 					replyFull: data.message[len].text,

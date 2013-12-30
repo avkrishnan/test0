@@ -91,32 +91,34 @@
 					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
 						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
 						tempClass = 'iconchannels icon-' + tempClass;
+						var messageType = 'msg-icon';
 					}
 					else if(valueMessage.escLevelId == 'N' || valueMessage.escLevelId == 'F') {
-						tempClass = '';						
+						tempClass = '';
+						var messageType = 'onlymsg';						
 					}
 					else {
 						tempClass = 'iconchannels icon-d'
 					}
-					if(valueMessage.text.length > screenSizeText) {
-						var tempText = jQuery.trim(valueMessage.text).substring(0, screenSizeText).split(" ").slice(0, -1).join(" ") + "...";
-					}
-					else {
-						var tempText = jQuery.trim(valueMessage.text);
-					}
+					var tempText = valueMessage.text;
 					if(valueMessage.ackRequested == 'Y' && valueMessage.acknowledged == 'N' && valueMessage.dismissed == 'N') {
 						var iGiClass = 'igibutton';
+						var messageType = 'igi-msg';
 					}
 					else if(valueMessage.acknowledged == 'Y' && valueMessage.dismissed == 'N') {
-						var iGiClass = 'igibutton igisent';						
+						var iGiClass = 'igibutton igisent';
+						var messageType = 'igi-msg';						
 					}
 					else {
 						var iGiClass = '';
 					}
+					if(iGiClass != '' && tempClass != '') {
+						var messageType = '';
+					}					
 					var readClass = 'read-' + valueMessage.read.toLowerCase(); 
 					self.channelMessages.push( // without push not working
 						{
-							readClass:readClass, read:valueMessage.read, ackRequested:valueMessage.ackRequested, dismissed: valueMessage.dismissed, iGiClass: iGiClass, 
+							readClass:readClass, read:valueMessage.read, ackRequested:valueMessage.ackRequested, dismissed: valueMessage.dismissed, iGiClass: iGiClass, messageType: messageType,
 							messageId: valueMessage.msgId, ack: valueMessage.acknowledged, messageCreated: tempCreated, messageShortText: tempText, messageText: valueMessage.text, 
 							messageClass: tempClass, messageID:valueMessage.channelId, messageSender:valueMessage.subscriberId, messageCreatedOriginal:valueMessage.created
 						}

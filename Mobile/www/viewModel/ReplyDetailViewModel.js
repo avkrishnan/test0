@@ -38,7 +38,7 @@ function ReplyDetailViewModel() {
 			self.channelName(channelObject.channelName);													
 			self.messageId(messageObject.messageId);
 			self.senderName(replyObject.senderFirstname+' '+replyObject.senderLastname+':');						
-			self.replyDate(dateFormat2(replyObject.created));
+			self.replyDate(formatDate(replyObject.created, 'short', 'main'));
 			self.reply(replyObject.replyLess);
 			self.moreText(replyObject.replyFull);												
 		}

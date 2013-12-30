@@ -216,7 +216,7 @@
 					senderSubscriberId: data.message[len].senderSubscriberId,
 					responseToMsgId: data.message[len].responseToMsgId,		
 					created: data.message[len].created,				
-					replyTime: msToTime(data.message[len].created),
+					replyTime: formatDate(data.message[len].created, 'short', 'main'),
 					replyLess: replyLess,					
 					replyFull: data.message[len].text,
 					senderFirstname: data.message[len].senderFirstname,
