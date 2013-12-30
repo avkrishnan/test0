@@ -46,12 +46,16 @@
 	
   self.nextViewCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
+		var nameReg = /^[a-zA-Z0-9._-]+$/;
     if (self.emailaddress() == '' || !emailReg.test(self.emailaddress())) {
       self.emailClass('validationerror');
       self.errorEmail('<span>SORRY:</span> Please enter valid email');
     } else if (self.evernym() == '') {
       self.accountNameClass('validationerror');
       self.errorAccountName('<span>SORRY:</span> Please enter Evernym name');
+		} else if(!nameReg.test(self.evernym())) {
+			self.accountNameClass('validationerror');
+			self.errorAccountName('<span>SORRY:</span> Only letters, numbers, (.), (-), and (_) allowed.');			
     } else if (self.evernym().length < 5 || self.evernym().length > 25) {
       self.accountNameClass('validationerror');
       self.errorAccountName('<span>SORRY:</span> Evernym min. 5 and max. 25 characters');		
