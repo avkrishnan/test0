@@ -3357,68 +3357,74 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	left:0;
 	position:absolute;
 	text-align:center;
-	top:48%;
+	top:42%;
 	width:100%;
 }
+.helpinfo span {
+	color:#fff;
+	font-size:16px;
+	display:block;
+	margin:0px 0px 5px 0px;
+}
 .helpinfo a {
-	padding:5px 15px;
-	font-size:14px;
+	padding:3px 31px 3px 10px;
+	font-size:22px;
 	border-radius:4px;
 	display:inline-block;
-	border:2px solid #2D2D2D;
-	background:#8DC63F;
+	background:#8DC63F url(images/helparrow.png) no-repeat 66px 10px;
 }
-/*27-12-2013*/
+.helpinfo .helpgotit {
+	padding:3px 23px 3px 46px;
+	background:#8DC63F url(images/helparrow.png) no-repeat 24px 10px;
+}
 .messagecenter {
-	background:url("images/followersarrow.png") no-repeat center top;
-	color: #FFFFFF;
-	font-size: 14px;
-	padding: 101px 90px 0 0;
-	position: absolute;
-	right: 110px;
+	background:url("images/usergidearrow.png") no-repeat 122px 5px;
+	padding:32px 0 0 0;
+	position:absolute;
+	right:154px;
 }
 .navigation {
-	background:url("images/navigationarrow.png") no-repeat 44px top;
-	color:#FFFFFF;
-	font-size:14px;
-	padding:69px 0 0 0;
+	background:url("images/usergidearrow.png") no-repeat 128px 5px;
+	padding:112px 0 0 0;
 	position:absolute;
-	right:5px;
+	right:19px;
 }
-.igihelp {
-	background:url("images/igihelparrow.png") no-repeat center top;
-	color: #FFFFFF;
-	font-size: 14px;
-	padding: 164px 114px 0 0;
-	position: absolute;
-	right: 29px;
-}
-.followershelp {
-	background:url("images/new-lostarrow.png") no-repeat center top;
-	color:#FFFFFF;
-	font-size:14px;
-	padding:115px 8px 0 0;
-	position:absolute;
-	right:2px;
-}
-.settingshelp {
-	background:url("images/settingarrow.png") no-repeat center bottom;
-	bottom:48px;
-	color:#FFFFFF;
-	font-size:14px;
-	left:25px;
-	padding:0 0 65px 15px;
-	position:absolute;
+.navigation span, .broadcasthelp span, .settingshelp span, .followershelp span, .igihelp span, .messagecenter span {
+	font-size: 16px;
+	color:#414141;
+	padding: 5px 10px;
+	background:#fffac8;
+	border-radius:4px;
 }
 .broadcasthelp {
-	background:url("images/broadcasthelparrow.png") no-repeat center bottom;
-	bottom:53px;
-	color:#FFFFFF;
-	font-size:14px;
-	padding:0 0 110px;
+	background:url("images/usergidebuttomarrow.png") no-repeat 108px 56px;
+	bottom:51px;
+	padding:0 0 85px 0;
 	position:absolute;
-	right:30px;
-	width:116px;
+	right:19px;
+}
+.broadcasthelp span {
+	display:block;
+	width:127px;
+}
+.settingshelp {
+	background:url("images/settingarrow.png") no-repeat 31px 28px;
+	bottom:46px;
+	left:0;
+	padding:0 0 48px 20px;
+	position:absolute;
+}
+.followershelp {
+	background:url("images/usergidearrow.png") no-repeat 95px 5px;
+	padding:115px 0 0 0;
+	position:absolute;
+	right:15px;
+}
+.igihelp {
+	background: url("images/usergidearrow.png") no-repeat 128px 5px;
+	padding:74px 0 0 0;
+	position:absolute;
+	right:96px;
 }
 /* New Channel create after information */
 .congrats {
@@ -3650,15 +3656,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-600.png) no-repeat center 0px;
-	}
-	.messagecenter {
-		right:107px;
-	}	
-	.igihelp {
-		right:27px;
-	}
-	.followershelp {
-		right:3px;
 	}
 }
 @media only screen and (min-width:360px) {
@@ -4023,18 +4020,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.broadcastmsgreplie {
 		width:78.1%;
 	}
-	.messagecenter {
-		right:135px;
-	}	
-	.igihelp {
-		right: 69px;
-	}
-	.messagecenter {
-		right:110px;
-	}	
-	.igihelp {
-		right:28px;
-	}
 	.singlemessage span {
 		width:96.8%;
 	}
@@ -4090,12 +4075,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.slidemenu {
 		min-height:622px;
-	}
-	.igihelp {
-		right:28px;
-	}
-	.followershelp {
-		right:0px;
 	}
 }
 /* @media query css End*/

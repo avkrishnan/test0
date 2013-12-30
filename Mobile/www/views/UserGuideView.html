@@ -9,19 +9,20 @@
   </header>
   <div class="page-content">
     <div data-bind="visible: sectionOne">
-      <div class="navigation">Quick Navigation</div>
-      <div class="settingshelp">Settings</div>
-      <div class="broadcasthelp">Create channels, Send broadcasts</div>
+      <div class="navigation"><span>Quick Navigation</span></div>
+      <div class="settingshelp"><span>Settings</span></div>
+      <div class="broadcasthelp"><span>Create channels, Send broadcasts</span></div>
       <div class="helpinfo">
-        <a href="#" data-bind="click: goToNext">Next &raquo;</a>
+        <span>Quick tour of Evernym Channels</span>
+        <a href="#" data-bind="click: goToNext">Next</a>
       </div>
     </div>
     <div data-bind="visible: sectionTwo">
-      <div class="messagecenter">Message Center</div>
-      <div class="igihelp">New iGi Responses</div>
-      <div class="followershelp">New/Lost Followers</div>
+      <div class="messagecenter"><span>Message Center</span></div>
+      <div class="igihelp"><span>New iGi Responses</span></div>
+      <div class="followershelp"><span>New/Lost Followers</span></div>
       <div class="helpinfo">
-        <a href="#" data-bind="click: okGotIt">Ok, Got it!</a>
+        <a class="helpgotit" href="#" data-bind="click: okGotIt">Ok, Got it!</a>
       </div>
     </div>
   </div>
