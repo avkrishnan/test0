@@ -40,7 +40,7 @@
 			self.errorNewChannel('<span>SORRY:</span> Only letters, numbers, (.), (-), and (_) allowed.');
 		} else if(self.newChannel().length < 5 || self.newChannel().length > 25) {
 			self.channelClass('validationerror');
-			self.errorNewChannel('<span>SORRY:</span> Name min. 5 and max. 25 characters');			
+			self.errorNewChannel('<span>SORRY:</span> Name of min. 5 and max. 25 characters');			
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
 			ES.loginService.checkName(self.newChannel(), { success: successAvailable, error: errorAPI });			
