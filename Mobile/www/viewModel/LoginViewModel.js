@@ -26,7 +26,9 @@
 				self.password(ENYM.ctx.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
-			$('input').keyup(self.clearErrorObs);
+			$('input').keyup(function(e) {
+				self.clearErrorObs();
+			});
 		} 
 		else {
 			goToView('homeView');
