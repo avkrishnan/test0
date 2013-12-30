@@ -29,13 +29,13 @@
 		}
 	});	
 
-	self.createChannelCommand = function (e) {
+	self.createChannelCommand = function () {
     if (self.newChannel() == '') {
       self.errorNewChannel('<span>SORRY:</span> Please enter channel name');
     } else if (self.newChannel().match(/\s/)) {
 			self.errorNewChannel('<span>SORRY:</span> Please choose a short name with no spaces');
-		} else if(self.newChannel().length > 15) {
-			self.errorNewChannel('<span>SORRY:</span> Please choose name of max. 15 characters');			
+		} else if(self.newChannel().length < 5 || self.newChannel().length > 25) {
+			self.errorNewChannel('<span>SORRY:</span> Name min. 5 and max. 25 characters');			
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
 			ES.loginService.checkName(self.newChannel(), { success: successAvailable, error: errorAPI });			
