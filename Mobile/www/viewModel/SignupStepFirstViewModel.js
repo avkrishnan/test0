@@ -13,7 +13,8 @@
 
   self.activate = function () {
 		var token = ES.evernymService.getAccessToken();
-		if(token == '' || token == null) {			
+		if(token == '' || token == null) {
+			$('input').focus();			
 			$('input').keyup(function () {
 				self.errorEmail('');
 				self.errorAccountName('');
