@@ -3392,7 +3392,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .navigation span, .broadcasthelp span, .settingshelp span, .followershelp span, .igihelp span, .messagecenter span {
 	font-size: 16px;
 	color:#414141;
-	padding: 5px 10px;
+	padding:6px 10px;
 	background:#fffac8;
 	border-radius:4px;
 }
