@@ -14,14 +14,8 @@
   self.activate = function () {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
-			$('input').focus();			
 			$('input').keyup(function () {
-				self.errorEmail('');
-				self.errorAccountName('');
-				self.errorPassword('');
-				self.emailClass('');
-				self.accountNameClass('');
-				self.passwordClass('');
+				self.clearErrorObs();
 			});
 		} 
 		else {

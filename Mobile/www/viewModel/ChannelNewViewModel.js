@@ -17,9 +17,7 @@
 		self.sectionTwo(false);
 		$('input').focus();							
 		$('input').keyup(function () {
-			self.message('');
-			self.channelClass('');				
-			self.errorNewChannel('');
+			self.clearErrorObs();
 		});							
 	}
 	
