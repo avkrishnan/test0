@@ -28,7 +28,7 @@
 	});	
 
 	self.createChannelCommand = function () {
-		var nameReg = /^[a-zA-Z0-9._-]+$/;
+		var nameReg = /^[a-zA-Z0-9]+$/;
     if (self.newChannel() == '') {
 			self.channelClass('validationerror');
       self.errorNewChannel('<span>SORRY:</span> Please enter channel name');

@@ -40,7 +40,7 @@
 	
   self.nextViewCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-		var nameReg = /^[a-zA-Z0-9._-]+$/;
+		var nameReg = /^[a-zA-Z0-9]+$/;
     if (self.emailaddress() == '' || !emailReg.test(self.emailaddress())) {
       self.emailClass('validationerror');
       self.errorEmail('<span>SORRY:</span> Please enter valid email');
