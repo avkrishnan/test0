@@ -148,7 +148,11 @@ h1.newcreatechannel {
 	padding:42px 0 0 10px;
 }
 .channel-broadcast {
-	padding:62px 0 50px 10px;
+	padding:0;
+	position:absolute;
+	top:50%;
+	margin-top:-75px;
+	width:100%;
 }
 .exitpreview {
 	padding:0 0 0 10px;
@@ -509,6 +513,12 @@ input[type="checkbox"]:checked + label span {
 	background:#545454;
 	border:0;
 	margin:10px 20px 10px 10px;
+}
+.channel-broadcast .baseline {
+	margin:0 10px
+}
+.channel-broadcast .Channel {
+	margin:16px 20px;
 }
 .loginform span {
 	margin:0 0 8px 8px;
