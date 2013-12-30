@@ -52,13 +52,13 @@
 			self.errorAccountName('<span>SORRY:</span> Only letters, numbers, (.), (-), and (_) allowed.');			
     } else if (self.evernym().length < 5 || self.evernym().length > 25) {
       self.accountNameClass('validationerror');
-      self.errorAccountName('<span>SORRY:</span> Evernym min. 5 and max. 25 characters');		
+      self.errorAccountName('<span>SORRY:</span> Evernym min. 5 and max. 25 characters');
+		} else if (self.password() == '') {
+      self.passwordClass('validationerror');
+      self.errorPassword('<span>SORRY:</span> Please enter password');	
     } else if (self.password().length < 8) {
       self.passwordClass('validationerror');
       self.errorPassword('<span>SORRY:</span> Password of min. 8 characters');
-		} else if (self.password() == '') {
-      self.passwordClass('validationerror');
-      self.errorPassword('<span>SORRY:</span> Please enter password');
     } else {
 			$.mobile.showPageLoadingMsg('a', 'Checking Evernym availability');
 			return ES.loginService.checkName(self.evernym(), { success: successAvailable, error: errorAPI });
