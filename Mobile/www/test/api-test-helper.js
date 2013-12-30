@@ -84,7 +84,7 @@ function ApiTestHelper() {
     badRequest : checkFunc("400"),// : Bad Request"),
     unauthorized : checkFunc("401"),// : Unauthorized"),
     forbidden : checkFunc("403"),// : Forbidden"),
-    notFound : checkFunc("404: Not Found"),
+    notFound : checkFunc("404"),//: Not Found"),
     notImplemented : checkFunc("501"),//: Not Implemented"),
     shouldNotSucceed : function(a,b,c,d) { 
       ok(false, 'this call should not have succeeded: ' + a + b + c + d); 
@@ -263,10 +263,10 @@ function ApiTestHelper() {
     };
   };
 
-  t.followChannel = function(scenario, ownerScenario, chnlKey) {
+  t.followChannel = function(scenario, ownerScenario, chnlKey, ovrdSuccess, ovrdFail) {
     return function() {
       $.when(scenario.ES.channelService.followChannel(ownerScenario[chnlKey].id))
-      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(ovrdSuccess === undefined ? t.CHECK.successNoContent : ovrdSuccess, ovrdFail === undefined ? t.CHECK.shouldNotFail : ovrdFail)
       .then(start,start);
     };
   };

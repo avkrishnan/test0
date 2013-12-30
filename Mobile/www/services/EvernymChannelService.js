@@ -62,4 +62,18 @@ function EvernymChannelService(api) {
     return api.callAPI('POST', '/account/provisional/enroll', provisional, callbacks, true);
   };
 
+  
+  /* Channel Follower Requests */
+  t.getFollowerReq = function(channelid) {
+    return api.callAPI('GET', '/channel/' + channelid + '/followerrequest', undefined, undefined, false);
+  };
+  
+  t.addFollowerReq = function(channelid, request) {
+    return api.callAPI('POST', '/channel/' + channelid + '/followerrequest/' + request, undefined, undefined, true);
+  };
+  
+  t.removeFollowerReq = function(channelid, request) {
+    return api.callAPI('DELETE', '/channel/' + channelid + '/followerrequest/' + request, undefined, undefined, true);
+  };
+  
 }
