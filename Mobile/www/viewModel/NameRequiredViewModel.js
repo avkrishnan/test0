@@ -10,8 +10,7 @@
 	
   self.defineObservables();			
 	
-  self.activate = function () {
-		addExternalMarkup(self.template); // this is for header/overlay message			
+  self.activate = function () {		
 		$('input').keyup(function () {
 		  self.clearErrorObs();
 		});
