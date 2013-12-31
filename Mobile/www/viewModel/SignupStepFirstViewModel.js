@@ -110,7 +110,7 @@
     loginModel.password = self.password();
     loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
     ES.loginService.accountLogin(loginModel, callbacks);
-	}
+	};
 	
 	function loginSuccess(args) {		
     $.mobile.hidePageLoadingMsg();
@@ -120,13 +120,13 @@
 		ENYM.ctx.setItem('newusername', self.evernym());
 		ENYM.ctx.setItem('newuseremail', self.emailaddress());					
 		goToView('registrationVerifyView');			
-  }
+  };
 
   function loginError(data, status, details) {
     $.mobile.hidePageLoadingMsg();		
 		self.errorFirstLastName('<span>SORRY:</span> '+details.message);
     ES.evernymService.clearAccessToken();
-  }	    	
+  };	    	
 				
 }
 
