@@ -10,10 +10,14 @@
 	self.escalateEdit = ko.observable(false);
 	self.channels = ko.observableArray([]);
 	self.messageText = ko.observable();
+	self.igiClass = ko.observable();
+	self.iGiYes = ko.observable();
+	self.iGiNo = ko.observable();
+	self.yesClass = ko.observable();
+	self.noClass = ko.observable();
 
   self.inputObs = [ 'channelId', 'channelName', 'characterCount', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
-	'normalActive', 'fastActive', 'escalateActive', 'escDuration', 'escLevel', 'duration', 'activeType', 'escalateEdit', 'igiClass', 'iGiYes', 'iGiNo', 'yesClass', 'noClass', 
-	'broadcastType', 'selectedChannels' ];
+	'normalActive', 'fastActive', 'escalateActive', 'escDuration', 'escLevel', 'duration', 'activeType', 'escalateEdit', 'broadcastType', 'selectedChannels'];
 	self.defineObservables();	
 	
 	/* channels options variable */
@@ -86,7 +90,6 @@
 		}			
 		self.broadcastType('FYI');
 		if(ENYM.ctx.getItem('iGiStatus') == 'yes') {
-			alert('here');
 			self.igiClass('igiimage');		
 			self.yesClass('nobutton');
 			self.noClass('yesbutton');
