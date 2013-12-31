@@ -477,6 +477,19 @@ input[type="checkbox"]:checked + label span {
 	padding:0 0 0 10px;
 	clear:both;
 }
+.signupfree {
+	text-align:center;
+	margin-right:10px;
+}
+.signupfree .loginbtn {
+	float:none;
+	display:inline-block;
+	border-radius:24px;
+	padding:10px;
+}
+.signupfree .loginbtn a.ui-link, .signupfree .loginbtn a.ui-link:hover {
+	border-radius:20px;
+}
 .login a.ui-link, .login a.ui-link:hover, .login a.forget-password.ui-link, .login a.forget-password.ui-link:hover {
 	color:#7F7F7F;
 	font-size:16px;
@@ -497,13 +510,16 @@ input[type="checkbox"]:checked + label span {
 	text-decoration:none;
 	border-radius:20px 4px 4px 20px;
 }
-.signedup {
+.signedup, .signup {
 	color:#fff;
 	font-size:14px;
 	display:block;
 	font-weight:normal;
 	font-style:italic;
 	margin:10px 20px 10px 10px;
+}
+.signup {
+	text-align:center;
 }
 .baseline {
 	height:1px;
@@ -515,7 +531,7 @@ input[type="checkbox"]:checked + label span {
 	margin:0 10px
 }
 .channel-broadcast .Channel {
-	margin:16px 20px;
+	margin:16px 10px;
 }
 .loginform span {
 	margin:0 0 8px 8px;
@@ -1214,6 +1230,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	color:#FFFFFF;
 	font-size:15px;
 	line-height:26px;
+}
+.dropdownmsg {
+	float:left;
 }
 .dropdown span.mybroadcast {
 	float:left;
@@ -3003,7 +3022,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:url("images/icon-f.png") no-repeat 0 0;
 }
 .slidervalue-img .emergencycoloricon {
-	background:#ed1c24;
+	/*background:#ed1c24;*/
+	background:url("images/icon-e.png") no-repeat 1px 0;
 }
 .slider-value .fast {
 	float:left;
@@ -3573,6 +3593,18 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#8DC63F;
 	margin-right:5px;
 	font-weight:normal;
+}
+/* Provisional */
+.required {
+	color:#FFFFFF;
+	font-size:14px;
+	line-height:22px;
+}
+.required span {
+	color:#be1e2d;
+	font-size:20px;
+	float:left;
+	padding:0px 4px 0 0;
 }
 /*
 	*@media query css
