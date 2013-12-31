@@ -8,9 +8,10 @@
 	self.sectionOne = ko.observable(false);
 	self.sectionTwo = ko.observable(false);	
 	self.escalateEdit = ko.observable(false);
-	self.channels = ko.observableArray([]);		
+	self.channels = ko.observableArray([]);
+	self.messageText = ko.observable();
 
-  self.inputObs = [ 'channelId', 'channelName', 'messageText', 'characterCount', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
+  self.inputObs = [ 'channelId', 'channelName', 'characterCount', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
 	'normalActive', 'fastActive', 'escalateActive', 'escDuration', 'escLevel', 'duration', 'activeType', 'escalateEdit', 'igiClass', 'iGiYes', 'iGiNo', 'yesClass', 'noClass', 
 	'broadcastType', 'selectedChannels' ];
 	self.defineObservables();	
@@ -23,15 +24,51 @@
 	};
 	
 	self.activate = function() {			
-		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
-		self.channels.removeAll();		
-		ENYM.ctx.removeItem('escLevel');
-		ENYM.ctx.removeItem('escDuration');		
-		ENYM.ctx.removeItem('iGiStatus');					
-		if(authenticate()) {
-			addExternalMarkup(self.template); // this is for header/overlay message
-			self.sectionOne(false);
-			self.sectionTwo(false);
+		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];				
+		addExternalMarkup(self.template); // this is for header/overlay message
+		self.sectionOne(false);
+		self.sectionTwo(false);
+		self.normalText('normalcolor');
+		self.fastText('');
+		self.escalateText('');								
+		self.normalClass('normalcoloricon');
+		self.fastClass('');
+		self.escalateClass('');
+		self.duration("Normal: <em>Send once (usually to email)</em>");
+		self.activeType('normalcolor');				
+		self.yesClass('yesbutton');
+		self.noClass('nobutton');					
+		self.escalateEdit(false);
+		self.escLevel('N');				
+		self.igiClass('igiimageoff');
+		self.characterCount('0');										
+		self.escLevel(ENYM.ctx.getItem('escLevel'));				
+		if(self.escLevel() == 'H') {
+			escalate = 'Hound';
+		} else if(self.escLevel() == 'C') {
+			escalate = 'Chase';
+		} else {
+			escalate = 'Remind';
+		}																									
+		if(ENYM.ctx.getItem('escalate') == 'yes') {
+			self.normalText('');
+			self.fastText('');
+			self.escalateText(escalate);				
+			self.normalClass('');
+			self.fastClass('');
+			self.escalateClass('escalatecoloricon icon-'+escalate);										
+			if(ENYM.ctx.getItem('escDuration')) {
+				self.escDuration(new Date(ENYM.ctx.getItem('escDuration')));					
+				var DateTime = ENYM.ctx.getItem('escDuration').split('/');
+				var day = DateTime[2].split(' ');
+				var time = day[1].split(':');
+				var durationText = '"' + escalate + '" until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0];
+				self.duration(durationText);
+				self.activeType('escalatecolor '+escalate);
+				self.escalateEdit(true);																								
+			}		
+			ENYM.ctx.removeItem('escalate');																											
+		} else {				
 			self.normalText('normalcolor');
 			self.fastText('');
 			self.escalateText('');								
@@ -43,71 +80,29 @@
 			self.yesClass('yesbutton');
 			self.noClass('nobutton');					
 			self.escalateEdit(false);
+			ENYM.ctx.removeItem('escDuration');
 			self.escLevel('N');				
-			self.igiClass('igiimageoff');
-			self.characterCount('0');										
-			self.escLevel(ENYM.ctx.getItem('escLevel'));				
-			if(self.escLevel() == 'H') {
-				escalate = 'Hound';
-			} else if(self.escLevel() == 'C') {
-				escalate = 'Chase';
-			} else {
-				escalate = 'Remind';
-			}																									
-			if(ENYM.ctx.getItem('escalate') == 'yes') {
-				self.normalText('');
-				self.fastText('');
-				self.escalateText(escalate);				
-				self.normalClass('');
-				self.fastClass('');
-				self.escalateClass('escalatecoloricon icon-'+escalate);										
-				if(ENYM.ctx.getItem('escDuration')) {
-					self.escDuration(new Date(ENYM.ctx.getItem('escDuration')));					
-					var DateTime = ENYM.ctx.getItem('escDuration').split('/');
-					var day = DateTime[2].split(' ');
-					var time = day[1].split(':');						
-					//var durationText = '"'+escalate+'" until '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2];
-					var durationText = '"' + escalate + '" until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0];
-					self.duration(durationText);
-					self.activeType('escalatecolor '+escalate);
-					self.escalateEdit(true);																								
-				}		
-				ENYM.ctx.removeItem('escalate');																											
-			} else {				
-				self.normalText('normalcolor');
-				self.fastText('');
-				self.escalateText('');								
-				self.normalClass('normalcoloricon');
-				self.fastClass('');
-				self.escalateClass('');
-				self.duration("Normal: <em>Send once (usually to email)</em>");
-				self.activeType('normalcolor');				
-				self.yesClass('yesbutton');
-				self.noClass('nobutton');					
-				self.escalateEdit(false);
-				ENYM.ctx.removeItem('escDuration');
-				self.escLevel('N');				
-				self.igiClass('igiimageoff');										
-			}			
-			self.broadcastType('FYI');
-			if(ENYM.ctx.getItem('iGiStatus')) {
-				self.igiClass('igiimage');		
-				self.yesClass('nobutton');
-				self.noClass('yesbutton');
-				self.broadcastType('RAC');															
-			}	
-			$('textarea').keyup(function () {								
-				self.characterCount(self.messageText().length);
-			});
-			if(typeof self.selectedChannels() == 'undefined' || self.selectedChannels() == '') {
-				self.channels.removeAll();										
-				$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
-				return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
-			}
-			else {
-				self.sectionOne(false);
-				self.sectionTwo(true);				
-			}
+			self.igiClass('igiimageoff');										
+		}			
+		self.broadcastType('FYI');
+		if(ENYM.ctx.getItem('iGiStatus') == 'yes') {
+			alert('here');
+			self.igiClass('igiimage');		
+			self.yesClass('nobutton');
+			self.noClass('yesbutton');
+			self.broadcastType('RAC');															
+		}	
+		$('textarea').keyup(function () {								
+			self.characterCount(self.messageText().length);
+		});
+		if(typeof self.selectedChannels() == 'undefined' || self.selectedChannels() == '') {
+			self.channels.removeAll();										
+			$.mobile.showPageLoadingMsg('a', 'Loading Channels options');
+			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });					
+		}
+		else {
+			self.sectionOne(false);
+			self.sectionTwo(true);				
 		}
 	};
 	
@@ -170,13 +165,14 @@
 	};    
 	
 	function successfulMessage(data){
+		$.mobile.hidePageLoadingMsg();
+		self.messageText('');			
 		ENYM.ctx.removeItem('escDuration');		
 		ENYM.ctx.removeItem('escLevel');
 		ENYM.ctx.removeItem('iGiStatus');										
 		var toastobj = {redirect: 'channelMainView', type: '', text: 'Broadcast sent'};
 		showToast(toastobj);									
-		ENYM.ctx.setItem('currentChannelId', self.selectedChannels().channelId);
-		self.clearForm();		
+		ENYM.ctx.setItem('currentChannelId', self.selectedChannels().channelId);	
 		backNavText.pop();
 		backNavView.pop();		
 		goToView('channelMainView');									
@@ -248,7 +244,7 @@
 		self.yesClass('nobutton');
 		self.noClass('yesbutton');
 		self.broadcastType('RAC');
-		ENYM.ctx.setItem('iGiStatus', 'yes');													
+		ENYM.ctx.setItem('iGiStatus', 'yes');									
   };
 	
 	self.iGiNo = function () {
