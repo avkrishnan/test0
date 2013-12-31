@@ -97,12 +97,7 @@
 					ENYM.ctx.setItem("currentVerificationCommethodID",responseData.id);
 				}
 				ENYM.ctx.setItem("verificationStatus",true);
-				if(responseData.type == 'EMAIL') {
-					var toastText = 'Email added';
-				} else {
-					var toastText = 'Phone number added';
-				}
-				var toastobj = {redirect: 'verifyContactView', type: '', text: toastText};		
+				var toastobj = {redirect: 'verifyContactView', type: '', text: 'Verification message sent'};		
 				showToast(toastobj);
 				goToView('verifyContactView');
 			},

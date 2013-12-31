@@ -77,10 +77,19 @@
 			ES.channelService.followChannel(self.channelId(), callbacks);
 		}
 		else {
-			ENYM.ctx.removeItem('action');		
-			var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+self.channelName()};
-			showToast(toastobj);
-			goToView('channelMessagesView');			
+			var callbacks = {
+				success: function() {
+					ENYM.ctx.removeItem('action');		
+					var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+self.channelName()};
+					showToast(toastobj);
+					goToView('channelMessagesView');										
+				},
+				error: function(data, status, details) {
+					var toastobj = {type: 'toast-error', text: details.message};
+					showToast(toastobj);
+				}
+			};						
+			ES.channelService.followChannel(self.channelId(), callbacks);						
 		}
   };
 
