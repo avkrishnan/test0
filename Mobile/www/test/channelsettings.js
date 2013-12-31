@@ -39,6 +39,10 @@
     };
   }
 
+  asyncTest('A checks channel settings to make sure that the default setting is there', fetchAndCheckSettings(SCEN_A, {NEW_FLWR_NOTIF:'N'}));
+
+  asyncTest('A removes the default channel setting', removeSetting(SCEN_A, 'NEW_FLWR_NOTIF'));
+  
   asyncTest('A checks channel settings to make sure there are none', fetchAndCheckSettings(SCEN_A, {}));
 
   asyncTest('A adds invalid setting', putSettings(SCEN_A, {XXX:'N'}, hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
