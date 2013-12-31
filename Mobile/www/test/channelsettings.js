@@ -5,8 +5,7 @@
   var hlpr = new ApiTestHelper();
 
   var SCEN_A = hlpr.TestScenario();
-  var SCEN_B = hlpr.TestScenario();
-
+  
   asyncTest('A enrolls', hlpr.enroll(SCEN_A));
 
   asyncTest('A logs in', hlpr.login(SCEN_A));

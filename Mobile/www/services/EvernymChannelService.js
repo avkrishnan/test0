@@ -78,7 +78,7 @@ function EvernymChannelService(api) {
 
   /* Channel Settings */
   t.getChnlSettings = function(channelid) {
-    return api.callAPI('GET', '/channel/' + channelid + '/setting', undefined, undefined, false);
+    return api.callAPI('GET', '/channel/' + channelid + '/setting', undefined, undefined, true);
   };
   
   t.putChnlSettings = function(channelid, settings) {
