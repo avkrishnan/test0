@@ -1,34 +1,20 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChannelMenuViewModel() {
-	var that = this;
-	this.template = 'channelMenuView';
-	this.viewid = 'V-04';
-	this.viewname = 'ChannelMenu';
-	this.displayname = 'Channel Menu';	
-	this.accountName = ko.observable();
+﻿function ChannelMenuViewModel() {
+	var self = this;
+	self.template = 'channelMenuView';
+	self.viewid = 'V-04';
+	self.viewname = 'ChannelMenu';
+	self.displayname = 'Channel Menu';
 	
-	/* Channel Menu observable */
-	this.backView = ko.observable();
+	self.activate = function() {
+		//self.backView(data.prevPage.attr('id'));
+	};
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-			that.backView(data.prevPage.attr('id'));
-    });	
-	};  
-	
-	this.activate = function() {
-		if(authenticate()) {
-			that.accountName(ENYM.ctx.getItem('accountName'));
-		}
-	}
-	
-	this.menuHide = function() {
+	self.menuHide = function() {
 		backNavText.pop();
 		backNavView.pop();
-		goToView(that.backView());		
-	}	
-	
+		goToView(self.previousViewID());		
+	};
 }
+
+ChannelMenuViewModel.prototype = new ENYM.ViewModel();
+ChannelMenuViewModel.prototype.constructor = ChannelMenuViewModel;

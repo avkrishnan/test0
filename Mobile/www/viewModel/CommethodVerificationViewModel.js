@@ -1,40 +1,28 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function CommethodVerificationViewModel() {
-	var that = this;
-	this.template = 'commethodVerificationView';
-	this.viewid = 'V-??';
-	this.viewname = 'ComMethodVerification';
-	this.displayname = 'ComMethod Verification';
-	this.accountName = ko.observable();
+﻿function CommethodVerificationViewModel() {
+	var self = this;
+	self.template = 'commethodVerificationView';
+	self.viewid = 'V-??';
+	self.viewname = 'ComMethodVerification';
+	self.displayname = 'ComMethod Verification';
 	
-	/* Verify commethod observable */	
-	this.message = ko.observable();	
+	self.message = ko.observable();	
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
-	
-	this.activate = function() {
-		if(authenticate()) {
-			that.accountName(ENYM.ctx.getItem('accountName'));
-			$.mobile.showPageLoadingMsg("a", "Verifying");
-			var key = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
-			return ES.commethodService.verification(key, { success: successfulVerify, error: errorAPI });
-		}
+	self.activate = function() {
+		$.mobile.showPageLoadingMsg("a", "Verifying");
+		var key = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
+		return ES.commethodService.verification(key, { success: successfulVerify, error: errorAPI });
 	}
     
 	function successfulVerify(data){	
 		$.mobile.hidePageLoadingMsg();
-		that.message("Successfully verified");
+		self.message("Successfully verified");
 	};    
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		that.message(details.message);	
+		self.message(details.message);	
 	};
-	
 }
+
+CommethodVerificationViewModel.prototype = new ENYM.ViewModel();
+CommethodVerificationViewModel.prototype.constructor = CommethodVerificationViewModel;

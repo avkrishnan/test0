@@ -1,42 +1,26 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function RemoveFollowerViewModel() {	
-  var that = this;
-	this.template = 'removeFollowerView';
-	this.viewid = 'V-35a';
-	this.viewname = 'Remove Follower';
-	this.displayname = 'Remove Follower';	
-	this.accountName = ko.observable();		
+﻿function RemoveFollowerViewModel() {	
+  var self = this;
+	self.template = 'removeFollowerView';
+	self.viewid = 'V-35a';
+	self.viewname = 'Remove Follower';
+	self.displayname = 'Remove Follower';
 	
-  /* Remove followers observable */
-	this.channelId = ko.observable();	
-	this.followerId = ko.observable();	
-	this.followerName = ko.observable();
-	this.followerAccount = ko.observable();							
+  self.inputObs = [ 'channelId', 'followerId', 'followerName', 'followerAccount' ];
+  self.defineObservables();	
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
-	
-	this.activate = function() {
-		if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
-			var followerObject = JSON.parse(ENYM.ctx.getItem('currentfollowerData'));;		
-			if(!followerObject) {
-				goToView('followersListView');			
-			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message						
-				that.accountName(ENYM.ctx.getItem('accountName'));	
-				that.channelId(channelObject.channelId);			
-				that.followerId(followerObject.followerId);
-				that.followerName(followerObject.followerName);			
-				that.followerAccount(followerObject.accountname);												
-			}
+	self.activate = function() {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
+		var followerObject = JSON.parse(ENYM.ctx.getItem('currentfollowerData'));
+		if(!followerObject) {
+			goToView('followersListView');
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message
+			self.channelId(channelObject.channelId);
+			self.followerId(followerObject.followerId);
+			self.followerName(followerObject.followerName);
+			self.followerAccount(followerObject.accountname);
 		}
-	}
+	};
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
@@ -44,7 +28,7 @@ function RemoveFollowerViewModel() {
 			backNavText.pop();
 			backNavView.pop();
 		}
-		ES.channelService.getChannel(that.channelId(), {success: successfulGetChannel, error: errorAPI});			
+		ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI});
   };
 	
 	function successfulGetChannel(data) {
@@ -74,10 +58,12 @@ function RemoveFollowerViewModel() {
 		showToast(toastobj);
   };
 	
-  this.removeFollowerCommand = function () {
+  self.removeFollowerCommand = function () {
 		$.mobile.showPageLoadingMsg('a', 'Removing Follower');
-		return ES.channelService.removeFollower(that.channelId(), that.followerId(), { success: successfulDelete, error: errorAPI });
+		return ES.channelService.removeFollower(self.channelId(), self.followerId(), { success: successfulDelete, error: errorAPI });
 		ENYM.ctx.removeItem('currentChannel');
-  };	
-	
+  };
 }
+
+RemoveFollowerViewModel.prototype = new ENYM.ViewModel();
+RemoveFollowerViewModel.prototype.constructor = RemoveFollowerViewModel;

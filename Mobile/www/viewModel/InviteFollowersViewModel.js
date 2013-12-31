@@ -1,85 +1,58 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function InviteFollowersViewModel() {	
-  var that = this;
-	this.template = 'inviteFollowersView';
-	this.viewid = 'V-27a';
-	this.viewname = 'InviteFollowers';
-	this.displayname = 'Invite Followers';	
-	this.accountName = ko.observable();	
+﻿function InviteFollowersViewModel() {	
+  var self = this;
+	self.template = 'inviteFollowersView';
+	self.viewid = 'V-27a';
+	self.viewname = 'InviteFollowers';
+	self.displayname = 'Invite Followers';	
+
+	self.textId = ko.observable('message');								
+	self.error = ko.observable(false);
 	
-  /* Invite Followers observable */
-	this.channelName = ko.observable();	
-	this.channelWebAddress = ko.observable();
-	this.emailClass = ko.observable();
-	this.errorEmail = ko.observable();		
-	this.emailaddress = ko.observable();		
-	this.textClass = ko.observable();
-	this.text = ko.observable();
-	this.textId = ko.observable('message');								
-	this.error = ko.observable(false);	
-	this.errorText = ko.observable();			
-		
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();				
-      that.activate();
-    });	
-	};  
+  self.inputObs = [ 'channelName', 'channelWebAddress', 'emailClass', 'errorEmail', 'emailaddress', 'textClass', 'text', 'errorText' ];
+  self.defineObservables();
 	
-	this.clearForm = function () {
-		that.emailaddress('');
-		that.emailClass('');
-		that.errorEmail('');				
-		that.text('');
-		that.textClass('');
-		that.error(false);		
-		that.errorText('');				
-	};	
-	
-	this.activate = function() {
-		if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
-			if(!channelObject) {
-				goToView('channelsIOwnView');			
-			} else {		
-				that.accountName(ENYM.ctx.getItem('accountName'));	
-				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));								
-				that.channelName(channelObject.channelName);
-				that.channelWebAddress(channelObject.channelName+'.evernym.dom');		
-				$('textarea').keyup(function () {
-					that.textClass('');
-					that.error(false);				
-					that.errorText('');												
-				});							
-				$('input, textarea').keyup(function () {
-					that.emailClass('');
-					that.errorEmail('');									
-				});			
-			}
+	self.activate = function() {
+		self.error(false);
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+		if(!channelObject) {
+			goToView('channelsIOwnView');			
+		} else {
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));								
+			self.channelName(channelObject.channelName);
+			self.channelWebAddress(channelObject.channelName+'.evernym.dom');		
+			$('textarea').keyup(function () {
+				self.textClass('');
+				self.error(false);				
+				self.errorText('');												
+			});							
+			$('input, textarea').keyup(function () {
+				self.emailClass('');
+				self.errorEmail('');									
+			});			
 		}
-	}
+	};
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'inviteFollowersView') {
-			that.sendInviteCommand();
+			self.sendInviteCommand();
 		}
 	});	
 	
-	this.sendInviteCommand = function () {
+	self.sendInviteCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-		var textData = $('#'+that.textId()).val();
-		if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
-			that.emailClass('validationerror');
-			that.errorEmail('<span>SORRY:</span> Please enter valid email');
+		var textData = $('#'+self.textId()).val();
+		if (self.emailaddress() == '' || !emailReg.test(self.emailaddress())) {
+			self.emailClass('validationerror');
+			self.errorEmail('<span>SORRY:</span> Please enter valid email');
     } else if (textData == '') {
-			that.textClass('validationerror');
-			that.error(true);			
-			that.errorText('<span>SORRY:</span> Please give message');
+			self.textClass('validationerror');
+			self.error(true);			
+			self.errorText('<span>SORRY:</span> Please give message');
     } else {
 			showMessage('Testing');			
     }
-  };	
-	
+  };
 }
+
+InviteFollowersViewModel.prototype = new ENYM.ViewModel();
+InviteFollowersViewModel.prototype.constructor = InviteFollowersViewModel;

@@ -1,37 +1,26 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function FollowerDetailsViewModel() {
-  var that = this;
-  this.template = 'followerDetailsView';
-  this.viewid = 'V-35';
-  this.viewname = 'Follower Details';
-  this.displayname = 'Follower Details';
-	this.accountName = ko.observable();	
+﻿function FollowerDetailsViewModel() {
+  var self = this;
+  self.template = 'followerDetailsView';
+  self.viewid = 'V-35';
+  self.viewname = 'Follower Details';
+  self.displayname = 'Follower Details';
 	
-  /* Follower observable */	
-	this.channelName = ko.observable();			
-	this.followerName = ko.observable();		
-	
-	/* Methods */
-  this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
+  self.inputObs = [ 'channelName', 'followerName' ]; 
+  //self.errorObs = [ 'currentpasswordClass', 'newpasswordClass', 'confirmpasswordClass', 'errorMessageCurrent', 'errorMessageNew', 'errorMessageConfirm' ];
+  self.defineObservables();	
 
-	this.activate = function() {
-		if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
-			var followerObject = JSON.parse(ENYM.ctx.getItem('currentfollowerData'));		
-			if(!channelObject) {
-				goToView('followersListView');							
-			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message					
-				that.accountName(ENYM.ctx.getItem('accountName'));
-				that.channelName(channelObject.channelName);										
-				that.followerName(followerObject.followerName+' <em>'+followerObject.accountname+'</em>');												
-			}
+	self.activate = function() {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+		var followerObject = JSON.parse(ENYM.ctx.getItem('currentfollowerData'));		
+		if(!channelObject) {
+			goToView('followersListView');							
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message
+			self.channelName(channelObject.channelName);										
+			self.followerName(followerObject.followerName+' <em>'+followerObject.accountname+'</em>');												
 		}
-	}			
-	
+	};
 }
+
+FollowerDetailsViewModel.prototype = new ENYM.ViewModel();
+FollowerDetailsViewModel.prototype.constructor = FollowerDetailsViewModel;

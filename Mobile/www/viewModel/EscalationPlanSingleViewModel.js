@@ -1,32 +1,50 @@
-﻿/*globals ko*/
-function EscalationPlanSingleViewModel() {
+﻿function EscalationPlanSingleViewModel() {
+	var self = this;	
+	self.template = "escalationPlanSingleView";
+	self.viewid = "V-081";
+	self.viewname = "EscalationPlanSingle";
+	self.displayname = "Escalation Plan Single";
+	self.hasfooter = true;
 	
-	this.template = "escalationPlanSingleView";
-	this.viewid = "V-081";
-	this.viewname = "EscalationPlanSingle";
-	this.displayname = "Escalation Plan Single";
-	this.hasfooter = true;
+	self.commethods = ko.observableArray([]);
+	self.activeEscalationPlan = ko.observableArray([]);
 	
-	this.commethods = ko.observableArray([]);
-	this.activeEscalationPlan = ko.observableArray([]);
+  self.inputObs = [ 'baseUrl', 'backText', 'name', 'activeEscPlan', 'navText' ]; 
+  //self.errorObs = [ 'currentpasswordClass', 'newpasswordClass', 'confirmpasswordClass', 'errorMessageCurrent', 'errorMessageNew', 'errorMessageConfirm' ];
+  self.defineObservables();	
 	
-	this.baseUrl = ko.observable();
-	this.accountName = ko.observable();
-	this.backText = ko.observable();	
-	this.name = ko.observable();
+	self.pView = '';
 	
-	this.activeEscPlan = ko.observable();
-	
-	this.navText = ko.observable();
-	this.pView = '';
-	
-	var that = this;
-	
-	this.gotoView = function(pageView) {
+	self.gotoView = function(pageView) {
 		goToView('escalationPlanSingleView');
-	}	
+	};
 	
-	this.getEscPlans = function() {
+	self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message
+		
+		var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
+		var previousView = ENYM.ctx.getItem('previousView');
+		console.log("previousView: " + previousView);
+		var vm = ko.dataFor($("#" + previousView).get(0));
+		console.log("previousView Model viewid: " + vm.displayname);
+		self.navText(vm.displayname);
+		self.pView = previousView;
+		
+		if (currentBaseUrl){
+			self.baseUrl(currentBaseUrl);
+		} else {
+			var es = new EvernymService();
+			self.baseUrl(es.getBaseUrl());
+		}
+		var _name = ENYM.ctx.getItem("UserFullName");
+		self.activeEscalationPlan.removeAll()
+		self.backText('<em></em>'+backNavText[backNavText.length-1]);		
+		self.name(_name);
+		self.activeEscPlan = ENYM.ctx.getItem("activeEscPlan");
+		return self.getEscPlans().then(gotEscPlans);   
+	};	
+	
+	self.getEscPlans = function() {
 		var callbacks = {
 			success: function(){
 				//alert('succ');
@@ -36,12 +54,12 @@ function EscalationPlanSingleViewModel() {
 			}
 		};		
 		return ES.escplanService.getEscPlans(callbacks);
-	}
+	};
 	
 	function gotEscPlans(data) {
 		if(data.escPaths.length) {
 			$.each(data.escPaths, function(indexEscPlans, valueEscPlans) {
-				if((valueEscPlans.urgencyName).toLowerCase() == that.activeEscPlan) {
+				if((valueEscPlans.urgencyName).toLowerCase() == self.activeEscPlan) {
 					delays = new Array(), arrCounter = 0;;
 					$.each(valueEscPlans.steps, function(indexSteps, valueSteps) {
 						var prevalue;
@@ -95,41 +113,20 @@ function EscalationPlanSingleViewModel() {
 								//alert(JSON.stringify(tempCommethods));
 							}
 						});
-						that.activeEscalationPlan.push( // without push not working
+						self.activeEscalationPlan.push( // without push not working
 							{comMethods:tempCommethods, delayText: varDelayText}
 						);
-						//alert(JSON.stringify(that.activeEscalationPlan));			
+						//alert(JSON.stringify(self.activeEscalationPlan));			
 					});
 				}
-				//that.escalationplans.push( // without push not working
+				//self.escalationplans.push( // without push not working
 					//{ urgencyName: valueEscPlans.urgencyName.toLowerCase(), commethods: tempEscCommethods }
 				//);
 			});
 		}
-	}
-  
-	this.applyBindings = function(){
-		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
-			var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
-			var previousView = ENYM.ctx.getItem('previousView');
-			console.log("previousView: " + previousView);
-			var vm = ko.dataFor($("#" + previousView).get(0));
-			console.log("previousView Model viewid: " + vm.displayname);
-			that.navText(vm.displayname);
-			that.pView = previousView;
-			
-			if (currentBaseUrl){
-				that.baseUrl(currentBaseUrl);
-			}
-			else {
-				var es = new EvernymService();
-				that.baseUrl(es.getBaseUrl());
-			}
-			that.activate();
-		});
 	};
 	
-	this.getCommethods = function() {
+	self.getCommethods = function() {
 		var callbacks = {
 			success: function(){
 				//alert('succ');
@@ -139,14 +136,14 @@ function EscalationPlanSingleViewModel() {
 			}
 		};		
 		return ES.commethodService.getCommethods(callbacks);
-	}
+	};
 	
-	this.gotoView = function(pageView) {
-		alert(JSON.stringify(pageView));
+	self.gotoView = function(pageView) {
+		//alert(JSON.stringify(pageView));
 		goToView(pageView);
-	}	
+	};	
 
-	this.showCommethods = function(data) {
+	self.showCommethods = function(data) {
 		if(data.commethod.length > 0) {
 			var tempCommethodClass = '', tempshowVerify = false;
 			$.each(data.commethod, function(indexCommethods, valueCommethods) {
@@ -155,21 +152,11 @@ function EscalationPlanSingleViewModel() {
 					tempCommethodClass = "notverify";
 					tempshowVerify = true;
 				}
-				that.commethods.push({ comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify });
+				self.commethods.push({ comMethodAddress: valueCommethods.address, comMethodClass: tempCommethodClass, comMethodVerify: tempshowVerify });
 			});
 		}
-	}	
-    
-	this.activate = function() {
-		addExternalMarkup(that.template); // this is for header/overlay message
-		var _accountName = ENYM.ctx.getItem("accountName");
-		var _name = ENYM.ctx.getItem("UserFullName");
-		that.activeEscalationPlan.removeAll()
-		that.accountName(_accountName);
-		that.backText('<em></em>'+backNavText[backNavText.length-1]);		
-		that.name(_name);
-		that.activeEscPlan = ENYM.ctx.getItem("activeEscPlan");
-		return that.getEscPlans().then(gotEscPlans);   
-	};	
-	
+	};
 }
+
+EscalationPlanSingleViewModel.prototype = new ENYM.ViewModel();
+EscalationPlanSingleViewModel.prototype.constructor = EscalationPlanSingleViewModel;

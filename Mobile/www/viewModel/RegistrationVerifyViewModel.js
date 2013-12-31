@@ -1,84 +1,64 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function RegistrationVerifyViewModel() {	
-  var that = this;
-	this.template = 'registrationVerifyView';
-	this.viewid = 'V-02f';
-	this.viewname = 'RegistrationVerify';
-	this.displayname = 'Registration Verify';	
-	this.accountName = ko.observable();	
+﻿function RegistrationVerifyViewModel() {	
+  var self = this;
+	self.template = 'registrationVerifyView';
+	self.viewid = 'V-02f';
+	self.viewname = 'RegistrationVerify';
+	self.displayname = 'Registration Verify';
 	
-	/* Registration verify observable */
-	this.verificationCommethodType = ko.observable();	
-	this.verificationCommethod = ko.observable();
-	this.verificationCommethodID = ko.observable();		
-	this.verificationCode = ko.observable();
-	this.errorMessage = ko.observable();						
+  self.inputObs = [ 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode', 'errorMessage' ];
+  self.defineObservables();
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-			that.clearForm();			
-      that.activate();
-    });	
-	};  
-	
-	this.clearForm = function () {
-		that.verificationCode('');
-    that.errorMessage('');
-  };
-	
-	this.activate = function() {
+	self.activate = function() {
 		var newUser = ENYM.ctx.getItem('newusername');		
 		if(newUser == '' || newUser == null) {
 			goToView('homeView');
 		} else {
-			that.getCommethods();
-			that.accountName('Your evernym is: '+ENYM.ctx.getItem('accountName')+" (Don't forget!)");
-			that.verificationCommethodType(ENYM.ctx.getItem('newuseremail'));				
+			self.getCommethods();
+			self.accountName('Your evernym is: '+ENYM.ctx.getItem('accountName')+" (Don't forget!)");
+			self.verificationCommethodType(ENYM.ctx.getItem('newuseremail'));				
 			$('input').keyup(function () {
-				that.errorMessage('');
+				self.errorMessage('');
 			});					
 		}
-	}
+	};
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'registrationVerifyView') {
-			that.verifyRequestCommethod();
+			self.verifyRequestCommethod();
 		}
 	});		
 	
-	this.getCommethods = function() {
+	self.getCommethods = function() {
 		var callbacks = {
 			success: function(data){
-				that.verificationCommethod(data.commethod[0].type);
-				that.verificationCommethodID(data.commethod[0].id);
+				self.verificationCommethod(data.commethod[0].type);
+				self.verificationCommethodID(data.commethod[0].id);
 			},
 			error: function (data, status, details) {
 				showMessage(details.message);
 			}
 		};		
 		return ES.commethodService.getCommethods(callbacks);
-	}
+	};
 	
-	this.verifyRequestCommethod = function() {
-		if(that.verificationCode() == '') {
-			that.errorMessage("<span>ERROR:</span> Please input verification code!");
+	self.verifyRequestCommethod = function() {
+		if(self.verificationCode() == '') {
+			self.errorMessage("<span>ERROR:</span> Please input verification code!");
 		}
-		else if(that.verificationCode().length != 6) {
-			that.errorMessage("<span>ERROR:</span> Verification code should be 6 digits!");
+		else if(self.verificationCode().length != 6) {
+			self.errorMessage("<span>ERROR:</span> Verification code should be 6 digits!");
 		}
 		else {
 			var verifyCommethodObject = {
-				code : that.verificationCode(),
-				type : that.verificationCommethodType(),
-				address : that.verificationCommethod()
+				code : self.verificationCode(),
+				type : self.verificationCommethodType(),
+				address : self.verificationCommethod()
 			};
-			that.verifyRequest(verifyCommethodObject);
+			self.verifyRequest(verifyCommethodObject);
 		}
-	}
+	};
 	
-	this.requestVerificationCode = function() {
+	self.requestVerificationCode = function() {
 		var callbacks = {
 			success: function(responseData) {
 				var toastobj = {type: '', text: 'Verification code sent'};
@@ -90,10 +70,10 @@ function RegistrationVerifyViewModel() {
 			}
 		};
 		$.mobile.showPageLoadingMsg('a', 'Resending Verification code');				
-		return ES.commethodService.requestVerification(that.verificationCommethodID(), callbacks);
-	}
+		return ES.commethodService.requestVerification(self.verificationCommethodID(), callbacks);
+	};
 	
-	this.verifyRequest = function(verifyCommethodObject) {
+	self.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
 				var toastobj = {redirect: 'tutorialView', type: '', text: 'Email verified'};
@@ -101,11 +81,13 @@ function RegistrationVerifyViewModel() {
 				goToView('tutorialView');
 			},
 			error: function (responseData, status, details) {
-				that.errorMessage("<span>ERROR:</span> " + details.message);
+				self.errorMessage("<span>ERROR:</span> " + details.message);
 			}
 		};
 		$.mobile.showPageLoadingMsg('a', 'Sending Verification Request');		
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
 	};
-	
 }
+
+RegistrationVerifyViewModel.prototype = new ENYM.ViewModel();
+RegistrationVerifyViewModel.prototype.constructor = RegistrationVerifyViewModel;

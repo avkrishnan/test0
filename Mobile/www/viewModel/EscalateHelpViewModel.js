@@ -1,25 +1,14 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function EscalateHelpViewModel() {
-  var that = this;
-  this.template = 'escalateHelpView';
-  this.viewid = 'V-20b';
-  this.viewname = 'Escalate Help';
-  this.displayname = 'Escalate help';
-	this.accountName = ko.observable();			
-	
-	/* Methods */
-  this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
+﻿function EscalateHelpViewModel() {
+  var self = this;
+  self.template = 'escalateHelpView';
+  self.viewid = 'V-20b';
+  self.viewname = 'Escalate Help';
+  self.displayname = 'Escalate help';
 
-	this.activate = function() {
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message						
-			that.accountName(ENYM.ctx.getItem('accountName'));									
-		}
-	}		
-	
+	self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message													
+	}
 }
+
+EscalateHelpViewModel.prototype = new ENYM.ViewModel();
+EscalateHelpViewModel.prototype.constructor = EscalateHelpViewModel;

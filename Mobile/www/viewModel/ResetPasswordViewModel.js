@@ -1,88 +1,66 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ResetPasswordViewModel() {
-	var that = this;
-	this.template = 'resetPasswordView';
-	this.viewid = 'V-03d';
-	this.viewname = 'ResetPassword';
-	this.displayname = 'ResetPassword';
-	this.accountName = ko.observable();		
-  
-	/* Reset Password observable */
-	this.newPassword = ko.observable();		
-	this.confirmPassword = ko.observable();
-	this.errorResetPassword = ko.observable();
-	this.passwordClass = ko.observable();
-	this.confirmPasswordClass = ko.observable();		
-	this.changePasswordNotification = ko.observable();
+﻿function ResetPasswordViewModel() {
+	var self = this;
+	self.template = 'resetPasswordView';
+	self.viewid = 'V-03d';
+	self.viewname = 'ResetPassword';
+	self.displayname = 'ResetPassword';
 	
-	/* Methods */				
-	this.applyBindings = function(){
-		$('#' + that.template).on('pagebeforeshow', function(e, data){																	
-			that.clearForm();			
-			that.activate();		
-		});
-	};
-	
-	this.clearForm = function(){
-		that.newPassword('');
-		that.confirmPassword('');
-		that.passwordClass('');
-		that.confirmPasswordClass('');				
-		that.errorResetPassword('');									
-	};
+  self.inputObs = [ 'newPassword', 'confirmPassword', 'errorResetPassword', 'passwordClass', 'confirmPasswordClass', 'changePasswordNotification' ];
+  self.defineObservables();
 		 
-	this.activate = function(){
+	self.activate = function(){
 		var resetAccount = ENYM.ctx.getItem('resetAccount');
 		if(resetAccount == '' || resetAccount == null) {
 			goToView('forgotPasswordView');
 		} else {			
-			that.accountName(ENYM.ctx.getItem('accountName'));
+			self.accountName(ENYM.ctx.getItem('accountName'));
 			$('input').keyup(function (){ 
-				that.passwordClass('');
-				that.confirmPasswordClass('');				
-				that.errorResetPassword('');
+				self.passwordClass('');
+				self.confirmPasswordClass('');				
+				self.errorResetPassword('');
 			});
 		}
 	};
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'resetPasswordView') {
-			that.resetPasswordCommand();
+			self.resetPasswordCommand();
 		}
 	});
 	 
-	this.resetPasswordCommand = function () {
-		if(this.newPassword() == '' &&  this.confirmPassword() == '') {
-			that.passwordClass('validationerror');
-			that.confirmPasswordClass('validationerror');				 
-			that.errorResetPassword('Please enter password and confirm password');
-		} else if(this.newPassword() == this.confirmPassword()) {				
+	self.resetPasswordCommand = function () {
+		if(self.newPassword() == '' &&  self.confirmPassword() == '') {
+			self.passwordClass('validationerror');
+			self.confirmPasswordClass('validationerror');				 
+			self.errorResetPassword('Please enter password and confirm password');
+		} else if(self.newPassword() == self.confirmPassword()) {				
 			var callbacks = {
 				success: resetPasswordSuccess,
 				error: resetPasswordError
 			}; 
 			var resetPasswordModel = {};       
-			resetPasswordModel.password = that.newPassword();             
-			resetPasswordModel.confirmPassword = that.confirmPassword();
+			resetPasswordModel.password = self.newPassword();             
+			resetPasswordModel.confirmPassword = self.confirmPassword();
 			resetPasswordModel.forgotPasswordRequestKey = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
 			$.mobile.showPageLoadingMsg('a', 'Sending Update Password Request');			
 			return ES.loginService.resetPassword(resetPasswordModel, callbacks).then(resetPasswordSuccess);
 		} else {
-			that.passwordClass('validationerror');
-			that.confirmPasswordClass('validationerror');				 
-			that.errorResetPassword("Passwords don't match");				
+			self.passwordClass('validationerror');
+			self.confirmPasswordClass('validationerror');				 
+			self.errorResetPassword("Passwords don't match");				
 		}
 	};
 	
 	function resetPasswordSuccess (data) {							
 		goToView('resetPasswordSuccessView');			
-	}
+	};
 		
 	function resetPasswordError(data, status, details){
-		that.passwordClass('validationerror');
-		that.confirmPasswordClass('validationerror');				
-		that.errorResetPassword(details.message);			
-	};		
-	       
+		self.passwordClass('validationerror');
+		self.confirmPasswordClass('validationerror');				
+		self.errorResetPassword(details.message);			
+	}; 
 }
+
+ResetPasswordViewModel.prototype = new ENYM.ViewModel();
+ResetPasswordViewModel.prototype.constructor = ResetPasswordViewModel;
