@@ -1,31 +1,22 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ResetPasswordSuccessViewModel() {
-	var that = this;
-	this.template = 'resetPasswordSuccessView';
-	this.viewid = 'V-03e';
-	this.viewname = 'ResetPasswordSuccess';
-	this.displayname = 'Reset password success';
-	this.accountName = ko.observable();		
-	
-	/* Methods */				
-	this.applyBindings = function(){
-		$('#' + that.template).on('pagebeforeshow', function(e, data){																	
-			that.activate();
-		});
-	};
+﻿function ResetPasswordSuccessViewModel() {
+	var self = this;
+	self.template = 'resetPasswordSuccessView';
+	self.viewid = 'V-03e';
+	self.viewname = 'ResetPasswordSuccess';
+	self.displayname = 'Reset password success';
 		 
-	this.activate = function(){
+	self.activate = function(){
 		var resetAccount = ENYM.ctx.getItem('resetAccount');		
 		if(resetAccount == '' || resetAccount == null) {
 			goToView('forgotPasswordView');
-		} else {					
-			that.accountName(ENYM.ctx.getItem("accountName"));
 		}
 	};
 	
-	this.okayResetCommand = function () {
+	self.okayResetCommand = function () {
 		ENYM.ctx.removeItem('resetAccount');						
 		goToView('loginView');
   };		       
 }
+
+ResetPasswordSuccessViewModel.prototype = new ENYM.ViewModel();
+ResetPasswordSuccessViewModel.prototype.constructor = ResetPasswordSuccessViewModel;

@@ -1,74 +1,44 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function AddFollowersViewModel() {	
-  var that = this;
-	this.template = 'addFollowersView';
-	this.viewid = 'V-28';
-	this.viewname = 'AddFollowers';
-	this.displayname = 'Add Followers';	
-	this.accountName = ko.observable();
+﻿function AddFollowersViewModel() {	
+  var self = this;
+	self.template = 'addFollowersView';
+	self.viewid = 'V-28';
+	self.viewname = 'AddFollowers';
+	self.displayname = 'Add Followers';
 	
-  /* Add Followers observable */
-	this.channelId = ko.observable();		
-	this.channelName = ko.observable();
-	this.firstLastName = ko.observable();	
-	this.nameClass = ko.observable();
-	this.errorName = ko.observable();		
-	this.emailaddress = ko.observable();
-	this.emailClass = ko.observable();
-	this.errorEmail = ko.observable();							
+  self.inputObs = [ 'channelId', 'channelName', 'firstLastName', 'nameClass', 'errorName', 'emailaddress', 'emailClass', 'errorEmail' ];
+  self.defineObservables();
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.clearForm();				
-      that.activate();
-    });	
-	};
-	
-	this.clearForm = function () {
-		that.firstLastName('');
-		that.nameClass('');
-		that.errorName('');			
-		that.emailaddress('');
-		that.emailClass('');
-		that.errorEmail('');							
-	};	  
-	
-	this.activate = function() {
-		if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
-			if(!channelObject) {
-				goToView('channelsIOwnView');			
-			} else {			
-				that.accountName(ENYM.ctx.getItem('accountName'));		
-				var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
-				that.channelId(channelObject.channelId);										
-				that.channelName(channelObject.channelName);
-				$('input').keyup(function () {
-					that.nameClass('');
-					that.errorName('');			
-					that.emailClass('');
-					that.errorEmail('');
-				});						
-			}
+	self.activate = function() {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
+		if(!channelObject) {
+			goToView('channelsIOwnView');			
+		} else {	
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
+			self.channelId(channelObject.channelId);										
+			self.channelName(channelObject.channelName);
+			$('input').keyup(function() {
+				self.nameClass('');
+				self.errorName('');			
+				self.emailClass('');
+				self.errorEmail('');
+			});						
 		}
-	}
+	};
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'addFollowersView') {
-			that.addFollowersCommand();
+			self.addFollowersCommand();
 		}
 	});	
 	
-	this.addFollowersCommand = function () {		
+	self.addFollowersCommand = function () {		
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-		if (that.firstLastName() == '') {
-			that.nameClass('validationerror');
-			that.errorName('<span>SORRY:</span> Please enter first and last name');
-    } else if (that.emailaddress() == '' || !emailReg.test(that.emailaddress())) {
-			that.emailClass('validationerror');
-			that.errorEmail('<span>SORRY:</span> Please enter valid email');
+		if (self.firstLastName() == '') {
+			self.nameClass('validationerror');
+			self.errorName('<span>SORRY:</span> Please enter first and last name');
+    } else if (self.emailaddress() == '' || !emailReg.test(self.emailaddress())) {
+			self.emailClass('validationerror');
+			self.errorEmail('<span>SORRY:</span> Please enter valid email');
     } else {
 			$.mobile.showPageLoadingMsg("a", "Adding Follower");
 			var provisional = generateProvisionalAccount();
@@ -77,17 +47,17 @@ function AddFollowersViewModel() {
   };
 	
 	function generateProvisionalAccount() {
-		var fullName = that.firstLastName().split(' ');
+		var fullName = self.firstLastName().split(' ');
 		var firstName = fullName[0];
 		var lastName = fullName[1];		
 		return {
-			emailaddress: that.emailaddress(),
-			smsPhone: that.smsPhone,
+			emailaddress: self.emailaddress(),
+			smsPhone: self.smsPhone,
 			firstname: firstName,
 			lastname: lastName,
-			channelid: that.channelId()
+			channelid: self.channelId()
 		};
-	}
+	};
 	
 	function successfulAdd(data){			
 		goToView('channelMainView');				
@@ -95,6 +65,8 @@ function AddFollowersViewModel() {
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();		
-	};	
-	
+	};
 }
+
+AddFollowersViewModel.prototype = new ENYM.ViewModel();
+AddFollowersViewModel.prototype.constructor = AddFollowersViewModel;

@@ -1,168 +1,145 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function EscalateTimeSettingsViewModel() {
-  var that = this;
-  this.template = 'escalateTimeSettingsView';
-  this.viewid = 'V-20d';
-  this.viewname = 'Escalate Time';
-  this.displayname = 'Escalate time';
-	this.accountName = ko.observable();	
+﻿function EscalateTimeSettingsViewModel() {
+  var self = this;
+  self.template = 'escalateTimeSettingsView';
+  self.viewid = 'V-20d';
+  self.viewname = 'Escalate Time';
+  self.displayname = 'Escalate time';
 	
-	/* Escalate date and time observable */
-	this.month = ko.observable();
-	this.day = ko.observable();
-	this.year = ko.observable();
-	this.hour = ko.observable();
-	this.minute = ko.observable();
-	this.meridiem = ko.observable();
-	this.pickerDate = ko.observable();				 				
-	
-	/* Methods */
-  this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
+  self.inputObs = [ 'month', 'day', 'year', 'hour', 'minute', 'meridiem', 'pickerDate' ];
+  self.defineObservables();	
 
-	this.activate = function() {
+	self.activate = function() {
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];		
-		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message					
-			that.accountName(ENYM.ctx.getItem('accountName'));			
-			if(ENYM.ctx.getItem('escDuration')) {
-				var DateTime = ENYM.ctx.getItem('escDuration').split('/');
-				var day = DateTime[2].split(' ');
-				var time = day[1].split(':');						
-				that.month(DateTime[1]);			
-				that.day(day[0]);
-				that.year(DateTime[0]);			
-				that.hour(time[0]);			
-				that.minute(time[1]);			
-				that.meridiem(day[2]);
-				//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
-				that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
-			} else {
-				that.month(monthNames[_getDate('getMonth')]);			
-				that.day(_getDate('getDate'));
-				that.year(_getDate('getFullYear'));
-				var hours = _getDate('getHours');
-				hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
-				that.hour(hours);
-				var mins = _getDate('getMinutes');
-				mins = ((mins+1<10?'0':'')+(mins+1));			
-				that.minute(mins);
-				var meridiem = _getDate('getHours')>11?'PM':'AM';			
-				that.meridiem(meridiem);
-				//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
-				that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
-			}
+		addExternalMarkup(self.template); // this is for header/overlay message		
+		if(ENYM.ctx.getItem('escDuration')) {
+			var DateTime = ENYM.ctx.getItem('escDuration').split('/');
+			var day = DateTime[2].split(' ');
+			var time = day[1].split(':');						
+			self.month(DateTime[1]);			
+			self.day(day[0]);
+			self.year(DateTime[0]);			
+			self.hour(time[0]);			
+			self.minute(time[1]);			
+			self.meridiem(day[2]);
+			self.pickerDate('Escalate until: ' + self.hour() + ':' + self.minute() + ' ' + self.meridiem() + ', ' + self.month() + '. ' + self.day() + ', ' + self.year());
+		} else {
+			self.month(monthNames[_getDate('getMonth')]);			
+			self.day(_getDate('getDate'));
+			self.year(_getDate('getFullYear'));
+			var hours = _getDate('getHours');
+			hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
+			self.hour(hours);
+			var mins = _getDate('getMinutes');
+			mins = ((mins+1<10?'0':'')+(mins+1));			
+			self.minute(mins);
+			var meridiem = _getDate('getHours')>11?'PM':'AM';			
+			self.meridiem(meridiem);
+			self.pickerDate('Escalate until: ' + self.hour() + ':' + self.minute() + ' ' + self.meridiem() + ', ' + self.month() + '. ' + self.day() + ', ' + self.year());
 		}
-	}
+	};
 	
-	this.upArrow = function (data) {
+	self.upArrow = function (data) {
 		ENYM.ctx.setItem('setValue', data);
-		that.setUp();			
+		self.setUp();			
   };
 	
-	this.downArrow = function (data) {
+	self.downArrow = function (data) {
 		ENYM.ctx.setItem('setValue', data);	
-		that.setDown();			
+		self.setDown();			
   };
 	
-	this.setUp = function () {
+	self.setUp = function () {
 		if(ENYM.ctx.getItem('setValue') == 'month') {
-			if(that.month() == 'Dec') {
-				that.month('Jan');
+			if(self.month() == 'Dec') {
+				self.month('Jan');
 			} else {
-				that.month(monthNames[$.inArray( that.month(), monthNames)+1]);		
+				self.month(monthNames[$.inArray( self.month(), monthNames)+1]);		
 			}			
 		} else if(ENYM.ctx.getItem('setValue') == 'day') {
-			if(that.day() == 31) {
-				that.day(1);
+			if(self.day() == 31) {
+				self.day(1);
 			} else {
-				var day = that.day();
+				var day = self.day();
 				day == day++;					
-				that.day(day);	
+				self.day(day);	
 			}				
 		} else if(ENYM.ctx.getItem('setValue') == 'year') {
-			var year = that.year();
+			var year = self.year();
 			year == year++;			
-			that.year(year);				
+			self.year(year);				
 		} else if(ENYM.ctx.getItem('setValue') == 'hour') {
-			if(that.hour() == 12) {
-				that.hour(1);
+			if(self.hour() == 12) {
+				self.hour(1);
 			} else {
-				var hour = that.hour();
+				var hour = self.hour();
 				hour == hour++;					
-				that.hour(hour);		
+				self.hour(hour);		
 			}				
 		} else if(ENYM.ctx.getItem('setValue') == 'minute') {
-			if(that.minute() == 59) {
-				that.minute('00');
+			if(self.minute() == 59) {
+				self.minute('00');
 			} else {
-				var minute = that.minute();
+				var minute = self.minute();
 				minute == minute ++;				
 				minute = ((minute<10?'0':'')+minute);					
-				that.minute(minute);		
+				self.minute(minute);		
 			}			
 		} else if(ENYM.ctx.getItem('setValue') == 'meridiem') {
-			if(that.meridiem() == 'PM') {
-				that.meridiem('AM');
+			if(self.meridiem() == 'PM') {
+				self.meridiem('AM');
 			} else {
-				that.meridiem('PM');		
+				self.meridiem('PM');		
 			}			
 		}
-		//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
-		that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
+		self.pickerDate('Escalate until: ' + self.hour() + ':' + self.minute() + ' ' + self.meridiem() + ', ' + self.month() + '. ' + self.day() + ', ' + self.year());
 	};	
 	
-	this.setDown = function () {
+	self.setDown = function () {
 		if(ENYM.ctx.getItem('setValue') == 'month') {
-			if(that.month() == 'Jan') {
-				that.month('Dec');
+			if(self.month() == 'Jan') {
+				self.month('Dec');
 			} else {
-				that.month(monthNames[$.inArray( that.month(), monthNames)-1]);		
+				self.month(monthNames[$.inArray( self.month(), monthNames)-1]);		
 			}				
 		} else if(ENYM.ctx.getItem('setValue') == 'day') {
-			if(that.day() == 1) {
-				that.day(31);
+			if(self.day() == 1) {
+				self.day(31);
 			} else {
-				var day = that.day();
+				var day = self.day();
 				day == day--;					
-				that.day(day);		
+				self.day(day);		
 			}			
 		} else if(ENYM.ctx.getItem('setValue') == 'year') {
-			that.year(that.year()-1);							
+			self.year(self.year()-1);							
 		} else if(ENYM.ctx.getItem('setValue') == 'hour') {
-			if(that.hour() == 1) {
-				that.hour(12);
+			if(self.hour() == 1) {
+				self.hour(12);
 			} else {
-				var hour = that.hour();
+				var hour = self.hour();
 				hour == hour--;					
-				that.hour(hour);					
+				self.hour(hour);					
 			}
 		} else if(ENYM.ctx.getItem('setValue') == 'minute') {
-			if(that.minute() == 00) {
-				that.minute(59);
+			if(self.minute() == 00) {
+				self.minute(59);
 			} else {
-				var minute = that.minute();
+				var minute = self.minute();
 				minute == minute --;
 				minute = ((minute<10?'0':'')+minute);					
-				that.minute(minute);									
+				self.minute(minute);									
 			}						
 		} else if(ENYM.ctx.getItem('setValue') == 'meridiem') {
-			if(that.meridiem() == 'PM') {
-				that.meridiem('AM');
+			if(self.meridiem() == 'PM') {
+				self.meridiem('AM');
 			} else {
-				that.meridiem('PM');		
+				self.meridiem('PM');		
 			}			
 		}
-		//that.pickerDate('Escalate until: '+that.month()+' '+that.day()+', '+that.year()+', '+that.hour()+':'+that.minute()+' '+that.meridiem());
-		that.pickerDate('Escalate until: ' + that.hour() + ':' + that.minute() + ' ' + that.meridiem() + ', ' + that.month() + '. ' + that.day() + ', ' + that.year());
+		self.pickerDate('Escalate until: ' + self.hour() + ':' + self.minute() + ' ' + self.meridiem() + ', ' + self.month() + '. ' + self.day() + ', ' + self.year());
 	};					
 	
-	this.saveCommand = function () {
-		var duration = that.year()+'/'+that.month()+'/'+that.day()+' '+that.hour()+':'+that.minute()+' '+that.meridiem();
+	self.saveCommand = function () {
+		var duration = self.year()+'/'+self.month()+'/'+self.day()+' '+self.hour()+':'+self.minute()+' '+self.meridiem();
 		var CurrentDate = new Date();
 		var SelectedDate = new Date(duration);		
 		if(SelectedDate >= CurrentDate){
@@ -173,6 +150,8 @@ function EscalateTimeSettingsViewModel() {
 			var toastobj = {type: 'toast-error', text: 'Please set date greater than current date !'};
 			showToast(toastobj);						
 		}
-  };					
-	
+  };
 }
+
+EscalateTimeSettingsViewModel.prototype = new ENYM.ViewModel();
+EscalateTimeSettingsViewModel.prototype.constructor = EscalateTimeSettingsViewModel;

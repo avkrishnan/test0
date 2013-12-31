@@ -1,36 +1,22 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function ChannelChangeIconViewModel() {	
-  var that = this;
-	this.template = 'channelChangeIconView';
-	this.viewid = 'V-16';
-	this.viewname = 'Change Icon';
-	this.displayname = 'Channel Chage Icon Image';	   
-	this.accountName = ko.observable();	
+﻿function ChannelChangeIconViewModel() {	
+  var self = this;
+	self.template = 'channelChangeIconView';
+	self.viewid = 'V-16';
+	self.viewname = 'Change Icon';
+	self.displayname = 'Channel Chage Icon Image';
 	
-  /* Channel Icon Image observable */
-	this.channelId = ko.observable();	
-	this.picId = ko.observable();
-	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
-	this.activate = function() {
-		if(authenticate()) {
+  self.inputObs = [ 'channelId', 'picId' ];
+  self.defineObservables();	
+ 
+	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
-			if(!channelObject) {
-			goToView('channelsIOwnView');			
-		} else {
-			addExternalMarkup(that.template); // this is for header/overlay message			
-			that.accountName(ENYM.ctx.getItem('accountName'));			
+		if(!channelObject) {
+			goToView('channelsIOwnView');
+			addExternalMarkup(self.template); // this is for header/overlay message				
 			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
-			that.channelId(channelObject.channelId);			
-			}
+			self.channelId(channelObject.channelId);			
 		}
-	}	
+	};
 	
 	function successfulModify(args) {
     goToView('channelSettingsView');
@@ -40,13 +26,15 @@ function ChannelChangeIconViewModel() {
     $.mobile.hidePageLoadingMsg();
   };
 	
-  this.changeChannelIconCommand = function () {
+  self.changeChannelIconCommand = function () {
 		var channelObject = {
-			id: that.channelId(),
-			picId: that.picId()
+			id: self.channelId(),
+			picId: self.picId()
 		};
 		$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 		ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
-  };	
-	
+  };
 }
+
+ChannelChangeIconViewModel.prototype = new ENYM.ViewModel();
+ChannelChangeIconViewModel.prototype.constructor = ChannelChangeIconViewModel;

@@ -1,56 +1,41 @@
-﻿/*globals ko*/
-/* To do - Pradeep Kumar */
-function WhoGotItViewModel() {
-  var that = this;
-	this.template = 'whoGotItView';
-	this.viewid = 'V-34';
-	this.viewname = 'Who Got it';
-	this.displayname = 'Who got iGi';	
-	this.accountName = ko.observable();		
+﻿function WhoGotItViewModel() {
+  var self = this;
+	self.template = 'whoGotItView';
+	self.viewid = 'V-34';
+	self.viewname = 'Who Got it';
+	self.displayname = 'Who got iGi';
 
-  /* Got it observable */
-	this.channelId = ko.observable();				
-	this.channelName = ko.observable();
-	this.messageId = ko.observable();				
-	this.acks = ko.observable();
-	this.recipients = ko.observableArray([]);					
+	self.recipients = ko.observableArray([]);
 	
-	/* Methods */
-	this.applyBindings = function() {
-		$('#' + that.template).on('pagebeforeshow', function (e, data) {
-      that.activate();
-    });	
-	};  
+  self.inputObs = [ 'channelId', 'channelName', 'messageId', 'acks' ];
+  self.defineObservables();	
 	
-	this.activate = function() {
-		if(authenticate()) {
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
-			var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
-			if(!channelObject || !messageObject) {
-				goToView('channelsIOwnView');			
-			} else {
-				addExternalMarkup(that.template); // this is for header/overlay message
-				that.recipients.removeAll();						
-				ENYM.ctx.removeItem('currentRecipientData');						
-				that.accountName(ENYM.ctx.getItem('accountName'));											
-				that.channelId(channelObject.channelId);			
-				that.channelName(channelObject.channelName);
-				that.messageId(messageObject.messageId);
-				if(messageObject.acks) {								
-					that.acks(messageObject.acks+' Got It');
-				} 
-				else if(messageObject.acks == 0) {
-					that.acks(messageObject.acks+' Got It');				
-				}
-				else if(messageObject.type != 'REQUEST_ACKNOWLEDGEMENT') {
-					that.acks('No iGi requested');				
-				}			
-				else {
-					that.acks('No followers to acknowledge iGi!');				
-				}
-				$.mobile.showPageLoadingMsg("a", "Loading Followers");
-				return ES.messageService.getMessageRecipients(that.channelId(), that.messageId(), 'Y', {success: successfulList, error: errorAPI});																			
+	self.activate = function() {
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
+		var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
+		if(!channelObject || !messageObject) {
+			goToView('channelsIOwnView');			
+		} else {
+			addExternalMarkup(self.template); // this is for header/overlay message
+			self.recipients.removeAll();						
+			ENYM.ctx.removeItem('currentRecipientData');										
+			self.channelId(channelObject.channelId);			
+			self.channelName(channelObject.channelName);
+			self.messageId(messageObject.messageId);
+			if(messageObject.acks) {								
+				self.acks(messageObject.acks+' Got It');
+			} 
+			else if(messageObject.acks == 0) {
+				self.acks(messageObject.acks+' Got It');				
 			}
+			else if(messageObject.type != 'REQUEST_ACKNOWLEDGEMENT') {
+				self.acks('No iGi requested');				
+			}			
+			else {
+				self.acks('No followers to acknowledge iGi!');				
+			}
+			$.mobile.showPageLoadingMsg("a", "Loading Followers");
+			return ES.messageService.getMessageRecipients(self.channelId(), self.messageId(), 'Y', {success: successfulList, error: errorAPI});																			
 		}
 	}	
 	
@@ -63,7 +48,7 @@ function WhoGotItViewModel() {
 			else {
 				var recipientsClass = 'odd';
 			}								
-			that.recipients.push({
+			self.recipients.push({
 				recipientId: data.recipients[len].subscriberId,
 				recipientsClass: recipientsClass,
 				recipient: data.recipients[len].rcvrFirstname +' '+ data.recipients[len].rcvrLastname+', <em>'+data.recipients[len].rcvrAccountname+'</em>'
@@ -77,9 +62,11 @@ function WhoGotItViewModel() {
 		showToast(toastobj);
   };
 	
-	this.recipientDetails = function(data){
+	self.recipientDetails = function(data){
 		ENYM.ctx.setItem('currentRecipientData', JSON.stringify(data));							
 		viewNavigate('Who Got it', 'whoGotItView', 'recipientDetailsView');
-	};			
-				
+	};	
 }
+
+WhoGotItViewModel.prototype = new ENYM.ViewModel();
+WhoGotItViewModel.prototype.constructor = WhoGotItViewModel;

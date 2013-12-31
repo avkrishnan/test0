@@ -2,7 +2,7 @@
 	var self = this;
 	self.template = "channelViewUnfollow";
 	self.viewid = "V-16";
-	self.viewname = "'Channel Unfollow'";
+	self.viewname = "Channel Unfollow";
 	self.displayname = "Channel Unfollow";
 	
   self.inputObs = [ 'title', 'description', 'channelid' ];

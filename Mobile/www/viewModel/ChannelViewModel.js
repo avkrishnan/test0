@@ -1,175 +1,152 @@
-﻿/*globals ko*/
-function ChannelViewModel() {
-	var that = this;
-	this.template = "channelView";
-	this.viewid = "V-18";
-	this.viewname = "Landing Page";
-	this.displayname = "Channel Landing Page";
+﻿function ChannelViewModel() {
+	var self = this;
+	self.template = "channelView";
+	self.viewid = "V-18";
+	self.viewname = "Landing Page";
+	self.displayname = "Channel Landing Page";
 	
-	this.accountName = ko.observable();	
-	
-	this.hasfooter = ko.observable(false);
-	this.hasheader = ko.observable(false);
-	this.settings = ko.observable(true);	
-	
-	this.isChannelView = true;
-	this.title = ko.observable();
-	this.channelAction = ko.observable();
-	this.channel = ko.observableArray([]);
-	this.message = ko.observable();
-	this.messages = ko.observableArray([]);
-	this.channelid = ko.observable();
-	this.channelIconObj = ko.observable();
-	this.channelMessage = ko.observable();
-	
-	this.url = ko.observable('');	
-	this.description = ko.observable('');
-	this.longdescription = ko.observable('');
-	this.moreText = ko.observable('');	
-	this.less = ko.observable(true);		
-	this.more = ko.observable(false);
-	this.moreButton = ko.observable(false);
-	this.lessButton = ko.observable(false);			
-	this.email = ko.observable('');
-	this.followers = ko.observable('');	
+	self.hasfooter = ko.observable(false);
+	self.hasheader = ko.observable(false);
+	self.settings = ko.observable(true);	
+	self.less = ko.observable(true);		
+	self.more = ko.observable(false);
+	self.moreButton = ko.observable(false);
+	self.lessButton = ko.observable(false);		
+	self.isChannelView = true;
 
-	this.applyBindings = function() {
-		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
-			//$('.more_messages_button').hide();
-			//var action = ENYM.ctx.getItem("action");
-			if ($.mobile.pageData && $.mobile.pageData.id) {
-				that.activate({id:$.mobile.pageData.id});
-			}
-			else {
-				var currentChannel = ENYM.ctx.getItem("currentChannel");
-				//alert(currentChannel);
-				//alert(ENYM.ctx.getItem("currentChannelMessages"));
-				
-				var lchannel = JSON.parse(currentChannel);
-				if (!(that.channel()[0] && lchannel.id == that.channel()[0].id)) {
-					that.messages([]);
-				}
-
-				if(lchannel) {
-					that.channel([lchannel]);
-					that.title(lchannel.name );
-					
-					that.relationship(lchannel.relationship);
-					
-					that.channelid(lchannel.id);
-					$.mobile.showPageLoadingMsg("a", "Loading Messages");
-					
-					that.description(lchannel.description);
-					that.longdescription(lchannel.longDescription);
-					that.url(lchannel.normName + '.evernym.com');
-					that.email(lchannel.normName + '@evernym.com');
-					that.showMainIcon(lchannel);
-				}
-				else {
-						//$.mobile.changePage("#" + channelListViewModel.template);
-				}
-			}
-		});
-	};
+	self.channel = ko.observableArray([]);
+	self.messages = ko.observableArray([]);
 	
-	this.showMainIcon = function(lchannel) {
+  self.inputObs = [ 'title', 'channelAction', 'url' , 'message', 'description', 'channelid', 'channelIconObj', 'channelMessage', 'longdescription', 'moreText', 'email', 'followers' ]; 
+  //self.errorObs = [ 'currentpasswordClass', 'newpasswordClass', 'confirmpasswordClass', 'errorMessageCurrent', 'errorMessageNew', 'errorMessageConfirm' ];
+  self.defineObservables();
+	
+	self.showMainIcon = function(lchannel) {
 		if (lchannel.picId ){
 			var iconJSON = JSON.parse(lchannel.picId);
 			if (iconJSON && iconJSON.id){
 				var set = iconJSON.set;
 				var id = iconJSON.id;
 				var mappedIcon2 = selectIconViewModel.mapImage(set, id, 63);
-				that.channelIconObj(mappedIcon2);
+				self.channelIconObj(mappedIcon2);
 			}
 		}
 	};
     
-	this.activate = function (channel) {
-		that.hasheader(false);			
-		that.hasfooter(false);		
+	self.activate = function (channel) {
+//
+	if ($.mobile.pageData && $.mobile.pageData.id) {
+		self.activate({id:$.mobile.pageData.id});
+	}
+	else {
+		var currentChannel = ENYM.ctx.getItem("currentChannel");
+		
+		var lchannel = JSON.parse(currentChannel);
+		if (!(self.channel()[0] && lchannel.id == self.channel()[0].id)) {
+			self.messages([]);
+		}
+	
+		if(lchannel) {
+			self.channel([lchannel]);
+			self.title(lchannel.name );
+			
+			self.relationship(lchannel.relationship);
+			
+			self.channelid(lchannel.id);
+			$.mobile.showPageLoadingMsg("a", "Loading Messages");
+			
+			self.description(lchannel.description);
+			self.longdescription(lchannel.longDescription);
+			self.url(lchannel.normName + '.evernym.com');
+			self.email(lchannel.normName + '@evernym.com');
+			self.showMainIcon(lchannel);
+		}
+		else {
+				//$.mobile.changePage("#" + channelListViewModel.template);
+		}
+	}
+//		
+		self.hasheader(false);			
+		self.hasfooter(false);		
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
 		}
 		else {
-			addExternalMarkup(that.template); // this is for header/overlay message
-			that.hasheader(true);
-			that.hasfooter(true);
+			addExternalMarkup(self.template); // this is for header/overlay message
+			self.hasheader(true);
+			self.hasfooter(true);
 		}		
-		that.channelid(channel.id);	
-		var _accountName = ENYM.ctx.getItem("accountName");
+		self.channelid(channel.id);	
 		var _name = ENYM.ctx.getItem("UserFullName");
-		that.accountName(_accountName);		
-		that.messages([]);
-		that.channelAction(true);
+		self.messages([]);
+		self.channelAction(true);
 		ENYM.ctx.removeItem('channelOwner');
-		that.followers('');
-		that.description('');
-		that.less(true);		
-		that.more(false);				
-		that.moreButton(false);
-		that.lessButton(false);						
+		self.followers('');
+		self.description('');
+		self.less(true);		
+		self.more(false);				
+		self.moreButton(false);
+		self.lessButton(false);						
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
-		//alert(that.channelid());
-		return that.getChannelCommand(that.channelid()).then(gotChannel);
+		return self.getChannelCommand(self.channelid()).then(gotChannel);
 	};
 	
-	this.channelSettings = function(){
+	self.channelSettings = function(){
 		if(ENYM.ctx.getItem('channelOwner') == 'yes') {		
-			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'channelSettingsView');
+			viewNavigate('Landing Page', 'channelView?id='+self.title(), 'channelSettingsView');
 		} else {
-			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'channelViewUnfollow');
+			viewNavigate('Landing Page', 'channelView?id='+self.title(), 'channelViewUnfollow');
 		}
 	}
 	
-	this.editLongDescription = function() {
+	self.editLongDescription = function() {
 		if(ENYM.ctx.getItem('channelOwner') == 'yes') {
-			viewNavigate('Landing Page', 'channelView?id='+that.title(), 'editLongDescriptionView');
+			viewNavigate('Landing Page', 'channelView?id='+self.title(), 'editLongDescriptionView');
 		}
 	}			
 	
 	function gotChannel(data) {
-		//alert(JSON.stringify(data));
 		$.mobile.hidePageLoadingMsg();
 		ENYM.ctx.setItem("currentChannel", JSON.stringify(data));
-		that.channel([data]);
-		that.channelMessage(data);
-		that.title(data.name);
+		self.channel([data]);
+		self.channelMessage(data);
+		self.title(data.name);
 		if(data.followers == 1) {
 			var followers = data.followers +' follower';
 		} else {
 			var followers = data.followers +' followers';
 		}		
-		that.followers(followers);
-		that.description(data.description);
+		self.followers(followers);
+		self.description(data.description);
 		if(typeof data.longDescription != 'undefined') {
 			if(data.longDescription.length > truncatedTextScreen()*12) {
 				var logDesc = ($.trim(data.longDescription).substring(0, truncatedTextScreen()*7).split(' ').slice(0, -1).join(' ') + '...').replace(/\n/g, '<br/>');
-				that.longdescription(logDesc);
-				that.moreText(data.longDescription.replace(/\n/g, '<br/>'));
-				that.moreButton(true);							
+				self.longdescription(logDesc);
+				self.moreText(data.longDescription.replace(/\n/g, '<br/>'));
+				self.moreButton(true);							
 			}
 			else {
-				that.longdescription(data.longDescription.replace(/\n/g, '<br/>'));			
+				self.longdescription(data.longDescription.replace(/\n/g, '<br/>'));			
 			}
 		}
 		else {
 			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
-				that.longdescription('This is the web page for '+that.title()+'. To follow '+that.title()+', click the Follow button below.');			
+				self.longdescription('This is the web page for '+self.title()+'. To follow '+self.title()+', click the Follow button below.');			
 			}
 		}
-		that.url(data.normName + '.evernym.com');
-		that.email(data.normName + '@evernym.com');
-		that.showMainIcon(data);
-		that.channelid(data.id);
+		self.url(data.normName + '.evernym.com');
+		self.email(data.normName + '@evernym.com');
+		self.showMainIcon(data);
+		self.channelid(data.id);
 		if(data.relationship == 'F' ) {
-			that.channelAction(false);
-			that.settings(true);			
+			self.channelAction(false);
+			self.settings(true);			
 			viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');			
 		}
 		else if(data.relationship == 'O') {
 			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
 			var account = JSON.parse(ENYM.ctx.getItem('account'));				
-				that.longdescription("This is the web page for "+that.title()+". To follow "+that.title()+", click the Follow button below.<br/><br/>Hello, "+account.firstname+"!  Your channel needs a better description than what we came up with for you, so go ahead and type that in this box.<br/>Make sure to include an invitation for visitors to click the Follow button in order to get your channel's broadcasts.");							
+				self.longdescription("This is the web page for "+self.title()+". To follow "+self.title()+", click the Follow button below.<br/><br/>Hello, "+account.firstname+"!  Your channel needs a better description than what we came up with for you, so go ahead and type self in this box.<br/>Make sure to include an invitation for visitors to click the Follow button in order to get your channel's broadcasts.");							
 			}				
 			ENYM.ctx.setItem('channelOwner', 'yes');
 			if(data.followers == 1) {
@@ -187,11 +164,11 @@ function ChannelViewModel() {
 			});
 			channel = channel[0];		
 			ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
-			that.settings(true);																
+			self.settings(true);																
 		}
 		else {
-			that.settings(false);			
-			that.channelAction(true);			
+			self.settings(false);			
+			self.channelAction(true);			
 		}
 	}
     
@@ -211,10 +188,7 @@ function ChannelViewModel() {
 	
 	function successfulFollowChannel() {
 		$.mobile.hidePageLoadingMsg();
-		//showMessage("Now Following Channel " + that.title());
-		//ENYM.ctx.removeItem("currentChannel");
-		//$.mobile.changePage("#" + channelsFollowingListViewModel.template);
-		var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+that.title()};
+		var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+self.title()};
 		showToast(toastobj);				
 		goToView('channelMessagesView');
 	}
@@ -223,7 +197,7 @@ function ChannelViewModel() {
 		$.mobile.hidePageLoadingMsg();
 	}
 	
-	this.logoutCommand = function() {
+	self.logoutCommand = function() {
 		loginViewModel.logoutCommand();
 		$.mobile.changePage("#" + loginViewModel.template);
 	};
@@ -253,12 +227,10 @@ function ChannelViewModel() {
 		if (details.code == 100601){ // we are already following this channel
 			var toastobj = {type: 'toast-error', text: details.message};
 			showToast(toastobj);		
-		}
-		else if (isBadLogin(details.code)){
+		} else if (isBadLogin(details.code)){
 			ENYM.ctx.setItem("action", 'follow_channel');
 			$.mobile.changePage("#" + loginViewModel.template);
-		}
-		else {
+		} else {
 			var toastobj = {type: 'toast-error', text: details.message};
 			showToast(toastobj);
 		}
@@ -277,52 +249,50 @@ function ChannelViewModel() {
 		showToast(toastobj);
 	}
 	
-	this.getChannelCommand = function (lchannelid) {
+	self.getChannelCommand = function (lchannelid) {
 		//alert(lchannelid);
 		$.mobile.showPageLoadingMsg("a", "Loading Channel");
 		return ES.channelService.getChannel(lchannelid, {success: successfulGetChannel, error: errorAPIChannel});
 	};
     
-	this.showMoreMessagesCommand = function(){
-		var last_message_id = that.messages()[that.messages().length - 1].id;
+	self.showMoreMessagesCommand = function(){
+		var last_message_id = self.messages()[self.messages().length - 1].id;
 		$.mobile.showPageLoadingMsg("a", "Loading Messages");
-		return ES.messageService.getChannelMessages(that.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
+		return ES.messageService.getChannelMessages(self.channelid(), {before: last_message_id}, {success: successfulMessageGET, error: errorRetrievingMessages}).then(gotMoreMessages);
 	}
 	
 	// follow/unfollow will be called on the basis of channelAction value
-	this.actionFollowChannelCommand = function() {
-		ENYM.ctx.setItem("currentChannel", JSON.stringify(that.channelMessage()));
+	self.actionFollowChannelCommand = function() {
+		ENYM.ctx.setItem("currentChannel", JSON.stringify(self.channelMessage()));
 		if(ENYM.ctx.getItem('channelOwner') == 'yes') {
 			var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
 			showToast(toastobj);			
-		}
-		else if(ENYM.ctx.getItem('accountName') == '' || ENYM.ctx.getItem('accountName') == null){
+		} else if(ENYM.ctx.getItem('accountName') == '' || ENYM.ctx.getItem('accountName') == null){
 			ENYM.ctx.setItem("action", 'follow_channel');
 			goToView('signupStepFirstView');
-		} 
-		else {
-			that.followChannelCommand();
+		} else {
+			self.followChannelCommand();
 		}
 	}
 	
-	this.followChannelCommand = function() {
-		that.messages([]);
+	self.followChannelCommand = function() {
+		self.messages([]);
 		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
-		return ES.channelService.followChannel(that.channelid(), {success: successfulFollowChannel, error: errorFollowing});
+		return ES.channelService.followChannel(self.channelid(), {success: successfulFollowChannel, error: errorFollowing});
 	};	
 	
-	this.unfollowChannelCommand = function() {
+	self.unfollowChannelCommand = function() {
 		$.mobile.showPageLoadingMsg("a", "Requesting to Unfollow Channel");
 		var callbacks = {
 			success: function(){;},
 			error: errorUnfollow
 		};
-		return ES.channelService.unfollowChannel(that.channelid(),callbacks).then(successfulUnfollowChannel);
+		return ES.channelService.unfollowChannel(self.channelid(),callbacks).then(successfulUnfollowChannel);
 	};
 	
 	function successfulUnfollowChannel(data){
 		ENYM.ctx.removeItem("currentChannel");
-		that.showChannelList();
+		self.showChannelList();
 	}
     
 	function errorUnfollow(data, status, details) {
@@ -331,46 +301,47 @@ function ChannelViewModel() {
 		showToast(toastobj);
 	}
 	
-	this.deleteChannelCommand = function () {
+	self.deleteChannelCommand = function () {
 		$.mobile.showPageLoadingMsg("a", "Removing Channel");
-		return ES.channelService.deleteChannel(that.channelid(), { success: successfulDelete, error: errorAPI });
+		return ES.channelService.deleteChannel(self.channelid(), { success: successfulDelete, error: errorAPI });
 	};
     
-	this.showMessage = function (message) {
+	self.showMessage = function (message) {
 		ENYM.ctx.setItem("currentMessage", JSON.stringify(message));
 		$.mobile.changePage("#" + messageViewModel.template)
 	};
 		
-	this.showChannelList = function() {
+	self.showChannelList = function() {
 		var lrelationship = 'O';
-		if (that.channel()[0]){
-			lrelationship = that.channel()[0].relationship;
+		if (self.channel()[0]){
+			lrelationship = self.channel()[0].relationship;
 		}
 		if (lrelationship && lrelationship == "F"){
 			$.mobile.changePage("#" + channelsFollowingListViewModel.template);
-		}
-		else {
+		} else {
 			$.mobile.changePage("#" + homeViewModel.template);
 		}
 	}
 	
-	this.modifyChannelCommand = function() {
-		//that.title("Channel: " + channel()[0].name );
+	self.modifyChannelCommand = function() {
+		//self.title("Channel: " + channel()[0].name );
 		return ES.channelService.modifyChannel(channel()[0], {success: successfulModify, error: errorAPI});
 	};
 	
-	this.showMore = function(){
-		that.less(false);		
-		that.more(true);
-		that.moreButton(false);	
-		that.lessButton(true);															
+	self.showMore = function(){
+		self.less(false);		
+		self.more(true);
+		self.moreButton(false);	
+		self.lessButton(true);															
 	};
 	
-	this.showLess = function(){
-		that.less(true);		
-		that.more(false);
-		that.moreButton(true);
-		that.lessButton(false);															
-	};		
-		
+	self.showLess = function(){
+		self.less(true);		
+		self.more(false);
+		self.moreButton(true);
+		self.lessButton(false);															
+	};
 }
+
+ChannelViewModel.prototype = new ENYM.ViewModel();
+ChannelViewModel.prototype.constructor = ChannelViewModel;
