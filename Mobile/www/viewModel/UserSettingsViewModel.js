@@ -116,7 +116,9 @@
 		ENYM.ctx.removeItem('newuseremail');
 		ENYM.ctx.removeItem('newusername');
 		ENYM.ctx.removeItem('newuserpassword');		
-    ENYM.ctx.removeItem('signUpError');				
+    ENYM.ctx.removeItem('signUpError');
+		ENYM.ctx.removeItem('backNavText');	
+		ENYM.ctx.removeItem('backNavView');						
 		goToView('loginView');
   }
 
@@ -126,9 +128,7 @@
 	
   self.cleanApplication = function() {
 		ES.evernymService.clearAccessToken();
-		ENYM.ctx.removeItem('login_nav');
-		ENYM.ctx.removeItem('backNavText');	
-		ENYM.ctx.removeItem('backNavView');				
+		ENYM.ctx.removeItem('login_nav');			
 		ENYM.ctx.removeItem('currentChannel');
 		//ENYM.ctx.removeItem('accountName');
 		ENYM.ctx.removeItem('account');		
