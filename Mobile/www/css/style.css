@@ -431,9 +431,6 @@ select, .ui-icon-arrow-d {
 	margin:15px 0 15px 5px;
 	display:block;
 }
-/*.loginform .msginfo {
-	color:#fff;
-}*/
 .loginform form {
 	border-bottom:1px solid #A0A0A0;
 	overflow:hidden;
@@ -611,16 +608,16 @@ input[type="checkbox"]:checked + label span {
 	box-shadow:0 0 20px #9e8342 inset;
 }
 .tutorial-1 {
-	background:url(images/v-51-320.png) no-repeat center 20px;
+	background:url(images/v-51-320.png) no-repeat center 0;
 }
 .tutorial-2 {
-	background:#fae49c url(images/v-52-320.png) no-repeat center 40px;
+	background:#fae49c url(images/v-52-320.png) no-repeat center 4px;
 }
 .tutorial-3 {
 	background:#fae49c url(images/v-53-320.png) no-repeat center 0px;
 }
 .tutorial-4 {
-	background:#fae49c url(images/v-54-320.png) no-repeat center 40px;
+	background:#fae49c url(images/v-54-320.png) no-repeat center 4px;
 }
 .tutorial-5 {
 	background:#fae49c url(images/v-55-320.png) no-repeat center 3px;
@@ -677,14 +674,18 @@ input[type="checkbox"]:checked + label span {
 	z-index:9999;
 	height:42px;
 }
+.tutorial h1 {
+	font-size:13px;
+	margin:12px 0 10px 5px;
+}
 .tutorial ul {
 	float:right;
-	margin:0 10px 0 0;
+	margin:0 6px 0 0;
 	line-height:42px;
 }
 .tutorial ul li {
 	display:inline;
-	padding:0 12px;
+	padding:0 10px;
 	background:url("images/sprites-login.png") no-repeat -22px -75px;
 }
 .tutorial ul li.active {
@@ -1341,10 +1342,10 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:url("images/IGISENT-h.png") no-repeat 8px 7px;
 }
 .iconchannels {
-float: right;
-padding: 23px 0;
-width: 46px;
-border-left:1px solid #EAEAEA;
+	float: right;
+	padding: 23px 0;
+	width: 46px;
+	border-left:1px solid #EAEAEA;
 }
 /*New Desing CHANGES*/
 .channelicans {
@@ -3555,6 +3556,24 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .cancelbtn {
 	margin:0 10px;
 }
+.reveal {
+	display:table;
+	width:100%;
+	margin:20px 0px 20px 0px;
+}
+.revealdesc {
+	display:table-cell;
+	padding:0 10px 0 0;
+	vertical-align:middle;
+	color:#fff;
+	font-size:16px;
+	width:100%;
+}
+.revealdesc strong {
+	color:#8DC63F;
+	margin-right:5px;
+	font-weight:normal;
+}
 /*
 	*@media query css
 */
@@ -3702,6 +3721,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.msgbroadcast {
 		width:81%;
 	}
+	.tutorial h1 {
+		font-size:14px;
+		margin:12px 0 10px 10px;
+	}
+	.tutorial ul {
+		margin:0 10px 0 0;
+	}
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3715,9 +3741,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.addaction .ui-input-search, .addaction div.ui-input-text {
 		width:91%;
-	}
-	.tutorial h1 {
-		font-size:22px;
 	}
 	.requestcontent .request, .requestcontent .replies, .requestcontent .igi, .requestcontent .lost {
 		font-size:15px;
@@ -3827,10 +3850,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:87%;
 	}
 	.channelmessages .msg-icon {
-	width:92.8%;
+		width:92.8%;
 	}
 	.channelmessages .igi-msg {
-	width:93.4%;
+		width:93.4%;
 	}
 	.channelmessages .onlymsg {
 		width:99.5%;
@@ -3843,6 +3866,31 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.channelmessages .msgbroadcast.onlymsg {
 		width:97.6%;
+	}
+	.tutorial h1 {
+		font-size:22px;
+		margin:5px 0 6px 12px;
+	}
+	.tutorial ul {
+		margin:0 12px 0 0;
+	}
+	.tutorial ul li {
+		padding:0px 12px;
+	}
+	.tutorial-1 {
+		background:#fae49c url(images/v-51-all.png) no-repeat center center;
+	}
+	.tutorial-2 {
+		background:#fae49c url(images/v-52-all.png) no-repeat center center;
+	}
+	.tutorial-3 {
+		background:#fae49c url(images/v-53-all.png) no-repeat center center;
+	}
+	.tutorial-4 {
+		background:#fae49c url(images/v-54-all.png) no-repeat center center;
+	}
+	.tutorial-5 {
+		background:#fae49c url(images/v-55-768.png) no-repeat center 20px;
 	}
 }
 @media only screen and (min-width:800px) {
@@ -3873,6 +3921,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.datetime-setting.date-minutesetting {
 		margin-right:49px;
+	}
+	.tutorial-5 {
+		background:#fae49c url(images/v-55-768.png) no-repeat center 130px;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -4061,6 +4112,21 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.channelmessages .msgbroadcast.onlymsg {
 		width:98.7%;
+	}
+	.tutorial-5 {
+		background:#fae49c url(images/v-55-1280.png) no-repeat center 0px;
+	}
+	.tutorial-1 {
+		background:#fae49c url(images/v-51-600.png) no-repeat center 4px;
+	}
+	.tutorial-2 {
+		background:#fae49c url(images/v-52-600.png) no-repeat center 4px;
+	}
+	.tutorial-3 {
+		background:#fae49c url(images/v-53-600.png) no-repeat center 4px;
+	}
+	.tutorial-4 {
+		background:#fae49c url(images/v-54-600.png) no-repeat center 4px;
 	}
 }
 @media only screen and (min-width:1290px) {

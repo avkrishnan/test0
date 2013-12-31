@@ -421,7 +421,9 @@ recipientDetailsViewModel = new RecipientDetailsViewModel(),
 singleMessageViewModel = new SingleMessageViewModel(),
 userGuideViewModel = new UserGuideViewModel(),
 plusMenuViewModel = new PlusMenuViewModel(),
-channelIntroViewModel = new ChannelIntroViewModel()
+channelIntroViewModel = new ChannelIntroViewModel(),
+
+nameRequiredViewModel = new NameRequiredViewModel()
 /* end */
 
 ;
@@ -502,7 +504,8 @@ var models = [
 							recipientDetailsViewModel	,
 							userGuideViewModel,
 							plusMenuViewModel,
-							channelIntroViewModel								
+							channelIntroViewModel,
+							nameRequiredViewModel								
               ];
 
 

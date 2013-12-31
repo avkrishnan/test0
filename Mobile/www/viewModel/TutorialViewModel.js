@@ -2,8 +2,8 @@
   var that = this;
   this.template = 'tutorialView';
   this.viewid = 'V-51';
-  this.viewname = 'Tutorial';
-  this.displayname = 'Tutorials';		
+  this.viewname = 'Introduction';
+  this.displayname = 'Introduction to Evernym Channels';		
 
   this.applyBindings = function() {
     $('#' + that.template).on('pagebeforeshow', function(e, data) {
@@ -25,7 +25,7 @@
 		$('.tutorials .tutorialslides:first-child').show();
 		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
 		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
-		navigation('.msg-content em', 'next', 'div.tutorialslides');
+		navigation('div.new-user', 'next', 'div.tutorialslides');
 
 		/* This function will swipe tutorial slides */
 		function SwipeSlide(Element, Event, functionName) {
@@ -46,9 +46,9 @@
 			$(clickElement).on('click',function() {
 				$('header ul li').removeClass('active');
 				$(Element).hide();
-				var slideview = $(this).parent().parent().parent()[functionName]("div "+Element).attr('id');
+				var slideview = $(this).parent()[functionName]("div "+Element).attr('id');
 				if(typeof slideview == 'undefined') {
-					slideview = $(this).parent().parent().parent().attr('id');
+					slideview = $(this).parent().attr('id');
 				}
 				$('#'+slideview).show();
 				$('header ul li#' + slideview + 'Active').addClass('active');

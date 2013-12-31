@@ -187,6 +187,7 @@
 	}
 	
 	function successfulFollowChannel() {
+		ENYM.ctx.removeItem('action');		
 		$.mobile.hidePageLoadingMsg();
 		var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+self.title()};
 		showToast(toastobj);				
@@ -264,14 +265,17 @@
 	// follow/unfollow will be called on the basis of channelAction value
 	self.actionFollowChannelCommand = function() {
 		ENYM.ctx.setItem("currentChannel", JSON.stringify(self.channelMessage()));
+		var account = JSON.parse(ENYM.ctx.getItem('account'));
+		ENYM.ctx.setItem("action", 'follow_channel');
 		if(ENYM.ctx.getItem('channelOwner') == 'yes') {
 			var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
 			showToast(toastobj);			
 		} else if(ENYM.ctx.getItem('accountName') == '' || ENYM.ctx.getItem('accountName') == null){
-			ENYM.ctx.setItem("action", 'follow_channel');
 			goToView('signupStepFirstView');
-		} else {
+		} else if (account && account.firstname && account.lastname) {
 			self.followChannelCommand();
+		} else {
+			goToView('nameRequiredView');
 		}
 	}
 	

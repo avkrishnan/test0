@@ -1,0 +1,24 @@
+<div id="nameRequiredView" data-role="page">
+	<header></header>
+  <div class="page-content">
+    <div class="reveal">
+      <span class="channelimg channel3 sky-blue"></span>
+      <div class="revealdesc">
+        <strong data-bind="text: channelName"></strong>requires followers to provide their first and last name.
+      </div>
+    </div>
+    <section class="loginform">
+      <div class="formtype" data-bind="css: firstnameClass">
+        <input type="text" data-bind="value: firstname" placeholder="First name" />      
+      </div>
+      <div class="formtype" data-bind="css: lastnameClass">
+        <input type="text" data-bind="value: lastname" placeholder="Last name" />
+        <div class="msgerror" data-bind="html: errorFirstLastName"></div>
+      </div>
+    </section>
+    <div class="revealbtn">
+      <a href="#" data-bind="click: insertNameCommand">Done</a>
+      <a class="cancelbtn" href="#" data-bind="click: cancelRequest">Cancel follow request</a>
+    </div>
+  </div>     
+</div>

@@ -77,8 +77,13 @@
 		var callbacks = {
 			success: function(responseData) {
 				var toastobj = {redirect: 'tutorialView', type: '', text: 'Email verified'};
-				showToast(toastobj);															
-				goToView('tutorialView');
+				showToast(toastobj);
+				if(ENYM.ctx.getItem("action") == 'follow_channel') {
+					goToView('nameRequiredView');
+				}
+				else {															
+					goToView('tutorialView');
+				}
 			},
 			error: function (responseData, status, details) {
 				self.errorMessage("<span>ERROR:</span> " + details.message);
@@ -87,6 +92,16 @@
 		$.mobile.showPageLoadingMsg('a', 'Sending Verification Request');		
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
 	};
+
+	self.skipCommand = function () {
+		if(ENYM.ctx.getItem("action") == 'follow_channel') {
+			goToView('nameRequiredView');
+		}
+		else {															
+			goToView('tutorialView');
+		}		
+	};	
+	
 }
 
 RegistrationVerifyViewModel.prototype = new ENYM.ViewModel();

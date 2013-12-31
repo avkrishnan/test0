@@ -28,20 +28,8 @@
 		ENYM.ctx.removeItem('newusername');
 		ENYM.ctx.removeItem('newuserpassword');	
     if(ENYM.ctx.getItem("action") == 'follow_channel') {
-			var callbacks = {
-				success: function() {
-					ENYM.ctx.removeItem('action');
-					var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
-					showToast(toastobj);
-					goToView('channelMessagesView');					
-				},
-				error: function(data, status, details) {
-					var toastobj = {type: 'toast-error', text: details.message};
-					showToast(toastobj);
-				}
-			};						
-			var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
-			ES.channelService.followChannel(channel.id, callbacks);
+			ENYM.ctx.removeItem('action');
+			goToView('channelMessagesView');					
 		}
 		else {
 			goToView('homeView');

@@ -29,13 +29,13 @@
 
 	self.createChannelCommand = function () {
 		var nameReg = /^[a-zA-Z0-9]+$/;
-    if(self.newChannel() == '') {
+    if (self.newChannel() == '') {
 			self.channelClass('validationerror');
       self.errorNewChannel('<span>SORRY:</span> Please enter channel name');
-		} else if(!nameReg.test(self.newChannel())) {
+		} else if (!nameReg.test(self.newChannel())) {
 			self.channelClass('validationerror');
 			self.errorNewChannel('<span>SORRY:</span> Letters and numbers only, no spaces.');
-		} else if(self.newChannel().length < 5 || self.newChannel().length > 25) {
+		} else if (self.newChannel().length < 5 || self.newChannel().length > 25) {
 			self.channelClass('validationerror');
 			self.errorNewChannel('<span>SORRY:</span> Name of min. 5 and max. 25 characters');			
 		} else {

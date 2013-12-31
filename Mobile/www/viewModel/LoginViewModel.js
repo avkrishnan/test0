@@ -117,8 +117,8 @@
     if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
 			ENYM.ctx.setItem('account', JSON.stringify(args.account));
-      ENYM.ctx.setItem("accountName", self.username());
-			if(ENYM.ctx.getItem("action") == 'follow_channel') {
+      ENYM.ctx.setItem('accountName', self.username());
+			if(ENYM.ctx.getItem('action') == 'follow_channel' && args.account.firstname && args.account.lastname) {
 				var callbacks = {
 					success: function() {
 						ENYM.ctx.removeItem('action');
@@ -135,6 +135,9 @@
 				};						
 				var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);
+			}
+			else if(ENYM.ctx.getItem('action') == 'follow_channel') {
+				goToView('nameRequiredView');
 			}
 			else {
 				goToView('homeView');
