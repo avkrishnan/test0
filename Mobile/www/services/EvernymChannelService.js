@@ -75,5 +75,19 @@ function EvernymChannelService(api) {
   t.removeFollowerReq = function(channelid, request) {
     return api.callAPI('DELETE', '/channel/' + channelid + '/followerrequest/' + request, undefined, undefined, true);
   };
+
+  /* Channel Settings */
+  t.getChnlSettings = function(channelid) {
+    return api.callAPI('GET', '/channel/' + channelid + '/setting', undefined, undefined, false);
+  };
   
+  t.putChnlSettings = function(channelid, settings) {
+    return api.callAPI('PUT', '/channel/' + channelid + '/setting', settings, undefined, true);
+  };
+  
+  t.removeChnlSetting = function(channelid, setting) {
+    return api.callAPI('DELETE', '/channel/' + channelid + '/setting/' + setting, undefined, undefined, true);
+  };
+
+
 }
