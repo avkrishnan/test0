@@ -37,7 +37,8 @@
   // asyncTest('A verifies email address', hlpr.verify(SCEN_A));
   // asyncTest('B verifies email address', hlpr.verify(SCEN_B));
 
-  var msgText = 'Hello everybody, this is a test broadcast! ';
+  var CRLF = String.fromCharCode(13) + String.fromCharCode(10);
+  var msgText = 'Hello everybody, this is a test broadcast! ' + CRLF + CRLF + " and this is another line.";
 
   asyncTest('A broadcasts a message', hlpr.broadcast(SCEN_A, 'chnl1', msgText, 'N'));
 
