@@ -77,8 +77,7 @@
       loginModel.accountname = self.username();
       loginModel.password = self.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
-      return ES.loginService.accountLogin(loginModel)
-        .then(loginSuccess, loginError);
+      return ES.loginService.accountLogin(loginModel).then(loginSuccess, loginError);
     }
   };
 	
@@ -92,6 +91,7 @@
 		ENYM.ctx.removeItem('newuseremail');
 		ENYM.ctx.removeItem('newusername');
 		ENYM.ctx.removeItem('newuserpassword');
+		ENYM.ctx.removeItem('roleType');
     //channelListViewModel.clearForm();
     //notificationsViewModel.removeNotifications();
     //OVERLAY.removeNotifications();
@@ -118,6 +118,9 @@
       ES.evernymService.setAccessToken(args.accessToken);
 			ENYM.ctx.setItem('account', JSON.stringify(args.account));
       ENYM.ctx.setItem('accountName', self.username());
+			if(typeof args.privs != 'undefined') {
+				ENYM.ctx.setItem('roleType', args.privs);
+			}
 			if(ENYM.ctx.getItem('action') == 'follow_channel' && args.account.firstname && args.account.lastname) {
 				var callbacks = {
 					success: function() {

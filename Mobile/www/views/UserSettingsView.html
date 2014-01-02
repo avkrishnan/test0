@@ -136,6 +136,9 @@
     <a href="#" class="low-messages policy" onclick="viewNavigate('Settings', 'userSettingsView', 'privacyPolicyView');">
       Privacy Policy and Terms of Service
     </a>
+    <a href="#" class="low-messages policy" onclick="viewNavigate('Settings', 'userSettingsView', 'administratorView');" data-bind="visible:roleType">
+      Administration
+    </a>
     <a href="login.html" class="low-messages signout" data-bind="click: logoutCommand">
       Sign out
     </a>

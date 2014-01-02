@@ -10,7 +10,7 @@
 	self.escalationplans = ko.observableArray([]);
 	self.comMethodType = ko.observable("EMAIL");
 	
-  self.inputObs = [ 'baseUrl', 'firstname', 'lastname', 'newComMethod', 'newComMethodName', 'navText' ];
+  self.inputObs = [ 'baseUrl', 'firstname', 'lastname', 'newComMethod', 'newComMethodName', 'navText', 'roleType' ];
   self.defineObservables();	
 	
 	self.pView = '';
@@ -30,8 +30,12 @@
 		var vm = ko.dataFor($("#" + previousView).get(0));
 		console.log("previousView Model viewid: " + vm.displayname);
 		self.navText(vm.displayname);
-		self.pView = previousView;	
-		
+		self.pView = previousView;
+		if(ENYM.ctx.getItem("roleType")) {
+			self.roleType(true);
+		} else {
+			self.roleType(false);
+		}
 		if (currentBaseUrl){
 			self.baseUrl(currentBaseUrl);
 		} else{
@@ -118,7 +122,8 @@
 		ENYM.ctx.removeItem('newuserpassword');		
     ENYM.ctx.removeItem('signUpError');
 		ENYM.ctx.removeItem('backNavText');	
-		ENYM.ctx.removeItem('backNavView');						
+		ENYM.ctx.removeItem('backNavView');
+		ENYM.ctx.removeItem('roleType');			
 		goToView('loginView');
   }
 

@@ -384,8 +384,10 @@ channelsIOwnViewModel = new ChannelsIOwnViewModel(),
 helpViewModel = new HelpViewModel(),
 aboutEvernymViewModel = new AboutEvernymViewModel(),
 feedbackViewModel = new FeedbackViewModel(),
+administratorViewModel = new AdministratorViewModel(),
 sendFeedbackViewModel = new SendFeedbackViewModel(),
 privacyPolicyViewModel = new PrivacyPolicyViewModel(),
+administratorFeedbackViewModel = new AdministratorFeedbackViewModel(),
 
 /* By Pradeep */
 channelMainViewModel = new ChannelMainViewModel(),
@@ -505,7 +507,9 @@ var models = [
 							userGuideViewModel,
 							plusMenuViewModel,
 							channelIntroViewModel,
-							nameRequiredViewModel								
+							nameRequiredViewModel,
+							administratorViewModel, 
+							administratorFeedbackViewModel					
               ];
 
 
