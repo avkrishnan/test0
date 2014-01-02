@@ -1,22 +1,13 @@
 ﻿function TutorialViewModel() {
-  var that = this;
-  this.template = 'tutorialView';
-  this.viewid = 'V-51';
-  this.viewname = 'Introduction';
-  this.displayname = 'Introduction to Evernym Channels';		
+	var self = this;
+  self.template = 'tutorialView';
+  self.viewid = 'V-51';
+  self.viewname = 'Introduction';
+  self.displayname = 'Introduction to Evernym Channels';		
 
-  this.applyBindings = function() {
-    $('#' + that.template).on('pagebeforeshow', function(e, data) {
-      that.activate();
-    });
-  };
-
-  this.activate = function() {
-		var token = ES.evernymService.getAccessToken();		
+  self.activate = function() {		
 		var newUser = ENYM.ctx.getItem('newusername');
-		if(token == '' || token == null){
-			goToView('loginView');
-		} else if(newUser == '' || newUser == null) {
+		if(newUser == '' || newUser == null) {
 				goToView('homeView');
 		}			
 		$('.tutorial ul li').removeClass('active');
@@ -39,7 +30,7 @@
 				$('header ul li#' + swipeView + 'Active').addClass('active');
 				$('#' + swipeView).show();
 			});
-		}
+		};
 		
 		/* This function will slide tutorial slides on arrow click */
 		function navigation(clickElement, functionName, Element) {
@@ -59,7 +50,10 @@
 		});
   };
 
-  this.getStartedCommand = function() {
+  self.getStartedCommand = function() {
 		goToView('userGuideView');
-  }
-}
+  };
+};
+
+TutorialViewModel.prototype = new ENYM.ViewModel();
+TutorialViewModel.prototype.constructor = TutorialViewModel;
