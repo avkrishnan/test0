@@ -784,7 +784,6 @@ function popBackNav() {
 	var targetView = goToView(backNavView.pop());
 	ENYM.ctx.removeItem('backNavView');		
 	ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
-	//$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});			
 }
 
