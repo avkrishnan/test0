@@ -1,24 +1,24 @@
 ﻿function ResetPasswordViewModel() {
 	var self = this;
+	self.requiresAuth = false;
 	self.template = 'resetPasswordView';
 	self.viewid = 'V-03d';
 	self.viewname = 'ResetPassword';
 	self.displayname = 'ResetPassword';
 	
-  self.inputObs = [ 'newPassword', 'confirmPassword', 'errorResetPassword', 'passwordClass', 'confirmPasswordClass', 'changePasswordNotification' ];
+  self.inputObs = [ 'newPassword', 'confirmPassword' ];
+	self.errorObs = [ 'errorResetPassword', 'passwordClass', 'confirmPasswordClass', 'changePasswordNotification'];
   self.defineObservables();
 		 
 	self.activate = function(){
-		var resetAccount = ENYM.ctx.getItem('resetAccount');
-		if(resetAccount == '' || resetAccount == null) {
-			goToView('forgotPasswordView');
-		} else {			
+		if((jQuery.mobile.path.get().split('?')[1])) {
 			self.accountName(ENYM.ctx.getItem('accountName'));
 			$('input').keyup(function (){ 
-				self.passwordClass('');
-				self.confirmPasswordClass('');				
-				self.errorResetPassword('');
+				self.clearErrorObs();
 			});
+		}
+		else {			
+			goToView('forgotPasswordView');
 		}
 	};
 	

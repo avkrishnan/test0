@@ -1,35 +1,20 @@
 ﻿function ForgotPasswordViewModel() {
-  var that = this;
-  this.template = 'forgotPasswordView';
-  this.viewid = 'V-03';
-  this.viewname = 'ForgotPassword';
-  this.displayname = 'Forgot Password';
+  var self = this;
+	self.requiresAuth = false;	
+  self.template = 'forgotPasswordView';
+  self.viewid = 'V-03';
+  self.viewname = 'ForgotPassword';
+  self.displayname = 'Forgot Password';
 	
-	/* Forgot password observable */
-  this.email = ko.observable();	
-  this.errorEmail = ko.observable();
-  this.emailClass = ko.observable();
+  self.inputObs = [ 'email'];
+  self.errorObs = [ 'errorEmail', 'emailClass'];	
+  self.defineObservables();	
 	
-	/* Methods */
-  this.applyBindings = function () {
-    $('#' + that.template).on('pagebeforeshow', null, function (e, data) {
-      that.clearForm();	      
-			that.activate();		
-    });
-  };
-	
-	this.clearForm = function () {
-    that.email('');		
-		that.emailClass('');				
-    that.errorEmail('');		
-  };
-	
-  this.activate = function () {
+  self.activate = function () {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {		
 			$('input').keyup(function () {					
-				that.errorEmail('');
-				that.emailClass('');
+				self.clearErrorObs();
 			});
 		} else {
 			goToView('homeView');
@@ -38,25 +23,25 @@
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotPasswordView') {
-			that.forgotPasswordCommand();
+			self.forgotPasswordCommand();
 		}
 	});
 	
-  this.forgotPasswordCommand = function () {
+  self.forgotPasswordCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-    if (that.email() == '') {
-      that.emailClass('validationerror');
-      that.errorEmail('Please enter your email');
-    } else if (that.email() != '' && !emailReg.test(that.email())) {
-      that.emailClass('validationerror');
-      that.errorEmail('Please enter valid email');
+    if (self.email() == '') {
+      self.emailClass('validationerror');
+      self.errorEmail('Please enter your email');
+    } else if (self.email() != '' && !emailReg.test(self.email())) {
+      self.emailClass('validationerror');
+      self.errorEmail('Please enter valid email');
     } else {
       var callbacks = {
         success: forgotPasswordSuccess,
         error: forgotPasswordError
       };
       var forgotPasswordModel = {};
-      forgotPasswordModel.emailAddress = that.email();
+      forgotPasswordModel.emailAddress = self.email();
 			$.mobile.showPageLoadingMsg('a', 'Sending Forgot Password Request');
       return ES.loginService.forgotPassword(forgotPasswordModel, callbacks);
     }
@@ -64,15 +49,18 @@
 
   function forgotPasswordSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-		ENYM.ctx.setItem('resetAccount', that.email());	
+		//ENYM.ctx.setItem('resetAccount', self.email());	
 		goToView('forgotPasswordSuccessView');		
-  }
+  };
 
   function forgotPasswordError(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     loginPageIfBadLogin(details.code);
-		that.emailClass('validationerror');
-		that.errorEmail(details.message);
-  }
+		self.emailClass('validationerror');
+		self.errorEmail(details.message);
+  };
 	
 }
+
+ForgotPasswordViewModel.prototype = new ENYM.ViewModel();
+ForgotPasswordViewModel.prototype.constructor = ForgotPasswordViewModel;
