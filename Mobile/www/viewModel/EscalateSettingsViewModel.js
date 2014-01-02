@@ -7,7 +7,7 @@
 
 	self.escType = ko.observable(false);
 	
-  self.inputObs = [ 'escalationType', 'escalateUntil', 'ecalateTime', 'remindClass', 'chaseClass', 'houndClass' ];
+  self.inputObs = [ 'escalationColor', 'escalationType', 'escalateUntil', 'ecalateTime', 'remindClass', 'chaseClass', 'houndClass', 'remindColor', 'chaseColor', 'houndColor' ];
   self.defineObservables();		
 
 	self.activate = function() {
@@ -15,18 +15,27 @@
 		self.escType(false);
 		self.escalateUntil('');						
 		self.ecalateTime('Set Date and Time');
+		self.remindColor('');
+		self.chaseColor('');
+		self.houndColor('');		
 		self.remindClass('');
 		self.chaseClass('');
 		self.houndClass('');
 		if(ENYM.ctx.getItem('escLevel') == 'H') {
+			self.escalationColor('houndcolor');
+			self.houndColor('houndcolor');
 			self.houndClass('criticalicon');
 			ENYM.ctx.setItem('escLevel', 'H');
 			self.escalationType('"Hound"');																													
 		} else if(ENYM.ctx.getItem('escLevel') == 'C') {
+			self.escalationColor('chasecolor');
+			self.chaseColor('chasecolor');
 			self.chaseClass('broadcasticon');
 			ENYM.ctx.setItem('escLevel', 'C');															
-			self.escalationType('"Chase"');				
+			self.escalationType('"Chase"');
 		} else {
+			self.escalationColor('remindcolor');
+			self.remindColor('remindcolor');
 			self.remindClass('timesensitiveicon');
 			ENYM.ctx.setItem('escLevel', 'R');															
 			self.escalationType('"Remind"');				
@@ -43,26 +52,38 @@
 	};	
 	
 	self.remindActive = function () {
+		self.remindColor('remindcolor ');
+		self.chaseColor('');
+		self.houndColor('');		
 		self.remindClass('timesensitiveicon ');
 		self.chaseClass('');
 		self.houndClass('');
 		ENYM.ctx.setItem('escLevel', 'R');
+		self.escalationColor('remindcolor ');
 		self.escalationType('"Remind"');					
   };
 	
 	self.chaseActive = function () {
+		self.remindColor('');
+		self.chaseColor('chasecolor');
+		self.houndColor('');		
 		self.remindClass('');
 		self.chaseClass('broadcasticon');
 		self.houndClass('');
 		ENYM.ctx.setItem('escLevel', 'C');
+		self.escalationColor('chasecolor');
 		self.escalationType('"Chase"');							
   };
 	
-	self.houndActive = function () {		
+	self.houndActive = function () {
+		self.remindColor('');
+		self.chaseColor('');
+		self.houndColor('houndcolor');				
 		self.remindClass('');
 		self.chaseClass('');
 		self.houndClass('criticalicon');
 		ENYM.ctx.setItem('escLevel', 'H');
+		self.escalationColor('houndcolor');
 		self.escalationType('"Hound"');							
   };
 	

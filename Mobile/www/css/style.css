@@ -2886,8 +2886,17 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin-top:15px;
 	width:100%;
 }
+.houndcolor, .slider-value span.houndcolor {
+	color:#f15a29;
+}
+.chasecolor, .slider-value span.chasecolor {
+	color:#f7941e;
+}
+.remindcolor, .slider-value span.remindcolor {
+	color:#d7df23;
+}
 .agressively-slider {
-    padding:0 10px;
+	padding:0 10px;
 }
 .agressively-slider span {
 	font-size:14px;
@@ -3021,7 +3030,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .slidervalue-img .fastcoloricon {
 	background:url("images/icon-f.png") no-repeat 0 0;
 }
-.slidervalue-img .emergencycoloricon {
+.slidervalue-img .icon-Emergency {
 	/*background:#ed1c24;*/
 	background:url("images/icon-e.png") no-repeat 1px 0;
 }
@@ -3598,13 +3607,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .required {
 	color:#FFFFFF;
 	font-size:14px;
-	line-height:22px;
 }
-.required span {
-	color:#be1e2d;
-	font-size:20px;
-	float:left;
-	padding:0px 4px 0 0;
+.permissionmsg {
+	margin:20px 10px 10px 0px;
+}
+.permissionmsg span {
+	font-size:14px;
+	color:#fff;
+	display:block;
+	margin:0 0 10px 0;
 }
 /*
 	*@media query css

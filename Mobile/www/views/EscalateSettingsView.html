@@ -14,16 +14,17 @@
       <div class="escalatedate-time">
         <em>Escalate for how long?</em>
         <div class="escalatedatetime">
-          <span data-bind="text: escalationType, visible: escType, valueUpdate: {valueUpdate: remindActive, valueUpdate: chaseActive, valueUpdate: houndActive}"></span><span data-bind="text: escalateUntil"></span>
+          <span data-bind="text: escalationType, visible: escType, css: escalationColor, valueUpdate: {valueUpdate: remindActive, valueUpdate: chaseActive, valueUpdate: houndActive}"></span>
+          <span data-bind="text: escalateUntil, css: escalationColor"></span>
           <a href="#" data-bind="text: ecalateTime" onclick="viewNavigate('Escalate Settings', 'escalateSettingsView', 'escalateTimeSettingsView');"></a>
         </div>
       </div>
       <div class="agressively-slider">
         <span>How agressively?</span>
         <div class="slider-value">
-          <span class="remind">Remind</span>
-          <span class="chase">Chase</span>
-          <span class="hound">Hound</span>
+          <span class="remind" data-bind="css: remindColor">Remind</span>
+          <span class="chase" data-bind="css: chaseColor">Chase</span>
+          <span class="hound" data-bind="css: houndColor">Hound</span>
         </div>
         <div class="slidervalue-img">
           <a class="remind-sensitive" href="#" data-bind="css: remindClass, click: remindActive"></a>
