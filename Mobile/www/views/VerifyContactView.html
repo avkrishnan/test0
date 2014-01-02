@@ -1,8 +1,7 @@
 <div id="verifyContactView" data-role="page">
 	<header class="logged-in"></header>
   <div class="page-content">
-    <div class="portal-name" data-bind="text: accountName"></div>
-   
+    <div class="portal-name">Your evernym: <span data-bind="text: accountName"></span></div>
     <div class="success">
       <p data-bind="ifnot: verificationStatus"><span data-bind="text: verificationCommethod"></span></p>
       <p data-bind="if: verificationStatus">Success! <span data-bind="text: verificationCommethod"></span> has been added to your contact list.</p>

@@ -22,7 +22,7 @@
   
   <section data-bind="ifnot: showDelete">
     <div class="page-content">
-      <div class="portal-name" data-bind="text: accountName"></div>
+      <div class="portal-name">Your evernym: <span data-bind="text: accountName"></span></div>
       <div class="details-delete"> <h1>My contact information</h1> </div>
       <div data-bind="foreach: commethods">
         <section data-bind="ifnot: $data.comMethodVerify">

@@ -1,7 +1,7 @@
 <div id="escalationPlanSingleView" data-role="page">
 	<header class="logged-in"></header>
   <div class="page-content">
-		<div class="portal-name" data-bind="text: accountName"></div>
+    <div class="portal-name">Your evernym: <span data-bind="text: accountName"></span></div>
     <div class="Emergencymsg" data-bind="css: activeEscPlan">When an <strong data-bind="value: activeEscPlan"></strong> message arrives</div>
     
     <div data-bind="foreach: activeEscalationPlan">
