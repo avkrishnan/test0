@@ -51,7 +51,14 @@
           <span class="nobutton">No</span>
         </div>
       </div>
-
+      
+      <div class="yes-no">
+        <label for="flip-1">First/Last name required</label>
+        <div class="yes-noclick">
+          <span data-bind="click: requiredYes, css: yesShare">Yes</span>
+          <span data-bind="click: requiredNo, css: noShare">No</span>              
+        </div>
+      </div>      
     </div>
   </div>
   <div class="toast-notification"></div>    

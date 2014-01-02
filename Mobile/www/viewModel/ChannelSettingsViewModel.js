@@ -5,7 +5,7 @@
 	self.viewname = 'Settings';
 	self.displayname = 'Channel Settings';
 	
-  self.inputObs = [ 'channelId', 'channelName', 'shortDescription' ];
+  self.inputObs = [ 'channelId', 'channelName', 'shortDescription', 'yesShare', 'noShare' ];
 	self.defineObservables();		
 	  
 	self.activate = function() {				
@@ -17,13 +17,30 @@
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);
 			self.shortDescription(channelObject.channelDescription);
-			ENYM.ctx.removeItem('channelOwner');										
+			self.yesShare('yesbutton');
+			self.noShare('nobutton');				
+			ENYM.ctx.removeItem('channelOwner');
+			var data = ES.channelService.getChnlSettings(self.channelId());
+			var setting = {};
+			setting.SHARE_NAME = 'Y';
+			//return ES.channelService.putChnlSettings(self.channelId(), setting);								
 		}
-	};
+	};	
 	
 	self.comingSoon = function() {
 		headerViewModel.comingSoon();		
 	};
+	
+	self.requiredYes = function() {
+		self.yesShare('nobutton');
+		self.noShare('yesbutton');		
+	};
+	
+	self.requiredNo = function() {
+		self.yesShare('yesbutton');
+		self.noShare('nobutton');				
+	};	
+		
 }
 
 ChannelSettingsViewModel.prototype = new ENYM.ViewModel();
