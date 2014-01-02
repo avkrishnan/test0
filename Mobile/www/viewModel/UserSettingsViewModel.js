@@ -117,6 +117,8 @@
 		ENYM.ctx.removeItem('newusername');
 		ENYM.ctx.removeItem('newuserpassword');		
     ENYM.ctx.removeItem('signUpError');
+		backNavText = [];
+		backNavView = [];		
 		ENYM.ctx.removeItem('backNavText');	
 		ENYM.ctx.removeItem('backNavView');						
 		goToView('loginView');

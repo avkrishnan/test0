@@ -20,9 +20,10 @@
 			self.yesShare('yesbutton');
 			self.noShare('nobutton');				
 			ENYM.ctx.removeItem('channelOwner');
-			var data = ES.channelService.getChnlSettings(self.channelId());
+			//var data = ES.channelService.getChnlSettings(self.channelId());
 			var setting = {};
-			setting.SHARE_NAME = 'Y';
+			setting.NEW_FLWR_NOTIF = 'H';
+			//setting.SHARE_NAME = 'N';
 			//return ES.channelService.putChnlSettings(self.channelId(), setting);								
 		}
 	};	
