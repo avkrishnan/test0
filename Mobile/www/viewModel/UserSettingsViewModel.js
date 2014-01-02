@@ -145,7 +145,7 @@
 		ENYM.ctx.removeItem('enymNotifications');
 		ES.systemService.MnsCacheData = {};
 		ES.systemService.MnsLastUpdated = 0;
-		sendMessageViewModel.clearForm();											
+		sendMessageViewModel.channels.removeAll();											
 	};
 }
 

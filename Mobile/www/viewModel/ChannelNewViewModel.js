@@ -90,7 +90,7 @@
   };
 	
   self.goToNext = function () {
-		sendMessageViewModel.clearForm();					
+		sendMessageViewModel.channels.removeAll();					
     goToView('channelIntroView');
   };
 }

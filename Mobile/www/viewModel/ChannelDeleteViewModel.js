@@ -31,7 +31,7 @@
 		ENYM.ctx.removeItem('counter');
 		var toastobj = {redirect: 'channelsIOwnView', type: '', text: 'Channel deleted'};
 		showToast(toastobj);				
-		sendMessageViewModel.clearForm();		
+		sesendMessageViewModel.channels.removeAll();	
 		goToView('channelsIOwnView');		
   };
 
