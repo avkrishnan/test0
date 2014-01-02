@@ -159,10 +159,12 @@ h1.newcreatechannel {
 }
 .portal-name {
 	font-size:18px;
-	color:#8dc63f;
-	font-style:italic;
 	display:block;
 	margin:20px 20px 12px 12px;
+	color:#fff;
+}
+.portal-name span {
+	color:#8dc63f;	
 }
 .welcome {
 	font-style:normal;
@@ -1067,6 +1069,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .requestcontent.last {
 	border-bottom:none;
+	clear:both;
 }
 .page-content.channelsettings {
 	padding-top:50px;
