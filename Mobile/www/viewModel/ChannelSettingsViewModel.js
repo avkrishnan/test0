@@ -38,12 +38,16 @@
 	self.requiredYes = function() {
 		self.yesShare('nobutton');
 		self.noShare('yesbutton');
+		var toastobj = {type: '', text: 'First/Last name now required'};
+		showToast(toastobj);		
 		ES.channelService.addFollowerReq(self.channelId(), 'SHARE_NAME');					
 	};
 	
 	self.requiredNo = function() {
 		self.yesShare('yesbutton');
 		self.noShare('nobutton');
+		var toastobj = {type: '', text: 'First/Last name no longer required'};
+		showToast(toastobj);		
 		ES.channelService.removeFollowerReq(self.channelId(), 'SHARE_NAME');				
 	};	
 		
