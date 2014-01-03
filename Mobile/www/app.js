@@ -770,10 +770,12 @@ if(!ENYM.ctx.getItem('backNavText') || !ENYM.ctx.getItem('backNavView')) {
 
 function viewNavigate(backText, backView, targetView) {
 	if($.mobile.activePage.attr('id') != targetView) {
-		backNavText.push(backText);
-		ENYM.ctx.setItem('backNavText', JSON.stringify(backNavText));	
-		backNavView.push(backView);
-		ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
+		if(backNavView[backNavView.length-1] != backView) {
+			backNavText.push(backText);
+			ENYM.ctx.setItem('backNavText', JSON.stringify(backNavText));	
+			backNavView.push(backView);
+			ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
+		}
 	}
 	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');	
 	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
