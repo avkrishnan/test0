@@ -9,6 +9,7 @@
 	
   self.activate = function() {
   	addExternalMarkup(self.template); // this is for header/overlay message
+		ENYM.ctx.removeItem('singleFeedback');
 		self.getFeedbacks().then(showFeedback);
 	};
 	
