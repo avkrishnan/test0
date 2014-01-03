@@ -26,8 +26,9 @@
   self.okGotIt = function() {
 		ENYM.ctx.removeItem('newuseremail');
 		ENYM.ctx.removeItem('newusername');
-		ENYM.ctx.removeItem('newuserpassword');	
-    if(ENYM.ctx.getItem("action") == 'follow_channel') {
+		ENYM.ctx.removeItem('newuserpassword');
+		var action = JSON.parse(ENYM.ctx.getItem('action'));			
+    if(action && action.follow_channel == 'Y') {
 			ENYM.ctx.removeItem('action');
 			goToView('channelMessagesView');					
 		}

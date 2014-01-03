@@ -20,13 +20,16 @@
 			self.yesShare('yesbutton');
 			self.noShare('nobutton');				
 			ENYM.ctx.removeItem('channelOwner');
-			//var data = ES.channelService.getChnlSettings(self.channelId());
-			var setting = {};
-			setting.NEW_FLWR_NOTIF = 'H';
-			//setting.SHARE_NAME = 'N';
-			//return ES.channelService.putChnlSettings(self.channelId(), setting);								
+			return ES.channelService.getFollowerReq(self.channelId()).then(getSuccess);				
 		}
 	};	
+	
+	function getSuccess(data) {
+		if(data != '') {
+			self.yesShare('nobutton');
+			self.noShare('yesbutton');		
+		}
+	}
 	
 	self.comingSoon = function() {
 		headerViewModel.comingSoon();		
@@ -34,12 +37,14 @@
 	
 	self.requiredYes = function() {
 		self.yesShare('nobutton');
-		self.noShare('yesbutton');		
+		self.noShare('yesbutton');
+		ES.channelService.addFollowerReq(self.channelId(), 'SHARE_NAME');					
 	};
 	
 	self.requiredNo = function() {
 		self.yesShare('yesbutton');
-		self.noShare('nobutton');				
+		self.noShare('nobutton');
+		ES.channelService.removeFollowerReq(self.channelId(), 'SHARE_NAME');				
 	};	
 		
 }

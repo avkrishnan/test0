@@ -49,7 +49,7 @@
 
   function forgotPasswordSuccess(args) {
     $.mobile.hidePageLoadingMsg();
-		//ENYM.ctx.setItem('resetAccount', self.email());	
+		ENYM.ctx.setItem('resetAccount', self.email());	
 		goToView('forgotPasswordSuccessView');		
   };
 
