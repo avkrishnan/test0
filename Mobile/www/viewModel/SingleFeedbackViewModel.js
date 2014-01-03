@@ -1,27 +1,23 @@
 ﻿function SingleFeedbackViewModel() {
   var self = this;
-	self.template = 'singleFeedbackViewModel';
+	self.template = 'singleFeedbackView';
 	self.viewid = 'V-47';
 	self.viewname = 'Single Feedback';
 	self.displayname = 'Single Feedback';
 	
-	self.submittedFeedbacks = ko.observableArray([]);
+  self.inputObs = [ 'created', 'feedback', 'context' ];
+  self.defineObservables();	
 	
   self.activate = function() {
   	addExternalMarkup(self.template); // this is for header/overlay message
-		self.getFeedbacks().then(showFeedback);
+		self.showFeedback();
 	};
 	
-	self.getFeedbacks = function() {
-		return ES.systemService.getFeedback();
-	};
-	
-	function showFeedback(data) {
-		$.each(data, function(indexMessage, valueMessage) {
-			valueMessage.context = valueMessage.context + '-icon';
-			valueMessage.created = formatDate(valueMessage.created, 'short', 'follow');
-		});
-		self.submittedFeedbacks(data);
+	self.showFeedback = function() {
+		var currentFeedback = ENYM.ctx.getItem('singleFeedback');
+		self.feedback(currentFeedback.comments);
+		self.created(currentFeedback.created);
+		self.context(currentFeedback.context);
 	};
 }
 

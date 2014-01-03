@@ -23,6 +23,11 @@
 		});
 		self.submittedFeedbacks(data);
 	};
+	
+	self.showSingleFeedback = function(data) {
+		ENYM.ctx.setItem('singleFeedback', data);
+		viewNavigate('Feedbacks', 'administratorFeedbackView', 'singleFeedbackView');
+	};
 }
 
 AdministratorFeedbackViewModel.prototype = new ENYM.ViewModel();
