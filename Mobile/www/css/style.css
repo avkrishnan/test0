@@ -158,11 +158,13 @@ h1.newcreatechannel {
 	padding:0 0 0 10px;
 }
 .portal-name {
-	font-size:18px;
+ font-size:18px;
+ display:block;
+ margin:20px 20px 12px 12px;
+ color:#fff;
+}
+.portal-name span {
 	color:#8dc63f;
-	font-style:italic;
-	display:block;
-	margin:20px 20px 12px 12px;
 }
 .welcome {
 	font-style:normal;
@@ -3648,13 +3650,36 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:#2D2D2D;
 	padding:0;
 	width:100%;
+	border:2px solid red;
 }
-.provisionalfollower .emailicon {
-	background:#2D2D2D url("images/sprites.png") no-repeat -6px -514px;
+.provisionalchannel, .provisionalfollower {
+	border-radius:20px 0 0 20px;
+	margin:20px 0 10px 0;
+	background:#2D2D2D;
+	padding:0;
+	width:100%;
+	overflow:hidden;
 }
-.provisionalfollower .texticon {
-	background:#2D2D2D url("images/sprites.png") no-repeat -6px -572px;
+.provisionalfollower {
+	border-radius:20px 0 0 10px;
 }
+.provisionalfollower em {
+	padding:19px;
+	margin-right:10px;
+	float:left;
+	background:url("images/sprites.png") no-repeat -7px -1753px;
+}
+/*.personalinformation {
+	display:inline-block;
+	padding:10px 0px 0px 0px;
+}
+.personalinformation span {
+	display:block;
+	color:#fff;
+	padding:0 0 10px 0px;
+	font-size:14px;
+}*/
+
 /*
 	*@media query css
 */
