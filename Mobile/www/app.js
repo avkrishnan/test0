@@ -10,11 +10,11 @@ ES.messageService = new EvernymMessageService(ES.evernymService);
 ES.escplanService = new EvernymEscPlanService(ES.evernymService);
 
 ES.evernymService.doAfterDone = function(){
-    $.mobile.hidePageLoadingMsg();
+    //$.mobile.hidePageLoadingMsg();
 };    
 
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
-    $.mobile.hidePageLoadingMsg();
+    //$.mobile.hidePageLoadingMsg();
 		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
 			ES.evernymService.clearAccessToken();
 			authenticate();
@@ -30,11 +30,14 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 			}
 		}
 };
-
-function goToView(view) {
-	$.mobile.changePage( "#" + view, {allowSamePageTransition: true});
+/*
+function goToView(viewmodel) {
+	
+	
+	
+	//$.mobile.changePage( "#" + view, {allowSamePageTransition: true});
 }
-
+*/
 function goToChannel(select) {
 	startBroadcast(select.value);
 }
@@ -345,7 +348,7 @@ function getClassName(classobject) {
 //notificationsViewModel = new NotificationsViewModel(),
 //panelHelpViewModel = new PanelHelpViewModel(),
 
-var
+/*var
 loginViewModel = new LoginViewModel(),
 channelListViewModel = new ChannelListViewModel(),
 channelsFollowingListViewModel = new ChannelsFollowingListViewModel(),
@@ -364,9 +367,9 @@ forgotPasswordViewModel = new ForgotPasswordViewModel(),
 forgotPasswordSuccessViewModel = new ForgotPasswordSuccessViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
 resetPasswordSuccessViewModel = new ResetPasswordSuccessViewModel(),
-
+*/
 /*By Devedner*/
-escalationPlansViewModel = new EscalationPlansViewModel(),
+/*escalationPlansViewModel = new EscalationPlansViewModel(),
 escalationPlanSingleViewModel = new EscalationPlanSingleViewModel(),
 addContactViewModel = new AddContactViewModel(),
 additionalContactViewModel = new AdditionalContactViewModel(),
@@ -377,7 +380,7 @@ channelViewUnfollowModel = new ChannelViewUnfollowModel(),
 changePasswordViewModel = new ChangePasswordViewModel(),
 /* end*/
 
-tutorialViewModel = new TutorialViewModel(),
+/*tutorialViewModel = new TutorialViewModel(),
 signupStepFirstViewModel = new SignupStepFirstViewModel(),
 signupStepSecondViewModel = new SignupStepSecondViewModel(),
 channelsIOwnViewModel = new ChannelsIOwnViewModel(),
@@ -388,7 +391,7 @@ inviteFollowersIIViewModel = new InviteFollowersIIViewModel(),
 privacyPolicyViewModel = new PrivacyPolicyViewModel(),
 
 /* By Pradeep */
-channelMainViewModel = new ChannelMainViewModel(),
+/*channelMainViewModel = new ChannelMainViewModel(),
 channelChangeNameViewModel = new ChannelChangeNameViewModel(),
 editShortDescriptionViewModel = new EditShortDescriptionViewModel(),
 channelDeleteViewModel = new ChannelDeleteViewModel(),
@@ -425,10 +428,10 @@ singleMessageViewModel = new SingleMessageViewModel()
 
 // load the stored state (recent searches)
 
-$.mobile.defaultPageTransition = ""; //"slide";
+//$.mobile.defaultPageTransition = ""; //"slide";
 
-var models = [
-							/* Jared's Code to be activated when required */
+/*var models = [
+							/* Jared's Code to be activated when required 
               //unsubscribeModel,
               //selectIconViewModel,
               //followChannelViewModel,
@@ -497,7 +500,7 @@ var models = [
 							notGotItViewModel,
 							whoGotItViewModel,
 							recipientDetailsViewModel									
-              ];
+              ];*/
 
 
 function getHTMLName(viewModel){
@@ -524,7 +527,7 @@ function getViewName(viewModel){
 
 
 
-
+/*
 function loadAllPages() {
     
   var getarray = [], i, len;
@@ -546,8 +549,52 @@ function loadAllPages() {
       }
     }
   });
-};
+};*/
 
+function goToView(view){
+    //loginView
+    // LoginViewModel 
+    //var s = new LoginViewModel();
+   //window[LoginViewModel]();
+    // var obj; obj[key] = value;
+    
+	var sview = view[0].toUpperCase() + view.slice(1);
+	$( "#allpages" ).load( 'views/' + sview +".html", function() {
+  //alert( "Load was performed." );
+	 	 console.log('Loaded ' + view);
+		var viewmodel = sview + 'Model';
+	 var s = document.createElement("script");
+    s.type = "text/javascript";
+	s.onload = function(){
+		var newModel = new window[viewmodel]();
+		ko.applyBindings(newModel, document.getElementById(view));
+      if (newModel.applyBindings){
+        newModel.applyBindings();
+      }
+	}
+    s.src = 'viewModel/' + viewmodel+".js";
+	document.querySelector('#allpagesScripts').innerHTML = "";
+	document.querySelector('#allpagesScripts').appendChild(s);
+	
+	});
+	
+	
+	
+	
+    // Use any selector
+   // $("#allpagesScripts").html(s);
+	
+	
+	/*$( "#allpagesScripts" ).load( 'viewModel/' + viewmodel+".js", function() {
+  //alert( "Load was performed." );
+	 	 console.log('Loaded ' + viewmodel);
+	});*/
+	
+	
+	
+	
+	
+}
 	$(document).ready(function () {
 		// bind each view model to a jQueryMobile page
 		console.log("document ready");
@@ -562,12 +609,13 @@ function loadAllPages() {
 			}
 		}
 		console.log('hash: ' + document.location.hash);
-		$.mobile.activeBtnClass = '';
+		//$.mobile.activeBtnClass = '';
 		//$("#channelListView").page("destroy").page();
 		//var currentUrl = $.mobile.path.parseUrl(window.location.href);
 		//console.log("currentUrl: " + currentUrl.hash);
 		localStorage.removeItem('baseUrl');
-		loadAllPages().done(function() {
+		goToView('loginView');
+		/*loadPage().done(function() {
 			console.log('done loading all pages.');
 			console.log("INITIALIZE PAGE");
 			$.mobile.initializePage();
@@ -578,8 +626,8 @@ function loadAllPages() {
 				}
 				channelListViewModel.listMyChannelsCommand().then(gotChannels);
 				channelMenuViewModel.getUrgencySettings();
-			}*/
-		});
+			}
+		});*/
 	});
 
 

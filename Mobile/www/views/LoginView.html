@@ -16,7 +16,7 @@
         <input type="checkbox" name="rememberPassword" />Remember me
       </label>
       <div class="login">
-        <a href="#forgotPasswordView">Forgot password?</a>
+        <a href="#" data-bind="click: forgetPasswordCommand">Forgot password?</a>
         <p class="loginbtn">
           <a href="#" data-bind="click: loginCommand">LOGIN</a>
         </p>
@@ -24,7 +24,7 @@
     </section>
     <div class="baseline"></div>
     <div class="signedup">Not signed up yet?</div>
-    <div class="login"><p class="loginbtn"><a href="#signupStepFirstView">SIGN UP NOW (IT'S FREE!)</a></p></div>    
+    <div class="login"><p class="loginbtn"><a href="#" data-bind="click: signupCommand">SIGN UP NOW (IT'S FREE!)</a></p></div>    
   </div>
    <div class="toast-notification toast-login"></div>         
 </div>

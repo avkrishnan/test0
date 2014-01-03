@@ -34,14 +34,16 @@
   };
 	
 	$(document).keyup(function(e) {
-		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'loginView') {
+		if (e.keyCode == 13 /*&& $.mobile.activePage.attr('id') == 'loginView'*/) {
 			//self.errorMessage('');
 			self.loginCommand();
 		}
 	});
 	
   self.loginCommand = function() {
+	 
     if (self.username() == '' && self.password() == '') {
+		
       self.usernameClass('validationerror');
       self.passwordClass('validationerror');
       self.errorMessage('<span>SORRY:</span> Please enter username and password');
@@ -71,7 +73,7 @@
 			  self.password('');
 			};
       var loginModel = {};
-      $.mobile.showPageLoadingMsg("a", "Logging In");
+      //$.mobile.showPageLoadingMsg("a", "Logging In");
       loginModel.accountname = self.username();
       loginModel.password = self.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
@@ -79,7 +81,15 @@
         .then(loginSuccess, loginError);
     }
   };
-	
+
+self.forgetPasswordCommand = function(){
+	goToView('forgotPasswordView');
+}
+
+self.signupCommand = function(){
+	goToView('signupStepFirstView');
+}
+
   self.cleanApplication = function() {
     ES.evernymService.clearAccessToken();
     localStorage.removeItem('login_nav');
@@ -104,7 +114,7 @@
 				showToast(toastobj);
 			}
 		};
-    $.mobile.hidePageLoadingMsg();
+    //$.mobile.hidePageLoadingMsg();
     // if (isPhoneGap()) {
     // alert("Running on PhoneGap!");
     // registerPushNotifications();
@@ -148,3 +158,5 @@
 
 LoginViewModel.prototype = new AppCtx.ViewModel();
 LoginViewModel.prototype.constructor = LoginViewModel;
+
+//@ sourceURL=myscript.js

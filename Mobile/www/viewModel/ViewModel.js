@@ -27,7 +27,7 @@ AppCtx.ViewModel = function() {
 	this.defineObservables = function() {
 	  var vm = this;
 		$.each(this.allObs(), function(i,v) {
-		  vm[v] = ko.observable();
+		  vm[v] = ko.observable('');
 		});
 	};
 	
