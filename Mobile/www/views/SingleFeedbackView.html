@@ -1,0 +1,24 @@
+<div id="singleFeedbackView" data-role="page">
+	<header class="logged-in"></header> 
+  <div class="page-content">
+    <h1 class="help-FAQs feedback">Feedbacks</h1>
+    <section>
+      <div class="channelmessages" data-bind="foreach: submittedFeedbacks">
+        <a href="#">
+        	<span class='feedbacks' data-bind="css:$data.context"></span>
+          <div class="messageschannel">
+            <span class="timemsg" data-bind="text:$data.created"></span>
+            <p data-bind="text:$data.comments"></p>
+          </div>
+          <span class="iconchannels icon-avatar"></span>
+        </a>
+      </div>      
+    </section>
+  </div>
+  <div class="toast-notification"></div>   
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Admin Feedback', 'administratorFeedbackView', 'userSettingsView');"></a>
+    <a class="announcement" href="#" onclick="viewNavigate('Admin Feedback', 'administratorFeedbackView', 'plusMenuView');"></a>
+  </div>
+  <div class="active-overlay" style="display:none"></div>  
+</div>
