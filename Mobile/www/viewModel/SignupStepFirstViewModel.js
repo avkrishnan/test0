@@ -93,7 +93,7 @@
 
   function signUpError(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		if(details.message == 'communication method already used') {
+		if(details.code == '100930') {
 			self.emailClass('validationerror');										
 			self.errorEmail('<span>SORRY: </span> ' + details.message);
 		}
