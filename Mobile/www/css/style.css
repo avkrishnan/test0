@@ -159,12 +159,10 @@ h1.newcreatechannel {
 }
 .portal-name {
 	font-size:18px;
+	color:#8dc63f;
+	font-style:italic;
 	display:block;
 	margin:20px 20px 12px 12px;
-	color:#fff;
-}
-.portal-name span {
-	color:#8dc63f;
 }
 .welcome {
 	font-style:normal;
@@ -1047,6 +1045,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	overflow:hidden;
 	margin:0 15px;
 	padding:8px 0 8px 42px;
+	clear:both;
 	border-bottom:1px solid #828181;
 }
 .requestcontent .followers {
@@ -1069,7 +1068,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .requestcontent.last {
 	border-bottom:none;
-	clear:both;
 }
 .page-content.channelsettings {
 	padding-top:50px;
@@ -1985,7 +1983,8 @@ h1.requests {
 	margin:0;
 }
 .removefollower {
-	margin-top:20px;
+	margin-top:10px;
+	clear:both;
 }
 .createchannel {
 	color:#FFFFFF;
@@ -2583,7 +2582,7 @@ ul.igiresponses li span {
 	padding:3px 0 7px 24px;
 	border-bottom:1px solid #fff;
 }
-.slidemenu a.ui-link, .slidemenu a.ui-link:hover, .slidemenu a.ui-link:visited, .slidemenu .ui-link:active {
+.slidemenu a, .slidemenu a.ui-link, .slidemenu a.ui-link:hover, .slidemenu a.ui-link:visited, .slidemenu .ui-link:active {
 	display:block;
 	font-size:20px;
 	font-weight:normal;
@@ -2603,6 +2602,9 @@ ul.igiresponses li span {
 }
 .slidemenu a.ui-link.channelsall-messagesicon {
 	background-position:0 -737px;
+}
+.slidemenu a.ui-link.usersettings {
+	background:url("images/hamburger-usersetting.png") no-repeat 8px 8px;
 }
 /*slide menu End*/
 .compose {
@@ -3619,6 +3621,20 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#fff;
 	display:block;
 	margin:0 0 10px 0;
+}
+/*v-35(provisional follower edit)*/
+.provisionalchannel {
+	border-radius:20px 0 0 20px;
+	margin:20px 0 10px 0;
+	background:#2D2D2D;
+	padding:0;
+	width:100%;
+}
+.provisionalfollower .emailicon {
+	background:#2D2D2D url("images/sprites.png") no-repeat -6px -514px;
+}
+.provisionalfollower .texticon {
+	background:#2D2D2D url("images/sprites.png") no-repeat -6px -572px;
 }
 /*
 	*@media query css
