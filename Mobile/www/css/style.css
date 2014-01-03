@@ -1400,25 +1400,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .icon-d {
 	background:url("images/all-icons.png") no-repeat -477px -5px;
 }
-/* */
-.feedbacks {
-	float:left;
-	width:43px;
-	height:46px;	
-}
-.icon-avatar {
-	background:url("images/sprites-icons.png") no-repeat center 5px;
-}
-.bug-icon {
-	background:url("images/sprites-icons.png") no-repeat -6px -247px;
-}
-.feedback-icon {
-	background:url("images/sprites-icons.png") no-repeat -6px -412px;
-}
-.suggestions-icon {
-	background:url("images/sprites.png") no-repeat -5px -168px;
-}
-/* */
 .messageschannel {
 	float:left;
 	padding:0 0 0 4px;
@@ -3265,6 +3246,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	height:156px;
 	overflow:auto;
 }
+.long-description textarea.ui-input-text {
+	min-height:156px;
+	max-height:190px;
+	height:auto;
+	overflow:auto;
+}
 .longdescription textarea::-moz-placeholder {
 	color:#000;
 }
@@ -3650,7 +3637,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:#2D2D2D;
 	padding:0;
 	width:100%;
-	border:2px solid red;
 }
 .provisionalchannel, .provisionalfollower {
 	border-radius:20px 0 0 20px;
@@ -3669,17 +3655,34 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	float:left;
 	background:url("images/sprites.png") no-repeat -7px -1753px;
 }
-/*.personalinformation {
+.provisional-follower {
 	display:inline-block;
 	padding:10px 0px 0px 0px;
 }
-.personalinformation span {
+.provisional-follower span {
 	display:block;
 	color:#fff;
 	padding:0 0 10px 0px;
 	font-size:14px;
-}*/
-
+}
+/*Sir*/
+.feedbacks {
+ float:left;
+ width:43px;
+ height:46px; 
+}
+.icon-avatar {
+ background:url("images/sprites-icons.png") no-repeat center 5px;
+}
+.bug-icon {
+ background:url("images/sprites-icons.png") no-repeat -6px -247px;
+}
+.feedback-icon {
+ background:url("images/sprites-icons.png") no-repeat -6px -412px;
+}
+.suggestions-icon {
+ background:url("images/sprites.png") no-repeat -5px -168px;
+}
 /*
 	*@media query css
 */
@@ -3833,6 +3836,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial ul {
 		margin:0 10px 0 0;
+	}
+	.long-description textarea.ui-input-text {
+		max-height:328px;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -3998,6 +4004,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-768.png) no-repeat center 20px;
 	}
+	.long-description textarea.ui-input-text {
+		max-height:712px;
+	}
 }
 @media only screen and (min-width:800px) {
 	.slidemenu {
@@ -4030,6 +4039,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-768.png) no-repeat center 130px;
+	}
+	.long-description textarea.ui-input-text {
+		max-height:968px;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -4233,6 +4245,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.tutorial-4 {
 		background:#fae49c url(images/v-54-600.png) no-repeat center 4px;
+	}
+	.long-description textarea.ui-input-text {
+		max-height:310px;
 	}
 }
 @media only screen and (min-width:1290px) {
