@@ -32,7 +32,7 @@ function SingleMessageRepliesViewModel() {
 	function successfulReliesGET(data){
     $.mobile.hidePageLoadingMsg();			
 		for(len = 0; len<data.message.length; len++) {
-			if(data.message[len].replies < 1) {
+			//if(data.message[len].replies < 1) {
 				var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+data.message[len].text;
 				if(data.message[len].text.length > truncatedTextScreen()) {
 				  var replyLess = $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...';
@@ -53,7 +53,7 @@ function SingleMessageRepliesViewModel() {
 					senderLastname: data.message[len].senderLastname,										
 					replyToReply: data.message[len].replies
 				});
-			}
+			//}
 		}
 	}; 
 	
