@@ -1400,6 +1400,25 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .icon-d {
 	background:url("images/all-icons.png") no-repeat -477px -5px;
 }
+/* */
+.feedbacks {
+	float:left;
+	width:43px;
+	height:46px;	
+}
+.icon-avatar {
+	background:url("images/sprites-icons.png") no-repeat center 5px;
+}
+.bug-icon {
+	background:url("images/sprites-icons.png") no-repeat -6px -247px;
+}
+.feedback-icon {
+	background:url("images/sprites-icons.png") no-repeat -6px -412px;
+}
+.suggestions-icon {
+	background:url("images/sprites.png") no-repeat -5px -168px;
+}
+/* */
 .messageschannel {
 	float:left;
 	padding:0 0 0 4px;

@@ -14,11 +14,20 @@
 	
 	self.getFeedbacks = function() {
 		return ES.systemService.getFeedback();
-	}
+	};
 	
 	function showFeedback(data) {
+		$.each(data, function(indexMessage, valueMessage) {
+			valueMessage.context = valueMessage.context + '-icon';
+			valueMessage.created = formatDate(valueMessage.created, 'short', 'follow');
+		});
 		self.submittedFeedbacks(data);
-	}
+	};
+	
+	self.showSingleFeedback = function(data) {
+		ENYM.ctx.setItem('singleFeedback', data);
+		viewNavigate('Feedbacks', 'administratorFeedbackView', 'singleFeedbackView');
+	};
 }
 
 AdministratorFeedbackViewModel.prototype = new ENYM.ViewModel();

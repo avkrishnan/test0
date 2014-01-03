@@ -3,9 +3,16 @@
   <div class="page-content">
     <h1 class="help-FAQs feedback">Feedbacks</h1>
     <section>
-    	<ul data-bind="foreach: submittedFeedbacks">
-      	<li data-bind="text: comments" style="background:#fff;padding:6px;margin:5px 0;width:92%;"></li>
-      </ul>
+      <div class="channelmessages" data-bind="foreach: submittedFeedbacks">
+        <a href="#" data-bind='click: $parent.showSingleFeedback'>
+        	<span class='feedbacks' data-bind="css:$data.context"></span>
+          <div class="messageschannel">
+            <span class="timemsg" data-bind="text:$data.created"></span>
+            <p data-bind="text:$data.comments"></p>
+          </div>
+          <span class="iconchannels icon-avatar"></span>
+        </a>
+      </div>      
     </section>
   </div>
   <div class="toast-notification"></div>   

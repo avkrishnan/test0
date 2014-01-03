@@ -388,6 +388,7 @@ administratorViewModel = new AdministratorViewModel(),
 sendFeedbackViewModel = new SendFeedbackViewModel(),
 privacyPolicyViewModel = new PrivacyPolicyViewModel(),
 administratorFeedbackViewModel = new AdministratorFeedbackViewModel(),
+singleFeedbackViewModel = new SingleFeedbackViewModel(),
 
 /* By Pradeep */
 channelMainViewModel = new ChannelMainViewModel(),
@@ -509,7 +510,8 @@ var models = [
 							channelIntroViewModel,
 							nameRequiredViewModel,
 							administratorViewModel, 
-							administratorFeedbackViewModel					
+							administratorFeedbackViewModel,
+							singleFeedbackViewModel					
               ];
 
 

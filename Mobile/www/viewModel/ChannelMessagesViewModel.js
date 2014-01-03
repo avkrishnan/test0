@@ -86,7 +86,6 @@
 			success: function(data) {
 				var screenSizeText = truncatedTextScreen();
 				$.each(data.messagealert, function(indexMessage, valueMessage) {
-					var tempCreated = time2TimeAgo(valueMessage.created);
 					var tempCreated = formatDate(valueMessage.created, 'short', 'follow');
 					if(valueMessage.escLevelId && valueMessage.escLevelId != 'N' && valueMessage.escLevelId != 'F') {
 						var tempClass = valueMessage.escLevelId.toLowerCase().trim();
