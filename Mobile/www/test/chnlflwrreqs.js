@@ -49,11 +49,7 @@
     };
   }
   
-  asyncTest('Fetch Channel Follower Request and make sure there are none', fetchAndCheckFlwrReqs(SCEN_A, []));
-
-  asyncTest('Add Channel Follower Request SHARE_NAME', addFlwrReqs(SCEN_A, 'SHARE_NAME'));
-  
-  asyncTest('Fetch Channel Follower Request and make sure there is one', fetchAndCheckFlwrReqs(SCEN_A, ['SHARE_NAME']));
+  asyncTest('Fetch Channel Follower Request and make sure the default is there', fetchAndCheckFlwrReqs(SCEN_A, ['SHARE_NAME']));
 
   asyncTest('Remove Channel Follower Request SHARE_NAME', removeFlwrReqs(SCEN_A, 'SHARE_NAME'));
 
@@ -62,6 +58,8 @@
   asyncTest('Fetch Channel Follower Request and make sure there are none', fetchAndCheckFlwrReqs(SCEN_A, []));
 
   asyncTest('Add invalid Channel Follower Request', addFlwrReqs(SCEN_A, 'INVALID', hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
+
+  asyncTest('Fetch Channel Follower Request and make sure there are none', fetchAndCheckFlwrReqs(SCEN_A, []));
 
   var SCEN_B = hlpr.TestScenario();
   var acct_2 = hlpr.generateAccount();
@@ -74,8 +72,10 @@
 
   asyncTest("B follow A'S channel without issue", hlpr.followChannel(SCEN_B, SCEN_A, 'channel'));
   
-  asyncTest('A adds Channel Follower Request SHARE_NAME again', addFlwrReqs(SCEN_A, 'SHARE_NAME'));
+  asyncTest('A adds Channel Follower Request SHARE_NAME', addFlwrReqs(SCEN_A, 'SHARE_NAME'));
 
+  asyncTest('Fetch Channel Follower Request and make sure there is one', fetchAndCheckFlwrReqs(SCEN_A, ['SHARE_NAME']));
+  
   var SCEN_C = hlpr.TestScenario();
   var acct_2 = hlpr.generateAccount();
   delete acct_2.firstname;
