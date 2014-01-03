@@ -201,7 +201,7 @@
 	function successfulReliesGET(data){
     $.mobile.hidePageLoadingMsg();			
 		for(var len = 0; len<data.message.length; len++) {
-			if(data.message[len].replies < 1) {
+			if(data.message[len].replies == 1) {
 				if(data.message[len].text.length > truncatedTextScreen()) {
 					var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+$.trim(data.message[len].text).substring(0, truncatedTextScreen()).split(' ').slice(0, -1).join(' ') + '...';
 				  var replyLess = $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...';

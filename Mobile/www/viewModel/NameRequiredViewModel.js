@@ -10,13 +10,19 @@
 	
   self.defineObservables();			
 	
-  self.activate = function () {		
-		$('input').keyup(function () {
-		  self.clearErrorObs();
-		});
-		var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
-		self.channelId(channel.id);		
-		self.channelName(channel.name);
+  self.activate = function () {
+		var action = JSON.parse(ENYM.ctx.getItem('action'));		
+		if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {	
+			$('input').keyup(function () {
+				self.clearErrorObs();
+			});
+			var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
+			self.channelId(channel.id);		
+			self.channelName(channel.name);
+		}
+		else {
+			goToView('homeView');
+		}
   };
 	
 	$(document).keyup(function (e) {
@@ -62,7 +68,7 @@
 		});
 		account = account[0];				
 		ENYM.ctx.setItem('account', JSON.stringify(account));		
-    if(ENYM.ctx.getItem('action') == 'follow_channel' && ENYM.ctx.getItem('newusername')) {
+    if(ENYM.ctx.getItem('newusername')) {
 			var callbacks = {
 				success: function() {
 					var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+self.channelName()};
@@ -101,8 +107,7 @@
   };
 	
 	self.cancelRequest = function() {
-    if(ENYM.ctx.getItem('action') == 'follow_channel' && ENYM.ctx.getItem('newusername')) {
-			ENYM.ctx.removeItem('action');
+    if(ENYM.ctx.getItem('newusername')) {
 			var toastobj = {redirect: 'tutorialView', type: 'toast-info', text: 'Follow request cancelled'};
 			showToast(toastobj);
 			goToView('tutorialView');					

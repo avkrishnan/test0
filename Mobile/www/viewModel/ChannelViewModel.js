@@ -13,10 +13,11 @@
   self.inputObs = [
     'title',
 		'channelAction',
-    'channelid', 
+    'channelId', 
     'description', 
     'longdescription', 
-    'moreText'];		
+    'moreText',
+		'loggedIn'];		
 	self.defineObservables();	
 	
 	self.less = ko.observable(true);		
@@ -27,20 +28,22 @@
 	self.activate = function (channel) {
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {
+			self.loggedIn('');
 			self.hasheader(false);
 			self.hasfooter(false);
 		}
 		else {
+			self.loggedIn('Y');
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.hasheader(true);
 			self.hasfooter(true);
 		}
 		if((jQuery.mobile.path.get().split('?')[1])) {
-			self.channelid((jQuery.mobile.path.get().split('?')[1]).replace('id=',''));
+			self.channelId((jQuery.mobile.path.get().split('?')[1]).replace('id=',''));
 		}
 		else {
 			var currentChannel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
-			self.channelid(currentChannel.id);		
+			self.channelId(currentChannel.id);		
 		}
 		self.accountName(ENYM.ctx.getItem("accountName"));		
 		self.channelAction(true);
@@ -50,7 +53,7 @@
 		self.moreButton(false);
 		self.lessButton(false);						
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
-		return ES.channelService.getChannel(self.channelid(), {success: successfulGetChannel, error: errorAPIChannel});;
+		return ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPIChannel});;
 	};			
 	
 	function successfulGetChannel(data) {
@@ -79,7 +82,7 @@
 				self.longdescription('This is the web page for '+self.title()+'. To follow '+self.title()+', click the Follow button below.');			
 			}
 		}
-		self.channelid(data.id);
+		self.channelId(data.id);
 		if(data.relationship == 'F' ) {
 			self.channelAction(false);
 			self.settings(true);			
@@ -169,25 +172,53 @@
 	
 	// follow/unfollow will be called on the basis of channelAction value
 	self.actionFollowChannelCommand = function() {
-		var account = JSON.parse(ENYM.ctx.getItem('account'));
-		ENYM.ctx.setItem("action", 'follow_channel');		
-		if(ENYM.ctx.getItem('channelOwner') == 'yes') {
-			var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
-			showToast(toastobj);			
+		if(self.loggedIn() == 'Y') {
+			var account = JSON.parse(ENYM.ctx.getItem('account'));			
+			if(ENYM.ctx.getItem('channelOwner') == 'yes') {
+				var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
+				showToast(toastobj);			
+			}
+			else if (account && account.firstname && account.lastname){
+				self.followChannelCommand();
+			}
+			else {
+				return ES.channelService.getFollowerReq(self.channelId()).then(getSuccessOnLogin);
+				function getSuccessOnLogin(data) {	
+					if(data != '') {
+						var action = {follow_channel: 'Y', SHARE_NAME: 'Y'};
+						ENYM.ctx.setItem('action', JSON.stringify(action));
+						goToView('nameRequiredView');
+					}
+					else {
+						self.followChannelCommand();			
+					}
+				}
+			}
 		}
-		else if(ENYM.ctx.getItem('accountName') == '' || ENYM.ctx.getItem('accountName') == null){
-			goToView('signupStepFirstView');
-		} 
-		else if (account && account.firstname && account.lastname) {
-			self.followChannelCommand();
-		} else {
-			goToView('nameRequiredView');
+		else {
+			return ES.channelService.getFollowerReq(self.channelId()).then(getSuccess);		
 		}
 	};
 	
+	function getSuccess(data) {					
+		if(data != '') {
+			var action = {follow_channel: 'Y', SHARE_NAME: 'Y'};
+		}
+		else {
+			var action = {follow_channel: 'Y', SHARE_NAME: 'N'};			
+		}
+		ENYM.ctx.setItem('action', JSON.stringify(action));			
+		if(ENYM.ctx.getItem('accountName') == '' || ENYM.ctx.getItem('accountName') == null){
+			goToView('signupStepFirstView');
+		} 
+		else {
+			goToView('loginView');
+		}
+	};	
+	
 	self.followChannelCommand = function() {
 		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
-		return ES.channelService.followChannel(self.channelid(), {success: successfulFollowChannel, error: errorFollowing});
+		return ES.channelService.followChannel(self.channelId(), {success: successfulFollowChannel, error: errorFollowing});
 	};	
 
 	self.showMore = function(){

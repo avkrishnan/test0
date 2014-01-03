@@ -13,6 +13,7 @@
 		if(newUser == '' || newUser == null) {
 			goToView('homeView');
 		} else {
+			action = JSON.parse(ENYM.ctx.getItem('action'));
 			self.getCommethods();
 			self.accountName('Your evernym is: '+ENYM.ctx.getItem('accountName')+" (Don't forget!)");
 			self.verificationCommethodType(ENYM.ctx.getItem('newuseremail'));				
@@ -76,14 +77,16 @@
 	self.verifyRequest = function(verifyCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				var toastobj = {redirect: 'tutorialView', type: '', text: 'Email verified'};
-				showToast(toastobj);
-				if(ENYM.ctx.getItem("action") == 'follow_channel') {
+				if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
+					var redirect = 'nameRequiredView';
 					goToView('nameRequiredView');
 				}
-				else {															
+				else {
+					var redirect = 'nameRequiredView';												
 					goToView('tutorialView');
 				}
+				var toastobj = {redirect: redirect, type: '', text: 'Email verified'};
+				showToast(toastobj);				
 			},
 			error: function (responseData, status, details) {
 				self.errorMessage("<span>ERROR:</span> " + details.message);
@@ -94,11 +97,23 @@
 	};
 
 	self.skipCommand = function () {
-		if(ENYM.ctx.getItem("action") == 'follow_channel') {
+		if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
 			goToView('nameRequiredView');
 		}
-		else {															
-			goToView('tutorialView');
+		else {
+			var callbacks = {
+				success: function() {		
+					var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+channel.name};
+					showToast(toastobj);
+					goToView('tutorialView');										
+				},
+				error: function(data, status, details) {
+					var toastobj = {type: 'toast-error', text: details.message};
+					showToast(toastobj);
+				}
+			};
+			var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
+			ES.channelService.followChannel(channel.id, callbacks);																						
 		}		
 	};	
 	

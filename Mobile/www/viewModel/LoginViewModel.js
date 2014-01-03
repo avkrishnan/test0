@@ -26,7 +26,7 @@
 				self.password(ENYM.ctx.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
-			$('input').keyup(function(e) {
+			$('input').keyup(function() {
 				self.clearErrorObs();
 			});
 		} 
@@ -121,7 +121,8 @@
 			if(typeof args.privs != 'undefined') {
 				ENYM.ctx.setItem('roleType', args.privs);
 			}
-			if(ENYM.ctx.getItem('action') == 'follow_channel' && args.account.firstname && args.account.lastname) {
+			var action = JSON.parse(ENYM.ctx.getItem('action'));
+			if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N') {
 				var callbacks = {
 					success: function() {
 						ENYM.ctx.removeItem('action');
@@ -139,8 +140,25 @@
 				var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
 				ES.channelService.followChannel(channel.id, callbacks);
 			}
-			else if(ENYM.ctx.getItem('action') == 'follow_channel') {
-				goToView('nameRequiredView');
+			else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
+				if(args.account.firstname && args.account.lastname) {
+					var callbacks = {
+						success: function() {		
+							var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
+							showToast(toastobj);
+							goToView('channelMessagesView');										
+						},
+						error: function(data, status, details) {
+							var toastobj = {type: 'toast-error', text: details.message};
+							showToast(toastobj);
+						}
+					};
+					var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
+					ES.channelService.followChannel(channel.id, callbacks);																						
+				}
+				else {
+					goToView('nameRequiredView');
+				}
 			}
 			else {
 				goToView('homeView');

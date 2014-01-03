@@ -51,7 +51,7 @@
 		}
 	};
 	
-	function resetPasswordSuccess (data) {							
+	function resetPasswordSuccess () {							
 		goToView('resetPasswordSuccessView');			
 	};
 		
