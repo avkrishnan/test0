@@ -12,8 +12,7 @@
   self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message				
 		self.sectionOne(false);
-		self.sectionTwo(false);			
-		ENYM.ctx.setItem('counter', 1);												
+		self.sectionTwo(false);														
 		self.channels.removeAll();			
 		$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 		return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });

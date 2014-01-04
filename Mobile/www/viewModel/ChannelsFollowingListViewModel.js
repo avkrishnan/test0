@@ -20,7 +20,6 @@
 		
 		if(authenticate()) {
 			addExternalMarkup(self.template); // this is for header/overlay message
-			ENYM.ctx.setItem('counter', 1);
 			self.channels.removeAll();
 			if(self.channels() && self.channels().length){
 				self.channels.removeAll();

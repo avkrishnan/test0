@@ -68,7 +68,11 @@
 		self.sectionTwo(true);
   };
 	
-  self.okCommand = function () {				
+  self.okCommand = function () {
+		if(backNavView[backNavView.length-1] == 'channelsIOwnView') {
+			backNavText.pop();
+			backNavView.pop();
+		}						
     goToView('channelsIOwnView');
   };
 	

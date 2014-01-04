@@ -17,14 +17,7 @@
 			addExternalMarkup(self.template); // this is for header/overlay message	
 			self.followers.removeAll();
 			self.followerCount('0 followers');								
-			self.accountName(ENYM.ctx.getItem('accountName'));		
-			if(ENYM.ctx.getItem('counter') == 1) {
-				ENYM.ctx.setItem('counter', 2);
-			} else if(ENYM.ctx.getItem('counter') == 2){		
-				ENYM.ctx.setItem('counter', 3);
-			}	else {
-				ENYM.ctx.setItem('counter', 1);
-			}																
+			self.accountName(ENYM.ctx.getItem('accountName'));																		
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);																						
 			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		

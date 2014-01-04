@@ -19,12 +19,6 @@
 		} 
 		else {
 			addExternalMarkup(self.template); // this is for header/overlay message		
-			if(ENYM.ctx.getItem('counter') == 1) {
-				ENYM.ctx.setItem('counter', 2);
-			} 
-			else {		
-				ENYM.ctx.setItem('counter', 1);
-			}
 			self.channelid(channel.id);
 			ENYM.ctx.removeItem("currentChannelMessage");
 			$.mobile.showPageLoadingMsg("a", "Loading Channel Messages");

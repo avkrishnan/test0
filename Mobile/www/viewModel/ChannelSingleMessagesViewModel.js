@@ -29,15 +29,6 @@
 		self.dismissButton(true);			
 		self.activeClass('igimsgdetail');
 		self.dismissClass('');										
-		if(ENYM.ctx.getItem('counter') == 1) {
-			ENYM.ctx.setItem('counter', 2);
-		} 
-		else if(ENYM.ctx.getItem('counter') == 2) {		
-			ENYM.ctx.setItem('counter', 3);
-		}	
-		else {
-			ENYM.ctx.setItem('counter', 1);
-		}
 		if(ENYM.ctx.getItem("overlayCurrentChannel")) {
 			var callbacks = {
 				success: function(data) {

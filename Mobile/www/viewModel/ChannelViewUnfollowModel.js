@@ -12,17 +12,15 @@
 
 	self.activate = function () {
 		addExternalMarkup(self.template); // this is for header/overlay message
-		
 		var channelObject = JSON.parse(ENYM.ctx.getItem("currentChannel"));
 		self.channelid(channelObject.id);
 		self.title(channelObject.name);
-		self.description(channelObject.description);		
-		
+		self.description(channelObject.description);
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
 	};	
 	
 	self.unfollowChannelCommand = function() {
-		$.mobile.showPageLoadingMsg("a", "Requesting to Unfollow Channel");
+		$.mobile.showPageLoadingMsg("a", "Requesting to Unfollow Channel");		
 		var callbacks = {
 			success: function(){
 				//alert('success');	
@@ -36,12 +34,15 @@
 	};
 	
 	function successfulUnfollowChannel(data){
-		var counter = ENYM.ctx.getItem('counter');
-		for(var ctr = 0; ctr < counter; ctr++) {
+		$.mobile.hidePageLoadingMsg();		
+		while (backNavView[backNavView.length-1] != 'channelsFollowingListView') {
 			backNavText.pop();
-			backNavView.pop();	
+			backNavView.pop();
 		}
-		ENYM.ctx.removeItem('counter');
+		if (backNavView[backNavView.length-1] == 'channelsFollowingListView') {
+			backNavText.pop();
+			backNavView.pop();			
+		}
 		var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'No longer following '+self.title()};
 		showToast(toastobj);						
 		ENYM.ctx.removeItem("currentChannel");				

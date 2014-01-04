@@ -23,15 +23,18 @@
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-		var counter = ENYM.ctx.getItem('counter');
-		for(var ctr = 0; ctr <= counter; ctr++) {	
+		while (backNavView[backNavView.length-1] != 'channelsIOwnView') {
 			backNavText.pop();
 			backNavView.pop();
 		}
-		ENYM.ctx.removeItem('counter');
+		if (backNavView[backNavView.length-1] == 'channelsIOwnView') {
+			backNavText.pop();
+			backNavView.pop();			
+		}
 		var toastobj = {redirect: 'channelsIOwnView', type: '', text: 'Channel deleted'};
 		showToast(toastobj);				
-		sendMessageViewModel.channels.removeAll();	
+		sendMessageViewModel.channels.removeAll();
+		ENYM.ctx.removeItem('currentChannelData');	
 		goToView('channelsIOwnView');		
   };
 

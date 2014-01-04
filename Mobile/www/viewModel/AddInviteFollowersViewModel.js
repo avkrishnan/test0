@@ -15,16 +15,7 @@
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message						
 			self.accountName(ENYM.ctx.getItem('accountName'));	
-			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
-			if(ENYM.ctx.getItem('counter') == 1) {
-				ENYM.ctx.setItem('counter', 2);
-			} else if(ENYM.ctx.getItem('counter') == 2){		
-				ENYM.ctx.setItem('counter', 3);
-			}	else if(ENYM.ctx.getItem('counter') == 3){
-				ENYM.ctx.setItem('counter', 4);
-			}	else {
-				ENYM.ctx.setItem('counter', 1);
-			}										
+			var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));										
 			self.channelName(channelObject.channelName);
 			self.channelWebAddress(channelObject.channelName+'.evernym.com');			
 		}

@@ -91,10 +91,6 @@
 	
   self.goToNext = function () {
 		sendMessageViewModel.channels.removeAll();
-		if(backNavView[backNavView.length-1] != channelIntroView) {
-			backNavText.pop();
-			backNavView.pop();
-		}
     goToView('channelIntroView');
   };
 }

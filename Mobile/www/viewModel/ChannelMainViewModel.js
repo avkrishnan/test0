@@ -15,12 +15,7 @@
 			goToView('channelsIOwnView');		
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message	
-			self.broadcasts.removeAll();											
-			if(ENYM.ctx.getItem('counter') == 1) {
-				ENYM.ctx.setItem('counter', 2);
-			} else {
-				ENYM.ctx.setItem('counter', 1)
-			}								
+			self.broadcasts.removeAll();																		
 			ENYM.ctx.removeItem('currentMessageData');			
 			self.broadcasts.removeAll();
 			if(ENYM.ctx.getItem('currentChannelId')) {

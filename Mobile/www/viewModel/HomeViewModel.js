@@ -7,7 +7,6 @@
 	
   self.activate = function() {
   	addExternalMarkup(self.template); // this is for header/overlay message									
-		ENYM.ctx.setItem('counter', 0);
 	};
 }
 
