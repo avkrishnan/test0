@@ -8,23 +8,25 @@
       <span class="channelimg channel4 sky-blue"></span>
       <div class="channelinfocontent last">
         <span data-bind="text: channelName"></span>
-        <a href="#" class="editbutton" data-bind="click: editTagline.bind($data, 'tagline'), text: taglineBtnText"></a>
-        <em data-bind="visible: !editing(), text: tagline"></em>
-        <input class="editTagline" data-bind="visible: editing, value: tagline, hasFocus: editing" />
+        <div class="taglineedit">
+          <a href="#" class="editbutton" data-bind="click: editTagline.bind($data, 'tagline'), text: taglineBtnText"></a>
+          <em data-bind="visible: !editing(), text: tagline"></em>
+          <input data-bind="visible: editing, value: tagline, hasFocus: editing" />
+        </div>
       </div>
       <div class="edit-button">
         <a href="#" class="editbutton" data-bind="click: comingSoon">Change Icon</a>
-        <!--<a href="#" class="editbutton" onclick="viewNavigate('Channel Intro', 'channelIntroView', 'editShortDescriptionView');">Edit Tagline</a>-->
       </div>
     </div>
     <div class="channellanding chandescription">
       <a class="editbtn" href="#" data-bind="click: editDescription.bind($data, 'desc'), text: descBtnText"></a>
-      <div data-bind="visible: !editingTextarea(), html: longDescription, visible: less"></div>
-      <div data-bind="visible: !editingTextarea(), html: moreText, visible: more"></div>
-      <textarea class="editDescription" data-bind="visible: editingTextarea, value: longDescription, hasFocus: editing"></textarea>       
-      <a class="morebtn" href="#" data-bind="visible: moreButton, click: showMore">MORE</a>
-      <a class="morebtn lessbtn" href="#" data-bind="visible: lessButton, click: showLess">LESS</a>    
-      <!--<a class="editbtn" href="#" onclick="viewNavigate('Channel Intro', 'channelIntroView', 'editLongDescriptionView');">Edit This Description</a>-->
+        <div class="descriptionedit">
+        <div data-bind="visible: !editingTextarea(), html: longDescription, visible: less"></div>
+        <div data-bind="visible: !editingTextarea(), html: moreText, visible: more"></div>
+        <textarea class="editDescription" data-bind="visible: editingTextarea, value: longDescription, hasFocus: editing"></textarea>       
+        <a class="morebtn" href="#" data-bind="visible: moreButton, click: showMore">MORE</a>
+        <a class="morebtn lessbtn" href="#" data-bind="visible: lessButton, click: showLess">LESS</a> 
+      </div>   
     </div>
     <div class="contactchannel">
        <div class="loginbtn"><span class="disablebtn">FOLLOW</span></div>

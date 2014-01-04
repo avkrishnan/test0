@@ -144,9 +144,15 @@ h1.newcreatechannel {
   padding:42px 0 50px 10px;
 	overflow:hidden;
 }
+.page-content.followerpage {
+	padding:42px 0 50px 0;
+}
 .page-content.nofooterbar, .page-content.hamburgermenupage {
 	padding:42px 0 0 10px;
 }
+/*.page-content.channelsettings {
+	border:3px solid blue;
+}*/
 .channel-broadcast {
 	padding:0;
 	position:absolute;
@@ -953,9 +959,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelcontent {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
-	display:inline-block;
+	display:block;
 	width:100%;
-	margin-bottom:10px;
+	margin:15px 0 10px 0;
 	overflow:hidden;
 	padding:0;
 }
@@ -1078,9 +1084,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .requestcontent.last {
 	border-bottom:none;
-}
-.page-content.channelsettings {
-	padding-top:50px;
 }
 .editchannel {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -283px;
@@ -1237,7 +1240,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .dropdown {
 	overflow:hidden;
-	padding:20px 15px 10px 14px;
+	padding:10px 15px 8px 14px;
 	color:#FFFFFF;
 	font-size:15px;
 	line-height:26px;
@@ -1467,7 +1470,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .broadcastreplies {
 	color:#fff;
 	padding:8px 0 8px 57px;
-	margin:10px 0 12px 0;
+	margin:15px 0 10px 0;
 	font-size:16px;
 	background:url("images/Replies-ican.png") no-repeat 0 0;
 }
@@ -1514,7 +1517,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#fff;
 	border-radius:4px;
 	overflow:hidden;
-	margin:8px 0 0 0;
+	margin:0;
 }
 .messagesundeliver li {
 	padding:5px 8px;
@@ -1874,21 +1877,20 @@ h1.messagesdate {
 .settinginner {
 	margin:10px 20px 0 0;
 }
-.page-content.followerpage {
-	padding:50px 0 50px 0;
-}
 .followerchannel {
 	border-bottom:1px solid #828181;
-	padding:10px 0 5px 10px;
+	padding:10px 0 10px 10px;
 }
 .followerchannel .channelcontent {
 	margin:0;
 }
 .newfollowers {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -969px;
+	margin:0px;
 }
 .low-messages.acceptdecline {
 	overflow:hidden;
+	margin:0 0 5px 0;
 }
 .requestsican {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -854px;
@@ -1898,7 +1900,7 @@ h1.messagesdate {
 }
 h1.requests {
 	font-size:14px;
-	margin:0 0 10px 15px;
+	margin:0 0 5px 15px;
 }
 .accept-decline {
 	float:left;
@@ -1925,7 +1927,7 @@ h1.requests {
 	padding:0 6px;
 }
 .allfollowercs {
-	margin:0 0 10px 10px;
+	margin:15px 0 10px 10px;
 	overflow:hidden;
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1084px;
 }
@@ -2247,7 +2249,7 @@ ul.igiresponses li span {
 	margin:0;
 }
 .channelsrecommended h1 {
-	margin-bottom:15px;
+	margin-bottom:0;
 	margin-top:20px;
 }
 .channelsrecommended {
@@ -3560,13 +3562,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	padding:2px 10px;
 	margin-right:5px;
 }
-/*.previewdonebtn a{
-	padding:4px 0;
-	font-weight:18px;
-	width:110px;
-	margin:0 0 10px 0px;
-	border:2px solid red;
-}*/
 .singlemessage {
 	background:#F1F2F2;
 	border-radius:21px 4px 4px 21px;
@@ -3697,6 +3692,29 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:url("images/sprites.png") no-repeat -5px -168px;
 }
 /**/
+.channelinfocontent .taglineedit em {
+	clear:none;
+}
+.taglineedit div.ui-input-text {
+	margin:8px 0px 0px 0px;
+}
+.chandescription .editbtn.ui-link, .chandescription .editbtn.ui-link:hover, .chandescription .editbtn.ui-link:visited, .chandescription .editbtn.ui-link:active,
+.chandescription .editbtn {
+	float:left;
+	margin:0 5px 0 0;
+}
+.descriptionedit textarea {
+	display:block;
+	clear:both;
+	color:#000;
+	font-size:14px;
+	background:#fff;
+	resize:none;
+	margin:26px 0px 0px 0px;
+	border:1px solid #E6E7E8;
+	min-height:80px;
+	max-height:80px;
+}
 /*
 	*@media query css
 */
@@ -3854,8 +3872,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.long-description textarea.ui-input-text {
 		max-height:328px;
 	}
+	.descriptionedit textarea {
+		max-height:150px;
+	}
 	.channelinfocontent em {
 		font-size:13px;
+		clear:both;
 	}
 	.accept-decline em {
 		display:block;
@@ -4028,6 +4050,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.long-description textarea.ui-input-text {
 		max-height:712px;
 	}
+	.descriptionedit textarea {
+		max-height:550px;
+	}
 }
 @media only screen and (min-width:800px) {
 	.slidemenu {
@@ -4063,6 +4088,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.long-description textarea.ui-input-text {
 		max-height:968px;
+	}
+	.descriptionedit textarea {
+		max-height:800px;
 	}
 }
 @media only screen and (min-width:980px) {
@@ -4269,6 +4297,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.long-description textarea.ui-input-text {
 		max-height:310px;
+	}
+	.descriptionedit textarea {
+		max-height:150px;
 	}
 }
 @media only screen and (min-width:1290px) {
