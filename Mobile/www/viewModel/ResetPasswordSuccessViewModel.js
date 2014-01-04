@@ -1,5 +1,6 @@
 ﻿function ResetPasswordSuccessViewModel() {
 	var self = this;
+	self.requiresAuth = false;	
 	self.template = 'resetPasswordSuccessView';
 	self.viewid = 'V-03e';
 	self.viewname = 'ResetPasswordSuccess';

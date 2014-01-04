@@ -12,7 +12,6 @@
 		 
 	self.activate = function(){
 		if((jQuery.mobile.path.get().split('?')[1])) {
-			self.accountName(ENYM.ctx.getItem('accountName'));
 			$('input').keyup(function (){ 
 				self.clearErrorObs();
 			});
@@ -43,7 +42,7 @@
 			resetPasswordModel.confirmPassword = self.confirmPassword();
 			resetPasswordModel.forgotPasswordRequestKey = (jQuery.mobile.path.get().split('?')[1]).replace('key=','');
 			$.mobile.showPageLoadingMsg('a', 'Sending Update Password Request');			
-			return ES.loginService.resetPassword(resetPasswordModel, callbacks).then(resetPasswordSuccess);
+			return ES.loginService.resetPassword(resetPasswordModel, callbacks);
 		} else {
 			self.passwordClass('validationerror');
 			self.confirmPasswordClass('validationerror');				 
