@@ -3257,7 +3257,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	overflow:auto;
 }
 .long-description textarea.ui-input-text {
-	min-height:156px;
+	min-height:180px;
 	max-height:190px;
 	height:auto;
 	overflow:auto;
