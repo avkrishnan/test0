@@ -46,7 +46,7 @@
 	function successAvailable(data){
 		if(data){
 			self.channelClass('validationerror');
-      self.errorChannel('<span>SORRY:</span> This channel name has already been taken');
+      self.errorChannel('<span>Sorry,</span> This channel name has already been taken');
 		} else {
 			self.sectionOne(false);
 			self.sectionTwo(true);						
@@ -60,7 +60,7 @@
 		self.sectionOne(true);
 		self.sectionTwo(false);
 		self.message('');
-    self.errorChannel('<span>SORRY:</span> '+details.message);		
+    self.errorChannel('<span>Sorry,</span> '+details.message);		
   };
 	
   self.confirmChannelChangeNameCommand = function () {		

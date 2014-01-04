@@ -173,7 +173,7 @@
 		ENYM.ctx.removeItem('escDuration');		
 		ENYM.ctx.removeItem('escLevel');
 		ENYM.ctx.removeItem('iGiStatus');										
-		var toastobj = {redirect: 'channelMainView', type: '', text: 'Broadcast sent'};
+		var toastobj = {redirect: 'channelMainView', type: '', text: 'Your message has been sent.'};
 		showToast(toastobj);									
 		ENYM.ctx.setItem('currentChannelId', self.selectedChannels().channelId);	
 		backNavText.pop();

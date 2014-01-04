@@ -66,19 +66,19 @@ function SignupStepSecondViewModel() {
   this.signUpCommand = function () {
     if (that.firstname() == '') {
       that.firstnameClass('validationerror');
-      that.errorFirstName('<span>SORRY:</span> Please enter first name');
+      that.errorFirstName('<span>Sorry,</span> Please enter first name');
     }
 		else if (that.firstname().length > 20) {
       that.firstnameClass('validationerror');
-      that.errorFirstName('<span>SORRY:</span> Please enter name of max. 20 characters');
+      that.errorFirstName('<span>Sorry,</span> Please enter name of max. 20 characters');
     }
 		else if (that.lastname() == '') {
       that.lastnameClass('validationerror');
-      that.errorFirstLastName('<span>SORRY:</span> Please enter last name');
+      that.errorFirstLastName('<span>Sorry,</span> Please enter last name');
     }				 
 		else if (that.lastname().length > 20) {
       that.lastnameClass('validationerror');
-      that.errorFirstLastName('<span>SORRY:</span> Please enter name of max. 20 characters');
+      that.errorFirstLastName('<span>Sorry,</span> Please enter name of max. 20 characters');
     } 
 		else {
       $.mobile.showPageLoadingMsg('a', 'Enrolling');
@@ -147,7 +147,7 @@ function SignupStepSecondViewModel() {
 
   function loginError(data, status, details) {
     $.mobile.hidePageLoadingMsg();		
-		that.errorFirstLastName('<span>SORRY:</span> '+details.message);
+		that.errorFirstLastName('<span>Sorry,</span> '+details.message);
     ES.evernymService.clearAccessToken();
   }
 	

@@ -31,13 +31,13 @@
 		var nameReg = /^[a-zA-Z0-9]+$/;
     if (self.newChannel() == '') {
 			self.channelClass('validationerror');
-      self.errorNewChannel('<span>SORRY:</span> Please enter channel name');
+      self.errorNewChannel('<span>Sorry,</span> Please enter channel name');
 		} else if (!nameReg.test(self.newChannel())) {
 			self.channelClass('validationerror');
-			self.errorNewChannel('<span>SORRY:</span> Letters and numbers only, no spaces.');
+			self.errorNewChannel('<span>Sorry,</span> Letters and numbers only, no spaces.');
 		} else if (self.newChannel().length < 5 || self.newChannel().length > 25) {
 			self.channelClass('validationerror');
-			self.errorNewChannel('<span>SORRY:</span> Name of min. 5 and max. 25 characters');			
+			self.errorNewChannel('<span>Sorry,</span> Name of min. 5 and max. 25 characters');			
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Checking channel name availability');
 			ES.loginService.checkName(self.newChannel(), { success: successAvailable, error: errorAPI });			
@@ -68,7 +68,7 @@
 	function successAvailable(data){
 		if(data){
 			self.channelClass('validationerror');
-      self.errorNewChannel('<span>SORRY:</span> This channel name has already been taken');
+      self.errorNewChannel('<span>Sorry,</span> This channel name has already been taken');
 		} else {
 			$.mobile.showPageLoadingMsg('a', 'Creating Channel ');
 			ES.channelService.createChannel({name: self.newChannel()}, {success: successfulCreate, error: errorAPI});			
@@ -86,7 +86,7 @@
 		self.sectionTwo(false);
 		self.message('');
 		self.channelClass('validationerror');
-    self.errorNewChannel('<span>SORRY:</span> ' + details.message);		
+    self.errorNewChannel('<span>Sorry,</span> ' + details.message);		
   };
 	
   self.goToNext = function () {

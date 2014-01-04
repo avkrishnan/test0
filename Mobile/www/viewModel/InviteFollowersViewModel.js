@@ -43,11 +43,11 @@
 		var textData = $('#'+self.textId()).val();
 		if (self.emailaddress() == '' || !emailReg.test(self.emailaddress())) {
 			self.emailClass('validationerror');
-			self.errorEmail('<span>SORRY:</span> Please enter valid email');
+			self.errorEmail('<span>Sorry,</span> Please enter valid email');
     } else if (textData == '') {
 			self.textClass('validationerror');
 			self.error(true);			
-			self.errorText('<span>SORRY:</span> Please give message');
+			self.errorText('<span>Sorry,</span> Please give message');
     } else {
 			showMessage('Testing');			
     }

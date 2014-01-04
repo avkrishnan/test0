@@ -60,13 +60,13 @@
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
 		self.errorMessage(true);	
-		self.errorChannel('<span>SORRY:</span> '+details.message);
+		self.errorChannel('<span>Sorry,</span> '+details.message);
   };
 	
   self.longDescriptionCommand = function () {
 		if (self.longDescription() == '' || typeof self.longDescription() == 'undefined') {
 			self.errorMessage(true);						
-      self.errorChannel('<span>SORRY:</span> Please enter long description');
+      self.errorChannel('<span>Sorry,</span> Please enter long description');
     } else {
 			var channelObject = {
 				id: self.channelId(),

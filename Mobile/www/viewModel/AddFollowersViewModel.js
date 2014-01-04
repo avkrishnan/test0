@@ -35,10 +35,10 @@
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
 		if (self.firstLastName() == '') {
 			self.nameClass('validationerror');
-			self.errorName('<span>SORRY:</span> Please enter first and last name');
+			self.errorName('<span>Sorry,</span> Please enter first and last name');
     } else if (self.emailaddress() == '' || !emailReg.test(self.emailaddress())) {
 			self.emailClass('validationerror');
-			self.errorEmail('<span>SORRY:</span> Please enter valid email');
+			self.errorEmail('<span>Sorry,</span> Please enter valid email');
     } else {
 			$.mobile.showPageLoadingMsg("a", "Adding Follower");
 			var provisional = generateProvisionalAccount();

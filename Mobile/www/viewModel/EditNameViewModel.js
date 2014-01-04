@@ -31,16 +31,16 @@
 	self.editNameCommand = function () {
     if (self.firstname() == '') {
       self.firstnameClass('validationerror');
-      self.errorFirstName('<span>SORRY:</span> Please enter first name');
+      self.errorFirstName('<span>Sorry,</span> Please enter first name');
     } else if (self.firstname().length > 20) {
       self.firstnameClass('validationerror');
-      self.errorFirstName('<span>SORRY:</span> Please enter name of max. 20 characters');
+      self.errorFirstName('<span>Sorry,</span> Please enter name of max. 20 characters');
     } else if (self.lastname() == '') {
       self.lastnameClass('validationerror');
-      self.errorFirstLastName('<span>SORRY:</span> Last name cannot be left empty');
+      self.errorFirstLastName('<span>Sorry,</span> Last name cannot be left empty');
     } else if (self.lastname().length > 20) {
       self.lastnameClass('validationerror');
-      self.errorFirstLastName('<span>SORRY:</span> Please enter name of max. 20 characters');
+      self.errorFirstLastName('<span>Sorry,</span> Please enter name of max. 20 characters');
     } else {
       $.mobile.showPageLoadingMsg('a', 'Updating Name');
       var account = modifyAccount();
@@ -76,7 +76,7 @@
     $.mobile.hidePageLoadingMsg();
 		self.firstnameClass('validationerror');		
 		self.lastnameClass('validationerror');
-		self.errorFirstLastName('<span>SORRY:</span> '+details.message);		
+		self.errorFirstLastName('<span>Sorry,</span> '+details.message);		
   };	
 	
 }

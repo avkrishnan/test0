@@ -43,22 +43,22 @@
 		var nameReg = /^[a-zA-Z0-9]+$/;
     if (self.emailaddress() == '' || !emailReg.test(self.emailaddress())) {
       self.emailClass('validationerror');
-      self.errorEmail('<span>SORRY:</span> Please enter valid email');
+      self.errorEmail('<span>Sorry,</span> Please enter valid email');
     } else if (self.evernym() == '') {
       self.accountNameClass('validationerror');
-      self.errorAccountName('<span>SORRY:</span> Please enter Evernym name');
+      self.errorAccountName('<span>Sorry,</span> Please enter Evernym name');
 		} else if (!nameReg.test(self.evernym())) {
 			self.accountNameClass('validationerror');
-			self.errorAccountName('<span>SORRY:</span> Letters and numbers only, no spaces.');			
+			self.errorAccountName('<span>Sorry,</span> Letters and numbers only, no spaces.');			
     } else if (self.evernym().length < 5 || self.evernym().length > 25) {
       self.accountNameClass('validationerror');
-      self.errorAccountName('<span>SORRY:</span> Evernym min. 5 and max. 25 characters');
+      self.errorAccountName('<span>Sorry,</span> Evernym min. 5 and max. 25 characters');
 		} else if (self.password() == '') {
       self.passwordClass('validationerror');
-      self.errorPassword('<span>SORRY:</span> Please enter password');	
+      self.errorPassword('<span>Sorry,</span> Please enter password');	
     } else if (self.password().length < 8) {
       self.passwordClass('validationerror');
-      self.errorPassword('<span>SORRY:</span> Password of min. 8 characters');
+      self.errorPassword('<span>Sorry,</span> Password of min. 8 characters');
     } else {
 			$.mobile.showPageLoadingMsg('a', 'Checking Evernym availability');
 			return ES.loginService.checkName(self.evernym(), { success: successAvailable, error: errorAPI });
@@ -68,7 +68,7 @@
 	function successAvailable(data){
 		if(data){
 			self.accountNameClass('validationerror');
-      self.errorAccountName('<span>SORRY:</span> This Evernym has already been taken');
+      self.errorAccountName('<span>Sorry,</span> This Evernym has already been taken');
 		} else {
       $.mobile.showPageLoadingMsg('a', 'Enrolling');
       var callbacks = {
@@ -82,7 +82,7 @@
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();	
-		self.errorPassword('<span>SORRY:</span> Please enter password');
+		self.errorPassword('<span>Sorry,</span> Please enter password');
 	};	
 	
 
@@ -95,7 +95,7 @@
     $.mobile.hidePageLoadingMsg();
 		if(details.code == '100930') {
 			self.emailClass('validationerror');										
-			self.errorEmail('<span>SORRY: </span> ' + details.message);
+			self.errorEmail('<span>Sorry, </span> email used by another account');
 		}
   };
 	
@@ -124,7 +124,7 @@
 
   function loginError(data, status, details) {
     $.mobile.hidePageLoadingMsg();		
-		self.errorFirstLastName('<span>SORRY:</span> '+details.message);
+		self.errorFirstLastName('<span>Sorry,</span> '+details.message);
     ES.evernymService.clearAccessToken();
   };	    	
 				

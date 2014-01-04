@@ -5,20 +5,23 @@
   self.viewname = 'Send Feedback';
   self.displayname = 'Send Feedback';
 	
-  self.inputObs = [ 'feedbackType', 'feedbackLabel', 'feedbackClass', 'feedback', 'feedbackContext', 'error', 'errorFeedback' ];
+  self.inputObs = [ 'feedbackType', 'feedbackLabel', 'feedbackClass', 'feedback', 'feedbackContext', 'error', 'errorFeedback', 'userFeedback'];
   self.defineObservables();	
 
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message			
 		if(feedbackType == 'feedback') {
+			self.userFeedback('Show user an example of usefull feedback');
 			self.feedbackType('Praise for Evernym Channels');
 			self.feedbackLabel('Your feedback:');
 			self.feedbackContext('feedback');									
 		} else if(feedbackType == 'suggestions') {
+			self.userFeedback('Show user an example of usefull feedback');
 			self.feedbackType('Suggestions for Evernym Channels');
 			self.feedbackLabel('Your Suggestions:');
 			self.feedbackContext('suggestions');								
 		} else {
+			self.userFeedback('Show user an example of how to report a bug in a usefull way');
 			self.feedbackType('Report a Bug for Evernym Channels');
 			self.feedbackLabel('Report a Bug:');
 			self.feedbackContext('bug');								
@@ -41,7 +44,7 @@
     if (self.feedback() == '' || typeof self.feedback() == 'undefined') {
 			self.feedbackClass('validationerror');
 			self.error(true);				
-			self.errorFeedback('<span>SORRY:</span> Please enter text above');
+			self.errorFeedback('<span>Sorry,</span> Please enter text above');
     } else {
       $.mobile.showPageLoadingMsg("a", "Sending Feedback");			
 			var feedbackObject = {};
@@ -64,7 +67,7 @@
 		$.mobile.hidePageLoadingMsg();	
 		self.feedbackClass('validationerror');
 		self.error(true);				
-		self.errorFeedback('<span>SORRY:</span> '+details.message);		
+		self.errorFeedback('<span>Sorry,</span> '+details.message);		
 	};
 }
 

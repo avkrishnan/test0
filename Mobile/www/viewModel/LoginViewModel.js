@@ -46,15 +46,15 @@
     if (self.username() == '' && self.password() == '') {
       self.usernameClass('validationerror');
       self.passwordClass('validationerror');
-      self.errorMessage('<span>SORRY:</span> Please enter username and password');
+      self.errorMessage('<span>Sorry,</span> Please enter username and password');
     } 
 		else if(self.username() == '') {
       self.usernameClass('validationerror');
-      self.errorMessage('<span>SORRY:</span> Please enter username');
+      self.errorMessage('<span>Sorry,</span> Please enter username');
     } 
 		else if(self.password() == '') {
       self.passwordClass('validationerror');
-      self.errorMessage('<span>SORRY:</span> Please enter password');
+      self.errorMessage('<span>Sorry,</span> Please enter password');
     } 
 		else {
 			self.errorMessage('');
@@ -69,7 +69,7 @@
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
 				self.passwordClass('validationerror');
-				self.errorMessage('<span>SORRY: </span> ' + details.message);
+				self.errorMessage('<span>Sorry, </span> ' + details.message);
 			  self.password('');
 			};
       var loginModel = {};
@@ -165,7 +165,7 @@
 			}
     } 
 		else {
-			self.errorMessage('<span>SORRY: </span> Unknown Error.');
+			self.errorMessage('<span>Sorry, </span> Unknown Error.');
       return;
     }
   }

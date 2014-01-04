@@ -62,13 +62,13 @@
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
 		self.errorMessage(true);			
-		self.errorChannel('<span>SORRY:</span> '+details.message);
+		self.errorChannel('<span>Sorry,</span> '+details.message);
   };
 	
   self.shortDescriptionCommand = function () {
 		if (self.shortDescription() == '' || typeof self.shortDescription() == 'undefined') {
 			self.errorMessage(true);			
-      self.errorChannel('<span>SORRY:</span> Please enter channel tagline');
+      self.errorChannel('<span>Sorry,</span> Please enter channel tagline');
     } else {
 			var channelObject = {
 				id: self.channelId(),
