@@ -1,4 +1,3 @@
-<!--To do - Pradeep Kumar-->
 <div id="sendFeedbackView" data-role="page" class="channel-list" >
 	<header class="logged-in"></header>  
   <div class="page-content channelsettings">
@@ -6,7 +5,7 @@
     <section class="loginform">
       <label class="invited-followChannel" data-bind="text: feedbackLabel"></label>
       <div class="formtype textareatype longdescription" data-bind="css: feedbackClass">
-        <textarea class="textarea" data-bind="value: feedback" placeholder="Show user an example of usefull feedback"></textarea>
+        <textarea class="textarea" data-bind="value: feedback" placeholder="Add text here..."></textarea>
         <div class="msgerror" data-bind="visible: error, html: errorFeedback"></div>
       </div>
       <a href="#" class="sendbtnican" data-bind="click: sendFeedbackCommand">

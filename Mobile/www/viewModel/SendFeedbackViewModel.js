@@ -11,17 +11,17 @@
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message			
 		if(feedbackType == 'feedback') {
-			self.userFeedback('Show user an example of usefull feedback');
+			$('#sendFeedbackView textarea').attr('placeholder', 'Show user an example of usefull feedback');
 			self.feedbackType('Praise for Evernym Channels');
 			self.feedbackLabel('Your feedback:');
 			self.feedbackContext('feedback');									
 		} else if(feedbackType == 'suggestions') {
-			self.userFeedback('Show user an example of usefull feedback');
+			$('#sendFeedbackView textarea').attr('placeholder', 'Show user an example of usefull feedback');			
 			self.feedbackType('Suggestions for Evernym Channels');
 			self.feedbackLabel('Your Suggestions:');
 			self.feedbackContext('suggestions');								
 		} else {
-			self.userFeedback('Show user an example of how to report a bug in a usefull way');
+			$('#sendFeedbackView textarea').attr('placeholder', 'Show user an example of how to report a bug in a usefull way');			
 			self.feedbackType('Report a Bug for Evernym Channels');
 			self.feedbackLabel('Report a Bug:');
 			self.feedbackContext('bug');								
