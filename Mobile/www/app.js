@@ -550,14 +550,8 @@ function loadAllPages() {
     }
   });
 };*/
-
+ 
 function goToView(view){
-    //loginView
-    // LoginViewModel 
-    //var s = new LoginViewModel();
-   //window[LoginViewModel]();
-    // var obj; obj[key] = value;
-    
 	var sview = view[0].toUpperCase() + view.slice(1);
 	$( "#allpages" ).load( 'views/' + sview +".html", function() {
   //alert( "Load was performed." );
@@ -601,11 +595,15 @@ function goToView(view){
 		var token = localStorage.getItem("accessToken");
 		if (document.location.hash == ""){
 			if (token) {
+                
+                goToView('channelListView');
+                addExternalMarkup();
 				//document.location.hash = "#channelListView";
-				document.location.hash = "#channelsIOwnView";
+				//document.location.hash = "#channelsIOwnView";
 			}
 			else {
-				document.location.hash = "#loginView";
+				//document.location.hash = "#loginView";
+                goToView('loginView');
 			}
 		}
 		console.log('hash: ' + document.location.hash);
@@ -614,7 +612,7 @@ function goToView(view){
 		//var currentUrl = $.mobile.path.parseUrl(window.location.href);
 		//console.log("currentUrl: " + currentUrl.hash);
 		localStorage.removeItem('baseUrl');
-		goToView('loginView');
+		//goToView('loginView');
 		/*loadPage().done(function() {
 			console.log('done loading all pages.');
 			console.log("INITIALIZE PAGE");
@@ -802,14 +800,15 @@ if(!localStorage.getItem('backNavText') || !localStorage.getItem('backNavView'))
 }
 
 function viewNavigate(backText, backView, targetView) {
-	if($.mobile.activePage.attr('id') != targetView) {
+	//if($.mobile.activePage.attr('id') != targetView) {
 		backNavText.push(backText);
 		localStorage.setItem('backNavText', JSON.stringify(backNavText));	
 		backNavView.push(backView);
 		localStorage.setItem('backNavView', JSON.stringify(backNavView));
-	}
-	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');	
-	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
+	//}
+	$('#'+backView+' .toast-notification').html('');	
+	//$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
+    goToView(targetView);
 }		
 
 function popBackNav() {
@@ -985,9 +984,14 @@ function time2TimeAgo(ts) {
 }
 
 /* External markup for Header/Overlay etc*/
-function addExternalMarkup(viewID) {
-	$('#' + viewID + ' header.logged-in').load('header.html');
-	$('#' + viewID + ' .active-overlay').load('overlaymessages.html');
+function addExternalMarkup() {
+	//$('#' + viewID + ' header.logged-in').load('header.html');
+	//$('#' + viewID + ' .active-overlay').load('overlaymessages.html');
+    
+     $('#myHeader').load('header.html');
+     $('#myHeader-overlay').load('overlaymessages.html');
+     
+    
 }
 
 /* Function to truncate message text on the basis of screen szie for overlay*/

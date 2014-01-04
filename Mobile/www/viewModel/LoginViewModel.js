@@ -1,4 +1,4 @@
-﻿function LoginViewModel() {
+function LoginViewModel() {
   var self = this;
   
   self.requiresAuth = false;
@@ -83,10 +83,16 @@
   };
 
 self.forgetPasswordCommand = function(){
+    document.getElementById('myHeader').innerHTML = "<header>"+
+    '<a href="#" class="back logintop" onclick="goToView(\'loginView\');"><em></em>Login</a>'+
+  '</header>';
 	goToView('forgotPasswordView');
 }
 
 self.signupCommand = function(){
+     document.getElementById('myHeader').innerHTML = "<header>"+
+    '<a href="#" class="back logintop" onclick="goToView(\'loginView\');"><em></em>Login</a>'+
+  '</header>';
 	goToView('signupStepFirstView');
 }
 
@@ -147,6 +153,7 @@ self.signupCommand = function(){
 			else {
 				goToView('channelListView');
 			}
+        addExternalMarkup();
     } 
 		else {
 			self.errorMessage('<span>SORRY: </span> Unknown Error.');

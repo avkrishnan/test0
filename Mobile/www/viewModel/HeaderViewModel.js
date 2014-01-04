@@ -1,19 +1,22 @@
-﻿function HeaderViewModel() {	
+function HeaderViewModel() {	
 	this.backText = ko.observable();
 	this.isBack = ko.observable(true);	
 	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable();
 	
-	that = this;
+	var that = this;
 	/* Methods */
 	this.activate = function() {
-		if($.mobile.activePage.attr('id') == 'channelListView') {
+		if(allpages.querySelector('div').getAttribute('id') == 'channelListView') {
 			this.isBack = ko.observable(false);
+            that.backText('<em></em>Home');
 		}
-		if(typeof backNavText[0] == 'undefined') {
-			that.backText('<em></em>Home');
+        else if(typeof backNavText[0] == 'undefined') {
+            this.isBack(true);
+			 that.backText('<em></em>Home');
 		}
 		else {
+            this.isBack(true);
 			that.backText('<em></em>'+backNavText[backNavText.length-1]);
 		}
 		this.updateBadges();
@@ -139,7 +142,7 @@
 }
 /* overlay messages*/
 function OverlayViewModel() {
-	that = this;
+	var that = this;
 	this.newMessagesDisplayList = ko.observableArray([]);	
 	
 	this.activate = function() {

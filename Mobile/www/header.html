@@ -11,14 +11,17 @@
 </div>
 <script>
 	var headerViewModel = new HeaderViewModel();
-	$(".logged-in").each(function() {
+    ko.applyBindings(headerViewModel, document.getElementById('header'));
+    headerViewModel.activate();
+    
+	/*$(".logged-in").each(function() {
 		if($(this).parent().css('display') != 'none') {
-			ko.applyBindings(headerViewModel, document.getElementById('header'));
+			
 			headerViewModel.activate();
 		}
 		else {
 			var nonCurrentViewHeader = "#" + $(this).parent().attr('id') + " header";
 			$(nonCurrentViewHeader).html('');
 		}
-	});
+	});*/
 </script>

@@ -1,4 +1,4 @@
-﻿/* To do - Pradeep Kumar */
+/* To do - Pradeep Kumar */
 function ChannelListViewModel() {
   var self = this;
   self.template = 'channelListView';
@@ -7,7 +7,7 @@ function ChannelListViewModel() {
   self.displayname = 'Home';
 	
   self.activate = function() {
-  	addExternalMarkup(self.template); // this is for header/overlay message									
+  	//addExternalMarkup(self.template); // this is for header/overlay message									
 		localStorage.setItem('counter', 0);
 	};
 }

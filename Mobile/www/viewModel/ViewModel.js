@@ -57,13 +57,13 @@ AppCtx.ViewModel = function() {
 
   this.applyBindings = function () {
 		var vm = this;
-    $('#' + vm.template).on('pagebeforeshow', null, function (e, data) {
+    //$('#' + vm.template).on('pagebeforeshow', null, function (e, data) {
       if(!vm.requiresAuth || authenticate()) {
 			  vm.clearForm();
 			  vm.activate();
 	      vm.accountName(localStorage.getItem("accountName"));
       }
-    });
+    //});
   };
 	
 	this.removelLocalStorage = function() {

@@ -18,7 +18,9 @@
 </div>
 <script>
 	var overlayViewModel = new OverlayViewModel();
-	$(".active-overlay").each(function() {
+    ko.applyBindings(overlayViewModel, document.getElementById('newMessages'));
+			overlayViewModel.activate();
+	/*$(".active-overlay").each(function() {
 		if($(this).parent().css('display') != 'none') {
 			var nonCurrentViewOverlay = "#" + $(this).parent().attr('id');
 			if(nonCurrentViewOverlay == '#channelSingleMessagesView') {
@@ -38,7 +40,8 @@
 			$(nonCurrentViewOverlay + " #newMessages-popup").remove();
 			$(nonCurrentViewOverlay + " #newMessages-screen").remove();
 		}	
-	});
+	});*/
+    
 	$('#newMessages').on({
 		popupbeforeposition: function() {
 			var maxHeight = $(window).height() - 98;
