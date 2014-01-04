@@ -5,23 +5,23 @@
   self.viewname = 'Send Feedback';
   self.displayname = 'Send Feedback';
 	
-  self.inputObs = [ 'feedbackType', 'feedbackLabel', 'feedbackClass', 'feedback', 'feedbackContext', 'error', 'errorFeedback', 'userFeedback'];
+  self.inputObs = [ 'feedbackType', 'feedbackLabel', 'feedbackClass', 'feedback', 'feedbackContext', 'error', 'errorFeedback', 'feedbackPlaceholder'];
   self.defineObservables();	
 
 	self.activate = function() {
-		addExternalMarkup(self.template); // this is for header/overlay message			
+		addExternalMarkup(self.template); // this is for header/overlay message
 		if(feedbackType == 'feedback') {
-			$('#sendFeedbackView textarea').attr('placeholder', 'Show user an example of usefull feedback');
+			self.feedbackPlaceholder('Show user an example of usefull feedback');
 			self.feedbackType('Praise for Evernym Channels');
 			self.feedbackLabel('Your feedback:');
 			self.feedbackContext('feedback');									
 		} else if(feedbackType == 'suggestions') {
-			$('#sendFeedbackView textarea').attr('placeholder', 'Show user an example of usefull feedback');			
+			self.feedbackPlaceholder('Show user an example of usefull feedback');			
 			self.feedbackType('Suggestions for Evernym Channels');
 			self.feedbackLabel('Your Suggestions:');
 			self.feedbackContext('suggestions');								
 		} else {
-			$('#sendFeedbackView textarea').attr('placeholder', 'Show user an example of how to report a bug in a usefull way');			
+			self.feedbackPlaceholder('Show user an example of how to report a bug in a usefull way');			
 			self.feedbackType('Report a Bug for Evernym Channels');
 			self.feedbackLabel('Report a Bug:');
 			self.feedbackContext('bug');								
