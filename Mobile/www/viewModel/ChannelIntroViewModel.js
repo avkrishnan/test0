@@ -8,9 +8,11 @@
 	self.sectionOne = ko.observable(true);
 	self.sectionTwo = ko.observable(false);
 	
-  self.inputObs = ['channelName', 'channelWebAddress', 'tagline', 'longdescription', 'moreText' ];
+  self.inputObs = ['channelId', 'channelName', 'channelWebAddress', 'tagline', 'longDescription', 'moreText', 'taglineBtnText', 'descBtnText', 'clickType'];
   self.defineObservables();
 
+	self.editing = ko.observable(false);
+	self.editingTextarea = ko.observable(false);	
 	self.less = ko.observable(true);		
 	self.more = ko.observable(false);
 	self.moreButton = ko.observable(false);
@@ -21,10 +23,15 @@
 		self.sectionTwo(false);		
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
   	addExternalMarkup(self.template); // this is for header/overlay message	
+		self.channelId(channelObject.channelId);
 		self.channelName(channelObject.channelName);													
-		self.channelWebAddress('This is your channel web page, now live at '+self.channelName()+'.evernym.com');
+		self.channelWebAddress('This is your channel web page, now live at <em>'+self.channelName()+'.evernym.com</em>');
 		self.tagline('(sample tagline for '+self.channelName()+')');		
-		self.longdescription('This is the web page for '+self.channelName()+'.</br>To follow '+self.channelName()+', click the "Follow" Button below.');
+		self.longDescription('This is the web page for '+self.channelName()+'.</br>To follow '+self.channelName()+', click the "Follow" Button below.');
+		self.taglineBtnText('Edit');
+		self.descBtnText('Edit');
+		self.editing(false);
+		self.editingTextarea(false);				
 		self.less(true);		
 		self.more(false);				
 		self.moreButton(false);
@@ -35,15 +42,109 @@
 		if(typeof channelObject.longDescription != 'undefined') {
 			if(channelObject.longDescription.length > truncatedTextScreen()*12) {
 				var logDesc = ($.trim(channelObject.longDescription).substring(0, truncatedTextScreen()*7).split(' ').slice(0, -1).join(' ') + '...').replace(/\n/g, '<br/>');
-				self.longdescription(logDesc);
+				self.longDescription(logDesc);
 				self.moreText(channelObject.longDescription.replace(/\n/g, '<br/>'));
 				self.moreButton(true);							
 			}
 			else {
-				self.longdescription(channelObject.longDescription.replace(/\n/g, '<br/>'));			
+				self.longDescription(channelObject.longDescription.replace(/\n/g, '<br/>'));			
 			}			
 		}						
 	};
+
+	self.editTagline = function(data) {		
+		self.clickType(data);
+		if(self.taglineBtnText() == 'Save') {
+			self.shortDescriptionCommand();
+		}
+		else {
+			self.editing(true);
+			self.taglineBtnText('Save');		
+		}
+	};
+	
+	self.editDescription = function(data) {
+		self.clickType(data);
+		if(self.descBtnText() == 'Save') {
+			self.longDescriptionCommand();
+		}
+		else {
+			self.editingTextarea(true);
+			self.descBtnText('Save');		
+			self.less(false);		
+			self.more(false);				
+		}
+	};
+	
+  self.shortDescriptionCommand = function () {
+		if (self.tagline() == '' || typeof self.tagline() == 'undefined') {
+			var toastobj = {type: 'toast-error', text: 'Please enter channel tagline'};
+			showToast(toastobj);
+    } else {
+			var channelObject = {
+				id: self.channelId(),
+				description: self.tagline()
+			};
+			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
+			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
+		}
+  };
+	
+  self.longDescriptionCommand = function () {
+		if (self.longDescription() == '' || typeof self.longDescription() == 'undefined') {
+			var toastobj = {type: 'toast-error', text: 'Please enter long description'};
+			showToast(toastobj);
+    } else {
+			var channelObject = {
+				id: self.channelId(),
+				longDescription: self.moreText()
+			};
+			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
+			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
+		}
+  };
+	
+	function successfulModify() {		
+		$.mobile.showPageLoadingMsg('a', 'Loading channel Infomation');
+		ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI});		
+  };		
+	
+	function successfulGetChannel(data) {	
+		if(data.followers == 1) {
+			var followers = data.followers +' follower';
+		} else {
+			var followers = data.followers +' followers';
+		}		
+		var channel = [];			
+		channel.push({
+			channelId: data.id, 
+			channelName: data.name, 
+			channelDescription: data.description,
+			longDescription: data.longDescription,			
+			followerCount: followers
+		});
+		channel = channel[0];		
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
+		if(self.clickType() == 'tagline') {
+			self.taglineBtnText('Edit');
+			self.editing(false);
+			var toastobj = {type: '', text: 'Channel Tagline updated'};
+			showToast(toastobj);								
+		}
+		else {
+			self.descBtnText('Edit');
+			self.editingTextarea(false);
+			self.less(true);
+			var toastobj = {type: '', text: 'Description changed'};
+			showToast(toastobj);						
+		}													
+  };
+
+  function errorAPI(data, status, details) {
+		$.mobile.hidePageLoadingMsg();		
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);
+  };				
 	
 	self.comingSoon = function() {
 		headerViewModel.comingSoon();		
