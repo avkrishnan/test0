@@ -47,8 +47,8 @@ function SingleMessageRepliesViewModel() {
 					created: data.message[len].created,				
 					replyTime: formatDate(data.message[len].created, 'short', 'main'),
 					reply: reply,
-					replyLess: replyLess,					
-					replyFull: data.message[len].text,
+					replyLess: replyLess.replace(/\n/g, '<br/>'),					
+					replyFull: data.message[len].text.replace(/\n/g, '<br/>'),
 					senderFirstname: data.message[len].senderFirstname,
 					senderLastname: data.message[len].senderLastname,										
 					replyToReply: data.message[len].replies
