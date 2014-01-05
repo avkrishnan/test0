@@ -1,4 +1,4 @@
-﻿/*globals ko*/
+/*globals ko*/
 /* To do - Pradeep Kumar */
 function ChannelsIOwnViewModel() {	
   var that = this;
@@ -15,26 +15,28 @@ function ChannelsIOwnViewModel() {
 
 	/* Methods */
 	this.applyBindings = function(){	
-		$('#' + that.template).on('pagebeforeshow', null, function (e, data) {	
+		//$('#' + that.template).on('pagebeforeshow', null, function (e, data) {	
 			that.activate();	
-		});		
+		//});		
 	};
 	
   this.activate = function() {
 		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message				
+			//addExternalMarkup(that.template); // this is for header/overlay message				
+           //that.updateHeader();
+             window["headerViewModel"].activate();
 			that.accountName(localStorage.getItem('accountName'));
 			that.sectionOne(false);
 			that.sectionTwo(false);			
 			localStorage.setItem('counter', 1);												
 			that.channels.removeAll();			
-			$.mobile.showPageLoadingMsg('a', 'Loading Channels');
+			//$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 			return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
 		}
 	};				    	
 	
 	function successfulList(data){	
-    $.mobile.hidePageLoadingMsg();
+   //$.mobile.hidePageLoadingMsg();
 		that.channels.removeAll();
 		if(data.channel.length == 0) {
 			that.sectionOne(true);			
@@ -59,7 +61,7 @@ function ChannelsIOwnViewModel() {
 	};    
 	
 	function errorAPI(data, status, details){
-		$.mobile.hidePageLoadingMsg();	
+		//$.mobile.hidePageLoadingMsg();	
 		var toastobj = {type: 'toast-error', text: details.message};
 		showToast(toastobj);
 	};

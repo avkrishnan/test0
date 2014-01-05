@@ -1,5 +1,5 @@
 function HeaderViewModel() {	
-	this.backText = ko.observable();
+	this.backText = ko.observable('<em></em>Home');
 	this.isBack = ko.observable(true);	
 	this.newMessageCount = ko.observable('');
 	this.newMessageClass = ko.observable();
@@ -7,9 +7,16 @@ function HeaderViewModel() {
 	var that = this;
 	/* Methods */
 	this.activate = function() {
-		if(allpages.querySelector('div').getAttribute('id') == 'channelListView') {
-			this.isBack = ko.observable(false);
-            that.backText('<em></em>Home');
+		if(getCurrentPageId() == 'channelListView') {
+            if(!this.isBack){
+               
+                this.isBack = ko.observable(false);
+            }
+            else{
+           
+            }
+             that.backText('<em></em>Home');
+			  this.isBack(false);
 		}
         else if(typeof backNavText[0] == 'undefined') {
             this.isBack(true);
@@ -122,7 +129,8 @@ function HeaderViewModel() {
 	this.newMessagesOverlayPopup = function() {
 		if(localStorage.getItem('enymNotifications')) {
 			if(JSON.parse(localStorage.getItem('enymNotifications')).length > 0) {
-				$('#newMessages').popup().popup('open', {x: 10, y:10});
+				//$('#newMessages').popup().popup('open', {x: 10, y:10});
+                $('#myHeader-overlay').show();
 			}
 		}
 		else {
@@ -187,7 +195,7 @@ function OverlayViewModel() {
 	}
 	
 	this.closePopup = function() {
-		$('#newMessages').popup('close');
+		 $('#myHeader-overlay').hide();
 	}
 	
 	this.iGiAckOverlay = function(data, event) {
@@ -236,6 +244,7 @@ function OverlayViewModel() {
 		//$('#newMessages').popup('close');
 		//that.closePopup();
 		var backText = getCurrentViewModel().viewname;	
-		viewNavigate(backText, $.mobile.activePage.attr('id'), 'channelSingleMessagesView');
+		viewNavigate(backText, getCurrentPageId(), 'channelSingleMessagesView');
+        that.closePopup();
 	}
 }

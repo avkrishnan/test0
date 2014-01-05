@@ -1,4 +1,4 @@
-﻿/* Devender - To Do Remove it later before go live*/
+/* Devender - To Do Remove it later before go live*/
 function ChannelSingleMessagesViewModel() {
 	var that = this;
 	this.template = "channelSingleMessagesView";
@@ -29,14 +29,15 @@ function ChannelSingleMessagesViewModel() {
 	this.setting = ko.observable(false);			
 
 	this.applyBindings = function() {
-		$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
+		//$("#" + that.template).on("pagebeforeshow", null, function(e, data) {
 			that.activate();
-		});
+		//});
 	};
     
 	this.activate = function() {
 		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message
+			//addExternalMarkup(that.template); // this is for header/overlay message
+            window["headerViewModel"].activate();
 			that.accountName(localStorage.getItem("accountName"));
 			that.channelIcon('');
 			that.setting(false);			

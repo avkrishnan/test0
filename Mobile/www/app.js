@@ -233,7 +233,7 @@ function submitFeedback(){
 
 
 function getCurrentViewModel(){
-    var vm = ko.dataFor($.mobile.activePage.get(0));
+    var vm = ko.dataFor(getCurrentPage());
     return vm;
 }
 
@@ -551,7 +551,7 @@ function loadAllPages() {
   });
 };*/
  
-function goToView(view){
+function goToView(view , callback){
 	var sview = view[0].toUpperCase() + view.slice(1);
 	$( "#allpages" ).load( 'views/' + sview +".html", function() {
   //alert( "Load was performed." );
@@ -565,6 +565,10 @@ function goToView(view){
       if (newModel.applyBindings){
         newModel.applyBindings();
       }
+        window.location.hash = view;
+        if(callback)
+            callback();    
+        //window["headerViewModel"].activate();
 	}
     s.src = 'viewModel/' + viewmodel+".js";
 	document.querySelector('#allpagesScripts').innerHTML = "";
@@ -595,9 +599,10 @@ function goToView(view){
 		var token = localStorage.getItem("accessToken");
 		if (document.location.hash == ""){
 			if (token) {
-                
-                goToView('channelListView');
                 addExternalMarkup();
+                goToView('channelListView');
+                
+                
 				//document.location.hash = "#channelListView";
 				//document.location.hash = "#channelsIOwnView";
 			}
@@ -605,7 +610,13 @@ function goToView(view){
 				//document.location.hash = "#loginView";
                 goToView('loginView');
 			}
+            localStorage.setItem('backNavText' , JSON.stringify([]));
+                localStorage.setItem('backNavView' , JSON.stringify([]));
 		}
+        else{
+                addExternalMarkup();
+                goToView(document.location.hash.slice(1));
+        }
 		console.log('hash: ' + document.location.hash);
 		//$.mobile.activeBtnClass = '';
 		//$("#channelListView").page("destroy").page();
@@ -811,6 +822,13 @@ function viewNavigate(backText, backView, targetView) {
     goToView(targetView);
 }		
 
+function getCurrentPageId(){
+ return getCurrentPage().getAttribute('id');
+}
+function getCurrentPage(){
+    return allpages.querySelector('div');
+}
+
 function popBackNav() {
 	backNavText.pop();
 	localStorage.removeItem('backNavText');	
@@ -818,8 +836,9 @@ function popBackNav() {
 	var targetView = goToView(backNavView.pop());
 	localStorage.removeItem('backNavView');		
 	localStorage.setItem('backNavView', JSON.stringify(backNavView));
-	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
-	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});			
+    
+	$('#'+getCurrentPageId()+' .toast-notification').html('');
+	//$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});			
 }
 
 /* Toast messages function */
@@ -828,12 +847,12 @@ function showToast(toastobj) {
 		$('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');			
 	}
 	else {
-		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
+		$('#'+getCurrentPageId()+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
 	}
 	$('.toast-notification').delay(500).slideDown(500, function() {
 		$('.toast-notification').show();
 	}).delay(4000).slideUp(1000, function() {
-		$('#'+$.mobile.activePage.attr('id')+' .toast-notification .toast-text').remove();
+		$('#'+getCurrentPageId()+' .toast-notification .toast-text').remove();
 	});
 }
 

@@ -37,7 +37,10 @@ AppCtx.ViewModel = function() {
 		  vm[v] = ko.observable(value);
 		});		
 	};
-	
+
+    this.updateHeader = function(){
+     window["headerViewModel"].activate();
+    }
   this.clearObs = function(obs) {
 		var vm = this;
     $.each(obs, function(i,v) {vm[v]('');});
@@ -63,7 +66,7 @@ AppCtx.ViewModel = function() {
 			  vm.activate();
 	      vm.accountName(localStorage.getItem("accountName"));
       }
-    //});
+   // });
   };
 	
 	this.removelLocalStorage = function() {

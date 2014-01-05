@@ -84,14 +84,14 @@ function LoginViewModel() {
 
 self.forgetPasswordCommand = function(){
     document.getElementById('myHeader').innerHTML = "<header>"+
-    '<a href="#" class="back logintop" onclick="goToView(\'loginView\');"><em></em>Login</a>'+
+    '<a href="#" class="back logintop" onclick="goToView(loginView);"><em></em>Login</a>'+
   '</header>';
 	goToView('forgotPasswordView');
 }
 
 self.signupCommand = function(){
      document.getElementById('myHeader').innerHTML = "<header>"+
-    '<a href="#" class="back logintop" onclick="goToView(\'loginView\');"><em></em>Login</a>'+
+    '<a href="#" class="back logintop" onclick="goToView(loginView);"><em></em>Login</a>'+
   '</header>';
 	goToView('signupStepFirstView');
 }
@@ -151,9 +151,10 @@ self.signupCommand = function(){
 				ES.channelService.followChannel(channel.id, callbacks);
 			}
 			else {
+                 addExternalMarkup();
 				goToView('channelListView');
 			}
-        addExternalMarkup();
+       
     } 
 		else {
 			self.errorMessage('<span>SORRY: </span> Unknown Error.');
