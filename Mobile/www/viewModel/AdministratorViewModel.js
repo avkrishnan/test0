@@ -8,6 +8,10 @@
   self.activate = function() {
   	addExternalMarkup(self.template); // this is for header/overlay message			
 	};
+	
+	self.comingSoon = function() {
+		headerViewModel.comingSoon();
+	};	
 }
 
 AdministratorViewModel.prototype = new ENYM.ViewModel();

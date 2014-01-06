@@ -84,8 +84,9 @@ function EvernymChannelService(api) {
     return api.callAPI('DELETE', '/channel/' + channelid + '/setting/' + setting, undefined, undefined, true);
   };
 
-  t.invite = function(channelid, invitation) {
-    return api.callAPI('POST', '/channel/' + channelid + '/invite', invitation, undefined, true);
+  t.invite = function(channelid, invitation, callbacks) {
+    //return api.callAPI('POST', '/channel/' + channelid + '/invite', invitation, undefined, true);
+		return api.callAPI('POST', '/channel/' + channelid + '/invite', invitation, callbacks, true); // aded callbacks by Devender
   };
 
 }

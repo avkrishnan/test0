@@ -1,28 +1,40 @@
-<!--To do - Pradeep Kumar-->
 <div id="addFollowersView" data-role="page">
   <header class="logged-in"></header> 
-  <div class="page-content channelsettings">
-    <div class="channelcontent broadecast">
+  <div class="page-content">
+  	<section data-bind="if:showInvite">
+    <div class="provisionalchannel">
       <span class="channelimg channel1 borderred"></span>
-      <div class="detailschannel last">
-        <div class="channelinfo"><strong data-bind="text: channelName"></strong></div>
-      </div>
-    </div> 
-    <section class="loginform" method="get" action="#">
-      <label class="msginfo">Add a Follower Manually</label>
+      <div class="channelinfoname" data-bind="text: channelName"></div>
+    </div>
+    </section>
+    <section class="loginform" data-bind="if:showInvite">
+      <label class="msginfo">Add a Follower</label>
       <div class="formtype" data-bind="css: nameClass">
-        <input type="text" data-bind="value: firstLastName" placeholder="first and last name" />
-        <div class="msgerror" data-bind="html: errorName"></div>         
+      	<input type="text" placeholder="first and last name (optional)" data-bind="value: firstLastName" />
+        <div class="msgerror" data-bind="html: errorName"></div>
       </div>
       <div class="formtype" data-bind="css: emailClass">
-        <input type="text" data-bind="value: emailaddress" placeholder="phone number or email address" />
-        <div class="msgerror" data-bind="html: errorEmail"></div>         
+      	<input type="text" data-bind="value: emailaddress" placeholder="email address *" />
+        <div class="msgerror" data-bind="html: errorEmail"></div>
       </div>
-      <div class="login"><div class="loginbtn"><a href="#" data-bind="click: addFollowersCommand">ADD</a></div></div>
+      <div class="formtype" data-bind="css: phoneClass">
+      	<input type="text" placeholder="phone number *" data-bind="value: smsPhone" />
+        <div class="msgerror" data-bind="html: errorPhone"></div>
+      </div>
+      <div class="required">* A phone number or email address are required</div>
+			<div class="loginbtn"><a href="#" data-bind="click: addFollowersCommand">ADD</a></div>
     </section>
-  </div>  
+    <section data-bind="ifnot:showInvite">
+    	<div class="permissionmsg">
+        <span>We have sent a message requesting your new follower's permission to receive messages from your channel.</span>
+        <span>You can see their status in the list of followers for this channel.</span>
+      </div>
+      <div class="loginbtn"><a href="#" class="ui-link" onclick="viewNavigate('Followers', 'followersListView', 'addInviteFollowersView');">OK, Got it</a></div>
+    </section>
+  </div>
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Settings', 'userSettingsView', 'userSettingsView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Settings', 'userSettingsView', 'plusMenuView');"></a>
   </div>
-</div>   
+  <div class="active-overlay" style="display:none"></div>
+</div>
