@@ -5,7 +5,8 @@
 	self.viewname = 'RegistrationVerify';
 	self.displayname = 'Registration Verify';
 	
-  self.inputObs = [ 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode', 'errorMessage' ];
+  self.inputObs = [ 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode'];
+  self.errorObs = [ 'verificationClass', 'errorMessage'];	
   self.defineObservables();
 	
 	self.activate = function() {
@@ -18,7 +19,7 @@
 			self.accountName('Your evernym is: '+ENYM.ctx.getItem('accountName')+" (Don't forget!)");
 			self.verificationCommethodType(ENYM.ctx.getItem('newuseremail'));				
 			$('input').keyup(function () {
-				self.errorMessage('');
+				self.clearErrorObs();
 			});					
 		}
 	};
@@ -44,9 +45,11 @@
 	
 	self.verifyRequestCommethod = function() {
 		if(self.verificationCode() == '') {
+			self.verificationClass('validationerror');
 			self.errorMessage("<span>ERROR:</span> Please input verification code!");
 		}
 		else if(self.verificationCode().length != 6) {
+			self.verificationClass('validationerror');
 			self.errorMessage("<span>ERROR:</span> Verification code should be 6 digits!");
 		}
 		else {
@@ -81,8 +84,24 @@
 					var redirect = 'nameRequiredView';
 					goToView('nameRequiredView');
 				}
+				else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N'){
+					var callbacks = {
+						success: function() {		
+							var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+channel.name};
+							showToast(toastobj);
+							goToView('tutorialView');										
+						},
+						error: function(data, status, details) {
+							var toastobj = {redirect: 'tutorialView', type: 'toast-error', text: details.message};
+							showToast(toastobj);
+							goToView('tutorialView');
+						}
+					};
+					var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
+					ES.channelService.followChannel(channel.id, callbacks);
+				}
 				else {
-					var redirect = 'nameRequiredView';												
+					var redirect = 'tutorialView';												
 					goToView('tutorialView');
 				}
 				var toastobj = {redirect: redirect, type: '', text: 'Email verified'};
@@ -100,7 +119,7 @@
 		if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
 			goToView('nameRequiredView');
 		}
-		else {
+		else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N'){
 			var callbacks = {
 				success: function() {		
 					var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+channel.name};
@@ -108,13 +127,17 @@
 					goToView('tutorialView');										
 				},
 				error: function(data, status, details) {
-					var toastobj = {type: 'toast-error', text: details.message};
+					var toastobj = {redirect: 'tutorialView', type: 'toast-error', text: details.message};
 					showToast(toastobj);
+					goToView('tutorialView');
 				}
 			};
 			var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
 			ES.channelService.followChannel(channel.id, callbacks);																						
-		}		
+		}
+		else {
+			goToView('tutorialView');
+		}	
 	};	
 	
 }
