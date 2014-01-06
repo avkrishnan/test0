@@ -1,4 +1,3 @@
-<!--To do - Pradeep Kumar-->
 <div id="whoGotItView" data-role="page" >
 	<header class="logged-in"></header>
   <div class="page-content channelsettings">
@@ -9,7 +8,19 @@
           <strong data-bind="text: channelName"></strong>
         </div>
       </div>
-    </div>    
+    </div>
+    <h1 class="messagesdate" data-bind="text: time"></h1>    
+    <div class="channelbroadcast">
+      <a href="#" class="singlemessage" onclick="viewNavigate('Broadcast Details', 'singleMessageView', 'singleMessageFullTextView');">
+        <div class="singlemsg" data-bind="html: singleMessage"></div>
+      </a>
+      <div class="broadcastmsgsend">
+        <a href="#" class="igigot" data-bind="html: iGi"></a>
+        <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: percentage }"></span>
+        <a href="#" class="iginotgot" data-bind="text: noiGi" onclick="viewNavigate('Who Got it', 'whoGotItView', 'notGotItView');"></a>
+      </div>
+      <div class="escalatebroadcast" data-bind="html: escalateUntil, visible: escalateTime"></div>            
+    </div>       
     <div class="broadcastreplies undelivermsg" data-bind="text: acks"></div>
     <div class="messagesundeliver messagesdeliver">
       <ul data-bind="foreach: recipients">      
