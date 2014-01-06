@@ -171,7 +171,7 @@
 	};
 	
 	// follow/unfollow will be called on the basis of channelAction value
-	self.getCommethodsCommand = function() {
+	self.actionFollowChannelCommand = function() {
 		if(self.loggedIn() == 'Y') {
 			var account = JSON.parse(ENYM.ctx.getItem('account'));			
 			if(ENYM.ctx.getItem('channelOwner') == 'yes') {
@@ -217,9 +217,10 @@
 		}
 	};	
 	
-	self.actionFollowChannelCommand = function() {
-		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");		
+	self.followChannelCommand = function() {
 		return ES.commethodService.getCommethods({success: getCommethods, error: errorAPI});
+		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
+		return ES.channelService.followChannel(self.channelId(), {success: successfulFollowChannel, error: errorFollowing});
 	};
 	
 	function getCommethods(data){
@@ -227,7 +228,7 @@
 			var len = 0;			
 			for(len; len<data.commethod.length; len++) {
 				if(data.commethod[len].verified == 'Y') {
-					self.getCommethodsCommand();
+					self.createChannelMessage();
 					return true;
 				}
 				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
@@ -245,11 +246,7 @@
 		$.mobile.hidePageLoadingMsg();		
 		var toastobj = {type: 'toast-error', text: details.message};
 		showToast(toastobj);		
-	};
-	
-	self.followChannelCommand = function() {
-		return ES.channelService.followChannel(self.channelId(), {success: successfulFollowChannel, error: errorFollowing});
-	};
+	};	
 
 	self.showMore = function(){
 		self.less(false);		
