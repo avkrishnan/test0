@@ -209,7 +209,7 @@
 			var action = {follow_channel: 'Y', SHARE_NAME: 'N'};			
 		}
 		ENYM.ctx.setItem('action', JSON.stringify(action));			
-		if(ENYM.ctx.getItem('accountName') == '' || ENYM.ctx.getItem('accountName') == null){
+		if(ENYM.ctx.getItem('evernym') == '' || ENYM.ctx.getItem('evernym') == null){
 			goToView('signupStepFirstView');
 		} 
 		else {

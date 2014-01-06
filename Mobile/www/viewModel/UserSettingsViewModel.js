@@ -137,7 +137,7 @@
 		ES.evernymService.clearAccessToken();
 		ENYM.ctx.removeItem('login_nav');			
 		ENYM.ctx.removeItem('currentChannel');
-		//ENYM.ctx.removeItem('accountName');
+		ENYM.ctx.removeItem('accountName');
 		ENYM.ctx.removeItem('account');		
 		ENYM.ctx.removeItem('name');		
 		ENYM.ctx.removeItem('iGiStatus');		

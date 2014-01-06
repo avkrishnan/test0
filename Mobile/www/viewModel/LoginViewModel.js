@@ -118,6 +118,7 @@
       ES.evernymService.setAccessToken(args.accessToken);
 			ENYM.ctx.setItem('account', JSON.stringify(args.account));
       ENYM.ctx.setItem('accountName', self.username());
+			ENYM.ctx.setItem('evernym', 1);
 			if(typeof args.privs != 'undefined') {
 				ENYM.ctx.setItem('roleType', args.privs);
 			}
@@ -168,9 +169,9 @@
 			self.errorMessage('<span>Sorry, </span> Unknown Error.');
       return;
     }
-  }
+  };
 		
-}
+};
 
 LoginViewModel.prototype = new ENYM.ViewModel();
 LoginViewModel.prototype.constructor = LoginViewModel;
