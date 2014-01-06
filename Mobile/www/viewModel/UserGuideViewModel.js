@@ -11,7 +11,7 @@
   self.activate = function() {		
 		var newUser = ENYM.ctx.getItem('newusername');
 		if(newUser == '' || newUser == null) {
-				goToView('homeView');
+			goToView('homeView');
 		}
 		self.sectionOne(true);
 		self.sectionTwo(false);		
@@ -35,8 +35,9 @@
 		else {
 			goToView('homeView');
 		}
-  }	
-}
+  };
+	
+};
 
 UserGuideViewModel.prototype = new ENYM.ViewModel();
 UserGuideViewModel.prototype.constructor = UserGuideViewModel;

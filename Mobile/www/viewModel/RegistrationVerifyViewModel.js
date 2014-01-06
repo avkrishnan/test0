@@ -87,16 +87,15 @@
 				else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N'){
 					var callbacks = {
 						success: function() {		
-							var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+channel.name};
-							goToView('tutorialView');										
+							var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+channel.name};										
 						},
 						error: function(data, status, details) {
 							var toastobj = {redirect: 'tutorialView', type: 'toast-error', text: details.message};
-							goToView('tutorialView');
 						}
 					};
 					var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
 					ES.channelService.followChannel(channel.id, callbacks);
+					goToView('tutorialView');
 				}
 				else {
 					var toastobj = {redirect: 'tutorialView', type: '', text: 'Email verified'};																	
