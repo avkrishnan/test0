@@ -78,7 +78,6 @@
 		}
 		$.mobile.showPageLoadingMsg("a", "Adding Provisional Follower");
 		var provisional = generateProvisionalAccount();
-		//alert(JSON.stringify(provisional));
 		ES.channelService.invite(self.channelId(), provisional, {success: successfulAdd, error: errorAPI});
   };
 	
@@ -92,7 +91,7 @@
 			lastName = '';
 		}
 		return {
-			//emailaddress: self.emailaddress(),
+			emailaddress: self.emailaddress(),
 			phonenumber: self.smsPhone(),
 			firstname: firstName,
 			lastname: lastName
