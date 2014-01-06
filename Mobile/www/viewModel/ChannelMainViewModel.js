@@ -220,16 +220,10 @@
 				});
 				reply = reply[0];		
 				ENYM.ctx.setItem('currentReplyData', JSON.stringify(reply));
-			//}
-		}
-		viewNavigate('Main', 'channelMainView', 'replyDetailView');
-		if(data.message[len].text.length > truncatedTextScreen()) {
-			var replyLess = $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...';
-		}
-		else {
-			var replyLess = data.message[len].text;					
+			//}		
 		}		
-		replyDetailViewModel.showMore();				
+		viewNavigate('Main', 'channelMainView', 'replyDetailView');						
+		replyDetailViewModel.showMore();		
 	}; 
 	
 	function errorAPI(data, status, details) {

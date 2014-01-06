@@ -8,10 +8,8 @@
     <div class="provisionalfollower">
       <em></em>
       <div class="provisional-follower">
-        <span data-bind="if: followerName, text: followerName"></span>
+        <span data-bind="visible: visibleName, text: followerName"></span>
         <span data-bind="visible: visibleEvernym, text: followerEvernym"></span>
-        <span data-bind="visible: visibleEmail, text: followerEmail"></span>
-        <span data-bind="visible: visiblePhone, text: followerPhone"></span>
       </div>
     </div>
     <div class="loginbtn removefollower">

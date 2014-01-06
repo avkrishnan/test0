@@ -45,7 +45,7 @@ function ReplyDetailViewModel() {
 	}	
 	
 	self.showMore = function(){
-		self.less(false);		
+		self.less(false);
 		self.more(true);
 		self.moreButton(false);
 		self.lessButton(true);																
