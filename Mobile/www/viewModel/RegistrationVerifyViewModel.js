@@ -87,10 +87,12 @@
 				else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N'){
 					var callbacks = {
 						success: function() {		
-							var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+channel.name};										
+							var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+channel.name};
+							showToast(toastobj);										
 						},
 						error: function(data, status, details) {
 							var toastobj = {redirect: 'tutorialView', type: 'toast-error', text: details.message};
+							showToast(toastobj);
 						}
 					};
 					var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
