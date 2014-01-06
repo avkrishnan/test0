@@ -81,19 +81,17 @@
 		var callbacks = {
 			success: function(responseData) {
 				if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
-					var redirect = 'nameRequiredView';
+					var toastobj = {redirect: 'nameRequiredView', type: '', text: 'Email verified'};					
 					goToView('nameRequiredView');
 				}
 				else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N'){
 					var callbacks = {
 						success: function() {		
 							var toastobj = {redirect: 'tutorialView', type: '', text: 'Now following '+channel.name};
-							showToast(toastobj);
 							goToView('tutorialView');										
 						},
 						error: function(data, status, details) {
 							var toastobj = {redirect: 'tutorialView', type: 'toast-error', text: details.message};
-							showToast(toastobj);
 							goToView('tutorialView');
 						}
 					};
@@ -101,10 +99,9 @@
 					ES.channelService.followChannel(channel.id, callbacks);
 				}
 				else {
-					var redirect = 'tutorialView';												
+					var toastobj = {redirect: 'tutorialView', type: '', text: 'Email verified'};																	
 					goToView('tutorialView');
 				}
-				var toastobj = {redirect: redirect, type: '', text: 'Email verified'};
 				showToast(toastobj);				
 			},
 			error: function (responseData, status, details) {
