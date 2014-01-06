@@ -137,7 +137,7 @@
 		ENYM.ctx.removeItem('action');
 		var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+self.title()};
 		showToast(toastobj);				
-		goToView('channelMessagesView');
+		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');
 	};
 	
 	function errorAPIChannel(data, status, details) {

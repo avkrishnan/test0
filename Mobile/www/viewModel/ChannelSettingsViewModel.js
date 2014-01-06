@@ -17,17 +17,17 @@
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);
 			self.shortDescription(channelObject.channelDescription);
-			self.yesShare('yesbutton');
-			self.noShare('nobutton');				
+			self.yesShare('nobutton');
+			self.noShare('yesbutton');				
 			ENYM.ctx.removeItem('channelOwner');
 			return ES.channelService.getFollowerReq(self.channelId()).then(getSuccess);				
 		}
 	};	
 	
 	function getSuccess(data) {
-		if(data != '') {
-			self.yesShare('nobutton');
-			self.noShare('yesbutton');		
+		if(data == '') {
+			self.yesShare('yesbutton');
+			self.noShare('nobutton');		
 		}
 	}
 	
