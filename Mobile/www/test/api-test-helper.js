@@ -271,6 +271,16 @@ function ApiTestHelper() {
     };
   };
 
+  t.inviteFollower = function(scenario, chnlKey, invitation, ovrdSuccess, ovrdFail) {
+    return function() {
+      var inv = typeof invitation === "function" ? invitation() : invitation;
+      $.when(scenario.ES.channelService.invite(scenario[chnlKey].id, inv))
+      .then(ovrdSuccess === undefined ? t.CHECK.success : ovrdSuccess, ovrdFail === undefined ? t.CHECK.shouldNotFail : ovrdFail)
+      .then(function(data) { scenario.lastInvite = data; })
+      .then(start,start);
+    };
+  };
+
   function build(func, shouldFail) {
     var success = shouldFail == true ? t.CHECK.shouldFail : t.CHECK.successNoContent;
     var fail =  shouldFail == true ? t.CHECK.badRequest : t.CHECK.shouldNotFail;

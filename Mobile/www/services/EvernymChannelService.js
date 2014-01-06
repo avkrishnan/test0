@@ -58,11 +58,6 @@ function EvernymChannelService(api) {
     return api.callAPI('PUT', '/channel/' + channel.id, channel, callbacks, true);
   };
 
-  t.provisionalEnroll = function(provisional, callbacks) {
-    return api.callAPI('POST', '/account/provisional/enroll', provisional, callbacks, true);
-  };
-
-  
   /* Channel Follower Requests */
   t.getFollowerReq = function(channelid) {
     return api.callAPI('GET', '/channel/' + channelid + '/followerrequest', undefined, undefined, false);
@@ -89,5 +84,8 @@ function EvernymChannelService(api) {
     return api.callAPI('DELETE', '/channel/' + channelid + '/setting/' + setting, undefined, undefined, true);
   };
 
+  t.invite = function(channelid, invitation) {
+    return api.callAPI('POST', '/channel/' + channelid + '/invite', invitation, undefined, true);
+  };
 
 }
