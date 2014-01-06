@@ -1,6 +1,5 @@
-<!--To do - Pradeep Kumar-->
 <div id="addInviteFollowersView" data-role="page">
-	<header class="logged-in"></header>  
+	<header class="logged-in"></header>
   <div class="page-content followerpage">
     <div class="followerchannel last">
       <div class="channelcontent broadecast">
@@ -8,9 +7,8 @@
         <div class="channelinfoname" data-bind="text: channelName"></div>
         <a href="#" class="setting settinginner" onclick="viewNavigate('Add/Invite', 'addInviteFollowersView', 'channelSettingsView');"></a>
       </div>
-    </div>			
-    <h1 class="invitefollowers">Add or invite new followers</h1>      
-    <h1 class="followersby">You can add followers by:</h1>     
+    </div>
+    <h1 class="invitefollowers">You can add followers by:</h1>
     <div class="low-messages allfollowercs visitaddress">
       <div class="accept-decline">
         <span>Asking them to visit your channel web page:</span>
@@ -18,12 +16,12 @@
       </div>
     </div>
       <a href="#" class="low-messages invitation" data-bind="click: comingSoon">Sending them an invitation (email)</a>
-      <a href="#" class="low-messages addMore addinformation" data-bind="click: comingSoon">Adding their information manually</a>
+      <a href="#" class="low-messages addMore addinformation" onclick="viewNavigate('Add/Invite', 'addInviteFollowersView', 'addFollowersView');">Adding their information manually</a>
   </div>
-  <div class="toast-notification"></div>  
+  <div class="toast-notification"></div>
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Add/Invite', 'addInviteFollowersView', 'userSettingsView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Add/Invite', 'addInviteFollowersView', 'plusMenuView');"></a>
   </div>
-  <div class="active-overlay" style="display:none"></div>  
-</div>   
+  <div class="active-overlay" style="display:none"></div>
+</div>
