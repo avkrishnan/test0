@@ -150,9 +150,6 @@ h1.newcreatechannel {
 .page-content.nofooterbar, .page-content.hamburgermenupage {
 	padding:42px 0 0 10px;
 }
-/*.page-content.channelsettings {
-	border:3px solid blue;
-}*/
 .channel-broadcast {
 	padding:0;
 	position:absolute;
@@ -251,13 +248,10 @@ a.addMore {
 }
 a.addchannel {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -628px;
-/*	padding:4px 0 4px 57px;*/
 }
-/*	*Page V-36b  */
 .low-messages.deliver-txt.addno.ui-link, .addno {
 	color:#8DC63F;
 }
-/*V-36b-end*/
 select, .ui-icon-arrow-d {
 	background:#fff url(images/drop-down.png) no-repeat right 0;
 	border:none;
@@ -410,7 +404,7 @@ select, .ui-icon-arrow-d {
 	background:url("images/sprites.png") no-repeat -14px -1325px;
 }
 .announcement {
-	background:url("images/plussign.png") no-repeat 0px 0px;
+	background:url("images/plussign.png") no-repeat 0 0;
 	float:right;
 	margin:-5px 0 4px 0;
 	padding:22px 60px 22px 0;
@@ -498,8 +492,6 @@ input[type="checkbox"]:checked + label span {
 .signupfree .loginbtn a.ui-link, .signupfree .loginbtn a.ui-link:hover {
 	border-radius:20px;
 }
-/*.login a.ui-link, .login a.ui-link:hover, .login a.ui-link:visited, .login a.ui-link:active
-.login a.ui-link, .login a.ui-link:hover, .login a.forget-password.ui-link, .login a.forget-password.ui-link:hover,*/
 a.forget-password, a.forget-password.ui-link, a.forget-password.ui-link:hover, a.forget-password.ui-link:visited, a.forget-password.ui-link:active,
 a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgotevernym.ui-link:visited, a.forgotevernym.ui-link:active {
 	color:#7F7F7F;
@@ -509,7 +501,7 @@ a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgo
 .forgotevernym {
 	display:inline-block;
 	width:100%;
-	margin:5px 0px 0px 10px;
+	margin:5px 0 0 10px;
 }
 .loginbtn {
 	background:#2d2d2d;
@@ -630,7 +622,7 @@ a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgo
 	position:fixed;
 	width:100%;
 	height:100%;
-	margin:42px 0px 0px 0px;
+	margin:42px 0 0 0;
 	background:#fae49c;
 }
 .new-user {
@@ -646,7 +638,7 @@ a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgo
 	background:#fae49c url(images/v-52-320.png) no-repeat center 4px;
 }
 .tutorial-3 {
-	background:#fae49c url(images/v-53-320.png) no-repeat center 0px;
+	background:#fae49c url(images/v-53-320.png) no-repeat center 0;
 }
 .tutorial-4 {
 	background:#fae49c url(images/v-54-320.png) no-repeat center 4px;
@@ -892,7 +884,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .actiondetails ul .action-time  li {
 	line-height:normal;
 	min-height:inherit;
-	padding:10px 0;
+	padding:10 0;
 }
 .action-time .ui-input-search, .action-time div.ui-input-text {
 	border-radius:4px;
@@ -1607,7 +1599,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	float:left;
 	overflow:hidden;
 	width:100%;
-	margin:0px 4px;
+	margin:0 4px;
 }
 .broadcastsensitive {
 	overflow:hidden;
@@ -1634,19 +1626,19 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:19px;
 }
 .broadcast-sensitive strong.icon-r {
-	background:url("images/icon-r.png") no-repeat 0px 0px;
+	background:url("images/icon-r.png") no-repeat 0 0;
 }
 .broadcast-sensitive strong.icon-e {
-	background:url("images/icon-e.png") no-repeat 0px 0px;
+	background:url("images/icon-e.png") no-repeat 0 0;
 }
 .broadcast-sensitive strong.icon-c {
-	background:url("images/icon-c.png") no-repeat 0px 0px;
+	background:url("images/icon-c.png") no-repeat 0 0;
 }
 .broadcast-sensitive strong.icon-h {
-	background:url("images/icon-h.png") no-repeat 0px 0px;
+	background:url("images/icon-h.png") no-repeat 0 0;
 }
 .broadcast-sensitive strong.icon-f {
-	background:url("images/icon-f.png") no-repeat 0px 0px;
+	background:url("images/icon-f.png") no-repeat 0 0;
 }
 .broadcastnormal span {
 	background-position:-9px -1555px;
@@ -1662,7 +1654,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-top:2px solid #a7a9ac;
 	border-bottom:2px solid #fff;
 	overflow:hidden;
-	margin:8px 0 3px 0px;
+	margin:8px 0 3px 0;
 	background:#67676a;
 	height:30px;
 	line-height:30px;
@@ -1782,16 +1774,16 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	margin-right:6px;
 }
 .singlemsgicon.icon-h {
-	background:url("images/icon-h.png") no-repeat 0px 2px;
+	background:url("images/icon-h.png") no-repeat 0 2px;
 }
 .singlemsgicon.icon-e {
-	background:url("images/icon-e.png") no-repeat 0px 2px;
+	background:url("images/icon-e.png") no-repeat 0 2px;
 }
 .singlemsgicon.icon-c {
-	background:url("images/icon-c.png") no-repeat 0px 2px;
+	background:url("images/icon-c.png") no-repeat 0 2px;
 }
 .singlemsgicon.icon-r {
-	background:url("images/icon-r.png") no-repeat 0px 2px;
+	background:url("images/icon-r.png") no-repeat 0 2px;
 }
 h1.messagesdate {
 	font-size:14px;
@@ -1815,58 +1807,16 @@ h1.messagesdate {
 .messagesend {
 	background:#2D2D2D url("images/sprites.png") no-repeat -6px -1824px;
 }
+.senddate {
+	margin:8px 0 10px 5px;
+	font-size:14px;
+}
 .broadcastmsgredfull {
 	background:#ffffff;
-	padding:0 0 5px 0;
-	border-radius:21px 10px 10px 10px;
+	padding:5px;
+	font-size:14px;
+	border-radius:4px;
 	margin:0 10px 0 0;
-}
-.broadcastmsgredfull p {
-	font-size:13px;
-	margin:10px 20px 5px 18px;
-}
-.broadcastmsgred {
-	border-bottom:1px solid #7f7c7c;
-	box-shadow:0 -8px 9px #CCCCCC inset;
-	margin:0;
-}
-.msgfullread {
-	border-radius:21px 4px 4px 21px;
-	color:#414141;
-	height:37px;
-	line-height:14px;
-	padding:0 0 0 50px;
-	margin:0 4px;
-}
-.msgfullread.icon-c {
-	background:#F1F2F2 url("images/icon-c.png") no-repeat 0 0;
-}
-.msgfullread.icon-h {
-	background:#F1F2F2 url("images/icon-h.png") no-repeat 0 0;
-}
-.msgfullread.icon-r {
-	background:#F1F2F2 url("images/icon-r.png") no-repeat 0 0;
-}
-.msgfullread.icon-e {
-	background:#F1F2F2 url("images/icon-e.png") no-repeat 0 0;
-}
-.msgfullread.icon-f {
-	background:#F1F2F2 url("images/icon-f.png") no-repeat 0 0;
-}
-.msgfullread span {
-	text-transform:uppercase;
-	font-size:11px;
-	color:#999999;
-}
-.msgfullread em {
-	font-size:12px;
-	color:#414141;
-	font-style:normal;
-	display:block;
-	padding:0px 10px 0px 0px;
-	text-overflow:ellipsis;
-	overflow:hidden;
-	white-space:nowrap;
 }
 .channelinfoname {
 	display:inline-block;
@@ -1886,7 +1836,7 @@ h1.messagesdate {
 }
 .newfollowers {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -969px;
-	margin:0px;
+	margin:0;
 }
 .low-messages.acceptdecline {
 	overflow:hidden;
@@ -1905,7 +1855,7 @@ h1.requests {
 .accept-decline {
 	float:left;
 	height:35px;
-	line-height:0px;
+	line-height:0;
 }
 .accept-decline span {
 	font-size:13px;
@@ -1939,10 +1889,7 @@ h1.requests {
 	border:none;
 }
 .invitefollowers {
-	border-bottom:1px solid #828181;
-	display:block;
-	margin:8px 25px 10px 25px;
-	padding:0 0 20px;
+	margin:15px 25px 0 25px;
 }
 .followersby {
 	margin:0 20px 10px 25px;
@@ -2324,7 +2271,7 @@ ul.igiresponses li span {
 }
 .messageshistory .iconchannels {
 	display:table-cell;
-	padding:0px;
+	padding:0;
 	float:none;
 }
 .shortdescription em {
@@ -2499,7 +2446,7 @@ ul.igiresponses li span {
 	background:#fff;
 	border-radius:21px 4px 4px 4px;
 	display:table;
-	padding:0px 0px 5px 0px;
+	padding:0 0 5px 0;
 	width:100%;
 }
 .messagedetail .iconchannels {
@@ -3050,7 +2997,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:url("images/icon-f.png") no-repeat 0 0;
 }
 .slidervalue-img .icon-Emergency {
-	/*background:#ed1c24;*/
 	background:url("images/icon-e.png") no-repeat 1px 0;
 }
 .slider-value .fast {
@@ -3128,7 +3074,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	padding:0 10px;
 }
 .igiimage, .igiimageoff {
-	background:url(images/broadcastigi.png) no-repeat 0px 0px;
+	background:url(images/broadcastigi.png) no-repeat 0 0;
 	width:40px;
 	display:table-cell;
 }
@@ -3239,7 +3185,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .picker-date {
 	color:#fff;
 	font-size:14px;
-	padding:10px 0px 0px 0px;
+	padding:10px 0 0 0;
 }
 /*	A short description  */
 .loginform .short-description {
@@ -3326,7 +3272,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	bottom:12px;
 }
 .toast-login {
- bottom:0px;
+ bottom:0;
 }
 /* CHANNELS PAGES CSS	END	 */
 /* ui-popup-container */
@@ -3419,7 +3365,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#fff;
 	font-size:16px;
 	display:block;
-	margin:0px 0px 5px 0px;
+	margin:0 0 5px 0;
 }
 .helpinfo a {
 	padding:3px 31px 3px 10px;
@@ -3485,13 +3431,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .congrats {
 	font-size:24px;
 	color:#fff;
-	margin:50px 10px 30px 0px;
+	margin:50px 10px 30px 0;
 	text-align:center;
 }
 .channel-live {
 	padding:15px 10px;
 	background:#2D2D2D;
-	margin:0px 10px 0px 0px;
+	margin:0 10px 0 0;
 	text-align:center;
 	color:#8DC63F;
 	font-size:22px;
@@ -3501,12 +3447,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	text-align:center;
 	font-size:17px;
 	color:#fff;
-	margin:35px 10px 35px 0px;
+	margin:35px 10px 35px 0;
 }
 .channelvisiting strong {
 	display:block;
 	font-size:20px;
-	margin:4px 0px 0px 0px;
+	margin:4px 0 0 0;
 }
 .nextinfo {
 	text-align:center;
@@ -3519,15 +3465,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	display:inline-block;
 	font-size:16px;
 	padding:4px 20px;
-	margin:0px 5px;
+	margin:0 5px;
 }
 .editinformation {
 	padding:8px;
 	background:#2D2D2D;
-	margin:20px 0px 0px 0px;
+	margin:20px 0 0 0;
 	color:#fff;
 	font-size:14px;
-	border-radius:4px 0px 0px 4px;
+	border-radius:4px 0 0 4px;
 }
 .editinformation span {
 	display:block;
@@ -3550,7 +3496,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	padding:5px;
 }
 .edit-button {
-	padding:0px 10px 10px 5px;
+	padding:0 10px 10px 5px;
 	overflow:hidden;
 }
 .editbutton, .editbutton.ui-link, .editbutton.ui-link:visited, .editbutton.ui-link:hover, .editbutton.ui-link:active {
@@ -3578,7 +3524,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#414141;
 	font-size:14px;
 	overflow:hidden;
-	padding:8px 0px 8px 8px;
+	padding:8px 0 8px 8px;
 	text-overflow:ellipsis;
 	white-space:nowrap;
 	width:84%;
@@ -3609,7 +3555,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .reveal {
 	display:table;
 	width:100%;
-	margin:20px 0px 20px 0px;
+	margin:20px 0 20px 0;
 }
 .revealdesc {
 	display:table-cell;
@@ -3630,7 +3576,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:14px;
 }
 .permissionmsg {
-	margin:20px 10px 10px 0px;
+	margin:20px 10px 10px 0;
 }
 .permissionmsg span {
 	font-size:14px;
@@ -3665,12 +3611,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .provisional-follower {
 	display:inline-block;
-	padding:10px 0px 0px 0px;
+	padding:10px 0 0 0;
 }
 .provisional-follower span {
 	display:block;
 	color:#fff;
-	padding:0 0 10px 0px;
+	padding:0 0 10px 0;
 	font-size:14px;
 }
 /*Sir*/
@@ -3691,12 +3637,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .suggestions-icon {
 	background:url("images/sprites.png") no-repeat -5px -168px;
 }
-/**/
+/*End*/
 .channelinfocontent .taglineedit em {
 	clear:none;
 }
 .taglineedit div.ui-input-text {
-	margin:8px 0px 0px 0px;
+	margin:8px 0 0 0;
 }
 .chandescription .editbtn.ui-link, .chandescription .editbtn.ui-link:hover, .chandescription .editbtn.ui-link:visited, .chandescription .editbtn.ui-link:active,
 .chandescription .editbtn {
@@ -3710,10 +3656,22 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:14px;
 	background:#fff;
 	resize:none;
-	margin:26px 0px 0px 0px;
+	margin:26px 0 0 0;
 	border:1px solid #E6E7E8;
 	min-height:80px;
 	max-height:80px;
+}
+/* 6-1-2014 */
+.invitedfollow {
+	font-size:14px;
+	color:#fff;
+	margin:15px 10px 20px 0;
+}
+.invitedfollow span {
+	color:#8DC63F;
+}
+.accept-decline.noname em{
+	line-height:35px;
 }
 /*
 	*@media query css
@@ -3815,7 +3773,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		background:#fae49c url(images/v-54-600.png) no-repeat center 15px;
 	}
 	.tutorial-5 {
-		background:#fae49c url(images/v-55-600.png) no-repeat center 0px;
+		background:#fae49c url(images/v-55-600.png) no-repeat center 0;
 	}
 }
 @media only screen and (min-width:360px) {
@@ -4030,7 +3988,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		margin:0 12px 0 0;
 	}
 	.tutorial ul li {
-		padding:0px 12px;
+		padding:0 12px;
 	}
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-all.png) no-repeat center center;
@@ -4281,7 +4239,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:98.7%;
 	}
 	.tutorial-5 {
-		background:#fae49c url(images/v-55-1280.png) no-repeat center 0px;
+		background:#fae49c url(images/v-55-1280.png) no-repeat center 0;
 	}
 	.tutorial-1 {
 		background:#fae49c url(images/v-51-600.png) no-repeat center 4px;

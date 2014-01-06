@@ -33,12 +33,21 @@
 				var followers = follower +' follower';
 			} else {
 				var followers = follower +' followers';
-			}				
+			}
+			if(typeof data.followers[len].firstname == 'undefined') {
+				var name = '';
+				var nameClass = 'noname'
+			}
+			else {
+				var name = data.followers[len].firstname +' '+ data.followers[len].lastname;
+				var nameClass = ''
+			}			
 			self.followerCount(followers);						
 			if(data.followers[len].relationship == 'F') {
 				self.followers.push({
 					followerId: data.followers[len].id,
-					followerName: data.followers[len].firstname +' '+ data.followers[len].lastname, 
+					nameClass: nameClass,
+					followerName: name, 
 					accountname: data.followers[len].accountname
 				});
 			}

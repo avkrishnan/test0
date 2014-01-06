@@ -1,4 +1,3 @@
-<!--To do - Pradeep Kumar-->
 <div id="followersListView" data-role="page">
 	<header class="logged-in"></header>  
   <div class="page-content followerpage">
@@ -50,7 +49,7 @@
     </div>
     <div data-bind="foreach: followers">
       <a href="#" class="low-messages allfollowercs" data-bind="click: $parent.followerDetails.bind($index())">
-        <div class="accept-decline">
+        <div class="accept-decline" data-bind="css: nameClass">
           <span data-bind="text: followerName"></span>
           <em data-bind="text: accountname"></em>
         </div>

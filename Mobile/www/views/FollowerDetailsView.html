@@ -1,26 +1,19 @@
-<!--To do - Pradeep Kumar-->
 <div id="followerDetailsView" data-role="page" class="channel-list" >
 	<header class="logged-in"></header>  
-  <div class="page-content followerpage">
-    <div class="followerchannel last">
-      <div class="channelcontent broadecast">
-        <span class="channelimg channel1 borderred"></span>
-        <div class="channelinfoname" data-bind="text: channelName"></div>
+  <div class="page-content">
+    <div class="provisionalchannel">
+      <span class="channelimg channel1 borderred"></span>
+      <div class="channelinfoname" data-bind="text: channelName"></div>
+    </div>
+    <div class="provisionalfollower">
+      <em></em>
+      <div class="provisional-follower">
+        <span data-bind="if: followerName, text: followerName"></span>
+        <span data-bind="visible: visibleEvernym, text: followerEvernym"></span>
+        <span data-bind="visible: visibleEmail, text: followerEmail"></span>
+        <span data-bind="visible: visiblePhone, text: followerPhone"></span>
       </div>
     </div>
-    <div class="followerchannel">
-      <div class="low-messages followerdetails" data-bind="html: followerName">
-        <!--Biff Jones <em>theycallmebiff</em>-->
-      </div>
-    </div>
-    <!--<div class="followerchannel followerincrease">
-      <h1 class="response">iGi Response Rate:</h1>
-      <div class="broadcastmsgsend">
-        <span class="msgincreasefull"><em class="percentage">75%</em></span>
-      </div>
-      <h1 class="response">Average iGi Response Time: <span>1.2 hrs</span></h1>
-      
-    </div>-->
     <div class="loginbtn removefollower">
       <a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'removeFollowerView');">Remove follower from this channel</a>
     </div>

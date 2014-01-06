@@ -1,7 +1,7 @@
 <!--To do - Pradeep Kumar-->
 <div id="privacyPolicyView" data-role="page" class="channel-list" >
 	<header class="logged-in">
-    <div id="header"><a href="#" class="back" data-bind="visible: noheader" onclick="goToView('signupStepFirstView');"><em></em>Step 1</a></div>
+    <div id="header"><a href="#" class="back" data-bind="visible: hasheader" onclick="goToView('signupStepFirstView');"><em></em>Quick sign-up</a></div>
   </header> 
   <div class="page-content">
     <h1 class="help-FAQs">Privacy Policy</h1>
@@ -92,7 +92,7 @@
       </div>
     </div>
   </div> 
-  <div class="footer" data-bind="visible:hasfooter">
+  <div class="footer" data-bind="visible: hasfooter">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Privacy Policy', 'privacyPolicyView', 'userSettingsView');"></a>
     <a class="announcement" href="#" onclick="viewNavigate('Privacy Policy', 'privacyPolicyView', 'plusMenuView');"></a>
   </div>

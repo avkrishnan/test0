@@ -5,9 +5,12 @@
   self.viewname = 'Follower Details';
   self.displayname = 'Follower Details';
 	
-  self.inputObs = [ 'channelName', 'followerName' ]; 
-  //self.errorObs = [ 'currentpasswordClass', 'newpasswordClass', 'confirmpasswordClass', 'errorMessageCurrent', 'errorMessageNew', 'errorMessageConfirm' ];
-  self.defineObservables();	
+  self.inputObs = [ 'channelName', 'followerName', 'followerEvernym', 'followerEmail', 'followerPhone' ]; 
+  self.defineObservables();
+	self.visibleName = ko.observable(true);
+	self.visibleEvernym = ko.observable(true);	
+	self.visibleEmail = ko.observable(true);
+	self.visiblePhone = ko.observable(true);		
 
 	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
@@ -16,10 +19,14 @@
 			goToView('followersListView');							
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message
-			self.channelName(channelObject.channelName);										
-			self.followerName(followerObject.followerName+' <em>'+followerObject.accountname+'</em>');												
+			self.channelName(channelObject.channelName);
+			self.followerName(followerObject.followerName);
+			self.followerEvernym(followerObject.accountname);
+			self.followerEmail(followerObject.followerEmail);
+			self.followerPhone(followerObject.followerPhone);																			
 		}
 	};
+	
 }
 
 FollowerDetailsViewModel.prototype = new ENYM.ViewModel();
