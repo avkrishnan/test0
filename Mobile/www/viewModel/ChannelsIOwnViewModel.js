@@ -20,7 +20,6 @@
 	
 	function successfulList(data){	
     $.mobile.hidePageLoadingMsg();
-		self.channels.removeAll();
 		if(data.channel.length == 0) {
 			self.sectionOne(true);			
 		} else {

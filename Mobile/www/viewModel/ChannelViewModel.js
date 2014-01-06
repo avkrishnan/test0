@@ -183,22 +183,23 @@
 			}
 			else {
 				return ES.channelService.getFollowerReq(self.channelId()).then(getSuccessOnLogin);
-				function getSuccessOnLogin(data) {	
-					if(data != '') {
-						var action = {follow_channel: 'Y', SHARE_NAME: 'Y'};
-						ENYM.ctx.setItem('action', JSON.stringify(action));
-						goToView('nameRequiredView');
-					}
-					else {
-						self.followChannelCommand();			
-					}
-				}
 			}
 		}
 		else {
 			return ES.channelService.getFollowerReq(self.channelId()).then(getSuccess);		
 		}
 	};
+	
+	function getSuccessOnLogin(data) {	
+		if(data != '') {
+			var action = {follow_channel: 'Y', SHARE_NAME: 'Y'};
+			ENYM.ctx.setItem('action', JSON.stringify(action));
+			goToView('nameRequiredView');
+		}
+		else {
+			self.followChannelCommand();			
+		}
+	};	
 	
 	function getSuccess(data) {					
 		if(data != '') {

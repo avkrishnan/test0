@@ -1,5 +1,4 @@
-﻿/* To do - Pradeep Kumar */
-function SingleMessageViewModel() {
+﻿function SingleMessageViewModel() {
   var self = this;
 	self.template = 'singleMessageView';
 	self.viewid = 'V-23';
@@ -21,8 +20,6 @@ function SingleMessageViewModel() {
 		'escalateUntil',
 		'replies'];		
 	self.defineObservables();		
-
-  /* Single message observable */		
 	self.noacksVisibility = ko.observable(false);
 	self.acksVisibility = ko.observable(false);			
 	self.escalateTime = ko.observable(false);					  
@@ -35,7 +32,6 @@ function SingleMessageViewModel() {
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message																		
 			self.channelName(channelObject.channelName);		
-			//that.time('Sent '+ formatDate(messageObject.created, 'short') + ' ('+messageObject.time+'):');
 			self.time('Sent - '+ formatDate(messageObject.created, 'long'));			
 			self.singleMessage('<span>'+messageObject.broadcastFull+'</span><em></em>');
 			self.broadcastType(messageObject.type);
