@@ -20,7 +20,6 @@
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);
 			$('input').keyup(function() {
-				self.emailaddress('');
 				self.nameClass('');
 				self.errorName('');
 				self.emailClass('');
@@ -38,30 +37,48 @@
 	});
 	
 	self.addFollowersCommand = function () {
-    /*
-		var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
-		if (self.emailaddress() == '' || !emailReg.test(self.emailaddress())) {
-			self.emailClass('validationerror');
-			self.errorEmail('<span>Sorry,</span> Please enter valid email.');
-		}
-		*/
-		var emailObject = validateEmail(self.emailaddress());
-		alert(emailObject.type);
-		if(emailObject.type == 'Error') {
-			self.errorEmail(emailObject.text);
-			self.emailClass('validationerror');
-			return false;			
-		}
-		var phoneObject = validateUSAPhone(self.smsPhone());
-		if(phoneObject.type == 'Error') {
-			self.errorPhone(phoneObject.text);
+		if(self.emailaddress() == '' && self.smsPhone() == '') {
+			self.errorPhone("<span>Sorry, </span> Please input email or phone!");
 			self.phoneClass('validationerror');
+			self.emailClass('validationerror');
 			return false;
 		} else {
-			self.smsPhone(phoneObject.text);
+			if(self.smsPhone() == '') {
+				var emailObject = validateEmail(self.emailaddress());
+				if(emailObject.type == 'Error') {
+					self.errorEmail(emailObject.text);
+					self.emailClass('validationerror');
+					return false;			
+				}				
+			} else if(self.emailaddress() == '') {
+				var phoneObject = validateUSAPhone(self.smsPhone());
+				if(phoneObject.type == 'Error') {
+					self.errorPhone(phoneObject.text);
+					self.phoneClass('validationerror');
+					return false;
+				} else {
+					self.smsPhone(phoneObject.text);
+				}
+			} else {
+				var emailObject = validateEmail(self.emailaddress());
+				if(emailObject.type == 'Error') {
+					self.errorEmail(emailObject.text);
+					self.emailClass('validationerror');
+					return false;			
+				}
+				var phoneObject = validateUSAPhone(self.smsPhone());
+				if(phoneObject.type == 'Error') {
+					self.errorPhone(phoneObject.text);
+					self.phoneClass('validationerror');
+					return false;
+				} else {
+					self.smsPhone(phoneObject.text);
+				}
+			}
 		}
 		$.mobile.showPageLoadingMsg("a", "Adding Provisional Follower");
 		var provisional = generateProvisionalAccount();
+		//alert(JSON.stringify(provisional));
 		ES.channelService.invite(self.channelId(), provisional, {success: successfulAdd, error: errorAPI});
   };
 	
@@ -76,7 +93,7 @@
 		}
 		return {
 			emailaddress: self.emailaddress(),
-			smsPhone: self.smsPhone,
+			phonenumber: self.smsPhone(),
 			firstname: firstName,
 			lastname: lastName
 		};

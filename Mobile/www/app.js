@@ -1010,15 +1010,12 @@ function validateUSAPhone(txtPhone) {
 
 /* This function validates email addresses */
 function validateEmail(txtEmail) {
-	alert(txtEmail);
 	var emailPattern = /^([\w-\.\+]+@([\w-]+\.)+[\w-]{2,4})?$/;
-	var phonepatternforhyphen = /^\d+(-\d+)*$/;
 	if(!emailPattern.test(txtEmail)) {
 		var emailObject = {
 			type : 'Error',
-			text : "<span>ERROR: </span>Not a valid email address."
-		};			
-		return false;
+			text : "<span>Sorry, </span> Not a valid email address."
+		};
 	} else if(emailPattern.test(txtEmail)) {
 		var emailObject = {
 			type : 'Email',
