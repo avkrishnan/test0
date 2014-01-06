@@ -127,15 +127,15 @@
 				var callbacks = {
 					success: function() {
 						ENYM.ctx.removeItem('action');
-						var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
+						var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
 						showToast(toastobj);						
-						goToView('channelMessagesView');					
+						goToView('channelsFollowingListView');					
 					},
 					error: function(data, status, details) {
 						ENYM.ctx.removeItem('action');
-						var toastobj = {redirect: 'channelMessagesView', type: 'toast-info', text: details.message};
+						var toastobj = {redirect: 'channelsFollowingListView', type: 'toast-info', text: details.message};
 						showToast(toastobj);											
-						goToView('channelMessagesView');
+						goToView('channelsFollowingListView');
 					}
 				};						
 				var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
@@ -145,9 +145,9 @@
 				if(args.account.firstname && args.account.lastname) {
 					var callbacks = {
 						success: function() {		
-							var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+channel.name};
+							var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
 							showToast(toastobj);
-							goToView('channelMessagesView');										
+							goToView('channelsFollowingListView');										
 						},
 						error: function(data, status, details) {
 							var toastobj = {type: 'toast-error', text: details.message};

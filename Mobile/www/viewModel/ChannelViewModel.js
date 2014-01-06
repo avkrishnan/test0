@@ -135,9 +135,9 @@
 	function successfulFollowChannel() {
 		$.mobile.hidePageLoadingMsg();
 		ENYM.ctx.removeItem('action');
-		var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+self.title()};
+		var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+self.title()};
 		showToast(toastobj);				
-		viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');
+		goToView('channelsFollowingListView');
 	};
 	
 	function errorAPIChannel(data, status, details) {

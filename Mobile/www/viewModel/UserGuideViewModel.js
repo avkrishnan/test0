@@ -30,7 +30,7 @@
 		var action = JSON.parse(ENYM.ctx.getItem('action'));			
     if(action && action.follow_channel == 'Y') {
 			ENYM.ctx.removeItem('action');
-			goToView('channelMessagesView');					
+			goToView('channelsFollowingListView');					
 		}
 		else {
 			goToView('homeView');

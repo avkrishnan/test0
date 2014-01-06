@@ -86,9 +86,9 @@
 			var callbacks = {
 				success: function() {
 					ENYM.ctx.removeItem('action');		
-					var toastobj = {redirect: 'channelMessagesView', type: '', text: 'Now following '+self.channelName()};
+					var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+self.channelName()};
 					showToast(toastobj);
-					goToView('channelMessagesView');										
+					goToView('channelsFollowingListView');										
 				},
 				error: function(data, status, details) {
 					var toastobj = {type: 'toast-error', text: details.message};
