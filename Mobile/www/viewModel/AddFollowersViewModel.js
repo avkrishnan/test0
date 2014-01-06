@@ -92,7 +92,7 @@
 			lastName = '';
 		}
 		return {
-			emailaddress: self.emailaddress(),
+			//emailaddress: self.emailaddress(),
 			phonenumber: self.smsPhone(),
 			firstname: firstName,
 			lastname: lastName

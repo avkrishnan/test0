@@ -994,7 +994,7 @@ function validateUSAPhone(txtPhone) {
 		};			
 	} else if(phoneNumberPattern.test(txtPhone)){  
 		if(txtPhone.match(/^[0-9]{3}\-[0-9]{3}\-[0-9]{4}$/)) {
-			txtPhone = self.comMethodName();
+			txtPhone = txtPhone;
 		} else if(txtPhone.indexOf('-') == 3 || txtPhone.indexOf('-') == 6) {
 			txtPhone = (txtPhone.indexOf('-') == 3) ? txtPhone.substring(0, 7) + "-" + txtPhone.substring(7, txtPhone.length) : txtPhone.substring(0, 3) + "-" + txtPhone.substring(3, txtPhone.length);
 		} else {
