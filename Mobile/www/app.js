@@ -424,7 +424,8 @@ plusMenuViewModel = new PlusMenuViewModel(),
 channelIntroViewModel = new ChannelIntroViewModel(),
 
 nameRequiredViewModel = new NameRequiredViewModel(),
-forgotEvernymViewModel = new ForgotEvernymViewModel()
+forgotEvernymViewModel = new ForgotEvernymViewModel(),
+messageLengthWarningViewModel = new MessageLengthWarningViewModel()
 /* end */
 
 ;
@@ -507,7 +508,8 @@ var models = [
 							administratorViewModel, 
 							administratorFeedbackViewModel,
 							singleFeedbackViewModel,
-							forgotEvernymViewModel				
+							forgotEvernymViewModel,
+							messageLengthWarningViewModel			
               ];
 
 

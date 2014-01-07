@@ -6,7 +6,9 @@
 	self.displayname = "Compose Broadcast";
 	
 	self.sectionOne = ko.observable(false);
-	self.sectionTwo = ko.observable(false);	
+	self.sectionTwo = ko.observable(false);
+	self.noWarning = ko.observable(true);
+	self.warning = ko.observable(false);		
 	self.escalateEdit = ko.observable(false);
 	self.channels = ko.observableArray([]);
 	self.messageText = ko.observable();
@@ -14,9 +16,9 @@
 	self.iGiYes = ko.observable();
 	self.iGiNo = ko.observable();
 	self.yesClass = ko.observable();
-	self.noClass = ko.observable();
+	self.noClass = ko.observable();	
 
-  self.inputObs = [ 'channelId', 'channelName', 'characterCount', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
+  self.inputObs = [ 'channelId', 'channelName', 'characterCount', 'characterClass', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
 	'normalActive', 'fastActive', 'escalateActive', 'escDuration', 'escLevel', 'duration', 'activeType', 'escalateEdit', 'broadcastType', 'selectedChannels'];
 	self.defineObservables();	
 	
@@ -32,6 +34,8 @@
 		addExternalMarkup(self.template); // this is for header/overlay message
 		self.sectionOne(false);
 		self.sectionTwo(false);
+		self.noWarning(true);
+		self.warning(false);		
 		self.normalText('normalcolor');
 		self.fastText('');
 		self.escalateText('');								
@@ -45,7 +49,15 @@
 		self.escalateEdit(false);
 		self.escLevel('N');				
 		self.igiClass('igiimageoff');
-		self.characterCount('0');										
+		self.characterCount('0');
+		self.characterClass('');
+		if(ENYM.ctx.getItem('msgLenWarn') && self.messageText().length >= 120) {
+			self.noWarning(false);
+			self.warning(true)				
+			self.characterClass('length-warning')
+			self.characterCount(ENYM.ctx.getItem('msgLenWarn'));
+			ENYM.ctx.removeItem('msgLenWarn');		
+		}
 		self.escLevel(ENYM.ctx.getItem('escLevel'));				
 		if(self.escLevel() == 'H') {
 			escalate = 'Hound';
@@ -97,6 +109,16 @@
 		}	
 		$('textarea').keyup(function () {								
 			self.characterCount(self.messageText().length);
+			if(self.messageText().length >= 120) {
+				self.noWarning(false);
+				self.warning(true)				
+				self.characterClass('length-warning');
+			} 
+			else {
+				self.noWarning(true);
+				self.warning(false)				
+				self.characterClass('');				
+			}
 		});
 		if(typeof self.selectedChannels() == 'undefined' || self.selectedChannels() == '') {
 			self.channels.removeAll();										
@@ -199,6 +221,11 @@
 		}
 		return ES.messageService.createChannelMessage(self.selectedChannels().channelId, messageobj, {success: successfulMessage, error: errorAPI});
 	};
+	
+	self.seeWarning = function () {
+		ENYM.ctx.setItem('msgLenWarn', self.characterCount());
+		viewNavigate('Compose', 'sendMessageView', 'messageLengthWarningView');										
+  };	
 
 	self.requestiGiHelp = function () {				
 		viewNavigate('Compose', 'sendMessageView', 'requestiGiHelpView');		

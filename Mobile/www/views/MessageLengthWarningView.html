@@ -1,0 +1,19 @@
+<div id="messageLengthWarningView" data-role="page">
+	<header class="logged-in"></header>  
+  <div class="page-content">
+    <div class="compose">
+      <h1>Message Length Warning</h1>
+      <div class="compose-text">
+        <p>For any recipients who receive this message via SMS/text, it will be cut off after 2 text messages.</p>
+        <br/>
+        <p>Long messages are fine for email and within the Channels app, but may be truncated for followers that receive via SMS.</p>
+      </div>
+     </div>
+     <div class="loginbtn"><a href="#" onclick="popBackNav();">OK, Got it!</a></div>
+  </div>  
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Message Warning', 'messageLengthWarningView', 'userSettingsView');"></a>
+    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Message Warning', 'messageLengthWarningView', 'plusMenuView');"></a>
+  </div>
+  <div class="active-overlay" style="display:none"></div>
+</div>   

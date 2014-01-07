@@ -23,7 +23,10 @@
       </div>
       <div class="broadcast-textarea sattingtextarea longdescription">
         <textarea class="textarea" data-bind="value: messageText, valueUpdate: 'afterkeydown'" placeholder="Add text here..."></textarea>
-        <span data-bind="text: characterCount"></span>      
+        <span data-bind="text: characterCount, css: characterClass, visible: noWarning"></span>        
+        <span data-bind="css: characterClass, visible: warning">
+          <a href="#" data-bind="text: characterCount, click: seeWarning"></a>
+        </span>      
       </div>          
       <div class="escalate-settings escalatesettings">
         <div class="settingscontent">

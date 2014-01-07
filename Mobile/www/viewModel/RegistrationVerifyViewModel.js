@@ -112,41 +112,6 @@
 		$.mobile.showPageLoadingMsg('a', 'Sending Verification Request');		
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
 	};
-	
-	self.getCommethodsCommand = function() {
-		if(action) {
-			$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");		
-			return ES.commethodService.getCommethods({success: getCommethods, error: errorAPI});
-		}
-		else {
-			self.skipCommand();
-		}
-	};
-	
-	function getCommethods(data){
-		if(data.commethod.length >= 1) {
-			var len = 0;			
-			for(len; len<data.commethod.length; len++) {
-				if(data.commethod[len].verified == 'Y') {
-					self.skipCommand();
-					return true;
-				}
-				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
-					var toastobj = {type: 'toast-error', text: 'Verify your email or phone before following'};
-					showToast(toastobj);								
-				}
-			}
-		} else {
-			var toastobj = {type: 'toast-error', text: 'Verify your email or phone before following'};
-			showToast(toastobj);
-		}
-	};	
-	
-	function errorAPI(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		var toastobj = {type: 'toast-error', text: details.message};
-		showToast(toastobj);		
-	};	
 
 	self.skipCommand = function () {
 		if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {

@@ -169,58 +169,25 @@
 			showToast(toastobj);
 		}
 	};
-
-	self.getCommethodsCommand = function() {
-		if(self.loggedIn() == 'Y') {
-			$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");		
-			return ES.commethodService.getCommethods({success: getCommethods, error: errorAPI});
-		}
-		else {
-			self.actionFollowChannelCommand();
-		}
-	};
 	
-	function getCommethods(data){
-		if(data.commethod.length >= 1) {
-			var len = 0;			
-			for(len; len<data.commethod.length; len++) {
-				if(data.commethod[len].verified == 'Y') {
-					var account = JSON.parse(ENYM.ctx.getItem('account'));			
-					if(ENYM.ctx.getItem('channelOwner') == 'yes') {
-						var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
-						showToast(toastobj);			
-					}
-					else if (account && account.firstname && account.lastname){
-						self.followChannelCommand();
-					}
-					else {
-						return ES.channelService.getFollowerReq(self.channelId()).then(getSuccessOnLogin);
-					}
-					return true;
-				}
-				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
-					ENYM.ctx.removeItem('action');		
-					var toastobj = {type: 'toast-error', text: 'Verify your email or phone before following'};
-					showToast(toastobj);								
-				}
-			}
-		} else {
-			ENYM.ctx.removeItem('action');
-			var toastobj = {type: 'toast-error', text: 'Verify your email or phone before following'};
-			showToast(toastobj);
-		}
-	};	
-	
-	function errorAPI(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		ENYM.ctx.removeItem('action');		
-		var toastobj = {type: 'toast-error', text: details.message};
-		showToast(toastobj);		
-	};
-		
 	// follow/unfollow will be called on the basis of channelAction value
 	self.actionFollowChannelCommand = function() {
-		return ES.channelService.getFollowerReq(self.channelId()).then(getSuccess);		
+		if(self.loggedIn() == 'Y') {
+			var account = JSON.parse(ENYM.ctx.getItem('account'));			
+			if(ENYM.ctx.getItem('channelOwner') == 'yes') {
+				var toastobj = {type: 'toast-info', text: 'See Channel Settings to receive your own broadcasts.'};
+				showToast(toastobj);			
+			}
+			else if (account && account.firstname && account.lastname){
+				self.followChannelCommand();
+			}
+			else {
+				return ES.channelService.getFollowerReq(self.channelId()).then(getSuccessOnLogin);
+			}
+		}
+		else {
+			return ES.channelService.getFollowerReq(self.channelId()).then(getSuccess);		
+		}
 	};
 	
 	function getSuccessOnLogin(data) {	
@@ -251,6 +218,7 @@
 	};	
 	
 	self.followChannelCommand = function() {
+		$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");
 		return ES.channelService.followChannel(self.channelId(), {success: successfulFollowChannel, error: errorFollowing});
 	};	
 
