@@ -1,8 +1,37 @@
 ﻿(function() {
-  QUnit.config.testTimeout = 90000;
+  QUnit.config.testTimeout = 8000;
   QUnit.config.reorder = false;
 
+
+  
   var hlpr = new ApiTestHelper();
+
+  
+  
+  
+  hlpr.getFollowers = function(scenario, chnlKey, check) {
+    return function() {
+      $.when(scenario.ES.channelService.getFollowers(scenario[chnlKey].id))
+      .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
+      .then(check, hlpr.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  };
+
+  hlpr.checkLastInvited = function(scenario, check) {
+    return function(data) {
+      var found = data.followers.find(function(item) { return item.accountname === scenario.lastInvite.accountname; });
+      ok(found != undefined, 'last invited is found in list of followers');
+      check(found);
+    };
+  };
+  
+  var checkLastInvitedIsProvisional = function(scenario) {
+    return hlpr.checkLastInvited(scenario, function(found) {      
+      equal(found.managed, 'Y', 'managed is equal to Y');
+    });
+  };
+  
 
   var SCEN_A = hlpr.TestScenario();
 
@@ -19,7 +48,7 @@
       firstname: 'TEST|Joe', 
       lastname: 'Bobson',
       emailaddress: hlpr.generateEmail('joebobson'),
-      phonenumber: '8013763348'
+      phonenumber: '801-376-3348'
   };
 
   asyncTest("A's channel follower count is zero", hlpr.checkFollowCount(SCEN_A, 0));
@@ -28,6 +57,27 @@
   
   asyncTest("A's channel follower count is still zero", hlpr.checkFollowCount(SCEN_A, 0));
 
+  
+  asyncTest('A checks followers and verifies the invitee is a provisional', hlpr.getFollowers(SCEN_A, 'channel', checkLastInvitedIsProvisional(SCEN_A)));
+  
+  function modifyLastInvite(scenario, newAccount) {
+    return function() {
+      $.when(scenario.ES.loginService.accountModifyOther(scenario.lastInvite.accountname, newAccount))
+      .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  }
+
+  var newFirst = "newfirstname" + hlpr.randomStr(5);
+  var newLast = "newlastname" + hlpr.randomStr(5);
+  
+  asyncTest('A modifies last invitee name', modifyLastInvite(SCEN_A, {firstname: newFirst, lastname: newLast}));
+  
+  asyncTest('A checks followers and verifies the name change', hlpr.getFollowers(SCEN_A, 'channel', hlpr.checkLastInvited(SCEN_A, function(found) {      
+    equal(found.firstname, newFirst, 'firstname matches');
+    equal(found.lastname, newLast, 'lastname matches');
+  })));
+  
   asyncTest('A invites the same provisional follower again', hlpr.inviteFollower(SCEN_A, 'channel', invitation, hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
 
   var SCEN_B = hlpr.TestScenario();
@@ -55,24 +105,9 @@
   asyncTest('C enrolls', hlpr.enroll(SCEN_C));
 
   asyncTest('A invites an existing evernym (non-following) with an unverified email', hlpr.inviteFollower(SCEN_A, 'channel', invite_overlap(SCEN_C)));
-  
-  
-  hlpr.getFollowers = function(scenario, chnlKey, check) {
-    return function() {
-      $.when(scenario.ES.channelService.getFollowers(scenario[chnlKey].id))
-      .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
-      .then(check, hlpr.CHECK.shouldNotFail)
-      .then(start,start);
-    };
-  };
 
-  asyncTest('A checks followers and verifies the invitee is a provisional', hlpr.getFollowers(SCEN_A, 'channel', function(data) {
-    ok(data.followers.findIndex(function(item) { return item.accountname === SCEN_A.lastInvite.accountname; }) >= 0, 'last invited is found in list of followers');
-  }));
+  asyncTest('A checks followers and verifies the invitee is a provisional', hlpr.getFollowers(SCEN_A, 'channel', checkLastInvitedIsProvisional(SCEN_A)));
   
-  
-  //TODO verify this resulted in a provisional; can do this by looking at the evernyms of followers
-
   //TODO A invites an existing evernym (non-following) with a verified email, and it results in an evernym invite, non-provisional
   
 })();

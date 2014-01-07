@@ -19,9 +19,11 @@
     <script type="text/javascript" src="scripts/notification_registration.js"></script>
     <script type="text/javascript" src="scripts/NotificationOverlay.js"></script>
     <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
+    <script type="text/javascript" charset="utf-8" src="moment.min.js"></script>
     <script type="text/javascript">
 			$.mobile.autoInitializePage = false;
 			$.support.cors = true;
+			moment().format();
 			//TODO when we enable Push Notification, we'll need this next line uncommented
 			//registerPushNotifications();
     </script>
