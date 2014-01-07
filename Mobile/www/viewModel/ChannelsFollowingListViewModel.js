@@ -11,19 +11,20 @@
 	this.noFollow = ko.observable();
 	
 	this.applyBindings = function() {	
-		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
+		//$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
 			that.noFollow(false);
 			if (!that.shown) {
 				localStorage.removeItem("currentChannel");
 				localStorage.removeItem("overlayCurrentChannel");
 				that.activate();
 			}
-		});
+		//});
 	};
 	
 	this.activate = function() {
 		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message
+			//addExternalMarkup(that.template); // this is for header/overlay message
+			window["headerViewModel"].activate();
 			that.accountName(localStorage.getItem("accountName"));
 			localStorage.setItem('counter', 1);					
 			//console.log("trying to get channels");
@@ -31,7 +32,7 @@
 			if(that.channels() && that.channels().length){
 				that.channels.removeAll();
 			}
-			$.mobile.showPageLoadingMsg("a", "Loading Channels");
+			//$.mobile.showPageLoadingMsg("a", "Loading Channels");
 			return this.listFollowingChannelsCommand().then(gotChannels);
 		}
 	};	
@@ -41,7 +42,7 @@
 	};
 
 	function gotChannels(data) {
-		$.mobile.hidePageLoadingMsg();
+		//$.mobile.hidePageLoadingMsg();
 		//that.shown = true;
 		//that.channels.removeAll();
 		if (data.channel && data.channel.constructor == Object) {
@@ -66,7 +67,7 @@
 	};
 	
 	function errorListChannels(data, status, details){
-		$.mobile.hidePageLoadingMsg();
+		//$.mobile.hidePageLoadingMsg();
 		var toastobj = {type: 'toast-error', text: details.message};
 		showToast(toastobj);
 	};

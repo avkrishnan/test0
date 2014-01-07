@@ -1,5 +1,3 @@
-/*globals ko*/
-/* To do - Pradeep Kumar */
 function ChannelsIOwnViewModel() {	
   var that = this;
 	this.template = 'channelsIOwnView';
@@ -8,12 +6,10 @@ function ChannelsIOwnViewModel() {
 	this.displayname = 'Channels I Own';	
 	this.accountName = ko.observable();		
 	
-  /* Channels observable */
 	this.sectionOne = ko.observable(false);
 	this.sectionTwo = ko.observable(false);	
 	this.channels = ko.observableArray([]);		
 
-	/* Methods */
 	this.applyBindings = function(){	
 		//$('#' + that.template).on('pagebeforeshow', null, function (e, data) {	
 			that.activate();	
@@ -82,6 +78,5 @@ function ChannelsIOwnViewModel() {
 		localStorage.removeItem('currentChannelData');			
 		localStorage.setItem('currentChannelData', JSON.stringify(data));	
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');		
-	};	
-	
+	};
 }

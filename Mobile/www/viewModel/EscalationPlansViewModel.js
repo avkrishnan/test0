@@ -1,5 +1,4 @@
-﻿/*globals ko*/
-function EscalationPlansViewModel() {
+﻿function EscalationPlansViewModel() {
 	var that = this;	
 	this.template = "escalationPlansView";
 	this.viewid = "V-081";
@@ -39,38 +38,39 @@ function EscalationPlansViewModel() {
 	//console.log(this.escalationplans);
   
 	this.applyBindings = function(){
-		$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
+		//$("#" + that.template).on("pagebeforeshow", null, function (e, data) {
 			
-			var currentBaseUrl = localStorage.getItem("baseUrl");
-			var previousView = localStorage.getItem('previousView');
+			//var currentBaseUrl = localStorage.getItem("baseUrl");
+			//var previousView = localStorage.getItem('previousView');
 			
-			console.log("previousView: " + previousView);
-			var vm = ko.dataFor($("#" + previousView).get(0));
-			console.log("previousView Model viewid: " + vm.displayname);
-			that.navText(vm.displayname);
-			that.pView = previousView;	
+			//console.log("previousView: " + previousView);
+			//var vm = ko.dataFor($("#" + previousView).get(0));
+			//console.log("previousView Model viewid: " + vm.displayname);
+			//that.navText(vm.displayname);
+			//that.pView = previousView;	
 			
-			if (currentBaseUrl){
-				that.baseUrl(currentBaseUrl);
-			}
-			else {
-				var es = new EvernymService();
-				that.baseUrl(es.getBaseUrl());
-			}
+			//if (currentBaseUrl){
+				//that.baseUrl(currentBaseUrl);
+			//}
+			//else {
+				//var es = new EvernymService();
+				//that.baseUrl(es.getBaseUrl());
+			//}
 			that.activate();
-		});
+		//});
 	};
 			
 	this.activate = function() {
 		if(authenticate()) {
-			addExternalMarkup(that.template); // this is for header/overlay message								
+			//addExternalMarkup(that.template); // this is for header/overlay message								
+			window["headerViewModel"].activate();
 			var _accountName = localStorage.getItem("accountName");
 			var _name = localStorage.getItem("UserFullName");
 			that.accountName(_accountName);		
 			that.name(_name);
 			that.escalationplans.removeAll();
 			that.getCommethods().then(gotCommethods);
-			$.mobile.showPageLoadingMsg("a", "Loading Escalation Plans");
+			//$.mobile.showPageLoadingMsg("a", "Loading Escalation Plans");
 			return that.getEscPlans().then(gotEscPlans);
 			//return true;
 		}
@@ -115,7 +115,7 @@ function EscalationPlansViewModel() {
 	};
 	
 	this.getCommethods = function(){
-		$.mobile.showPageLoadingMsg("a", "Getting Communication Methods");
+		//$.mobile.showPageLoadingMsg("a", "Getting Communication Methods");
 		var callbacks = {
 			success: function(){
 				//alert('succ');
