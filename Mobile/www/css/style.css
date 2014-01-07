@@ -1862,8 +1862,12 @@ h1.requests {
 }
 .accept-decline em {
 	font-size:13px;
-	line-height:10px;
+	line-height:14px;
 	color:#8DC63F;
+	display:block;
+}
+.accept-decline.channelurl em {
+	display:inline;
 }
 .acceptdeclinebtn {
 	float:right;
@@ -1960,6 +1964,7 @@ h1.requests {
 	font-weight:bold;
 	line-height:19px;
 	margin:3px 0;
+	clear:both;
 }
 .channel-follow {
 	margin:0 0 8px 0;
@@ -2870,7 +2875,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-style:italic;
 }
 .slider-value {
-	margin:10px 0 0;
+	margin:10px 0 0 0;
 	overflow:hidden;
 }
 .slider-value span {
@@ -3215,7 +3220,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 /*-Edit personal information-*/
 /* Yes No*/
-.yesnoclick, .yes-noclick, .yesno-click {
+.yesnoclick, .yes-noclick, .yesno-click, .clickyesno {
 	float:right;
 	border-radius:20px;
 	padding:3px 4px;
@@ -3223,7 +3228,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#666;
 	cursor:pointer;
 }
-.yesnoclick span, .yes-noclick span, .yesno-click span {
+.yesnoclick span, .yes-noclick span, .yesno-click span, .clickyesno span {
 	border-radius:50px;
 	float:left;
 	height:30px;
@@ -3233,7 +3238,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	width:30px;
 	color:#666;
 }
-.yesnoclick span.nobutton, .yes-noclick span.nobutton, .yesno-click span.nobutton {
+.yesnoclick span.nobutton, .yes-noclick span.nobutton, .yesno-click span.nobutton, .clickyesno span.nobutton {
 	background:#8dc63f;
 	color:#fff;
 	border-radius:50px;
@@ -3673,6 +3678,54 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .accept-decline.noname em{
 	line-height:35px;
 }
+.newsettings {
+	margin:10px 0 0 0;
+}
+.newsettings span.chase {
+	margin:0 32%;
+}
+.notify {
+	margin:25px 0 10px 6px;
+}
+.newsettings .coloroff {
+	color:#BE1E2D;
+}
+.newsettings .colornormal {
+	color:#27aae1;
+}
+.newsettings .colorfast {
+	color:#8dc63f;
+}
+.newsettingsslide .remind-sensitive.bgoff {
+	background:#BE1E2D;
+}
+.newsettingsslide .chase-broadcast.bgnormal {
+	background:#27aae1;
+}
+.newsettingsslide .hound-critical.bgfast {
+	background:#8dc63f;
+}
+.newsettingsslide {
+	background:url(images/emergency-setting-line.png) no-repeat 4px 23px;
+	margin:0;
+	overflow:hidden;
+	padding:8px 0 0 0;
+}
+.newsettingsslide .remind-sensitive, .newsettingsslide .chase-broadcast, .newsettingsslide .hound-critical {
+	padding:16px;
+	border-radius:20px;
+}
+.newsettingsslide .remind-sensitive {
+	background:url(images/emergency-setting-dot.png) no-repeat -5px -3px;
+}
+.newsettingsslide .chase-broadcast {
+	background:url(images/emergency-setting-dot.png) no-repeat -3px -3px;
+	margin:0 32%;
+}
+.newsettingsslide .hound-critical {
+	background:url(images/emergency-setting-dot.png) no-repeat -1px -3px;
+}
+
 /*
 	*@media query css
 */
@@ -3837,9 +3890,18 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		font-size:13px;
 		clear:both;
 	}
-	.accept-decline em {
+	/*.accept-decline em {
 		display:block;
 		line-height:16px;
+	}*/
+	.accept-decline.channelurl em {
+		display:block;
+	}
+	.newsettings span.chase {
+		margin: 0 34%;
+	}
+	.newsettingsslide .chase-broadcast {
+		margin:0 34%;
 	}
 }
 @media only screen and (min-width:768px) {
@@ -4011,6 +4073,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.descriptionedit textarea {
 		max-height:550px;
 	}
+	.newsettings span.chase {
+		margin:0 43%;
+	}
+	.newsettingsslide .chase-broadcast {
+		margin:0 42.5%;
+	}
 }
 @media only screen and (min-width:800px) {
 	.slidemenu {
@@ -4050,6 +4118,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.descriptionedit textarea {
 		max-height:800px;
 	}
+	.newsettings span.chase {
+		margin:0 43%;
+	}
+	.newsettingsslide .chase-broadcast {
+		margin:0 42.5%;
+	}
 }
 @media only screen and (min-width:980px) {
 	.addaction .ui-input-search, .addaction div.ui-input-text {
@@ -4070,6 +4144,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.slider-value span.chase {
 		margin:0 42%;
+	}
+	.newsettings span.chase {
+		margin:0 44%;
 	}
 	.slidervalue-img .chase-broadcast {
 		margin:0 43.5%;
@@ -4161,6 +4238,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.slider-value span.chase {
 		margin:0 44%;
+	}
+	.newsettings span.chase {
+		margin:0 45.2%;
 	}
 	.slidervalue-img .chase-broadcast {
 		margin:0 45%;

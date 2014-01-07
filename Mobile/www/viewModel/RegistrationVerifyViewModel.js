@@ -132,13 +132,11 @@
 					return true;
 				}
 				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
-					ENYM.ctx.removeItem('action');
 					var toastobj = {type: 'toast-error', text: 'Verify your email or phone before following'};
 					showToast(toastobj);								
 				}
 			}
 		} else {
-			ENYM.ctx.removeItem('action');
 			var toastobj = {type: 'toast-error', text: 'Verify your email or phone before following'};
 			showToast(toastobj);
 		}
@@ -146,7 +144,6 @@
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		ENYM.ctx.removeItem('action');
 		var toastobj = {type: 'toast-error', text: details.message};
 		showToast(toastobj);		
 	};	
