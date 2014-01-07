@@ -6,12 +6,17 @@
 	self.viewname = 'ResetPassword';
 	self.displayname = 'ResetPassword';
 	
+	self.sectionOne = ko.observable(true);
+	self.sectionTwo = ko.observable(false);	
+	
   self.inputObs = [ 'newPassword', 'confirmPassword' ];
 	self.errorObs = [ 'errorResetPassword', 'passwordClass', 'confirmPasswordClass', 'changePasswordNotification'];
   self.defineObservables();
 		 
 	self.activate = function(){
 		if((jQuery.mobile.path.get().split('?')[1])) {
+			self.sectionOne(true);
+			self.sectionTwo(false);			
 			$('input').keyup(function (){ 
 				self.clearErrorObs();
 			});
@@ -50,8 +55,10 @@
 		}
 	};
 	
-	function resetPasswordSuccess () {							
-		goToView('resetPasswordSuccessView');			
+	function resetPasswordSuccess () {
+    $.mobile.hidePageLoadingMsg();									
+		self.sectionOne(false);
+		self.sectionTwo(true);		
 	};
 		
 	function resetPasswordError(data, status, details){

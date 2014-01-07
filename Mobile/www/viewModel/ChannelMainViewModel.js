@@ -40,7 +40,7 @@
 		else {
 			var followers = data.followers +' followers';
 		}					
-		self.followerCount(followers+'<a class="add-followers" href="#">Add Followers</a>');		
+		self.followerCount(followers);		
 		var channel = [];			
 		channel.push({
 			channelId: data.id, 

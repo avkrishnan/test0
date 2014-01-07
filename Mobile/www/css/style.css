@@ -392,6 +392,11 @@ select, .ui-icon-arrow-d {
 	z-index:9999;
 	width:100%;
 	height:46px;
+	text-align:center;
+	line-height:46px;
+}
+.helpfooter {
+	line-height:normal;
 }
 .logo, .ui-body-c .logo.ui-link, .ui-body-c .logo.ui-link:visited, .ui-body-c .logo.ui-link:hover, .ui-body-c .logo.ui-link:active{
 	height:26px;
@@ -399,6 +404,7 @@ select, .ui-icon-arrow-d {
 	font-family:'OpenSansRegular';
 	font-style:italic;
 	float:left;
+	font-size:16px;
 	margin:13px 0 4px 20px;
 	padding:0 0 0 28px;	
 	background:url("images/sprites.png") no-repeat -14px -1325px;
@@ -408,6 +414,15 @@ select, .ui-icon-arrow-d {
 	float:right;
 	margin:-5px 0 4px 0;
 	padding:22px 60px 22px 0;
+}
+.footer span {
+	font-size:16px;
+	color:#A7A9AC;
+	margin:0 50px 0 0;
+}
+.helpfooter span {
+	margin:12px 50px 0 0;
+	display:inline-block;
 }
 /*Footer End*/
 /*	*	Login page css */
@@ -1563,7 +1578,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:1px 10px;
 	color:#fff;
 }
-
 .channelinformation {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
@@ -1583,11 +1597,11 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelinfocontent .title.ui-link, .channelinfocontent span {
 	color:#8DC63F;
 }
-span.followercount {
-	color:#fff;	
-}
 .channelinformation .setting {
 	margin:2px 5px 0 0;
+}
+span.followercount {
+ color:#fff; 
 }
 .channelbroadcast {
 	background:#e6e7e8;

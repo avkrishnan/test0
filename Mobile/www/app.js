@@ -361,9 +361,7 @@ inviteFollowersViewModel = new InviteFollowersViewModel(),
 commethodVerificationViewModel = new CommethodVerificationViewModel(),
 
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
-forgotPasswordSuccessViewModel = new ForgotPasswordSuccessViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
-resetPasswordSuccessViewModel = new ResetPasswordSuccessViewModel(),
 
 /*By Devedner*/
 userSettingsViewModel = new UserSettingsViewModel(),
@@ -408,7 +406,6 @@ addFollowersViewModel = new AddFollowersViewModel(),
 
 editNameViewModel = new EditNameViewModel(),
 editLongDescriptionViewModel = new EditLongDescriptionViewModel(),
-changePasswordSuccessViewModel = new ChangePasswordSuccessViewModel(),
 requestiGiHelpViewModel = new RequestiGiHelpViewModel(),
 
 escalateHelpViewModel = new EscalateHelpViewModel(),
@@ -426,7 +423,8 @@ userGuideViewModel = new UserGuideViewModel(),
 plusMenuViewModel = new PlusMenuViewModel(),
 channelIntroViewModel = new ChannelIntroViewModel(),
 
-nameRequiredViewModel = new NameRequiredViewModel()
+nameRequiredViewModel = new NameRequiredViewModel(),
+forgotEvernymViewModel = new ForgotEvernymViewModel()
 /* end */
 
 ;
@@ -459,9 +457,7 @@ var models = [
               inviteFollowersViewModel,
               commethodVerificationViewModel, 
               forgotPasswordViewModel,
-							forgotPasswordSuccessViewModel, 
               resetPasswordViewModel,
-							resetPasswordSuccessViewModel, 
               singleMessageViewModel,
               userSettingsViewModel,
               escalationPlanSingleViewModel,
@@ -495,7 +491,6 @@ var models = [
 							editNameViewModel,							
 							editLongDescriptionViewModel,
 							changePasswordViewModel,
-							changePasswordSuccessViewModel,
 							requestiGiHelpViewModel,
 							escalateHelpViewModel,
 							escalateSettingsViewModel,
@@ -511,7 +506,8 @@ var models = [
 							nameRequiredViewModel,
 							administratorViewModel, 
 							administratorFeedbackViewModel,
-							singleFeedbackViewModel					
+							singleFeedbackViewModel,
+							forgotEvernymViewModel				
               ];
 
 

@@ -1,0 +1,23 @@
+<div id="forgotEvernymView" data-role="page">
+  <header>
+    <a href="#" class="back logintop" onclick="goToView('loginView');"><em></em>Login</a>
+  </header>
+  <div class="page-content">
+    <section class="loginform" data-bind="visible: sectionOne">
+      <label class="msginfo">Forgot your evernym:</label>
+      <div class="formtype" data-bind="css: emailClass">
+        <input type="text" data-bind="value: email" placeholder="the email you registered with" />
+        <div class="errormsg" data-bind="text:errorEmail"></div>
+      </div>
+      <div class="loginbtn">
+        <a href="#" data-bind="click: forgotEvernymCommand">SUBMIT</a>
+      </div>
+    </section>
+    <div class="baseline" data-bind="visible: sectionOne"></div>    
+    <section class="loginform" data-bind="visible: sectionTwo">
+      <label class="msginfo">Forgot your evernym:</label>    
+      <div class="signedup changepswd">We've sent you an email with your evernym</div>    
+      <div class="loginbtn"><a href="#" onclick="goToView('loginView');">OK</a></div>
+    </section>    
+  </div>
+</div>

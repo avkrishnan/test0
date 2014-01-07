@@ -15,8 +15,9 @@
       <label>
         <input type="checkbox" name="rememberPassword" />Remember me
       </label>
+      <a class="forgotevernym" href="#" onclick="goToView('forgotEvernymView');">Forgot your evernym?</a>
       <div class="login">
-        <a href="#forgotPasswordView">Forgot password?</a>
+        <a class="forget-password" onclick="goToView('forgotPasswordView');">Forgot password?</a>
         <p class="loginbtn">
           <a href="#" data-bind="click: loginCommand">LOGIN</a>
         </p>
@@ -24,7 +25,7 @@
     </section>
     <div class="baseline"></div>
     <div class="signup">Not signed up yet?</div>    
-		<div class="signupfree"><div class="loginbtn"><a href="#signupStepFirstView" class="ui-link">SIGN UP NOW (IT'S FREE!)</a></div></div>
+		<div class="signupfree"><div class="loginbtn"><a class="ui-link" onclick="goToView('signupStepFirstView');">SIGN UP NOW (IT'S FREE!)</a></div></div>
   </div>
   <div class="toast-notification toast-login"></div>         
 </div>

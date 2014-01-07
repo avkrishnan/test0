@@ -1,17 +1,21 @@
 ﻿function ChangePasswordViewModel() {
   var self = this;
-
   self.template = 'changePasswordView';
   self.viewid = 'V-44';
   self.viewname = 'Change Password';
   self.displayname = 'Change Password';
+	
+	self.sectionOne = ko.observable(true);
+	self.sectionTwo = ko.observable(false);	
 
   self.inputObs = [ 'currentPassword', 'newPassword', 'newConfirmPassword' ]; 
   self.errorObs = [ 'currentpasswordClass', 'newpasswordClass', 'confirmpasswordClass', 'errorMessageCurrent', 'errorMessageNew', 'errorMessageConfirm' ];
   self.defineObservables();
 
   self.activate = function () {
-		addExternalMarkup(self.template); // this is for header/overlay message			
+		addExternalMarkup(self.template); // this is for header/overlay message
+		self.sectionOne(true);
+		self.sectionTwo(false);					
 		$('input').keyup(function () {
 		  self.clearErrorObs();
 		});			
@@ -53,8 +57,8 @@
 
   function successfulChange(args) {
     $.mobile.hidePageLoadingMsg();
-		ENYM.ctx.setItem('changePassword', self.newPassword());		
-		goToView('changePasswordSuccessView');
+		self.sectionOne(false);
+		self.sectionTwo(true);
   };
 
   function errorAPI(data, status, details) {
@@ -63,6 +67,11 @@
 		self.newpasswordClass('validationerror');
 		self.confirmpasswordClass('validationerror');		
 		self.errorMessageConfirm(details.message);		
+  };
+	
+	self.okayChangeCommand = function () {
+		ENYM.ctx.removeItem('changePassword');
+		popBackNav();								
   };		
 	
 }

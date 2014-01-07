@@ -1,10 +1,10 @@
-﻿function ForgotPasswordViewModel() {
+﻿function ForgotEvernymViewModel() {
   var self = this;
 	self.requiresAuth = false;	
-  self.template = 'forgotPasswordView';
-  self.viewid = 'V-03';
-  self.viewname = 'ForgotPassword';
-  self.displayname = 'Forgot Password';
+  self.template = 'forgotEvernymView';
+  self.viewid = 'V-??';
+  self.viewname = 'ForgotEvernym';
+  self.displayname = 'Forgot Evernym';
 	
 	self.sectionOne = ko.observable(true);
 	self.sectionTwo = ko.observable(false);	
@@ -27,12 +27,12 @@
   };
 	
 	$(document).keyup(function (e) {
-		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotPasswordView') {
-			self.forgotPasswordCommand();
+		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'forgotEvernymView') {
+			self.forgotEvernymCommand();
 		}
 	});
 	
-  self.forgotPasswordCommand = function () {
+  self.forgotEvernymCommand = function () {
     var emailReg = /^[\+_a-zA-Z0-9-]+(\.[\+_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/;
     if (self.email() == '') {
       self.emailClass('validationerror');
@@ -41,24 +41,25 @@
       self.emailClass('validationerror');
       self.errorEmail('Please enter valid email');
     } else {
-      var callbacks = {
-        success: forgotPasswordSuccess,
-        error: forgotPasswordError
+			self.sectionOne(false);
+			self.sectionTwo(true);
+      /*var callbacks = {
+        success: forgotEvernymSuccess,
+        error: forgotEvernymError
       };
-      var forgotPasswordModel = {};
-      forgotPasswordModel.emailAddress = self.email();
-			$.mobile.showPageLoadingMsg('a', 'Sending Forgot Password Request');
-      return ES.loginService.forgotPassword(forgotPasswordModel, callbacks);
+      var forgotEvernymModel = {};
+      forgotEvernymModel.emailAddress = self.email();
+			$.mobile.showPageLoadingMsg('a', 'Sending Forgot Evernym Request');
+      return ES.loginService.forgotEvernym(forgotEvernymModel, callbacks);*/
     }
   };
 
-  function forgotPasswordSuccess() {
-    $.mobile.hidePageLoadingMsg();
-		self.sectionOne(false);
-		self.sectionTwo(true);		
+  function forgotEvernymSuccess() {
+    $.mobile.hidePageLoadingMsg();	
+		goToView('forgotEvernymSuccessView');		
   };
 
-  function forgotPasswordError(data, status, details) {
+  function forgotEvernymError(data, status, details) {
     $.mobile.hidePageLoadingMsg();
 		self.emailClass('validationerror');
 		self.errorEmail(details.message);
@@ -66,5 +67,5 @@
 	
 }
 
-ForgotPasswordViewModel.prototype = new ENYM.ViewModel();
-ForgotPasswordViewModel.prototype.constructor = ForgotPasswordViewModel;
+ForgotEvernymViewModel.prototype = new ENYM.ViewModel();
+ForgotEvernymViewModel.prototype.constructor = ForgotEvernymViewModel;

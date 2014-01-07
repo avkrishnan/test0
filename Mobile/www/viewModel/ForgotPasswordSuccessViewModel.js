@@ -15,10 +15,7 @@ function ForgotPasswordSuccessViewModel() {
 			goToView('homeView');
 		}		
   };
-
-  self.okayCommand = function () {		
-		goToView('loginView');
-  };
+	
 };
 
 ForgotPasswordSuccessViewModel.prototype = new ENYM.ViewModel();
