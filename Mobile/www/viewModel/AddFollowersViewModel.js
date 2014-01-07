@@ -82,20 +82,25 @@
   };
 	
 	function generateProvisionalAccount() {
+		var provosional = {};
 		if(self.firstLastName() != '') {
 			var fullName = self.firstLastName().split(' ');
 			var firstName = fullName[0];
-			var lastName = fullName[1];		
-		} else {
-			firstName = '';
-			lastName = '';
+			var lastName = fullName[1];
+			if(firstName != '') {
+				provosional.firstname = firstName;
+			}
+			if(lastName != '') {
+				provosional.lastname = lastName;
+			}
 		}
-		return {
-			emailaddress: self.emailaddress(),
-			phonenumber: self.smsPhone(),
-			firstname: firstName,
-			lastname: lastName
-		};
+		if(self.emailaddress() != '') {
+			provosional.emailaddress = self.emailaddress();
+		}
+		if(self.smsPhone() != '') {
+			provosional.phonenumber = self.smsPhone();
+		}
+		return provosional;
 	};
 	
 	function successfulAdd(data) {
