@@ -822,7 +822,7 @@ function formatDate(date, format, source) {
 	if(typeof(source) === 'undefined') {
 		source = '';
 	}	
-	var newDate = new Date(date);
+	var newDate = new Date(moment(date)); // TO DO (DEVENDER) replace this js code with Moment library
 	var shortMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'];
 	var longMonths  = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'];
 	var longDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
