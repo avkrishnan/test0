@@ -1,4 +1,3 @@
-<!--To do - Pradeep Kumar-->
 <div id="channelMainView" data-role="page">
 	<header class="logged-in"></header>  
   <div class="page-content">   
@@ -7,7 +6,10 @@
       <div class="channelinfocontent">
         <a class="title" href="#" data-bind="text: channelName" onclick="viewNavigate('Main', 'channelMainView', 'followersListView');"></a>
         <a href="#" class="setting" onclick="viewNavigate('Main', 'channelMainView', 'channelSettingsView');"></a>
-        <div class="addfollowers" data-bind="html: followerCount" onclick="viewNavigate('Main', 'channelMainView', 'followersListView');"><!--16 followers<a class="add-followers" href="#">Add Followers</a>--></div>
+        <div class="addfollowers">
+          <span class="followercount" data-bind="text: followerCount" onclick="viewNavigate('Main', 'channelMainView', 'followersListView');"></span>
+          <a class="add-followers" href="#" onclick="viewNavigate('Main', 'channelMainView', 'addInviteFollowersView');">Add Followers</a>
+        </div>
       </div>
       <br />
       <!--To do - to be activated when data received-->

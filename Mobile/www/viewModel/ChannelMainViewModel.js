@@ -25,7 +25,7 @@
 			else {									
 				self.channelId(channelObject.channelId);
 				self.channelName(channelObject.channelName);
-				self.followerCount(channelObject.followerCount+'<a class="add-followers" href="#">Add Followers</a>');											
+				self.followerCount(channelObject.followerCount);											
 			}
 			self.getMessagesCommand();
 		}

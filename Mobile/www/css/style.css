@@ -1563,6 +1563,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	padding:1px 10px;
 	color:#fff;
 }
+
 .channelinformation {
 	background:#2D2D2D;
 	border-radius:21px 0 0 10px;
@@ -1581,6 +1582,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 .channelinfocontent .title.ui-link, .channelinfocontent span {
 	color:#8DC63F;
+}
+span.followercount {
+	color:#fff;	
 }
 .channelinformation .setting {
 	margin:2px 5px 0 0;
