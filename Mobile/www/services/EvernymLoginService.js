@@ -24,6 +24,10 @@ function EvernymLoginService(api) {
     return api.callAPI('PUT', '/account', account, callbacks, true);
   };
 
+  t.accountModifyOther = function(id, account) {
+    return api.callAPI('PUT', '/account/' + id, account, undefined, true);
+  };
+
   t.accountLogout = function(callbacks) {
     return api.callAPI('POST', '/account/logout', undefined, callbacks, true);
   };
