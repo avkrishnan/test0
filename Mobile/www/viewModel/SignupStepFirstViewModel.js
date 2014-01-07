@@ -118,7 +118,8 @@
 		ES.evernymService.setAccessToken(args.accessToken);
 		ENYM.ctx.setItem('accountName', args.account.accountname);
 		ENYM.ctx.setItem('newusername', self.evernym());
-		ENYM.ctx.setItem('newuseremail', self.emailaddress());					
+		ENYM.ctx.setItem('newuseremail', self.emailaddress());
+		ENYM.ctx.setItem('evernym', 1);					
 		goToView('registrationVerifyView');			
   };
 

@@ -108,6 +108,7 @@
 	
 	self.cancelRequest = function() {
     if(ENYM.ctx.getItem('newusername')) {
+			ENYM.ctx.removeItem('action');
 			var toastobj = {redirect: 'tutorialView', type: 'toast-info', text: 'Follow request cancelled'};
 			showToast(toastobj);
 			goToView('tutorialView');					

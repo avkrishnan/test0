@@ -122,54 +122,101 @@
 			if(typeof args.privs != 'undefined') {
 				ENYM.ctx.setItem('roleType', args.privs);
 			}
-			var action = JSON.parse(ENYM.ctx.getItem('action'));
-			if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N') {
-				var callbacks = {
-					success: function() {
-						ENYM.ctx.removeItem('action');
-						var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
-						showToast(toastobj);						
-						goToView('channelsFollowingListView');					
-					},
-					error: function(data, status, details) {
-						ENYM.ctx.removeItem('action');
-						var toastobj = {redirect: 'channelsFollowingListView', type: 'toast-info', text: details.message};
-						showToast(toastobj);											
-						goToView('channelsFollowingListView');
-					}
-				};						
-				var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
-				ES.channelService.followChannel(channel.id, callbacks);
-			}
-			else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
-				if(args.account.firstname && args.account.lastname) {
-					var callbacks = {
-						success: function() {		
-							var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
-							showToast(toastobj);
-							goToView('channelsFollowingListView');										
-						},
-						error: function(data, status, details) {
-							var toastobj = {type: 'toast-error', text: details.message};
-							showToast(toastobj);
-						}
-					};
-					var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
-					ES.channelService.followChannel(channel.id, callbacks);																						
-				}
-				else {
-					goToView('nameRequiredView');
-				}
-			}
-			else {
-				goToView('homeView');
-			}
+			self.getCommethodsCommand();			
     } 
 		else {
 			self.errorMessage('<span>Sorry, </span> Unknown Error.');
       return;
     }
   };
+	
+	self.getCommethodsCommand = function() {
+		var action = JSON.parse(ENYM.ctx.getItem('action'));		
+		if(action) {
+			$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");		
+			return ES.commethodService.getCommethods({success: getCommethods, error: errorAPI});
+		}
+		else {
+			self.afterLoggedIn();
+		}
+	};
+	
+	function getCommethods(data){
+		if(data.commethod.length >= 1) {
+			var len = 0;			
+			for(len; len<data.commethod.length; len++) {
+				if(data.commethod[len].verified == 'Y') {
+					self.afterLoggedIn();
+					return true;
+				}
+				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
+					ENYM.ctx.removeItem('action');
+					var toastobj = {redirect: 'homeView', type: 'toast-error', text: 'Verify your email or phone before following'};
+					showToast(toastobj);
+					goToView('homeView');								
+				}
+			}
+		} else {
+			ENYM.ctx.removeItem('action');
+			var toastobj = {redirect: 'homeView', type: 'toast-error', text: 'Verify your email or phone before following'};
+			showToast(toastobj);
+			goToView('homeView');
+		}
+	};	
+	
+	function errorAPI(data, status, details){
+		$.mobile.hidePageLoadingMsg();
+		ENYM.ctx.removeItem('action');		
+		var toastobj = {redirect: 'homeView', type: 'toast-error', text: details.message};
+		showToast(toastobj);
+		goToView('homeView');		
+	};	
+	
+	self.afterLoggedIn = function() {
+		var action = JSON.parse(ENYM.ctx.getItem('action'));		
+		if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N') {
+			var callbacks = {
+				success: function() {
+					ENYM.ctx.removeItem('action');
+					var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
+					showToast(toastobj);						
+					goToView('channelsFollowingListView');					
+				},
+				error: function(data, status, details) {
+					ENYM.ctx.removeItem('action');
+					var toastobj = {redirect: 'channelsFollowingListView', type: 'toast-info', text: details.message};
+					showToast(toastobj);											
+					goToView('channelsFollowingListView');
+				}
+			};						
+			var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
+			ES.channelService.followChannel(channel.id, callbacks);
+		}
+		else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
+			if(args.account.firstname && args.account.lastname) {
+				var callbacks = {
+					success: function() {		
+						var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
+						showToast(toastobj);
+						goToView('channelsFollowingListView');										
+					},
+					error: function(data, status, details) {
+						var toastobj = {type: 'toast-error', text: details.message};
+						showToast(toastobj);
+					}
+				};
+				var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
+				ES.channelService.followChannel(channel.id, callbacks);																						
+			}
+			else {
+				goToView('nameRequiredView');
+			}
+		}
+		else {
+			goToView('homeView');
+		}
+	}	
+	
 		
 };
 
