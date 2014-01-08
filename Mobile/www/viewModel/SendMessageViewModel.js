@@ -120,7 +120,7 @@
 			self.characterCount(self.messageText().length);
 			var chanLength = self.selectedChannels().channelName.length;
 			var limitLength = 302-chanLength; //char lim=320, pging1,2 char+spaces=12, elipsis pg1,2=6 & chanLength=ch.name+3(space & square brackets) i.e. cal=320-18-(chanLength+3)			
-			if(self.messageText().length >= limitLength) {
+			if(self.messageText().length > limitLength) {
 				self.noWarning(false);
 				self.warning(true)				
 				self.characterClass('length-warning');

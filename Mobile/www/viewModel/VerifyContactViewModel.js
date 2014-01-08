@@ -6,7 +6,7 @@
 	self.displayname = "Verify Contact";
 	self.hasfooter = true;
 	
-  self.inputObs = [ 'baseUrl', 'verificationCommethod', 'verificationCommethodType', 'verificationCommethodID', 'verificationCode', 'navText', 'errorMessage', 'verificationStatus' ];
+  self.inputObs = ['verificationCommethod', 'verificationCommethodType', 'verificationCommethodID', 'verificationCode', 'navText', 'errorMessage', 'verificationStatus', 'verified'];
   self.defineObservables();		
 	
 	self.pView = '';

@@ -5,7 +5,7 @@
 	self.viewname = 'RegistrationVerify';
 	self.displayname = 'Registration Verify';
 	
-  self.inputObs = [ 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode'];
+  self.inputObs = [ 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode', 'verified'];
   self.errorObs = [ 'verificationClass', 'errorMessage'];	
   self.defineObservables();
 	
@@ -15,7 +15,6 @@
 			goToView('homeView');
 		} else {
 			action = JSON.parse(ENYM.ctx.getItem('action'));
-			self.getCommethods();
 			self.accountName('Your evernym is: '+ENYM.ctx.getItem('accountName')+" (Don't forget!)");
 			self.verificationCommethodType(ENYM.ctx.getItem('newuseremail'));				
 			$('input').keyup(function () {
@@ -35,6 +34,7 @@
 			success: function(data){
 				self.verificationCommethod(data.commethod[0].type);
 				self.verificationCommethodID(data.commethod[0].id);
+				self.verified(data.commethod[0].verified);
 			},
 			error: function (data, status, details) {
 				showMessage(details.message);
@@ -53,12 +53,18 @@
 			self.errorMessage("<span>ERROR:</span> Verification code should be 6 digits!");
 		}
 		else {
-			var verifyCommethodObject = {
-				code : self.verificationCode(),
-				type : self.verificationCommethodType(),
-				address : self.verificationCommethod()
-			};
-			self.verifyRequest(verifyCommethodObject);
+			self.getCommethods();
+			if(self.verified() == 'Y') {
+				self.skipCommand();
+			}
+			else {
+				var verifyCommethodObject = {
+					code : self.verificationCode(),
+					type : self.verificationCommethodType(),
+					address : self.verificationCommethod()
+				};
+				self.verifyRequest(verifyCommethodObject);
+			}
 		}
 	};
 	
@@ -115,7 +121,14 @@
 
 	self.skipCommand = function () {
 		if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
-			goToView('nameRequiredView');
+			if(self.verified() == 'Y') {
+				var toastobj = {redirect: 'nameRequiredView', type: 'toast-info', text: 'Email already verified'};
+				showToast(toastobj);
+				goToView('nameRequiredView');
+			}
+			else {
+				goToView('nameRequiredView');
+			}
 		}
 		else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'N'){
 			var callbacks = {
@@ -134,7 +147,14 @@
 			ES.channelService.followChannel(channel.id, callbacks);																						
 		}
 		else {
-			goToView('tutorialView');
+			if(self.verified() == 'Y') {
+				var toastobj = {redirect: 'tutorialView', type: 'toast-info', text: 'Email already verified'};
+				showToast(toastobj);
+				goToView('tutorialView');
+			}
+			else {			
+				goToView('tutorialView');
+			}
 		}	
 	};	
 	
