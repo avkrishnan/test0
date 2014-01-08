@@ -110,7 +110,7 @@
 						var toastText = 'Email already verified';				
 					}
 					ENYM.ctx.removeItem("commethodType");
-					var toastobj = {redirect: 'addContactView', type: '', text: toastText};
+					var toastobj = {redirect: 'addContactView', type: 'toast-info', text: toastText};
 					showToast(toastobj);	
 					goToView('addContactView');					
 				}
