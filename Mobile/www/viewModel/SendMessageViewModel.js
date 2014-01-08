@@ -29,6 +29,15 @@
 		this.followerCount = followers;
 	};
 	
+	self.composeForm = function() {
+		self.messageText('');		
+		self.channels.removeAll();		
+		ENYM.ctx.removeItem('msgLenWarn');
+		ENYM.ctx.removeItem('escDuration');		
+		ENYM.ctx.removeItem('escLevel');				
+		ENYM.ctx.removeItem('iGiStatus');				
+	};
+	
 	self.activate = function() {			
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];				
 		addExternalMarkup(self.template); // this is for header/overlay message
@@ -51,13 +60,6 @@
 		self.igiClass('igiimageoff');
 		self.characterCount('0');
 		self.characterClass('');
-		if(ENYM.ctx.getItem('msgLenWarn') && self.messageText().length >= 120) {
-			self.noWarning(false);
-			self.warning(true)				
-			self.characterClass('length-warning')
-			self.characterCount(ENYM.ctx.getItem('msgLenWarn'));
-			ENYM.ctx.removeItem('msgLenWarn');		
-		}
 		self.escLevel(ENYM.ctx.getItem('escLevel'));				
 		if(self.escLevel() == 'H') {
 			escalate = 'Hound';
@@ -106,10 +108,19 @@
 			self.yesClass('nobutton');
 			self.noClass('yesbutton');
 			self.broadcastType('RAC');															
-		}	
+		}		
+		if(ENYM.ctx.getItem('msgLenWarn')) {
+			self.noWarning(false);
+			self.warning(true)				
+			self.characterClass('length-warning')
+			self.characterCount(ENYM.ctx.getItem('msgLenWarn'));
+			ENYM.ctx.removeItem('msgLenWarn');		
+		}		
 		$('textarea').keyup(function () {								
 			self.characterCount(self.messageText().length);
-			if(self.messageText().length >= 120) {
+			var chanLength = self.selectedChannels().channelName.length;
+			var limitLength = 144-chanLength; // char lim=160, pging1,2 char=12, elipsis pg1=3 (160-15) and ch.name=calculate+1 for space (145-chanLength+1)			
+			if(self.messageText().length >= limitLength) {
 				self.noWarning(false);
 				self.warning(true)				
 				self.characterClass('length-warning');

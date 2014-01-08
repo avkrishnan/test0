@@ -140,12 +140,11 @@
 		ENYM.ctx.removeItem('accountName');
 		ENYM.ctx.removeItem('account');		
 		ENYM.ctx.removeItem('name');		
-		ENYM.ctx.removeItem('iGiStatus');		
 		ENYM.ctx.removeItem('currentChannelData');
 		ENYM.ctx.removeItem('enymNotifications');
 		ES.systemService.MnsCacheData = {};
 		ES.systemService.MnsLastUpdated = 0;
-		sendMessageViewModel.channels.removeAll();											
+		sendMessageViewModel.composeForm();										
 	};
 }
 
