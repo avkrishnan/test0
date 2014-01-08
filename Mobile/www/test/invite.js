@@ -78,6 +78,65 @@
     equal(found.lastname, newLast, 'lastname matches');
   })));
   
+  function getComMethodOfLastInvite(scenario, expCount) {
+    return function() {
+      $.when(scenario.ES.commethodService.getCommethodsForProvis(scenario.lastInvite.accountname))
+      .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
+      .then(function(data) {
+        scenario.provisComMethods = data.commethod;
+        equal(scenario.provisComMethods.length, expCount, 'number of com methods is ' + expCount);
+      }, hlpr.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  }
+    
+  function findComMethodOfType(scenario,type) {
+    var found = scenario.provisComMethods.find(function(item) { return item.type === type; });
+    return found;
+  }
+  
+  function deleteComMethodOfLastInvite(scenario,type) {
+    return function() {
+      var cm = findComMethodOfType(scenario, type);
+      $.when(scenario.ES.commethodService.deleteCommethodForProvis(scenario.lastInvite.accountname, cm.id))
+      .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  }
+    
+  function reqVerifComMethodOfLastInvite(scenario,type) {
+    return function() {
+      var cm = findComMethodOfType(scenario, type);
+      $.when(scenario.ES.commethodService.requestVerificationForProvis(scenario.lastInvite.accountname, cm.id))
+      .then(hlpr.CHECK.successNoContent, hlpr.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  }
+    
+  function addComMethodOfLastInvite(scenario,cm) {
+    return function() {
+      $.when(scenario.ES.commethodService.addCommethodForProvis(scenario.lastInvite.accountname, cm))
+      .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
+      .then(function(data) {
+        debugger;
+      }, hlpr.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  }
+    
+
+  asyncTest('A views provisional\'s communication methods and checks count', getComMethodOfLastInvite(SCEN_A, 2)); 
+  
+  asyncTest('A removes provisional\'s EMAIL communication methods', deleteComMethodOfLastInvite(SCEN_A,'EMAIL')); 
+
+  asyncTest('A views provisional\'s communication methods and checks count', getComMethodOfLastInvite(SCEN_A, 1)); 
+
+  asyncTest('A adds EMAIL communication method to provisional', addComMethodOfLastInvite(SCEN_A, {type: 'EMAIL', address: 'jason@lawcasa.com'}));
+
+  asyncTest('A views provisional\'s communication methods and checks count', getComMethodOfLastInvite(SCEN_A, 2)); 
+
+  asyncTest('A requests verification of provisional\'s EMAIL communication methods', reqVerifComMethodOfLastInvite(SCEN_A,'EMAIL')); 
+  
   asyncTest('A invites the same provisional follower again', hlpr.inviteFollower(SCEN_A, 'channel', invitation, hlpr.CHECK.shouldNotSucceed, hlpr.CHECK.badRequest));
 
   var SCEN_B = hlpr.TestScenario();

@@ -56,4 +56,7 @@
     .then(start, start);
   });
 
+  asyncTest('ADD COM METHOD', hlpr.createEmail(SCEN1, 'mine'));
+
+  
 })();

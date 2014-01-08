@@ -392,7 +392,7 @@ function ApiTestHelper() {
 
   t.createEmail = function(scenario, name) {
     return function() {
-      var emailAddress = api.generateEmail(scenario.account.accountname);
+      var emailAddress = t.generateEmail(scenario.account.accountname);
       name = name == undefined ? "email" : name;
       var comMethod = {
         name : name,
@@ -402,7 +402,7 @@ function ApiTestHelper() {
       $.when(scenario.ES.commethodService.addCommethod(comMethod))
       .then(t.CHECK.created,t.CHECK.shouldNotFail)
       .then( function(data) {
-          scenario[cmName] = data;
+          scenario[name] = data;
         },t.CHECK.shouldNotFail)
       .then(start,start);
     };
