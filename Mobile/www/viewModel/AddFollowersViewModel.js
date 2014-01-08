@@ -38,7 +38,7 @@
 	
 	self.addFollowersCommand = function () {
 		if(self.emailaddress() == '' && self.smsPhone() == '') {
-			self.errorPhone("<span>Sorry, </span> Please input email or phone!");
+			self.errorPhone("<span>Sorry, </span> A phone number or email address are required.");
 			self.phoneClass('validationerror');
 			self.emailClass('validationerror');
 			return false;

@@ -14,19 +14,23 @@
         <div class="msgerror" data-bind="html: errorName"></div>
       </div>
       <div class="formtype" data-bind="css: emailClass">
-      	<input type="text" data-bind="value: emailaddress" placeholder="email address *" />
+      	<input type="text" data-bind="value: emailaddress" placeholder="email address*" />
         <div class="msgerror" data-bind="html: errorEmail"></div>
       </div>
       <div class="formtype" data-bind="css: phoneClass">
-      	<input type="text" placeholder="phone number *" data-bind="value: smsPhone" />
+      	<input type="text" placeholder="phone number*" data-bind="value: smsPhone" />
         <div class="msgerror" data-bind="html: errorPhone"></div>
       </div>
-      <div class="required">* A phone number or email address are required</div>
+      <div class="required">*A phone number or email address are required</div>
 			<div class="loginbtn"><a href="#" data-bind="click: addFollowersCommand">ADD</a></div>
     </section>
+    <div class="addbtnmsg" data-bind="if:showInvite">
+      <p>When you click the Add button we'll send a simple message requesting your new follower's permission to receive messages from your channel.</p>
+      <p>They will not be able to receive your broadcasts via text or email until we receive their permission for each.</p>
+    </div>
     <section data-bind="ifnot:showInvite">
     	<div class="permissionmsg">
-        <span>We have sent a message requesting your new follower's permission to receive messages from your channel.</span>
+        <span>Permission request has been sent.</span>
         <span>You can see their status in the list of followers for this channel.</span>
       </div>
       <div class="loginbtn"><a href="#" class="ui-link" onclick="viewNavigate('Followers', 'followersListView', 'addInviteFollowersView');">OK, Got it</a></div>
