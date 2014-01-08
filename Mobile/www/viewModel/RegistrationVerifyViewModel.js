@@ -15,6 +15,7 @@
 			goToView('homeView');
 		} else {
 			action = JSON.parse(ENYM.ctx.getItem('action'));
+			self.getCommethods();			
 			self.accountName('Your evernym is: '+ENYM.ctx.getItem('accountName')+" (Don't forget!)");
 			self.verificationCommethodType(ENYM.ctx.getItem('newuseremail'));				
 			$('input').keyup(function () {
@@ -34,7 +35,6 @@
 			success: function(data){
 				self.verificationCommethod(data.commethod[0].type);
 				self.verificationCommethodID(data.commethod[0].id);
-				self.verified(data.commethod[0].verified);
 			},
 			error: function (data, status, details) {
 				showMessage(details.message);
@@ -53,18 +53,12 @@
 			self.errorMessage("<span>ERROR:</span> Verification code should be 6 digits!");
 		}
 		else {
-			self.getCommethods();
-			if(self.verified() == 'Y') {
-				self.skipCommand();
-			}
-			else {
-				var verifyCommethodObject = {
-					code : self.verificationCode(),
-					type : self.verificationCommethodType(),
-					address : self.verificationCommethod()
-				};
-				self.verifyRequest(verifyCommethodObject);
-			}
+			var verifyCommethodObject = {
+				code : self.verificationCode(),
+				type : self.verificationCommethodType(),
+				address : self.verificationCommethod()
+			};
+			self.verifyRequest(verifyCommethodObject);
 		}
 	};
 	
@@ -112,7 +106,14 @@
 				showToast(toastobj);				
 			},
 			error: function (responseData, status, details) {
-				self.errorMessage("<span>ERROR:</span> " + details.message);
+				if(details.code == '100912') {
+					self.verified('Y');
+					self.skipCommand();
+				}
+				else {
+					self.verified('N');
+					self.errorMessage("<span>ERROR:</span> " + details.message);
+				}
 			}
 		};
 		$.mobile.showPageLoadingMsg('a', 'Sending Verification Request');		

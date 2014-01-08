@@ -6,7 +6,7 @@
 	self.displayname = "Verify Contact";
 	self.hasfooter = true;
 	
-  self.inputObs = ['verificationCommethod', 'verificationCommethodType', 'verificationCommethodID', 'verificationCode', 'navText', 'errorMessage', 'verificationStatus', 'verified'];
+  self.inputObs = ['verificationCommethod', 'verificationCommethodType', 'verificationCommethodID', 'verificationCode', 'navText', 'errorMessage', 'verificationStatus'];
   self.defineObservables();		
 	
 	self.pView = '';
@@ -29,7 +29,7 @@
 			};
 			self.verifyRequest(verifyCommethodObject);
 		}
-	};
+	};	
 	
 	self.requestVerificationCode = function() {
 		var callbacks = {
@@ -102,7 +102,21 @@
 				goToView('addContactView');
 			},
 			error: function (responseData, status, details) {
-				self.errorMessage("<span>ERROR: </span>" + details.message);
+				if(details.code == '100912') {
+					if(ENYM.ctx.getItem("commethodType") == 'TEXT') {
+						var toastText = 'Phone number already verified';					
+					}
+					else {
+						var toastText = 'Email already verified';				
+					}
+					ENYM.ctx.removeItem("commethodType");
+					var toastobj = {redirect: 'addContactView', type: '', text: toastText};
+					showToast(toastobj);	
+					goToView('addContactView');					
+				}
+				else {		
+					self.errorMessage("<span>ERROR: </span>" + details.message);
+				}
 			}
 		};	
 		return ES.commethodService.verification(verifyCommethodObject.code, callbacks, ES.evernymService.getAccessToken());
