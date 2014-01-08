@@ -7,6 +7,7 @@
 	self.showInvite = ko.observable();
 	
   self.inputObs = [ 'channelId', 'channelName', 'firstLastName', 'nameClass', 'errorName', 'emailaddress', 'emailClass', 'errorEmail', 'smsPhone', 'phoneClass', 'errorPhone' ];
+	self.errorObs = [ 'nameClass', 'errorName', 'emailClass', 'errorEmail', 'errorPhone', 'phoneClass' ];
   self.defineObservables();
 	
 	self.activate = function() {
@@ -20,12 +21,7 @@
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);
 			$('input').keyup(function() {
-				self.nameClass('');
-				self.errorName('');
-				self.emailClass('');
-				self.errorEmail('');
-				self.errorPhone('');
-				self.phoneClass('');
+				self.clearErrorObs();
 			});
 		}
 	};
