@@ -358,8 +358,6 @@ channelNewViewModel = new ChannelNewViewModel(),
 sendMessageViewModel = new SendMessageViewModel(),
 followersListViewModel = new FollowersListViewModel(),
 inviteFollowersViewModel = new InviteFollowersViewModel(),
-commethodVerificationViewModel = new CommethodVerificationViewModel(),
-
 forgotPasswordViewModel = new ForgotPasswordViewModel(),
 resetPasswordViewModel = new ResetPasswordViewModel(),
 
@@ -425,7 +423,8 @@ channelIntroViewModel = new ChannelIntroViewModel(),
 
 nameRequiredViewModel = new NameRequiredViewModel(),
 forgotEvernymViewModel = new ForgotEvernymViewModel(),
-messageLengthWarningViewModel = new MessageLengthWarningViewModel()
+messageLengthWarningViewModel = new MessageLengthWarningViewModel(),
+newFollowersSettingsViewModel = new NewFollowersSettingsViewModel()
 /* end */
 
 ;
@@ -455,8 +454,7 @@ var models = [
               channelNewViewModel,            
               sendMessageViewModel,
               followersListViewModel,
-              inviteFollowersViewModel,
-              commethodVerificationViewModel, 
+              inviteFollowersViewModel, 
               forgotPasswordViewModel,
               resetPasswordViewModel,
               singleMessageViewModel,
@@ -509,7 +507,8 @@ var models = [
 							administratorFeedbackViewModel,
 							singleFeedbackViewModel,
 							forgotEvernymViewModel,
-							messageLengthWarningViewModel			
+							messageLengthWarningViewModel,
+							newFollowersSettingsViewModel		
               ];
 
 

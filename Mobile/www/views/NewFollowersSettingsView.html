@@ -1,0 +1,31 @@
+<div id="newFollowersSettingsView" data-role="page">
+	<header class="logged-in"></header>  
+  <div class="page-content">
+    	<h1 class="notify">Notify me of new followers:</h1>     
+      <div class="settingsfollowers">
+        <div class="agressively-slider">
+          <div class="slider-value newsettings">
+          	<span class="remind" data-bind="css: offText">Off</span>
+            <span class="normaltext" data-bind="css: normalText">Normal</span>
+            <span class="hound" data-bind="css: fastText">Fast</span>
+          </div>          
+          <div class="slidervalue-img newsettingsslide">
+          	<a class="remind-sensitive" href="#" data-bind="click: offYes, css: offClass"></a>
+            <a class="chase-broadcast" href="#" data-bind="click: normalYes, css: normalClass"></a>
+            <a class="hound-critical" href="#" data-bind="click: fastYes, css: fastClass"></a>
+          </div>          
+          <div class="broadcastinform">
+            <span data-bind="html: duration, css: activeType"></span>
+          </div>         
+        </div>
+      </div>      
+      <div class="loginbtn">
+        <a href="#" data-bind="click: saveCommand">Save and Contine</a>
+      </div>
+    </div>
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Follower settings', 'newFollowersSettingsView', 'userSettingsView');"></a>
+    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Follower settings', 'newFollowersSettingsView', 'plusMenuView');"></a>
+  </div>
+  <div class="active-overlay" style="display:none"></div>
+</div>   

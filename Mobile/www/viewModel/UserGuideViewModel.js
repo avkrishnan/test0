@@ -29,7 +29,13 @@
 			goToView('channelsFollowingListView');					
 		}
 		else {
-			goToView('homeView');
+			if(ENYM.ctx.getItem('evernymIntro')) {
+				ENYM.ctx.removeItem('evernymIntro')
+				goToView('userSettingsView');
+			}
+			else {
+				goToView('homeView');
+			}
 		}
   };
 	

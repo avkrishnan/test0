@@ -102,6 +102,11 @@
 		self.defaultCommethods = data.commethod;
 	}
 	
+	self.evernymIntro = function() {
+		ENYM.ctx.setItem('evernymIntro', 1);
+		goToView('tutorialView');
+	};
+	
 	/* logout */
   self.logoutCommand = function() {
     var token = ES.evernymService.getAccessToken();
