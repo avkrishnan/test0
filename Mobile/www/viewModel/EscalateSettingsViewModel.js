@@ -40,12 +40,14 @@
 			ENYM.ctx.setItem('escLevel', 'R');															
 			self.escalationType('"Remind"');				
 		}
+		//alert(JSON.stringify(ENYM.ctx.getItem('escDuration')));
 		if(ENYM.ctx.getItem('escDuration')) {
-			var DateTime = ENYM.ctx.getItem('escDuration').split('/');
-			var day = DateTime[2].split(' ');
-			var time = day[1].split(':');
+			//var DateTime = ENYM.ctx.getItem('escDuration').split('/');
+			//var day = DateTime[2].split(' ');
+			//var time = day[1].split(':');
 			//self.escalateUntil(' until: '+DateTime[1]+' '+day[0]+', '+DateTime[0]+', '+time[0]+':'+time[1]+' '+day[2]);
-			self.escalateUntil(' until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0]);
+			//self.escalateUntil(' until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0]);
+			self.escalateUntil(' until: ' + moment(ENYM.ctx.getItem('escDuration')).format('h:m A, MMM. D, YYYY'));
 			self.ecalateTime('Edit');
 			self.escType(true);																						
 		}

@@ -12,16 +12,13 @@
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];		
 		addExternalMarkup(self.template); // this is for header/overlay message		
 		if(ENYM.ctx.getItem('escDuration')) {
-			var DateTime = ENYM.ctx.getItem('escDuration').split('/');
-			var day = DateTime[2].split(' ');
-			var time = day[1].split(':');						
-			self.month(DateTime[1]);			
-			self.day(day[0]);
-			self.year(DateTime[0]);			
-			self.hour(time[0]);			
-			self.minute(time[1]);			
-			self.meridiem(day[2]);
-			self.pickerDate('Escalate until: ' + self.hour() + ':' + self.minute() + ' ' + self.meridiem() + ', ' + self.month() + '. ' + self.day() + ', ' + self.year());
+			self.month(moment(ENYM.ctx.getItem('escDuration')).format('MMM'));		
+			self.day(moment(ENYM.ctx.getItem('escDuration')).format('D'));
+			self.year(moment(ENYM.ctx.getItem('escDuration')).format('YYYY'));			
+			self.hour(moment(ENYM.ctx.getItem('escDuration')).format('h'));			
+			self.minute(moment(ENYM.ctx.getItem('escDuration')).format('m'));			
+			self.meridiem(moment(ENYM.ctx.getItem('escDuration')).format('A'));
+			self.pickerDate('Escalate until: ' + moment(ENYM.ctx.getItem('escDuration')).format('h:m A, MMM. D, YYYY'));
 		} else {
 			self.month(monthNames[_getDate('getMonth')]);			
 			self.day(_getDate('getDate'));
@@ -30,7 +27,7 @@
 			hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
 			self.hour(hours);
 			var mins = _getDate('getMinutes');
-			mins = ((mins+1<10?'0':'')+(mins+1));			
+			mins = ((mins+1<10?'0':'')+(mins));			
 			self.minute(mins);
 			var meridiem = _getDate('getHours')>11?'PM':'AM';			
 			self.meridiem(meridiem);
@@ -139,16 +136,35 @@
 	};					
 	
 	self.saveCommand = function () {
+		
 		var duration = self.year()+'/'+self.month()+'/'+self.day()+' '+self.hour()+':'+self.minute()+' '+self.meridiem();
-		var CurrentDate = new Date();
-		var SelectedDate = new Date(duration);		
-		if(SelectedDate >= CurrentDate){
-			ENYM.ctx.setItem('escDuration', duration);		
+		/*var CurrentDate = new Date();
+		var CurrentDate = moment();
+		alert(CurrentDate);
+		var SelectedDate = moment();
+		alert(SelectedDate);
+		*/
+//
+var CurrentDate = moment();
+var hours;
+if(self.meridiem() == 'PM' && self.hour() < 12) {
+	hours = parseInt(self.hour()) + parseInt(12);
+}
+var month = monthNames.indexOf(self.month());
+//alert(month);
+var minutes = parseInt(self.minute()) + parseInt(0);
+var SelectedDate = moment([self.year(), month, self.day(), hours, minutes, 0, 0]);
+var diff = SelectedDate.diff(CurrentDate, 'minutes');
+//alert(diff);
+//
+		//if(SelectedDate >= CurrentDate){
+		if(diff > 0 ){	
+			ENYM.ctx.setItem('escDuration', SelectedDate);
 			popBackNav();				
-		}					
-		else {	
+		}
+		else {
 			var toastobj = {type: 'toast-error', text: 'Please set date greater than current date !'};
-			showToast(toastobj);						
+			showToast(toastobj);			
 		}
   };
 }

@@ -76,14 +76,11 @@
 			self.fastClass('');
 			self.escalateClass('escalatecoloricon icon-'+escalate);										
 			if(ENYM.ctx.getItem('escDuration')) {
-				self.escDuration(new Date(ENYM.ctx.getItem('escDuration')));					
-				var DateTime = ENYM.ctx.getItem('escDuration').split('/');
-				var day = DateTime[2].split(' ');
-				var time = day[1].split(':');
-				var durationText = '"' + escalate + '" until: ' + time[0] + ':' + time[1] + ' ' + day[2] + ', ' + DateTime[1] + '. ' + day[0] + ', ' + DateTime[0];
+				self.escDuration(ENYM.ctx.getItem('escDuration'));				
+				var durationText = '"' + escalate + '" until: ' + moment(ENYM.ctx.getItem('escDuration')).format('h:m A, MMM. D, YYYY');
 				self.duration(durationText);
 				self.activeType('escalatecolor '+escalate);
-				self.escalateEdit(true);																								
+				self.escalateEdit(true);																					
 			}		
 			ENYM.ctx.removeItem('escalate');																											
 		} else {				
