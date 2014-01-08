@@ -1887,7 +1887,8 @@ h1.requests {
 .accept-decline.channelurl em {
 	display:inline;
 	font-style:normal;
-	font-size:14px;
+	font-size:15px;
+	margin-top:2px;
 }
 .acceptdeclinebtn {
 	float:right;
@@ -1929,7 +1930,7 @@ h1.requests {
 	line-height:normal;
 }
 .invitation {
-	background:#2D2D2D url("images/sprites-channel.png") no-repeat -2px -170px;
+	background:#2D2D2D url("images/directory.png") no-repeat 3px 3px;
 }
 .formtype.textareatype {
 	padding:4px 5px 4px 4px;
@@ -3787,6 +3788,14 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:12px;
 	padding:1px 5px;
 	margin:0 10px 0 0;
+}
+.addbtnmsg {
+	margin:10px 10px 0px 0px;
+}
+.addbtnmsg p {
+	margin:0 0 10px 0;
+	color:#fff;
+	font-size:14px;
 }
 /*
 	*@media query css
