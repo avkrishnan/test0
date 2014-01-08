@@ -7,12 +7,14 @@
 	
 	self.sectionOne = ko.observable(false);
 	self.sectionTwo = ko.observable(false);
+	self.addFollower = ko.observable(false);
 	self.channels = ko.observableArray([]);
 	
   self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message				
 		self.sectionOne(false);
-		self.sectionTwo(false);														
+		self.sectionTwo(false);
+		self.addFollower(false);													
 		self.channels.removeAll();			
 		$.mobile.showPageLoadingMsg('a', 'Loading Channels');
 		return ES.channelService.listMyChannels({ success: successfulList, error: errorAPI });
@@ -27,15 +29,21 @@
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 				if(data.channel[channelslength].followers == 1) {
 					var followers = data.channel[channelslength].followers +' follower';
+					var followerVisble = false;
+				} else if(data.channel[channelslength].followers == 0){
+					var followers = data.channel[channelslength].followers +' followers';
+					var followerVisble = true;
 				} else {
 					var followers = data.channel[channelslength].followers +' followers';
-				}			
+					var followerVisble = false;
+				}						
 				self.channels.push({
 					channelId: data.channel[channelslength].id, 
 					channelName: data.channel[channelslength].name, 
 					channelDescription: data.channel[channelslength].description,
 					longDescription: data.channel[channelslength].longDescription,
-					followerCount: followers
+					followerCount: followers,
+					addFollower: followerVisble
 				});
 			}			
 		}
@@ -63,6 +71,11 @@
 		ENYM.ctx.removeItem('currentChannelData');			
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));	
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');		
+	};
+	self.addFollowers = function(data){
+		ENYM.ctx.removeItem('currentChannelData');			
+		ENYM.ctx.setItem('currentChannelData', JSON.stringify(data));	
+		viewNavigate('Channels', 'channelsIOwnView', 'addInviteFollowersView');		
 	};
 }
 

@@ -1886,6 +1886,8 @@ h1.requests {
 }
 .accept-decline.channelurl em {
 	display:inline;
+	font-style:normal;
+	font-size:14px;
 }
 .acceptdeclinebtn {
 	float:right;
@@ -1918,16 +1920,16 @@ h1.requests {
 	font-size:14px;
 }
 .visitaddress {
-	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1473px;
+	background:#2D2D2D url("images/www.png") no-repeat 3px 3px;
+}
+.addinformation, .invitation {
+	margin-left:10px;
+	font-size:13px;
+	height:35px;
+	line-height:normal;
 }
 .invitation {
-	background:#2D2D2D url("images/sprites-channel.png") no-repeat -1px -170px;
-	margin-left:10px;
-	font-size:13px;
-}
-.addinformation {
-	margin-left:10px;
-	font-size:13px;
+	background:#2D2D2D url("images/sprites-channel.png") no-repeat -2px -170px;
 }
 .formtype.textareatype {
 	padding:4px 5px 4px 4px;
@@ -3777,6 +3779,15 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .newsettingsslide .hound-critical {
 	right:0;
 }
+.requestcontent span.add-followers {
+	background:#8DC63F;
+	border-radius:4px;
+	color: #FFFFFF;
+	display:inline-block;
+	font-size:12px;
+	padding:1px 5px;
+	margin:0 10px 0 0;
+}
 /*
 	*@media query css
 */
@@ -3926,6 +3937,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	.accept-decline.channelurl em {
 		display:block;
 	}
+	.addinformation {
+		line-height:35px;
+	}
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -3942,12 +3956,12 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.requestcontent .request, .requestcontent .replies, .requestcontent .igi, .requestcontent .lost {
 		font-size:15px;
-		margin-right:15px;
+		margin-right:10px;
 		padding:1px 10px;
 	}
 	.requestcontent .followers {
 		font-size:18px;
-		margin-right:30px;
+		margin-right:18px;
 	}
 	.channelicons ul {
 		width:93%;
@@ -4074,6 +4088,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.descriptionedit textarea {
 		max-height:550px;
+	}
+	.addinformation, .invitation {
+		line-height:35px;
+	}
+	.requestcontent span.add-followers {
+		font-size:15px;
+		padding:1px 10px;
 	}
 }
 @media only screen and (min-width:800px) {
