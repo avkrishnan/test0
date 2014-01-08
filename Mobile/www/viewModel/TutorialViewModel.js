@@ -5,11 +5,7 @@
   self.viewname = 'Introduction';
   self.displayname = 'Introduction to Evernym Channels';		
 
-  self.activate = function() {		
-		var newUser = ENYM.ctx.getItem('newusername');
-		if(newUser == '' || newUser == null) {
-				goToView('homeView');
-		}			
+  self.activate = function() {				
 		$('.tutorial ul li').removeClass('active');
 		$('.tutorial ul li:first-child').addClass('active');		
 		$('.tutorials .tutorialslides').hide();

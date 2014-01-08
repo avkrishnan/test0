@@ -9,10 +9,6 @@
 	self.sectionTwo = ko.observable(false);	
 	
   self.activate = function() {		
-		var newUser = ENYM.ctx.getItem('newusername');
-		if(newUser == '' || newUser == null) {
-			goToView('homeView');
-		}
 		self.sectionOne(true);
 		self.sectionTwo(false);		
   	addExternalMarkup(self.template); // this is for header/overlay message									
