@@ -8,7 +8,7 @@
   self.viewname = "Login";
   self.displayname = "Login";	
 	
-  self.inputObs = [ 'username', 'password'];
+  self.inputObs = [ 'username', 'password', 'session'];
   self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
 
   self.defineObservables();
@@ -37,7 +37,6 @@
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'loginView') {
-			//self.errorMessage('');
 			self.loginCommand();
 		}
 	});
@@ -61,10 +60,12 @@
       if ($('input[name="rememberPassword"]:checked').length == 1) {
 				ENYM.ctx.setItem("username", self.username());
         ENYM.ctx.setItem("password", self.password());
+				self.session(2*7*24*60*60);
       }
 			else {
 				ENYM.ctx.removeItem('username');
 				ENYM.ctx.removeItem('password');
+				self.session(3600);
 			}
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
@@ -75,8 +76,9 @@
       var loginModel = {};
       $.mobile.showPageLoadingMsg("a", "Logging In");
       loginModel.accountname = self.username();
-      loginModel.password = self.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
+			loginModel.overrideTtl = self.session();
+      loginModel.password = self.password();			
       return ES.loginService.accountLogin(loginModel).then(loginSuccess, loginError);
     }
   };
