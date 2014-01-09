@@ -6,7 +6,7 @@
     <section class="loginform textareatype">       
       <label class="short-description">Tagline for:<span data-bind="text: channelName"></span></label>         
       <div class="formtype textareatype">
-        <textarea data-bind="value: shortDescription" placeholder="SLC Boys under-14 (Bob Smith)"></textarea>
+        <textarea data-bind="value: shortDescription, valueUpdate: 'afterkeydown'" placeholder="SLC Boys under-14 (Bob Smith)"></textarea>
         <div class="msgerror" data-bind="visible:errorMessage, html: errorChannel"></div>        
       </div>
       <div class="login">
@@ -16,6 +16,7 @@
       </div>
     </section>
   </div> 
+  <div class="toast-notification"></div>
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Edit Tagline', 'editShortDescriptionView', 'userSettingsView');"></a>
     <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Edit Tagline', 'editShortDescriptionView', 'plusMenuView');"></a>
