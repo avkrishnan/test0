@@ -205,9 +205,7 @@
 		ENYM.ctx.removeItem('iGiStatus');										
 		var toastobj = {redirect: 'channelMainView', type: '', text: 'Your message has been sent.'};
 		showToast(toastobj);									
-		ENYM.ctx.setItem('currentChannelId', self.selectedChannels().channelId);	
-		backNavText.pop();
-		backNavView.pop();		
+		ENYM.ctx.setItem('currentChannelId', self.selectedChannels().channelId);			
 		goToView('channelMainView');									
 	};
 	
