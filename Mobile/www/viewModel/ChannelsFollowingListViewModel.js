@@ -1,18 +1,16 @@
 ﻿function ChannelsFollowingListViewModel() {
 	var self = this;
-	
 	self.template = "channelsFollowingListView";
 	self.viewid = "V-30";
 	self.viewname = "Channels";
 	self.displayname = "Channels I Follow";
-	self.hasfooter = true;
 	
 	self.channels = ko.observableArray([]);
-	self.shown = false;
-	self.noFollow = ko.observable();
+	self.shown = false
+	self.noFollow = ko.observable(false);
 	
 	self.activate = function() {
-		self.noFollow(false);
+		self.noFollow(false);	
 		if (!self.shown) {
 			ENYM.ctx.removeItem("currentChannel");
 			ENYM.ctx.removeItem("overlayCurrentChannel");
@@ -45,8 +43,9 @@
 				}
 			});
 			self.channels(data.channel);
+			self.noFollow(true);			
 		}	else{
-			self.noFollow(true);
+			goToView('followChannelView');			
 		}
 	};
 	
@@ -54,7 +53,7 @@
 		$.mobile.hidePageLoadingMsg();
 		var toastobj = {type: 'toast-error', text: details.message};
 		showToast(toastobj);
-	};
+	};	
 	
 	/* action to channel page to unfollow*/
 	self.channelViewUnfollow = function(data) {

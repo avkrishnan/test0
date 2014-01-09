@@ -424,7 +424,9 @@ channelIntroViewModel = new ChannelIntroViewModel(),
 nameRequiredViewModel = new NameRequiredViewModel(),
 forgotEvernymViewModel = new ForgotEvernymViewModel(),
 messageLengthWarningViewModel = new MessageLengthWarningViewModel(),
-newFollowersSettingsViewModel = new NewFollowersSettingsViewModel()
+newFollowersSettingsViewModel = new NewFollowersSettingsViewModel(),
+
+followChannelViewModel = new FollowChannelViewModel()
 /* end */
 
 ;
@@ -508,7 +510,8 @@ var models = [
 							singleFeedbackViewModel,
 							forgotEvernymViewModel,
 							messageLengthWarningViewModel,
-							newFollowersSettingsViewModel		
+							newFollowersSettingsViewModel,
+							followChannelViewModel	
               ];
 
 
@@ -756,7 +759,13 @@ $(document).bind('panelbeforeopen', function(e, data) {
                  });
 								 
 /* By pradeep kumar */
-/* Back navigation functions */
+/* Back navigation functions and variables used
+ *
+ * backtext - text which is diplayed in back button
+ * backView - view page id (when click back button it, redirect to this id)
+ * targetView - view page id (when click it, redirect to this id)
+ *
+*/
 if(!ENYM.ctx.getItem('backNavText') || !ENYM.ctx.getItem('backNavView')) {
 	var backNavText = [];
 	var backNavView = [];

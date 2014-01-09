@@ -1,18 +1,19 @@
 <div id="channelsFollowingListView" data-role="page" data-dom-cache="true" class="channel-list">
   <header class="logged-in"></header>
-  <div class="page-content channel_follow">
+  <div class="page-content" data-bind="visible: noFollow">
+    <div class="loginbtn findbtn">
+      <a href="#" onclick="viewNavigate('Channels', 'channelsFollowingListView', 'followChannelView');">Follow a Channel</a>
+    </div>  
     <div class="dropdown">
-      Channels I Follow:
-      <div data-bind="ifnot:noFollow">
-        <form class="chaneldropdown" action="#" method="get">
-          <select>
-            <option value="min">A-Z</option>
-            <option value="min">A-Z</option>
-            <option value="min">A-Z</option>
-            <option value="min">A-Z</option>
-          </select>
-        </form>
-      </div>
+      <span class="mybroadcast">Channels I Follow:</span>
+      <form class="chaneldropdown" action="#" method="get">
+        <select>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+          <option value="min">A-Z</option>
+        </select>
+      </form>
     </div>
     <section data-bind="foreach: channels">
       <div class="channelinformation channel-follow">
@@ -26,10 +27,6 @@
         </div>
       </div>
     </section>
-    <div class="nofollowedyet" data-bind="if:noFollow">
-      <div class="baseline"></div>
-      <div class="getmsg">You're not following any channels yet. Visit a channels website:<span> NAME</span>.evernym.com to follow it.</div>
-    </div>
   </div>
   <div class="toast-notification"></div> 
   <div class="footer">
