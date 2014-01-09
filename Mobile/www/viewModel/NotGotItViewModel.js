@@ -76,8 +76,16 @@
 	};
 	
 	function successfulList(data){
+		var rcvrFirstname,rcvrLastname;
 		$.mobile.hidePageLoadingMsg();	
 		for(var len = 0; len<data.recipients.length; len++) {
+			if(typeof (data.recipients[len].rcvrFirstname) == 'undefined' && typeof(data.recipients[len].rcvrLastname) == 'undefined') {
+				rcvrFirstname = '';
+			  rcvrLastname = '';
+			} else{
+				rcvrFirstname = data.recipients[len].rcvrFirstname;
+				rcvrLastname = data.recipients[len].rcvrLastname+',';
+			}
 			if (len % 2 === 0) {
 				var recipientsClass = 'even';
       }
@@ -87,7 +95,7 @@
 			self.recipients.push({
 				recipientId: data.recipients[len].subscriberId,
 				recipientsClass: recipientsClass,
-				recipient: '<span></span>'+data.recipients[len].rcvrFirstname +' '+ data.recipients[len].rcvrLastname+', <em>'+data.recipients[len].rcvrAccountname+'</em>'
+				recipient: '<span></span>'+rcvrFirstname +' '+ rcvrLastname+' <em>'+data.recipients[len].rcvrAccountname+'</em>'
 			});
 		}
 	};

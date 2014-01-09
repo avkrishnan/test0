@@ -17,7 +17,12 @@
 			addExternalMarkup(self.template); // this is for header/overlay message																		
 			self.channelName(channelObject.channelName);
 			var recipient = recipientObject.recipient.split(',');
-			self.recipient(recipient[0]+' '+recipient[1]);								
+			if(typeof recipient[1] == 'undefined'){
+				var rcvrName = '';
+			} else {
+				var rcvrName = recipient[1];
+			}
+			self.recipient(recipient[0]+' '+rcvrName);								
 		}
 	};
 }
