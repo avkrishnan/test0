@@ -47,8 +47,8 @@
       //accountname:  
       firstname: 'TEST|Joe', 
       lastname: 'Bobson',
-      //emailaddress: 'jason@lawcasa.com',
-      emailaddress: hlpr.generateEmail('joebobson'),
+      emailaddress: 'jason@lawcasa.com',
+      //emailaddress: hlpr.generateEmail('joebobson'),
       phonenumber: '801-376-3348'
   };
 
@@ -169,5 +169,6 @@
   asyncTest('A checks followers and verifies the invitee is a provisional', hlpr.getFollowers(SCEN_A, 'channel', checkLastInvitedIsProvisional(SCEN_A)));
   
   //TODO A invites an existing evernym (non-following) with a verified email, and it results in an evernym invite, non-provisional
-  
+
+
 })();
