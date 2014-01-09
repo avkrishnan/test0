@@ -34,10 +34,19 @@
 			self.followerCount(self.followerCount() + ' followers');
 		}	
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(typeof valueFollower.firstname == 'undefined') {
+			if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 				var name = '';
 				var nameClass = 'noname';
-			} else {
+			} 
+			else if(typeof valueFollower.firstname == 'undefined') {
+				var name = valueFollower.lastname;
+				var nameClass = '';				
+			}
+			else if(typeof valueFollower.lastname == 'undefined') {
+				var name = valueFollower.firstname;
+				var nameClass = '';				
+			}			
+			else {
 				var name = valueFollower.firstname +' '+ valueFollower.lastname;
 				var nameClass = '';
 			}
