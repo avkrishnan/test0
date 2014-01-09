@@ -53,7 +53,7 @@
 		self.moreButton(false);
 		self.lessButton(false);						
 		$.mobile.showPageLoadingMsg("a", "Loading The Channel");
-		return ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPIChannel});;
+		return ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPIChannel});
 	};			
 	
 	function successfulGetChannel(data) {

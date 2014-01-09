@@ -411,6 +411,7 @@ escalateSettingsViewModel = new EscalateSettingsViewModel(),
 escalateTimeSettingsViewModel = new EscalateTimeSettingsViewModel(),
 followerDetailsViewModel = new FollowerDetailsViewModel(),
 
+editFollowerDetailsViewModel = new EditFollowerDetailsViewModel(),
 removeFollowerViewModel = new RemoveFollowerViewModel(),
 notGotItViewModel = new NotGotItViewModel(),
 whoGotItViewModel = new WhoGotItViewModel(),
@@ -424,9 +425,10 @@ channelIntroViewModel = new ChannelIntroViewModel(),
 nameRequiredViewModel = new NameRequiredViewModel(),
 forgotEvernymViewModel = new ForgotEvernymViewModel(),
 messageLengthWarningViewModel = new MessageLengthWarningViewModel(),
-newFollowersSettingsViewModel = new NewFollowersSettingsViewModel()
-/* end */
+newFollowersSettingsViewModel = new NewFollowersSettingsViewModel(),
 
+followChannelViewModel = new FollowChannelViewModel()
+/* end */
 ;
 
 // load the stored state (recent searches)
@@ -508,9 +510,10 @@ var models = [
 							singleFeedbackViewModel,
 							forgotEvernymViewModel,
 							messageLengthWarningViewModel,
-							newFollowersSettingsViewModel		
-              ];
-
+							newFollowersSettingsViewModel,
+							followChannelViewModel,	
+							editFollowerDetailsViewModel
+            ];
 
 function getHTMLName(viewModel){
     var name = getClassName(viewModel).replace("Model","");
@@ -756,7 +759,13 @@ $(document).bind('panelbeforeopen', function(e, data) {
                  });
 								 
 /* By pradeep kumar */
-/* Back navigation functions */
+/* Back navigation functions and variables used
+ *
+ * backtext - text which is diplayed in back button
+ * backView - view page id (when click back button it, redirect to this id)
+ * targetView - view page id (when click it, redirect to this id)
+ *
+*/
 if(!ENYM.ctx.getItem('backNavText') || !ENYM.ctx.getItem('backNavView')) {
 	var backNavText = [];
 	var backNavView = [];

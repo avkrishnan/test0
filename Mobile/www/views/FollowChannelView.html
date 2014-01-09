@@ -1,0 +1,33 @@
+<div id="followChannelView" data-role="page">
+	<header class="logged-in"></header>  
+  <div class="page-content">
+    <div class="dropdown">
+      Channels I Follow:
+    </div>
+    <div class="nofollowedyet">
+      <div class="baseline"></div>
+      <div class="followerinfo">
+        <h1>To follow a channel:</h1>
+        <span>1. Visit the channel's web page.</span>
+        <span>2. Click the Follow button.</span>
+      </div>
+      <div class="getmsg">All channel web pages can be found at <span>channelname.evernym.com.</span></div>
+      <div class="getmsg">Or enter the channel's name to go there now:</div>
+      
+      <section class="loginform" method="get" action="#">
+        <div class="formtype channelstype" data-bind="css: findClass">
+          <div class="channelstypeinner">
+            <input type="text" data-bind="value: channelValue" placeholder="type channel name here" />            
+            <a href="#"><span data-bind="click: findChannel">GO</span></a>
+          </div>
+          <div class="msgerror" data-bind="html: errorFind"></div>          
+        </div>
+      </section>
+    </div>
+  </div>  
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Follow Channel', 'followChannelView', 'userSettingsView');"></a>
+    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Follow Channel', 'followChannelView', 'plusMenuView');"></a>
+  </div>
+  <div class="active-overlay" style="display:none"></div>
+</div>   
