@@ -75,29 +75,37 @@
 	}	
 	
 	function successfulReliesGET(data){
+		var senderFirstname,senderLastname;
     $.mobile.hidePageLoadingMsg();			
 		for(var len = 0; len<data.message.length; len++) {
 			//if(data.message[len].replies < 1) {
-				var reply = '<em>'+data.message[len].senderFirstname+' '+data.message[len].senderLastname+': </em>'+data.message[len].text;
-				if(data.message[len].text.length > truncatedTextScreen()) {
-				  var replyLess = $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...';
-				}
-				else {
-					var replyLess = data.message[len].text;					
-				}				
-				self.msgReplies.push({
-					replyId: data.message[len].id,
-					senderSubscriberId: data.message[len].senderSubscriberId,
-					responseToMsgId: data.message[len].responseToMsgId,		
-					created: data.message[len].created,				
-					replyTime: formatDate(data.message[len].created, 'short', 'main'),
-					reply: reply,
-					replyLess: replyLess.replace(/\n/g, '<br/>'),					
-					replyFull: data.message[len].text.replace(/\n/g, '<br/>'),
-					senderFirstname: data.message[len].senderFirstname,
-					senderLastname: data.message[len].senderLastname,										
-					replyToReply: data.message[len].replies
-				});
+			if(typeof data.message[len].senderFirstname == 'undefined' && typeof data.message[len].senderLastname == 'undefined') {
+				senderFirstname = 'Evernym';
+			  senderLastname = '';
+			} else{
+				senderFirstname = data.message[len].senderFirstname;
+				senderLastname = data.message[len].senderLastname;
+			}
+			var reply = '<em>'+senderFirstname+' '+senderLastname+': </em>'+data.message[len].text;
+			if(data.message[len].text.length > truncatedTextScreen()) {
+			  var replyLess = $.trim(data.message[len].text).substring(0, truncatedTextScreen()*2).split(' ').slice(0, -1).join(' ') + '...';
+			}
+			else {
+				var replyLess = data.message[len].text;					
+			}				
+			self.msgReplies.push({
+				replyId: data.message[len].id,
+				senderSubscriberId: data.message[len].senderSubscriberId,
+				responseToMsgId: data.message[len].responseToMsgId,		
+				created: data.message[len].created,				
+				replyTime: formatDate(data.message[len].created, 'short', 'main'),
+				reply: reply,
+				replyLess: replyLess.replace(/\n/g, '<br/>'),					
+				replyFull: data.message[len].text.replace(/\n/g, '<br/>'),
+				senderFirstname: data.message[len].senderFirstname,
+				senderLastname: data.message[len].senderLastname,										
+				replyToReply: data.message[len].replies
+			});
 			//}
 		}
 	}; 
