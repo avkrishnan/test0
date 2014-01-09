@@ -39,7 +39,7 @@
 			return ES.channelService.getChannel(self.channelValue(), {success: successfulGetChannel, error: errorAPI});				
 		} else {
 			self.findClass('validationerror');
-      self.errorFind('<span>Sorry,</span> channel not found.');			
+      self.errorFind("<span>Sorry,</span> that channel name doesn't exist, try again");			
 		}							
 	};
 	
