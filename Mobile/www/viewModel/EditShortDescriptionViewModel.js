@@ -78,7 +78,7 @@
 				ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
     	} else {
     		self.errorMessage(true);			
-      	self.errorChannel('<span>Sorry,</span> taglines of a maximum of 80 characters.');
+      	self.errorChannel('<span>Sorry,</span> Taglines have a max of 80 characters');
     	}
 		}
   };
