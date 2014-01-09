@@ -23,7 +23,7 @@
 			$.mobile.showPageLoadingMsg('a', 'Loading Followers');		
 			return ES.channelService.getFollowers(self.channelId(), { success: successfulList, error: errorAPI });
 		}
-	};	
+	};
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();	
