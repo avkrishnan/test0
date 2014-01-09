@@ -79,7 +79,7 @@
 		var rcvrFirstname,rcvrLastname;
 		$.mobile.hidePageLoadingMsg();	
 		for(var len = 0; len<data.recipients.length; len++) {
-			if(typeof (data.recipients[len].rcvrFirstname) == 'undefined' && typeof(data.recipients[len].rcvrLastname) == 'undefined') {
+			if(typeof data.recipients[len].rcvrFirstname == 'undefined' && typeof data.recipients[len].rcvrLastname == 'undefined') {
 				rcvrFirstname = '';
 			  rcvrLastname = '';
 			} else{

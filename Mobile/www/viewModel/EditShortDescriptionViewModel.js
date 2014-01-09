@@ -26,7 +26,6 @@
 			});
 		}
 	}
-	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13  && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'editShortDescriptionView') {
 			self.shortDescriptionCommand();
@@ -64,21 +63,27 @@
 		self.errorMessage(true);			
 		self.errorChannel('<span>Sorry,</span> '+details.message);
   };
-	
+
   self.shortDescriptionCommand = function () {
 		if (self.shortDescription() == '' || typeof self.shortDescription() == 'undefined') {
 			self.errorMessage(true);			
       self.errorChannel('<span>Sorry,</span> Please enter channel tagline');
     } else {
-			var channelObject = {
-				id: self.channelId(),
-				description: self.shortDescription()
-			};
-			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
-			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
+    	if(self.shortDescription().length <=80){
+    		var channelObject = {
+					id: self.channelId(),
+					description: self.shortDescription()
+				};
+				$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
+				ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
+    	} else {
+    		self.errorMessage(true);			
+      	self.errorChannel('<span>Sorry,</span> Please enter channel tagline of max. 80 character');
+    	}
 		}
   };
 }
+
 
 EditShortDescriptionViewModel.prototype = new ENYM.ViewModel();
 EditShortDescriptionViewModel.prototype.constructor = EditShortDescriptionViewModel;

@@ -2,8 +2,8 @@
   var self = this;
 	self.template = 'removeFollowerView';
 	self.viewid = 'V-35a';
-	self.viewname = 'Remove Follower';
-	self.displayname = 'Remove Follower';
+	self.viewname = 'Delete Follower';
+	self.displayname = 'Delete Follower';
 	
   self.inputObs = [ 'channelId', 'followerId', 'followerName', 'followerAccount' ];
   self.defineObservables();	

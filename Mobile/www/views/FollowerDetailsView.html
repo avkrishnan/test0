@@ -13,9 +13,11 @@
         <span></span>
       </div>
     </div>
-    <div class="loginbtn"><a href="#" onclick="viewNavigate('Followers', 'followerDetailsView', 'editFollowerDetailsView');">Edit</a></div>
-    <div class="loginbtn removefollower"><a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'removeFollowerView');">Remove follower from this channel</a></div>
-  </div>   
+    <div class="loginbtn removefollower">
+      <a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'removeFollowerView');">Delete follower from this channel</a>
+    </div>
+  </div> 
+  <div class="toast-notification"></div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'userSettingsView');"></a>
     <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'plusMenuView');"></a>    
