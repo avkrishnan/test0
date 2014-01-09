@@ -1,0 +1,33 @@
+<div id="editFollowerDetailsView" data-role="page" class="channel-list" >
+	<header class="logged-in"></header>  
+  <div class="page-content">
+    <div class="provisionalchannel">
+      <span class="channelimg channel1 borderred"></span>
+      <div class="channelinfoname" data-bind="text: channelName"></div>
+    </div>
+
+    <form class="loginform">
+      <label class="msginfo">Edit a Follower</label>
+      <div class="formtype" data-bind="css: nameClass">
+      	<input type="text" placeholder="first and last name (optional)" data-bind="value: followerName" />
+        <div class="msgerror" data-bind="html: errorName"></div>
+      </div>
+      <div class="formtype" data-bind="css: emailClass">
+      	<input type="text" data-bind="value: emailaddress" placeholder="email address*" />
+        <div class="msgerror" data-bind="html: errorEmail"></div>
+      </div>
+      <div class="formtype" data-bind="css: phoneClass">
+      	<input type="text" placeholder="phone number*" data-bind="value: smsPhone" />
+        <div class="msgerror" data-bind="html: errorPhone"></div>
+      </div>
+      <div class="required">* A phone number or email address are required</div>
+      <div class="loginbtn"><a href="#" data-bind='click:editFollowerDetails'>Save</a></div>
+    </form>
+
+  </div>   
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'userSettingsView');"></a>
+    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'plusMenuView');"></a>    
+  </div>
+  <div class="active-overlay" style="display:none"></div>  
+</div>
