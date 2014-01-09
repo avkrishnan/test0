@@ -411,6 +411,7 @@ escalateSettingsViewModel = new EscalateSettingsViewModel(),
 escalateTimeSettingsViewModel = new EscalateTimeSettingsViewModel(),
 followerDetailsViewModel = new FollowerDetailsViewModel(),
 
+editFollowerDetailsViewModel = new EditFollowerDetailsViewModel(),
 removeFollowerViewModel = new RemoveFollowerViewModel(),
 notGotItViewModel = new NotGotItViewModel(),
 whoGotItViewModel = new WhoGotItViewModel(),
@@ -428,7 +429,6 @@ newFollowersSettingsViewModel = new NewFollowersSettingsViewModel(),
 
 followChannelViewModel = new FollowChannelViewModel()
 /* end */
-
 ;
 
 // load the stored state (recent searches)
@@ -511,9 +511,9 @@ var models = [
 							forgotEvernymViewModel,
 							messageLengthWarningViewModel,
 							newFollowersSettingsViewModel,
-							followChannelViewModel	
-              ];
-
+							followChannelViewModel,	
+							editFollowerDetailsViewModel
+            ];
 
 function getHTMLName(viewModel){
     var name = getClassName(viewModel).replace("Model","");

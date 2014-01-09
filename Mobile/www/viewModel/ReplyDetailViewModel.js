@@ -14,7 +14,7 @@ function ReplyDetailViewModel() {
     'replyDate', 
     'reply', 
     'moreText'];	
-	self.defineObservables();					
+	self.defineObservables();				
 
   /* Single message observable */			
 	self.less = ko.observable(true);		
@@ -23,13 +23,21 @@ function ReplyDetailViewModel() {
 	self.lessButton = ko.observable(false);											  
 	
 	self.activate = function() {
+		var senderFirstname,senderLastname;
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
 		var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));			
 		if(!channelObject || !messageObject) {
 			goToView('channelsIOwnView');			
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message								
-			var replyObject = JSON.parse(ENYM.ctx.getItem('currentReplyData'));			
+			var replyObject = JSON.parse(ENYM.ctx.getItem('currentReplyData'));	
+			if(typeof replyObject.senderFirstname == 'undefined' && typeof replyObject.senderLastname == 'undefined') {
+				senderFirstname = 'Evernym';
+			  senderLastname = '';
+			} else{
+				senderFirstname = replyObject.senderFirstname;
+				senderLastname = replyObject.senderLastname;
+			}		
 			self.less(true);				
 			self.more(false);		
 			self.moreButton(true);
@@ -37,7 +45,7 @@ function ReplyDetailViewModel() {
 			self.channelId(channelObject.channelId);	
 			self.channelName(channelObject.channelName);													
 			self.messageId(messageObject.messageId);
-			self.senderName(replyObject.senderFirstname+' '+replyObject.senderLastname+':');						
+			self.senderName(senderFirstname+' '+senderLastname+':');						
 			self.replyDate(formatDate(replyObject.created, 'short', 'main'));
 			self.reply(replyObject.replyLess);
 			self.moreText(replyObject.replyFull);												

@@ -26,32 +26,30 @@
 	};	
 	
 	function successfulList(data){
-    $.mobile.hidePageLoadingMsg();				
-		for(var len = 0; len<data.followers.length; len++) {
-			var follower = data.followers.length-1;				
-			if(follower == 1) {
-				var followers = follower +' follower';
-			} else {
-				var followers = follower +' followers';
-			}
-			if(typeof data.followers[len].firstname == 'undefined') {
+    $.mobile.hidePageLoadingMsg();	
+		self.followerCount(data.followers.length - 1);
+		if(self.followerCount() == 1) {
+			self.followerCount(self.followerCount() + ' follower');
+		} else {
+			self.followerCount(self.followerCount() + ' followers');
+		}	
+		$.each(data.followers, function(indexFollower, valueFollower) {
+			if(typeof valueFollower.firstname == 'undefined') {
 				var name = '';
-				var nameClass = 'noname'
+				var nameClass = 'noname';
+			} else {
+				var name = valueFollower.firstname +' '+ valueFollower.lastname;
+				var nameClass = '';
 			}
-			else {
-				var name = data.followers[len].firstname +' '+ data.followers[len].lastname;
-				var nameClass = ''
-			}			
-			self.followerCount(followers);						
-			if(data.followers[len].relationship == 'F') {
+			if(valueFollower.relationship != 'O') {
 				self.followers.push({
-					followerId: data.followers[len].id,
+					followerId: valueFollower.id,
 					nameClass: nameClass,
 					followerName: name, 
-					accountname: data.followers[len].accountname
+					accountname: valueFollower.accountname
 				});
 			}
-		}
+		});
 	}; 
 	
   function errorAPI(data, status, details) {

@@ -22,7 +22,7 @@
 			var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));										
 			self.channelName(channelObject.channelName);
 			var fullDate = formatDate(messageObject.created,'long');					
-			self.time('Sent - '+ fullDate);			
+			self.time('Sent - '+ fullDate);		
 			self.fullText(messageObject.broadcastFull.replace(/\n/g, '<br/>'));																
 		}
 	};			
