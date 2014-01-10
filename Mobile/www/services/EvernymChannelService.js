@@ -55,7 +55,9 @@ function EvernymChannelService(api) {
   };
 
   t.modifyChannel = function(channel, callbacks) {
-    return api.callAPI('PUT', '/channel/' + channel.id, channel, callbacks, true);
+    var chnlId = channel.id;
+    delete channel.id;
+    return api.callAPI('PUT', '/channel/' + chnlId, channel, callbacks, true);
   };
 
   /* Channel Follower Requests */
