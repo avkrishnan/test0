@@ -59,12 +59,12 @@
 			self.errorMessage('');
       if ($('input[name="rememberPassword"]:checked').length == 1) {
 				ENYM.ctx.setItem("username", self.username());
-        ENYM.ctx.setItem("password", self.password());
+        //ENYM.ctx.setItem("password", self.password());
 				self.session(2*7*24*60*60);
       }
 			else {
 				ENYM.ctx.removeItem('username');
-				ENYM.ctx.removeItem('password');
+				//ENYM.ctx.removeItem('password');
 				self.session(3600);
 			}
       var loginError = function(data, status, details) {
