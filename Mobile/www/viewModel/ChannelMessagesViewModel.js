@@ -34,9 +34,13 @@
 	
 	/*action to single message page*/
 	self.iGiAckMessage = function(data) {
-		var callbacks = {
+		if(data.iGiClass == 'igibutton igisent') {
+			var toastobj = {type: 'toast-info', text: 'iGi has already been sent !'};
+			showToast(toastobj);
+		} else{
+			var callbacks = {
 			success: function(data) {					
-				var toastobj = {type: '', text: 'iGi Acknowledgement sent !'};
+				var toastobj = {type: '', text: 'iGi is being sent !'};
 				showToast(toastobj);				
 				goToView($.mobile.activePage.attr('id'));								
 			},
@@ -45,7 +49,8 @@
 				showToast(toastobj);			
 			}
 		};					
-		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
+		$.mobile.showPageLoadingMsg('a', 'Sending iGi request !');
+		}
 		// TODO make a common function for all Overlay message and Badge Count
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 			ES.systemService.adjMnsCount(-1);

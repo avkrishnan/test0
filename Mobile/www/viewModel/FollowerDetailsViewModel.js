@@ -5,7 +5,7 @@
   self.viewname = 'Follower Details';
   self.displayname = 'Follower Details';
 	
-  self.inputObs = [ 'channelName', 'followerName', 'followerEvernym' ];
+  self.inputObs = [ 'channelName', 'followerName', 'followerEvernym', 'followerEmail', 'followerPhone' ];
   self.defineObservables();
 	
 	self.visibleName = ko.observable(true);
@@ -30,9 +30,16 @@
 			} else {
 				self.visibleEvernym(true);
 				self.followerEvernym(followerObject.accountname);
-			}																							
+			}
+		}
+		if(followerObject.followerId != '') {
+			$.when(ES.channelService.getFollower(followerObject.followerId).then(self.initializeFollowerDetails()));
 		}
 	};
+	
+	self.initializeFollowerDetails = function() {
+		//alert('here');
+	}
 }
 
 FollowerDetailsViewModel.prototype = new ENYM.ViewModel();

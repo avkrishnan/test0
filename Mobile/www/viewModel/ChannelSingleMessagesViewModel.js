@@ -139,7 +139,7 @@
 		$('.active-overlay').html('');
 		var callbacks = {
 			success: function(data) {
-				//alert('success');
+				//alert(success);
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
@@ -155,12 +155,24 @@
 			if(tempEnymNotifications.length > 0) {
 				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 					if(typeof valueNotification != 'undefined' && valueNotification.msgId == messageID) {
-						tempEnymNotifications.splice(indexNotification,1)
+						tempEnymNotifications.splice(indexNotification,1);
 					}
 				});
 				ENYM.ctx.removeItem('enymNotifications');
 				ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 			}
+		} else if (read == 'N') {
+			var tempEnymNotifications = [];
+			tempEnymNotifications = JSON.parse(ENYM.ctx.getItem('enymNotifications'));
+			if(tempEnymNotifications.length > 0) {
+				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
+					if(typeof valueNotification != 'undefined' && valueNotification.msgId == messageID) {
+						valueNotification.read = 'Y';
+					}
+				});
+				ENYM.ctx.removeItem('enymNotifications');
+				ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			}			
 		}
 		return ES.messageService.readMsg(messageID, callbacks).then(self.updateMessages);
 	};
@@ -197,7 +209,7 @@
 				self.activeClass('igisentimg');
 				backNavText.pop();
 				var redirectView = backNavView.pop();				
-				var toastobj = {redirect: redirectView, type: '', text: 'iGi Acknowledgement sent !'};
+				var toastobj = {redirect: redirectView, type: '', text: 'iGi is being sent !'};
 				showToast(toastobj);				
 				goToView(redirectView);
 			},
@@ -207,11 +219,11 @@
 			}
 		};		
 		if(self.ack() == 'Y' || self.activeClass() == 'igisentimg') {
-			var toastobj = {type: 'toast-info', text: 'iGi Acknowledgement already sent !'};
+			var toastobj = {type: 'toast-info', text: 'iGi has already been sent !'};
 			showToast(toastobj);												
 		}
 		else {			
-			$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
+			$.mobile.showPageLoadingMsg('a', 'Sending iGi request !');
 			// To Do Common function for Overlay messages and badge count
 			if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 				ES.systemService.adjMnsCount(-1);
