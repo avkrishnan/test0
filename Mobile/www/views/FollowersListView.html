@@ -2,58 +2,33 @@
 	<header class="logged-in"></header>  
   <div class="page-content followerpage">
     <div class="followerchannel">
-      <div class="channelcontent broadecast">
+      <div class="channelname">
         <span class="channelimg channel1 borderred"></span>
         <div class="channelinfoname" data-bind="text: channelName"></div>
         <a href="#" class="setting settinginner" onclick="viewNavigate('Followers', 'followersListView', 'channelSettingsView');"></a>
       </div>
-    </div>      
+    </div>   
     <div class="followerchannel">
-      <a class="low-messages newfollowers" href="#" onclick="viewNavigate('Followers', 'followersListView', 'addInviteFollowersView');">Add or invite new followers</a>
+      <a class="addinvitebtn" href="#" onclick="viewNavigate('Followers', 'followersListView', 'addInviteFollowersView');"> + ADD / INVITE</a>
     </div>    
-    <!--<div class="followerchannel">
-      <h1 class="requests">Follower Requests:</h1>
-      <div class="low-messages acceptdecline requestsican">
-        <div class="accept-decline">
-          <span>Lebron James</span>
-          <em>lj-ballin</em>
-        </div>
-        <div class="acceptdeclinebtn">
-          <a href="#">ACCEPT</a>
-          <a href="#">DECLINE</a>
-        </div>
-      </div>
-    </div>
     <div class="followerchannel">
-      <h1 class="requests">No Longer following:</h1>
-      <div class="low-messages acceptdecline norequestsican">
-        <div class="accept-decline">
-          <span>Will Bown</span>
-          <em>willbowen17</em>
-        </div>
-        <div class="acceptdeclinebtn">
-          <a href="#">CLEAR</a>
-        </div>
-      </div>
-    </div>-->
-    <div class="dropdown">
-      <span class="followerssearch" data-bind="text: followerCount"></span>
-      <form class="chaneldropdown" action="#" method="get" >
-        <select>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
-          <option value="min">A-Z</option>
-        </select>
-      </form>
+      <a class="followercount" href="#" onclick="viewNavigate('Followers', 'followersListView', 'invitedFollowersView');">
+        Invites<span data-bind="text: invitesCount"></span>
+      </a>
+      <a class="followercount declined" href="#" onclick="viewNavigate('Followers', 'followersListView', 'declinedFollowersView');">
+        Declined Invites<span data-bind="text: declinesCount"></span>
+      </a>
+      <a class="followercount nocontact" href="#">Un-reachable Followers<span>0</span></a>
     </div>
+    <div class="pending" data-bind="text: followerCount"></div>
     <div data-bind="foreach: followers">
-      <a href="#" class="low-messages allfollowercs" data-bind="click: $parent.followerDetails.bind($index())">
-        <div class="accept-decline" data-bind="css: nameClass">
+      <a href="#" class="normalfollowers" data-bind="css: nameClass, css: provClass, click: $parent.followerDetails.bind($index())">
+        <span class="evernym" data-bind="visible: evernymIcon"></span>
+        <div class="normalinvites">
           <span data-bind="text: followerName"></span>
           <em data-bind="text: accountname"></em>
         </div>
-      </a>
+      </a>      
     </div>
   </div>
   <div class="toast-notification"></div>  

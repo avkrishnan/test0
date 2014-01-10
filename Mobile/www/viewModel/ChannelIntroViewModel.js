@@ -109,19 +109,14 @@
 		ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI});		
   };		
 	
-	function successfulGetChannel(data) {	
-		if(data.followers == 1) {
-			var followers = data.followers +' follower';
-		} else {
-			var followers = data.followers +' followers';
-		}		
+	function successfulGetChannel(data) {		
 		var channel = [];			
 		channel.push({
 			channelId: data.id, 
 			channelName: data.name, 
 			channelDescription: data.description,
 			longDescription: data.longDescription,			
-			followerCount: followers
+			followerCount: data.followers
 		});
 		channel = channel[0];		
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));

@@ -59,12 +59,7 @@
 	function successfulGetChannel(data) {
 		$.mobile.hidePageLoadingMsg();
 		ENYM.ctx.setItem("currentChannel", JSON.stringify(data));
-		self.title(data.name);
-		if(data.followers == 1) {
-			var followers = data.followers +' follower';
-		} else {
-			var followers = data.followers +' followers';
-		}		
+		self.title(data.name);	
 		self.description(data.description);
 		if(typeof data.longDescription != 'undefined') {
 			if(data.longDescription.length > truncatedTextScreen()*12) {
@@ -85,7 +80,9 @@
 		self.channelId(data.id);
 		if(data.relationship == 'F' ) {
 			self.channelAction(false);
-			self.settings(true);			
+			self.settings(true);
+			var toastobj = {redirect: 'channelMessagesView', type: '', text: "You already follow the channel '"+self.title()+"'"};
+			showToast(toastobj);						
 			viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');			
 		}
 		else if(data.relationship == 'O') {
@@ -93,19 +90,14 @@
 			var account = JSON.parse(ENYM.ctx.getItem('account'));				
 				self.longdescription("This is the web page for "+self.title()+". To follow "+self.title()+", click the Follow button below.<br/><br/>Hello, "+account.firstname+"!  Your channel needs a better description than what we came up with for you, so go ahead and type that in this box.<br/>Make sure to include an invitation for visitors to click the Follow button in order to get your channel's broadcasts.");							
 			}				
-			ENYM.ctx.setItem('channelOwner', 'yes');
-			if(data.followers == 1) {
-				var followers = data.followers +' follower';
-			} else {
-				var followers = data.followers +' followers';
-			}		
+			ENYM.ctx.setItem('channelOwner', 'yes');	
 			var channel = [];			
 			channel.push({
 				channelId: data.id, 
 				channelName: data.name, 
 				channelDescription: data.description,
 				longDescription: data.longDescription,			
-				followerCount: followers
+				followerCount: data.followers
 			});
 			channel = channel[0];		
 			ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));

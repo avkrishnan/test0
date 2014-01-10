@@ -427,7 +427,9 @@ forgotEvernymViewModel = new ForgotEvernymViewModel(),
 messageLengthWarningViewModel = new MessageLengthWarningViewModel(),
 newFollowersSettingsViewModel = new NewFollowersSettingsViewModel(),
 
-followChannelViewModel = new FollowChannelViewModel()
+followChannelViewModel = new FollowChannelViewModel(),
+invitedFollowersViewModel = new InvitedFollowersViewModel(),
+declinedFollowersViewModel = new DeclinedFollowersViewModel()
 /* end */
 ;
 
@@ -512,7 +514,9 @@ var models = [
 							messageLengthWarningViewModel,
 							newFollowersSettingsViewModel,
 							followChannelViewModel,	
-							editFollowerDetailsViewModel
+							editFollowerDetailsViewModel,
+							invitedFollowersViewModel,
+							declinedFollowersViewModel
             ];
 
 function getHTMLName(viewModel){

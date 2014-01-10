@@ -25,7 +25,12 @@
 			else {									
 				self.channelId(channelObject.channelId);
 				self.channelName(channelObject.channelName);
-				self.followerCount(channelObject.followerCount);											
+				if(channelObject.followerCount == 1) {
+					var followers = channelObject.followerCount +' follower';
+				} else {
+					var followers = channelObject.followerCount +' followers';
+				}				
+				self.followerCount(followers);											
 			}
 			self.getMessagesCommand();
 		}
@@ -46,7 +51,7 @@
 			channelId: data.id, 
 			channelName: data.name, 
 			channelDescription: data.description,
-			followerCount: followers
+			followerCount: data.followers
 		});
 		channel = channel[0];		
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));

@@ -1,0 +1,78 @@
+﻿function DeclinedFollowersViewModel() {
+  var self = this;
+	self.template = 'declinedFollowersView';
+	self.viewid = 'V-??';
+	self.viewname = 'Declined Followers';
+	self.displayname = 'Declined Followers';
+	
+	self.evernymIcon = ko.observable(false);	
+  self.inputObs = [ 'channelId', 'channelName', 'declinesCount'];
+	self.defineObservables();	
+  self.followers = ko.observableArray([]);
+	  
+	self.activate = function() {			
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));				
+		if(!channelObject) {
+			goToView('channelsIOwnView');			
+		} else {				
+			addExternalMarkup(self.template); // this is for header/overlay message
+			self.evernymIcon(false);
+			self.followers.removeAll();
+			self.declinesCount('0');																										
+			self.channelId(channelObject.channelId);
+			self.channelName(channelObject.channelName);																						
+			$.mobile.showPageLoadingMsg('a', 'Loading Declined Followers');		
+			return ES.channelService.getFollowers(self.channelId(), { success: successfulList, error: errorAPI });
+		}
+	};
+	
+	function successfulList(data){
+    $.mobile.hidePageLoadingMsg();
+		$.each(data.followers, function(indexFollower, valueFollower) {
+			if(valueFollower.relationship == 'N') {
+				var evernymIcon = false;
+				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
+					var name = '';
+					var nameClass = 'noname';
+				} 
+				else if(typeof valueFollower.firstname == 'undefined') {
+					var name = valueFollower.lastname;
+					var nameClass = 'provisionalicon';				
+				}
+				else if(typeof valueFollower.lastname == 'undefined') {
+					var name = valueFollower.firstname;
+					var nameClass = 'provisionalicon';				
+				}			
+				else {
+					var name = valueFollower.firstname +' '+ valueFollower.lastname;
+					var nameClass = 'provisionalicon';
+				}
+				if(valueFollower.managed == 'N') {
+					var nameClass = true;
+				}		
+				self.followers.push({
+					followerId: valueFollower.id,
+					nameClass: nameClass,
+					followerName: name, 
+					accountname: valueFollower.accountname,
+					evernymIcon: evernymIcon
+				});
+				self.declinesCount(self.followers().length);
+			}
+		});
+	}; 
+	
+  function errorAPI(data, status, details) {
+    $.mobile.hidePageLoadingMsg();
+		var toastobj = {type: 'toast-error', text: details.message};
+		showToast(toastobj);		
+  };
+	
+	self.followerDetails = function (data) {
+		ENYM.ctx.setItem('currentfollowerData', JSON.stringify(data));		
+		viewNavigate('Declined Followers', 'declinedFollowersView', 'followerDetailsView');
+  };
+}
+
+DeclinedFollowersViewModel.prototype = new ENYM.ViewModel();
+DeclinedFollowersViewModel.prototype.constructor = DeclinedFollowersViewModel;

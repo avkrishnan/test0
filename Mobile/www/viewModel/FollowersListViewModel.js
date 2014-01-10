@@ -5,7 +5,7 @@
 	self.viewname = 'Followers';
 	self.displayname = 'Followers';
 
-  self.inputObs = [ 'channelId', 'channelName', 'followerCount'];
+  self.inputObs = [ 'channelId', 'channelName', 'invitesCount', 'declinesCount', 'followerCount'];
 	self.defineObservables();	
   self.followers = ko.observableArray([]);
 	  
@@ -16,7 +16,9 @@
 		} else {				
 			addExternalMarkup(self.template); // this is for header/overlay message	
 			self.followers.removeAll();
-			self.followerCount('0 followers');								
+			self.invitesCount(0);
+			self.declinesCount(0);			
+			self.followerCount('Followers (0)');								
 			self.accountName(ENYM.ctx.getItem('accountName'));																		
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);																						
@@ -26,40 +28,58 @@
 	};
 	
 	function successfulList(data){
-    $.mobile.hidePageLoadingMsg();	
-		self.followerCount(data.followers.length - 1);
-		if(self.followerCount() == 1) {
-			self.followerCount(self.followerCount() + ' follower');
-		} else {
-			self.followerCount(self.followerCount() + ' followers');
-		}	
+    $.mobile.hidePageLoadingMsg();
+		invites = declines = 0;
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
-				var name = '';
-				var nameClass = 'noname';
-			} 
-			else if(typeof valueFollower.firstname == 'undefined') {
-				var name = valueFollower.lastname;
-				var nameClass = '';				
-			}
-			else if(typeof valueFollower.lastname == 'undefined') {
-				var name = valueFollower.firstname;
-				var nameClass = '';				
-			}			
-			else {
-				var name = valueFollower.firstname +' '+ valueFollower.lastname;
-				var nameClass = '';
-			}
 			if(valueFollower.relationship != 'O') {
+				if(valueFollower.relationship == 'I') {
+					invites == invites++;
+				}
+				else if(valueFollower.relationship == 'N') {
+					declines == declines++;
+				}
+				else if(valueFollower.relationship == 'F') {
+					var prov = '';
+				}
+				var evernymIcon = false;
+				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
+					var name = '';
+					var nameClass = 'noname';
+				} 
+				else if(typeof valueFollower.firstname == 'undefined') {
+					var name = valueFollower.lastname;
+					var nameClass = 'provisionalicon';				
+				}
+				else if(typeof valueFollower.lastname == 'undefined') {
+					var name = valueFollower.firstname;
+					var nameClass = 'provisionalicon';				
+				}			
+				else {
+					var name = valueFollower.firstname +' '+ valueFollower.lastname;
+					var nameClass = '';
+				}
+				if(valueFollower.managed == 'N') {
+					var evernymIcon = true;
+					var nameClass = '';
+				}		
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
-					followerName: name, 
-					accountname: valueFollower.accountname
+					followerName: name,
+					provClass: prov, 
+					accountname: valueFollower.accountname,
+					evernymIcon: evernymIcon
 				});
 			}
 		});
-	}; 
+		self.invitesCount(invites);
+		self.declinesCount(declines);		
+		if(self.followers().length == 1) {
+			self.followerCount('Follower ('+self.followers().length+')');
+		} else {
+			self.followerCount('Followers ('+self.followers().length+')');
+		}	
+	};	 
 	
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();

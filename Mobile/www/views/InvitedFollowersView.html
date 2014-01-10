@@ -1,0 +1,30 @@
+<div id="invitedFollowersView" data-role="page">
+	<header class="logged-in"></header> 
+  <div class="page-content followerpage">
+    <div class="followerchannel">
+      <div class="channelname">
+        <span class="channelimg channel1 borderred"></span>
+        <div class="channelinfoname" data-bind="text: channelName"></div>
+        <a href="#" class="setting settinginner" onclick="viewNavigate('Invited Followers', 'invitedFollowersView', 'channelSettingsView');"></a>
+      </div>
+    </div>         
+    <div class="pending">
+      Pending Invites <span data-bind="text: invitesCount"></span>
+    </div>
+    <div data-bind="foreach: followers">
+      <a href="#" class="normalfollowers" data-bind="css: nameClass, click: $parent.followerDetails.bind($index())">
+        <span class="evernym" data-bind="visible: evernymIcon"></span>
+        <div class="normalinvites">
+          <span data-bind="text: followerName"></span>
+          <em data-bind="text: accountname"></em>
+        </div>
+      </a>
+    </div>          
+  </div>  
+  <div class="toast-notification"></div>  
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Invited Followers', 'invitedFollowersView', 'userSettingsView');"></a>
+    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Invited Followers', 'invitedFollowersView', 'plusMenuView');"></a>
+  </div>
+  <div class="active-overlay" style="display:none"></div>  
+</div>   

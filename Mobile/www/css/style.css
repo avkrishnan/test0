@@ -350,6 +350,9 @@ select, .ui-icon-arrow-d {
 	color:#fff;
 	padding:0 10px 0 12px;
 }
+.verification {
+	margin:58px 0 0 0;
+}
 .success p {
 	padding-bottom:15px;
 }
@@ -3675,11 +3678,24 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .provisionalfollower {
 	border-radius:20px 0 0 10px;
 }
-.provisionalfollower em {
-	padding:19px;
-	margin-right:10px;
+.provisionalfollower .followernormal {
+	background:url(images/sprites.png) no-repeat -6px -1824px;
 	float:left;
-	background:url("images/sprites.png") no-repeat -7px -1753px;
+	height:42px;
+	margin-right:10px;
+	padding:0 0 0 13px;
+	width:33px;
+}
+.provisionalfollower .followernormal em.evernym {
+	background:url(images/evernymiconlogo.png) no-repeat 16px 24px;
+	float:left;
+	padding:20px 16px;
+}
+.provisionalfollower .followernormal.provisionalicon {
+	background:url(images/sprites-channel.png) no-repeat -4px -1084px;
+}
+.provisionalfollower .followernormal.nonverifiedicon {
+	background:url(images/sprites.png) no-repeat -6px -1908px;
 }
 .provisional-follower {
 	display:inline-block;
@@ -3844,6 +3860,105 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:14px;
 	margin:0 5px;
 	padding:4px 14px;
+}
+/*V-26---10-01-2014*/
+.channelname {
+	background:#2D2D2D;
+	margin:15px 0 5px 0;
+	border-radius:20px 0 0 20px;
+}
+.addinvitebtn {
+	background:#8DC63F url(images/buddy-white.png) no-repeat 12px 7px;
+	padding:5px 15px 5px 32px;
+	border-radius:4px;
+	font-size:14px;
+	margin:6px 0px;
+	display:inline-block;
+}
+.followercount, .followercount.ui-link, .followercount.ui-link:visited, .followercount.ui-link:hover, .followercount.ui-link:active {
+	border-radius:4px;
+	padding:5px 5px 4px 10px;
+	display:block;
+	margin:5px 10px 5px 0;
+	background:#f1f2f2;
+	color:#67686b;
+	font-size:16px;
+}
+.followercount span {
+	float:right;
+	color:#fff;
+}
+.followercount.declined, .followercount.declined.ui-link, .followercount.declined.ui-link:visited, .followercount.declined.ui-link:hover, .followercount.declined.ui-link:active {
+	margin:10px 10px 10px 0;
+	color:#25a1d6;
+}
+.followercount.declined span {
+	background:#25a1d6;
+}
+.followercount.nocontact, .followercount.nocontact.ui-link, .followercount.nocontact.ui-link:visited, .followercount.nocontact.ui-link:hover, .followercount.nocontact.ui-link:active {
+	color:#f7941e;
+}
+.followercount.nocontact span {
+	background:#f7941e;
+}
+/*10-01-2014*/
+.pending {
+	color:#fff;
+	font-size:16px;
+	margin:10px 0px 15px 25px;
+}
+.pending span, .followercount span {
+	background:#8DC63F;
+	border-radius:4px;
+	margin-left:5px;
+	padding:1px 8px;
+	font-size:14px;
+}
+.normalfollowers {
+	background:#2D2D2D url(images/sprites.png) no-repeat -6px -1824px;
+	margin:0px 0px 0px 10px;
+	border-radius:21px 0 0 21px;
+	padding:0 0 0 30px;
+	height:43px;
+	display:inline-block;
+	width:100%;
+	margin-bottom:10px;
+}
+.normalfollowers.provisionalicon {
+	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1084px;
+}
+.noverified {
+	background-position:-6px -1908px
+}
+.noverified .normalinvites em {
+	font-style:normal;
+	color:#f7941e;
+}
+.normalfollowers.noname {
+	line-height:40px;
+	background:#2D2D2D url(images/sprites-channel.png) no-repeat -4px -1084px;
+}
+.normalfollowers.noname em {
+ line-height:40px;
+ font-size:14px;
+}
+.evernym {
+	background:url(images/evernymiconlogo.png) no-repeat 0 22px;
+	padding:21px 9px;
+	float:left;
+}
+.normalinvites {
+	margin-left:28px;
+}
+.normalinvites span {
+	font-size:14px;
+	color:#fff;
+}
+.normalinvites em {
+	display:block;
+	color:#8DC63F;
+	font-size:13px;
+	line-height:14px;
 }
 /*
 	*@media query css
