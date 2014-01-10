@@ -139,7 +139,7 @@
 		$('.active-overlay').html('');
 		var callbacks = {
 			success: function(data) {
-				//alert('success');
+				//alert(success);
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
@@ -155,12 +155,24 @@
 			if(tempEnymNotifications.length > 0) {
 				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 					if(typeof valueNotification != 'undefined' && valueNotification.msgId == messageID) {
-						tempEnymNotifications.splice(indexNotification,1)
+						tempEnymNotifications.splice(indexNotification,1);
 					}
 				});
 				ENYM.ctx.removeItem('enymNotifications');
 				ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 			}
+		} else if (read == 'N') {
+			var tempEnymNotifications = [];
+			tempEnymNotifications = JSON.parse(ENYM.ctx.getItem('enymNotifications'));
+			if(tempEnymNotifications.length > 0) {
+				$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
+					if(typeof valueNotification != 'undefined' && valueNotification.msgId == messageID) {
+						valueNotification.read = 'Y';
+					}
+				});
+				ENYM.ctx.removeItem('enymNotifications');
+				ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
+			}			
 		}
 		return ES.messageService.readMsg(messageID, callbacks).then(self.updateMessages);
 	};
