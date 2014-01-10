@@ -429,7 +429,8 @@ newFollowersSettingsViewModel = new NewFollowersSettingsViewModel(),
 
 followChannelViewModel = new FollowChannelViewModel(),
 invitedFollowersViewModel = new InvitedFollowersViewModel(),
-declinedFollowersViewModel = new DeclinedFollowersViewModel()
+declinedFollowersViewModel = new DeclinedFollowersViewModel(),
+unreachableFollowersViewModel = new UnreachableFollowersViewModel()
 /* end */
 ;
 
@@ -516,7 +517,8 @@ var models = [
 							followChannelViewModel,	
 							editFollowerDetailsViewModel,
 							invitedFollowersViewModel,
-							declinedFollowersViewModel
+							declinedFollowersViewModel,
+							unreachableFollowersViewModel
             ];
 
 function getHTMLName(viewModel){

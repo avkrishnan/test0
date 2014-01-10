@@ -1,4 +1,4 @@
-﻿function InvitedFollowersViewModel() {
+﻿function UnreachableFollowersViewModel() {
   var self = this;
 	self.template = 'unreachableFollowersView';
 	self.viewid = 'V-??';
@@ -29,9 +29,20 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(valueFollower.relationship == 'I') {		
-				var evernymIcon = false;
-				var nameClass = 'provisionalicon';
+			if(valueFollower.relationship == 'U') {		
+				var evernymIcon = false;				
+				if(valueFollower.relationship == 'I') {
+					invites == invites++;
+					var nameClass = 'provisionalicon';
+				}
+				else if(valueFollower.relationship == 'N') {
+					declines == declines++;
+					var nameClass = 'provisionalicon';
+				}
+				else if(valueFollower.relationship == 'F') {
+					var nameClass = 'normalfollowers';
+					var evernymIcon = true;
+				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					var name = '';
 					nameClass = nameClass+' noname';
@@ -69,5 +80,5 @@
   };
 }
 
-InvitedFollowersViewModel.prototype = new ENYM.ViewModel();
-InvitedFollowersViewModel.prototype.constructor = InvitedFollowersViewModel;
+UnreachableFollowersViewModel.prototype = new ENYM.ViewModel();
+UnreachableFollowersViewModel.prototype.constructor = UnreachableFollowersViewModel;

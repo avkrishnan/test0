@@ -48,7 +48,7 @@
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
-					followerName: name, 
+					followerName: name,
 					accountname: valueFollower.accountname,
 					evernymIcon: evernymIcon
 				});

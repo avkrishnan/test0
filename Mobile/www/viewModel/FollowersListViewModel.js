@@ -5,7 +5,7 @@
 	self.viewname = 'Followers';
 	self.displayname = 'Followers';
 
-  self.inputObs = [ 'channelId', 'channelName', 'invitesCount', 'declinesCount', 'followerCount'];
+  self.inputObs = [ 'channelId', 'channelName', 'invitesCount', 'declinesCount', 'unreachCount', 'followerCount'];
 	self.defineObservables();	
   self.followers = ko.observableArray([]);
 	  
@@ -17,7 +17,8 @@
 			addExternalMarkup(self.template); // this is for header/overlay message	
 			self.followers.removeAll();
 			self.invitesCount(0);
-			self.declinesCount(0);			
+			self.declinesCount(0);
+			self.unreachCount(0);						
 			self.followerCount('Followers (0)');								
 			self.accountName(ENYM.ctx.getItem('accountName'));																		
 			self.channelId(channelObject.channelId);
@@ -29,7 +30,7 @@
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
-		invites = declines = 0;
+		invites = declines = unreachs = 0;
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship != 'O') {
 				var evernymIcon = false;				
@@ -41,6 +42,10 @@
 					declines == declines++;
 					var nameClass = 'provisionalicon';
 				}
+				else if(valueFollower.relationship == 'U') {
+					unreachs == unreachs++;
+					var nameClass = 'normalfollowers';
+				}				
 				else if(valueFollower.relationship == 'F') {
 					var nameClass = 'normalfollowers';
 					var evernymIcon = true;
@@ -68,7 +73,8 @@
 			}
 		});
 		self.invitesCount(invites);
-		self.declinesCount(declines);		
+		self.declinesCount(declines);
+		self.unreachCount(unreachs);		
 		if(self.followers().length == 1) {
 			self.followerCount('Follower ('+self.followers().length+')');
 		} else {
