@@ -3421,9 +3421,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:url(images/decline.png) no-repeat 0 5px;
 }
 /* IGI Confirmation End*/
-.nofollowedyet {
+/*.nofollowedyet {
   margin-top:-10px;
-}
+}*/
 /* Help Page */
 .helpinfo {
 	display:inline-block;
@@ -3812,7 +3812,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 /*9-jan-2014*/
 .followerinfo {
 	color:#fff;
-	margin:10px;
+	margin:25px 10px 25px 10px;
 }
 .followerinfo h1 {
 	margin:0px 0 10px 0;
