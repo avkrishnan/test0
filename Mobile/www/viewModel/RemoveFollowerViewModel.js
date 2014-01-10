@@ -47,7 +47,7 @@
 		});
 		channel = channel[0];		
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
-		var toastobj = {redirect: 'followersListView', type: '', text: 'Follower deleted'};
+		var toastobj = {redirect: 'followersListView', type: '', text: 'Follower removed'};
 		showToast(toastobj);						
     goToView('followersListView');					
 	}	
