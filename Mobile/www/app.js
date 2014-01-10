@@ -889,7 +889,7 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
   });
 }
 
-feedbackType = ''; // For setting feedback type
+//feedbackType = ''; // For setting feedback type
 
 /* Validate user via access token */
 function authenticate() {

@@ -23,7 +23,7 @@
 			}
 			else {
 				self.username(ENYM.ctx.getItem("username"));
-				self.password(ENYM.ctx.getItem("password"));
+				//self.password(ENYM.ctx.getItem("password"));
 				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
 			}
 			$('input').keyup(function() {
