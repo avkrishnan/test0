@@ -9,7 +9,9 @@
   self.defineObservables();	
 
 	self.activate = function() {
-		addExternalMarkup(self.template); // this is for header/overlay message
+		addExternalMarkup(self.template); 
+		var feedbackType = ENYM.ctx.getItem("feedbackType");
+		// this is for header/overlay message
 		if(feedbackType == 'feedback') {
 			self.feedbackPlaceholder('Show user an example of usefull feedback');
 			self.feedbackType('Praise for Evernym Channels');
