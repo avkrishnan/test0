@@ -107,8 +107,9 @@
     };
     var loginModel = {};
     loginModel.accountname = self.evernym();
-    loginModel.password = self.password();
-    loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
+    loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';		
+		loginModel.overrideTtl = 3600;
+    loginModel.password = self.password();		
     ES.loginService.accountLogin(loginModel, callbacks);
 	};
 	

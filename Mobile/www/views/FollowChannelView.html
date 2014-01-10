@@ -3,25 +3,24 @@
   <div class="page-content">
     <div class="dropdown">
     </div>
-    <div class="nofollowedyet">
-      <div class="followerinfo">
-        <h1>To follow a channel:</h1>
-        <span>1. Visit the channel's web page.</span>
-        <span>2. Click the Follow button.</span>
-      </div>
-      <div class="getmsg">All channel web pages can be found at (channelname).evernym.com.</div>
-      <div class="getmsg">Or enter the channel's name to go there now:</div>
-      
-      <section class="loginform" method="get" action="#">
-        <div class="formtype channelstype" data-bind="css: findClass">
-          <div class="channelstypeinner">
-            <input type="text" data-bind="value: channelValue" placeholder="type channel name here" />            
-            <a href="#"><span data-bind="click: findChannel">GO</span></a>
-          </div>
-          <div class="msgerror" data-bind="html: errorFind"></div>          
-        </div>
-      </section>
+    <div class="followerinfo">
+      <h1>To follow a channel:</h1>
+      <span>1. Visit the channel's web page.</span>
+      <span>2. Click the Follow button.</span>
     </div>
+    <div class="success">
+      <p>Any channel can be found at (channelname).evernym.com.</p>
+      <p>Or enter the channel's name to go there now:</p>
+    </div>
+    <section class="loginform" method="get" action="#">
+      <div class="formtype channelstype" data-bind="css: findClass">
+        <div class="channelstypeinner">
+          <input type="text" data-bind="value: channelValue" placeholder="type channel name here" />            
+          <a href="#"><span data-bind="click: findChannel">GO</span></a>
+        </div>
+        <div class="msgerror" data-bind="html: errorFind"></div>          
+      </div>
+    </section>
   </div>  
   <div class="footer">
     <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Follow Channel', 'followChannelView', 'userSettingsView');"></a>

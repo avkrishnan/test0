@@ -6,21 +6,22 @@
 	self.displayname = 'Feedback';
 	
   self.activate = function() {
-  	addExternalMarkup(self.template); // this is for header/overlay message			
+  	addExternalMarkup(self.template);// this is for header/overlay message	
+  	ENYM.ctx.removeItem("feedbackType"); 		
 	};
 	
 	self.praise = function() {
-		feedbackType = 'feedback';
+		ENYM.ctx.setItem("feedbackType", 'feedback');
 		viewNavigate('Feedback', 'feedbackView', 'sendFeedbackView');
 	}
 	
 	self.suggestions = function() {
-		feedbackType = 'suggestions';
+		ENYM.ctx.setItem("feedbackType", 'suggestions');
 		viewNavigate('Feedback', 'feedbackView', 'sendFeedbackView');
 	}
 	
 	self.reportABug = function() {
-		feedbackType = 'bug';
+		ENYM.ctx.setItem("feedbackType", 'bug');
 		viewNavigate('Feedback', 'feedbackView', 'sendFeedbackView');
 	}
 }
