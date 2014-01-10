@@ -528,11 +528,19 @@ a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgo
 	float:right;
 }
 .findbtn {
-	margin:10px 0 0 0;
+	margin:10px 0 10px 0;
 	border-radius:4px 0 0 4px;
+	font-size:13px;
+	padding:8px;
+}
+.followtitle {
+	color:#fff;
+	display:inline-block;
+	margin:22px 0 0 15px;
 }
 .loginbtn.findbtn a.ui-link, .loginbtn.findbtn a.ui-link:hover {
 	border-radius:4px;
+	padding:2px 10px;
 }
 .loginbtn a.ui-link, .loginbtn a.ui-link:hover {
 	background:#8dc63f;
@@ -2210,14 +2218,6 @@ ul.igiresponses li span {
 	border-bottom:1px solid #828181;
 	padding: 0 0 10px 10px;
 }
-/*.notingfollowed {
-	border:none;
-	padding:5px 0 0 10px;
-}
-.notingfollowed .msginfo {
-	margin:0 0 15px 5px;
-	font-style:italic;
-}*/
 .searchtype .ui-icon-searchfield:after {
 	background:url("images/searchicon.png") no-repeat 0 0;
 	border:none;
@@ -2916,11 +2916,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-style:normal;
 	color:#fff;
 }
-/*.slider-value span.remind {
-	float:left;
-	left:0;
-	position:relative;
-}*/
 .slider-value span.normaltext, .slider-value span.chase {
 	float:left;
 	left:50%;
@@ -2930,11 +2925,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .slider-value span.chase {
 	margin: 0 0 0 -73px;
 }
-/*.slider-value span.hound {
-	float:right;
-	position:relative;
-	right:0;
-}*/
 .slidervalue-img .remind-sensitive, .slidervalue-img .chase-broadcast, .slidervalue-img .hound-critical {
 	float:left;
 	padding:20px;
@@ -2942,9 +2932,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	position:relative;
 	left:0;
 }
-/*.slidervalue-img .chase-broadcast {
-	background:url("images/emergency-setting-dot.png") no-repeat -5px 0;
-}*/
 .slidervalue-img .chase-broadcast {
 	left:50%;
 	margin:0 0 0 -56px;
@@ -2962,10 +2949,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .slidervalue-img.newsettingsslide .hound-critical {
 	background:url("images/emergency-setting-dot.png") no-repeat -2px -4px;
 }
-/*.slidervalue-img .hound-critical {
-	float:right;
-	background:url("images/emergency-setting-dot.png") no-repeat 6px 0;
-}*/
 .slidervalue-img .criticalicon {
 	background:url("images/icon-h.png") no-repeat 3px 0;
 }
@@ -3424,9 +3407,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:url(images/decline.png) no-repeat 0 5px;
 }
 /* IGI Confirmation End*/
-/*.nofollowedyet {
-  margin-top:-10px;
-}*/
 /* Help Page */
 .helpinfo {
 	display:inline-block;
@@ -3925,16 +3905,21 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin-bottom:10px;
 }
 .normalfollowers.provisionalicon {
-	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1084px;
+ background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1084px;
 }
 .noverified {
-	background-position:-6px -1908px
+	background-position:-6px -1908px;
+	display:block;
 }
 .noverified .normalinvites em {
 	font-style:normal;
 	color:#f7941e;
 }
-.normalfollowers.noname {
+.normalfollowers.normalnoname {
+	line-height:40px;
+	background:#2D2D2D url(images/sprites-channel.png) no-repeat -4px -1084px;
+}
+.normalfollowers.provisionalnoname {
 	line-height:40px;
 	background:#2D2D2D url(images/sprites-channel.png) no-repeat -4px -1084px;
 }
