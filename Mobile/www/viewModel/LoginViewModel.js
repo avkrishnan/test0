@@ -13,19 +13,12 @@
 
   self.defineObservables();
 	
-  self.activate = function() {
+  self.activate = function() { 
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {			
 			self.errorMessage('');
-			if (ENYM.ctx.getItem("username") == null && ENYM.ctx.getItem("password") == null) {
-				self.username('');
-				self.password('');
-			}
-			else {
-				self.username(ENYM.ctx.getItem("username"));
-				//self.password(ENYM.ctx.getItem("password"));
-				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
-			}
+			self.username('');
+			self.password('');
 			$('input').keyup(function() {
 				self.clearErrorObs();
 			});
@@ -58,13 +51,10 @@
 		else {
 			self.errorMessage('');
       if ($('input[name="rememberPassword"]:checked').length == 1) {
-				ENYM.ctx.setItem("username", self.username());
-        //ENYM.ctx.setItem("password", self.password());
 				self.session(2*7*24*60*60);
+				$("input[type='checkbox']").attr("checked",false).checkboxradio("refresh"); 
       }
 			else {
-				ENYM.ctx.removeItem('username');
-				//ENYM.ctx.removeItem('password');
 				self.session(3600);
 			}
       var loginError = function(data, status, details) {
@@ -91,8 +81,8 @@
     ENYM.ctx.removeItem('name');
     ENYM.ctx.removeItem('signUpError');
 		ENYM.ctx.removeItem('newuseremail');
-		ENYM.ctx.removeItem('newusername');
-		ENYM.ctx.removeItem('newuserpassword');
+		//ENYM.ctx.removeItem('newusername');
+		//ENYM.ctx.removeItem('newuserpassword');
 		ENYM.ctx.removeItem('roleType');
     //channelListViewModel.clearForm();
     //notificationsViewModel.removeNotifications();

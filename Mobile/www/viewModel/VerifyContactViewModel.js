@@ -66,7 +66,7 @@
 		self.verificationCommethod(ENYM.ctx.getItem("currentVerificationCommethod"));
 		self.verificationCommethodID(ENYM.ctx.getItem("currentVerificationCommethodID"));
 		self.verificationStatus(ENYM.ctx.getItem("verificationStatus"));
-		if (self.verificationStatus() == 'false') {
+		if (self.verificationStatus() == false) {
 			self.verificationStatus(false);
 		} else {
 			self.verificationStatus(true);

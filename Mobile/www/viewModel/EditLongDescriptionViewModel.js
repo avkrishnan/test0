@@ -25,7 +25,7 @@
 		}
 	};
 	
-	$(document).keyup(function (e) {
+	$(document).keyup(function(e) {
 		if (e.keyCode == 13  && e.target.nodeName != 'TEXTAREA' && $.mobile.activePage.attr('id') == 'editLongDescriptionView') {
 			self.longDescriptionCommand();
 		}
