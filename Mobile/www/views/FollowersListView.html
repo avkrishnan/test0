@@ -18,11 +18,13 @@
       <a class="followercount declined" href="#" onclick="viewNavigate('Followers', 'followersListView', 'declinedFollowersView');">
         Declined Invites<span data-bind="text: declinesCount"></span>
       </a>
-      <a class="followercount nocontact" href="#">Un-reachable Followers<span>0</span></a>
+      <a class="followercount nocontact" href="#" onclick="viewNavigate('Followers', 'followersListView', 'unreachableFollowersView');">
+        Un-reachable Followers<span>0</span>
+      </a>
     </div>
     <div class="pending" data-bind="text: followerCount"></div>
     <div data-bind="foreach: followers">
-      <a href="#" class="normalfollowers" data-bind="css: nameClass, css: provClass, click: $parent.followerDetails.bind($index())">
+      <a href="#" data-bind="css: nameClass, click: $parent.followerDetails.bind($index())">
         <span class="evernym" data-bind="visible: evernymIcon"></span>
         <div class="normalinvites">
           <span data-bind="text: followerName"></span>

@@ -1,15 +1,15 @@
-<div id="declinedFollowersView" data-role="page">
+<div id="unreachableFollowersView" data-role="page">
 	<header class="logged-in"></header> 
   <div class="page-content followerpage">
     <div class="followerchannel">
       <div class="channelname">
         <span class="channelimg channel1 borderred"></span>
         <div class="channelinfoname" data-bind="text: channelName"></div>
-        <a href="#" class="setting settinginner" onclick="viewNavigate('Declined Followers', 'declinedFollowersView', 'channelSettingsView');"></a>
+        <a href="#" class="setting settinginner" onclick="viewNavigate('Unreachable Followers', 'unreachableFollowersView', 'channelSettingsView');"></a>
       </div>
     </div>         
     <div class="pending">
-      Declined Invites <span data-bind="text: declinesCount"></span>
+      Un-reachable Followers <span data-bind="text: unreachCount"></span>
     </div>
     <div data-bind="foreach: followers">
       <a href="#" data-bind="css: nameClass, click: $parent.followerDetails.bind($index())">
@@ -23,8 +23,8 @@
   </div>  
   <div class="toast-notification"></div>  
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Declined Followers', 'declinedFollowersView', 'userSettingsView');"></a>
-    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Declined Followers', 'declinedFollowersView', 'plusMenuView');"></a>
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Unreachable Followers', 'unreachableFollowersView', 'userSettingsView');"></a>
+    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Unreachable Followers', 'unreachableFollowersView', 'plusMenuView');"></a>
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div>   

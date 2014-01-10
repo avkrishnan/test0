@@ -5,9 +5,10 @@
   self.viewname = 'Follower Details';
   self.displayname = 'Follower Details';
 	
-  self.inputObs = [ 'channelName', 'followerName', 'followerEvernym', 'followerEmail', 'followerPhone' ];
+  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'followerEvernym', 'followerEmail', 'followerPhone' ];
   self.defineObservables();
 	
+	self.evernymIcon = ko.observable(false);	
 	self.visibleName = ko.observable(true);
 	self.visibleEvernym = ko.observable(true);		
 
@@ -19,6 +20,8 @@
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.channelName(channelObject.channelName);
+			self.evernymIcon(followerObject.evernymIcon);
+			self.nameClass(followerObject.nameClass);
 			if(typeof followerObject.followerName == 'undefined' || followerObject.followerName == '') {
 				self.visibleName(false);
 			} else {

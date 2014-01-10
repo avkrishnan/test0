@@ -29,27 +29,22 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(valueFollower.relationship == 'I') {
+			if(valueFollower.relationship == 'I') {		
 				var evernymIcon = false;
+				var nameClass = 'provisionalicon';
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					var name = '';
-					var nameClass = 'noname';
+					nameClass = nameClass+' noname';
 				} 
 				else if(typeof valueFollower.firstname == 'undefined') {
-					var name = valueFollower.lastname;
-					var nameClass = 'provisionalicon';				
+					var name = valueFollower.lastname;				
 				}
 				else if(typeof valueFollower.lastname == 'undefined') {
-					var name = valueFollower.firstname;
-					var nameClass = 'provisionalicon';				
+					var name = valueFollower.firstname;			
 				}			
 				else {
 					var name = valueFollower.firstname +' '+ valueFollower.lastname;
-					var nameClass = 'provisionalicon';
 				}
-				if(valueFollower.managed == 'N') {
-					var nameClass = true;
-				}		
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,

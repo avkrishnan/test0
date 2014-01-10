@@ -1,12 +1,12 @@
-﻿function DeclinedFollowersViewModel() {
+﻿function InvitedFollowersViewModel() {
   var self = this;
-	self.template = 'declinedFollowersView';
+	self.template = 'unreachableFollowersView';
 	self.viewid = 'V-??';
-	self.viewname = 'Declined Followers';
-	self.displayname = 'Declined Followers';
+	self.viewname = 'Unreachable Followers';
+	self.displayname = 'Unreachable Followers';
 	
 	self.evernymIcon = ko.observable(false);	
-  self.inputObs = [ 'channelId', 'channelName', 'declinesCount'];
+  self.inputObs = [ 'channelId', 'channelName', 'unreachCount'];
 	self.defineObservables();	
   self.followers = ko.observableArray([]);
 	  
@@ -18,10 +18,10 @@
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.evernymIcon(false);
 			self.followers.removeAll();
-			self.declinesCount('0');																										
+			self.unreachCount('0');																										
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);																						
-			$.mobile.showPageLoadingMsg('a', 'Loading Declined Followers');		
+			$.mobile.showPageLoadingMsg('a', 'Loading Invited Followers');		
 			return ES.channelService.getFollowers(self.channelId(), { success: successfulList, error: errorAPI });
 		}
 	};
@@ -29,7 +29,7 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(valueFollower.relationship == 'N') {
+			if(valueFollower.relationship == 'I') {		
 				var evernymIcon = false;
 				var nameClass = 'provisionalicon';
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
@@ -44,7 +44,7 @@
 				}			
 				else {
 					var name = valueFollower.firstname +' '+ valueFollower.lastname;
-				}		
+				}
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
@@ -52,7 +52,7 @@
 					accountname: valueFollower.accountname,
 					evernymIcon: evernymIcon
 				});
-				self.declinesCount(self.followers().length);
+				self.unreachCount(self.followers().length);
 			}
 		});
 	}; 
@@ -65,9 +65,9 @@
 	
 	self.followerDetails = function (data) {
 		ENYM.ctx.setItem('currentfollowerData', JSON.stringify(data));		
-		viewNavigate('Declined Followers', 'declinedFollowersView', 'followerDetailsView');
+		viewNavigate('Unreachable Followers', 'unreachableFollowersView', 'followerDetailsView');
   };
 }
 
-DeclinedFollowersViewModel.prototype = new ENYM.ViewModel();
-DeclinedFollowersViewModel.prototype.constructor = DeclinedFollowersViewModel;
+InvitedFollowersViewModel.prototype = new ENYM.ViewModel();
+InvitedFollowersViewModel.prototype.constructor = InvitedFollowersViewModel;

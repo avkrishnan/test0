@@ -12,7 +12,7 @@
       Pending Invites <span data-bind="text: invitesCount"></span>
     </div>
     <div data-bind="foreach: followers">
-      <a href="#" class="normalfollowers" data-bind="css: nameClass, click: $parent.followerDetails.bind($index())">
+      <a href="#" data-bind="css: nameClass, click: $parent.followerDetails.bind($index())">
         <span class="evernym" data-bind="visible: evernymIcon"></span>
         <div class="normalinvites">
           <span data-bind="text: followerName"></span>

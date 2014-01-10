@@ -32,41 +32,36 @@
 		invites = declines = 0;
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship != 'O') {
+				var evernymIcon = false;				
 				if(valueFollower.relationship == 'I') {
 					invites == invites++;
+					var nameClass = 'provisionalicon';
 				}
 				else if(valueFollower.relationship == 'N') {
 					declines == declines++;
+					var nameClass = 'provisionalicon';
 				}
 				else if(valueFollower.relationship == 'F') {
-					var prov = '';
+					var nameClass = 'normalfollowers';
+					var evernymIcon = true;
 				}
-				var evernymIcon = false;
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					var name = '';
-					var nameClass = 'noname';
+					nameClass = nameClass+' noname';
 				} 
 				else if(typeof valueFollower.firstname == 'undefined') {
-					var name = valueFollower.lastname;
-					var nameClass = 'provisionalicon';				
+					var name = valueFollower.lastname;				
 				}
 				else if(typeof valueFollower.lastname == 'undefined') {
-					var name = valueFollower.firstname;
-					var nameClass = 'provisionalicon';				
+					var name = valueFollower.firstname;			
 				}			
 				else {
 					var name = valueFollower.firstname +' '+ valueFollower.lastname;
-					var nameClass = '';
-				}
-				if(valueFollower.managed == 'N') {
-					var evernymIcon = true;
-					var nameClass = '';
-				}		
+				}	
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
 					followerName: name,
-					provClass: prov, 
 					accountname: valueFollower.accountname,
 					evernymIcon: evernymIcon
 				});
