@@ -4,7 +4,7 @@
 	self.viewid = 'V-26';
 	self.viewname = 'Followers';
 	self.displayname = 'Followers';
-
+	
   self.inputObs = [ 'channelId', 'channelName', 'invitesCount', 'declinesCount', 'unreachCount', 'followerCount'];
 	self.defineObservables();	
   self.followers = ko.observableArray([]);
@@ -15,10 +15,7 @@
 			goToView('channelsIOwnView');			
 		} else {				
 			addExternalMarkup(self.template); // this is for header/overlay message	
-			self.followers.removeAll();
-			self.invitesCount(0);
-			self.declinesCount(0);
-			self.unreachCount(0);						
+			self.followers.removeAll();						
 			self.followerCount('Followers (0)');								
 			self.accountName(ENYM.ctx.getItem('accountName'));																		
 			self.channelId(channelObject.channelId);

@@ -12,15 +12,21 @@
       <a class="addinvitebtn" href="#" onclick="viewNavigate('Followers', 'followersListView', 'addInviteFollowersView');"> + ADD / INVITE</a>
     </div>    
     <div class="followerchannel">
-      <a class="followercount" href="#" onclick="viewNavigate('Followers', 'followersListView', 'invitedFollowersView');">
-        Invites<span data-bind="text: invitesCount"></span>
-      </a>
-      <a class="followercount declined" href="#" onclick="viewNavigate('Followers', 'followersListView', 'declinedFollowersView');">
-        Declined Invites<span data-bind="text: declinesCount"></span>
-      </a>
-      <a class="followercount nocontact" href="#" onclick="viewNavigate('Followers', 'followersListView', 'unreachableFollowersView');">
-        Un-reachable Followers<span data-bind="text: unreachCount">0</span>
-      </a>
+      <div data-bind="ifnot: invitesCount() == 0">
+        <a class="followercount" href="#" onclick="viewNavigate('Followers', 'followersListView', 'invitedFollowersView');">
+          Invites<span data-bind="text: invitesCount"></span>
+        </a>
+      </div>
+      <div data-bind="ifnot: declinesCount() == 0">
+        <a class="followercount declined" href="#" onclick="viewNavigate('Followers', 'followersListView', 'declinedFollowersView');">
+          Declined Invites<span data-bind="text: declinesCount"></span>
+        </a>
+      </div>
+      <div data-bind="ifnot: unreachCount() == 0">
+        <a class="followercount nocontact" href="#" onclick="viewNavigate('Followers', 'followersListView', 'unreachableFollowersView');">
+          Un-reachable Followers<span data-bind="text: unreachCount">0</span>
+        </a>
+      </div>
     </div>
     <div class="pending" data-bind="text: followerCount"></div>
     <div data-bind="foreach: followers">
