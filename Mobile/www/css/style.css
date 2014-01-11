@@ -4482,3 +4482,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	display:inline;
 	padding-left:0;
 }
+#sendMessageView .broadcast-icon {
+	background:url("images/sprites-channel.png") no-repeat -4px -744px #2D2D2D;
+}
