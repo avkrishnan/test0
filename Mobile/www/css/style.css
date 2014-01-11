@@ -4476,3 +4476,9 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 }
 /* @media query css End*/
+/*CSS by Devender*/
+#channelMainView .followercount {
+	background:none;
+	display:inline;
+	padding-left:0;
+}
