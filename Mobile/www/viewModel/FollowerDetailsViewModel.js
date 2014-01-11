@@ -36,7 +36,7 @@
 			}
 		}
 		if(followerObject.followerId != '') {
-			$.when(ES.channelService.getFollower(followerObject.followerId).then(self.initializeFollowerDetails()));
+			//$.when(ES.channelService.getFollower(followerObject.followerId).then(self.initializeFollowerDetails()));
 		}
 	};
 	

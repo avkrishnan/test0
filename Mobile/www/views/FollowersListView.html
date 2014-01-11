@@ -11,7 +11,7 @@
     <div class="followerchannel">
       <a class="addinvitebtn" href="#" onclick="viewNavigate('Followers', 'followersListView', 'addInviteFollowersView');"> + ADD / INVITE</a>
     </div>    
-    <div class="followerchannel">
+    <div class="followerchannel" data-bind="visible:countIsZero">
       <div data-bind="ifnot: invitesCount() == 0">
         <a class="followercount" href="#" onclick="viewNavigate('Followers', 'followersListView', 'invitedFollowersView');">
           Invites<span data-bind="text: invitesCount"></span>
