@@ -3,6 +3,7 @@
 function ApiTestHelper() {
 
   var t = this;
+  var hlpr = this;
   
   t.is_empty = function(obj) {
 
@@ -166,7 +167,7 @@ function ApiTestHelper() {
       scenario.account = account ? account : t.generateAccount();
       scenario.account.accountname = scenario.account.accountname.toLowerCase();
       $.when(scenario.ES.loginService.accountEnroll(scenario.account))
-      .then(t.CHECK.successNoContent, t.CHECK.shouldNotFail)
+      .then(t.CHECK.success, t.CHECK.shouldNotFail)
       .then(start,start);
     };
   };
@@ -630,5 +631,84 @@ function ApiTestHelper() {
     return function() { setTimeout( function(){ expect(0); start(); }, millis == undefined ? 1000 : millis); };
   };
   
+  t.checkEmail = function(eSvc, emailAddress) {
 
+    var dfd = $.Deferred();
+    var waitTime = 2000; //in milliseconds
+    var times = 0;
+    var m = 50;
+
+    var fail = function() {
+      times++;
+      console.log('no email yet; tried ' + times + ' times');
+      if (times < m) {
+        //this recurses
+        setTimeout(getEmail,waitTime);
+      } else {
+        //this stops the recursion
+        console.log('max times reached.');
+        dfd.reject();
+      }
+    };
+    
+    var getEmail = function() {
+      $.when(eSvc.callAPI('GET', '/test/msg/' + emailAddress))
+        .then(dfd.resolve, fail); //fail is recursive with getEmail
+    };
+
+    getEmail();
+
+    return dfd.promise();
+  };
+
+  //var uuidPattern = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
+
+  //"stripped-html" : "<div style=\"font-family:Arial, Helvetica, sans-serif; background:#f1f2f2; overflow:hidden; border-radius:10px; padding:20px 0 20px 20px;\">\r\n\r\n\t<img src=\"https://www.evernym.com/images/Email-chan-1.png\" alt=\"Evernym icon\" title=\"Channel icon\" style=\"color:#8DC63F; line-height:42px; padding:0 10px 0 2px; float:left;\">\r\n\t<div style=\"background:#2D2D2D; border-radius:20px 0 0 20px; line-height:40px; color:#8DC63F; margin:0 0 0 3px; font-size:20px;\"> \r\n\t\t<strong style=\"color:#8DC63F; font-size:20px; line-height:42px; font-weight:normal;\">testchannel-mZ7sR</strong>\r\n\t</div>\r\n\t\r\n\t<div style=\"background:#fff; padding:15px 10px 15px 10px; margin:20px 20px 20px 0; border-radius:4px;\">\r\n\t\t<div style=\"font-size:16px; color:#000;\">\r\n\t\t\t<span>testFirst testLast has invited you to follow <em style=\"color:#8DC63F; font-style:normal;\">testchannel-mZ7sR</em>.</span>\r\n\t\t\t<span style=\"display:block; margin-top:10px;\">Please Accept or Decline this invitation.</span>\r\n\t\t</div>\r\n\t</div>\r\n\t\r\n\t<div style=\"font-size:16px; margin:0 20px 10px 0; float:right;\">\t\t\r\n\t\t<a href=\"https://api.evernym.com/api24/rest/invite/accept?id=06aa3c5a-a641-4648-9ebb-18a9166f84d7e1f978f6-ba00-4865-b2a0-cd584f8d35bd\" style=\"text-decoration:none; color:#fff; background:#8DC63F; padding:4px 12px; border-radius:4px;\">Accept</a>\r\n\t\t<a href=\"https://api.evernym.com/api24/rest/invite/decline?id=06aa3c5a-a641-4648-9ebb-18a9166f84d7\" style=\"text-decoration:none; color:#fff; background:#d43232; padding:4px 12px; border-radius:4px; margin-left:10px;\">Decline</a>\r\n\t</div>\r\n\t\r\n\t<div style=\"font-size:16px; margin:0 20px 0 0; clear:both; text-align:center; color:#414141;\">BETA</div>\r\n</div>\r\n\r\n<div style=\"overflow:hidden; margin:30px 20px 0 20px;\">\r\n\t<img src=\"https://www.evernym.com/images/logo.png\" alt=\"Evernym Logo\" alt=\"Evernym Logo\" title=\"Evernym Logo\" style=\"float:left; padding:0 25px 15px 10px;\" >\r\n\t\r\n\t<div style=\"font-size:13px; font-family:Arial, Helvetica, sans-serif;\">\r\n\t\t<span style=\"color:#414141;\">Know they know&trade; with<em style=\"font-style:normal; color:#8DC63F;\"> Evernym Channels</em>, the fast, free way to be sure everyone gets your message.</span>\r\n\t\t<span style=\"display:block; color:#414141;\">Change how I receive messages from<em style=\"font-style:normal; color:#8DC63F;\"> testchannel-mZ7sR </em><a href=\"https://app.evernym.com/dev/index.html#privacyPolicyView\" style=\" text-decoration:none; color:#8DC63F;\">Privacy Policy</a></span>\r\n\t</div>\r\n\t\r\n</div>",
+
+  hlpr.checkVerifCode = function(scenario, ovrdUrlTail) {
+    return function(data) {
+      debugger;
+      var text = data.dtlsMap['stripped-html'];
+      urlTail = ovrdUrlTail == undefined ? 'verify' : ovrdUrlTail;
+      var re = new RegExp('"(http.*' + urlTail + '\\?id=.*?)"', 'ig');
+      var urls = re.exec(text);
+      ok(Array.isArray(urls));
+      equal(urls.length,2);
+      var url = urls[1];
+
+      scenario.verif = {};
+
+      /*
+      var grps = (/code: (\d{6})/ig).exec(text);
+      ok(Array.isArray(grps));
+      equal(grps.length,2);
+      var code = grps[1];
+      scenario.verif.code = code;
+      */
+      scenario.verif.url = url;
+    };
+  };
+  
+  hlpr.checkVerifEmail = function(scenario, ovrdESvc, ovrdEmail, ovrdUrlTail) {
+    return function () {
+      $.when(hlpr.checkEmail(ovrdESvc == undefined ? scenario.ES.evernymService : ovrdESvc, ovrdEmail == undefined ? scenario.account.emailaddress : ovrdEmail))
+      .then(hlpr.checkVerifCode(scenario, ovrdUrlTail), hlpr.CHECK.shouldNotFail)
+      .then(start,start);
+    };
+  };
+
+
+  hlpr.clickVerifyLink = function(scenario, ovrdSearchStr) {
+    return function() {
+      $.get(scenario.verif.url)
+      .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
+      .then(function(data) {
+        var re = new RegExp(ovrdSearchStr  == undefined ? 'Verified successfully' : ovrdSearchStr, 'ig');
+        var arr = re.exec(data);
+        ok(Array.isArray(arr) && arr.length > 0, 'verified string is found in response');
+      }, hlpr.CHECK.shouldNotFail)
+      .then(start, start);
+    };
+  };
+  
 };

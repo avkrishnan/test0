@@ -7,7 +7,10 @@
   module("group a");
 
   var SCEN1 = hlpr.TestScenario();
+  
   var acct = hlpr.generateAccount();
+  //debugger;
+  //acct.emailaddress = 'joebobson@rs7292.mailgun.org';
 
   asyncTest('CHECK EVERNYM AVAILABILITY for nonexistent name', function() {
     $.when(SCEN1.ES.loginService.checkName(acct.accountname))
@@ -16,7 +19,7 @@
   });
 
   asyncTest('ENROLL', hlpr.enroll(SCEN1,acct));
-
+  
   /*
    * asyncTest('ENROLL WITH PHONE NUMBER', hlpr.enroll(SCEN2, (function() { var
    * acct = api.generateAccount(); acct.phonenumber = '8013763348'; return acct;
