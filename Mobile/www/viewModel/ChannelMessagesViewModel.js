@@ -10,10 +10,10 @@
   self.defineObservables();
 		
 	self.channelMessages = ko.observableArray([]);
-    
+    var channel;
 	self.activate = function() {
 		ENYM.ctx.removeItem("overlayCurrentChannel");
-		var channel = JSON.parse(ENYM.ctx.getItem("currentChannel"));
+		channel = JSON.parse(ENYM.ctx.getItem("currentChannel"));
 		if(!channel) {
 			goToView('channelsFollowingListView');
 		} 
@@ -41,8 +41,9 @@
 			var callbacks = {
 			success: function(data) {					
 				var toastobj = {type: '', text: 'iGi sent!'};
-				showToast(toastobj);				
-				goToView($.mobile.activePage.attr('id'));								
+				showToast(toastobj);
+				self.gotChannel(channel);				
+				//goToView($.mobile.activePage.attr('id'));								
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
@@ -122,7 +123,7 @@
 						}
 					);
 				});
-				
+				alert(JSON.stringify(self.channelMessages()));
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
