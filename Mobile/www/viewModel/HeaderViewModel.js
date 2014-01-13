@@ -197,7 +197,7 @@ function OverlayViewModel() {
 		//alert(event.currentTarget.parentNode.getAttribute('id'));
 		var callbacks = {
 			success: function(data) {
-				var toastobj = {type: '', text: 'iGi Acknowledgement sent !'};
+				var toastobj = {type: '', text: 'iGi sent!'};
 				showToast(toastobj);							
 				//goToView($.mobile.activePage.attr('id'));																	
 			},
@@ -206,7 +206,7 @@ function OverlayViewModel() {
 				showToast(toastobj);					
 			}
 		};					
-		$.mobile.showPageLoadingMsg('a', 'Sending Acknowledgement request !');
+		$.mobile.showPageLoadingMsg('a', 'Sending iGi request!');
 //
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 			setTimeout(function() {			
