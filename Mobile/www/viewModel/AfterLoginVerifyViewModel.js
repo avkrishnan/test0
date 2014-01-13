@@ -27,9 +27,7 @@
 	self.getCommethods = function() {
 		var callbacks = {
 			success: function(data){
-				if(data.commethod[0].type == 'EMAIL') {
-					self.commethod(data.commethod[0].address);
-				}
+				self.commethod(data.commethod[0].address);
 				self.verificationCommethodType();		
 				self.verificationCommethod(data.commethod[0].type);
 				self.verificationCommethodID(data.commethod[0].id);
