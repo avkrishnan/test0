@@ -209,7 +209,7 @@
 				self.activeClass('igisentimg');
 				backNavText.pop();
 				var redirectView = backNavView.pop();				
-				var toastobj = {redirect: redirectView, type: '', text: 'iGi is being sent !'};
+				var toastobj = {redirect: redirectView, type: '', text: 'iGi sent!'};
 				showToast(toastobj);				
 				goToView(redirectView);
 			},
@@ -219,11 +219,11 @@
 			}
 		};		
 		if(self.ack() == 'Y' || self.activeClass() == 'igisentimg') {
-			var toastobj = {type: 'toast-info', text: 'iGi has already been sent !'};
+			var toastobj = {type: 'toast-info', text: 'iGi has already been sent!'};
 			showToast(toastobj);												
 		}
 		else {			
-			$.mobile.showPageLoadingMsg('a', 'Sending iGi request !');
+			$.mobile.showPageLoadingMsg('a', 'Sending iGi request!');
 			// To Do Common function for Overlay messages and badge count
 			if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 				ES.systemService.adjMnsCount(-1);
