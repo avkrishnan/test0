@@ -22,8 +22,7 @@
 			$('input').keyup(function() {
 				self.clearErrorObs();
 			});
-		} 
-		else {
+		} else {
 			goToView('homeView');
 		}
   };
@@ -39,28 +38,24 @@
       self.usernameClass('validationerror');
       self.passwordClass('validationerror');
       self.errorMessage('<span>Sorry,</span> Please enter username and password');
-    } 
-		else if(self.username() == '') {
+    } else if(self.username() == '') {
       self.usernameClass('validationerror');
       self.errorMessage('<span>Sorry,</span> Please enter username');
-    } 
-		else if(self.password() == '') {
+    } else if(self.password() == '') {
       self.passwordClass('validationerror');
       self.errorMessage('<span>Sorry,</span> Please enter password');
-    } 
-		else {
+    } else {
 			self.errorMessage('');
       if ($('input[name="rememberPassword"]:checked').length == 1) {
 				self.session(2*7*24*60*60);
 				$("input[type='checkbox']").attr("checked",false).checkboxradio("refresh"); 
-      }
-			else {
+      } else {
 				self.session(3600);
 			}
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
 				self.passwordClass('validationerror');
-				self.errorMessage('<span>Sorry, </span> ' + details.message);
+				self.errorMessage('<span>Sorry, </span> evernym or password is incorrect');
 			  self.password('');
 			};
       var loginModel = {};
