@@ -18,7 +18,7 @@
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.evernymIcon(false);
 			self.followers.removeAll();
-			self.declinesCount('0');																										
+			self.declinesCount('');																										
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);																						
 			$.mobile.showPageLoadingMsg('a', 'Loading Declined Followers');		

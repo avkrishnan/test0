@@ -3678,7 +3678,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:url(images/sprites-channel.png) no-repeat -4px -1084px;
 }
 .provisionalfollower .followernormal.nonverifiedicon {
-	background:url(images/sprites.png) no-repeat -6px -1908px;
+	/*background:url(images/sprites.png) no-repeat -6px -1908px;*/
+	background:#2D2D2D url("images/non-verified.png") no-repeat 3px 3px;
 }
 .provisional-follower {
 	display:inline-block;
@@ -3911,7 +3912,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
  background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1084px;
 }
 .noverified {
-	background-position:-6px -1908px;
+	background:#2D2D2D url("images/non-verified.png") no-repeat 3px 3px;
 	display:block;
 }
 .noverified .normalinvites em {
@@ -3928,6 +3929,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .provisionalicon.noname {
 	line-height:40px;
+	font-style:italic;
 	background:#2D2D2D url(images/sprites-channel.png) no-repeat -4px -1084px;
 }
 .provisionalicon.noname em {
@@ -4476,12 +4478,3 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 }
 /* @media query css End*/
-/*CSS by Devender*/
-#channelMainView .followercount {
-	background:none;
-	display:inline;
-	padding-left:0;
-}
-#sendMessageView .broadcast-icon {
-	background:url("images/sprites-channel.png") no-repeat -4px -744px #2D2D2D;
-}

@@ -16,7 +16,7 @@
 		} else {				
 			addExternalMarkup(self.template); // this is for header/overlay message	
 			self.followers.removeAll();
-			self.followerCount('Followers (0)');
+			self.followerCount('Followers ()');
 			self.accountName(ENYM.ctx.getItem('accountName'));
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);
@@ -60,14 +60,16 @@
 				}			
 				else {
 					var name = valueFollower.firstname +' '+ valueFollower.lastname;
-				}	
-				self.followers.push({
-					followerId: valueFollower.id,
-					nameClass: nameClass,
-					followerName: name,
-					accountname: valueFollower.accountname,
-					evernymIcon: evernymIcon
-				});
+				}
+				if(valueFollower.relationship != 'N') {	
+					self.followers.push({
+						followerId: valueFollower.id,
+						nameClass: nameClass,
+						followerName: name,
+						accountname: valueFollower.accountname,
+						evernymIcon: evernymIcon
+					});
+				}
 			}
 		});
 		self.invitesCount(invites);

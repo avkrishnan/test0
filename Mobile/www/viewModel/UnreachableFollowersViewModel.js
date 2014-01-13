@@ -18,7 +18,7 @@
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.evernymIcon(false);
 			self.followers.removeAll();
-			self.unreachCount('0');																										
+			self.unreachCount('');																										
 			self.channelId(channelObject.channelId);
 			self.channelName(channelObject.channelName);																						
 			$.mobile.showPageLoadingMsg('a', 'Loading Invited Followers');		
