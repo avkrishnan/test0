@@ -72,8 +72,11 @@
 			self.channelName(self.newChannel()+' is now live.');			
 			self.channelWebAddress(self.newChannel()+'.evernym.com');			
 		}
-	};
-						
+		
+        $(".channelvisiting strong").bind("copy", function () {
+            return false;
+    });
+	};				
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
     goToView('channelNameView');

@@ -207,7 +207,7 @@ function OverlayViewModel() {
 			}
 		};					
 		$.mobile.showPageLoadingMsg('a', 'Sending iGi request!');
-//
+
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 			setTimeout(function() {			
 				ES.systemService.adjMnsCount(-1);
