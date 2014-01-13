@@ -68,7 +68,7 @@
 	function successAvailable(data){
 		if(data){
 			self.accountNameClass('validationerror');
-      self.errorAccountName('<span>Sorry,</span> This Evernym has already been taken');
+      self.errorAccountName('<span>Sorry,</span> This evernym has already been taken');
 		} else {
       $.mobile.showPageLoadingMsg('a', 'Enrolling');
       var callbacks = {
