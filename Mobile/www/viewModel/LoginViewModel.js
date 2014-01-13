@@ -8,24 +8,17 @@
   self.viewname = "Login";
   self.displayname = "Login";	
 	
-  self.inputObs = [ 'username', 'password'];
+  self.inputObs = [ 'username', 'password', 'session'];
   self.errorObs = [ 'errorMessage', 'usernameClass', 'passwordClass' ];
 
   self.defineObservables();
 	
-  self.activate = function() {
+  self.activate = function() { 
 		var token = ES.evernymService.getAccessToken();
 		if(token == '' || token == null) {			
 			self.errorMessage('');
-			if (ENYM.ctx.getItem("username") == null && ENYM.ctx.getItem("password") == null) {
-				self.username('');
-				self.password('');
-			}
-			else {
-				self.username(ENYM.ctx.getItem("username"));
-				self.password(ENYM.ctx.getItem("password"));
-				$("input[type='checkbox']").attr("checked", true).checkboxradio("refresh");
-			}
+			self.username('');
+			self.password('');
 			$('input').keyup(function() {
 				self.clearErrorObs();
 			});
@@ -37,7 +30,6 @@
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'loginView') {
-			//self.errorMessage('');
 			self.loginCommand();
 		}
 	});
@@ -59,12 +51,11 @@
 		else {
 			self.errorMessage('');
       if ($('input[name="rememberPassword"]:checked').length == 1) {
-				ENYM.ctx.setItem("username", self.username());
-        ENYM.ctx.setItem("password", self.password());
+				self.session(2*7*24*60*60);
+				$("input[type='checkbox']").attr("checked",false).checkboxradio("refresh"); 
       }
 			else {
-				ENYM.ctx.removeItem('username');
-				ENYM.ctx.removeItem('password');
+				self.session(3600);
 			}
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
@@ -75,8 +66,9 @@
       var loginModel = {};
       $.mobile.showPageLoadingMsg("a", "Logging In");
       loginModel.accountname = self.username();
-      loginModel.password = self.password();
       loginModel.appToken = 'sNQO8tXmVkfQpyd3WoNA6_3y2Og=';
+			loginModel.overrideTtl = self.session();
+      loginModel.password = self.password();			
       return ES.loginService.accountLogin(loginModel).then(loginSuccess, loginError);
     }
   };
@@ -89,8 +81,8 @@
     ENYM.ctx.removeItem('name');
     ENYM.ctx.removeItem('signUpError');
 		ENYM.ctx.removeItem('newuseremail');
-		ENYM.ctx.removeItem('newusername');
-		ENYM.ctx.removeItem('newuserpassword');
+		//ENYM.ctx.removeItem('newusername');
+		//ENYM.ctx.removeItem('newuserpassword');
 		ENYM.ctx.removeItem('roleType');
     //channelListViewModel.clearForm();
     //notificationsViewModel.removeNotifications();
@@ -114,7 +106,7 @@
     // alert("Not running on PhoneGap!");
     // }
     ES.evernymService.clearAccessToken();
-    if (args.accessToken) {
+		if (args.accessToken) {
       ES.evernymService.setAccessToken(args.accessToken);
 			ENYM.ctx.setItem('account', JSON.stringify(args.account));
       ENYM.ctx.setItem('accountName', self.username());
@@ -129,19 +121,13 @@
       return;
     }
   };
-	
-	self.getCommethodsCommand = function() {
-		var action = JSON.parse(ENYM.ctx.getItem('action'));		
-		if(action) {
-			$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");		
-			return ES.commethodService.getCommethods({success: getCommethods, error: errorAPI});
-		}
-		else {
-			self.afterLoggedIn();
-		}
+
+	self.getCommethodsCommand = function() {		
+		return ES.commethodService.getCommethods({success: getCommethods, error: errorAPI});
 	};
 	
 	function getCommethods(data){
+		$.mobile.hidePageLoadingMsg();
 		if(data.commethod.length >= 1) {
 			var len = 0;			
 			for(len; len<data.commethod.length; len++) {
@@ -150,12 +136,11 @@
 					return true;
 				}
 				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
-					ENYM.ctx.removeItem('action');
-					viewNavigate('Verify Contact', 'afterLoginVerifyView', 'userSettingsView')								
+					viewNavigate('Home', 'homeView', 'afterLoginVerifyView')								
 				}
 			}
 		} else {
-			goToView('afterLoginVerifyView');
+			viewNavigate('Home', 'homeView', 'afterLoginVerifyView')
 		}
 	};	
 	
@@ -188,7 +173,8 @@
 			ES.channelService.followChannel(channel.id, callbacks);
 		}
 		else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
-			if(args.account.firstname && args.account.lastname) {
+			var account = JSON.parse(ENYM.ctx.getItem('account'));
+			if(account.firstname && account.lastname) {
 				var callbacks = {
 					success: function() {		
 						var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
@@ -212,6 +198,7 @@
 		}
 	}	
 	
+		
 };
 
 LoginViewModel.prototype = new ENYM.ViewModel();
