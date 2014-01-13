@@ -1,0 +1,27 @@
+<div id="afterLoginVerifyView" data-role="page">
+	<header class="logged-in"></header>
+  <div class="page-content">      
+    <div class="success verification">
+      <p><span data-bind="text: commethod"></span> is not yet verified, and you cannot yet receive any communications from channels you follow.</p>
+      <p>We have sent you a confirmation message. Verify by entering the code below.</p>
+    </div>
+    <div class="add-action loginform">
+      <div class="addaction" data-bind="css: verificationClass">
+        <input type="text" data-bind="value: verificationCode" placeholder="enter 6-digit code from email" />
+        <a href="#" class="addbtn verify"  data-bind="click: verifyRequestCommethod">Verify</a>       
+      </div>
+      <div class="msgerror" data-bind="html: errorMessage"></div>      
+    </div>
+    <div class="resend">
+      Can't find the code?
+      <a class="addbtn" href="#" data-bind="click: requestVerificationCode">Re-Send</a>
+    </div>     
+    <div class="loginbtn"><a href="#" class="ui-link" data-bind="click: skipCommand">Skip for Now</a></div>
+    </div>  
+    <div class="toast-notification"></div>   
+  <div class="footer">
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Verify Contact', 'afterLoginVerifyView', 'userSettingsView');"></a>
+    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Verify Contact', 'afterLoginVerifyView', 'plusMenuView');"></a>
+  </div>
+  <div class="active-overlay" style="display:none"></div>
+</div>   
