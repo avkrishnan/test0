@@ -33,7 +33,15 @@
 				self.verificationCommethodType();		
 				self.verificationCommethod(data.commethod[0].type);
 				self.verificationCommethodID(data.commethod[0].id);
-				self.requestVerificationCode();
+				var callback = {
+					success: function(responseData) {										
+					},
+					error: function (responseData, status, details) {
+						var toastobj = {type: 'toast-error', text: details.message};
+						showToast(toastobj);
+					}
+				};				
+				ES.commethodService.requestVerification(self.verificationCommethodID(), callback);
 			},
 			error: function (data, status, details) {
 				showMessage(details.message);
@@ -64,7 +72,7 @@
 	self.requestVerificationCode = function() {
 		var callbacks = {
 			success: function(responseData) {
-				var toastobj = {type: '', text: 'Verification message sent'};
+				var toastobj = {type: '', text: 'Verification code sent'};
 				showToast(toastobj);										
 			},
 			error: function (responseData, status, details) {
