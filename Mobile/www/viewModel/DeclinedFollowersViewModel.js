@@ -29,7 +29,7 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(valueFollower.relationship == 'N') {
+			if(valueFollower.relationship == 'D') {
 				var evernymIcon = false;
 				var nameClass = 'provisionalicon';
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {

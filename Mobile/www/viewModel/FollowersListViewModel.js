@@ -36,7 +36,7 @@
 					invites == invites++;
 					var nameClass = 'provisionalicon';
 				}
-				else if(valueFollower.relationship == 'N') {
+				else if(valueFollower.relationship == 'D') {
 					declines == declines++;
 					var nameClass = 'provisionalicon';
 				}
@@ -61,7 +61,7 @@
 				else {
 					var name = valueFollower.firstname +' '+ valueFollower.lastname;
 				}
-				if(valueFollower.relationship != 'N') {	
+				if(valueFollower.relationship != 'D') {	
 					self.followers.push({
 						followerId: valueFollower.id,
 						nameClass: nameClass,
