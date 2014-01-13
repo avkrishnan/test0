@@ -180,7 +180,8 @@
 			ES.channelService.followChannel(channel.id, callbacks);
 		}
 		else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
-			if(args.account.firstname && args.account.lastname) {
+			var account = JSON.parse(ENYM.ctx.getItem('account'));
+			if(account.firstname && account.lastname) {
 				var callbacks = {
 					success: function() {		
 						var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
