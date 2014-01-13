@@ -14,7 +14,7 @@
         <div class="mycontact">
           <em class="gray-delete"></em>
           <span class="delete-address">Delete This Address</span>
-          <a class="confirmbtn" href="#" data-bind="click: confirmDelete">CONFIRM</a>
+          <a class="confirmbtn" href="#" data-bind="click: confirmDelete">Confirm</a>
         </div>
       </section>
     </div>
@@ -33,7 +33,7 @@
         <section data-bind="if: $data.comMethodVerify">
           <a href="#" class="mycontact" data-bind="css: $data.comMethodClass, click: $parent.gotoDelete.bind('verifyContactView')">
             <em data-bind="css: $data.comMethodTypeClass"></em><span data-bind="text: $data.comMethodAddress"></span>
-            <span class="addbtn verify" data-bind="click: $parent.gotoVerify.bind('verifyContactView')">VERIFY</span>
+            <span class="addbtn verify" data-bind="click: $parent.gotoVerify.bind('verifyContactView')">Verify</span>
           </a>          
         </section>
       </div>
