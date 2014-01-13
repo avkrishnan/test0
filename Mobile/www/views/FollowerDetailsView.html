@@ -6,17 +6,19 @@
       <div class="channelinfoname" data-bind="text: channelName"></div>
     </div>
     
-      <div class="provisionalfollower">
-      	<span class="followernormal" data-bind="css: nameClass"><em class="evernym" data-bind="visible: evernymIcon"></em></span>
-        <div class="provisional-follower">
-          <span data-bind="visible: visibleName, text: followerName"></span>
-          <span data-bind="visible: visibleEvernym, text: followerEvernym"></span>
+    <div class="provisionalfollower">
+      <span class="followernormal" data-bind="css: nameClass"><em class="evernym" data-bind="visible: evernymIcon"></em></span>
+      <div class="provisional-follower">
+        <span data-bind="text: followerName"></span>
+        <div data-bind="foreach:followerCommethods">
+          <span data-bind="text: address"></span>
         </div>
-      </div>    
-    
-    <div class="loginbtn"><a href="#" onclick="viewNavigate('Followers', 'followerDetailsView', 'editFollowerDetailsView');">Edit</a></div>
+      </div>
+    </div>    
+
+    <div class="loginbtn" data-bind="visible:evernymType"><a href="#" onclick="viewNavigate('Followers', 'followerDetailsView', 'editFollowerDetailsView');">Edit</a></div>
     <div class="loginbtn removefollower">
-      <a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'removeFollowerView');">Remove follower from this channel</a>
+      <a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'removeFollowerView');">Remove Follower from This Channel</a>
     </div>
   </div> 
   <div class="toast-notification"></div>  
