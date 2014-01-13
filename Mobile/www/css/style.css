@@ -3859,7 +3859,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin:6px 0px;
 	display:inline-block;
 }
-.followercount, .followercount.ui-link, .followercount.ui-link:visited, .followercount.ui-link:hover, .followercount.ui-link:active {
+.notificationcount, .notificationcount.ui-link, .notificationcount.ui-link:visited, .notificationcount.ui-link:hover, .notificationcount.ui-link:active {
 	border-radius:4px;
 	padding:5px 5px 4px 10px;
 	display:block;
@@ -3868,21 +3868,21 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#67686b;
 	font-size:16px;
 }
-.followercount span {
+.notificationcount span {
 	float:right;
 	color:#fff;
 }
-.followercount.declined, .followercount.declined.ui-link, .followercount.declined.ui-link:visited, .followercount.declined.ui-link:hover, .followercount.declined.ui-link:active {
+.notificationcount.declined, .notificationcount.declined.ui-link, .notificationcount.declined.ui-link:visited, .notificationcount.declined.ui-link:hover, .notificationcount.declined.ui-link:active {
 	margin:10px 10px 10px 0;
 	color:#25a1d6;
 }
-.followercount.declined span {
+.notificationcount.declined span {
 	background:#25a1d6;
 }
-.followercount.nocontact, .followercount.nocontact.ui-link, .followercount.nocontact.ui-link:visited, .followercount.nocontact.ui-link:hover, .followercount.nocontact.ui-link:active {
+.notificationcount.nocontact, .notificationcount.nocontact.ui-link, .notificationcount.nocontact.ui-link:visited, .notificationcount.nocontact.ui-link:hover, .notificationcount.nocontact.ui-link:active {
 	color:#f7941e;
 }
-.followercount.nocontact span {
+.notificationcount.nocontact span {
 	background:#f7941e;
 }
 /*10-01-2014*/
@@ -3891,7 +3891,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:16px;
 	margin:10px 0px 15px 25px;
 }
-.pending span, .followercount span {
+.pending span, .notificationcount span {
 	background:#8DC63F;
 	border-radius:4px;
 	margin-left:5px;
@@ -3933,8 +3933,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:#2D2D2D url(images/sprites-channel.png) no-repeat -4px -1084px;
 }
 .provisionalicon.noname em {
- line-height:40px;
- font-size:14px;
+	line-height:40px;
+	font-size:14px;
 }
 .evernym {
 	background:url(images/evernymiconlogo.png) no-repeat 0 22px;
