@@ -105,6 +105,7 @@
 					var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
 					ES.channelService.followChannel(channel.id, callbacks);
 					goToView('channelsFollowingListView');
+					ENYM.ctx.removeItem('action');
 				}
 				else {
 					var toastobj = {redirect: 'homeView', type: '', text: 'Email verified'};																	
@@ -152,7 +153,8 @@
 				}
 			};
 			var channel = JSON.parse(ENYM.ctx.getItem('currentChannel'));						
-			ES.channelService.followChannel(channel.id, callbacks);																						
+			ES.channelService.followChannel(channel.id, callbacks);
+			ENYM.ctx.removeItem('action');																						
 		}
 		else {
 			if(self.verified() == 'Y') {
