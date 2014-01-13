@@ -4,12 +4,12 @@
   self.viewid = 'V-35';
   self.viewname = 'Follower Details';
   self.displayname = 'Follower Details';
+	self.followerCommethods = ko.observable([]);
 	
-  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'followerEvernym', 'followerEmail', 'followerPhone' ];
+  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'followerEvernym', 'evernymType' ];
   self.defineObservables();
 	
 	self.evernymIcon = ko.observable(false);	
-	self.visibleName = ko.observable(true);
 	self.visibleEvernym = ko.observable(true);		
 
 	self.activate = function() {
@@ -22,27 +22,23 @@
 			self.channelName(channelObject.channelName);
 			self.evernymIcon(followerObject.evernymIcon);
 			self.nameClass(followerObject.nameClass);
+			self.evernymType(false);
+			self.followerCommethods([]);
 			if(typeof followerObject.followerName == 'undefined' || followerObject.followerName == '') {
-				self.visibleName(false);
+				self.followerName(followerObject.accountname);
 			} else {
-				self.visibleName(true);
 				self.followerName(followerObject.followerName);
 			}
-			if(typeof followerObject.accountname == 'undefined' || followerObject.accountname == '') {
-				self.visibleEvernym(false);
-			} else {
-				self.visibleEvernym(true);
-				self.followerEvernym(followerObject.accountname);
+			if(followerObject.type == 'I') {
+				self.evernymType(true);	
 			}
 		}
-		if(followerObject.followerId != '') {
-			//$.when(ES.channelService.getFollower(followerObject.followerId).then(self.initializeFollowerDetails()));
+		if(followerObject.accountname != '') {
+			$.when(ES.commethodService.getCommethodsForProvis(followerObject.accountname).then(function(data) {
+				self.followerCommethods(data.commethod);
+			}));
 		}
 	};
-	
-	self.initializeFollowerDetails = function() {
-		//alert('here');
-	}
 }
 
 FollowerDetailsViewModel.prototype = new ENYM.ViewModel();
