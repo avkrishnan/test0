@@ -1,0 +1,38 @@
+Searching 284 files for "ok, got it" (regex, whole word)
+
+/Users/mithileshkumar/Applications/Evernym/mobileweb/Mobile/www/views/AddFollowersView.html:
+   34          <span>You can see their status in the list of followers for this channel.</span>
+   35        </div>
+   36:       <div class="loginbtn"><a href="#" class="ui-link" onclick="viewNavigate('Followers', 'followersListView', 'addInviteFollowersView');">OK, Got it</a></div>
+   37      </section>
+   38    </div>
+
+/Users/mithileshkumar/Applications/Evernym/mobileweb/Mobile/www/views/EscalateHelpView.html:
+   24            <input type="checkbox" name="checkbox-0 "/>Don't show again
+   25          </label>
+   26:         <div class="loginbtn"><a href="#" onclick="popBackNav();">OK, Got it!</a></div>       
+   27        </div>
+   28      </form>
+
+/Users/mithileshkumar/Applications/Evernym/mobileweb/Mobile/www/views/MessageLengthWarningView.html:
+   10        </div>
+   11       </div>
+   12:      <div class="loginbtn"><a href="#" onclick="popBackNav();"> Ok, Got It! </a></div>
+   13    </div>  
+   14    <div class="footer">
+
+/Users/mithileshkumar/Applications/Evernym/mobileweb/Mobile/www/views/RequestiGiHelpView.html:
+   11        </div>
+   12       </div>
+   13:     <div class="loginbtn"><a href="#" onclick="popBackNav();">Ok, Got It!</a></div>
+   14    </div>  
+   15    <div class="footer">
+
+/Users/mithileshkumar/Applications/Evernym/mobileweb/Mobile/www/views/UserGuideView.html:
+   23        <div class="followershelp"><span>New/Lost Followers</span></div>
+   24        <div class="helpinfo">
+   25:         <a class="helpgotit" href="#" data-bind="click: okGotIt">Ok, Got it!</a>
+   26        </div>
+   27      </div>
+
+5 matches across 5 files
