@@ -69,7 +69,7 @@
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
 				self.passwordClass('validationerror');
-				self.errorMessage('<span>Sorry, </span> ' + details.message);
+				self.errorMessage('<span>Sorry, </span> evernym or password is incorrect');
 			  self.password('');
 			};
       var loginModel = {};
@@ -106,6 +106,7 @@
 				showToast(toastobj);
 			}
 		};
+    $.mobile.hidePageLoadingMsg();
     // if (isPhoneGap()) {
     // alert("Running on PhoneGap!");
     // registerPushNotifications();
@@ -129,12 +130,18 @@
     }
   };
 	
-	self.getCommethodsCommand = function() {		
-		return ES.commethodService.getCommethods({success: getCommethods, error: errorAPI});
+	self.getCommethodsCommand = function() {
+		var action = JSON.parse(ENYM.ctx.getItem('action'));		
+		if(action) {
+			$.mobile.showPageLoadingMsg("a", "Requesting to Follow Channel");		
+			return ES.commethodService.getCommethods({success: getCommethods, error: errorAPI});
+		}
+		else {
+			self.afterLoggedIn();
+		}
 	};
 	
 	function getCommethods(data){
-		$.mobile.hidePageLoadingMsg();
 		if(data.commethod.length >= 1) {
 			var len = 0;			
 			for(len; len<data.commethod.length; len++) {
@@ -143,11 +150,12 @@
 					return true;
 				}
 				else if(len == data.commethod.length-1 && data.commethod[len].verified == 'N') {
-					viewNavigate('Home', 'homeView', 'afterLoginVerifyView')								
+					ENYM.ctx.removeItem('action');
+					viewNavigate('Verify Contact', 'afterLoginVerifyView', 'userSettingsView')								
 				}
 			}
 		} else {
-			viewNavigate('Home', 'homeView', 'afterLoginVerifyView')
+			goToView('afterLoginVerifyView');
 		}
 	};	
 	
@@ -180,8 +188,7 @@
 			ES.channelService.followChannel(channel.id, callbacks);
 		}
 		else if(action && action.follow_channel == 'Y' && action.SHARE_NAME == 'Y') {
-			var account = JSON.parse(ENYM.ctx.getItem('account'));
-			if(account.firstname && account.lastname) {
+			if(args.account.firstname && args.account.lastname) {
 				var callbacks = {
 					success: function() {		
 						var toastobj = {redirect: 'channelsFollowingListView', type: '', text: 'Now following '+channel.name};
