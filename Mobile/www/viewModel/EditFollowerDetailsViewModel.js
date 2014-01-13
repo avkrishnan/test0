@@ -4,6 +4,7 @@
   self.viewid = 'V-35';
   self.viewname = 'Edit Follower Details';
   self.displayname = 'Edit Follower Details';
+	self.followerCommethods = ko.observable([]);	
 	
   self.inputObs = [ 'channelName', 'followerName', 'emailaddress', 'smsPhone', 'followerID' ];
 	self.errorObs = [ 'nameClass', 'errorName', 'emailClass', 'errorEmail', 'errorPhone', 'phoneClass' ];
@@ -21,16 +22,24 @@
 			self.followerID(followerObject.accountname);
 			if(typeof followerObject.followerName != 'undefined' || followerObject.followerName != '') {
 				self.followerName(followerObject.followerName);
-			}
-			/*
-			if(typeof followerObject.accountname != 'undefined' || followerObject.accountname != '') {
-				self.followerEmail(followerObject.accountname);
-			}
-			if(typeof followerObject.followerName != 'undefined' || followerObject.followerName != '') {
-				self.followerPhone(followerObject.followerName);
-			}	
-			*/																								
+			}																					
 		}
+		self.followerCommethods([]);
+		if(followerObject.accountname != '') {
+			$.when(ES.commethodService.getCommethodsForProvis(followerObject.accountname)
+				.then(function(data) {
+					$.each(data.commethod, function(indexCommethod, valueCommethod) {
+						if(valueCommethod.type == 'EMAIL') {
+							self.emailaddress(valueCommethod.address);
+						} else {
+							self.smsPhone(valueCommethod.address);
+						}
+					});
+					self.followerCommethods(data.commethod);
+					//alert(JSON.stringify(data.commethod));
+				})
+			);
+		}		
 		$('input').keyup(function() {
 			self.clearErrorObs();
 		});		
@@ -84,8 +93,35 @@
 		}
 		$.mobile.showPageLoadingMsg("a", "Editing Follower details.");
 		var editFollower = generateProvisionalAccount();
-		//alert(JSON.stringify(editFollower));
-		ES.loginService.accountModifyOther(self.followerID(), editFollower, { success: editSuccessful, error: errorAPI });
+		$.when(ES.loginService.accountModifyOther(self.followerID(), editFollower)
+			.then(function() {
+				if(self.emailaddress() != '' || self.smsPhone() != '') {
+					if(self.followerCommethods().length > 0) {
+						$.each(self.followerCommethods(), function(indexCommethod, valueCommethod) {
+							if(valueCommethod.type == 'EMAIL') {
+								if(valueCommethod.address != self.emailaddress()) {
+									ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id);
+									ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});
+								}
+							} else if (valueCommethod.type == 'TEXT') {
+								if(valueCommethod.address != self.smsPhone()) {
+									ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id);
+									ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
+								}					
+							}
+						});
+					}
+					else {
+						if(self.emailaddress() != '') {
+							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});	
+						} else {
+							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
+						}
+					}
+				}
+			})
+		);
+		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');
   };
 	
 	function generateProvisionalAccount() {
@@ -100,12 +136,6 @@
 			if(lastName != '') {
 				tempProvosional.lastname = lastName;
 			}
-		}
-		if(self.emailaddress() != '') {
-			//tempProvosional.emailaddress = self.emailaddress();
-		}
-		if(self.smsPhone() != '') {
-			//tempProvosional.phonenumber = self.smsPhone();
 		}
 		return tempProvosional;
 	};

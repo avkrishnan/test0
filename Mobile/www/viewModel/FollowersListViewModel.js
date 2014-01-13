@@ -67,7 +67,8 @@
 						nameClass: nameClass,
 						followerName: name,
 						accountname: valueFollower.accountname,
-						evernymIcon: evernymIcon
+						evernymIcon: evernymIcon,
+						type:valueFollower.relationship
 					});
 				}
 			}
