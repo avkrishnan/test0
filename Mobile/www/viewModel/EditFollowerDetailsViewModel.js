@@ -97,24 +97,42 @@
 			.then(function() {
 				if(self.emailaddress() != '' || self.smsPhone() != '') {
 					if(self.followerCommethods().length > 0) {
+						var emailreplaced = false;
+						var phonereplaced = false;
 						$.each(self.followerCommethods(), function(indexCommethod, valueCommethod) {
 							if(valueCommethod.type == 'EMAIL') {
 								if(valueCommethod.address != self.emailaddress()) {
-									ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id);
-									ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});
+									$.when(ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id)
+										.then(function() {
+											ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});
+										})
+									);
 								}
-							} else if (valueCommethod.type == 'TEXT') {
+								emailreplaced = true;
+							}
+							if(valueCommethod.type == 'TEXT') {
 								if(valueCommethod.address != self.smsPhone()) {
-									ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id);
-									ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
-								}					
+									$.when(ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id)
+										.then(function() {
+											ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
+										})
+									);
+								}
+								phonereplaced = true;
 							}
 						});
+						if(self.emailaddress() != '' && emailreplaced == false) {
+							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});	
+						}
+						if(self.smsPhone() != '' && phonereplaced == false) {
+							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
+						}						
 					}
 					else {
 						if(self.emailaddress() != '') {
 							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});	
-						} else {
+						}
+						if(self.smsPhone() != '') {
 							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
 						}
 					}
