@@ -10,20 +10,19 @@
 	
 	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
+		var followersNotifyObject = JSON.parse(ENYM.ctx.getItem('followersNotify'));
 		if(!channelObject) {
 			goToView('channelsIOwnView');
 		} else {		
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.channelId(channelObject.channelId);
-			self.offText('');		
-			self.normalText('colornormal');
-			self.fastText('');
-			self.offClass('');		
-			self.normalClass('bgnormal');
-			self.fastClass('');
-			self.duration("Normal: <em>Send once (usually to email)</em>");
-			self.activeType('normalcolor');								
-			self.escLevel('N');
+			if(followersNotifyObject == null){
+				self.offYes();
+			} else if(followersNotifyObject == 'F')	{							
+				self.fastYes();
+			} else {
+				self.normalYes();
+			}
 		}
 	};
 
@@ -70,7 +69,7 @@
 		}
 		else {
 			var setting = {};
-      setting.NEW_FLWR_NOTIF = self.escLevel();				
+      setting.NEW_FLWR_NOTIF = self.escLevel();	
 			ES.channelService.putChnlSettings(self.channelId(), setting);
 			var setType = 'Normal';
 			if(self.escLevel() == 'F') {

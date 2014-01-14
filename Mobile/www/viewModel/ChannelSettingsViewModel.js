@@ -5,11 +5,11 @@
 	self.viewname = 'Settings';
 	self.displayname = 'Channel Settings';
 	
-  self.inputObs = [ 'channelId', 'channelName', 'shortDescription', 'yesShare', 'noShare', 'yesNotify', 'noNotify'];
+  self.inputObs = [ 'channelId', 'channelName', 'shortDescription', 'yesShare', 'noShare', 'notifyClass', 'newFollowers' ];
 	self.defineObservables();		
 	  
 	self.activate = function() {				
-		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));			
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
 		if(!channelObject) {
 			goToView('channelsIOwnView');
 		} else {
@@ -18,9 +18,7 @@
 			self.channelName(channelObject.channelName);
 			self.shortDescription(channelObject.channelDescription);
 			self.yesShare('nobutton');
-			self.noShare('yesbutton');
-			self.yesNotify('nobutton');
-			self.noNotify('yesbutton');								
+			self.noShare('yesbutton');							
 			ENYM.ctx.removeItem('channelOwner');
 			ES.channelService.getFollowerReq(self.channelId()).then(getSuccess);
 			ES.channelService.getChnlSettings(self.channelId()).then(getSettings);				
@@ -36,9 +34,15 @@
 	
 	function getSettings(data) {
 		if(typeof data.NEW_FLWR_NOTIF == 'undefined') {
-			self.yesNotify('yesbutton');
-			self.noNotify('nobutton');				
-		}		
+			self.newFollowers('Off');			
+		} else if(data.NEW_FLWR_NOTIF == 'F') {
+			self.newFollowers('Fast');
+		} else {
+			self.newFollowers('Normal');
+		}
+		self.notifyClass('bluebtn');
+		ENYM.ctx.removeItem('followersNotify');
+		ENYM.ctx.setItem('followersNotify', JSON.stringify(data.NEW_FLWR_NOTIF));
 	}	
 	
 	self.comingSoon = function() {
@@ -58,23 +62,13 @@
 		}				
 	};
 	
-	self.requiredNo = function(data) {
-		if(data == 'Share') {
-			self.yesShare('yesbutton');
-			self.noShare('nobutton');
-			var toastobj = {type: '', text: 'First/Last name no longer required'};
-			showToast(toastobj);		
-			ES.channelService.removeFollowerReq(self.channelId(), 'SHARE_NAME');			
-		}
-		else if(data == 'Notify') {
-			self.yesNotify('yesbutton');
-			self.noNotify('nobutton');
-			var toastobj = {type: '', text: 'Notify me of new followers no longer required'};
-			showToast(toastobj);
-			ES.channelService.removeChnlSetting(self.channelId(), 'NEW_FLWR_NOTIF');		
-		}						
+	self.requiredNo = function() {
+		self.yesShare('yesbutton');
+		self.noShare('nobutton');
+		var toastobj = {type: '', text: 'First/Last name no longer required'};
+		showToast(toastobj);		
+		ES.channelService.removeFollowerReq(self.channelId(), 'SHARE_NAME');							
 	};		
-		
 }
 
 ChannelSettingsViewModel.prototype = new ENYM.ViewModel();

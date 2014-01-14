@@ -3270,7 +3270,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 /*-Edit personal information-*/
 /* Yes No*/
-.yesnoclick, .yes-noclick, .yesno-click, .clickyesno {
+.yesnoclick, .yes-noclick, .yesno-click {
 	float:right;
 	border-radius:20px;
 	padding:3px 4px;
@@ -3278,7 +3278,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#666;
 	cursor:pointer;
 }
-.yesnoclick span, .yes-noclick span, .yesno-click span, .clickyesno span {
+.yesnoclick span, .yes-noclick span, .yesno-click span {
 	border-radius:50px;
 	float:left;
 	height:30px;
@@ -3288,7 +3288,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	width:30px;
 	color:#666;
 }
-.yesnoclick span.nobutton, .yes-noclick span.nobutton, .yesno-click span.nobutton, .clickyesno span.nobutton {
+.yesnoclick span.nobutton, .yes-noclick span.nobutton, .yesno-click span.nobutton {
 	background:#8dc63f;
 	color:#fff;
 	border-radius:50px;
@@ -3953,6 +3953,25 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#8DC63F;
 	font-size:13px;
 	line-height:14px;
+}
+/*13-Jan-2013*/
+.notifyfollowers {
+	overflow:hidden;
+	margin:0 0 18px 0;	
+}
+.notifyfollowers span {
+	font-size:14px;
+	color:#fff;
+}
+.bluebtn {
+	background:#1C75BC;
+	border-radius:4px;
+	color:#FFFFFF;
+	float:right;
+	font-size:14px;
+	padding:5px 0;
+	text-align:center;
+	width:72px;
 }
 /*
 	*@media query css

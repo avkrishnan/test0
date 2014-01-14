@@ -27,21 +27,18 @@
       Change channel icon image
     </a>
     <div class="radiobtn">
+      <div class="notifyfollowers">
+        <span>Notify me of new followers</span>
+        <a href="#" data-bind="click: requiredYes.bind($data, 'Notify'), css: notifyClass, text: newFollowers"></a>
+      </div> 
+
       <div class="yes-no">
         <label for="flip-1">First/Last name required</label>
         <div class="yes-noclick">
           <span data-bind="click: requiredYes.bind($data, 'Share'), css: yesShare">Yes</span>
-          <span data-bind="click: requiredNo.bind($data, 'Share'), css: noShare">No</span>              
+          <span data-bind="click: requiredNo, css: noShare">No</span>              
         </div>
-      </div>
-      
-      <div class="yes-no">
-        <label for="flip-1">Notify me of new followers</label>
-        <div class="clickyesno">
-          <span data-bind="click: requiredYes.bind($data, 'Notify'), css: yesNotify">Yes</span>
-          <span data-bind="click: requiredNo.bind($data, 'Notify'), css: noNotify">No</span>           
-        </div>
-      </div>           
+      </div>         
     
       <div class="yes-no">
         <label for="flip-1">Make this channel public</label>
