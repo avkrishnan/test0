@@ -31,37 +31,37 @@
 		invites = declines = unreachs = 0;
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship != 'O') {
-				var evernymIcon = false;
 				if(valueFollower.relationship == 'I') {
 					invites == invites++;
-					var nameClass = 'provisionalicon';
 				}
 				else if(valueFollower.relationship == 'D') {
 					declines == declines++;
-					var nameClass = 'provisionalicon';
 				}
 				else if(valueFollower.relationship == 'U') {
 					unreachs == unreachs++;
-					var nameClass = 'normalfollowers';
 				}				
-				else if(valueFollower.relationship == 'F') {
-					var nameClass = 'normalfollowers';
-					var evernymIcon = true;
-				}
-				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
-					var name = '';
-					nameClass = nameClass+' noname';
-				} 
-				else if(typeof valueFollower.firstname == 'undefined') {
-					var name = valueFollower.lastname;
-				}
-				else if(typeof valueFollower.lastname == 'undefined') {
-					var name = valueFollower.firstname;
-				}			
-				else {
-					var name = valueFollower.firstname +' '+ valueFollower.lastname;
-				}
-				if(valueFollower.relationship != 'D') {	
+				if(valueFollower.relationship == 'F') {
+					var evernymIcon = false;
+					if(valueFollower.managed == 'N') {
+						var nameClass = 'normalfollowers';
+						var evernymIcon = true;
+					}
+					else {
+						var nameClass = 'provisionalicon';						
+					}
+					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
+						var name = '';
+						nameClass = nameClass+' noname';
+					} 
+					else if(typeof valueFollower.firstname == 'undefined') {
+						var name = valueFollower.lastname;
+					}
+					else if(typeof valueFollower.lastname == 'undefined') {
+						var name = valueFollower.firstname;
+					}			
+					else {
+						var name = valueFollower.firstname +' '+ valueFollower.lastname;
+					}						
 					self.followers.push({
 						followerId: valueFollower.id,
 						nameClass: nameClass,

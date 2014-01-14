@@ -31,7 +31,13 @@
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship == 'D') {
 				var evernymIcon = false;
-				var nameClass = 'provisionalicon';
+				if(valueFollower.managed == 'N') {
+					var nameClass = 'normalfollowers';
+					var evernymIcon = true;
+				}
+				else {
+					var nameClass = 'provisionalicon';						
+				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					var name = '';
 					nameClass = nameClass+' noname';
