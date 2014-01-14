@@ -30,18 +30,13 @@
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship == 'U') {		
-				var evernymIcon = false;				
-				if(valueFollower.relationship == 'I') {
-					invites == invites++;
-					var nameClass = 'provisionalicon';
-				}
-				else if(valueFollower.relationship == 'N') {
-					declines == declines++;
-					var nameClass = 'provisionalicon';
-				}
-				else if(valueFollower.relationship == 'F') {
+				var evernymIcon = false;
+				if(valueFollower.managed == 'N') {
 					var nameClass = 'normalfollowers';
 					var evernymIcon = true;
+				}
+				else {
+					var nameClass = 'provisionalicon';						
 				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					var name = '';
