@@ -1362,7 +1362,8 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:5em;
 }
 .unfollow {
-	padding:2px 10px;
+	padding:2px 0px;
+	text-align:center;
 	background:#8dc63f;
 	color:#fff;
 	font-size:14px;
@@ -1370,6 +1371,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:85px;
 	margin:5px 0 0 12px;
 	border-radius:4px;
+	text-transform:capitalize;
 }
 .channelmessages {
 	padding:0 10px 0 0;
@@ -1574,9 +1576,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-size:12px;
 }
 .msg-nameuserid {
-	background:url("images/sprites-channel.png") no-repeat 4px -1087px;
+	background:url("images/sprites-channel.png") no-repeat 4px -1079px;
 	border-bottom:1px solid #828181;
-	padding:8px 0 22px 66px;
+	padding:15px 0 15px 66px;
 	margin:0 0 0 -10px;
 }
 .msg-nameuserid em {
@@ -1870,6 +1872,7 @@ h1.messagesdate {
 }
 .followerchannel .channelcontent {
 	margin:0;
+	cursor:pointer;
 }
 .newfollowers {
 	background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -969px;
@@ -3850,6 +3853,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:#2D2D2D;
 	margin:15px 0 5px 0;
 	border-radius:20px 0 0 20px;
+	cursor:pointer;
 }
 .addinvitebtn {
 	background:#8DC63F url(images/buddy-white.png) no-repeat 12px 7px;
@@ -3972,6 +3976,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	padding:5px 0;
 	text-align:center;
 	width:72px;
+}
+.clickabl {
+	display:inline-block;
+	width:85%;
 }
 /*
 	*@media query css
@@ -4281,6 +4289,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		font-size:15px;
 		padding:1px 10px;
 	}
+	.clickabl {
+		display: inline-block;
+		width:94%;
+	}
 }
 @media only screen and (min-width:800px) {
 	.slidemenu {
@@ -4480,6 +4492,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	}
 	.descriptionedit textarea {
 		max-height:150px;
+	}
+	.clickabl {
+		display:inline-block;
+		width:96%;
 	}
 }
 @media only screen and (min-width:1290px) {
