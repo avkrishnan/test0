@@ -3951,6 +3951,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .normalinvites span {
 	font-size:14px;
 	color:#fff;
+	font-style:italic;
+	text-transform:capitalize;
 }
 .normalinvites em {
 	display:block;
