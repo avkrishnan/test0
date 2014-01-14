@@ -42,8 +42,8 @@
 			success: function(data) {					
 				var toastobj = {type: '', text: 'iGi sent!'};
 				showToast(toastobj);
-				self.gotChannel(channel);				
-				//goToView($.mobile.activePage.attr('id'));								
+				//self.gotChannel(channel);				
+				goToView($.mobile.activePage.attr('id'));								
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
@@ -123,7 +123,6 @@
 						}
 					);
 				});
-				alert(JSON.stringify(self.channelMessages()));
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
