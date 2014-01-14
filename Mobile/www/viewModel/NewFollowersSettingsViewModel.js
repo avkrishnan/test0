@@ -62,10 +62,10 @@
   };
 	
 	self.saveCommand = function () {
+		$.mobile.showPageLoadingMsg('a', 'Saving Channel Setting');
 		if(self.escLevel() == 'O') {
 			ES.channelService.removeChnlSetting(self.channelId(), 'NEW_FLWR_NOTIF');
-			var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Notify me of new followers no longer required'};
-			showToast(toastobj);			
+			var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Notify me of new followers no longer required'};			
 		}
 		else {
 			var setting = {};
@@ -74,13 +74,14 @@
 			var setType = 'Normal';
 			if(self.escLevel() == 'F') {
 				var setType = 'Fast';
-			}
+			}  
 			var toastobj = {redirect: 'channelSettingsView', type: '', text: 'Notify me of new followers is set to '+setType};
-			showToast(toastobj);			
 		}
-		popBackNav();
+		setTimeout(function() {
+		  popBackNav();
+			showToast(toastobj);
+		}, 500);
   };
-	
 }
 
 NewFollowersSettingsViewModel.prototype = new ENYM.ViewModel();
