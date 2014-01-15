@@ -33,14 +33,21 @@
 				var evernymIcon = false;
 				if(valueFollower.managed == 'N') {
 					var nameClass = 'normalfollowers';
+					var evernym = true
 					var evernymIcon = true;
 				}
-				else {
-					var nameClass = 'provisionalicon';						
+				else {						
+					var nameClass = 'provisionalicon noname';
+					var evernym = false																			
 				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
-					var name = '';
-					nameClass = nameClass+' noname';
+					if(valueFollower.managed == 'Y') {
+						name = 'Guest';
+					}
+					else {
+						name = '';
+						nameClass = nameClass+' noname';
+					}
 				} 
 				else if(typeof valueFollower.firstname == 'undefined') {
 					var name = valueFollower.lastname;				
@@ -56,8 +63,9 @@
 					nameClass: nameClass,
 					followerName: name, 
 					accountname: valueFollower.accountname,
+					evernym: evernym,
 					evernymIcon: evernymIcon,
-					type:valueFollower.relationship
+					type:valueFollower.managed
 				});
 				self.invitesCount(self.followers().length);
 			}
@@ -66,8 +74,6 @@
 	
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		var toastobj = {type: 'toast-error', text: details.message};
-		showToast(toastobj);		
   };
 	
 	self.followerDetails = function (data) {

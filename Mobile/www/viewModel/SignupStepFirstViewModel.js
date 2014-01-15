@@ -6,13 +6,14 @@
   self.viewname = 'Register';
   self.displayname = 'Register';
 	
-  self.inputObs = [ 'evernym', 'password', 'emailaddress'];
+  self.inputObs = [ 'evernym', 'password', 'emailaddress', 'guest' ];
   self.errorObs = [ 'errorEmail', 'errorAccountName', 'errorPassword', 'emailClass', 'accountNameClass', 'passwordClass']
 	
 	self.defineObservables();	
 
   self.activate = function () {
 		var token = ES.evernymService.getAccessToken();
+		self.guest(true);
 		if(token == '' || token == null) {
 			$('input').keyup(function () {
 				self.clearErrorObs();
@@ -87,6 +88,9 @@
 	
 
   function signUpSuccess(args) {
+		if(!$.isEmptyObject(args)) {
+			self.guest(false);
+		}
     $.mobile.hidePageLoadingMsg();
 		self.loginCommand();
   };
@@ -100,7 +104,7 @@
   };
 	
 	self.loginCommand = function() {
-    $.mobile.showPageLoadingMsg('a', 'Logging In With New Credentials');
+    $.mobile.showPageLoadingMsg('a', 'Logging in with new credentials');
     var callbacks = {
       success : loginSuccess,
       error : loginError
@@ -120,8 +124,10 @@
 		ENYM.ctx.setItem('accountName', args.account.accountname);
 		ENYM.ctx.setItem('newusername', self.evernym());
 		ENYM.ctx.setItem('newuseremail', self.emailaddress());
-		ENYM.ctx.setItem('evernym', 1);					
-		goToView('registrationVerifyView');			
+		ENYM.ctx.setItem('evernym', 1);
+		if(self.guest() == true) {			
+			goToView('registrationVerifyView');
+		}
   };
 
   function loginError(data, status, details) {
