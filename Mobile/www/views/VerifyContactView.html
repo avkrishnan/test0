@@ -8,12 +8,12 @@
       <p data-bind="text: verificationCommethodType"></p>
     </div>
     
-    <div class="add-action">
-      <div class="addaction">
+    <div class="add-action loginform">
+      <div class="addaction" data-bind="css: verificationClass">
         <input type="text" placeholder="enter 6 digit code from email" data-bind="{value: verificationCode}" />
-        <a href="#" class="addbtn verify" data-bind="click: verifyRequestCommethod">Verify</a>
+        <a href="#" class="addbtn verify" data-bind="click: getCommethods">Verify</a>
       </div>
-      <div class="error-message" data-bind="html: errorMessage"></div>
+      <div class="msgerror" data-bind="html: errorMessage"></div>
     </div>
     
     <div class="resend">
