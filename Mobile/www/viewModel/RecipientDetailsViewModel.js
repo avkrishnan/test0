@@ -16,14 +16,14 @@
     'percentageClass',
 		'percentage',
 		'noiGi',
-		//'igiReceivedTime',
+		'igiReceivedTime',
 		'escalateUntil',
 		'escalateTime',
 		'notIgiReceived'
 		];		
 	self.defineObservables();	
 	self.escalateTime = ko.observable(false);
-	//self.igiReceived = ko.observable(false);
+	self.igiReceived = ko.observable(false);
 
 	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
@@ -52,6 +52,7 @@
 			} else {
 				var rcvrName = recipient[1];
 			}
+			self.igiReceivedTime('');
 			self.recipient(recipient[0]+' '+rcvrName);	
 			self.notIgiReceived('noigi');
 		}
