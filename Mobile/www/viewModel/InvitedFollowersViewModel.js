@@ -57,7 +57,7 @@
 					followerName: name, 
 					accountname: valueFollower.accountname,
 					evernymIcon: evernymIcon,
-					type:valueFollower.relationship
+					type:valueFollower.managed
 				});
 				self.invitesCount(self.followers().length);
 			}
@@ -66,8 +66,6 @@
 	
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();
-		var toastobj = {type: 'toast-error', text: details.message};
-		showToast(toastobj);		
   };
 	
 	self.followerDetails = function (data) {

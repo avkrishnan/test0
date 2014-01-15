@@ -29,7 +29,7 @@
 			} else {
 				self.followerName(followerObject.followerName);
 			}
-			if(followerObject.type == 'I') {
+			if(followerObject.type == 'Y') {
 				self.evernymType(true);	
 			}
 		}

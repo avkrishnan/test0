@@ -139,6 +139,8 @@
 				}
 			})
 		);
+		var toastobj = {redirect:'followersListView', type: '', text: 'Guest details changed'};
+		showToast(toastobj);
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');
   };
 	
