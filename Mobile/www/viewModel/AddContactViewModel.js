@@ -36,7 +36,7 @@
 		ENYM.ctx.setItem("currentVerificationCommethodType",data.comMethodType);
 		ENYM.ctx.setItem("currentVerificationCommethodID",data.comMethodID);
 		ENYM.ctx.setItem("verificationStatus",false);
-		viewNavigate('Cont. Info', 'addContactView', 'verifyContactView');		
+		viewNavigate('Cont. Info', 'addContactView', 'verifyContactView');
 	}
 	
 	self.gotoDelete = function(data) {	
