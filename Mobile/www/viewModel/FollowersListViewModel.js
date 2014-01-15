@@ -8,12 +8,12 @@
   self.inputObs = [ 'channelId', 'channelName', 'invitesCount', 'declinesCount', 'unreachCount', 'followerCount', 'countIsZero' ];
 	self.defineObservables();
   self.followers = ko.observableArray([]);
-	  
+
 	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
 		if(!channelObject) {
 			goToView('channelsIOwnView');
-		} else {				
+		} else {			
 			addExternalMarkup(self.template); // this is for header/overlay message	
 			self.followers.removeAll();
 			self.followerCount('Followers ()');
@@ -29,6 +29,7 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		invites = declines = unreachs = 0;
+		name = '';		
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship != 'O') {
 				if(valueFollower.relationship == 'I') {
@@ -46,22 +47,22 @@
 						var nameClass = 'normalfollowers';
 						var evernymIcon = true;
 					}
-					else {
-						var nameClass = 'provisionalicon';						
+					else {						
+						var nameClass = 'provisionalicon';																			
 					}
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
-						var name = '';
+						name = '';
 						nameClass = nameClass+' noname';
 					} 
 					else if(typeof valueFollower.firstname == 'undefined') {
-						var name = valueFollower.lastname;
+						name = valueFollower.lastname;
 					}
 					else if(typeof valueFollower.lastname == 'undefined') {
-						var name = valueFollower.firstname;
+						name = valueFollower.firstname;
 					}			
 					else {
-						var name = valueFollower.firstname +' '+ valueFollower.lastname;
-					}						
+						name = valueFollower.firstname +' '+ valueFollower.lastname;
+					}	
 					self.followers.push({
 						followerId: valueFollower.id,
 						nameClass: nameClass,
@@ -84,7 +85,7 @@
 		} else {
 			self.followerCount('Followers ('+self.followers().length+')');
 		}	
-	};	 
+	};
 	
   function errorAPI(data, status, details) {
     $.mobile.hidePageLoadingMsg();

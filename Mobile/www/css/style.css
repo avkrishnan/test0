@@ -1576,10 +1576,15 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-size:12px;
 }
 .msg-nameuserid {
+<<<<<<< HEAD
 	background:url("images/avatar.png") no-repeat 10px 15px;
+=======
+	background:url("images/sprites-channel.png") no-repeat 4px -1074px;
+>>>>>>> e4b85587c1b032a49e89fad52be3fd8da88e11e1
 	border-bottom:1px solid #828181;
 	padding:12px 0 8px 66px;
 	margin:0 0 0 -10px;
+	
 }
 .noigi {
 	line-height:45px;
