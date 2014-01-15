@@ -32,20 +32,10 @@
 	
 	self.gotoVerify = function(data) {
 		self.verify(true);
-		var callbacks = {
-			success: function(responseData) {
-				//alert('Verification code sent!');
-			},
-			error: function (responseData, status, details) {
-				var toastobj = {type: 'toast-error', text: details.message};
-				showToast(toastobj);				
-			}
-		};		
 		ENYM.ctx.setItem("currentVerificationCommethod",data.comMethodAddress);
 		ENYM.ctx.setItem("currentVerificationCommethodType",data.comMethodType);
 		ENYM.ctx.setItem("currentVerificationCommethodID",data.comMethodID);
 		ENYM.ctx.setItem("verificationStatus",false);
-		ES.commethodService.requestVerification(data.comMethodID, callbacks);
 		viewNavigate('Cont. Info', 'addContactView', 'verifyContactView');		
 	}
 	

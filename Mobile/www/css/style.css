@@ -1576,10 +1576,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	font-size:12px;
 }
 .msg-nameuserid {
-	background:url("images/sprites-channel.png") no-repeat 4px -1079px;
+	background:url("images/avatar.png") no-repeat 10px 15px;
 	border-bottom:1px solid #828181;
-	padding:15px 0 15px 66px;
+	padding:12px 0 8px 66px;
 	margin:0 0 0 -10px;
+}
+.noigi {
+	line-height:45px;
 }
 .msg-nameuserid em {
 	font-size:14px;
@@ -1824,8 +1827,12 @@ span.followercount {
 .singlemsgicon.icon-r {
 	background:url("images/icon-r.png") no-repeat 0 2px;
 }
-h1.messagesdate {
+h1.messagesdate, h1.receiveddate {
 	font-size:14px;
+}
+h1.receiveddate {
+	margin:0 0 10px 0;
+	display:block;
 }
 .repliesmsg {
 	background:#2D2D2D url("images/Replies-ican.png") no-repeat 3px 3px;
@@ -3914,6 +3921,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .provisionalicon {
  background:#2D2D2D url("images/sprites-channel.png") no-repeat -4px -1084px;
+ font-style:italic;
 }
 .noverified {
 	background:#2D2D2D url("images/non-verified.png") no-repeat 3px 3px;
@@ -3933,7 +3941,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .provisionalicon.noname {
 	line-height:40px;
-	font-style:italic;
+	/*font-style:italic;*/
 	background:#2D2D2D url(images/sprites-channel.png) no-repeat -4px -1084px;
 }
 .provisionalicon.noname em {
@@ -3951,7 +3959,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .normalinvites span {
 	font-size:14px;
 	color:#fff;
-	font-style:italic;
 	text-transform:capitalize;
 }
 .normalinvites em {

@@ -10,7 +10,22 @@
         </div>
       </div>
     </div>
-    <div class="broadcastreplies msg-nameuserid" data-bind="html: recipient"></div>
+    <h1 class="messagesdate" data-bind="text: time"></h1>
+    <div class="channelbroadcast">
+      <a href="#" class="singlemessage" onclick="viewNavigate('Who Got it', 'recipientDetailsView', 'singleMessageFullTextView');">
+        <div class="singlemsg" data-bind="html: singleMessage"></div>
+      </a>
+     <div class="broadcastmsgsend">
+        <a href="#" class="igigot" data-bind="html: iGi"></a>
+        <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: percentage }"></span>
+        <a href="#" class="iginotgot" data-bind="text: noiGi" onclick="viewNavigate('Who Got it', 'recipientDetailsView', 'notGotItView');"></a>
+      </div>
+      <div class="escalatebroadcast" data-bind="html: escalateUntil, visible: escalateTime"></div>          
+    </div>
+    <div class="broadcastreplies msg-nameuserid" data-bind="css: notIgiReceived">
+      <span data-bind="html: recipient"></span>
+      <!--<h1 class="receiveddate" data-bind="html: igiReceivedTime, visible: igiReceived"></h1>-->
+    </div>
   </div> 
   <div class="toast-notification"></div> 
   <div class="footer">
