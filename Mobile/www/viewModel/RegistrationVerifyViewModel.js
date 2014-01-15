@@ -26,20 +26,33 @@
 	
 	$(document).keyup(function (e) {
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'registrationVerifyView') {
-			self.verifyRequestCommethod();
+			self.verifyCommand();
 		}
-	});		
-	
+	});
+
+	self.verifyCommand = function(){
+		$.when(self.getCommethods().then(function(data) {
+			if(self.verified() == 'Y') {
+				self.skipCommand()					
+			}
+			else {
+				self.verifyRequestCommethod();
+			}
+		}));		
+	};
+
 	self.getCommethods = function() {
 		var callbacks = {
 			success: function(data){
 				self.verificationCommethod(data.commethod[0].type);
 				self.verificationCommethodID(data.commethod[0].id);
+				self.verified(data.commethod[0].verified);
 			},
 			error: function (data, status, details) {
 				showMessage(details.message);
 			}
-		};		
+		};
+		$.mobile.showPageLoadingMsg('a', 'Sending Verification Request');				
 		return ES.commethodService.getCommethods(callbacks);
 	};
 	
