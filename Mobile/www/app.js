@@ -14,8 +14,7 @@ ES.evernymService.doAfterDone = function(){
 };    
 
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
-	$.mobile.hidePageLoadingMsg();
-	if(jqXHR.responseJSON) {
+    $.mobile.hidePageLoadingMsg();
 		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
 			ES.evernymService.clearAccessToken();
 			authenticate();
@@ -30,7 +29,6 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 			
 			}
 		}
-	}
 };
 
 function goToView(view) {
@@ -809,13 +807,6 @@ function popBackNav() {
 }
 
 /* Toast messages function */
-/* variables used
- * toastobj - this object has redirect, type and text parameters;
- * redirect - view page id where you are going to show toast
- * type - toast type like - ''(defualt and confirmation toast),'toast-info'(informational toast), 'toast-error'(error toast)
- * text - toast text
- *
-*/
 function showToast(toastobj) {
 	if(toastobj.redirect) {	
 		$('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');			

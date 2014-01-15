@@ -1,43 +1,57 @@
-<!--To do - Pradeep Kumar-->
 <div id="signupStepFirstView" data-role="page">
   <header>
-    <a href="#" class="back logintop" onclick="goToView('loginView');"><em></em>Login</a>
+    <a href="#" class="back logintop" onclick="goToView('loginView');" data-bind="visible:guest"><em></em>Login</a>
   </header>
   <div class="page-content nofooterbar">
-    <section class="loginform">
-      <label class="msginfo">Quick & easy sign-up:</label>
-      <div class="formtype" data-bind="css: emailClass">
-        <div class="validationerrormsg">      
-          <input type="text" data-bind="value: emailaddress" placeholder="email address" />
-          <div class="msgerror" data-bind="html: errorEmail"></div>
+  	<section data-bind="if:guest">
+      <section class="loginform">
+        <label class="msginfo">Quick & easy sign-up:</label>
+        <div class="formtype" data-bind="css: emailClass">
+          <div class="validationerrormsg">      
+            <input type="text" data-bind="value: emailaddress" placeholder="email address" />
+            <div class="msgerror" data-bind="html: errorEmail"></div>
+          </div>
         </div>
-      </div>
-      <div class="formtype" data-bind="css: accountNameClass">
-        <div class="validationerrormsg">      
-          <input type="text" data-bind="value: evernym, valueUpdate: 'afterkeydown'" placeholder="create your evernym (username)" />
-          <div class="msgerror" data-bind="html: errorAccountName"></div>
+        <div class="formtype" data-bind="css: accountNameClass">
+          <div class="validationerrormsg">      
+            <input type="text" data-bind="value: evernym, valueUpdate: 'afterkeydown'" placeholder="create your evernym (username)" />
+            <div class="msgerror" data-bind="html: errorAccountName"></div>
+          </div>
         </div>
-      </div>
-      <div class="helptext">Your evernym is your unique public username, visible by the channels you follow. It can be from 5 to 25 letters and numbers, but no spaces.</div>
-      <div class="formtype" data-bind="css: passwordClass">
-        <div class="validationerrormsg">      
-          <input type="password" data-bind="value: password" placeholder="create your password" />
-          <div class="msgerror" data-bind="html: errorPassword"></div>
+        <div class="helptext">Your evernym is your unique public username, visible by the channels you follow. It can be from 5 to 25 letters and numbers, but no spaces.</div>
+        <div class="formtype" data-bind="css: passwordClass">
+          <div class="validationerrormsg">      
+            <input type="password" data-bind="value: password" placeholder="create your password" />
+            <div class="msgerror" data-bind="html: errorPassword"></div>
+          </div>
         </div>
-      </div>
-      <div class="helptext">Minimum 8 characters, and hard to guess!</div>
-      <div class="login">
-        <p class="loginbtn">
-          <a href="#" data-bind="click: nextViewCommand">Sign up!</a>
-        </p>
+        <div class="helptext">Minimum 8 characters, and hard to guess!</div>
+        <div class="login">
+          <p class="loginbtn">
+            <a href="#" data-bind="click: nextViewCommand">Sign up!</a>
+          </p>
+        </div>
+      </section>
+      <div class="baseline"></div>
+      <div class="signedup">
+        <span>Evernym is all about privacy.</span> We never share your information with anyone, and we never read or scan your communications</div>
+      <div class="baseline"></div>
+      <div class="terms">By signing up you are agreeing to our
+        <a href="#" onclick="goToView('privacyPolicyView');">Terms of Use and Privacy Policy</a>
       </div>
     </section>
-    <div class="baseline"></div>
-    <div class="signedup">
-      <span>Evernym is all about privacy.</span> We never share your information with anyone, and we never read or scan your communications</div>
-    <div class="baseline"></div>
-    <div class="terms">By signing up you are agreeing to our
-      <a href="#" onclick="goToView('privacyPolicyView');">Terms of Use and Privacy Policy</a>
-    </div>
+    <section data-bind='ifnot:guest'>
+     <div class="editinformation">
+        IMPORTANT: EXISTING EMAIL ADDRESS
+      </div>      
+			<div class="invitedfollow">
+      	(<span data-bind='text:emailaddress'></span>) has previously been invited to follow one or more channels.
+      </div>
+      <div class="invitedfollow">
+      	After verifying ownership of (<span data-bind='text:emailaddress'></span>), your new evernym account (<span data-bind='text:evernym'></span>) will take the place of (<span data-bind='text:emailaddress'></span>) in following these channels, and you will have sole control over it.
+      </div>
+      <div class="loginbtn"><a href="#" onclick="goToView('registrationVerifyView');">OK, got it!</a></div>
+    </section>
   </div>
+  <div class="footer tutorialbottombar"></div>
 </div>
