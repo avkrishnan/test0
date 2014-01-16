@@ -30,7 +30,7 @@
     </div>
     <div class="pending" data-bind="text: followerCount"></div>
     <div data-bind="foreach: followers">
-      <a href="#" data-bind="css: nameClass, click: $parent.followerDetails.bind($index())">
+      <a href="#" data-bind="css: nameClass, click: $parent.followerDetails">
         <span class="evernym" data-bind="visible: evernymIcon"></span>
         <div class="normalinvites">
           <span data-bind="text: followerName"></span>

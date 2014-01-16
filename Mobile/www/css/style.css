@@ -1386,26 +1386,29 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 }
 /*New Desing CHANGES v-55*/
 .igibutton {
-	float: left;
-	padding: 20px 0;
-	width: 43px;
-	background:url("images/IGI.png") no-repeat 4px 7px;
+	float:left;
+	padding:23px 0;
+	width:45px;
+	border-right:1px solid #EAEAEA;
+	background:url("images/IGI-btn.png") no-repeat 4px 7px;
 }
-.igisent {
-	background:url("images/IGISENT.png") no-repeat 4px 7px;
+.messagesreceived .igibutton {
+	background:url("images/IGI.png") no-repeat 4px 7px;
+	border:none;
 }
 .igibtnarrow {
 	width:45px;
 	background:url("images/IGI-btn.png") no-repeat 4px 7px;
 	border-right:1px solid #ccc;
+	display:table-cell;
 }
-.igisentwhite {
+.igisentwhite, .igisent {
 	background:url("images/IGISENT-h.png") no-repeat 8px 7px;
 }
 .iconchannels {
-	float: right;
-	padding: 23px 0;
-	width: 46px;
+	float:right;
+	padding:23px 0;
+	width:46px;
 	border-left:1px solid #EAEAEA;
 }
 /*New Desing CHANGES*/
@@ -1454,13 +1457,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:97%;
 }
 .channelmessages .messageschannel {
-	width:68%;
+	width:67%;
 }
 .channelmessages .msg-icon {
 	width:82.2%;
 }
 .channelmessages .igi-msg {
-	width:83.5%;
+	width:83%;
 }
 .channelmessages .onlymsg {
 	width:98%;
@@ -4102,13 +4105,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:98%;
 	}
 	.channelmessages .messageschannel {
-		width:71.7%;
+		width:71%;
 	}
 	.channelmessages .msg-icon {
 		width:84.4%;
 	}
 	.channelmessages .igi-msg {
-		width:85.5%;
+		width:85%;
 	}
 	.channelmessages .onlymsg {
 		width:99%;
@@ -4246,7 +4249,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:92.8%;
 	}
 	.channelmessages .igi-msg {
-		width:93.4%;
+		width:93%;
 	}
 	.channelmessages .onlymsg {
 		width:99.5%;
@@ -4379,13 +4382,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:99.4%;
 	}
 	.channelmessages .messageschannel {
-		width:90%;
+		width:89%;
 	}
 	.channelmessages .msg-icon {
 		width:94.4%;
 	}
 	.channelmessages .igi-msg {
-		width:94.8%;
+		width:94%;
 	}
 	.channelmessages .onlymsg {
 		width:99.5%;
