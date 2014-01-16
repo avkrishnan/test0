@@ -1001,9 +1001,7 @@ function truncatedTextScreen() {
 /* This function validates USA phonenumber for 10 digits and returns dashed phone number or error object*/
 function validateUSAPhone(txtPhone) {
 	var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-	var phonepatternforhyphen = /^\d+(-\d+)*$/;
   var phoneNumberPatternPlus = /^\+?[0-9]{0,15}$/;
-  var phoneHypenPlus = /(?:\(?\+\d{2}\)?\s*)?\d+(?:[ -]*\d+)*$/;
 
   txtPhone = txtPhone.replace(/[\u00AD\u002D\u2011]+/g,'');
   if(!phoneNumberPatternPlus.test(txtPhone) || ((12>txtPhone.length || txtPhone.length >15) && (txtPhone.charAt(0) == '+'))){

@@ -1,5 +1,5 @@
 <div id="channelSingleMessagesView" data-role="page">
-	<header class="logged-in"></header>
+  <header class="logged-in"></header>
   <div class="page-content">
     <div class="channelinformation">
       <span class="channelimg" data-bind="css: channelIcon"></span>
@@ -22,11 +22,13 @@
       </div>      
     </div>
     <div class="msgdetailbuttons">
-      <a href="#" data-bind="css: activeClass, click: iGiAck, visible: iGiButton"></a>      
+      <a href="#" data-bind="css: activeClass, click: iGiAck, visible: iGiButton"></a>
+      <a href="#" class="igiactive" data-bind="visible: iGiButton">i Got it</a>            
       <a href="#" data-bind="css: dismissClass, click: dismissEscalation, visible: dismissButton">Dismiss</a>
       <!--<a href="#" data-bind="visible: snoozeButton">snooze</a>-->      
-      <a class="replybtn" href="#" data-bind="click: comingSoon">Reply</a>
-    </div>         
+      <!--<a class="replybtn" href="#" data-bind="click: comingSoon">Reply</a>-->
+    </div>
+    <div class="loginbtn"><a href="" data-bind="click: comingSoon">Reply</a></div>             
   </div>
   <div class="toast-notification"></div>    
   <div class="footer">
