@@ -5,7 +5,7 @@
 	self.viewname = 'Verify Contact';
 	self.displayname = 'Verify Contact';
 	
-  self.inputObs = [ 'commethod', 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode', 'verified'];
+  self.inputObs = [ 'commethod', 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode', 'verified', 'status'];
   self.errorObs = [ 'verificationClass', 'errorMessage'];	
   self.defineObservables();
 	
@@ -25,9 +25,10 @@
 	});
 	
 	self.verifyCommand = function(){
+		self.status('verify');
 		$.when(self.getCommethods().then(function(data) {
 			if(self.verified() == 'Y') {
-				self.skipCommand()					
+				self.skipCommand();					
 			}
 			else {
 				self.verifyRequestCommethod();
@@ -51,7 +52,7 @@
 						showToast(toastobj);
 					}
 				};
-				if(self.verified() != 'Y') {				
+				if(self.status() != 'verify') {				
 					ES.commethodService.requestVerification(self.verificationCommethodID(), callback);
 				}
 			},
