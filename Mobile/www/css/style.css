@@ -526,6 +526,7 @@ a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgo
 	padding:10px 15px 10px 10px;
 	border-radius:24px 0 0 24px;
 	float:right;
+	clear:both;
 }
 .findbtn {
 	margin:10px 0 10px 0;
@@ -1392,10 +1393,6 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	border-right:1px solid #EAEAEA;
 	background:url("images/IGI-btn.png") no-repeat 4px 7px;
 }
-.messagesreceived .igibutton {
-	background:url("images/IGI.png") no-repeat 4px 7px;
-	border:none;
-}
 .igibtnarrow {
 	width:45px;
 	background:url("images/IGI-btn.png") no-repeat 4px 7px;
@@ -1445,13 +1442,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .messageschannel {
 	float:left;
 	padding:0 0 0 4px;
-	width:64%;
+	width:63%;
 }
 .msg-icon {
 	width:80.9%;
 }
 .igi-msg {
-	width:82%;
+	width:81%;
 }
 .onlymsg {
 	width:97%;
@@ -2537,13 +2534,13 @@ ul.igiresponses li span {
 	line-height:33px;
 	margin:10px 0 10px 0;
 	overflow:hidden;
-	padding:0;
+	padding:0px 10px 0px 0px;
 	float:right;
 }
 .msgdetailbuttons a.igimsgdetail, .msgdetailbuttons a.igimsgdetail.ui-link, .msgdetailbuttons a.igimsgdetail.ui-link:visited, .msgdetailbuttons a.igimsgdetail.ui-link:hover, .msgdetailbuttons a.igimsgdetail.ui-link:active {
-	background:url(images/msgdetails.png) no-repeat left center;
+	background:url(images/IGI-btn.png) no-repeat 6px center;
 	float:left;
-	padding:18px 28px 18px 27px;
+	padding:18px 20px 18px 27px;
 	margin:0;
 }
 .msgdetailbuttons a.igisentimg, .msgdetailbuttons a.igisentimg.ui-link, .msgdetailbuttons a.igisentimg.ui-link:visited, .msgdetailbuttons a.igisentimg.ui-link:hover, .msgdetailbuttons a.igisentimg.ui-link:active {
@@ -2562,6 +2559,12 @@ ul.igiresponses li span {
 	font-size:14px;
 	color:#a7a9ac;
 	float:left;
+}
+.msgdetailbuttons a.igiactive, .msgdetailbuttons a.igiactive.ui-link, .msgdetailbuttons a.igiactive.ui-link:visited, .msgdetailbuttons a.igiactive.ui-link:hover, .msgdetailbuttons a.igiactive.ui-link:active {
+		background:#8DC63F;
+		color:#fff;
+		font-weight:bold;
+		cursor:auto;
 }
 .msgdetailbuttons a.replybtn, .msgdetailbuttons a.replybtn.ui-link, .msgdetailbuttons a.replybtn.ui-link:visited, .msgdetailbuttons a.replybtn.ui-link:hover, .msgdetailbuttons a.replybtn.ui-link:active {
 	background:#A7A9AC url("images/replybg.png") no-repeat 10px 8px;
@@ -4093,13 +4096,13 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:77%;
 	}
 	.messageschannel {
-		width:68.8%;
+		width:68%;
 	}
 	.msg-icon {
 		width:83%;
 	}
 	.igi-msg {
-		width:84%;
+		width:83%;
 	}
 	.onlymsg {
 		width:98%;
@@ -4237,7 +4240,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:92.7%;
 	}
 	.igi-msg {
-		width:93.2%;
+		width:93%;
 	}
 	.onlymsg {
 		width:99%;
@@ -4376,7 +4379,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:94.2%;
 	}
 	.igi-msg {
-		width:94.7%;
+		width:94.4%;
 	}
 	.onlymsg {
 		width:99.4%;
@@ -4458,7 +4461,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:95.7%;
 	}
 	.igi-msg {
-		width:96%;
+		width:95.7%;
 	}
 	.onlymsg {
 		width:99.5%;
