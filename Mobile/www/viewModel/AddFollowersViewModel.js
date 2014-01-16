@@ -106,6 +106,9 @@
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
+		self.phoneClass('validationerror');
+		self.emailClass('validationerror');
+		self.errorPhone('<span>Sorry, </span> email (or phone number) already associated with this channel.');					
 	};
 }
 
