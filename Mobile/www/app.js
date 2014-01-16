@@ -1002,23 +1002,30 @@ function truncatedTextScreen() {
 function validateUSAPhone(txtPhone) {
 	var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 	var phonepatternforhyphen = /^\d+(-\d+)*$/;
-	if(!phoneNumberPattern.test(txtPhone) || (10 > txtPhone.length > 12 )){
-		var phoneObject = {
-			type : 'Error',
-			text : '<span>Sorry, </span> Not a valid phone number.'
-		};			
-	} else if(phoneNumberPattern.test(txtPhone)){  
-		if(txtPhone.match(/^[0-9]{3}\-[0-9]{3}\-[0-9]{4}$/)) {
-			txtPhone = txtPhone;
-		} else if(txtPhone.indexOf('-') == 3 || txtPhone.indexOf('-') == 6) {
-			txtPhone = (txtPhone.indexOf('-') == 3) ? txtPhone.substring(0, 7) + "-" + txtPhone.substring(7, txtPhone.length) : txtPhone.substring(0, 3) + "-" + txtPhone.substring(3, txtPhone.length);
-		} else {
-			txtPhone = txtPhone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-		}
-		var phoneObject = {
-			type : 'Text',
-			text : txtPhone
-		};			    
+  var phoneNumberPatternPlus = /^\+?[0-9]{0,15}$/;
+  var phoneHypenPlus = /(?:\(?\+\d{2}\)?\s*)?\d+(?:[ -]*\d+)*$/;
+
+  txtPhone = txtPhone.replace(/[\u00AD\u002D\u2011]+/g,'');
+  if(!phoneNumberPatternPlus.test(txtPhone) || ((12>txtPhone.length || txtPhone.length >15) && (txtPhone.charAt(0) == '+'))){
+    var phoneObject = {
+      type : 'Error',
+      text : '<span>Sorry, </span> Not a valid phone number.'
+    };
+  } else if((txtPhone.charAt(0) != '+') && (!phoneNumberPattern.test(txtPhone)) || (10>txtPhone.length || txtPhone.length >12)) {
+    var phoneObject = {
+      type : 'Error',
+      text : '<span>Sorry, </span> Not a valid phone number.'
+    };
+  } else {
+    if((txtPhone.charAt(0)) == '+') {
+      txtPhone = txtPhone.replace(/(.{2})(.{3})(.{3})/,'$1-$2-$3-');
+    } else {
+      txtPhone = txtPhone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+    }
+	  var phoneObject = {
+  		type : 'Text',
+  		text : txtPhone
+	  };		    
 	}
 	return phoneObject;
 }

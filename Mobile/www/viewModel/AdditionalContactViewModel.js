@@ -17,6 +17,7 @@
 		var phoneNumberPatternPlus = /^\+?[0-9]{0,15}$/;
 		var phonepatternforhyphen = /^\d+(-\d+)*$/;
 		var phoneHypenPlus = /(?:\(?\+\d{2}\)?\s*)?\d+(?:[ -]*\d+)*$/;
+
 		if(self.comMethodName() == '') {
 			self.errorMessage("<span>ERROR: </span>Please input email or phone!");
 			self.errorMessageInput('validationerror');
@@ -33,18 +34,17 @@
 				self.addNewCommethod(newCommethodObject);
 			}
 		} else { // for phone
-			if((!phoneNumberPattern.test(self.comMethodName()) || !phoneNumberPatternPlus.test(self.comMethodName())) && 10 > self.comMethodName().length > 15){
+			tempCommethodName = self.comMethodName().replace(/[\u00AD\u002D\u2011]+/g,'');
+			if(!phoneNumberPatternPlus.test(tempCommethodName) || ((12>tempCommethodName.length || tempCommethodName.length >15) && (tempCommethodName.charAt(0) == '+'))){
 				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
-			} else if(phoneNumberPattern.test(self.comMethodName()) || phoneNumberPatternPlus.test(self.comMethodName())){  
-				if(self.comMethodName().match(/^[0-9]{3}\-[0-9]{3}\-[0-9]{4}$/)) {
-					tempCommethodName = self.comMethodName();
-				} else if(self.comMethodName().indexOf('-') == 3 || self.comMethodName().indexOf('-') == 6) {
-					tempCommethodName = (self.comMethodName().indexOf('-') == 3) ? self.comMethodName().substring(0, 7) + "-" + self.comMethodName().substring(7, self.comMethodName().length) : self.comMethodName().substring(0, 3) + "-" + self.comMethodName().substring(3, self.comMethodName().length);
-				}else if((self.comMethodName().charAt(0)) == '+') {
-					tempCommethodName = self.comMethodName().replace(/(.{2})(.{3})(.{3})/,'$1-$2-$3-');
-				}
-				else {
-					tempCommethodName = self.comMethodName().replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+			}
+			else if((tempCommethodName.charAt(0) != '+' && !phoneNumberPattern.test(tempCommethodName)) || (10>tempCommethodName.length || tempCommethodName.length >12)) {
+				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
+			} else {
+				if((tempCommethodName.charAt(0)) == '+') {
+					tempCommethodName = tempCommethodName.replace(/(.{2})(.{3})(.{3})/,'$1-$2-$3-');
+				} else {
+					tempCommethodName = tempCommethodName.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
 				}
 				self.comMethodName(tempCommethodName);
 				var newCommethodObject = {
