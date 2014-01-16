@@ -5,7 +5,7 @@
 	self.viewname = 'Verify Contact';
 	self.displayname = 'Verify Contact';
 	
-  self.inputObs = [ 'commethod', 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode', 'verified'];
+  self.inputObs = [ 'commethod', 'verificationCommethodType', 'verificationCommethod', 'verificationCommethodID', 'verificationCode', 'verified', 'status'];
   self.errorObs = [ 'verificationClass', 'errorMessage'];	
   self.defineObservables();
 	
@@ -22,7 +22,19 @@
 		if (e.keyCode == 13 && $.mobile.activePage.attr('id') == 'afterLoginVerifyView') {
 			self.verifyRequestCommethod();
 		}
-	});		
+	});
+	
+	self.verifyCommand = function(){
+		self.status('verify');
+		$.when(self.getCommethods().then(function(data) {
+			if(self.verified() == 'Y') {
+				self.skipCommand();					
+			}
+			else {
+				self.verifyRequestCommethod();
+			}
+		}));		
+	};			
 	
 	self.getCommethods = function() {
 		var callbacks = {
@@ -31,6 +43,7 @@
 				self.verificationCommethodType();		
 				self.verificationCommethod(data.commethod[0].type);
 				self.verificationCommethodID(data.commethod[0].id);
+				self.verified(data.commethod[0].verified);
 				var callback = {
 					success: function(responseData) {										
 					},
@@ -38,13 +51,16 @@
 						var toastobj = {type: 'toast-error', text: details.message};
 						showToast(toastobj);
 					}
-				};				
-				ES.commethodService.requestVerification(self.verificationCommethodID(), callback);
+				};
+				if(self.status() != 'verify') {				
+					ES.commethodService.requestVerification(self.verificationCommethodID(), callback);
+				}
 			},
 			error: function (data, status, details) {
 				showMessage(details.message);
 			}
-		};		
+		};
+		$.mobile.showPageLoadingMsg('a', 'Sending Verification Request');		
 		return ES.commethodService.getCommethods(callbacks);
 	};
 	
@@ -156,7 +172,13 @@
 		}
 		else {
 			if(self.verified() == 'Y') {
-				var toastobj = {redirect: 'homeView', type: 'toast-info', text: 'Email already verified'};
+				if(self.verificationCommethod == 'TEXT') {
+					var toastText = 'Phone number already verified';					
+				}
+				else {
+					var toastText = 'Email already verified';				
+				}				
+				var toastobj = {redirect: 'homeView', type: 'toast-info', text: toastText};
 				showToast(toastobj);
 				goToView('homeView');
 			}

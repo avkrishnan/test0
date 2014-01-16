@@ -128,9 +128,8 @@
 	
 	function getCommethods(data){
 		$.mobile.hidePageLoadingMsg();
-		if(data.commethod.length >= 1) {
-			var len = 0;			
-			for(len; len<data.commethod.length; len++) {
+		if(data.commethod[0]) {	
+			for(var len = 0; len<data.commethod.length; len++) {
 				if(data.commethod[len].verified == 'Y') {
 					self.afterLoggedIn();
 					return true;
@@ -140,7 +139,7 @@
 				}
 			}
 		} else {
-			viewNavigate('Home', 'homeView', 'afterLoginVerifyView')
+			goToView('homeView');
 		}
 	};	
 	
