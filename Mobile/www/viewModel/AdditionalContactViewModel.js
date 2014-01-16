@@ -37,8 +37,7 @@
 			tempCommethodName = self.comMethodName().replace(/[\u00AD\u002D\u2011]+/g,'');
 			if(!phoneNumberPatternPlus.test(tempCommethodName) || ((12>tempCommethodName.length || tempCommethodName.length >15) && (tempCommethodName.charAt(0) == '+'))){
 				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
-			}
-			else if((tempCommethodName.charAt(0) != '+' && !phoneNumberPattern.test(tempCommethodName)) || (10>tempCommethodName.length || tempCommethodName.length >12)) {
+			} else if((tempCommethodName.charAt(0) != '+' && !phoneNumberPattern.test(tempCommethodName)) || (10>tempCommethodName.length || tempCommethodName.length >12)) {
 				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
 			} else {
 				if((tempCommethodName.charAt(0)) == '+') {
