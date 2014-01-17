@@ -11,6 +11,7 @@
   self.defineObservables();
 	
 	self.activate = function() {
+		var  emailVerificationText, phoneVerificationText;
 		addExternalMarkup(self.template); // This is for header/overlay message
 		self.verificationCommethod(ENYM.ctx.getItem('currentVerificationCommethod'));
 		self.verificationCommethodID(ENYM.ctx.getItem('currentVerificationCommethodID'));
@@ -20,13 +21,17 @@
 		});			
 		if (self.verificationStatus() == false) {
 			self.verificationStatus(false);
+			emailVerificationText = 'To verify, click on the link (or enter the code below) from the message sent to you previously.';
+			phoneVerificationText =  'To verify, enter the code below from the message sent to you previously.'
 		} else {
 			self.verificationStatus(true);
+			emailVerificationText = 'We have sent you a confirmation message. Verify by clicking on the link (or enter the code below).';
+			phoneVerificationText = 'We have sent you a confirmation message. Verify by entering the code below.';
 		}
 		if(ENYM.ctx.getItem('commethodType') == 'EMAIL') {
-			self.verificationCommethodType('We have sent you a confirmation message. Verify by clicking on the link (or enter the code below).');
+			self.verificationCommethodType(emailVerificationText);
 		} else {
-			self.verificationCommethodType('We have sent you a confirmation message. Verify by entering the code below.');
+			self.verificationCommethodType(phoneVerificationText);
 		}
 	};
 	
