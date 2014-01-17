@@ -34,10 +34,12 @@
 	
 	/*action to single message page*/
 	self.iGiAckMessage = function(data) {
-		if(data.iGiClass == 'igibutton igisent') {
+		var iGiClass = $('#'+data.messageId).attr('class');
+		if(data.iGiClass == 'igibutton igisent' || iGiClass ==  'igibutton igisent') {
 			var toastobj = {type: 'toast-info', text: 'iGi has already been sent!'};
 			showToast(toastobj);
 		} else {
+			$('#'+data.messageId).parent().removeClass('read-n').addClass('read-i')
 			$('#'+data.messageId).addClass('igisent');
 			data.ack = 'Y';			
 			var callbacks = {
