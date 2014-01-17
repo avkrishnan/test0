@@ -38,12 +38,12 @@
 		if(data.iGiClass == 'igibutton igisent' || iGiClass ==  'igibutton igisent') {
 			var toastobj = {type: 'toast-info', text: 'iGi has already been sent!'};
 			showToast(toastobj);
-		} else {
-			$('#'+data.messageId).parent().removeClass('read-n').addClass('read-i')
-			$('#'+data.messageId).addClass('igisent');
-			data.ack = 'Y';			
+		} else {			
 			var callbacks = {
-				success: function(data) {					
+				success: function(data) {
+					$('#'+data.messageId).parent().removeClass('read-n').addClass('read-i')
+					$('#'+data.messageId).addClass('igisent');
+					data.ack = 'Y';										
 					var toastobj = {type: '', text: 'iGi sent!'};
 					showToast(toastobj);
 					//self.gotChannel(channel);											
