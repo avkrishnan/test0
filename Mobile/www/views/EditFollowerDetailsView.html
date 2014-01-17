@@ -6,7 +6,7 @@
       <div class="channelinfoname" data-bind="text: channelName"></div>
     </div>
 
-    <form class="loginform">
+    <section class="loginform">
       <label class="msginfo">Edit a Follower</label>
       <div class="formtype" data-bind="css: nameClass">
       	<input type="text" placeholder="first and last name (optional)" data-bind="value: followerName" />
@@ -21,13 +21,16 @@
         <div class="msgerror" data-bind="html: errorPhone"></div>
       </div>
       <div class="required">* A phone number or email address are required</div>
-      <div class="loginbtn"><a href="#" data-bind='click:editFollowerDetails'>Save</a></div>
-    </form>
+      <div class="revealbtn">
+        <a href="#" data-bind='click: editFollowerDetails'>Save</a>
+        <a class="cancelbtn" href="#" onclick="popBackNav();">Cancel</a>      
+      </div>
+    </section>
 
   </div>   
   <div class="footer">
-    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'userSettingsView');"></a>
-    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'plusMenuView');"></a>    
+    <a class="logo" href="#" data-bind="text: accountName" onclick="viewNavigate('Edit Follower', 'editFollowerDetailsView', 'userSettingsView');"></a>
+    <span>BETA</span><a class="announcement" href="#" onclick="viewNavigate('Edit Follower', 'editFollowerDetailsView', 'plusMenuView');"></a>    
   </div>
   <div class="active-overlay" style="display:none"></div>  
 </div>

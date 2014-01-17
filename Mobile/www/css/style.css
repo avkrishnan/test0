@@ -1363,7 +1363,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:5em;
 }
 .unfollow {
-	padding:2px 0px;
+	padding:2px 0;
 	text-align:center;
 	background:#8dc63f;
 	color:#fff;
@@ -2530,24 +2530,22 @@ ul.igiresponses li span {
 .msgdetailbuttons {
 	background:#2D2D2D;
 	border-radius:4px 0 0 4px;
-	height:36px;
-	line-height:33px;
 	margin:10px 0 10px 0;
 	overflow:hidden;
-	padding:0px 10px 0px 0px;
+	padding:0 10px 0 0;
 	float:right;
 }
 .msgdetailbuttons a.igimsgdetail, .msgdetailbuttons a.igimsgdetail.ui-link, .msgdetailbuttons a.igimsgdetail.ui-link:visited, .msgdetailbuttons a.igimsgdetail.ui-link:hover, .msgdetailbuttons a.igimsgdetail.ui-link:active {
-	background:url(images/IGI-btn.png) no-repeat 6px center;
+	background:url(images/msgdetails.png) no-repeat left center;
 	float:left;
-	padding:18px 20px 18px 27px;
+	padding:18px 20px 18px 35px;
 	margin:0;
 }
 .msgdetailbuttons a.igisentimg, .msgdetailbuttons a.igisentimg.ui-link, .msgdetailbuttons a.igisentimg.ui-link:visited, .msgdetailbuttons a.igisentimg.ui-link:hover, .msgdetailbuttons a.igisentimg.ui-link:active {
-	background:url(images/msgsentdetails.png) no-repeat left center;
+	background:url(images/igisend.png) no-repeat left center;
 	float:left;
-	margin:6px 0 0 6px;
-	padding:12px 18px;
+	margin:0 0 0 6px;
+	padding:17px 14px 18px 14px;
 	cursor:auto;
 }
 .msgdetailbuttons a, .msgdetailbuttons a.ui-link, .msgdetailbuttons a.ui-link:visited, .msgdetailbuttons a.ui-link:hover, .msgdetailbuttons a.ui-link:active {
@@ -2555,16 +2553,10 @@ ul.igiresponses li span {
 	border-radius:4px;
 	padding:2px 13px;
 	text-decoration:none;
-	margin:6px 0 7px 8px;
+	margin:6px 0 6px 8px;
 	font-size:14px;
 	color:#a7a9ac;
 	float:left;
-}
-.msgdetailbuttons a.igiactive, .msgdetailbuttons a.igiactive.ui-link, .msgdetailbuttons a.igiactive.ui-link:visited, .msgdetailbuttons a.igiactive.ui-link:hover, .msgdetailbuttons a.igiactive.ui-link:active {
-		background:#8DC63F;
-		color:#fff;
-		font-weight:bold;
-		cursor:auto;
 }
 .msgdetailbuttons a.replybtn, .msgdetailbuttons a.replybtn.ui-link, .msgdetailbuttons a.replybtn.ui-link:visited, .msgdetailbuttons a.replybtn.ui-link:hover, .msgdetailbuttons a.replybtn.ui-link:active {
 	background:#A7A9AC url("images/replybg.png") no-repeat 10px 8px;
@@ -3012,7 +3004,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .settingsfollowers {
 	padding:10px 15px 10px 10px;
 	background:#2D2D2D;
-	margin:5px 0px 10px 0px;
+	margin:5px 0 10px 0;
 	border-radius:10px 0 0 10px;
 }
 .settingscontent .slider-value, .settingsfollowers .agressively-slider {
@@ -3127,7 +3119,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin:0 0 0 -65px;
 }
 .i-icon a {
-	background:url("images/informationicon.png") no-repeat 0px 0px;
+	background:url("images/informationicon.png") no-repeat 0 0;
 	display:inline-block;
 	height:18px;
 	margin:9px 0 0 0;
@@ -3645,6 +3637,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .required {
 	color:#FFFFFF;
 	font-size:14px;
+	margin-bottom:10px;
 }
 .permissionmsg {
 	margin:20px 10px 10px 0;
@@ -3818,7 +3811,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin:0 10px 0 0;
 }
 .addbtnmsg {
-	margin:10px 10px 0px 0px;
+	margin:10px 10px 0 0;
 }
 .addbtnmsg p {
 	margin:0 0 10px 0;
@@ -3831,7 +3824,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin:25px 10px 25px 10px;
 }
 .followerinfo h1 {
-	margin:0px 0 10px 0;
+	margin:0 0 10px 0;
 }
 .followerinfo span {
 	display:block;
@@ -3873,7 +3866,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	padding:5px 15px 5px 32px;
 	border-radius:4px;
 	font-size:14px;
-	margin:6px 0px;
+	margin:6px 0;
 	display:inline-block;
 }
 .notificationcount, .notificationcount.ui-link, .notificationcount.ui-link:visited, .notificationcount.ui-link:hover, .notificationcount.ui-link:active {
@@ -3906,7 +3899,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .pending {
 	color:#fff;
 	font-size:16px;
-	margin:10px 0px 15px 25px;
+	margin:10px 0 15px 25px;
 }
 .pending span, .notificationcount span {
 	background:#8DC63F;
@@ -3917,7 +3910,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .normalfollowers, .provisionalicon {
 	background:#2D2D2D url(images/sprites.png) no-repeat -6px -1824px;
-	margin:0px 0px 0px 10px;
+	margin:0 0 0 10px;
 	border-radius:21px 0 0 21px;
 	padding:0 0 0 30px;
 	height:43px;
@@ -4527,5 +4520,4 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		min-height:622px;
 	}
 }
-
 /* @media query css End*/

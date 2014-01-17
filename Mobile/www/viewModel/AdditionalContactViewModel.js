@@ -1,31 +1,59 @@
 ﻿function AdditionalContactViewModel() {
 	var self = this;
-	self.template = "additionalContactView";
-	self.viewid = "V-081";
-	self.viewname = "AdditionalContact";
-	self.displayname = "Additional Contact";
-	self.hasfooter = true;
+	self.template = 'additionalContactView';
+	self.viewid = 'V-10';
+	self.viewname = 'AdditionalContact';
+	self.displayname = 'Additional Contact';
 
-  self.inputObs = [ 'baseUrl', 'comMethodName', 'navText', 'errorMessage', 'errorMessageInput' ];
-  self.defineObservables();	
-		
-	self.pView = '';
+  self.inputObs = [ 'baseUrl', 'comMethodName' ];
+	self.errorObs = [ 'errorMessage', 'errorMessageInput'];	
+  self.defineObservables();		
+
+	self.activate = function() {
+		addExternalMarkup(self.template); // this is for header/overlay message
+		$('input').keyup(function () {
+			self.clearErrorObs();
+		});		
+		ENYM.ctx.removeItem('currentVerificationCommethodID');	
+	};	
+	
+	$(document).keyup(function(e) {
+		if (e.keyCode == 13  && $.mobile.activePage.attr('id') == 'additionalContactView') {
+			self.addCommethod();
+		}
+	});	
 		
 	self.addCommethod = function() {
-		var emailPattern = /^([\w-\.\+]+@([\w-]+\.)+[\w-]{2,4})?$/;
-		var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-		var phoneNumberPatternPlus = /^\+?[0-9]{0,15}$/;
-		var phonepatternforhyphen = /^\d+(-\d+)*$/;
-		var phoneHypenPlus = /(?:\(?\+\d{2}\)?\s*)?\d+(?:[ -]*\d+)*$/;
-
+		var phoneNumberPattern = /^[0-9\-\s\(\)\+]+$/i;	
 		if(self.comMethodName() == '') {
-			self.errorMessage("<span>ERROR: </span>Please input email or phone!");
+			self.errorMessage('<span>ERROR:</span> Please input email or phone!');
 			self.errorMessageInput('validationerror');
-		} else if((!phoneNumberPatternPlus.test(self.comMethodName())) && (!phonepatternforhyphen.test(self.comMethodName()) && !phoneHypenPlus.test(self.comMethodName()))) { /* for email*/
-			if(!emailPattern.test(self.comMethodName())) {
-				self.errorMessage("<span>ERROR: </span>Not a valid email address!");
+		} 
+		else if(phoneNumberPattern.test(self.comMethodName())){
+			var phoneObject = validateUSAPhone(self.comMethodName());
+			if(phoneObject.type == 'Error') {
+				self.errorMessage(phoneObject.text);					
+				self.errorMessageInput('validationerror');					
 				return false;
-			} else if(emailPattern.test(self.comMethodName())) {
+			} 
+			else {
+				self.comMethodName(phoneObject.textShow);						
+				var newCommethodObject = {
+					name : 'Default name', // TO DO with Timothy
+					type : 'TEXT',
+					address : self.comMethodName()
+				};
+				self.addNewCommethod(newCommethodObject);
+			}
+		}
+		else {
+			var emailObject = validateEmail(self.comMethodName());		
+			if(emailObject.type == 'Error') {
+				self.errorMessage(emailObject.text);					
+				self.errorMessageInput('validationerror');					
+				return false;
+			} 
+			else {					
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
 					type : 'EMAIL',
@@ -33,82 +61,30 @@
 				};
 				self.addNewCommethod(newCommethodObject);
 			}
-		} else { // for phone
-			tempCommethodName = self.comMethodName().replace(/[\u00AD\u002D\u2011]+/g,'');
-			if(!phoneNumberPatternPlus.test(tempCommethodName) || ((12>tempCommethodName.length || tempCommethodName.length >15) && (tempCommethodName.charAt(0) == '+'))){
-				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
-			} else if((tempCommethodName.charAt(0) != '+' && !phoneNumberPattern.test(tempCommethodName)) || (10>tempCommethodName.length || tempCommethodName.length >12)) {
-				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
-			} else {
-				if((tempCommethodName.charAt(0)) == '+') {
-					tempCommethodName = tempCommethodName.replace(/(.{2})(.{3})(.{3})/,'$1-$2-$3-');
-				} else {
-					tempCommethodName = tempCommethodName.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-				}
-				self.comMethodName(tempCommethodName);
-				var newCommethodObject = {
-					name : 'Default name', // TO DO with Timothy
-					type : 'TEXT',
-					address : self.comMethodName()
-				};
-				self.addNewCommethod(newCommethodObject);				    
-			}
-		}
-	}
-	
-	self.inputKeyUp = function () {
-		self.errorMessage('');
-	}	
-
-	self.activate = function() {
-		addExternalMarkup(self.template); // this is for header/overlay message
-		var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
-		var previousView = ENYM.ctx.getItem('previousView');
-		var vm = ko.dataFor($("#" + previousView).get(0));
-		self.navText(vm.displayname);
-		self.pView = previousView;
-		if (currentBaseUrl){
-			self.baseUrl(currentBaseUrl);
-		} else {
-			var es = new EvernymService();
-			self.baseUrl(es.getBaseUrl());
 		}		
-		$('#additionalContactView input').on("keyup", self.inputKeyUp);
-		
-		self.comMethodName('');
-		self.errorMessage('');
-		ENYM.ctx.removeItem("currentVerificationCommethodID");	
-		$.mobile.showPageLoadingMsg("a", "Loading Settings");
-		return true;
-	};
-	
-	$(document).keyup(function(e) {
-		if (e.keyCode == 13  && $.mobile.activePage.attr('id') == 'additionalContactView') {
-			self.errorMessage('');
-			self.addCommethod();
-		}
-	});				
+	}			
 	
 	self.addNewCommethod = function(newCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				ENYM.ctx.setItem("commethodType",responseData.type);
+				ENYM.ctx.setItem('commethodType',responseData.type);
 				if (responseData.address == 'TEXT') {
-					ENYM.ctx.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
-					ENYM.ctx.setItem("currentVerificationCommethodID",responseData.id);
+					ENYM.ctx.setItem('currentVerificationCommethod',responseData.address+'(TXT)');
+					ENYM.ctx.setItem('currentVerificationCommethodID',responseData.id);
 				} else {
-					ENYM.ctx.setItem("currentVerificationCommethod",responseData.address);
-					ENYM.ctx.setItem("currentVerificationCommethodID",responseData.id);
+					ENYM.ctx.setItem('currentVerificationCommethod',responseData.address);
+					ENYM.ctx.setItem('currentVerificationCommethodID',responseData.id);
 				}
-				ENYM.ctx.setItem("verificationStatus",true);
+				ENYM.ctx.setItem('verificationStatus',true);
 				var toastobj = {redirect: 'verifyContactView', type: '', text: 'Verification message sent'};		
 				showToast(toastobj);
 				goToView('verifyContactView');
 			},
 			error: function (responseData, status, details) {
-				self.errorMessage("<span>ERROR: </span>" + details.message);
+				self.errorMessage('<span>ERROR:</span> ' + details.message);
 			}
 		};
+		$.mobile.showPageLoadingMsg('a', 'Adding new communication methods');
 		ES.commethodService.addCommethod(newCommethodObject, callbacks );
 	};
 }
