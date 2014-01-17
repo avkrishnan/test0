@@ -55,8 +55,7 @@
 				$("input[type='checkbox']").attr("checked",false).checkboxradio("refresh"); 
       }
 			else {
-				//self.session(3600);
-				self.session(60);
+				self.session(3600);
 			}
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
