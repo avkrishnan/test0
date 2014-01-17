@@ -1363,7 +1363,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:5em;
 }
 .unfollow {
-	padding:2px 0px;
+	padding:2px 0;
 	text-align:center;
 	background:#8dc63f;
 	color:#fff;
@@ -3004,7 +3004,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .settingsfollowers {
 	padding:10px 15px 10px 10px;
 	background:#2D2D2D;
-	margin:5px 0px 10px 0px;
+	margin:5px 0 10px 0;
 	border-radius:10px 0 0 10px;
 }
 .settingscontent .slider-value, .settingsfollowers .agressively-slider {
@@ -3119,7 +3119,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin:0 0 0 -65px;
 }
 .i-icon a {
-	background:url("images/informationicon.png") no-repeat 0px 0px;
+	background:url("images/informationicon.png") no-repeat 0 0;
 	display:inline-block;
 	height:18px;
 	margin:9px 0 0 0;
@@ -3637,6 +3637,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .required {
 	color:#FFFFFF;
 	font-size:14px;
+	margin-bottom:10px;
 }
 .permissionmsg {
 	margin:20px 10px 10px 0;
@@ -3810,7 +3811,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin:0 10px 0 0;
 }
 .addbtnmsg {
-	margin:10px 10px 0px 0px;
+	margin:10px 10px 0 0;
 }
 .addbtnmsg p {
 	margin:0 0 10px 0;
@@ -3823,7 +3824,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	margin:25px 10px 25px 10px;
 }
 .followerinfo h1 {
-	margin:0px 0 10px 0;
+	margin:0 0 10px 0;
 }
 .followerinfo span {
 	display:block;
@@ -3865,7 +3866,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	padding:5px 15px 5px 32px;
 	border-radius:4px;
 	font-size:14px;
-	margin:6px 0px;
+	margin:6px 0;
 	display:inline-block;
 }
 .notificationcount, .notificationcount.ui-link, .notificationcount.ui-link:visited, .notificationcount.ui-link:hover, .notificationcount.ui-link:active {
@@ -3898,7 +3899,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .pending {
 	color:#fff;
 	font-size:16px;
-	margin:10px 0px 15px 25px;
+	margin:10px 0 15px 25px;
 }
 .pending span, .notificationcount span {
 	background:#8DC63F;
@@ -3909,7 +3910,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 }
 .normalfollowers, .provisionalicon {
 	background:#2D2D2D url(images/sprites.png) no-repeat -6px -1824px;
-	margin:0px 0px 0px 10px;
+	margin:0 0 0 10px;
 	border-radius:21px 0 0 21px;
 	padding:0 0 0 30px;
 	height:43px;
@@ -4519,5 +4520,4 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		min-height:622px;
 	}
 }
-
 /* @media query css End*/

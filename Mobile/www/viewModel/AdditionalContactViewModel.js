@@ -1,47 +1,21 @@
 ﻿function AdditionalContactViewModel() {
 	var self = this;
-	self.template = "additionalContactView";
-	self.viewid = "V-081";
-	self.viewname = "AdditionalContact";
-	self.displayname = "Additional Contact";
-	//self.hasfooter = true;
+	self.template = 'additionalContactView';
+	self.viewid = 'V-10';
+	self.viewname = 'AdditionalContact';
+	self.displayname = 'Additional Contact';
 
-  self.inputObs = [ 'baseUrl', 'comMethodName'/*, 'navText'*/, 'validatedCommethod' ];
+  self.inputObs = [ 'baseUrl', 'comMethodName' ];
 	self.errorObs = [ 'errorMessage', 'errorMessageInput'];	
-  self.defineObservables();	
-		
-	//self.pView = '';
-	
+  self.defineObservables();		
 
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message
-		//var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
-		//var previousView = ENYM.ctx.getItem('previousView');
-		//var vm = ko.dataFor($("#" + previousView).get(0));
-		//self.navText(vm.displayname);
-		//self.pView = previousView;
-		/*if (currentBaseUrl){
-			self.baseUrl(currentBaseUrl);
-		} else {
-			var es = new EvernymService();
-			self.baseUrl(es.getBaseUrl());
-		}		
-		$('#additionalContactView input').on("keyup", self.inputKeyUp);
-		
-		self.comMethodName('');
-		self.errorMessage('');*/
 		$('input').keyup(function () {
 			self.clearErrorObs();
 		});		
-		ENYM.ctx.removeItem("currentVerificationCommethodID");	
-		/*$.mobile.showPageLoadingMsg("a", "Loading Settings");
-		return true;*/
-	};
-/*	
-	
-	self.inputKeyUp = function () {
-		self.errorMessage('');
-	}	*/	
+		ENYM.ctx.removeItem('currentVerificationCommethodID');	
+	};	
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13  && $.mobile.activePage.attr('id') == 'additionalContactView') {
@@ -52,7 +26,7 @@
 	self.addCommethod = function() {
 		var phoneNumberPattern = /^[0-9\-\s\(\)\+]+$/i;	
 		if(self.comMethodName() == '') {
-			self.errorMessage("<span>ERROR: </span>Please input email or phone!");
+			self.errorMessage('<span>ERROR:</span> Please input email or phone!');
 			self.errorMessageInput('validationerror');
 		} 
 		else if(phoneNumberPattern.test(self.comMethodName())){
@@ -63,12 +37,11 @@
 				return false;
 			} 
 			else {
-				self.comMethodName(phoneObject.textShow);
-				self.validatedCommethod(phoneObject.text);						
+				self.comMethodName(phoneObject.textShow);						
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
-					type : 'EMAIL',
-					address : self.validatedCommethod()
+					type : 'TEXT',
+					address : self.comMethodName()
 				};
 				self.addNewCommethod(newCommethodObject);
 			}
@@ -80,12 +53,11 @@
 				self.errorMessageInput('validationerror');					
 				return false;
 			} 
-			else {
-				self.validatedCommethod(emailObject.text);					
+			else {					
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
 					type : 'EMAIL',
-					address : self.validatedCommethod()
+					address : self.comMethodName()
 				};
 				self.addNewCommethod(newCommethodObject);
 			}
@@ -95,21 +67,21 @@
 	self.addNewCommethod = function(newCommethodObject) {
 		var callbacks = {
 			success: function(responseData) {
-				ENYM.ctx.setItem("commethodType",responseData.type);
+				ENYM.ctx.setItem('commethodType',responseData.type);
 				if (responseData.address == 'TEXT') {
-					ENYM.ctx.setItem("currentVerificationCommethod",responseData.address+'(TXT)');
-					ENYM.ctx.setItem("currentVerificationCommethodID",responseData.id);
+					ENYM.ctx.setItem('currentVerificationCommethod',responseData.address+'(TXT)');
+					ENYM.ctx.setItem('currentVerificationCommethodID',responseData.id);
 				} else {
-					ENYM.ctx.setItem("currentVerificationCommethod",responseData.address);
-					ENYM.ctx.setItem("currentVerificationCommethodID",responseData.id);
+					ENYM.ctx.setItem('currentVerificationCommethod',responseData.address);
+					ENYM.ctx.setItem('currentVerificationCommethodID',responseData.id);
 				}
-				ENYM.ctx.setItem("verificationStatus",true);
+				ENYM.ctx.setItem('verificationStatus',true);
 				var toastobj = {redirect: 'verifyContactView', type: '', text: 'Verification message sent'};		
 				showToast(toastobj);
 				goToView('verifyContactView');
 			},
 			error: function (responseData, status, details) {
-				self.errorMessage("<span>ERROR: </span>" + details.message);
+				self.errorMessage('<span>ERROR:</span> ' + details.message);
 			}
 		};
 		$.mobile.showPageLoadingMsg('a', 'Adding new communication methods');

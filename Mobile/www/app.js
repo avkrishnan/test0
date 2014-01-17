@@ -14,7 +14,8 @@ ES.evernymService.doAfterDone = function(){
 };    
 
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
-    $.mobile.hidePageLoadingMsg();
+	$.mobile.hidePageLoadingMsg();
+	if(jqXHR.responseJSON) {
 		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
 			ES.evernymService.clearAccessToken();
 			authenticate();
@@ -24,11 +25,12 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 		else {
 			var hash = $.mobile.urlHistory.getActive().hash;
 			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
-			
-			ENYM.ctx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
-			
+				var resume = {status: 1, account: getCurrentViewModel().accountName()};						
+				ENYM.ctx.setItem('resumeStatus', resume);
+				ENYM.ctx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
 			}
 		}
+	}
 };
 
 function goToView(view) {
@@ -898,14 +900,14 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
   });
 }
 
-//feedbackType = ''; // For setting feedback type
-
 /* Validate user via access token */
 function authenticate() {
 	var token = ES.evernymService.getAccessToken();
 	if(token == '' || token == null) {
-		sendMessageViewModel.clearForm();		
-		goToView('loginView');
+		sendMessageViewModel.clearForm();
+		var resume = {status: 1, account: getCurrentViewModel().accountName()};						
+		ENYM.ctx.setItem('resumeStatus', resume);
+		goToView('loginView');	
 		return false;
 	}
 	return true;
@@ -1023,48 +1025,18 @@ function validateUSAPhone(txtPhone) {
 		else if (phoneNum.length > 11 || phoneNum.length < 10) {
 			var phoneObject = {
 				type : 'Error',
-				text : '<span>Sorry, </span> Not a valid phone number.'
+				text : '<span>Sorry,</span> Not a valid phone number.'
 			};
 		}
 	}
 	else {
 		var phoneObject = {
 			type : 'Error',
-			text : '<span>Sorry, </span> Not a valid phone number.'
+			text : '<span>Sorry,</span> Not a valid phone number.'
 		};		
 	}
 	return phoneObject;
 };
-
-/* This function validates USA phonenumber for 10 digits and returns dashed phone number or error object
-function validateUSAPhone(txtPhone) {
-	var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-  var phoneNumberPatternPlus = /^\+?[0-9]{0,15}$/;
-
-  txtPhone = txtPhone.replace(/[\u00AD\u002D\u2011]+/g,'');
-  if(!phoneNumberPatternPlus.test(txtPhone) || ((12>txtPhone.length || txtPhone.length >15) && (txtPhone.charAt(0) == '+'))){
-    var phoneObject = {
-      type : 'Error',
-      text : '<span>Sorry, </span> Not a valid phone number.'
-    };
-  } else if((txtPhone.charAt(0) != '+') && (!phoneNumberPattern.test(txtPhone)) || (10>txtPhone.length || txtPhone.length >12)) {
-    var phoneObject = {
-      type : 'Error',
-      text : '<span>Sorry, </span> Not a valid phone number.'
-    };
-  } else {
-    if((txtPhone.charAt(0)) == '+') {
-      txtPhone = txtPhone.replace(/(.{2})(.{3})(.{3})/,'$1-$2-$3-');
-    } else {
-      txtPhone = txtPhone.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-    }
-	  var phoneObject = {
-  		type : 'Text',
-  		text : txtPhone
-	  };		    
-	}
-	return phoneObject;
-}*/
 
 /* This function validates email addresses */
 function validateEmail(txtEmail) {
@@ -1072,7 +1044,7 @@ function validateEmail(txtEmail) {
 	if(!emailPattern.test(txtEmail)) {
 		var emailObject = {
 			type : 'Error',
-			text : "<span>Sorry, </span> Not a valid email address."
+			text : "<span>Sorry,</span> Not a valid email address."
 		};
 	} else if(emailPattern.test(txtEmail)) {
 		var emailObject = {

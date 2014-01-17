@@ -2,11 +2,11 @@
   var self = this;
 	self.template = 'addFollowersView';
 	self.viewid = 'V-28';
-	self.viewname = 'AddFollowers';
+	self.viewname = 'Add Followers';
 	self.displayname = 'Add Followers';
 	self.showInvite = ko.observable();
 	
-  self.inputObs = [ 'channelId', 'channelName', 'firstLastName', 'nameClass', 'errorName', 'emailaddress', 'emailClass', 'errorEmail', 'smsPhone', 'phoneClass', 'errorPhone', 'validatedPhone' ];
+  self.inputObs = [ 'channelId', 'channelName', 'firstLastName', 'nameClass', 'errorName', 'emailaddress', 'emailClass', 'errorEmail', 'smsPhone', 'phoneClass', 'errorPhone'];
 	self.errorObs = [ 'nameClass', 'errorName', 'emailClass', 'errorEmail', 'errorPhone', 'phoneClass' ];
   self.defineObservables();
 	
@@ -34,7 +34,7 @@
 	
 	self.addFollowersCommand = function () {
 		if(self.emailaddress() == '' && self.smsPhone() == '') {
-			self.errorPhone("<span>Sorry, </span> a phone or email address are required.");
+			self.errorPhone("<span>Sorry,</span> a phone or email address are required.");
 			self.phoneClass('validationerror');
 			self.emailClass('validationerror');
 			return false;
@@ -54,7 +54,6 @@
 					return false;
 				} else {
 					self.smsPhone(phoneObject.textShow);
-					self.validatedPhone(phoneObject.text);
 				}
 			} else {
 				var emailObject = validateEmail(self.emailaddress());
@@ -70,11 +69,10 @@
 					return false;
 				} else {
 					self.smsPhone(phoneObject.textShow);
-					self.validatedPhone(phoneObject.text);
 				}
 			}
 		}
-		$.mobile.showPageLoadingMsg("a", "Adding Provisional Follower");
+		$.mobile.showPageLoadingMsg('a', 'Adding Provisional Follower');
 		var provisional = generateProvisionalAccount();
 		ES.channelService.invite(self.channelId(), provisional, {success: successfulAdd, error: errorAPI});
   };
@@ -95,8 +93,8 @@
 		if(self.emailaddress() != '') {
 			provosional.emailaddress = self.emailaddress();
 		}
-		if(self.validatedPhone() != '') {
-			provosional.phonenumber = self.validatedPhone();
+		if(self.smsPhone() != '') {
+			provosional.phonenumber = self.smsPhone();
 		}
 		return provosional;
 	};
@@ -111,15 +109,15 @@
 		if(self.emailaddress() != '' && self.smsPhone() != '') {
 			self.emailClass('validationerror');
 			self.phoneClass('validationerror');			
-			self.errorPhone('<span>Sorry, </span> phone or email already invited');			
+			self.errorPhone('<span>Sorry,</span> phone or email already invited');			
 		} 
 		else if (self.emailaddress() != '') {
 			self.emailClass('validationerror');			
-			self.errorEmail('<span>Sorry, </span> email already associated with this channel.');			
+			self.errorEmail('<span>Sorry,</span> email already associated with this channel.');			
 		}	
 		else {
 			self.phoneClass('validationerror');			
-			self.errorPhone('<span>Sorry, </span> phone already associated with this channel.');			
+			self.errorPhone('<span>Sorry,</span> phone already associated with this channel.');			
 		}							
 	};
 }
