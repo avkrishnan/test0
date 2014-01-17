@@ -40,7 +40,7 @@
 			showToast(toastobj);
 		} else {			
 			var callbacks = {
-				success: function(data) {
+				success: function() {
 					$('#'+data.messageId).parent().removeClass('read-n').addClass('read-i')
 					$('#'+data.messageId).addClass('igisent');
 					data.ack = 'Y';										
