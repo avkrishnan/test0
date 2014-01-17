@@ -6,7 +6,7 @@
 	self.displayname = 'Add Followers';
 	self.showInvite = ko.observable();
 	
-  self.inputObs = [ 'channelId', 'channelName', 'firstLastName', 'nameClass', 'errorName', 'emailaddress', 'emailClass', 'errorEmail', 'smsPhone', 'phoneClass', 'errorPhone' ];
+  self.inputObs = [ 'channelId', 'channelName', 'firstLastName', 'nameClass', 'errorName', 'emailaddress', 'emailClass', 'errorEmail', 'smsPhone', 'phoneClass', 'errorPhone', 'validatedPhone' ];
 	self.errorObs = [ 'nameClass', 'errorName', 'emailClass', 'errorEmail', 'errorPhone', 'phoneClass' ];
   self.defineObservables();
 	
@@ -53,7 +53,8 @@
 					self.phoneClass('validationerror');
 					return false;
 				} else {
-					self.smsPhone(phoneObject.text);
+					self.smsPhone(phoneObject.textShow);
+					self.validatedPhone(phoneObject.text);
 				}
 			} else {
 				var emailObject = validateEmail(self.emailaddress());
@@ -68,7 +69,8 @@
 					self.phoneClass('validationerror');
 					return false;
 				} else {
-					self.smsPhone(phoneObject.text);
+					self.smsPhone(phoneObject.textShow);
+					self.validatedPhone(phoneObject.text);
 				}
 			}
 		}
@@ -93,8 +95,8 @@
 		if(self.emailaddress() != '') {
 			provosional.emailaddress = self.emailaddress();
 		}
-		if(self.smsPhone() != '') {
-			provosional.phonenumber = self.smsPhone();
+		if(self.validatedPhone() != '') {
+			provosional.phonenumber = self.validatedPhone();
 		}
 		return provosional;
 	};

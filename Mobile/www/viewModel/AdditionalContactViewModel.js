@@ -4,70 +4,23 @@
 	self.viewid = "V-081";
 	self.viewname = "AdditionalContact";
 	self.displayname = "Additional Contact";
-	self.hasfooter = true;
+	//self.hasfooter = true;
 
-  self.inputObs = [ 'baseUrl', 'comMethodName', 'navText', 'errorMessage', 'errorMessageInput' ];
+  self.inputObs = [ 'baseUrl', 'comMethodName'/*, 'navText'*/, 'validatedCommethod' ];
+	self.errorObs = [ 'errorMessage', 'errorMessageInput'];	
   self.defineObservables();	
 		
-	self.pView = '';
-		
-	self.addCommethod = function() {
-		var emailPattern = /^([\w-\.\+]+@([\w-]+\.)+[\w-]{2,4})?$/;
-		var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
-		var phoneNumberPatternPlus = /^\+?[0-9]{0,15}$/;
-		var phonepatternforhyphen = /^\d+(-\d+)*$/;
-		var phoneHypenPlus = /(?:\(?\+\d{2}\)?\s*)?\d+(?:[ -]*\d+)*$/;
-
-		if(self.comMethodName() == '') {
-			self.errorMessage("<span>ERROR: </span>Please input email or phone!");
-			self.errorMessageInput('validationerror');
-		} else if((!phoneNumberPatternPlus.test(self.comMethodName())) && (!phonepatternforhyphen.test(self.comMethodName()) && !phoneHypenPlus.test(self.comMethodName()))) { /* for email*/
-			if(!emailPattern.test(self.comMethodName())) {
-				self.errorMessage("<span>ERROR: </span>Not a valid email address!");
-				return false;
-			} else if(emailPattern.test(self.comMethodName())) {
-				var newCommethodObject = {
-					name : 'Default name', // TO DO with Timothy
-					type : 'EMAIL',
-					address : self.comMethodName()
-				};
-				self.addNewCommethod(newCommethodObject);
-			}
-		} else { // for phone
-			tempCommethodName = self.comMethodName().replace(/[\u00AD\u002D\u2011]+/g,'');
-			if(!phoneNumberPatternPlus.test(tempCommethodName) || ((12>tempCommethodName.length || tempCommethodName.length >15) && (tempCommethodName.charAt(0) == '+'))){
-				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
-			} else if((tempCommethodName.charAt(0) != '+' && !phoneNumberPattern.test(tempCommethodName)) || (10>tempCommethodName.length || tempCommethodName.length >12)) {
-				self.errorMessage("<span>ERROR: </span>Not a valid phone number!");
-			} else {
-				if((tempCommethodName.charAt(0)) == '+') {
-					tempCommethodName = tempCommethodName.replace(/(.{2})(.{3})(.{3})/,'$1-$2-$3-');
-				} else {
-					tempCommethodName = tempCommethodName.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-				}
-				self.comMethodName(tempCommethodName);
-				var newCommethodObject = {
-					name : 'Default name', // TO DO with Timothy
-					type : 'TEXT',
-					address : self.comMethodName()
-				};
-				self.addNewCommethod(newCommethodObject);				    
-			}
-		}
-	}
+	//self.pView = '';
 	
-	self.inputKeyUp = function () {
-		self.errorMessage('');
-	}	
 
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message
-		var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
-		var previousView = ENYM.ctx.getItem('previousView');
-		var vm = ko.dataFor($("#" + previousView).get(0));
-		self.navText(vm.displayname);
-		self.pView = previousView;
-		if (currentBaseUrl){
+		//var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
+		//var previousView = ENYM.ctx.getItem('previousView');
+		//var vm = ko.dataFor($("#" + previousView).get(0));
+		//self.navText(vm.displayname);
+		//self.pView = previousView;
+		/*if (currentBaseUrl){
 			self.baseUrl(currentBaseUrl);
 		} else {
 			var es = new EvernymService();
@@ -76,18 +29,68 @@
 		$('#additionalContactView input').on("keyup", self.inputKeyUp);
 		
 		self.comMethodName('');
-		self.errorMessage('');
+		self.errorMessage('');*/
+		$('input').keyup(function () {
+			self.clearErrorObs();
+		});		
 		ENYM.ctx.removeItem("currentVerificationCommethodID");	
-		$.mobile.showPageLoadingMsg("a", "Loading Settings");
-		return true;
+		/*$.mobile.showPageLoadingMsg("a", "Loading Settings");
+		return true;*/
 	};
+/*	
+	
+	self.inputKeyUp = function () {
+		self.errorMessage('');
+	}	*/	
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13  && $.mobile.activePage.attr('id') == 'additionalContactView') {
-			self.errorMessage('');
 			self.addCommethod();
 		}
-	});				
+	});	
+		
+	self.addCommethod = function() {
+		var phoneNumberPattern = /^[0-9\-\s\(\)\+]+$/i;	
+		if(self.comMethodName() == '') {
+			self.errorMessage("<span>ERROR: </span>Please input email or phone!");
+			self.errorMessageInput('validationerror');
+		} 
+		else if(phoneNumberPattern.test(self.comMethodName())){
+			var phoneObject = validateUSAPhone(self.comMethodName());
+			if(phoneObject.type == 'Error') {
+				self.errorMessage(phoneObject.text);					
+				self.errorMessageInput('validationerror');					
+				return false;
+			} 
+			else {
+				self.comMethodName(phoneObject.textShow);
+				self.validatedCommethod(phoneObject.text);						
+				var newCommethodObject = {
+					name : 'Default name', // TO DO with Timothy
+					type : 'EMAIL',
+					address : self.validatedCommethod()
+				};
+				self.addNewCommethod(newCommethodObject);
+			}
+		}
+		else {
+			var emailObject = validateEmail(self.comMethodName());		
+			if(emailObject.type == 'Error') {
+				self.errorMessage(emailObject.text);					
+				self.errorMessageInput('validationerror');					
+				return false;
+			} 
+			else {
+				self.validatedCommethod(emailObject.text);					
+				var newCommethodObject = {
+					name : 'Default name', // TO DO with Timothy
+					type : 'EMAIL',
+					address : self.validatedCommethod()
+				};
+				self.addNewCommethod(newCommethodObject);
+			}
+		}		
+	}			
 	
 	self.addNewCommethod = function(newCommethodObject) {
 		var callbacks = {
@@ -109,6 +112,7 @@
 				self.errorMessage("<span>ERROR: </span>" + details.message);
 			}
 		};
+		$.mobile.showPageLoadingMsg('a', 'Adding new communication methods');
 		ES.commethodService.addCommethod(newCommethodObject, callbacks );
 	};
 }

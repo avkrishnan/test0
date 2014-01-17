@@ -2530,24 +2530,22 @@ ul.igiresponses li span {
 .msgdetailbuttons {
 	background:#2D2D2D;
 	border-radius:4px 0 0 4px;
-	height:36px;
-	line-height:33px;
 	margin:10px 0 10px 0;
 	overflow:hidden;
-	padding:0px 10px 0px 0px;
+	padding:0 10px 0 0;
 	float:right;
 }
 .msgdetailbuttons a.igimsgdetail, .msgdetailbuttons a.igimsgdetail.ui-link, .msgdetailbuttons a.igimsgdetail.ui-link:visited, .msgdetailbuttons a.igimsgdetail.ui-link:hover, .msgdetailbuttons a.igimsgdetail.ui-link:active {
-	background:url(images/IGI-btn.png) no-repeat 6px center;
+	background:url(images/msgdetails.png) no-repeat left center;
 	float:left;
-	padding:18px 20px 18px 27px;
+	padding:18px 20px 18px 35px;
 	margin:0;
 }
 .msgdetailbuttons a.igisentimg, .msgdetailbuttons a.igisentimg.ui-link, .msgdetailbuttons a.igisentimg.ui-link:visited, .msgdetailbuttons a.igisentimg.ui-link:hover, .msgdetailbuttons a.igisentimg.ui-link:active {
-	background:url(images/msgsentdetails.png) no-repeat left center;
+	background:url(images/igisend.png) no-repeat left center;
 	float:left;
-	margin:6px 0 0 6px;
-	padding:12px 18px;
+	margin:0 0 0 6px;
+	padding:17px 14px 18px 14px;
 	cursor:auto;
 }
 .msgdetailbuttons a, .msgdetailbuttons a.ui-link, .msgdetailbuttons a.ui-link:visited, .msgdetailbuttons a.ui-link:hover, .msgdetailbuttons a.ui-link:active {
@@ -2555,16 +2553,10 @@ ul.igiresponses li span {
 	border-radius:4px;
 	padding:2px 13px;
 	text-decoration:none;
-	margin:6px 0 7px 8px;
+	margin:6px 0 6px 8px;
 	font-size:14px;
 	color:#a7a9ac;
 	float:left;
-}
-.msgdetailbuttons a.igiactive, .msgdetailbuttons a.igiactive.ui-link, .msgdetailbuttons a.igiactive.ui-link:visited, .msgdetailbuttons a.igiactive.ui-link:hover, .msgdetailbuttons a.igiactive.ui-link:active {
-		background:#8DC63F;
-		color:#fff;
-		font-weight:bold;
-		cursor:auto;
 }
 .msgdetailbuttons a.replybtn, .msgdetailbuttons a.replybtn.ui-link, .msgdetailbuttons a.replybtn.ui-link:visited, .msgdetailbuttons a.replybtn.ui-link:hover, .msgdetailbuttons a.replybtn.ui-link:active {
 	background:#A7A9AC url("images/replybg.png") no-repeat 10px 8px;
