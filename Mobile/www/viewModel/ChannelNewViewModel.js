@@ -27,31 +27,6 @@
 		}
 	});	
 
-	/*document.onkeydown = function(e) {
-		var keyPressed = e.keyCode;
-	  if (keyPressed == 16 || keyPressed == 55) {
-			$('.changename').bind("cut copy paste",function(e) {
-	    e.preventDefault();
-		});
-			}
-	  /*var keyPressed = e.keyCode;
-	  if (keyPressed == 16) {
-	  alert('key'); //thats the keycode for shift
-	    $('html').css({'-moz-user-select':'-moz-none',
-	       '-moz-user-select':'none',
-	       '-o-user-select':'none',
-	       '-khtml-user-select':'none',
-	       '-webkit-user-select':'none',
-	       '-ms-user-select':'none',
-	       'user-select':'none'
-	    }); //or you could pass these css rules into a class and add that class to html instead
-
-	    document.onkeyup = function() {
-	      //here you remove css rules that disable text selection
-	    }
-	  }
-	}*/
-
 	self.createChannelCommand = function () {
 		var nameReg = /^[a-zA-Z0-9]+$/;
     if (self.newChannel() == '') {
