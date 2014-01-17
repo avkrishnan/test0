@@ -114,16 +114,13 @@
 			if(typeof args.privs != 'undefined') {
 				ENYM.ctx.setItem('roleType', args.privs);
 			}
-			var resumeStatus = ENYM.ctx.getItem('resumeStatus');
-			if(resumeStatus.status == 1 && resumeStatus.account == self.username()) {			
+			if(ENYM.ctx.getItem('resumeStatus') == 1) {			
 				goToView(self.previousViewID());
 			}
 			else {
 				self.getCommethodsCommand();			
-			}
-			ENYM.ctx.removeItem('resumeStatus');			
-			var resume = {status: 0, account: self.accountName()};						
-			ENYM.ctx.setItem('resumeStatus', resume);			
+			}					
+			ENYM.ctx.setItem('resumeStatus', 0);			
     } 
 		else {
 			self.errorMessage('<span>Sorry, </span> Unknown Error.');

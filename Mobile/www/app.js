@@ -24,9 +24,8 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 		}
 		else {
 			var hash = $.mobile.urlHistory.getActive().hash;
-			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
-				var resume = {status: 1, account: getCurrentViewModel().accountName()};						
-				ENYM.ctx.setItem('resumeStatus', resume);
+			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){				
+				ENYM.ctx.setItem('resumeStatus', 1);
 				ENYM.ctx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
 			}
 		}
@@ -904,9 +903,8 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 function authenticate() {
 	var token = ES.evernymService.getAccessToken();
 	if(token == '' || token == null) {
-		sendMessageViewModel.clearForm();
-		var resume = {status: 1, account: getCurrentViewModel().accountName()};						
-		ENYM.ctx.setItem('resumeStatus', resume);
+		sendMessageViewModel.clearForm();				
+		ENYM.ctx.setItem('resumeStatus', 1);
 		goToView('loginView');	
 		return false;
 	}
