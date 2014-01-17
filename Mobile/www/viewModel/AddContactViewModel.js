@@ -33,7 +33,7 @@
 	self.gotoVerify = function(data) {
 		self.verify(true);
 		ENYM.ctx.setItem("currentVerificationCommethod",data.comMethodAddress);
-		ENYM.ctx.setItem("currentVerificationCommethodType",data.comMethodType);
+		ENYM.ctx.setItem("commethodType",data.comMethodType);
 		ENYM.ctx.setItem("currentVerificationCommethodID",data.comMethodID);
 		ENYM.ctx.setItem("verificationStatus",false);
 		viewNavigate('Cont. Info', 'addContactView', 'verifyContactView');
