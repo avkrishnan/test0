@@ -13,10 +13,7 @@
 .messages-content {
 	margin:15px 0 0 0;
 }
-/*.page-content .tutorialslides:first-child {
-	display:block; 
-}*/
-* {
+body {
    -ms-user-select: text; /* IE 10+ */
    -moz-user-select: -moz-text;
    -khtml-user-select: text;

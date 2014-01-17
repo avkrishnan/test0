@@ -14,7 +14,7 @@
 
     <div class="channelmessages" data-bind="foreach: channelMessages">
       <a href="#" data-bind="css:$data.readClass">
-        <span data-bind="css: iGiClass, click: $parent.iGiAckMessage"></span>
+        <span data-bind="css: iGiClass, click: $parent.iGiAckMessage, attr:{id: messageId}"></span>
         <div class="messageschannel" data-bind="css: messageType, click: $parent.showSingleMessage">
           <span class="timemsg" data-bind="text:$data.messageCreated"></span>
           <p data-bind="html:$data.messageShortText"></p>
