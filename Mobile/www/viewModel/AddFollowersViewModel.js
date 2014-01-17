@@ -2,11 +2,11 @@
   var self = this;
 	self.template = 'addFollowersView';
 	self.viewid = 'V-28';
-	self.viewname = 'AddFollowers';
+	self.viewname = 'Add Followers';
 	self.displayname = 'Add Followers';
 	self.showInvite = ko.observable();
 	
-  self.inputObs = [ 'channelId', 'channelName', 'firstLastName', 'nameClass', 'errorName', 'emailaddress', 'emailClass', 'errorEmail', 'smsPhone', 'phoneClass', 'errorPhone', 'validatedPhone' ];
+  self.inputObs = [ 'channelId', 'channelName', 'firstLastName', 'nameClass', 'errorName', 'emailaddress', 'emailClass', 'errorEmail', 'smsPhone', 'phoneClass', 'errorPhone'];
 	self.errorObs = [ 'nameClass', 'errorName', 'emailClass', 'errorEmail', 'errorPhone', 'phoneClass' ];
   self.defineObservables();
 	
@@ -54,7 +54,6 @@
 					return false;
 				} else {
 					self.smsPhone(phoneObject.textShow);
-					self.validatedPhone(phoneObject.text);
 				}
 			} else {
 				var emailObject = validateEmail(self.emailaddress());
@@ -70,7 +69,6 @@
 					return false;
 				} else {
 					self.smsPhone(phoneObject.textShow);
-					self.validatedPhone(phoneObject.text);
 				}
 			}
 		}
@@ -95,8 +93,8 @@
 		if(self.emailaddress() != '') {
 			provosional.emailaddress = self.emailaddress();
 		}
-		if(self.validatedPhone() != '') {
-			provosional.phonenumber = self.validatedPhone();
+		if(self.smsPhone() != '') {
+			provosional.phonenumber = self.smsPhone();
 		}
 		return provosional;
 	};

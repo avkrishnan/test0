@@ -4,44 +4,18 @@
 	self.viewid = "V-081";
 	self.viewname = "AdditionalContact";
 	self.displayname = "Additional Contact";
-	//self.hasfooter = true;
 
-  self.inputObs = [ 'baseUrl', 'comMethodName'/*, 'navText'*/, 'validatedCommethod' ];
+  self.inputObs = [ 'baseUrl', 'comMethodName' ];
 	self.errorObs = [ 'errorMessage', 'errorMessageInput'];	
-  self.defineObservables();	
-		
-	//self.pView = '';
-	
+  self.defineObservables();		
 
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message
-		//var currentBaseUrl = ENYM.ctx.getItem("baseUrl");
-		//var previousView = ENYM.ctx.getItem('previousView');
-		//var vm = ko.dataFor($("#" + previousView).get(0));
-		//self.navText(vm.displayname);
-		//self.pView = previousView;
-		/*if (currentBaseUrl){
-			self.baseUrl(currentBaseUrl);
-		} else {
-			var es = new EvernymService();
-			self.baseUrl(es.getBaseUrl());
-		}		
-		$('#additionalContactView input').on("keyup", self.inputKeyUp);
-		
-		self.comMethodName('');
-		self.errorMessage('');*/
 		$('input').keyup(function () {
 			self.clearErrorObs();
 		});		
 		ENYM.ctx.removeItem("currentVerificationCommethodID");	
-		/*$.mobile.showPageLoadingMsg("a", "Loading Settings");
-		return true;*/
-	};
-/*	
-	
-	self.inputKeyUp = function () {
-		self.errorMessage('');
-	}	*/	
+	};	
 	
 	$(document).keyup(function(e) {
 		if (e.keyCode == 13  && $.mobile.activePage.attr('id') == 'additionalContactView') {
@@ -63,12 +37,11 @@
 				return false;
 			} 
 			else {
-				self.comMethodName(phoneObject.textShow);
-				self.validatedCommethod(phoneObject.text);						
+				self.comMethodName(phoneObject.textShow);						
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
-					type : 'EMAIL',
-					address : self.validatedCommethod()
+					type : 'TEXT',
+					address : self.comMethodName()
 				};
 				self.addNewCommethod(newCommethodObject);
 			}
@@ -80,12 +53,11 @@
 				self.errorMessageInput('validationerror');					
 				return false;
 			} 
-			else {
-				self.validatedCommethod(emailObject.text);					
+			else {					
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
 					type : 'EMAIL',
-					address : self.validatedCommethod()
+					address : self.comMethodName()
 				};
 				self.addNewCommethod(newCommethodObject);
 			}
