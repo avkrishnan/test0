@@ -2,7 +2,7 @@
   var self = this;
   self.template = 'editFollowerDetailsView';
   self.viewid = 'V-35';
-  self.viewname = 'Edit Follower Details';
+  self.viewname = 'Edit Follower';
   self.displayname = 'Edit Follower Details';
 	self.followerCommethods = ko.observable([]);	
 	
