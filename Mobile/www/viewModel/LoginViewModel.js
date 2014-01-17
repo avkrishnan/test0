@@ -55,7 +55,8 @@
 				$("input[type='checkbox']").attr("checked",false).checkboxradio("refresh"); 
       }
 			else {
-				self.session(3600);
+				//self.session(3600);
+				self.session(60);
 			}
       var loginError = function(data, status, details) {
 				self.usernameClass('validationerror');
@@ -114,7 +115,16 @@
 			if(typeof args.privs != 'undefined') {
 				ENYM.ctx.setItem('roleType', args.privs);
 			}
-			self.getCommethodsCommand();			
+			var resumeStatus = ENYM.ctx.getItem('resumeStatus');
+			if(resumeStatus.status == 1 && resumeStatus.account == self.username()) {			
+				goToView(self.previousViewID());
+			}
+			else {
+				self.getCommethodsCommand();			
+			}
+			ENYM.ctx.removeItem('resumeStatus');			
+			var resume = {status: 0, account: self.accountName()};						
+			ENYM.ctx.setItem('resumeStatus', resume);			
     } 
 		else {
 			self.errorMessage('<span>Sorry, </span> Unknown Error.');
