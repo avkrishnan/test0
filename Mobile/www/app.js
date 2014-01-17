@@ -1000,6 +1000,44 @@ function truncatedTextScreen() {
 
 /* This function validates USA phonenumber for 10 digits and returns dashed phone number or error object*/
 function validateUSAPhone(txtPhone) {
+	var phoneNumberPattern = /^[0-9\-\s\(\)\+]+$/i;
+	if(phoneNumberPattern.test(txtPhone)) {
+		var phoneNum = txtPhone.replace(/\D/g,'');
+		if(phoneNum.length == 10) {
+			textShow = phoneNum.replace(/(.{3})(.{3})(.{4})/,'$1-$2-$3');
+			var phoneObject = {
+				type : 'Text',
+				text : phoneNum,
+				textShow: textShow
+			};
+		}
+		else if(phoneNum.length == 11) {
+			phoneNum = phoneNum.slice(1, phoneNum);
+			textShow = phoneNum.replace(/(.{3})(.{3})(.{4})/,'$1-$2-$3');			
+			var phoneObject = {
+				type : 'Text',
+				text : phoneNum,
+				textShow: textShow
+			};		
+		}
+		else if (phoneNum.length > 11 || phoneNum.length < 10) {
+			var phoneObject = {
+				type : 'Error',
+				text : '<span>Sorry, </span> Not a valid phone number.'
+			};
+		}
+	}
+	else {
+		var phoneObject = {
+			type : 'Error',
+			text : '<span>Sorry, </span> Not a valid phone number.'
+		};		
+	}
+	return phoneObject;
+};
+
+/* This function validates USA phonenumber for 10 digits and returns dashed phone number or error object
+function validateUSAPhone(txtPhone) {
 	var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
   var phoneNumberPatternPlus = /^\+?[0-9]{0,15}$/;
 
@@ -1026,7 +1064,7 @@ function validateUSAPhone(txtPhone) {
 	  };		    
 	}
 	return phoneObject;
-}
+}*/
 
 /* This function validates email addresses */
 function validateEmail(txtEmail) {

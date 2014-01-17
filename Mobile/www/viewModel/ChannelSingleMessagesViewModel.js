@@ -6,7 +6,18 @@
 	self.displayname = "Channel Single Message";
 	self.hasfooter = true;
 	
-  self.inputObs = [ 'title', 'description', 'channelid', 'channelIcon', 'messageId', 'ack', 'messageCreated', 'messageClass', 'messageText', 'moreText', 'activeClass', 'dismissClass' ];
+  self.inputObs = [ 'title', 
+	'description', 
+	'channelid', 
+	'channelIcon', 
+	'messageId', 
+	'ack', 
+	'messageCreated', 
+	'messageClass', 
+	'messageText', 
+	'moreText', 
+	'activeClass', 
+	'dismissClass' ];
   self.defineObservables();
 	
 	self.less = ko.observable(true);
