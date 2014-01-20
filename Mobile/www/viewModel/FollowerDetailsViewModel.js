@@ -40,8 +40,8 @@
 				self.evernymType(true);
 			}
 		}
-		if(followerObject.accountname != '') {
-			$.when(ES.commethodService.getCommethodsForProvis(followerObject.accountname).then(function(data) {
+		if(followerObject.accountEvernym != '') {
+			$.when(ES.commethodService.getCommethodsForProvis(followerObject.accountEvernym).then(function(data) {
 				self.followerCommethods(data.commethod);
 			}));
 		}

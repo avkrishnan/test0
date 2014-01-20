@@ -75,6 +75,7 @@
 					if(valueFollower.reachable == 'N') {
 						var nameClass = 'normalfollowers noverified';						
 						accountname = 'Un-reachable Follower';
+						var evernym = true;
 					}
 					else {
 						accountname = valueFollower.accountname;					
@@ -85,6 +86,7 @@
 						visibleName: visibleName,
 						followerName: name,
 						accountname: accountname,
+						accountEvernym: valueFollower.accountname,
 						evernym: evernym,
 						evernymIcon: evernymIcon,
 						type: valueFollower.managed

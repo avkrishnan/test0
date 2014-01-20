@@ -60,6 +60,7 @@
 					visibleName: visibleName,
 					followerName: name, 
 					accountname: 'Un-reachable Follower',
+					accountEvernym: valueFollower.accountname,
 					evernym: true,					
 					evernymIcon: evernymIcon,
 					type: valueFollower.managed
