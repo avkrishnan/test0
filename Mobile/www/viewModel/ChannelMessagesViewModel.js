@@ -34,22 +34,27 @@
 	
 	/*action to single message page*/
 	self.iGiAckMessage = function(data) {
-		if(data.iGiClass == 'igibutton igisent') {
+		var iGiClass = $('#'+data.messageId).attr('class');
+		if(data.iGiClass == 'igibutton igisent' || iGiClass ==  'igibutton igisent') {
 			var toastobj = {type: 'toast-info', text: 'iGi has already been sent!'};
 			showToast(toastobj);
-		} else{
+		} else {			
 			var callbacks = {
-			success: function(data) {					
-				var toastobj = {type: '', text: 'iGi sent!'};
-				showToast(toastobj);
-				self.gotChannel(channel);											
-			},
-			error: function(data, status, details) {
-				var toastobj = {type: 'toast-error', text: details.message};
-				showToast(toastobj);			
-			}
-		};					
-		$.mobile.showPageLoadingMsg('a', 'Sending iGi request!');
+				success: function() {
+					$('#'+data.messageId).parent().removeClass('read-n').addClass('read-i')
+					$('#'+data.messageId).addClass('igisent');
+					data.ack = 'Y';										
+					var toastobj = {type: '', text: 'iGi sent!'};
+					showToast(toastobj);
+					//self.gotChannel(channel);											
+				},
+				error: function(data, status, details) {
+					var toastobj = {type: 'toast-error', text: details.message};
+					showToast(toastobj);			
+				}
+			};					
+			$.mobile.showPageLoadingMsg('a', 'Sending iGi request!');
+			return ES.messageService.acknowledgeMsg(data.messageId, callbacks);
 		}
 		// TODO make a common function for all Overlay message and Badge Count
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
@@ -69,7 +74,7 @@
 			}, 1000);				
 			ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 		}
-		return ES.messageService.acknowledgeMsg(data.messageId, callbacks);
+		//return ES.messageService.acknowledgeMsg(data.messageId, callbacks);
 	};
 		
 	self.showSingleMessage = function(data) {

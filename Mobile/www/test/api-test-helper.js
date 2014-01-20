@@ -667,7 +667,6 @@ function ApiTestHelper() {
 
   hlpr.checkVerifCode = function(scenario, ovrdUrlTail) {
     return function(data) {
-      debugger;
       var text = data.dtlsMap['stripped-html'];
       urlTail = ovrdUrlTail == undefined ? 'verify' : ovrdUrlTail;
       var re = new RegExp('"(http.*' + urlTail + '\\?id=.*?)"', 'ig');

@@ -1,3 +1,19 @@
+
+@charset "utf-8";
+/* Todo - this file will be merged to style.css once all development done */
+.page-content .tutorialslides {
+	/*display:none;*/
+	cursor:pointer; 
+}
+.addfollowers {
+	cursor:pointer;	
+}
+.toast-notification {
+	display:none;
+}
+.messages-content {
+	margin:15px 0 0 0;
+}
 @charset "utf-8";
 /* Todo - this file will be merged to style.css once all development done */
 .page-content .tutorialslides {

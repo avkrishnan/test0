@@ -20,7 +20,7 @@
 
   hlpr.checkLastInvited = function(scenario, check) {
     return function(data) {
-      var found = data.followers.find(function(item) { return item.accountname === scenario.lastInvite.accountname; });
+      var found = data.followers.filter(function(item) { return item.accountname === scenario.lastInvite.accountname; })[0];
       ok(found != undefined, 'last invited is found in list of followers');
       check(found);
     };
@@ -92,7 +92,7 @@
   }
     
   function findComMethodOfType(scenario,type) {
-    var found = scenario.provisComMethods.find(function(item) { return item.type === type; });
+    var found = scenario.provisComMethods.filter(function(item) { return item.type === type; })[0];
     return found;
   }
   
@@ -119,7 +119,6 @@
       $.when(scenario.ES.commethodService.addCommethodForProvis(scenario.lastInvite.accountname, cm))
       .then(hlpr.CHECK.success, hlpr.CHECK.shouldNotFail)
       .then(function(data) {
-        debugger;
       }, hlpr.CHECK.shouldNotFail)
       .then(start,start);
     };
