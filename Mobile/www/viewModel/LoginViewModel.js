@@ -22,6 +22,7 @@
 			$('input').keyup(function() {
 				self.clearErrorObs();
 			});
+			ENYM.ctx.removeItem('signupObj');
 		} 
 		else {
 			goToView('homeView');

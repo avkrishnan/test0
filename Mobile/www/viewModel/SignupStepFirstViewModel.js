@@ -18,6 +18,11 @@
 			$('input').keyup(function () {
 				self.clearErrorObs();
 			});
+			if(ENYM.ctx.getItem('signupObj')) {
+				self.emailaddress(ENYM.ctx.getItem('signupObj').emailAddress);
+				self.evernym(ENYM.ctx.getItem('signupObj').evernymName);
+				ENYM.ctx.removeItem('signupObj');
+			} 
 		} 
 		else {
 			goToView('homeView');
@@ -135,7 +140,11 @@
 		self.errorFirstLastName('<span>Sorry,</span> '+details.message);
     ES.evernymService.clearAccessToken();
   };	    	
-				
+	self.privacyPolicy = function(){
+		var signupObj = {emailAddress: self.emailaddress(), evernymName: self.evernym()};			
+		ENYM.ctx.setItem('signupObj', signupObj);
+		goToView('privacyPolicyView');
+	};		
 }
 
 SignupStepFirstViewModel.prototype = new ENYM.ViewModel();
