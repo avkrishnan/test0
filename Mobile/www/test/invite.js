@@ -47,8 +47,8 @@
       //accountname:  
       firstname: 'TEST|Joe', 
       lastname: 'Bobson',
-      emailaddress: 'jason@lawcasa.com',
-      //emailaddress: hlpr.generateEmail('joebobson'),
+      //emailaddress: 'jason@lawcasa.com',
+      emailaddress: hlpr.generateEmail('joebobson'),
       phonenumber: '801-376-3348'
   };
 
