@@ -14,7 +14,8 @@ ES.evernymService.doAfterDone = function(){
 };    
 
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
-    $.mobile.hidePageLoadingMsg();
+	$.mobile.hidePageLoadingMsg();
+	if(jqXHR.responseJSON) {
 		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
 			ES.evernymService.clearAccessToken();
 			authenticate();
@@ -23,12 +24,12 @@ ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThr
 		}
 		else {
 			var hash = $.mobile.urlHistory.getActive().hash;
-			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){
-			
-			ENYM.ctx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
-			
+			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){				
+				ENYM.ctx.setItem('resumeStatus', 1);
+				ENYM.ctx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
 			}
 		}
+	}
 };
 
 function goToView(view) {
@@ -898,14 +899,13 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
   });
 }
 
-//feedbackType = ''; // For setting feedback type
-
 /* Validate user via access token */
 function authenticate() {
 	var token = ES.evernymService.getAccessToken();
 	if(token == '' || token == null) {
-		sendMessageViewModel.clearForm();		
-		goToView('loginView');
+		sendMessageViewModel.clearForm();				
+		ENYM.ctx.setItem('resumeStatus', 1);
+		goToView('loginView');	
 		return false;
 	}
 	return true;
