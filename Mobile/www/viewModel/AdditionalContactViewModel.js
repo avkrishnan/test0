@@ -37,7 +37,7 @@
 				return false;
 			} 
 			else {
-				self.comMethodName(phoneObject.textShow);						
+				self.comMethodName(phoneObject.text);						
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
 					type : 'TEXT',

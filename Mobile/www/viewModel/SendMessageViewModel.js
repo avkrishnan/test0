@@ -19,7 +19,7 @@
 	self.noClass = ko.observable();	
 
   self.inputObs = [ 'channelId', 'channelName', 'characterCount', 'characterClass', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
-	'normalActive', 'fastActive', 'escalateActive', 'escDuration', 'escLevel', 'duration', 'activeType', 'escalateEdit', 'broadcastType', 'selectedChannels'];
+	'normalActive', 'fastActive', 'escalateActive', 'escDuration', 'escLevel', 'duration', 'activeType', 'escalateEdit', 'broadcastType', 'selectedChannels', 'messageClass'];
 	self.defineObservables();	
 	
 	/* channels options variable */
@@ -38,7 +38,8 @@
 		ENYM.ctx.removeItem('iGiStatus');				
 	};
 	
-	self.activate = function() {			
+	self.activate = function() {
+		self.messageClass('');			
 		monthNames = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June','July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];				
 		addExternalMarkup(self.template); // this is for header/overlay message
 		self.sectionOne(false);
@@ -113,7 +114,8 @@
 			self.characterCount(ENYM.ctx.getItem('msgLenWarn'));
 			ENYM.ctx.removeItem('msgLenWarn');		
 		}		
-		$('textarea').keyup(function () {								
+		$('textarea').keyup(function () {
+			//self.messageClass('expand');							
 			self.characterCount(self.messageText().length);
 			var chanLength = self.selectedChannels().channelName.length;
 			var limitLength = 299-chanLength; //char lim=320, pging1,2 char+spaces=12, elipsis pg1,2=6 & chanLength=ch.name+3(space & square brackets) i.e. cal=320-18-(chanLength+3)			

@@ -29,7 +29,7 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(valueFollower.relationship == 'U') {		
+			if(valueFollower.reachable == 'N') {		
 				var evernymIcon = false;
 				if(valueFollower.managed == 'N') {
 					var nameClass = 'normalfollowers';
@@ -42,7 +42,7 @@
 				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					if(valueFollower.managed == 'Y') {
-						name = 'Guest';
+						name = valueFollower.comMethods[0].address;
 					}
 					else {
 						name = '';
