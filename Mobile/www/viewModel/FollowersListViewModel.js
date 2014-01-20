@@ -41,7 +41,8 @@
 				if(valueFollower.relationship == 'F') {
 					if(valueFollower.reachable == 'N') {
 						unreachs == unreachs++;
-					}					
+					}
+					var visibleName = true				
 					var evernymIcon = false;
 					if(valueFollower.managed == 'N') {
 						var nameClass = 'normalfollowers';
@@ -54,9 +55,11 @@
 					}
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 						if(valueFollower.managed == 'Y') {
+							visibleName = false;
 							name = valueFollower.comMethods[0].address;
 						}
 						else {
+							visibleName = false;
 							name = '';
 							nameClass = nameClass+' noname';
 						}
@@ -80,6 +83,7 @@
 					self.followers.push({
 						followerId: valueFollower.id,
 						nameClass: nameClass,
+						visibleName: visibleName,
 						followerName: name,
 						accountname: accountname,
 						evernym: evernym,

@@ -7,16 +7,20 @@
     </div>
     
     <div class="provisionalfollower">
-      <span class="followernormal" data-bind="css: nameClass"><em class="evernym" data-bind="visible: evernymIcon"></em></span>
+      <span class="followernormal" data-bind="css: nameClass">
+        <em class="evernym" data-bind="visible: evernymIcon"></em>
+      </span>
       <div class="provisional-follower">
-        <span data-bind="text: followerName"></span>
+        <span data-bind="text: followerName, visible: visibleName"></span>
         <div data-bind="foreach:followerCommethods">
           <span data-bind="text: address"></span>
         </div>
       </div>
-    </div>    
+    </div>
 
-    <div class="loginbtn" data-bind="visible:evernymType"><a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'editFollowerDetailsView');">Edit</a></div>
+    <div class="loginbtn" data-bind="visible:evernymType">
+      <a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'editFollowerDetailsView');">Edit</a>
+    </div>
     <div class="loginbtn removefollower">
       <a href="#" onclick="viewNavigate('Follower Details', 'followerDetailsView', 'removeFollowerView');">Remove Follower from This Channel</a>
     </div>
