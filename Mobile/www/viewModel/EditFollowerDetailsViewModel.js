@@ -20,9 +20,11 @@
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.channelName(channelObject.channelName);
 			self.followerID(followerObject.accountname);
-			if(typeof followerObject.followerName != 'undefined' || followerObject.followerName != '') {
-				self.followerName(followerObject.followerName);
-			}																					
+			if(followerObject.visibleName == true) {
+				if(typeof followerObject.followerName != 'undefined' || followerObject.followerName != '') {
+					self.followerName(followerObject.followerName);
+				}
+			}
 		}
 		self.followerCommethods([]);
 		if(followerObject.accountname != '') {
