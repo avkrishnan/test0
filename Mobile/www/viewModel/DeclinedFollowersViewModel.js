@@ -2,8 +2,8 @@
   var self = this;
 	self.template = 'declinedFollowersView';
 	self.viewid = 'V-??';
-	self.viewname = 'Declined Followers';
-	self.displayname = 'Declined Followers';
+	self.viewname = 'Declined Invites';
+	self.displayname = 'Declined Invites';
 	
 	self.evernymIcon = ko.observable(false);	
   self.inputObs = [ 'channelId', 'channelName', 'declinesCount'];
@@ -64,7 +64,8 @@
 					followerName: name,
 					accountname: valueFollower.accountname,
 					evernym: evernym,					
-					evernymIcon: evernymIcon
+					evernymIcon: evernymIcon,
+					type: valueFollower.managed
 				});
 				self.declinesCount(self.followers().length);
 			}
@@ -79,7 +80,7 @@
 	
 	self.followerDetails = function (data) {
 		ENYM.ctx.setItem('currentfollowerData', JSON.stringify(data));		
-		viewNavigate('Declined Followers', 'declinedFollowersView', 'followerDetailsView');
+		viewNavigate('Declined Invites', 'declinedFollowersView', 'followerDetailsView');
   };
 }
 
