@@ -53,7 +53,7 @@
 					self.phoneClass('validationerror');
 					return false;
 				} else {
-					self.smsPhone(phoneObject.textShow);
+					self.smsPhone(phoneObject.text);
 				}
 			} else {
 				var emailObject = validateEmail(self.emailaddress());
@@ -68,7 +68,7 @@
 					self.phoneClass('validationerror');
 					return false;
 				} else {
-					self.smsPhone(phoneObject.textShow);
+					self.smsPhone(phoneObject.text);
 				}
 			}
 		}
