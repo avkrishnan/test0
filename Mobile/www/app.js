@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 var ES = {
 	evernymService: new EvernymService()
 };
@@ -17,6 +17,7 @@ ES.evernymService.doAfterDone = function(){
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
 	$.mobile.hidePageLoadingMsg();
 	if(jqXHR.responseJSON) {
+<<<<<<< HEAD
 		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
 			ES.evernymService.clearAccessToken();
 			authenticate();
@@ -1072,6 +1073,8 @@ ES.evernymService.doAfterDone = function(){
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
 	$.mobile.hidePageLoadingMsg();
 	if(jqXHR.responseJSON) {
+=======
+>>>>>>> d9b98073d382bc48ed4f0a5759cbdd2dfd3d0de0
 		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
 			ES.evernymService.clearAccessToken();
 			authenticate();
