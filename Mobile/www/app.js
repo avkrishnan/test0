@@ -1,5 +1,5 @@
 var ES = {
-	evernymService: new EvernymService()
+  evernymService: new EvernymService()
 };
 ES.evernymService = new EvernymService();
 ES.channelService = new EvernymChannelService(ES.evernymService);
@@ -14,30 +14,30 @@ ES.evernymService.doAfterDone = function(){
 };    
 
 ES.evernymService.doAfterFail = function(ajaxParams, jqXHR, textStatus, errorThrown, details){
-	$.mobile.hidePageLoadingMsg();
-	if(jqXHR.responseJSON) {
-		if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
-			ES.evernymService.clearAccessToken();
-			authenticate();
-			var toastobj = {type: 'toast-error', text: jqXHR.responseJSON.message};
-			showToast(toastobj);
-		}
-		else {
-			var hash = $.mobile.urlHistory.getActive().hash;
-			if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){				
-				ENYM.ctx.setItem('resumeStatus', 1);
-				ENYM.ctx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
-			}
-		}
-	}
+  $.mobile.hidePageLoadingMsg();
+  if(jqXHR.responseJSON) {
+    if(jqXHR.responseJSON.code == '100201' || jqXHR.responseJSON.code == '100202' || jqXHR.responseJSON.code == '100203') {
+      ES.evernymService.clearAccessToken();
+      authenticate();
+      var toastobj = {type: 'toast-error', text: jqXHR.responseJSON.message};
+      showToast(toastobj);
+    }
+    else {
+      var hash = $.mobile.urlHistory.getActive().hash;
+      if (isBadLogin(details.code) && hash.indexOf("loginView") == -1){       
+        ENYM.ctx.setItem('resumeStatus', 1);
+        ENYM.ctx.setItem("login_nav", JSON.stringify({'hash': hash, 'params': ajaxParams}));
+      }
+    }
+  }
 };
 
 function goToView(view) {
-	$.mobile.changePage( "#" + view, {allowSamePageTransition: true});
+  $.mobile.changePage( "#" + view, {allowSamePageTransition: true});
 }
 
 function goToChannel(select) {
-	startBroadcast(select.value);
+  startBroadcast(select.value);
 }
 
 ko.virtualElements.allowedBindings.updateListviewOnChange = true;
@@ -140,8 +140,8 @@ function startBroadcast(channel){
 }
 
 function showMessage(msg){
-	$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")
-	.css({ display: "block",
+  $("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")
+  .css({ display: "block",
          opacity: 0.90,
          position: "fixed",
          padding: "7px",
@@ -149,8 +149,8 @@ function showMessage(msg){
          width: "270px",
          left: ($(window).width() - 284)/2,
          top: $(window).height()/2 })
-	.appendTo( $.mobile.pageContainer ).delay( 1500 )
-	.fadeOut( 400, function(){
+  .appendTo( $.mobile.pageContainer ).delay( 1500 )
+  .fadeOut( 400, function(){
              $(this).remove();
              });
 }
@@ -209,14 +209,14 @@ function submitFeedback(){
                                   });
     }
     function errorSendingFeedback(data, status, details){
-		$.mobile.hidePageLoadingMsg();
-		if (loginPageIfBadLogin(details.code)){
+    $.mobile.hidePageLoadingMsg();
+    if (loginPageIfBadLogin(details.code)){
             showError("Please log in or register to view this channel.");
-		}
+    }
         else {
-		    showError("Error Sending Feedback: " + ((status==500)?"Internal Server Error":details.message));
-		}
-	}
+        showError("Error Sending Feedback: " + ((status==500)?"Internal Server Error":details.message));
+    }
+  }
     var callbacks = {
         success: sentFeedback,
         error: errorSendingFeedback
@@ -241,12 +241,12 @@ function showFeedback(){
     
     if (!existingdiv){
     
-	$("<div id='feedbackdiv' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'>" +
+  $("<div id='feedbackdiv' class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'>" +
       "<textarea id='feedbacktextarea' style='width:250px;height:70px;resize:none;'></textarea><br/>" +
       "<button onclick='submitFeedback();'>Submit</button>&nbsp;&nbsp;" +
       "<button onclick='closeFeedback();'>Cancel</button><br/>" +
       "</div>")
-	.css({ display: "block",
+  .css({ display: "block",
          opacity: 0.90,
          position: "fixed",
          padding: "7px",
@@ -254,8 +254,8 @@ function showFeedback(){
          width: "270px",
          left: ($(window).width() - 284)/2,
          top: "20px" /* $(window).height()/2 - 145 */ })
-	.appendTo( $.mobile.pageContainer ).delay( 1500 )
-	;
+  .appendTo( $.mobile.pageContainer ).delay( 1500 )
+  ;
     }
     
     
@@ -442,7 +442,7 @@ afterLoginVerifyViewModel = new AfterLoginVerifyViewModel()
 $.mobile.defaultPageTransition = ""; //"slide";
 
 var models = [
-							/* Jared's Code to be activated when required */
+              /* Jared's Code to be activated when required */
               //unsubscribeModel,
               //selectIconViewModel,
               //followChannelViewModel,
@@ -452,7 +452,7 @@ var models = [
               //devSettingsModel, 
               //notificationsViewModel,
               //panelHelpViewModel, 
-              //messageViewModel,																												
+              //messageViewModel,                                                       
               loginViewModel,
               homeViewModel,
               channelsFollowingListViewModel,
@@ -471,58 +471,58 @@ var models = [
               addContactViewModel,
               additionalContactViewModel,
               verifyContactViewModel,
-							signupStepFirstViewModel,
-							signupStepSecondViewModel,
-							tutorialViewModel,
-							channelsIOwnViewModel,
-							helpViewModel,
-							aboutEvernymViewModel,
-							feedbackViewModel,
-							sendFeedbackViewModel,
-							privacyPolicyViewModel,
-							channelMainViewModel,
-							channelChangeNameViewModel,
-							editShortDescriptionViewModel,
-							channelDeleteViewModel,
-							channelChangeIconViewModel,
-							firstChannelViewModel,
-							channelMessagesViewModel,
-							registrationVerifyViewModel,
-							singleMessageFullTextViewModel,							
-							channelViewUnfollowModel,
-							singleMessageRepliesViewModel,
-							replyDetailViewModel,
-							channelSingleMessagesViewModel,
-							addInviteFollowersViewModel,
-							addFollowersViewModel,
-							editNameViewModel,							
-							editLongDescriptionViewModel,
-							changePasswordViewModel,
-							requestiGiHelpViewModel,
-							escalateHelpViewModel,
-							escalateSettingsViewModel,
-							escalateTimeSettingsViewModel,
-							followerDetailsViewModel,
-							removeFollowerViewModel,
-							notGotItViewModel,
-							whoGotItViewModel,
-							recipientDetailsViewModel	,
-							userGuideViewModel,
-							plusMenuViewModel,
-							channelIntroViewModel,
-							nameRequiredViewModel,
-							administratorViewModel, 
-							administratorFeedbackViewModel,
-							singleFeedbackViewModel,
-							forgotEvernymViewModel,
-							messageLengthWarningViewModel,
-							newFollowersSettingsViewModel,
-							followChannelViewModel,	
-							editFollowerDetailsViewModel,
-							invitedFollowersViewModel,
-							declinedFollowersViewModel,
-							unreachableFollowersViewModel,
-							afterLoginVerifyViewModel
+              signupStepFirstViewModel,
+              signupStepSecondViewModel,
+              tutorialViewModel,
+              channelsIOwnViewModel,
+              helpViewModel,
+              aboutEvernymViewModel,
+              feedbackViewModel,
+              sendFeedbackViewModel,
+              privacyPolicyViewModel,
+              channelMainViewModel,
+              channelChangeNameViewModel,
+              editShortDescriptionViewModel,
+              channelDeleteViewModel,
+              channelChangeIconViewModel,
+              firstChannelViewModel,
+              channelMessagesViewModel,
+              registrationVerifyViewModel,
+              singleMessageFullTextViewModel,             
+              channelViewUnfollowModel,
+              singleMessageRepliesViewModel,
+              replyDetailViewModel,
+              channelSingleMessagesViewModel,
+              addInviteFollowersViewModel,
+              addFollowersViewModel,
+              editNameViewModel,              
+              editLongDescriptionViewModel,
+              changePasswordViewModel,
+              requestiGiHelpViewModel,
+              escalateHelpViewModel,
+              escalateSettingsViewModel,
+              escalateTimeSettingsViewModel,
+              followerDetailsViewModel,
+              removeFollowerViewModel,
+              notGotItViewModel,
+              whoGotItViewModel,
+              recipientDetailsViewModel ,
+              userGuideViewModel,
+              plusMenuViewModel,
+              channelIntroViewModel,
+              nameRequiredViewModel,
+              administratorViewModel, 
+              administratorFeedbackViewModel,
+              singleFeedbackViewModel,
+              forgotEvernymViewModel,
+              messageLengthWarningViewModel,
+              newFollowersSettingsViewModel,
+              followChannelViewModel, 
+              editFollowerDetailsViewModel,
+              invitedFollowersViewModel,
+              declinedFollowersViewModel,
+              unreachableFollowersViewModel,
+              afterLoginVerifyViewModel
             ];
 
 function getHTMLName(viewModel){
@@ -573,39 +573,39 @@ function loadAllPages() {
   });
 };
 
-	$(document).ready(function () {
-		// bind each view model to a jQueryMobile page
-		console.log("document ready");
-		var token = ENYM.ctx.getItem("accessToken");
-		if (document.location.hash == ""){
-			if (token) {
-				//document.location.hash = "#channelListView";
-				document.location.hash = "#channelsIOwnView";
-			}
-			else {
-				document.location.hash = "#loginView";
-			}
-		}
-		console.log('hash: ' + document.location.hash);
-		$.mobile.activeBtnClass = '';
-		//$("#channelListView").page("destroy").page();
-		//var currentUrl = $.mobile.path.parseUrl(window.location.href);
-		//console.log("currentUrl: " + currentUrl.hash);
-		ENYM.ctx.removeItem('baseUrl');
-		loadAllPages().done(function() {
-			console.log('done loading all pages.');
-			console.log("INITIALIZE PAGE");
-			$.mobile.initializePage();
-			/*if (token){
-				function gotChannels(data){
-					channelListViewModel.channels.removeAll();
-					channelListViewModel.channels(data.channel);
-				}
-				channelListViewModel.listMyChannelsCommand().then(gotChannels);
-				channelMenuViewModel.getUrgencySettings();
-			}*/
-		});
-	});
+  $(document).ready(function () {
+    // bind each view model to a jQueryMobile page
+    console.log("document ready");
+    var token = ENYM.ctx.getItem("accessToken");
+    if (document.location.hash == ""){
+      if (token) {
+        //document.location.hash = "#channelListView";
+        document.location.hash = "#channelsIOwnView";
+      }
+      else {
+        document.location.hash = "#loginView";
+      }
+    }
+    console.log('hash: ' + document.location.hash);
+    $.mobile.activeBtnClass = '';
+    //$("#channelListView").page("destroy").page();
+    //var currentUrl = $.mobile.path.parseUrl(window.location.href);
+    //console.log("currentUrl: " + currentUrl.hash);
+    ENYM.ctx.removeItem('baseUrl');
+    loadAllPages().done(function() {
+      console.log('done loading all pages.');
+      console.log("INITIALIZE PAGE");
+      $.mobile.initializePage();
+      /*if (token){
+        function gotChannels(data){
+          channelListViewModel.channels.removeAll();
+          channelListViewModel.channels(data.channel);
+        }
+        channelListViewModel.listMyChannelsCommand().then(gotChannels);
+        channelMenuViewModel.getUrgencySettings();
+      }*/
+    });
+  });
 
 
 $(document).on('pagebeforecreate', '[data-role="page"]', function(e,a){
@@ -631,47 +631,47 @@ $(document).on('pagebeforehide', '[data-role="page"]', function(e,a){
 
 
 $(document).on('pagebeforeshow', '[data-role="page"]', function(e,a) {
-	console.log("showing page: " + $(this).attr('id'));
-	var vm = ko.dataFor(this);
-	var token = ENYM.ctx.getItem("accessToken");
-	document.title = vm.displayname;	
-	
-	if ( vm && vm.hasfooter && token){
-		// The reason the footer is appended on the pagebeforeshow instead of pagebeforecreate is because it relies on the viewmodel for some information to build it.
-		var viewid = vm.viewid;
-		var viewname = vm.viewname;
-		
-		/*
-		if (! $(this).find("#thefooter").length ){
-		$(this).append($("#globalfooter #thefooter").clone());
-		}
-		*/
-		var name = ENYM.ctx.getItem('accountName');
-		$(this).find('#thefooter #footer-gear').html(name);
-		$(this).find('#thefooter #viewid').html(viewid + " " + viewname);
-	}
-	else {
-		$(this).find("#thefooter").remove();
-	}
-	//$(this).page();
-	/*
-	//if( panelHelpViewModel.isDirty($(this).attr('id'))){
-	var panelhtml = $("#globalpanel").find('#mypanel').html();
-	$(this).find('#mypanel').html(panelhtml);
-	$(this).find('#mypanel').panel();
-	$(this).find('#mypanel').trigger('create');
-	var panelhtml = $("#globalpaneldots").find('#mypaneldots').html();
-	$(this).find('#mypaneldots').html(panelhtml);
-	$(this).find('#mypaneldots').panel();
-	$(this).find('#mypaneldots').trigger('create');
-	*/
-	/*
-	var panel = $(this).find('#mypanel').get(0);
-	if (panel){
-	myScroll = new iScroll(panel);
-	}
-	*/
-	//}
+  console.log("showing page: " + $(this).attr('id'));
+  var vm = ko.dataFor(this);
+  var token = ENYM.ctx.getItem("accessToken");
+  document.title = vm.displayname;  
+  
+  if ( vm && vm.hasfooter && token){
+    // The reason the footer is appended on the pagebeforeshow instead of pagebeforecreate is because it relies on the viewmodel for some information to build it.
+    var viewid = vm.viewid;
+    var viewname = vm.viewname;
+    
+    /*
+    if (! $(this).find("#thefooter").length ){
+    $(this).append($("#globalfooter #thefooter").clone());
+    }
+    */
+    var name = ENYM.ctx.getItem('accountName');
+    $(this).find('#thefooter #footer-gear').html(name);
+    $(this).find('#thefooter #viewid').html(viewid + " " + viewname);
+  }
+  else {
+    $(this).find("#thefooter").remove();
+  }
+  //$(this).page();
+  /*
+  //if( panelHelpViewModel.isDirty($(this).attr('id'))){
+  var panelhtml = $("#globalpanel").find('#mypanel').html();
+  $(this).find('#mypanel').html(panelhtml);
+  $(this).find('#mypanel').panel();
+  $(this).find('#mypanel').trigger('create');
+  var panelhtml = $("#globalpaneldots").find('#mypaneldots').html();
+  $(this).find('#mypaneldots').html(panelhtml);
+  $(this).find('#mypaneldots').panel();
+  $(this).find('#mypaneldots').trigger('create');
+  */
+  /*
+  var panel = $(this).find('#mypanel').get(0);
+  if (panel){
+  myScroll = new iScroll(panel);
+  }
+  */
+  //}
 });
 
 
@@ -767,7 +767,7 @@ $(document).bind('panelbeforeopen', function(e, data) {
                  
                  
                  });
-								 
+                 
 /* By pradeep kumar */
 /* Back navigation functions and variables used
  *
@@ -777,114 +777,114 @@ $(document).bind('panelbeforeopen', function(e, data) {
  *
 */
 if(!ENYM.ctx.getItem('backNavText') || !ENYM.ctx.getItem('backNavView')) {
-	var backNavText = [];
-	var backNavView = [];
+  var backNavText = [];
+  var backNavView = [];
 } else {
-	var backNavText = JSON.parse(ENYM.ctx.getItem('backNavText'));
-	var backNavView = JSON.parse(ENYM.ctx.getItem('backNavView'));
+  var backNavText = JSON.parse(ENYM.ctx.getItem('backNavText'));
+  var backNavView = JSON.parse(ENYM.ctx.getItem('backNavView'));
 }
 
 function viewNavigate(backText, backView, targetView) {
-	if($.mobile.activePage.attr('id') != targetView) {
-		if(backNavView[backNavView.length-1] != backView) {
-			backNavText.push(backText);
-			ENYM.ctx.setItem('backNavText', JSON.stringify(backNavText));	
-			backNavView.push(backView);
-			ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
-		}
-	}
-	$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');	
-	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});		
-}		
+  if($.mobile.activePage.attr('id') != targetView) {
+    if(backNavView[backNavView.length-1] != backView) {
+      backNavText.push(backText);
+      ENYM.ctx.setItem('backNavText', JSON.stringify(backNavText)); 
+      backNavView.push(backView);
+      ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
+    }
+  }
+  $('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');  
+  $.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});    
+}   
 
 function popBackNav() {
-	backNavText.pop();
-	ENYM.ctx.removeItem('backNavText');	
-	ENYM.ctx.setItem('backNavText', JSON.stringify(backNavText));				
-	var targetView = goToView(backNavView.pop());
-	ENYM.ctx.removeItem('backNavView');		
-	ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
-	$.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});			
+  backNavText.pop();
+  ENYM.ctx.removeItem('backNavText'); 
+  ENYM.ctx.setItem('backNavText', JSON.stringify(backNavText));       
+  var targetView = goToView(backNavView.pop());
+  ENYM.ctx.removeItem('backNavView');   
+  ENYM.ctx.setItem('backNavView', JSON.stringify(backNavView));
+  $.mobile.changePage( "#" + targetView, {allowSamePageTransition: true});      
 }
 
 /* Toast messages function */
 function showToast(toastobj) {
-	if(toastobj.redirect) {	
-		$('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');			
-	}
-	else {
-		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');				
-	}
-	$('.toast-notification').delay(500).slideDown(500, function() {
-		$('.toast-notification').show();
-	}).delay(1800).slideUp(700, function() {
-		$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
-	});
+  if(toastobj.redirect) { 
+    $('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');      
+  }
+  else {
+    $('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');       
+  }
+  $('.toast-notification').delay(500).slideDown(500, function() {
+    $('.toast-notification').show();
+  }).delay(1800).slideUp(700, function() {
+    $('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
+  });
 }
 
 /* Get current date/time values */
 function _getDate(functionName) {
-	var _date = new Date();
-	return _date[functionName]();	
+  var _date = new Date();
+  return _date[functionName](); 
 }
 /* This function converts passed date into a desired format*/
 function formatDate(date, format, source) {
-	if(typeof(date) === 'undefined') {
-		date = new Date();
-	}
-	if(typeof(format) === 'undefined') {
-		format = 'short';
-	}
-	if(typeof(source) === 'undefined') {
-		source = '';
-	}	
-	var newDate = new Date(moment(date)); // TO DO (DEVENDER) replace this js code with Moment library
-	var shortMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'];
-	var longMonths  = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'];
-	var longDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-	var year 	= newDate.getFullYear();
-	var month 	= newDate.getMonth();
-	var day			= newDate.getDate();
-	var weekDay	= newDate.getDay();
-	var hour 		= newDate.getHours();
-	var minute 	= newDate.getMinutes();
-	var todaysDay = new Date().getDate();
-	var todaysYear = new Date().getFullYear();
-	//var output 	= months[month] + ' ' + day + ', ' + newDate.getFullYear() +  ', ' +((hour == 0|| hour == 12 )?12:hour%12) + ':' +((''+minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'am' : 'pm');
-	var output;
-	switch(format) {
-		case 'short' :
-			if(day == todaysDay) {
-				if(source == 'follow' || source == 'main') {
-					output 	= 'TODAY, ' + ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
-				}
-				else {
-					output 	= ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
-				}
-			}
-			else if(year > todaysYear) {
-				if(source == 'follow' || source == 'main') {
-					output 	= month + '/' + day + '/' + year;	
-				}
-				else {
-					output 	= month + '/' + day + '/' + year + ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
-				}
-			}
-			else {
-				if(source == 'follow' || source == 'main') {
-					output 	= shortMonths[month] + '. ' + day + ', ' +  ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
-				}
-				else {
-					output 	= shortMonths[month] + '. ' + day;
-				}
-			}
-			break;
-		case 'long':
-			//output 	= newDate.toLocaleString();
-			output = longDays[weekDay] + ' ' + shortMonths[month] + '. ' + day + ', ' + year + ' ' +  ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
-			break;
-	}
-	return output;
+  if(typeof(date) === 'undefined') {
+    date = new Date();
+  }
+  if(typeof(format) === 'undefined') {
+    format = 'short';
+  }
+  if(typeof(source) === 'undefined') {
+    source = '';
+  } 
+  var newDate = new Date(moment(date)); // TO DO (DEVENDER) replace this js code with Moment library
+  var shortMonths = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep', 'Oct', 'Nov', 'Dec'];
+  var longMonths  = ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'];
+  var longDays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var year  = newDate.getFullYear();
+  var month   = newDate.getMonth();
+  var day     = newDate.getDate();
+  var weekDay = newDate.getDay();
+  var hour    = newDate.getHours();
+  var minute  = newDate.getMinutes();
+  var todaysDay = new Date().getDate();
+  var todaysYear = new Date().getFullYear();
+  //var output  = months[month] + ' ' + day + ', ' + newDate.getFullYear() +  ', ' +((hour == 0|| hour == 12 )?12:hour%12) + ':' +((''+minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'am' : 'pm');
+  var output;
+  switch(format) {
+    case 'short' :
+      if(day == todaysDay) {
+        if(source == 'follow' || source == 'main') {
+          output  = 'TODAY, ' + ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+        }
+        else {
+          output  = ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+        }
+      }
+      else if(year > todaysYear) {
+        if(source == 'follow' || source == 'main') {
+          output  = month + '/' + day + '/' + year; 
+        }
+        else {
+          output  = month + '/' + day + '/' + year + ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+        }
+      }
+      else {
+        if(source == 'follow' || source == 'main') {
+          output  = shortMonths[month] + '. ' + day + ', ' +  ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+        }
+        else {
+          output  = shortMonths[month] + '. ' + day;
+        }
+      }
+      break;
+    case 'long':
+      //output  = newDate.toLocaleString();
+      output = longDays[weekDay] + ' ' + shortMonths[month] + '. ' + day + ', ' + year + ' ' +  ((hour == 0|| hour == 12 ) ? 12 : hour % 12) + ':' + (('' + minute).length<2 ? '0' :'') + minute + ' ' + (hour < 12? 'AM' : 'PM');
+      break;
+  }
+  return output;
 }
 
 /* Hide footer on mobile keypad */
@@ -901,152 +901,154 @@ if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 /* Validate user via access token */
 function authenticate() {
-	var token = ES.evernymService.getAccessToken();
-	if(token == '' || token == null) {
-		sendMessageViewModel.clearForm();				
-		ENYM.ctx.setItem('resumeStatus', 1);
-		goToView('loginView');	
-		return false;
-	}
-	return true;
+  var token = ES.evernymService.getAccessToken();
+  if(token == '' || token == null) {
+    sendMessageViewModel.clearForm();       
+    ENYM.ctx.setItem('resumeStatus', 1);
+    goToView('loginView');  
+    return false;
+  }
+  return true;
 }
 
 /* pradeep kumar end */
 
 /* Time conversion into time ago*/
 function time2TimeAgo(ts) {
-	endDate = new Date();
-	startDate = new Date(ts);
-	var diff = startDate - endDate;
-	var millisecondsPerDay = 86400 * 1000; // Day in milliseconds
-	startDate.setHours(0,0,0,1);  // Start just after midnight
-	endDate.setHours(23,59,59,999);  // End just before midnight
-	var diff = endDate - startDate;  // Milliseconds between datetime objects    
-	var days = Math.ceil(diff / millisecondsPerDay);
-	days = days-1;
-	if(days == 1) {
-		return ' yesterday';
-	}	
-	else if(days > 1) {
-		return formatDate(ts, 'short');
-	}
-	else if(days < 1) {
-		var newDate = new Date(ts).getTime();
-		var ms = new Date().getTime() - newDate;				
-		var secs = Math.floor(ms / 1000);
-		var msleft = ms % 1000;
-		var totalHours = Math.floor(secs / (60 * 60));
-		var hours = totalHours % 24;
-		var divisor_for_minutes = secs % (60 * 60);
-		var minutes = Math.floor(divisor_for_minutes / 60);
-		var divisor_for_seconds = divisor_for_minutes % 60;
-		var seconds = Math.ceil(divisor_for_seconds);
-		if(hours == 1) {
-			return hours + ' hr ago';		
-		} 
-		else if(hours > 1) {
-			return hours + ' hrs ago';
-		} 
-		else if(minutes == 1) {
-			return minutes + ' min ago';
-		} 
-		else if(minutes > 1) {
-			return minutes + ' mins ago';		
-		} 
-		else if(seconds > 1) {
-			return  seconds + ' secs ago';
-		}
-		else {
-			return  'just now';
-		}						
-	}
+  endDate = new Date();
+  startDate = new Date(ts);
+  var diff = startDate - endDate;
+  var millisecondsPerDay = 86400 * 1000; // Day in milliseconds
+  startDate.setHours(0,0,0,1);  // Start just after midnight
+  endDate.setHours(23,59,59,999);  // End just before midnight
+  var diff = endDate - startDate;  // Milliseconds between datetime objects    
+  var days = Math.ceil(diff / millisecondsPerDay);
+  days = days-1;
+  if(days == 1) {
+    return ' yesterday';
+  } 
+  else if(days > 1) {
+    return formatDate(ts, 'short');
+  }
+  else if(days < 1) {
+    var newDate = new Date(ts).getTime();
+    var ms = new Date().getTime() - newDate;        
+    var secs = Math.floor(ms / 1000);
+    var msleft = ms % 1000;
+    var totalHours = Math.floor(secs / (60 * 60));
+    var hours = totalHours % 24;
+    var divisor_for_minutes = secs % (60 * 60);
+    var minutes = Math.floor(divisor_for_minutes / 60);
+    var divisor_for_seconds = divisor_for_minutes % 60;
+    var seconds = Math.ceil(divisor_for_seconds);
+    if(hours == 1) {
+      return hours + ' hr ago';   
+    } 
+    else if(hours > 1) {
+      return hours + ' hrs ago';
+    } 
+    else if(minutes == 1) {
+      return minutes + ' min ago';
+    } 
+    else if(minutes > 1) {
+      return minutes + ' mins ago';   
+    } 
+    else if(seconds > 1) {
+      return  seconds + ' secs ago';
+    }
+    else {
+      return  'just now';
+    }           
+  }
 }
 
 /* External markup for Header/Overlay etc*/
 function addExternalMarkup(viewID) {
-	$('#' + viewID + ' header.logged-in').load('header.html');
-	$('#' + viewID + ' .active-overlay').load('overlaymessages.html');
+  $('#' + viewID + ' header.logged-in').load('header.html');
+  $('#' + viewID + ' .active-overlay').load('overlaymessages.html');
 }
 
 /* Function to truncate message text on the basis of screen szie for overlay*/
 function truncatedText() {
-	var screenSize = $(window).width();
-	if(screenSize < 400) {
-		return screenSize/7;
-	}
-	else if (screenSize > 400 && screenSize < 600) {
-		return screenSize/6;
-	}
-	else if(screenSize > 600 && screenSize < 800) {
-		return screenSize/5;
-	}
-	else {
-		return screenSize/4;	
-	}
+  var screenSize = $(window).width();
+  if(screenSize < 400) {
+    return screenSize/7;
+  }
+  else if (screenSize > 400 && screenSize < 600) {
+    return screenSize/6;
+  }
+  else if(screenSize > 600 && screenSize < 800) {
+    return screenSize/5;
+  }
+  else {
+    return screenSize/4;  
+  }
 }
 /* Function to truncate message text on the basis of screen szie*/
 function truncatedTextScreen() {
-	var screenSize = $(window).width();
-	if(screenSize < 400) {
-		return screenSize/11;
-	}
-	else if (screenSize > 400 && screenSize < 700) {
-		return screenSize/8;
-	}
-	else {
-		return screenSize/8;
-	}
+  var screenSize = $(window).width();
+  if(screenSize < 400) {
+    return screenSize/11;
+  }
+  else if (screenSize > 400 && screenSize < 700) {
+    return screenSize/8;
+  }
+  else {
+    return screenSize/8;
+  }
 }
 
 /* This function validates USA phonenumber for 10 digits and returns dashed phone number or error object*/
 function validateUSAPhone(txtPhone) {
-	var phoneNumberPattern = /^[0-9\-\s\(\)\+]+$/i;
-	if(phoneNumberPattern.test(txtPhone)) {
-		var phoneNum = txtPhone.replace(/\D/g,'');
-		if(phoneNum.length == 10) {
-			textShow = phoneNum.replace(/(.{3})(.{3})(.{4})/,'$1-$2-$3');
-			var phoneObject = {
-				type : 'Text',
-				text : textShow
-			};
-		}
-		else if(phoneNum.length == 11) {
-			phoneNum = phoneNum.slice(1, phoneNum);
-			textShow = phoneNum.replace(/(.{3})(.{3})(.{4})/,'$1-$2-$3');			
-			var phoneObject = {
-				type : 'Text',
-				text : textShow
-			};		
-		}
-		else if (phoneNum.length > 11 || phoneNum.length < 10) {
-			var phoneObject = {
-				type : 'Error',
-				text : '<span>Sorry,</span> Not a valid phone number.'
-			};
-		}
-	}
-	else {
-		var phoneObject = {
-			type : 'Error',
-			text : '<span>Sorry,</span> Not a valid phone number.'
-		};		
-	}
-	return phoneObject;
+  var phoneNumberPattern = /^[0-9\-\s\(\)\+]+$/i;
+  if(phoneNumberPattern.test(txtPhone)) {
+    var phoneNum = txtPhone.replace(/\D/g,'');
+    if(phoneNum.length == 10) {
+      textShow = phoneNum.replace(/(.{3})(.{3})(.{4})/,'$1-$2-$3');
+      var phoneObject = {
+        type : 'Text',
+        text : phoneNum,
+        textShow: textShow
+      };
+    }
+    else if(phoneNum.length == 11) {
+      phoneNum = phoneNum.slice(1, phoneNum);
+      textShow = phoneNum.replace(/(.{3})(.{3})(.{4})/,'$1-$2-$3');     
+      var phoneObject = {
+        type : 'Text',
+        text : phoneNum,
+        textShow: textShow
+      };    
+    }
+    else if (phoneNum.length > 11 || phoneNum.length < 10) {
+      var phoneObject = {
+        type : 'Error',
+        text : '<span>Sorry,</span> Not a valid phone number.'
+      };
+    }
+  }
+  else {
+    var phoneObject = {
+      type : 'Error',
+      text : '<span>Sorry,</span> Not a valid phone number.'
+    };    
+  }
+  return phoneObject;
 };
 
 /* This function validates email addresses */
 function validateEmail(txtEmail) {
-	var emailPattern = /^([\w-\.\+]+@([\w-]+\.)+[\w-]{2,4})?$/;
-	if(!emailPattern.test(txtEmail)) {
-		var emailObject = {
-			type : 'Error',
-			text : "<span>Sorry,</span> Not a valid email address."
-		};
-	} else if(emailPattern.test(txtEmail)) {
-		var emailObject = {
-			type : 'Email',
-			text : txtEmail
-		};
-	}
-	return emailObject;
+  var emailPattern = /^([\w-\.\+]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  if(!emailPattern.test(txtEmail)) {
+    var emailObject = {
+      type : 'Error',
+      text : "<span>Sorry,</span> Not a valid email address."
+    };
+  } else if(emailPattern.test(txtEmail)) {
+    var emailObject = {
+      type : 'Email',
+      text : txtEmail
+    };
+  }
+  return emailObject;
 }
