@@ -165,11 +165,15 @@
   };
 	
   self.okCommand = function () {
-		if(backNavView[backNavView.length-1] == 'channelsIOwnView') {
-			backNavText.pop();
-			backNavView.pop();
-		}						
-    goToView('channelsIOwnView');
+  	if(self.previousViewID() == 'channelNewView'){
+			if(backNavView[backNavView.length-1] == 'channelsIOwnView') {
+				backNavText.pop();
+				backNavView.pop();
+			}						
+	    goToView('channelsIOwnView');
+ 	  } else{
+    	goToView('channelSettingsView');
+    }
   };
 	
   self.exitPreview = function () {				
