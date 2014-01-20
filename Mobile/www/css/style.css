@@ -2673,7 +2673,7 @@ ul.igiresponses li span {
 	font-size:13px;
 	margin:0;
 	color:#414141;
-	padding:5px 5px 22px 5px;
+	padding:0 5px 22px 5px;
 }
 .broadcast-textarea span {
 	float:right;
@@ -3275,8 +3275,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .broadcast-textarea.longdescription textarea.ui-input-text {
 	overflow:hidden;
 	height:auto;
-	min-height:80px;
-	max-height:156px;
+	min-height:81px;
 }
 .longdescription textarea.ui-input-text {
 	height:156px;
