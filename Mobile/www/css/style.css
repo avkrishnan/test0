@@ -1454,7 +1454,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:63%;
 }
 .msg-icon {
-	width:80.9%;
+	width:80%;
 }
 .igi-msg {
 	width:81%;
@@ -1466,13 +1466,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:67%;
 }
 .channelmessages .msg-icon {
-	width:82.2%;
+	width:82%;
 }
 .channelmessages .igi-msg {
-	width:83%;
+	width:82%;
 }
 .channelmessages .onlymsg {
-	width:98%;
+	width:97%;
 }
 .igi-responses .messageschannel {
 	border-left:1px solid #EAEAEA;
@@ -1516,7 +1516,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	background:#27aae1;
 	float:left;
 	border-radius:4px;
-	margin:16px 0 14px 8px;
+	margin:16px 0 14px 5px;
 	font-style:normal;
 	font-size:13px;
 }
@@ -3273,11 +3273,14 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-style:normal;
 }
 .broadcast-textarea.longdescription textarea.ui-input-text {
-	height:81px;
+	overflow:hidden;
+	height:auto;
+	min-height:80px;
+	max-height:156px;
 }
-.broadcast-textarea.longdescription .expand.ui-input-text {
-	height:156px;
-}
+/*.broadcast-textarea.longdescription .expand.ui-input-text {
+	max-height:156px;
+}*/
 .longdescription textarea.ui-input-text {
 	height:156px;
 	overflow:auto;
@@ -3605,7 +3608,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	padding:8px 0 8px 8px;
 	text-overflow:ellipsis;
 	white-space:nowrap;
-	width:84%;
+	width:85%;
 	display:inline-block;
 }
 .singlemessage em {
@@ -4103,17 +4106,17 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:59%;
 	}
 	.broadcast-sensitive em {
-		font-size: 14px;
-		padding: 9px 10px;
+		font-size:14px;
+		padding:9px 10px;
 	}
 	.broadcast-sensitive span {
 		width:77%;
 	}
 	.messageschannel {
-		width:68%;
+		width:67%;
 	}
 	.msg-icon {
-		width:83%;
+		width:82%;
 	}
 	.igi-msg {
 		width:83%;
@@ -4122,22 +4125,22 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:98%;
 	}
 	.channelmessages .messageschannel {
-		width:71%;
+		width:70%;
 	}
 	.channelmessages .msg-icon {
-		width:84.4%;
-	}
-	.channelmessages .igi-msg {
-		width:85%;
-	}
-	.channelmessages .onlymsg {
-		width:99%;
-	}
-	.igi-responses .messageschannel {
 		width:83%;
 	}
+	.channelmessages .igi-msg {
+		width:83%;
+	}
+	.channelmessages .onlymsg {
+		width:98%;
+	}
+	.igi-responses .messageschannel {
+		width:82%;
+	}
 	.msgbroadcast {
-		width:81%;
+		width:82%;
 	}
 	.tutorial h1 {
 		font-size:14px;
@@ -4242,43 +4245,43 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:94%;
 	}
 	.broadcastsensitive {
-		width: 76%;
+		width:76%;
 	}
 	.broadcast-sensitive span {
-		width: 91.8%;
+		width:91.8%;
 	}
 	.messageschannel {
-		width:85.7%;
+		width:85%;
 	}
 	.msg-icon {
-		width:92.7%;
+		width:92%;
 	}
 	.igi-msg {
-		width:93%;
+		width:92%;
 	}
 	.onlymsg {
 		width:99%;
 	}
 	.channelmessages .messageschannel {
-		width:87%;
+		width:86%;
 	}
 	.channelmessages .msg-icon {
-		width:92.8%;
+		width:92%;
 	}
 	.channelmessages .igi-msg {
-		width:93%;
+		width:92%;
 	}
 	.channelmessages .onlymsg {
-		width:99.5%;
+		width:98%;
 	}
 	.igi-responses .messageschannel {
-		width:92.6%;
+		width:92%;
 	}
 	.msgbroadcast {
-		width:91.5%;
+		width:92%;
 	}
 	.channelmessages .msgbroadcast.onlymsg {
-		width:97.6%;
+		width:98%;
 	}
 	.tutorial h1 {
 		font-size:22px;
@@ -4378,7 +4381,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:31.5%;
 	}
 	.singlemessage span {
-		width: 95.5%;
+		width:95%;
 	}
 	.broadcastmsgreplie {
 		width:72%;
@@ -4387,37 +4390,37 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width: 93.6%;
 	}
 	.messageschannel {
-		width:88.7%;
+		width:88%;
 	}
 	.msg-icon {
-		width:94.2%;
+		width:94%;
 	}
 	.igi-msg {
-		width:94.4%;
+		width:94%;
 	}
 	.onlymsg {
-		width:99.4%;
+		width:99%;
 	}
 	.channelmessages .messageschannel {
 		width:89%;
 	}
 	.channelmessages .msg-icon {
-		width:94.4%;
+		width:94%;
 	}
 	.channelmessages .igi-msg {
 		width:94%;
 	}
 	.channelmessages .onlymsg {
-		width:99.5%;
+		width:99%;
 	}
 	.igi-responses .messageschannel {
-		width:94.2%;
+		width:94%;
 	}
 	.msgbroadcast {
-		width:93.2%;
+		width:93%;
 	}
 	.channelmessages .msgbroadcast.onlymsg {
-		width: 98.4%;
+		width:98%;
 	}
 }
 @media only screen and (min-width:1280px) {
@@ -4460,7 +4463,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:78.1%;
 	}
 	.singlemessage span {
-		width:96.8%;
+		width:96%;
 	}
 	.broadcastsensitive {
 		width:81.4%;
@@ -4469,37 +4472,37 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 		width:95%;
 	}
 	.messageschannel {
-		width:91.5%;
+		width:91%;
 	}
 	.msg-icon {
-		width:95.7%;
+		width:95%;
 	}
 	.igi-msg {
-		width:95.7%;
+		width:95%;
 	}
 	.onlymsg {
-		width:99.5%;
+		width:99%;
 	}
 	.channelmessages .messageschannel {
-		width: 92.3%;
+		width:92%;
 	}
 	.channelmessages .msg-icon {
-		width:95.7%;
+		width:95%;
 	}
 	.channelmessages .igi-msg {
-		width:96%;
+		width:95%;
 	}
 	.channelmessages .onlymsg {
-		width:99.5%;
+		width:99%;
 	}
 	.igi-responses .messageschannel {
-		width:95.6%;
+		width:95%;
 	}
 	.msgbroadcast {
-		width:94.5%;
+		width:95%;
 	}
 	.channelmessages .msgbroadcast.onlymsg {
-		width:98.7%;
+		width:99%;
 	}
 	.tutorial-5 {
 		background:#fae49c url(images/v-55-1280.png) no-repeat center 0;

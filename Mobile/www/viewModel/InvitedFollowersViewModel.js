@@ -2,8 +2,8 @@
   var self = this;
 	self.template = 'invitedFollowersView';
 	self.viewid = 'V-??';
-	self.viewname = 'Invited Followers';
-	self.displayname = 'Invited Followers';
+	self.viewname = 'Pending Invites';
+	self.displayname = 'Pending Invites';
 	
 	self.evernymIcon = ko.observable(false);	
   self.inputObs = [ 'channelId', 'channelName', 'invitesCount'];
@@ -65,7 +65,7 @@
 					accountname: valueFollower.accountname,
 					evernym: evernym,
 					evernymIcon: evernymIcon,
-					type:valueFollower.managed
+					type: valueFollower.managed
 				});
 				self.invitesCount(self.followers().length);
 			}
@@ -78,7 +78,7 @@
 	
 	self.followerDetails = function (data) {
 		ENYM.ctx.setItem('currentfollowerData', JSON.stringify(data));		
-		viewNavigate('Invited Followers', 'invitedFollowersView', 'followerDetailsView');
+		viewNavigate('Pending Invites', 'invitedFollowersView', 'followerDetailsView');
   };
 }
 

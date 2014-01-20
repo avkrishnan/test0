@@ -2,7 +2,7 @@
   var self = this;
 	self.template = 'unreachableFollowersView';
 	self.viewid = 'V-??';
-	self.viewname = 'Unreachable Followers';
+	self.viewname = 'Unreachable';
 	self.displayname = 'Unreachable Followers';
 	
 	self.evernymIcon = ko.observable(false);	
@@ -29,16 +29,11 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(valueFollower.reachable == 'N') {		
+			if(valueFollower.reachable == 'N' && valueFollower.relationship == 'F') {		
 				var evernymIcon = false;
+				var nameClass = 'normalfollowers noverified';				
 				if(valueFollower.managed == 'N') {
-					var nameClass = 'normalfollowers';
-					var evernym = true
 					var evernymIcon = true;
-				}
-				else {						
-					var nameClass = 'provisionalicon noname';
-					var evernym = false																			
 				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					if(valueFollower.managed == 'Y') {
@@ -46,7 +41,6 @@
 					}
 					else {
 						name = '';
-						nameClass = nameClass+' noname';
 					}
 				} 
 				else if(typeof valueFollower.firstname == 'undefined') {
@@ -57,14 +51,15 @@
 				}			
 				else {
 					var name = valueFollower.firstname +' '+ valueFollower.lastname;
-				}
+				}				
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
 					followerName: name, 
-					accountname: valueFollower.accountname,
-					evernym: evernym,					
-					evernymIcon: evernymIcon
+					accountname: 'Un-reachable Followers',
+					evernym: true,					
+					evernymIcon: evernymIcon,
+					type: valueFollower.managed
 				});
 				self.unreachCount(self.followers().length);
 			}
@@ -79,7 +74,7 @@
 	
 	self.followerDetails = function (data) {
 		ENYM.ctx.setItem('currentfollowerData', JSON.stringify(data));		
-		viewNavigate('Unreachable Followers', 'unreachableFollowersView', 'followerDetailsView');
+		viewNavigate('Unreachable', 'unreachableFollowersView', 'followerDetailsView');
   };
 }
 
