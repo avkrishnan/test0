@@ -12,7 +12,8 @@
       </span>
       <div class="provisional-follower">
         <span data-bind="text: followerName, visible: visibleName"></span>
-        <div data-bind="foreach:followerCommethods">
+        <span data-bind="text: accountname, visible: evernym"></span>
+        <div data-bind="foreach: followerCommethods">
           <span data-bind="text: address"></span>
         </div>
       </div>

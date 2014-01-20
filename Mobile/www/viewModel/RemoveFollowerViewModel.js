@@ -5,8 +5,11 @@
 	self.viewname = 'Remove Follower';
 	self.displayname = 'Remove Follower';
 	
-  self.inputObs = [ 'channelId', 'followerId', 'followerName', 'followerAccount' ];
-  self.defineObservables();	
+  self.inputObs = [ 'channelId', 'followerId', 'nameClass', 'followerName', 'accountname' ];
+  self.defineObservables();
+	
+	self.evernymIcon = ko.observable(false);
+	self.evernym = ko.observable(false);
 	
 	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
@@ -17,8 +20,11 @@
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.channelId(channelObject.channelId);
 			self.followerId(followerObject.followerId);
+			self.evernymIcon(followerObject.evernymIcon);
+			self.nameClass(followerObject.nameClass);
 			self.followerName(followerObject.followerName);
-			self.followerAccount(followerObject.accountname);
+			self.evernym(followerObject.evernym);			
+			self.accountname(followerObject.accountname);
 		}
 	};
 

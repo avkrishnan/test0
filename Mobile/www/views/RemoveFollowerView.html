@@ -1,13 +1,13 @@
-<!--To do - Pradeep Kumar-->
 <div id="removeFollowerView" data-role="page">
 	<header class="logged-in"></header>  
   <div class="page-content channelsettings">
-    <a class="low-messages allfollowercs ui-link" href="#">
-      <div class="accept-decline">
+    <a href="#" data-bind="css: nameClass" class="deletefollwer">
+      <span class="evernym" data-bind="visible: evernymIcon"></span>
+      <div class="normalinvites">
         <span data-bind="text: followerName"></span>
-        <em data-bind="text: followerAccount"></em>
+        <em data-bind="text: accountname, visible: evernym"></em>
       </div>
-    </a>        
+    </a>   
     <div class="confirmdelete"><span></span>Are you sure you want to remove this follower? This cannot be undone.</div>
     <div class="login">
       <div class="loginbtn channeldelete">

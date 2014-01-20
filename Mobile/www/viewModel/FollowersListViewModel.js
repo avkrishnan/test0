@@ -59,7 +59,6 @@
 							name = valueFollower.comMethods[0].address;
 						}
 						else {
-							visibleName = false;
 							name = '';
 							nameClass = nameClass+' noname';
 						}
@@ -75,7 +74,7 @@
 					}
 					if(valueFollower.reachable == 'N') {
 						var nameClass = 'normalfollowers noverified';						
-						accountname = 'Un-reachable Followers';
+						accountname = 'Un-reachable Follower';
 					}
 					else {
 						accountname = valueFollower.accountname;					

@@ -29,7 +29,8 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(valueFollower.reachable == 'N' && valueFollower.relationship == 'F') {		
+			if(valueFollower.reachable == 'N' && valueFollower.relationship == 'F') {
+				var visibleName = true;		
 				var evernymIcon = false;
 				var nameClass = 'normalfollowers noverified';				
 				if(valueFollower.managed == 'N') {
@@ -37,6 +38,7 @@
 				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					if(valueFollower.managed == 'Y') {
+						visibleName = false;
 						name = valueFollower.comMethods[0].address;
 					}
 					else {
@@ -55,8 +57,9 @@
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
+					visibleName: visibleName,
 					followerName: name, 
-					accountname: 'Un-reachable Followers',
+					accountname: 'Un-reachable Follower',
 					evernym: true,					
 					evernymIcon: evernymIcon,
 					type: valueFollower.managed

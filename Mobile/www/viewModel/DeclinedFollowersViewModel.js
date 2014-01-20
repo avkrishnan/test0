@@ -30,6 +30,7 @@
     $.mobile.hidePageLoadingMsg();
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship == 'D') {
+				var visibleName = true;
 				var evernymIcon = false;
 				if(valueFollower.managed == 'N') {
 					var nameClass = 'normalfollowers';
@@ -42,6 +43,7 @@
 				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					if(valueFollower.managed == 'Y') {
+						visibleName = false;
 						name = valueFollower.comMethods[0].address;
 					}
 					else {
@@ -61,6 +63,7 @@
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
+					visibleName: visibleName,
 					followerName: name,
 					accountname: valueFollower.accountname,
 					evernym: evernym,					

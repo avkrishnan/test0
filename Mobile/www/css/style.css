@@ -3278,9 +3278,6 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	min-height:80px;
 	max-height:156px;
 }
-/*.broadcast-textarea.longdescription .expand.ui-input-text {
-	max-height:156px;
-}*/
 .longdescription textarea.ui-input-text {
 	height:156px;
 	overflow:auto;
@@ -4012,6 +4009,10 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .clickabl {
 	display:inline-block;
 	width:85%;
+}
+/* 20-Jan-2014 */
+.deletefollwer {
+	margin-top:15px;
 }
 /*
 	*@media query css

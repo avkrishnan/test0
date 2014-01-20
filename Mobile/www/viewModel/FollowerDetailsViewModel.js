@@ -6,12 +6,13 @@
   self.displayname = 'Follower Details';
 	self.followerCommethods = ko.observable([]);
 	
-  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'followerEvernym', 'evernymType' ];
+  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'accountname', 'followerEvernym', 'evernymType' ];
   self.defineObservables();
 	
 	self.evernymIcon = ko.observable(false);	
 	self.visibleEvernym = ko.observable(true);
-	self.visibleName = ko.observable(false);			
+	self.visibleName = ko.observable(false);
+	self.evernym = ko.observable(false);			
 
 	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
@@ -26,6 +27,8 @@
 			self.evernymType(false);
 			self.followerCommethods([]);
 			self.visibleName(followerObject.visibleName);
+			self.evernym(followerObject.evernym);			
+			self.accountname(followerObject.accountname);			
 			if(followerObject.visibleName == true) {
 				if(typeof followerObject.followerName == 'undefined' || followerObject.followerName == '') {
 					self.followerName(followerObject.accountname);
@@ -34,7 +37,7 @@
 				}
 			}
 			if(followerObject.type == 'Y') {
-				self.evernymType(true);	
+				self.evernymType(true);
 			}
 		}
 		if(followerObject.accountname != '') {
