@@ -15,28 +15,18 @@
 			ENYM.ctx.removeItem("currentChannel");
 			ENYM.ctx.removeItem("overlayCurrentChannel");
 		}
-		
-		if(authenticate()) {
-			addExternalMarkup(self.template); // this is for header/overlay message
+		addExternalMarkup(self.template); // this is for header/overlay message
+		self.channels.removeAll();
+		if(self.channels() && self.channels().length){
 			self.channels.removeAll();
-			if(self.channels() && self.channels().length){
-				self.channels.removeAll();
-			}
-			$.mobile.showPageLoadingMsg("a", "Loading Channels");
-			//return self.listFollowingChannelsCommand().then(gotChannels);
-			return ES.channelService.listFollowingChannels().then(gotChannels, errorListChannels);
 		}
+		$.mobile.showPageLoadingMsg("a", "Loading Channels");
+		return ES.channelService.listFollowingChannels().then(gotChannels, errorListChannels);
 	};
 
 	function gotChannels(data) {
 		$.mobile.hidePageLoadingMsg();
-		if (data.channel && data.channel.constructor == Object) {
-			data.channel = [data.channel];
-		}
-		if (!data.channel) {
-			return;
-		}
-		if(data.channel.length) {
+		if(data.channel) {
 			$.each(data.channel, function(indexChannel, valueChannel) {
 				if(typeof valueChannel.description == 'undefined') {
 					valueChannel.description = '';
