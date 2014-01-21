@@ -12,13 +12,14 @@
 	self.escalateEdit = ko.observable(false);
 	self.channels = ko.observableArray([]);
 	self.messageText = ko.observable();
+	self.characterCount = ko.observable();
 	self.igiClass = ko.observable();
 	self.iGiYes = ko.observable();
 	self.iGiNo = ko.observable();
 	self.yesClass = ko.observable();
 	self.noClass = ko.observable();	
 
-  self.inputObs = [ 'channelId', 'channelName', 'characterCount', 'characterClass', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
+  self.inputObs = [ 'channelId', 'channelName', 'characterClass', 'normalText', 'fastText', 'escalateText', 'normalClass', 'fastClass', 'escalateClass', 
 	'normalActive', 'fastActive', 'escalateActive', 'escDuration', 'escLevel', 'duration', 'activeType', 'escalateEdit', 'broadcastType', 'selectedChannels'];
 	self.defineObservables();	
 	
@@ -58,8 +59,11 @@
 		self.escalateEdit(false);
 		self.escLevel('N');				
 		self.igiClass('igiimageoff');
-		self.characterCount('0');
 		self.characterClass('');
+		if(self.messageText() == '' || typeof self.messageText() == 'undefined') {
+			self.characterCount('0');
+			$('#sendMessageView textarea').css( 'height' ,'81');
+		}
 		self.escLevel(ENYM.ctx.getItem('escLevel'));				
 		if(self.escLevel() == 'H') {
 			escalate = 'Hound';
@@ -199,7 +203,8 @@
 	
 	function successfulMessage(data){
 		$.mobile.hidePageLoadingMsg();
-		self.messageText('');			
+		self.messageText('');
+		ENYM.ctx.removeItem('msgLenWarn');			
 		ENYM.ctx.removeItem('escDuration');		
 		ENYM.ctx.removeItem('escLevel');
 		ENYM.ctx.removeItem('iGiStatus');										
