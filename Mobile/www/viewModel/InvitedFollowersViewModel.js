@@ -36,28 +36,31 @@
 					var nameClass = 'normalfollowers';
 					var evernym = true
 					var evernymIcon = true;
-				}
-				else {						
+				} else {						
 					var nameClass = 'provisionalicon noname';
 					var evernym = false																			
 				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					if(valueFollower.managed == 'Y') {
 						name = valueFollower.comMethods[0].address;
-					}
-					else {
+					} else {
 						name = '';
 						nameClass = nameClass+' noname';
 					}
 					visibleName = false;
-				} 
-				else if(typeof valueFollower.firstname == 'undefined') {
+				} else if(typeof valueFollower.firstname == 'undefined') {
 					var name = valueFollower.lastname;				
-				}
-				else if(typeof valueFollower.lastname == 'undefined') {
+				} else if(typeof valueFollower.lastname == 'undefined') {
 					var name = valueFollower.firstname;			
-				}			
-				else {
+				} else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
+					if(valueFollower.managed == 'Y') {
+						name = valueFollower.comMethods[0].address;
+					} else {
+						name = '';
+						nameClass = nameClass+' noname';
+					}
+					visibleName = false;	
+				} else {
 					var name = valueFollower.firstname +' '+ valueFollower.lastname;
 				}
 				self.followers.push({

@@ -22,6 +22,8 @@
 			if(followerObject.visibleName == true) {
 				if(typeof followerObject.followerName != 'undefined' || followerObject.followerName != '') {
 					self.followerName(followerObject.followerName);
+				} else {
+					self.followerName();
 				}
 			}
 		}
@@ -99,59 +101,58 @@
 		if(self.previousEmail() != self.emailaddress() || self.previousPhone() != self.smsPhone()) {
 			toastMessage = "Changes saved, invitation sent";
 		}
-		$.when(ES.loginService.accountModifyOther(self.followerID(), editFollower)
-			.then(function() {
-				if(self.emailaddress() != '' || self.smsPhone() != '') {
-					if(self.followerCommethods().length > 0) {
-						var emailreplaced = false;
-						var phonereplaced = false;
-						$.each(self.followerCommethods(), function(indexCommethod, valueCommethod) {
-							if(valueCommethod.type == 'EMAIL') {
-								if(valueCommethod.address != self.emailaddress()) {
-									$.when(ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id)
-										.then(function() {
-											ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});
-										})
-									);
-								}
-								emailreplaced = true;
+		$.when(ES.loginService.accountModifyOther(self.followerID(), editFollower))
+		.then(function() {
+			if(self.emailaddress() != '' || self.smsPhone() != '') {
+				if(self.followerCommethods().length > 0) {
+					var emailreplaced = false;
+					var phonereplaced = false;
+					$.each(self.followerCommethods(), function(indexCommethod, valueCommethod) {
+						if(valueCommethod.type == 'EMAIL') {
+							if(valueCommethod.address != self.emailaddress()) {
+								$.when(ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id)
+									.then(function() {
+										ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});
+									})
+								);
 							}
-							if(valueCommethod.type == 'TEXT') {
-								if(valueCommethod.address != self.smsPhone()) {
-									$.when(ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id)
-										.then(function() {
-											ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
-										})
-									);
-								}
-								phonereplaced = true;
-							}
-						});
-						if(self.emailaddress() != '' && emailreplaced == false) {
-							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});	
+							emailreplaced = true;
 						}
-						if(self.smsPhone() != '' && phonereplaced == false) {
-							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
-						}						
+						if(valueCommethod.type == 'TEXT') {
+							if(valueCommethod.address != self.smsPhone()) {
+								$.when(ES.commethodService.deleteCommethodForProvis(self.followerID(), valueCommethod.id)
+									.then(function() {
+										ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
+									})
+								);
+							}
+							phonereplaced = true;
+						}
+					});
+					if(self.emailaddress() != '' && emailreplaced == false) {
+						ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});	
 					}
-					else {
-						if(self.emailaddress() != '') {
-							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});	
-						}
-						if(self.smsPhone() != '') {
-							ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
-						}
+					if(self.smsPhone() != '' && phonereplaced == false) {
+						ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
+					}						
+				}
+				else {
+					if(self.emailaddress() != '') {
+						ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'EMAIL', address: self.emailaddress()});	
+					}
+					if(self.smsPhone() != '') {
+						ES.commethodService.addCommethodForProvis(self.followerID(), {type: 'TEXT', address: self.smsPhone()});
 					}
 				}
-			})
-		);
+			}
+		})
 		var toastobj = {redirect:'followersListView', type: '', text: toastMessage};
 		showToast(toastobj);
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');
   };
 	
 	function generateProvisionalAccount() {
-		var tempProvosional = {};
+		var tempProvosional = {firstname:'', lastname:''};
 		if(self.followerName() != '') {
 			var fullName = self.followerName().split(' ');
 			var firstName = fullName[0];
@@ -161,21 +162,17 @@
 			}
 			if(typeof lastName != 'undefined' && lastName != '') {
 				tempProvosional.lastname = lastName;
-			} else {
-				tempProvosional.lastname = '';
 			}
 		}
 		return tempProvosional;
 	};
 	
 	function editSuccessful(data) {
-		//alert('Success');
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');
 	};
 	
 	function errorAPI(data, status, details){
 		$.mobile.hidePageLoadingMsg();
-		//alert('Error');
 	};	
 }
 

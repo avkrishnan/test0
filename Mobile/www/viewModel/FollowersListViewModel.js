@@ -48,27 +48,31 @@
 						var nameClass = 'normalfollowers';
 						var evernym = true
 						var evernymIcon = true;
-					}
-					else {						
+					} else {						
 						var nameClass = 'provisionalicon noname';
 						var evernym = false																			
 					}
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 						if(valueFollower.managed == 'Y') {
 							name = valueFollower.comMethods[0].address;
-						}
-						else {
+						} else {
 							name = '';
 							nameClass = nameClass+' noname';
 						}
 						visibleName = false;
-					} 
-					else if(typeof valueFollower.firstname == 'undefined') {
+					} else if(typeof valueFollower.firstname == 'undefined') {
 						name = valueFollower.lastname;
-					}
-					else if(typeof valueFollower.lastname == 'undefined') {
+					} else if(typeof valueFollower.lastname == 'undefined') {
 						name = valueFollower.firstname;
-					}			
+					}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
+						if(valueFollower.managed == 'Y') {
+							name = valueFollower.comMethods[0].address;
+						} else {
+							name = '';
+							nameClass = nameClass+' noname';
+						}
+						visibleName = false;
+					}
 					else {
 						name = valueFollower.firstname +' '+ valueFollower.lastname;
 					}
@@ -79,8 +83,7 @@
 						if(name == '' && valueFollower.managed == 'N') {
 							name = valueFollower.accountname;
 						}
-					}
-					else {
+					} else {
 						reachable = valueFollower.accountname;					
 					}						
 					self.followers.push({
