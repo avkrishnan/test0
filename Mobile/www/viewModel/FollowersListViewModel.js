@@ -76,6 +76,9 @@
 						var nameClass = 'normalfollowers noverified';						
 						reachable = 'Un-reachable Follower';
 						var evernym = true;
+						if(name == '' && valueFollower.managed == 'N') {
+							name = valueFollower.accountname;
+						}
 					}
 					else {
 						reachable = valueFollower.accountname;					

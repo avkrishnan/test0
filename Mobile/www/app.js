@@ -808,6 +808,7 @@ function popBackNav() {
 }
 
 /* Toast messages function */
+var last, diff;
 function showToast(toastobj) {
   if(toastobj.redirect) { 
     $('#'+toastobj.redirect+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');      
@@ -815,11 +816,21 @@ function showToast(toastobj) {
   else {
     $('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('<div class="toast-text '+toastobj.type+'">'+toastobj.text+'</div>');       
   }
-  $('.toast-notification').delay(500).slideDown(500, function() {
-    $('.toast-notification').show();
-  }).delay(1800).slideUp(700, function() {
-    $('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
-  });
+	var d = new Date();
+	d = d.getTime();
+	diff = d - last;
+	if ( diff > 4000 || typeof last == 'undefined') {	
+		$('.toast-notification').delay(500).slideDown(500, function() {
+			$('.toast-notification').show();
+		}).delay(1800).slideUp(700, function() {
+			$('#'+$.mobile.activePage.attr('id')+' .toast-notification').html('');
+		});
+	} 
+	else {
+		$(' .toast-notification').show();
+		setTimeout(function() { $(' .toast-notification').slideUp(1000); }, 1000);
+	}	
+	last = d;
 }
 
 /* Get current date/time values */

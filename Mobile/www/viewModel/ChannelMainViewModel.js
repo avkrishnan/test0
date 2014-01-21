@@ -104,7 +104,8 @@
 					var noiGi = '';								
 				} else {
 					var iGi = data.message[len].acks+' Got it <span class="percentage-text">('+percentage+')</span>';
-					var noiGi = data.message[len].noacks+" Haven't";
+					var notGot = (data.message[len].noacks == 1) ? "  Hasn't" : " Haven't";
+					var noiGi = data.message[len].noacks+' '+notGot;
 					var percentageClass = '';
 					var percentageText = '';														 					
 				}																	
