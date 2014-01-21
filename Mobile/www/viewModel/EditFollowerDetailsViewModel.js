@@ -6,16 +6,15 @@
   self.displayname = 'Edit Follower Details';
 	self.followerCommethods = ko.observable([]);	
 	
-  self.inputObs = [ 'channelName', 'followerName', 'emailaddress', 'smsPhone', 'followerID' ];
+  self.inputObs = [ 'channelName', 'followerName', 'emailaddress', 'smsPhone', 'followerID', 'previousEmail', 'previousPhone' ];
 	self.errorObs = [ 'nameClass', 'errorName', 'emailClass', 'errorEmail', 'errorPhone', 'phoneClass' ];
   self.defineObservables();
 
 	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
 		var followerObject = JSON.parse(ENYM.ctx.getItem('currentfollowerData'));
-		//alert(JSON.stringify(followerObject));
 		if(!channelObject) {
-			goToView('followersListView');							
+			goToView('followersListView');					
 		} else {
 			addExternalMarkup(self.template); // this is for header/overlay message
 			self.channelName(channelObject.channelName);
@@ -33,12 +32,13 @@
 					$.each(data.commethod, function(indexCommethod, valueCommethod) {
 						if(valueCommethod.type == 'EMAIL') {
 							self.emailaddress(valueCommethod.address);
+							self.previousEmail(valueCommethod.address);
 						} else {
 							self.smsPhone(valueCommethod.address);
+							self.previousPhone(valueCommethod.address);
 						}
 					});
 					self.followerCommethods(data.commethod);
-					//alert(JSON.stringify(data.commethod));
 				})
 			);
 		}		
@@ -95,6 +95,10 @@
 		}
 		$.mobile.showPageLoadingMsg("a", "Editing Follower details.");
 		var editFollower = generateProvisionalAccount();
+		var toastMessage = "Changes saved successfully.";
+		if(self.previousEmail() != self.emailaddress() || self.previousPhone() != self.smsPhone()) {
+			toastMessage = "New contact information saved, invitation(s) sent.";
+		}
 		$.when(ES.loginService.accountModifyOther(self.followerID(), editFollower)
 			.then(function() {
 				if(self.emailaddress() != '' || self.smsPhone() != '') {
@@ -141,7 +145,7 @@
 				}
 			})
 		);
-		var toastobj = {redirect:'followersListView', type: '', text: 'New contact information saved, invitation(s) sent'};
+		var toastobj = {redirect:'followersListView', type: '', text: toastMessage};
 		showToast(toastobj);
 		viewNavigate('Channels', 'channelsIOwnView', 'followersListView');
   };
