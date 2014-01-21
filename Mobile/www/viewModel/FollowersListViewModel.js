@@ -74,19 +74,19 @@
 					}
 					if(valueFollower.reachable == 'N') {
 						var nameClass = 'normalfollowers noverified';						
-						accountname = 'Un-reachable Follower';
+						reachable = 'Un-reachable Follower';
 						var evernym = true;
 					}
 					else {
-						accountname = valueFollower.accountname;					
+						reachable = valueFollower.accountname;					
 					}						
 					self.followers.push({
 						followerId: valueFollower.id,
 						nameClass: nameClass,
 						visibleName: visibleName,
 						followerName: name,
-						accountname: accountname,
-						accountEvernym: valueFollower.accountname,
+						accountname: valueFollower.accountname,
+						reachable: reachable,
 						evernym: evernym,
 						evernymIcon: evernymIcon,
 						type: valueFollower.managed

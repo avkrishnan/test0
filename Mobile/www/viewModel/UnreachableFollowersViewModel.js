@@ -59,8 +59,8 @@
 					nameClass: nameClass,
 					visibleName: visibleName,
 					followerName: name, 
-					accountname: 'Un-reachable Follower',
-					accountEvernym: valueFollower.accountname,
+					accountname: valueFollower.accountname,
+					reachable: 'Un-reachable Follower',
 					evernym: true,					
 					evernymIcon: evernymIcon,
 					type: valueFollower.managed

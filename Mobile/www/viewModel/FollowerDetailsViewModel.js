@@ -6,7 +6,7 @@
   self.displayname = 'Follower Details';
 	self.followerCommethods = ko.observable([]);
 	
-  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'accountname', 'followerEvernym', 'evernymType' ];
+  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'reachable', 'followerEvernym', 'evernymType' ];
   self.defineObservables();
 	
 	self.evernymIcon = ko.observable(false);	
@@ -28,7 +28,7 @@
 			self.followerCommethods([]);
 			self.visibleName(followerObject.visibleName);
 			self.evernym(followerObject.evernym);			
-			self.accountname(followerObject.accountname);			
+			self.reachable(followerObject.reachable);			
 			if(followerObject.visibleName == true) {
 				if(typeof followerObject.followerName == 'undefined' || followerObject.followerName == '') {
 					self.followerName(followerObject.accountname);
@@ -40,8 +40,8 @@
 				self.evernymType(true);
 			}
 		}
-		if(followerObject.accountEvernym != '') {
-			$.when(ES.commethodService.getCommethodsForProvis(followerObject.accountEvernym).then(function(data) {
+		if(followerObject.evernymIcon == false) {
+			$.when(ES.commethodService.getCommethodsForProvis(followerObject.accountname).then(function(data) {
 				self.followerCommethods(data.commethod);
 			}));
 		}
