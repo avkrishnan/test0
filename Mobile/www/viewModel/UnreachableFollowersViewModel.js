@@ -42,6 +42,9 @@
 					}
 					else {
 						name = '';
+						if(valueFollower.reachable == 'N' && valueFollower.managed == 'N') {
+							name = valueFollower.accountname;
+						}						
 					}
 					visibleName = false;
 				} 
