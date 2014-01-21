@@ -21,13 +21,13 @@
   self.activate = function() {
 		self.sectionOne(true);
 		self.sectionTwo(false);		
-		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));		
-  	addExternalMarkup(self.template); // this is for header/overlay message	
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
+  		addExternalMarkup(self.template); // this is for header/overlay message	
 		self.channelId(channelObject.channelId);
 		self.channelName(channelObject.channelName);													
 		self.channelWebAddress('This is your channel web page, now live at <em>'+self.channelName()+'.evernym.com</em>');
 		self.tagline('(sample tagline for '+self.channelName()+')');		
-		self.longDescription('This is the web page for '+self.channelName()+'.</br>To follow '+self.channelName()+', click the "Follow" Button below.');
+		self.longDescription('This is the web page for '+self.channelName()+'.<br/>To follow '+self.channelName()+', click the "Follow" Button below.');
 		self.taglineBtnText('Edit');
 		self.descBtnText('Edit');
 		self.editing(false);
@@ -69,6 +69,7 @@
 			self.longDescriptionCommand();
 		}
 		else {
+			self.longDescription(self.longDescription().replace(/<br\s*[\/]?>/gi,'\n'));
 			self.editingTextarea(true);
 			self.descBtnText('Save');		
 			self.less(false);		
@@ -115,7 +116,7 @@
 			channelId: data.id, 
 			channelName: data.name, 
 			channelDescription: data.description,
-			longDescription: data.longDescription,			
+			longDescription: self.longDescription(),		
 			followerCount: data.followers
 		});
 		channel = channel[0];		
@@ -131,7 +132,8 @@
 			self.editingTextarea(false);
 			self.less(true);
 			var toastobj = {type: '', text: 'Description changed'};
-			showToast(toastobj);						
+			showToast(toastobj);	
+			self.longDescription(self.longDescription().replace(/\n/g, "<br/>"));					
 		}													
   };
 

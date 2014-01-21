@@ -155,8 +155,10 @@
 			if(firstName != '') {
 				tempProvosional.firstname = firstName;
 			}
-			if(lastName != '') {
+			if(typeof lastName != 'undefined' && lastName != '') {
 				tempProvosional.lastname = lastName;
+			} else {
+				tempProvosional.lastname = '';
 			}
 		}
 		return tempProvosional;
