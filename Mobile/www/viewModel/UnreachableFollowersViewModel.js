@@ -38,12 +38,12 @@
 				}
 				if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 					if(valueFollower.managed == 'Y') {
-						visibleName = false;
 						name = valueFollower.comMethods[0].address;
 					}
 					else {
 						name = '';
 					}
+					visibleName = false;
 				} 
 				else if(typeof valueFollower.firstname == 'undefined') {
 					var name = valueFollower.lastname;				

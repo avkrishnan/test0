@@ -112,7 +112,7 @@
 
 	/*To Do to show new feature coming soon*/
 	this.comingSoon = function() {
-		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};
+		var toastobj = {type: 'toast-info', text: 'Feature coming soon!'};			
 		showToast(toastobj);
 	}	
 	

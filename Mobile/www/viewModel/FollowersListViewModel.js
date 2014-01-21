@@ -55,13 +55,13 @@
 					}
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 						if(valueFollower.managed == 'Y') {
-							visibleName = false;
 							name = valueFollower.comMethods[0].address;
 						}
 						else {
 							name = '';
 							nameClass = nameClass+' noname';
 						}
+						visibleName = false;
 					} 
 					else if(typeof valueFollower.firstname == 'undefined') {
 						name = valueFollower.lastname;
