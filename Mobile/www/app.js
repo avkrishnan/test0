@@ -1007,8 +1007,7 @@ function validateUSAPhone(txtPhone) {
       textShow = phoneNum.replace(/(.{3})(.{3})(.{4})/,'$1-$2-$3');
       var phoneObject = {
         type : 'Text',
-        text : phoneNum,
-        textShow: textShow
+        text : textShow
       };
     }
     else if(phoneNum.length == 11) {
@@ -1016,8 +1015,7 @@ function validateUSAPhone(txtPhone) {
       textShow = phoneNum.replace(/(.{3})(.{3})(.{4})/,'$1-$2-$3');     
       var phoneObject = {
         type : 'Text',
-        text : phoneNum,
-        textShow: textShow
+        text : textShow
       };    
     }
     else if (phoneNum.length > 11 || phoneNum.length < 10) {

@@ -21,7 +21,7 @@
   self.activate = function() {
 		self.sectionOne(true);
 		self.sectionTwo(false);		
-		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
+		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
   		addExternalMarkup(self.template); // this is for header/overlay message	
 		self.channelId(channelObject.channelId);
 		self.channelName(channelObject.channelName);													
@@ -98,7 +98,7 @@
     } else {
 			var channelObject = {
 				id: self.channelId(),
-				longDescription: self.moreText()
+				longDescription: self.longDescription()
 			};
 			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
@@ -110,13 +110,13 @@
 		ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI});		
   };		
 	
-	function successfulGetChannel(data) {		
+	function successfulGetChannel(data) {	
 		var channel = [];			
 		channel.push({
 			channelId: data.id, 
 			channelName: data.name, 
 			channelDescription: data.description,
-			longDescription: self.longDescription(),		
+			longDescription: data.longDescription,		
 			followerCount: data.followers
 		});
 		channel = channel[0];		
