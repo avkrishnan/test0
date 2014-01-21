@@ -95,9 +95,9 @@
 		}
 		$.mobile.showPageLoadingMsg("a", "Editing Follower details.");
 		var editFollower = generateProvisionalAccount();
-		var toastMessage = "Changes saved successfully.";
+		var toastMessage = "Changes saved successfully";
 		if(self.previousEmail() != self.emailaddress() || self.previousPhone() != self.smsPhone()) {
-			toastMessage = "New contact information saved, invitation(s) sent.";
+			toastMessage = "Changes saved, invitation sent";
 		}
 		$.when(ES.loginService.accountModifyOther(self.followerID(), editFollower)
 			.then(function() {
