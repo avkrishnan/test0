@@ -66,6 +66,7 @@
 					visibleName: visibleName,
 					followerName: name, 
 					accountname: valueFollower.accountname,
+					accountEvernym: valueFollower.accountname,					
 					evernym: evernym,
 					evernymIcon: evernymIcon,
 					type: valueFollower.managed
