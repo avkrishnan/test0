@@ -89,7 +89,10 @@
 					var percentage = '';
 				  var percentageText = '';														 					
 				} else if(percentage == '100%') {
-					var iGi = 'All followers Got it ('+percentage+')';
+					var gotiGi = data.message[len].acks;
+					var totaliGi = gotiGi+data.message[len].noacks;
+					var follower = (totaliGi == 1) ? ' Follower' : ' Followers';
+					var iGi = gotiGi+'/'+totaliGi+follower+' got it - '+percentage;
 					var noiGi = '';
 					var percentageClass = '';
 					var percentageText = '';						
