@@ -167,14 +167,14 @@
   };
 	
   self.okCommand = function () {
-  	if(self.previousViewID() == 'channelNewView'){
+  	if(backNavView.pop() == 'plusMenuView' ){
 			if(backNavView[backNavView.length-1] == 'channelsIOwnView') {
 				backNavText.pop();
 				backNavView.pop();
 			}						
 	    goToView('channelsIOwnView');
- 	  } else{
-    	goToView('channelSettingsView');
+		} else{
+		goToView('channelSettingsView');
     }
   };
 	
