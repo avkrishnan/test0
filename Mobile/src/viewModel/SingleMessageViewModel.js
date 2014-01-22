@@ -56,8 +56,12 @@
 				}
 				else {
 					self.noacksVisibility(true);
-					self.acksVisibility(true);	
-					self.noacks(messageObject.noacks+" Haven't Got It Yet");
+					self.acksVisibility(true);
+					if(messageObject.noacks == 1) {	
+						self.noacks(messageObject.noacks+" Hasn't Got It Yet");
+					} else {
+						self.noacks(messageObject.noacks+" Haven't Got It Yet");
+					}
 					self.acks(messageObject.acks+' Got It');					
 				}
 			}							
