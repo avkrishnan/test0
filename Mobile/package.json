@@ -1,7 +1,7 @@
 {
   "name": "evernym-channels",
   "version": "1.2.6",
-  "description": "",
+  "description": "description",
   "main": "www/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
