@@ -15,9 +15,6 @@
     <script type="text/javascript" src="lib/knockout-2.2.0rc.debug.js"></script>
     <script type="text/javascript" src="lib/iscroll.js"></script>
     <script type="text/javascript" src="lib/jquery.mobile.iscrollview.js"></script>
-    <script type="text/javascript" src="scripts/evernym_settings.js"></script>
-    <script type="text/javascript" src="scripts/notification_registration.js"></script>
-    <script type="text/javascript" src="scripts/NotificationOverlay.js"></script>
     <script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
     <script type="text/javascript" charset="utf-8" src="moment.min.js"></script>
     <script type="text/javascript">
@@ -28,100 +25,14 @@
 			//registerPushNotifications();
     </script>
 
-    <!-- application context -->
-    <script type="text/javascript" src="AppCtx.js"></script>
-
     <!-- Amplify, for storage and api calls -->
     <script type="text/javascript" src="lib/amplify.js"></script>
 
-    <!-- services -->
-    <script type="text/javascript" src="services/EvernymService.js"></script>
-    <script type="text/javascript" src="services/EvernymLoginService.js"></script>
-    <script type="text/javascript" src="services/EvernymChannelService.js"></script>
-    <script type="text/javascript" src="services/EvernymMessageService.js"></script>
-    <script type="text/javascript" src="services/EvernymCommethodService.js"></script>
-    <script type="text/javascript" src="services/EvernymSystemService.js"></script>
-    <script type="text/javascript" src="services/EvernymEscPlanService.js"></script>
-
-    <!-- view models -->
-    <script type="text/javascript" src="viewModel/ViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/LoginViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/HomeViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelSettingsViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelsFollowingListViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelMenuViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelNewViewModel.js"></script>   
-    <script type="text/javascript" src="viewModel/SendMessageViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/FollowersListViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/InviteFollowersViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ForgotPasswordViewModel.js"></script>   
-    <script type="text/javascript" src="viewModel/ResetPasswordViewModel.js"></script>    
-    <script type="text/javascript" src="viewModel/SingleMessageViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/UserSettingsViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/EscalationPlanSingleViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/AddContactViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/AdditionalContactViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/VerifyContactViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/TutorialViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/SignupStepFirstViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/SignupStepSecondViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelsIOwnViewModel.js"></script> 
-		<script type="text/javascript" src="viewModel/HelpViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/AboutEvernymViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/FeedbackViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/SendFeedbackViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/PrivacyPolicyViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/ChannelMainViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/ChannelChangeNameViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/EditShortDescriptionViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/ChannelDeleteViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/ChannelChangeIconViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/FirstChannelViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelMessagesViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelSingleMessagesViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/RegistrationVerifyViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/SingleMessageFullTextViewModel.js"></script>                                                                 
-    <script type="text/javascript" src="viewModel/ChannelViewUnfollowModel.js"></script>
-    <script type="text/javascript" src="viewModel/SingleMessageRepliesViewModel.js"></script> 
-    <script type="text/javascript" src="viewModel/ReplyDetailViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/AddInviteFollowersViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/AddFollowersViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/EditNameViewModel.js"></script>    
-		<script type="text/javascript" src="viewModel/EditLongDescriptionViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChangePasswordViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/RequestiGiHelpViewModel.js"></script>    
-    <script type="text/javascript" src="viewModel/EscalateHelpViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/EscalateSettingsViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/EscalateTimeSettingsViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/FollowerDetailsViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/RemoveFollowerViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/HeaderViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/NotGotItViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/WhoGotItViewModel.js"></script> 
-    <script type="text/javascript" src="viewModel/RecipientDetailsViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/UserGuideViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/PlusMenuViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ChannelIntroViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/NameRequiredViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/AdministratorViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/AdministratorFeedbackViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/SingleFeedbackViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/ForgotEvernymViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/MessageLengthWarningViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/NewFollowersSettingsViewModel.js"></script>
-    <script type="text/javascript" src="viewModel/FollowChannelViewModel.js"></script>              
-		<script type="text/javascript" src="viewModel/EditFollowerDetailsViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/InvitedFollowersViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/DeclinedFollowersViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/UnreachableFollowersViewModel.js"></script>
-		<script type="text/javascript" src="viewModel/AfterLoginVerifyViewModel.js"></script>           
-    
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/tutorial.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="app.js" ></script>
-	</head>
+  </head>
   <body>
     <div id="allpages"></div>
+    <script type="text/javascript" src="js/evernym-channels.min.js"></script>
   </body>
 </html>

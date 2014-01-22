@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch: {
-      files: ['www/**/*.js'],
+      files: ['src/**/*.js'],
       tasks: ['uglify']
     },
     uglify: {
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
       },
       build: {
         files: {
-          'www/<%= pkg.name %>.min.js': [ 'www/AppCtx.js', 'www/services/*.js', 'www/viewModel/ViewModel.js', 'www/viewModel/*.js', 'www/scripts/*.js', 'www/app.js'],
+          'www/js/<%= pkg.name %>.min.js': [ 'src/AppCtx.js', 'src/services/*.js', 'src/viewModel/ViewModel.js', 'src/viewModel/*.js', 'src/scripts/*.js', 'src/app.js'],
         }
       }
     },
