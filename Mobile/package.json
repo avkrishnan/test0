@@ -1,0 +1,21 @@
+{
+  "name": "evernym-channels",
+  "version": "1.2.6",
+  "description": "",
+  "main": "www/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/evernym/mobileweb.git"
+  },
+  "author": "Evernym, Inc.",
+  "license": "Copyright 2010-2014, All rights reserved",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.3.1"
+  }
+}
