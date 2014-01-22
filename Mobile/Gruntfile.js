@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         mangle: true,
-        sourceMap: true,
+        sourceMap: false,
         report: 'min',
       },
       build: {
