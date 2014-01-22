@@ -5,7 +5,7 @@ var api_codes = {
     100201: 'Access token has expired',
     100202: 'Your session has expired. Please log in.',
     100920: 'You cannot send a message because you have not verified your email address. Please check your email.',
-    
+
 };
 
 function getAPICode(key){
