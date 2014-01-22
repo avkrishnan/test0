@@ -1,0 +1,17 @@
+Use Grunt to build
+Grunt relies on node and npm
+	Install node
+	On linux: # sudo apt-get install node
+
+	Install grunt command line interface
+	# npm install -g grunt-cli
+
+In the Mobile directory, you can install grunt dependencies found in package.json by
+# npm install
+
+Grunt files:
+Gruntfile.js
+package.json
+
+To build evernym-channels.min.js and the associated map file:
+grunt uglify
