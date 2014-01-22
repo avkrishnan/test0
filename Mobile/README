@@ -15,3 +15,10 @@ package.json
 
 To build evernym-channels.min.js and the associated map file:
 grunt uglify
+
+To have grunt automatically build the minified file whenever a .js file in the www directory or below changes:
+grunt watch
+
+To start a web server on port 8000 to test the app locally:
+grunt connect:server:keepalive
+
