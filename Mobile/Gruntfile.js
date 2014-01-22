@@ -19,6 +19,13 @@ module.exports = function(grunt) {
           'www/<%= pkg.name %>.min.js': [ 'www/AppCtx.js', 'www/services/*.js', 'www/viewModel/ViewModel.js', 'www/viewModel/*.js', 'www/scripts/*.js', 'www/app.js'],
         }
       }
+    },
+    connect: {
+      server: {
+        options: {
+          base: 'www'
+        }
+      }
     }
   });
 
@@ -26,6 +33,7 @@ module.exports = function(grunt) {
 //  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify','watch']);
