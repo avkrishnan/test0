@@ -29,7 +29,7 @@
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
 		invites = declines = unreachs = 0;
-		name = accountname = '';		
+		name = accountname = fullnameClass = '';		
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship != 'O') {
 				if(valueFollower.relationship == 'I') {
@@ -60,10 +60,13 @@
 							name = '';
 							nameClass = nameClass+' noname';
 						}
+						fullnameClass = '';
 					} else if(typeof valueFollower.firstname == 'undefined') {
 						name = valueFollower.lastname;
+						fullnameClass = 'name';
 					} else if(typeof valueFollower.lastname == 'undefined') {
 						name = valueFollower.firstname;
+						fullnameClass = 'name';
 					}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
 						if(valueFollower.managed == 'Y') {
 							name = valueFollower.comMethods[0].address;
@@ -72,9 +75,11 @@
 							name = '';
 							nameClass = nameClass+' noname';
 						}
+						fullnameClass = '';
 					}
 					else {
 						name = valueFollower.firstname +' '+ valueFollower.lastname;
+						fullnameClass = 'name';
 					}
 					if(valueFollower.reachable == 'N') {
 						var nameClass = 'normalfollowers noverified';						
@@ -91,6 +96,7 @@
 						nameClass: nameClass,
 						visibleName: visibleName,
 						followerName: name,
+						fullnameClass: fullnameClass,
 						accountname: valueFollower.accountname,
 						reachable: reachable,
 						evernym: evernym,

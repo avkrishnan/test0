@@ -28,7 +28,7 @@
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
-		name = '';
+		name = fullnameClass = '';
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.reachable == 'N' && valueFollower.relationship == 'F') {
 				var visibleName = true;		
@@ -47,12 +47,15 @@
 							name = valueFollower.accountname;
 						}						
 					}
+					fullnameClass = '';
 				} 
 				else if(typeof valueFollower.firstname == 'undefined') {
-					name = valueFollower.lastname;				
+					name = valueFollower.lastname;
+					fullnameClass = 'name';				
 				}
 				else if(typeof valueFollower.lastname == 'undefined') {
-					name = valueFollower.firstname;			
+					name = valueFollower.firstname;
+					fullnameClass = 'name';			
 				}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
 					if(valueFollower.managed == 'Y') {
 						name = valueFollower.comMethods[0].address;
@@ -60,15 +63,18 @@
 					} else {
 						name = valueFollower.accountname;
 					}
+					fullnameClass = '';
 				}						
 				else {
 					name = valueFollower.firstname +' '+ valueFollower.lastname;
+					fullnameClass = 'name';
 				}			
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
 					visibleName: visibleName,
-					followerName: name, 
+					followerName: name,
+					fullnameClass: fullnameClass, 
 					accountname: valueFollower.accountname,
 					reachable: 'Un-reachable Follower',
 					evernym: true,					

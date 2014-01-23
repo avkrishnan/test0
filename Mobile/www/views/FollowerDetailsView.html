@@ -11,7 +11,7 @@
         <em class="evernym" data-bind="visible: evernymIcon"></em>
       </span>
       <div class="provisional-follower">
-        <span data-bind="text: followerName, visible: visibleName"></span>
+        <span data-bind="text: followerName, visible: visibleName, css: fullnameClass"></span>
         <span data-bind="text: reachable, visible: evernym"></span>
         <div data-bind="foreach: followerCommethods">
           <span data-bind="text: address"></span>

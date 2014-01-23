@@ -5,7 +5,7 @@
 	self.viewname = 'Remove Follower';
 	self.displayname = 'Remove Follower';
 	
-  self.inputObs = [ 'channelId', 'followerId', 'nameClass', 'followerName', 'reachable' ];
+  self.inputObs = [ 'channelId', 'followerId', 'nameClass', 'followerName', 'fullnameClass', 'reachable' ];
   self.defineObservables();
 	
 	self.evernymIcon = ko.observable(false);
@@ -23,6 +23,7 @@
 			self.evernymIcon(followerObject.evernymIcon);
 			self.nameClass(followerObject.nameClass);
 			self.followerName(followerObject.followerName);
+			self.fullnameClass(followerObject.fullnameClass);
 			self.evernym(followerObject.evernym);			
 			self.reachable(followerObject.reachable);
 		}
