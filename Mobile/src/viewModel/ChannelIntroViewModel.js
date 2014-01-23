@@ -162,13 +162,17 @@
 	};	
 	
   self.showPreview = function () {
+  	self.longDescription(self.longDescription().replace(/\n/g, "<br/>"));
+    self.less(true);		
 		self.sectionOne(false);
 		self.sectionTwo(true);
   };
 	
   self.okCommand = function () {
-  	self.shortDescriptionCommand();
-  	self.longDescriptionCommand();
+  	if(self.taglineBtnText() == 'Save' ||self.descBtnText() == 'Save'){
+  		self.shortDescriptionCommand();
+  		self.longDescriptionCommand();
+  	}
   	setTimeout(function(){
 	  	if(backNavView.pop() == 'plusMenuView' ){
 				if(backNavView[backNavView.length-1] == 'channelsIOwnView') {
@@ -179,12 +183,16 @@
 			} else{
 			goToView('channelSettingsView');
 	    }
-	 	},2500);
+	 	},2000);
   };
 	
-  self.exitPreview = function () {			
+  self.exitPreview = function () {	
+	  if(self.descBtnText() == 'Save'){
+	  	self.longDescription(self.longDescription().replace(/<br\s*[\/]?>/gi,'\n'));
+	  	self.less(false);
+	  }
     self.sectionOne(true);
-		self.sectionTwo(false);
+		self.sectionTwo(false);	
   };		
 }
 

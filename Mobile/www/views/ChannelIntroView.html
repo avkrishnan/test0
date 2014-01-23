@@ -20,7 +20,7 @@
     </div>
     <div class="channellanding chandescription">
       <a class="editbtn" href="#" data-bind="click: editDescription.bind($data, 'desc'), text: descBtnText"></a>
-        <div class="descriptionedit">
+      <div class="descriptionedit">
         <div data-bind="visible: !editingTextarea(), html: longDescription, visible: less"></div>
         <div data-bind="visible: !editingTextarea(), html: moreText, visible: more"></div>
         <textarea class="editDescription" data-bind="visible: editingTextarea, value: longDescription, hasFocus: editing"></textarea>       

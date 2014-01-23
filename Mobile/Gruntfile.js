@@ -20,6 +20,17 @@ module.exports = function(grunt) {
         }
       }
     },
+    jshint: {
+      files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+      options: {
+        globals: {
+          jQuery: true,
+          console: true,
+          module: true,
+          document: true
+        }
+      }
+    },
     connect: {
       server: {
         options: {
@@ -35,6 +46,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify','watch']);
