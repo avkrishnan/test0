@@ -28,6 +28,7 @@
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
+		name = '';
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship == 'D') {
 				var visibleName = true;
@@ -52,10 +53,10 @@
 					visibleName = false;
 				} 
 				else if(typeof valueFollower.firstname == 'undefined') {
-					var name = valueFollower.lastname;				
+					name = valueFollower.lastname;				
 				}
 				else if(typeof valueFollower.lastname == 'undefined') {
-					var name = valueFollower.firstname;			
+					name = valueFollower.firstname;			
 				} else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
 					if(valueFollower.managed == 'Y') {
 						name = valueFollower.comMethods[0].address;
@@ -65,7 +66,7 @@
 					}
 					visibleName = false;				
 				} else {
-					var name = valueFollower.firstname +' '+ valueFollower.lastname;
+					name = valueFollower.firstname +' '+ valueFollower.lastname;
 				}		
 				self.followers.push({
 					followerId: valueFollower.id,
