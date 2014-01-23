@@ -61,7 +61,8 @@
 				else {
 					self.noacksVisibility(true);
 					self.acksVisibility(true);	
-					self.noacks(messageObject.noacks+" Haven't Got It Yet");
+					var notGot = (messageObject.noacks == 1) ? "  Hasn't" : " Haven't";
+					self.noacks(messageObject.noacks+notGot+" Got It Yet");					
 					self.acks(messageObject.acks+' Got It');					
 				}
 			}									
@@ -69,7 +70,8 @@
 			self.channelId(channelObject.channelId);			
 			self.channelName(channelObject.channelName);
 			self.messageId(messageObject.messageId);								
-			self.noacks(messageObject.noacks+" Haven't Got It Yet");
+			var notGot = (messageObject.noacks == 1) ? "  Hasn't" : " Haven't";
+			self.noacks(messageObject.noacks+notGot+" Got It Yet");
 			$.mobile.showPageLoadingMsg("a", "Loading Followers");
 			return ES.messageService.getMessageRecipients(self.channelId(), self.messageId(), 'N', {success: successfulList, error: errorAPI});																				
 		}

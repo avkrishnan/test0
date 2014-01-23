@@ -22,9 +22,7 @@
 	
 	function successfulList(data){	
     $.mobile.hidePageLoadingMsg();
-		if(data.channel.length == 0) {
-			self.sectionOne(true);			
-		} else {
+		if(data.channel) {
 			self.sectionTwo(true);				
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 				if(data.channel[channelslength].followers == 1) {
@@ -46,7 +44,9 @@
 					followerCount: data.channel[channelslength].followers,
 					addFollower: followerVisble
 				});
-			}			
+			}
+		} else {
+			self.sectionOne(true);	
 		}
 	};    
 	

@@ -57,11 +57,8 @@
 				else {
 					self.noacksVisibility(true);
 					self.acksVisibility(true);
-					if(messageObject.noacks == 1) {	
-						self.noacks(messageObject.noacks+" Hasn't Got It Yet");
-					} else {
-						self.noacks(messageObject.noacks+" Haven't Got It Yet");
-					}
+					var notGot = (messageObject.noacks == 1) ? "  Hasn't" : " Haven't";
+					self.noacks(messageObject.noacks+' '+notGot+" Got It Yet");
 					self.acks(messageObject.acks+' Got It');					
 				}
 			}							
