@@ -22,7 +22,7 @@
 		self.sectionOne(true);
 		self.sectionTwo(false);		
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
-  		addExternalMarkup(self.template); // this is for header/overlay message	
+  	addExternalMarkup(self.template); // this is for header/overlay message	
 		self.channelId(channelObject.channelId);
 		self.channelName(channelObject.channelName);													
 		self.channelWebAddress('This is your channel web page, now live at <em>'+self.channelName()+'.evernym.com</em>');
@@ -161,27 +161,31 @@
 		self.lessButton(false);															
 	};	
 	
-  self.showPreview = function () {				
+  self.showPreview = function () {
 		self.sectionOne(false);
 		self.sectionTwo(true);
   };
 	
   self.okCommand = function () {
-  	if(backNavView.pop() == 'plusMenuView' ){
-			if(backNavView[backNavView.length-1] == 'channelsIOwnView') {
-				backNavText.pop();
-				backNavView.pop();
-			}						
-	    goToView('channelsIOwnView');
-		} else{
-		goToView('channelSettingsView');
-    }
+  	self.shortDescriptionCommand();
+  	self.longDescriptionCommand();
+  	setTimeout(function(){
+	  	if(backNavView.pop() == 'plusMenuView' ){
+				if(backNavView[backNavView.length-1] == 'channelsIOwnView') {
+					backNavText.pop();
+					backNavView.pop();
+				}						
+		    goToView('channelsIOwnView');
+			} else{
+			goToView('channelSettingsView');
+	    }
+	 	},2500);
   };
 	
-  self.exitPreview = function () {				
-    goToView('channelIntroView');
+  self.exitPreview = function () {			
+    self.sectionOne(true);
+		self.sectionTwo(false);
   };		
-		
 }
 
 ChannelIntroViewModel.prototype = new ENYM.ViewModel();
