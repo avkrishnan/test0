@@ -28,6 +28,7 @@
 	
 	function successfulList(data){
     $.mobile.hidePageLoadingMsg();
+		name = '';
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.reachable == 'N' && valueFollower.relationship == 'F') {
 				var visibleName = true;		
@@ -41,22 +42,28 @@
 						name = valueFollower.comMethods[0].address;
 					}
 					else {
-						name = '';
-						if(valueFollower.reachable == 'N' && valueFollower.managed == 'N') {
+						if(valueFollower.reachable == 'N') {
 							name = valueFollower.accountname;
 						}						
 					}
 					visibleName = false;
 				} 
 				else if(typeof valueFollower.firstname == 'undefined') {
-					var name = valueFollower.lastname;				
+					name = valueFollower.lastname;				
 				}
 				else if(typeof valueFollower.lastname == 'undefined') {
-					var name = valueFollower.firstname;			
-				}			
+					name = valueFollower.firstname;			
+				}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
+					if(valueFollower.managed == 'Y') {
+						name = valueFollower.comMethods[0].address;
+					} else {
+						name = valueFollower.accountname;
+					}
+					visibleName = false;
+				}						
 				else {
-					var name = valueFollower.firstname +' '+ valueFollower.lastname;
-				}				
+					name = valueFollower.firstname +' '+ valueFollower.lastname;
+				}			
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,

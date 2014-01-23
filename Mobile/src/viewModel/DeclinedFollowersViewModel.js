@@ -56,8 +56,15 @@
 				}
 				else if(typeof valueFollower.lastname == 'undefined') {
 					var name = valueFollower.firstname;			
-				}			
-				else {
+				} else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
+					if(valueFollower.managed == 'Y') {
+						name = valueFollower.comMethods[0].address;
+					} else {
+						name = '';
+						nameClass = nameClass+' noname';
+					}
+					visibleName = false;				
+				} else {
 					var name = valueFollower.firstname +' '+ valueFollower.lastname;
 				}		
 				self.followers.push({
