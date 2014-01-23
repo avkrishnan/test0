@@ -30,10 +30,6 @@
 
 	function successfulDelete(args) {
     $.mobile.hidePageLoadingMsg();
-		for(var ctr = 0; ctr <= 1; ctr++) {
-			backNavText.pop();
-			backNavView.pop();
-		}
 		ES.channelService.getChannel(self.channelId(), {success: successfulGetChannel, error: errorAPI});
   };
 	
@@ -48,9 +44,14 @@
 		});
 		channel = channel[0];		
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
-		var toastobj = {redirect: 'followersListView', type: '', text: 'Follower removed'};
+		var backText, backNav;
+		for(var ctr = 0; ctr <= 1; ctr++) {
+			backText = backNavText.pop();
+			backNav = backNavView.pop();
+		}
+		var toastobj = {redirect: backNav, type: '', text: 'Follower removed'};
 		showToast(toastobj);						
-    goToView('followersListView');					
+    goToView(backNav);					
 	}	
 
   function errorAPI(data, status, details) {

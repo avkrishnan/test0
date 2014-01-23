@@ -28,7 +28,7 @@
 			self.followerCommethods([]);
 			self.visibleName(followerObject.visibleName);
 			self.evernym(followerObject.evernym);			
-			self.reachable(followerObject.reachable);			
+			self.reachable(followerObject.reachable);		
 			if(followerObject.visibleName == true) {
 				if(typeof followerObject.followerName == 'undefined' || followerObject.followerName == '') {
 					self.followerName(followerObject.accountname);
