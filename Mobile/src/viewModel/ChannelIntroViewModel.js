@@ -8,7 +8,7 @@
 	self.sectionOne = ko.observable(true);
 	self.sectionTwo = ko.observable(false);
 	
-  self.inputObs = ['channelId', 'channelName', 'channelWebAddress', 'tagline', 'longDescription', 'moreText', 'taglineBtnText', 'descBtnText', 'clickType'];
+  self.inputObs = ['channelId', 'channelName', 'channelWebAddress', 'tagline', 'longDescription', 'moreText', 'taglineBtnText', 'descBtnText', 'clickType', 'characterCount', 'characterClass'];
   self.defineObservables();
 
 	self.editing = ko.observable(false);
@@ -16,13 +16,13 @@
 	self.less = ko.observable(true);		
 	self.more = ko.observable(false);
 	self.moreButton = ko.observable(false);
-	self.lessButton = ko.observable(false);		
+	self.lessButton = ko.observable(false); 		
 	
   self.activate = function() {
 		self.sectionOne(true);
 		self.sectionTwo(false);		
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));
-  	addExternalMarkup(self.template); // this is for header/overlay message	
+  		addExternalMarkup(self.template); // this is for header/overlay message	
 		self.channelId(channelObject.channelId);
 		self.channelName(channelObject.channelName);													
 		self.channelWebAddress('This is your channel web page, now live at <em>'+self.channelName()+'.evernym.com</em>');
@@ -49,7 +49,10 @@
 			else {
 				self.longDescription(channelObject.longDescription.replace(/\n/g, '<br/>'));			
 			}			
-		}						
+		}
+		$(":input").bind("keyup keypress", function(e) {
+		    self.characterCount(self.tagline().length);
+		})		 				
 	};
 
 	self.editTagline = function(data) {		
@@ -59,9 +62,12 @@
 		}
 		else {
 			self.editing(true);
-			self.taglineBtnText('Save');		
+			self.taglineBtnText('Save');
+			self.characterClass('length-warning');
+			self.characterCount(self.tagline().length);
 		}
 	};
+
 	
 	self.editDescription = function(data) {
 		self.clickType(data);
@@ -169,21 +175,29 @@
   };
 	
   self.okCommand = function () {
-  	if(self.taglineBtnText() == 'Save' ||self.descBtnText() == 'Save'){
-  		self.shortDescriptionCommand();
-  		self.longDescriptionCommand();
+  	if(self.taglineBtnText() == 'Save' || self.descBtnText() == 'Save'){
+  		if(self.tagline() == '') {
+	  		var toastobj = {type: 'toast-error', text: 'Please enter channel tagline'};
+			showToast(toastobj);
+  		} else if(self.longDescription() == ''){
+			var toastobj = {type: 'toast-error', text: 'Please enter long description'};
+			showToast(toastobj);
+  		} else{
+  			self.shortDescriptionCommand();
+  			self.longDescriptionCommand();
+  		}
   	}
-  	setTimeout(function(){
-	  	if(backNavView.pop() == 'plusMenuView' ){
-				if(backNavView[backNavView.length-1] == 'channelsIOwnView') {
-					backNavText.pop();
-					backNavView.pop();
-				}						
-		    goToView('channelsIOwnView');
-			} else{
-			goToView('channelSettingsView');
-	    }
-	 	},2000);
+  	if(self.longDescription() != '' && self.tagline() != '') {
+  		setTimeout(function() {
+		  	if(self.previousViewID() == 'channelNewView'){
+		  		goToView('channelsIOwnView');
+		  	} else {
+		  		goToView('channelSettingsView');
+		  	}
+			backNavText.pop();
+			backNavView.pop();
+		},2000);
+	}
   };
 	
   self.exitPreview = function () {	

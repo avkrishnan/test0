@@ -464,7 +464,8 @@ select, .ui-icon-arrow-d {
 }
 .loginform .formtype {
 	background:#2d2d2d;
-	padding:4px 5px 0 4px;
+	/*padding:4px 5px 0 4px;*/
+	padding:4px 15px 0 4px;
 	margin-bottom:10px;
 	min-height:40px;
 	border-radius:7px 0 0 7px;
@@ -835,7 +836,7 @@ a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgo
 	margin:0;
 	background:#fff;
 	padding:0;
-	width:99%;
+	width:100%;
 	border-radius:4px;
 }
 .addaction .ui-input-search, .addaction div.ui-input-text {
@@ -854,6 +855,9 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:97%;
 	font-size:14px;
 	font-family:'OpenSansRegular';
+}
+.characterscount div.ui-input-text input.ui-input-text {
+	width:89%;
 }
 .searchtype .ui-input-search input.ui-input-text {
 	width:86%;
@@ -3767,9 +3771,9 @@ span.evernymname {
 .channelinfocontent .taglineedit em {
 	clear:none;
 }
-.taglineedit div.ui-input-text {
+/*.taglineedit div.ui-input-text {
 	margin:8px 0 0 0;
-}
+}*/
 .chandescription .editbtn.ui-link, .chandescription .editbtn.ui-link:hover, .chandescription .editbtn.ui-link:visited, .chandescription .editbtn.ui-link:active,
 .chandescription .editbtn {
 	float:left;
@@ -3996,9 +4000,6 @@ span.evernymname {
 	padding:21px 9px;
 	float:left;
 }
-/*.questionmark {
-	background:url(images/questionmark.png) no-repeat 0 22px;
-}*/
 .normalinvites {
 	margin-left:8px;
 	float:left;
@@ -4042,12 +4043,6 @@ span.evernymname {
 .deletefollwer {
 	margin-top:15px;
 }
-/*.stoptime {
-	font-size:14px;
-	margin:8px 0px 0px 0px;
-	display:block;
-	border:1px solid red;
-}*/
 .confirmcancel {
 	text-align:center;
 	margin:10px 0 4px 0;
@@ -4108,7 +4103,6 @@ span.verified, span.unverified {
 	color:#FFFFFF;
 	padding:1px 6px;
 	font-size:14px;
-/*	float:left;*/
 }
 .acceptdecline-btn a.declinebtn {
 	background:#D43232;
@@ -4155,6 +4149,42 @@ span.verified, span.unverified {
 }
 .invitemessages {
 	display:block;
+}
+.invitationtext, .invitationtext.ui-link, .invitationtext.ui-link:visited, .invitationtext.ui-link:hover, .invitationtext.ui-link:active {
+	color:#A0A0A0;
+	display:block;
+	font-size:14px;
+	text-decoration:underline;
+	position:fixed;
+	bottom:55px;
+}
+.textinvitation {
+	font-size:14px;
+	color:#fff;
+	margin:15px 0 0 0;
+	background:#2D2D2D;
+	padding:10px 10px 10px 10px;
+	border-radius:4px 0 0 4px;
+}
+.textcount {
+	border-radius:4px;
+	background:#fff;
+	display:inline-block;
+	width:100%;
+	margin:8px 0 0 0;
+}
+.textcount span {
+	float:right;
+	margin:-3px 8px 0 0;
+}
+.textcount div.ui-input-text {
+	width:100%;
+}
+.loginform span.inputcount {
+	position:relative;
+	margin:-29px 3px 0 0;
+	float:right;
+	color:#8DC63F;
 }
 /*
 	*@media query css
@@ -4475,6 +4505,9 @@ span.verified, span.unverified {
 	.clickabl {
 		display:inline-block;
 		width:94%;
+	}
+	.characterscount div.ui-input-text input.ui-input-text {
+		width:96%;
 	}
 }
 @media only screen and (min-width:800px) {
