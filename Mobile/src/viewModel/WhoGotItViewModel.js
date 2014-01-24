@@ -91,17 +91,21 @@
 		for(var len = 0; len<data.recipients.length; len++) {
 			if(typeof data.recipients[len].rcvrFirstname == 'undefined' && typeof data.recipients[len].rcvrLastname == 'undefined') {
 				rcvrFirstname = '';
+				rcvrLastname = '';				
+			}
+			else if(typeof data.recipients[len].rcvrFirstname == 'undefined') {
+				rcvrFirstname = '';
+				rcvrLastname = data.recipients[len].rcvrLastname;
+			}
+			else if(typeof data.recipients[len].rcvrLastname == 'undefined') {
+				rcvrFirstname = data.recipients[len].rcvrFirstname;
 			  rcvrLastname = '';
-			} else{
+			}			
+			else {
 				rcvrFirstname = data.recipients[len].rcvrFirstname;
 				rcvrLastname = data.recipients[len].rcvrLastname+',';
 			}
-			if (len % 2 === 0) {
-				var recipientsClass = 'even';
-      }
-			else {
-				var recipientsClass = 'odd';
-			}								
+			var recipientsClass = (len % 2 === 0) ? ' even' : ' odd';								
 			self.recipients.push({
 				recipientId: data.recipients[len].subscriberId,
 				recipientsClass: recipientsClass,

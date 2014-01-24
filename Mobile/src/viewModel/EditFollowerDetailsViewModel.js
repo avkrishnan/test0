@@ -154,7 +154,8 @@
 	function generateProvisionalAccount() {
 		var tempProvosional = {firstname:'', lastname:''};
 		if(self.followerName() != '') {
-			var fullName = self.followerName().split(' ');
+			var fullName = self.followerName().trim().replace(/\s/g, "=").split('=');
+			
 			var firstName = fullName[0];
 			var lastName = fullName[1];
 			if(firstName != '') {
