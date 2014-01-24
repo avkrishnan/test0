@@ -189,7 +189,7 @@
   	}
   	if(self.longDescription() != '' && self.tagline() != '') {
   		setTimeout(function() {
-		  	if(self.previousViewID() == 'channelNewView'){
+		  	if(self.previousViewID() == 'channelNewView') {
 		  		goToView('channelsIOwnView');
 		  	} else {
 		  		goToView('channelSettingsView');
