@@ -33,6 +33,10 @@
 				self.followerCount(followers);											
 			}
 			self.getMessagesCommand();
+			if(ENYM.ctx.getItem('scrollObj')){
+				//self.scrollTop(ENYM.ctx.getItem('scrollObj').scrollPosition);
+				ENYM.ctx.removeItem('scrollObj');
+			}
 		}
 	}
 	
@@ -156,6 +160,9 @@
 	};	
 	
 	self.singleMessage = function(data){
+		var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+		var scrollObj = {scrollPosition: scrollTop};			
+		ENYM.ctx.setItem('scrollObj', scrollObj);
 		ENYM.ctx.setItem('currentMessageData', JSON.stringify(data));							
 		viewNavigate('Main', 'channelMainView', 'singleMessageView');
 	};
