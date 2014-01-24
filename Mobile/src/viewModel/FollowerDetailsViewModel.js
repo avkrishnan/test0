@@ -6,7 +6,7 @@
   self.displayname = 'Follower Details';
 	self.followerCommethods = ko.observable([]);
 	
-  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'reachable', 'followerEvernym', 'evernymType' ];
+  self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'fullnameClass', 'reachable', 'followerEvernym', 'evernymType' ];
   self.defineObservables();
 	
 	self.evernymIcon = ko.observable(false);	
@@ -36,6 +36,7 @@
 					self.followerName(followerObject.followerName);
 				}
 			}
+			self.fullnameClass(followerObject.fullnameClass);
 			if(followerObject.type == 'Y') {
 				self.evernymType(true);
 			}

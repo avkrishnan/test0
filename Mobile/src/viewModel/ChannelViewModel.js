@@ -41,9 +41,12 @@
 		if((jQuery.mobile.path.get().split('?')[1])) {
 			self.channelId((jQuery.mobile.path.get().split('?')[1]).replace('id=',''));
 		}
-		else {
+		else if(ENYM.ctx.getItem('currentChannel')){
 			var currentChannel = JSON.parse(ENYM.ctx.getItem('currentChannel'));
 			self.channelId(currentChannel.id);		
+		}
+		else {
+			goToView('homeView');
 		}
 		self.accountName(ENYM.ctx.getItem("accountName"));		
 		self.channelAction(true);
@@ -86,9 +89,8 @@
 			viewNavigate('Channels', 'channelsFollowingListView', 'channelMessagesView');			
 		}
 		else if(data.relationship == 'O') {
-			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {
-			var account = JSON.parse(ENYM.ctx.getItem('account'));				
-				self.longdescription("This is the web page for "+self.title()+". To follow "+self.title()+", click the Follow button below.<br/><br/>Hello, "+account.firstname+"!  Your channel needs a better description than what we came up with for you, so go ahead and type that in this box.<br/>Make sure to include an invitation for visitors to click the Follow button in order to get your channel's broadcasts.");							
+			if(data.longDescription == '' || typeof data.longDescription == 'undefined') {				
+				self.longdescription("This is the web page for "+self.title()+". To follow "+self.title()+", click the Follow button below.<br/><br/>You can make a better Description than this one... click in this box and start typing!");							
 			}				
 			ENYM.ctx.setItem('channelOwner', 'yes');	
 			var channel = [];			

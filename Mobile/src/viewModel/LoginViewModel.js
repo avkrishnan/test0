@@ -115,13 +115,13 @@
 			if(typeof args.privs != 'undefined') {
 				ENYM.ctx.setItem('roleType', args.privs);
 			}
-			if(ENYM.ctx.getItem('resumeStatus') == 1) {			
-				goToView(self.previousViewID());
+			if(ENYM.ctx.getItem('resumeStatus') == 1) {
+				ENYM.ctx.setItem('resumeStatus', 0);							
+				goToView(self.previousViewID());				
 			}
 			else {
 				self.getCommethodsCommand();			
-			}					
-			ENYM.ctx.setItem('resumeStatus', 0);			
+			}								
     } 
 		else {
 			self.errorMessage('<span>Sorry, </span> Unknown Error.');
