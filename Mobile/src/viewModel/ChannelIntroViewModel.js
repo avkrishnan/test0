@@ -8,7 +8,7 @@
 	self.sectionOne = ko.observable(true);
 	self.sectionTwo = ko.observable(false);
 	
-  self.inputObs = ['channelId', 'channelName', 'channelWebAddress', 'tagline', 'longDescription', 'moreText', 'taglineBtnText', 'descBtnText', 'clickType', 'taglineChacter'];
+  self.inputObs = ['channelId', 'channelName', 'channelWebAddress', 'tagline', 'longDescription', 'moreText', 'taglineBtnText', 'descBtnText', 'clickType'];
   self.defineObservables();
 
 	self.editing = ko.observable(false);

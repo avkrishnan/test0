@@ -52,7 +52,7 @@
 		}
 		var toastobj = {redirect: backNav, type: '', text: 'Follower removed'};
 		showToast(toastobj);						
-    	goToView(backNav);					
+    goToView(backNav);					
 	}	
 
   function errorAPI(data, status, details) {
@@ -65,7 +65,6 @@
 		$.mobile.showPageLoadingMsg('a', 'Removing Follower');
 		return ES.channelService.removeFollower(self.channelId(), self.followerId(), { success: successfulDelete, error: errorAPI });
 		ENYM.ctx.removeItem('currentChannel');
-		//goToView('followerDetailsView');
   };
 }
 
