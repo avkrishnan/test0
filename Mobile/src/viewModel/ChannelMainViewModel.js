@@ -33,6 +33,12 @@
 				self.followerCount(followers);											
 			}
 			self.getMessagesCommand();
+			alert(JSON.stringify(ENYM.ctx.getItem('scrollObj').scrollPosition));
+			if(ENYM.ctx.getItem('scrollObj')){
+				alert(ENYM.ctx.getItem('scrollObj').scrollPosition);
+				 $('#channelMainView').scrollTop(800);
+				//ENYM.ctx.removeItem('scrollObj');
+			}
 		}
 	}
 	
@@ -156,6 +162,10 @@
 	};	
 	
 	self.singleMessage = function(data){
+		var scrollTop = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+		var scrollObj = {scrollPosition: scrollTop};			
+		ENYM.ctx.setItem('scrollObj', scrollObj);
+		alert(JSON.stringify(ENYM.ctx.getItem('scrollObj')));
 		ENYM.ctx.setItem('currentMessageData', JSON.stringify(data));							
 		viewNavigate('Main', 'channelMainView', 'singleMessageView');
 	};
