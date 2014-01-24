@@ -7,8 +7,9 @@
     <em class="webaddress">(max. 25 letters or numbers, no spaces)</em>
     <section class="loginform">
       <label class="createchannel">Example:<em> karateclass</em></label>
-      <div class="formtype" data-bind="css: channelClass">
-        <input type="text" data-bind="value: newChannel, hasfocus: true" placeholder="choose a channel name" />
+      <div class="formtype characterscount" data-bind="css: channelClass">
+        <input type="text" data-bind="value: newChannel, hasfocus: true, valueUpdate: 'afterkeydown'" placeholder="choose a channel name" />
+        <span class="inputcount" data-bind="text: characterCount, css: characterClass"></span>
         <div class="channelavailable" data-bind="html: message"></div>
         <div class="msgerror" data-bind="html: errorNewChannel"></div>
       </div>

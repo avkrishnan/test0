@@ -8,17 +8,19 @@
 	self.sectionOne = ko.observable(true);
 	self.sectionTwo = ko.observable(false);
 	
-  self.inputObs = [ 'newChannel', 'message', 'channelName', 'channelWebAddress'];
+  self.inputObs = [ 'newChannel', 'message', 'channelName', 'channelWebAddress', 'characterCount', 'characterClass'];
 	self.errorObs = [ 'errorNewChannel', 'channelClass'];
   self.defineObservables();
 	  
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message					
 		self.sectionOne(true);
-		self.sectionTwo(false);					
-		$('input').keyup(function () {
+		self.sectionTwo(false);	
+		self.characterCount(self.newChannel().length);					
+		$(":input").bind("keyup keypress", function(e) {
 			self.clearErrorObs();
-		});						
+		    self.characterCount(self.newChannel().length);
+		});				
 	}
 	
 	$(document).keyup(function (e) {

@@ -11,8 +11,10 @@
         <div class="taglineedit">
           <a href="#" class="editbutton" data-bind="click: editTagline.bind($data, 'tagline'), text: taglineBtnText"></a>
           <em data-bind="visible: !editing(), text: tagline"></em>
-          <input data-bind="visible: editing, value: tagline, hasFocus: editing" />
-          <span data-bind="visible: editing, text:taglineChacter"></span>
+          <div class="textcount">
+            <input data-bind="visible: editing, value: tagline, hasFocus: editing, valueUpdate: 'afterkeydown'" />
+            <span data-bind="visible: editing, text: characterCount, css: characterClass"></span>
+          </div>
         </div>
       </div>
       <div class="edit-button">
