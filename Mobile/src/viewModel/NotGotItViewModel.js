@@ -104,6 +104,10 @@
 				recipient: '<span></span>'+rcvrFirstname +' '+ rcvrLastname+' <em>'+data.recipients[len].rcvrAccountname+'</em>'
 			});
 		}
+		if(ENYM.ctx.getItem('scrollNotGotItObj')){
+			$.mobile.silentScroll(ENYM.ctx.getItem('scrollNotGotItObj').scrollPosition); 
+			ENYM.ctx.removeItem('scrollNotGotItObj');
+		}
 	};
 
   function errorAPI(data, status, details) {
@@ -127,6 +131,9 @@
 	};	
 	
 	self.recipientDetails = function(data){
+		var scrollNotGotIt = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+		var scrollNotGotItObj = {scrollPosition: scrollNotGotIt};			
+		ENYM.ctx.setItem('scrollNotGotItObj', scrollNotGotItObj);
 		ENYM.ctx.setItem('currentRecipientData', JSON.stringify(data));							
 		viewNavigate('Not Got it', 'notGotItView', 'recipientDetailsView');
 	};	
