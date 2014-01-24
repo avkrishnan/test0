@@ -55,11 +55,11 @@
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 						if(valueFollower.managed == 'Y') {
 							name = valueFollower.comMethods[0].address;
+							visibleName = false;
 						} else {
 							name = '';
 							nameClass = nameClass+' noname';
 						}
-						visibleName = false;
 					} else if(typeof valueFollower.firstname == 'undefined') {
 						name = valueFollower.lastname;
 					} else if(typeof valueFollower.lastname == 'undefined') {
@@ -67,11 +67,11 @@
 					}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
 						if(valueFollower.managed == 'Y') {
 							name = valueFollower.comMethods[0].address;
+							visibleName = false;
 						} else {
 							name = '';
 							nameClass = nameClass+' noname';
 						}
-						visibleName = false;
 					}
 					else {
 						name = valueFollower.firstname +' '+ valueFollower.lastname;

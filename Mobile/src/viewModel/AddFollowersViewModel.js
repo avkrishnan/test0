@@ -72,7 +72,7 @@
 				}
 			}
 		}
-		$.mobile.showPageLoadingMsg('a', 'Adding Provisional Follower');
+		$.mobile.showPageLoadingMsg('a', 'Inviting guest');
 		var provisional = generateProvisionalAccount();
 		ES.channelService.invite(self.channelId(), provisional, {success: successfulAdd, error: errorAPI});
   };
