@@ -68,7 +68,8 @@
 				else {
 					name = valueFollower.firstname +' '+ valueFollower.lastname;
 					fullnameClass = 'name';
-				}			
+				}
+				var evernymIconClass = (evernymIcon == false)?'normalinvitation':'';			
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
@@ -79,6 +80,7 @@
 					reachable: 'Un-reachable Follower',
 					evernym: true,					
 					evernymIcon: evernymIcon,
+					evernymIconClass: evernymIconClass,
 					type: valueFollower.managed
 				});
 				self.unreachCount(self.followers().length);

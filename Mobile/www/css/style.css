@@ -534,6 +534,9 @@ a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgo
 	float:right;
 	clear:both;
 }
+.contactchannel .loginbtn {
+	clear:none;
+}
 .findbtn {
 	margin:10px 0 10px 0;
 	border-radius:4px 0 0 4px;
@@ -1386,7 +1389,7 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .channelmessages {
 	padding:0 10px 0 0;
 }
-.channelmessages a {
+.channelmessages .allmessages {
 	width:100%;
 	background:#fff;
 	border-radius:4px;
@@ -1817,7 +1820,7 @@ span.followercount {
 .escalatebroadcast {
 	font-size:13px;
 	color:#414141;
-	padding:10px 0 10px 4px;
+	padding:10px 0 6px 4px;
 	margin:0 0 8px 0;
 }
 .singlemsgicon {
@@ -2121,7 +2124,7 @@ h1.requests {
 .msg-hideshow {
 	overflow:hidden;
 	margin:0 -8px;
-	padding:12px 8px 10px 8px;
+	padding:10px 8px 10px 8px;
 	border-bottom:1px solid #ccc;
 }
 .msg-hideshow h4 {
@@ -2130,10 +2133,21 @@ h1.requests {
 	font-size: 15px;
 	font-weight:normal;
 }
-.msg-hideshow a {
-	float:right;
+.readmsgmark a {
 	padding:12px;
-	background:url("images/msg-hide.png") no-repeat 0 0;
+	background:url("images/msg-hide.png") no-repeat 0 13px;
+}
+.readmsgmark {
+	float:right;
+}
+.readmsgmark .markread {
+	background:#8DC63F;
+	font-size:14px;
+	color:#fff;
+	margin-right:10px;
+	padding:2px 10px;
+	border-radius:4px;
+	float:left;
 }
 .messagesreceived {
 	background:#fff;
@@ -2673,7 +2687,7 @@ ul.igiresponses li span {
 	font-size:13px;
 	margin:0;
 	color:#414141;
-	padding:0 5px 22px 5px;
+	padding:5px 5px 22px 5px;
 }
 .broadcast-textarea span {
 	float:right;
@@ -3275,7 +3289,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 .broadcast-textarea.longdescription textarea.ui-input-text {
 	overflow:hidden;
 	height:auto;
-	min-height:81px;
+	min-height:80px;
+	max-height:156px;
 }
 .longdescription textarea.ui-input-text {
 	height:156px;
@@ -3626,8 +3641,11 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:14px;
 	padding:5px 15px;
 }
+a.channeldelete {
+	background:#BE1E2D;
+}
 .cancelbtn {
-	margin:0 10px;
+	margin:0 10px 0 5px;
 }
 .reveal {
 	display:table;
@@ -3710,8 +3728,8 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	background:url("images/non-verified.png") no-repeat 3px 3px;
 }
 .provisional-follower {
-	vertical-align: middle;
-	word-break: break-all;
+	vertical-align:middle;
+	word-break:break-all;
 	padding:10px 10px 0 55px;
 }
 .provisional-follower span {
@@ -3721,7 +3739,11 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	font-size:14px;
 }
 span.name {
- text-transform:capitalize;
+	text-transform:capitalize;
+}
+span.evernymname {
+	color:#8DC63F;
+	font-style:italic;
 }
 /*Sir*/
 .feedbacks {
@@ -3818,7 +3840,7 @@ span.name {
 	position:relative;
 }
 .slidervalue-img.newsettingsslide .chase-broadcast{
-	left: 50%;
+	left:50%;
 	margin:0 0 0 -49px;
 }
 .newsettingsslide .hound-critical {
@@ -3963,7 +3985,6 @@ span.name {
 }
 .provisionalicon.noname {
 	line-height:40px;
-	/*font-style:italic;*/
 	background:#2D2D2D url(images/sprites-channel.png) no-repeat -4px -1084px;
 }
 .provisionalicon.noname em {
@@ -3975,8 +3996,15 @@ span.name {
 	padding:21px 9px;
 	float:left;
 }
+/*.questionmark {
+	background:url(images/questionmark.png) no-repeat 0 22px;
+}*/
 .normalinvites {
-	margin-left:28px;
+	margin-left:8px;
+	float:left;
+}
+.normalinvitation {
+	margin-left:23px;
 }
 .normalinvites span {
 	font-size:14px;
@@ -4011,9 +4039,122 @@ span.name {
 	display:inline-block;
 	width:85%;
 }
-/* 20-Jan-2014 */
 .deletefollwer {
 	margin-top:15px;
+}
+/*.stoptime {
+	font-size:14px;
+	margin:8px 0px 0px 0px;
+	display:block;
+	border:1px solid red;
+}*/
+.confirmcancel {
+	text-align:center;
+	margin:10px 0 4px 0;
+}
+.confirmcancel a {
+	background:#8DC63F;
+	color:#fff;
+	font-size:14px;
+	margin:0 5px;
+	padding:3px 0px;
+	display:inline-block;
+	width:60px;
+	border-radius:4px;
+}
+span.verified, span.unverified {
+	background:url("images/verified.png") no-repeat 0 1px;
+	padding:0 0 10px 26px;
+}
+.provisional-follower span.unverified {
+	background:url("images/unverified.png") no-repeat 0 2px;
+}
+/*.pending unreachablehelp*/
+.unreachablehelp {
+	overflow:hidden;
+	line-height:36px;
+}
+.stopbtn {
+	margin:0 0 8px 8px;
+	background:#CFD1D3;
+	border-radius:4px;
+	padding:2px 8px;
+	color:#414141;
+	font-size:14px;
+	display:inline-block;
+	cursor:pointer;
+}
+.helpbtn {
+	background:#2D2D2D url("images/helpicon.png") no-repeat 10px 9px;
+	padding:18px 24px;
+	float:right;
+	border-radius:10px 0 0 10px;
+}
+.msgchannelname, .msgchannelname.ui-link, .msgchannelname.ui-link:visited, .msgchannelname.ui-link:hover, .msgchannelname.ui-link:active {
+	color:#8DC63F;
+	font-size:13px;
+	font-weight:normal;
+	cursor:pointer;
+}
+.acceptdecline-btn {
+	float:left;
+	margin:0 0 5px 5px;
+	text-align:center;
+	width:100%;
+}
+.acceptdecline-btn a {
+	background:#8DC63F;
+	border-radius:4px;
+	color:#FFFFFF;
+	padding:1px 6px;
+	font-size:14px;
+/*	float:left;*/
+}
+.acceptdecline-btn a.declinebtn {
+	background:#D43232;
+	margin:0px 0px 0px 5px;
+}
+.invite-msg {
+	width:98%;
+}
+.re-invitebtn {
+	background:#8DC63F;
+	border-radius:4px;
+	font-size:14px;
+	margin:12px 48px 0 0;
+	padding:0 6px;
+	float:right;
+}
+.default {
+	background:#1c75bc;
+	border-radius:4px;
+	font-size:14px;
+	margin:0 0 0 5px;
+	padding:0 6px;
+	font-weight:normal;
+	color:#fff;
+}
+.msgacceptdecline {
+	background:#2D2D2D;
+	border-radius:4px 0 0 4px;
+	float:right;
+	margin:10px 0;
+	padding:0 10px 0 0;
+}
+.msgacceptdecline a {
+	background:#8DC63F;
+	border-radius:4px;
+	color:#A7A9AC;
+	float:left;
+	font-size:14px;
+	margin:6px 0 6px 8px;
+	padding:2px 13px;
+}
+.msgacceptdecline a.declinebtn {
+	background:#D43232;
+}
+.invitemessages {
+	display:block;
 }
 /*
 	*@media query css
@@ -4167,6 +4308,14 @@ span.name {
 	.addinformation {
 		line-height:35px;
 	}
+	.invite-msg {
+		width:98%;
+	}
+/*	.stopbtn {
+		padding:2px 8px;
+		font-size:14px;
+		margin:4px 5px 0 0;
+	}*/
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -4324,7 +4473,7 @@ span.name {
 		padding:1px 10px;
 	}
 	.clickabl {
-		display: inline-block;
+		display:inline-block;
 		width:94%;
 	}
 }
@@ -4530,6 +4679,9 @@ span.name {
 	.clickabl {
 		display:inline-block;
 		width:96%;
+	}
+	.invite-msg {
+		width:99%;
 	}
 }
 @media only screen and (min-width:1290px) {
