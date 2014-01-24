@@ -2,7 +2,7 @@
   var self = this;
   self.template = 'requestiGiHelpView';
   self.viewid = 'V-20b';
-  self.viewname = 'iGi Help';
+  self.viewname = 'iGi help';
   self.displayname = 'iGi help';
 
 	self.activate = function() {

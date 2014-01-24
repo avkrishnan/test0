@@ -8,13 +8,14 @@
         <a href="#" class="setting settinginner" onclick="viewNavigate('Unreachable', 'unreachableFollowersView', 'channelSettingsView');"></a>
       </div>
     </div>         
-    <div class="pending">
+    <div class="pending unreachablehelp">
       Un-reachable Followers <span data-bind="text: unreachCount"></span>
+      <a class="helpbtn" href="#" onclick="viewNavigate('Unreachable', 'unreachableFollowersView', 'unreachableHelpView');"></a>
     </div>
     <div data-bind="foreach: followers">
       <a href="#" data-bind="css: nameClass, click: $parent.followerDetails.bind($index())">
         <span class="evernym" data-bind="visible: evernymIcon"></span>
-        <div class="normalinvites">
+        <div class="normalinvites" data-bind="css: evernymIconClass">
           <span data-bind="text: followerName, css: fullnameClass"></span>
           <em data-bind="text: reachable, visible: evernym"></em>
         </div>

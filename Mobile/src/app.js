@@ -433,7 +433,8 @@ invitedFollowersViewModel = new InvitedFollowersViewModel(),
 declinedFollowersViewModel = new DeclinedFollowersViewModel(),
 unreachableFollowersViewModel = new UnreachableFollowersViewModel(),
 
-afterLoginVerifyViewModel = new AfterLoginVerifyViewModel()
+afterLoginVerifyViewModel = new AfterLoginVerifyViewModel(),
+unreachableHelpViewModel = new UnreachableHelpViewModel()
 /* end */
 ;
 
@@ -522,7 +523,8 @@ var models = [
               invitedFollowersViewModel,
               declinedFollowersViewModel,
               unreachableFollowersViewModel,
-              afterLoginVerifyViewModel
+              afterLoginVerifyViewModel,
+							unreachableHelpViewModel
             ];
 
 function getHTMLName(viewModel){

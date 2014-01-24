@@ -14,7 +14,7 @@
     <div data-bind="foreach: followers">
       <a href="#" data-bind="css: nameClass, click: $parent.followerDetails.bind($index())">
         <span class="evernym" data-bind="visible: evernymIcon"></span>
-        <div class="normalinvites">
+        <div class="normalinvites" data-bind="css: evernymIconClass">
           <span data-bind="text: followerName, css: fullnameClass"></span>
           <em data-bind="text: accountname, visible: evernym"></em>
         </div>

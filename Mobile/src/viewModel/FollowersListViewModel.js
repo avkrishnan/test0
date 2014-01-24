@@ -90,7 +90,8 @@
 						}
 					} else {
 						reachable = valueFollower.accountname;					
-					}						
+					}
+					var evernymIconClass = (evernymIcon == false)?'normalinvitation':'';				
 					self.followers.push({
 						followerId: valueFollower.id,
 						nameClass: nameClass,
@@ -101,6 +102,7 @@
 						reachable: reachable,
 						evernym: evernym,
 						evernymIcon: evernymIcon,
+						evernymIconClass: evernymIconClass,
 						type: valueFollower.managed
 					});
 				}

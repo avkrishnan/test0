@@ -72,7 +72,8 @@
 				} else {
 					name = valueFollower.firstname +' '+ valueFollower.lastname;
 					fullnameClass = 'name';
-				}		
+				}
+				var evernymIconClass = (evernymIcon == false)?'normalinvitation':'';
 				self.followers.push({
 					followerId: valueFollower.id,
 					nameClass: nameClass,
@@ -83,6 +84,7 @@
 					reachable: valueFollower.accountname,				
 					evernym: evernym,					
 					evernymIcon: evernymIcon,
+					evernymIconClass: evernymIconClass,
 					type: valueFollower.managed
 				});
 				self.declinesCount(self.followers().length);
