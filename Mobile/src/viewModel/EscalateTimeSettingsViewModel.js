@@ -49,6 +49,9 @@
 		if(ENYM.ctx.getItem('setValue') == 'month') {
 			if(self.month() == 'Dec') {
 				self.month('Jan');
+				var year = self.year();
+				year == year++;			
+				self.year(year);				
 			} else {
 				self.month(monthNames[$.inArray( self.month(), monthNames)+1]);		
 			}			
@@ -95,6 +98,7 @@
 		if(ENYM.ctx.getItem('setValue') == 'month') {
 			if(self.month() == 'Jan') {
 				self.month('Dec');
+				self.year(self.year()-1);				
 			} else {
 				self.month(monthNames[$.inArray( self.month(), monthNames)-1]);		
 			}				

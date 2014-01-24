@@ -27,13 +27,13 @@
 			for(var channelslength = 0; channelslength<data.channel.length; channelslength++) {
 				if(data.channel[channelslength].followers == 1) {
 					var followers = data.channel[channelslength].followers +' follower';
-					var followerVisble = false;
+					var followerVisible = false;
 				} else if(data.channel[channelslength].followers == 0){
 					var followers = data.channel[channelslength].followers +' followers';
-					var followerVisble = true;
+					var followerVisible = true;
 				} else {
 					var followers = data.channel[channelslength].followers +' followers';
-					var followerVisble = false;
+					var followerVisible = false;
 				}						
 				self.channels.push({
 					channelId: data.channel[channelslength].id, 
@@ -42,7 +42,7 @@
 					longDescription: data.channel[channelslength].longDescription,
 					followers: followers,
 					followerCount: data.channel[channelslength].followers,
-					addFollower: followerVisble
+					addFollower: followerVisible
 				});
 			}
 		} else {
