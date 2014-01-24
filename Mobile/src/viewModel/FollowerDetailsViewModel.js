@@ -4,8 +4,8 @@
   self.viewid = 'V-35';
   self.viewname = 'Follower Details';
   self.displayname = 'Follower Details';
-	self.followerCommethods = ko.observable([]);
 	
+	self.followerCommethods = ko.observable([]);
   self.inputObs = [ 'channelName', 'nameClass', 'followerName', 'fullnameClass', 'reachable', 'followerEvernym', 'evernymType' ];
   self.defineObservables();
 	

@@ -88,6 +88,7 @@
 					type: valueFollower.managed
 				});
 				self.declinesCount(self.followers().length);
+				ENYM.ctx.setItem('lastStatus', self.followers().length);
 			}
 		});
 	}; 

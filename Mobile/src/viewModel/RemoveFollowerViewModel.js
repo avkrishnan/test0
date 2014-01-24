@@ -46,14 +46,20 @@
 		});
 		channel = channel[0];		
 		ENYM.ctx.setItem('currentChannelData', JSON.stringify(channel));
-		var backText, backNav;
+		var backNav;
 		for(var ctr = 0; ctr <= 1; ctr++) {
-			backText = backNavText.pop();
+			backNavText.pop();
 			backNav = backNavView.pop();
 		}
+		if(ENYM.ctx.getItem('lastStatus') == 1) {
+			backNavText.pop();
+			backNav = backNavView.pop();			
+			backNav = 'followersListView';
+		}
+		ENYM.ctx.removeItem('lastStatus');
 		var toastobj = {redirect: backNav, type: '', text: 'Follower removed'};
 		showToast(toastobj);						
-    	goToView(backNav);					
+		goToView(backNav);
 	}	
 
   function errorAPI(data, status, details) {
@@ -66,7 +72,6 @@
 		$.mobile.showPageLoadingMsg('a', 'Removing Follower');
 		return ES.channelService.removeFollower(self.channelId(), self.followerId(), { success: successfulDelete, error: errorAPI });
 		ENYM.ctx.removeItem('currentChannel');
-		//goToView('followerDetailsView');
   };
 }
 
