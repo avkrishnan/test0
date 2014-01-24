@@ -33,14 +33,14 @@
 		$.each(data.followers, function(indexFollower, valueFollower) {
 			if(valueFollower.relationship != 'O') {
 				if(valueFollower.relationship == 'I') {
-					invites == invites++;
+					invites++;
 				}
 				else if(valueFollower.relationship == 'D') {
-					declines == declines++;
+					declines++;
 				}				
 				if(valueFollower.relationship == 'F') {
 					if(valueFollower.reachable == 'N') {
-						unreachs == unreachs++;
+						unreachs++;
 					}
 					var visibleName = true				
 					var evernymIcon = false;
@@ -54,7 +54,7 @@
 					}
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 						if(valueFollower.managed == 'Y') {
-							name = valueFollower.comMethods[0].address;
+							name = valueFollower.comMethods.address;
 							visibleName = false;
 						} else {
 							name = '';
@@ -69,7 +69,7 @@
 						fullnameClass = 'name';
 					}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
 						if(valueFollower.managed == 'Y') {
-							name = valueFollower.comMethods[0].address;
+							name = valueFollower.comMethods.address;
 							visibleName = false;
 						} else {
 							name = '';
@@ -112,11 +112,8 @@
 		if(self.invitesCount() != 0 || self.declinesCount() != 0 || self.unreachCount() != 0) {
 			self.countIsZero(true);
 		}
-		if(self.followers().length == 1) {
-			self.followerCount('Follower ('+self.followers().length+')');
-		} else {
-			self.followerCount('Followers ('+self.followers().length+')');
-		}	
+		var followers = (self.followers().length == 1)? 'Follower': 'Followers';
+		self.followerCount(followers+' ('+self.followers().length+')');
 	};
 	
   function errorAPI(data, status, details) {
