@@ -33,10 +33,6 @@
 				self.followerCount(followers);											
 			}
 			self.getMessagesCommand();
-			if(ENYM.ctx.getItem('scrollObj')){
-				//self.scrollTop(ENYM.ctx.getItem('scrollObj').scrollPosition);
-				ENYM.ctx.removeItem('scrollObj');
-			}
 		}
 	}
 	
@@ -145,6 +141,10 @@
 				noacks: data.message[len].noacks,
 				type: data.message[len].type
 			});
+		}
+		if(ENYM.ctx.getItem('scrollObj')){
+			$.mobile.silentScroll(ENYM.ctx.getItem('scrollObj').scrollPosition); 
+			ENYM.ctx.removeItem('scrollObj');
 		}
 	}
 

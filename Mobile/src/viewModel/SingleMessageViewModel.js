@@ -60,7 +60,7 @@
 					var notGot = (messageObject.noacks == 1) ? "  Hasn't" : " Haven't";
 					self.noacks(messageObject.noacks+' '+notGot+" Got It Yet");
 					self.acks(messageObject.acks+' Got It');					
-				}
+				}	
 			}							
 		}
 	}

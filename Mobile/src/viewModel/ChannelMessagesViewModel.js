@@ -45,8 +45,7 @@
 					$('#'+data.messageId).addClass('igisent');
 					data.ack = 'Y';										
 					var toastobj = {type: '', text: 'iGi sent!'};
-					showToast(toastobj);
-					//self.gotChannel(channel);											
+					showToast(toastobj);										
 				},
 				error: function(data, status, details) {
 					var toastobj = {type: 'toast-error', text: details.message};
@@ -78,6 +77,9 @@
 	};
 		
 	self.showSingleMessage = function(data) {
+		var scrollMessage = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+		var scrollMessageObj = {scrollPosition: scrollMessage};			
+		ENYM.ctx.setItem('scrollMessageObj', scrollMessageObj);
 		ENYM.ctx.setItem("currentChannelMessage",JSON.stringify(data));
 		viewNavigate('Broadcast Msg', 'channelMessagesView', 'channelSingleMessagesView');
 	};
@@ -128,6 +130,10 @@
 						}
 					);
 				});
+				if(ENYM.ctx.getItem('scrollMessageObj')){
+					$.mobile.silentScroll(ENYM.ctx.getItem('scrollMessageObj').scrollPosition); 
+					ENYM.ctx.removeItem('scrollMessageObj');
+				}
 			},
 			error: function(data, status, details) {
 				var toastobj = {type: 'toast-error', text: details.message};
