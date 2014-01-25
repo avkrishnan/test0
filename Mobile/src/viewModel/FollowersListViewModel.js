@@ -39,7 +39,7 @@
 					declines++;
 				}				
 				if(valueFollower.relationship == 'F') {
-					if(valueFollower.reachable == 'N') {
+					if(valueFollower.reachable == 'N' && valueFollower.managed == 'N') {
 						unreachs++;
 					}
 					var visibleName = true				
@@ -54,7 +54,7 @@
 					}
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 						if(valueFollower.managed == 'Y') {
-							name = valueFollower.comMethods.address;
+							name = valueFollower.comMethods[0].address;
 							visibleName = false;
 						} else {
 							name = '';
@@ -69,7 +69,7 @@
 						fullnameClass = 'name';
 					}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
 						if(valueFollower.managed == 'Y') {
-							name = valueFollower.comMethods.address;
+							name = valueFollower.comMethods[0].address;
 							visibleName = false;
 						} else {
 							name = '';
@@ -81,7 +81,7 @@
 						name = valueFollower.firstname +' '+ valueFollower.lastname;
 						fullnameClass = 'name';
 					}
-					if(valueFollower.reachable == 'N') {
+					if(valueFollower.reachable == 'N' && valueFollower.managed == 'N') {
 						var nameClass = 'normalfollowers noverified';						
 						reachable = 'Un-reachable Follower';
 						var evernym = true;

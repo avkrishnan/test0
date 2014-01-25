@@ -1402,12 +1402,15 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	overflow:hidden;
 }
 /*New Desing CHANGES v-55*/
-.igibutton {
+.igibutton, .closemsg {
 	float:left;
 	padding:23px 0;
 	width:45px;
 	border-right:1px solid #EAEAEA;
-	background:url("images/IGI-btn.png") no-repeat 4px 7px;
+	background:url(images/IGI-btn.png) no-repeat 4px 7px;
+}
+.closemsg {
+	background:url(images/msg-hide.png) no-repeat center center;
 }
 .igibtnarrow {
 	width:45px;
@@ -1461,13 +1464,13 @@ div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 	width:63%;
 }
 .msg-icon {
-	width:80%;
+	width:65%;
 }
 .igi-msg {
 	width:81%;
 }
 .onlymsg {
-	width:97%;
+	width:81%;
 }
 .channelmessages .messageschannel {
 	width:67%;
@@ -1826,10 +1829,12 @@ span.followercount {
 	color:#414141;
 	padding:10px 0 6px 4px;
 	margin:0 0 8px 0;
+	border:1px solid red;
+	float:left;
 }
 .singlemsgicon {
 	padding:12px 19px;
-	margin-right:6px;
+	margin-right:4px;
 }
 .singlemsgicon.icon-h {
 	background:url("images/icon-h.png") no-repeat 0 2px;
@@ -2136,21 +2141,10 @@ h1.requests {
 	font-size: 15px;
 	font-weight:normal;
 }
-.readmsgmark a {
-	padding:12px;
-	background:url("images/msg-hide.png") no-repeat 0 13px;
-}
-.readmsgmark {
+.msg-hideshow a {
 	float:right;
-}
-.readmsgmark .markread {
-	background:#8DC63F;
-	font-size:14px;
-	color:#fff;
-	margin-right:10px;
-	padding:2px 10px;
-	border-radius:4px;
-	float:left;
+	padding:12px;
+	background:url("images/msg-hide.png") no-repeat 0 0;
 }
 .messagesreceived {
 	background:#fff;
@@ -3731,9 +3725,9 @@ a.channeldelete {
 	background:url("images/non-verified.png") no-repeat 3px 3px;
 }
 .provisional-follower {
-	vertical-align:middle;
 	word-break:break-all;
-	padding:10px 10px 0 55px;
+	padding:10px 10px 0 0px;
+	float:left;
 }
 .provisional-follower span {
 	display:block;
@@ -3865,6 +3859,10 @@ span.evernymname {
 	margin:0 0 10px 0;
 	color:#fff;
 	font-size:14px;
+}
+.addbtnmsg p a, .addbtnmsg p a.ui-link, .addbtnmsg p a.ui-link:visited, .addbtnmsg p a.ui-link:hover, .addbtnmsg p a.ui-link:active {
+	color:#A0A0A0;
+	text-decoration:underline;
 }
 /*9-jan-2014*/
 .followerinfo {
@@ -4069,14 +4067,14 @@ span.Y, span.N {
 	line-height:36px;
 }
 .stopbtn {
-	margin:0 0 8px 8px;
-	background:#CFD1D3;
+	background:#1c75bc;
 	border-radius:4px;
-	padding:2px 8px;
-	color:#414141;
-	font-size:14px;
-	display:inline-block;
+	color:#fff;
 	cursor:pointer;
+	float:right;
+	font-size:12px;
+	margin:10px 4px 8px 2px;
+	padding:2px 4px;
 }
 .helpbtn {
 	background:#2D2D2D url("images/helpicon.png") no-repeat 10px 9px;
@@ -4149,21 +4147,18 @@ span.Y, span.N {
 .invitemessages {
 	display:block;
 }
-.invitationtext, .invitationtext.ui-link, .invitationtext.ui-link:visited, .invitationtext.ui-link:hover, .invitationtext.ui-link:active {
-	color:#A0A0A0;
-	display:block;
-	font-size:14px;
-	text-decoration:underline;
-	position:fixed;
-	bottom:55px;
-}
 .textinvitation {
+	background:#2D2D2D;
+	padding:10px;
+	border-radius:4px 0 0 4px;
+	text-align:center;
+	overflow:hidden;
+}
+.textinvitation span {
 	font-size:14px;
 	color:#fff;
-	margin:15px 0 0 0;
-	background:#2D2D2D;
-	padding:10px 10px 10px 10px;
-	border-radius:4px 0 0 4px;
+	margin-bottom:5px;
+	display:block;
 }
 .textcount {
 	border-radius:4px;
@@ -4184,6 +4179,10 @@ span.Y, span.N {
 	margin:-29px 3px 0 0;
 	float:right;
 	color:#8DC63F;
+}
+.provisionalfollower .re-invitebtn {
+	margin:12px 5px 8px 0;
+	color:#fff;
 }
 /*
 	*@media query css
@@ -4288,13 +4287,13 @@ span.Y, span.N {
 		width:67%;
 	}
 	.msg-icon {
-		width:82%;
+		width:68%;
 	}
 	.igi-msg {
 		width:83%;
 	}
 	.onlymsg {
-		width:98%;
+		width:82%;
 	}
 	.channelmessages .messageschannel {
 		width:70%;
@@ -4340,11 +4339,6 @@ span.Y, span.N {
 	.invite-msg {
 		width:98%;
 	}
-/*	.stopbtn {
-		padding:2px 8px;
-		font-size:14px;
-		margin:4px 5px 0 0;
-	}*/
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -4434,13 +4428,13 @@ span.Y, span.N {
 		width:85%;
 	}
 	.msg-icon {
-		width:92%;
+		width:85%;
 	}
 	.igi-msg {
 		width:92%;
 	}
 	.onlymsg {
-		width:99%;
+		width:92%;
 	}
 	.channelmessages .messageschannel {
 		width:86%;
@@ -4576,13 +4570,13 @@ span.Y, span.N {
 		width:88%;
 	}
 	.msg-icon {
-		width:94%;
+		width:89%;
 	}
 	.igi-msg {
 		width:94%;
 	}
 	.onlymsg {
-		width:99%;
+		width:94%;
 	}
 	.channelmessages .messageschannel {
 		width:89%;
@@ -4658,13 +4652,13 @@ span.Y, span.N {
 		width:91%;
 	}
 	.msg-icon {
-		width:95%;
+		width:92%;
 	}
 	.igi-msg {
 		width:95%;
 	}
 	.onlymsg {
-		width:99%;
+		width:95%;
 	}
 	.channelmessages .messageschannel {
 		width:92%;
