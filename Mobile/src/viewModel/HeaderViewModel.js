@@ -176,7 +176,7 @@ function OverlayViewModel() {
 				var messageType = 'igi-msg';										
 			}
 			else {
-				var iGiClass = '';
+				var iGiClass = 'closemsg';
 			}
 			if(iGiClass != '' && valueNotification.escLevelId != '') {
 				var messageType = '';
@@ -195,19 +195,6 @@ function OverlayViewModel() {
 	
 	this.iGiAckOverlay = function(data, event) {
 		//alert(event.currentTarget.parentNode.getAttribute('id'));
-		var callbacks = {
-			success: function(data) {
-				var toastobj = {type: '', text: 'iGi sent!'};
-				showToast(toastobj);							
-				//goToView($.mobile.activePage.attr('id'));																	
-			},
-			error: function(data, status, details) {
-				var toastobj = {type: 'toast-error', text: details.message};
-				showToast(toastobj);					
-			}
-		};					
-		$.mobile.showPageLoadingMsg('a', 'Sending iGi request!');
-
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
 			setTimeout(function() {			
 				ES.systemService.adjMnsCount(-1);
@@ -229,9 +216,26 @@ function OverlayViewModel() {
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
 			}, 1000);				
 			ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
-		}	
-//		
-		return ES.messageService.acknowledgeMsg(data.msgId, callbacks);
+		}
+		if(data.iGiClass == 'igibutton') {
+			var callbacks = {
+				success: function(responsData) {
+					var toastobj = {type: '', text: 'iGi sent!'};
+					showToast(toastobj);							
+					//goToView($.mobile.activePage.attr('id'));																	
+				},
+				error: function(responsData, status, details) {
+					var toastobj = {type: 'toast-error', text: details.message};
+					showToast(toastobj);					
+				}
+			};					
+			$.mobile.showPageLoadingMsg('a', 'Sending iGi request!');						
+			return ES.messageService.acknowledgeMsg(data.msgId, callbacks);
+		}
+		else {					
+			$.mobile.showPageLoadingMsg('a', 'Marking message as read!');
+			return ES.messageService.readMsg(data.msgId);			
+		}
 	}	
 	
 	this.showSingleMessage = function(data) {

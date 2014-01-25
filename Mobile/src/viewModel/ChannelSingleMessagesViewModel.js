@@ -74,7 +74,7 @@
 			else {
 				self.messageText(channel.fullText);										
 			}					
-			if(channel.iGiClass != '') {
+			if(channel.iGiClass != '' && channel.iGiClass != 'closemsg') {
 				if(channel.acknowledged == 'N') {
 					self.iGiButton(true);												
 					self.activeClass('igimsgdetail');																		
