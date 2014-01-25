@@ -1973,7 +1973,6 @@ h1.requests {
 	margin-left:10px;
 	font-size:13px;
 	height:35px;
-	line-height:normal;
 }
 .invitation {
 	background:#2D2D2D url("images/directory.png") no-repeat 3px 3px;
@@ -4057,11 +4056,11 @@ span.evernymname {
 	width:60px;
 	border-radius:4px;
 }
-span.verified, span.unverified {
+span.Y, span.N {
 	background:url("images/verified.png") no-repeat 0 1px;
 	padding:0 0 10px 26px;
 }
-.provisional-follower span.unverified {
+.provisional-follower span.N {
 	background:url("images/unverified.png") no-repeat 0 2px;
 }
 /*.pending unreachablehelp*/
