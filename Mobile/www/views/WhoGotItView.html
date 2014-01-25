@@ -17,7 +17,7 @@
       <div class="broadcastmsgsend">
         <a href="#" class="igigot" data-bind="html: iGi"></a>
         <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: percentage }"></span>
-        <a href="#" class="iginotgot" data-bind="text: noiGi" onclick="viewNavigate('Who Got it', 'whoGotItView', 'notGotItView');"></a>
+        <a href="#" class="iginotgot" data-bind="text: noiGi, style: { width: $data.percentageNotGot }" onclick="viewNavigate('Who Got it', 'whoGotItView', 'notGotItView');"></a>
       </div>
       <div class="escalatebroadcast" data-bind="html: escalateUntil, visible: escalateTime"></div>            
     </div>       

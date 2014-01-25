@@ -37,7 +37,7 @@
         <div class="broadcastmsgsend">
           <span class="igigot" data-bind="html: iGi, click: $parent.showWhoGotIt.bind($index())"></span>
           <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: $data.percentage }, click: $parent.iGiPercentage.bind($index())"></span>
-          <em class="iginotgot" data-bind="text: noiGi, click: $parent.showNotGotIt.bind($index())"></em>
+          <em class="iginotgot" data-bind="text: noiGi, click: $parent.showNotGotIt.bind($index()), style: { width: $data.percentageNotGot }"></em>
         </div>    
         <div class="broadcastmsgreplie" data-bind="click: $parent.showReplies.bind($index())">
           <span data-bind="text: replies"></span><!--<em>3 new</em>-->
