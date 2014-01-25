@@ -50,13 +50,13 @@
 				self.longDescription(channelObject.longDescription.replace(/\n/g, '<br/>'));			
 			}			
 		}
-		$(":input").bind("keyup keypress", function(e) {
+		$("textarea").bind("keyup keypress", function(e) {
 		    self.characterCount(self.tagline().length);
 		    if(e.keyCode == 8 || e.keyCode == 46) {
 		    } else {
 			    if(self.tagline().length == 80){
 			    	var toastobj = {type: 'toast-error', text: 'Taglines have a max of 80 characters'};
-					showToast(toastobj);	
+					showToast(toastobj);
 			    }
 			}	
 		});		 				

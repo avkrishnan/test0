@@ -3772,7 +3772,7 @@ span.evernymname {
 	float:left;
 	margin:0 5px 0 0;
 }
-.descriptionedit textarea, .textcount textarea {
+.descriptionedit textarea {
 	display:block;
 	clear:both;
 	color:#000;
@@ -3784,11 +3784,21 @@ span.evernymname {
 	min-height:80px;
 	max-height:80px;
 }
-.textcount textarea {
+/*textarea.taglinetext  {
     border: none;
     margin: 0;
     min-height: 50px;
     resize: none;
+}*/
+ .textcount textarea {
+	display:block;
+	clear:both;
+	color:#000;
+	font-size:14px;
+	background:#fff;
+	resize:none;
+	margin:0;
+	min-height:50px;
 }
 /* 6-1-2014 */
 .invitedfollow {
