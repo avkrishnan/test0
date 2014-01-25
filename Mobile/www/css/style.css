@@ -1829,7 +1829,6 @@ span.followercount {
 	color:#414141;
 	padding:10px 0 6px 4px;
 	margin:0 0 8px 0;
-	border:1px solid red;
 	float:left;
 }
 .singlemsgicon {
@@ -3772,7 +3771,7 @@ span.evernymname {
 	float:left;
 	margin:0 5px 0 0;
 }
-.descriptionedit textarea {
+.descriptionedit textarea, .textcount textarea {
 	display:block;
 	clear:both;
 	color:#000;
@@ -3783,6 +3782,12 @@ span.evernymname {
 	border:1px solid #E6E7E8;
 	min-height:80px;
 	max-height:80px;
+}
+.textcount textarea {
+    border: none;
+    margin: 0;
+    min-height: 50px;
+    resize: none;
 }
 /* 6-1-2014 */
 .invitedfollow {
@@ -4161,15 +4166,15 @@ span.Y, span.N {
 	display:block;
 }
 .textcount {
-	border-radius:4px;
-	background:#fff;
-	display:inline-block;
-	width:100%;
-	margin:8px 0 0 0;
+	background: #FFFFFF;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 8px 0 0;
+    width: 100%;
 }
 .textcount span {
 	float:right;
-	margin:-3px 8px 0 0;
+	margin: -5px 4px 0 0;
 }
 .textcount div.ui-input-text {
 	width:100%;
@@ -4724,4 +4729,5 @@ span.Y, span.N {
 		min-height:622px;
 	}
 }
+
 /* @media query css End*/

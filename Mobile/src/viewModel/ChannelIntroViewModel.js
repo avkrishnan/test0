@@ -35,7 +35,7 @@
 		self.less(true);		
 		self.more(false);				
 		self.moreButton(false);
-		self.lessButton(false);		
+		self.lessButton(false);	
 		if(typeof channelObject.channelDescription != 'undefined') {
 			self.tagline(channelObject.channelDescription);
 		}
@@ -52,13 +52,20 @@
 		}
 		$(":input").bind("keyup keypress", function(e) {
 		    self.characterCount(self.tagline().length);
-		})		 				
+		    if(e.keyCode == 8 || e.keyCode == 46) {
+		    } else {
+			    if(self.tagline().length == 80){
+			    	var toastobj = {type: 'toast-error', text: 'Taglines have a max of 80 characters'};
+					showToast(toastobj);	
+			    }
+			}	
+		});		 				
 	};
 
 	self.editTagline = function(data) {		
 		self.clickType(data);
 		if(self.taglineBtnText() == 'Save') {
-			self.shortDescriptionCommand();
+			self.shortDescriptionCommand();;
 		}
 		else {
 			self.editing(true);
@@ -84,31 +91,31 @@
 	};
 	
   self.shortDescriptionCommand = function () {
-		if (self.tagline() == '' || typeof self.tagline() == 'undefined') {
+		/*if (self.tagline() == '' || typeof self.tagline() == 'undefined') {
 			var toastobj = {type: 'toast-error', text: 'Please enter channel tagline'};
 			showToast(toastobj);
-    } else {
+    } else {*/
 			var channelObject = {
 				id: self.channelId(),
 				description: self.tagline()
 			};
 			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
-		}
+		//}
   };
 	
   self.longDescriptionCommand = function () {
-		if (self.longDescription() == '' || typeof self.longDescription() == 'undefined') {
+		/*if (self.longDescription() == '' || typeof self.longDescription() == 'undefined') {
 			var toastobj = {type: 'toast-error', text: 'Please enter long description'};
 			showToast(toastobj);
-    } else {
+    } else {*/
 			var channelObject = {
 				id: self.channelId(),
 				longDescription: self.longDescription()
 			};
 			$.mobile.showPageLoadingMsg('a', 'Modifying Channel ');
 			ES.channelService.modifyChannel(channelObject, {success: successfulModify, error: errorAPI});
-		}
+		//}
   };
 	
 	function successfulModify() {		
@@ -170,34 +177,25 @@
   self.showPreview = function () {
   	self.longDescription(self.longDescription().replace(/\n/g, "<br/>"));
     self.less(true);		
-		self.sectionOne(false);
-		self.sectionTwo(true);
+	self.sectionOne(false);
+	self.sectionTwo(true);
   };
 	
   self.okCommand = function () {
   	if(self.taglineBtnText() == 'Save' || self.descBtnText() == 'Save'){
-  		if(self.tagline() == '') {
-	  		var toastobj = {type: 'toast-error', text: 'Please enter channel tagline'};
-			showToast(toastobj);
-  		} else if(self.longDescription() == ''){
-			var toastobj = {type: 'toast-error', text: 'Please enter long description'};
-			showToast(toastobj);
-  		} else{
-  			self.shortDescriptionCommand();
-  			self.longDescriptionCommand();
-  		}
+  		self.shortDescriptionCommand();
+  		self.longDescriptionCommand();
   	}
-  	if(self.longDescription() != '' && self.tagline() != '') {
-  		setTimeout(function() {
-		  	if(self.previousViewID() == 'channelNewView') {
-		  		goToView('channelsIOwnView');
-		  	} else {
-		  		goToView('channelSettingsView');
-		  	}
-			backNavText.pop();
-			backNavView.pop();
-		},2000);
-	}
+  	$.mobile.showPageLoadingMsg('a', 'Saving Channel ');
+	setTimeout(function() {
+	  	if(self.previousViewID() == 'channelNewView') {
+	  		goToView('channelsIOwnView');
+	  	} else {
+	  		goToView('channelSettingsView');
+	  	}
+		backNavText.pop();
+		backNavView.pop();
+	},2000);
   };
 	
   self.exitPreview = function () {	
@@ -206,8 +204,12 @@
 	  	self.less(false);
 	  }
     self.sectionOne(true);
-		self.sectionTwo(false);	
-  };		
+	self.sectionTwo(false);	
+  };	
+  self.focus = function(){
+  	self.editing(true);
+  	$('.length-warning').css('display','block');
+  };
 }
 
 ChannelIntroViewModel.prototype = new ENYM.ViewModel();

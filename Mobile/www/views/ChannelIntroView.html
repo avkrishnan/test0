@@ -12,7 +12,7 @@
           <a href="#" class="editbutton" data-bind="click: editTagline.bind($data, 'tagline'), text: taglineBtnText"></a>
           <em data-bind="visible: !editing(), text: tagline"></em>
           <div class="textcount">
-            <input data-bind="visible: editing, value: tagline, hasFocus: editing, valueUpdate: 'afterkeydown'" />
+            <textarea data-bind="visible: editing, value: tagline, valueUpdate: 'afterkeydown'" maxlength="80" autofocus></textarea> 
             <span data-bind="visible: editing, text: characterCount, css: characterClass"></span>
           </div>
         </div>
@@ -26,7 +26,7 @@
       <div class="descriptionedit">
         <div data-bind="visible: !editingTextarea(), html: longDescription, visible: less"></div>
         <div data-bind="visible: !editingTextarea(), html: moreText, visible: more"></div>
-        <textarea class="editDescription" data-bind="visible: editingTextarea, value: longDescription, hasFocus: editing"></textarea>       
+        <textarea class="editDescription" data-bind="visible: editingTextarea, value: longDescription" autofocus></textarea>       
         <a class="morebtn" href="#" data-bind="visible: moreButton, click: showMore">More</a>
         <a class="morebtn lessbtn" href="#" data-bind="visible: lessButton, click: showLess">Less</a> 
       </div>   

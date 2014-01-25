@@ -20,6 +20,13 @@
 		$(":input").bind("keyup keypress", function(e) {
 			self.clearErrorObs();
 		    self.characterCount(self.newChannel().length);
+		    if(e.keyCode == 8 || e.keyCode == 46) {
+		    } else {
+		    	if(self.newChannel().length == 25){
+			    	var toastobj = {type: 'toast-error', text: 'Name of maximum 25 characters'};
+					showToast(toastobj);	
+		    	}
+			}	
 		});				
 	}
 	
@@ -74,7 +81,7 @@
 			self.channelName(self.newChannel()+' is now live.');			
 			self.channelWebAddress(self.newChannel()+'.evernym.com');			
 		}
-		
+		ENYM.ctx.setItem('createNewChannel', 'true');
         $(".channelvisiting strong").bind("copy", function () {
             return false;
     });
