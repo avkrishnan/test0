@@ -54,7 +54,7 @@
 					}
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 						if(valueFollower.managed == 'Y') {
-							name = valueFollower.comMethods.address;
+							name = valueFollower.comMethods[0].address;
 							visibleName = false;
 						} else {
 							name = '';
@@ -69,7 +69,7 @@
 						fullnameClass = 'name';
 					}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
 						if(valueFollower.managed == 'Y') {
-							name = valueFollower.comMethods.address;
+							name = valueFollower.comMethods[0].address;
 							visibleName = false;
 						} else {
 							name = '';
