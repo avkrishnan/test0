@@ -14,6 +14,7 @@
     'percentageText',
     'percentageClass',
 		'percentage',
+		'percentageNotGot',
 		'noiGi',
 		'noacks',
 		'acks',
@@ -38,7 +39,8 @@
 			self.iGi(messageObject.iGi);
 			self.percentageText(messageObject.percentageText);
 			self.percentageClass(messageObject.percentageClass);
-			self.percentage(messageObject.percentage);			
+			self.percentage(messageObject.percentage);
+			self.percentageNotGot(messageObject.percentageNotGot);			
 			self.noiGi(messageObject.noiGi);
 			self.noacksVisibility(false);
 			self.acksVisibility(false);			

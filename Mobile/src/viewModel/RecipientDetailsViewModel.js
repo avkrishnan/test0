@@ -15,6 +15,7 @@
     'percentageText',
     'percentageClass',
 		'percentage',
+		'percentageNotGot',
 		'noiGi',
 		'igiReceivedTime',
 		'escalateUntil',
@@ -28,7 +29,7 @@
 	self.activate = function() {
 		var channelObject = JSON.parse(ENYM.ctx.getItem('currentChannelData'));	
 		var recipientObject = JSON.parse(ENYM.ctx.getItem('currentRecipientData'));
-		var messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));	
+		messageObject = JSON.parse(ENYM.ctx.getItem('currentMessageData'));	
 		if(!channelObject || !recipientObject) {
 			goToView('channelsIOwnView');			
 		} else {
@@ -39,7 +40,8 @@
 			self.iGi(messageObject.iGi);
 			self.percentageText(messageObject.percentageText);
 			self.percentageClass(messageObject.percentageClass);
-			self.percentage(messageObject.percentage);			
+			self.percentage(messageObject.percentage);
+			self.percentageNotGot(messageObject.percentageNotGot);			
 			self.noiGi(messageObject.noiGi);
 			self.escalateTime(false);
 			if(messageObject.escUntil != '' &&  typeof messageObject.escUntil != 'undefined') {
@@ -57,6 +59,21 @@
 			self.notIgiReceived('noigi');
 		}
 	};
+	
+	self.showWhoGotIt = function(){
+		if(messageObject.type != 'REQUEST_ACKNOWLEDGEMENT') {
+			var toastobj = {type: 'toast-info', text: 'No iGi requested'};
+			showToast(toastobj);						
+		}
+		else if(messageObject.acks == '0 Got It') {
+			var toastobj = {type: 'toast-info', text: "No iGi's received yet"};
+			showToast(toastobj);			
+		}
+		else {					
+			viewNavigate('Broadcast Details', 'singleMessageView', 'whoGotItView');
+		}
+	};	
+
 }
 
 RecipientDetailsViewModel.prototype = new ENYM.ViewModel();

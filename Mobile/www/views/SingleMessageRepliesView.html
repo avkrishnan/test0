@@ -17,13 +17,13 @@
       <div class="broadcastmsgsend">
         <a href="#" class="igigot" data-bind="html: iGi, click: showWhoGotIt"></a>
         <span class="percentage" data-bind="html: percentageText, css: percentageClass, style: { width: percentage }, click: showWhoGotIt"></span>
-        <a href="#" class="iginotgot" data-bind="text: noiGi" onclick="viewNavigate('Replies', 'singleMessageRepliesView', 'notGotItView');"></a>
+        <a href="#" class="iginotgot" data-bind="text: noiGi, style: { width: $data.percentageNotGot }" onclick="viewNavigate('Replies', 'singleMessageRepliesView', 'notGotItView');"></a>
       </div>
       <div class="escalatebroadcast" data-bind="html: escalateUntil, visible: escalateTime"></div>            
     </div>     
     <div class="broadcastreplies">Replies</div>
     <div class="channelmessages" data-bind="foreach: msgReplies">
-      <a href="#" class="repliesbroadcast" data-bind="click: $parent.replyDetail.bind($index())">
+      <a href="#" class="allmessages repliesbroadcast" data-bind="click: $parent.replyDetail.bind($index())">
         <!--<span class="newreplies">new</span>-->       
         <div class="msgbroadcast onlymsg">
           <span class="timemsg" data-bind="text: replyTime"></span>

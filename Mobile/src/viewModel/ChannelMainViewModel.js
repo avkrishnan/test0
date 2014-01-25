@@ -81,14 +81,15 @@
 				var sensitivityText = '';				
 			}
 			if(data.message[len].type == 'REQUEST_ACKNOWLEDGEMENT') {
-				var percentage = (Math.round(Math.ceil(data.message[len].acks*100)/(data.message[len].acks+data.message[len].noacks)))+'%';										
+				var percentage = (Math.round(Math.ceil(data.message[len].acks*100)/(data.message[len].acks+data.message[len].noacks)));
+				var percentageNotGot = 100-(percentage+1);										
 				if(data.message[len].acks == 0) {
 					var iGi = '0%. . . no responses yet';
 					var noiGi = '';
 					var percentageClass = 'zero-percentage';
 					var percentage = '';
 				  var percentageText = '';														 					
-				} else if(percentage == '100%') {
+				} else if(percentage == '100') {
 					var gotiGi = data.message[len].acks;
 					var totaliGi = gotiGi+data.message[len].noacks;
 					var follower = (totaliGi == 1) ? ' Follower' : ' Followers';
@@ -99,7 +100,7 @@
 				} else if(!data.message[len].acks) {
 					var iGi = '';
 					var percentageClass = 'norequested';				
-					var percentage = '100%';
+					var percentage = '100';
 					var percentageText = 'No followers to acknowledge iGi!';													
 					var noiGi = '';								
 				} else {
@@ -112,7 +113,7 @@
 			} else {			
 				var iGi = '';
 				var percentageClass = 'norequested';				
-				var percentage = '100%';
+				var percentage = '100';
 				var percentageText = 'No iGi requested<em class="norequestedican"></em>';													
 				var noiGi = '';															
 			}
@@ -133,7 +134,8 @@
 				escUntil: data.message[len].escUntil,
 				iGi: iGi,
 				percentageText: percentageText,				
-				percentage: percentage,
+				percentage: percentage+'%',
+				percentageNotGot: percentageNotGot+'%',
 				percentageClass: percentageClass,				
 				noiGi: noiGi,		
 				replies: replies,
