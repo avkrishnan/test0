@@ -39,7 +39,7 @@
 					declines++;
 				}				
 				if(valueFollower.relationship == 'F') {
-					if(valueFollower.reachable == 'N') {
+					if(valueFollower.reachable == 'N' && valueFollower.managed == 'N') {
 						unreachs++;
 					}
 					var visibleName = true				
@@ -81,7 +81,7 @@
 						name = valueFollower.firstname +' '+ valueFollower.lastname;
 						fullnameClass = 'name';
 					}
-					if(valueFollower.reachable == 'N') {
+					if(valueFollower.reachable == 'N' && valueFollower.managed == 'N') {
 						var nameClass = 'normalfollowers noverified';						
 						reachable = 'Un-reachable Follower';
 						var evernym = true;

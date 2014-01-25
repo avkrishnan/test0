@@ -30,7 +30,7 @@
     $.mobile.hidePageLoadingMsg();
 		name = fullnameClass = '';
 		$.each(data.followers, function(indexFollower, valueFollower) {
-			if(valueFollower.reachable == 'N' && valueFollower.relationship == 'F') {
+			if(valueFollower.reachable == 'N' && valueFollower.relationship == 'F' && valueFollower.managed == 'N') {
 				var visibleName = true;		
 				var evernymIcon = false;
 				var nameClass = 'normalfollowers noverified';				
