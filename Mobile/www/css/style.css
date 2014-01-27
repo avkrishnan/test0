@@ -755,6 +755,7 @@ a.forgotevernym, a.forgotevernym.ui-link, a.forgotevernym.ui-link:hover, a.forgo
 	display:inline;
 	padding:0 10px;
 	background:url("images/sprites-login.png") no-repeat -22px -75px;
+	cursor:pointer;
 }
 .tutorial ul li.active {
 	background:url("images/sprites-login.png") no-repeat -22px -139px;
