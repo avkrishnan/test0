@@ -24,7 +24,11 @@
 			self.day(_getDate('getDate'));
 			self.year(_getDate('getFullYear'));
 			var hours = _getDate('getHours');
-			hours = (hours<10?'0':'')+(hours>12?hours-12:hours);			
+			if(hours == 0){
+				hours = '12';
+			} else {
+				hours = (hours<10?'0':'')+(hours>12?hours-12:hours);
+			}			
 			self.hour(hours);
 			var mins = _getDate('getMinutes');
 			mins = ((mins+1<10?'0':'')+(mins));			
@@ -148,19 +152,18 @@
 		var SelectedDate = moment();
 		alert(SelectedDate);
 		*/
-//
-var CurrentDate = moment();
-var hours;
-if(self.meridiem() == 'PM' && self.hour() < 12) {
-	hours = parseInt(self.hour()) + parseInt(12);
-}
-var month = monthNames.indexOf(self.month());
-//alert(month);
-var minutes = parseInt(self.minute()) + parseInt(0);
-var SelectedDate = moment([self.year(), month, self.day(), hours, minutes, 0, 0]);
-var diff = SelectedDate.diff(CurrentDate, 'minutes');
-//alert(diff);
-//
+		//
+		var CurrentDate = moment();
+		var hours;
+		if(self.meridiem() == 'PM' && self.hour() < 12) {
+			hours = parseInt(self.hour()) + parseInt(12);
+		}
+		var month = monthNames.indexOf(self.month());
+		//alert(month);
+		var minutes = parseInt(self.minute()) + parseInt(0);
+		var SelectedDate = moment([self.year(), month, self.day(), hours, minutes, 0, 0]);
+		var diff = SelectedDate.diff(CurrentDate, 'minutes');
+
 		//if(SelectedDate >= CurrentDate){
 		if(diff > 0 ){	
 			ENYM.ctx.setItem('escDuration', SelectedDate);

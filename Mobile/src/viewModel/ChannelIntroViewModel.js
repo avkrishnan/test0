@@ -64,6 +64,9 @@
 
 	self.editTagline = function(data) {		
 		self.clickType(data);
+		if(self.descBtnText() == 'Save') {
+				$('.descriptionedit textarea').focus();
+		}
 		if(self.taglineBtnText() == 'Save') {
 			self.shortDescriptionCommand();
 		} else {
@@ -77,6 +80,9 @@
 	
 	self.editDescription = function(data) {
 		self.clickType(data);
+		if(self.taglineBtnText() == 'Save'){
+			$('.textcount textarea').focus();
+		}
 		if(self.descBtnText() == 'Save') {
 			self.longDescriptionCommand();
 		} else {
@@ -202,7 +208,7 @@
 	  }
     self.sectionOne(true);
 		self.sectionTwo(false);	
-  };	
+  };
 }
 
 ChannelIntroViewModel.prototype = new ENYM.ViewModel();
