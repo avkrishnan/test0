@@ -29,15 +29,13 @@
 	});	
 	
 	self.editNameCommand = function () {
-    if (self.firstname() == '') {
-      self.firstnameClass('validationerror');
-      self.errorFirstName('<span>Sorry,</span> Please enter first name');
+    if (self.firstname() == '' && self.lastname() == '') {
+      $.mobile.showPageLoadingMsg('a', 'Removing Name');
+      var account = modifyAccount();
+      ES.loginService.accountModify(account, { success: successfulUpdate, error: errorAPI });
     } else if (self.firstname().length > 20) {
       self.firstnameClass('validationerror');
       self.errorFirstName('<span>Sorry,</span> Please enter name of max. 20 characters');
-    } else if (self.lastname() == '') {
-      self.lastnameClass('validationerror');
-      self.errorFirstLastName('<span>Sorry,</span> Last name cannot be left empty');
     } else if (self.lastname().length > 20) {
       self.lastnameClass('validationerror');
       self.errorFirstLastName('<span>Sorry,</span> Please enter name of max. 20 characters');
@@ -63,9 +61,13 @@
 			firstname: self.firstname(), 
 			lastname: self.lastname()
 		});
-		account = account[0];				
+		account = account[0];	
 		ENYM.ctx.setItem('account', JSON.stringify(account));
-		var toastobj = {redirect: 'userSettingsView', type: '', text: 'Name updated successfully !'};
+		if(self.firstname() == '' && self.lastname() == '') { 
+			var toastobj = {redirect: 'userSettingsView', type: '', text: 'Name removed successfully !'};
+		} else {
+			var toastobj = {redirect: 'userSettingsView', type: '', text: 'Name updated successfully !'};
+		}	
 		showToast(toastobj);						
 		backNavText.pop();
 		backNavView.pop();		
