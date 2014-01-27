@@ -10,13 +10,13 @@
 		$('.tutorial ul li:first-child').addClass('active');		
 		$('.tutorials .tutorialslides').hide();
 		$('.tutorials .tutorialslides:first-child').show();
-		dotSlide('.tutorial ul li', 'next', 'div.tutorialslides');
+		dotSlide('.tutorial ul li', 'div.tutorialslides');
 		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
 		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
 		navigation('div.new-user', 'next', 'div.tutorialslides');
 
 		/* This function will slide tutorial slides on arrow click */
-		function dotSlide(clickElement, functionName, Element) {
+		function dotSlide(clickElement, Element) {
 			$(clickElement).on('click',function() {
 				$('header ul li').removeClass('active');
 				$(this).addClass('active');
