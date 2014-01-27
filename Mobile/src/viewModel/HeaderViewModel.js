@@ -190,17 +190,19 @@ function OverlayViewModel() {
 	}
 	
 	this.closePopup = function() {
-		$('#newMessages').popup('close');
+		if($.mobile.activePage.find("#newMessages").is(":visible")) {
+			$('#newMessages').popup('close');
+		}
 	}
 	
 	this.iGiAckOverlay = function(data, event) {
-		//alert(event.currentTarget.parentNode.getAttribute('id'));
 		if(!$.isEmptyObject(ES.systemService.MnsCacheData)) {
-			setTimeout(function() {			
-				ES.systemService.adjMnsCount(-1);
+			//setTimeout(function() {			
 				$("#"+event.currentTarget.parentNode.getAttribute('id')).remove();
-			}, 1000);
-			if(ES.systemService.MnsCacheData.data.unreadCount == 1) {
+				ES.systemService.adjMnsCount(-1);
+			//}, 1000);
+			//alert(ES.systemService.MnsCacheData.data.unreadCount);
+			if(ES.systemService.MnsCacheData.data.unreadCount == 0) {
 				$('#newMessages').remove();
 			}
 		}
@@ -209,20 +211,19 @@ function OverlayViewModel() {
 		if(tempEnymNotifications.length > 0) {
 			$.each(tempEnymNotifications, function(indexNotification, valueNotification) {
 				if(typeof valueNotification != 'undefined' && valueNotification.msgId == data.msgId) {
-					tempEnymNotifications.splice(indexNotification,1)
+					tempEnymNotifications.splice(indexNotification,1);
 				}					
 			});
-			setTimeout(function() {
+			//setTimeout(function() {
 				showNewMessagesCount(ES.systemService.MnsCacheData.data.unreadCount);
-			}, 1000);				
+			//}, 1000);
 			ENYM.ctx.setItem('enymNotifications', JSON.stringify(tempEnymNotifications));
 		}
 		if(data.iGiClass == 'igibutton') {
 			var callbacks = {
 				success: function(responsData) {
 					var toastobj = {type: '', text: 'iGi sent!'};
-					showToast(toastobj);							
-					//goToView($.mobile.activePage.attr('id'));																	
+					showToast(toastobj);
 				},
 				error: function(responsData, status, details) {
 					var toastobj = {type: 'toast-error', text: details.message};
