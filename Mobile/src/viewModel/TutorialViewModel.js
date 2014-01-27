@@ -10,9 +10,22 @@
 		$('.tutorial ul li:first-child').addClass('active');		
 		$('.tutorials .tutorialslides').hide();
 		$('.tutorials .tutorialslides:first-child').show();
+		dotSlide('.tutorial ul li', 'div.tutorialslides');
 		SwipeSlide('div.tutorialslides', 'swipeleft', 'next');
 		SwipeSlide('div.tutorialslides', 'swiperight', 'prev');
 		navigation('div.new-user', 'next', 'div.tutorialslides');
+
+		/* This function will slide tutorial slides on arrow click */
+		function dotSlide(clickElement, Element) {
+			$(clickElement).on('click',function() {
+				$('header ul li').removeClass('active');
+				$(this).addClass('active');
+				$(Element).hide();
+				var dotId = $(this).attr('id');
+				var slideview = dotId.substr(0,6);
+				$('#'+slideview).show();
+			});
+		}
 
 		/* This function will swipe tutorial slides */
 		function SwipeSlide(Element, Event, functionName) {
