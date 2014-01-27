@@ -27,6 +27,7 @@
 	self.iGiButton = ko.observable(false);
 	self.dismissButton = ko.observable(true);
 	self.setting = ko.observable(false);
+	self.replyButton = ko.observable(false);
     
 	self.activate = function() {
 		addExternalMarkup(self.template); // this is for header/overlay message
@@ -37,24 +38,18 @@
 		self.moreButton(false);
 		self.lessButton(false);				
 		self.iGiButton(false);
-		self.dismissButton(true);			
+		self.dismissButton(true);
+		self.replyButton(false);		
 		self.activeClass('igimsgdetail');
 		self.dismissClass('');										
 		if(ENYM.ctx.getItem("overlayCurrentChannel")) {
 			var callbacks = {
 				success: function(data) {
-					self.channelIcon('channel4 sky-blue');						
-					self.title(data.name);
 					self.description(data.description);
-					self.setting(true);
 				},
 				error: function(data, status, details) {
-					if(status == '404') {
-						self.channelIcon('evernymicon');							
-						self.title('Evernym, Inc.');
-						self.description('System Notifications');
-						self.setting(false);
-					}
+					var toastobj = {type: 'toast-error', text: details.message};
+					showToast(toastobj);
 				}
 			};					
 			var channel = JSON.parse(ENYM.ctx.getItem("overlayCurrentChannel"));
@@ -91,12 +86,28 @@
 			else if(channel.dismissed == 'Y') {
 				self.iGiButton(false);						
 				self.dismissClass('active');												
-			}			
-			if(channel.read == 'N' && channel.acknowledged == 'N') {
-				return ES.channelService.getChannel(channel.channelId, callbacks).then(self.readMessageUpdateBadge(channel.msgId, channel.read, channel.ackRequested));
+			}
+			if(channel.displayFrom != 'Evernym') {
+				self.channelIcon('channel4 sky-blue');						
+				self.title(channel.displayFrom);
+				self.setting(true);
+				self.replyButton(true);					
+				if(channel.read == 'N' && channel.acknowledged == 'N') {
+					return ES.channelService.getChannel(channel.channelId, callbacks).then(self.readMessageUpdateBadge(channel.msgId, channel.read, channel.ackRequested));
+				}
+				else {
+					return ES.channelService.getChannel(channel.channelId, callbacks);
+				}
 			}
 			else {
-				return ES.channelService.getChannel(channel.channelId, callbacks);
+				if(channel.read == 'N' && channel.acknowledged == 'N') {
+					self.readMessageUpdateBadge(channel.msgId, channel.read, channel.ackRequested);
+				}
+				self.channelIcon('evernymicon');							
+				self.title('Evernym, Inc.');
+				self.description('System Notifications');
+				self.setting(false);
+				self.replyButton(false);				
 			}
 		}
 		else {
