@@ -136,7 +136,11 @@
 
   function logoutError() {
 		//alert('error');
-  }	
+  }
+	
+	self.closePopup = function() {
+		overlayViewModel.closePopup();
+	}
 	
   self.cleanApplication = function() {
 		ES.evernymService.clearAccessToken();
@@ -149,7 +153,7 @@
 		ENYM.ctx.removeItem('enymNotifications');
 		ES.systemService.MnsCacheData = {};
 		ES.systemService.MnsLastUpdated = 0;
-		sendMessageViewModel.composeForm();										
+		sendMessageViewModel.composeForm();		
 	};
 }
 

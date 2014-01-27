@@ -16,7 +16,7 @@
 	self.less = ko.observable(true);		
 	self.more = ko.observable(false);
 	self.moreButton = ko.observable(false);
-	self.lessButton = ko.observable(false); 		
+	self.lessButton = ko.observable(false);	
 	
   self.activate = function() {
 		self.sectionOne(true);
@@ -59,15 +59,14 @@
 					showToast(toastobj);
 			    }
 			}	
-		});		 				
+		}); 			
 	};
 
 	self.editTagline = function(data) {		
 		self.clickType(data);
 		if(self.taglineBtnText() == 'Save') {
-			self.shortDescriptionCommand();;
-		}
-		else {
+			self.shortDescriptionCommand();
+		} else {
 			self.editing(true);
 			self.taglineBtnText('Save');
 			self.characterClass('length-warning');
@@ -80,8 +79,7 @@
 		self.clickType(data);
 		if(self.descBtnText() == 'Save') {
 			self.longDescriptionCommand();
-		}
-		else {
+		} else {
 			self.longDescription(self.longDescription().replace(/<br\s*[\/]?>/gi,'\n'));
 			self.editingTextarea(true);
 			self.descBtnText('Save');		
@@ -139,8 +137,7 @@
 			self.editing(false);
 			var toastobj = {type: '', text: 'Channel Tagline updated'};
 			showToast(toastobj);								
-		}
-		else {
+		} else {
 			self.descBtnText('Edit');
 			self.editingTextarea(false);
 			self.less(true);
@@ -154,7 +151,7 @@
 		$.mobile.hidePageLoadingMsg();		
 		var toastobj = {type: 'toast-error', text: details.message};
 		showToast(toastobj);
-  };				
+  };			
 	
 	self.comingSoon = function() {
 		headerViewModel.comingSoon();		
@@ -187,15 +184,15 @@
   		self.longDescriptionCommand();
   	}
   	$.mobile.showPageLoadingMsg('a', 'Saving Channel ');
-	setTimeout(function() {
+		setTimeout(function() {
 	  	if(self.previousViewID() == 'channelNewView') {
 	  		goToView('channelsIOwnView');
 	  	} else {
 	  		goToView('channelSettingsView');
 	  	}
-		backNavText.pop();
-		backNavView.pop();
-	},2000);
+			backNavText.pop();
+			backNavView.pop();
+		},2000);
   };
 	
   self.exitPreview = function () {	
@@ -204,12 +201,8 @@
 	  	self.less(false);
 	  }
     self.sectionOne(true);
-	self.sectionTwo(false);	
+		self.sectionTwo(false);	
   };	
-  self.focus = function(){
-  	self.editing(true);
-  	$('.length-warning').css('display','block');
-  };
 }
 
 ChannelIntroViewModel.prototype = new ENYM.ViewModel();
