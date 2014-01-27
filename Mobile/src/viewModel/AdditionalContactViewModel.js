@@ -57,7 +57,7 @@
 				var newCommethodObject = {
 					name : 'Default name', // TO DO with Timothy
 					type : 'EMAIL',
-					address : self.comMethodName()
+					address : emailObject.text
 				};
 				self.addNewCommethod(newCommethodObject);
 			}

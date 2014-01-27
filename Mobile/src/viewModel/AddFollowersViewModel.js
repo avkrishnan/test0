@@ -45,7 +45,10 @@
 					self.errorEmail(emailObject.text);
 					self.emailClass('validationerror');
 					return false;			
-				}				
+				}
+				else {
+					self.emailaddress(emailObject.text);
+				}						
 			} else if(self.emailaddress() == '') {
 				var phoneObject = validateUSAPhone(self.smsPhone());
 				if(phoneObject.type == 'Error') {
@@ -62,6 +65,9 @@
 					self.emailClass('validationerror');
 					return false;			
 				}
+				else {
+					self.emailaddress(emailObject.text);
+				}				
 				var phoneObject = validateUSAPhone(self.smsPhone());
 				if(phoneObject.type == 'Error') {
 					self.errorPhone(phoneObject.text);
