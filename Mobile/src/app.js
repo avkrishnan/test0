@@ -1049,6 +1049,7 @@ function validateUSAPhone(txtPhone) {
 
 /* This function validates email addresses */
 function validateEmail(txtEmail) {
+	txtEmail = txtEmail.replace(/\s/g, '');
   var emailPattern = /^([\w-\.\+]+@([\w-]+\.)+[\w-]{2,4})?$/;
   if(!emailPattern.test(txtEmail)) {
     var emailObject = {

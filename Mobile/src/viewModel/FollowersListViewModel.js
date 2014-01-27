@@ -55,11 +55,11 @@
 					if(typeof valueFollower.firstname == 'undefined' && typeof valueFollower.lastname == 'undefined') {
 						if(valueFollower.managed == 'Y') {
 							name = valueFollower.comMethods[0].address;
-							visibleName = false;
 						} else {
 							name = '';
 							nameClass = nameClass+' noname';
 						}
+						visibleName = false;
 						fullnameClass = '';
 					} else if(typeof valueFollower.firstname == 'undefined') {
 						name = valueFollower.lastname;
@@ -70,11 +70,11 @@
 					}	else if(valueFollower.firstname == '' && valueFollower.lastname == '') {
 						if(valueFollower.managed == 'Y') {
 							name = valueFollower.comMethods[0].address;
-							visibleName = false;
 						} else {
 							name = '';
 							nameClass = nameClass+' noname';
 						}
+						visibleName = false;
 						fullnameClass = '';
 					}
 					else {
@@ -87,6 +87,7 @@
 						var evernym = true;
 						if(name == '' && valueFollower.managed == 'N') {
 							name = valueFollower.accountname;
+							visibleName = true;
 						}
 					} else {
 						reachable = valueFollower.accountname;					
