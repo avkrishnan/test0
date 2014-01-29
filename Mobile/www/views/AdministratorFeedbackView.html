@@ -4,7 +4,7 @@
     <h1 class="help-FAQs feedback">Feedbacks</h1>
     <section>
       <div class="channelmessages" data-bind="foreach: submittedFeedbacks">
-        <a href="#" data-bind='click: $parent.showSingleFeedback'>
+        <a class="allmessages" href="#" data-bind='click: $parent.showSingleFeedback'>
         	<span class='feedbacks' data-bind="css:$data.context"></span>
           <div class="messageschannel">
             <span class="timemsg" data-bind="text:$data.created"></span>
