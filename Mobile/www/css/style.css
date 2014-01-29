@@ -413,21 +413,20 @@ select, .ui-icon-arrow-d {
 	font-family:'OpenSansRegular';
 	font-style:italic;
 	float:left;
-	font-size:16px;
-	margin:13px 0 4px 20px;
-	padding:0 0 0 28px;	
+	font-size:14px;
+	margin:13px 0 4px 10px;
+	padding:0 0 0 25px;	
 	background:url("images/sprites.png") no-repeat -14px -1325px;
 }
 .announcement {
 	background:url("images/plussign.png") no-repeat 0 0;
 	float:right;
 	margin:-5px 0 4px 0;
-	padding:22px 60px 22px 0;
+	padding:22px 53px 22px 0;
 }
 .footer span {
-	font-size:16px;
+	font-size:14px;
 	color:#A7A9AC;
-	margin:0 50px 0 0;
 }
 .helpfooter span {
 	margin:12px 50px 0 0;
@@ -3532,6 +3531,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	color:#8DC63F;
 	font-size:22px;
 	border-radius:4px;
+	word-break:break-all;	
 }
 .channelvisiting {
 	text-align:center;
@@ -3543,6 +3543,7 @@ a, a.ui-link, .ui-link:visited, .ui-link:hover, .ui-link:active{
 	display:block;
 	font-size:20px;
 	margin:4px 0 0 0;
+	word-break:break-all;	
 }
 .nextinfo {
 	text-align:center;
@@ -4358,6 +4359,13 @@ span.Y, span.N {
 	.invite-msg {
 		width:98%;
 	}
+	.logo, .ui-body-c .logo.ui-link, .ui-body-c .logo.ui-link:visited, .ui-body-c .logo.ui-link:hover, .ui-body-c .logo.ui-link:active{
+		font-size:16px;
+		padding:0 0 0 28px;	
+	}
+	.footer span {
+		font-size:16px;
+	}
 }
 @media only screen and (min-width:768px) {
 	.searchtype .ui-input-search input.ui-input-text {
@@ -4521,6 +4529,9 @@ span.Y, span.N {
 	.characterscount div.ui-input-text input.ui-input-text {
 		width:96%;
 	}
+	.footer span {
+		margin:0 50px 0 0;
+	}	
 }
 @media only screen and (min-width:800px) {
 	.slidemenu {
